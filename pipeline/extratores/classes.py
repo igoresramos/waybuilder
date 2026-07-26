@@ -27,6 +27,7 @@ import time
 import urllib.error
 import urllib.request
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -149,6 +150,39 @@ def aon_query(name: str, category: str, size: int = 100) -> list[dict]:
     cache_file.write_text(json.dumps(hits, ensure_ascii=False), encoding="utf-8")
     time.sleep(HTTP_SLEEP)
     return hits
+
+
+def prefetch_aon(pares: list[tuple[str, str]], workers: int = 12) -> None:
+    """Popula o cache do AoN em paralelo antes das buscas sequenciais em
+    aon_query() -- a latencia do elasticsearch.aonprd.com e ~1s/consulta
+    (nao e overhead de handshake), entao paralelizar e o unico jeito de nao
+    levar ~15min numa base fria de ~850 nomes distintos."""
+    vistos = set()
+    pendentes = []
+    for nome, categoria in pares:
+        chave = (categoria, nome)
+        if chave in vistos:
+            continue
+        vistos.add(chave)
+        cache_file = AON_CACHE / f"{slugify(categoria)}__{slugify(nome)}.json"
+        if not cache_file.exists():
+            pendentes.append((nome, categoria))
+
+    if not pendentes:
+        return
+    print(
+        f"[classes] prefetch AoN: {len(pendentes)} consultas novas em ate "
+        f"{workers} conexoes paralelas...",
+        file=sys.stderr,
+    )
+    done = 0
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        futs = [ex.submit(aon_query, nome, categoria) for nome, categoria in pendentes]
+        for fut in as_completed(futs):
+            fut.result()
+            done += 1
+            if done % 150 == 0:
+                print(f"  ... {done}/{len(pendentes)}", file=sys.stderr)
 
 
 def pf2etools_load(filename: str) -> dict | None:
@@ -538,6 +572,7 @@ def construir_registros_feature(
     owners: list[tuple[str, int]],
     classes_foundry: dict[str, dict],
     pf2etools_por_classe: dict[str, tuple[dict | None, str | None]],
+    slugs_conhecidos: set[str],
 ) -> list[dict]:
     sys_ = fdata["system"]
     nome = fdata["name"]
@@ -592,7 +627,19 @@ def construir_registros_feature(
             campo_book.set(hit.get("primary_source"), "aon")
             campo_page.set(parse_aon_page(hit.get("primary_source_raw")), "aon")
         campo_name.set(nome, "foundry")
-        campo_traits.set(traits_valor, "foundry")
+        # Feature compartilhada por N classes carrega no Foundry o trait de
+        # TODAS as classes donas (e assim que o filtro de feats do Foundry
+        # funciona). Pro registro expandido por classe, isso mentiria sobre
+        # o que a Fighter-version tem a ver com "wizard" -- filtra pra so o
+        # trait da propria classe (mantem traits que nao sao slug de classe).
+        if classe:
+            slug_da_classe = slug_classe(classe)
+            traits_registro = [
+                t for t in traits_valor if t not in slugs_conhecidos or t == slug_da_classe
+            ]
+        else:
+            traits_registro = traits_valor
+        campo_traits.set(traits_registro, "foundry")
         campo_rarity.set(rarity_foundry, "foundry")
         campo_book.set(pub.get("title"), "foundry")
 
@@ -724,6 +771,11 @@ def extrair() -> list[dict]:
           f"{len(classes_foundry) - len(STATS['pf2etools_classes_sem_arquivo'])}/"
           f"{len(classes_foundry)} classes", file=sys.stderr)
 
+    pares_aon = [(nome, "class") for nome in classes_foundry] + [
+        (f["name"], "class-feature") for f in features_foundry
+    ]
+    prefetch_aon(pares_aon)
+
     registros = []
 
     print("[classes] consultando AoN para classes...", file=sys.stderr)
@@ -744,7 +796,9 @@ def extrair() -> list[dict]:
           "(pode levar alguns minutos na 1a execucao)...", file=sys.stderr)
     for i, fdata in enumerate(features_foundry, 1):
         owners = ownership.get(fdata["name"], [])
-        regs = construir_registros_feature(fdata, owners, classes_foundry, pf2etools_por_classe)
+        regs = construir_registros_feature(
+            fdata, owners, classes_foundry, pf2etools_por_classe, slugs_conhecidos
+        )
         registros.extend(regs)
         STATS["n_registros_class_feature"] += len(regs)
         if i % 100 == 0:
