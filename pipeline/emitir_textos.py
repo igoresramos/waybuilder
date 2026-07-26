@@ -80,11 +80,70 @@ def indexar_foundry():
     return idx
 
 
+def entries_para_prosa(e, prof=0):
+    """`entries` do pf2etools -> prosa legivel."""
+    out = []
+    if isinstance(e, str):
+        out.append(e)
+    elif isinstance(e, list):
+        for x in e:
+            out.append(entries_para_prosa(x, prof))
+    elif isinstance(e, dict):
+        if e.get("name"):
+            out.append(f"**{e['name']}**")
+        for chave in ("entries", "items", "entry"):
+            if chave in e:
+                out.append(entries_para_prosa(e[chave], prof + 1))
+    return limpar("\n".join(x for x in out if x))
+
+
+def indexar_pf2etools():
+    """nome normalizado -> prosa, a partir de `entries`."""
+    idx = {}
+    for f in glob.glob(f"{BRUTO}/pf2etools/**/*.json", recursive=True):
+        try:
+            d = json.load(open(f))
+        except Exception:
+            continue
+        if not isinstance(d, dict):
+            continue
+        for v in d.values():
+            if not isinstance(v, list):
+                continue
+            for r in v:
+                if not isinstance(r, dict) or not r.get("name") or not r.get("entries"):
+                    continue
+                t = entries_para_prosa(r["entries"])
+                if t:
+                    idx.setdefault(re.sub(r"[^a-z0-9]+", "", r["name"].lower()), t)
+    return idx
+
+
+def chaves_de(nome):
+    """Nome cru e sem o sufixo desambiguador: 'Tusks (Orc)' -> tambem 'Tusks'."""
+    base = re.sub(r"[^a-z0-9]+", "", (nome or "").lower())
+    sem_par = re.sub(r"\s*\([^)]*\)\s*$", "", nome or "")
+    alt = re.sub(r"[^a-z0-9]+", "", sem_par.lower())
+    return [k for k in dict.fromkeys([base, alt]) if k]
+
+
 def main():
     base = json.load(open(f"{BASE}/index.json"))
     aon = indexar_aon()
     foundry = indexar_foundry()
-    print(f"indice de prosa: {len(aon)} do AoN, {len(foundry)} do Foundry")
+    pf2t = indexar_pf2etools()
+    aon_por_nome = {}
+    for f in glob.glob(f"{BRUTO}/aon_*.json"):
+        try: d = json.load(open(f))
+        except Exception: continue
+        regs = d if isinstance(d, list) else next((v for v in d.values() if isinstance(v, list)), [])
+        for r in regs:
+            if isinstance(r, dict) and r.get("name"):
+                t = limpar(r.get("text") or r.get("summary") or "")
+                if t:
+                    aon_por_nome.setdefault(re.sub(r"[^a-z0-9]+", "", r["name"].lower()), t)
+    print(f"indice de prosa: {len(aon)} AoN(id), {len(aon_por_nome)} AoN(nome), "
+          f"{len(foundry)} Foundry, {len(pf2t)} pf2etools")
 
     textos = collections.defaultdict(dict)
     origem = collections.Counter()
@@ -100,9 +159,22 @@ def main():
         if aid and aid in aon:
             t, de = aon[aid], "aon"
         if not t:
-            chave = re.sub(r"[^a-z0-9]+", "", (r.get("name") or "").lower())
-            if chave in foundry:
-                t, de = foundry[chave], "foundry"
+            for chave in chaves_de(r.get("name")):
+                for mapa, rotulo in ((foundry, "foundry"), (aon_por_nome, "aon:nome"),
+                                     (pf2t, "pf2etools")):
+                    if chave in mapa:
+                        t, de = mapa[chave], rotulo
+                        break
+                if t: break
+        if not t:
+            for alias in (r.get("aliases") or []):
+                for chave in chaves_de(alias):
+                    for mapa, rotulo in ((aon_por_nome, "aon:alias"), (pf2t, "pf2etools:alias")):
+                        if chave in mapa:
+                            t, de = mapa[chave], rotulo
+                            break
+                    if t: break
+                if t: break
         if not t:
             t, de = (r.get("summary") or ""), "summary"
         if t:
