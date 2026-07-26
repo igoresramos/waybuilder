@@ -51,7 +51,9 @@ pipeline/
 
 Ordem de execucao: extratores -> `reconciliar` -> `emitir_textos` -> `fundir_renomeados`.
 
-**Numeros atuais:** ~9.9k registros, prosa em 100%, portoes de qualidade passando.
+**Numeros atuais:** **18.176 registros em 21 kinds**, prosa em 100% (17.866/17.866),
+2.299 com divergencia registrada, 359 com alias. Index 15,2 MB + prosa 16,7 MB.
+Residuo: 6 registros sem `license`.
 
 ## As tres fontes, e o que cada uma serve
 
@@ -65,11 +67,19 @@ Cuidado: **`Pf2ools` sem o "e" e um repo morto.** A fonte viva e `Pf2eToolsOrg`.
 
 ## O que falta
 
-- Reextrair class-features sob o schema corrigido (nivel vai para a progressao
-  da classe, feature vira registro compartilhado)
-- Mecanizar a tabela de slots de conjuracao -- **nenhuma das tres fontes entrega
-  isso estruturado**, confirmado por tres extratores independentes
-- O front
+A **base fechou**. O que resta esta detalhado em `TODO.md`; os tres primeiros:
+
+1. **Grafo de progressao de dois niveis** -- 62 class-features de segundo nivel
+   (teses do Mago, ordens Hellknight, ikons do Exemplar, gates do Kineticist)
+   ficam invisiveis modelando so `classe -> feature`
+2. **Predicado precisa falar de SUBCLASSE** -- a proficiencia de conjuracao do
+   Clerigo depende da Doutrina, e o nivel do companheiro e o `class_level` de
+   quem o concedeu. Nenhum dos dois cabe em `class_level` puro
+3. **O front**
+
+Ja resolvido nesta sessao: reextracao das class-features sob o schema corrigido,
+e a tabela de slots de conjuracao (10 de 11 classes; Animist nao existe em fonte
+nenhuma).
 
 ## Simulacoes
 

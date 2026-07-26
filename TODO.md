@@ -2,8 +2,8 @@
 project: waybuilder
 items:
   - id: 1
-    texto: "Rodar o pipeline completo quando os 3 extratores voltarem (equipamento, companheiros, referencia): reconciliar -> emitir_textos -> fundir_renomeados, validando os portoes. Base deve ir de ~9,9k para ~21k registros"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26: pipeline rodado com as 7 familias. Base final 18.176 registros em 21 kinds, prosa 100%, 597 pares Legacy<->Remaster fundidos, zero par nao unido. Residuo: 6 registros sem license"
+    prioridade: concluido
   - id: 2
     texto: "Grafo de progressao de dois niveis: classe -> feature -> sub-escolha. 62 class-features de segundo nivel ficam invisiveis hoje (teses e escolas do Mago, ordens Hellknight, ikons do Exemplar, gates do Kineticist, research fields do Alchemist)"
     prioridade: alta
