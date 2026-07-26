@@ -193,7 +193,16 @@ solto. O numero do Foundry (0-4) e traduzido na entrada.
 
 `class`, `class-feature`, `feat`, `ancestry`, `heritage`, `background`, `spell`,
 `equipment`, `weapon`, `armor`, `shield`, `archetype`, `familiar-ability`,
-`animal-companion`, `trait`, `skill`, `deity`, `domain`
+`familiar-specific`, `animal-companion`, `eidolon`, `trait`, `skill`, `deity`,
+`domain`
+
+> `eidolon` e `familiar-specific` entraram depois: sao categorias proprias no
+> AoN (13 e 47 registros) que a primeira leitura do escopo nao pegou. O trait
+> `Minion` marca 123 documentos e serve de rede de seguranca para achar o que
+> escapar das categorias -- companheiro de constructo, montaria, morto-vivo.
+>
+> Regra que decide se algo ganha kind proprio: **se alguma regra do jogo
+> consegue falar de um e nao do outro, sao tipos diferentes.**
 
 Fora: bestiario, perigo, NPC, veiculo, conteudo de aventura, regra de reino.
 
