@@ -31,5 +31,23 @@ items:
   - id: 10
     texto: "Importador do Pathbuilder tem que AVISAR o que se perde. Confirmado com o Igor: o eidolon existe no app deles e nao sobrevive ao export. Perda silenciosa e o pior tipo"
     prioridade: baixa
+  - id: 11
+    texto: "BUG barato: aplicar normalizar_livro() antes de COMPARAR source em reconciliar.py. A funcao ja existe mas so roda depois; por isso boa parte dos 72 conflitos de source e falso -- e o foundry gravando 'Pathfinder <Livro>' contra '<Livro>' das outras duas fontes"
+    prioridade: alta
+  - id: 12
+    texto: "A tabela de precedencia da spec NAO esta validada. Arbitragem contra PDF deu 63% geral e 50% nos dois campos de maior volume (traits = 88% dos conflitos, level = 3,8%). Nao trocar nada: em varios casos nenhuma fonte bate com o impresso. Validar de verdade exige historico de erratas, que nao temos -- o PDF impresso nao e arbitro, as fontes digitais incorporam errata posterior"
+    prioridade: media
+  - id: 13
+    texto: "A regra de precedencia grants->foundry e letra morta: grants nunca gera conflito real no dataset, o merge adota silenciosamente o lado nao-vazio. Ou exercitar ou remover da spec"
+    prioridade: baixa
+  - id: 14
+    texto: "Tabela numerica de slots de conjuracao: NENHUMA das 11 classes tem. Recuperadas do PDF: Animist (War of Immortals p.12-13, hibrido prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of Magic). Exemplar e Kineticist confirmados nao-conjuradores. Faltam as 8 do Player Core / Player Core 2"
+    prioridade: alta
+  - id: 15
+    texto: "Ambientacao dos Lost Omens (DECISAO DO IGOR PENDENTE): proposta e dois kinds novos, region e organization, mais append de recorte regional na prosa de ancestry/deity ja existente. A base ja tem a descricao basica de ancestria e divindade; falta a camada regional (subculturas como 'Alijae elves', pratica local de divindade, organizacoes filiaveis). ~350-400 paginas novas. Melhor retorno: Mwangi Expanse, Impossible Lands, Society Guide"
+    prioridade: media
+  - id: 16
+    texto: "Licenciamento antes de publicar: texto de regra sob OGL/ORC e reutilizavel com atribuicao, mas conteudo de Golarion dos Lost Omens (nomes de deuses, nacoes, organizacoes) e Product Identity e NAO e. Se a ambientacao entrar na base, marcar esses registros para poderem ser excluidos de um build publico"
+    prioridade: baixa
 promoted: []
 ---
