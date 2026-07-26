@@ -166,6 +166,32 @@ paginar em blocos de ~80 registros.
 
 Mesma classe do problema ja registrado na wiki para o GraphQL do Railway.
 
+### Metade dos PDFs oficiais e scan puro, e o tamanho denuncia
+Dos 35 PDFs, os quatro maiores -- War of Immortals (235 MB), Monster Core
+(289 MB), Treasure Vault (229 MB), Menace Under Otari (178 MB) -- **nao tem
+camada de texto nenhuma**. `pdftotext` retorna vazio e `pdffonts` lista zero
+fontes. `Lost Omens.pdf` e o mesmo caso: 40 bytes extraidos do documento
+inteiro, e sem o texto nem da para identificar qual livro e.
+
+Regra pratica: **rodar `pdffonts` antes de qualquer pipeline de extracao.**
+Zero fontes = scan. Um PDF de regra acima de ~100 MB quase sempre e imagem.
+
+Para tabela numerica densa em PDF assim, renderizar a pagina com `pdftoppm` e
+ler a imagem foi mais confiavel que OCR via tesseract -- o OCR troca digito em
+tabela de slots, e o erro passa despercebido porque o numero errado continua
+plausivel.
+
+### A base nao tem tabela de slots de NENHUMA classe conjuradora
+Refinamento da licao acima sobre conjuracao: o buraco nunca foi so o Animist.
+Nenhuma das 11 classes conjuradoras tem a tabela numerica de slots por rank
+mecanizada -- so a progressao de proficiencia. O Animist apenas era o caso onde
+faltava tambem a proficiencia, o que o tornou visivel.
+
+Recuperadas do PDF ate agora: Animist (War of Immortals p.12-13, hibrido
+prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of
+Magic). Exemplar e Kineticist foram **confirmados como nao-conjuradores** -- nao
+havia tabela faltando.
+
 ### Trait no PF2e e vocabulario puro, nao mecanica
 0 de 561 traits tem efeito estruturado. Os campos `resistance`/`weakness`/
 `speed`/`skill_mod` do AoN vem vazios em 100% deles, e o Foundry
