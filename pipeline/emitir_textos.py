@@ -62,10 +62,17 @@ def indexar_aon():
     return idx
 
 
+CLONE = ("/tmp/claude-1000/-mnt-c-Users-igor0/39eadbed-e8eb-4194-8557-74f05193fdc1"
+         "/scratchpad/pf2e-research/pf2e/packs/pf2e")
+
+
 def indexar_foundry():
-    """nome normalizado -> descricao, como plano B."""
+    """nome normalizado -> descricao. Le o cache e, se existir, o clone completo."""
     idx = {}
-    for f in glob.glob(f"{BRUTO}/foundry/**/*.json", recursive=True):
+    fontes = glob.glob(f"{BRUTO}/foundry/**/*.json", recursive=True)
+    if os.path.isdir(CLONE):
+        fontes += glob.glob(f"{CLONE}/**/*.json", recursive=True)
+    for f in fontes:
         try:
             d = json.load(open(f))
         except Exception:

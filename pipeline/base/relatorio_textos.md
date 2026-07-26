@@ -1,61 +1,7 @@
 # Emissao de prosa
 
-- referencias resolvidas: **9846/9898** (99.5%)
-- origem: {'aon': 9336, 'foundry': 444, 'aon:nome': 49, 'pf2etools': 17}
+- referencias resolvidas: **9898/9898** (100.0%)
+- origem: {'aon': 9336, 'foundry': 562}
 - prosa total: 7.7 MB
-- sem prosa: 52
+- sem prosa: 0
 
-## Sem prosa
-
-- `wb:feat/armored-regiment-training`
-- `wb:feat/autonomic-psychic-action`
-- `wb:feat/avenger-of-envy`
-- `wb:feat/avenger-of-gluttony`
-- `wb:feat/avenger-of-greed`
-- `wb:feat/avenger-of-lust`
-- `wb:feat/avenger-of-sloth`
-- `wb:feat/avenger-of-wrath`
-- `wb:feat/blessing-of-the-five`
-- `wb:feat/camouflage-coat`
-- `wb:feat/ceremony-of-strengthened-hand`
-- `wb:feat/certain-stratagem`
-- `wb:feat/construct-dynamo`
-- `wb:feat/decree-of-banishment`
-- `wb:feat/dedication-to-the-five`
-- `wb:feat/devil-allies`
-- `wb:feat/disillusionment`
-- `wb:feat/emboldened-with-glorious-purpose`
-- `wb:feat/empathic-envoy`
-- `wb:feat/exemplar-resiliency`
-- `wb:feat/faultless-defense`
-- `wb:feat/fear-no-law-fear-no-one`
-- `wb:feat/flash-of-omnipotence`
-- `wb:feat/harsh-judgement`
-- `wb:feat/innate-magical-intuition`
-- `wb:feat/judgement-of-the-monolith`
-- `wb:feat/larger-than-life`
-- `wb:feat/locate-lawbreakers`
-- `wb:feat/lotus-above-the-wind`
-- `wb:feat/luring-chomp`
-- `wb:feat/master-summoning-spellcasting`
-- `wb:feat/no-hands-no-problem`
-- `wb:feat/opportune-trickster`
-- `wb:feat/orators-filibuster`
-- `wb:feat/pass-vengeful-judgment`
-- `wb:feat/quick-recovery`
-- `wb:feat/remember-their-names`
-- `wb:feat/reveal-beasts`
-- `wb:feat/righteous-resistance`
-- `wb:feat/seek-injustice`
-- `wb:feat/shackles-of-law`
-- `wb:feat/silence-heresy`
-- `wb:feat/silence-the-profane`
-- `wb:feat/spiritual-disruption`
-- `wb:feat/sturdy-bindings`
-- `wb:feat/trailblazing-stride`
-- `wb:feat/vermillion-threads`
-- `wb:feat/whispers-of-warning`
-- `wb:heritage/ambitious-human`
-- `wb:heritage/battle-trained-human-bb`
-- `wb:heritage/naari`
-- `wb:heritage/warden-human-bb`
