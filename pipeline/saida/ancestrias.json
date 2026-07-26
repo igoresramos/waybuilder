@@ -27885,14 +27885,14 @@
   {
     "id": "wb:background/refugee-fall-of-plaguestone",
     "kind": "background",
-    "name": "Refugee (FoP)",
+    "name": "Refugee (Fall of Plaguestone)",
     "traits": [],
     "rarity": "common",
     "source": {
       "license": "OGL",
       "remaster": false,
-      "book": "The Fall of Plaguestone",
-      "page": 55
+      "book": "Pathfinder Adventure: The Fall of Plaguestone",
+      "page": null
     },
     "boosts": [
       {
@@ -27928,14 +27928,13 @@
     "text": "wb:text/background/refugee-fall-of-plaguestone",
     "mechanized": true,
     "xref": {
-      "foundry": "Compendium.pf2e.backgrounds.Item.HDquvQywAZimmcFF",
-      "aon": "background-40"
+      "foundry": "Compendium.pf2e.backgrounds.Item.HDquvQywAZimmcFF"
     },
     "prov": {
-      "name": "aon",
-      "rarity": "aon",
+      "name": "foundry",
+      "rarity": "foundry",
       "traits": "foundry",
-      "source": "aon+foundry",
+      "source": "foundry",
       "boosts": "foundry",
       "skill_training": "foundry",
       "feats_granted": "foundry"
@@ -27944,14 +27943,14 @@
   {
     "id": "wb:background/refugee-pc2",
     "kind": "background",
-    "name": "Refugee",
+    "name": "Refugee (PC2)",
     "traits": [],
     "rarity": "common",
     "source": {
       "license": "ORC",
       "remaster": true,
-      "book": "Player Core 2",
-      "page": 50
+      "book": "Pathfinder Player Core 2",
+      "page": null
     },
     "boosts": [
       {
@@ -27985,14 +27984,13 @@
     "text": "wb:text/background/refugee-pc2",
     "mechanized": true,
     "xref": {
-      "foundry": "Compendium.pf2e.backgrounds.Item.i28Z9JXhEvoc7BX5",
-      "aon": "background-455"
+      "foundry": "Compendium.pf2e.backgrounds.Item.i28Z9JXhEvoc7BX5"
     },
     "prov": {
-      "name": "aon",
-      "rarity": "aon",
+      "name": "foundry",
+      "rarity": "foundry",
       "traits": "foundry",
-      "source": "aon+foundry",
+      "source": "foundry",
       "boosts": "foundry",
       "skill_training": "foundry",
       "feats_granted": "foundry"

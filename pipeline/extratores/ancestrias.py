@@ -180,19 +180,16 @@ def index_aon_by_name(docs):
     return idx
 
 
-PAREN_RE = re.compile(r"\([^)]*\)")
-
-
 def normalize_name(name):
-    """Normalizacao frouxa pra pareamento de segunda tentativa: derruba
-    parenteses, hifen vira espaco, colapsa espaco. Existe porque Foundry e
-    AoN as vezes grafam o mesmo registro de jeitos diferentes -- ex.:
-    Foundry \"Oenopion-Ooze Tender\" x AoN \"Oenopion Ooze-Tender\", Foundry
-    \"Refugee (PC2)\" x AoN \"Refugee\", Foundry \"Reclaimer Investigator\" x
-    AoN \"Reclaimed Investigator\" (essa ultima nao normaliza igual de
-    proposito -- e uma divergencia de grafia real, nao so pontuacao;
-    fica registrada em `relatorio['pareamento_fuzzy']` pra revisao manual)."""
-    n = PAREN_RE.sub("", name).strip().lower()
+    """Normalizacao frouxa pra pareamento de segunda tentativa: so hifen vira
+    espaco e colapsa espaco (NAO derruba parenteses -- ex.: "Refugee (PC2)"
+    x "Refugee (Fall of Plaguestone)" x "Refugee (FoP)" sao 2 backgrounds
+    DIFERENTES que colidiriam se parenteses fossem ignorados). Existe pra
+    pegar so diferenca de pontuacao, tipo Foundry "Oenopion-Ooze Tender" x
+    AoN "Oenopion Ooze-Tender". Pares com grafia realmente diferente (ex.:
+    Foundry "Reclaimer Investigator" x AoN "Reclaimed Investigator") ficam
+    de fora de proposito e aparecem como gap pra revisao manual."""
+    n = name.strip().lower()
     n = n.replace("-", " ")
     n = re.sub(r"\s+", " ", n).strip()
     return n

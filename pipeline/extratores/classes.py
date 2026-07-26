@@ -1180,7 +1180,7 @@ def gerar_relatorio_md() -> str:
         "Barbarian, Champion, Investigator, Monk, Oracle, Sorcerer, Swashbuckler) nem "
         "arquivo nenhum pra 4 classes novas (Animist, Commander, Exemplar, Guardian). "
         "Isso significa que ~12/27 classes ficam sem cross-check de `level` confiavel "
-        "contra a fonte que a spec desginou como autoridade pra isso -- o Foundry vira "
+        "contra a fonte que a spec designou como autoridade pra isso -- o Foundry vira "
         "fonte unica de fato pra elas, contrariando a garantia de dupla-fonte que a "
         "spec pede (\"ha duas fontes independentes -- divergencia e bug\"). Se o "
         "pf2etools atualizar o branch dev depois, vale re-rodar.\n"

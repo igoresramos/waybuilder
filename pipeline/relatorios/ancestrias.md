@@ -98,7 +98,7 @@ AoN tem 94 docs de ancestry, 436 de heritage e 612 de background (Legacy + Remas
 
 - Renomeados (par Legacy->Remaster com nome diferente, via `remaster_id`): 0
 
-- Legacy sem substituto (era pre-remaster, sem `remaster_id`, e o nome nao aparece no Foundry -- ou seja, saiu de circulacao): 96
+- Legacy sem substituto (era pre-remaster, sem `remaster_id`, e o nome nao aparece no Foundry -- ou seja, saiu de circulacao): 97
 
   - Aerialist (Extinction Curse Player's Guide, 2020-01-13) -- `background-134`
 
@@ -274,6 +274,8 @@ AoN tem 94 docs de ancestry, 436 de heritage e 612 de background (Legacy + Remas
 
   - Willowshore Urchin (Season of Ghosts Player's Guide, 2023-10-02) -- `background-398`
 
+  - Refugee (FoP) (The Fall of Plaguestone, 2019-08-01) -- `background-40`
+
   - Dragon Scholar (Age of Ashes Player's Guide, 2019-08-01) -- `background-42`
 
   - Emancipated (Age of Ashes Player's Guide, 2019-08-01) -- `background-43`
@@ -312,16 +314,16 @@ AoN tem 94 docs de ancestry, 436 de heritage e 612 de background (Legacy + Remas
 - Naari
 - Warden Human (BB)
 
-- **Backgrounds sem par no AoN**: 1
+- **Backgrounds sem par no AoN**: 3
 
 - Reclaimer Investigator
+- Refugee (Fall of Plaguestone)
+- Refugee (PC2)
 
-- **Pareamento por nome normalizado (fallback)**: 4 registros so casaram com AoN depois de derrubar parenteses/hifen (grafia diverge entre Foundry e AoN, mesmo registro). Sem esse fallback, esses apareceriam como "sem par" ou, do lado do mapa Legacy->Remaster, como "removido":
+- **Pareamento por nome normalizado (fallback)**: 2 registros so casaram com AoN depois de derrubar parenteses/hifen (grafia diverge entre Foundry e AoN, mesmo registro). Sem esse fallback, esses apareceriam como "sem par" ou, do lado do mapa Legacy->Remaster, como "removido":
 
 - background: Foundry "Aspiring Free-Captain" ~ AoN "Aspiring Free Captain" (background-81)
 - background: Foundry "Oenopion-Ooze Tender" ~ AoN "Oenopion Ooze-Tender" (background-92)
-- background: Foundry "Refugee (Fall of Plaguestone)" ~ AoN "Refugee" (background-174)
-- background: Foundry "Refugee (PC2)" ~ AoN "Refugee" (background-174)
 
 ## Divergencias entre fontes
 
