@@ -12,6 +12,29 @@ Contrato unico que **todo** extrator obedece. Escrito antes de qualquer extracao
 de proposito: sem isso, cada fonte produz um formato e a reconciliacao vira
 retrabalho.
 
+## Principio zero: isto nao e um sistema de jogo
+
+O Waybuilder e um **construtor de personagem**, como o Pathbuilder. Ele nao roda
+mecanica de jogo, nao arbitra e nao impede nada. Serve para montar, visualizar e
+imprimir um personagem -- o resto acontece na mesa, na base da confianca.
+
+Consequencia direta e mandatoria em todo o resto desta spec:
+
+> **`requires` sugere, nunca bloqueia.** O predicado existe para ordenar e
+> filtrar a lista de opcoes relevantes -- "estes feats combinam com o que voce
+> tem" -- e para derivar estatistica. Ele **nunca** e usado para negar uma
+> escolha ao jogador. Quem quiser pegar algo fora do requisito, pega, e o app
+> mostra que esta fora.
+
+Corolarios:
+
+- `mechanized: false` nao e lacuna, e caso normal. O jogador le e resolve.
+- Alinhamento, tenet, condicao narrativa ("you died and returned as a ghost"),
+  filiacao a organizacao -- tudo isso e **contexto descritivo**, exibido para o
+  jogador saber o que esta pegando. Nunca predicado.
+- Conteudo cortado pela Paizo (alinhamento, Legacy sem sucessor) fica na base.
+  Num jogo caseiro sem aquela restricao, continua valendo.
+
 ## Principio
 
 A base e **auto-contida**. Depois de construida, nada nela depende de rede, de

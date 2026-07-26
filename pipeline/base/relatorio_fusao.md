@@ -1,0 +1,120 @@
+# Fusao de renomeados
+
+Politica: nome nao importa, regra e conteudo importam. Par confirmado vira
+um registro so; todos os nomes ficam em `aliases`. **Nada e descartado.**
+
+- base: 10022 -> **9915** registros
+- pares fundidos: **107**
+- registros com alias: **100**
+- pulados por prosa curta demais para julgar: 214
+- criterio: similaridade >= 0.62 **e** >= 15 termos distintivos
+
+## Fusoes
+
+- `1.00` **Armor of Fury** -> **Armor Mastery** _(class-feature)_
+- `1.00` **Evasion** -> **Blast Dodger** _(class-feature)_
+- `1.00` **Improved Evasion** -> **Greater Rogue Reflexes** _(class-feature)_
+- `1.00` **Spell Repertoire** -> **Spell Repertoire** _(class-feature)_
+- `1.00` **Align Ki** -> **Align Qi** _(feat)_
+- `1.00` **Critical Debilitations** -> **Critical Debilitation** _(feat)_
+- `1.00` **Diviner Sense** -> **Keen Magical Detection** _(feat)_
+- `1.00` **Exude Abyssal Corruption** -> **Exude Demonic Corruption** _(feat)_
+- `1.00` **Favored Enemy** -> **Favored Prey** _(feat)_
+- `1.00` **Forge-Blessd Shot** -> **Forge-Blessed Shot** _(feat)_
+- `1.00` **Harbinger's Claw** -> **Harbinger's Caw** _(feat)_
+- `1.00` **Improved Familiar** -> **Improved Familiar (Familiar Master)** _(feat)_
+- `1.00` **Ki Center** -> **Qi Center** _(feat)_
+- `1.00` **Nocturnal Grippli** -> **Nocturnal Tripkee** _(feat)_
+- `1.00` **Point-Blank Shot** -> **Point Blank Stance** _(feat)_
+- `1.00` **Scattering Shot** -> **Shattering Shot** _(feat)_
+- `1.00` **Skill Mastery (Investigator)** -> **Skill Mastery** _(feat)_
+- `1.00` **Solar Rejuvenation (Leshy)** -> **Solar Rejuvenation** _(feat)_
+- `1.00` **Artillerst** -> **Artillerist** _(archetype)_
+- `0.98` **Phase Arrow** -> **Incorporeal Shot** _(feat)_
+- `0.98` **Implausible Purchase** -> **Implausible Purchase (Investigator)** _(feat)_
+- `0.98` **Snap Out of It!** -> **Snap Out of It! (Marshal)** _(feat)_
+- `0.97` **Stunning Fist** -> **Stunning Blows** _(feat)_
+- `0.97` **Arrow Snatching** -> **Projectile Snatching** _(feat)_
+- `0.97` **Predictive Purchase** -> **Predictive Purchase (Investigator)** _(feat)_
+- `0.95` **Impose Order (Aphorite)** -> **Impose Order** _(feat)_
+- `0.95` **Arrow of Death** -> **Fatal Shot** _(feat)_
+- `0.95` **Flicker** -> **Flickering Twirl** _(feat)_
+- `0.95` **Grippli Glide** -> **Tripkee Glide** _(feat)_
+- `0.94` **Enchanting Arrow** -> **Enchanting Shot** _(feat)_
+- `0.94` **Spell Repertoire** -> **Spell Repertoire** _(class-feature)_
+- `0.93` **Seeker Arrow** -> **Homing Shot** _(feat)_
+- `0.92` **Power Attack** -> **Vicious Swing** _(feat)_
+- `0.92` **Shared Luck (Catfolk)** -> **Luck of the Clowder** _(feat)_
+- `0.91` **Knockdown** -> **Slam Down** _(feat)_
+- `0.91` **Spring Attack** -> **Dashing Strike** _(feat)_
+- `0.90` **Exemplar Resilency** -> **Barbarian Resiliency** _(feat)_
+- `0.90` **Armiger's Mobility** -> **Hellknight Mobility** _(feat)_
+- `0.90` **Courageous Opportunity** -> **Reflexive Courage** _(feat)_
+- `0.89` **Efficient Apport** -> **Reclined Apport** _(spell)_
+- `0.89` **Resolve** -> **Disciplined Mind** _(class-feature)_
+- `0.89` **Guardian's Deflection** -> **Guardian's Deflection (Swashbuckler)** _(feat)_
+- `0.88` **Expanded Luck** -> **Lucky Break** _(feat)_
+- `0.88` **Spell Penetration** -> **Irresistible Magic** _(feat)_
+- `0.86` **Greater Resolve** -> **Perfected Mind** _(class-feature)_
+- `0.85` **Startling Appearance** -> **Startling Appearance (Vigilante)** _(feat)_
+- `0.85` **Sneak Savant** -> **Sneak Adept** _(feat)_
+- `0.83` **Alchemist Armor Mastery (Level 19)** -> **Medium Armor Mastery** _(class-feature)_
+- `0.83` **Bone Rider** -> **Fossil Rider** _(feat)_
+- `0.83` **Combat Reflexes** -> **Tactical Reflexes** _(feat)_
+- `0.83` **Deflect Arrow** -> **Deflect Projectile** _(feat)_
+- `0.81` **Efficient Alchemy** -> **Efficient Alchemy (Alchemist)** _(feat)_
+- `0.81` **Blessed Blood (Aasimar)** -> **Blessed Blood (Nephilim)** _(feat)_
+- `0.81` **Cunning Hair** -> **Flexible Tail** _(feat)_
+- `0.80` **Hellknight Order Cross-Training** -> **Order Cross-Training** _(feat)_
+- `0.80` **Nocturnal Sense** -> **Nocturnal Senses** _(feat)_
+- `0.80` **Precious Arrow** -> **Precious Ammunition** _(feat)_
+- `0.80` **Vigorous Inspiration** -> **Vigorous Anthem** _(feat)_
+- `0.79` **Basic Cathartic Spellcasting** -> **Basic Eldritch Archer Spellcasting** _(feat)_
+- `0.79` **Advanced Martial Magic** -> **Advanced Breakthrough** _(feat)_
+- `0.79` **Grippli Lore** -> **Tripkee Lore** _(feat)_
+- `0.79` **Wild Shape** -> **Untamed Form** _(feat)_
+- `0.79` **Firework Technican** -> **Firework Technician** _(archetype)_
+- `0.79` **Gnoll Lore** -> **Kholo Lore** _(feat)_
+- `0.79` **Form of the Fiend** -> **Bestial Manifestation** _(feat)_
+- `0.79` **Twinned Defense (Swashbuckler)** -> **Twinned Defense (Fighter)** _(feat)_
+- `0.78` **Metamagic Channel** -> **Spellshape Channel** _(feat)_
+- `0.78` **Laughing Gnoll** -> **Laughing Kholo** _(feat)_
+- `0.78` **Skill Mastery (Rogue)** -> **Skill Mastery** _(feat)_
+- `0.78` **Woodland Stride** -> **Forest Passage** _(feat)_
+- `0.78` **Sense Good** -> **Sense Holiness** _(feat)_
+- `0.77` **Crystalline Cloud** -> **Extraplanar Cloud** _(feat)_
+- `0.77` **Hellknight Signifer Dedication** -> **Hellknight Signifer Preferment** _(feat)_
+- `0.75` **Expert Disassembler** -> **Expert Disassembly** _(feat)_
+- `0.75` **Wild Empathy** -> **Animal Empathy (Ranger)** _(feat)_
+- `0.74` **Sense Evil** -> **Sense Unholiness** _(feat)_
+- `0.74` **Slink** -> **Refined Motion in Darkness** _(feat)_
+- `0.74` **Attack of Opportunity** -> **Reactive Strike** _(feat)_
+- `0.74` **Simple Weapon Expertise** -> **Weapon Expertise** _(class-feature)_
+- `0.73` **Dangle (Vanara)** -> **Dangle** _(feat)_
+- `0.73` **Advanced Synergy** -> **Advanced Breakthrough** _(feat)_
+- `0.72` **Improved Knockdown** -> **Crashing Slam** _(feat)_
+- `0.72` **Triggerbrand Salvo** -> **Stab and Blast** _(feat)_
+- `0.71` **Spirit Strikes** -> **Quietus Strikes** _(feat)_
+- `0.71` **Opening Stance (Fighter)** -> **Opening Stance** _(feat)_
+- `0.70` **Drag Down** -> **Steal for the Depths** _(feat)_
+- `0.70` **Magic Arrow** -> **Magic Ammunition** _(feat)_
+- `0.70` **Battle Assessment** -> **Combat Reading** _(feat)_
+- `0.70` **Dueling Dance (Swashbuckler)** -> **Dueling Dance (Fighter)** _(feat)_
+- `0.70` **Vishkanya Lore** -> **Leshy Lore** _(feat)_
+- `0.70` **Eidolon Weapon Specialization** -> **Weapon Specialization** _(class-feature)_
+- `0.68` **Crystalline Dust** -> **Extraplanar Haze** _(feat)_
+- `0.68` **Greater Kinetic Durability** -> **Greater Juggernaut** _(class-feature)_
+- `0.67` **Necrotic Infusion** -> **Divine Infusion** _(feat)_
+- `0.67` **Wyvern Sting** -> **Spider Sting** _(spell)_
+- `0.67` **Forest Stealth** -> **Swamp Stealth** _(feat)_
+- `0.66` **Celestial Wings** -> **Divine Wings** _(feat)_
+- `0.66` **Iruxi Glide** -> **Leshy Glide** _(feat)_
+- `0.66` **Pierce the Darkness** -> **Orc Sight** _(feat)_
+- `0.65` **Disrupt Ki** -> **Disrupt Qi** _(feat)_
+- `0.65` **Well of Potential** -> **Energized Font** _(feat)_
+- `0.65` **Clever Shadow** -> **Flexible Tail** _(feat)_
+- `0.64` **Fire's Pathway** -> **Nature's Pathway** _(spell)_
+- `0.64` **Radiant Infusion** -> **Divine Infusion** _(feat)_
+- `0.63` **Skillful Tail (Ganzi)** -> **Flexible Tail** _(feat)_
+- `0.63` **Summon Celestial Kin** -> **Summon Nephilim Kin** _(feat)_
+- `0.63` **Intercorporate** -> **Resilient Physiology** _(feat)_
