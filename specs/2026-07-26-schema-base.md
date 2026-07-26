@@ -193,8 +193,8 @@ solto. O numero do Foundry (0-4) e traduzido na entrada.
 
 `class`, `class-feature`, `feat`, `ancestry`, `heritage`, `background`, `spell`,
 `equipment`, `weapon`, `armor`, `shield`, `archetype`, `familiar-ability`,
-`familiar-specific`, `animal-companion`, `eidolon`, `trait`, `skill`, `deity`,
-`domain`
+`familiar-specific`, `animal-companion`, `eidolon`, `apparition`, `trait`,
+`skill`, `deity`, `domain`
 
 > `eidolon` e `familiar-specific` entraram depois: sao categorias proprias no
 > AoN (13 e 47 registros) que a primeira leitura do escopo nao pegou. O trait
@@ -203,6 +203,17 @@ solto. O numero do Foundry (0-4) e traduzido na entrada.
 >
 > Regra que decide se algo ganha kind proprio: **se alguma regra do jogo
 > consegue falar de um e nao do outro, sao tipos diferentes.**
+>
+> `apparition` (espirito do Animist, 14 registros) entrou aplicando essa regra
+> na extracao. Pelo mesmo teste ficaram **de fora**: especializacao e avanco de
+> companheiro animal (nenhuma regra mira "avancado" sem mirar "companheiro
+> animal"), e companheiro de constructo do Inventor -- que nao e familia
+> propria, so reflavoriza `animal-companion`.
+>
+> **Nivel do companheiro nao e nivel de personagem.** A regra oficial diz que o
+> companheiro avanca com o nivel de quem o concedeu, ou seja `class_level` da
+> classe doadora. Em multiclasse os dois divergem -- e mais um caso que a
+> linguagem de predicado precisa saber expressar.
 
 Fora: bestiario, perigo, NPC, veiculo, conteudo de aventura, regra de reino.
 
