@@ -113,12 +113,68 @@ Por campo, nao por registro:
 |---|---|---|
 | `grants` (efeito mecanico) | **foundry** | unica com rank numerico e rule elements |
 | `requires` (pre-requisito) | **pf2etools** | unica com `{@feat}`/`{@skill}` marcados |
-| `text`, `name`, `traits`, `rarity` | **aon** | e a Paizo; mais completa e atual |
+| `text`, `name`, `rarity` | **aon** | e a Paizo; mais completa e atual |
 | `level` | foundry, conferido contra pf2etools | ha duas fontes independentes -- divergencia e bug |
 | `source`, `remaster` | **aon** | tem `remaster_id`/`legacy_id` para a ponte |
+| `traits` | **nenhuma -- ver abaixo** | e conjunto, nao valor escalar |
 
 Quando a fonte vencedora nao tem o campo, cai para a proxima na ordem acima e
 `prov` registra de quem veio.
+
+## `traits` e uniao, nao precedencia
+
+Precedencia so cabe quando as fontes **disputam o mesmo slot com valores
+alternativos** -- um numero contra outro, uma grafia contra outra. `traits` nao
+e isso: e um conjunto onde **cada fonte descreve uma faceta parcial** do mesmo
+objeto. Escolher uma fonte joga fora o que a outra sabia.
+
+> Medido: `traits` respondia por **88% dos 2.299 conflitos** da base, e quase
+> nenhum era divergencia real. Dos 137 casos com conjuntos totalmente disjuntos:
+> 72 eram facetas complementares (foundry lista o trait de arma, aon o de item
+> magico), 31 eram ancestria renomeada no remaster, 18 eram granularidade
+> diferente. So 16 eram problema de verdade -- e de outra natureza (ver
+> "Colisao de identidade").
+>
+> A escolha estava destruindo dado: `bastard-sword` guardava `two-hand` no lugar
+> de `two-hand-d12`, perdendo o dado de dano; e 31 registros carregavam o nome
+> **legado** de ancestria (`tiefling`, `aasimar`, `ifrit`) numa base que se
+> declara remaster-first.
+
+Regra: `traits` e a **uniao das tres fontes**, aplicada nesta ordem:
+
+1. **Mapa legado -> remaster.** `aasimar`, `tiefling`, `aphorite`, `ganzi` ->
+   `nephilim`; `ifrit`, `oread`, `sylph`, `undine` -> `naari`. O termo legado vai
+   para `aliases_traits`, nunca some.
+2. **Absorcao por granularidade.** O trait parametrizado absorve o base:
+   presentes `two-hand-d12` e `two-hand`, fica so `two-hand-d12`. A regra vale
+   para todo sufixo de parametro (`-d\d+`, `-\d+`, `-aim-d\d+`).
+3. **Uniao do que sobrar**, ordenada alfabeticamente.
+
+`prov.traits` passa a registrar a **lista de fontes que contribuiram**, nao uma
+vencedora: `"traits": ["foundry", "aon"]`.
+
+## Colisao de identidade
+
+`wb:<kind>/<slug>` assume que nome e unico por kind. **Nao e.** Ha homonimos
+legitimos, as vezes no mesmo livro.
+
+> `Death from Above` sao dois feats do War of Immortals: um de arquetipo no
+> nivel 8 e um mitico no nivel 16 (p.128). O Foundry separa os dois; o AoN
+> indexa so o mitico. A reconciliacao fundiu por slug e produziu uma quimera --
+> nivel de um, nome/traits/raridade/texto do outro. `Reckless Abandon` e igual:
+> feat de goblin e feat de barbaro nivel 16.
+
+Detector, barato e confiavel:
+
+> **Conflito com valores categoricamente disjuntos nao e divergencia de fonte --
+> e sinal de que duas entidades foram fundidas.**
+
+Divergencia real e `8` contra `9`, ou `"God's"` contra `"Gods'"`. Quando uma
+fonte diz que o objeto e `archetype` e a outra `mythic`, sao dois objetos.
+
+Quando detectado, o registro e **desmembrado**: cada entidade ganha slug proprio
+com sufixo derivado do que as distingue (`wb:feat/death-from-above-mythic`), e
+`xref` aponta so para o id da fonte correspondente.
 
 ## Nivel de class-feature pertence a classe, nao a feature
 
@@ -192,9 +248,15 @@ solto. O numero do Foundry (0-4) e traduzido na entrada.
 ## Kinds em escopo
 
 `class`, `class-feature`, `feat`, `ancestry`, `heritage`, `background`, `spell`,
-`equipment`, `weapon`, `armor`, `shield`, `archetype`, `familiar-ability`,
-`familiar-specific`, `animal-companion`, `eidolon`, `apparition`, `trait`,
-`skill`, `deity`, `domain`
+`ritual`, `equipment`, `weapon`, `armor`, `shield`, `archetype`,
+`familiar-ability`, `familiar-specific`, `animal-companion`, `eidolon`,
+`apparition`, `trait`, `skill`, `deity`, `domain`
+
+> `ritual` entrou depois. Foi **omissao ao escrever esta lista**, nao falha de
+> extrator: zero registros em 18.176, e a palavra nao aparecia uma vez sequer
+> nesta spec. Sao ~31 so nos dois Player Core. Ritual nao consome slot de
+> escolha, mas o personagem sabe quais conhece, e o principio "nada e
+> descartado" cobre o caso.
 
 > `eidolon` e `familiar-specific` entraram depois: sao categorias proprias no
 > AoN (13 e 47 registros) que a primeira leitura do escopo nao pegou. O trait
@@ -235,3 +297,7 @@ O build **falha** se:
 3. Um `requires` cita `wb:` id que nao existe na base.
 4. Cobertura cai em relacao ao build anterior sem justificativa no LOG.
 5. Algum registro emitido tem `license` ausente.
+6. Sobra `traits` categoricamente disjunto entre fontes **depois** de aplicadas
+   as tres regras de uniao -- e suspeita de colisao de identidade.
+7. Um `name` normalizado aparece em dois registros do mesmo `kind` sem que a
+   distincao esteja explicita no slug.
