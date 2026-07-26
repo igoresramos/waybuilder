@@ -416,6 +416,7 @@ def extrair():
         "cobertura_fontes": Counter(),
         "conflitos_por_campo": Counter(),
         "homonimos": Counter(),
+        "kind_reconciliado": Counter(),
         "mechanized_true": 0,
         "mechanized_false": 0,
         "rules_ignoradas": Counter(),
@@ -431,27 +432,43 @@ def extrair():
         est["homonimos"][novo.get("_kind", "?")] += 1
         return novo if remaster_novo and not atual.get("_remaster") else atual
 
+    # O Foundry classifica pelo `type` do item (mecanica real: e uma arma, uma
+    # armadura...). O AoN as vezes cataloga o mesmo item magico especifico
+    # (ex.: um item que E uma arma, mas a Paizo lista na pagina generica de
+    # "Equipment") sob `category: equipment`. Sem reconciliar isso, o mesmo
+    # nome vira DOIS registros -- um `weapon` orfao (so foundry) e um
+    # `equipment` orfao (so aon) -- ao inves de um so, enriquecido pelas duas
+    # fontes. O Foundry decide o kind quando tem opiniao; as outras fontes so
+    # decidem para nomes que o Foundry nao tem.
     for r in foundry:
         k = (kind_de(r["tipo"]), chave(r["nome"]))
         r["_remaster"] = bool(r["remaster"])
         r["_kind"] = k[0]
         porchave[k]["foundry"] = melhor(porchave[k]["foundry"], r, r["_remaster"])
 
+    kind_por_chave_foundry = {}
+    for r in foundry:
+        kind_por_chave_foundry.setdefault(chave(r["nome"]), kind_de(r["tipo"]))
+
     for kind_nome, lst in tools_por_kind.items():
         for r in lst:
-            k = (kind_nome, chave(r["nome"]))
+            ch = chave(r["nome"])
+            k = (kind_por_chave_foundry.get(ch, kind_nome), ch)
             r["_remaster"] = r["remaster"]
-            r["_kind"] = kind_nome
+            r["_kind"] = k[0]
             porchave[k]["pf2etools"] = melhor(porchave[k]["pf2etools"], r, r["_remaster"])
 
     for kind_nome, lst in aon_por_kind.items():
         for r in lst:
             if r.get("excluir"):
                 continue
-            k = (kind_nome, chave(r["nome"]))
+            ch = chave(r["nome"])
+            k = (kind_por_chave_foundry.get(ch, kind_nome), ch)
             r["_remaster"] = not r["remaster_id"]
-            r["_kind"] = kind_nome
+            r["_kind"] = k[0]
             porchave[k]["aon"] = melhor(porchave[k]["aon"], r, r["_remaster"])
+            if k[0] != kind_nome:
+                est["kind_reconciliado"][kind_nome + "->" + k[0]] += 1
 
     registros = []
     ignoradas = est["rules_ignoradas"]
@@ -716,6 +733,8 @@ def main():
         print("  %-10s %5d estruturados / %5d so-prosa" % (
             k, est["com_estrutura_mecanica"].get(k, 0), est["so_prosa"].get(k, 0)))
     print()
+    print("kind reconciliado (aon/pf2etools divergia do foundry): %s" %
+          dict(est["kind_reconciliado"]))
     print("runas detectadas: %s" % dict(est["runas_detectadas"]))
     print("mechanized true/false: %d / %d" % (est["mechanized_true"], est["mechanized_false"]))
     print("sem source/licenca: %d" % est["sem_source"])
