@@ -202,7 +202,33 @@ daquela classe.
 ## Arquetipos
 
 **20.** Dedicacoes continuam existindo como rota paralela mais barata, rodando
-RAW. Dedicacao da propria classe e permitida, por simplicidade de codigo.
+RAW. **Dedicacao da propria classe e permitida.**
+
+> Decisao consciente, nao omissao. O custo conhecido: o feat **Advanced Dogma**
+> e seus irmaos dizem *"your [classe] level is equal to half your character
+> level for the purpose of meeting prerequisites"* e sao **repetiveis**. Uma
+> classe pura que se dedica a si mesma converte o trilho de Free Archetype em
+> class feats extras. O RAW proibe por isso.
+>
+> Medido durante o design: 24 dos 27 feats que usam esse padrao sao gate de
+> pre-requisito, e so 3 escalam efeito -- esses 3 dizem "character level"
+> explicitamente e nao sao afetados.
+>
+> Fica na mesa. Ver "O que o app nao arbitra".
+
+## O que o app nao arbitra
+
+Tres decisoes ficam com o mestre, de proposito. O app modela estrutura; a mesa
+resolve julgamento.
+
+| Caso | Por que fica fora |
+|---|---|
+| **Retraining** de nivel de classe | e negociacao de ficha, nao regra de construcao |
+| **Conjurar abaixo do rank efetivo** | e escolha tatica no momento do lance |
+| **Dedicacao da propria classe** | e abuso reconhecivel, mais barato de coibir socialmente que de modelar |
+
+O criterio comum: quando o custo de modelar supera o custo de um mestre dizer
+"nao", nao modela. O app nunca **impede** esses casos -- so nao os automatiza.
 
 **21.** **Regra de sanidade:** a rota de nivel de classe nunca pode entregar
 menos que a rota de dedicacao. Se entregar, niveis param de valer a pena e o
