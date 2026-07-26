@@ -361,7 +361,14 @@ class Parser:
         if isinstance(pred, dict) and len(pred) == 1:
             op = next(iter(pred))
             if op in ("all", "any"):
-                itens = [Parser._simplificar(i) for i in pred[op]]
+                itens = []
+                for i in pred[op]:
+                    i = Parser._simplificar(i)
+                    # achata grupo aninhado do mesmo operador
+                    if isinstance(i, dict) and len(i) == 1 and op in i:
+                        itens.extend(i[op])
+                    else:
+                        itens.append(i)
                 if len(itens) == 1:
                     return itens[0]
                 return {op: itens}

@@ -105,6 +105,35 @@ arquivo nenhum para Animist, Commander, Exemplar e Guardian. Cerca de 12 das 27
 classes ficam **sem cross-check de `level`**. A precedencia da spec assume duas
 fontes independentes para conferir nivel -- em metade das classes existe so uma.
 
+### Vinculo feat -> arquetipo sai do DIRETORIO do Foundry, nao do campo do AoN
+`packs/pf2e/feats/archetype/<slug>/` e campo exato: 244 pastas, 2.266 feats,
+zero casamento textual. Medida a alternativa: o campo `archetype` do AoN
+atribuiria **538 feats a mais**, porque ele significa *"acessivel via este
+arquetipo"* e nao *"pertence a"*. Em `martial-artist` sao 9 na pasta contra 32
+no AoN -- os 23 extras sao feats de Monge com `trait:["Monk"]`. Validacao
+cruzada: dos 2.150 feats com traco `archetype`, 96,1% tem vinculo pelo
+diretorio.
+
+### Parser de pre-requisito: 84,7%, e o resto nao vale regex
+3.609 de 4.263 predicados parseados. A cauda tem 403 assinaturas distintas e
+**282 aparecem uma unica vez** -- prosa unica, condicao narrativa ("you died and
+returned as a ghost"), alinhamento legado. O unico ganho grande que sobra
+(~3 p.p.) vem de alimentar o indice de nomes com as class-features, nao de mais
+expressao regular.
+
+Truque que destravou o parser: tentar a **clausula de rank com lista propria
+antes** da quebra por virgula, aceitando so se *todo* item resolver como alvo de
+proficiencia. E o que distribui `trained in Occultism or Religion` em dois
+predicados sem transformar `trained in Crafting, expert in Society` em lista
+errada.
+
+### Rule elements: 21 tipos servem para ficha, 14 nao
+Convertidos: `GrantItem`, `FlatModifier`, `ActiveEffectLike`, `ChoiceSet`,
+`MartialProficiency` e mais 16. Ignorados de proposito: `ItemAlteration` (949),
+`RollOption` (546), `Note` (269), `AdjustDegreeOfSuccess` (135) -- sao automacao
+de rolagem em mesa, nao construcao de personagem. So 27 feats perdem mecanica
+real.
+
 ### A tabela de slots de conjuracao nao esta mecanizada em lugar nenhum
 Nem AoN, nem pf2etools, nem os campos estruturados do Foundry. Ela vive dentro
 de rule elements nao decodificados. Confirmado como o item mais caro do projeto,
