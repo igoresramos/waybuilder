@@ -1,8 +1,8 @@
 ---
-project: nethys
+project: waybuilder
 ---
 
-# LESSONS -- Nethys
+# LESSONS -- Waybuilder
 
 ## Decisoes
 | data | decisao | motivo |
