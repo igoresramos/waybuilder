@@ -44,8 +44,14 @@ items:
     texto: "Tabela numerica de slots de conjuracao: NENHUMA das 11 classes tem. Recuperadas do PDF: Animist (War of Immortals p.12-13, hibrido prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of Magic). Exemplar e Kineticist confirmados nao-conjuradores. Faltam as 8 do Player Core / Player Core 2"
     prioridade: alta
   - id: 15
-    texto: "Ambientacao dos Lost Omens (DECISAO DO IGOR PENDENTE): proposta e dois kinds novos, region e organization, mais append de recorte regional na prosa de ancestry/deity ja existente. A base ja tem a descricao basica de ancestria e divindade; falta a camada regional (subculturas como 'Alijae elves', pratica local de divindade, organizacoes filiaveis). ~350-400 paginas novas. Melhor retorno: Mwangi Expanse, Impossible Lands, Society Guide"
+    texto: "RESOLVIDO 2026-07-26: os capitulos de ambientacao dos Lost Omens sao flavor puro -- IGNORAR, por decisao do Igor ('se e apenas flavor e nada de mecanica, pode ignorar'). Verificado por amostragem: o conteudo mecanico daqueles capitulos ja esta na base. Nao criar kinds region/organization como container de texto"
+    prioridade: concluido
+  - id: 22
+    texto: "A mecanica de filiacao EXISTE mas nao esta estruturada: 305 registros (155 equipment, 134 feat, 13 weapon, 3 armor) tem linha 'Access' no texto citando organizacao/regiao/etnia como condicao de raridade uncommon, com requires:null. Mais 68 feats/archetypes com requires_texto tipo 'member of X'. Nenhuma chave do predicado sabe falar de filiacao. Solucao: ~20-25 stubs leves (id+nome, sem prosa) para as organizacoes citadas como pre-requisito + termo novo no predicado. Lembrar do principio zero: sugere, nunca bloqueia"
     prioridade: media
+  - id: 23
+    texto: "Gaps de ingestao achados na verificacao dos Lost Omens: 4 wayfinders do PFS Guide e o feat 'Triggerbrand Salvo' nao estao na base"
+    prioridade: baixa
   - id: 16
     texto: "Licenciamento antes de publicar: texto de regra sob OGL/ORC e reutilizavel com atribuicao, mas conteudo de Golarion dos Lost Omens (nomes de deuses, nacoes, organizacoes) e Product Identity e NAO e. Se a ambientacao entrar na base, marcar esses registros para poderem ser excluidos de um build publico"
     prioridade: baixa
