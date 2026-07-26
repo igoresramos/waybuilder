@@ -1,0 +1,1074 @@
+[
+  {
+    "name": "feats-aaws.json",
+    "path": "data/feats/feats-aaws.json",
+    "sha": "03a1bd7c81cb2237e97fe3b59485279f03b36700",
+    "size": 7681,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aaws.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aaws.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/03a1bd7c81cb2237e97fe3b59485279f03b36700",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-aaws.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aaws.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/03a1bd7c81cb2237e97fe3b59485279f03b36700",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aaws.json"
+    }
+  },
+  {
+    "name": "feats-aoa3.json",
+    "path": "data/feats/feats-aoa3.json",
+    "sha": "d56e073b83518ec8cedac8fbb69dae992c4c47ff",
+    "size": 9375,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoa3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoa3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d56e073b83518ec8cedac8fbb69dae992c4c47ff",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-aoa3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoa3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d56e073b83518ec8cedac8fbb69dae992c4c47ff",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoa3.json"
+    }
+  },
+  {
+    "name": "feats-aoa4.json",
+    "path": "data/feats/feats-aoa4.json",
+    "sha": "3d4e20cb99006b24b4197a1c6636c125483b0d93",
+    "size": 6369,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoa4.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoa4.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/3d4e20cb99006b24b4197a1c6636c125483b0d93",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-aoa4.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoa4.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/3d4e20cb99006b24b4197a1c6636c125483b0d93",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoa4.json"
+    }
+  },
+  {
+    "name": "feats-aoa5.json",
+    "path": "data/feats/feats-aoa5.json",
+    "sha": "b2a8f023c2cb104c3157a0792c7820397dea6b38",
+    "size": 6130,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoa5.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoa5.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/b2a8f023c2cb104c3157a0792c7820397dea6b38",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-aoa5.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoa5.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/b2a8f023c2cb104c3157a0792c7820397dea6b38",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoa5.json"
+    }
+  },
+  {
+    "name": "feats-aoa6.json",
+    "path": "data/feats/feats-aoa6.json",
+    "sha": "46521567262ff6ddcb0b778d111b0e27c43ed343",
+    "size": 5652,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoa6.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoa6.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/46521567262ff6ddcb0b778d111b0e27c43ed343",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-aoa6.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoa6.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/46521567262ff6ddcb0b778d111b0e27c43ed343",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoa6.json"
+    }
+  },
+  {
+    "name": "feats-aoe1.json",
+    "path": "data/feats/feats-aoe1.json",
+    "sha": "d935087f0928a34f29bbd6adda3ba93d4d58e766",
+    "size": 4025,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoe1.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoe1.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d935087f0928a34f29bbd6adda3ba93d4d58e766",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-aoe1.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoe1.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d935087f0928a34f29bbd6adda3ba93d4d58e766",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoe1.json"
+    }
+  },
+  {
+    "name": "feats-aoe2.json",
+    "path": "data/feats/feats-aoe2.json",
+    "sha": "3f92bf5a427ef46588c2f55dd99d018b4a1dcd17",
+    "size": 6944,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoe2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoe2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/3f92bf5a427ef46588c2f55dd99d018b4a1dcd17",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-aoe2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoe2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/3f92bf5a427ef46588c2f55dd99d018b4a1dcd17",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoe2.json"
+    }
+  },
+  {
+    "name": "feats-aoe3.json",
+    "path": "data/feats/feats-aoe3.json",
+    "sha": "d7c48cf2ede247bd6da75a1e01815acde9caee96",
+    "size": 8178,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoe3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoe3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d7c48cf2ede247bd6da75a1e01815acde9caee96",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-aoe3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-aoe3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d7c48cf2ede247bd6da75a1e01815acde9caee96",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-aoe3.json"
+    }
+  },
+  {
+    "name": "feats-apg.json",
+    "path": "data/feats/feats-apg.json",
+    "sha": "2ada12ae90cf318417bc06a457d448d377b48e55",
+    "size": 644134,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-apg.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-apg.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2ada12ae90cf318417bc06a457d448d377b48e55",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-apg.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-apg.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2ada12ae90cf318417bc06a457d448d377b48e55",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-apg.json"
+    }
+  },
+  {
+    "name": "feats-av1.json",
+    "path": "data/feats/feats-av1.json",
+    "sha": "633b6317913887b0df26eda7282d95f33911800d",
+    "size": 5195,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-av1.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-av1.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/633b6317913887b0df26eda7282d95f33911800d",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-av1.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-av1.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/633b6317913887b0df26eda7282d95f33911800d",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-av1.json"
+    }
+  },
+  {
+    "name": "feats-av2.json",
+    "path": "data/feats/feats-av2.json",
+    "sha": "8c50af9892ebac1159010e2d98a2c69d81943d32",
+    "size": 9523,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-av2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-av2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/8c50af9892ebac1159010e2d98a2c69d81943d32",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-av2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-av2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/8c50af9892ebac1159010e2d98a2c69d81943d32",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-av2.json"
+    }
+  },
+  {
+    "name": "feats-av3.json",
+    "path": "data/feats/feats-av3.json",
+    "sha": "91231daa55ec5af3232b4b2ca040ab2b8613d277",
+    "size": 4812,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-av3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-av3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/91231daa55ec5af3232b4b2ca040ab2b8613d277",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-av3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-av3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/91231daa55ec5af3232b4b2ca040ab2b8613d277",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-av3.json"
+    }
+  },
+  {
+    "name": "feats-botd.json",
+    "path": "data/feats/feats-botd.json",
+    "sha": "46f7dee2160f82d177944209d7a7a2ac22e96c0e",
+    "size": 113971,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-botd.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-botd.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/46f7dee2160f82d177944209d7a7a2ac22e96c0e",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-botd.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-botd.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/46f7dee2160f82d177944209d7a7a2ac22e96c0e",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-botd.json"
+    }
+  },
+  {
+    "name": "feats-cott.json",
+    "path": "data/feats/feats-cott.json",
+    "sha": "52d957308f4279b4351985e5585d361582e8a44f",
+    "size": 16821,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-cott.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-cott.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/52d957308f4279b4351985e5585d361582e8a44f",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-cott.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-cott.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/52d957308f4279b4351985e5585d361582e8a44f",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-cott.json"
+    }
+  },
+  {
+    "name": "feats-crb.json",
+    "path": "data/feats/feats-crb.json",
+    "sha": "3bb3047f4c23576d637aa6bbdb489ac9f6694346",
+    "size": 533587,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-crb.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-crb.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/3bb3047f4c23576d637aa6bbdb489ac9f6694346",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-crb.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-crb.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/3bb3047f4c23576d637aa6bbdb489ac9f6694346",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-crb.json"
+    }
+  },
+  {
+    "name": "feats-da.json",
+    "path": "data/feats/feats-da.json",
+    "sha": "5d6ee818d8f568c6ff18265f4fb260a6190691ff",
+    "size": 224750,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-da.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-da.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/5d6ee818d8f568c6ff18265f4fb260a6190691ff",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-da.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-da.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/5d6ee818d8f568c6ff18265f4fb260a6190691ff",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-da.json"
+    }
+  },
+  {
+    "name": "feats-ec1.json",
+    "path": "data/feats/feats-ec1.json",
+    "sha": "2b4f17913485aacd203b96c3caa9274d824534ec",
+    "size": 11003,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ec1.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ec1.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2b4f17913485aacd203b96c3caa9274d824534ec",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-ec1.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ec1.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2b4f17913485aacd203b96c3caa9274d824534ec",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ec1.json"
+    }
+  },
+  {
+    "name": "feats-ec2.json",
+    "path": "data/feats/feats-ec2.json",
+    "sha": "d63b7a631b41856748a0e7d110c584222c0d1c48",
+    "size": 4909,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ec2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ec2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d63b7a631b41856748a0e7d110c584222c0d1c48",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-ec2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ec2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d63b7a631b41856748a0e7d110c584222c0d1c48",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ec2.json"
+    }
+  },
+  {
+    "name": "feats-ec3.json",
+    "path": "data/feats/feats-ec3.json",
+    "sha": "fc390500f7a6083af8ee0ce59a5c48090831eb61",
+    "size": 15511,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ec3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ec3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/fc390500f7a6083af8ee0ce59a5c48090831eb61",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-ec3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ec3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/fc390500f7a6083af8ee0ce59a5c48090831eb61",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ec3.json"
+    }
+  },
+  {
+    "name": "feats-ec6.json",
+    "path": "data/feats/feats-ec6.json",
+    "sha": "a863b46715ebe4b12c21c7cb647e810b898a785a",
+    "size": 10485,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ec6.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ec6.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/a863b46715ebe4b12c21c7cb647e810b898a785a",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-ec6.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ec6.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/a863b46715ebe4b12c21c7cb647e810b898a785a",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ec6.json"
+    }
+  },
+  {
+    "name": "feats-fop.json",
+    "path": "data/feats/feats-fop.json",
+    "sha": "ef3ffc44937191887b12d369bfc4b798ab64c1df",
+    "size": 1813,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-fop.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-fop.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ef3ffc44937191887b12d369bfc4b798ab64c1df",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-fop.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-fop.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ef3ffc44937191887b12d369bfc4b798ab64c1df",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-fop.json"
+    }
+  },
+  {
+    "name": "feats-frp1.json",
+    "path": "data/feats/feats-frp1.json",
+    "sha": "aaa2763d207dfd8c222b38245d8993f45a8d24a9",
+    "size": 9566,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-frp1.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-frp1.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/aaa2763d207dfd8c222b38245d8993f45a8d24a9",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-frp1.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-frp1.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/aaa2763d207dfd8c222b38245d8993f45a8d24a9",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-frp1.json"
+    }
+  },
+  {
+    "name": "feats-frp2.json",
+    "path": "data/feats/feats-frp2.json",
+    "sha": "6c3072acb578289a8654d6118865b158afc437dd",
+    "size": 11332,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-frp2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-frp2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/6c3072acb578289a8654d6118865b158afc437dd",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-frp2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-frp2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/6c3072acb578289a8654d6118865b158afc437dd",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-frp2.json"
+    }
+  },
+  {
+    "name": "feats-frp3.json",
+    "path": "data/feats/feats-frp3.json",
+    "sha": "d6a37c89ea5e7ae5663094662568a56d418d43b8",
+    "size": 17148,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-frp3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-frp3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d6a37c89ea5e7ae5663094662568a56d418d43b8",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-frp3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-frp3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/d6a37c89ea5e7ae5663094662568a56d418d43b8",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-frp3.json"
+    }
+  },
+  {
+    "name": "feats-g&g.json",
+    "path": "data/feats/feats-g&g.json",
+    "sha": "c2199d6f66d4aed64bd5be6d66559d4b7a17881a",
+    "size": 229233,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-g&g.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-g&g.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/c2199d6f66d4aed64bd5be6d66559d4b7a17881a",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-g%26g.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-g&g.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/c2199d6f66d4aed64bd5be6d66559d4b7a17881a",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-g&g.json"
+    }
+  },
+  {
+    "name": "feats-gmg.json",
+    "path": "data/feats/feats-gmg.json",
+    "sha": "be034824f380e0db18cea883da0acc2415098fc7",
+    "size": 1808,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-gmg.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-gmg.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/be034824f380e0db18cea883da0acc2415098fc7",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-gmg.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-gmg.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/be034824f380e0db18cea883da0acc2415098fc7",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-gmg.json"
+    }
+  },
+  {
+    "name": "feats-gw1.json",
+    "path": "data/feats/feats-gw1.json",
+    "sha": "3c8fdedb19c1f4f375542d5df71b85861909dfe9",
+    "size": 9096,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-gw1.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-gw1.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/3c8fdedb19c1f4f375542d5df71b85861909dfe9",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-gw1.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-gw1.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/3c8fdedb19c1f4f375542d5df71b85861909dfe9",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-gw1.json"
+    }
+  },
+  {
+    "name": "feats-gw2.json",
+    "path": "data/feats/feats-gw2.json",
+    "sha": "12f4b34959b481f679ccd138f56d8aa212abaf08",
+    "size": 7532,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-gw2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-gw2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/12f4b34959b481f679ccd138f56d8aa212abaf08",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-gw2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-gw2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/12f4b34959b481f679ccd138f56d8aa212abaf08",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-gw2.json"
+    }
+  },
+  {
+    "name": "feats-gw3.json",
+    "path": "data/feats/feats-gw3.json",
+    "sha": "ed97279e68cd869cf38cd434eb10fb93cc803067",
+    "size": 5983,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-gw3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-gw3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ed97279e68cd869cf38cd434eb10fb93cc803067",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-gw3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-gw3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ed97279e68cd869cf38cd434eb10fb93cc803067",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-gw3.json"
+    }
+  },
+  {
+    "name": "feats-loaclo.json",
+    "path": "data/feats/feats-loaclo.json",
+    "sha": "48665ad3dea37b1a2189d30ff5b914dd86ceecde",
+    "size": 865,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-loaclo.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-loaclo.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/48665ad3dea37b1a2189d30ff5b914dd86ceecde",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-loaclo.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-loaclo.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/48665ad3dea37b1a2189d30ff5b914dd86ceecde",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-loaclo.json"
+    }
+  },
+  {
+    "name": "feats-loag.json",
+    "path": "data/feats/feats-loag.json",
+    "sha": "aee4ce2f03dae052bd9a61fecbf60b7d6488a998",
+    "size": 210138,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-loag.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-loag.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/aee4ce2f03dae052bd9a61fecbf60b7d6488a998",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-loag.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-loag.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/aee4ce2f03dae052bd9a61fecbf60b7d6488a998",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-loag.json"
+    }
+  },
+  {
+    "name": "feats-locg.json",
+    "path": "data/feats/feats-locg.json",
+    "sha": "c68ba8cf3277c68e49469a7def5a152052f70182",
+    "size": 151802,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-locg.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-locg.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/c68ba8cf3277c68e49469a7def5a152052f70182",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-locg.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-locg.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/c68ba8cf3277c68e49469a7def5a152052f70182",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-locg.json"
+    }
+  },
+  {
+    "name": "feats-logm.json",
+    "path": "data/feats/feats-logm.json",
+    "sha": "04db352e4b07bf8d8b814fda9934252d2db76e9c",
+    "size": 13172,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-logm.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-logm.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/04db352e4b07bf8d8b814fda9934252d2db76e9c",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-logm.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-logm.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/04db352e4b07bf8d8b814fda9934252d2db76e9c",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-logm.json"
+    }
+  },
+  {
+    "name": "feats-lohh.json",
+    "path": "data/feats/feats-lohh.json",
+    "sha": "50e6362df298597446ad601c5c4a6a474b83b609",
+    "size": 16940,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lohh.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lohh.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/50e6362df298597446ad601c5c4a6a474b83b609",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lohh.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lohh.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/50e6362df298597446ad601c5c4a6a474b83b609",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lohh.json"
+    }
+  },
+  {
+    "name": "feats-loil.json",
+    "path": "data/feats/feats-loil.json",
+    "sha": "2459ead636eac624c201bb657791cef1e807ba70",
+    "size": 102004,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-loil.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-loil.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2459ead636eac624c201bb657791cef1e807ba70",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-loil.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-loil.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2459ead636eac624c201bb657791cef1e807ba70",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-loil.json"
+    }
+  },
+  {
+    "name": "feats-lokl.json",
+    "path": "data/feats/feats-lokl.json",
+    "sha": "26a70de229579f36fe71c61899319869daf2648a",
+    "size": 58593,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lokl.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lokl.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/26a70de229579f36fe71c61899319869daf2648a",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lokl.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lokl.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/26a70de229579f36fe71c61899319869daf2648a",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lokl.json"
+    }
+  },
+  {
+    "name": "feats-lol.json",
+    "path": "data/feats/feats-lol.json",
+    "sha": "e7a749681a053108144d8dfa27cb7ededf56ec00",
+    "size": 16174,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lol.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lol.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/e7a749681a053108144d8dfa27cb7ededf56ec00",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lol.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lol.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/e7a749681a053108144d8dfa27cb7ededf56ec00",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lol.json"
+    }
+  },
+  {
+    "name": "feats-lome.json",
+    "path": "data/feats/feats-lome.json",
+    "sha": "6218107056872471aff8fb5f03ec81fb2ac3e479",
+    "size": 43650,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lome.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lome.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/6218107056872471aff8fb5f03ec81fb2ac3e479",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lome.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lome.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/6218107056872471aff8fb5f03ec81fb2ac3e479",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lome.json"
+    }
+  },
+  {
+    "name": "feats-lomm.json",
+    "path": "data/feats/feats-lomm.json",
+    "sha": "2ba75f3d1acc4110447c527131b1b2a360502bf4",
+    "size": 7320,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lomm.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lomm.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2ba75f3d1acc4110447c527131b1b2a360502bf4",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lomm.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lomm.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2ba75f3d1acc4110447c527131b1b2a360502bf4",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lomm.json"
+    }
+  },
+  {
+    "name": "feats-lopsg.json",
+    "path": "data/feats/feats-lopsg.json",
+    "sha": "e074bf42768def48c877d452fb0e01deca339c8b",
+    "size": 50753,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lopsg.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lopsg.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/e074bf42768def48c877d452fb0e01deca339c8b",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lopsg.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lopsg.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/e074bf42768def48c877d452fb0e01deca339c8b",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lopsg.json"
+    }
+  },
+  {
+    "name": "feats-lora.json",
+    "path": "data/feats/feats-lora.json",
+    "sha": "9431d62c2e2eb943a6c03d2da5527a7d103d8b35",
+    "size": 66243,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lora.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lora.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/9431d62c2e2eb943a6c03d2da5527a7d103d8b35",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lora.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lora.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/9431d62c2e2eb943a6c03d2da5527a7d103d8b35",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lora.json"
+    }
+  },
+  {
+    "name": "feats-losk.json",
+    "path": "data/feats/feats-losk.json",
+    "sha": "024c67b000bec57dfc052ea9ae3b523f1d6ad5c2",
+    "size": 68722,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-losk.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-losk.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/024c67b000bec57dfc052ea9ae3b523f1d6ad5c2",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-losk.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-losk.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/024c67b000bec57dfc052ea9ae3b523f1d6ad5c2",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-losk.json"
+    }
+  },
+  {
+    "name": "feats-lotgb.json",
+    "path": "data/feats/feats-lotgb.json",
+    "sha": "16ef5787e8f2b393ee9603e3b47bf463a79f6cc7",
+    "size": 54408,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lotgb.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lotgb.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/16ef5787e8f2b393ee9603e3b47bf463a79f6cc7",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lotgb.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lotgb.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/16ef5787e8f2b393ee9603e3b47bf463a79f6cc7",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lotgb.json"
+    }
+  },
+  {
+    "name": "feats-lowg.json",
+    "path": "data/feats/feats-lowg.json",
+    "sha": "4d3f798c2f1925b0b998ee72ea6b6252e68234d6",
+    "size": 47382,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lowg.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lowg.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/4d3f798c2f1925b0b998ee72ea6b6252e68234d6",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-lowg.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-lowg.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/4d3f798c2f1925b0b998ee72ea6b6252e68234d6",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-lowg.json"
+    }
+  },
+  {
+    "name": "feats-ngd.json",
+    "path": "data/feats/feats-ngd.json",
+    "sha": "1c556929093e4ce3c786fddfe06b3cd35300d788",
+    "size": 9624,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ngd.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ngd.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/1c556929093e4ce3c786fddfe06b3cd35300d788",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-ngd.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ngd.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/1c556929093e4ce3c786fddfe06b3cd35300d788",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ngd.json"
+    }
+  },
+  {
+    "name": "feats-ooa1.json",
+    "path": "data/feats/feats-ooa1.json",
+    "sha": "a68d51f0f03f351e92c70cbd4ac243b90a8833a1",
+    "size": 7788,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ooa1.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ooa1.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/a68d51f0f03f351e92c70cbd4ac243b90a8833a1",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-ooa1.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ooa1.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/a68d51f0f03f351e92c70cbd4ac243b90a8833a1",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ooa1.json"
+    }
+  },
+  {
+    "name": "feats-ooa3.json",
+    "path": "data/feats/feats-ooa3.json",
+    "sha": "4eebe8af9e5616db0ea839d08e6bb35c4cc700fa",
+    "size": 10311,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ooa3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ooa3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/4eebe8af9e5616db0ea839d08e6bb35c4cc700fa",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-ooa3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-ooa3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/4eebe8af9e5616db0ea839d08e6bb35c4cc700fa",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-ooa3.json"
+    }
+  },
+  {
+    "name": "feats-pc1.json",
+    "path": "data/feats/feats-pc1.json",
+    "sha": "e3ccb4753e79768ad089addd0d8dc93c6fc426c4",
+    "size": 569018,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-pc1.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-pc1.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/e3ccb4753e79768ad089addd0d8dc93c6fc426c4",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-pc1.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-pc1.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/e3ccb4753e79768ad089addd0d8dc93c6fc426c4",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-pc1.json"
+    }
+  },
+  {
+    "name": "feats-pc2.json",
+    "path": "data/feats/feats-pc2.json",
+    "sha": "ff7872f61a402701adc2452d462d6fa9e951e40d",
+    "size": 56515,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-pc2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-pc2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ff7872f61a402701adc2452d462d6fa9e951e40d",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-pc2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-pc2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ff7872f61a402701adc2452d462d6fa9e951e40d",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-pc2.json"
+    }
+  },
+  {
+    "name": "feats-roe.json",
+    "path": "data/feats/feats-roe.json",
+    "sha": "2d2ed96975b141d445d8c73dc08c8587c370cc78",
+    "size": 155634,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-roe.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-roe.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2d2ed96975b141d445d8c73dc08c8587c370cc78",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-roe.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-roe.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2d2ed96975b141d445d8c73dc08c8587c370cc78",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-roe.json"
+    }
+  },
+  {
+    "name": "feats-sf0.json",
+    "path": "data/feats/feats-sf0.json",
+    "sha": "271ac349aa52c95657ff4a185b5ef5a411aef8b2",
+    "size": 11550,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sf0.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sf0.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/271ac349aa52c95657ff4a185b5ef5a411aef8b2",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sf0.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sf0.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/271ac349aa52c95657ff4a185b5ef5a411aef8b2",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sf0.json"
+    }
+  },
+  {
+    "name": "feats-sf2.json",
+    "path": "data/feats/feats-sf2.json",
+    "sha": "ef5220133b6ff71d6281c72236fe6ed2db88a93c",
+    "size": 1170,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sf2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sf2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ef5220133b6ff71d6281c72236fe6ed2db88a93c",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sf2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sf2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ef5220133b6ff71d6281c72236fe6ed2db88a93c",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sf2.json"
+    }
+  },
+  {
+    "name": "feats-sli.json",
+    "path": "data/feats/feats-sli.json",
+    "sha": "44b3c132985512a4d9c19b3dbbf5ef1cfc283320",
+    "size": 6118,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sli.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sli.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/44b3c132985512a4d9c19b3dbbf5ef1cfc283320",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sli.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sli.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/44b3c132985512a4d9c19b3dbbf5ef1cfc283320",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sli.json"
+    }
+  },
+  {
+    "name": "feats-sog2.json",
+    "path": "data/feats/feats-sog2.json",
+    "sha": "f69ecf9cc276ff6e99fc109ec8f452fefde4745c",
+    "size": 2118,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sog2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sog2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/f69ecf9cc276ff6e99fc109ec8f452fefde4745c",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sog2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sog2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/f69ecf9cc276ff6e99fc109ec8f452fefde4745c",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sog2.json"
+    }
+  },
+  {
+    "name": "feats-sog4.json",
+    "path": "data/feats/feats-sog4.json",
+    "sha": "ec396254b34bb351c3a54913fdd8bbb89cce3b41",
+    "size": 16946,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sog4.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sog4.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ec396254b34bb351c3a54913fdd8bbb89cce3b41",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sog4.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sog4.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/ec396254b34bb351c3a54913fdd8bbb89cce3b41",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sog4.json"
+    }
+  },
+  {
+    "name": "feats-som.json",
+    "path": "data/feats/feats-som.json",
+    "sha": "5acc20470f0c29d2f32d139e0217ace26d56eb4b",
+    "size": 142477,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-som.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-som.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/5acc20470f0c29d2f32d139e0217ace26d56eb4b",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-som.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-som.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/5acc20470f0c29d2f32d139e0217ace26d56eb4b",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-som.json"
+    }
+  },
+  {
+    "name": "feats-sot2.json",
+    "path": "data/feats/feats-sot2.json",
+    "sha": "6ad4cc3de2adc93830f3378faa2ea9205567f7fe",
+    "size": 9728,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sot2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sot2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/6ad4cc3de2adc93830f3378faa2ea9205567f7fe",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sot2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sot2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/6ad4cc3de2adc93830f3378faa2ea9205567f7fe",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sot2.json"
+    }
+  },
+  {
+    "name": "feats-sot3.json",
+    "path": "data/feats/feats-sot3.json",
+    "sha": "fb7a89dc9186c2e3bb12f007f194691fd60a7f59",
+    "size": 3805,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sot3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sot3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/fb7a89dc9186c2e3bb12f007f194691fd60a7f59",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sot3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sot3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/fb7a89dc9186c2e3bb12f007f194691fd60a7f59",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sot3.json"
+    }
+  },
+  {
+    "name": "feats-sot4.json",
+    "path": "data/feats/feats-sot4.json",
+    "sha": "2202945b0fce97fb852842917d6757a672934583",
+    "size": 3452,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sot4.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sot4.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2202945b0fce97fb852842917d6757a672934583",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sot4.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sot4.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/2202945b0fce97fb852842917d6757a672934583",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sot4.json"
+    }
+  },
+  {
+    "name": "feats-sot6.json",
+    "path": "data/feats/feats-sot6.json",
+    "sha": "def56a138c256b211cc3e5cc16443aaac099d345",
+    "size": 7864,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sot6.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sot6.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/def56a138c256b211cc3e5cc16443aaac099d345",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-sot6.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-sot6.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/def56a138c256b211cc3e5cc16443aaac099d345",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-sot6.json"
+    }
+  },
+  {
+    "name": "feats-tv.json",
+    "path": "data/feats/feats-tv.json",
+    "sha": "a4dbe20ec1f06be3f48344435824a86151655a5f",
+    "size": 13189,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-tv.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-tv.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/a4dbe20ec1f06be3f48344435824a86151655a5f",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-tv.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-tv.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/a4dbe20ec1f06be3f48344435824a86151655a5f",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-tv.json"
+    }
+  },
+  {
+    "name": "feats-wow1.json",
+    "path": "data/feats/feats-wow1.json",
+    "sha": "b8b8bbb8d7a74e5367c8831ad296e4ea19a135bc",
+    "size": 7136,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wow1.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wow1.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/b8b8bbb8d7a74e5367c8831ad296e4ea19a135bc",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-wow1.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wow1.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/b8b8bbb8d7a74e5367c8831ad296e4ea19a135bc",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wow1.json"
+    }
+  },
+  {
+    "name": "feats-wow2.json",
+    "path": "data/feats/feats-wow2.json",
+    "sha": "b2dcec5607a81b9ea4f7a897cf64ff1bf8d7c69c",
+    "size": 19239,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wow2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wow2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/b2dcec5607a81b9ea4f7a897cf64ff1bf8d7c69c",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-wow2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wow2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/b2dcec5607a81b9ea4f7a897cf64ff1bf8d7c69c",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wow2.json"
+    }
+  },
+  {
+    "name": "feats-wtd2.json",
+    "path": "data/feats/feats-wtd2.json",
+    "sha": "af5ab06324ec6524adfade3062a3cd3dca36219b",
+    "size": 507,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wtd2.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wtd2.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/af5ab06324ec6524adfade3062a3cd3dca36219b",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-wtd2.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wtd2.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/af5ab06324ec6524adfade3062a3cd3dca36219b",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wtd2.json"
+    }
+  },
+  {
+    "name": "feats-wtd3.json",
+    "path": "data/feats/feats-wtd3.json",
+    "sha": "0a19589fa2ad00f4725a48e1dd479660e61fa15e",
+    "size": 1717,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wtd3.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wtd3.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/0a19589fa2ad00f4725a48e1dd479660e61fa15e",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-wtd3.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wtd3.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/0a19589fa2ad00f4725a48e1dd479660e61fa15e",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wtd3.json"
+    }
+  },
+  {
+    "name": "feats-wtd4.json",
+    "path": "data/feats/feats-wtd4.json",
+    "sha": "54be0fb2aae36f62835ad97a6729022fd92be85d",
+    "size": 2105,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wtd4.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wtd4.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/54be0fb2aae36f62835ad97a6729022fd92be85d",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/feats-wtd4.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/feats-wtd4.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/54be0fb2aae36f62835ad97a6729022fd92be85d",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/feats-wtd4.json"
+    }
+  },
+  {
+    "name": "index.json",
+    "path": "data/feats/index.json",
+    "sha": "34889efc1f2c0c40bf912291e97e4a65669a94f9",
+    "size": 1803,
+    "url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/index.json?ref=dev",
+    "html_url": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/index.json",
+    "git_url": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/34889efc1f2c0c40bf912291e97e4a65669a94f9",
+    "download_url": "https://raw.githubusercontent.com/Pf2eToolsOrg/Pf2eTools/dev/data/feats/index.json",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/contents/data/feats/index.json?ref=dev",
+      "git": "https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/git/blobs/34889efc1f2c0c40bf912291e97e4a65669a94f9",
+      "html": "https://github.com/Pf2eToolsOrg/Pf2eTools/blob/dev/data/feats/index.json"
+    }
+  }
+]
