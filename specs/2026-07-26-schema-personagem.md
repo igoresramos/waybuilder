@@ -143,10 +143,25 @@ Aqui os quatro sao o **mesmo tipo**: um Ator, com o mesmo motor e menos slots.
 `tipo` diz qual, `concedido_por` diz de onde veio. Nao ha caso especial, nao ha
 array por especie, e um eidolon nao e menos cidadao que um familiar.
 
-**Decisao do Igor: eidolon e tratado como companheiro.** Mesmo comportamento,
-mesma ficha, mesmos slots. O que muda e so o dado -- o eidolon escolhe um tipo
-(Beast, Construct, Dragon...) onde o companheiro animal escolhe uma especie.
-Nao ha ramo de codigo separado.
+**Mas `tipo` e distinto, e isso nao e detalhe.** Eidolon tem `tipo: "eidolon"`,
+nao `tipo: "companheiro"`.
+
+Motivo: `tipo` e uma dimensao que os predicados miram. Existe feat e pericia de
+Summoner que afeta **o eidolon e nenhum outro companheiro**. Se os dois
+compartilharem o tipo, "seu eidolon ganha X" vira inexprimivel -- ou vaza para o
+companheiro animal, que e pior.
+
+A unificacao e do **motor**, nao da **identidade**:
+
+| Compartilham | Nao compartilham |
+|---|---|
+| a mesma estrutura de Ator | o valor de `tipo` |
+| o mesmo `fold` de estatistica derivada | quais slots existem |
+| o mesmo componente de tela | quem pode mira-los num predicado |
+
+Regra pratica: se alguma regra do jogo consegue falar de um e nao do outro,
+sao tipos diferentes. Vale para eidolon, companheiro animal, familiar,
+montaria e o que a Paizo publicar depois.
 
 Consequencia pratica: quando entrar `tipo: "montaria"` ou qualquer coisa que a
 Paizo publique depois, nao ha codigo novo -- so dado.
