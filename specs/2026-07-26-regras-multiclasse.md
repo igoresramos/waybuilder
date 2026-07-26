@@ -48,7 +48,8 @@ numa classe existente ou numa classe nova.
 
 **4.** Duas classes concedendo a mesma proficiencia: vale o melhor rank.
 
-**5.** Class DC e por classe, com rank pelo nivel daquela classe.
+**5.** Class DC e por classe, com rank pelo nivel daquela classe. Efeito que diz
+"your class DC" sem especificar qual usa o **maior** class DC do personagem.
 
 **6.** Sem formula de amolecimento de rank. Considerada e **descartada**: o gap
 real de um 50/50 marcial e de ~1 rank (Barbaro para em Master via Weapon Mastery
@@ -73,7 +74,13 @@ concedido no nivel 1 de classe.
 > Commander, Exemplar, Fighter, Guardian, Gunslinger, Inventor, Investigator,
 > Kineticist, Monk, Ranger, Rogue, Swashbuckler, Thaumaturge. A implementacao
 > **deriva isso de query**, nunca de lista escrita a mao -- essa lista ja errou
-> duas vezes durante o design.
+> tres vezes durante o design (3 -> 6 -> 16), e a terceira foi por query
+> ingenua: o Summoner concede "evolution feat" no nivel 1, que e class feat com
+> outro nome, e nao casa com o padrao `"<classe> feat"`. Sao ao menos 17.
+>
+> **Feat concedido por dentro de uma feature de identidade** -- order feat do
+> Druida, evolution feat do Summoner -- acompanha a feature pela regra 7, e nao
+> cai nesta regra. Sem isso, a identidade vem oca.
 
 ## Pericias
 
@@ -105,13 +112,18 @@ nivel **daquela classe**.
 nivel de **personagem**. Se um class feat for gasto num feat de arquetipo,
 tambem vale nivel de personagem -- arquetipo nao pertence a classe nenhuma.
 
-**14.** Ancestry feat, general feat, skill feat, boosts de 5/10/15/20 e skill
-increases seguem o nivel de personagem, sem mudanca.
+**14.** A cadencia **basica** que todo personagem tem -- ancestry feat, general
+feat, skill feat, boosts de 5/10/15/20, skill increase -- segue o nivel de
+personagem, sem mudanca.
 
-**15.** Feature de "ganha X todo nivel" passa a valer a partir do nivel de
-personagem em que aquela classe entrou. Vale pro skill feat do Ladino e pra
-qualquer outra que apareca: escolher cedo compensa muito, escolher tarde vale
-pouco.
+**15.** Quando uma **classe** concede cadencia extra ("ganha X todo nivel"), o
+extra passa a valer a partir do nivel de personagem em que aquela classe entrou.
+Escolher cedo compensa muito, escolher tarde vale pouco.
+
+> A regra 15 sempre vence a 14 no que for **concedido pela classe**; a 14
+> continua valendo para a linha de base. Casos conhecidos: o Ladino concede
+> skill feat **e** skill increase todo nivel; o Investigador concede skill
+> increase todo nivel. Levantar os demais e tarefa de query no Projeto A.
 
 ## Conjuracao
 
@@ -119,7 +131,24 @@ pouco.
 tabela nativa do PF2e. Sem houserule.
 
 **17.** **Elevacao:** `rank_efetivo = ceil(nivel_de_personagem / 2)`.
-Vale para truque, focus spell e magia de slot, sem excecao.
+Vale para truque, focus spell e magia de slot.
+
+**17b.** **Teto para magia que age sozinha.** Magia com o trait `summon`, e magia
+de efeito continuo autonomo (Spirit Link, Protector Tree), elevam no maximo
+`rank_do_slot + 2`.
+
+> Principio: invocacao **cria** economia de acao em vez de gasta-la. Todo o
+> argumento de autocontencao da regra 17 se apoia em o dip perder acoes
+> conjurando -- invocacao inverte esse limitador em vez de pagar por ele. Cura
+> nao entra: curar custa duas acoes tuas, todas as vezes.
+>
+> Numeros verificados (Summon Animal, `Heightened (10th) Level 15`, personagem
+> nivel 20): dip de Mago 1 cai de criatura nivel 15 para **nivel 2**;
+> Mago 10 / Guerreiro 10 fica em **nivel 9**; Mago 20 puro nao muda, porque o
+> `+2` nao tem para onde ir a partir do rank 10.
+>
+> Descartado: usar o rank cru do slot. Mataria tambem o multiclasse honesto --
+> um Mago 10 invocando criatura nivel 5 num personagem 20 e decoracao.
 
 > Marcado como botao de playtest ("fecho sem teto a priori").
 >
@@ -139,8 +168,9 @@ que vem por ele roda RAW puro.
 ## "Your level"
 
 **19.** Em texto de regra impresso, "your level" significa **nivel de
-personagem** -- **exceto** onde o arquetipo equivalente do PF2e trava ou nega a
-feature. Nesses casos, e o nivel daquela classe.
+personagem** -- **exceto** onde o arquetipo equivalente do PF2e **nega,
+congela, modifica ou gateia atras de feat** a feature. Nesses casos, e o nivel
+daquela classe.
 
 > A lista de excecoes **nao e escrita a mao, e derivada**: onde o RAW achou a
 > feature perigosa em versao rasa, ele ja sinalizou travando o arquetipo.
@@ -151,11 +181,23 @@ feature. Nesses casos, e o nivel daquela classe.
 > | Focus spell | da, elevando por nivel de personagem | personagem |
 > | Companheiro animal | da, escalando por nivel de personagem | personagem |
 > | Advanced alchemy | **congela em 1** | nivel de Alquimista |
-> | Reacao de causa do Campeao | **nao da** | nivel de Campeao |
+> | Reacao de causa do Campeao | **gateia** atras do feat Champion's Reaction (Feat 6) | nivel de Campeao |
+> | Elemental blast do Kineticist | **gateia** atras de Improved Elemental Blast | nivel de Kineticist |
+> | Exploit Vulnerability do Thaumaturge | **modifica** (vira Glimpse Vulnerability) | nivel de Thaumaturge |
 >
-> Validado sobre 826 documentos que citam "your level". A maioria e magia de
-> forma de batalha (`AC = N + your level`), que se auto-limita pelo rank da
-> magia -- o portao de acesso faz o trabalho, nao o termo de nivel.
+> Validado sobre 826 documentos que citam "your level" nas categorias `spell`,
+> `feat`, `class-feature` e `action`. O universo total e 1.335 -- os 509
+> restantes sao majoritariamente equipamento e ficam fora do escopo de ficha.
+> A maioria dos 826 e magia de forma de batalha (`AC = N + your level`), que se
+> auto-limita pelo rank da magia -- o portao de acesso faz o trabalho, nao o
+> termo de nivel.
+>
+> **A tabela e ilustrativa, nao normativa.** A regra e a derivacao; a tabela e
+> so o resultado dela em cinco casos conhecidos. Numa primeira redacao esta
+> tabela afirmava que o arquetipo de Campeao **nao** concedia a reacao -- era
+> falso, o feat Champion's Reaction existe em CRB e Player Core 2. O verdict
+> final nao mudou (gateado atras de feat tambem cai em nivel de classe), mas
+> serve de aviso: cada linha sai de consulta, nunca de memoria.
 
 ## Arquetipos
 
@@ -211,7 +253,23 @@ matou o teto de +2.
 | Guerreiro 19 / Clerigo 1 | 733 | 750 | 6, so rank 1 | 34 |
 | Clerigo 20 puro | **1789** | 750 | 18, ranks 1-10 | 45 |
 
-O Clerigo puro causa **mais dano que o Guerreiro**. O dip empata so na cura --
-porque Heal e a unica magia de rank 1 que escala bem indefinidamente -- e perde
+O Clerigo puro causa **mais dano que o Guerreiro**. O dip empata na cura e perde
 em tudo mais: 2,4x menos dano, 3x menos slots, e multiplicador de 0,30 contra
 0,95 em magia de save. O dip nao substitui o especialista.
+
+### Limites conhecidos destas simulacoes
+
+Registrados porque a conclusao depende deles:
+
+1. **O 733 do dip e artefato de estilo, nao custo de multiclasse.** A simulacao
+   fez o dip gastar 12 acoes curando e comparou com um Guerreiro que so ataca.
+   Isso mede o custo de jogar de healbot. Re-rodar com o dip atacando full-time.
+2. **Heal nao e a unica magia de rank 1 que escala bem.** Soothe (rank 1,
+   oculta) faz `Heightened (+1) +1d10+4` -> 95 HP no rank 10, 76% do Heal, em
+   outra tradicao. A afirmacao original estava errada.
+3. **Nao foram testadas magias sem rolagem contra defesa** alem de Heal --
+   invocacao, buff, HP temporario, muralha. Foi o que a regra 17b endereca.
+4. **Assuncoes assimetricas:** o Clerigo roda com DC de apex sempre contra o
+   save fraco; o Guerreiro roda sem buff nem flanqueamento. Inflam o conjurador.
+5. Gear, atributos e nivel dos alvos nao estavam declarados -- agora estao no
+   codigo em `docs/simulacoes/`.
