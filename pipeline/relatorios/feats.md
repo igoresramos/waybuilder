@@ -98,9 +98,9 @@ afetados.
 | 5 | `evil alignment` | `Trained in Religion; evil alignment` |
 | 5 | `a familiar` | `a familiar, you follow a good-aligned deity or patron` |
 
-São 403 assinaturas distintas para 654 falhas, e 282 delas aparecem **uma unica
+Sao 403 assinaturas distintas para 654 falhas, e 282 delas aparecem **uma unica
 vez**. A cauda e literalmente prosa artesanal, nao um punhado de formas
-sistematicas que valha a pena continuar caçando.
+sistematicas que valha a pena continuar cacando.
 
 ### A cauda por natureza do problema
 
@@ -332,12 +332,13 @@ Motivo dos 613 feats nao mecanizados:
 
 | motivo | registros |
 |---|---:|
-| pre-requisito nao parseado | 594 |
+| pre-requisito nao parseado | 587 |
 | rule element nao modelado | 27 |
 
-(a soma passa de 613 porque 8 feats tem os dois problemas)
+(a soma passa de 613 porque 1 feat tem os dois problemas; os outros 67
+pre-requisitos nao parseados sao de arquetipo, contados na linha `archetype`)
 
-Ou seja: **97 % do que impede mecanizacao e pre-requisito em prosa, nao efeito**.
+Ou seja: **96 % do que impede mecanizacao e pre-requisito em prosa, nao efeito**.
 O lado dos efeitos ja esta praticamente resolvido pelo Foundry.
 
 ---
@@ -348,7 +349,7 @@ O lado dos efeitos ja esta praticamente resolvido pelo Foundry.
 |---|---|
 | 1. `prov` para todo campo preenchido | **passa** -- 0 campos sem proveniencia |
 | 2. `level` divergente sem entrada em `conflitos` | **passa** -- 46 divergencias, 46 registradas |
-| 3. `requires` cita `wb:` inexistente | **pendente por dependencia**: dos 3.256 `has` emitidos, 2.789 apontam para `wb:feat/*` que existe nesta saida; 2 nao existem (feat citada por outra que so aparece em fonte que ficou de fora da uniao). Os demais apontam para kinds que ainda nao tem extrator: 335 `wb:class-feature/*`, 101 `wb:heritage/*`, 28 `wb:spell/*`, 1 `wb:archetype/*`. O portao so pode ser avaliado com a base completa |
+| 3. `requires` cita `wb:` inexistente | **pendente por dependencia**: dos 3.261 `has` emitidos, 2.794 apontam para `wb:feat/*` que existe nesta saida; 2 nao existem (`wb:feat/dual-weapon-dedication` e `wb:feat/underworld-connections`, nomes citados que nao casam com nenhum registro da uniao). Os demais apontam para kinds que ainda nao tem extrator: 335 `wb:class-feature/*`, 101 `wb:heritage/*`, 28 `wb:spell/*`, 1 `wb:archetype/*`. O portao so pode ser avaliado com a base completa |
 | 4. cobertura menor que o build anterior | n/a -- primeiro build |
 | 5. `license` ausente | **10 registros**, todos arquetipos sem feat de Dedication no Foundry e cujo livro nao aparece na tabela livro->licenca (`Hellknight Armiger`, `Gray Gardener`, `Gelid Shard`, `Splinter of Finality`, `Drow Shootist`, ...). Os outros 6.659 tem licenca: 4.378 ORC, 2.281 OGL |
 
