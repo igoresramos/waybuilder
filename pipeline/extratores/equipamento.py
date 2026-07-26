@@ -117,7 +117,7 @@ def kind_de(foundry_type: str) -> str:
 # Runas: deteccao de item-runa dentro do pacote `equipment` do Foundry
 # --------------------------------------------------------------------------
 
-USAGE_RUNA_RE = re.compile(r"^etched-onto-(weapon|armor|shield)$")
+USAGE_RUNA_RE = re.compile(r"^etched-onto-(?:an?-)?(weapon|armor|shield)s?$")
 
 RUNA_TIPO_POR_SLUG = (
     (re.compile(r"^weapon-potency-(\d)$"), "potency"),

@@ -17,7 +17,8 @@ Saida:   pipeline/base/index.json + pipeline/base/relatorio_reconciliacao.md
 import json, os, re, sys, unicodedata, collections
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-ENTRADA = ["classes.json", "feats.json", "magias.json", "ancestrias.json"]
+ENTRADA = ["classes.json", "feats.json", "magias.json", "ancestrias.json",
+           "equipamento.json", "companheiros.json", "referencia.json"]
 
 # precedencia por campo, conforme specs/2026-07-26-schema-base.md
 PRECEDENCIA = {

@@ -1,63 +1,35 @@
 # Relatorio de reconciliacao
 
-- registros de entrada: **10057**
-- colisoes de id fundidas: **34**
-- base final: **10022** registros
-- registros com divergencia registrada: **607**
-- suspeitas de par nao unido: **36**
+- registros de entrada: **18849**
+- colisoes de id fundidas: **75**
+- base final: **18773** registros
+- registros com divergencia registrada: **2359**
+- suspeitas de par nao unido: **0**
 
 ## Por kind
 
 - `feat`: 6412
+- `equipment`: 6099
 - `spell`: 1642
-- `class-feature`: 986
+- `weapon`: 1033
+- `class-feature`: 826
+- `trait`: 561
+- `deity`: 484
 - `background`: 332
 - `heritage`: 326
 - `archetype`: 247
+- `armor`: 207
+- `familiar-ability`: 133
+- `shield`: 118
+- `animal-companion`: 113
+- `domain`: 64
 - `ancestry`: 50
+- `familiar-specific`: 39
+- `skill`: 33
 - `class`: 27
+- `apparition`: 14
+- `eidolon`: 13
 
 ## Portoes de qualidade
 
-- todos passaram
-
-## Suspeitas de par nao unido (amostra)
-
-Mesmo kind e mesmo nome normalizado, ids diferentes.
-
-- **class-feature** / _advanced vials_ -> `wb:class-feature/advanced-vials-bomber`, `wb:class-feature/advanced-vials-chirurgeon`, `wb:class-feature/advanced-vials-mutagenist`, `wb:class-feature/advanced-vials-toxicologist`, `wb:class-feature/advanced-vials`  (Player Core 2)
-- **class-feature** / _armor expertise_ -> `wb:class-feature/champion-armor-expertise`, `wb:class-feature/commander-armor-expertise`, `wb:class-feature/fighter-armor-expertise`  (Battlecry!, Player Core, Player Core 2)
-- **class-feature** / _armor mastery_ -> `wb:class-feature/barbarian-armor-mastery`, `wb:class-feature/champion-armor-mastery`, `wb:class-feature/commander-armor-mastery`, `wb:class-feature/fighter-armor-mastery`  (Battlecry!, Player Core, Player Core 2)
-- **class-feature** / _battle hardened_ -> `wb:class-feature/fighter-battle-hardened`, `wb:class-feature/guardian-battle-hardened`  (Battlecry!, Player Core)
-- **class-feature** / _defensive robes_ -> `wb:class-feature/sorcerer-defensive-robes`, `wb:class-feature/summoner-defensive-robes`, `wb:class-feature/witch-defensive-robes`, `wb:class-feature/wizard-defensive-robes`  (Player Core, Player Core 2, Secrets of Magic)
-- **class-feature** / _deity_ -> `wb:class-feature/deity-champion`, `wb:class-feature/deity-cleric`  (Player Core, Player Core 2)
-- **class-feature** / _expert spellcaster_ -> `wb:class-feature/animist-expert-spellcaster`, `wb:class-feature/bard-expert-spellcaster`, `wb:class-feature/druid-expert-spellcaster`, `wb:class-feature/magus-expert-spellcaster`, `wb:class-feature/oracle-expert-spellcaster`, `wb:class-feature/psychic-expert-spellcaster`, `wb:class-feature/sorcerer-expert-spellcaster`, `wb:class-feature/summoner-expert-spellcaster`, `wb:class-feature/witch-expert-spellcaster`, `wb:class-feature/wizard-expert-spellcaster`  (Dark Archives (Remastered), Player Core, Player Core 2, Secrets of Magic, War of Immortals)
-- **class-feature** / _field discovery_ -> `wb:class-feature/field-discovery-bomber`, `wb:class-feature/field-discovery-chirurgeon`, `wb:class-feature/field-discovery-mutagenist`, `wb:class-feature/field-discovery-toxicologist`, `wb:class-feature/field-discovery`  (Player Core 2)
-- **class-feature** / _fortitude expertise_ -> `wb:class-feature/animist-fortitude-expertise`, `wb:class-feature/bard-fortitude-expertise`, `wb:class-feature/commander-fortitude-expertise`, `wb:class-feature/druid-fortitude-expertise`, `wb:class-feature/investigator-fortitude-expertise`, `wb:class-feature/psychic-fortitude-expertise`, `wb:class-feature/swashbuckler-fortitude-expertise`  (Battlecry!, Dark Archives (Remastered), Player Core, Player Core 2, War of Immortals)
-- **class-feature** / _greater field discovery_ -> `wb:class-feature/greater-field-discovery-bomber`, `wb:class-feature/greater-field-discovery-chirurgeon`, `wb:class-feature/greater-field-discovery-mutagenist`, `wb:class-feature/greater-field-discovery-toxicologist`, `wb:class-feature/greater-field-discovery`  (Player Core 2)
-- **class-feature** / _greater weapon specialization_ -> `wb:class-feature/greater-weapon-specialization-barbarian`, `wb:class-feature/champion-greater-weapon-specialization`, `wb:class-feature/commander-greater-weapon-specialization`, `wb:class-feature/fighter-greater-weapon-specialization`, `wb:class-feature/guardian-greater-weapon-specialization`, `wb:class-feature/ranger-greater-weapon-specialization`, `wb:class-feature/rogue-greater-weapon-specialization`, `wb:class-feature/swashbuckler-greater-weapon-specialization`, `wb:class-feature/thaumaturge-greater-weapon-specialization`  (Battlecry!, Dark Archives (Remastered), Player Core, Player Core 2)
-- **class-feature** / _juggernaut_ -> `wb:class-feature/barbarian-juggernaut`, `wb:class-feature/magus-juggernaut`  (Player Core 2, Secrets of Magic)
-- **class-feature** / _legendary spellcaster_ -> `wb:class-feature/animist-legendary-spellcaster`, `wb:class-feature/bard-legendary-spellcaster`, `wb:class-feature/druid-legendary-spellcaster`, `wb:class-feature/oracle-legendary-spellcaster`, `wb:class-feature/psychic-legendary-spellcaster`, `wb:class-feature/sorcerer-legendary-spellcaster`, `wb:class-feature/witch-legendary-spellcaster`, `wb:class-feature/wizard-legendary-spellcaster`  (Dark Archives (Remastered), Player Core, Player Core 2, War of Immortals)
-- **class-feature** / _light armor expertise_ -> `wb:class-feature/bard-light-armor-expertise`, `wb:class-feature/investigator-light-armor-expertise`, `wb:class-feature/kineticist-light-armor-expertise`, `wb:class-feature/oracle-light-armor-expertise`, `wb:class-feature/rogue-light-armor-expertise`, `wb:class-feature/swashbuckler-light-armor-expertise`  (Player Core, Player Core 2, Rage of Elements)
-- **class-feature** / _light armor mastery_ -> `wb:class-feature/kineticist-light-armor-mastery`, `wb:class-feature/rogue-light-armor-mastery`, `wb:class-feature/swashbuckler-light-armor-mastery`  (Player Core, Player Core 2, Rage of Elements)
-- **class-feature** / _magical fortitude_ -> `wb:class-feature/oracle-magical-fortitude`, `wb:class-feature/sorcerer-magical-fortitude`, `wb:class-feature/witch-magical-fortitude`, `wb:class-feature/wizard-magical-fortitude`  (Player Core, Player Core 2)
-- **class-feature** / _martial weapon mastery_ -> `wb:class-feature/martial-weapon-mastery`, `wb:class-feature/ranger-weapon-mastery`  (Player Core)
-- **class-feature** / _master spellcaster_ -> `wb:class-feature/animist-master-spellcaster`, `wb:class-feature/bard-master-spellcaster`, `wb:class-feature/druid-master-spellcaster`, `wb:class-feature/magus-master-spellcaster`, `wb:class-feature/oracle-master-spellcaster`, `wb:class-feature/psychic-master-spellcaster`, `wb:class-feature/sorcerer-master-spellcaster`, `wb:class-feature/summoner-master-spellcaster`, `wb:class-feature/witch-master-spellcaster`, `wb:class-feature/wizard-master-spellcaster`  (Dark Archives (Remastered), Player Core, Player Core 2, Secrets of Magic, War of Immortals)
-- **class-feature** / _masterful hunter_ -> `wb:class-feature/masterful-hunter-flurry`, `wb:class-feature/masterful-hunter-outwit`, `wb:class-feature/masterful-hunter-precision`, `wb:class-feature/masterful-hunter`  (Player Core)
-- **class-feature** / _medium armor expertise_ -> `wb:class-feature/medium-armor-expertise-inventor`, `wb:class-feature/alchemist-medium-armor-expertise`, `wb:class-feature/barbarian-medium-armor-expertise`, `wb:class-feature/druid-medium-armor-expertise`, `wb:class-feature/gunslinger-medium-armor-expertise`, `wb:class-feature/magus-medium-armor-expertise`, `wb:class-feature/ranger-medium-armor-expertise`, `wb:class-feature/thaumaturge-medium-armor-expertise`  (Dark Archives (Remastered), Guns & Gears (Remastered), Player Core, Player Core 2, Secrets of Magic)
-- **class-feature** / _medium armor mastery_ -> `wb:class-feature/alchemist-medium-armor-mastery`, `wb:class-feature/gunslinger-medium-armor-mastery`, `wb:class-feature/inventor-medium-armor-mastery`, `wb:class-feature/magus-medium-armor-mastery`, `wb:class-feature/ranger-medium-armor-mastery`, `wb:class-feature/thaumaturge-medium-armor-mastery`  (Dark Archives (Remastered), Guns & Gears (Remastered), Player Core, Player Core 2, Secrets of Magic)
-- **class-feature** / _perception expertise_ -> `wb:class-feature/alchemist-perception-expertise`, `wb:class-feature/animist-perception-expertise`, `wb:class-feature/champion-perception-expertise`, `wb:class-feature/cleric-perception-expertise`, `wb:class-feature/druid-perception-expertise`, `wb:class-feature/exemplar-perception-expertise`, `wb:class-feature/inventor-perception-expertise`, `wb:class-feature/kineticist-perception-expertise`, `wb:class-feature/monk-perception-expertise`, `wb:class-feature/sorcerer-perception-expertise`, `wb:class-feature/witch-perception-expertise`, `wb:class-feature/wizard-perception-expertise`  (Pathfinder Rage of Elements, Player Core, Player Core 2, Rage of Elements, War of Immortals)
-- **class-feature** / _perception legend_ -> `wb:class-feature/gunslinger-perception-legend`, `wb:class-feature/ranger-perception-legend`, `wb:class-feature/rogue-perception-legend`  (Guns & Gears (Remastered), Player Core)
-- **class-feature** / _perception mastery_ -> `wb:class-feature/barbarian-perception-mastery`, `wb:class-feature/bard-perception-mastery`, `wb:class-feature/commander-perception-mastery`, `wb:class-feature/exemplar-perception-mastery`, `wb:class-feature/gunslinger-perception-mastery`, `wb:class-feature/ranger-perception-mastery`, `wb:class-feature/rogue-perception-mastery`, `wb:class-feature/thaumaturge-perception-mastery`  (Battlecry!, Guns & Gears (Remastered), Pathfinder Player Core, Player Core, Player Core 2, War of Immortals)
-- **class-feature** / _perpetual infusions_ -> `wb:class-feature/perpetual-infusions-bomber`, `wb:class-feature/perpetual-infusions-chirurgeon`, `wb:class-feature/perpetual-infusions-mutagenist`, `wb:class-feature/perpetual-infusions-toxicologist`, `wb:class-feature/perpetual-infusions`  (Core Rulebook)
-- **class-feature** / _perpetual perfection_ -> `wb:class-feature/perpetual-perfection-bomber`, `wb:class-feature/perpetual-perfection-chirurgeon`, `wb:class-feature/perpetual-perfection-mutagenist`, `wb:class-feature/perpetual-perfection-toxicologist`, `wb:class-feature/perpetual-perfection`  (Core Rulebook)
-- **class-feature** / _perpetual potency_ -> `wb:class-feature/perpetual-potency-bomber`, `wb:class-feature/perpetual-potency-chirurgeon`, `wb:class-feature/perpetual-potency-mutagenist`, `wb:class-feature/perpetual-potency-toxicologist`, `wb:class-feature/perpetual-potency`  (Core Rulebook)
-- **class-feature** / _reflex expertise_ -> `wb:class-feature/barbarian-reflex-expertise`, `wb:class-feature/bard-reflex-expertise`, `wb:class-feature/champion-reflex-expertise`, `wb:class-feature/cleric-reflex-expertise`, `wb:class-feature/druid-reflex-expertise`, `wb:class-feature/guardian-reflex-expertise`, `wb:class-feature/inventor-reflex-expertise`, `wb:class-feature/sorcerer-reflex-expertise`, `wb:class-feature/thaumaturge-reflex-expertise`, `wb:class-feature/witch-reflex-expertise`, `wb:class-feature/wizard-reflex-expertise`  (Battlecry!, Guns & Gears (Remastered), Pathfinder Player Core 2, Player Core, Player Core 2)
-- **class-feature** / _shield block_ -> `wb:class-feature/champion-shield-block`, `wb:class-feature/commander-shield-block`, `wb:class-feature/druid-shield-block`, `wb:class-feature/exemplar-shield-block`, `wb:class-feature/fighter-shield-block`, `wb:class-feature/guardian-shield-block`, `wb:class-feature/inventor-shield-block`  (Battlecry!, Guns & Gears (Remastered), Player Core, Player Core 2, War of Immortals)
-- **class-feature** / _signature spells_ -> `wb:class-feature/bard-signature-spells`, `wb:class-feature/oracle-signature-spells`, `wb:class-feature/psychic-signature-spells`, `wb:class-feature/sorcerer-signature-spells`  (Dark Archives (Remastered), Player Core, Player Core 2)
-- **class-feature** / _simple weapon expertise_ -> `wb:class-feature/animist-simple-weapon-expertise`, `wb:class-feature/summoner-simple-weapon-expertise`  (Secrets of Magic, War of Immortals)
-- **class-feature** / _spell repertoire_ -> `wb:class-feature/spell-repertoire-bard`, `wb:class-feature/spell-repertoire-oracle`, `wb:class-feature/spell-repertoire-psychic`, `wb:class-feature/spell-repertoire-sorcerer`, `wb:class-feature/spell-repertoire-summoner`, `wb:class-feature/bard-spell-repertoire`, `wb:class-feature/oracle-spell-repertoire`, `wb:class-feature/psychic-spell-repertoire`, `wb:class-feature/sorcerer-spell-repertoire`, `wb:class-feature/summoner-spell-repertoire`  (Dark Archive, Dark Archives (Remastered), Player Core, Player Core 2, Secrets of Magic)
-- **class-feature** / _weapon expertise_ -> `wb:class-feature/weapon-expertise-swashbuckler`, `wb:class-feature/champion-weapon-expertise`, `wb:class-feature/druid-weapon-expertise`, `wb:class-feature/exemplar-weapon-expertise`, `wb:class-feature/guardian-weapon-expertise`, `wb:class-feature/investigator-weapon-expertise`, `wb:class-feature/kineticist-weapon-expertise`, `wb:class-feature/magus-weapon-expertise`, `wb:class-feature/oracle-weapon-expertise`, `wb:class-feature/psychic-weapon-expertise`, `wb:class-feature/sorcerer-weapon-expertise`, `wb:class-feature/swashbuckler-weapon-expertise`, `wb:class-feature/thaumaturge-weapon-expertise`, `wb:class-feature/witch-weapon-expertise`, `wb:class-feature/wizard-weapon-expertise`, `wb:class-feature/weapon`  (Battlecry!, Dark Archives (Remastered), Player Core, Player Core 2, Rage of Elements, Secrets of Magic, War of Immortals)
-- **class-feature** / _weapon mastery_ -> `wb:class-feature/barbarian-weapon-mastery`, `wb:class-feature/champion-weapon-mastery`, `wb:class-feature/commander-weapon-mastery`, `wb:class-feature/guardian-weapon-mastery`, `wb:class-feature/investigator-weapon-mastery`, `wb:class-feature/magus-weapon-mastery`, `wb:class-feature/swashbuckler-weapon-mastery`, `wb:class-feature/thaumaturge-weapon-mastery`  (Battlecry!, Dark Archives (Remastered), Player Core 2, Secrets of Magic)
-- **class-feature** / _weapon specialization_ -> `wb:class-feature/alchemist-weapon-specialization`, `wb:class-feature/animist-weapon-specialization`, `wb:class-feature/barbarian-weapon-specialization`, `wb:class-feature/bard-weapon-specialization`, `wb:class-feature/champion-weapon-specialization`, `wb:class-feature/cleric-weapon-specialization`, `wb:class-feature/commander-weapon-specialization`, `wb:class-feature/druid-weapon-specialization`, `wb:class-feature/fighter-weapon-specialization`, `wb:class-feature/guardian-weapon-specialization`, `wb:class-feature/gunslinger-weapon-specialization`, `wb:class-feature/inventor-weapon-specialization`, `wb:class-feature/investigator-weapon-specialization`, `wb:class-feature/kineticist-weapon-specialization`, `wb:class-feature/magus-weapon-specialization`, `wb:class-feature/monk-weapon-specialization`, `wb:class-feature/oracle-weapon-specialization`, `wb:class-feature/ranger-weapon-specialization`, `wb:class-feature/rogue-weapon-specialization`, `wb:class-feature/sorcerer-weapon-specialization`, `wb:class-feature/summoner-weapon-specialization`, `wb:class-feature/swashbuckler-weapon-specialization`, `wb:class-feature/thaumaturge-weapon-specialization`, `wb:class-feature/witch-weapon-specialization`, `wb:class-feature/wizard-weapon-specialization`  (Battlecry!, Dark Archives (Remastered), Guns & Gears (Remastered), Player Core, Player Core 2, Rage of Elements, Secrets of Magic, War of Immortals)
-- **class-feature** / _will expertise_ -> `wb:class-feature/alchemist-will-expertise`, `wb:class-feature/kineticist-will-expertise`, `wb:class-feature/ranger-will-expertise`  (Player Core, Player Core 2, Rage of Elements)
+- FALHA sem license: 6
