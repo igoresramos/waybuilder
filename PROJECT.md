@@ -69,7 +69,8 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
-> Design das regras caseiras fechado (21 regras) apos brainstorming longo com
+> Design das regras caseiras fechado (22 regras, em
+> `specs/2026-07-26-regras-multiclasse.md`) apos brainstorming longo com
 > verificacao continua contra o Elasticsearch do Archives of Nethys, pesquisa em
 > 4 agentes paralelos e review adversarial em Fable. Spec ainda nao escrita.
 > Projeto criado como `nethys`, renomeado para `waybuilder` no mesmo dia.
