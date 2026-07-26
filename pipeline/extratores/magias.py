@@ -504,6 +504,7 @@ def extrair() -> list[dict]:
             "defesa": defesa,
             "escalonamento_de_dano": escalonamento,
             "text": text_ref,
+            "texto": texto_plain,
             "mechanized": fsys is not None,
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
@@ -513,9 +514,9 @@ def extrair() -> list[dict]:
 
         registros.append(registro)
 
-    return registros, textos
+    return registros
 
 
 if __name__ == "__main__":
-    regs, textos = extrair()
-    print(f"{len(regs)} registros extraidos, {len(textos)} textos")
+    regs = extrair()
+    print(f"{len(regs)} registros extraidos")
