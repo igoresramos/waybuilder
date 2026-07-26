@@ -5,7 +5,7 @@ status: planning
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 0
+hours: 4
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -69,11 +69,17 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
-> Design das regras caseiras fechado (22 regras, em
-> `specs/2026-07-26-regras-multiclasse.md`) apos brainstorming longo com
-> verificacao continua contra o Elasticsearch do Archives of Nethys, pesquisa em
-> 4 agentes paralelos e review adversarial em Fable. Spec ainda nao escrita.
-> Projeto criado como `nethys`, renomeado para `waybuilder` no mesmo dia.
+> Design fechado e base canonica montada. As 22 regras de multiclasse, o schema
+> da base e o schema do documento de personagem estao escritos, revisados
+> adversarialmente e commitados. O pipeline roda ponta a ponta
+> (extratores -> reconciliar -> prosa -> fusao) e produz ~9,9k registros com
+> prosa em 100% e todos os portoes de qualidade passando.
+>
+> Tres extratores ficaram rodando no fim da sessao (equipamento, companheiros,
+> referencia); quando entrarem, a base vai a ~21k registros. Falta o front.
+>
+> **Comece por `README.md`** -- ele e o ponto de retomada.
+
 
 ## Stack
 - Python ou TypeScript para o pipeline

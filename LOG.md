@@ -50,3 +50,22 @@ project: waybuilder
   (nunca remasterizadas oficialmente -- Android, Anadi, Kitsune, Sprite,
   Strix, Skeleton, etc.)
 - Relatorio completo em `pipeline/relatorios/ancestrias.md`
+
+### Sessao | ~14:30-18:30 (estimado) | igor + claude-code
+- Projeto criado, renomeado `nethys` -> `waybuilder`, e escopo colapsado em um
+  projeto so (base + construtor), construido em fatias verticais
+- **3 specs escritas e aprovadas**: as 22 regras caseiras de multiclasse, o
+  schema da base canonica, e o schema do documento de personagem
+- **Review adversarial em Fable duas vezes.** O primeiro demoliu uma regra que o
+  Igor nunca propos -- erro meu de transcricao. O segundo, sobre a spec real,
+  achou 7 defeitos legitimos, todos endereçados
+- **Base canonica montada**: 6 extratores em paralelo (classes, feats, magias,
+  ancestrias, conjuracao, e mais 3 rodando), reconciliacao, emissao de prosa e
+  fusao de renomeados. ~9,9k registros com prosa em 100% e portoes passando
+- Simulacoes de Monte Carlo (200k iteracoes) calibraram a regra de elevacao de
+  magia; benchmark de 3.624 criaturas do AoN extraido e guardado
+- **Principio zero definido pelo Igor**: isto e um construtor de personagem, nao
+  um sistema de jogo. `requires` sugere, nunca bloqueia
+- README.md criado como ponto de retomada para sessoes futuras
+- Encerrada com 3 extratores ainda rodando (equipamento, companheiros,
+  referencia) -- base deve chegar a ~21k registros
