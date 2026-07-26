@@ -185,6 +185,55 @@ def prefetch_aon(pares: list[tuple[str, str]], workers: int = 12) -> None:
                 print(f"  ... {done}/{len(pendentes)}", file=sys.stderr)
 
 
+def _nome_base(nome: str) -> str | None:
+    """'Adept Benefit (Amulet)' -> 'Adept Benefit'. O Foundry as vezes quebra
+    uma unica entrada do AoN em variantes parentizadas (por escolha de
+    implemento, mutagenista/quimico/etc); o AoN normalmente so tem a base."""
+    if " (" in nome and nome.endswith(")"):
+        return nome.split(" (", 1)[0].strip()
+    return None
+
+
+def resolver_hits_feature(nome: str) -> list[dict]:
+    """Cascata de busca pra class-feature: nome exato em category
+    class-feature -> nome exato em category feat (varias entradas do pack
+    class-features do Foundry sao categorizadas como Feat comum no AoN,
+    ex. 'Advanced Alchemy') -> mesma cascata com o nome-base sem parenteses.
+    So usada depois do prefetch_aon_features() ter aquecido o cache."""
+    hits = aon_query(nome, "class-feature")
+    if hits:
+        return hits
+    hits = aon_query(nome, "feat")
+    if hits:
+        return hits
+    base = _nome_base(nome)
+    if base:
+        hits = aon_query(base, "class-feature")
+        if hits:
+            return hits
+        hits = aon_query(base, "feat")
+        if hits:
+            return hits
+    return []
+
+
+def prefetch_aon_fallback_features(nomes: list[str]) -> None:
+    """2a leva de prefetch: so pros nomes que ficaram sem hit em
+    (nome, class-feature) na 1a leva. Precisa rodar depois do prefetch_aon()
+    inicial, porque so sabemos quem precisa de fallback lendo o cache."""
+    pares = []
+    for nome in nomes:
+        hits = aon_query(nome, "class-feature")
+        if hits:
+            continue
+        pares.append((nome, "feat"))
+        base = _nome_base(nome)
+        if base:
+            pares.append((base, "class-feature"))
+            pares.append((base, "feat"))
+    prefetch_aon(pares)
+
+
 def pf2etools_load(filename: str) -> dict | None:
     """Baixa (ou le do cache) um arquivo data/class/<filename> do pf2etools.
     Marca 404 com um arquivo `.missing` para nao re-tentar toda hora."""
@@ -354,6 +403,7 @@ STATS = {
     "n_registros_class_feature": 0,
     "n_multi_owner_features": 0,
     "n_multi_owner_expanded": 0,
+    "n_classe_inferida_por_trait": 0,
     "mechanized_true": 0,
     "mechanized_false": 0,
     "mechanized_false_motivos": defaultdict(int),
@@ -567,6 +617,20 @@ def montar_requires_feature(sys_: dict, feature_id_para_relatorio: str) -> Campo
     return campo  # sempre vazio nesta passada -- ver nota acima
 
 
+def inferir_classe_por_trait(
+    traits_valor: list[str], classes_foundry: dict[str, dict]
+) -> str | None:
+    """Fallback pra features de subclasse (instintos, doutrinas, bloodlines,
+    edges de cacador etc.) que NAO aparecem no items{} de nenhuma classe --
+    a ligacao so existe via trait. So infere quando exatamente 1 trait bate
+    com uma classe conhecida (ambiguidade real e rara, ver relatorio)."""
+    nome_por_slug = {slug_classe(n): n for n in classes_foundry}
+    bateu = [nome_por_slug[t] for t in traits_valor if t in nome_por_slug]
+    if len(bateu) == 1:
+        return bateu[0]
+    return None
+
+
 def construir_registros_feature(
     fdata: dict,
     owners: list[tuple[str, int]],
@@ -591,13 +655,20 @@ def construir_registros_feature(
         for m in motivos:
             STATS["mechanized_false_motivos"][m.split(":")[0]] += 1
 
-    hits_aon = aon_query(nome, "class-feature")
+    hits_aon = resolver_hits_feature(nome)
     if not hits_aon:
         STATS["aon_feature_sem_match"].append(nome)
 
-    # unidades: (classe|None, nivel)
+    # unidades: (classe|None, nivel, inferido?)
+    classe_inferida = False
     if not owners:
-        unidades = [(None, nivel_proprio)]
+        classe_unica = inferir_classe_por_trait(traits_valor, classes_foundry)
+        if classe_unica:
+            classe_inferida = True
+            unidades = [(classe_unica, nivel_proprio)]
+            STATS["n_classe_inferida_por_trait"] += 1
+        else:
+            unidades = [(None, nivel_proprio)]
     else:
         unidades = owners
 
@@ -709,7 +780,7 @@ def construir_registros_feature(
             "prov": {
                 "name": campo_name.fonte,
                 "level": "foundry",
-                "class": "foundry",
+                "class": "foundry (inferido de traits)" if classe_inferida else "foundry",
                 "traits": campo_traits.fonte,
                 "rarity": campo_rarity.fonte,
                 "source": campo_book.fonte,
@@ -833,7 +904,13 @@ def gerar_relatorio_md() -> str:
         f"- Features compartilhadas por mais de uma classe (Weapon Specialization, "
         f"Shield Block etc.): **{s['n_multi_owner_features']}** nomes, expandidos em "
         f"**{s['n_multi_owner_expanded']}** registros (1 por par feature+classe dona, "
-        f"porque o nivel de concessao difere por classe -- ver secao 'Problemas mais serios')\n"
+        f"porque o nivel de concessao difere por classe -- ver secao 'Problemas mais serios')"
+    )
+    linhas.append(
+        f"- Features sem dono no `items{{}}` de nenhuma classe (instintos, doutrinas, "
+        f"bloodlines, edges de cacador etc.) recuperadas via trait: "
+        f"**{s['n_classe_inferida_por_trait']}** (`prov.class = \"foundry (inferido de "
+        f"traits)\"`, distinto do caso direto)\n"
     )
 
     linhas.append("## Campo-fonte -> campo-canonico, por fonte\n")

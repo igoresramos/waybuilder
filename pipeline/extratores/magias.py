@@ -455,6 +455,16 @@ def extrair() -> list[dict]:
             if kinds_all and all(k == "healing" for k in kinds_all):
                 defesa, defesa_motivo = None, "foundry:heal-only-override"
         prov["defesa"] = defesa_motivo if fsys else None
+        # divergencia conhecida: foundry diz "sem defesa" mas a AoN tem saving_throw
+        # estruturado preenchido (gap de dados do foundry). Registrado, nao corrigido
+        # (foundry continua vencendo por precedencia), mas fica auditavel.
+        if defesa is None and fsys is not None:
+            aon_saving_throw = aon.get("saving_throw")
+            if aon_saving_throw:
+                conflitos.append({
+                    "campo": "defesa", "foundry": None, "aon_saving_throw": aon_saving_throw,
+                    "escolhido": "foundry (gap conhecido, ver LOG)",
+                })
 
         heightened, heightened_motivo = ([], "sem-foundry")
         if fsys:

@@ -112,7 +112,31 @@ ATRIBUTOS = {
     "str": "str", "dex": "dex", "con": "con", "int": "int", "wis": "wis", "cha": "cha",
 }
 
-TRADICOES = {"arcane", "divine", "occult", "primal"}
+TRADICOES = ("arcane", "divine", "occult", "primal")
+
+# Alvos de proficiencia que nao sao pericia. A chave e a mesma usada em `grants`.
+PROFICIENCIA_OUTRA = {
+    "simple weapons": "simple", "all simple weapons": "simple",
+    "martial weapons": "martial", "all martial weapons": "martial",
+    "advanced weapons": "advanced", "all advanced weapons": "advanced",
+    "martial firearms": "martial", "simple firearms": "simple",
+    "unarmed attacks": "unarmed", "unarmed attack": "unarmed",
+    "light armor": "light", "medium armor": "medium", "heavy armor": "heavy",
+    "unarmored defense": "unarmored", "unarmored": "unarmored",
+    "fortitude saves": "fortitude", "fortitude": "fortitude",
+    "reflex saves": "reflex", "reflex": "reflex",
+    "will saves": "will", "will": "will",
+    "perception": "perception",
+    "spell attacks": "spell-attack", "spell attack rolls": "spell-attack",
+    "spell dcs": "spell-dc", "class dc": "class-dc",
+}
+
+# Sufixos de escolha de subclasse: "{@class Magus|...} hybrid study".
+SUFIXO_SUBCLASSE = re.compile(
+    r"\s+(hybrid study|muse|methodology|order|doctrine|bloodline|instinct|"
+    r"racket|way|research field|conscious mind|subconscious mind|cause|"
+    r"tenet|discipline|specialty|innovation|element|implement|hunter's edge|"
+    r"deity|mystery|patron|lesson|school|thesis|style|form|apparition)s?$", re.I)
 
 # ---- rule elements do Foundry -------------------------------------------
 
@@ -283,6 +307,18 @@ TRADICAO_RE = re.compile(
     r"^(?:the\s+)?ability to cast (arcane|divine|occult|primal) spells"
     r"(?:\s+from spell slots)?$", re.I)
 
+QUALQUER_CONJURACAO_RE = re.compile(
+    r"^(?:you (?:have|are)\s+|able to cast\s+|ability to cast\s+)?"
+    r"(?:a\s+)?(?:spellcasting class feature|spells from spell slots|"
+    r"able to cast spells|ability to cast spells)$", re.I)
+
+CAST_SPELL_RE = re.compile(
+    r"^(?:the\s+)?(?:ability|able) to cast (\x01\d+\x02)"
+    r"(?:\s+as an? .*)?$", re.I)
+
+HERANCA_RE = re.compile(r"^(.+?)\s+heritage$", re.I)
+TRACO_RE = re.compile(r"^(.+?)\s+trait$", re.I)
+
 CLASSE_NIVEL_RE = re.compile(r"^(\w[\w\s]*?)\s+level\s+(\d+)$", re.I)
 
 LORE_RE = re.compile(r"^(.+?)\s+lore$", re.I)
@@ -413,24 +449,31 @@ class Parser:
         return {conector: preds}
 
     def _pericia(self, texto, tags):
+        """Alvo de proficiencia: pericia, Lore, arma, armadura, salvaguarda."""
         t = texto.strip().strip(".")
+        t = re.sub(r"^(?:a|an|any|all|any kind of)\s+", "", t, flags=re.I).strip()
         i = so_marca(t)
         if i is not None:
             tipo, partes = tags[i]
-            if tipo == "skill":
-                nome = partes[0]
-            else:
+            if tipo != "skill":
                 return None
+            # {@skill Lore||Warfare Lore} -> o rotulo real esta em partes[2]
+            nome = partes[2] if len(partes) >= 3 and partes[2] else partes[0]
         else:
             nome = expandir(t, tags)
         n = chave(nome)
         if n in PERICIAS:
             return n
+        if n in PROFICIENCIA_OUTRA:
+            return PROFICIENCIA_OUTRA[n]
         m = LORE_RE.match(n)
         if m:
             return "lore:" + slug(m.group(1))
-        if n in ("a lore skill", "any lore", "any lore skill"):
+        if n in ("lore", "a lore skill", "lore skill", "any lore", "any lore skill",
+                 "one lore skill"):
             return "lore:*"
+        if n in ("weapon", "kind of weapon", "weapons"):
+            return "weapon:*"
         return None
 
     # -- atomo -------------------------------------------------------------
@@ -468,6 +511,44 @@ class Parser:
         m = TRADICAO_RE.match(t)
         if m:
             return {"spellcasting_tradition": m.group(1).lower()}
+        if QUALQUER_CONJURACAO_RE.match(t):
+            return {"any": [{"spellcasting_tradition": x} for x in TRADICOES]}
+        m = CAST_SPELL_RE.match(t)
+        if m:
+            j = so_marca(m.group(1))
+            if j is not None and tags[j][0] == "spell":
+                return {"has": "wb:spell/" + slug(tags[j][1][0])}
+
+        # d2) "<X> heritage" / "<X> trait"
+        m = HERANCA_RE.match(t)
+        if m:
+            alvo = m.group(1).strip()
+            j = so_marca(alvo)
+            if j is not None and tags[j][0] == "ancestry":
+                p = self._tag(tags[j])
+                if p is not None:
+                    return p
+            nome = expandir(alvo, tags).strip()
+            if nome:
+                return {"has": "wb:heritage/" + slug(nome)}
+        m = TRACO_RE.match(t)
+        if m:
+            alvo = m.group(1).strip()
+            j = so_marca(alvo)
+            if j is not None and tags[j][0] == "trait":
+                return {"trait": slug(tags[j][1][0])}
+            nome = expandir(alvo, tags).strip()
+            if nome and " " not in nome:
+                return {"trait": slug(nome)}
+
+        # d3) marca de classe/ancestralidade seguida de substantivo de subclasse
+        m = re.match(r"^(\x01\d+\x02)(\s+.+)$", t)
+        if m and SUFIXO_SUBCLASSE.search(m.group(2)):
+            j = so_marca(m.group(1))
+            if j is not None and tags[j][0] in ("class", "ancestry"):
+                p = self._tag(tags[j])
+                if p is not None:
+                    return p
 
         # e) clausula de rank residual (sem lista)
         r = self._clausula_rank(t, tags)
