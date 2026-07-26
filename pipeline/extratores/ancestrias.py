@@ -496,6 +496,8 @@ def extract_heritages(foundry_heritages, aon_idx, aon_norm_idx, relatorio):
             relatorio["heritage_sem_aon"].append(name)
 
         prov = {}
+        if ancestry_id:
+            prov["ancestry"] = "foundry"
         if aon_doc:
             out_name = aon_doc.get("name", name)
             prov["name"] = "aon"
@@ -918,10 +920,10 @@ def gerar_relatorio_md(registros, meta):
 
     lines.append(
         f"- **Pareamento por nome normalizado (fallback)**: {len(gaps['pareamento_fuzzy'])} "
-        "registros so casaram com AoN depois de derrubar parenteses/hifen (grafia "
-        "diverge entre Foundry e AoN, mesmo registro). Sem esse fallback, esses "
-        "apareceriam como \"sem par\" ou, do lado do mapa Legacy->Remaster, como "
-        "\"removido\":\n"
+        "registros so casaram com AoN depois de normalizar hifen/espaco (mesmo "
+        "registro, pontuacao diverge entre Foundry e AoN). Sem esse fallback, "
+        "esses apareceriam como \"sem par\" ou, do lado do mapa Legacy->Remaster, "
+        "como \"removido\":\n"
     )
     lines.append(_md_list(gaps["pareamento_fuzzy"], limit=20))
 

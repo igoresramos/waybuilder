@@ -97,6 +97,34 @@ Por campo, nao por registro:
 Quando a fonte vencedora nao tem o campo, cai para a proxima na ordem acima e
 `prov` registra de quem veio.
 
+## Nivel de class-feature pertence a classe, nao a feature
+
+Uma class-feature e **um** registro, compartilhado. Quem diz em que nivel ela
+entra e a **progressao da classe**, nao a feature.
+
+```json
+// wb:class/fighter
+"progressao": [
+  {"nivel": 7,  "concede": "wb:class-feature/weapon-specialization"},
+  {"nivel": 13, "concede": "wb:class-feature/weapon-legend"}
+]
+// wb:class/wizard
+"progressao": [
+  {"nivel": 13, "concede": "wb:class-feature/weapon-specialization"}
+]
+```
+
+O registro `wb:class-feature/weapon-specialization` **nao tem `level`**.
+
+> Descoberto na extracao: o Foundry guarda 1 arquivo por feature referenciado
+> por N classes com nivel proprio cada. Modelar `level` como escalar na feature
+> obriga a duplicar o registro por classe -- 27 nomes viravam 187 registros com
+> o texto repetido. Alem do desperdicio, quebra a identidade: `wb:class-feature/
+> weapon-specialization` passaria a existir em varias versoes conflitantes.
+>
+> `level` escalar continua valendo para `feat`, `spell` e tudo que tem nivel
+> intrinseco. So class-feature muda.
+
 ## Linguagem de predicado (`requires`)
 
 E aqui que a houserule mora. Termo de nivel e **sempre explicito** -- nunca um

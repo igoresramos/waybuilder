@@ -84,3 +84,28 @@ classe sai de query sobre as 47, nunca de lista escrita a mao.
 O `total` do AoN para em 10.000 por padrao. Sem `"track_total_hits": true` a
 contagem mente silenciosamente. E `terms` em campo de texto (`primary_source`,
 `name`) retorna zero -- usar `match_phrase`.
+
+### Class-feature e compartilhada entre classes
+O Foundry guarda 1 arquivo por feature, referenciado por N classes com nivel
+proprio cada. "Weapon Specialization" e um arquivo so: Guerreiro no 7, Mago no
+13. Modelar `level` na feature obriga a duplicar o registro por classe (27 nomes
+-> 187 registros com texto repetido) e quebra a identidade do id. O nivel
+pertence a **progressao da classe**. Corrigido na spec do schema.
+
+### 52% das class-features nao casam com o AoN, e nao e bug de busca
+O AoN usa categorias proprias para escolha de subclasse -- `mystery`, `patron`,
+`instinct`, `doctrine` -- em vez de `class-feature`. Cair para a categoria `feat`
+como fallback **piora**: `Advanced Alchemy` existe como class-feature nativa E
+como feat de arquetipo, entidades diferentes com o mesmo nome.
+
+### pf2etools nao cobre o Remaster inteiro
+Sem geracao remaster para 8 das 12 classes do Player Core 2 (Alchemist,
+Barbarian, Champion, Investigator, Monk, Oracle, Sorcerer, Swashbuckler) e sem
+arquivo nenhum para Animist, Commander, Exemplar e Guardian. Cerca de 12 das 27
+classes ficam **sem cross-check de `level`**. A precedencia da spec assume duas
+fontes independentes para conferir nivel -- em metade das classes existe so uma.
+
+### A tabela de slots de conjuracao nao esta mecanizada em lugar nenhum
+Nem AoN, nem pf2etools, nem os campos estruturados do Foundry. Ela vive dentro
+de rule elements nao decodificados. Confirmado como o item mais caro do projeto,
+que ja era a suspeita no desenho inicial.

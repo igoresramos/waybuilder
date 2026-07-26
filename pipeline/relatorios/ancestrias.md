@@ -320,7 +320,7 @@ AoN tem 94 docs de ancestry, 436 de heritage e 612 de background (Legacy + Remas
 - Refugee (Fall of Plaguestone)
 - Refugee (PC2)
 
-- **Pareamento por nome normalizado (fallback)**: 2 registros so casaram com AoN depois de derrubar parenteses/hifen (grafia diverge entre Foundry e AoN, mesmo registro). Sem esse fallback, esses apareceriam como "sem par" ou, do lado do mapa Legacy->Remaster, como "removido":
+- **Pareamento por nome normalizado (fallback)**: 2 registros so casaram com AoN depois de normalizar hifen/espaco (mesmo registro, pontuacao diverge entre Foundry e AoN). Sem esse fallback, esses apareceriam como "sem par" ou, do lado do mapa Legacy->Remaster, como "removido":
 
 - background: Foundry "Aspiring Free-Captain" ~ AoN "Aspiring Free Captain" (background-81)
 - background: Foundry "Oenopion-Ooze Tender" ~ AoN "Oenopion Ooze-Tender" (background-92)
