@@ -71,7 +71,7 @@ Pin do Foundry: `87f9e5028baaa10b70fdc766260b7886def17e04`
 
 ## Campos que NAO consegui mapear
 
-- **`requires` (pre-requisito) em class-feature.** So 4 dos 826 arquivos tem `system.prerequisites.value` preenchido (Way of the Spellshot, Flexible Spell Preparation, Elemental Magic, Wellspring Magic), e e prosa livre sem marcacao `{@feat}`/`{@skill}` -- o pf2etools (fonte vencedora pra `requires`) nao guarda prerequisites estruturados no nivel de class-feature (isso existe pra `feat`, que e outro extrator). Traduzir a prosa pra `all`/`any`/`class_level` exigiria parsing de linguagem natural -- decidi deixar `requires` ausente nesses 4 casos em vez de inventar estrutura. Nomes: .
+- **`requires` (pre-requisito) em class-feature.** So 4 dos 826 arquivos tem `system.prerequisites.value` preenchido (Way of the Spellshot, Flexible Spell Preparation, Elemental Magic, Wellspring Magic), e e prosa livre sem marcacao `{@feat}`/`{@skill}` -- o pf2etools (fonte vencedora pra `requires`) nao guarda prerequisites estruturados no nivel de class-feature (isso existe pra `feat`, que e outro extrator). Traduzir a prosa pra `all`/`any`/`class_level` exigiria parsing de linguagem natural -- decidi deixar `requires` ausente nesses 4 casos em vez de inventar estrutura. Nomes: Elemental Magic, Flexible Spell Preparation, Way of the Spellshot, Wellspring Magic.
 
 - **`system.subfeatures.{senses,languages,keyOptions,suppressedFeatures}`.** 245 features tem `proficiencies` (traduzido pra `grants[].proficiency`), mas 81 tem `senses`, 85 `suppressedFeatures`, 15 `languages`, 9 `keyOptions` -- nenhum desses quatro foi traduzido pra `grants` nesta passada. Contribuem pra `mechanized:false`.
 
@@ -81,7 +81,7 @@ Pin do Foundry: `87f9e5028baaa10b70fdc766260b7886def17e04`
 
 - **4 classes sem nenhum arquivo no pf2etools:** Animist, Commander, Exemplar, Guardian -- Animist, Commander, Exemplar e Guardian sao classes recentes (War of Immortals / Battlecry!) que o branch `dev` do pf2etools ainda nao portou em `data/class/`. Cross-check de nivel pulado pra elas; `xref.pf2etools` fica `null`.
 
-- **`source.page` ausente por falta de match no AoN:** 0 classes, 484 class-features (ver listas de nomes sem match na secao seguinte).
+- **`source.page` ausente por falta de match no AoN:** 0 classes, 444 class-features (ver listas de nomes sem match na secao seguinte).
 
 ## Divergencias reais encontradas
 
@@ -92,18 +92,30 @@ O Foundry guarda **um arquivo por class-feature**, referenciado (nome+nivel+uuid
 
 | Feature | Classe | Foundry | pf2etools |
 |---|---|---|---|
-| evasion | Gunslinger | 7 | 11 |
+| Evasion | Gunslinger | 7 | 11 |
 
 ### 3. Geracao (legado x remaster) divergente entre Foundry e pf2etools
 Classes onde o Foundry considera o conteudo remasterizado (`publication.remaster: true`, licenca ORC) mas o arquivo disponivel no pf2etools ainda e o legado (pre-remaster, licenca OGL/CRB/APG original):
 
 | Classe | Arquivo pf2etools usado | Nota |
 |---|---|---|
+| Alchemist | class-alchemist.json | arquivo class-alchemist.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Barbarian | class-barbarian.json | arquivo class-barbarian.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Champion | class-champion.json | arquivo class-champion.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Gunslinger | class-gunslinger.json | arquivo class-gunslinger.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Inventor | class-inventor.json | arquivo class-inventor.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Investigator | class-investigator.json | arquivo class-investigator.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Monk | class-monk.json | arquivo class-monk.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Oracle | class-oracle.json | arquivo class-oracle.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Psychic | class-psychic.json | arquivo class-psychic.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Sorcerer | class-sorcerer.json | arquivo class-sorcerer.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Swashbuckler | class-swashbuckler.json | arquivo class-swashbuckler.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
+| Thaumaturge | class-thaumaturge.json | arquivo class-thaumaturge.json e geracao legado, Foundry e remaster -- geracoes divergentes, cross-check de nivel ainda tentado (numero de nivel raramente muda entre geracoes) |
 
 ## mechanized: true x false
 
-- `mechanized: true`: **255** / 853
-- `mechanized: false`: **598** / 853
+- `mechanized: true`: **312** / 1013
+- `mechanized: false`: **701** / 1013
 
 Uma class-feature sai `mechanized:true` só quando `system.rules` está vazio **e** `system.subfeatures` só contém `proficiencies` (ou está vazio). Motivos de `mechanized:false` mais comuns:
 
@@ -119,7 +131,19 @@ Uma class-feature sai `mechanized:true` só quando `system.rules` está vazio **
 ## Sem match no AoN
 
 - Classes sem nenhum hit: (nenhuma)
-- Class-features sem nenhum hit (472): Adept Benefit (Amulet), Adept Benefit (Bell), Adept Benefit (Chalice), Adept Benefit (Lantern), Adept Benefit (Mirror), Adept Benefit (Regalia), Adept Benefit (Shield), Adept Benefit (Tome), Adept Benefit (Wand), Adept Benefit (Weapon), Advanced Alchemy, Advanced Design, Advanced Rangefinder, Advanced Vials (Bomber), Advanced Vials (Chirurgeon), Advanced Vials (Mutagenist), Advanced Vials (Toxicologist), Aerodynamic Construction, Air Gate, Alchemical Sciences Methodology, Alchemist Armor Expertise (Level 13), Alchemist Armor Mastery (Level 19), All-Consuming Hunger, Aloof Firmament, Amulet, Anathema (Cleric), Anathema (Druid), Ancestors, Angel Eidolon, Anger Phantom Eidolon, Animal Instinct, Animal Order, Antimagic Plating, Anvil's Hardness, Arcane Spellcasting (Magus), Armor Innovation, Ashes, Attack Refiner, Automated Impediments, Avenger...
+- Class-features sem nenhum hit (431): Adept Benefit (Amulet), Adept Benefit (Bell), Adept Benefit (Chalice), Adept Benefit (Lantern), Adept Benefit (Mirror), Adept Benefit (Regalia), Adept Benefit (Shield), Adept Benefit (Tome), Adept Benefit (Wand), Adept Benefit (Weapon), Advanced Alchemy, Advanced Design, Advanced Rangefinder, Aerodynamic Construction, Air Gate, Alchemical Sciences Methodology, Alchemist Armor Expertise (Level 13), Alchemist Armor Mastery (Level 19), All-Consuming Hunger, Aloof Firmament, Amulet, Ancestors, Angel Eidolon, Anger Phantom Eidolon, Animal Instinct, Animal Order, Antimagic Plating, Anvil's Hardness, Armor Innovation, Ashes, Attack Refiner, Automated Impediments, Avenger, Baba Yaga, Bands of Imprisonment, Barrow's Edge, Battle Creed, Battledancer, Beast Eidolon, Bell...
+
+Investiguei uma amostra manual dessas ~431 (52% dos 826 arquivos). A causa dominante nao e falha de busca: o AoN usa **categorias proprias pras escolhas de subclasse**, diferentes de `class-feature` -- ex. "Ancestors" (misterio de Oraculo) vive em `category:mystery`, "Baba Yaga" (patrona de Bruxa) em `category:patron`. Confirmado por amostragem: `bloodline`/`instinct`/`doctrine`/`order`/`mystery`/`patron` sao categorias reais e distintas no indice `aon`. Um segundo grupo (ex. "Angel Eidolon", boons de eidolon do Summoner) parece **nao ter doc proprio no AoN em nenhuma categoria** -- fica so descrito dentro da pagina da classe. Decidi NAO adicionar uma cascata de categorias alternativas nesta passada: o teste que fiz com `category:feat` como fallback (antes de restringir a cascata so a `class-feature`) causou colisao real -- "Advanced Alchemy" existe como class-feature nativa do Alchemist E como feat de arquetipo (Alchemist Dedication), duas entidades diferentes com o mesmo nome. Uma cascata de categorias (`mystery`, `patron`, `instinct`, `doctrine`, `order`...) e viavel e recuperaria boa parte dos 431, mas cada categoria precisa ser validada campo-a-campo antes de confiar nela pra `source`/`rarity` -- fica pra uma proxima passada.
+
+## Colisoes de id (achado real, nao teorico)
+
+O pack `class-features` do Foundry ainda tem itens **orfaos** (nao referenciados no `items{}` de nenhuma classe) que sao duplicatas mortas de features que o remaster consolidou num item compartilhado -- ex. `Druid Weapon Expertise` (Core Rulebook, orfao) e a `Weapon Expertise` compartilhada (Player Core, referenciada por 25 classes) descrevem a mesma coisa pro Druid, e o slug de ambas colide (`slugify("Druid Weapon Expertise")` == `druid-` + `slugify("Weapon Expertise")`). Desambiguado com sufixo `-dupN` deterministico em vez de sobrescrever silenciosamente:
+
+| Id original | Id novo | Nome | xref.foundry |
+|---|---|---|---|
+| `wb:class-feature/druid-weapon-expertise` | `wb:class-feature/druid-weapon-expertise-dup2` | Druid Weapon Expertise | Compendium.pf2e.classfeatures.Item.Ra32tlqBxHzT6fzN |
+| `wb:class-feature/psychic-weapon-expertise` | `wb:class-feature/psychic-weapon-expertise-dup2` | Psychic Weapon Expertise | Compendium.pf2e.classfeatures.Item.kLschzVZFoe3U63C |
+| `wb:class-feature/wizard-weapon-expertise` | `wb:class-feature/wizard-weapon-expertise-dup2` | Wizard Weapon Expertise | Compendium.pf2e.classfeatures.Item.GBsC2cARoFiqMi9V |
 
 ## Os 3 problemas mais serios
 

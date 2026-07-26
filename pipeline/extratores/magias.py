@@ -1,7 +1,7 @@
 """
 Extrator canonico de MAGIAS (kind=spell) para o Waybuilder.
 
-Fontes fixadas (ver pipeline/dados_brutos/*/MANIFEST.md quando existir):
+Fontes fixadas (ver pipeline/dados_brutos/foundry/PIN pro commit pinado):
   - foundry:   foundryvtt/pf2e, commit 87f9e5028baaa10b70fdc766260b7886def17e04
                packs/pf2e/spells/{spells,focus}/**  (rituais excluidos: categoria
                separada na AoN, fora do escopo desta extracao)
@@ -29,7 +29,7 @@ from html.parser import HTMLParser
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DADOS = os.path.join(BASE_DIR, "dados_brutos")
 FOUNDRY_SPELLS_DIR = os.path.join(DADOS, "foundry", "spells")
-AON_BATCHES_DIR = os.path.join(DADOS, "aon", "_batches")
+AON_SPELLS_FILE = os.path.join(DADOS, "aon_spells.json")  # lista flat de _source, mesmo padrao de aon_feats.json etc.
 PF2ETOOLS_DIR = os.path.join(DADOS, "pf2etools")
 
 
@@ -269,13 +269,8 @@ def escalonamento_ganho_medio_por_rank(esc: dict) -> float | None:
 # --------------------------------------------------------------------------
 
 def load_aon_spells() -> list[dict]:
-    docs = []
-    for path in sorted(glob.glob(os.path.join(AON_BATCHES_DIR, "*.json"))):
-        with open(path, encoding="utf-8") as f:
-            data = json.load(f)
-        for hit in data["hits"]["hits"]:
-            docs.append(hit["_source"])
-    return docs
+    with open(AON_SPELLS_FILE, encoding="utf-8") as f:
+        return json.load(f)
 
 
 def dedupe_aon_legacy_remaster(docs: list[dict]) -> tuple[list[dict], dict]:
@@ -389,8 +384,9 @@ def extrair() -> list[dict]:
 
         source_book = aon.get("primary_source") or (aon.get("source") or [None])[0]
         source_page = None
-        praw = aon.get("primary_source_raw") or ""
-        m = re.search(r"pg\.\s*(\d+)", praw)
+        # "primary_source_raw" nao foi baixado no dump (nao estava no _source
+        # filter); a pagina vem do campo "text" (formato "... Source <Livro> pg. N ...").
+        m = re.search(r"pg\.\s*(\d+)", aon.get("text") or "")
         if m:
             source_page = int(m.group(1))
         is_remaster = bool(legacy_doc) or not bool(aon.get("remaster_id"))

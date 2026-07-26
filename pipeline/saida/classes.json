@@ -4701,7 +4701,7 @@
   {
     "id": "wb:class-feature/advanced-vials-bomber",
     "kind": "class-feature",
-    "name": "Advanced Vials (Bomber)",
+    "name": "Advanced Vials",
     "level": 11,
     "class": [
       "Alchemist"
@@ -4711,8 +4711,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -4721,16 +4721,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.5FnyPYPaRbJthT3I",
-      "aon": null,
+      "aon": "class-feature-831",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -4738,7 +4738,7 @@
   {
     "id": "wb:class-feature/advanced-vials-chirurgeon",
     "kind": "class-feature",
-    "name": "Advanced Vials (Chirurgeon)",
+    "name": "Advanced Vials",
     "level": 11,
     "class": [
       "Alchemist"
@@ -4748,8 +4748,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -4758,16 +4758,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.6d8JFjFuvH27dpiw",
-      "aon": null,
+      "aon": "class-feature-831",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -4775,7 +4775,7 @@
   {
     "id": "wb:class-feature/advanced-vials-mutagenist",
     "kind": "class-feature",
-    "name": "Advanced Vials (Mutagenist)",
+    "name": "Advanced Vials",
     "level": 11,
     "class": [
       "Alchemist"
@@ -4785,8 +4785,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -4795,16 +4795,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.wYOdTCWQQ6ec8I6b",
-      "aon": null,
+      "aon": "class-feature-831",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -4812,14 +4812,14 @@
   {
     "id": "wb:class-feature/advanced-vials-toxicologist",
     "kind": "class-feature",
-    "name": "Advanced Vials (Toxicologist)",
+    "name": "Advanced Vials",
     "level": 1,
     "class": [],
     "traits": null,
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -4828,19 +4828,26 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.fOWKDtenCzLRWCgu",
-      "aon": null,
+      "aon": "class-feature-831",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry",
       "traits": null,
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
-    "conflitos": []
+    "conflitos": [
+      {
+        "campo": "level",
+        "foundry": 1,
+        "aon": 11,
+        "escolhido": "foundry"
+      }
+    ]
   },
   {
     "id": "wb:class-feature/advanced-vials",
@@ -5557,7 +5564,7 @@
   {
     "id": "wb:class-feature/anathema-druid",
     "kind": "class-feature",
-    "name": "Anathema (Druid)",
+    "name": "Anathema",
     "level": 1,
     "class": [
       "Druid"
@@ -5567,8 +5574,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core",
-      "page": null,
+      "book": "Player Core",
+      "page": 122,
       "license": "ORC",
       "remaster": true
     },
@@ -5577,16 +5584,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.nfBn8QB6HVdzpTFV",
-      "aon": null,
+      "aon": "class-feature-667",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -6081,7 +6088,7 @@
   {
     "id": "wb:class-feature/arcane-spellcasting-magus",
     "kind": "class-feature",
-    "name": "Arcane Spellcasting (Magus)",
+    "name": "Arcane Spellcasting",
     "level": 1,
     "class": [
       "Magus"
@@ -6091,8 +6098,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Secrets of Magic",
-      "page": null,
+      "book": "Secrets of Magic",
+      "page": 35,
       "license": "OGL",
       "remaster": false
     },
@@ -6101,16 +6108,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.wXaz41gwqNtTn6tf",
-      "aon": null,
+      "aon": "class-feature-418",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -10931,7 +10938,7 @@
   {
     "id": "wb:class-feature/deity-champion",
     "kind": "class-feature",
-    "name": "Deity (Champion)",
+    "name": "Deity",
     "level": 1,
     "class": [
       "Champion"
@@ -10941,8 +10948,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 86,
       "license": "ORC",
       "remaster": true
     },
@@ -10951,16 +10958,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.ehL7mnkqxN5wIkgu",
-      "aon": null,
+      "aon": "class-feature-871",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -10968,7 +10975,7 @@
   {
     "id": "wb:class-feature/deity-cleric",
     "kind": "class-feature",
-    "name": "Deity (Cleric)",
+    "name": "Deity",
     "level": 1,
     "class": [
       "Cleric"
@@ -10978,8 +10985,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core",
-      "page": null,
+      "book": "Player Core",
+      "page": 108,
       "license": "ORC",
       "remaster": true
     },
@@ -10988,16 +10995,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.DutW12WMFPHBoLTH",
-      "aon": null,
+      "aon": "class-feature-649",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -12149,7 +12156,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/druid-weapon-expertise",
+    "id": "wb:class-feature/druid-weapon-expertise-dup2",
     "kind": "class-feature",
     "name": "Druid Weapon Expertise",
     "level": 11,
@@ -12174,7 +12181,7 @@
         }
       }
     ],
-    "text": "wb:text/class-feature/druid-weapon-expertise",
+    "text": "wb:text/class-feature/druid-weapon-expertise-dup2",
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.Ra32tlqBxHzT6fzN",
@@ -14633,7 +14640,7 @@
   {
     "id": "wb:class-feature/familiar-witch",
     "kind": "class-feature",
-    "name": "Familiar (Witch)",
+    "name": "Familiar",
     "level": 1,
     "class": [
       "Witch"
@@ -14643,8 +14650,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core",
-      "page": null,
+      "book": "Player Core",
+      "page": 178,
       "license": "ORC",
       "remaster": true
     },
@@ -14653,16 +14660,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.yksPhweBZYVCsE1A",
-      "aon": null,
+      "aon": "class-feature-772",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -14779,7 +14786,7 @@
   {
     "id": "wb:class-feature/field-discovery-bomber",
     "kind": "class-feature",
-    "name": "Field Discovery (Bomber)",
+    "name": "Field Discovery",
     "level": 5,
     "class": [
       "Alchemist"
@@ -14789,8 +14796,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -14799,16 +14806,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.8QAFgy9U8PxEa7Dw",
-      "aon": null,
+      "aon": "class-feature-824",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -14816,7 +14823,7 @@
   {
     "id": "wb:class-feature/field-discovery-chirurgeon",
     "kind": "class-feature",
-    "name": "Field Discovery (Chirurgeon)",
+    "name": "Field Discovery",
     "level": 5,
     "class": [
       "Alchemist"
@@ -14826,8 +14833,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -14836,16 +14843,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.qC0Iz6SlG2i9gv6g",
-      "aon": null,
+      "aon": "class-feature-824",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -14853,7 +14860,7 @@
   {
     "id": "wb:class-feature/field-discovery-mutagenist",
     "kind": "class-feature",
-    "name": "Field Discovery (Mutagenist)",
+    "name": "Field Discovery",
     "level": 5,
     "class": [
       "Alchemist"
@@ -14863,8 +14870,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -14873,16 +14880,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.V4Jt7eDnJBLv5bDj",
-      "aon": null,
+      "aon": "class-feature-824",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -14890,7 +14897,7 @@
   {
     "id": "wb:class-feature/field-discovery-toxicologist",
     "kind": "class-feature",
-    "name": "Field Discovery (Toxicologist)",
+    "name": "Field Discovery",
     "level": 5,
     "class": [
       "Alchemist"
@@ -14900,8 +14907,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -14910,16 +14917,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.6zo2PJGYoig7nFpR",
-      "aon": null,
+      "aon": "class-feature-824",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -17114,7 +17121,7 @@
   {
     "id": "wb:class-feature/greater-field-discovery-bomber",
     "kind": "class-feature",
-    "name": "Greater Field Discovery (Bomber)",
+    "name": "Greater Field Discovery",
     "level": 13,
     "class": [
       "Alchemist"
@@ -17124,8 +17131,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -17134,16 +17141,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.RGs4uR3CAvgbtBAA",
-      "aon": null,
+      "aon": "class-feature-833",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -17151,7 +17158,7 @@
   {
     "id": "wb:class-feature/greater-field-discovery-chirurgeon",
     "kind": "class-feature",
-    "name": "Greater Field Discovery (Chirurgeon)",
+    "name": "Greater Field Discovery",
     "level": 13,
     "class": [
       "Alchemist"
@@ -17161,8 +17168,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -17171,16 +17178,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.JJcaVijwRt9dsnac",
-      "aon": null,
+      "aon": "class-feature-833",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -17188,7 +17195,7 @@
   {
     "id": "wb:class-feature/greater-field-discovery-mutagenist",
     "kind": "class-feature",
-    "name": "Greater Field Discovery (Mutagenist)",
+    "name": "Greater Field Discovery",
     "level": 13,
     "class": [
       "Alchemist"
@@ -17198,8 +17205,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -17208,16 +17215,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.1BKdOJ0HNL6Eg3xw",
-      "aon": null,
+      "aon": "class-feature-833",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -17225,7 +17232,7 @@
   {
     "id": "wb:class-feature/greater-field-discovery-toxicologist",
     "kind": "class-feature",
-    "name": "Greater Field Discovery (Toxicologist)",
+    "name": "Greater Field Discovery",
     "level": 13,
     "class": [
       "Alchemist"
@@ -17235,8 +17242,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 56,
       "license": "ORC",
       "remaster": true
     },
@@ -17245,16 +17252,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.tnqyQrhrZeDtDvcO",
-      "aon": null,
+      "aon": "class-feature-833",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -17680,7 +17687,7 @@
   {
     "id": "wb:class-feature/greater-weapon-specialization-barbarian",
     "kind": "class-feature",
-    "name": "Greater Weapon Specialization (Barbarian)",
+    "name": "Greater Weapon Specialization",
     "level": 15,
     "class": [
       "Barbarian"
@@ -17690,8 +17697,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 70,
       "license": "ORC",
       "remaster": true
     },
@@ -17700,16 +17707,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.7JjhxMFo8DMwpGx0",
-      "aon": null,
+      "aon": "class-feature-862",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -24447,7 +24454,7 @@
   {
     "id": "wb:class-feature/masterful-hunter-flurry",
     "kind": "class-feature",
-    "name": "Masterful Hunter (Flurry)",
+    "name": "Masterful Hunter",
     "level": 17,
     "class": [
       "Ranger"
@@ -24457,8 +24464,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core",
-      "page": null,
+      "book": "Player Core",
+      "page": 152,
       "license": "ORC",
       "remaster": true
     },
@@ -24467,16 +24474,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.JhLncIB10GSQowWL",
-      "aon": null,
+      "aon": "class-feature-736",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -24484,7 +24491,7 @@
   {
     "id": "wb:class-feature/masterful-hunter-outwit",
     "kind": "class-feature",
-    "name": "Masterful Hunter (Outwit)",
+    "name": "Masterful Hunter",
     "level": 17,
     "class": [
       "Ranger"
@@ -24494,8 +24501,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core",
-      "page": null,
+      "book": "Player Core",
+      "page": 152,
       "license": "ORC",
       "remaster": true
     },
@@ -24504,16 +24511,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.vWZaLE2fEKMBw3D5",
-      "aon": null,
+      "aon": "class-feature-736",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -24521,7 +24528,7 @@
   {
     "id": "wb:class-feature/masterful-hunter-precision",
     "kind": "class-feature",
-    "name": "Masterful Hunter (Precision)",
+    "name": "Masterful Hunter",
     "level": 17,
     "class": [
       "Ranger"
@@ -24531,8 +24538,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core",
-      "page": null,
+      "book": "Player Core",
+      "page": 152,
       "license": "ORC",
       "remaster": true
     },
@@ -24541,16 +24548,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.BJYSUbFUGcTLaPDn",
-      "aon": null,
+      "aon": "class-feature-736",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -24638,7 +24645,7 @@
   {
     "id": "wb:class-feature/medium-armor-expertise-inventor",
     "kind": "class-feature",
-    "name": "Medium Armor Expertise (Inventor)",
+    "name": "Medium Armor Expertise",
     "level": 11,
     "class": [
       "Inventor"
@@ -24648,8 +24655,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Guns & Gears",
-      "page": null,
+      "book": "Guns & Gears (Remastered)",
+      "page": 15,
       "license": "ORC",
       "remaster": true
     },
@@ -24666,16 +24673,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.esyKPSDbFQPB4lhq",
-      "aon": null,
+      "aon": "class-feature-497",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29013,7 +29020,7 @@
   {
     "id": "wb:class-feature/perpetual-infusions-bomber",
     "kind": "class-feature",
-    "name": "Perpetual Infusions (Bomber)",
+    "name": "Perpetual Infusions",
     "level": 7,
     "class": [
       "Alchemist"
@@ -29023,8 +29030,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29033,16 +29040,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.DFQDtT1Van4fFEHi",
-      "aon": null,
+      "aon": "class-feature-15",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29050,7 +29057,7 @@
   {
     "id": "wb:class-feature/perpetual-infusions-chirurgeon",
     "kind": "class-feature",
-    "name": "Perpetual Infusions (Chirurgeon)",
+    "name": "Perpetual Infusions",
     "level": 7,
     "class": [
       "Alchemist"
@@ -29060,8 +29067,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29070,16 +29077,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.fzvIe6FwwCuIdnjX",
-      "aon": null,
+      "aon": "class-feature-15",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29087,7 +29094,7 @@
   {
     "id": "wb:class-feature/perpetual-infusions-mutagenist",
     "kind": "class-feature",
-    "name": "Perpetual Infusions (Mutagenist)",
+    "name": "Perpetual Infusions",
     "level": 7,
     "class": [
       "Alchemist"
@@ -29097,8 +29104,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29107,16 +29114,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.Dug1oaVYejLmYEFt",
-      "aon": null,
+      "aon": "class-feature-15",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29124,7 +29131,7 @@
   {
     "id": "wb:class-feature/perpetual-infusions-toxicologist",
     "kind": "class-feature",
-    "name": "Perpetual Infusions (Toxicologist)",
+    "name": "Perpetual Infusions",
     "level": 7,
     "class": [
       "Alchemist"
@@ -29134,8 +29141,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29144,16 +29151,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.LlZ5R50z9j8jysZL",
-      "aon": null,
+      "aon": "class-feature-15",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29198,7 +29205,7 @@
   {
     "id": "wb:class-feature/perpetual-perfection-bomber",
     "kind": "class-feature",
-    "name": "Perpetual Perfection (Bomber)",
+    "name": "Perpetual Perfection",
     "level": 17,
     "class": [
       "Alchemist"
@@ -29208,8 +29215,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29218,16 +29225,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.xO90iBD8XNGyaCkz",
-      "aon": null,
+      "aon": "class-feature-27",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29235,7 +29242,7 @@
   {
     "id": "wb:class-feature/perpetual-perfection-chirurgeon",
     "kind": "class-feature",
-    "name": "Perpetual Perfection (Chirurgeon)",
+    "name": "Perpetual Perfection",
     "level": 17,
     "class": [
       "Alchemist"
@@ -29245,8 +29252,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29255,16 +29262,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.YByJ9O7oe8wxfbqs",
-      "aon": null,
+      "aon": "class-feature-27",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29272,7 +29279,7 @@
   {
     "id": "wb:class-feature/perpetual-perfection-mutagenist",
     "kind": "class-feature",
-    "name": "Perpetual Perfection (Mutagenist)",
+    "name": "Perpetual Perfection",
     "level": 17,
     "class": [
       "Alchemist"
@@ -29282,8 +29289,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29292,16 +29299,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.CGetAmSbv06fW7GT",
-      "aon": null,
+      "aon": "class-feature-27",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29309,7 +29316,7 @@
   {
     "id": "wb:class-feature/perpetual-perfection-toxicologist",
     "kind": "class-feature",
-    "name": "Perpetual Perfection (Toxicologist)",
+    "name": "Perpetual Perfection",
     "level": 17,
     "class": [
       "Alchemist"
@@ -29319,8 +29326,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29329,16 +29336,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.3R19zS7gERhEX87F",
-      "aon": null,
+      "aon": "class-feature-27",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29383,7 +29390,7 @@
   {
     "id": "wb:class-feature/perpetual-potency-bomber",
     "kind": "class-feature",
-    "name": "Perpetual Potency (Bomber)",
+    "name": "Perpetual Potency",
     "level": 11,
     "class": [
       "Alchemist"
@@ -29393,8 +29400,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29403,16 +29410,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.8rEVg03QJ71ic3PP",
-      "aon": null,
+      "aon": "class-feature-20",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29420,7 +29427,7 @@
   {
     "id": "wb:class-feature/perpetual-potency-chirurgeon",
     "kind": "class-feature",
-    "name": "Perpetual Potency (Chirurgeon)",
+    "name": "Perpetual Potency",
     "level": 11,
     "class": [
       "Alchemist"
@@ -29430,8 +29437,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29440,16 +29447,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.VS5vkqUQu4n7E28Y",
-      "aon": null,
+      "aon": "class-feature-20",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29457,7 +29464,7 @@
   {
     "id": "wb:class-feature/perpetual-potency-mutagenist",
     "kind": "class-feature",
-    "name": "Perpetual Potency (Mutagenist)",
+    "name": "Perpetual Potency",
     "level": 11,
     "class": [
       "Alchemist"
@@ -29467,8 +29474,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29477,16 +29484,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.mZFqRLYOQEqKA8ri",
-      "aon": null,
+      "aon": "class-feature-20",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -29494,7 +29501,7 @@
   {
     "id": "wb:class-feature/perpetual-potency-toxicologist",
     "kind": "class-feature",
-    "name": "Perpetual Potency (Toxicologist)",
+    "name": "Perpetual Potency",
     "level": 11,
     "class": [
       "Alchemist"
@@ -29504,8 +29511,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Core Rulebook",
-      "page": null,
+      "book": "Core Rulebook",
+      "page": 66,
       "license": "OGL",
       "remaster": false
     },
@@ -29514,16 +29521,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.JOdbVu14phvdjhaY",
-      "aon": null,
+      "aon": "class-feature-20",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -30256,7 +30263,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/psychic-weapon-expertise",
+    "id": "wb:class-feature/psychic-weapon-expertise-dup2",
     "kind": "class-feature",
     "name": "Psychic Weapon Expertise",
     "level": 11,
@@ -30281,7 +30288,7 @@
         }
       }
     ],
-    "text": "wb:text/class-feature/psychic-weapon-expertise",
+    "text": "wb:text/class-feature/psychic-weapon-expertise-dup2",
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.kLschzVZFoe3U63C",
@@ -34629,7 +34636,7 @@
   {
     "id": "wb:class-feature/spell-repertoire-bard",
     "kind": "class-feature",
-    "name": "Spell Repertoire (Bard)",
+    "name": "Spell Repertoire",
     "level": 1,
     "class": [
       "Bard"
@@ -34639,8 +34646,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core",
-      "page": null,
+      "book": "Player Core",
+      "page": 94,
       "license": "ORC",
       "remaster": true
     },
@@ -34649,16 +34656,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.6FsusoMYxxjyIkVh",
-      "aon": null,
+      "aon": "class-feature-625",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -34666,7 +34673,7 @@
   {
     "id": "wb:class-feature/spell-repertoire-oracle",
     "kind": "class-feature",
-    "name": "Spell Repertoire (Oracle)",
+    "name": "Spell Repertoire",
     "level": 1,
     "class": [
       "Oracle"
@@ -34676,8 +34683,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 128,
       "license": "ORC",
       "remaster": true
     },
@@ -34686,16 +34693,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.cFe6vFb3gSDyNeS9",
-      "aon": null,
+      "aon": "class-feature-956",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -34703,7 +34710,7 @@
   {
     "id": "wb:class-feature/spell-repertoire-psychic",
     "kind": "class-feature",
-    "name": "Spell Repertoire (Psychic)",
+    "name": "Spell Repertoire",
     "level": 1,
     "class": [
       "Psychic"
@@ -34713,8 +34720,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Dark Archive",
-      "page": null,
+      "book": "Dark Archive",
+      "page": 8,
       "license": "OGL",
       "remaster": false
     },
@@ -34723,16 +34730,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.1mMdsSIVsyyqNr2t",
-      "aon": null,
+      "aon": "class-feature-537",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -34740,7 +34747,7 @@
   {
     "id": "wb:class-feature/spell-repertoire-sorcerer",
     "kind": "class-feature",
-    "name": "Spell Repertoire (Sorcerer)",
+    "name": "Spell Repertoire",
     "level": 1,
     "class": [
       "Sorcerer"
@@ -34750,8 +34757,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 144,
       "license": "ORC",
       "remaster": true
     },
@@ -34760,16 +34767,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.lURKSJZAGKVD6cH9",
-      "aon": null,
+      "aon": "class-feature-984",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -34777,7 +34784,7 @@
   {
     "id": "wb:class-feature/spell-repertoire-summoner",
     "kind": "class-feature",
-    "name": "Spell Repertoire (Summoner)",
+    "name": "Spell Repertoire",
     "level": 1,
     "class": [
       "Summoner"
@@ -34787,8 +34794,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Secrets of Magic",
-      "page": null,
+      "book": "Secrets of Magic",
+      "page": 51,
       "license": "OGL",
       "remaster": false
     },
@@ -34797,16 +34804,16 @@
     "mechanized": true,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.Ju2Tp5s5iBB76tQO",
-      "aon": null,
+      "aon": "class-feature-447",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -39423,7 +39430,7 @@
   {
     "id": "wb:class-feature/weapon-expertise-swashbuckler",
     "kind": "class-feature",
-    "name": "Weapon Expertise (Swashbuckler)",
+    "name": "Weapon Expertise",
     "level": 5,
     "class": [
       "Swashbuckler"
@@ -39433,8 +39440,8 @@
     ],
     "rarity": "common",
     "source": {
-      "book": "Pathfinder Player Core 2",
-      "page": null,
+      "book": "Player Core 2",
+      "page": 158,
       "license": "ORC",
       "remaster": true
     },
@@ -39451,16 +39458,16 @@
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.F5BHEav90oOJ2LwN",
-      "aon": null,
+      "aon": "class-feature-1019",
       "pf2etools": null
     },
     "prov": {
-      "name": "foundry",
+      "name": "aon",
       "level": "foundry",
       "class": "foundry (inferido de traits)",
       "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
+      "rarity": "aon",
+      "source": "aon",
       "grants": "foundry"
     },
     "conflitos": []
@@ -42145,7 +42152,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/wizard-weapon-expertise",
+    "id": "wb:class-feature/wizard-weapon-expertise-dup2",
     "kind": "class-feature",
     "name": "Wizard Weapon Expertise",
     "level": 11,
@@ -42169,7 +42176,7 @@
         }
       }
     ],
-    "text": "wb:text/class-feature/wizard-weapon-expertise",
+    "text": "wb:text/class-feature/wizard-weapon-expertise-dup2",
     "mechanized": false,
     "xref": {
       "foundry": "Compendium.pf2e.classfeatures.Item.GBsC2cARoFiqMi9V",

@@ -122,6 +122,7 @@ PROFICIENCIA_OUTRA = {
     "martial firearms": "martial", "simple firearms": "simple",
     "unarmed attacks": "unarmed", "unarmed attack": "unarmed",
     "light armor": "light", "medium armor": "medium", "heavy armor": "heavy",
+    "light": "light", "medium": "medium", "heavy": "heavy",
     "unarmored defense": "unarmored", "unarmored": "unarmored",
     "fortitude saves": "fortitude", "fortitude": "fortitude",
     "reflex saves": "reflex", "reflex": "reflex",
@@ -289,7 +290,7 @@ class Indices:
 
 RANK_RE = re.compile(
     r"^(?:you (?:must )?(?:are|be)\s+|must be\s+|be\s+|being\s+)?"
-    r"(untrained|trained|expert|master|legendary)\s+in\s+(.+)$", re.I)
+    r"(untrained|trained|expert|master|legendary)\s+(?:proficiency\s+)?in\s+(.+)$", re.I)
 
 ATRIB_VAL_RE = re.compile(
     r"^(strength|dexterity|constitution|intelligence|wisdom|charisma)\s+(\d+)$", re.I)
@@ -455,6 +456,8 @@ class Parser:
         i = so_marca(t)
         if i is not None:
             tipo, partes = tags[i]
+            if tipo == "item":
+                return "weapon:" + slug(partes[0])
             if tipo != "skill":
                 return None
             # {@skill Lore||Warfare Lore} -> o rotulo real esta em partes[2]
@@ -647,11 +650,32 @@ class Parser:
 # --------------------------------------------------------------------------
 
 AEL_PERICIA = re.compile(r"^system\.skills\.([a-z\-]+)\.rank$")
+AEL_PERICIA_ESCOLHA = re.compile(r"^system\.skills\.\{item\|.*\}\.rank$")
 AEL_PROF = re.compile(r"^system\.proficiencies\.([a-z]+)\.([a-z\-]+)\.rank$")
 AEL_PROF2 = re.compile(r"^system\.(martial|attributes\.classDC)\.([a-z\-]+)\.rank$")
+AEL_PROF3 = re.compile(r"^system\.proficiencies\.([a-z\-]+)\.rank$")
 AEL_FOCO = re.compile(r"^system\.resources\.focus\.(max|value)$")
 AEL_HP = re.compile(r"^system\.attributes\.hp\.(max|value)$")
 AEL_SENTIDO = re.compile(r"^system\.perception\.rank$")
+
+# Caminhos de ficha que o construtor sabe representar sem interpretar o Foundry.
+AEL_NOMEADO = {
+    "system.attributes.dying.max": "dying_max",
+    "system.attributes.dying.recoveryDC": "dying_recovery_dc",
+    "system.attributes.hp.recoveryMultiplier": "hp_recovery_multiplier",
+    "system.attributes.reach.base": "reach",
+    "system.attributes.familiarAbilities.value": "familiar_abilities",
+    "system.build.languages.granted": "languages",
+    "system.build.languages.max": "languages_max",
+    "inventory.bulk.maxAddend": "bulk_max",
+    "inventory.bulk.encumberedAfterAddend": "bulk_encumbered",
+    "system.initiative.tiebreakPriority": "initiative_tiebreak",
+    "system.attributes.flanking.canGangUp": "flanking_gang_up",
+    "system.attributes.flanking.offGuardable": "flanking_off_guardable",
+    "system.resources.versatileVials.max": "versatile_vials",
+    "system.crafting.entries.advancedAlchemy.maxSlots": "advanced_alchemy_slots",
+    "system.attributes.speed.value": "speed_land",
+}
 
 
 def _rank_palavra(v):
@@ -702,10 +726,22 @@ def converter_grants(regras, contagem_ignoradas):
                 else:
                     grants.append({"skill_training": {"auto": [m.group(1)]}})
                 continue
+            if AEL_PERICIA_ESCOLHA.match(path):
+                rk = _rank_palavra(val)
+                grants.append({"skill_training": {"free": 1, "rank": rk or val}})
+                continue
             m = AEL_PROF.match(path) or AEL_PROF2.match(path)
             if m:
                 rk = _rank_palavra(val)
                 grants.append({"proficiency": {m.group(2): rk or val}})
+                continue
+            m = AEL_PROF3.match(path)
+            if m:
+                rk = _rank_palavra(val)
+                grants.append({"proficiency": {m.group(1): rk or val}})
+                continue
+            if path in AEL_NOMEADO:
+                grants.append({AEL_NOMEADO[path]: val})
                 continue
             if AEL_FOCO.match(path):
                 grants.append({"focus_pool": val})
@@ -917,13 +953,19 @@ def norm_pf2etools(f):
     }
 
 
+RARIDADES = {"common", "uncommon", "rare", "unique"}
+
+
 def norm_aon(a):
     src = a.get("primary_source_raw") or ""
     m = re.search(r"pg\.\s*(\d+)", src)
+    # o AoN mistura raridade dentro de `trait`; raridade tem campo proprio
+    tr = [slug(t) for t in (a.get("trait") or a.get("trait_raw") or [])]
+    tr = [t for t in tr if t not in RARIDADES]
     return {
         "nome": a.get("name"),
         "level": a.get("level"),
-        "traits": [slug(t) for t in (a.get("trait") or a.get("trait_raw") or [])],
+        "traits": tr,
         "rarity": (a.get("rarity") or "").lower() or None,
         "livro": a.get("primary_source"),
         "pagina": int(m.group(1)) if m else None,
@@ -1002,21 +1044,32 @@ def extrair():
             idx.tracos.add(chave(t))
 
     # ---- agrupamento por chave de nome ----------------------------------
+    #    Nomes se repetem entre linha legada e remaster. Preferimos sempre o
+    #    registro remaster: e a linha viva e o schema deriva o slug dele.
     porchave = defaultdict(lambda: {"foundry": None, "pf2etools": None, "aon": None})
+    est_dup = Counter()
+
+    def melhor(atual, novo, remaster_novo):
+        if atual is None:
+            return novo
+        est_dup["homonimos"] += 1
+        return novo if remaster_novo and not atual.get("_remaster") else atual
+
     for r in foundry:
         k = chave(r["nome"])
-        if porchave[k]["foundry"] is None:
-            porchave[k]["foundry"] = r
+        r["_remaster"] = bool(r["remaster"])
+        porchave[k]["foundry"] = melhor(porchave[k]["foundry"], r, r["_remaster"])
     for r in tools:
         k = chave(r["nome"])
-        if porchave[k]["pf2etools"] is None:
-            porchave[k]["pf2etools"] = r
+        r["_remaster"] = bool(r.get("remaster"))
+        porchave[k]["pf2etools"] = melhor(porchave[k]["pf2etools"], r, r["_remaster"])
     for r in aon:
         if r.get("excluir"):
             continue
         k = chave(r["nome"])
-        if porchave[k]["aon"] is None:
-            porchave[k]["aon"] = r
+        # sem `remaster_id` = nao foi substituido, logo e a versao corrente
+        r["_remaster"] = not r["remaster_id"]
+        porchave[k]["aon"] = melhor(porchave[k]["aon"], r, r["_remaster"])
 
     # ---- vinculo feat -> arquetipo (fonte exata: diretorio do Foundry) ---
     arq_por_chave = {}
@@ -1027,6 +1080,34 @@ def extrair():
     # ---- parsing --------------------------------------------------------
     parser = Parser(idx)
     ignoradas = Counter()
+
+    # tabela livro -> (licenca, remaster), observada no Foundry. Serve para
+    # completar registros cuja fonte vencedora nao carrega licenca.
+    licenca_por_livro = {}
+    for rf in foundry:
+        if rf["livro"] and rf["licenca"]:
+            licenca_por_livro.setdefault(chave(rf["livro"]),
+                                         (rf["licenca"], bool(rf["remaster"])))
+    # e a mesma tabela indexada pela sigla do pf2etools, deduzida por cruzamento
+    # (mesmo feat presente nas duas fontes) -- nao por lista escrita a mao
+    votos = defaultdict(Counter)
+    _f_por_chave = {}
+    for rf in foundry:
+        _f_por_chave.setdefault(chave(rf["nome"]), rf)
+    for rt in tools:
+        rf = _f_por_chave.get(chave(rt["nome"]))
+        if rf and rf["licenca"] and rt.get("fonte"):
+            votos[chave(rt["fonte"])][(rf["licenca"], bool(rf["remaster"]))] += 1
+    for sigla, cnt in votos.items():
+        licenca_por_livro.setdefault(sigla, cnt.most_common(1)[0][0])
+
+    def completar_licenca(src, prov_dict):
+        if not src or src.get("license"):
+            return
+        info = licenca_por_livro.get(chave(src.get("book") or ""))
+        if info:
+            src["license"], src["remaster"] = info[0], info[1]
+            prov_dict["source"] = (prov_dict.get("source") or "aon") + "+foundry(licenca)"
 
     est = {
         "foundry_total": len(foundry),
@@ -1046,6 +1127,7 @@ def extrair():
         "rules_ignoradas": ignoradas,
         "conflitos_por_campo": Counter(),
         "cobertura_fontes": Counter(),
+        "homonimos": est_dup,
         "arquetipos_emitidos": 0,
         "feats_com_arquetipo": 0,
         "aon_arch_contaminacao": Counter(),
@@ -1065,8 +1147,11 @@ def extrair():
         prov = {}
         conflitos = []
 
-        # nome
+        # nome / texto
         prov["name"] = "aon" if a else ("foundry" if f else "pf2etools")
+        prov["text"] = "aon" if (a and a["texto"]) else ("foundry" if f else None)
+        if prov["text"] is None:
+            del prov["text"]
 
         # level
         niveis = {}
@@ -1131,6 +1216,8 @@ def extrair():
             source = {"book": t["fonte"], "page": t["pagina"],
                       "license": None, "remaster": bool(t["remaster"])}
             prov["source"] = "pf2etools"
+
+        completar_licenca(source, prov)
 
         # ---- requires ---------------------------------------------------
         bruto_pre = None
@@ -1201,7 +1288,7 @@ def extrair():
             "source": source,
             "requires": requires,
             "grants": grants,
-            "text": "wb:text/feat/" + sl,
+            "text": ("wb:text/feat/" + sl) if "text" in prov else None,
             "mechanized": mechanized,
             "xref": {},
             "prov": prov,
@@ -1239,17 +1326,38 @@ def extrair():
 
     contagem_feats = Counter(v for v in arq_por_chave.values())
 
+    # licenca/edicao do arquetipo herdada do feat de Dedication (tem publication)
+    licenca_dedicacao = {}
+    for rf in foundry:
+        if rf["archetype_dir"] and rf["nome"].lower().endswith("dedication"):
+            if rf["licenca"]:
+                licenca_dedicacao.setdefault(
+                    rf["archetype_dir"], (rf["licenca"], rf["remaster"], rf["livro"]))
+
     for sl in sorted(arq_por_slug):
         r = arq_por_slug[sl]
         prov = {}
         conflitos = []
         nome = r["nome"] if r else sl.replace("-", " ").title()
         prov["name"] = "aon" if r else "foundry"
+        if r and r["texto"]:
+            prov["text"] = "aon"
+        if r and r["rarity"]:
+            prov["rarity"] = "aon"
+        if r and r["traits"]:
+            prov["traits"] = "aon"
+        # Licenca do arquetipo: sai do feat de Dedication, que tem `publication`
+        ded = licenca_dedicacao.get(sl)
         source = None
         if r and r["livro"]:
             source = {"book": r["livro"], "page": r["pagina"],
-                      "license": None, "remaster": False}
-            prov["source"] = "aon"
+                      "license": ded[0] if ded else None,
+                      "remaster": bool(ded[1]) if ded else False}
+            prov["source"] = "aon" if not ded else "aon+foundry"
+        elif ded:
+            source = {"book": ded[2], "license": ded[0], "remaster": bool(ded[1])}
+            prov["source"] = "foundry"
+        completar_licenca(source, prov)
         requires = None
         bruto_pre = r["prereq"] if r else None
         if bruto_pre:
@@ -1275,7 +1383,7 @@ def extrair():
             "source": source,
             "requires": requires,
             "grants": [],
-            "text": "wb:text/archetype/" + sl,
+            "text": ("wb:text/archetype/" + sl) if "text" in prov else None,
             "mechanized": requires is not None or not bruto_pre,
             "xref": {},
             "prov": prov,

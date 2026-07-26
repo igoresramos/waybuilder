@@ -1,0 +1,3 @@
+# Dumps brutos das fontes: reconstruiveis pelos pins registrados na spec
+# (specs/2026-07-26-schema-base.md). Nao versionados por peso.
+dados_brutos/

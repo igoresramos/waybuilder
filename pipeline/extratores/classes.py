@@ -196,22 +196,20 @@ def _nome_base(nome: str) -> str | None:
 
 def resolver_hits_feature(nome: str) -> list[dict]:
     """Cascata de busca pra class-feature: nome exato em category
-    class-feature -> nome exato em category feat (varias entradas do pack
-    class-features do Foundry sao categorizadas como Feat comum no AoN,
-    ex. 'Advanced Alchemy') -> mesma cascata com o nome-base sem parenteses.
-    So usada depois do prefetch_aon_features() ter aquecido o cache."""
+    class-feature -> nome-base sem parenteses, mesma categoria (ex. 'Adept
+    Benefit (Amulet)' -> 'Adept Benefit'). Fica restrito a categoria
+    class-feature de proposito: uma cascata pra categoria "feat" foi testada
+    e descartada -- "Advanced Alchemy" como class-feature (Alchemist nativo)
+    e "Advanced Alchemy" como feat de arquetipo (Alchemist Dedication) sao
+    coisas DIFERENTES com o mesmo nome; cruzar categoria arriscava emparelhar
+    o registro errado (fonte/pagina/nivel de outra entidade). So usada
+    depois do prefetch_aon_fallback_features() ter aquecido o cache."""
     hits = aon_query(nome, "class-feature")
-    if hits:
-        return hits
-    hits = aon_query(nome, "feat")
     if hits:
         return hits
     base = _nome_base(nome)
     if base:
         hits = aon_query(base, "class-feature")
-        if hits:
-            return hits
-        hits = aon_query(base, "feat")
         if hits:
             return hits
     return []
@@ -226,11 +224,9 @@ def prefetch_aon_fallback_features(nomes: list[str]) -> None:
         hits = aon_query(nome, "class-feature")
         if hits:
             continue
-        pares.append((nome, "feat"))
         base = _nome_base(nome)
         if base:
             pares.append((base, "class-feature"))
-            pares.append((base, "feat"))
     prefetch_aon(pares)
 
 
@@ -415,7 +411,37 @@ STATS = {
     "conflitos_hp_ou_progressao": [],
     "campos_nao_mapeados": defaultdict(int),
     "prereq_prosa_nao_traduzida": [],
+    "colisoes_de_id": [],  # (id_original, id_novo, nome, xref_foundry)
 }
+
+
+def desambiguar_colisoes_de_id(registros: list[dict]) -> None:
+    """Achado real: o pack class-features do Foundry ainda tem 3 itens
+    orfaos (`Druid Weapon Expertise`, `Psychic Weapon Expertise`,
+    `Wizard Weapon Expertise`, sourcebook legado, NAO referenciados no
+    items{} de nenhuma classe) que sao duplicatas mortas da feature
+    compartilhada remaster `Weapon Expertise` -- pra Druid, por exemplo,
+    `slugify("Druid Weapon Expertise")` e `f"{slug_classe('Druid')}-"
+    f"{slugify('Weapon Expertise')}"` colidem no mesmo id. Em vez de
+    sobrescrever um registro silenciosamente, desambigua deterministico
+    (sufixo `-dupN`) e registra a colisao pro relatorio."""
+    grupos: dict[str, list[dict]] = defaultdict(list)
+    for r in registros:
+        grupos[r["id"]].append(r)
+
+    for base_id, regs in grupos.items():
+        if len(regs) < 2:
+            continue
+        # a posse direta (items{} da classe) e mais confiavel que a inferencia
+        # por trait -- a que tem posse direta fica com o id limpo.
+        regs.sort(key=lambda r: 0 if r["prov"].get("class") == "foundry" else 1)
+        for i, r in enumerate(regs[1:], start=2):
+            slug_kind_prefix, _, slug = base_id.partition("/")
+            novo_slug = f"{slug}-dup{i}"
+            novo_id = f"{slug_kind_prefix}/{novo_slug}"
+            STATS["colisoes_de_id"].append((base_id, novo_id, r["name"], r["xref"]["foundry"]))
+            r["id"] = novo_id
+            r["text"] = f"wb:text/{r['kind']}/{novo_slug}"
 
 
 # ---------------------------------------------------------------------------
@@ -603,18 +629,16 @@ def montar_grants_feature(sys_: dict) -> tuple[list[dict], bool, list[str]]:
     return grants, mechanized, motivos
 
 
-def montar_requires_feature(sys_: dict, feature_id_para_relatorio: str) -> Campo:
-    campo = Campo()
+def registrar_prereq_nao_traduzido(sys_: dict, nome: str) -> None:
+    """`requires` fica ausente quando o Foundry tem `prerequisites.value`
+    (prosa livre, sem marcacao {@feat}/{@skill} como no pf2etools -- que e a
+    fonte vencedora pra `requires` mas nao guarda prerequisito estruturado no
+    nivel de class-feature). Traduzir a prosa pra linguagem de predicado
+    exigiria parsing de linguagem natural -- fora de escopo desta passada.
+    So registra, nao inventa estrutura (ver relatorio)."""
     prereq = (sys_.get("prerequisites") or {}).get("value") or []
     if prereq:
-        # Prosa livre, sem marcacao {@feat}/{@skill} como no pf2etools. Nao
-        # entra na linguagem de predicado (all/any/class_level/...) porque
-        # isso exigiria parsing de linguagem natural -- fora de escopo desta
-        # passada. Registrado, nao inventado: ver relatorio.
-        STATS["prereq_prosa_nao_traduzida"].append(
-            (feature_id_para_relatorio, [p.get("value") for p in prereq])
-        )
-    return campo  # sempre vazio nesta passada -- ver nota acima
+        STATS["prereq_prosa_nao_traduzida"].append((nome, [p.get("value") for p in prereq]))
 
 
 def inferir_classe_por_trait(
@@ -646,6 +670,8 @@ def construir_registros_feature(
     nivel_proprio = (sys_.get("level") or {}).get("value")
     traits_valor = (sys_.get("traits") or {}).get("value") or []
     rarity_foundry = (sys_.get("traits") or {}).get("rarity")
+
+    registrar_prereq_nao_traduzido(sys_, nome)
 
     grants, mechanized, motivos = montar_grants_feature(sys_)
     if mechanized:
@@ -753,7 +779,7 @@ def construir_registros_feature(
                             "escolhido": "foundry",
                         }
                     )
-                    STATS["conflitos_level"].append((slug, classe, nivel, nivel_pf2etools))
+                    STATS["conflitos_level"].append((nome, classe, nivel, nivel_pf2etools))
 
         registro = {
             "id": f"wb:class-feature/{slug}",
@@ -820,13 +846,14 @@ def extrair() -> list[dict]:
         pf2etools_por_classe[nome_classe] = (data, fname)
         if data is None:
             STATS["pf2etools_classes_sem_arquivo"].append(nome_classe)
-            STATS["pf2etools_class_cobertura"][nome_classe] = (None, "sem arquivo no pf2etools")
+            STATS["pf2etools_class_cobertura"][nome_classe] = (None, "sem arquivo no pf2etools", True)
         else:
             gerado_remaster = bool(data.get("class", [{}])[0].get("remaster"))
             fonte_remaster_foundry = bool(
                 (classes_foundry[nome_classe]["system"].get("publication") or {}).get("remaster")
             )
-            if gerado_remaster != fonte_remaster_foundry:
+            geracao_bate = gerado_remaster == fonte_remaster_foundry
+            if not geracao_bate:
                 nota = (
                     f"arquivo {fname} e geracao "
                     f"{'remaster' if gerado_remaster else 'legado'}, "
@@ -836,7 +863,7 @@ def extrair() -> list[dict]:
                 )
             else:
                 nota = f"arquivo {fname}, geracao bate com o Foundry"
-            STATS["pf2etools_class_cobertura"][nome_classe] = (fname, nota)
+            STATS["pf2etools_class_cobertura"][nome_classe] = (fname, nota, geracao_bate)
 
     print(f"[classes] pf2etools resolvido para "
           f"{len(classes_foundry) - len(STATS['pf2etools_classes_sem_arquivo'])}/"
@@ -846,6 +873,7 @@ def extrair() -> list[dict]:
         (f["name"], "class-feature") for f in features_foundry
     ]
     prefetch_aon(pares_aon)
+    prefetch_aon_fallback_features([f["name"] for f in features_foundry])
 
     registros = []
 
@@ -875,7 +903,14 @@ def extrair() -> list[dict]:
         if i % 100 == 0:
             print(f"  ... {i}/{len(features_foundry)}", file=sys.stderr)
 
+    desambiguar_colisoes_de_id(registros)
+
     STATS["n_registros_emitidos"] = len(registros)
+    # mechanized_true/false foram incrementados 1x por CLASSE e 1x por ARQUIVO
+    # de feature (nao por registro expandido) -- recalcula em cima dos
+    # registros de fato emitidos, que e o que a spec pede pra reportar.
+    STATS["mechanized_true"] = sum(1 for r in registros if r["mechanized"])
+    STATS["mechanized_false"] = sum(1 for r in registros if not r["mechanized"])
     print(f"[classes] total emitido: {len(registros)} registros", file=sys.stderr)
     return registros
 
@@ -1053,8 +1088,8 @@ def gerar_relatorio_md() -> str:
     )
     linhas.append("| Classe | Arquivo pf2etools usado | Nota |")
     linhas.append("|---|---|---|")
-    for nome_classe, (fname, nota) in sorted(s["pf2etools_class_cobertura"].items()):
-        if fname and "divergem" in nota:
+    for nome_classe, (fname, nota, geracao_bate) in sorted(s["pf2etools_class_cobertura"].items()):
+        if fname and not geracao_bate:
             linhas.append(f"| {nome_classe} | {fname} | {nota} |")
     linhas.append("")
 
@@ -1080,7 +1115,44 @@ def gerar_relatorio_md() -> str:
         (", ".join(s["aon_feature_sem_match"][:40]) + ("..." if len(s["aon_feature_sem_match"]) > 40 else ""))
         if s["aon_feature_sem_match"] else "(nenhuma)"
     )
-    linhas.append("")
+    linhas.append(
+        "\nInvestiguei uma amostra manual dessas ~431 (52% dos 826 arquivos). A causa "
+        "dominante nao e falha de busca: o AoN usa **categorias proprias pras escolhas "
+        "de subclasse**, diferentes de `class-feature` -- ex. \"Ancestors\" (misterio de "
+        "Oraculo) vive em `category:mystery`, \"Baba Yaga\" (patrona de Bruxa) em "
+        "`category:patron`. Confirmado por amostragem: `bloodline`/`instinct`/`doctrine`/"
+        "`order`/`mystery`/`patron` sao categorias reais e distintas no indice `aon`. "
+        "Um segundo grupo (ex. \"Angel Eidolon\", boons de eidolon do Summoner) parece "
+        "**nao ter doc proprio no AoN em nenhuma categoria** -- fica so descrito dentro "
+        "da pagina da classe. Decidi NAO adicionar uma cascata de categorias alternativas "
+        "nesta passada: o teste que fiz com `category:feat` como fallback (antes de "
+        "restringir a cascata so a `class-feature`) causou colisao real -- \"Advanced "
+        "Alchemy\" existe como class-feature nativa do Alchemist E como feat de "
+        "arquetipo (Alchemist Dedication), duas entidades diferentes com o mesmo nome. "
+        "Uma cascata de categorias (`mystery`, `patron`, `instinct`, `doctrine`, "
+        "`order`...) e viavel e recuperaria boa parte dos 431, mas cada categoria "
+        "precisa ser validada campo-a-campo antes de confiar nela pra `source`/`rarity` "
+        "-- fica pra uma proxima passada.\n"
+    )
+
+    if s["colisoes_de_id"]:
+        linhas.append("## Colisoes de id (achado real, nao teorico)\n")
+        linhas.append(
+            "O pack `class-features` do Foundry ainda tem itens **orfaos** (nao "
+            "referenciados no `items{}` de nenhuma classe) que sao duplicatas mortas "
+            "de features que o remaster consolidou num item compartilhado -- ex. "
+            "`Druid Weapon Expertise` (Core Rulebook, orfao) e a `Weapon Expertise` "
+            "compartilhada (Player Core, referenciada por 25 classes) descrevem a "
+            "mesma coisa pro Druid, e o slug de ambas colide "
+            "(`slugify(\"Druid Weapon Expertise\")` == `druid-` + "
+            "`slugify(\"Weapon Expertise\")`). Desambiguado com sufixo `-dupN` "
+            "deterministico em vez de sobrescrever silenciosamente:\n"
+        )
+        linhas.append("| Id original | Id novo | Nome | xref.foundry |")
+        linhas.append("|---|---|---|---|")
+        for antigo, novo, nome, xref in s["colisoes_de_id"]:
+            linhas.append(f"| `{antigo}` | `{novo}` | {nome} | {xref} |")
+        linhas.append("")
 
     linhas.append("## Os 3 problemas mais serios\n")
     linhas.append(
