@@ -69,14 +69,19 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
-> Design fechado e base canonica montada. As 22 regras de multiclasse, o schema
-> da base e o schema do documento de personagem estao escritos, revisados
-> adversarialmente e commitados. O pipeline roda ponta a ponta
-> (extratores -> reconciliar -> prosa -> fusao) e produz ~9,9k registros com
-> prosa em 100% e todos os portoes de qualidade passando.
+> Design fechado e **base canonica montada**. As 22 regras de multiclasse, o
+> schema da base e o schema do documento de personagem estao escritos, revisados
+> adversarialmente e commitados.
 >
-> Tres extratores ficaram rodando no fim da sessao (equipamento, companheiros,
-> referencia); quando entrarem, a base vai a ~21k registros. Falta o front.
+> O pipeline roda ponta a ponta (7 extratores -> reconciliar -> prosa -> fusao)
+> e produz **18.176 registros em 21 kinds**, prosa em 100% (17.866/17.866),
+> 2.299 com divergencia entre fontes registrada, 597 pares Legacy<->Remaster
+> fundidos, zero par nao unido. Index 15,2 MB + prosa 16,7 MB.
+> Resíduo unico: 6 registros sem `license` (portao de qualidade 5 falhando).
+>
+> Falta o construtor. Os dois proximos itens sao de modelagem, nao de extracao:
+> o grafo de progressao de dois niveis e a linguagem de predicado sabendo falar
+> de subclasse.
 >
 > **Comece por `README.md`** -- ele e o ponto de retomada.
 
