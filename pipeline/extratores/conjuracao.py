@@ -497,8 +497,9 @@ def extract_tradition_e_tipo(class_slug: str) -> dict:
         if m:
             tradition = m.group(1).lower()
             break
-    if class_slug == "summoner" and tradition is None:
-        tradition = "variavel (definida pela tradicao do eidolon escolhido; nao ha tradicao fixa na class-feature)"
+    if tradition is None and class_slug in TRADITION_VARIAVEL:
+        origem = TRADITION_VARIAVEL[class_slug]
+        tradition = f"variavel (definida pela escolha de {origem}; nao ha tradicao fixa na class-feature)"
     if "spell repertoire" in text.lower():
         tipo = "spontaneous"
     elif "prepare" in text.lower() or "prepared spellcaster" in text.lower():

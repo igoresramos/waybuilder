@@ -866,7 +866,7 @@
         "foundry_feature": "packs/pf2e/class-features/sorcerer-spellcasting.json",
         "pf2etools": "class-sorcerer.json"
       },
-      "tradition": null,
+      "tradition": "variavel (definida pela escolha de bloodline; nao ha tradicao fixa na class-feature)",
       "type": "spontaneous",
       "proficiency": {
         "trained": 1,
@@ -1400,7 +1400,7 @@
         "foundry_feature": "packs/pf2e/class-features/witch-spellcasting.json",
         "pf2etools": "class-witch-pc1.json"
       },
-      "tradition": null,
+      "tradition": "variavel (definida pela escolha de patron; nao ha tradicao fixa na class-feature)",
       "type": "prepared",
       "proficiency": {
         "trained": 1,
@@ -2482,7 +2482,7 @@
         "foundry_feature": "packs/pf2e/class-features/summoner-spellcasting.json",
         "pf2etools": "class-summoner.json"
       },
-      "tradition": "variavel (definida pela tradicao do eidolon escolhido; nao ha tradicao fixa na class-feature)",
+      "tradition": "variavel (definida pela escolha de eidolon; nao ha tradicao fixa na class-feature)",
       "type": "spontaneous",
       "proficiency": {
         "trained": 1,
