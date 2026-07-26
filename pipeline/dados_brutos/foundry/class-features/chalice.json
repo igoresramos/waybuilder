@@ -1,0 +1,79 @@
+{
+    "_id": "1vgFGSnn0DIBmK7j",
+    "img": "systems/pf2e/icons/features/classes/chalice.webp",
+    "name": "Chalice",
+    "system": {
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "category": "classfeature",
+        "description": {
+            "value": "<p>Chalice implements are vessels that fill with liquid, associating them with healing, nourishment, and life. Your chalice might be a traditional cup or goblet, but it could also be a small amphora, a polished gourd, or even a hollowed-out skull. Chalice implements are associated with the astrological signs of the mother and the newlyweds, as well as the sea dragon.</p><h3><strong>Initiate Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.UfUqPcPcrGgRJCO3 inline]</p><h3><strong>Adept Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.T6p6lZnGupq3CX6A inline]</p><h3><strong>Intensify Vulnerability</strong></h3><p>Your reinforced chalice can collect a creature's life force from a distance to become empowered. While you're within 30 feet of the target of your Exploit Vulnerability, you increase the effect if someone Drinks from the Chalice. Add additional temporary Hit Points equal to your level if the drinker sips, or add twice your level to the Hit Points regained if the drinker drains the chalice.</p><h3><strong>Paragon Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.rW3xdQPTNptQIcL5 inline]</p>"
+        },
+        "level": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Dark Archive (Remastered)"
+        },
+        "rules": [
+            {
+                "allowDuplicate": false,
+                "key": "GrantItem",
+                "uuid": "Compendium.pf2e.equipment-srd.Item.Chalice Implement"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "override",
+                "path": "flags.system.thaumaturge.initiateBenefit",
+                "predicate": [
+                    "feat:thaumaturge-dedication"
+                ],
+                "value": "Compendium.pf2e.classfeatures.Item.Initiate Benefit (Chalice)"
+            },
+            {
+                "key": "GrantItem",
+                "predicate": [
+                    "class:thaumaturge"
+                ],
+                "uuid": "Compendium.pf2e.classfeatures.Item.Initiate Benefit (Chalice)"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "flags.system.thaumaturge.adeptChoices",
+                "predicate": [
+                    "class:thaumaturge"
+                ],
+                "priority": 20,
+                "value": {
+                    "label": "{item|name}",
+                    "predicate": [
+                        {
+                            "not": "feature:adept-benefit-chalice"
+                        }
+                    ],
+                    "value": "Compendium.pf2e.classfeatures.Item.Adept Benefit (Chalice)"
+                }
+            }
+        ],
+        "traits": {
+            "otherTags": [
+                "thaumaturge-implement"
+            ],
+            "rarity": "common",
+            "value": [
+                "thaumaturge"
+            ]
+        }
+    },
+    "type": "feat"
+}

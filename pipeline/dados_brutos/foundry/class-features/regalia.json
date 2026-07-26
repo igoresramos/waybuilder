@@ -1,0 +1,79 @@
+{
+    "_id": "DhdLzrcMvB93Rjmt",
+    "img": "systems/pf2e/icons/features/classes/regalia.webp",
+    "name": "Regalia",
+    "system": {
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "category": "classfeature",
+        "description": {
+            "value": "<p>Regalia implements represent rulership, leadership, and social connections. While they differ in shape depending on regional customs and markers used to signify authority, common regalia implements are scepters, jeweled orbs, and heraldic banners. Regalia implements are associated with the harrow suit of crowns and the astrological signs of the patriarch and the sovereign dragon.</p><h3><strong>Initiate Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.3eRkOQa7h1MWmzBh inline]</p><h3><strong>Adept Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.EkNT2EhbClDQJUAG inline]</p><h3><strong>Intensify Vulnerability</strong></h3><p>Your regalia implement makes you seem more confident and inspiring with each success. Whenever you successfully Strike the target of your Exploit Vulnerability, choose an ally that you can see. That ally gains a +1 circumstance bonus to its attack rolls against the creature until the beginning of your next turn. If the attack roll was a critical hit, the circumstance bonus increases to +2.</p><h3><strong>Paragon Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.zOMYv2nl2gGICErA inline]</p>"
+        },
+        "level": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Dark Archive (Remastered)"
+        },
+        "rules": [
+            {
+                "allowDuplicate": false,
+                "key": "GrantItem",
+                "uuid": "Compendium.pf2e.equipment-srd.Item.Regalia Implement"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "override",
+                "path": "flags.system.thaumaturge.initiateBenefit",
+                "predicate": [
+                    "feat:thaumaturge-dedication"
+                ],
+                "value": "Compendium.pf2e.classfeatures.Item.Initiate Benefit (Regalia)"
+            },
+            {
+                "key": "GrantItem",
+                "predicate": [
+                    "class:thaumaturge"
+                ],
+                "uuid": "Compendium.pf2e.classfeatures.Item.Initiate Benefit (Regalia)"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "flags.system.thaumaturge.adeptChoices",
+                "predicate": [
+                    "class:thaumaturge"
+                ],
+                "priority": 20,
+                "value": {
+                    "label": "{item|name}",
+                    "predicate": [
+                        {
+                            "not": "feature:adept-benefit-regalia"
+                        }
+                    ],
+                    "value": "Compendium.pf2e.classfeatures.Item.Adept Benefit (Regalia)"
+                }
+            }
+        ],
+        "traits": {
+            "otherTags": [
+                "thaumaturge-implement"
+            ],
+            "rarity": "common",
+            "value": [
+                "thaumaturge"
+            ]
+        }
+    },
+    "type": "feat"
+}

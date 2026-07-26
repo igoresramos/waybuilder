@@ -1,0 +1,140 @@
+{
+    "_id": "YiDkrwaxiF7Gao7y",
+    "img": "icons/weapons/swords/greatsword-crossguard-flanged-purple.webp",
+    "name": "Weapon",
+    "system": {
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "category": "classfeature",
+        "description": {
+            "value": "<p>Weapon implements are the most direct and confrontational, representing battle, struggle, and potentially violence. You can choose only a one-handed weapon as an implement, which allows you to channel energies into your weapon as well as hold your other implements once you gain them. Weapon implements are associated with the harrow suit of hammers and the astrological signs of the rider and the swordswoman.</p><h3><strong>Initiate Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.MZajaYrn6c1A1XcO inline]</p><h3><strong>Adept Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.XcuyDpn8L4HltRjW inline]</p><h3><strong>Intensify Vulnerability</strong></h3><p>Your weapon is drawn to your enemy's vital spots, almost of its own accord. You gain a +2 status bonus to attack rolls against the target of your Exploit Vulnerability.</p><h3><strong>Paragon Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.mrSBs3kfw6POoZtG inline]</p>"
+        },
+        "level": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Dark Archive (Remastered)"
+        },
+        "rules": [
+            {
+                "adjustName": false,
+                "allowedDrops": {
+                    "label": "PF2E.SpecificRule.AllowedDrops.OneHandedWeapon",
+                    "predicate": [
+                        "item:usage:hands:1",
+                        {
+                            "not": "item:trait:consumable"
+                        }
+                    ]
+                },
+                "choices": {
+                    "filter": [
+                        "item:usage:hands:1",
+                        {
+                            "nor": [
+                                "item:magical",
+                                "item:trait:consumable"
+                            ]
+                        }
+                    ],
+                    "itemType": "weapon"
+                },
+                "flag": "weaponImplement",
+                "key": "ChoiceSet",
+                "prompt": "PF2E.SpecificRule.Prompt.Weapon"
+            },
+            {
+                "flag": "weaponImplement",
+                "key": "GrantItem",
+                "track": true,
+                "uuid": "{item|flags.system.rulesSelections.weaponImplement}"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "override",
+                "path": "flags.system.thaumaturge.weaponImplement",
+                "priority": 5,
+                "value": "{item|flags.system.itemGrants.weaponImplement.id}"
+            },
+            {
+                "key": "RollOption",
+                "option": "implement-held",
+                "predicate": [
+                    "weapon-implement:equipped"
+                ]
+            },
+            {
+                "key": "RollOption",
+                "option": "implement:weapon:equipped",
+                "predicate": [
+                    "weapon-implement:equipped"
+                ]
+            },
+            {
+                "itemId": "{item|flags.system.itemGrants.weaponImplement.id}",
+                "key": "ItemAlteration",
+                "mode": "add",
+                "property": "description",
+                "value": [
+                    {
+                        "divider": true,
+                        "text": "@Embed[Compendium.pf2e.classfeatures.Item.YiDkrwaxiF7Gao7y inline]"
+                    }
+                ]
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "override",
+                "path": "flags.system.thaumaturge.initiateBenefit",
+                "predicate": [
+                    "feat:thaumaturge-dedication"
+                ],
+                "value": "Compendium.pf2e.classfeatures.Item.Initiate Benefit (Weapon)"
+            },
+            {
+                "key": "GrantItem",
+                "predicate": [
+                    "class:thaumaturge"
+                ],
+                "uuid": "Compendium.pf2e.classfeatures.Item.Initiate Benefit (Weapon)"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "flags.system.thaumaturge.adeptChoices",
+                "predicate": [
+                    "class:thaumaturge"
+                ],
+                "priority": 20,
+                "value": {
+                    "label": "{item|name}",
+                    "predicate": [
+                        {
+                            "not": "feature:adept-benefit-weapon"
+                        }
+                    ],
+                    "value": "Compendium.pf2e.classfeatures.Item.Adept Benefit (Weapon)"
+                }
+            }
+        ],
+        "traits": {
+            "otherTags": [
+                "thaumaturge-implement"
+            ],
+            "rarity": "common",
+            "value": [
+                "thaumaturge"
+            ]
+        }
+    },
+    "type": "feat"
+}

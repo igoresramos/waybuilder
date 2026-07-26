@@ -1,0 +1,79 @@
+{
+    "_id": "pDxdE8S8QJV2PGiB",
+    "img": "systems/pf2e/icons/features/classes/wand.webp",
+    "name": "Wand",
+    "system": {
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "category": "classfeature",
+        "description": {
+            "value": "<p>Wand implements are short, lightweight batons, usually made of wood but often incorporating other materials. Due to their association with spellcasters, wand implements are connected to magic and its practice, as well as the direction and manipulation of energy. Wand implements are associated with the astrological signs of the thrush and the sky dragon.</p><h3><strong>Initiate Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.YbRVsHfmhPXLfCTB inline]</p><h3><strong>Adept Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.pax1pnWW5XFYO0Eg inline]</p><h3><strong>Intensify Vulnerability</strong></h3><p>Your empowered wand surges with ever-more-powerful magic. When you Fling Magic to damage the target of your Exploit Vulnerability, Fling Magic gains a status bonus to its damage roll equal to your level.</p><h3><strong>Paragon Benefit</strong></h3><p>@Embed[Compendium.pf2e.classfeatures.Item.jVW6185zu3VlWHot inline]</p>"
+        },
+        "level": {
+            "value": 1
+        },
+        "prerequisites": {
+            "value": []
+        },
+        "publication": {
+            "license": "ORC",
+            "remaster": true,
+            "title": "Pathfinder Dark Archive (Remastered)"
+        },
+        "rules": [
+            {
+                "allowDuplicate": false,
+                "key": "GrantItem",
+                "uuid": "Compendium.pf2e.equipment-srd.Item.Wand Implement"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "override",
+                "path": "flags.system.thaumaturge.initiateBenefit",
+                "predicate": [
+                    "feat:thaumaturge-dedication"
+                ],
+                "value": "Compendium.pf2e.classfeatures.Item.Initiate Benefit (Wand)"
+            },
+            {
+                "key": "GrantItem",
+                "predicate": [
+                    "class:thaumaturge"
+                ],
+                "uuid": "Compendium.pf2e.classfeatures.Item.Initiate Benefit (Wand)"
+            },
+            {
+                "key": "ActiveEffectLike",
+                "mode": "add",
+                "path": "flags.system.thaumaturge.adeptChoices",
+                "predicate": [
+                    "class:thaumaturge"
+                ],
+                "priority": 20,
+                "value": {
+                    "label": "{item|name}",
+                    "predicate": [
+                        {
+                            "not": "feature:adept-benefit-wand"
+                        }
+                    ],
+                    "value": "Compendium.pf2e.classfeatures.Item.Adept Benefit (Wand)"
+                }
+            }
+        ],
+        "traits": {
+            "otherTags": [
+                "thaumaturge-implement"
+            ],
+            "rarity": "common",
+            "value": [
+                "thaumaturge"
+            ]
+        }
+    },
+    "type": "feat"
+}
