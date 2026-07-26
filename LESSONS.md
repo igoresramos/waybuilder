@@ -157,3 +157,20 @@ deixa essas 62 invisiveis para o construtor.
   "Weapon Mastery"). Aceitar nome do AoN por match aproximado criava registro
   fantasma. Agora so match exato alimenta `name`; aproximado so alimenta
   rarity/source/page.
+
+### AoN Elasticsearch trava sem `User-Agent`
+`elasticsearch.aonprd.com` **pendura indefinidamente** se a requisicao nao tiver
+header `User-Agent` -- nao retorna erro, nao dá timeout, so fica esperando. E
+throttla banda em resposta grande (~150 KB). Contorno: mandar `User-Agent` e
+paginar em blocos de ~80 registros.
+
+Mesma classe do problema ja registrado na wiki para o GraphQL do Railway.
+
+### Trait no PF2e e vocabulario puro, nao mecanica
+0 de 561 traits tem efeito estruturado. Os campos `resistance`/`weakness`/
+`speed`/`skill_mod` do AoN vem vazios em 100% deles, e o Foundry
+(`src/scripts/config/traits.ts`) e so dicionario slug->rotulo, sem rule element.
+541/561 tem `trait_group`, que e taxonomia e nao mecanica.
+
+Consequencia: nao adianta procurar efeito de trait em fonte nenhuma. Se o
+construtor precisar de mecanica por trait, ela e nossa e tem de ser escrita.
