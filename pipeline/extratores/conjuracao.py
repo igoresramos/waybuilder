@@ -771,10 +771,15 @@ def escrever_relatorio(dados: dict) -> str:
         "convencionais; confirmado no texto de psi-cantrips-and-amps.json)."
     )
     linhas.append(
-        "- **Divine Font**: confirmado em 1 fonte (Foundry). 4 slots extras no "
-        "maior rank a partir do nivel 1, sobe pra 5 no nivel 5 e 6 no nivel 15 -- "
-        "**diverge do que a maioria lembra da regra pre-remaster (fixo em 4)**; "
-        "a progressao 4/5/6 e texto literal do arquivo remaster (Player Core)."
+        "- **Divine Font**: confirmado em **2 fontes independentes que "
+        "concordam**. Foundry (`divine-font.json`, regex programatico) diz "
+        "4/5/6 nos niveis 1/5/15; a nota de rodape da propria tabela do "
+        "pf2etools (`class-cleric-pc1.json`, campo `footnotes`, texto solto "
+        "nao parseado por regex) diz literalmente \"The number is 4 at 1st "
+        "level, 5 at 5th level, and 6 at 15th level\" -- duas fontes, dois "
+        "arquivos diferentes, mesmo numero. **Diverge do que a maioria lembra "
+        "da regra pre-remaster (fixo em 4)**; a progressao 4/5/6 e a regra "
+        "remaster (Player Core) vigente."
     )
     linhas.append(
         "- **Animista**: ver secao dedicada abaixo -- unica classe sem tabela "
@@ -826,7 +831,7 @@ def escrever_relatorio(dados: dict) -> str:
 
     linhas.append("\n## Portoes de qualidade (spec)\n")
     linhas.append(
-        "- Todo campo preenchido em `classes.json` (deste extrator) tem "
+        "- Todo campo preenchido em `conjuracao.json` (deste extrator) tem "
         "`prov` correspondente -- portao 1 da spec.\n"
         "- Nao ha `conflitos` registrados: como so uma fonte materializa a "
         "tabela numerica, nao houve dois valores pra comparar campo a campo.\n"

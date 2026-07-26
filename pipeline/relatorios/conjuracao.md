@@ -34,7 +34,7 @@ O relatorio de `classes.py` (extrator irmao) registrou que a tabela de slots "fi
 - **Marcos de rank-up de proficiencia (trained/expert/master/legendary)**: confirmados so no Foundry (`system.spellcasting` + nomes das class-features `Expert/Master/Legendary Spellcaster`), 1 fonte. Nao cruzado com AoN/pf2etools nesta passada (ficaria fora do orcamento de tempo); risco baixo porque sao nomes de feature literais, nao inferencia.
 - **Doutrina do Clerico (Cloistered vs Warpriest)**: achado que NAO estava previsto -- confirmado em 1 fonte (Foundry, texto das 12 features de doutrina) que Warpriest e estruturalmente mais lento e nunca chega a legendary (expert@11, master@19), enquanto Cloistered segue o padrao pleno (expert@7, master@15, legendary@19). Isso muda o campo `proficiency` do Clerico de um dict simples pra um dict por doutrina -- ver `classes['cleric']['proficiency']`.
 - **Focus pool nativo**: confirmado em 1 fonte (Foundry, regex sobre a class-feature dona) por classe. Todas as 11 tem 1 Focus Point nativo, EXCETO Wizard (0 -- curriculo da escola concede spell slots, nao focus) e Psychic (2 -- unico caso, usado pra 'amps' em vez de focus spells convencionais; confirmado no texto de psi-cantrips-and-amps.json).
-- **Divine Font**: confirmado em 1 fonte (Foundry). 4 slots extras no maior rank a partir do nivel 1, sobe pra 5 no nivel 5 e 6 no nivel 15 -- **diverge do que a maioria lembra da regra pre-remaster (fixo em 4)**; a progressao 4/5/6 e texto literal do arquivo remaster (Player Core).
+- **Divine Font**: confirmado em **2 fontes independentes que concordam**. Foundry (`divine-font.json`, regex programatico) diz 4/5/6 nos niveis 1/5/15; a nota de rodape da propria tabela do pf2etools (`class-cleric-pc1.json`, campo `footnotes`, texto solto nao parseado por regex) diz literalmente "The number is 4 at 1st level, 5 at 5th level, and 6 at 15th level" -- duas fontes, dois arquivos diferentes, mesmo numero. **Diverge do que a maioria lembra da regra pre-remaster (fixo em 4)**; a progressao 4/5/6 e a regra remaster (Player Core) vigente.
 - **Animista**: ver secao dedicada abaixo -- unica classe sem tabela completa confirmada.
 
 ## O que teve que ser codificado a mao (e por que)
@@ -52,7 +52,7 @@ O pf2etools (branch `dev`) nao tem variante `-pc2` (Player Core 2, remaster) par
 
 ## Portoes de qualidade (spec)
 
-- Todo campo preenchido em `classes.json` (deste extrator) tem `prov` correspondente -- portao 1 da spec.
+- Todo campo preenchido em `conjuracao.json` (deste extrator) tem `prov` correspondente -- portao 1 da spec.
 - Nao ha `conflitos` registrados: como so uma fonte materializa a tabela numerica, nao houve dois valores pra comparar campo a campo.
 - `mechanized`: nao aplicavel a este arquivo (nao segue o envelope `kind: class-feature` da spec-base; e um arquivo auxiliar de dados tabulares referenciado por `wb:class-feature/<slug>-spellcasting`, ja emitido por `classes.py`). Ver nota de integracao abaixo.
 

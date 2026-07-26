@@ -138,3 +138,22 @@ real.
 Nem AoN, nem pf2etools, nem os campos estruturados do Foundry. Ela vive dentro
 de rule elements nao decodificados. Confirmado como o item mais caro do projeto,
 que ja era a suspeita no desenho inicial.
+
+### Progressao de classe tem DOIS niveis, nao um
+Depois de mover `level` para `wb:class/*.progressao`, sobraram 62 class-features
+sem classe dona -- e nenhuma delas e concedida por outra feature tampouco.
+Sao **escolhas de segundo nivel**: teses e escolas do Mago, ordens Hellknight,
+ikons do Exemplar, gates do Kineticist, research fields do Alchemist.
+
+O grafo real e `classe -> feature -> sub-escolha`. Modelar so o primeiro salto
+deixa essas 62 invisiveis para o construtor.
+
+### Dois bugs de casamento achados na reextracao
+- O `items{}` das classes do Foundry as vezes cacheia um `name` desatualizado
+  (Cleric guarda "Deity" para o item que hoje se chama "Deity (Cleric)").
+  Fallback pelo sufixo do `uuid` recuperou 14 vinculos invisiveis.
+- O AoN indexa 1 doc por classe dona de uma feature compartilhada, as vezes com
+  nome diferente (Ranger tinha "Martial Weapon Mastery" para o que hoje e
+  "Weapon Mastery"). Aceitar nome do AoN por match aproximado criava registro
+  fantasma. Agora so match exato alimenta `name`; aproximado so alimenta
+  rarity/source/page.
