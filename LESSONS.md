@@ -166,6 +166,39 @@ paginar em blocos de ~80 registros.
 
 Mesma classe do problema ja registrado na wiki para o GraphQL do Railway.
 
+### Contar registro por livro nao mede cobertura
+Afirmei que os PDFs oficiais nao adicionariam cobertura porque a base ja tinha
+centenas de registros de cada um dos 11 livros de regra. A metrica estava certa
+e a conclusao errada: um livro pode aparecer com 2.032 registros e ainda assim
+faltar uma **categoria inteira**.
+
+O que a contagem por `source.book` nao podia ver, e o teste adversarial viu:
+**`ritual` nao existe na base.** Zero registros em 18.176, zero com o trait, e a
+palavra nao aparece uma vez sequer na spec do schema. Nao foi falha de extrator
+-- foi omissao ao escrever a lista de kinds em escopo.
+
+Medir cobertura exige **gabarito externo**: as listas e o indice remissivo do
+proprio livro enumeram o que ele contem. Cruzar essa lista contra a base acha
+ausencia; contar o que ja esta la, nunca.
+
+Fora rituals, a cobertura pontual medida foi 99,8% (3 misses em 1.345 nomes,
+4 livros). O desvio e pequeno e concentrado -- mas concentrado e justamente o
+que a metrica agregada esconde.
+
+### O PDF impresso nao e arbitro das fontes digitais
+Montei uma arbitragem para validar a tabela de precedencia da spec usando os
+PDFs como verdade. Resultado: 63% de acerto geral, e **50% nos dois campos de
+maior volume** (`traits`, que e 88% de todos os conflitos, e `level`).
+
+Mas o numero importa menos que o defeito da premissa: em varios casos **nenhuma**
+das tres fontes bate com o impresso. As fontes digitais incorporam errata
+posterior a publicacao. Entao o teste nao mediu "quem acerta", mediu "quem
+concorda com o impresso" -- que nao e a mesma pergunta.
+
+Consequencia: a precedencia continua **sem validacao real**, e valida-la exige
+historico de errata, que nenhuma das fontes expoe. Nao trocar a regra: sem
+saber quem erra, inverter a direcao so troca qual metade fica errada.
+
 ### Metade dos PDFs oficiais e scan puro, e o tamanho denuncia
 Dos 35 PDFs, os quatro maiores -- War of Immortals (235 MB), Monster Core
 (289 MB), Treasure Vault (229 MB), Menace Under Otari (178 MB) -- **nao tem

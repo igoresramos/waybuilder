@@ -49,5 +49,14 @@ items:
   - id: 16
     texto: "Licenciamento antes de publicar: texto de regra sob OGL/ORC e reutilizavel com atribuicao, mas conteudo de Golarion dos Lost Omens (nomes de deuses, nacoes, organizacoes) e Product Identity e NAO e. Se a ambientacao entrar na base, marcar esses registros para poderem ser excluidos de um build publico"
     prioridade: baixa
+  - id: 17
+    texto: "FALTA UM KIND INTEIRO: ritual. Zero registros em 18.176, zero com o trait, e a palavra nao aparece uma vez sequer na spec do schema -- foi omissao de escopo, nao bug de extrator. 31 rituals confirmados ausentes (18 Player Core + 13 Player Core 2). E conteudo de jogador, nao bestiario. Precisa entrar na lista de kinds da spec e ganhar extrator"
+    prioridade: alta
+  - id: 18
+    texto: "Tres ausencias pontuais confirmadas contra o PDF: 'Life-Saving Yowl' (feat de Catfolk nivel 17, Player Core 2) simplesmente nao existe na base; 'Cavern Kobold' e 'Spellscale Kobold' (Ancestry Guide) sao herancas legacy que ficaram sem alias na fusao Legacy<->Remaster"
+    prioridade: media
+  - id: 19
+    texto: "Cobertura medida so em 4 dos 26 livros (1.377 nomes cruzados, 99,8% fora rituals). Treasure Vault segue SEM medicao -- e scan puro e o OCR foi abandonado por custo. Os outros 22 livros nao foram testados"
+    prioridade: baixa
 promoted: []
 ---
