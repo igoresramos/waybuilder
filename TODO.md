@@ -58,5 +58,11 @@ items:
   - id: 19
     texto: "Cobertura medida so em 4 dos 26 livros (1.377 nomes cruzados, 99,8% fora rituals). Treasure Vault segue SEM medicao -- e scan puro e o OCR foi abandonado por custo. Os outros 22 livros nao foram testados"
     prioridade: baixa
+  - id: 20
+    texto: "CORRIGIR A SPEC: traits sai da tabela de precedencia e vira UNIAO. Responde por 88% dos 2.299 conflitos e quase nenhum e divergencia real -- sao facetas complementares (72 casos: foundry lista trait de arma, aon lista trait de item magico), ancestria renomeada no remaster (31: foundry nephilim/naari vs aon tiefling/aasimar/ifrit -- a precedencia escolhe o nome LEGADO numa base remaster-first) e trait parametrizado (18: two-hand-d12 vira two-hand e perde o dado mecanico). Precisa de normalizacao de parametro e mapa legado->remaster"
+    prioridade: alta
+  - id: 21
+    texto: "COLISAO DE IDENTIDADE: wb:<kind>/<slug> assume nome unico por kind e nao e. 16 suspeitas. Confirmado em wb:feat/death-from-above -- sao DOIS feats no War of Immortals (arquetipo nv8 e mitico nv16 p.128); o Foundry separa, o AoN indexa so o mitico, e a base fundiu numa quimera com nivel de um e nome/traits/texto do outro. wb:feat/reckless-abandon e igual (goblin vs barbaro nv16). Portao de qualidade proposto: traits categoricamente disjuntos depois de descontar as causas de merge = colisao, falha o build"
+    prioridade: alta
 promoted: []
 ---

@@ -185,6 +185,53 @@ Fora rituals, a cobertura pontual medida foi 99,8% (3 misses em 1.345 nomes,
 4 livros). O desvio e pequeno e concentrado -- mas concentrado e justamente o
 que a metrica agregada esconde.
 
+### `traits` nao e campo de precedencia, e campo de UNIAO
+`traits` responde por **88% dos 2.299 conflitos** da base. A investigacao de por
+que mostrou que quase nenhum deles e divergencia: e a regra de precedencia
+aplicada a um campo onde ela conceitualmente nao cabe. Trait nao e um valor
+escalar disputado -- e um **conjunto que cada fonte descreve parcialmente**.
+
+Dos 137 casos com traits totalmente disjuntos entre as fontes, a classificacao:
+
+| n | causa | exemplo |
+|---|---|---|
+| 72 | **facetas diferentes** -- foundry lista o trait de arma/armadura, aon lista o de item magico | `blade-byrnie`: foundry `flexible, noisy` / aon `invested, magical` |
+| 31 | **ancestria renomeada no remaster** | foundry `nephilim` / aon `tiefling`, `aasimar`, `aphorite`; foundry `naari` / aon `ifrit` |
+| 18 | **trait parametrizado vs trait base** | `bastard-sword`: foundry `two-hand-d12` / aon `two-hand` |
+| 16 | **colisao de identidade** (dois itens homonimos distintos) | `death-from-above` |
+
+As tres primeiras causas nao pedem escolha, pedem **merge**. E a escolha atual
+esta ativamente destruindo dado:
+
+- Nas **facetas**, escolher uma fonte joga fora metade do vocabulario do item.
+- Nas **ancestrias**, `traits -> aon` injeta o nome **legado** numa base que se
+  declara remaster-first. Direcao invertida, sistematicamente.
+- Nos **parametrizados**, `two-hand-d12` vira `two-hand` -- perde-se exatamente
+  a informacao mecanica que o construtor precisa. Acontece com arma do Player
+  Core, nao com caso exotico.
+
+Correcao: `traits` sai da tabela de precedencia. Passa a ser uniao, com
+normalizacao de parametro (`fatal-d10` absorve `fatal`) e um mapa
+legado -> remaster para nome de ancestria.
+
+### Slug igual nao e entidade igual
+Os 16 restantes sao outro problema: **a identidade `wb:<kind>/<slug>` assume que
+nome e unico por kind, e nao e.** Existem homonimos legitimos no mesmo livro.
+
+`Death from Above` sao dois feats: um de arquetipo no nivel 8 e um mitico no
+nivel 16 (War of Immortals p.128). O Foundry separa os dois; o AoN indexa so o
+mitico. A reconciliacao fundiu por slug e produziu uma quimera -- **nivel do feat
+de arquetipo com nome, traits, raridade e texto do mitico**. `Reckless Abandon`
+e o mesmo caso: feat de goblin e feat de barbaro nivel 16.
+
+O sintoma que denuncia: **conflito com valores categoricamente disjuntos**
+(`archetype` contra `mythic`, `goblin` contra `barbarian`) nao e divergencia de
+fonte, e sinal de que duas entidades foram fundidas. Divergencia real e um
+numero contra outro numero, ou uma grafia contra outra.
+
+Vale como portao de qualidade: traits disjuntos entre fontes **depois** de
+descontar as tres causas de merge acima devem falhar o build.
+
 ### O PDF impresso nao e arbitro das fontes digitais
 Montei uma arbitragem para validar a tabela de precedencia da spec usando os
 PDFs como verdade. Resultado: 63% de acerto geral, e **50% nos dois campos de
