@@ -30,8 +30,12 @@ import json, os, re, sys, glob, unicodedata, collections
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PROJETO = os.path.dirname(AQUI)
-ICONICS = os.path.join(PROJETO, "pipeline", "dados_brutos",
-                       "foundry_repo", "packs", "pf2e")
+sys.path.insert(0, os.path.join(PROJETO, "pipeline"))
+import comum                                  # noqa: E402
+# o clone chega como `foundry/` ou `foundry_repo/` conforme quem baixou; este
+# era o ultimo script que ainda conhecia so um dos dois nomes
+ICONICS = comum.packs_foundry() or os.path.join(
+    PROJETO, "pipeline", "dados_brutos", "foundry_repo", "packs", "pf2e")
 sys.path.insert(0, AQUI)
 from motor import Base, Personagem          # noqa: E402
 
