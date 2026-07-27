@@ -39,8 +39,8 @@ items:
     texto: "CONCLUIDO 2026-07-26. 907 registros sem prosa (5,0%), nao os 100% reportados. A metrica de emitir_textos.py divide pelas referencias existentes, nao pela base -- registro sem referencia nenhuma nao entra no denominador. Corrigir a METRICA junto com o buraco, senao ela volta a mentir"
     prioridade: concluido
   - id: 14
-    texto: "CONCLUIDO 2026-07-27. Tabela numerica de slots de conjuracao: NENHUMA das 11 classes tem. Recuperadas do PDF e guardadas em pipeline/dados_brutos/tabelas_conjuracao_pdf.json: Animist (War of Immortals p.12-13, hibrido prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of Magic). Exemplar e Kineticist confirmados NAO-conjuradores. Faltam as 8 do Player Core / Player Core 2"
-    prioridade: concluido
+    texto: "REABERTO 2026-07-27 como PARCIAL -- estava marcado CONCLUIDO em cima de um arquivo que nao existe mais. Tabela numerica de slots de conjuracao: 11 das 12 classes conjuradoras estao completas em base/index.json com 20 niveis cada (as 8 do Player Core vieram do pf2etools; Magus e Summoner tambem, com max_rank 9 no nivel 20). Exemplar e Kineticist confirmados NAO-conjuradores, sem tabela porque nao existe. FALTA SO O ANIMIST, e o dado foi PERDIDO: era o unico que dependia exclusivamente de pipeline/dados_brutos/tabelas_conjuracao_pdf.json, gravado num diretorio ignorado pelo git e nunca commitado. O Animist nao esta no index do pf2etools (404 em class-animist.json) e nem Foundry nem AoN materializam a tabela -- so citam 'Animist Spells per Day' como nome. Sobrevivente: pipeline/dados_derivados/tabelas_conjuracao_pdf.json tem tradicao divine, tipo hibrido, proficiencia 1/7/15/19 (conferida contra a base, bate) e a irregularidade do slot rank 10 nos niveis 19-20 vindo do supreme incarnation. Falta a matriz slots_per_level, e refazer exige o PDF (War of Immortals p.12-13), que tambem se perdeu -- ver item 44"
+    prioridade: alta
   - id: 31
     texto: "CONCLUIDO 2026-07-26. 22 registros so-pf2etools sao duplicatas de registros ja existentes (wb:armor/hide vs wb:armor/hide-armor). Explicam os 6 sem license, os 23 sem rarity e 16 dos sem prosa -- o portao 5 estava detectando FALHA DE CASAMENTO, nao falta de licenca. O sintoma foi lido errado desde o inicio"
     prioridade: concluido
@@ -94,6 +94,13 @@ items:
   - id: 43
     texto: "CORRECAO DE ESCOPO (Igor, 2026-07-27): eu tinha lido o principio zero como 'mecanica de combate fica de fora' e ESTAVA ERRADO. O app e para construir o personagem inteiro, como o Pathbuilder -- armas, armadura, pets, e TODOS os numeros na ficha. O que fica fora e retraining e arbitragem de mesa, nao os numeros. Isso reabre o item 42: o dano de rage do Giant Instinct, a penalidade de ataque multiplo do Flurry e a reacao de causa do Champion SAO numeros de ficha e precisam sair. FEITO nesta sessao: AC (com dex_cap, penalidade de armadura, escudo) e ataque/dano por arma equipada -- o dado ja estava na base (931 armas com damage, 202 armaduras com ac_bonus/dex_cap). FALTA: os Atores (companheiro, familiar, eidolon) com stats proprios, runas de potencia/impacto, e o interpretador parcial de rule elements para dano condicional"
     prioridade: alta
+
+  - id: 44
+    texto: "DECISAO DO IGOR -- os 35 PDFs oficiais (1,7 GB) sumiram de pipeline/dados_brutos/pdfs/ e os zips de origem tambem nao estao mais no Downloads. Nunca entraram no git (nem deveriam, por peso e licenciamento). Consequencia: nao da para refazer a leitura da tabela do Animist (item 14) nem qualquer nova arbitragem contra impresso. A base emitida NAO depende deles -- as tres fontes digitais continuam inteiras e reconstruiveis. Opcoes: (a) rebaixar os livros e refazer so as paginas 12-13 do War of Immortals, (b) deixar o Animist sem tabela e o motor avisando, (c) achar a tabela numa fonte digital de terceiro. Nao arbitrei"
+    prioridade: media
+  - id: 45
+    texto: "CONCLUIDO 2026-07-27. Perda silenciosa de artefato: criado pipeline/dados_derivados/ (versionado, para tudo que exigiu leitura/julgamento humano) separado de dados_brutos/ (dump reproduzivel por pin, fora do git); registro pipeline/artefatos_perdidos.json com motivo, dano medido e decisao; portao 8 em portoes.py falhando quando documento versionado cita caminho que nao existe e nao esta registrado. Varredura completa feita: dos 42 caminhos citados em arquivos versionados, 3 nao existiam -- tabelas_conjuracao_pdf.json (perda real), _dump_aon_rituais.py e _wb_dump_companheiros.py (substituidos por dump_aon.py, sem perda de dado)"
+    prioridade: concluido
 
   # ==========================================================================
   # BLOCO 2 -- MODELAGEM. Depende da base re-emitida.

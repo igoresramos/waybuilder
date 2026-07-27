@@ -25,7 +25,7 @@ Kinds emitidos:
                       mas feat/pericia de Animist fala dele e nao do eidolon,
                       logo kind proprio.
 
-Volume alvo (medido no AoN, `_wb_dump_companheiros.py`):
+Volume alvo (medido no AoN, hoje via `dump_aon.py`):
   animal-companion .................... 114
   animal-companion-specialization ...... 17  (subtype especializacao)
   animal-companion-advanced ............  8  (subtype avancado)
@@ -56,9 +56,10 @@ Fontes e precedencia (ver specs/2026-07-26-schema-base.md):
                                              unica fonte, entao fica marcada
                                              como incerta no `prov`.
 
-Dump do AoN: `pipeline/dados_brutos/_wb_dump_companheiros.py` ->
+Dump do AoN: `pipeline/dump_aon.py` ->
 `pipeline/dados_brutos/aon_companheiros.json` (405 docs, categorias listadas
-acima, indice elasticsearch `aon`).
+acima, indice elasticsearch `aon`). O script ad-hoc original
+(`_wb_dump_companheiros.py`) foi substituido e nao existe mais.
 
 Somente biblioteca padrao. Ponto de entrada: `extrair() -> list[dict]`.
 """
@@ -141,7 +142,7 @@ def carregar_aon():
     if not os.path.exists(AON_COMPANHEIROS):
         raise SystemExit(
             "aon_companheiros.json nao encontrado. Rode "
-            "pipeline/dados_brutos/_wb_dump_companheiros.py primeiro.")
+            "pipeline/dump_aon.py animal-companion primeiro.")
     return _ler_json(AON_COMPANHEIROS)
 
 

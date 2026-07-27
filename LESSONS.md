@@ -392,10 +392,49 @@ Nenhuma das 11 classes conjuradoras tem a tabela numerica de slots por rank
 mecanizada -- so a progressao de proficiencia. O Animist apenas era o caso onde
 faltava tambem a proficiencia, o que o tornou visivel.
 
-Recuperadas do PDF ate agora: Animist (War of Immortals p.12-13, hibrido
+Recuperadas do PDF na epoca: Animist (War of Immortals p.12-13, hibrido
 prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of
 Magic). Exemplar e Kineticist foram **confirmados como nao-conjuradores** -- nao
 havia tabela faltando.
+
+> **Correcao de 2026-07-27.** Este paragrafo ficou desatualizado nos dois
+> sentidos. Para melhor: as 11 conjuradoras hoje tem a tabela completa em
+> `base/index.json`, vinda do pf2etools. Para pior: a tabela do **Animist se
+> perdeu** -- ele e a unica classe que dependia so do arquivo lido do PDF, e
+> esse arquivo morava em `dados_brutos/`. Ver a licao seguinte.
+
+### "Reconstruivel pelos pins" nao vale para o que uma pessoa leu a olho
+`pipeline/.gitignore` excluia `dados_brutos/` inteiro justificando que era
+"reconstruivel pelos pins registrados na spec". Verdade para o clone do Foundry
+(`buscar_fontes.sh`) e o dump do AoN (`dump_aon.py`). **Falso** para
+`tabelas_conjuracao_pdf.json`, que veio de paginas renderizadas de um PDF
+imagem-only e lidas a olho -- nao ha pin nem comando que refaca.
+
+Ele sumiu sem ruido nenhum: nunca entrou no git (`git log --all
+--diff-filter=A` sobre o caminho devolve vazio), o `TODO.md` seguiu marcando o
+item 14 como CONCLUIDO, e o relatorio em `docs/` seguiu citando o caminho. O
+build passava.
+
+Tres coisas fizeram a perda ser recuperavel em parte:
+1. o **relatorio** estava em `docs/`, que e versionado -- livro, pagina, metodo
+   e todos os achados qualitativos sobreviveram;
+2. a proficiencia registrada nele (1/7/15/19) **bate exatamente** com a base
+   hoje, o que prova que o resgate e fiel e nao reconstrucao de memoria;
+3. Magus e Summoner tinham segunda fonte (pf2etools), entao nao dependiam dele.
+
+O que nao voltou: a matriz `slots_per_level` do Animist, que era dado de fonte
+unica.
+
+Regra que ficou, materializada no **portao 8**: dump de fonte reproduzivel por
+pin vive em `dados_brutos/` e fica fora do git; **tudo que exigiu leitura,
+julgamento ou arbitragem humana vive em `dados_derivados/` e vai para o git**.
+O teste e uma pergunta so -- existe comando que refaz isso sozinho? Perda
+conhecida fica registrada em `artefatos_perdidos.json` com motivo, dano medido
+e decisao. O portao nao impede perda; impede perda **silenciosa**.
+
+Corolario de metodo: a varredura que achou isso -- conferir todo caminho citado
+em arquivo versionado contra o disco -- custou segundos e achou **3** ausencias
+em 42 caminhos. Vale rodar em qualquer projeto que guarde artefato fora do git.
 
 ### Trait no PF2e e vocabulario puro, nao mecanica
 0 de 561 traits tem efeito estruturado. Os campos `resistance`/`weakness`/

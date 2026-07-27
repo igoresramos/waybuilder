@@ -3,7 +3,16 @@
 Objetivo: preencher o buraco confirmado -- "tabela de slots de conjuracao nao esta
 mecanizada em lugar nenhum" e "Animist nao tem tabela de slots em fonte nenhuma".
 
-Dados extraidos: `pipeline/dados_brutos/tabelas_conjuracao_pdf.json`
+Dados extraidos: `pipeline/dados_derivados/tabelas_conjuracao_pdf.json`
+
+> **Nota de 2026-07-27.** O arquivo original foi gravado em
+> `pipeline/dados_brutos/`, que esta no `.gitignore`, e **se perdeu** -- nunca
+> entrou no git. Este relatorio sobreviveu porque `docs/` e versionado, e a
+> partir dele o arquivo foi refeito em `pipeline/dados_derivados/`. Voltou tudo
+> menos a matriz `slots_per_level` do Animist, que nao tem outra fonte: refazer
+> exige as paginas do PDF, que tambem se perderam. Magus e Summoner nao foram
+> afetados -- as tabelas deles vem do pf2etools via `conjuracao.py`.
+> Ver `pipeline/artefatos_perdidos.json` e o portao 8.
 
 ## Metodo
 
@@ -81,5 +90,6 @@ Igor quiser -- essas classes estao no Player Core / Player Core 2, que nem abri.
 
 ## Arquivos gerados
 
-- `pipeline/dados_brutos/tabelas_conjuracao_pdf.json` -- dados estruturados das 5 classes
+- `pipeline/dados_derivados/tabelas_conjuracao_pdf.json` -- dados estruturados das
+  5 classes (refeito em 2026-07-27 a partir deste relatorio; ver nota no topo)
 - Este relatorio

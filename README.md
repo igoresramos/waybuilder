@@ -43,13 +43,15 @@ pipeline/
   buscar_fontes.sh      reconstroi o clone do Foundry no pin (615 MB, fora do git)
   dump_aon.py           baixa o indice `aon` inteiro -- 43.686 docs, 93 categorias
   dados_brutos/         fontes fixadas (fora do git, reconstruiveis pelos dois acima)
+  dados_derivados/      artefato lido/arbitrado a mao -- VERSIONADO, ver o README de la
+  artefatos_perdidos.json  registro de perda conhecida, consultado pelo portao 8
   extratores/           um por familia de entidade
   reconciliar.py        funde colisoes de id, traits como uniao, canoniza livro
   auditar_conflitos.py  compara a base contra AoN e Foundry em disco
   desmembrar_colisoes.py  separa entidades distintas que caíram no mesmo slug
   emitir_textos.py      resolve a prosa
   fundir_renomeados.py  une Legacy<->Remaster pelo remaster_id do AoN
-  portoes.py            os 7 portoes de qualidade
+  portoes.py            os 8 portoes de qualidade
   build.sh              roda tudo na ordem certa
   saida/                saida crua de cada extrator
   base/                 a base canonica -- index.json + text/ + relatorios
@@ -101,6 +103,12 @@ Os cinco defeitos da auditoria de 26/07 estao **resolvidos**:
 | 3 -- `requires` orfao | 23 (era 80) | vocabulario nao unificado, nao falta de conteudo. `resolver_referencias.py` casou 58 por nome |
 | 6 -- traits disjunto | 1 | resto de conflito de traits |
 | 7 -- homonimo | 13 | casaram com doc do AoN que nao representa nenhum grupo; desmembrar exigiria arbitrar |
+
+O **portao 8** passa, com 4 perdas conhecidas registradas em
+`pipeline/artefatos_perdidos.json`. Ele nasceu de uma perda real: a tabela de
+conjuracao do Animist, lida a olho de um PDF imagem-only, foi gravada em
+`dados_brutos/` -- que o `.gitignore` exclui alegando "reconstruivel pelos
+pins" -- e sumiu sem nada reclamar. Ver a licao em `LESSONS.md` e o item 14.
 
 > **Correcao a spec, verificada contra as fontes:** ela dizia que em
 > `Death from Above` "o Foundry separa os dois; o AoN indexa so o mitico". E o

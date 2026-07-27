@@ -401,3 +401,23 @@ O build **falha** se:
    as tres regras de uniao -- e suspeita de colisao de identidade.
 7. Um `name` normalizado aparece em dois registros do mesmo `kind` sem que a
    distincao esteja explicita no slug.
+8. Um caminho citado em documento versionado nao existe no disco, e nao esta
+   registrado em `pipeline/artefatos_perdidos.json`.
+
+> **Por que o 8 existe.** `dados_brutos/tabelas_conjuracao_pdf.json` guardava as
+> tabelas de conjuracao lidas dos PDFs oficiais -- o War of Immortals e imagem
+> pura, entao as paginas foram renderizadas e as tabelas lidas a olho. Ele
+> nasceu em `dados_brutos/`, que o `.gitignore` exclui alegando "reconstruivel
+> pelos pins". Isso vale para o clone do Foundry e o dump do AoN; nao valia para
+> ele. Sumiu, o `TODO.md` seguiu marcando o item como CONCLUIDO e o relatorio
+> seguiu citando o caminho. Nada reclamou.
+>
+> **A distincao que o portao materializa:** `dados_brutos/` e dump de fonte,
+> reproduzivel por script a partir de um pin, e fica fora do git.
+> `dados_derivados/` e tudo que exigiu leitura, julgamento ou arbitragem humana,
+> e **vai para o git**. O teste e uma pergunta so: existe comando que refaz isso
+> sozinho?
+>
+> Perda ja conhecida vive em `artefatos_perdidos.json` com motivo, dano medido e
+> decisao pendente -- aparece no relatorio sem quebrar o build. Perda **nova**
+> quebra. O objetivo nao e impedir toda perda; e impedir perda **silenciosa**.

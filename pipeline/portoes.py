@@ -19,13 +19,21 @@ Uso:
 
 Saida: relatorio em base/relatorio_portoes.md, codigo 1 se algum portao falha.
 """
-import json, os, re, sys, glob, collections, unicodedata
+import json, os, re, sys, glob, collections, subprocess, unicodedata
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+RAIZ = os.path.dirname(AQUI)
 BASE = f"{AQUI}/base"
 BRUTOS = f"{AQUI}/dados_brutos"
 AON_DUMP = f"{BRUTOS}/aon_dump"
 COBERTURA = f"{BASE}/_cobertura.json"
+
+# Raizes que um script reconstroi a partir de um pin: buscar_fontes.sh traz o
+# clone do Foundry, dump_aon.py traz o dump do AoN. Sumir daqui nao e perda.
+# Qualquer outro caminho citado precisa existir -- ver portao 8.
+RECONSTRUIVEL = ("pipeline/dados_brutos/foundry",
+                 "pipeline/dados_brutos/aon",
+                 "pipeline/dados_brutos/pf2etools")
 
 # Campos cujo preenchimento exige `prov`. `mechanized`, `kind` e `id` sao
 # derivados do proprio pipeline, nao vieram de fonte -- nao entram.
@@ -325,6 +333,100 @@ def portao_7_homonimo(base, ctx):
     return len(graves), detalhe
 
 
+def _arquivos_versionados():
+    """Arquivos de texto versionados do projeto, sem os dumps de fonte.
+
+    Os 3.610 arquivos sob dados_brutos/ sao dump de fonte -- varrer citacao
+    dentro deles nao diz nada e custa caro.
+    """
+    r = subprocess.run(["git", "-C", RAIZ, "ls-files"],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        return None
+    return [f for f in r.stdout.split()
+            if f.endswith((".md", ".py", ".sh", ".json"))
+            and "/dados_brutos/" not in f]
+
+
+def portao_8_artefato_citado(base, ctx):
+    """Caminho citado em documento versionado que nao existe no disco.
+
+    O portao que faltava quando `dados_brutos/tabelas_conjuracao_pdf.json`
+    sumiu. Aquele arquivo tinha as tabelas de conjuracao lidas dos PDFs
+    oficiais -- o War of Immortals e imagem pura, entao as paginas foram
+    renderizadas e lidas a olho, sem script que refaca. Ele nasceu em
+    `dados_brutos/`, que o .gitignore exclui alegando "reconstruivel pelos
+    pins": verdade para o clone do Foundry e o dump do AoN, falso para ele.
+    Sumiu sem ruido, o TODO seguiu dizendo CONCLUIDO e o relatorio seguiu
+    citando o caminho -- nada no build reclamou.
+
+    Fonte bruta sob uma raiz reconstruivel nao entra: `buscar_fontes.sh` e
+    `dump_aon.py` a trazem de volta. Todo o resto tem que existir.
+
+    Perda ja conhecida vive em `artefatos_perdidos.json` com motivo e decisao;
+    ela aparece no relatorio mas nao quebra o build. Perda NOVA quebra.
+    """
+    versionados = _arquivos_versionados()
+    if versionados is None:
+        return 0, ["git indisponivel -- portao desligado"]
+
+    pat_arquivo = re.compile(
+        r"(?:pipeline|motor|docs|specs)/[A-Za-z0-9_./-]+\.[a-z]{2,6}")
+    pat_diretorio = re.compile(
+        r"(?:pipeline|motor|docs|specs)/[A-Za-z0-9_./-]+/")
+    # LESSONS e LOG citam o diretorio de brutos sem o `pipeline/` na frente
+    pat_solto = re.compile(r"(?<![A-Za-z0-9_/-])dados_brutos/[A-Za-z0-9_./-]+")
+
+    citados = collections.defaultdict(set)
+    for rel in versionados:
+        try:
+            txt = open(os.path.join(RAIZ, rel), encoding="utf-8",
+                       errors="ignore").read()
+        except OSError:
+            continue
+        curto = rel.split("waybuilder/")[-1]
+        achados = set(pat_arquivo.findall(txt)) | set(pat_diretorio.findall(txt))
+        achados |= {f"pipeline/{c}" for c in pat_solto.findall(txt)}
+        for c in achados:
+            c = c.rstrip(".")
+            if not c.startswith(RECONSTRUIVEL):
+                citados[c].add(curto)
+
+    conhecidos = {}
+    try:
+        reg = json.load(open(f"{AQUI}/artefatos_perdidos.json"))
+        conhecidos = {p["caminho"]: p for p in reg.get("perdidos", [])}
+    except (OSError, ValueError, KeyError):
+        pass
+
+    novos, sabidos = [], []
+    for c in sorted(citados):
+        if os.path.exists(os.path.join(RAIZ, c)):
+            continue
+        onde = ", ".join(sorted(citados[c])[:3])
+        # Subcaminho de um diretorio ja registrado herda o registro: perder
+        # `pdfs/` perde `pdfs/PF2e/DM/` junto, e sao a mesma decisao.
+        chave = next((k for k in conhecidos
+                      if c == k or (k.endswith("/") and c.startswith(k))), None)
+        if chave:
+            k = conhecidos[chave]
+            sabidos.append(f"`{c}` -- {k.get('decisao', '?')} "
+                           f"(reproduzivel: {k.get('reproduzivel')})")
+        else:
+            novos.append(f"`{c}` citado em {onde} e **nao existe no disco**. "
+                         f"Se foi derivado a mao, ele nunca deveria ter vivido "
+                         f"fora de dados_derivados/; registre em "
+                         f"artefatos_perdidos.json com motivo e decisao.")
+
+    detalhe = novos[:30]
+    if sabidos:
+        detalhe.append("")
+        detalhe.append(f"_Perdas ja registradas em `artefatos_perdidos.json` "
+                       f"({len(sabidos)}) -- visiveis, nao bloqueiam:_")
+        detalhe += [f"- {s}" for s in sabidos]
+    return len(novos), detalhe
+
+
 PORTOES = [
     (1, "prov por campo preenchido", portao_1_prov, ("pre-fusao", "final")),
     (2, "level divergente sem conflito", portao_2_level, ("pre-fusao", "final")),
@@ -333,6 +435,7 @@ PORTOES = [
     (5, "license ausente", portao_5_license, ("pre-fusao", "final")),
     (6, "traits disjunto apos uniao", portao_6_traits, ("pre-fusao", "final")),
     (7, "homonimo no mesmo kind", portao_7_homonimo, ("pre-fusao",)),
+    (8, "artefato citado que sumiu do disco", portao_8_artefato_citado, ("final",)),
 ]
 
 

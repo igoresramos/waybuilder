@@ -1,0 +1,49 @@
+{
+  "_doc": "Registro de artefato citado em documento versionado que NAO existe mais no disco. O portao 8 consulta este arquivo: caminho listado aqui aparece no relatorio como perda conhecida e nao quebra o build; caminho ausente daqui quebra. Serve para que perda fique registrada em vez de silenciosa. Remover uma entrada exige que o arquivo tenha voltado.",
+  "perdidos": [
+    {
+      "caminho": "pipeline/dados_brutos/tabelas_conjuracao_pdf.json",
+      "descoberto_em": "2026-07-27",
+      "citado_em": ["TODO.md", "docs/pdfs/2026-07-26_tabelas-conjuracao.md"],
+      "o_que_era": "tabelas de conjuracao de Animist, Magus e Summoner lidas dos PDFs oficiais em 2026-07-26",
+      "reproduzivel": false,
+      "motivo": "War of Immortals e PDF imagem-only; as paginas 12-13 foram renderizadas com pdftoppm e lidas a olho. Nao ha script que refaca.",
+      "nunca_entrou_no_git": true,
+      "verificado_por": "git log --all --diff-filter=A -- '*tabelas_conjuracao_pdf.json' devolve vazio",
+      "dano_real": "apenas o Animist. Magus e Summoner estao completos em base/index.json, extraidos do pf2etools por conjuracao.py, sem dependencia deste arquivo.",
+      "recuperado": "pipeline/dados_derivados/tabelas_conjuracao_pdf.json guarda tudo que o relatorio versionado preservou. Falta so a matriz slots_per_level do Animist.",
+      "decisao": "PENDENTE -- ver item 14 do TODO"
+    },
+    {
+      "caminho": "pipeline/dados_brutos/pdfs/",
+      "descoberto_em": "2026-07-27",
+      "citado_em": ["LESSONS.md", "LOG.md", "TODO.md"],
+      "o_que_era": "35 PDFs oficiais extraidos dos zips do Downloads, 1,7 GB",
+      "reproduzivel": false,
+      "motivo": "os zips de origem tambem nao estao mais em /mnt/c/Users/igor0/Downloads",
+      "nunca_entrou_no_git": true,
+      "dano_real": "bloqueia refazer a leitura da tabela do Animist e qualquer nova arbitragem contra impresso. Nao afeta a base emitida.",
+      "decisao": "PENDENTE -- Igor decide se rebaixa os livros"
+    },
+    {
+      "caminho": "pipeline/dados_brutos/_dump_aon_rituais.py",
+      "descoberto_em": "2026-07-27",
+      "citado_em": ["docs/2026-07-26_extrator-rituais.md"],
+      "o_que_era": "script ad-hoc que baixou os rituais do AoN",
+      "reproduzivel": true,
+      "motivo": "substituido por dump_aon.py, que cobre a categoria ritual (dump_aon.py:132)",
+      "dano_real": "nenhum. A saida aon_rituals.json esta no disco e o dump_aon.py a regenera.",
+      "decisao": "RESOLVIDO -- sem acao"
+    },
+    {
+      "caminho": "pipeline/dados_brutos/_wb_dump_companheiros.py",
+      "descoberto_em": "2026-07-27",
+      "citado_em": ["pipeline/extratores/companheiros.py", "pipeline/relatorios/companheiros.md"],
+      "o_que_era": "script ad-hoc que baixou os companheiros do AoN",
+      "reproduzivel": true,
+      "motivo": "substituido por dump_aon.py, que cobre animal-companion (dump_aon.py:135)",
+      "dano_real": "nenhum. A saida aon_companheiros.json esta no disco e o dump_aon.py a regenera.",
+      "decisao": "RESOLVIDO -- sem acao"
+    }
+  ]
+}

@@ -1,8 +1,9 @@
 # Extrator de companheiros -- relatorio
 
 Fonte: `pipeline/extratores/companheiros.py`. Saida: `pipeline/saida/companheiros.json`
-(312 registros, 0 ids duplicados). Dump bruto: `pipeline/dados_brutos/_wb_dump_companheiros.py`
+(312 registros, 0 ids duplicados). Dump bruto: `pipeline/dump_aon.py`
 -> `pipeline/dados_brutos/aon_companheiros.json` (405 docs, elasticsearch `aon`).
+O script ad-hoc original (`_wb_dump_companheiros.py`) foi substituido por ele.
 
 ## Contagem por kind
 

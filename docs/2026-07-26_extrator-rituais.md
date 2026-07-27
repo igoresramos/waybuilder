@@ -248,6 +248,6 @@ Distribuicao por nivel: 1(9) 2(20) 3(23) 4(18) 5(26) 6(19) 7(10) 8(11) 9(9) 10(6
   -- `magias.py` deixa essa pasta de fora explicitamente, entao nunca tinha
   sido copiada pra `dados_brutos/`)
 - `pipeline/dados_brutos/aon_rituals.json` (201 docs brutos, `category=ritual`)
-- `pipeline/dados_brutos/_dump_aon_rituais.py` (script de dump, mesmo padrao
-  de `_dump_aon_ancestrias.py`, com `User-Agent` explicito -- o endpoint
-  pendura sem ele)
+- o script de dump da epoca (`_dump_aon_rituais.py`) foi substituido por
+  `pipeline/dump_aon.py`, que cobre a categoria `ritual` e ja manda o
+  `User-Agent` explicito -- o endpoint pendura sem ele

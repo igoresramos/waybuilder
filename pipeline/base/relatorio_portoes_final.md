@@ -55,3 +55,13 @@
 
 NAO SE APLICA nesta fase.
 
+## Portao 8 -- artefato citado que sumiu do disco
+
+**PASSOU** -- 0 ocorrencia(s).
+
+- 
+- _Perdas ja registradas em `artefatos_perdidos.json` (3) -- visiveis, nao bloqueiam:_
+- - `pipeline/dados_brutos/pdfs/` -- PENDENTE -- Igor decide se rebaixa os livros (reproduzivel: False)
+- - `pipeline/dados_brutos/pdfs/PF2e/DM/` -- PENDENTE -- Igor decide se rebaixa os livros (reproduzivel: False)
+- - `pipeline/dados_brutos/tabelas_conjuracao_pdf.json` -- PENDENTE -- ver item 14 do TODO (reproduzivel: False)
+

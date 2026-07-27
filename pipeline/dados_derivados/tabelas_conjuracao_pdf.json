@@ -1,0 +1,66 @@
+{
+  "_doc": "Resgate do antigo pipeline/dados_brutos/tabelas_conjuracao_pdf.json, perdido por ter nascido em diretorio ignorado pelo git. Reconstruido em 2026-07-27 a partir de docs/pdfs/2026-07-26_tabelas-conjuracao.md, que estava versionado e sobreviveu. Toda afirmacao aqui vem daquele relatorio ou de conferencia contra base/index.json. NENHUM numero foi inventado: o que se perdeu esta como null com o motivo ao lado.",
+  "origem": {
+    "relatorio": "docs/pdfs/2026-07-26_tabelas-conjuracao.md",
+    "sessao": "2026-07-26 18:40-21:30",
+    "metodo": "War of Immortals e PDF imagem-only (pdftotext e pdffonts confirmam zero camada de texto); paginas renderizadas com pdftoppm -r 100 -png e tabelas lidas a olho. Secrets of Magic e Rage of Elements tem texto real, lidos com pdftotext -layout.",
+    "convencao_de_pagina": "numero impresso no rodape do livro, igual ao campo source.page do index.json"
+  },
+  "classes": {
+    "animist": {
+      "conjuradora": true,
+      "fonte": {"book": "War of Immortals", "page": [12, 13],
+                "nota": "p.12 advancement table, p.13 spells per day"},
+      "tradition": "divine",
+      "type": "hibrido -- dois pools independentes que nao se misturam: animist spellcasting (prepared, lista divine comum) + apparition spellcasting (spontaneous, repertorio das apparitions atuned no dia)",
+      "proficiency": {"trained": 1, "expert": 7, "master": 15, "legendary": 19},
+      "proficiency_varia_por_subclasse": false,
+      "irregularidade": "niveis 19-20 ganham um slot de apparition rank 10 marcado '0+1*', vindo da feature supreme incarnation; funciona diferente dos slots normais. O mecanismo interno nao foi lido em detalhe.",
+      "slots_per_level": null,
+      "slots_per_level_status": "PERDIDO. Era a unica parte deste arquivo sem outra fonte -- o Animist nao existe no index do pf2etools (404 em class-animist.json), e nem Foundry nem AoN materializam a tabela numerica; ambos so citam 'Animist Spells per Day' como nome de tabela. Refazer exige o PDF, que tambem se perdeu.",
+      "conferido_contra_base": "proficiency 1/7/15/19 e tradition divine batem exatamente com base/index.json em 2026-07-27, o que confirma que este resgate e fiel ao original"
+    },
+    "magus": {
+      "conjuradora": true,
+      "fonte": {"book": "Secrets of Magic", "page": [36, 39],
+                "nota": "p.36 advancement table, p.39 spells per day"},
+      "tradition": "arcane",
+      "type": "prepared (spellbook, como wizard)",
+      "regra_propria": "no maximo 2 slots do rank mais alto disponivel + 2 do rank imediatamente abaixo",
+      "proficiency": {"trained": 1, "expert": 9, "master": 17},
+      "chega_a_legendary": false,
+      "irregularidade": "a partir do nivel 7 um rank aparece com asterisco na tabela -- slot que so existe pela feature studious spells (p.41, nao lida em detalhe). Registrada a existencia, nao o mecanismo.",
+      "slots_per_level": "presente em base/index.json",
+      "slots_per_level_status": "NAO PERDIDO. Extraido do pf2etools por conjuracao.py, sem dependencia deste arquivo. 20 niveis, max_rank 9 no nivel 20.",
+      "conferido_contra_base": "proficiency 1/9/17 bate com base/index.json em 2026-07-27"
+    },
+    "summoner": {
+      "conjuradora": true,
+      "fonte": {"book": "Secrets of Magic", "page": [52, 55],
+                "nota": "p.52 advancement table, p.55 spells per day"},
+      "tradition": "depende do eidolon escolhido (arcane/divine/occult/primal) -- nao e fixo por classe",
+      "type": "spontaneous",
+      "regra_propria": "o repertorio ENCOLHE: toda vez que sobe de rank de slot, perde 2 spells do repertorio do rank mais baixo que caiu",
+      "proficiency": {"trained": 1, "expert": 9, "master": 17},
+      "chega_a_legendary": false,
+      "slots_per_level": "presente em base/index.json",
+      "slots_per_level_status": "NAO PERDIDO. Mesma origem do Magus. 20 niveis, max_rank 9 no nivel 20.",
+      "conferido_contra_base": "proficiency 1/9/17 bate com base/index.json em 2026-07-27"
+    },
+    "exemplar": {
+      "conjuradora": false,
+      "fonte": {"book": "War of Immortals", "page": [29, 30]},
+      "motivo": "Initial Proficiencies e advancement table nao citam spellcasting, spell attack nem spell DC em nivel nenhum. Mecanica e divine spark canalizado em ikons (immanence passivo + transcendence ativo), sem spell slots.",
+      "slots_per_level": null,
+      "slots_per_level_status": "NAO EXISTE -- nao ha o que preencher"
+    },
+    "kineticist": {
+      "conjuradora": false,
+      "fonte": {"book": "Rage of Elements", "page": [13]},
+      "motivo": "usa kinetic gate + impulses (acao com trait impulse); nao lanca spells e nao tem spell slots.",
+      "slots_per_level": null,
+      "slots_per_level_status": "NAO EXISTE -- nao ha o que preencher"
+    }
+  },
+  "fora_de_escopo_na_epoca": "Cleric, Wizard, Druid, Bard, Sorcerer, Oracle, Psychic e Witch nao foram lidos do PDF (estao no Player Core / Player Core 2, que nao foram abertos). As tabelas dessas 8 classes vieram do pf2etools e estao completas em base/index.json."
+}
