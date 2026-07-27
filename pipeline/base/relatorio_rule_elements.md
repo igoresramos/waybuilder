@@ -9,21 +9,22 @@ rank e sem `predicate`. O resto depende do interpretador do Foundry
 (`item:trait:finesse`, `self:effect:rage`, `@actor.flags`) e fica como
 prosa -- que pelo principio zero **nao e lacuna**.
 
-- registros que ganharam efeito: **99**
-- grants adicionados: **123**
+- registros que ganharam efeito: **492**
+- grants adicionados: **589**
 
 ## Nao convertidos
 
 - FlatModifier: precisa do interpretador: 1793
 - ItemAlteration: precisa do interpretador: 1497
-- GrantItem: precisa do interpretador: 1120
 - RollOption: precisa do interpretador: 1079
 - ActiveEffectLike sem path de rank: 604
 - ChoiceSet: precisa do interpretador: 568
 - Note: precisa do interpretador: 540
+- GrantItem sem alvo na base: 415
 - Resistance: precisa do interpretador: 338
 - ActiveEffectLike com predicate: 263
 - DamageDice: precisa do interpretador: 254
+- GrantItem com predicate: 239
 - AdjustDegreeOfSuccess: precisa do interpretador: 239
 - AdjustModifier: precisa do interpretador: 227
 - Strike: precisa do interpretador: 201
@@ -55,10 +56,10 @@ prosa -- que pelo principio zero **nao e lacuna**.
 ## Exemplos
 
 - `wb:class/alchemist` (Alchemist): `[{"proficiency": {"weapon-base-alchemical-bomb": "trained"}}]`
-- `wb:class-feature/alchemical-sciences-methodology` (Alchemical Sciences Methodology): `[{"proficiency": {"crafting": "trained"}}]`
+- `wb:class-feature/alchemical-sciences-methodology` (Alchemical Sciences Methodology): `[{"proficiency": {"crafting": "trained"}}, {"grant_feat": ["wb:feat/alchemical-crafting"]}, {"grant_feat": ["wb:equipment/formula-book-blank"]}]`
 - `wb:class-feature/alchemical-weapon-expertise` (Alchemical Weapon Expertise): `[{"proficiency": {"weapon-base-alchemical-bomb": "expert"}}]`
 - `wb:class-feature/alchemical-weapon-mastery` (Alchemical Weapon Mastery): `[{"proficiency": {"weapon-base-alchemical-bomb": "master"}}]`
-- `wb:class-feature/ancestors` (Ancestors): `[{"proficiency": {"society": "trained"}}]`
-- `wb:class-feature/angel-eidolon` (Angel Eidolon): `[{"proficiency": {"diplomacy": "trained"}}, {"proficiency": {"religion": "trained"}}]`
-- `wb:class-feature/anger-phantom-eidolon` (Anger Phantom Eidolon): `[{"proficiency": {"intimidation": "trained"}}, {"proficiency": {"occultism": "trained"}}]`
-- `wb:class-feature/ashes` (Ashes): `[{"proficiency": {"occultism": "trained"}}]`
+- `wb:class-feature/alchemy` (Alchemy): `[{"grant_feat": ["wb:feat/alchemical-crafting"]}, {"grant_feat": ["wb:class-feature/formula-book"]}, {"grant_feat": ["wb:feat/advanced-alchemy"]}, {"grant_feat": ["wb:class-feature/versatile-vials"]}, {"grant_feat": ["wb:feat/quick-alchemy"]}]`
+- `wb:class-feature/aloof-firmament` (Aloof Firmament): `[{"grant_feat": ["wb:feat/cat-fall"]}]`
+- `wb:class-feature/amulet` (Amulet): `[{"grant_feat": ["wb:equipment/amulet-implement"]}]`
+- `wb:class-feature/ancestors` (Ancestors): `[{"proficiency": {"society": "trained"}}, {"grant_feat": ["wb:class-feature/curse-of-ancestral-meddling"]}]`

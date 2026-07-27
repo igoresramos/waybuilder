@@ -34,7 +34,14 @@ O que nao pode e o app fingir que calculou.
 Entrada: pipeline/base/index.json + dados_brutos/foundry_repo/
 Saida:   index.json reescrito + base/relatorio_rule_elements.md
 """
-import json, os, re, sys, glob, collections
+import json, os, re, sys, glob, collections, unicodedata
+
+
+def normalizar(s):
+    s = unicodedata.normalize("NFKD", str(s or ""))
+    s = "".join(c for c in s if not unicodedata.combining(c)).lower()
+    s = s.replace("'", "").replace("’", "")
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]+", " ", s)).strip()
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 BASE = f"{AQUI}/base"
@@ -64,13 +71,37 @@ def rules_do_foundry():
     return idx
 
 
-def converter(regras):
+def converter(regras, por_nome=None):
     """Rule elements -> (grants novos, quantos ficaram de fora e por que)."""
     grants, pulados = [], collections.Counter()
     for r in regras:
         if not isinstance(r, dict):
             continue
         chave = r.get("key")
+
+        # GrantItem sem predicado tambem e declarativo: o UUID carrega o nome
+        # (`Compendium.pf2e.feats-srd.Item.Bardic Lore`), e resolver nome para
+        # id `wb:` e o que a base existe para fazer.
+        #
+        # E onde mora metade do que a subclasse entrega: a Musa do Bardo concede
+        # a composition spell (Maestro -> Lingering Composition, Enigma ->
+        # Bardic Lore), a Ordem do Druida concede o focus spell (Flame Order ->
+        # Fire Lung). Sem isto, escolher a musa mudava quais feats APARECIAM
+        # (o predicado ja fazia isso) mas nao dava nada.
+        if chave == "GrantItem" and por_nome is not None:
+            if r.get("predicate"):
+                pulados["GrantItem com predicate"] += 1
+                continue
+            uuid = str(r.get("uuid") or "")
+            nome = uuid.split(".")[-1].strip()
+            alvo = por_nome.get(normalizar(nome))
+            if alvo is None:
+                pulados["GrantItem sem alvo na base"] += 1
+                continue
+            campo = "grant_spell" if alvo.get("kind") == "spell" else "grant_feat"
+            grants.append({campo: [alvo["id"]]})
+            continue
+
         if chave != "ActiveEffectLike":
             pulados[f"{chave}: precisa do interpretador"] += 1
             continue
@@ -98,6 +129,14 @@ def main():
         print("sem clone do Foundry -- rode buscar_fontes.sh", file=sys.stderr)
         return 1
 
+    # nome normalizado -> registro, para resolver o UUID do GrantItem.
+    # Preferencia a quem tem `grants`: o predicado aponta para a entidade que o
+    # motor precisa avaliar, nao para a ficha de catalogo.
+    por_nome = {}
+    for r in sorted(base, key=lambda x: (0 if x.get("grants") else 1,
+                                         0 if x.get("kind") in ("feat", "spell") else 1)):
+        por_nome.setdefault(normalizar(r.get("name")), r)
+
     convertidos, novos_grants = 0, 0
     pulados_total = collections.Counter()
     exemplos = []
@@ -108,7 +147,7 @@ def main():
         regras = rules.get(fid)
         if not regras:
             continue
-        grants, pulados = converter(regras)
+        grants, pulados = converter(regras, por_nome)
         pulados_total.update(pulados)
         if not grants:
             continue
