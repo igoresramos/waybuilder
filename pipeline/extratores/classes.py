@@ -51,12 +51,9 @@ SAIDA_DIR = PIPELINE_DIR / "saida"
 RELATORIOS_DIR = PIPELINE_DIR / "relatorios"
 
 FOUNDRY_PIN = "87f9e5028baaa10b70fdc766260b7886def17e04"
-# Clone local pinado no commit acima. Pode ser sobrescrito por env var (o clone
-# vive num diretorio de scratchpad de sessao, nao e permanente).
-FOUNDRY_SRC_DEFAULT = (
-    "/tmp/claude-1000/-mnt-c-Users-igor0/39eadbed-e8eb-4194-8557-74f05193fdc1"
-    "/scratchpad/pf2e-research/pf2e"
-)
+# Clone local pinado no commit acima, dentro de dados_brutos/. Reconstruivel por
+# `pipeline/buscar_fontes.sh`; sobrescrivel por env var.
+FOUNDRY_SRC_DEFAULT = str(RAW_DIR / "foundry_repo")
 FOUNDRY_SRC = os.environ.get("WB_FOUNDRY_REPO", FOUNDRY_SRC_DEFAULT)
 
 AON_URL = "https://elasticsearch.aonprd.com/aon/_search"

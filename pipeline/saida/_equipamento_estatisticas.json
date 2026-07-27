@@ -1,70 +1,38 @@
 {
  "foundry_total": 5698,
- "aon_weapon": 614,
- "aon_armor": 75,
- "aon_shield": 32,
- "aon_equipment": 8642,
- "pf2etools_base_total": 410,
+ "aon_weapon": 0,
+ "aon_armor": 0,
+ "aon_shield": 0,
+ "aon_equipment": 0,
+ "pf2etools_base_total": 0,
  "por_kind": {
-  "armor": 207,
-  "equipment": 6137,
+  "armor": 202,
+  "equipment": 4398,
   "shield": 118,
-  "weapon": 1034
+  "weapon": 980
  },
  "com_estrutura_mecanica": {
   "armor": 202,
-  "equipment": 5959,
+  "equipment": 4398,
   "shield": 118,
-  "weapon": 1030
+  "weapon": 980
  },
- "so_prosa": {
-  "armor": 5,
-  "equipment": 178,
-  "weapon": 4
- },
+ "so_prosa": {},
  "runas_detectadas": {
   "property": 101,
   "potency": 6,
   "reinforcing": 5
  },
  "cobertura_fontes": {
-  "armor:FA": 145,
-  "armor:F": 23,
-  "armor:FTA": 32,
-  "armor:T": 4,
-  "armor:FT": 2,
-  "armor:A": 1,
-  "equipment:A": 1739,
-  "equipment:FA": 3593,
-  "equipment:F": 805,
-  "shield:FA": 96,
-  "shield:FTA": 16,
-  "shield:F": 6,
-  "weapon:FA": 661,
-  "weapon:FTA": 233,
-  "weapon:F": 67,
-  "weapon:A": 48,
-  "weapon:FT": 19,
-  "weapon:TA": 4,
-  "weapon:T": 2
+  "armor:F": 202,
+  "equipment:F": 4398,
+  "shield:F": 118,
+  "weapon:F": 980
  },
- "conflitos_por_campo": {
-  "traits": 1677,
-  "level": 55
- },
- "homonimos": {
-  "armor": 112,
-  "weapon": 577,
-  "shield": 67,
-  "equipment": 1983
- },
- "kind_reconciliado": {
-  "weapon->equipment": 23,
-  "equipment->weapon": 898,
-  "equipment->shield": 143,
-  "equipment->armor": 207
- },
- "mechanized_true": 7440,
+ "conflitos_por_campo": {},
+ "homonimos": {},
+ "kind_reconciliado": {},
+ "mechanized_true": 5642,
  "mechanized_false": 56,
  "rules_ignoradas": {
   "RollOption": 314,
@@ -93,5 +61,5 @@
   "CriticalSpecialization": 8,
   "FastHealing": 1
  },
- "sem_source": 1636
+ "sem_source": 0
 }

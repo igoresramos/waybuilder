@@ -62,8 +62,8 @@ def indexar_aon():
     return idx
 
 
-CLONE = ("/tmp/claude-1000/-mnt-c-Users-igor0/39eadbed-e8eb-4194-8557-74f05193fdc1"
-         "/scratchpad/pf2e-research/pf2e/packs/pf2e")
+CLONE = os.environ.get("WB_FOUNDRY_PACKS",
+                       f"{BRUTO}/foundry_repo/packs/pf2e")
 
 
 def indexar_foundry():

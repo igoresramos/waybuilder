@@ -20,6 +20,7 @@ stdlib-only. Roda offline a partir de pipeline/dados_brutos/.
 """
 
 import json
+import os
 import re
 from pathlib import Path
 
@@ -34,8 +35,7 @@ SAIDA_DIR = PIPELINE_DIR / "saida"
 RELATORIOS_DIR = PIPELINE_DIR / "relatorios"
 
 FOUNDRY_REPO = Path(
-    "/tmp/claude-1000/-mnt-c-Users-igor0/39eadbed-e8eb-4194-8557-74f05193fdc1"
-    "/scratchpad/pf2e-research/pf2e"
+    os.environ.get("WB_FOUNDRY_REPO", DADOS_BRUTOS / "foundry_repo")
 )
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
 FOUNDRY_PACKS = FOUNDRY_REPO / "packs" / "pf2e"
