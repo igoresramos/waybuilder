@@ -302,6 +302,38 @@ checar(any("Hand of the Apprentice" in f["feat"] for f in p.fora_do_requisito),
        "Hand of the Apprentice exige Universalist -- com Battle Magic, sinaliza",
        f"{p.fora_do_requisito}")
 
+# -- regra 21: a rota de nivel nunca entrega menos que a dedicacao ---------
+print("\nregra 21 -- sanidade: nivel de classe >= dedicacao")
+# Rota A (houserule): Guerreiro 19 / Clerigo 1
+rota_a = personagem(niveis((FIGHTER, 19), (CLERIC, 1)))
+# Rota B (RAW): Guerreiro 20 + Cleric Dedication pelo slot de Free Archetype
+esc_b = niveis((FIGHTER, 20)) + [
+    {"em": 2, "slot": "free_archetype", "pega": "wb:feat/cleric-dedication"}]
+rota_b = personagem(esc_b)
+checar(rota_a.nivel == 20 and rota_b.nivel == 20, "as duas rotas no nivel 20")
+
+ded = BASE.opcional("wb:feat/cleric-dedication")
+checar(ded is not None and bool(ded.get("grants")),
+       "a dedicacao de Clerigo tem efeito estruturado para comparar",
+       f"grants={bool((ded or {}).get('grants'))}")
+
+# o que a rota A entrega e a B nao: conjuracao de verdade
+checar(bool(rota_a.conjuracao),
+       "a rota de nivel de classe da conjuracao (slots reais)")
+conj_a = rota_a.conjuracao[0] if rota_a.conjuracao else None
+if conj_a:
+    checar(conj_a["nivel_de_classe"] == 1,
+           "com os slots de um Clerigo 1 (regra 16)")
+    checar(conj_a["rank_efetivo"] == 10,
+           "mas conjurando no rank 10 (regra 17: ceil(20/2))",
+           f"deu {conj_a['rank_efetivo']}")
+
+# e a identidade de classe, que a dedicacao nao compra integra
+ids_a = {f["id"] for f in rota_a.features}
+checar(any("cleric" in i or "doctrine" in i for i in ids_a),
+       "e a identidade de Clerigo vem junto (regra 7)",
+       f"features de Clerigo: {[i for i in ids_a if 'cleric' in i][:3]}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")
