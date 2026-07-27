@@ -237,24 +237,35 @@ class TestUniaoDeTraitsNoArtefato(unittest.TestCase):
         self.assertEqual(ruins, [])
 
     def test_traits_nao_gera_mais_conflito(self):
-        # DEFEITO ABERTO, 113 registros (95 equipment). A uniao roda em
-        # `reconciliar.main` (`unir_do_conflito`), mas quem cria conflito de
-        # `traits` DEPOIS dela -- auditar_conflitos.py e desmembrar_colisoes.py,
-        # passos 3 e 4 do build.sh -- nao passa pela reparacao. E ordem de
-        # pipeline, nao regra de uniao: os 113 somem rodando a reparacao no fim.
+        # eram 113 (95 equipment) enquanto a reparacao rodava dentro de
+        # `reconciliar.main`: quem CRIA conflito de `traits` depois dela --
+        # auditar_conflitos.py e desmembrar_colisoes.py -- nunca passava por
+        # ela. `normalizar_traits.py` roda no fim do build e fecha isso.
         conf = [r["id"] for r in self.base
                 for c in (r.get("conflitos") or []) if c.get("campo") == "traits"]
-        self.assertLessEqual(len(conf), 113,
-                             f"{len(conf)} registros com conflito de traits -- piora")
+        self.assertEqual(conf[:5], [], f"{len(conf)} registros com conflito de traits")
 
     def test_nome_legado_de_ancestria_nao_sobrevive_nos_traits(self):
-        # DEFEITO ABERTO, 13 registros (grippli 5, aasimar 3, gnoll 3, ifrit 2).
-        # `normalizacao_traits.json` tem os 6 mapeamentos; o que falta e passar
-        # TODO registro por `traits_uniao.unir()`, nao so os que tem conflito
-        # entre fontes. Um registro de fonte unica nunca e normalizado.
+        # eram 13 (grippli 5, aasimar 3, gnoll 3, ifrit 2): o mapa de
+        # `normalizacao_traits.json` existia, mas `unir()` so era chamado
+        # quando havia conflito ENTRE FONTES, e registro de fonte unica nunca
+        # passava por ele.
         legados = {"tiefling", "aasimar", "ifrit", "gnoll", "half-elf", "grippli"}
         ruins = [r["id"] for r in self.base if legados & set(r.get("traits") or [])]
-        self.assertLessEqual(len(ruins), 13, ruins[:8])
+        self.assertEqual(ruins[:5], [], f"{len(ruins)} com nome legado nos traits")
+
+    def test_realinhamento_nao_e_desfeito_pela_uniao(self):
+        # `desmembrar_colisoes` grava o valor DESCARTADO sob a chave `antes`.
+        # Se a uniao tratar `antes` como fonte, ela ressuscita o trait que o
+        # realinhamento acabou de tirar -- `death-from-above` voltava a ter
+        # `archetype` junto de `mythic`, que e a quimera original.
+        import traits_uniao
+        self.assertFalse(traits_uniao.e_fonte("antes"))
+        self.assertTrue(traits_uniao.e_fonte("aon"))
+        self.assertTrue(traits_uniao.e_fonte("aon_2"))
+        dfa = [r for r in self.base if r["id"] == "wb:feat/death-from-above"]
+        if dfa:
+            self.assertNotIn("archetype", dfa[0].get("traits") or [])
 
 
 if __name__ == "__main__":

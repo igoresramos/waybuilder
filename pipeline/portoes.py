@@ -257,6 +257,16 @@ def _grupos_de_identidade(docs):
             x = pai[x]
         return x
 
+    def unir(x, y):
+        rx, ry = raiz(x), raiz(y)
+        if rx != ry:
+            pai[rx] = ry
+
+    # dois docs que apontam para o MESMO alvo sao a mesma entidade, mesmo que o
+    # alvo nao esteja no grupo: `Temporal Distortion` tem um doc em Divine
+    # Mysteries e outro em Dark Archives (Remastered), e os dois declaram
+    # `legacy_id: [spell-1195]` -- e a mesma magia reimpressa, nao duas.
+    por_alvo = collections.defaultdict(list)
     for d in docs:
         i = str(d.get("id"))
         for chave in ("remaster_id", "legacy_id"):
@@ -267,10 +277,12 @@ def _grupos_de_identidade(docs):
                 if a is None:
                     continue
                 a = str(a)
+                por_alvo[a].append(i)
                 if a in pai:
-                    ra, rb = raiz(i), raiz(a)
-                    if ra != rb:
-                        pai[ra] = rb
+                    unir(i, a)
+    for irmaos in por_alvo.values():
+        for outro in irmaos[1:]:
+            unir(irmaos[0], outro)
     grupos = collections.defaultdict(list)
     for d in docs:
         grupos[raiz(str(d.get("id")))].append(d)
@@ -298,7 +310,13 @@ def portao_7_homonimo(base, ctx):
     por_nome = collections.defaultdict(list)
     for d in aon.values():
         cat = str(d.get("category") or "")
-        if cat:
+        # doc que declara `remaster_id` e a versao LEGADO de outra coisa, nao
+        # uma entidade a distinguir. Sem isto o portao acusa homonimo sempre
+        # que o remaster renomeia: `Hellknight Dedication` (feat-1078, nv6) e
+        # o legado de `Hellknight Preferment`, que ja esta na base com o nome
+        # novo -- nada colidiu. Os dois `Death from Above` nao declaram
+        # remaster_id nenhum, entao o caso real continua passando pelo filtro.
+        if cat and not d.get("remaster_id"):
             por_nome[(cat, norm(d.get("name")))].append(d)
 
     # casos ja resolvidos por desmembrar_colisoes.py: o irmao existe, entao a

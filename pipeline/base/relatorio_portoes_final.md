@@ -47,9 +47,8 @@
 
 ## Portao 6 -- traits disjunto apos uniao
 
-**FALHOU** -- 1 ocorrencia(s).
+**PASSOU** -- 0 ocorrencia(s).
 
-- `wb:weapon/leiomano`: [['fatal-d10', 'versatile-s'], ['fatal', 'uncommon', 'versatile']]
 
 ## Portao 7 -- homonimo no mesmo kind
 

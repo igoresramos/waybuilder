@@ -41,6 +41,22 @@ def normalizar_termo(t):
     return re.sub(r"\s+", "-", str(t or "").strip().lower())
 
 
+FONTES = ("aon", "foundry", "pf2etools", "waybuilder")
+
+
+def e_fonte(chave):
+    """A chave do conflito nomeia uma FONTE, ou e escrituracao do pipeline?
+
+    `desmembrar_colisoes.py` grava `{"campo": "traits", "antes": [...], "aon":
+    [...]}` quando realinha um registro com o doc certo. `antes` e o valor
+    DESCARTADO de proposito, nao uma faceta a unir -- unir de volta recria a
+    quimera que o realinhamento acabou de desfazer (`death-from-above` voltava
+    a ter `archetype` junto de `mythic`).
+    """
+    raiz = str(chave).rsplit("_", 1)[0]
+    return str(chave) in FONTES or raiz in FONTES
+
+
 def unir(valores_por_fonte):
     """{fonte: [traits]} -> (traits_finais, aliases_traits, fontes_que_contribuiram).
 
@@ -91,7 +107,7 @@ def unir_do_conflito(registro):
     por_fonte = {}
     for c in de_traits:
         for chave, valor in c.items():
-            if chave in ("campo", "escolhido") or not isinstance(valor, list):
+            if not isinstance(valor, list) or not e_fonte(chave):
                 continue
             por_fonte.setdefault(chave, []).extend(valor)
     # o valor que ficou no registro tambem conta como faceta

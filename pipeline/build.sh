@@ -66,5 +66,12 @@ python3 portoes.py --fase pre-fusao || true
 echo "== 7. fundir legacy/remaster =="
 python3 fundir_renomeados.py
 
+echo "== 7b. normalizar traits na base inteira =="
+# depois do ULTIMO escritor de index.json: auditar_conflitos e
+# desmembrar_colisoes criam conflito de traits depois da reparacao que roda
+# dentro do reconciliador, e registro de fonte unica nunca passava pela
+# normalizacao. Aqui a garantia vale para a base toda.
+python3 normalizar_traits.py
+
 echo "== 8. portoes, fase final =="
 python3 portoes.py --fase final

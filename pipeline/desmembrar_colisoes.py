@@ -40,6 +40,82 @@ BASE = f"{AQUI}/base"
 TRAITS_DISTINTIVOS = ("mythic", "archetype", "rare", "uncommon")
 
 
+CURADORIA = f"{AQUI}/colisoes_identidade.json"
+
+
+def _fixar(reg, campo, valor):
+    """Escreve campo simples ou aninhado (`source.page`), com prov de curadoria."""
+    if "." in campo:
+        pai, filho = campo.split(".", 1)
+        reg.setdefault(pai, {})[filho] = valor
+    else:
+        reg[campo] = valor
+    reg.setdefault("prov", {})[campo] = "curadoria"
+
+
+def aplicar_curadoria(base, aon, ids, relatorio):
+    """Aplica `colisoes_identidade.json` ANTES do detector automatico.
+
+    O arquivo existia com 6 colisoes verificadas a mao contra o AoN e o
+    checkout do Foundry -- e **nenhum script o lia**. O detector automatico
+    resolvia os mesmos casos por heuristica e chegava a outro resultado: em
+    `death-from-above` ele deixou o registro canonico no doc mitico e parkeou o
+    id do Foundry do arquetipo como `foundry_ambiguo` no registro errado, alem
+    de criar um terceiro registro. A curadoria e mais confiavel que a
+    heuristica porque cada par foi conferido doc a doc; ela vem primeiro, e o
+    detector so cuida do que ela nao cobre.
+
+    Devolve (novos_registros, ids_tratados).
+    """
+    if not os.path.exists(CURADORIA):
+        return [], set()
+    curada = json.load(open(CURADORIA))
+    por_id = {r["id"]: r for r in base}
+    novos, tratados = [], set()
+
+    for chave, caso in curada.items():
+        if chave.startswith("_"):
+            continue
+        entrada = por_id.get(chave)
+        if not entrada:
+            relatorio.append(f"- CURADORIA `{chave}`: nao existe na base -- pulado")
+            continue
+        tratados.add(chave)
+        for i, ent in enumerate(caso.get("entidades") or []):
+            alvo = por_id.get(ent["id"])
+            if alvo is None:
+                doc = aon.get(str((ent.get("xref") or {}).get("aon") or ""))
+                alvo = aon_kinds.converter(doc, entrada.get("kind")) if doc else None
+                if alvo is None:
+                    relatorio.append(f"- CURADORIA `{ent['id']}`: sem doc do AoN "
+                                     f"para criar o irmao -- pulado")
+                    continue
+                alvo["id"] = ent["id"]
+                alvo["text"] = f"wb:text/{entrada.get('kind')}/{ent['id'].split('/', 1)[-1]}"
+                alvo["desmembrado_de"] = chave
+                src = alvo.setdefault("source", {})
+                if not src.get("license"):
+                    livro = normalizar_livro(src.get("book") or "")
+                    if src.get("remaster") is True or livro in LIVROS_ORC:
+                        src["license"] = "ORC"
+                    elif livro:
+                        src["license"] = "OGL"
+                    if src.get("license"):
+                        alvo.setdefault("prov", {})["source.license"] = "inferida:livro"
+                ids.add(alvo["id"])
+                por_id[alvo["id"]] = alvo
+                novos.append(alvo)
+            # o xref curado MANDA: e ele que diz qual doc descreve qual entidade
+            alvo["xref"] = dict(ent.get("xref") or {})
+            for campo, valor in (ent.get("correcoes") or {}).items():
+                _fixar(alvo, campo, valor)
+            tratados.add(alvo["id"])
+            relatorio.append(
+                f"- CURADORIA `{alvo['id']}`{' (criado)' if i and alvo in novos else ''}: "
+                f"xref {alvo['xref']}, correcoes {ent.get('correcoes') or {}}")
+    return novos, tratados
+
+
 def sufixo_de(doc, irmaos):
     """Sufixo que separa este doc dos irmaos: trait exclusivo, senao o nivel."""
     meus = {str(t).lower() for t in (doc.get("trait") or [])}
@@ -68,13 +144,23 @@ def main():
     por_nome = collections.defaultdict(list)
     for d in aon.values():
         cat = str(d.get("category") or "")
-        if cat:
+        # mesma regra do portao 7: doc com `remaster_id` e a versao LEGADO de
+        # outra coisa, nao uma entidade a desmembrar. Sem isto o passo cria
+        # irmao para cada nome que o remaster renomeou -- `Hellknight
+        # Dedication` (feat-1078) viraria um registro proprio embora seu
+        # sucessor `Hellknight Preferment` ja esteja na base.
+        if cat and not d.get("remaster_id"):
             por_nome[(cat, portoes.norm(d.get("name")))].append(d)
 
     ids = {r["id"] for r in base}
     novos, relatorio = [], []
 
+    curados, tratados = aplicar_curadoria(base, aon, ids, relatorio)
+    novos += curados
+
     for r in list(base):
+        if r["id"] in tratados:
+            continue                      # ja resolvido a mao, com doc conferido
         if r.get("kind") == "class-feature":
             continue                      # compartilhada por N classes, por design
         candidatos = por_nome.get((r.get("kind"), portoes.norm(r.get("name"))))
