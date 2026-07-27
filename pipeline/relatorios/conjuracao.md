@@ -54,7 +54,7 @@ O pf2etools (branch `dev`) nao tem variante `-pc2` (Player Core 2, remaster) par
 
 - Todo campo preenchido em `conjuracao.json` (deste extrator) tem `prov` correspondente -- portao 1 da spec.
 - Nao ha `conflitos` registrados: como so uma fonte materializa a tabela numerica, nao houve dois valores pra comparar campo a campo.
-- `mechanized`: nao aplicavel a este arquivo (nao segue o envelope `kind: class-feature` da spec-base; e um arquivo auxiliar de dados tabulares referenciado por `wb:class-feature/<slug>-spellcasting`, ja emitido por `classes.py`). Ver nota de integracao abaixo.
+- `grants_completos` / `requires_parseado`: nao aplicaveis a este arquivo (nao segue o envelope `kind: class-feature` da spec-base; e um arquivo auxiliar de dados tabulares referenciado por `wb:class-feature/<slug>-spellcasting`, ja emitido por `classes.py`). Ver nota de integracao abaixo.
 
 ## Nota de integracao com classes.json
 

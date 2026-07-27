@@ -24,6 +24,7 @@ import glob
 import json
 import os
 import re
+import sys
 from html.parser import HTMLParser
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +32,9 @@ DADOS = os.path.join(BASE_DIR, "dados_brutos")
 FOUNDRY_SPELLS_DIR = os.path.join(DADOS, "foundry", "spells")
 AON_SPELLS_FILE = os.path.join(DADOS, "aon_spells.json")  # lista flat de _source, mesmo padrao de aon_feats.json etc.
 PF2ETOOLS_DIR = os.path.join(DADOS, "pf2etools")
+
+sys.path.insert(0, BASE_DIR)
+import comum  # noqa: E402
 
 
 # --------------------------------------------------------------------------
@@ -331,6 +335,14 @@ def load_pf2etools_spells() -> dict:
 
 TRADITIONS = {"arcane", "divine", "occult", "primal"}
 
+# A9 (auditoria 2026-07-26): 463 dos 513 spells sem `tradicoes` sao focus
+# spells cuja tradicao vem da classe que concede, nao da magia -- aceitavel
+# por design (spec: "requires sugere, nunca bloqueia"; a tradicao real varia
+# por build, ex.: Witch depende do patron escolhido). Quando o unico dado que
+# aponta a origem e o trait de classe, o campo declara a derivacao em vez de
+# ficar nulo ou de chutar uma tradicao especifica que pode estar errada.
+CLASSES_DERIVAM_TRADICAO = {"bard", "witch", "psychic", "summoner"}
+
 
 def extrair() -> list[dict]:
     """Extrai a lista canonica de magias (kind=spell). Cada registro traz
@@ -416,13 +428,38 @@ def extrair() -> list[dict]:
         elif foundry_rank is None and aon_rank is not None and pf_rank is not None and aon_rank != pf_rank:
             conflitos.append({"campo": "rank", "aon": aon_rank, "pf2etools": pf_rank, "escolhido": "aon"})
 
+        # A9 (auditoria 2026-07-26): 0 dos 1.639 spells tinha `level` -- so
+        # `rank`, que e o nome remaster do campo. Um filtro de nivel no
+        # cliente descartava a magia inteira em silencio. `rank` continua
+        # canonico; `level` e espelho declarado com o MESMO valor (spec v2).
+        level = rank
+        prov["level"] = comum.prov_inferido("waybuilder", "espelho-rank")
+
         # --- tradicoes (foundry vence, conferido contra pf2etools/aon) ---
+        # Bug corrigido (A9): `foundry_tradition == []` (o foundry TEM o campo
+        # mas ele veio vazio) estava sendo tratado igual a "foundry decidiu
+        # que nao ha tradicao" e nunca caia pro fallback da AoN. Fica
+        # indistinguivel de fato de "sem dado nenhum" (None) so quando a AoN
+        # tambem nao tem nada -- e exatamente o caso dos focus spells. Quando
+        # a AoN TEM tradicao (ex.: Soulshelter Vessel, Suffocate), o campo do
+        # foundry vazio nao pode vencer por precedencia vazia.
         foundry_tradition = sorted(fsys["traits"]["traditions"]) if fsys else None
         pf_tradition = sorted(t.lower() for t in pf.get("traditions", [])) if (pf and pf.get("traditions")) else None
-        tradicoes = foundry_tradition if foundry_tradition is not None else (sorted(aon_tradition) if aon_tradition else [])
-        prov["tradicoes"] = "foundry" if foundry_tradition is not None else ("aon" if aon_tradition else None)
+        tradicoes = foundry_tradition if foundry_tradition else (sorted(aon_tradition) if aon_tradition else [])
+        prov["tradicoes"] = "foundry" if foundry_tradition else ("aon" if aon_tradition else None)
         if foundry_tradition is not None and pf_tradition is not None and foundry_tradition != pf_tradition:
             conflitos.append({"campo": "tradicoes", "foundry": foundry_tradition, "pf2etools": pf_tradition, "escolhido": "foundry"})
+
+        # Das que sobram sem tradicao nenhuma: quando o unico sinal disponivel
+        # e um trait de classe cuja tradicao e variavel/derivada (bard,
+        # witch, psychic, summoner), declara a derivacao em vez de deixar
+        # `tradicoes` mudo -- nao inventa um valor especifico de tradicao.
+        tradicao_de_classe = None
+        if not tradicoes:
+            donas = CLASSES_DERIVAM_TRADICAO & set(traits)
+            if donas:
+                tradicao_de_classe = sorted(donas)[0]
+                prov["tradicao_de_classe"] = comum.prov_inferido("waybuilder", "traits")
 
         # --- campos mecanicos / estruturais (foundry vence) ---
         acoes = fsys["time"]["value"] if fsys else None
@@ -492,12 +529,29 @@ def extrair() -> list[dict]:
             src_abbrev = pf.get("source", "")
             xref["pf2etools"] = f"{slug}_{src_abbrev}".lower()
 
+        # --- grants_completos / requires_parseado (A2 da auditoria) ---------
+        # `spell` esta em comum.KINDS_SEM_REQUISITO (nao tem `requires` nesta
+        # extracao -- sem pre-requisito pra magia), entao requires_parseado
+        # sai `null` (nao se aplica), nao `false`. `perdeu_mecanica` e o caso
+        # concreto e observavel de perda parcial pra spell: o foundry tinha
+        # texto de elevacao ("Heightened (...)") mas nao a estrutura
+        # `system.heightening` pra converter.
+        grants_completos, requires_parseado = comum.mecanizacao(
+            "spell",
+            tinha_mecanica=fsys is not None,
+            perdeu_mecanica=heightened_only_prosa,
+            tem_requires_texto=False,
+            requires_saiu=False,
+        )
+
         registro = {
             "id": wb_id,
             "kind": "spell",
             "name": registro_name,
             "rank": rank,
+            "level": level,
             "tradicoes": tradicoes,
+            "tradicao_de_classe": tradicao_de_classe,
             "traits": traits,
             "rarity": rarity,
             "source": source,
@@ -511,7 +565,8 @@ def extrair() -> list[dict]:
             "escalonamento_de_dano": escalonamento,
             "text": text_ref,
             "texto": texto_plain,
-            "mechanized": fsys is not None,
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }

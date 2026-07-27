@@ -7,17 +7,17 @@ Este extrator foi reescrito em 2026-07-26 pra corrigir um defeito de modelagem: 
 ## Antes x depois (fix de modelagem)
 
 - Registros `class-feature` **antes** (1 por par feature+classe dona): **986**
-- Registros `class-feature` **depois** (1 por arquivo do Foundry, sem `level`): **826**
-- Reducao por deduplicacao: **160** registros (**16.2%**)
-- Total de registros emitidos: antes **1013**, depois **853**
+- Registros `class-feature` **depois** (1 por arquivo do Foundry, sem `level`): **841**
+- Reducao por deduplicacao: **145** registros (**14.7%**)
+- Total de registros emitidos: antes **1013**, depois **868**
 
 ## Contagens
 
 - Classes no Foundry (packs/pf2e/classes): **27**
-- Arquivos de class-feature no Foundry (packs/pf2e/class-features): **826** (827 arquivos no diretorio, 1 e `_folders.json` -- metadado de pasta do compendio, descartado)
+- Arquivos de class-feature no Foundry (packs/pf2e/class-features): **841** (827 arquivos no diretorio, 1 e `_folders.json` -- metadado de pasta do compendio, descartado)
 - Registros `class` emitidos: **27**
-- Registros `class-feature` emitidos: **826** (1:1 com arquivos do Foundry)
-- Total de registros emitidos: **853**
+- Registros `class-feature` emitidos: **841** (1:1 com arquivos do Foundry)
+- Total de registros emitidos: **868**
 - Features com **2 ou mais** classes donas (compartilhadas de fato -- Weapon Specialization, Shield Block etc.): **27**, cada uma emitida como **1 registro** com N entradas de `progressao` (uma por classe), em vez dos N registros duplicados de antes
 - Features sem dono direto no `items{}` de nenhuma classe (instintos, doutrinas, bloodlines, edges de cacador etc.) recuperadas via trait unico: **414** (`prov.class = "foundry (inferido de traits)"`)
 - Vinculos classe->feature resolvidos via sufixo do `uuid` do Foundry (o `name` cacheado em `items{}` estava desatualizado -- achado real, ver secao 'Casamento de ownership'): **14**
@@ -27,7 +27,7 @@ Este extrator foi reescrito em 2026-07-26 pra corrigir um defeito de modelagem: 
 
 | N classes donas | Quantas features |
 |---|---|
-| 0 | 62 |
+| 0 | 77 |
 | 1 | 737 |
 | 2 | 3 |
 | 3 | 2 |
@@ -105,7 +105,7 @@ Exemplo do proprio criterio da spec: `Field Discovery` do Alchemist tem a versao
 | `system.publication.{license,remaster}` | `source.{license,remaster}` | unica fonte confiavel pra license (AoN nao expoe) |
 | `system.publication.title` | `source.book` (fallback) | usado so quando AoN nao bate |
 | `system.items{}` (nome+nivel+uuid) | `progressao[].{nivel,concede}` da classe | **campo novo** -- nivel de class-feature agora mora aqui, nao na feature |
-| `system.rules[]` (classe) | determina `mechanized` | nao decodificado; presenca de rules != [] -> `mechanized:false` |
+| `system.rules[]` (classe) | determina `grants_completos` | nao decodificado; presenca de rules != [] -> `grants_completos:false` |
 
 ### Foundry (`packs/pf2e/class-features/*.json`)
 
@@ -115,8 +115,8 @@ Exemplo do proprio criterio da spec: `Field Discovery` do Alchemist tem a versao
 | `system.traits.value` | `traits` (fallback) | AoN nao expoe traits pra class-feature; sem filtragem por dono (feature compartilhada tem trait de todas as classes de fato) |
 | `system.traits.rarity` | `rarity` (fallback) | AoN normalmente tem, usado como primario |
 | `system.subfeatures.proficiencies.<cat>.rank` | `grants[].proficiency.<cat>` | dict `{categoria: {rank:0..4}}`, tratado |
-| `system.subfeatures.{senses,languages,keyOptions,suppressedFeatures}` | **nao mapeado** | contribui pra `mechanized:false` -- ver secao de gaps |
-| `system.rules[]` (nao-vazio) | **nao mapeado** | contribui pra `mechanized:false` -- ~40 tipos de rule element, fora de escopo desta passada (custo maior do projeto, ver PROJECT.md) |
+| `system.subfeatures.{senses,languages,keyOptions,suppressedFeatures}` | **nao mapeado** | contribui pra `grants_completos:false` -- ver secao de gaps |
+| `system.rules[]` (nao-vazio) | **nao mapeado** | contribui pra `grants_completos:false` -- ~40 tipos de rule element, fora de escopo desta passada (custo maior do projeto, ver PROJECT.md) |
 | `system.prerequisites.value` (prosa) | **nao mapeado pra `requires`** | so 4 features tem; prosa livre, sem marcacao -- ver gaps |
 | `system.publication.{license,remaster,title}` | `source.*` | igual ao de classe |
 
@@ -140,17 +140,17 @@ Exemplo do proprio criterio da spec: `Field Discovery` do Alchemist tem a versao
 | `traits` | **ausente** em class e class-feature | confirmado por amostragem; `traits` cai pro Foundry sempre |
 | `license` | **ausente** | AoN nao expoe OGL/ORC; `source.license` vem sempre do Foundry |
 
-## Cobertura de `grants` (mechanized true/false)
+## Cobertura de `grants` (grants_completos true/false)
 
 - Antes: `mechanized:true` **312** / 1013 (**30.8%**)
-- Depois: `mechanized:true` **255** / 853 (**29.9%**)
+- Depois: `grants_completos:true` **255** / 868 (**29.4%**)
 
-A logica de traducao pra `grants` (subfeatures.proficiencies + presenca de `rules`) **nao mudou** -- e a mesma formula de antes, aplicada por arquivo do Foundry. A cobertura *proporcional* (percentual) fica estatisticamente equivalente; o que mudou foi so o denominador, porque antes cada feature compartilhada inflava tanto o numerador quanto o denominador N vezes (1 por classe dona, todas com o mesmo `mechanized`). A leitura correta: **cobertura de grants nao melhorou nem piorou em essencia -- so parou de ser contada em duplicidade.**
+A logica de traducao pra `grants` (subfeatures.proficiencies + presenca de `rules`) **nao mudou** -- e a mesma formula de antes, aplicada por arquivo do Foundry. A cobertura *proporcional* (percentual) fica estatisticamente equivalente; o que mudou foi so o denominador, porque antes cada feature compartilhada inflava tanto o numerador quanto o denominador N vezes (1 por classe dona, todas com o mesmo valor). A leitura correta: **cobertura de grants nao melhorou nem piorou em essencia -- so parou de ser contada em duplicidade.** (`mechanized` foi substituido por `grants_completos`/`requires_parseado` -- ver spec-base.)
 
-| Motivo (mechanized:false) | Ocorrencias |
+| Motivo (grants_completos:false) | Ocorrencias |
 |---|---|
-| rule-elements-nao-traduzidos | 569 |
-| subfeatures-nao-traduzidas | 94 |
+| rule-elements-nao-traduzidos | 584 |
+| subfeatures-nao-traduzidas | 98 |
 | class:rules-nao-traduzidas(1) | 2 |
 | class:rules-nao-traduzidas(2) | 1 |
 | class:rules-nao-traduzidas(3) | 1 |
@@ -160,15 +160,15 @@ A logica de traducao pra `grants` (subfeatures.proficiencies + presenca de `rule
 
 - **`requires` (pre-requisito) em class-feature.** So 4 dos 826 arquivos tem `system.prerequisites.value` preenchido (Way of the Spellshot, Flexible Spell Preparation, Elemental Magic, Wellspring Magic), e e prosa livre sem marcacao `{@feat}`/`{@skill}` -- o pf2etools (fonte vencedora pra `requires`) nao guarda prerequisites estruturados no nivel de class-feature (isso existe pra `feat`, que e outro extrator). Traduzir a prosa pra `all`/`any`/`class_level` exigiria parsing de linguagem natural -- decidi deixar `requires` ausente nesses 4 casos em vez de inventar estrutura. Nomes: Elemental Magic, Flexible Spell Preparation, Way of the Spellshot, Wellspring Magic.
 
-- **`system.subfeatures.{senses,languages,keyOptions,suppressedFeatures}`.** Nenhum desses quatro foi traduzido pra `grants` nesta passada -- contribuem pra `mechanized:false` (ver tabela de motivos acima).
+- **`system.subfeatures.{senses,languages,keyOptions,suppressedFeatures}`.** Nenhum desses quatro foi traduzido pra `grants` nesta passada -- contribuem pra `grants_completos:false` (ver tabela de motivos acima).
 
-- **`system.rules[]` (rule elements) em geral.** Maioria das 826 features tem pelo menos 1 rule element nao-trivial (ChoiceSet, GrantItem, FlatModifier, MartialProficiency, CriticalSpecialization etc.). Decidir decodificar isso e o item de maior custo do projeto (ja registrado assim em PROJECT.md) -- fora de escopo desta entrega. Essas features saem com `mechanized:false` e `grants` parcial (so a parte de `subfeatures.proficiencies`, quando existe).
+- **`system.rules[]` (rule elements) em geral.** Maioria das 826 features tem pelo menos 1 rule element nao-trivial (ChoiceSet, GrantItem, FlatModifier, MartialProficiency, CriticalSpecialization etc.). Decidir decodificar isso e o item de maior custo do projeto (ja registrado assim em PROJECT.md) -- fora de escopo desta entrega. Essas features saem com `grants_completos:false` e `grants` parcial (so a parte de `subfeatures.proficiencies`, quando existe).
 
 - **Tabela de spellcasting (slots por nivel, tradicao).** `system.spellcasting` no arquivo de classe e so uma flag 0/1 dizendo se a classe conjura. A tabela real (progressao de slots, foco, preparado x repertorio) vive espalhada em rule elements de class-features especificas (ex.: "Arcane Spellcasting"), nao decodificada. `spellcasting` sai como bool solto, sem `spell_slots`.
 
 - **4 classes sem nenhum arquivo no pf2etools:** Animist, Commander, Exemplar, Guardian -- Animist, Commander, Exemplar e Guardian sao classes recentes (War of Immortals / Battlecry!) que o branch `dev` do pf2etools ainda nao portou em `data/class/`. Cross-check de nivel pulado pra elas; `xref.pf2etools` fica `null`.
 
-- **`source.page` ausente por falta de match no AoN:** 0 classes, 431 class-features (ver listas de nomes sem match na secao seguinte).
+- **`source.page` ausente por falta de match no AoN:** 0 classes, 446 class-features (ver listas de nomes sem match na secao seguinte).
 
 - **`source.page`/`source.book` de uma feature compartilhada representa 1 classe dona, nao todas.** Quando N classes tem a mesma feature, cada uma pode ter sido publicada numa pagina diferente do livro daquela classe (ex.: Weapon Mastery pg. 104 no capitulo do Champion, pg. 166 no do Ranger). O registro unico so guarda uma pagina (a 1a classe dona em ordem alfabetica com hit exato no AoN) -- perda de informacao aceita conscientemente em troca de nao duplicar o registro. Se isso importar pro builder, a pagina por classe teria que virar parte da `progressao`, nao do registro da feature -- decisao de spec, nao de implementacao.
 
@@ -203,7 +203,7 @@ Classes onde o Foundry considera o conteudo remasterizado (`publication.remaster
 - Classes sem nenhum hit: (nenhuma)
 - Class-features com match de nome EXATO: **340**
 - Class-features so com match APROXIMADO (nome-base, sem parenteses -- usado so pra rarity/source/page, nunca pra `name`): **55**
-- Class-features sem nenhum hit (431): Adept Benefit (Amulet), Adept Benefit (Bell), Adept Benefit (Chalice), Adept Benefit (Lantern), Adept Benefit (Mirror), Adept Benefit (Regalia), Adept Benefit (Shield), Adept Benefit (Tome), Adept Benefit (Wand), Adept Benefit (Weapon), Advanced Alchemy, Advanced Design, Advanced Rangefinder, Aerodynamic Construction, Air Gate, Alchemical Sciences Methodology, Alchemist Armor Expertise (Level 13), Alchemist Armor Mastery (Level 19), All-Consuming Hunger, Aloof Firmament, Amulet, Ancestors, Angel Eidolon, Anger Phantom Eidolon, Animal Instinct, Animal Order, Antimagic Plating, Anvil's Hardness, Armor Innovation, Ashes, Attack Refiner, Automated Impediments, Avenger, Baba Yaga, Bands of Imprisonment, Barrow's Edge, Battle Creed, Battledancer, Beast Eidolon, Bell...
+- Class-features sem nenhum hit (446): Acrobat's Calling, Adept Benefit (Amulet), Adept Benefit (Bell), Adept Benefit (Chalice), Adept Benefit (Lantern), Adept Benefit (Mirror), Adept Benefit (Regalia), Adept Benefit (Shield), Adept Benefit (Tome), Adept Benefit (Wand), Adept Benefit (Weapon), Advanced Alchemy, Advanced Design, Advanced Rangefinder, Aerodynamic Construction, Air Gate, Alchemical Sciences Methodology, Alchemist Armor Expertise (Level 13), Alchemist Armor Mastery (Level 19), All-Consuming Hunger, Aloof Firmament, Amulet, Ancestors, Angel Eidolon, Anger Phantom Eidolon, Animal Instinct, Animal Order, Antimagic Plating, Anvil's Hardness, Armor Innovation, Artisan's Calling, Ashes, Attack Refiner, Automated Impediments, Avenger, Baba Yaga, Bands of Imprisonment, Barrow's Edge, Battle Creed, Battledancer...
 
 Investigacao da passada anterior (mantida valida): a causa dominante do 'sem match' nao e falha de busca -- o AoN usa **categorias proprias pras escolhas de subclasse**, diferentes de `class-feature` (`mystery`, `patron`, `instinct`, `doctrine`, `order` etc.). Uma cascata de categorias alternativas e viavel mas arriscada sem validacao campo-a-campo (colisao real testada com `category:feat` -- "Advanced Alchemy" existe como class-feature nativa do Alchemist E como feat de arquetipo, duas entidades diferentes com o mesmo nome) -- fica pra uma proxima passada, nao mexida nesta.
 
@@ -213,7 +213,7 @@ Nenhuma. Com o fix de modelagem, o slug de uma class-feature nunca mais leva pre
 
 ## Problemas que restam (nao resolvidos nesta passada)
 
-1. **RAW de spellcasting nao esta neste extrator.** `spellcasting` sai como bool solto; a tabela de slots por nivel/tradicao (que faz Mago, Clerigo etc. funcionarem no builder) vive em rule elements de class-features especificas e nao foi decodificada. Sem isso as classes conjuradoras ficam com `mechanized:false` na pratica ainda que o registro da CLASSE em si saia `true` -- o builder vai calcular progressao de feat/proficiencia mas nao vai saber quantos slots de magia a classe tem.
+1. **RAW de spellcasting nao esta neste extrator.** `spellcasting` sai como bool solto; a tabela de slots por nivel/tradicao (que faz Mago, Clerigo etc. funcionarem no builder) vive em rule elements de class-features especificas e nao foi decodificada. Sem isso as classes conjuradoras ficam com `grants_completos:false` na pratica ainda que o registro da CLASSE em si saia `true` -- o builder vai calcular progressao de feat/proficiencia mas nao vai saber quantos slots de magia a classe tem.
 
 2. **pf2etools no branch `dev`, no snapshot baixado agora, nao tem a geracao remaster pra 8 das 12 classes originarias do Player Core 2** (Alchemist, Barbarian, Champion, Investigator, Monk, Oracle, Sorcerer, Swashbuckler) nem arquivo nenhum pra 4 classes novas (Animist, Commander, Exemplar, Guardian). Isso significa que ~12/27 classes ficam sem cross-check de nivel confiavel contra a fonte que a spec designou como autoridade pra isso -- o Foundry vira fonte unica de fato pra elas, contrariando a garantia de dupla-fonte que a spec pede ("ha duas fontes independentes -- divergencia e bug"). Se o pf2etools atualizar o branch dev depois, vale re-rodar.
 

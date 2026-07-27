@@ -5,7 +5,8 @@ Obedece `specs/2026-07-26-schema-base.md`:
   - envelope com `id`, `kind`, `prov` por campo e `conflitos`
   - `requires` na linguagem de predicado (all/any/not, >=, <=, ==)
   - `grants` na linguagem de efeito
-  - `mechanized` separa o que o app calcula do que so exibe
+  - `grants_completos` / `requires_parseado` separam o que o app calcula do
+    que so exibe (ver `comum.mecanizacao`)
 
 Precedencia por campo:
 
@@ -36,6 +37,9 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 PIPELINE = os.path.dirname(AQUI)
 PROJETO = os.path.dirname(PIPELINE)
 BRUTOS = os.path.join(PIPELINE, "dados_brutos")
+
+sys.path.insert(0, PIPELINE)
+import comum  # noqa: E402
 
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
 
@@ -151,7 +155,7 @@ RE_CONVERTIDOS = {
 }
 
 # Ignorados de proposito: automacao de rolagem em mesa, nao construcao de ficha.
-# Nao penalizam `mechanized`.
+# Nao penalizam `grants_completos`.
 RE_NEUTROS = {
     "Note", "RollOption", "TokenLight", "TokenEffectIcon", "AdjustDegreeOfSuccess",
     "SubstituteRoll", "RollTwice", "AdjustModifier", "AdjustStrike",
@@ -700,7 +704,7 @@ def converter_grants(regras, contagem_ignoradas):
 
     Devolve (grants, perdeu_mecanica). `perdeu_mecanica` marca rule element
     relevante para a ficha que nao coube na linguagem -- e o que derruba
-    `mechanized`.
+    `grants_completos`.
     """
     grants = []
     perdeu = False
@@ -848,6 +852,15 @@ def carregar_foundry(packs):
         partes = rel.split(os.sep)
         arqt = partes[1] if partes[0] == "archetype" and len(partes) > 2 else None
         classe = partes[1] if partes[0] == "class" and len(partes) > 2 else None
+        # `shared-*-feats` e pasta de ORGANIZACAO do repo, nao arquetipo nem
+        # classe: 14 feats saiam apontando para `wb:archetype/shared-archetype-
+        # feats`, que nunca existiu como registro. Mesma classe do artefato
+        # organizacional que o reconciliador ja descarta, so que virando
+        # referencia em vez de registro.
+        if arqt and arqt.startswith("shared-"):
+            arqt = None
+        if classe and classe.startswith("shared-"):
+            classe = None
         d["_rel"] = rel
         d["_archetype_dir"] = arqt
         d["_class_dir"] = classe
@@ -1128,9 +1141,11 @@ def extrair():
         "prereq_por_fonte": Counter(),
         "falhas_por_padrao": Counter(),
         "falhas_exemplos": {},
-        "mechanized_true": 0,
-        "mechanized_false": 0,
-        "motivo_nao_mechanized": Counter(),
+        "grants_completos_true": 0,
+        "grants_completos_false": 0,
+        "requires_parseado_true": 0,
+        "requires_parseado_false": 0,
+        "motivo_grants_incompletos": Counter(),
         "rules_ignoradas": ignoradas,
         "conflitos_por_campo": Counter(),
         "cobertura_fontes": Counter(),
@@ -1261,15 +1276,12 @@ def extrair():
             if grants:
                 prov["grants"] = "foundry"
 
-        mechanized = requires_ok and not perdeu
-        if mechanized:
-            est["mechanized_true"] += 1
-        else:
-            est["mechanized_false"] += 1
-            if not requires_ok:
-                est["motivo_nao_mechanized"]["requires-nao-parseado"] += 1
-            if perdeu:
-                est["motivo_nao_mechanized"]["rule-element-nao-modelado"] += 1
+        grants_completos, requires_parseado = comum.mecanizacao(
+            "feat", bool(f and f["rules"]), perdeu, bool(bruto_pre), requires_ok)
+        est["grants_completos_true" if grants_completos else "grants_completos_false"] += 1
+        if not grants_completos:
+            est["motivo_grants_incompletos"]["rule-element-nao-modelado"] += 1
+        est["requires_parseado_true" if requires_parseado else "requires_parseado_false"] += 1
 
         # ---- arquetipo --------------------------------------------------
         arq = arq_por_chave.get(k)
@@ -1296,7 +1308,8 @@ def extrair():
             "requires": requires,
             "grants": grants,
             "text": ("wb:text/feat/" + sl) if "text" in prov else None,
-            "mechanized": mechanized,
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
             "xref": {},
             "prov": prov,
         }
@@ -1304,10 +1317,39 @@ def extrair():
             reg["requires_texto"] = bruto_pre
         if arq:
             reg["archetype"] = "wb:archetype/" + arq
+        # Feat que nao casou com o Foundry ficava sem `feat_category` (378
+        # registros). A categoria da para derivar do que o AoN ja diz: campo
+        # proprio de classe/ancestria, ou o trait de categoria.
+        if not reg.get("feat_category"):
+            traits = set(reg.get("traits") or [])
+            derivada = None
+            if "mythic" in traits:
+                derivada = "mythic"
+            elif "skill" in traits:
+                derivada = "skill"
+            elif "general" in traits:
+                derivada = "general"
+            elif "archetype" in traits or arq:
+                derivada = "class"
+            elif a and a.get("class"):
+                derivada = "class"
+            elif a and a.get("ancestry"):
+                derivada = "ancestry"
+            if derivada:
+                reg["feat_category"] = derivada
+                prov["feat_category"] = comum.prov_inferido("aon", "traits")
         if f:
             reg["xref"]["foundry"] = "Compendium.pf2e.feats-srd.Item." + f["id"]
             if f["categoria"]:
-                reg["feat_category"] = f["categoria"]
+                # `classfeature` e valor bruto do Foundry que escapa em feat
+                # mitico -- os 3 casos sao todos `mythic`.
+                cat = f["categoria"]
+                if cat == "classfeature":
+                    cat = "mythic" if "mythic" in (reg.get("traits") or []) else "class"
+                    prov["feat_category"] = comum.prov_inferido("foundry", "traits")
+                else:
+                    prov["feat_category"] = comum.prov_lido("foundry")
+                reg["feat_category"] = cat
         if a:
             reg["xref"]["aon"] = a["id"]
             if a["remaster_id"]:
@@ -1380,6 +1422,10 @@ def extrair():
                 for pad in (res.falhas or ["<sem atomo>"]):
                     est["falhas_por_padrao"][pad] += 1
                     est["falhas_exemplos"].setdefault(pad, bruto_pre)
+        # archetype nunca converte rule elements (grants e sempre []) -- nada a
+        # converter e sucesso, so `requires` depende do parse do pre-requisito.
+        arq_grants_completos, arq_requires_parseado = comum.mecanizacao(
+            "archetype", False, False, bool(bruto_pre), requires is not None)
         reg = {
             "id": "wb:archetype/" + sl,
             "kind": "archetype",
@@ -1391,7 +1437,8 @@ def extrair():
             "requires": requires,
             "grants": [],
             "text": ("wb:text/archetype/" + sl) if "text" in prov else None,
-            "mechanized": requires is not None or not bruto_pre,
+            "grants_completos": arq_grants_completos,
+            "requires_parseado": arq_requires_parseado,
             "xref": {},
             "prov": prov,
             "feats": contagem_feats.get(sl, 0),
@@ -1403,6 +1450,14 @@ def extrair():
             reg["xref"]["aon"] = r["id"]
             if r["remaster_id"]:
                 reg["remaster_de"] = r["remaster_id"]
+        # Arquetipo que so existe como DIRETORIO no Foundry mesmo assim tem
+        # fonte identificavel -- e o diretorio. Sem isto o registro sai com
+        # `xref` vazio e o portao 5 o reprova por "nenhuma fonte", que e falso
+        # (aconteceu com wb:archetype/venture-gossip).
+        if sl in dirs_arq:
+            reg["xref"].setdefault("foundry", f"packs/pf2e/feats/archetype/{sl}")
+            prov.setdefault("name", "foundry")
+            prov["xref.foundry"] = comum.prov_inferido("foundry", "diretorio")
         if r and r["level"] is not None:
             prov["level"] = "aon"
         if conflitos:
@@ -1442,8 +1497,10 @@ def main():
     print("com pre-requisito .... %d" % tot)
     print("predicado parseado ... %d (%.1f%%)" % (ok, 100.0 * ok / tot if tot else 0))
     print("predicado falhou ..... %d" % est["prereq_falha"])
-    print("mechanized true/false  %d / %d" % (est["mechanized_true"],
-                                              est["mechanized_false"]))
+    print("grants_completos true/false ... %d / %d" % (
+        est["grants_completos_true"], est["grants_completos_false"]))
+    print("requires_parseado true/false .. %d / %d" % (
+        est["requires_parseado_true"], est["requires_parseado_false"]))
     print()
     print("top 15 padroes nao cobertos:")
     for pad, n in est["falhas_por_padrao"].most_common(15):

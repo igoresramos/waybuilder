@@ -29,8 +29,11 @@ def main():
     # Metricas pro relatorio
     # ------------------------------------------------------------------
     total = len(regs)
-    mechanized = [r for r in regs if r["mechanized"]]
-    nao_mechanized = [r for r in regs if not r["mechanized"]]
+    # "mechanized" saiu do envelope (A2/A9): o que este relatorio media com
+    # ele -- "achou o par no foundry?" -- e o mesmo que perguntar se `xref`
+    # tem `foundry`; nao precisa de campo novo pra isso.
+    mechanized = [r for r in regs if "foundry" in r["xref"]]
+    nao_mechanized = [r for r in regs if "foundry" not in r["xref"]]
 
     heightened_estruturado = [r for r in regs if r["heightened"]]
     heightened_so_prosa = [r for r in regs if r["heightened_so_prosa"]]
@@ -51,7 +54,7 @@ def main():
     # ranking: sem defesa (real, ja com heal-only-override aplicado) + escalonamento
     sem_defesa_com_esc = []
     for r in regs:
-        if r["defesa"] is None and r["mechanized"] and r["escalonamento_de_dano"]:
+        if r["defesa"] is None and "foundry" in r["xref"] and r["escalonamento_de_dano"]:
             ganho = magias.escalonamento_ganho_medio_por_rank(r["escalonamento_de_dano"])
             if ganho:
                 sem_defesa_com_esc.append((ganho, r))
@@ -83,9 +86,15 @@ def main():
     for r in regs:
         for t in r["tradicoes"]:
             tradicao_counts[t] += 1
-    sem_tradicao = sum(1 for r in regs if not r["tradicoes"])
+    sem_tradicao = [r for r in regs if not r["tradicoes"]]
+    sem_tradicao_focus = [r for r in sem_tradicao if "focus" in r["traits"]]
+    sem_tradicao_nao_focus = [r for r in sem_tradicao if "focus" not in r["traits"]]
+    tradicao_de_classe_counts = collections.Counter(
+        r["tradicao_de_classe"] for r in sem_tradicao_nao_focus if r["tradicao_de_classe"])
+    sem_tradicao_irresolvel = [r for r in sem_tradicao_nao_focus if not r["tradicao_de_classe"]]
 
     rank_counts = collections.Counter(r["rank"] for r in regs)
+    com_level_e_rank = sum(1 for r in regs if r["level"] is not None and r["level"] == r["rank"])
 
     # ------------------------------------------------------------------
     # Relatorio
@@ -94,7 +103,7 @@ def main():
     lines.append("# Relatorio -- Extracao de Magias (kind=spell)")
     lines.append("")
     lines.append(f"- Total de magias no registro canonico: **{total}**")
-    lines.append(f"- Casadas com foundry (mechanized=true, dados criticos disponiveis): **{len(mechanized)}**")
+    lines.append(f"- Casadas com foundry (`xref.foundry` presente, dados criticos disponiveis): **{len(mechanized)}**")
     lines.append(f"- Sem match no foundry (indefinidas): **{len(nao_mechanized)}**")
     lines.append(f"- Escopo: AoN `category=spell` (2.461 docs brutos, legado+remaster) deduplicados por `remaster_id`/`legacy_id` -> {total} conceitos canonicos.")
     lines.append(f"- Foundry: `packs/pf2e/spells/{{spells,focus}}` -- rituais (`packs/pf2e/spells/rituals`) fora do escopo (categoria separada na AoN: `ritual`, 201 docs).")
@@ -198,7 +207,19 @@ def main():
     lines.append("")
     for t, c in tradicao_counts.most_common():
         lines.append(f"- {t}: {c}")
-    lines.append(f"- sem tradicao (ex: algumas focus spells de classe): {sem_tradicao}")
+    lines.append(f"- sem `tradicoes`: **{len(sem_tradicao)}**, dos quais:")
+    lines.append(f"  - focus spells (aceitavel -- a tradicao vem da classe que concede): **{len(sem_tradicao_focus)}**")
+    lines.append(f"  - nao-focus, fechados via `tradicao_de_classe` (A9): **{sum(tradicao_de_classe_counts.values())}** -- {dict(tradicao_de_classe_counts)}")
+    lines.append(f"  - nao-focus, ainda irresolviveis: **{len(sem_tradicao_irresolvel)}**")
+    for r in sem_tradicao_irresolvel:
+        lines.append(f"    - {r['name']} ({r['id']}) -- traits={r['traits']}, sem tradicao no foundry nem na AoN, sem trait de classe pra derivar. Provavelmente magia de monstro/perigo (fora do escopo de PC), nao fica silenciada: listada aqui.")
+    lines.append("")
+
+    lines.append("## `level` (espelho de `rank`, A9)")
+    lines.append("")
+    lines.append(f"- Registros com `level == rank` (os dois emitidos, mesmo valor): **{com_level_e_rank}** / {total}")
+    lines.append("- `rank` continua canonico; `level` existe so pra nao quebrar filtro de nivel no cliente")
+    lines.append("  (spec v2, `prov.level = waybuilder~inferido:espelho-rank`).")
     lines.append("")
 
     lines.append("## Rank (distribuicao)")

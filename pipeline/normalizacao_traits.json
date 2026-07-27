@@ -1,152 +1,247 @@
 {
-  "renomeados": {
-    "aasimar": "nephilim",
-    "tiefling": "nephilim",
-    "aphorite": "nephilim",
-    "ganzi": "nephilim",
-    "ifrit": "naari",
-    "metamagic": "spellshape",
-    "negative": "void",
-    "positive": "vitality",
-    "gnoll": "kholo",
-    "couatl": "coatl",
-    "petitioner": "shade",
-    "locathah": "athamaru",
-    "duergar": "hryngar",
-    "half-elf": "aiuvarin",
-    "half-orc": "dromaar",
-    "good": "holy",
-    "evil": "unholy"
+ "renomeados": {
+  "aasimar": "nephilim",
+  "tiefling": "nephilim",
+  "aphorite": "nephilim",
+  "ganzi": "nephilim",
+  "ifrit": "naari",
+  "metamagic": "spellshape",
+  "negative": "void",
+  "positive": "vitality",
+  "gnoll": "kholo",
+  "couatl": "coatl",
+  "petitioner": "shade",
+  "locathah": "athamaru",
+  "duergar": "hryngar",
+  "half-elf": "aiuvarin",
+  "half-orc": "dromaar",
+  "good": "holy",
+  "evil": "unholy",
+  "grippli": "tripkee"
+ },
+ "removidos_sem_sucessor": [
+  "abjuration",
+  "conjuration",
+  "divination",
+  "enchantment",
+  "evocation",
+  "necromancy",
+  "transmutation",
+  "lawful",
+  "chaotic"
+ ],
+ "familias_parametrizadas": {
+  "two-hand": {
+   "exemplos": [
+    "two-hand-d6",
+    "two-hand-d8",
+    "two-hand-d10",
+    "two-hand-d12"
+   ],
+   "tipo": "dado"
   },
-  "removidos_sem_sucessor": [
-    "abjuration",
-    "conjuration",
-    "divination",
-    "enchantment",
-    "evocation",
-    "necromancy",
-    "transmutation",
-    "lawful",
-    "chaotic"
-  ],
-  "familias_parametrizadas": {
-    "two-hand": {
-      "exemplos": ["two-hand-d6", "two-hand-d8", "two-hand-d10", "two-hand-d12"],
-      "tipo": "dado"
-    },
-    "fatal": {
-      "exemplos": ["fatal-d8", "fatal-d10", "fatal-d12"],
-      "tipo": "dado"
-    },
-    "fatal-aim": {
-      "exemplos": ["fatal-aim-d10", "fatal-aim-d12"],
-      "tipo": "dado"
-    },
-    "deadly": {
-      "exemplos": ["deadly-d4", "deadly-d6", "deadly-d8", "deadly-d10", "deadly-d12"],
-      "tipo": "dado"
-    },
-    "jousting": {
-      "exemplos": ["jousting-d4", "jousting-d6", "jousting-d8", "jousting-d10"],
-      "tipo": "dado"
-    },
-    "volley": {
-      "exemplos": ["volley-20", "volley-30", "volley-50", "volley-60"],
-      "tipo": "numero"
-    },
-    "scatter": {
-      "exemplos": ["scatter-5", "scatter-10", "scatter-15", "scatter-20"],
-      "tipo": "numero"
-    },
-    "capacity": {
-      "exemplos": ["capacity-2", "capacity-3", "capacity-4", "capacity-5"],
-      "tipo": "numero"
-    },
-    "hefty": {
-      "exemplos": ["hefty-2"],
-      "tipo": "numero"
-    },
-    "thrown": {
-      "exemplos": ["thrown-10", "thrown-15", "thrown-20", "thrown-25", "thrown-30", "thrown-40", "thrown-50", "thrown-60", "thrown-80", "thrown-100", "thrown-200"],
-      "tipo": "numero"
-    },
-    "shield-throw": {
-      "exemplos": ["shield-throw-20", "shield-throw-30"],
-      "tipo": "numero"
-    },
-    "reload": {
-      "exemplos": ["reload-0", "reload-1", "reload-2", "reload-1-min"],
-      "tipo": "misto"
-    },
-    "versatile": {
-      "exemplos": ["versatile-p", "versatile-s", "versatile-b", "versatile-acid", "versatile-cold", "versatile-electricity", "versatile-fire", "versatile-force", "versatile-mental", "versatile-poison", "versatile-sonic", "versatile-spirit", "versatile-vitality", "versatile-void"],
-      "tipo": "palavra"
-    },
-    "integrated": {
-      "exemplos": ["integrated-1d6-b", "integrated-1d6-p", "integrated-1d6-s", "integrated-1d6-s-versatile-p"],
-      "tipo": "composto"
-    },
-    "deflecting": {
-      "exemplos": ["deflecting-bludgeoning", "deflecting-piercing", "deflecting-slashing", "deflecting-physical-ranged"],
-      "tipo": "palavra"
-    },
-    "attached": {
-      "exemplos": ["attached-to-shield", "attached-to-crossbow-or-firearm"],
-      "tipo": "palavra"
-    },
-    "entrench": {
-      "exemplos": ["entrench-melee", "entrench-ranged"],
-      "tipo": "palavra"
-    },
-    "launching": {
-      "exemplos": ["launching-dart"],
-      "tipo": "palavra"
-    }
+  "fatal": {
+   "exemplos": [
+    "fatal-d8",
+    "fatal-d10",
+    "fatal-d12"
+   ],
+   "tipo": "dado"
   },
-  "prov": {
-    "aasimar": "aon:Ancestries.aspx?ID=68 (Nephilim, Player Core pg.78) - \"the nephilim trait is interchangeable with either the aasimar or tiefling trait\"",
-    "tiefling": "aon:Ancestries.aspx?ID=68 (Nephilim, Player Core pg.78) - \"the nephilim trait is interchangeable with either the aasimar or tiefling trait\"",
-    "aphorite": "aon:Ancestries.aspx?ID=68 (Nephilim, Player Core pg.78) - \"Other nephilim sometimes earn the names of aphorite or ganzi\"",
-    "ganzi": "aon:Ancestries.aspx?ID=68 (Nephilim, Player Core pg.78) - \"Other nephilim sometimes earn the names of aphorite or ganzi\"",
-    "ifrit": "aon:trait-870 (Naari, Monster Core 2 pg.365, \"Naaris are planar scions descended from efreet\") comparado a aon:trait-301 (Ifrit, Bestiary 2, \"Ifrits are planar scions descended from efreet\") - mesma descricao, mesma linhagem, nome trocado",
-    "metamagic": "aon:remaster_id trait-107 (Metamagic) -> trait-513 (Spellshape)",
-    "negative": "aon:remaster_id trait-118 (Negative) -> trait-510 (Void)",
-    "positive": "aon:remaster_id trait-128 (Positive) -> trait-509 (Vitality)",
-    "gnoll": "aon:remaster_id trait-219 (Gnoll) -> trait-758 (Kholo)",
-    "couatl": "aon:remaster_id trait-298 (Couatl) -> trait-748 (Coatl)",
-    "petitioner": "aon:remaster_id trait-305 (Petitioner) -> trait-692 (Shade)",
-    "locathah": "aon:remaster_id trait-356 (Locathah) -> trait-741 (Athamaru)",
-    "duergar": "aon:remaster_id trait-53 (Duergar) -> trait-626 (Hryngar)",
-    "half-elf": "aon:remaster_id trait-85 (Half-Elf) -> trait-515 (Aiuvarin)",
-    "half-orc": "aon:remaster_id trait-86 (Half-Orc) -> trait-516 (Dromaar)",
-    "good": "web:lorespire.paizo.com/tiki-index.php?page=pfs2guide._.Pathfinder-2e-Remaster (guia oficial PFS de remaster) - \"Alignment has been removed... enemy abilities which previously had the good or evil traits may now have the holy or unholy trait\"",
-    "evil": "web:lorespire.paizo.com/tiki-index.php?page=pfs2guide._.Pathfinder-2e-Remaster (guia oficial PFS de remaster) - \"Alignment has been removed... enemy abilities which previously had the good or evil traits may now have the holy or unholy trait\"",
-    "abjuration": "aon:busca por trait=Abjuration em spells - 124 resultados, todos primary_source Core Rulebook (2019, legado); zero em livro remaster",
-    "conjuration": "aon:busca por trait=Conjuration em spells - 140 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
-    "divination": "aon:busca por trait=Divination em spells - 159 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
-    "enchantment": "aon:busca por trait=Enchantment em spells - 162 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
-    "evocation": "aon:busca por trait=Evocation em spells - 253 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
-    "necromancy": "aon:busca por trait=Necromancy em spells - 193 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
-    "transmutation": "aon:busca por trait=Transmutation em spells - 166 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
-    "lawful": "web:lorespire.paizo.com/tiki-index.php?page=pfs2guide._.Pathfinder-2e-Remaster - \"Alignment has been removed from the game\", sem mencao a sucessor para lawful/chaotic (so good/evil viram holy/unholy); aon:trait-99 (Lawful) sem remaster_id",
-    "chaotic": "web:lorespire.paizo.com/tiki-index.php?page=pfs2guide._.Pathfinder-2e-Remaster - \"Alignment has been removed from the game\", sem mencao a sucessor para lawful/chaotic (so good/evil viram holy/unholy); aon:trait-25 (Chaotic) sem remaster_id",
-    "two-hand": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "fatal": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "fatal-aim": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "deadly": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits) - variantes multi-dado (2d4,3d4,4d4...) presentes no arquivo mas nao incluidas aqui por suspeita de serem exclusivas do sistema sf2e (Starfinder), nao confirmadas em conteudo pf2e",
-    "jousting": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "volley": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "scatter": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "capacity": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "hefty": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits)",
-    "thrown": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "shield-throw": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits); document.ts usa startsWith('shield-throw-')",
-    "reload": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "versatile": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits) - variantes p/s/b confirmadas tambem via aon (trait Versatile presente em Dagger, Morningstar, Greatsword etc.); variantes de energia (acid/cold/.../void) so confirmadas via foundry",
-    "integrated": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits); document.ts usa startsWith('integrated')",
-    "deflecting": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits)",
-    "attached": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
-    "entrench": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (armorTraits)",
-    "launching": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits)"
+  "fatal-aim": {
+   "exemplos": [
+    "fatal-aim-d10",
+    "fatal-aim-d12"
+   ],
+   "tipo": "dado"
+  },
+  "deadly": {
+   "exemplos": [
+    "deadly-d4",
+    "deadly-d6",
+    "deadly-d8",
+    "deadly-d10",
+    "deadly-d12"
+   ],
+   "tipo": "dado"
+  },
+  "jousting": {
+   "exemplos": [
+    "jousting-d4",
+    "jousting-d6",
+    "jousting-d8",
+    "jousting-d10"
+   ],
+   "tipo": "dado"
+  },
+  "volley": {
+   "exemplos": [
+    "volley-20",
+    "volley-30",
+    "volley-50",
+    "volley-60"
+   ],
+   "tipo": "numero"
+  },
+  "scatter": {
+   "exemplos": [
+    "scatter-5",
+    "scatter-10",
+    "scatter-15",
+    "scatter-20"
+   ],
+   "tipo": "numero"
+  },
+  "capacity": {
+   "exemplos": [
+    "capacity-2",
+    "capacity-3",
+    "capacity-4",
+    "capacity-5"
+   ],
+   "tipo": "numero"
+  },
+  "hefty": {
+   "exemplos": [
+    "hefty-2"
+   ],
+   "tipo": "numero"
+  },
+  "thrown": {
+   "exemplos": [
+    "thrown-10",
+    "thrown-15",
+    "thrown-20",
+    "thrown-25",
+    "thrown-30",
+    "thrown-40",
+    "thrown-50",
+    "thrown-60",
+    "thrown-80",
+    "thrown-100",
+    "thrown-200"
+   ],
+   "tipo": "numero"
+  },
+  "shield-throw": {
+   "exemplos": [
+    "shield-throw-20",
+    "shield-throw-30"
+   ],
+   "tipo": "numero"
+  },
+  "reload": {
+   "exemplos": [
+    "reload-0",
+    "reload-1",
+    "reload-2",
+    "reload-1-min"
+   ],
+   "tipo": "misto"
+  },
+  "versatile": {
+   "exemplos": [
+    "versatile-p",
+    "versatile-s",
+    "versatile-b",
+    "versatile-acid",
+    "versatile-cold",
+    "versatile-electricity",
+    "versatile-fire",
+    "versatile-force",
+    "versatile-mental",
+    "versatile-poison",
+    "versatile-sonic",
+    "versatile-spirit",
+    "versatile-vitality",
+    "versatile-void"
+   ],
+   "tipo": "palavra"
+  },
+  "integrated": {
+   "exemplos": [
+    "integrated-1d6-b",
+    "integrated-1d6-p",
+    "integrated-1d6-s",
+    "integrated-1d6-s-versatile-p"
+   ],
+   "tipo": "composto"
+  },
+  "deflecting": {
+   "exemplos": [
+    "deflecting-bludgeoning",
+    "deflecting-piercing",
+    "deflecting-slashing",
+    "deflecting-physical-ranged"
+   ],
+   "tipo": "palavra"
+  },
+  "attached": {
+   "exemplos": [
+    "attached-to-shield",
+    "attached-to-crossbow-or-firearm"
+   ],
+   "tipo": "palavra"
+  },
+  "entrench": {
+   "exemplos": [
+    "entrench-melee",
+    "entrench-ranged"
+   ],
+   "tipo": "palavra"
+  },
+  "launching": {
+   "exemplos": [
+    "launching-dart"
+   ],
+   "tipo": "palavra"
   }
+ },
+ "prov": {
+  "aasimar": "aon:Ancestries.aspx?ID=68 (Nephilim, Player Core pg.78) - \"the nephilim trait is interchangeable with either the aasimar or tiefling trait\"",
+  "tiefling": "aon:Ancestries.aspx?ID=68 (Nephilim, Player Core pg.78) - \"the nephilim trait is interchangeable with either the aasimar or tiefling trait\"",
+  "aphorite": "aon:Ancestries.aspx?ID=68 (Nephilim, Player Core pg.78) - \"Other nephilim sometimes earn the names of aphorite or ganzi\"",
+  "ganzi": "aon:Ancestries.aspx?ID=68 (Nephilim, Player Core pg.78) - \"Other nephilim sometimes earn the names of aphorite or ganzi\"",
+  "ifrit": "aon:trait-870 (Naari, Monster Core 2 pg.365, \"Naaris are planar scions descended from efreet\") comparado a aon:trait-301 (Ifrit, Bestiary 2, \"Ifrits are planar scions descended from efreet\") - mesma descricao, mesma linhagem, nome trocado",
+  "metamagic": "aon:remaster_id trait-107 (Metamagic) -> trait-513 (Spellshape)",
+  "negative": "aon:remaster_id trait-118 (Negative) -> trait-510 (Void)",
+  "positive": "aon:remaster_id trait-128 (Positive) -> trait-509 (Vitality)",
+  "gnoll": "aon:remaster_id trait-219 (Gnoll) -> trait-758 (Kholo)",
+  "couatl": "aon:remaster_id trait-298 (Couatl) -> trait-748 (Coatl)",
+  "petitioner": "aon:remaster_id trait-305 (Petitioner) -> trait-692 (Shade)",
+  "locathah": "aon:remaster_id trait-356 (Locathah) -> trait-741 (Athamaru)",
+  "duergar": "aon:remaster_id trait-53 (Duergar) -> trait-626 (Hryngar)",
+  "half-elf": "aon:remaster_id trait-85 (Half-Elf) -> trait-515 (Aiuvarin)",
+  "half-orc": "aon:remaster_id trait-86 (Half-Orc) -> trait-516 (Dromaar)",
+  "good": "web:lorespire.paizo.com/tiki-index.php?page=pfs2guide._.Pathfinder-2e-Remaster (guia oficial PFS de remaster) - \"Alignment has been removed... enemy abilities which previously had the good or evil traits may now have the holy or unholy trait\"",
+  "evil": "web:lorespire.paizo.com/tiki-index.php?page=pfs2guide._.Pathfinder-2e-Remaster (guia oficial PFS de remaster) - \"Alignment has been removed... enemy abilities which previously had the good or evil traits may now have the holy or unholy trait\"",
+  "abjuration": "aon:busca por trait=Abjuration em spells - 124 resultados, todos primary_source Core Rulebook (2019, legado); zero em livro remaster",
+  "conjuration": "aon:busca por trait=Conjuration em spells - 140 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
+  "divination": "aon:busca por trait=Divination em spells - 159 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
+  "enchantment": "aon:busca por trait=Enchantment em spells - 162 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
+  "evocation": "aon:busca por trait=Evocation em spells - 253 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
+  "necromancy": "aon:busca por trait=Necromancy em spells - 193 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
+  "transmutation": "aon:busca por trait=Transmutation em spells - 166 resultados, todos Core Rulebook (2019, legado); zero em livro remaster",
+  "lawful": "web:lorespire.paizo.com/tiki-index.php?page=pfs2guide._.Pathfinder-2e-Remaster - \"Alignment has been removed from the game\", sem mencao a sucessor para lawful/chaotic (so good/evil viram holy/unholy); aon:trait-99 (Lawful) sem remaster_id",
+  "chaotic": "web:lorespire.paizo.com/tiki-index.php?page=pfs2guide._.Pathfinder-2e-Remaster - \"Alignment has been removed from the game\", sem mencao a sucessor para lawful/chaotic (so good/evil viram holy/unholy); aon:trait-25 (Chaotic) sem remaster_id",
+  "two-hand": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "fatal": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "fatal-aim": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "deadly": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits) - variantes multi-dado (2d4,3d4,4d4...) presentes no arquivo mas nao incluidas aqui por suspeita de serem exclusivas do sistema sf2e (Starfinder), nao confirmadas em conteudo pf2e",
+  "jousting": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "volley": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "scatter": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "capacity": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "hefty": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits)",
+  "thrown": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "shield-throw": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits); document.ts usa startsWith('shield-throw-')",
+  "reload": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "versatile": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits) - variantes p/s/b confirmadas tambem via aon (trait Versatile presente em Dagger, Morningstar, Greatsword etc.); variantes de energia (acid/cold/.../void) so confirmadas via foundry",
+  "integrated": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits); document.ts usa startsWith('integrated')",
+  "deflecting": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits)",
+  "attached": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (weaponTraits)",
+  "entrench": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (armorTraits)",
+  "launching": "foundry:87f9e5028baaa10b70fdc766260b7886def17e04:src/scripts/config/traits.ts (shieldTraits)",
+  "grippli": "aon:remaster_id dos 4 heritages Grippli->Tripkee (Poisonhide, Snaptongue, Stickytoe, Windweb; Howl of the Wild). Os dois traits coexistem no indice do AoN sem remaster_id proprio, entao a evidencia vem do vinculo declarado nas herancas, nao do trait"
+ }
 }

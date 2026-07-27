@@ -46,10 +46,15 @@ dos nomes em ingles, termos do proprio stat block de PF2e):
   cast, cost, secondary_casters, secondary_casters_note, primary_check,
   secondary_checks, requirements, results (por grau de sucesso).
 
-mechanized e sempre False: ritual nao tem `grants` (nada que o builder calcule
-pra personagem -- e conhecimento/utilidade resolvido na mesa), mesmo quando ha
-dado estrutural do Foundry (tempo, custo, pericias). Ver spec: "mechanized: false
-nao e lacuna, e caso normal."
+grants_completos e sempre True: ritual nao usa o array `grants` (nada que o
+builder calcule pra personagem -- e conhecimento/utilidade resolvido na mesa);
+a mecanica que existe (defesa, heightened, escalonamento_de_dano, acoes/
+alcance/area/duracao) sai direto pra campos estruturados proprios, sem rule
+element nenhum ficando de fora. Nada a perder na conversao = sucesso, nao
+lacuna (ver specs/2026-07-26-schema-base.md, "grants_completos e
+requires_parseado"). requires_parseado tambem e sempre True: ritual nao tem
+pre-requisito no sentido de feat (o campo `requirements` de materiais nao e
+predicado de nivel/feat/skill).
 
 stdlib-only. Le pipeline/dados_brutos/ e pipeline/normalizacao_traits.json
 (offline, sem rede).
@@ -66,6 +71,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import magias  # noqa: E402  -- reaproveita slugify/norm_name/strip_html/foundry_* (mesmo schema Foundry)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, BASE_DIR)
+import comum  # noqa: E402
+
 DADOS = os.path.join(BASE_DIR, "dados_brutos")
 FOUNDRY_RITUALS_DIR = os.path.join(DADOS, "foundry", "spells", "rituals")
 AON_RITUALS_FILE = os.path.join(DADOS, "aon_rituals.json")
@@ -478,6 +486,12 @@ def extrair() -> list[dict]:
         if fdoc:
             xref["foundry"] = f"Compendium.pf2e.spells-rituals.Item.{fdoc['_id']}"
 
+        # mecanica vai pra campos estruturados proprios (defesa/heightened/
+        # escalonamento/acoes...), nao pro array `grants` -- nada perdido na
+        # conversao. Ritual nao tem pre-requisito.
+        grants_completos, requires_parseado = comum.mecanizacao(
+            "ritual", True, False, False, True)
+
         registro = {
             "id": wb_id,
             "kind": "ritual",
@@ -498,7 +512,8 @@ def extrair() -> list[dict]:
             "ritual": ritual_block,
             "text": text_ref,
             "texto": texto_plain,
-            "mechanized": False,
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }

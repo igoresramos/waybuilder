@@ -20,7 +20,9 @@ stdlib-only. Roda offline a partir de pipeline/dados_brutos/.
 """
 
 import json
+import os
 import re
+import sys
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -33,10 +35,11 @@ DADOS_BRUTOS = PIPELINE_DIR / "dados_brutos"
 SAIDA_DIR = PIPELINE_DIR / "saida"
 RELATORIOS_DIR = PIPELINE_DIR / "relatorios"
 
-FOUNDRY_REPO = Path(
-    "/tmp/claude-1000/-mnt-c-Users-igor0/39eadbed-e8eb-4194-8557-74f05193fdc1"
-    "/scratchpad/pf2e-research/pf2e"
-)
+sys.path.insert(0, str(PIPELINE_DIR))
+import comum  # noqa: E402
+
+FOUNDRY_REPO = Path(os.environ.get("WB_FOUNDRY_REPO", "")) if os.environ.get(
+    "WB_FOUNDRY_REPO") else DADOS_BRUTOS / "foundry"
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
 FOUNDRY_PACKS = FOUNDRY_REPO / "packs" / "pf2e"
 
@@ -152,7 +155,7 @@ def load_foundry_heritages():
 
 def load_foundry_backgrounds():
     out = {}
-    for f in sorted((FOUNDRY_PACKS / "backgrounds").glob("*.json")):
+    for f in sorted((FOUNDRY_PACKS / "backgrounds").rglob("*.json")):
         if f.name == "_folders.json":
             continue
         d = _load_json(f)
@@ -306,36 +309,50 @@ def extract_ancestries(foundry_ancestries, aon_idx, aon_norm_idx, p2t_idx, herit
             relatorio["ancestry_sem_aon"].append(name)
 
         prov = {}
+        conflitos = []
 
-        # --- name/traits/rarity/source: aon vence, fallback foundry ---
+        # --- name/rarity/source: escolha por precedencia + registro de
+        # divergencia na mesma operacao (comum.escolher). Achado A3: antes
+        # disto o "aon vence" era so um pick, sem comparar o que o foundry
+        # discordava -- por isso 6 kinds saiam com conflitos zerado.
+        out_name, name_prov, conf = comum.escolher(
+            "name", {"aon": aon_doc.get("name") if aon_doc else None, "foundry": name})
+        conflitos += conf
+        out_name = out_name or name
+        prov["name"] = name_prov or "foundry"
+
+        rarity, rarity_prov, conf = comum.escolher(
+            "rarity", {"aon": aon_doc.get("rarity") if aon_doc else None,
+                       "foundry": s.get("traits", {}).get("rarity")})
+        conflitos += conf
+        prov["rarity"] = rarity_prov
+
+        # traits continua uniao simples aon->fallback foundry (a uniao das 3
+        # fontes via comum.uniao_traits e outro achado, fora do escopo daqui).
         if aon_doc:
-            out_name = aon_doc.get("name", name)
-            prov["name"] = "aon"
-            rarity = aon_doc.get("rarity") or s.get("traits", {}).get("rarity")
-            prov["rarity"] = "aon"
             aon_traits = normalize_traits(aon_doc.get("trait"), rarity)
             traits = aon_traits or list(s.get("traits", {}).get("value", []))
             prov["traits"] = "aon" if aon_traits else "foundry"
         else:
-            out_name = name
-            prov["name"] = "foundry"
-            rarity = s.get("traits", {}).get("rarity")
-            prov["rarity"] = "foundry"
             traits = list(s.get("traits", {}).get("value", []))
             prov["traits"] = "foundry"
 
+        book, book_prov, conf = comum.escolher(
+            "source.book", {"aon": aon_doc.get("primary_source") if aon_doc else None,
+                            "foundry": pub.get("title")})
+        conflitos += conf
+        page, page_prov, conf = comum.escolher(
+            "source.page",
+            {"aon": parse_page(aon_doc.get("primary_source_raw")) if aon_doc else None})
+        conflitos += conf
+
         source = {
+            "book": book,
+            "page": page,
             "license": pub.get("license"),
             "remaster": is_remaster,
         }
-        prov["source"] = "foundry"
-        if aon_doc:
-            source["book"] = aon_doc.get("primary_source")
-            source["page"] = parse_page(aon_doc.get("primary_source_raw"))
-            prov["source"] = "aon+foundry"
-        else:
-            source["book"] = pub.get("title")
-            source["page"] = None
+        prov["source"] = book_prov or "foundry"
 
         # --- campos estruturados: foundry vence ---
         hp = s.get("hp")
@@ -381,7 +398,6 @@ def extract_ancestries(foundry_ancestries, aon_idx, aon_norm_idx, p2t_idx, herit
         heritages = heritage_map.get(slug, [])
         prov["heritages"] = "foundry"
 
-        conflitos = []
         if aon_doc:
             # cruza hp/size/speed/boosts/flaw com o AoN quando ele tem o campo
             if aon_doc.get("hp") is not None and aon_doc["hp"] != hp:
@@ -448,6 +464,12 @@ def extract_ancestries(foundry_ancestries, aon_idx, aon_norm_idx, p2t_idx, herit
         if p2t_candidates:
             xref["pf2etools"] = f"ancestries/ancestry-{slug}"
 
+        # mecanica sai direto de campos estruturados do Foundry (boosts/flaw/
+        # hp/size/speed), sem rule elements pra perder -- nada a converter e
+        # sucesso. Ancestry nao tem pre-requisito.
+        grants_completos, requires_parseado = comum.mecanizacao(
+            "ancestry", True, False, False, True)
+
         record = {
             "id": f"wb:ancestry/{slug}",
             "kind": "ancestry",
@@ -464,7 +486,8 @@ def extract_ancestries(foundry_ancestries, aon_idx, aon_norm_idx, p2t_idx, herit
             "senses": senses,
             "heritages": heritages,
             "text": f"wb:text/ancestry/{slug}",
-            "mechanized": True,
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }
@@ -496,33 +519,42 @@ def extract_heritages(foundry_heritages, aon_idx, aon_norm_idx, relatorio):
             relatorio["heritage_sem_aon"].append(name)
 
         prov = {}
+        conflitos = []
         if ancestry_id:
             prov["ancestry"] = "foundry"
+
+        out_name, name_prov, conf = comum.escolher(
+            "name", {"aon": aon_doc.get("name") if aon_doc else None, "foundry": name})
+        conflitos += conf
+        out_name = out_name or name
+        prov["name"] = name_prov or "foundry"
+
+        rarity, rarity_prov, conf = comum.escolher(
+            "rarity", {"aon": aon_doc.get("rarity") if aon_doc else None,
+                       "foundry": s.get("traits", {}).get("rarity")})
+        conflitos += conf
+        prov["rarity"] = rarity_prov
+
         if aon_doc:
-            out_name = aon_doc.get("name", name)
-            prov["name"] = "aon"
-            rarity = aon_doc.get("rarity") or s.get("traits", {}).get("rarity")
-            prov["rarity"] = "aon"
             aon_traits = normalize_traits(aon_doc.get("trait"), rarity)
             traits = aon_traits or list(s.get("traits", {}).get("value", []))
             prov["traits"] = "aon" if aon_traits else "foundry"
         else:
-            out_name = name
-            prov["name"] = "foundry"
-            rarity = s.get("traits", {}).get("rarity")
-            prov["rarity"] = "foundry"
             traits = list(s.get("traits", {}).get("value", []))
             prov["traits"] = "foundry"
 
-        source = {"license": pub.get("license"), "remaster": is_remaster}
-        prov["source"] = "foundry"
-        if aon_doc:
-            source["book"] = aon_doc.get("primary_source")
-            source["page"] = parse_page(aon_doc.get("primary_source_raw"))
-            prov["source"] = "aon+foundry"
-        else:
-            source["book"] = pub.get("title")
-            source["page"] = None
+        book, book_prov, conf = comum.escolher(
+            "source.book", {"aon": aon_doc.get("primary_source") if aon_doc else None,
+                            "foundry": pub.get("title")})
+        conflitos += conf
+        page, page_prov, conf = comum.escolher(
+            "source.page",
+            {"aon": parse_page(aon_doc.get("primary_source_raw")) if aon_doc else None})
+        conflitos += conf
+
+        source = {"book": book, "page": page,
+                  "license": pub.get("license"), "remaster": is_remaster}
+        prov["source"] = book_prov or "foundry"
 
         # --- grants: traducao limitada dos rule elements do Foundry ---
         rules = s.get("rules", [])
@@ -539,7 +571,9 @@ def extract_heritages(foundry_heritages, aon_idx, aon_norm_idx, relatorio):
                 }})
                 mapped_keys.add(key)
         rule_keys = [r.get("key") for r in rules]
-        mechanized = (not rules) or all(k in mapped_keys for k in rule_keys)
+        perdeu_mecanica = bool(rules) and not all(k in mapped_keys for k in rule_keys)
+        grants_completos, requires_parseado = comum.mecanizacao(
+            "heritage", bool(rules), perdeu_mecanica, False, True)
         prov["grants"] = "foundry"
 
         xref = {"foundry": f"Compendium.pf2e.heritages.Item.{d.get('_id')}"}
@@ -556,17 +590,105 @@ def extract_heritages(foundry_heritages, aon_idx, aon_norm_idx, relatorio):
             "source": source,
             "grants": grants,
             "text": f"wb:text/heritage/{slug}",
-            "mechanized": mechanized,
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }
+        if conflitos:
+            record["conflitos"] = conflitos
         records.append(record)
 
-        if not mechanized:
+        if not grants_completos:
             relatorio["heritage_grants_parcial"] += 1
         if not rules:
             relatorio["heritage_sem_rule_elements"] += 1
 
+    return records
+
+
+def _slugify_nome(nome):
+    """Slug a partir de nome cru (sem filename de origem pra apoiar, ao
+    contrario de `slug_from_filename`) -- usado so pra heranca mono-AoN."""
+    s = re.sub(r"[^a-z0-9]+", "-", (nome or "").strip().lower())
+    return s.strip("-")
+
+
+def extract_heritages_aon_only(foundry_heritages, aon_heritages, relatorio):
+    """Heranca que existe SO no AoN, sem par no Foundry por nome (exato ou
+    normalizado).
+
+    Por que precisa existir: `fundir_renomeados.py` so consegue linkar/aliasar
+    um legado ao seu remaster quando as DUAS pontas ja sao registros `wb:` --
+    ele opera sobre `xref.aon` de quem ja esta em `base/index.json`, nunca cria
+    um registro novo a partir da ponte do AoN. Como a enumeracao de heritage
+    saia so do Foundry, heranca legada que o Foundry nunca carregou (ex.:
+    Cavern Kobold, Advanced Player's Guide, remaster_id -> Cavernstalker
+    Kobold) nao tinha `wb:` nenhum -- "nada e descartado" falhava antes mesmo
+    da fusao rodar, nao por causa dela.
+
+    Emitido mono-fonte (`xref` so com `aon`) -- legitimo, o portao 5 aceita
+    xref de uma fonte so. `license` fica None de proposito: quem infere a
+    partir do livro e `reconciliar.py` (mesma regra pra toda a base), nao
+    cada extrator por conta propria.
+    """
+    fnd_names = foundry_name_set(foundry_heritages)
+    fnd_names_norm = foundry_normalized_name_set(foundry_heritages)
+    slugs_usados = set(foundry_heritages.keys())
+
+    records = []
+    for doc in aon_heritages:
+        nome = doc.get("name")
+        if not nome:
+            continue
+        if nome.strip().lower() in fnd_names:
+            continue
+        if normalize_name(nome) in fnd_names_norm:
+            continue
+
+        sl = _slugify_nome(nome)
+        if not sl:
+            continue
+        if sl in slugs_usados:
+            sl = f"{sl}-{doc['id']}"
+        slugs_usados.add(sl)
+
+        rarity = (doc.get("rarity") or "").lower() or None
+        traits = normalize_traits(doc.get("trait"), rarity)
+        is_remaster = not bool(doc.get("remaster_id"))
+
+        grants_completos, requires_parseado = comum.mecanizacao(
+            "heritage", False, False, False, True)
+
+        prov = {"name": "aon", "source": "aon"}
+        if rarity:
+            prov["rarity"] = "aon"
+        if traits:
+            prov["traits"] = "aon"
+
+        record = {
+            "id": f"wb:heritage/{sl}",
+            "kind": "heritage",
+            "name": nome,
+            "ancestry": None,
+            "traits": traits,
+            "rarity": rarity,
+            "source": {
+                "book": doc.get("primary_source"),
+                "page": parse_page(doc.get("primary_source_raw")),
+                "license": None,
+                "remaster": is_remaster,
+            },
+            "grants": [],
+            "text": f"wb:text/heritage/{sl}",
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
+            "xref": {"aon": doc["id"]},
+            "prov": prov,
+        }
+        records.append(record)
+
+    relatorio["heritage_so_aon"] = len(records)
     return records
 
 
@@ -584,31 +706,40 @@ def extract_backgrounds(foundry_backgrounds, aon_idx, aon_norm_idx, p2t_idx, rel
             relatorio["background_sem_aon"].append(name)
 
         prov = {}
+        conflitos = []
+
+        out_name, name_prov, conf = comum.escolher(
+            "name", {"aon": aon_doc.get("name") if aon_doc else None, "foundry": name})
+        conflitos += conf
+        out_name = out_name or name
+        prov["name"] = name_prov or "foundry"
+
+        rarity, rarity_prov, conf = comum.escolher(
+            "rarity", {"aon": aon_doc.get("rarity") if aon_doc else None,
+                       "foundry": s.get("traits", {}).get("rarity")})
+        conflitos += conf
+        prov["rarity"] = rarity_prov
+
         if aon_doc:
-            out_name = aon_doc.get("name", name)
-            prov["name"] = "aon"
-            rarity = aon_doc.get("rarity") or s.get("traits", {}).get("rarity")
-            prov["rarity"] = "aon"
             aon_traits = normalize_traits(aon_doc.get("trait"), rarity)
             traits = aon_traits or list(s.get("traits", {}).get("value", []))
             prov["traits"] = "aon" if aon_traits else "foundry"
         else:
-            out_name = name
-            prov["name"] = "foundry"
-            rarity = s.get("traits", {}).get("rarity")
-            prov["rarity"] = "foundry"
             traits = list(s.get("traits", {}).get("value", []))
             prov["traits"] = "foundry"
 
-        source = {"license": pub.get("license"), "remaster": is_remaster}
-        prov["source"] = "foundry"
-        if aon_doc:
-            source["book"] = aon_doc.get("primary_source")
-            source["page"] = parse_page(aon_doc.get("primary_source_raw"))
-            prov["source"] = "aon+foundry"
-        else:
-            source["book"] = pub.get("title")
-            source["page"] = None
+        book, book_prov, conf = comum.escolher(
+            "source.book", {"aon": aon_doc.get("primary_source") if aon_doc else None,
+                            "foundry": pub.get("title")})
+        conflitos += conf
+        page, page_prov, conf = comum.escolher(
+            "source.page",
+            {"aon": parse_page(aon_doc.get("primary_source_raw")) if aon_doc else None})
+        conflitos += conf
+
+        source = {"book": book, "page": page,
+                  "license": pub.get("license"), "remaster": is_remaster}
+        prov["source"] = book_prov or "foundry"
 
         boosts = []
         for _, slot in sorted(s.get("boosts", {}).items(), key=lambda kv: kv[0]):
@@ -648,6 +779,11 @@ def extract_backgrounds(foundry_backgrounds, aon_idx, aon_norm_idx, p2t_idx, rel
         if p2t_candidates:
             xref["pf2etools"] = f"backgrounds/{slug}"
 
+        # mesma logica do ancestry: campos estruturados direto do Foundry,
+        # sem rule elements pra perder. Background nao tem pre-requisito.
+        grants_completos, requires_parseado = comum.mecanizacao(
+            "background", True, False, False, True)
+
         record = {
             "id": f"wb:background/{slug}",
             "kind": "background",
@@ -659,10 +795,13 @@ def extract_backgrounds(foundry_backgrounds, aon_idx, aon_norm_idx, p2t_idx, rel
             "skill_training": skill_training,
             "feats_granted": feats_granted,
             "text": f"wb:text/background/{slug}",
-            "mechanized": True,
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }
+        if conflitos:
+            record["conflitos"] = conflitos
         records.append(record)
 
         if not boosts:
@@ -756,6 +895,7 @@ def extrair():
         "background_boosts_ausente": [], "background_skill_training_ausente": [],
         "background_feat_ausente": [],
         "heritage_grants_parcial": 0, "heritage_sem_rule_elements": 0,
+        "heritage_so_aon": 0,
         "divergencia_pf2etools": [],
         "pareamento_fuzzy": [],
     }
@@ -763,6 +903,7 @@ def extrair():
     records = []
     records += extract_ancestries(foundry_ancestries, aon_anc_idx, aon_anc_norm_idx, p2t_anc_idx, heritage_map, relatorio)
     records += extract_heritages(foundry_heritages, aon_her_idx, aon_her_norm_idx, relatorio)
+    records += extract_heritages_aon_only(foundry_heritages, aon_heritages, relatorio)
     records += extract_backgrounds(foundry_backgrounds, aon_bg_idx, aon_bg_norm_idx, p2t_bg_idx, relatorio)
 
     # anexa o mapa legacy->remaster e o relatorio como atributo da funcao,
@@ -833,7 +974,7 @@ def gerar_relatorio_md(registros, meta):
     lines.append(f"| ancestry | {n_anc} | {anc_boosts_ok}/{n_anc} | {anc_flaw_ok}/{n_anc} (flaw) |")
     n_her = len(by_kind["heritage"])
     her_mech = n_her - gaps["heritage_grants_parcial"]
-    lines.append(f"| heritage | {n_her} | n/a | {her_mech}/{n_her} totalmente mecanizados (`mechanized=true`) |")
+    lines.append(f"| heritage | {n_her} | n/a | {her_mech}/{n_her} totalmente mecanizados (`grants_completos=true`) |")
     n_bg = len(by_kind["background"])
     bg_boosts_ok = n_bg - len(gaps["background_boosts_ausente"])
     bg_skill_ok = n_bg - len(gaps["background_skill_training_ausente"])
@@ -895,7 +1036,7 @@ def gerar_relatorio_md(registros, meta):
         "Note, CreatureSize, ActorTraits, TokenLight, DamageDice, Aura, AdjustModifier, "
         "AdjustStrike, Weakness). So `FlatModifier` foi traduzido pra linguagem de "
         f"efeito do schema (bate 1:1 com o exemplo do contrato). "
-        f"`mechanized=true` em {n_her - gaps['heritage_grants_parcial']}/{n_her} "
+        f"`grants_completos=true` em {n_her - gaps['heritage_grants_parcial']}/{n_her} "
         f"registros ({gaps['heritage_sem_rule_elements']} deles por nao terem rule "
         "element nenhum -- heranças puramente narrativas). O resto precisa do "
         "interpretador de rule elements (item de trabalho proprio, ja registrado em "

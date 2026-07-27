@@ -1,0 +1,67 @@
+{
+  "_doc": "Colisoes de identidade curadas: homonimos que `wb:<kind>/<slug>` funde numa quimera. Cada entidade e separada pelo xref que a fonte declara, nao por heuristica. Diagnostico caso a caso em docs/2026-07-26_colisoes-identidade.md (verificado contra AoN e contra o checkout do Foundry). O detector generico de reconciliar.py continua rodando: caso novo que aparecer falha o portao 6 e entra aqui depois de verificado.",
+  "_formato": {
+    "chave": "id canonico onde as entidades colidiram",
+    "entidades": "cada uma com o id final e o xref que a identifica; o registro de entrada vai para a entidade cujo xref ele carrega",
+    "correcoes": "campos a sobrescrever depois do desmembramento, com a fonte que os arbitra"
+  },
+
+  "wb:feat/death-from-above": {
+    "verificado": "AoN feat-7380 (Mythic, nv16, War of Immortals p.128) e feat-7610 (Archetype Verduran Shadow, nv8, Pathfinder #201 p.80) sao documentos distintos; o Foundry tem 2 arquivos",
+    "entidades": [
+      {"id": "wb:feat/death-from-above",
+       "xref": {"aon": "feat-7610", "foundry": "j8CLa6RoohfKCWoO"},
+       "correcoes": {"level": 8, "source.book": "Pathfinder #201: Pactbreaker", "source.page": 80}},
+      {"id": "wb:feat/death-from-above-eternal-legend",
+       "xref": {"aon": "feat-7380", "foundry": "95dHFM31VrUjn3d3"},
+       "correcoes": {"level": 16, "source.book": "War of Immortals", "source.page": 128}}
+    ]
+  },
+
+  "wb:feat/reckless-abandon": {
+    "verificado": "AoN feat-4454 (Goblin, nv17, Player Core) e feat-173 -> feat-5868 'Desperate Wrath' (Barbarian, nv16) sao entidades distintas; o nome goblin nao mudou no remaster, entao o slug simples pertence a ele",
+    "entidades": [
+      {"id": "wb:feat/reckless-abandon",
+       "xref": {"aon": "feat-4454", "foundry": "fqw1ELaqavuKLHIj"},
+       "correcoes": {"level": 17}}
+    ],
+    "consolidar": {"wb:feat/reckless-abandon-goblin": "wb:feat/reckless-abandon"}
+  },
+
+  "wb:feat/dual-weapon-reload": {
+    "verificado": "AoN feat-3294/feat-8659 (Gunslinger, nv1, Guns & Gears) e feat-6309/feat-1952 (Archetype Dual-Weapon Warrior / Crossbow Infiltrator, nv4, Player Core 2)",
+    "entidades": [
+      {"id": "wb:feat/dual-weapon-reload",
+       "xref": {"aon": "feat-3294", "foundry": "sjChYEuEWPqndCSK"},
+       "correcoes": {"level": 1}},
+      {"id": "wb:feat/dual-weapon-reload-archetype",
+       "xref": {"aon": "feat-6309"},
+       "correcoes": {"level": 4}}
+    ],
+    "consolidar": {"wb:feat/dual-weapon-reload-gunslinger": "wb:feat/dual-weapon-reload"}
+  },
+
+  "wb:feat/even-the-odds": {
+    "verificado": "AoN feat-6145 (Swashbuckler, nv4, Player Core 2) e feat-7675 (Archetype Eagle Knight, nv14, Shining Kingdoms p.51)",
+    "entidades": [
+      {"id": "wb:feat/even-the-odds",
+       "xref": {"aon": "feat-6145", "foundry": "5HDBvVbfoaXljbch"},
+       "correcoes": {"level": 4}},
+      {"id": "wb:feat/even-the-odds-eagle-knight",
+       "xref": {"aon": "feat-7675", "foundry": "ccLpjnWjl62Ehegc"},
+       "correcoes": {"level": 14, "source.page": 51}}
+    ]
+  },
+
+  "wb:feat/play-to-the-crowd": {
+    "verificado": "AoN feat-6335/feat-1978 (Archetype Gladiator/Concentrate, nv4, Player Core 2) e feat-7637 (Archetype Dandy/Skill, nv12, Pathfinder #204). Nao aparece como traits disjuntos -- os dois lados compartilham 'archetype'; achado pelo salto de level",
+    "entidades": [
+      {"id": "wb:feat/play-to-the-crowd",
+       "xref": {"aon": "feat-6335", "foundry": "KrYvJ5n06yHCipCZ"},
+       "correcoes": {"level": 4}},
+      {"id": "wb:feat/play-to-the-crowd-dandy",
+       "xref": {"aon": "feat-7637", "foundry": "uiEoY3uGSEOCaftX"},
+       "correcoes": {"level": 12}}
+    ]
+  }
+}

@@ -4,7 +4,9 @@ Pathfinder 2e (Waybuilder).
 Obedece `specs/2026-07-26-schema-base.md`:
 
   - envelope com `id`, `kind`, `prov` por campo e `conflitos`
-  - `mechanized` separa o que o app calcula do que so exibe
+  - `grants_completos` / `requires_parseado` separam o que o app calcula do
+    que so exibe (ver `comum.mecanizacao`) -- as 4 kinds daqui nao produzem
+    `grants` por natureza, entao `grants_completos` sai sempre `null`
   - "Principio zero": edict/anathema ficam como TEXTO, nunca como predicado
 
 Estas 4 categorias nao tem `requires` nem `level` intrinseco (nao sao
@@ -46,6 +48,9 @@ PROJETO = os.path.dirname(PIPELINE)
 BRUTOS = os.path.join(PIPELINE, "dados_brutos")
 SAIDA = os.path.join(PIPELINE, "saida")
 RELATORIOS = os.path.join(PIPELINE, "relatorios")
+
+sys.path.insert(0, PIPELINE)
+import comum  # noqa: E402
 
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
 _CANDIDATOS_FOUNDRY = [
@@ -326,6 +331,9 @@ def _envelope(kind, sl, nome, rarity, source, extra_xref=None, hit=None,
     prov = {"name": "aon", "traits": "aon", "rarity": "aon", "source": "aon"}
     if prov_extra:
         prov.update(prov_extra)
+    # trait/skill/deity/domain nao produzem `grants` por natureza (KINDS_SEM_GRANTS)
+    # -- `grants_completos` sai null, nunca false. Nenhuma tem pre-requisito.
+    grants_completos, requires_parseado = comum.mecanizacao(kind, False, False, False, True)
     reg = {
         "id": f"wb:{kind}/{sl}",
         "kind": kind,
@@ -337,7 +345,8 @@ def _envelope(kind, sl, nome, rarity, source, extra_xref=None, hit=None,
         "requires": None,
         "grants": [],
         "text": f"wb:text/{kind}/{sl}" if text_disponivel else None,
-        "mechanized": False,
+        "grants_completos": grants_completos,
+        "requires_parseado": requires_parseado,
         "xref": {"aon": hit.get("id")} if hit else {},
         "prov": prov,
     }

@@ -1,0 +1,772 @@
+{
+ "alchemist": {
+  "hp": 8,
+  "key_ability": [
+   "int"
+  ],
+  "attacks": {
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "light": 1,
+   "medium": 1,
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 2,
+   "reflex": 2,
+   "will": 1
+  },
+  "perception": 1,
+  "skills": 3,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "7": {
+    "simple": 2,
+    "unarmed": 2,
+    "will": 2
+   },
+   "9": {
+    "perception": 2
+   },
+   "13": {
+    "light": 2,
+    "medium": 2,
+    "unarmored": 2
+   },
+   "15": {
+    "simple": 3,
+    "unarmed": 3,
+    "reflex": 3
+   },
+   "19": {
+    "light": 3,
+    "medium": 3,
+    "unarmored": 3
+   }
+  }
+ },
+ "barbarian": {
+  "hp": 12,
+  "key_ability": [
+   "str"
+  ],
+  "attacks": {
+   "martial": 1,
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "light": 1,
+   "medium": 1,
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 2,
+   "reflex": 1,
+   "will": 2
+  },
+  "perception": 2,
+  "skills": 3,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "5": {
+    "simple": 2,
+    "martial": 2,
+    "unarmed": 2
+   },
+   "7": {
+    "fortitude": 3
+   },
+   "9": {
+    "reflex": 2
+   },
+   "13": {
+    "fortitude": 4,
+    "light": 2,
+    "medium": 2,
+    "unarmored": 2,
+    "simple": 3,
+    "martial": 3,
+    "unarmed": 3
+   },
+   "15": {
+    "will": 3
+   },
+   "17": {
+    "perception": 3
+   },
+   "19": {
+    "light": 3,
+    "medium": 3,
+    "unarmored": 3
+   }
+  }
+ },
+ "bard": {
+  "hp": 8,
+  "key_ability": [
+   "cha"
+  ],
+  "attacks": {
+   "martial": 1,
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "light": 1,
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 1,
+   "reflex": 1,
+   "will": 2
+  },
+  "perception": 2,
+  "skills": 4,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "3": {
+    "reflex": 2
+   },
+   "7": {
+    "spellcasting": 2
+   },
+   "9": {
+    "fortitude": 2,
+    "will": 3
+   },
+   "11": {
+    "martial": 2,
+    "simple": 2,
+    "unarmed": 2,
+    "perception": 3
+   },
+   "13": {
+    "light": 2,
+    "unarmored": 2
+   },
+   "15": {
+    "spellcasting": 3
+   },
+   "17": {
+    "will": 4
+   },
+   "19": {
+    "spellcasting": 4
+   }
+  }
+ },
+ "champion": {
+  "hp": 10,
+  "key_ability": [
+   "dex",
+   "str"
+  ],
+  "attacks": {
+   "martial": 1,
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "heavy": 1,
+   "light": 1,
+   "medium": 1,
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 2,
+   "reflex": 1,
+   "will": 2
+  },
+  "perception": 1,
+  "skills": 2,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "5": {
+    "martial": 2,
+    "simple": 2,
+    "unarmed": 2
+   },
+   "7": {
+    "light": 2,
+    "medium": 2,
+    "heavy": 2,
+    "unarmored": 2
+   },
+   "9": {
+    "spellcasting": 2,
+    "fortitude": 3
+   },
+   "11": {
+    "will": 3,
+    "perception": 2
+   },
+   "13": {
+    "light": 3,
+    "medium": 3,
+    "heavy": 3,
+    "unarmored": 3,
+    "martial": 3,
+    "simple": 3,
+    "unarmed": 3
+   },
+   "17": {
+    "spellcasting": 3,
+    "light": 4,
+    "medium": 4,
+    "heavy": 4,
+    "unarmored": 4
+   }
+  }
+ },
+ "cleric": {
+  "hp": 8,
+  "key_ability": [
+   "wis"
+  ],
+  "attacks": {
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 1,
+   "reflex": 1,
+   "will": 2
+  },
+  "perception": 1,
+  "skills": 2,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "3": {
+    "fortitude": 2
+   },
+   "5": {
+    "perception": 2
+   },
+   "7": {
+    "spellcasting": 2
+   },
+   "9": {
+    "will": 3
+   },
+   "11": {
+    "reflex": 2,
+    "simple": 2,
+    "unarmed": 2
+   },
+   "13": {
+    "unarmored": 2
+   },
+   "15": {
+    "spellcasting": 3
+   },
+   "19": {
+    "spellcasting": 4
+   }
+  }
+ },
+ "druid": {
+  "hp": 8,
+  "key_ability": [
+   "wis"
+  ],
+  "attacks": {
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "light": 1,
+   "medium": 1,
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 1,
+   "reflex": 1,
+   "will": 2
+  },
+  "perception": 1,
+  "skills": 2,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "3": {
+    "perception": 2,
+    "fortitude": 2
+   },
+   "5": {
+    "reflex": 2
+   },
+   "7": {
+    "spellcasting": 2
+   },
+   "11": {
+    "will": 3,
+    "simple": 2,
+    "unarmed": 2
+   },
+   "13": {
+    "light": 2,
+    "medium": 2,
+    "unarmored": 2
+   },
+   "15": {
+    "spellcasting": 3
+   },
+   "19": {
+    "spellcasting": 4
+   }
+  }
+ },
+ "fighter": {
+  "hp": 10,
+  "key_ability": [
+   "dex",
+   "str"
+  ],
+  "attacks": {
+   "martial": 2,
+   "simple": 2,
+   "unarmed": 2
+  },
+  "defenses": {
+   "heavy": 1,
+   "light": 1,
+   "medium": 1,
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 2,
+   "reflex": 2,
+   "will": 1
+  },
+  "perception": 2,
+  "skills": 3,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "3": {
+    "will": 2
+   },
+   "7": {
+    "perception": 3
+   },
+   "9": {
+    "fortitude": 3
+   },
+   "11": {
+    "light": 2,
+    "medium": 2,
+    "heavy": 2,
+    "unarmored": 2
+   },
+   "13": {
+    "martial": 3,
+    "simple": 3,
+    "unarmed": 3
+   },
+   "15": {
+    "reflex": 3
+   },
+   "17": {
+    "light": 3,
+    "medium": 3,
+    "heavy": 3,
+    "unarmored": 3
+   },
+   "19": {
+    "martial": 4,
+    "simple": 4,
+    "unarmed": 4
+   }
+  }
+ },
+ "monk": {
+  "hp": 10,
+  "key_ability": [
+   "dex",
+   "str"
+  ],
+  "attacks": {
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "unarmored": 2
+  },
+  "saves": {
+   "fortitude": 2,
+   "reflex": 2,
+   "will": 2
+  },
+  "perception": 1,
+  "skills": 4,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "5": {
+    "simple": 2,
+    "unarmed": 2,
+    "perception": 2
+   },
+   "7": {
+    "reflex": 3
+   },
+   "11": {
+    "will": 3
+   },
+   "13": {
+    "unarmored": 3,
+    "simple": 3,
+    "unarmed": 3
+   },
+   "15": {
+    "reflex": 4
+   },
+   "17": {
+    "unarmored": 4
+   }
+  }
+ },
+ "ranger": {
+  "hp": 10,
+  "key_ability": [
+   "dex",
+   "str"
+  ],
+  "attacks": {
+   "martial": 1,
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "light": 1,
+   "medium": 1,
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 2,
+   "reflex": 2,
+   "will": 1
+  },
+  "perception": 2,
+  "skills": 4,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "3": {
+    "will": 2
+   },
+   "5": {
+    "simple": 2,
+    "martial": 2,
+    "unarmed": 2
+   },
+   "7": {
+    "reflex": 3,
+    "perception": 3
+   },
+   "11": {
+    "fortitude": 3,
+    "light": 2,
+    "medium": 2,
+    "unarmored": 2
+   },
+   "13": {
+    "simple": 3,
+    "martial": 3,
+    "unarmed": 3
+   },
+   "15": {
+    "reflex": 4,
+    "perception": 4
+   },
+   "19": {
+    "light": 3,
+    "medium": 3,
+    "unarmored": 3
+   }
+  }
+ },
+ "rogue": {
+  "hp": 8,
+  "key_ability": [
+   "dex"
+  ],
+  "attacks": {
+   "martial": 1,
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "light": 1,
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 1,
+   "reflex": 2,
+   "will": 2
+  },
+  "perception": 2,
+  "skills": 7,
+  "skillInc": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20
+  ],
+  "prog": {
+   "5": {
+    "simple": 2,
+    "martial": 2,
+    "unarmed": 2
+   },
+   "7": {
+    "reflex": 3,
+    "perception": 3
+   },
+   "9": {
+    "fortitude": 2
+   },
+   "13": {
+    "reflex": 4,
+    "perception": 4,
+    "light": 2,
+    "unarmored": 2,
+    "simple": 3,
+    "martial": 3,
+    "unarmed": 3
+   },
+   "17": {
+    "will": 3
+   },
+   "19": {
+    "light": 3,
+    "unarmored": 3
+   }
+  }
+ },
+ "sorcerer": {
+  "hp": 6,
+  "key_ability": [
+   "cha"
+  ],
+  "attacks": {
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 1,
+   "reflex": 1,
+   "will": 2
+  },
+  "perception": 1,
+  "skills": 2,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "5": {
+    "fortitude": 2
+   },
+   "7": {
+    "spellcasting": 2
+   },
+   "9": {
+    "reflex": 2
+   },
+   "11": {
+    "perception": 2,
+    "simple": 2,
+    "unarmed": 2
+   },
+   "13": {
+    "unarmored": 2
+   },
+   "15": {
+    "spellcasting": 3
+   },
+   "17": {
+    "will": 3
+   },
+   "19": {
+    "spellcasting": 4
+   }
+  }
+ },
+ "wizard": {
+  "hp": 6,
+  "key_ability": [
+   "int"
+  ],
+  "attacks": {
+   "simple": 1,
+   "unarmed": 1
+  },
+  "defenses": {
+   "unarmored": 1
+  },
+  "saves": {
+   "fortitude": 1,
+   "reflex": 1,
+   "will": 2
+  },
+  "perception": 1,
+  "skills": 2,
+  "skillInc": [
+   3,
+   5,
+   7,
+   9,
+   11,
+   13,
+   15,
+   17,
+   19
+  ],
+  "prog": {
+   "5": {
+    "reflex": 2
+   },
+   "7": {
+    "spellcasting": 2
+   },
+   "9": {
+    "fortitude": 2
+   },
+   "11": {
+    "perception": 2,
+    "simple": 2,
+    "unarmed": 2
+   },
+   "13": {
+    "unarmored": 2
+   },
+   "15": {
+    "spellcasting": 3
+   },
+   "17": {
+    "will": 3
+   },
+   "19": {
+    "spellcasting": 4
+   }
+  }
+ }
+}

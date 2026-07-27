@@ -93,10 +93,124 @@
  "deity_licenca_direta_foundry": 471,
  "registros_sem_licenca": 135,
  "registros_total": 1144,
- "traits_citados_total": 282,
- "traits_orfaos_total": 0,
- "traits_orfaos_top": [],
- "traits_orfaos_fontes": {},
+ "traits_citados_total": 418,
+ "traits_orfaos_total": 16,
+ "traits_orfaos_top": [
+  [
+   "fatal-d10",
+   7
+  ],
+  [
+   "fatal-d8",
+   6
+  ],
+  [
+   "two-hand-d8",
+   6
+  ],
+  [
+   "deadly-d8",
+   3
+  ],
+  [
+   "thrown-20",
+   3
+  ],
+  [
+   "versatile-s",
+   2
+  ],
+  [
+   "versatile-p",
+   2
+  ],
+  [
+   "capacity-3",
+   2
+  ],
+  [
+   "scatter-5",
+   2
+  ],
+  [
+   "two-hand-d12",
+   2
+  ],
+  [
+   "fatal-d12",
+   1
+  ],
+  [
+   "jousting-d6",
+   1
+  ],
+  [
+   "capacity-2",
+   1
+  ],
+  [
+   "fatal-aim-d10",
+   1
+  ],
+  [
+   "thrown-10",
+   1
+  ],
+  [
+   "deadly-d10",
+   1
+  ]
+ ],
+ "traits_orfaos_fontes": {
+  "fatal-d10": [
+   "equipamento.json"
+  ],
+  "fatal-d8": [
+   "equipamento.json"
+  ],
+  "two-hand-d8": [
+   "equipamento.json"
+  ],
+  "deadly-d8": [
+   "equipamento.json"
+  ],
+  "thrown-20": [
+   "equipamento.json"
+  ],
+  "versatile-s": [
+   "equipamento.json"
+  ],
+  "versatile-p": [
+   "equipamento.json"
+  ],
+  "capacity-3": [
+   "equipamento.json"
+  ],
+  "scatter-5": [
+   "equipamento.json"
+  ],
+  "two-hand-d12": [
+   "equipamento.json"
+  ],
+  "fatal-d12": [
+   "equipamento.json"
+  ],
+  "jousting-d6": [
+   "equipamento.json"
+  ],
+  "capacity-2": [
+   "equipamento.json"
+  ],
+  "fatal-aim-d10": [
+   "equipamento.json"
+  ],
+  "thrown-10": [
+   "equipamento.json"
+  ],
+  "deadly-d10": [
+   "equipamento.json"
+  ]
+ },
  "pf2etools_crosscheck": {
   "trait": {
    "pf2etools": 471,

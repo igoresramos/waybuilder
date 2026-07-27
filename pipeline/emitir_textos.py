@@ -17,8 +17,21 @@ Saida:   pipeline/base/text/<kind>.json + relatorio de cobertura
 import json, os, re, glob, collections, sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, AQUI)
+import comum  # noqa: E402
+
 BASE = f"{AQUI}/base"
 BRUTO = f"{AQUI}/dados_brutos"
+
+# origem da prosa -> valor de prov, no vocabulario fechado da spec v2
+PROV_POR_ORIGEM = {
+    "aon":              lambda: comum.prov_lido("aon"),
+    "foundry":          lambda: comum.prov_lido("foundry"),
+    "pf2etools":        lambda: comum.prov_lido("pf2etools"),
+    "aon:nome":         lambda: comum.prov_inferido("aon", "nome-aproximado"),
+    "aon:alias":        lambda: comum.prov_inferido("aon", "nome-aproximado"),
+    "pf2etools:alias":  lambda: comum.prov_inferido("pf2etools", "nome-aproximado"),
+}
 
 
 def limpar(t):
@@ -62,8 +75,8 @@ def indexar_aon():
     return idx
 
 
-CLONE = ("/tmp/claude-1000/-mnt-c-Users-igor0/39eadbed-e8eb-4194-8557-74f05193fdc1"
-         "/scratchpad/pf2e-research/pf2e/packs/pf2e")
+CLONE = os.environ.get("WB_FOUNDRY_PACKS") or os.path.join(
+    AQUI, "dados_brutos", "foundry", "packs", "pf2e")
 
 
 def indexar_foundry():
@@ -156,10 +169,17 @@ def main():
     origem = collections.Counter()
     faltando = []
 
+    criadas = 0
     for r in base:
         ref = r.get("text")
         if not isinstance(ref, str) or not ref.startswith("wb:text/"):
-            continue
+            # Registro sem referencia nenhuma era invisivel para a metrica
+            # antiga: nao entrava no denominador e por isso "prosa em 100%"
+            # convivia com 907 registros sem prosa. Agora todo registro ganha
+            # referencia e a busca pela prosa acontece para todos.
+            ref = "wb:text/" + r["id"].split("wb:", 1)[-1]
+            r["text"] = ref
+            criadas += 1
         kind = r.get("kind")
         t = ""
         aid = (r.get("xref") or {}).get("aon")
@@ -187,8 +207,22 @@ def main():
         if t:
             textos[kind][ref] = t
             origem[de] += 1
+            fabrica = PROV_POR_ORIGEM.get(de)
+            if fabrica:
+                r.setdefault("prov", {})["text"] = fabrica()
+            elif not comum.prov_valido((r.get("prov") or {}).get("text") or ""):
+                # `summary` ja veio de alguma fonte: herda a prov do proprio campo
+                p = (r.get("prov") or {}).get("summary")
+                fontes = [k for k in (r.get("xref") or {})
+                          if k in ("aon", "foundry", "pf2etools")]
+                r.setdefault("prov", {})["text"] = (
+                    p if comum.prov_valido(p or "")
+                    else comum.prov_lido(fontes[0]) if len(fontes) == 1
+                    else comum.prov_lido("waybuilder"))
         else:
             faltando.append(r["id"])
+            r.pop("text", None)
+            (r.get("prov") or {}).pop("text", None)
 
     os.makedirs(f"{BASE}/text", exist_ok=True)
     total_bytes = 0
@@ -198,11 +232,18 @@ def main():
         total_bytes += os.path.getsize(caminho)
         print(f"  {kind:14} {len(mapa):>5} textos  {os.path.getsize(caminho)/1e6:.2f} MB")
 
-    # portao: nenhuma referencia pendurada
+    # O index guarda as referencias criadas aqui e a prov de cada prosa.
+    json.dump(base, open(f"{BASE}/index.json", "w"),
+              ensure_ascii=False, separators=(",", ":"))
+
+    # Metrica: o denominador e a BASE INTEIRA, nao o subconjunto que ja tinha
+    # referencia. Dividir pelo subconjunto processado foi o que fez "prosa em
+    # 100% (17.866/17.866)" conviver com 907 registros sem prosa nenhuma.
     resolvidas = sum(len(m) for m in textos.values())
-    esperadas = sum(1 for r in base if isinstance(r.get("text"), str)
-                    and r["text"].startswith("wb:text/"))
-    print(f"\nreferencias resolvidas: {resolvidas}/{esperadas} ({resolvidas/max(1,esperadas):.1%})")
+    total = len(base)
+    orfas = resolvidas - sum(1 for r in base if r.get("text"))
+    print(f"\nprosa: {resolvidas}/{total} da base ({resolvidas/max(1,total):.1%})")
+    print(f"referencias criadas neste passo: {criadas}")
     print(f"origem: {dict(origem)}")
     print(f"prosa total: {total_bytes/1e6:.1f} MB")
     if faltando:
@@ -210,14 +251,16 @@ def main():
 
     open(f"{BASE}/relatorio_textos.md", "w").write(
         "# Emissao de prosa\n\n"
-        f"- referencias resolvidas: **{resolvidas}/{esperadas}** "
-        f"({resolvidas/max(1,esperadas):.1%})\n"
+        f"- registros com prosa: **{resolvidas}/{total}** "
+        f"({resolvidas/max(1,total):.1%} da base)\n"
+        f"- referencias criadas neste passo: {criadas}\n"
+        f"- chaves de prosa sem registro apontando (orfas): {max(0, orfas)}\n"
         f"- origem: {dict(origem)}\n"
         f"- prosa total: {total_bytes/1e6:.1f} MB\n"
         f"- sem prosa: {len(faltando)}\n\n"
         + ("## Sem prosa\n\n" + "\n".join(f"- `{i}`" for i in faltando) if faltando else "")
     )
-    return 0 if resolvidas / max(1, esperadas) > 0.98 else 1
+    return 0 if resolvidas / max(1, total) > 0.98 else 1
 
 
 if __name__ == "__main__":

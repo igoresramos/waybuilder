@@ -6,7 +6,7 @@
  "aon_equipment": 8642,
  "pf2etools_base_total": 410,
  "por_kind": {
-  "armor": 207,
+  "armor": 204,
   "equipment": 6137,
   "shield": 118,
   "weapon": 1034
@@ -18,7 +18,7 @@
   "weapon": 1030
  },
  "so_prosa": {
-  "armor": 5,
+  "armor": 2,
   "equipment": 178,
   "weapon": 4
  },
@@ -28,10 +28,10 @@
   "reinforcing": 5
  },
  "cobertura_fontes": {
-  "armor:FA": 145,
+  "armor:FA": 142,
   "armor:F": 23,
-  "armor:FTA": 32,
-  "armor:T": 4,
+  "armor:FTA": 35,
+  "armor:T": 1,
   "armor:FT": 2,
   "armor:A": 1,
   "equipment:A": 1739,
@@ -64,8 +64,11 @@
   "equipment->shield": 143,
   "equipment->armor": 207
  },
- "mechanized_true": 7440,
- "mechanized_false": 56,
+ "grants_completos_true": 7437,
+ "grants_completos_false": 56,
+ "grants_completos_null": 0,
+ "requires_parseado_true": 7493,
+ "requires_parseado_false": 0,
  "rules_ignoradas": {
   "RollOption": 314,
   "EphemeralEffect": 4,
@@ -93,5 +96,26 @@
   "CriticalSpecialization": 8,
   "FastHealing": 1
  },
- "sem_source": 1636
+ "sem_source": 1632,
+ "casados_por_sufixo": {
+  "armor": 6
+ },
+ "recusados": [
+  {
+   "id": "wb:weapon/nine-ring-sword",
+   "name": "Nine-Ring Sword",
+   "xref": {
+    "pf2etools": "baseitems#nine-ring-sword"
+   },
+   "motivo": "source vazio"
+  },
+  {
+   "id": "wb:weapon/wind-and-fire-wheel",
+   "name": "Wind and Fire Wheel",
+   "xref": {
+    "pf2etools": "baseitems#wind-and-fire-wheel"
+   },
+   "motivo": "source vazio"
+  }
+ ]
 }

@@ -185,8 +185,8 @@ def turno_marcial(p, ac):
     return total
 
 def turno_conjurador(p, ref, n_alvos, ac=99):
-    """2 acoes: magia de area elevada ao rank efetivo. 1 acao sobra (ignorada)."""
-    if not p.slots or p.dc_magia == 0: return turno_marcial(p, ac)
+    """2 acoes: magia de area elevada ao rank efetivo. 1 acao sobra (ignorada).
+    So chamada quando ja se confirmou que sobra slot -- ver consumir_slot()."""
     rank = min(p.rank_efetivo, 10)
     dados = 2*rank                                   # ~2d6 por rank (fireball-like)
     tot = 0
@@ -196,17 +196,37 @@ def turno_conjurador(p, ref, n_alvos, ac=99):
         tot += [d*2, d, d//2, 0][g]
     return tot
 
+def consumir_slot(restantes):
+    """Gasta o slot de MENOR rank disponivel (regra 17: qualquer slot eleva
+    ao mesmo rank efetivo, entao o certo taticamente e queimar o mais fraco
+    primeiro). Retorna True se havia slot pra gastar."""
+    disponiveis = [r for r, q in restantes.items() if q > 0]
+    if not disponiveis: return False
+    restantes[min(disponiveis)] -= 1
+    return True
+
 def simular_combate(party, nivel, n_inimigos=3, max_rodadas=6):
+    """Politica de acao SIMETRICA e igual pros dois lados do regime: todo
+    personagem maximiza dano com as acoes que tem. Marcial ataca 3x (MAP
+    0/-5/-10). Quem tem rank_magia>=1 conjura 2 acoes de dano de area
+    elevado (1 acao sobra, ignorada) ENQUANTO tiver slot -- os slots sao
+    consumidos de verdade ao longo do combate (Counter por personagem,
+    reiniciado a cada chamada desta funcao); esgotado o estoque, cai pra
+    ataque marcial no resto da luta. Sem isso um dip de 1 nivel de
+    conjurador apareceria conjurando infinitamente por 6 rodadas, o que
+    superestimaria qualquer multiclasse com uma pitada de magia."""
     m = BENCH[min(24, max(1, nivel))]
     inimigos = [m["hp"]] * n_inimigos
     hp = {i: p.hp for i, p in enumerate(party)}
+    slots_restantes = [collections.Counter(p.slots) for p in party]
     for rodada in range(1, max_rodadas+1):
         # party ataca
         for idx, p in enumerate(party):
             if hp[idx] <= 0: continue
             vivos = [i for i, h in enumerate(inimigos) if h > 0]
             if not vivos: return dict(vitoria=True, rodadas=rodada-1, hp_perdido=sum(p.hp for p in party)-sum(max(0,v) for v in hp.values()))
-            if p.rank_magia >= 1 and p.slots:
+            pode_conjurar = p.rank_magia >= 1 and consumir_slot(slots_restantes[idx])
+            if pode_conjurar:
                 d = turno_conjurador(p, m["ref"], min(len(vivos), 3), m["ac"])
                 for i in vivos[:3]: inimigos[i] -= d//max(1,min(len(vivos),3))
             else:
@@ -238,9 +258,11 @@ def prova_pericia(p, dc, treinado):
     return acertos/400
 
 def cobertura_aventura(party, nivel):
-    """Aventura padrao: 8 pilares, cada um exigindo pelo menos um personagem treinado."""
+    """Aventura padrao: 8 pilares, cada um exigindo pelo menos um personagem
+    treinado. NAO fixa semente aqui -- quem chama controla a semente global
+    (uma vez, no inicio da rodada inteira) pra permitir repetir a chamada
+    N vezes e medir intervalo, em vez de sempre cair no mesmo resultado."""
     dc = DC_POR_NIVEL[min(20, nivel)]
-    random.seed(hash((nivel, tuple(p.nome for p in party))) & 0xffffffff)
     cobertos, taxas = 0, []
     for pilar in PILARES:
         # quem tem pericia sobrando cobre o pilar (proxy: n_pericias vs 8 pilares)
@@ -251,3 +273,175 @@ def cobertura_aventura(party, nivel):
         if melhor > 0: cobertos += 1
         taxas.append(melhor)
     return dict(pilares_cobertos=cobertos, taxa_media=st.mean(taxas))
+
+
+# ---------------------------------------------------------------- fabrica de regime
+def montar_personagem(regime, nivel, principal, secundaria=None, ratio=0.5):
+    """Constroi um Personagem no REGIME pedido. Centraliza aqui a unica
+    diferenca real entre os tres regimes -- nao ha "if regime" espalhado no
+    resto do arquivo porque a distincao inteira mora em COMO splits/dedicacao
+    sao montados, nao em formulas separadas:
+
+      RAW      classe unica ocupa TODO o nivel de personagem. `secundaria`
+               e ignorada -- RAW nao tem multiclasse nenhuma.
+
+      RAW_FA   classe unica ocupa todo o nivel de personagem + `secundaria`
+               entra como DEDICACAO de arquetipo (Free Archetype sempre
+               ligado nesta regra -- regra 2 da spec). O Personagem ja
+               modela a trilha RAW de dedicacao (rank1 sempre, expert aos
+               12, master aos 18 -- nunca legendary) e os 8 gates de slot
+               (regra 18: sem elevacao). Isso representa o teto teorico de
+               "gastar toda a trilha de FA numa dedicacao so" -- sem Free
+               Archetype seria irreal (a dedicacao competiria por feats
+               com a classe principal); com FA, os feats sao de graca.
+
+      HOUSE    `principal` e `secundaria` dividem o nivel pelo `ratio`
+               (fracao do nivel que vai pra `principal`; o resto pra
+               `secundaria`). E o regime das 22 regras caseiras: melhor
+               rank entre classes, elevacao de conjuracao, HP por nivel de
+               classe etc -- tudo isso ja vive em Personagem._derivar().
+
+    Nivel 1 nao da pra dividir em duas classes (cada classe pede pelo menos
+    1 nivel) -- HOUSE em nivel 1 vira automaticamente classe unica, igual
+    RAW. Isso NAO e bug: e a propria regra 1 da spec ("a cada subida, +1
+    nivel numa classe existente ou numa nova") aplicada ao caso trivial.
+    """
+    if regime == "RAW":
+        return Personagem("RAW", {principal: nivel}, nivel)
+    if regime == "RAW_FA":
+        ded = secundaria if secundaria else None
+        return Personagem("RAW_FA", {principal: nivel}, nivel, dedicacao=ded)
+    if regime == "HOUSE":
+        if secundaria is None or nivel < 2:
+            return Personagem("HOUSE", {principal: nivel}, nivel)
+        n_sec = max(1, min(nivel - 1, round(nivel * (1 - ratio))))
+        n_prin = nivel - n_sec
+        return Personagem("HOUSE", {principal: n_prin, secundaria: n_sec}, nivel)
+    raise ValueError(f"regime desconhecido: {regime}")
+
+
+def simular_encontro(party, nivel, tipo, n=500, seed=0):
+    """Roda N combates e devolve media + desvio + IC90 de hp_perdido (menor
+    e melhor) e taxa de vitoria. tipo="solo" = 1 inimigo do MESMO nivel do
+    personagem (chefe/elite solitario). tipo="grupo" = 3 inimigos 4 niveis
+    ABAIXO (proxy de "mooks" mais fracos -- PF2e nao publica ajuste de XP
+    granular o bastante pro benchmark de mediana aqui, entao 4 niveis abaixo
+    e uma escolha simples e declarada, nao uma conversao oficial de XP)."""
+    random.seed(seed)
+    if tipo == "solo":
+        nv_efetivo, n_inimigos = nivel, 1
+    elif tipo == "grupo":
+        nv_efetivo, n_inimigos = max(1, nivel - 4), 3
+    else:
+        raise ValueError(tipo)
+    perdas, vitorias = [], 0
+    for _ in range(n):
+        r = simular_combate(party, nv_efetivo, n_inimigos=n_inimigos)
+        perdas.append(r["hp_perdido"])
+        vitorias += r["vitoria"]
+    media = st.mean(perdas)
+    dp = st.pstdev(perdas) if len(perdas) > 1 else 0.0
+    ic90 = 1.645 * dp / (n ** 0.5)
+    return dict(n=n, media_hp_perdido=media, ic90=ic90, dp=dp,
+                taxa_vitoria=vitorias/n, nivel_inimigo=nv_efetivo, n_inimigos=n_inimigos)
+
+
+def simular_pilares(party, nivel, n=200, seed=0):
+    """Roda cobertura_aventura N vezes (cada chamada ja faz 400 provas por
+    pilar internamente) e devolve media + IC90 de pilares cobertos e taxa."""
+    random.seed(seed)
+    cobertos, taxas = [], []
+    for _ in range(n):
+        r = cobertura_aventura(party, nivel)
+        cobertos.append(r["pilares_cobertos"])
+        taxas.append(r["taxa_media"])
+    def resumo(vals):
+        media = st.mean(vals)
+        dp = st.pstdev(vals) if len(vals) > 1 else 0.0
+        return media, 1.645*dp/(n**0.5)
+    m_cob, ic_cob = resumo(cobertos)
+    m_tax, ic_tax = resumo(taxas)
+    return dict(n=n, pilares_cobertos_media=m_cob, pilares_cobertos_ic90=ic_cob,
+                taxa_media=m_tax, taxa_ic90=ic_tax)
+
+
+# =====================================================================
+# ASSUNCOES -- premissas explicitas da simulacao. Tudo aqui e escolha de
+# metodo, NAO regra de PF2e nem numero extraido de fonte. Numero que vem de
+# fonte real (Foundry, AoN, bench_monstros de 3624 criaturas do AoN) fica em
+# classes.json/bench_monstros.json e em preparar_dados.py, separado disto.
+# =====================================================================
+ASSUNCOES = """
+ASSUNCOES da simulacao (docs/simulacoes/wb_sim.py + matriz.py)
+
+GEAR (curva de riqueza padrao, PF2e Core Rulebook tabela 10-5, sem magia
+especial fora a runa de potencia/precisao esperada pro nivel):
+  arma:    potencia +1 no nivel 2, +2 no 10, +3 no 16
+  striking: 2 dados de dano a partir do 4, 3 a partir do 12, 4 a partir do 19
+  armadura: potencia +1 no 5, +2 no 11, +3 no 18
+  resiliente: +1 no 8, +2 no 14, +3 no 20
+  Sem item de barganha, sem runas de propriedade, sem consumivel (pocao,
+  pergaminho). Isso favorece levemente quem depende menos de item (marcial
+  simples vs conjurador que normalmente compra pergaminho de emergencia).
+
+ATRIBUTOS: habilidade-chave parte de 18 (+4), com os boosts automaticos de
+5/10/15/20 (vira +5 aos 10, +6 aos 20). Habilidade secundaria fica fixa em
++2 ate o nivel 10, +3 dai pra frente -- serve pra Int em pericias e pra
+qualquer atributo que a classe NAO principal precise. Todo personagem, de
+qualquer classe, roda com essa mesma curva -- ninguem é otimizado nem
+sub-otimizado em atributo por regime.
+
+ALVOS: bench_monstros.json (mediana de AC/HP/save/ataque/dano de 3624
+criaturas do AoN, por nivel). Dois cenarios de combate:
+  SOLO  -- 1 inimigo do MESMO nivel do personagem (chefe solitario).
+  GRUPO -- 3 inimigos de nivel-4 (mooks mais fracos; -4 e escolha de
+           metodo, PF2e nao da conversao oficial granular o bastante pro
+           benchmark de mediana usado aqui).
+Combate dura ate 6 rodadas ou ate um lado zerar. Nao modela dia inteiro de
+aventura (varios encontros, atricao de recurso entre eles) -- so o encontro
+isolado. Ver "limites" no relatorio.
+
+POLITICA DE ACAO -- SIMETRICA entre os dois lados do regime, e essa e a
+correcao do vies que o Fable apontou na simulacao de nivel 20 anterior (o
+dip gastava 12 acoes curando contra um Guerreiro que so atacava). Regra
+unica pra qualquer personagem, marcial ou multiclasse:
+  - Sem rank_magia (ou sem slot disponivel): 3 ataques com agravo de mira
+    (MAP 0/-5/-10), sempre no mesmo alvo vivo.
+  - Com rank_magia>=1 E slot disponivel: 2 acoes de magia de dano de area
+    (~2d6 por rank efetivo, ate 3 alvos, save basico), 1 acao sobra
+    (ignorada, nao vira ataque extra). Os slots SAO consumidos rodada a
+    rodada (nao e conjuracao infinita) -- um dip de 1 nivel com poucos
+    slots esgota e cai pra ataque marcial no meio do combate, igual
+    aconteceria numa mesa de verdade.
+  - Ninguem cura, ninguem buffa, ninguem usa acao pra manobra. Os dois
+    lados maximizam dano bruto com o que tem -- e a unica forma de
+    comparar dano sem embutir estilo de jogo na comparacao.
+
+REGIMES (ver montar_personagem() pro mapeamento exato):
+  RAW      classe unica, nivel de personagem inteiro nela. Sem dedicacao.
+  RAW_FA   classe unica + UMA dedicacao de arquetipo, financiada pelos
+           feats gratis do Free Archetype (nao compete com feat de classe).
+           Modela o teto teorico de investir a trilha de FA inteira nessa
+           dedicacao (Basico sempre, Expert aos 12, Master aos 18 --
+           nunca Legendary; slots RAW, sem elevacao, regra 18).
+  HOUSE    nivel dividido entre duas classes pela houserule (specs/
+           2026-07-26-regras-multiclasse.md): melhor rank entre classes,
+           elevacao de conjuracao ate metade do nivel de personagem, HP
+           por nivel de classe que concedeu, pericias com regra de delta.
+
+PERICIA/PILARES: 8 pilares (social, furtividade, ladroagem, atletismo,
+saber, medicina, natureza, percepcao), DC por nivel (PF2e Core tabela
+10-5). "Treinado num pilar" e sorteado com probabilidade
+min(1, n_pericias_do_personagem/10) -- proxy simplificado pra "o personagem
+tem pericia sobrando pra cobrir isso", nao uma escolha real de skill feat.
+Cada pilar coberto por PELO MENOS UM personagem do grupo testado conta como
+"coberto". Nao modela skill feat especifico (Assurance, Trick Magic Item
+etc.) nem circunstancia narrativa -- so alcance de numero vs DC.
+
+METODO ESTATISTICO: semente fixa por config (nivel, regime, combo, cenario)
+pra reprodutibilidade -- ver seed= em cada chamada de simular_encontro/
+simular_pilares em matriz.py. N e IC90 (1.645*desvio/raiz(n)) reportados
+junto da media, nunca so a media sozinha. Combate: n=500 por config.
+Pilares: n=200 por config (cada rodada ja embute 400 provas por pilar
+dentro de prova_pericia, entao o n efetivo de d20 rolado e maior).
+"""

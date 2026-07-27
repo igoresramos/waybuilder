@@ -1,7 +1,7 @@
 # Relatorio -- Extracao de Magias (kind=spell)
 
 - Total de magias no registro canonico: **1667**
-- Casadas com foundry (mechanized=true, dados criticos disponiveis): **1651**
+- Casadas com foundry (`xref.foundry` presente, dados criticos disponiveis): **1651**
 - Sem match no foundry (indefinidas): **16**
 - Escopo: AoN `category=spell` (2.461 docs brutos, legado+remaster) deduplicados por `remaster_id`/`legacy_id` -> 1667 conceitos canonicos.
 - Foundry: `packs/pf2e/spells/{spells,focus}` -- rituais (`packs/pf2e/spells/rituals`) fora do escopo (categoria separada na AoN: `ritual`, 201 docs).
@@ -148,11 +148,21 @@ Cura nunca rola contra nada no PF2e RAW -- listado por completude, nao e anomali
 
 ## Tradicoes
 
-- arcane: 781
-- occult: 640
-- primal: 590
-- divine: 444
-- sem tradicao (ex: algumas focus spells de classe): 531
+- arcane: 782
+- occult: 641
+- primal: 594
+- divine: 446
+- sem `tradicoes`: **526**, dos quais:
+  - focus spells (aceitavel -- a tradicao vem da classe que concede): **477**
+  - nao-focus, fechados via `tradicao_de_classe` (A9): **48** -- {'bard': 10, 'psychic': 18, 'summoner': 2, 'witch': 18}
+  - nao-focus, ainda irresolviveis: **1**
+    - Web of Influence (wb:spell/web-of-influence) -- traits=['detection', 'divination', 'uncommon'], sem tradicao no foundry nem na AoN, sem trait de classe pra derivar. Provavelmente magia de monstro/perigo (fora do escopo de PC), nao fica silenciada: listada aqui.
+
+## `level` (espelho de `rank`, A9)
+
+- Registros com `level == rank` (os dois emitidos, mesmo valor): **1667** / 1667
+- `rank` continua canonico; `level` existe so pra nao quebrar filtro de nivel no cliente
+  (spec v2, `prov.level = waybuilder~inferido:espelho-rank`).
 
 ## Rank (distribuicao)
 

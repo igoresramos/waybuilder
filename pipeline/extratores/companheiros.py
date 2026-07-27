@@ -80,6 +80,9 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 PIPELINE = os.path.dirname(AQUI)
 BRUTOS = os.path.join(PIPELINE, "dados_brutos")
 
+sys.path.insert(0, PIPELINE)
+import comum  # noqa: E402
+
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
 
 _CANDIDATOS_FOUNDRY = [
@@ -321,6 +324,11 @@ def montar(doc, kind, est, subtype=None):
         prov["text"] = "aon"
         text_ref = "wb:text/%s/%s" % (kind, sl)
 
+    # baseline: nenhuma destas kinds tem fonte de rule elements no Foundry
+    # (so familiar-ability tem, e sobrescreve abaixo quando casa por nome) --
+    # sem mecanica nenhuma pra converter, `grants_completos` e sucesso (true),
+    # nao perda. Nenhuma tem pre-requisito, entao `requires_parseado` e true.
+    grants_completos, requires_parseado = comum.mecanizacao(kind, False, False, False, True)
     reg = {
         "id": "wb:%s/%s" % (kind, sl),
         "kind": kind,
@@ -332,7 +340,8 @@ def montar(doc, kind, est, subtype=None):
         "requires": None,
         "grants": [],
         "text": text_ref,
-        "mechanized": False,
+        "grants_completos": grants_completos,
+        "requires_parseado": requires_parseado,
         "xref": {"aon": doc.get("id")},
         "prov": prov,
     }
@@ -398,8 +407,8 @@ def extrair():
         "por_kind": Counter(),
         "foundry_familiar_abilities": len(foundry_fa),
         "familiar_ability_casadas_foundry": 0,
-        "familiar_ability_mechanized_true": 0,
-        "familiar_ability_mechanized_false": 0,
+        "familiar_ability_grants_completos_true": 0,
+        "familiar_ability_grants_completos_false": 0,
         "rules_ignoradas": Counter(),
         "animal_companion_ataques_parseados": 0,
         "animal_companion_sem_ataque_no_texto": 0,
@@ -467,11 +476,12 @@ def extrair():
             reg["grants"] = grants
             if grants:
                 reg["prov"]["grants"] = "foundry"
-            reg["mechanized"] = not perdeu
-            if reg["mechanized"]:
-                est["familiar_ability_mechanized_true"] += 1
+            reg["grants_completos"], reg["requires_parseado"] = comum.mecanizacao(
+                "familiar-ability", bool(f["rules"]), perdeu, False, True)
+            if reg["grants_completos"]:
+                est["familiar_ability_grants_completos_true"] += 1
             else:
-                est["familiar_ability_mechanized_false"] += 1
+                est["familiar_ability_grants_completos_false"] += 1
             pub = f.get("publication") or {}
             if pub.get("license"):
                 if reg["source"] is None:
@@ -483,7 +493,9 @@ def extrair():
                 reg["traits"] = f["traits"]
                 reg["prov"]["traits"] = "foundry"
         else:
-            est["familiar_ability_mechanized_false"] += 1
+            # sem casamento no Foundry: nenhuma fonte de rule element pra esta
+            # habilidade, nada a converter -- baseline de `montar()` (true) fica.
+            est["familiar_ability_grants_completos_true"] += 1
         registros.append(reg)
 
     # ---- familiar-specific -----------------------------------------------
@@ -562,8 +574,8 @@ def main():
     print()
     print("familiar-ability casadas c/ foundry .. %d / %d" % (
         est["familiar_ability_casadas_foundry"], est["por_kind"].get("familiar-ability", 0)))
-    print("familiar-ability mechanized true/false %d / %d" % (
-        est["familiar_ability_mechanized_true"], est["familiar_ability_mechanized_false"]))
+    print("familiar-ability grants_completos true/false %d / %d" % (
+        est["familiar_ability_grants_completos_true"], est["familiar_ability_grants_completos_false"]))
     print("animal-companion ataques parseados ... %d" % est["animal_companion_ataques_parseados"])
     print("animal-companion com Melee sem parse . %d" % est["animal_companion_com_melee_mas_sem_parse"])
     print("eidolon ataques sugeridos parseados .. %d" % est["eidolon_ataques_sugeridos_parseados"])

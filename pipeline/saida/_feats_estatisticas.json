@@ -823,10 +823,11 @@
   "member of the pathfinder society affiliated with the school of swords": "Strength 14, Dexterity 14, or Constitution 14; member of the Pathfinder Society affiliated with the School of Swords",
   "in driving lore": "Dwarven Weapon Cunning;  in Driving Lore"
  },
- "mechanized_true": 5808,
- "mechanized_false": 613,
- "motivo_nao_mechanized": {
-  "requires-nao-parseado": 587,
+ "grants_completos_true": 6394,
+ "grants_completos_false": 27,
+ "requires_parseado_true": 5834,
+ "requires_parseado_false": 587,
+ "motivo_grants_incompletos": {
   "rule-element-nao-modelado": 27
  },
  "rules_ignoradas": {
@@ -890,10 +891,10 @@
   "homonimos": 3118
  },
  "arquetipos_emitidos": 248,
- "feats_com_arquetipo": 2266,
+ "feats_com_arquetipo": 2252,
  "aon_arch_contaminacao": {
-  "so-aon-afirma-arquetipo": 326,
-  "aon-multivalorado": 70,
-  "aon-nao-tem-o-do-foundry": 19
+  "so-aon-afirma-arquetipo": 340,
+  "aon-multivalorado": 58,
+  "aon-nao-tem-o-do-foundry": 5
  }
 }
