@@ -1037,8 +1037,10 @@ def escrever_relatorio(dados: dict) -> str:
     linhas.append(
         "- Todo campo preenchido em `conjuracao.json` (deste extrator) tem "
         "`prov` correspondente -- portao 1 da spec.\n"
-        "- Nao ha `conflitos` registrados: como so uma fonte materializa a "
-        "tabela numerica, nao houve dois valores pra comparar campo a campo.\n"
+        f"- `conflitos` registrados: **{len(relatorio['conflitos_registrados'])}** "
+        f"classe(s) ({', '.join(relatorio['conflitos_registrados']) or '-'}) -- "
+        "divergencia PDF x pf2etools nunca e silenciada, mesma operacao que a "
+        "escolha (`escolher_slots()`, mesmo formato de `comum.escolher()`).\n"
         "- `grants_completos` / `requires_parseado`: nao aplicaveis a este "
         "arquivo (nao segue o envelope `kind: class-feature` da spec-base; "
         "e um arquivo auxiliar de dados tabulares referenciado por "
@@ -1078,7 +1080,8 @@ def main() -> None:
 
     print(f"[conjuracao] {len(dados['classes'])} classes escritas em saida/conjuracao.json")
     print(
-        f"[conjuracao] slots completos: {len(relatorio_interno['slots_confirmados_pf2etools'])}, "
+        f"[conjuracao] slots via PDF (fonte vencedora): {len(relatorio_interno['slots_confirmados_pdf'])}, "
+        f"conflitos com pf2etools: {len(relatorio_interno['conflitos_registrados'])}, "
         f"sem cobertura: {len(relatorio_interno['sem_cobertura'])}"
     )
 

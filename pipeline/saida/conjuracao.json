@@ -28,7 +28,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-wizard-pc1.json, tabela 'Wizard Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/wizard.json",
@@ -50,75 +50,74 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
           "ranks": {
             "1": 2
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 3
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 2
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 2
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 3
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -126,10 +125,10 @@
             "4": 3,
             "5": 2
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -137,10 +136,10 @@
             "4": 3,
             "5": 3
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -149,10 +148,10 @@
             "5": 3,
             "6": 2
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -161,10 +160,10 @@
             "5": 3,
             "6": 3
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -174,10 +173,10 @@
             "6": 3,
             "7": 2
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -187,10 +186,10 @@
             "6": 3,
             "7": 3
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -201,10 +200,10 @@
             "7": 3,
             "8": 2
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -215,10 +214,10 @@
             "7": 3,
             "8": 3
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -230,10 +229,10 @@
             "8": 3,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -245,10 +244,10 @@
             "8": 3,
             "9": 3
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -260,11 +259,14 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -277,12 +279,22 @@
             "9": 3,
             "10": 1
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         }
       },
-      "slots_footnotes": [
-        "* The archwizard's spellcraft class feature gives you a 10th-rank spell slot that works a bit differently from other spell slots."
-      ]
+      "source": {
+        "book": "Player Core",
+        "page": 195,
+        "page_advancement_table": 194
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Wizard Spells per Day', pagina 195. 'N*' no rank 10 (niveis 19-20) = a feature 'archwizard's spellcraft' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "notas": "Padrao identico ao Bard/Cleric/Druid/Witch -- conjurador pleno prepared (spellbook), sem irregularidade alem do rank 10."
+      }
     },
     "cleric": {
       "id": "wb:class-feature/cleric-spellcasting",
@@ -295,7 +307,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (regex sobre as 12 class-features de doutrina first..final-doctrine-{cloistered-cleric,warpriest}, ver conjuracao.md)",
         "focus_pool": "foundry (regex sobre Domain Initiate, feat granted pela Primeira Doutrina)",
-        "slots_per_level": "pf2etools (class-cleric-pc1.json, tabela 'Cleric Spells per Day')",
+        "slots_per_level": "waybuilder",
         "divine_font": "foundry (regex sobre packs/pf2e/class-features/divine-font.json)"
       },
       "xref": {
@@ -333,75 +345,74 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
           "ranks": {
             "1": 2
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 3
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 2
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 2
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 3
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -409,10 +420,10 @@
             "4": 3,
             "5": 2
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -420,10 +431,10 @@
             "4": 3,
             "5": 3
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -432,10 +443,10 @@
             "5": 3,
             "6": 2
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -444,10 +455,10 @@
             "5": 3,
             "6": 3
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -457,10 +468,10 @@
             "6": 3,
             "7": 2
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -470,10 +481,10 @@
             "6": 3,
             "7": 3
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -484,10 +495,10 @@
             "7": 3,
             "8": 2
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -498,10 +509,10 @@
             "7": 3,
             "8": 3
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -513,10 +524,10 @@
             "8": 3,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -528,10 +539,10 @@
             "8": 3,
             "9": 3
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -543,11 +554,14 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -560,13 +574,22 @@
             "9": 3,
             "10": 1
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         }
       },
-      "slots_footnotes": [
-        "* Your divine font gives you additional {@spell heal|PC1} or {@spell harm|PC1} spells of this rank. The number is 4 at 1st level, 5 at 5th level, and 6 at 15th level.",
-        "† The miraculous spell class feature gives you a 10th-rank spell slot that works a bit differently from other spell slots."
-      ],
+      "source": {
+        "book": "Player Core",
+        "page": 111,
+        "page_advancement_table": 110
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Cleric Spells per Day', pagina 111. 'N*' no rank 10 (niveis 19-20) = a feature 'miraculous spell' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "notas": "A tabela impressa marca com '*' o rank mais alto disponivel em cada nivel (nota: 'Your divine font gives you additional heal or harm spells of this rank. The number is 4 at 1st level, 5 at 5th level, and 6 at 15th level') -- e so informativo de ONDE o Divine Font se aplica, nao um numero diferente do que ja esta na celula. Os +4/+5/+6 slots extras do Divine Font em si ja estao capturados a parte (extract_divine_font() em conjuracao.py, campo divine_font em conjuracao.json) -- nao duplicados aqui. Doutrina (Cloistered/Warpriest) afeta a PROFICIENCIA (ja tratado a parte, TODO item 73), nao a contagem de slots -- a advancement table do cleric (pagina 110) nao lista milestones de spellcaster porque isso vem das 12 features de doutrina, nao da advancement table generica."
+      },
       "divine_font": {
         "at_level": {
           "1": 4,
@@ -592,7 +615,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-druid-pc1.json, tabela 'Druid Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/druid.json",
@@ -614,75 +637,74 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
           "ranks": {
             "1": 2
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 3
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 2
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 2
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 3
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -690,10 +712,10 @@
             "4": 3,
             "5": 2
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -701,10 +723,10 @@
             "4": 3,
             "5": 3
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -713,10 +735,10 @@
             "5": 3,
             "6": 2
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -725,10 +747,10 @@
             "5": 3,
             "6": 3
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -738,10 +760,10 @@
             "6": 3,
             "7": 2
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -751,10 +773,10 @@
             "6": 3,
             "7": 3
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -765,10 +787,10 @@
             "7": 3,
             "8": 2
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -779,10 +801,10 @@
             "7": 3,
             "8": 3
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -794,10 +816,10 @@
             "8": 3,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -809,10 +831,10 @@
             "8": 3,
             "9": 3
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -824,11 +846,14 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -841,12 +866,22 @@
             "9": 3,
             "10": 1
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         }
       },
-      "slots_footnotes": [
-        "* The primal hierophant class feature gives you a 10th-rank spell slot that works a bit differently from other spell slots."
-      ]
+      "source": {
+        "book": "Player Core",
+        "page": 125,
+        "page_advancement_table": 124
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Druid Spells per Day', pagina 125. 'N*' no rank 10 (niveis 19-20) = a feature 'primal hierophant' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "notas": "Padrao identico ao Bard/Cleric/Witch/Wizard -- conjurador pleno prepared, sem irregularidade alem do rank 10."
+      }
     },
     "sorcerer": {
       "id": "wb:class-feature/sorcerer-spellcasting",
@@ -859,7 +894,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-sorcerer.json, tabela 'Sorcerer Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/sorcerer.json",
@@ -881,75 +916,74 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
           "ranks": {
             "1": 3
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 4
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 3
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
             "3": 3
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
             "3": 4
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
             "3": 4,
             "4": 3
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
             "3": 4,
             "4": 4
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -957,10 +991,10 @@
             "4": 4,
             "5": 3
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -968,10 +1002,10 @@
             "4": 4,
             "5": 4
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -980,10 +1014,10 @@
             "5": 4,
             "6": 3
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -992,10 +1026,10 @@
             "5": 4,
             "6": 4
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -1005,10 +1039,10 @@
             "6": 4,
             "7": 3
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -1018,10 +1052,10 @@
             "6": 4,
             "7": 4
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -1032,10 +1066,10 @@
             "7": 4,
             "8": 3
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -1046,10 +1080,10 @@
             "7": 4,
             "8": 4
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -1061,10 +1095,10 @@
             "8": 4,
             "9": 3
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -1076,10 +1110,10 @@
             "8": 4,
             "9": 4
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -1091,11 +1125,14 @@
             "8": 4,
             "9": 4,
             "10": 1
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
             "1": 4,
             "2": 4,
@@ -1108,12 +1145,22 @@
             "9": 4,
             "10": 1
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         }
       },
-      "slots_footnotes": [
-        "* The bloodline paragon class feature gives you a 10th-level spell slot that works a bit differently from other spell slots."
-      ]
+      "source": {
+        "book": "Player Core 2",
+        "page": 147,
+        "page_advancement_table": 146
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Sorcerer Spells per Day', pagina 147. 'N*' no rank 10 (niveis 19-20) = a feature 'bloodline paragon' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "notas": "IRREGULARIDADE: mesmo padrao do Oracle -- 3 slots no rank de entrada, 4 no seguinte (bonus classico dos 2 conjuradores 'spontaneos' remaster). Tradicao variavel por bloodline. pf2etools so tem arquivo legado (class-sorcerer.json, sem -pc1/-pc2), mas os numeros batem 100% com a tabela do Player Core 2 remaster lida diretamente do PDF."
+      }
     },
     "bard": {
       "id": "wb:class-feature/bard-spellcasting",
@@ -1126,7 +1173,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-bard-pc1.json, tabela 'Bard Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/bard.json",
@@ -1148,75 +1195,74 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
           "ranks": {
             "1": 2
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 3
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 2
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 2
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 3
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1224,10 +1270,10 @@
             "4": 3,
             "5": 2
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1235,10 +1281,10 @@
             "4": 3,
             "5": 3
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1247,10 +1293,10 @@
             "5": 3,
             "6": 2
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1259,10 +1305,10 @@
             "5": 3,
             "6": 3
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1272,10 +1318,10 @@
             "6": 3,
             "7": 2
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1285,10 +1331,10 @@
             "6": 3,
             "7": 3
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1299,10 +1345,10 @@
             "7": 3,
             "8": 2
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1313,10 +1359,10 @@
             "7": 3,
             "8": 3
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1328,10 +1374,10 @@
             "8": 3,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1343,10 +1389,10 @@
             "8": 3,
             "9": 3
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1358,11 +1404,14 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1375,12 +1424,22 @@
             "9": 3,
             "10": 1
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         }
       },
-      "slots_footnotes": [
-        "* The magnum opus class feature gives you a 10th-rank spell slot that works a bit differently from other spell slots."
-      ]
+      "source": {
+        "book": "Player Core",
+        "page": 97,
+        "page_advancement_table": 96
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Bard Spells per Day', pagina 97. 'N*' no rank 10 (niveis 19-20) = a feature 'magnum opus' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "notas": "Remaster: Bard usa spell repertoire (spontaneo) mas a CONTAGEM de slots segue o padrao identico ao dos conjuradores prepared (2 no rank de entrada, 3 no seguinte) -- nao ganha o slot bonus que Oracle/Sorcerer tem. Confirmado batendo PDF x pf2etools."
+      }
     },
     "witch": {
       "id": "wb:class-feature/witch-spellcasting",
@@ -1393,7 +1452,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-witch-pc1.json, tabela 'Witch Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/witch.json",
@@ -1415,75 +1474,74 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
           "ranks": {
             "1": 2
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 3
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 2
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 2
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
             "3": 3,
             "4": 3
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1491,10 +1549,10 @@
             "4": 3,
             "5": 2
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1502,10 +1560,10 @@
             "4": 3,
             "5": 3
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1514,10 +1572,10 @@
             "5": 3,
             "6": 2
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1526,10 +1584,10 @@
             "5": 3,
             "6": 3
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1539,10 +1597,10 @@
             "6": 3,
             "7": 2
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1552,10 +1610,10 @@
             "6": 3,
             "7": 3
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1566,10 +1624,10 @@
             "7": 3,
             "8": 2
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1580,10 +1638,10 @@
             "7": 3,
             "8": 3
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1595,10 +1653,10 @@
             "8": 3,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1610,10 +1668,10 @@
             "8": 3,
             "9": 3
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1625,11 +1683,14 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
             "1": 3,
             "2": 3,
@@ -1642,12 +1703,22 @@
             "9": 3,
             "10": 1
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         }
       },
-      "slots_footnotes": [
-        "* The patron's gift class feature gives you a 10th-rank spell slot that works a bit differently from other spell slots."
-      ]
+      "source": {
+        "book": "Player Core",
+        "page": 181,
+        "page_advancement_table": 180
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Witch Spells per Day', pagina 181. 'N*' no rank 10 (niveis 19-20) = a feature 'patron's gift' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "notas": "Tradicao variavel por patron (ver TRADITION_VARIAVEL em conjuracao.py) -- a class-feature de conjuracao nao fixa uma tradicao, mesma mecanica do Sorcerer (bloodline) e Summoner (eidolon). Contagem de slots segue o padrao pleno normal (nao ganha bonus como Oracle/Sorcerer)."
+      }
     },
     "oracle": {
       "id": "wb:class-feature/oracle-spellcasting",
@@ -1660,7 +1731,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-oracle.json, tabela 'Oracle Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/oracle.json",
@@ -1682,239 +1753,727 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
-          "ranks": {
-            "1": 2
-          },
-          "max_rank": 1
-        },
-        "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 3
           },
+          "cantrips": 5,
+          "max_rank": 1
+        },
+        "2": {
+          "ranks": {
+            "1": 4
+          },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 2
+            "1": 4,
+            "2": 3
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3
+            "1": 4,
+            "2": 4
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 2
+            "1": 4,
+            "2": 4,
+            "3": 3
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3
+            "1": 4,
+            "2": 4,
+            "3": 4
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 3
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 3
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 3
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 3
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 3
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3,
-            "9": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 3
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3,
-            "9": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 4
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3,
-            "9": 3,
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 4,
             "10": 1
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3,
-            "9": 3,
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 4,
             "10": 1
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         }
       },
-      "slots_footnotes": [
-        "* The oracular clarity class feature gives you a 10th level spell slot that works differently from other spell slots."
-      ]
+      "conflitos": [
+        {
+          "campo": "slots_per_level",
+          "escolhido": "waybuilder",
+          "waybuilder": {
+            "1": {
+              "ranks": {
+                "1": 3
+              },
+              "cantrips": 5,
+              "max_rank": 1
+            },
+            "2": {
+              "ranks": {
+                "1": 4
+              },
+              "cantrips": 5,
+              "max_rank": 1
+            },
+            "3": {
+              "ranks": {
+                "1": 4,
+                "2": 3
+              },
+              "cantrips": 5,
+              "max_rank": 2
+            },
+            "4": {
+              "ranks": {
+                "1": 4,
+                "2": 4
+              },
+              "cantrips": 5,
+              "max_rank": 2
+            },
+            "5": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 3
+              },
+              "cantrips": 5,
+              "max_rank": 3
+            },
+            "6": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4
+              },
+              "cantrips": 5,
+              "max_rank": 3
+            },
+            "7": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 3
+              },
+              "cantrips": 5,
+              "max_rank": 4
+            },
+            "8": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4
+              },
+              "cantrips": 5,
+              "max_rank": 4
+            },
+            "9": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 3
+              },
+              "cantrips": 5,
+              "max_rank": 5
+            },
+            "10": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4
+              },
+              "cantrips": 5,
+              "max_rank": 5
+            },
+            "11": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 3
+              },
+              "cantrips": 5,
+              "max_rank": 6
+            },
+            "12": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4
+              },
+              "cantrips": 5,
+              "max_rank": 6
+            },
+            "13": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 3
+              },
+              "cantrips": 5,
+              "max_rank": 7
+            },
+            "14": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4
+              },
+              "cantrips": 5,
+              "max_rank": 7
+            },
+            "15": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 3
+              },
+              "cantrips": 5,
+              "max_rank": 8
+            },
+            "16": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4
+              },
+              "cantrips": 5,
+              "max_rank": 8
+            },
+            "17": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4,
+                "9": 3
+              },
+              "cantrips": 5,
+              "max_rank": 9
+            },
+            "18": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4,
+                "9": 4
+              },
+              "cantrips": 5,
+              "max_rank": 9
+            },
+            "19": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4,
+                "9": 4,
+                "10": 1
+              },
+              "cantrips": 5,
+              "ranks_raw": {
+                "10": "1*"
+              },
+              "max_rank": 10
+            },
+            "20": {
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4,
+                "9": 4,
+                "10": 1
+              },
+              "cantrips": 5,
+              "ranks_raw": {
+                "10": "1*"
+              },
+              "max_rank": 10
+            }
+          },
+          "pf2etools": {
+            "1": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 2
+              },
+              "max_rank": 1
+            },
+            "2": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3
+              },
+              "max_rank": 1
+            },
+            "3": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 2
+              },
+              "max_rank": 2
+            },
+            "4": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3
+              },
+              "max_rank": 2
+            },
+            "5": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 2
+              },
+              "max_rank": 3
+            },
+            "6": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3
+              },
+              "max_rank": 3
+            },
+            "7": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 2
+              },
+              "max_rank": 4
+            },
+            "8": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3
+              },
+              "max_rank": 4
+            },
+            "9": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 2
+              },
+              "max_rank": 5
+            },
+            "10": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3
+              },
+              "max_rank": 5
+            },
+            "11": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2
+              },
+              "max_rank": 6
+            },
+            "12": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3
+              },
+              "max_rank": 6
+            },
+            "13": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 2
+              },
+              "max_rank": 7
+            },
+            "14": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3
+              },
+              "max_rank": 7
+            },
+            "15": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 2
+              },
+              "max_rank": 8
+            },
+            "16": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3
+              },
+              "max_rank": 8
+            },
+            "17": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3,
+                "9": 2
+              },
+              "max_rank": 9
+            },
+            "18": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3,
+                "9": 3
+              },
+              "max_rank": 9
+            },
+            "19": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3,
+                "9": 3,
+                "10": 1
+              },
+              "max_rank": 10
+            },
+            "20": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3,
+                "9": 3,
+                "10": 1
+              },
+              "max_rank": 10
+            }
+          }
+        }
+      ],
+      "source": {
+        "book": "Player Core 2",
+        "page": 131,
+        "page_advancement_table": 130
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Oracle Spells per Day', pagina 131. 'N*' no rank 10 (niveis 19-20) = a feature 'oracular clarity' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "notas": "IRREGULARIDADE CONFIRMADA E CORRIGIDA: a primeira tentativa de cross-check via pf2etools apontou o padrao generico (2/3), que e o valor LEGADO (pre-remaster) -- o Oracle remaster (Player Core 2) ganhou 1 slot A MAIS por rank (3 no rank de entrada, 4 no seguinte), igual ao Sorcerer. Isso NAO estava documentado no pf2etools (arquivo sem variante -pc1) e so foi pego comparando literalmente PDF vs pf2etools linha a linha -- diferenca real de regra entre edicoes, nao erro de leitura. Fonte que resolveu o conflito: Foundry (oracle-spellcasting.json), que reflete a regra remaster vigente. Tradicao divine e fixa (nao depende de mystery, ao contrario do que se poderia supor por analogia com sorcerer/witch)."
+      }
     },
     "psychic": {
       "id": "wb:class-feature/psychic-spellcasting",
@@ -1925,7 +2484,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-psychic.json, tabela 'Psychic Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/psychic.json",
@@ -1947,83 +2506,82 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 3,
           "ranks": {
             "1": 1
           },
-          "max_rank": 1,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 1
         },
         "2": {
-          "cantrips": 3,
           "ranks": {
             "1": 2
           },
-          "max_rank": 1,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 1
         },
         "3": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 1
           },
-          "max_rank": 2,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 2
         },
         "4": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2
           },
-          "max_rank": 2,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 2
         },
         "5": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
             "3": 1
           },
-          "max_rank": 3,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 3
         },
         "6": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
             "3": 2
           },
-          "max_rank": 3,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 3
         },
         "7": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
             "3": 2,
             "4": 1
           },
-          "max_rank": 4,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 4
         },
         "8": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
             "3": 2,
             "4": 2
           },
-          "max_rank": 4,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 4
         },
         "9": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2031,11 +2589,11 @@
             "4": 2,
             "5": 1
           },
-          "max_rank": 5,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 5
         },
         "10": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2043,11 +2601,11 @@
             "4": 2,
             "5": 2
           },
-          "max_rank": 5,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 5
         },
         "11": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2056,11 +2614,11 @@
             "5": 2,
             "6": 1
           },
-          "max_rank": 6,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 6
         },
         "12": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2069,11 +2627,11 @@
             "5": 2,
             "6": 2
           },
-          "max_rank": 6,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 6
         },
         "13": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2083,11 +2641,11 @@
             "6": 2,
             "7": 1
           },
-          "max_rank": 7,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 7
         },
         "14": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2097,11 +2655,11 @@
             "6": 2,
             "7": 2
           },
-          "max_rank": 7,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 7
         },
         "15": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2112,11 +2670,11 @@
             "7": 2,
             "8": 1
           },
-          "max_rank": 8,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 8
         },
         "16": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2127,11 +2685,11 @@
             "7": 2,
             "8": 2
           },
-          "max_rank": 8,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 8
         },
         "17": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2143,11 +2701,11 @@
             "8": 2,
             "9": 1
           },
-          "max_rank": 9,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 9
         },
         "18": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2159,11 +2717,11 @@
             "8": 2,
             "9": 2
           },
-          "max_rank": 9,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "max_rank": 9
         },
         "19": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2176,11 +2734,14 @@
             "9": 2,
             "10": 1
           },
-          "max_rank": 10,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "ranks_raw": {
+            "10": "1*"
+          },
+          "max_rank": 10
         },
         "20": {
-          "cantrips": 3,
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2193,14 +2754,23 @@
             "9": 2,
             "10": 1
           },
-          "max_rank": 10,
-          "cantrips_raw": "3*"
+          "cantrips": 3,
+          "cantrips_raw": "3*",
+          "ranks_raw": {
+            "10": "1*"
+          },
+          "max_rank": 10
         }
       },
-      "slots_footnotes": [
-        "* Your conscious mind gives you three additional cantrips with amps. One cantrip is unique to your conscious mind.",
-        "† The infinite mind class feature gives you a 10th-level spell slot that works a bit differently from other spell slots."
-      ]
+      "source": {
+        "book": "Dark Archive",
+        "page": 11,
+        "page_advancement_table": 11
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Table 2: Psychic Spells per Day (legado, pre-remaster -- classe nunca reeditada em Player Core/Player Core 2, nem pf2etools nem foundry tem variante remaster)', pagina 11. 'N*' no rank 10 (niveis 19-20) = a feature 'infinite mind' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "notas": "Classe NUNCA foi reimpressa em Player Core ou Player Core 2 -- unica fonte oficial continua sendo Dark Archive (2022, pre-remaster, usa 'level' em vez de 'rank' na tabela). Padrao proprio, mais fraco que os outros: 1 slot no rank de entrada (nao 2), sobe pra 2 no nivel seguinte (nao 3), nunca chega a 3 slots em rank nenhum. Cantrips base e 3 (nao 5) -- rodape diz 'Your conscious mind gives you three additional cantrips with amps', ou seja sao 3 cantrips normais + 3 psi cantrips especiais via feature de conscious mind, nao 6 cantrips normais. Compensado por outras features da classe (amps, thought echoes) fora do escopo de slots. Cross-check via pf2etools (class-psychic.json) e MESMA fonte fisica (Dark Archive) materializada por outro pipeline -- e um cross-check mais fraco que os outros 7 (nao e fonte independente do livro), registrado aqui com essa ressalva."
+      }
     },
     "animist": {
       "id": "wb:class-feature/animist-apparition-spellcasting",
@@ -2221,52 +2791,278 @@
         "cap": 3,
         "source_feature": "Animist & Apparition Spellcasting"
       },
-      "slots_per_level": null,
-      "slots_coverage": "parcial -- so nivel 1 (confirmado) e um exemplo textual do nivel 2",
-      "slots_confirmed_partial": {
+      "slots_per_level": {
         "1": {
-          "main_pool": {
-            "cantrips": 2,
-            "ranks": {
-              "1": 1
-            }
+          "ranks": {},
+          "cantrips_raw": "2+2",
+          "ranks_raw": {
+            "1": "1+1"
           },
-          "apparition_pool": {
-            "cantrips": 2,
-            "ranks": {
-              "1": 1
-            }
-          },
-          "confirmado_em": [
-            "foundry",
-            "aon"
-          ]
+          "max_rank": 1
         },
         "2": {
-          "main_pool": {
-            "ranks": {
-              "1": 2
-            }
+          "ranks": {},
+          "cantrips_raw": "2+2",
+          "ranks_raw": {
+            "1": "2+1"
           },
-          "apparition_pool_extra_1st_rank": 1,
-          "nota": "AoN descreve como '2+1' 1st-rank slots (2 do pool principal + 1 do pool de apparition)",
-          "confirmado_em": [
-            "aon"
-          ]
+          "max_rank": 1
+        },
+        "3": {
+          "ranks": {},
+          "cantrips_raw": "2+2",
+          "ranks_raw": {
+            "1": "2+1",
+            "2": "1+1"
+          },
+          "max_rank": 2
+        },
+        "4": {
+          "ranks": {},
+          "cantrips_raw": "2+2",
+          "ranks_raw": {
+            "1": "2+1",
+            "2": "2+1"
+          },
+          "max_rank": 2
+        },
+        "5": {
+          "ranks": {},
+          "cantrips_raw": "2+2",
+          "ranks_raw": {
+            "1": "2+1",
+            "2": "2+1",
+            "3": "1+1"
+          },
+          "max_rank": 3
+        },
+        "6": {
+          "ranks": {},
+          "cantrips_raw": "2+2",
+          "ranks_raw": {
+            "1": "2+1",
+            "2": "2+1",
+            "3": "2+1"
+          },
+          "max_rank": 3
+        },
+        "7": {
+          "ranks": {},
+          "cantrips_raw": "2+3",
+          "ranks_raw": {
+            "1": "2+1",
+            "2": "2+1",
+            "3": "2+1",
+            "4": "1+1"
+          },
+          "max_rank": 4
+        },
+        "8": {
+          "ranks": {},
+          "cantrips_raw": "2+3",
+          "ranks_raw": {
+            "1": "2+1",
+            "2": "2+1",
+            "3": "2+1",
+            "4": "2+1"
+          },
+          "max_rank": 4
+        },
+        "9": {
+          "ranks": {},
+          "cantrips_raw": "2+3",
+          "ranks_raw": {
+            "1": "2+1",
+            "2": "2+1",
+            "3": "2+1",
+            "4": "2+1",
+            "5": "1+1"
+          },
+          "max_rank": 5
+        },
+        "10": {
+          "ranks": {},
+          "cantrips_raw": "2+3",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+1",
+            "5": "2+1"
+          },
+          "max_rank": 5
+        },
+        "11": {
+          "ranks": {},
+          "cantrips_raw": "2+3",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+1",
+            "6": "1+1"
+          },
+          "max_rank": 6
+        },
+        "12": {
+          "ranks": {},
+          "cantrips_raw": "2+3",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+1",
+            "6": "2+1"
+          },
+          "max_rank": 6
+        },
+        "13": {
+          "ranks": {},
+          "cantrips_raw": "2+3",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+2",
+            "6": "2+1",
+            "7": "1+1"
+          },
+          "max_rank": 7
+        },
+        "14": {
+          "ranks": {},
+          "cantrips_raw": "2+3",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+2",
+            "6": "2+1",
+            "7": "2+1"
+          },
+          "max_rank": 7
+        },
+        "15": {
+          "ranks": {},
+          "cantrips_raw": "2+4",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+2",
+            "6": "2+2",
+            "7": "2+1",
+            "8": "1+1"
+          },
+          "max_rank": 8
+        },
+        "16": {
+          "ranks": {},
+          "cantrips_raw": "2+4",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+2",
+            "6": "2+2",
+            "7": "2+1",
+            "8": "2+1"
+          },
+          "max_rank": 8
+        },
+        "17": {
+          "ranks": {},
+          "cantrips_raw": "2+4",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+2",
+            "6": "2+2",
+            "7": "2+2",
+            "8": "2+1",
+            "9": "1+1"
+          },
+          "max_rank": 9
+        },
+        "18": {
+          "ranks": {},
+          "cantrips_raw": "2+4",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+2",
+            "6": "2+2",
+            "7": "2+2",
+            "8": "2+1",
+            "9": "2+1"
+          },
+          "max_rank": 9
+        },
+        "19": {
+          "ranks": {},
+          "cantrips_raw": "2+4",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+2",
+            "6": "2+2",
+            "7": "2+2",
+            "8": "2+2",
+            "9": "2+1",
+            "10": "0+1*"
+          },
+          "max_rank": 10
+        },
+        "20": {
+          "ranks": {},
+          "cantrips_raw": "2+4",
+          "ranks_raw": {
+            "1": "2+2",
+            "2": "2+2",
+            "3": "2+2",
+            "4": "2+2",
+            "5": "2+2",
+            "6": "2+2",
+            "7": "2+2",
+            "8": "2+2",
+            "9": "2+1",
+            "10": "0+1*"
+          },
+          "max_rank": 10
         }
       },
-      "slots_not_covered": "tabela completa niveis 1-20 de ambos os pools (principal e apparition) nao existe estruturada em nenhuma das 3 fontes fixadas; nao foi codificada a mao para nao arriscar numero nao verificavel",
       "prov": {
         "tradition": "aon (campo 'tradition': ['Divine'])",
         "type": "foundry (texto: 'you are a prepared spellcaster'; pool de apparition e explicitamente 'spontaneous')",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre animist-apparition-spellcasting.json, secao 'Vessel Spells')",
-        "slots_per_level": "NAO COBERTO -- ver slots_not_covered"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/animist.json",
         "foundry_feature": "packs/pf2e/class-features/animist-apparition-spellcasting.json",
         "aon": "class-64"
+      },
+      "source": {
+        "book": "War of Immortals",
+        "page": 13,
+        "page_advancement_table": 12
+      },
+      "slots_footnotes": {
+        "notacao": "cada valor e 'X+Y' onde X = slots via animist spellcasting (prepared, lista divine comum) e Y = slots via apparition spellcasting (spontaneous, repertorio das apparitions atuned). Tabela fonte: 'Animist Spells per Day', pagina 13.",
+        "notas": "1st-rank aparece na coluna '1' mesmo no nivel 1 (nao ha coluna cantrip separada de slot 0 alem de cantrips). *Rank 10 (nivel 19-20): feature 'supreme incarnation' da um slot de apparition de rank 10 que funciona diferente dos demais slots (nao e um slot normal, ver texto da feature). Cantrips tambem tem componente dupla (animist+apparition) mas a tabela imprime como valor unico combinado (ex: 2+2 = 2 cantrips animist + 2 cantrips apparition)."
       }
     },
     "magus": {
@@ -2281,7 +3077,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-magus.json, tabela 'Magus Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/magus.json",
@@ -2302,167 +3098,215 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
           "ranks": {
             "1": 1
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 2
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
             "1": 2,
             "2": 1
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
             "1": 2,
             "2": 2
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
             "2": 2,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
             "2": 2,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
             "3": 2,
             "4": 2
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "2": "0*"
           },
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
             "3": 2,
             "4": 2
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "2": "0*"
+          },
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
             "4": 2,
             "5": 2
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "2": "0*"
           },
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
             "4": 2,
             "5": 2
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "2": "0*"
+          },
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
             "5": 2,
             "6": 2
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "3": "0*"
           },
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
             "5": 2,
             "6": 2
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "3": "0*"
+          },
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
             "6": 2,
             "7": 2
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
             "6": 2,
             "7": 2
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "4": "0*"
+          },
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
             "7": 2,
             "8": 2
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
             "7": 2,
             "8": 2
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "4": "0*"
+          },
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
             "8": 2,
             "9": 2
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
             "8": 2,
             "9": 2
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
             "8": 2,
             "9": 2
+          },
+          "cantrips": 5,
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 9
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
             "8": 2,
             "9": 2
           },
+          "cantrips": 5,
+          "ranks_raw": {
+            "4": "0*"
+          },
           "max_rank": 9
         }
       },
-      "slots_footnotes": [
-        "* The studious spells class feature gives you extra slots of this level for specific spells (page 41)."
-      ]
+      "source": {
+        "book": "Secrets of Magic",
+        "page": 39,
+        "page_advancement_table": 36
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Table 2-2: Magus Spells per Day', pagina 39. '-*' = rank cuja unica vaga vem exclusivamente da feature 'studious spells' (nivel 7+, slot extra fixo para spells especificas, nao e slot normal preparavel livremente -- ver pagina 41 do livro).",
+        "notas": "Regra explicita do livro: no maximo 2 slots do rank mais alto disponivel, e (se ja castar rank 2+) no maximo 2 slots do rank imediatamente abaixo -- os ranks intermediarios ficam vazios ('-') conforme o magus sobe de nivel e os ranks baixos saem de uso. A coluna marcada com '*' e um slot fixo que so existe por causa da feature 'studious spells' (ganha no nivel 7), nao e um slot preparavel livremente como os outros -- registrei como '0*' para deixar explicito que a leitura literal da tabela mostra travessao, mas a feature dá acesso a spells especificas nesse rank. Nao inventei o mecanismo de studious spells em detalhe -- so confirmei a existencia via titulo da nota de rodape da tabela; o detalhe fica na pagina 41, nao lida."
+      }
     },
     "summoner": {
       "id": "wb:class-feature/summoner-spellcasting",
@@ -2475,7 +3319,7 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-summoner.json, tabela 'Summoner Spells per Day')"
+        "slots_per_level": "waybuilder"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/summoner.json",
@@ -2496,165 +3340,173 @@
       },
       "slots_per_level": {
         "1": {
-          "cantrips": 5,
           "ranks": {
             "1": 1
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "2": {
-          "cantrips": 5,
           "ranks": {
             "1": 2
           },
+          "cantrips": 5,
           "max_rank": 1
         },
         "3": {
-          "cantrips": 5,
           "ranks": {
             "1": 2,
             "2": 1
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "4": {
-          "cantrips": 5,
           "ranks": {
             "1": 2,
             "2": 2
           },
+          "cantrips": 5,
           "max_rank": 2
         },
         "5": {
-          "cantrips": 5,
           "ranks": {
             "2": 2,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "6": {
-          "cantrips": 5,
           "ranks": {
             "2": 2,
             "3": 2
           },
+          "cantrips": 5,
           "max_rank": 3
         },
         "7": {
-          "cantrips": 5,
           "ranks": {
             "3": 2,
             "4": 2
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "8": {
-          "cantrips": 5,
           "ranks": {
             "3": 2,
             "4": 2
           },
+          "cantrips": 5,
           "max_rank": 4
         },
         "9": {
-          "cantrips": 5,
           "ranks": {
             "4": 2,
             "5": 2
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "10": {
-          "cantrips": 5,
           "ranks": {
             "4": 2,
             "5": 2
           },
+          "cantrips": 5,
           "max_rank": 5
         },
         "11": {
-          "cantrips": 5,
           "ranks": {
             "5": 2,
             "6": 2
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "12": {
-          "cantrips": 5,
           "ranks": {
             "5": 2,
             "6": 2
           },
+          "cantrips": 5,
           "max_rank": 6
         },
         "13": {
-          "cantrips": 5,
           "ranks": {
             "6": 2,
             "7": 2
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "14": {
-          "cantrips": 5,
           "ranks": {
             "6": 2,
             "7": 2
           },
+          "cantrips": 5,
           "max_rank": 7
         },
         "15": {
-          "cantrips": 5,
           "ranks": {
             "7": 2,
             "8": 2
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "16": {
-          "cantrips": 5,
           "ranks": {
             "7": 2,
             "8": 2
           },
+          "cantrips": 5,
           "max_rank": 8
         },
         "17": {
-          "cantrips": 5,
           "ranks": {
             "8": 2,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "18": {
-          "cantrips": 5,
           "ranks": {
             "8": 2,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "19": {
-          "cantrips": 5,
           "ranks": {
             "8": 2,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         },
         "20": {
-          "cantrips": 5,
           "ranks": {
             "8": 2,
             "9": 2
           },
+          "cantrips": 5,
           "max_rank": 9
         }
       },
-      "slots_footnotes": null
+      "source": {
+        "book": "Secrets of Magic",
+        "page": 55,
+        "page_advancement_table": 52
+      },
+      "slots_footnotes": {
+        "notacao": "tabela fonte 'Table 2-4: Summoner Spells per Day', pagina 55. Mesmo formato de 'no maximo 2 do rank mais alto + 2 do rank abaixo' do magus, mas sem coluna com asterisco (summoner nao tem studious spells).",
+        "notas": "Ranks mais baixos ficam vazios ('-' na tabela) conforme o summoner sobe -- ele so mantem slots dos 2 ranks mais altos disponiveis a cada momento (regra do livro: max 2 slots do rank mais alto + 2 do rank -1). O repertorio de spells encolhe junto: toda vez que perde um rank de slot, perde 2 spells do repertorio daquele rank tambem (ver texto pagina 55-56, nao transcrito aqui por ser prosa, nao tabela)."
+      }
     }
   }
 }

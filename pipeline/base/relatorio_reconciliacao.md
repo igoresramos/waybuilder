@@ -1,12 +1,12 @@
 # Relatorio de reconciliacao
 
-- registros de entrada: **19451**
+- registros de entrada: **19498**
 - colisoes de identidade desmembradas: **1**
-- colisoes de id fundidas: **76**
-- base final: **19374** registros
-- registros com divergencia registrada: **2761**
-- source.book normalizado: **1057**
-- license inferida: **2013**
+- colisoes de id fundidas: **79**
+- base final: **19418** registros
+- registros com divergencia registrada: **2874**
+- source.book normalizado: **1066**
+- license inferida: **2010**
 
 ## Por kind
 
@@ -17,12 +17,12 @@
 - `class-feature`: 841
 - `trait`: 561
 - `background`: 514
-- `deity`: 484
+- `deity`: 490
 - `heritage`: 346
 - `archetype`: 247
 - `armor`: 204
+- `familiar-ability`: 171
 - `ritual`: 151
-- `familiar-ability`: 133
 - `relic`: 122
 - `shield`: 118
 - `language`: 117

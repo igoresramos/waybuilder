@@ -1,9 +1,9 @@
 # Emissao de prosa
 
-- registros com prosa: **19205/19374** (99.1% da base)
+- registros com prosa: **19249/19418** (99.1% da base)
 - referencias criadas neste passo: 902
 - chaves de prosa sem registro apontando (orfas): 0
-- origem: {'aon': 17879, 'foundry': 1310, 'pf2etools': 16, 'aon:nome': 1}
+- origem: {'aon': 17879, 'foundry': 1354, 'pf2etools': 16, 'aon:nome': 1}
 - prosa total: 17.9 MB
 - sem prosa: 168
 

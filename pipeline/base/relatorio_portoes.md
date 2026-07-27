@@ -1,6 +1,6 @@
 # Portoes de qualidade
 
-Base: **19374** registros, 24 kinds.
+Base: **19418** registros, 24 kinds.
 Todos os portoes sao reportados, inclusive os que passam --
 portao ausente e portao aprovado nao podem parecer a mesma coisa.
 
@@ -39,25 +39,22 @@ portao ausente e portao aprovado nao podem parecer a mesma coisa.
 
 2 registros marcados com `desmembrado_de`
 
-### Portao 8 -- kind com 2+ fontes e zero divergencia registrada: **FALHA**
+### Portao 8 -- kind com 2+ fontes e zero divergencia registrada: **PASSA**
 
-2 kinds sem instrumentacao de conflito
+0 kinds sem instrumentacao de conflito
 
-- `archetype`: 242 registros com 2+ fontes, 0 conflitos
-- `familiar-ability`: 73 registros com 2+ fontes, 0 conflitos
+### Portao 9 -- cobertura por kind contra o censo do AoN: **PASSA**
 
-### Portao 9 -- cobertura por kind contra o censo do AoN: **FALHA**
+0 kinds abaixo do piso
 
-1 kinds abaixo do piso
-
-- `familiar-ability`: base 133 / censo 142 -- abaixo do piso (135)
 - `ancestry`: base 50 / censo 68 [tolerancia 30%: o AoN conta heranca versatil dentro de ancestry]
 - `animal-companion`: base 113 / censo 96 [tolerancia 20%: especializacao e avanco ficam fora por decisao de escopo]
 - `archetype`: base 247 / censo 244
 - `background`: base 514 / censo 499
 - `class-feature`: base 841 / censo 721 [tolerancia 10%: o AoN indexa escolha de subclasse em categoria propria (mystery, patron, instinct, doctrine)]
-- `deity`: base 484 / censo 484
+- `deity`: base 490 / censo 484
 - `domain`: base 64 / censo 63
+- `familiar-ability`: base 171 / censo 142
 - `feat`: base 6411 / censo 6085
 - `heritage`: base 346 / censo 335 [tolerancia 3%: o AoN indexa heranca versatil como ancestry]
 - `language`: base 117 / censo 117

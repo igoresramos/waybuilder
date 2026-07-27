@@ -4,12 +4,12 @@ Criterio: funde so com `remaster_id`/`legacy_id` declarado pelo AoN.
 Prosa nao decide; aparece so como confirmacao. Nada e deletado -- o
 absorvido fica na base com `superseded_by`.
 
-- registros na base: **19374** (nenhum deletado)
+- registros na base: **19418** (nenhum deletado)
 - pares declarados pela fonte: **734**
 - fundidos: **655** (destes, 441 com mudanca anotada -- errata de level/preco ou consolidacao)
 - vetados (categoria/kind diferente): **79**
 - alvo declarado que a base nao tem: **67**
-- registros OGL sem vinculo nenhum declarado: **6336**
+- registros OGL sem vinculo nenhum declarado: **6351**
 - registros com alias: **364**
 
 ## Vetados (chave declarada, mas nao sao a mesma coisa)
