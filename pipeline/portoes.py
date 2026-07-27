@@ -482,21 +482,15 @@ FORA_DE_ESCOPO = {
     "trap", "npc", "spell-effect", "creature-theme-template",
 }
 
-# Categoria do AoN -> kinds da base que a atendem. So entra aqui quem NAO casa
-# pelo proprio nome.
-COBERTO_POR = {
-    "animal-companion": ("animal-companion",),
-    "animal-companion-advanced": ("animal-companion",),
-    "animal-companion-specialization": ("animal-companion",),
-    "animal-companion-unique": ("animal-companion",),
-}
-
-
 def censo_aon():
-    """categoria -> quantos docs VIGENTES o AoN publica.
+    """categoria -> {id do AoN: nome} dos docs VIGENTES.
 
     Vigente = nao declara `remaster_id`. O doc legado que aponta sucessor nao
-    conta como entidade a cobrir: ele vira alias do sucessor na base.
+    e entidade a cobrir: ele vira alias do sucessor na base.
+
+    Por ID, nao por contagem: contar deixa registro extra mascarar ausencia --
+    20 itens que so o pf2etools tem escondem 20 itens do AoN que faltam, e o
+    portao passa com o total batendo.
     """
     docs = {}
     for f in sorted(glob.glob(f"{BRUTOS}/aon_*.json")):
@@ -510,13 +504,14 @@ def censo_aon():
         for r in lista:
             if not isinstance(r, dict) or not r.get("id"):
                 continue
-            d = docs.setdefault(str(r["id"]), {"cat": None, "rid": None})
+            d = docs.setdefault(str(r["id"]), {"cat": None, "rid": None, "nome": None})
             d["cat"] = d["cat"] or r.get("category") or implicita
             d["rid"] = d["rid"] or r.get("remaster_id")
-    censo = collections.Counter()
-    for d in docs.values():
+            d["nome"] = d["nome"] or r.get("name")
+    censo = collections.defaultdict(dict)
+    for i, d in docs.items():
         if not d["rid"] and d["cat"]:
-            censo[str(d["cat"])] += 1
+            censo[str(d["cat"])][i] = d["nome"]
     return censo
 
 
@@ -541,29 +536,46 @@ def portao_9_censo(base, ctx):
     if os.path.exists(caminho):
         conhecidas = json.load(open(caminho)).get("ausencias") or {}
 
-    por_kind = collections.Counter(r.get("kind") for r in base)
+    # todo id do AoN que a base cita, em qualquer kind e em qualquer papel:
+    # `xref.aon` (vigente) e `xref.legado_aon` (absorvido pela fusao)
+    citados = set()
+    for r in base:
+        xr = r.get("xref") or {}
+        for chave in ("aon", "legado_aon"):
+            if xr.get(chave):
+                citados.add(str(xr[chave]))
+    # o AoN publica a mesma entidade em mais de um doc quando ela reaparece em
+    # outro livro (`Aldori Dueling Sword` tem 3 docs, sem legacy_id ligando os
+    # tres). Cobrir por id sozinho acusaria isso como ausencia, entao o nome
+    # tambem cobre: a pergunta deste portao e "esse conteudo entrou?", nao
+    # "esse doc foi citado?". Quem cita doc legado no lugar do vigente e outro
+    # defeito, medido a parte.
+    nomes = {norm(r.get("name")) for r in base if r.get("name")}
+
     novas, ja_sabidas = [], []
-    for cat, esperado in sorted(censo.items()):
+    for cat in sorted(censo):
         if cat in FORA_DE_ESCOPO:
             continue
-        kinds = COBERTO_POR.get(cat, (cat,))
-        obtido = sum(por_kind.get(k, 0) for k in kinds)
-        if obtido >= esperado:
+        faltando = {i: n for i, n in censo[cat].items()
+                    if i not in citados and norm(n) not in nomes}
+        if not faltando:
             continue
-        falta = esperado - obtido
-        registro = conhecidas.get(cat)
-        linha = (f"`{cat}`: AoN publica {esperado} vigentes, a base tem "
-                 f"{obtido} em {'+'.join(kinds)} -- faltam {falta}")
-        if registro and falta <= registro.get("falta_aceita", 0):
-            ja_sabidas.append(f"{linha} -- {registro.get('motivo', 'sem motivo')}")
+        registro = conhecidas.get(cat) or {}
+        aceito = set(registro.get("ids_aceitos") or [])
+        novos = {i: n for i, n in faltando.items() if i not in aceito}
+        amostra = ", ".join(f"{n or i}" for i, n in list(sorted(
+            faltando.items(), key=lambda x: str(x[1])))[:6])
+        linha = (f"`{cat}`: {len(faltando)} de {len(censo[cat])} vigentes do AoN "
+                 f"nao estao na base -- {amostra}")
+        if novos:
+            novas.append(f"{linha} ({len(novos)} sem decisao registrada)")
         else:
-            novas.append(linha + (f" (registrado aceitava {registro['falta_aceita']})"
-                                  if registro else ""))
+            ja_sabidas.append(f"{linha} -- {registro.get('motivo', 'sem motivo')}")
 
     detalhe = list(novas)
     if ja_sabidas:
-        detalhe.append(f"\n_Ausencias ja decididas ({len(ja_sabidas)}) -- visiveis, "
-                       f"nao bloqueiam:_")
+        detalhe.append(f"\n_Ausencias ja decididas ({len(ja_sabidas)} categorias) -- "
+                       f"visiveis, nao bloqueiam:_")
         detalhe += [f"- {x}" for x in ja_sabidas]
     return len(novas), detalhe
 

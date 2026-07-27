@@ -172,6 +172,32 @@ class TestPortoesMedemAlgo(unittest.TestCase):
                       if str(x).startswith("wb:"))
         self.assertGreater(citados, 1000)
 
+    def test_o_censo_do_aon_mede_o_kind_ausente(self):
+        # o portao 9 e o unico gabarito EXTERNO: os outros comparam a base com
+        # ela mesma. Se o censo vier vazio ou a lista de fora-de-escopo comer
+        # tudo, ele passa medindo nada -- que e o defeito que os portoes
+        # existem para pegar.
+        import portoes
+        censo = portoes.censo_aon()
+        self.assertGreater(len(censo), 20, "censo do AoN quase vazio")
+        emescopo = [c for c in censo if c not in portoes.FORA_DE_ESCOPO]
+        self.assertGreater(len(emescopo), 25, "fora-de-escopo comeu o censo")
+        # e tem de continuar enxergando os dois kinds que so ele achou
+        self.assertIn("tactic", censo)
+        self.assertIn("class-kit", censo)
+        self.assertGreaterEqual(len(censo["tactic"]), 37)
+
+    def test_ausencia_conhecida_do_censo_esta_declarada_com_motivo(self):
+        import portoes
+        caminho = os.path.join(os.path.dirname(BASE), "..", "censo_ausencias.json")
+        with open(os.path.normpath(caminho)) as fh:
+            declarado = json.load(fh)["ausencias"]
+        for cat, reg in declarado.items():
+            self.assertTrue(reg.get("motivo"), cat)
+            self.assertTrue(reg.get("ids_aceitos"), cat)
+        n, _ = portoes.portao_9_censo(self.base, {})
+        self.assertEqual(n, 0, "ausencia nova no censo do AoN")
+
     def test_os_portoes_que_dependem_de_fonte_nao_passam_por_ausencia(self):
         # o defeito que estava vivo: sem o dump do AoN em disco os portoes 2 e
         # 7 devolviam 0 ocorrencias -- isto e, PASSAVAM -- em vez de dizer que

@@ -171,6 +171,52 @@ outro PC, onde `foundry_repo/` existia; os `grants` convertidos de rule element
 (1.709 `flat_modifier`, 896 `grant_feat`, ...) estao la. O defeito bloqueava
 **rebuild aqui**, e mentia no relatorio de portoes.
 
+### 4. Portao 9 -- censo do AoN por categoria
+
+O unico gabarito **externo**. Os outros oito comparam a base com ela mesma (o
+build anterior) ou com o que ela ja cita; nenhum responde "existe conteudo la
+fora que nunca entrou".
+
+Duas decisoes de projeto fizeram a diferenca entre um portao util e um barulhento:
+
+- **Por ID, nao por contagem.** Contar deixa registro extra mascarar ausencia:
+  20 itens que so o pf2etools tem escondem 20 itens do AoN que faltam, e o total
+  bate. Com id, nada se compensa.
+- **Nome tambem cobre.** O AoN publica a mesma entidade em varios docs quando
+  ela reaparece em outro livro (`Aldori Dueling Sword` tem 3 docs, sem
+  `legacy_id` ligando os tres). So por id, isso viraria 1.083 falsas ausencias.
+  Cobrindo tambem por nome, sobram **238 reais**.
+
+Ausencia ja decidida vive em `censo_ausencias.json` com motivo, mesmo contrato
+do portao 8: aparece no relatorio, nao bloqueia; ausencia **nova** quebra.
+
+O que ele achou de primeira:
+
+| achado | n | destino |
+|---|---|---|
+| `tactic` -- tacticas do Commander (Battlecry!) | 37 | kind nunca extraido, dump ja em disco -- TODO 54 |
+| `class-kit` -- kits de equipamento inicial | 32 | idem |
+| class-feature de verdade fora da base | 4 | Incredible/Vigilant Senses, Lightning Reflexes, Premonition's Reflexes -- TODO 55 |
+| linha de tabela de progressao | 159 | ausencia por design (a base modela em `class.progressao`) |
+| entrada de piada do proprio AoN | 5 | Dad Joke, Wombat Style... nao e conteudo |
+
+### Bonus 2: 69 registros servindo conteudo pre-remaster
+
+Medido de passagem, com a ponte que o portao 9 usa. **646 registros** tem
+`xref.aon` apontando para doc que o AoN marca com `remaster_id` de mesma
+categoria. Em **577** o sucessor tambem esta na base como registro proprio --
+isso e correto, e a fusao vetada por campo estruturado divergente (a regra do
+item 24: se discorda, nao funde).
+
+Os outros **69 nao tem sucessor nenhum na base**: o unico dado disponivel e o
+pre-remaster. 63 sao arquetipos (`Acrobat` aponta `archetype-45`, cujo sucessor
+`archetype-236` nunca entrou). Passou despercebido porque o extrator casa por
+nome e o nome nao mudou. TODO 56.
+
+Fora dessa conta, sem acao: 38 class-features cujo `remaster_id` aponta para a
+CLASSE (padrao do AoN, o veto por `kind` ja barra) e 71 com `remaster_id: '0'`,
+que e "removido no remaster" -- mantidos de proposito.
+
 ### O que continua sem poder rodar nesta maquina
 
 `build.sh` passo 0 (`buscar_fontes.sh` + `dump_aon.py`) nunca rodou aqui, entao
