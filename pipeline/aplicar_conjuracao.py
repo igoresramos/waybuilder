@@ -58,6 +58,13 @@ def main():
             "slots_per_level": dados.get("slots_per_level"),
             "notas": dados.get("slots_footnotes"),
         }
+        # O Animist tem dois pools que nao se misturam (animist prepared +
+        # apparition spontaneous). `slots_per_level` traz a soma, que responde
+        # "quantas magias por dia"; a separacao responde "quais posso preparar
+        # neste slot", e sem ela a ficha nao monta. Copiar so quando existe.
+        for extra in ("slots_hibridos", "slots_nota_hibrida", "slots_rank_10"):
+            if dados.get(extra):
+                alvo["spellcasting"][extra] = dados[extra]
         prov = alvo.setdefault("prov", {})
         prov["spellcasting"] = (dados.get("prov") or {}).get(
             "slots_per_level", "pf2etools")

@@ -66,3 +66,7 @@ NAO SE APLICA nesta fase.
 - - `wb:feat/necromantic-resistance` casou com `feat-3477` mas o AoN tem 2 entidades: feat-884(nv4,Archetype); feat-3477(nv4,Archetype)
 - - `wb:feat/sky-and-heaven-stance` casou com `feat-2200` mas o AoN tem 2 entidades: feat-2200(nv6,Archetype,Stance); feat-8807(nv6,Archetype,Stance)
 
+## Portao 8 -- artefato citado que sumiu do disco
+
+NAO SE APLICA nesta fase.
+

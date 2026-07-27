@@ -107,20 +107,38 @@ class Verificador:
     def checa_houserule_nao_vaza(self, p):
         """CLASSE UNICA: a houserule inteira tem que sumir.
 
-        E o teste central. Elevacao > 0 aqui significaria que a regra caseira
-        esta alterando o jogo padrao.
+        CORRECAO 2026-07-27. A versao anterior travava em `elevacao != 0` e
+        acusava Animist, Magus e Summoner nos niveis 19-20. **A assercao e que
+        estava errada**, nao o motor -- ela confundia os dois eixos:
+
+          liberar rank de slot  ->  nivel de CLASSE      (regra 16)
+          heightened, sempre    ->  nivel de PERSONAGEM  (regra 17)
+
+        `elevacao` era a subtracao de um eixo pelo outro, o que nao significa
+        nada. Conjurador parcial tem teto de slot 9 e mesmo assim heightena
+        truque e focus spell no rank 10 no nivel 20 -- isso e **RAW**, esta na
+        regra do trait Cantrip ("automatically heightened to half your level
+        rounded up") e vale para o Magus oficial, sem houserule nenhuma.
+
+        O que de fato tem de valer com uma classe so:
+          1. nivel de classe == nivel de personagem;
+          2. o heightened e ceil(nivel/2) -- se algum dia amarrar no nivel de
+             classe, a houserule quebrou o RAW e este teste pega;
+          3. slots e max_rank saem da tabela nativa, sem invencao (checado em
+             checa_conjuracao).
         """
         problemas = []
         for c in p.conjuracao:
-            if c["elevacao"] != 0:
-                problemas.append(
-                    f"elevacao {c['elevacao']} em classe unica ({c['classe']} "
-                    f"{c['nivel_de_classe']}, personagem {p.nivel}) -- a "
-                    f"houserule esta vazando para o RAW")
             if c["nivel_de_classe"] != p.nivel:
                 problemas.append(
                     f"nivel de classe {c['nivel_de_classe']} != nivel de "
                     f"personagem {p.nivel} com uma classe so")
+            esperado = -(-p.nivel // 2)          # ceil(nivel/2)
+            if c["rank_efetivo"] != esperado:
+                problemas.append(
+                    f"rank efetivo {c['rank_efetivo']} != ceil({p.nivel}/2)="
+                    f"{esperado} em {c['classe']} -- heightened tem que vir do "
+                    f"nivel de PERSONAGEM (regra 17), nunca do de classe")
         return problemas
 
     def checa_conjuracao(self, p, classe):

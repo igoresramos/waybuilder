@@ -53,6 +53,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]  # .../waybuilder
 PIPELINE_DIR = PROJECT_ROOT / "pipeline"
 RAW_DIR = PIPELINE_DIR / "dados_brutos"
 FOUNDRY_CACHE = RAW_DIR / "foundry"
+# O clone completo no pin, reconstruido por buscar_fontes.sh. FOUNDRY_CACHE e
+# uma copia achatada e PARCIAL dele: classes.py so popula `classes/` e
+# `class-features/`, entao `feats/` fica vazio (0 contra 6.045 no clone) e
+# `class-features/` fica com 827 dos 842. Sem fallback, load_foundry_feat
+# devolve None sempre -- foi o que zerou o focus pool do Cloistered Cleric.
+FOUNDRY_REPO = RAW_DIR / "foundry_repo" / "packs" / "pf2e"
 AON_CACHE = RAW_DIR / "aon"
 PF2ETOOLS_CACHE = RAW_DIR / "pf2etools"
 SAIDA_DIR = PIPELINE_DIR / "saida"
@@ -173,10 +179,19 @@ def _http_post_json(url: str, payload: dict) -> dict:
 
 
 def load_foundry_json(subdir: str, slug: str) -> dict | None:
+    """Cache achatado primeiro; se faltar, o clone completo.
+
+    O cache e parcial por construcao e a falta e SILENCIOSA -- devolver None
+    faz o campo derivado virar null sem erro nenhum. No clone os feats sao
+    aninhados por classe e nivel (`feats/class/cleric/level-1/x.json`), dai a
+    busca recursiva."""
     path = FOUNDRY_CACHE / subdir / f"{slug}.json"
-    if not path.exists():
+    if path.exists():
+        return json.loads(path.read_text(encoding="utf-8"))
+    achado = next((FOUNDRY_REPO / subdir).rglob(f"{slug}.json"), None)
+    if achado is None:
         return None
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(achado.read_text(encoding="utf-8"))
 
 
 def load_foundry_class(slug: str) -> dict | None:

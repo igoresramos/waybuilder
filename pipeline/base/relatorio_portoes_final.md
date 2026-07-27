@@ -60,8 +60,10 @@ NAO SE APLICA nesta fase.
 **PASSOU** -- 0 ocorrencia(s).
 
 - 
-- _Perdas ja registradas em `artefatos_perdidos.json` (3) -- visiveis, nao bloqueiam:_
+- _Perdas ja registradas em `artefatos_perdidos.json` (5) -- visiveis, nao bloqueiam:_
+- - `pipeline/dados_brutos/_dump_aon_rituais.py` -- RESOLVIDO -- sem acao (reproduzivel: True)
+- - `pipeline/dados_brutos/_wb_dump_companheiros.py` -- RESOLVIDO -- sem acao (reproduzivel: True)
 - - `pipeline/dados_brutos/pdfs/` -- PENDENTE -- Igor decide se rebaixa os livros (reproduzivel: False)
 - - `pipeline/dados_brutos/pdfs/PF2e/DM/` -- PENDENTE -- Igor decide se rebaixa os livros (reproduzivel: False)
-- - `pipeline/dados_brutos/tabelas_conjuracao_pdf.json` -- PENDENTE -- ver item 14 do TODO (reproduzivel: False)
+- - `pipeline/dados_brutos/tabelas_conjuracao_pdf.json` -- RESOLVIDO -- o arquivo continua perdido, mas nenhum dado dele esta (reproduzivel: False)
 

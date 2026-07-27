@@ -321,9 +321,9 @@
       },
       "focus_pool": {
         "cloistered_cleric": {
-          "base": null,
-          "cap": null,
-          "note": "Domain Initiate nao encontrado no cache"
+          "base": 1,
+          "cap": 3,
+          "note": "concedido automaticamente pela Primeira Doutrina (Cloistered Cleric); nao e uma class-feature nativa do Clerico"
         },
         "warpriest": {
           "base": 0,
