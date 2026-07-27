@@ -181,7 +181,7 @@ personagem traduzido**, sem subconjunto.
 - bate: **1287** (62.4%)
 - diverge: **777**, sendo:
   - motor da rank MENOR que o oficial: **775** -- ver "causa-raiz" abaixo
-  - motor da rank MAIOR que o oficial: **2** -- sinal acionavel, ver "Achados sobre o motor"
+  - motor da rank MAIOR que o oficial: **2** -- sinal acionavel, ver "Sobre-concessao" abaixo
 
 ### Causa-raiz da maioria das divergencias (nao e bug do motor)
 
@@ -271,6 +271,19 @@ classe. Top 15 por tamanho de amostra:
 - ... e mais 133 combinacoes classe+pericia com >=50% de divergencia (amostra menor, 2-3 personagens cada) -- o padrao e generalizado, nao um grupo pequeno de excecoes
 
 ### Sobre-concessao (motor MAIOR que o oficial -- unico sinal realmente acionavel, 2 caso(s))
+
+Investigado caso a caso -- NAO e bug do motor. Os 2 casos sao
+`Droven` (Inventor) em `crafting`: o motor aplica a class-feature
+`Expert Overdrive`, cujo texto RAW confirma
+(`pipeline/base/text/class-feature.json`, chave
+`wb:text/class-feature/expert-overdrive`): "You become an expert in
+Crafting" -- automatico, sem escolha do jogador. O motor esta
+correto; e o `system.skills` do ator do Foundry que NAO persiste
+esse aumento automatico vindo de class feature (mesma classe de
+limite documentada acima pro `trainedSkills.value`, so que essa
+fonte nao cobre aumentos de FEATURE, so o treino INICIAL). Sem essa
+explicacao os 2 casos ficariam contados como divergencia real; estao
+listados aqui por transparencia, mas nao indicam problema no motor.
 
 - `Droven (Level 3)` (Inventor, nivel 3) -- `crafting`: oficial trained, motor expert
 - `Droven (Level 5)` (Inventor, nivel 5) -- `crafting`: oficial trained, motor expert

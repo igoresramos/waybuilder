@@ -173,6 +173,13 @@ items:
     texto: "MOTOR -- conjuracao por dedicacao nao entra na ficha. `motor.py::_conjuracao` itera so `ordem_de_classe`, entao Cleric Dedication + Basic Cleric Spellcasting no trilho gratuito produz `conjuracao: []`. A regra 18 fala em slots de arquetipo que a visao calculada nao tem. Menor, mas quebra o caso 'conjurador por arquetipo', que e comum em mesa"
     prioridade: media
 
+  - id: 67
+    texto: "MOTOR NAO IMPLEMENTA `skill_increase`. O schema do documento de personagem declara o slot (specs/2026-07-26-schema-personagem.md:173) e `grep -n skill_increase motor/motor.py` devolve ZERO. Ou seja: o aumento de pericia por nivel -- que no PF2e acontece nos niveis 3, 5, 7, 9... e e uma das poucas escolhas que TODO personagem faz -- nao existe no motor. Achado pela validacao de pericia contra os iconics: 775 dos 777 pontos divergentes sao o motor dando rank MENOR que o oficial, e a causa e essa mais a falta de oraculo de 'em que nivel cada aumento foi gasto'"
+    prioridade: alta
+  - id: 68
+    texto: "CUIDADO COM A METRICA DE PERICIA: os 62,4% (1.287 de 2.064) NAO medem a qualidade do motor. Dois vieses, os dois descobertos ao construir a medicao. (1) `system.skills.<pericia>.rank` do ator do Foundry NAO e o rank final -- so registra escolha discricionaria; o treino automatico de classe vive em `trainedSkills.value` DENTRO do item de classe do mesmo ator. Provado com a Amiri: `athletics` sai ausente de `system.skills` e presente em `trainedSkills.value` do item Barbarian. O oraculo corrigido une as duas fontes (`max(rank explicito, 1 se automatico)`), as duas do proprio ator, nenhuma da nossa base. (2) Mesmo corrigido, falta o oraculo de EM QUE NIVEL cada aumento foi gasto, entao o motor comeca perdendo por construcao. Enquanto o item 67 nao entrar, este numero mede a lacuna, nao o motor. Os 2 casos em que o motor da rank MAIOR foram investigados um a um e o motor esta CERTO: Droven (Inventor) em crafting, pela class-feature `Expert Overdrive`, cujo texto RAW diz 'You become an expert in Crafting' -- e o ator do Foundry que nao persiste bump automatico de class feature"
+    prioridade: media
+
   # ==========================================================================
   # BLOCO 2 -- MODELAGEM. Depende da base re-emitida.
   # ==========================================================================
