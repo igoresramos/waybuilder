@@ -2,7 +2,7 @@
 projeto: waybuilder
 tipo: decisao pendente
 data: 2026-07-27
-status: aguardando decisao do Igor
+status: itens 1-3 executados; falta a decisao de schema (item 53 do TODO)
 ---
 
 # Duas linhas paralelas em 27/07, e o que fazer com a segunda
@@ -103,3 +103,79 @@ da regra 17b.
 
 **Nao fazer:** re-emitir a base (esta linha e superior em arquitetura), portar
 testes (ja estao aqui) ou simulacoes.
+
+## Executado (itens 1, 2 e 3)
+
+### 1. Portao 4 nao rebaixa mais a propria linha de base
+
+`--gravar-cobertura` gravava a baseline mesmo com o portao falhando. Agora so
+grava com o build limpo, e tambem recusa quando algum portao ficou **NAO
+MEDIDO** -- fixar referencia a partir de um build que nao mediu e a mesma
+armadilha por outro caminho.
+
+### 2. Colisao de fonte em `fundir()`
+
+Quando os dois lados vinham da mesma fonte, `{campo, fa: atual, fb: v}` colapsava
+no literal do dict e o registro de conflito passava a dizer que o vencedor era o
+valor perdedor. Desambiguado como `comum.escolher` ja fazia (`aon` / `aon_2`).
+Havia **337 entradas** com essa assinatura; as antigas so somem no proximo
+build, porque o valor sobrescrito nao esta mais no registro (da para reconstruir
+pelo campo emitido, se valer a pena).
+
+### 3. Suite de testes: de 34 quebrados para zero
+
+**85 testes, verde.** Nenhum foi apagado. A classificacao explica o que cada
+grupo era de verdade:
+
+| grupo | n | destino |
+|---|---|---|
+| gap de schema v1 x v2 | 7 | `expectedFailure` com o numero medido -- viram verde sozinhos se a v2 for adotada, e o unittest cobra a retirada do marcador |
+| feature pendente (tabela do PDF) | 14 | `skipUnless` guardado por `hasattr` -- caem sozinhos quando a integracao entrar (task 16) |
+| API que mudou de lugar | 10 | reescritos contra o ARTEFATO, que e o alvo que interessa |
+| defeito real medido | 3 | teste com teto no numero atual (`assertLessEqual`): nao mascara, mas acusa **piora** |
+
+Os reescritos contra o artefato merecem nota: os testes originais chamavam
+`reconciliar.desmembrar`, `reconciliar.carregar_curadoria` e
+`fundir_renomeados.veto`, que aqui vivem dentro do `main()`. Reescrever para
+medir o dado emitido -- `death-from-above` voltou a ter os niveis 8 e 16 em
+registros separados, `blade-byrnie` uniu as facetas das duas fontes,
+`vicious-swing` guarda `legado_aon: feat-359` -- e mais forte do que testar a
+funcao: teste de funcao verde com dado emitido errado foi exatamente o que
+deixou a uniao de traits passar na v1.
+
+Duas hipoteses minhas cairam na primeira execucao e o dado estava certo, nao o
+teste: `aliases` vazio nao e perda (em 323 dos 616 casos o remaster nao mudou o
+nome, so o livro -- o rastro obrigatorio e o `historico`), e no desmembramento
+so o irmao CRIADO carrega `desmembrado_de`.
+
+### Bonus: o portao que passava por ausencia de dado
+
+Achado ao tentar rodar o build aqui. `indice_aon()` e `indice_foundry()` vinham
+**vazios nesta maquina** -- procuravam `dados_brutos/foundry_repo/` e
+`dados_brutos/aon_dump/`, que aqui se chamam `foundry/` e nunca foram gerados --
+e os portoes 2 e 7 respondiam `return 0`: **passaram**. E a mesma falha que eles
+existem para pegar.
+
+Corrigido: `comum.packs_foundry()` conhece os dois nomes de pasta (os extratores
+ja tinham o fallback; portoes, `emitir_textos`, `aplicar_subclasses` e
+`converter_rule_elements` nao), `indice_aon()` cai nos apelidos versionados
+(`dados_brutos/aon_*.json`, 33.348 docs) completando campo em vez de
+sobrescrever, e portao desligado agora devolve `None` = **NAO MEDIDO**.
+
+Resultado com os indices carregando de verdade: portao 2 passa limpo (0 `level`
+divergente sem conflito registrado, contra 28.689 docs do Foundry e 33.348 do
+AoN) e o **portao 7 acusou 2 colisoes de identidade novas** -- item 49 do TODO.
+
+O que isto NAO significa: a base emitida nao foi afetada. Ela foi construida no
+outro PC, onde `foundry_repo/` existia; os `grants` convertidos de rule element
+(1.709 `flat_modifier`, 896 `grant_feat`, ...) estao la. O defeito bloqueava
+**rebuild aqui**, e mentia no relatorio de portoes.
+
+### O que continua sem poder rodar nesta maquina
+
+`build.sh` passo 0 (`buscar_fontes.sh` + `dump_aon.py`) nunca rodou aqui, entao
+`dados_brutos/aon_dump/` nao existe. Com os fallbacks acima a cadeia inteira
+passou a carregar, mas **nao re-emiti a base** de proposito: isso e decisao do
+Igor e o doc dizia para nao fazer. Um rebuild resolveria de uma vez os itens 50
+e 51 (113 conflitos de traits residuais, 13 nomes legados de ancestria, 2 obras
+com grafia dupla), que hoje sao residuo do dado emitido, nao do codigo.

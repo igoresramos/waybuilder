@@ -6,6 +6,39 @@ project: waybuilder
 
 ## 2026-07-27
 
+### Sessao | 14:00-15:10 | porte da linha paralela: portoes, fusao e suite verde | igor + claude-code
+
+Igor mandou tocar os itens 1, 2 e 3 do doc de comparacao das duas linhas.
+
+**Item 1 e 2, cirurgicos.** Portao 4 nao grava mais a linha de base a partir de
+build sujo. `reconciliar.fundir()` nao apaga mais o vencedor quando os dois
+lados vem da mesma fonte -- eram 337 registros de conflito dizendo que o
+escolhido era o valor perdedor.
+
+**Item 3, a suite: 34 quebrados -> 85 testes verdes, nenhum apagado.** A leitura
+que estava errada no doc era "testes obsoletos". Eles nao eram obsoletos: 7 sao
+gaps de schema (spec v2 x v1), 14 sao criterio de aceite de feature pendente,
+10 testavam funcoes que aqui vivem dentro do `main()` e 3 apontavam defeito real
+do dado. Cada grupo ganhou o tratamento que se auto-limpa -- `expectedFailure`
+acusa "unexpected success" quando o gap fechar, `skipUnless(hasattr(...))` cai
+quando a funcao existir, e defeito real virou teto (`assertLessEqual`) que
+acusa piora sem mascarar o numero.
+
+**O achado da sessao veio de tentar rodar o build aqui.** `indice_aon()` e
+`indice_foundry()` voltavam vazios nesta maquina (nome de pasta diferente:
+`foundry/` contra `foundry_repo/`, e `aon_dump/` nunca gerado) e os portoes 2 e
+7 respondiam `return 0` -- **passavam por ausencia de dado**, que e literalmente
+a falha que eles existem para pegar. Com o fallback de caminho e o estado NAO
+MEDIDO, o portao 2 passou limpo de verdade e o **portao 7 acusou 2 colisoes de
+identidade novas**: `hellknight-dedication` (feat-8812 nv2 x feat-1078 nv6, com
+a assinatura ja visivel no conflito de level onde o pf2etools dizia 6) e
+`cane-pistol-melee`. A base emitida nao foi afetada -- ela nasceu no outro PC,
+onde os caminhos batiam.
+
+Rebuild NAO foi feito, de proposito: e decisao do Igor. Fica registrado que a
+cadeia inteira volta a carregar aqui e que um rebuild fecharia sozinho os itens
+50 e 51.
+
 ### Sessao | 05:41-07:03 | perda de artefato, Animist recuperado, regras 17b/21/23 | igor + claude-code
 
 **Perda de artefato, e o portao que faltava.** `dados_brutos/tabelas_conjuracao_pdf.json`
