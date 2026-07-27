@@ -14,8 +14,8 @@ items:
     texto: "Separar indice e prosa no build final. Hoje o index tem 8,8 MB com texto embutido; o alvo medido e 0,53 MB de indice mais prosa sob demanda"
     prioridade: media
   - id: 5
-    texto: "Repescar traits orfaos: quando o extrator de referencia voltar, cruzar os traits citados pelos ~10k registros contra os extraidos. Orfao e erro de normalizacao em algum extrator"
-    prioridade: media
+    texto: "CONCLUIDO 2026-07-26 pela auditoria ampla: os traits orfaos sao so 16, todos parametrizados -- resolvidos pelo mapa de familias em pipeline/normalizacao_traits.json"
+    prioridade: concluido
   - id: 6
     texto: "Explorar os PDFs oficiais quando o Igor passar o caminho. Dois objetivos separados -- cobertura (o que existe la e nao entrou pelas 3 fontes) e ambientacao (texto de mundo que nenhuma fonte tem). Usar agentes, sao zips de ~2GB. Ferramenta ja conferida: pdftotext, pdfinfo, pypdf, unzip, 902 GB livres"
     prioridade: media
@@ -70,5 +70,38 @@ items:
   - id: 21
     texto: "COLISAO DE IDENTIDADE: wb:<kind>/<slug> assume nome unico por kind e nao e. 16 suspeitas. Confirmado em wb:feat/death-from-above -- sao DOIS feats no War of Immortals (arquetipo nv8 e mitico nv16 p.128); o Foundry separa, o AoN indexa so o mitico, e a base fundiu numa quimera com nivel de um e nome/traits/texto do outro. wb:feat/reckless-abandon e igual (goblin vs barbaro nv16). Portao de qualidade proposto: traits categoricamente disjuntos depois de descontar as causas de merge = colisao, falha o build"
     prioridade: alta
+  - id: 24
+    texto: "CRITICO -- a fusao Legacy<->Remaster destruiu dado. fundir_renomeados.py decide por similaridade de PROSA e deletou 597 registros; 393/597 (65,8%) fundiram registros com level/price_cp/damage diferentes, e amostra de 60 contra o remaster_id do AoN confirmou so 21 (35%) como fusao correta. wb:equipment/aeon-stone engoliu 24 pedras distintas; 'Poi'->'Shield Bash'; 'Tonfa'->'Shuan Ji' (mesmo livro); 6 armas viraram 'Gaff'. REVERTER e refazer usando o remaster_id/legacy_id do AoN como chave, nao prosa. Prosa so como desempate, nunca como criterio"
+    prioridade: alta
+  - id: 25
+    texto: "`mechanized` significa 4 coisas diferentes conforme o extrator que o escreveu: 12.742 registros (70,1%) tem true com grants vazio, e 370 tem false com grants cheio. O false se distribui por KIND inteiro, nao por registro -- ou seja, e propriedade do extrator, nao do dado. Definir o significado unico na spec e fazer todos obedecerem"
+    prioridade: alta
+  - id: 26
+    texto: "Divergencia silenciada: 6 kinds (class-feature, background, heritage, familiar-ability, ancestry, class) tem 1.618 registros com 2+ fontes e ZERO conflitos registrados. Comprovadas 145 divergencias reais de source.book contra o Foundry, nenhuma anotada. Esses extratores nao implementam a deteccao de conflito -- o numero de 2.299 divergencias e piso, nao total"
+    prioridade: alta
+  - id: 27
+    texto: "Buracos de cobertura medidos contra o censo do AoN: background -167 (33% do kind!), e dois kinds que a spec NUNCA listou -- `relic` (-116) e `language` (-85). Mesma classe de erro do ritual: omissao ao escrever a lista de kinds, nao falha de extrator"
+    prioridade: alta
+  - id: 28
+    texto: "source.book sai com DUAS grafias para 26 obras, afetando 10.723 registros (59%), mais 160 com \\r\\n literal dentro do nome. Relacionado ao item 11 (normalizar_livro rodando tarde), mas maior: nao e so comparacao, e o valor emitido"
+    prioridade: alta
+  - id: 29
+    texto: "Dos 7 portoes de qualidade da spec, so o 5 esta implementado. O portao 1 falharia (2.694 sem prov.text), o 3 falharia (111 registros com requires citando 61 ids inexistentes). E o portao 7 e TAUTOLOGICO: pergunta por nome duplicado depois de a duplicata ter sido fundida -- que e exatamente a fresta por onde o death-from-above passou. Reescrever o 7 para rodar ANTES da fusao"
+    prioridade: alta
+  - id: 30
+    texto: "907 registros sem prosa (5,0%), nao os 100% reportados. A metrica de emitir_textos.py divide pelas referencias existentes, nao pela base -- registro sem referencia nenhuma nao entra no denominador e some da conta. Corrigir a metrica junto com o buraco"
+    prioridade: media
+  - id: 31
+    texto: "22 registros so-pf2etools sao duplicatas de registros ja existentes (wb:armor/hide vs wb:armor/hide-armor). Explicam os 6 sem license, os 23 sem rarity e 16 dos sem prosa -- ou seja, o portao 5 estava detectando FALHA DE CASAMENTO, nao falta de licenca. O sintoma foi lido errado desde o inicio"
+    prioridade: media
+  - id: 32
+    texto: "spell usa `rank` e nunca `level`, fora do envelope da spec -- qualquer filtro por nivel descarta as 1.639 magias silenciosamente. Mais 513 sem tradicoes, das quais 50 nao sao focus. Decidir: spell vira excecao documentada na spec, ou passa a emitir level tambem"
+    prioridade: media
+  - id: 33
+    texto: "3.033 registros mono-fonte AoN com a materia-prima em disco e nao usada. O proprio pipeline ja gravou que faltam 42 nomes presentes no pf2etools, mais 6 deities, 38 familiar-abilities e 15 class-features do checkout do Foundry. Menor esforco por registro ganho de toda a lista"
+    prioridade: media
+  - id: 34
+    texto: "Residuos menores da auditoria: wb:archetype/shared-archetype-feats e diretorio de organizacao do Foundry virado arquetipo em 14 feats; 1.440 licencas inferidas por heuristica sem marca no registro emitido; prov.class 'inferido de traits' em 409 das 817 class-features; 152 pontos de prov marcados 'desconhecida'; 65 traits:null contra 3.036 []; 256 feats sem feat_category (3 com valor bruto 'classfeature'); 1.506 sem source.page"
+    prioridade: baixa
 promoted: []
 ---

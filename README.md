@@ -51,16 +51,43 @@ pipeline/
 
 Ordem de execucao: extratores -> `reconciliar` -> `emitir_textos` -> `fundir_renomeados`.
 
-**Numeros atuais:** **18.176 registros em 21 kinds**, prosa em 100% (17.866/17.866),
-2.299 com divergencia registrada, 359 com alias. Index 15,2 MB + prosa 16,7 MB.
-Residuo: 6 registros sem `license`.
+## ATENCAO: a base tem dano conhecido. Nao construa por cima dela ainda
 
-**A base precisa ser re-emitida antes de se construir por cima dela.** A revisao
-de 26/07 achou tres defeitos no dado ja emitido -- `traits` usando precedencia
-em vez de uniao, colisao de identidade por slug, e o kind `ritual` ausente. Os
-tres estao corrigidos na spec e nos insumos (`pipeline/normalizacao_traits.json`,
-`pipeline/saida/rituais.json`), mas **o pipeline ainda nao rodou de novo**.
-Detalhe em `TODO.md` itens 17, 20 e 21, e nas secoes novas do `LESSONS.md`.
+A auditoria de 26/07 (relatorio em `docs/2026-07-26_auditoria-ampla.md`) achou
+**perda de dado real**. A base **nao esta fechada** -- precisa ser re-emitida.
+
+**Numeros atuais, ja corrigidos:** 18.176 registros em 21 kinds, **prosa em 95%
+(907 sem prosa)**, 2.299 com divergencia registrada, 359 com alias.
+Index 15,2 MB + prosa 16,7 MB.
+
+> A afirmacao anterior de "prosa em 100%" estava errada: a metrica dividia
+> pelas referencias existentes, nao pela base. Registro sem referencia nenhuma
+> nao entrava no denominador e por isso nao aparecia como falta.
+
+**Os cinco defeitos, em ordem de gravidade:**
+
+1. **A fusao Legacy<->Remaster destruiu registros.** `fundir_renomeados.py`
+   decide por similaridade de prosa e deletou 597; amostra de 60 contra o
+   `remaster_id` do AoN confirmou so **35% como fusao correta**.
+   `wb:equipment/aeon-stone` engoliu **24 pedras distintas** (Amber Sphere,
+   Black Disc, Agate Ellipsoid...), cada uma com efeito proprio. `Poi` virou
+   `Shield Bash`; `Tonfa` virou `Shuan Ji`, do mesmo livro; 6 armas viraram
+   `Gaff`. **Reverter e refazer com o `remaster_id` do AoN, nao com prosa.**
+2. **`traits` usava precedencia e devia ser uniao** -- 88% dos conflitos, com
+   perda de dado (`two-hand-d12` virava `two-hand`) e injecao de nome legado de
+   ancestria numa base remaster-first. Spec corrigida, mapa pronto em
+   `pipeline/normalizacao_traits.json`.
+3. **`wb:<kind>/<slug>` assume nome unico por kind** -- 5 colisoes confirmadas,
+   59 candidatos. `death-from-above` e uma quimera de dois feats distintos.
+4. **Faltavam kinds inteiros:** `ritual` (extrator pronto, 151 registros em
+   `pipeline/saida/rituais.json`, ainda fora do `ENTRADA` do reconciliador),
+   e mais dois que a spec nunca listou -- `relic` (-116) e `language` (-85).
+5. **Dos 7 portoes de qualidade, so 1 esta implementado.** O portao 1 falharia
+   (2.694 sem `prov.text`), o 3 falharia (111 registros citando 61 ids
+   inexistentes), e o 7 e tautologico: pergunta por duplicata **depois** de a
+   duplicata ter sido fundida -- que e exatamente a fresta do `death-from-above`.
+
+Detalhe de cada um no `TODO.md` (itens 17, 20, 21, 24-33) e no `LESSONS.md`.
 
 ## As tres fontes, e o que cada uma serve
 

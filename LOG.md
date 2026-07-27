@@ -47,7 +47,18 @@ correcao de spec e um extrator novo.
   Corrigiu dois erros meus que ja estavam na spec -- `oread`/`sylph`/`undine`
   nao viraram `naari` (so `ifrit`), e `illusion` sobreviveu ao remaster
 - Nota de wiki criada: `merge-n-fontes-precedencia-vs-uniao.md`
-- **Encerrada com 1 agente rodando** (auditoria ampla em Opus)
+- **A auditoria ampla voltou no fim e mudou o estado do projeto.** 13 achados;
+  o critico e que a **fusao Legacy<->Remaster destruiu dado**: decide por
+  similaridade de prosa, deletou 597 registros e so 35% das fusoes estavam
+  certas. `wb:equipment/aeon-stone` engoliu 24 pedras distintas. Tambem
+  derrubou dois numeros que eu vinha reportando: prosa e **95%, nao 100%**
+  (907 sem prosa -- a metrica dividia pelo subconjunto errado), e das 2.299
+  divergencias, 6 kinds simplesmente **nao detectam conflito**, entao o numero
+  e piso e nao total. Dos 7 portoes de qualidade, so 1 esta implementado, e o
+  portao 7 e tautologico -- pergunta por duplicata depois de a fusao ja ter
+  acontecido
+- **A base NAO esta fechada.** Precisa de re-emissao antes de qualquer trabalho
+  de construtor. Detalhe nos itens 24-34 do TODO
 
 ### Evento | igor + claude-code
 - Projeto criado via /tartarus:novo

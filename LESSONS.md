@@ -166,6 +166,44 @@ paginar em blocos de ~80 registros.
 
 Mesma classe do problema ja registrado na wiki para o GraphQL do Railway.
 
+### Similaridade de prosa nao e criterio de identidade
+`fundir_renomeados.py` unia pares Legacy<->Remaster por similaridade de texto
+(corte 0,62, piso de 15 tokens distintivos). O relatorio saiu bonito -- "597
+pares fundidos, **zero par nao unido**" -- e eu tratei isso como sucesso.
+
+Auditado contra o `remaster_id` do AoN: **so 35% das fusoes estavam certas.**
+393 dos 597 pares fundiram registros com `level`, `price_cp` ou `damage`
+diferentes -- ou seja, o dado ja dizia que eram entidades distintas, e o
+criterio de prosa ignorou.
+
+Casos: `wb:equipment/aeon-stone` engoliu **24 pedras diferentes** (Amber Sphere,
+Black Disc, Agate Ellipsoid, Azure Briolette...), cada uma com efeito proprio.
+`Poi` virou `Shield Bash`. `Tonfa` virou `Shuan Ji`, **do mesmo livro** -- nao
+ha nem historia de renomeacao possivel ali. Seis armas viraram `Gaff`.
+
+A causa e estrutural: itens de uma mesma familia **compartilham quase todo o
+texto** e diferem em uma linha de efeito. Prosa e exatamente o pior sinal
+possivel para distingui-los.
+
+Regra: fusao de identidade usa **chave explicita da fonte** (`remaster_id` /
+`legacy_id`, que o AoN entrega prontos). Prosa serve como desempate quando a
+chave falta, nunca como criterio.
+
+E a metrica que me enganou: **"zero par nao unido" mede o que sobrou, nao o que
+foi unido errado.** Uma metrica de recall sem a de precisao ao lado sempre
+parece boa -- fundir tudo com tudo daria zero tambem.
+
+### Metrica que divide pelo subconjunto errado esconde o buraco
+Reportei "prosa em 100% (17.866/17.866)" varias vezes. O real e **95%**: ha
+**907 registros sem prosa** numa base de 18.176.
+
+O denominador estava errado. `emitir_textos.py` conta *referencias resolvidas
+sobre referencias existentes* -- e registro que nunca ganhou referencia nenhuma
+nao entra na conta. O caso que mais importa e justamente o que a metrica nao ve.
+
+Vale para qualquer cobertura: **o denominador tem que ser o universo, nao o
+subconjunto que ja foi processado.**
+
 ### Contar registro por livro nao mede cobertura
 Afirmei que os PDFs oficiais nao adicionariam cobertura porque a base ja tinha
 centenas de registros de cada um dos 11 livros de regra. A metrica estava certa

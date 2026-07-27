@@ -79,8 +79,13 @@ hidden: false
 > fundidos, zero par nao unido. Index 15,2 MB + prosa 16,7 MB.
 > Resíduo unico: 6 registros sem `license` (portao de qualidade 5 falhando).
 >
-> **A revisao de 2026-07-26 achou tres defeitos que precisam de re-emissao
-> antes de construir por cima:**
+> **A base NAO esta fechada. A auditoria de 2026-07-26 achou perda de dado
+> real** -- a fusao Legacy<->Remaster deletou 597 registros decidindo por
+> similaridade de prosa, e so 35% das fusoes estavam certas
+> (`wb:equipment/aeon-stone` engoliu 24 pedras distintas). Reverter e refazer
+> com o `remaster_id` do AoN e o item mais urgente da lista.
+>
+> **Os outros defeitos que precisam de re-emissao:**
 > 1. `traits` usava precedencia e devia ser uniao -- 88% dos conflitos, com
 >    perda de dado real (`two-hand-d12` virava `two-hand`) e injecao de nome
 >    legado de ancestria numa base remaster-first. Spec ja corrigida, mapa de
