@@ -382,9 +382,11 @@ def main():
         + ("\n".join(linhas_por_classe) + "\n" if linhas_por_classe else "nenhuma.\n")
         + "\n### Achados sistemicos (classe + pericia, >=2 amostras, "
           ">=50% divergindo)\n\n"
-        "Confirma o padrao: sao as pericias que os personagens pre-gerados da\n"
-        "Paizo tipicamente ELEGEM treinar/subir por escolha, nao um bug\n"
-        "localizado numa classe.\n\n"
+        f"**{len(sistemicos)}** combinacoes classe+pericia batem esse\n"
+        "criterio -- confirma que a causa-raiz acima e generalizada: sao as\n"
+        "pericias que os personagens pre-gerados da Paizo tipicamente ELEGEM\n"
+        "treinar/subir por escolha do jogador, nao um bug localizado numa\n"
+        f"classe. Top {min(TOPO_SISTEMICOS, len(sistemicos))} por tamanho de amostra:\n\n"
         + ("\n".join(linhas_sistemicos) + "\n" if linhas_sistemicos
            else "nenhum padrao sistemico encontrado.\n")
         + "\n### Sobre-concessao (motor MAIOR que o oficial -- unico sinal "
