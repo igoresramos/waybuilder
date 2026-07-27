@@ -50,13 +50,10 @@ PF2ETOOLS_CACHE = RAW_DIR / "pf2etools"
 SAIDA_DIR = PIPELINE_DIR / "saida"
 RELATORIOS_DIR = PIPELINE_DIR / "relatorios"
 
-sys.path.insert(0, str(PIPELINE_DIR))
-import comum  # noqa: E402
-
 FOUNDRY_PIN = "87f9e5028baaa10b70fdc766260b7886def17e04"
-# Clone local pinado no commit acima. Pode ser sobrescrito por env var (o clone
-# vive num diretorio de scratchpad de sessao, nao e permanente).
-FOUNDRY_SRC_DEFAULT = str(PIPELINE_DIR / "dados_brutos" / "foundry")
+# Clone local pinado no commit acima, dentro de dados_brutos/. Reconstruivel por
+# `pipeline/buscar_fontes.sh`; sobrescrivel por env var.
+FOUNDRY_SRC_DEFAULT = str(RAW_DIR / "foundry_repo")
 FOUNDRY_SRC = os.environ.get("WB_FOUNDRY_REPO", FOUNDRY_SRC_DEFAULT)
 
 AON_URL = "https://elasticsearch.aonprd.com/aon/_search"
@@ -77,13 +74,7 @@ FOUNDRY_FEATURE_UUID_PREFIX = "Compendium.pf2e.classfeatures.Item."
 # ---------------------------------------------------------------------------
 
 def slugify(name: str) -> str:
-    # apostrofo cai (nao vira "-"): mesma convencao de feats.py/ancestrias.py/
-    # companheiros.py/referencia.py. Antes disso "Acrobat's Calling" virava
-    # `acrobat-s-calling`, e o predicado que feats.py gera pra citar a mesma
-    # feature usa `acrobats-calling` (apostrofo removido) -- descasamento que
-    # fazia as 8 mythic callings citadas por feat mitico ficarem com `wb:`
-    # quebrado no portao 3, mesmo depois delas passarem a ser lidas.
-    s = name.lower().replace("'", "").replace("’", "")
+    s = name.lower()
     s = re.sub(r"[^a-z0-9]+", "-", s)
     return s.strip("-")
 
@@ -334,13 +325,7 @@ def ensure_foundry_cache() -> None:
     dst_features.mkdir(parents=True, exist_ok=True)
     for f in src_classes.glob("*.json"):
         (dst_classes / f.name).write_bytes(f.read_bytes())
-    # rglob, nao glob: class-features tem subdiretorio (mythic-callings/,
-    # com revenge-of-the-runelords/ dentro) que um glob raso pula inteiro.
-    # Achado real: 8 mythic callings citadas por feat de nivel mitico
-    # (wb:feat/repel-assault etc.) ficavam com `wb:` quebrado no portao 3
-    # porque o arquivo nunca era lido. Cache e um diretorio SO (flat) por
-    # design -- nomes de arquivo aqui nao colidem entre si (checado).
-    for f in src_features.rglob("*.json"):
+    for f in src_features.glob("*.json"):
         (dst_features / f.name).write_bytes(f.read_bytes())
     pin_marker.write_text(FOUNDRY_PIN, encoding="utf-8")
 
@@ -470,11 +455,9 @@ STATS = {
     "ownership_resolvido_por_uuid": 0,  # items{} com name cacheado desatualizado, resolvido via uuid
     "ownership_nao_resolvido": [],  # (classe, nome_item, nivel) sem match nem por nome nem por uuid
     "mesmo_nome_conteudo_diferente": [],  # (nome_base, [nomes distintos]) -- grupos mantidos separados de proposito
-    "grants_completos_true": 0,
-    "grants_completos_false": 0,
-    "grants_incompletos_motivos": defaultdict(int),
-    "requires_parseado_true": 0,
-    "requires_parseado_false": 0,
+    "mechanized_true": 0,
+    "mechanized_false": 0,
+    "mechanized_false_motivos": defaultdict(int),
     "aon_class_sem_match": [],
     "aon_feature_sem_match": [],
     "aon_feature_nome_exato": 0,
@@ -587,56 +570,38 @@ def construir_registro_classe(nome: str, cdata: dict, aon_cache_hits: dict) -> d
         STATS["aon_class_sem_match"].append(nome)
     hit, _ = escolher_hit_aon(hits, quer_remaster=remaster_foundry)
 
-    campo_traits = Campo()
+    campo_name, campo_traits, campo_rarity = Campo(), Campo(), Campo()
+    campo_book, campo_page = Campo(), Campo()
+
+    if hit:
+        campo_name.set(hit.get("name"), "aon")
+        campo_rarity.set(hit.get("rarity"), "aon")
+        campo_book.set(hit.get("primary_source"), "aon")
+        campo_page.set(parse_aon_page(hit.get("primary_source_raw")), "aon")
+    campo_name.set(nome, "foundry")
     campo_traits.set((sys_.get("traits") or {}).get("value") or [], "foundry")
-
-    # name/rarity/source: escolha por precedencia + registro de divergencia na
-    # MESMA operacao (comum.escolher). Antes disto `Campo.set()` era
-    # first-write-wins -- aon setado primeiro nunca dava chance do foundry
-    # divergente aparecer, e "conflitos" saia sempre `[]` (achado A3: `class`
-    # tinha 27 registros com 2+ fontes e zero conflitos).
-    conflitos = []
-    aon_nome = hit.get("name") if hit else None
-    aon_rarity = hit.get("rarity") if hit else None
-    aon_book = hit.get("primary_source") if hit else None
-    aon_page = parse_aon_page(hit.get("primary_source_raw")) if hit else None
-
-    nome_valor, nome_prov, conf = comum.escolher("name", {"aon": aon_nome, "foundry": nome})
-    conflitos += conf
-    nome_valor = nome_valor or nome
-
-    rarity_valor, rarity_prov, conf = comum.escolher(
-        "rarity", {"aon": aon_rarity, "foundry": (sys_.get("traits") or {}).get("rarity")})
-    conflitos += conf
-
-    book_valor, book_prov, conf = comum.escolher(
-        "source.book", {"aon": aon_book, "foundry": pub.get("title")})
-    conflitos += conf
-    page_valor, page_prov, conf = comum.escolher("source.page", {"aon": aon_page})
-    conflitos += conf
+    campo_rarity.set((sys_.get("traits") or {}).get("rarity"), "foundry")
+    campo_book.set(pub.get("title"), "foundry")
 
     grants = montar_grants_classe(sys_)
 
-    # grants_completos: as grants acima vem de campos estruturados do Foundry,
-    # sem decodificar rule elements. Se a classe tem `rules` extras (escolha de
-    # pericia bonus, feats condicionais etc.), essa parte nao foi convertida --
-    # perdeu mecanica de verdade, nao "nao se aplica" (class produz grants).
-    # class nao tem `requires`, entao requires_parseado e sempre true.
+    # mechanized: as grants acima vem de campos estruturados do Foundry, sem
+    # decodificar rule elements. Se a classe tem `rules` extras (escolha de
+    # pericia bonus, feats condicionais etc.), essa parte nao esta mecanizada.
     rules_extra = sys_.get("rules") or []
-    grants_completos, requires_parseado = comum.mecanizacao(
-        "class", bool(rules_extra), bool(rules_extra), False, True)
-    if not grants_completos:
-        STATS["grants_incompletos_motivos"][f"class:rules-nao-traduzidas({len(rules_extra)})"] += 1
+    mechanized = len(rules_extra) == 0
+    if not mechanized:
+        STATS["mechanized_false_motivos"][f"class:rules-nao-traduzidas({len(rules_extra)})"] += 1
 
     registro = {
         "id": f"wb:class/{slug}",
         "kind": "class",
-        "name": nome_valor,
+        "name": campo_name.valor,
         "traits": campo_traits.valor,
-        "rarity": rarity_valor,
+        "rarity": campo_rarity.valor,
         "source": {
-            "book": book_valor,
-            "page": page_valor,
+            "book": campo_book.valor,
+            "page": campo_page.valor,
             "license": license_,
             "remaster": remaster_foundry,
         },
@@ -645,27 +610,25 @@ def construir_registro_classe(nome: str, cdata: dict, aon_cache_hits: dict) -> d
         "spellcasting": bool(sys_.get("spellcasting")),
         "progressao": [],  # preenchido depois de processar as class-features, ver extrair()
         "text": f"wb:text/class/{slug}",
-        "grants_completos": grants_completos,
-        "requires_parseado": requires_parseado,
+        "mechanized": mechanized,
         "xref": {
             "foundry": f"Compendium.pf2e.classes.Item.{cdata['_id']}",
             "aon": hit.get("_id") if hit else None,
             "pf2etools": None,  # preenchido depois, quando resolvemos o arquivo pf2etools
         },
         "prov": {
-            "name": nome_prov or "foundry",
+            "name": campo_name.fonte,
             "traits": campo_traits.fonte,
-            "rarity": rarity_prov,
-            "source": book_prov or "foundry",  # book/page vem do mesmo par
+            "rarity": campo_rarity.fonte,
+            "source": campo_book.fonte,  # book/page vem do mesmo par
             "grants": "foundry",
             "key_ability": "foundry",
             "spellcasting": "foundry",
             "progressao": "foundry",
         },
+        "conflitos": [],
     }
-    if conflitos:
-        registro["conflitos"] = conflitos
-    if page_valor is None:
+    if campo_page.valor is None:
         STATS["campos_nao_mapeados"]["class.source.page (sem match aon)"] += 1
     if not hit:
         STATS["campos_nao_mapeados"]["class.rarity/source (sem match aon)"] += 1
@@ -722,7 +685,7 @@ def montar_indice_ownership(
 # ---------------------------------------------------------------------------
 
 def montar_grants_feature(sys_: dict) -> tuple[list[dict], bool, list[str]]:
-    """Devolve (grants, grants_completos, motivos_grants_incompletos)."""
+    """Devolve (grants, mechanized, motivos_nao_mecanizado)."""
     grants = []
     motivos = []
 
@@ -736,18 +699,13 @@ def montar_grants_feature(sys_: dict) -> tuple[list[dict], bool, list[str]]:
     subf_extra = set(subf.keys()) - {"proficiencies"}
     rules = sys_.get("rules") or []
 
-    # class-feature nao tem `requires`, so `grants` -- ha mecanica extra
-    # (subfeatures nao traduzidas ou rule elements) inteiramente fora de
-    # escopo desta conversao, entao "tinha mecanica" e "perdeu" coincidem.
-    tem_mecanica_extra = bool(subf_extra) or bool(rules)
-    grants_completos, _ = comum.mecanizacao(
-        "class-feature", tem_mecanica_extra, tem_mecanica_extra, False, True)
+    mechanized = not subf_extra and not rules
     if subf_extra:
         motivos.append(f"subfeatures-nao-traduzidas:{sorted(subf_extra)}")
     if rules:
         motivos.append(f"rule-elements-nao-traduzidos:{len(rules)}")
 
-    return grants, grants_completos, motivos
+    return grants, mechanized, motivos
 
 
 def registrar_prereq_nao_traduzido(sys_: dict, nome: str) -> None:
@@ -798,15 +756,13 @@ def construir_registro_feature(
 
     registrar_prereq_nao_traduzido(sys_, nome)
 
-    grants, grants_completos, motivos = montar_grants_feature(sys_)
-    requires_parseado = True  # class-feature nunca emite `requires`
-    if grants_completos:
-        STATS["grants_completos_true"] += 1
+    grants, mechanized, motivos = montar_grants_feature(sys_)
+    if mechanized:
+        STATS["mechanized_true"] += 1
     else:
-        STATS["grants_completos_false"] += 1
+        STATS["mechanized_false"] += 1
         for m in motivos:
-            STATS["grants_incompletos_motivos"][m.split(":")[0]] += 1
-    STATS["requires_parseado_true"] += 1
+            STATS["mechanized_false_motivos"][m.split(":")[0]] += 1
 
     # unidades: (classe, nivel) -- direto do items{} (owners) ou inferido por
     # trait quando a feature e orfa (subclasse concedida via rule element).
@@ -921,8 +877,7 @@ def construir_registro_feature(
         },
         "grants": grants,
         "text": f"wb:text/class-feature/{slug}",
-        "grants_completos": grants_completos,
-        "requires_parseado": requires_parseado,
+        "mechanized": mechanized,
         "xref": {
             "foundry": f"Compendium.pf2e.classfeatures.Item.{fdata['_id']}",
             "aon": hit_para_xref.get("_id") if hit_para_xref else None,
@@ -1012,11 +967,10 @@ def extrair() -> list[dict]:
             reg["prov"]["xref_pf2etools"] = "pf2etools"
         registros_class[nome] = reg
         STATS["n_registros_class"] += 1
-        if reg["grants_completos"]:
-            STATS["grants_completos_true"] += 1
+        if reg["mechanized"]:
+            STATS["mechanized_true"] += 1
         else:
-            STATS["grants_completos_false"] += 1
-        STATS["requires_parseado_true"] += 1
+            STATS["mechanized_false"] += 1
 
     print(f"[classes] {len(features_foundry)} class-features -- consultando AoN "
           "(pode levar alguns minutos na 1a execucao)...", file=sys.stderr)
@@ -1074,10 +1028,8 @@ def extrair() -> list[dict]:
     STATS["mesmo_nome_conteudo_diferente"].sort(key=lambda x: (-len(x[1]), x[0]))
 
     STATS["n_registros_emitidos"] = len(registros)
-    STATS["grants_completos_true"] = sum(1 for r in registros if r["grants_completos"])
-    STATS["grants_completos_false"] = sum(1 for r in registros if not r["grants_completos"])
-    STATS["requires_parseado_true"] = sum(1 for r in registros if r["requires_parseado"])
-    STATS["requires_parseado_false"] = sum(1 for r in registros if not r["requires_parseado"])
+    STATS["mechanized_true"] = sum(1 for r in registros if r["mechanized"])
+    STATS["mechanized_false"] = sum(1 for r in registros if not r["mechanized"])
     print(f"[classes] total emitido: {len(registros)} registros", file=sys.stderr)
     return registros
 
@@ -1243,7 +1195,7 @@ def gerar_relatorio_md() -> str:
     linhas.append("| `system.publication.{license,remaster}` | `source.{license,remaster}` | unica fonte confiavel pra license (AoN nao expoe) |")
     linhas.append("| `system.publication.title` | `source.book` (fallback) | usado so quando AoN nao bate |")
     linhas.append("| `system.items{}` (nome+nivel+uuid) | `progressao[].{nivel,concede}` da classe | **campo novo** -- nivel de class-feature agora mora aqui, nao na feature |")
-    linhas.append("| `system.rules[]` (classe) | determina `grants_completos` | nao decodificado; presenca de rules != [] -> `grants_completos:false` |\n")
+    linhas.append("| `system.rules[]` (classe) | determina `mechanized` | nao decodificado; presenca de rules != [] -> `mechanized:false` |\n")
 
     linhas.append("### Foundry (`packs/pf2e/class-features/*.json`)\n")
     linhas.append("| Campo Foundry | Campo canonico | Quirk |")
@@ -1252,8 +1204,8 @@ def gerar_relatorio_md() -> str:
     linhas.append("| `system.traits.value` | `traits` (fallback) | AoN nao expoe traits pra class-feature; sem filtragem por dono (feature compartilhada tem trait de todas as classes de fato) |")
     linhas.append("| `system.traits.rarity` | `rarity` (fallback) | AoN normalmente tem, usado como primario |")
     linhas.append("| `system.subfeatures.proficiencies.<cat>.rank` | `grants[].proficiency.<cat>` | dict `{categoria: {rank:0..4}}`, tratado |")
-    linhas.append("| `system.subfeatures.{senses,languages,keyOptions,suppressedFeatures}` | **nao mapeado** | contribui pra `grants_completos:false` -- ver secao de gaps |")
-    linhas.append("| `system.rules[]` (nao-vazio) | **nao mapeado** | contribui pra `grants_completos:false` -- ~40 tipos de rule element, fora de escopo desta passada (custo maior do projeto, ver PROJECT.md) |")
+    linhas.append("| `system.subfeatures.{senses,languages,keyOptions,suppressedFeatures}` | **nao mapeado** | contribui pra `mechanized:false` -- ver secao de gaps |")
+    linhas.append("| `system.rules[]` (nao-vazio) | **nao mapeado** | contribui pra `mechanized:false` -- ~40 tipos de rule element, fora de escopo desta passada (custo maior do projeto, ver PROJECT.md) |")
     linhas.append("| `system.prerequisites.value` (prosa) | **nao mapeado pra `requires`** | so 4 features tem; prosa livre, sem marcacao -- ver gaps |")
     linhas.append("| `system.publication.{license,remaster,title}` | `source.*` | igual ao de classe |\n")
 
@@ -1275,25 +1227,24 @@ def gerar_relatorio_md() -> str:
     linhas.append("| `traits` | **ausente** em class e class-feature | confirmado por amostragem; `traits` cai pro Foundry sempre |")
     linhas.append("| `license` | **ausente** | AoN nao expoe OGL/ORC; `source.license` vem sempre do Foundry |\n")
 
-    linhas.append("## Cobertura de `grants` (grants_completos true/false)\n")
-    total_mech = s["grants_completos_true"] + s["grants_completos_false"]
-    pct_true_depois = (s["grants_completos_true"] / total_mech * 100) if total_mech else 0
+    linhas.append("## Cobertura de `grants` (mechanized true/false)\n")
+    total_mech = s["mechanized_true"] + s["mechanized_false"]
+    pct_true_depois = (s["mechanized_true"] / total_mech * 100) if total_mech else 0
     pct_true_antes = (312 / 1013 * 100)
     linhas.append(f"- Antes: `mechanized:true` **312** / 1013 (**{pct_true_antes:.1f}%**)")
-    linhas.append(f"- Depois: `grants_completos:true` **{s['grants_completos_true']}** / {total_mech} (**{pct_true_depois:.1f}%**)")
+    linhas.append(f"- Depois: `mechanized:true` **{s['mechanized_true']}** / {total_mech} (**{pct_true_depois:.1f}%**)")
     linhas.append(
         "\nA logica de traducao pra `grants` (subfeatures.proficiencies + presenca de "
         "`rules`) **nao mudou** -- e a mesma formula de antes, aplicada por arquivo do "
         "Foundry. A cobertura *proporcional* (percentual) fica estatisticamente equivalente; "
         "o que mudou foi so o denominador, porque antes cada feature compartilhada inflava "
         "tanto o numerador quanto o denominador N vezes (1 por classe dona, todas com o "
-        "mesmo valor). A leitura correta: **cobertura de grants nao melhorou nem "
-        "piorou em essencia -- so parou de ser contada em duplicidade.** (`mechanized` foi "
-        "substituido por `grants_completos`/`requires_parseado` -- ver spec-base.)\n"
+        "mesmo `mechanized`). A leitura correta: **cobertura de grants nao melhorou nem "
+        "piorou em essencia -- so parou de ser contada em duplicidade.**\n"
     )
-    linhas.append("| Motivo (grants_completos:false) | Ocorrencias |")
+    linhas.append("| Motivo (mechanized:false) | Ocorrencias |")
     linhas.append("|---|---|")
-    for motivo, n in sorted(s["grants_incompletos_motivos"].items(), key=lambda x: -x[1]):
+    for motivo, n in sorted(s["mechanized_false_motivos"].items(), key=lambda x: -x[1]):
         linhas.append(f"| {motivo} | {n} |")
     linhas.append("")
 
@@ -1312,14 +1263,14 @@ def gerar_relatorio_md() -> str:
     linhas.append(
         "- **`system.subfeatures.{senses,languages,keyOptions,suppressedFeatures}`.** "
         "Nenhum desses quatro foi traduzido pra `grants` nesta passada -- contribuem pra "
-        "`grants_completos:false` (ver tabela de motivos acima).\n"
+        "`mechanized:false` (ver tabela de motivos acima).\n"
     )
     linhas.append(
         "- **`system.rules[]` (rule elements) em geral.** Maioria das 826 features tem "
         "pelo menos 1 rule element nao-trivial (ChoiceSet, GrantItem, FlatModifier, "
         "MartialProficiency, CriticalSpecialization etc.). Decidir decodificar isso e "
         "o item de maior custo do projeto (ja registrado assim em PROJECT.md) -- fora "
-        "de escopo desta entrega. Essas features saem com `grants_completos:false` e "
+        "de escopo desta entrega. Essas features saem com `mechanized:false` e "
         "`grants` parcial (so a parte de `subfeatures.proficiencies`, quando existe).\n"
     )
     linhas.append(
@@ -1443,7 +1394,7 @@ def gerar_relatorio_md() -> str:
         "bool solto; a tabela de slots por nivel/tradicao (que faz Mago, Clerigo etc. "
         "funcionarem no builder) vive em rule elements de class-features especificas "
         "e nao foi decodificada. Sem isso as classes conjuradoras ficam com "
-        "`grants_completos:false` na pratica ainda que o registro da CLASSE em si saia "
+        "`mechanized:false` na pratica ainda que o registro da CLASSE em si saia "
         "`true` -- o builder vai calcular progressao de feat/proficiencia mas nao vai "
         "saber quantos slots de magia a classe tem.\n"
     )

@@ -6,48 +6,165 @@ project: waybuilder
 
 ## 2026-07-27
 
-### Sessao | 08:45-11:30 | igor + claude-code
-**Bloco 1 do TODO fechado: a base foi re-emitida e os portoes passam.** O Igor
-deu carta branca ("tenha autonomia, valide com o Fable, nao pare ate finalizar")
-depois de voltar ao PC que tem os zips e os PDFs.
+### Sessao | 05:41-07:03 | perda de artefato, Animist recuperado, regras 17b/21/23 | igor + claude-code
 
-Materia-prima restaurada primeiro: o checkout do Foundry apontava para um `/tmp`
-de sessao que nao existe mais (7 arquivos com o caminho morto). Rebaixado o
-tarball do commit pinado -- 33.025 JSONs -- e os dumps que faltavam do AoN
-(`relic`, `language`, a ponte `remaster_id`/`legacy_id` com 23.258 docs, e o
-censo por categoria).
+**Perda de artefato, e o portao que faltava.** `dados_brutos/tabelas_conjuracao_pdf.json`
+-- as tabelas de conjuracao lidas a olho de paginas renderizadas do War of
+Immortals -- nunca entrou no git e sumiu. O `.gitignore` excluia `dados_brutos/`
+alegando "reconstruivel pelos pins": verdade para o clone do Foundry e o dump do
+AoN, falso para trabalho derivado a mao. O `TODO.md` seguia marcando o item 14
+como CONCLUIDO e o relatorio seguia citando o caminho; nada reclamava.
 
-- **Spec v2 do schema-base**, escrita antes de qualquer codigo (SDD): fusao por
-  chave da fonte, `mechanized` virando dois campos, `rank` no envelope, `relic`
-  e `language` nos kinds, `prov` com vocabulario fechado, `source.book`
-  normalizado na escrita, portoes com ordem de execucao declarada
-- **Review adversarial em Fable derrubou duas partes da v2, com razao**: os
-  guardas que eu tinha escrito vetariam **77,8%** das fusoes que o proprio AoN
-  declara (N->1 e consolidacao legitima -- `Magic Wand` recebe as 10 varas por
-  rank), e faltava o guarda que importa: **351 de 351** class-features apontam
-  `remaster_id` para a CLASSE, nao para outra feature. Os dois medidos por mim
-  antes de aceitar
-- **7 agentes despachados**, a maioria em paralelo, com escopo de arquivo
-  disjunto: relic+language, tabelas de conjuracao, `mechanized` nos 7
-  extratores, equipamento+magias, backgrounds+conflitos silenciados,
-  integracao das tabelas, simulacoes de balanceamento
-- **Review adversarial do nucleo em Opus** achou 10 defeitos no codigo que eu
-  tinha escrito -- 4 criticos, todos reais e confirmados por medicao propria.
-  O pior: a uniao de `traits` estava implementada na camada errada e
-  `bastard-sword` continuava perdendo o `-d12`. Todos corrigidos
-- **Numeros:** 18.176 -> 19.418 registros, 21 -> 24 kinds, prosa 95% -> 99,1%,
-  0 registros deletados (contra 597), 10 portoes passando (contra 1 de 7)
-- **Balanceamento medido**: niveis 1-15, 12 classes puras + 10 combinacoes,
-  HOUSE vs RAW vs RAW+Free Archetype, combate e nao-combate. A houserule nao
-  quebra o jogo; dois pontos estreitos viraram itens de playtest
-- Documentos novos: `docs/2026-07-27_reemissao-base.md`,
-  `docs/2026-07-27_ausencias-pontuais.md`,
-  `docs/simulacoes/2026-07-27_balanceamento.md`
-- 78 testes automatizados (eram 0), incluindo invariantes medidos sobre a base
-  real: `prov` valido, `traits` nunca null, `rank == level`, uma grafia por
-  livro, `superseded_by` integro
+Varredura de todo caminho citado em arquivo versionado: 42 caminhos, **3 nao
+existiam**. Um era perda real, dois eram scripts de dump substituidos por
+`dump_aon.py` (sem perda de dado, mas `companheiros.py` mandava rodar um script
+inexistente -- bug real). Criados `pipeline/dados_derivados/` (versionado),
+`artefatos_perdidos.json` (perda registrada com motivo, dano medido e decisao) e
+o **portao 8**: caminho citado que some quebra o build; perda ja conhecida
+aparece no relatorio sem bloquear.
+
+**O Animist voltou, e de fonte melhor que o PDF.** A conclusao de 26/07 dizia
+que "nem Foundry nem AoN materializam a tabela". Meia verdade: o item de classe
+do Foundry so tem o flag `spellcasting: 1`, mas o doc de classe do AoN carrega a
+tabela inteira em HTML no campo `markdown` -- e o extrator lia so `text`, a
+projecao achatada. **O dado estava no cache que o proprio extrator ja baixava.**
+Foi essa conclusao errada que mandou alguem ler o PDF a olho.
+
+Parser em `pipeline/tabelas_conjuracao_aon.py`, validado contra as outras 10
+conjuradoras: reproduz as 10 **celula a celula**, incluindo truques, contra o
+pf2etools -- fonte independente. As 11 conjuradoras agora tem tabela completa.
+Animist tem teto de rank 9 (terceira classe assim, com Magus e Summoner) mais um
+slot de apparition rank 10 pela Supreme Incarnation.
+
+**A conferencia registro a registro pagou.** `build.sh` rodado e comparado com o
+commit anterior via `comparar_bases.py` novo: 19.738 -> 19.738, zero sumiram,
+zero nasceram. O primeiro build alterou **dois** registros, e o segundo era
+regressao minha: o focus pool do Cloistered Cleric zerou. Causa raiz maior que o
+sintoma -- `load_foundry_feat` le de `dados_brutos/foundry/feats/`, que tem **0
+arquivos contra 6.045 no clone**, porque `classes.py` so popula `classes/` e
+`class-features/`. Falta silenciosa: devolve `None` e o campo vira `null`.
+Corrigido com fallback para o clone. Build final: **1 registro alterado**, o
+pretendido.
+
+**Regra 17b -- teto do que cria criatura.** Escopo corrigido pelo Igor: Spirit
+Link e Protector Tree saem (nao criam nada), `incarnate` entra -- 23 magias, zero
+interseccao com `summon`, sao as invocacoes de rank 4 a 10. 37 no total, so por
+trait, zero curadoria.
+
+**Regra 21 virou invariante testado.** A simulacao (Opus, relatorio em
+`docs/simulacoes/`) achou **50 de 204 pares** violando: no nivel 20 o dip ficava
+em 0% da dedicacao gratuita. Decisao do Igor: *"o dip tem que obrigatoriamente
+ser pelo menos tao forte quanto uma dedicacao no mesmo nivel de personagem"*.
+Piso implementado, e a regra virou varredura EXAUSTIVA dos 204 pares em
+`teste_motor.py`.
+
+**Regra 23 -- exclusao mutua** entre nivel de classe X e dedicacao de X, nos dois
+sentidos. Corrige divergencia que ja existia: um Mago 20 puro recebia
+`atende: true` para Wizard Dedication, porque a proibicao mora numa regra geral
+de arquetipo e nao no `requires` do feat.
+
+**Ficha do companheiro, RAW puro**, com as regras citadas verbatim em
+`docs/2026-07-27_atores.md`. Maturidade derivada dos feats, nao lida do
+documento. A escolha nimble/savage virou **slot no vocabulario generico**
+(`eixo/nivel/slot/escolhe/opcoes`), nao campo ad-hoc -- correcao de rumo do Igor
+no meio da tarefa do agente.
+
+**Medido a pedido do Igor:** 243 dos 6.044 feats (4%) abrem escolha, e a cadeia
+de desbloqueio na base chega a **profundidade 4**. O encadeamento NAO esta no
+formato do Foundry (opcoes de `ChoiceSet` sao valores ou consultas, nunca
+ponteiro para item com escolha dentro) -- e grafo de dependencia, nao arvore
+aninhada. Conclusao: slot tem de ser derivado do estado a cada escolha, nunca
+arvore estatica.
+
+**Duas afirmacoes minhas corrigidas no caminho**, registradas para nao voltarem:
+o item 39 nao era defeito (heightened vem do nivel de personagem e independe do
+teto de slot -- a assercao do validador e que estava errada, com 18 falsas
+violacoes); e o argumento de que bloquear a dedicacao propria custaria 8 slots
+estava inflado (o personagem pega qualquer uma das outras 26).
+
+### Sessao | fonte limpa + fatia vertical 1 | igor + claude-code
+
+**Item 37 -- pf2etools completo.** A terceira fonte vivia como 242 arquivos
+baixados um a um por HTTP, adivinhando nomes; os 50 `.json.missing` eram chutes
+de nome, nao conteudo faltando. Clone no pin (7d1ec43f), 382 arquivos em escopo.
+Os 140 novos caem nos buracos: `baseitems.json`, `deities.json`, `traits.json`,
+`archetypes.json`, `companionsfamiliars.json`, `optionalfeatures.json`.
+
+Prova de reproducibilidade: 7 dos 8 extratores deram contagem **identica**. O
+oitavo (rituais) achou defeito real -- nao existe pasta `rituals/` no Foundry,
+ritual e magia com `system.ritual`; o extrator lia um recorte feito a mao numa
+sessao antiga e, quando sumiu, 6 rituais exclusivos do Foundry sumiam calados.
+
+Portao 5 zerado: os 3 orfaos nao eram falta de licenca -- o bloco de `source` do
+extrator de equipamento so tinha ramo para AoN e Foundry, entao item exclusivo do
+pf2etools saia com `source` vazio por construcao. Mais as 141 siglas de livro
+extraidas de `js/parser.js` da propria fonte. Itens magicos ligados: +2.632.
+
+**Fatia vertical 1 -- o motor monta ficha.** `motor/` implementa 11 das 22
+regras, com 24 assercoes travando cada uma. Guerreiro 3 / Mago 2 sai completo.
+A houserule aparece viva: Mago 2 num personagem 5 tem os slots de um Mago 2 e
+conjura no rank 3 (+2 de elevacao); Mago 5 puro ganha elevacao zero.
+
+O que a fatia descobriu, que era o motivo de faze-la:
+- **a progressao misturava concessao com escolha** -- `wb:class/wizard` declarava
+  49 features, sendo 15 concedidas; o resto sao as 23 escolas e 5 teses, opcao
+  mutuamente exclusiva. Um motor ingenuo daria todas ao Mago 1. Fonte
+  autoritativa: `system.items` da classe no Foundry
+- **item 2 fechado**: as 28 categorias de sub-escolha do AoN viraram kind proprio
+- **item 14 fechado**: a tabela de slots existia desde a primeira sessao e nunca
+  entrou na base, por ser mapa e nao lista
+- **portao 3: 80 -> 23** -- nao faltava conteudo, faltava vocabulario unificado
+
+Base: 19.429 -> 19.738. Portoes 1, 2, 4 e 5 passam.
+
+**Avaliacao pedida pelo Igor, registrada porque muda a prioridade:** o risco do
+projeto saiu de "os dados estao errados" para "o modelo de efeito e fragmentado e
+a regra nunca foi testada na mesa". O efeito mecanico mora em tres formatos
+(classe usa `grants`, ancestria usa campos soltos, background usa outro
+conjunto) e a spec define `grants` como a linguagem unica. E `class_level`, a
+razao de o projeto existir, aparece em 79 de 19.738 registros.
 
 ## 2026-07-26
+
+### Sessao | re-emissao do bloco 1 | igor + claude-code
+Executado o bloco 1 inteiro do TODO (re-emissao da base). 11 itens fechados.
+
+**Bloqueio achado antes de qualquer item, e nao registrado em lugar nenhum:**
+7 dos 10 extratores e o `emitir_textos` apontavam para um clone do Foundry em
+`/tmp/claude-.../scratchpad/pf2e-research`, de uma sessao ja encerrada. O clone
+nao existia mais e **o pipeline nao rodava** -- re-executar o extrator de
+equipamento dava 5.698 registros contra os 7.496 da base, mono-fonte, exit code
+0. Pior: `carregar_aon()` cai para lista vazia em silencio quando o dump falta,
+e os dumps do AoN para equipamento nunca tinham sido salvos. **A base de 18.176
+registros nao era reproduzivel a partir do repo.**
+- clone refeito no pin dentro de `dados_brutos/`, `buscar_fontes.sh` reconstroi
+- `dump_aon.py` novo: indice `aon` inteiro em disco, 43.686 docs em 93
+  categorias (bate com o censo remoto)
+- os 7 caminhos hardcoded de `/tmp` foram substituidos
+
+**Itens fechados:** 29 (os 7 portoes), 20 (traits como uniao), 24 (fusao por
+`remaster_id`), 30 (metrica de prosa), 17 (rituais), 28 e 11 (grafia de livro),
+27 (relic/language/background), 21 (colisoes desmembradas), 26 (divergencia
+detectada), 25 (`mechanized` derivado), 31 (confirmado: era falha de casamento).
+
+**Numeros:** base 18.176 -> **19.250 registros em 24 kinds**. Prosa de 95%
+reportado (82,6% real) para **99,2%**. 586 registros que a fusao por prosa tinha
+deletado foram recuperados. 318 irmaos criados no desmembramento. Portoes 1, 2 e
+4 passam; 3, 5 e 7 seguem abertos com causa documentada.
+
+**Duas correcoes a spec, verificadas contra as fontes:**
+- `Death from Above`: a spec dizia "o Foundry separa os dois; o AoN indexa so o
+  mitico". E o contrario nos dois lados. O defeito nunca foi fusao de
+  duplicatas -- e **casamento ambiguo**, escolher 1 entre N em silencio
+- `mechanized` passou a ser derivado (`== bool(grants)`); significava quatro
+  coisas conforme o extrator
+
+**Aberto para decisao do Igor:** 3 registros (`heavy-power-suit`,
+`nine-ring-sword`, `wind-and-fire-wheel`) nao existem em fonte nenhuma em disco
+-- vieram de consulta ao vivo ao pf2etools. Nao inventei licenca (item 35). E o
+dump local do pf2etools esta incompleto, sem script de reconstrucao (item 37) --
+`requires`, cuja precedencia e pf2etools, roda hoje com fonte parcial.
+
 
 ### Sessao | 18:40-21:30 | igor + claude-code
 Exploracao dos PDFs oficiais e revisao ampla da base. **O pipeline nao foi

@@ -1,0 +1,149 @@
+# Validacao contra os personagens oficiais da Paizo
+
+A houserule so diverge do RAW quando ha mais de uma classe. Logo, um
+personagem de **classe unica** montado por este motor tem que bater
+exatamente com o oficial -- se nao bater, o motor esta errado.
+
+- avaliados: **136**
+- hp bate: **117**
+- hp diverge: **12**
+- nao traduzido: **7**
+
+## Por personagem
+
+- OK   `Amiri (Level 1)` nivel 1 -- HP oficial 22, motor 22
+- OK   `Amiri (Level 3)` nivel 3 -- HP oficial 50, motor 50
+- OK   `Amiri (Level 5)` nivel 5 -- HP oficial 83, motor 83
+- OK   `Droven (Level 1)` nivel 1 -- HP oficial 17, motor 17
+- OK   `Droven (Level 3)` nivel 3 -- HP oficial 38, motor 38
+- OK   `Droven (Level 5)` nivel 5 -- HP oficial 63, motor 63
+- `Whirp (Level 1)` -- NAO TRADUZIDO: classe ausente da base: wb:class/construct-companion
+- `Whirp (Level 3)` -- NAO TRADUZIDO: classe ausente da base: wb:class/construct-companion
+- `Whirp (Level 5)` -- NAO TRADUZIDO: classe ausente da base: wb:class/construct-companion
+- OK   `Ezren (Level 1)` nivel 1 -- HP oficial 16, motor 16
+- OK   `Ezren (Level 3)` nivel 3 -- HP oficial 32, motor 32
+- OK   `Ezren (Level 5)` nivel 5 -- HP oficial 53, motor 53
+- OK   `Feiya (Level 1)` nivel 1 -- HP oficial 15, motor 15
+- OK   `Feiya (Level 3)` nivel 3 -- HP oficial 29, motor 29
+- OK   `Feiya (Level 5)` nivel 5 -- HP oficial 53, motor 53
+- OK   `Fumbus (Level 1)` nivel 1 -- HP oficial 15, motor 15
+- OK   `Fumbus (Level 3)` nivel 3 -- HP oficial 33, motor 33
+- OK   `Fumbus (Level 5)` nivel 5 -- HP oficial 56, motor 56
+- OK   `Grimmyr (Level 1)` nivel 1 -- HP oficial 25, motor 25
+- OK   `Grimmyr (Level 3)` nivel 3 -- HP oficial 58, motor 58
+- OK   `Grimmyr (Level 5)` nivel 5 -- HP oficial 95, motor 95
+- OK   `Harsk (Level 1)` nivel 1 -- HP oficial 22, motor 22
+- OK   `Harsk (Level 3)` nivel 3 -- HP oficial 46, motor 46
+- OK   `Harsk (Level 5)` nivel 5 -- HP oficial 75, motor 75
+- OK   `Jirelle (Level 1)` nivel 1 -- HP oficial 19, motor 19
+- OK   `Jirelle (Level 3)` nivel 3 -- HP oficial 41, motor 41
+- OK   `Jirelle (Level 5)` nivel 5 -- HP oficial 68, motor 68
+- OK   `Korakai (Level 1)` nivel 1 -- HP oficial 15, motor 15
+- OK   `Korakai (Level 3)` nivel 3 -- HP oficial 36, motor 36
+- OK   `Korakai (Level 5)` nivel 5 -- HP oficial 61, motor 61
+- OK   `Kyra (Level 1)` nivel 1 -- HP oficial 16, motor 16
+- OK   `Kyra (Level 3)` nivel 3 -- HP oficial 32, motor 32
+- OK   `Kyra (Level 5)` nivel 5 -- HP oficial 48, motor 48
+- OK   `Lem (Level 1)` nivel 1 -- HP oficial 15, motor 15
+- OK   `Lem (Level 3)` nivel 3 -- HP oficial 33, motor 33
+- OK   `Lem (Level 5)` nivel 5 -- HP oficial 56, motor 56
+- `Droogami (Level 1)` -- NAO TRADUZIDO: classe ausente da base: wb:class/animal-companion
+- `Droogami (Level 3)` -- NAO TRADUZIDO: classe ausente da base: wb:class/animal-companion
+- `Droogami (Level 5)` -- NAO TRADUZIDO: classe ausente da base: wb:class/animal-companion
+- OK   `Lini (Level 1)` nivel 1 -- HP oficial 18, motor 18
+- OK   `Lini (Level 3)` nivel 3 -- HP oficial 41, motor 41
+- OK   `Lini (Level 5)` nivel 5 -- HP oficial 68, motor 68
+- OK   `Merisiel (Level 1)` nivel 1 -- HP oficial 15, motor 15
+- DIFF `Merisiel (Level 3)` nivel 3 -- HP oficial 33, motor 30
+- DIFF `Merisiel (Level 5)` nivel 5 -- HP oficial 56, motor 51
+- OK   `Mios (Level 1)` nivel 1 -- HP oficial 17, motor 17
+- OK   `Mios (Level 3)` nivel 3 -- HP oficial 35, motor 35
+- OK   `Mios (Level 5)` nivel 5 -- HP oficial 58, motor 58
+- OK   `Nahoa (Level 1)` nivel 1 -- HP oficial 21, motor 21
+- OK   `Nahoa (Level 3)` nivel 3 -- HP oficial 50, motor 50
+- OK   `Nahoa (Level 5)` nivel 5 -- HP oficial 83, motor 83
+- OK   `Nhalmika (Level 1)` nivel 1 -- HP oficial 20, motor 20
+- OK   `Nhalmika (Level 3)` nivel 3 -- HP oficial 43, motor 43
+- OK   `Nhalmika (Level 5)` nivel 5 -- HP oficial 70, motor 70
+- OK   `Quinn (Level 1)` nivel 1 -- HP oficial 16, motor 16
+- OK   `Quinn (Level 3)` nivel 3 -- HP oficial 32, motor 32
+- OK   `Quinn (Level 5)` nivel 5 -- HP oficial 53, motor 53
+- OK   `Sajan (Level 1)` nivel 1 -- HP oficial 19, motor 19
+- OK   `Sajan (Level 3)` nivel 3 -- HP oficial 41, motor 41
+- OK   `Sajan (Level 5)` nivel 5 -- HP oficial 68, motor 68
+- OK   `Samo (Level 1)` nivel 1 -- HP oficial 16, motor 16
+- OK   `Samo (Level 3)` nivel 3 -- HP oficial 32, motor 32
+- OK   `Samo (Level 5)` nivel 5 -- HP oficial 48, motor 48
+- OK   `Seelah (Level 1)` nivel 1 -- HP oficial 20, motor 20
+- OK   `Seelah (Level 3)` nivel 3 -- HP oficial 47, motor 47
+- OK   `Seelah (Level 5)` nivel 5 -- HP oficial 78, motor 78
+- OK   `Seoni (Level 1)` nivel 1 -- HP oficial 15, motor 15
+- OK   `Seoni (Level 3)` nivel 3 -- HP oficial 32, motor 32
+- OK   `Seoni (Level 5)` nivel 5 -- HP oficial 53, motor 53
+- OK   `Thaleon (Level 1)` nivel 1 -- HP oficial 12, motor 12
+- OK   `Thaleon (Level 3)` nivel 3 -- HP oficial 24, motor 24
+- OK   `Thaleon (Level 5)` nivel 5 -- HP oficial 36, motor 36
+- DIFF `Ulka (Level 1)` nivel 1 -- HP oficial 21, motor 19
+- DIFF `Ulka (Level 3)` nivel 3 -- HP oficial 39, motor 37
+- DIFF `Ulka (Level 5)` nivel 5 -- HP oficial 62, motor 60
+- OK   `Valeros (Level 1)` nivel 1 -- HP oficial 20, motor 20
+- OK   `Valeros (Level 3)` nivel 3 -- HP oficial 47, motor 47
+- OK   `Valeros (Level 5)` nivel 5 -- HP oficial 78, motor 78
+- OK   `Yoon (Level 1)` nivel 1 -- HP oficial 20, motor 20
+- OK   `Yoon (Level 3)` nivel 3 -- HP oficial 44, motor 44
+- DIFF `Yoon (Level 5)` nivel 5 -- HP oficial 68, motor 73
+- OK   `Bottlespeaker (Level 4)` nivel 4 -- HP oficial 48, motor 48
+- OK   `Fluff Fang (Level 4)` nivel 4 -- HP oficial 44, motor 44
+- OK   `Popcorn (Level 4)` nivel 4 -- HP oficial 68, motor 68
+- OK   `Reaching Rings (Level 4)` nivel 4 -- HP oficial 52, motor 52
+- OK   `Bottlespeaker` nivel 3 -- HP oficial 38, motor 38
+- OK   `Fluff Fang` nivel 3 -- HP oficial 35, motor 35
+- OK   `Popcorn` nivel 3 -- HP oficial 53, motor 53
+- OK   `Reaching Rings` nivel 3 -- HP oficial 41, motor 41
+- OK   `Amiri (Beginner Box)` nivel 1 -- HP oficial 22, motor 22
+- OK   `Ezren (Beginner Box)` nivel 1 -- HP oficial 16, motor 16
+- DIFF `Kyra (Beginner Box)` nivel 1 -- HP oficial 21, motor 17
+- OK   `Lem (Beginner Box)` nivel 1 -- HP oficial 15, motor 15
+- OK   `Merisiel (Beginner Box)` nivel 1 -- HP oficial 15, motor 15
+- OK   `Sajan (Beginner Box)` nivel 1 -- HP oficial 19, motor 19
+- OK   `Seoni (Beginner Box)` nivel 1 -- HP oficial 15, motor 15
+- DIFF `Valeros (Beginner Box)` nivel 1 -- HP oficial 24, motor 20
+- DIFF `Jaithe` nivel 4 -- HP oficial 42, motor 46
+- OK   `Kellsti` nivel 4 -- HP oficial 38, motor 38
+- OK   `Takemiru` nivel 4 -- HP oficial 56, motor 56
+- OK   `Zerryd` nivel 4 -- HP oficial 44, motor 44
+- OK   `Booker Kaar` nivel 3 -- HP oficial 38, motor 38
+- OK   `Doc Featherton` nivel 3 -- HP oficial 32, motor 32
+- OK   `Zakzak` nivel 3 -- HP oficial 39, motor 39
+- OK   `Zindarel` nivel 3 -- HP oficial 30, motor 30
+- OK   `Grimmnir` nivel 1 -- HP oficial 13, motor 13
+- OK   `Izni` nivel 1 -- HP oficial 14, motor 14
+- `Precious` -- NAO TRADUZIDO: classe ausente da base: wb:class/animal-companion
+- OK   `Quizrel` nivel 1 -- HP oficial 15, motor 15
+- OK   `Rhin` nivel 1 -- HP oficial 15, motor 15
+- DIFF `Simeek` nivel 1 -- HP oficial 18, motor 17
+- OK   `Eteleon` nivel 6 -- HP oficial 60, motor 60
+- OK   `Kangir` nivel 6 -- HP oficial 88, motor 88
+- OK   `Yacob` nivel 6 -- HP oficial 80, motor 80
+- OK   `Zeah` nivel 6 -- HP oficial 62, motor 62
+- OK   `Elsir Syniras` nivel 5 -- HP oficial 41, motor 41
+- OK   `Jadren Tagar` nivel 5 -- HP oficial 73, motor 73
+- OK   `Kaako Ashfeather` nivel 5 -- HP oficial 61, motor 61
+- OK   `Lavanna Saltspray` nivel 5 -- HP oficial 61, motor 61
+- OK   `Cutie Killstuff` nivel 2 -- HP oficial 34, motor 34
+- DIFF `Hellpup` nivel 2 -- HP oficial 22, motor 24
+- OK   `Marcella the Marionette` nivel 2 -- HP oficial 24, motor 24
+- OK   `The Tin Wizard` nivel 2 -- HP oficial 22, motor 22
+- OK   `Brave Wanderer` nivel 10 -- HP oficial 108, motor 108
+- OK   `Kiana` nivel 10 -- HP oficial 158, motor 158
+- OK   `Ruvior` nivel 10 -- HP oficial 126, motor 126
+- OK   `Sizkmi` nivel 10 -- HP oficial 116, motor 116
+- OK   `Melvok` nivel 5 -- HP oficial 41, motor 41
+- OK   `Oraka` nivel 5 -- HP oficial 60, motor 60
+- OK   `Savshin Starwatcher` nivel 5 -- HP oficial 58, motor 58
+- OK   `Zathri` nivel 5 -- HP oficial 73, motor 73
+- OK   `Ekene` nivel 1 -- HP oficial 16, motor 16
+- OK   `Kalaggi Nakutu` nivel 1 -- HP oficial 21, motor 21
+- DIFF `Muruwa` nivel 1 -- HP oficial 15, motor 9
+- OK   `Ufi` nivel 1 -- HP oficial 17, motor 17
+- OK   `Zane Ikundi` nivel 1 -- HP oficial 15, motor 15

@@ -1,11 +1,11 @@
 ---
 project: waybuilder
 category: pessoal
-status: active
+status: planning
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 10
+hours: 8.5
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -19,10 +19,9 @@ hidden: false
 > dedicacao do PF2e oficial. O nome e piada com o Pathbuilder 2e, o app que ele
 > substitui, e ecoa o Wayfinder, a bussola da Pathfinder Society.
 >
-> Depende de uma base de dados canonica -- o merge de tres fontes que
-> isoladamente sao incompletas. Essa base **existe e esta fechada** desde
-> 2026-07-27. Base e construtor sao um projeto so, construidos em fatias
-> verticais.
+> Depende de uma base de dados canonica que hoje nao existe: o merge de tres
+> fontes que isoladamente sao incompletas. Base e construtor sao um projeto so,
+> construidos em fatias verticais.
 
 ## Quem usa
 > Igor e a mesa dele.
@@ -70,31 +69,84 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
-> **A base canonica esta fechada.** Re-emitida em 2026-07-27 sob a spec v2, com
-> os 10 portoes de qualidade passando. As 22 regras de multiclasse, o schema da
-> base e o schema do documento de personagem seguem escritos e revisados
-> adversarialmente.
+> Design fechado e **base canonica re-emitida**. As 22 regras de multiclasse, o
+> schema da base e o schema do documento de personagem estao escritos, revisados
+> adversarialmente e commitados.
 >
-> O pipeline roda ponta a ponta (`python3 pipeline/rodar.py`: 10 extratores ->
-> reconciliar -> prosa -> fusao -> portoes) e produz **19.418 registros em 24
-> kinds**, prosa em **99,1%**, 2.867 com divergencia registrada, 646 com
-> `superseded_by` e **nenhum registro deletado**. Index 20,9 MB + prosa 17,9 MB.
+> **19.738 registros em 52 kinds** (24 originais + 28 de sub-escolha promovidos a
+> kind proprio), prosa em **99,2%** (166 sem prosa), 1.550 com
+> divergencia registrada, 281 desmembrados de colisao de identidade.
 >
-> O dano que a auditoria de 26/07 achou foi corrigido e medido -- a fusao
-> legado/remaster passou a usar a chave que o AoN publica (12/12 corretas na
-> amostra, contra 35% antes), `traits` virou uniao de verdade
-> (`two-hand-d12` de 2 para 10 registros), e entraram os kinds que faltavam:
-> `ritual` 151, `relic` 122, `language` 117, `background` de 332 para 514.
-> Verificacao completa em `docs/2026-07-27_reemissao-base.md`.
+> A re-emissao de 2026-07-26 fechou os cinco defeitos da auditoria: a fusao
+> Legacy<->Remaster passou a usar o `remaster_id` do AoN em vez de similaridade
+> de prosa (**586 registros deletados foram recuperados**; `aeon-stone` voltou de
+> 17 para 40); `traits` virou uniao; as colisoes de identidade foram
+> desmembradas; entraram `ritual`, `relic`, `language` e 168 backgrounds que
+> faltavam; e os 7 portoes de qualidade existem de fato.
 >
-> As regras caseiras tambem foram medidas: a matriz de balanceamento
-> (`docs/simulacoes/2026-07-27_balanceamento.md`, niveis 1-15, HOUSE vs RAW vs
-> RAW+Free Archetype) diz que **a houserule nao quebra o jogo** -- 2 pontos
-> fora da curva em 160 configuracoes, e um bonus de versatilidade fora do
-> combate sem nenhuma perda medida.
+> **Antes disso, um bloqueio nao registrado precisou ser resolvido:** 7 dos 10
+> extratores apontavam para um clone do Foundry num diretorio de scratchpad de
+> sessao (`/tmp/...`) que ja nao existia. O pipeline nao rodava, e re-executar
+> produzia uma base menor e mono-fonte **sem erro nenhum**. Fonte refeita dentro
+> de `dados_brutos/`, com `buscar_fontes.sh` e `dump_aon.py` reconstruindo as
+> duas maiores.
 >
-> **O proximo passo e modelagem, nao dado**: o grafo de progressao de dois
-> niveis e o predicado sabendo falar de subclasse. Depois, o front.
+> **O motor ja monta ficha COMPLETA (2026-07-27).** HP, AC (com cap de DEX,
+> escudo, penalidade), ataque e dano por arma, proficiencias, identidade de
+> classe, conjuracao e a lista do que pode pegar. Validado contra os iconics da
+> Paizo: **117 de 129 batem (91%)**.
+>
+> **(historico)** Fatia vertical 1 fechada: `motor/`
+> implementa 11 das 22 regras e imprime `Guerreiro 3 / Mago 2` completo, com 24
+> assercoes de teste travando cada regra. A houserule aparece viva -- Mago 2 num
+> personagem 5 tem os slots de um Mago 2 e conjura no rank 3; Mago 5 puro ganha
+> elevacao zero, que e o comportamento correto.
+>
+> Fechados junto: o grafo de progressao de dois niveis (item 2 -- as 28
+> categorias de sub-escolha do AoN viraram kind proprio, e a progressao agora
+> separa concessao de escolha usando `system.items` do Foundry como fonte
+> autoritativa) e a tabela de slots de conjuracao (item 14).
+>
+> **Os tres itens de modelagem fecharam** (gate de nivel, subclasse no predicado,
+> efeito unificado). `class_level` foi de 79 para 1.932 registros.
+>
+> **Sessao de 2026-07-27 (05:41-07:03).** As 11 classes conjuradoras tem tabela
+> de slots completa -- o Animist, ultimo buraco, foi recuperado do campo
+> `markdown` do AoN, que o extrator nunca lia. Tres regras novas implementadas e
+> testadas: **17b** (teto do que cria criatura: `summon` + `incarnate`, 37
+> magias, mais companheiro e eidolon), **21** afiada de principio para invariante
+> varrido nos 204 pares, e **23** (exclusao mutua entre nivel de classe e
+> dedicacao da mesma classe). Ficha do companheiro em RAW puro, com maturidade
+> derivada dos feats.
+>
+> Criado o **portao 8** contra perda silenciosa de artefato, depois de uma perda
+> real: dump de fonte reproduzivel por pin fica em `dados_brutos/` e fora do git;
+> tudo que exigiu leitura ou arbitragem humana vai em `dados_derivados/`, que e
+> versionado.
+>
+> **PROXIMO PASSO, decidido com o Igor:** o app e para construir o personagem
+> INTEIRO, como o Pathbuilder -- todos os numeros na ficha. Fica de fora so
+> retraining e arbitragem de mesa. Nessa ordem:
+> 1. **Slots abertos, genericos** -- 243 dos 6.044 feats (4%) abrem escolha, e a
+>    cadeia de desbloqueio chega a profundidade 4. Slot tem de ser DERIVADO do
+>    estado a cada escolha, nunca arvore estatica. Primeiro caso de teste pronto
+>    e sem dado novo: o beneficio por especializacao do companheiro
+>    (Ambusher/Bully/Daredevil/Racer/Tracker/Wrecker)
+> 2. **Familiar e eidolon** -- so tem nivel e o cap da 17b. O eidolon usa
+>    estatisticas do proprio Summoner, entao a ficha dele nao e independente
+> 3. **Runas** -- potencia e impacto (`+1 striking longsword`)
+> 4. **Interpretador parcial de Rule Elements** -- dano condicional das
+>    subclasses (itens 42/43). Dano de rage e numero de ficha
+>
+> **Aberto para decisao do Igor:**
+> - a regra 17b vale para slot de ARQUETIPO? A regra 18 diz que Free Archetype
+>   roda RAW puro, mas isso deixa a rota gratuita passar a comprada em alguns
+>   niveis. A spec nao decide
+> - o piso da regra 21 achata uma faixa: no personagem 20, os niveis de classe 1
+>   a 12 dao todos rank 8. Se o "deveria ser ainda mais forte" virar numero, e
+>   ai que ele entra
+> - itens 41 (tradicao por subclasse em Sorcerer/Summoner/Witch e prosa) e 42
+>   (8 eixos de subclasse sem efeito)
 >
 > **Comece por `README.md`** -- ele e o ponto de retomada.
 

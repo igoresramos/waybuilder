@@ -1,21 +1,12 @@
 ---
 spec: schema-base
 project: waybuilder
-version: 2
+version: 1
 status: aprovada
 created: 2026-07-26
-updated: 2026-07-27
 ---
 
 # Schema da base canonica
-
-> **v2 (2026-07-27)** -- reescrita das partes que a auditoria ampla de 26/07
-> (`docs/2026-07-26_auditoria-ampla.md`) provou erradas ou ausentes. Mudou:
-> fusao legado<->remaster passa a usar chave da fonte e nao apaga registro;
-> `mechanized` vira dois campos; `rank` entra no envelope; `relic` e `language`
-> entram nos kinds; `prov` ganha vocabulario fechado com marca de inferencia;
-> `source.book` e normalizado na escrita; os portoes de qualidade ganham ordem
-> de execucao declarada. O que a v1 dizia e continua valendo nao foi tocado.
 
 Contrato unico que **todo** extrator obedece. Escrito antes de qualquer extracao
 de proposito: sem isso, cada fonte produz um formato e a reconciliacao vira
@@ -79,19 +70,17 @@ Nunca do ID de nenhuma fonte -- IDs de terceiros vivem em `xref`.
   "id": "wb:class-feature/fighter-weapon-mastery",
   "kind": "class-feature",
   "name": "Fighter Weapon Mastery",
-  "aliases": ["Weapon Mastery"],
   "level": 5,
   "traits": ["fighter"],
   "rarity": "common",
   "source": {
-    "book": "Player Core", "book_raw": "Pathfinder Player Core", "page": 145,
+    "book": "Player Core", "page": 145,
     "license": "ORC", "remaster": true
   },
   "requires": { "...predicado..." },
   "grants":  [ "...efeitos..." ],
   "text": "wb:text/class-feature/fighter-weapon-mastery",
-  "grants_completos": true,
-  "requires_parseado": true,
+  "mechanized": true,
   "xref": {
     "foundry":   "Compendium.pf2e.classfeatures.Item.xxxx",
     "aon":       "class-feature-156",
@@ -99,8 +88,7 @@ Nunca do ID de nenhuma fonte -- IDs de terceiros vivem em `xref`.
   },
   "prov": {
     "name": "aon", "level": "foundry", "grants": "foundry",
-    "requires": "pf2etools", "text": "aon",
-    "source.license": "waybuilder~inferido:livro"
+    "requires": "pf2etools", "text": "aon"
   },
   "conflitos": [
     {"campo": "level", "foundry": 5, "aon": 5, "pf2etools": 5, "escolhido": "foundry"}
@@ -109,68 +97,25 @@ Nunca do ID de nenhuma fonte -- IDs de terceiros vivem em `xref`.
 ```
 
 - **`prov`** e obrigatorio e por campo. Sem isso nao da para re-sincronizar so o
-  que mudou nem auditar divergencia. Formato fechado na secao "Vocabulario de
-  `prov`" -- `"aon"` e leitura direta, `"aon~inferido:<regra>"` e derivacao.
+  que mudou nem auditar divergencia.
 - **`conflitos`** so aparece quando as fontes discordam. Divergencia e registrada,
   nunca silenciada.
-- **`grants_completos`** / **`requires_parseado`** substituem `mechanized` (ver
-  secao proxima). Nunca travam o build.
+- **`mechanized`** separa as duas camadas: `true` = o app calcula pelos `grants`;
+  `false` = so exibe o texto e o jogador controla na mao. Nunca trava o build.
+
+  > **E derivado, nao declarado: `mechanized == bool(grants)`.** Medido em
+  > 2026-07-26: o campo significava quatro coisas diferentes conforme o
+  > extrator. 12.923 registros (70,1%) tinham `true` com `grants` vazio -- ou
+  > seja, prometiam calculo sem nada para calcular -- e 374 tinham `false` com
+  > `grants` cheio. Pior, o `false` se distribuia por **kind inteiro** (`deity`,
+  > `trait`, `ritual`, `language`, `skill`): era propriedade de quem escreveu o
+  > extrator, nao do dado.
+  >
+  > Como a unica coisa que o app consegue calcular sao os `grants`, o valor e
+  > exatamente isso. Extrator nao declara mais este campo; o reconciliador
+  > deriva.
 - **`text`** e uma referencia, nao o texto. A prosa vive em arquivo separado
-  (3,6 MB gzip) e carrega sob demanda. **Todo registro emitido tem `text`** --
-  quando o AoN nao tem prosa, cai para a descricao do Foundry, e `prov.text`
-  registra de quem veio.
-- **`rank`** substitui `level` **so em `spell`** -- e o nome remaster do campo.
-  Para nao quebrar filtro de nivel no cliente, `spell` emite os **dois**, com o
-  mesmo valor; `rank` e o campo canonico e `level` e espelho declarado, escrito
-  num ponto so da emissao, com `prov.level = "waybuilder~inferido:espelho-rank"`.
-  O portao 2 falha o build se `rank != level` em algum spell -- sem invariante,
-  os dois se soltam com o tempo e o filtro do cliente volta a mentir.
-- **`aliases`** guarda todo nome pelo qual a entidade ja foi conhecida
-  (renomeacao do remaster, nome de outra fonte). A busca resolve por qualquer um.
-
-## `grants_completos` e `requires_parseado`
-
-`mechanized` foi removido. Ele respondia a duas perguntas diferentes com um
-booleano so, e cada extrator escolhia qual das duas:
-
-> Medido na v1: **12.742 registros (70,1%)** tinham `mechanized: true` com
-> `grants` vazio, e **370** tinham `false` com `grants` cheio -- 72% da base
-> contradizendo a propria definicao. O `false` nao se distribuia por registro e
-> sim por **kind inteiro** (`trait` 561/561, `deity` 484/484, `skill` 33/33...),
-> o que denuncia propriedade do extrator, nao do dado. Em `feat`, `false`
-> significava "nao consegui parsear o pre-requisito" -- afirmacao sobre o
-> parser, nao sobre o registro.
-
-| campo | pergunta | valores |
-|---|---|---|
-| `grants_completos` | a mecanica de efeito foi convertida por inteiro? | `true` / `false` / `null` |
-| `requires_parseado` | o pre-requisito virou predicado? | `true` / `false` / `null` |
-
-`null` e **"nao se aplica"**, e e o valor obrigatorio quando o kind nao produz
-aquele campo por natureza -- `trait`, `skill`, `deity` e `domain` nao tem
-`grants`, entao respondem `null`, nunca `false`. Registro sem pre-requisito em
-fonte nenhuma tem `requires_parseado: true` com `requires` vazio: nada a parsear
-e sucesso, nao falha.
-
-Regra unica, valida para todos os extratores: `grants_completos` e `false`
-somente quando a fonte **tinha** mecanica e a conversao perdeu parte dela
-(rule element fora do mapa dos 21 convertidos). `requires_parseado` e `false`
-somente quando ha `requires_texto` e o predicado saiu vazio ou parcial.
-
-Quais kinds respondem `null`, para nao sobrar decisao por extrator:
-
-| campo | `null` (nao se aplica) |
-|---|---|
-| `grants_completos` | `trait`, `skill`, `deity`, `domain`, `language`, `archetype` |
-| `requires_parseado` | `trait`, `skill`, `language`, `domain`, `deity`, `spell`, `ancestry`, `background` -- exceto se o registro tiver `requires_texto`, e ai vale a regra normal |
-
-`deity` responde `null` em `grants_completos` apesar de alimentar o build do
-Clerigo: o que ele da (arma favorecida, fonte divina, dominios) sao **campos
-proprios**, nao `grants`. Se algum dia virarem `grants`, o kind sai da lista --
-e a mudanca fica registrada aqui, nao escondida num extrator.
-
-Sem essa tabela, duas regras da spec colidiam no mesmo registro: "kind que nao
-produz o campo responde `null`" e "registro sem pre-requisito responde `true`".
+  (3,6 MB gzip) e carrega sob demanda.
 
 ## Precedencia entre fontes
 
@@ -178,84 +123,15 @@ Por campo, nao por registro:
 
 | Campo | Vence | Motivo |
 |---|---|---|
-| `grants` (efeito mecanico) | **foundry** | unica com rank numerico e rule elements -- ver nota |
+| `grants` (efeito mecanico) | **foundry** | unica com rank numerico e rule elements |
 | `requires` (pre-requisito) | **pf2etools** | unica com `{@feat}`/`{@skill}` marcados |
 | `text`, `name`, `rarity` | **aon** | e a Paizo; mais completa e atual |
 | `level` | foundry, conferido contra pf2etools | ha duas fontes independentes -- divergencia e bug |
-| `rank` (so `spell`) | foundry, conferido contra aon | mesmo criterio de `level` |
 | `source`, `remaster` | **aon** | tem `remaster_id`/`legacy_id` para a ponte |
 | `traits` | **nenhuma -- ver abaixo** | e conjunto, nao valor escalar |
 
 Quando a fonte vencedora nao tem o campo, cai para a proxima na ordem acima e
 `prov` registra de quem veio.
-
-> Nota sobre `grants`: a linha da tabela nunca e exercitada, porque **so o
-> Foundry produz o campo** -- as outras duas fontes nao tem efeito mecanico
-> estruturado. Isso e propriedade das fontes, nao regra morta: se algum dia
-> outra fonte passar a emitir efeito, a precedencia ja esta escrita. Registrado
-> aqui para nao voltar como "regra que nunca dispara, remover".
-
-**Comparar valores e literal, menos para nome de livro.** So `source.book`
-compara por chave normalizada -- a diferenca de grafia entre fontes ali e ruido
-conhecido. No resto, `"God's"` contra `"Gods'"` **e** divergencia real e tem de
-aparecer em `conflitos`; normalizar mascarava 46 pares desses.
-
-**Duas entradas que resolvem para a mesma fonte com valores diferentes viram
-conflito, nao descarte.** Ficar com a primeira em silencio apagava 67 valores
-por build.
-
-**A escolha por precedencia e o registro da divergencia sao a mesma operacao.**
-Ela vive em **uma** funcao compartilhada (`pipeline/comum.py`), nao replicada por
-extrator.
-
-> Enquanto estava replicada em 7 arquivos, "divergencia nunca silenciada" nao era
-> verificavel -- e de fato nao acontecia: 6 kinds (`class-feature`, `background`,
-> `heritage`, `familiar-ability`, `ancestry`, `class`) tinham **1.618 registros
-> com 2+ fontes e exatamente zero conflitos**, enquanto 145 divergencias reais de
-> `source.book` contra o Foundry eram comprovaveis. Os numeros de conflito da v1
-> sao **piso**, nao total.
-
-### `source.book` e normalizado na escrita, nao so na comparacao
-
-O valor emitido e a forma canonica; a grafia original fica em `source.book_raw`
-quando difere. `strip()` obrigatorio -- inclusive de `\r\n` literal.
-
-> Medido: **10.723 registros (59%)** ficaram com livro de grafia ambigua --
-> 26 obras com duas grafias (`Player Core` 2.032 contra `Pathfinder Player Core`
-> 83), mais 160 registros com `\r\n` dentro do nome do livro. Qualquer
-> agrupamento por livro no cliente -- filtro, cobertura, triagem de licenca --
-> dava numero errado.
-
-## Vocabulario de `prov`
-
-Valor de `prov[campo]` e uma string com gramatica fechada:
-
-```
-<fonte>                     leitura direta da fonte
-<fonte>~inferido:<regra>    valor derivado, nao lido
-```
-
-`<fonte>` ∈ `aon | foundry | pf2etools | waybuilder`. `waybuilder` e o proprio
-pipeline (valor calculado, nao vindo de fonte externa). `<regra>` vem de lista
-fechada, registrada aqui quando nasce: `livro` (licenca inferida do nome do
-livro), `remaster_id` (vinculo pela ponte do AoN), `traits` (classe dona inferida
-de trait), `nome-aproximado` (casamento por nome normalizado), `diretorio`
-(vinculo pelo caminho do pack do Foundry), `espelho-rank` (`level` copiado de
-`rank` em `spell`).
-
-Quem infere e quem e citado como fonte: **a inferencia e do pipeline**, entao
-licenca derivada do nome do livro e `waybuilder~inferido:livro`, nao
-`aon~inferido:livro`. `aon~inferido:<regra>` so quando o valor vem do AoN por
-um caminho indireto (`aon~inferido:nome-aproximado`).
-
-Regra: **nao existe `prov` com valor `"desconhecida"`**. Se a fusao nao sabe de
-onde veio o campo, ela nao tem o direito de adotar o campo.
-
-> Na v1, `prov` misturava 8 formatos livres (`"foundry(deities, por nome)"`,
-> `"aon (nome aproximado)"`, `"aon(heuristica:remaster_id)"`) e 152 pontos com
-> `"desconhecida"`, o que nenhum consumidor conseguia parsear. 1.440 licencas
-> inferidas nao tinham sinal nenhum no registro emitido -- so em `prov` -- e sao
-> justamente a base do build publico do item 16 do TODO.
 
 ## `traits` e uniao, nao precedencia
 
@@ -300,93 +176,7 @@ Regra: `traits` e a **uniao das tres fontes**, aplicada nesta ordem:
 3. **Uniao do que sobrar**, ordenada alfabeticamente.
 
 `prov.traits` passa a registrar a **lista de fontes que contribuiram**, nao uma
-vencedora: `"traits": ["foundry", "aon"]`. E **`traits` nao gera `conflitos`**:
-o campo saiu da precedencia, entao "divergencia de trait" deixou de ser uma
-categoria -- o que cada fonte dizia esta na uniao e em `prov.traits`.
-
-> Onde a uniao acontece importa. Os extratores colapsam as tres fontes num
-> registro so **antes** da reconciliacao, entao unir no reconciliador sobre o
-> grupo de registros e vacuo -- medido: 1 contribuinte em 15.802 registros, e
-> `bastard-sword` continuava com `two-hand` em vez de `two-hand-d12`, que e
-> exatamente o dado que a auditoria mostrou sendo destruido.
->
-> O que cada fonte dizia **nao se perde**: fica no proprio `conflitos` que o
-> extrator gravou, com uma chave por fonte. E de la que a uniao sai hoje. O
-> efeito na base: `two-hand-d12` passou de 2 registros para 10, e `two-hand`
-> puro caiu de 19 para 2. A correcao definitiva e o extrator chamar a uniao
-> direto -- o caminho pelo `conflitos` e o mesmo resultado sem reescrever
-> sete extratores.
-
-## Fusao legado <-> remaster
-
-Politica de conteudo (decidida pelo Igor, inalterada): **nome nao importa, regra
-e conteudo importam.** `Power Attack` e `Vicious Swing` sao a mesma coisa e viram
-um registro so, com todos os nomes em `aliases`.
-
-O que mudou e o **criterio de decidir se sao a mesma coisa**:
-
-> A v1 decidia por similaridade de prosa (Jaccard >= 0,62, >= 15 tokens
-> distintivos). Auditado contra o `remaster_id` do AoN: **so 35% das 597 fusoes
-> estavam certas**; 393 (65,8%) uniram registros com `level`, `price_cp` ou
-> `damage` diferentes -- o dado ja dizia que eram entidades distintas.
-> `wb:equipment/aeon-stone` engoliu 24 pedras distintas; `Poi` virou `Shield
-> Bash`; `Tonfa` virou `Shuan Ji`, do **mesmo livro**. A causa e estrutural:
-> itens de uma familia compartilham quase todo o texto e diferem numa linha.
-> Prosa e o pior sinal possivel para distingui-los.
-
-1. **A chave e da fonte.** Funde so quando o AoN declara o vinculo
-   (`remaster_id` no doc legado apontando para o doc alvo, ou `legacy_id` no
-   doc remaster). Prosa entra como **confirmacao**, nunca como decisor.
-2. **Um unico veto: categoria diferente.** Legado e alvo tem de ser da mesma
-   categoria no AoN e do mesmo `kind` na base.
-
-   > Medido: **351 de 351** class-features com `remaster_id` apontam para um
-   > doc de categoria `class` -- `Evasion` (class-feature-25) aponta para
-   > `class-56`, que e o **Alchemist**. Sem este veto a feature seria absorvida
-   > pela classe. Consequencia aceita: renomeacao real de class-feature
-   > (`Armor of Fury` -> `Armor Mastery`) fica sem chave e tem de sair da
-   > progressao da classe no Foundry, que esta spec ja elege como fonte do
-   > vinculo classe->feature.
-
-3. **O que muda entre legado e alvo e anotado, nao vetado.** `level`,
-   `price_cp` ou `damage` divergentes, consolidacao N->1 e data de publicacao
-   entram em `historico[].mudou` e no relatorio.
-
-   > A versao anterior desta spec vetava esses tres casos. Medido na ponte do
-   > AoN antes de escrever isto: os vetos barram **77,8%** dos pares que a
-   > propria fonte declara, e por motivo legitimo. N->1 e o caso **normal** da
-   > consolidacao do remaster -- 351 alvos recebem 2+ legados dentro da mesma
-   > categoria (`Magic Wand` <- as 10 varas por rank de magia, `Bewitching
-   > Bloom` <- as 10 flores). `level`/`price_cp` divergentes sao errata
-   > (`Hand of the Mage` nv2 -> `Charlatan's Gloves` nv3). E a fronteira de
-   > data e falsa: Rage of Elements e de 2023-08-02 e ha legado declarado
-   > publicado em 2024.
-   >
-   > O que protegia contra o dano da auditoria (`aeon-stone` engolindo 24
-   > pedras) nunca foi o guarda: **das 24 pedras, so 5 declaram `remaster_id`**.
-   > Era a chave -- e o fato de nada ser deletado.
-
-4. **Nada e deletado.** O registro absorvido permanece na base com
-   `superseded_by: ["<id do alvo>"]` -- **lista**, porque 1->N declarado existe
-   (`Wish` -> [`Wish`, `Manifestation`]) -- e **com a propria prosa**, que
-   difere da do alvo. Some da lista de escolha do construtor, continua
-   resolvivel por id e por busca.
-
-5. **Homonimo declarado ocupa dois slots de `xref`.** 5.599 pares declarados
-   tem o **mesmo nome** (`Tusks` feat-1286 -> `Tusks` feat-4519), caem no mesmo
-   slug e chegam juntos na fusao de id, antes desta etapa. O vigente fica em
-   `xref.aon` e o substituido em `xref.legado_aon` -- decidido pela ponte, nao
-   pela ordem de leitura. Na v1 o segundo sobrescrevia o primeiro em silencio.
-
-> A v1 deletava (`final = [r for r in base if r["id"] not in absorvidos]`), e o
-> relatorio dizia "Nada e descartado" -- o que nao era descartado era o *nome*.
-> Efeito colateral rastreado: 8 entradas de `progressao` de classe passaram a
-> apontar para id inexistente e 597 chaves de prosa ficaram orfas.
-
-E a metrica do relatorio muda junto: **"zero par nao unido" e recall sem
-precisao** -- fundir tudo com tudo tambem daria zero. O relatorio reporta os
-dois lados: pares unidos com chave, pares vetados por guarda, e legados sem
-chave nenhuma.
+vencedora: `"traits": ["foundry", "aon"]`.
 
 ## Colisao de identidade
 
@@ -410,26 +200,6 @@ fonte diz que o objeto e `archetype` e a outra `mythic`, sao dois objetos.
 Quando detectado, o registro e **desmembrado**: cada entidade ganha slug proprio
 com sufixo derivado do que as distingue (`wb:feat/death-from-above-mythic`), e
 `xref` aponta so para o id da fonte correspondente.
-
-**Ordem importa:** o detector roda **antes** de `fundir()`, sobre as colisoes de
-id, e nao depois.
-
-> O portao 7 da v1 ("nome duplicado no mesmo kind") media 0 e sempre mediria:
-> `reconciliar.py` funde toda colisao de id **antes** de qualquer verificacao.
-> Ele perguntava se existia duplicata depois de a duplicata ter sido eliminada.
-> Foi por essa fresta que `death-from-above` passou.
-
-Regra de sufixo, nesta ordem (primeira que distinguir, vence), para o sufixo ser
-deterministico e nao depender da ordem de leitura das fontes:
-
-1. trait de categoria que so um lado tem (`-mythic`, `-goblin`)
-2. classe ou arquetipo dono (`-fighter`, `-familiar-master`)
-3. livro (`-tian-xia-cg`)
-4. nivel (`-nv16`)
-
-**Falso positivo conhecido:** sufixo de grau em item (`-greater`, `-major`,
-`-true`, `-lesser`) e variante legitima da mesma familia, nao colisao. Nao
-desmembrar, nao fundir -- ja sao registros distintos e corretos.
 
 ## Nivel de class-feature pertence a classe, nao a feature
 
@@ -476,11 +246,54 @@ E aqui que a houserule mora. Termo de nivel e **sempre explicito** -- nunca um
 
 Operadores: `all`, `any`, `not`, `>=`, `<=`, `==`.
 Termos: `class_level`, `character_level`, `ability`, `proficiency`, `has`,
-`trait`, `spellcasting_tradition`.
+`trait`, `spellcasting_tradition`, `subclass`.
 
 No PF2e oficial `class_level` e `character_level` sao sempre o mesmo numero.
 A base guarda os dois separados assim mesmo -- e o que permite o builder existir
 sem migracao depois.
+
+### O gate de nivel e DERIVADO, nao lido
+
+> Medido em 2026-07-27: `class_level` aparecia em **79 de 19.738 registros** --
+> o termo que justifica o projeto inteiro estava praticamente vazio. E nao
+> porque falta dado: porque **nenhuma fonte precisa da distincao**, ja que no
+> PF2e os dois numeros sao sempre iguais.
+>
+> No PF2e o pre-requisito de um feat **nunca menciona nivel**: o nivel do feat
+> *e* o gate. `Accompany`, com trait `bard` e `level: 8`, quer dizer "voce e um
+> Bardo de nivel 8". Sob a houserule isso se parte em dois, e a regra de
+> derivacao e mecanica:
+
+| O feat tem | Gate derivado | Regra |
+|---|---|---|
+| trait de classe X | `class_level[X] >= N` | 12 |
+| trait `archetype` | `character_level >= N` | 13 |
+| trait de ancestria Y | `character_level >= N` **e** `has` a ancestria | 14 |
+| nenhum dos anteriores | `character_level >= N` | 14 |
+
+`archetype` vence trait de classe: arquetipo nao pertence a classe nenhuma.
+O `requires` declarado pela fonte **nunca e sobrescrito** -- o gate entra como
+mais uma clausula de um `all`, e clausula ja presente nao e duplicada.
+
+### `subclass`: a camada do meio
+
+```json
+{"subclass": {"cleric": "wb:class-feature/warpriest"}}
+```
+
+> `has` nao serve para isto: e generico demais, e nao distingue "escolheu esta
+> doutrina" de "pegou este feat". Um predicado que nao distingue nao consegue
+> expressar "so para Warpriest".
+>
+> O caso que obriga o termo a existir e publicado: a proficiencia de conjuracao
+> do Clerigo depende da **Doutrina**. Cloistered segue o conjurador pleno
+> (expert 7, master 15, legendary 19); Warpriest e mais lento e nunca chega a
+> legendary (expert 11, master 19). Duas progressoes, mesma classe, mesmo nivel
+> -- `class_level` sozinho nao alcanca.
+>
+> O dado ja vinha certo desde a primeira extracao, em
+> `spellcasting.proficiency`, com as duas progressoes separadas. Faltava o
+> termo e faltava alguem consumir.
 
 ## Linguagem de efeito (`grants`)
 
@@ -500,31 +313,50 @@ sem migracao depois.
 Ranks sao **palavra** (`untrained|trained|expert|master|legendary`), nunca numero
 solto. O numero do Foundry (0-4) e traduzido na entrada.
 
+### `grants` vale para TODO kind, nao so para `class`
+
+> Medido em 2026-07-27: esta era a unica linguagem de efeito da spec, e so
+> `class` a usava. Ancestria guardava o efeito em campos soltos (`hp`, `size`,
+> `speed`, `boosts`, `senses`, `flaw`, `languages`); background usava outro
+> conjunto (`skill_training`, `attribute`, `skill`, `feat`). Tres formatos para
+> o mesmo conceito.
+>
+> Consequencia visivel: `mechanized`, definido como `== bool(grants)`, marcava
+> 50 ancestrias e 502 backgrounds como "o jogador resolve na mao", quando o
+> efeito deles e calculavel e ja estava estruturado -- so que noutro lugar.
+> Um motor precisava conhecer os tres formatos, e cada kind novo viraria caso
+> especial.
+
+Termos adicionais, emitidos pela projecao canonica de ancestria e background:
+
+```json
+[
+  {"hp_ancestry": 10},
+  {"size": "med"},
+  {"speed": {"land": 20}},
+  {"sense": "darkvision"},
+  {"language": {"auto": ["common", "dwarven"], "free": 1}},
+  {"skill_training": {"auto": ["arcana"], "lore": ["Azlant Lore"]}},
+  {"grant_feat": ["wb:feat/assurance"]},
+  {"requires_ancestry": "wb:ancestry/dwarf"}
+]
+```
+
+Os campos originais **permanecem**: a projecao adiciona, nunca substitui. Nada
+se perde e quem lia `r["hp"]` continua funcionando.
+
 ## Kinds em escopo
 
 `class`, `class-feature`, `feat`, `ancestry`, `heritage`, `background`, `spell`,
-`ritual`, `equipment`, `weapon`, `armor`, `shield`, `archetype`, `relic`,
-`language`, `familiar-ability`, `familiar-specific`, `animal-companion`,
-`eidolon`, `apparition`, `trait`, `skill`, `deity`, `domain`
+`ritual`, `equipment`, `weapon`, `armor`, `shield`, `archetype`,
+`familiar-ability`, `familiar-specific`, `animal-companion`, `eidolon`,
+`apparition`, `trait`, `skill`, `deity`, `domain`
 
 > `ritual` entrou depois. Foi **omissao ao escrever esta lista**, nao falha de
 > extrator: zero registros em 18.176, e a palavra nao aparecia uma vez sequer
-> nesta spec. Ritual nao consome slot de escolha, mas o personagem sabe quais
-> conhece, e o principio "nada e descartado" cobre o caso. O escopo real sao
-> **145 rituals vigentes** no censo do AoN, nao os ~31 dos dois Player Core que
-> a primeira contagem viu.
-
-> `relic` (122 vigentes) e `language` (117 vigentes) entraram pela mesma porta,
-> na auditoria de 26/07, e pelo mesmo motivo: omissao ao escrever a lista.
-> `relic` tem trilha de progressao propria (gift/aspect) e por isso nao cabe
-> dentro de `equipment`. `language` existia so como string solta dentro do campo
-> `languages` das 50 ancestrias -- a ficha tem linha de idiomas e precisa de
-> entidade para referenciar.
-
-> **Como achar o proximo kind ausente:** censo por `category` do AoN
-> descontando `remaster_id`, cruzado contra a contagem por kind da base.
-> Contar registro por `source.book` nao acha nada -- um livro pode aparecer com
-> 2.032 registros e ainda assim faltar uma categoria inteira.
+> nesta spec. Sao ~31 so nos dois Player Core. Ritual nao consome slot de
+> escolha, mas o personagem sabe quais conhece, e o principio "nada e
+> descartado" cobre o caso.
 
 > `eidolon` e `familiar-specific` entraram depois: sao categorias proprias no
 > AoN (13 e 47 registros) que a primeira leitura do escopo nao pegou. O trait
@@ -551,83 +383,41 @@ Fora: bestiario, perigo, NPC, veiculo, conteudo de aventura, regra de reino.
 
 ```
 base/
-  index.json            campos filtraveis de todos os registros   (~0,53 MB gzip)
-  text/<kind>.json      prosa, carregada sob demanda              (~3,6 MB gzip)
-  base.sqlite           store canonico com prov e conflitos       (build-time)
-  relatorio_portoes.md  os 9 portoes, resultado de cada um
-  relatorio_fusao.md    unidos com chave / vetados por guarda / sem chave
+  index.json        campos filtraveis de todos os registros   (~0,53 MB gzip)
+  text/<kind>.json  prosa, carregada sob demanda              (~3,6 MB gzip)
+  base.sqlite       store canonico com prov e conflitos       (build-time)
 ```
 
 ## Portoes de qualidade
 
-Cada portao declara **em que ponto do pipeline roda**. Portao que roda depois da
-operacao que ele deveria vigiar nao vigia nada -- foi o defeito do portao 7 da
-v1. Todos sao reportados em `base/relatorio_portoes.md` **inclusive quando
-passam**: portao ausente e portao aprovado nao podem parecer a mesma coisa.
+O build **falha** se:
 
-| # | portao | roda |
-|---|---|---|
-| 1 | todo campo preenchido tem `prov`, e nenhum `prov` vale `"desconhecida"` | pos-emissao |
-| 2 | `level`/`rank` divergente entre fontes sem entrada em `conflitos` | pos-merge |
-| 3 | `requires`, `grants` ou `progressao` citando `wb:` id inexistente | pos-emissao |
-| 4 | queda de cobertura por kind contra o build anterior sem justificativa no LOG | pos-emissao |
-| 5 | registro emitido sem `license`, ou com `xref` vazio | pos-merge |
-| 6 | `traits` categoricamente disjunto sobrando depois das tres regras de uniao | pos-merge |
-| 7 | duas entidades distintas colidindo no mesmo id | **pre-fusao**, sobre as colisoes de id |
-| 8 | kind com >=20 registros de 2+ fontes e **zero** `conflitos` (sem contar `traits`) | pos-merge |
-| 9 | toda **categoria** do censo do AoN (`category` menos `remaster_id`) mapeia para kind, e nenhum kind fica abaixo do piso | pos-emissao |
-| 10 | registro emitido sem `text`, em kind fora da lista de isencao declarada | pos-emissao |
+1. Algum registro nao tem `prov` para todo campo preenchido.
+2. `level` diverge entre foundry e pf2etools sem entrada em `conflitos`.
+3. Um `requires` cita `wb:` id que nao existe na base.
+4. Cobertura cai em relacao ao build anterior sem justificativa no LOG.
+5. Algum registro emitido tem `license` ausente.
+6. Sobra `traits` categoricamente disjunto entre fontes **depois** de aplicadas
+   as tres regras de uniao -- e suspeita de colisao de identidade.
+7. Um `name` normalizado aparece em dois registros do mesmo `kind` sem que a
+   distincao esteja explicita no slug.
+8. Um caminho citado em documento versionado nao existe no disco, e nao esta
+   registrado em `pipeline/artefatos_perdidos.json`.
 
-O portao 9 varre as **categorias do censo**, nao uma lista de kinds escrita a
-mao. A diferenca e o proposito: uma allow-list e cega justamente para o que ele
-existe para achar -- o kind que ninguem lembrou de listar. Categoria sem kind
-mapeado tem tres saidas, todas escritas: entra no escopo, entra em
-`FORA_DE_ESCOPO` com o motivo, ou entra em `CATEGORIA_COBERTA` quando a base ja
-a cobre dentro de outro kind (`ikon` sao class-features; `arcane-school` sao
-traits).
-
-> Assim que passou a varrer o censo, o portao achou dois kinds de jogador
-> ausentes -- `tactic` (37, as tacticas do Commander no Battlecry!) e
-> `class-kit` (32, os kits de equipamento inicial). Mesma classe de omissao do
-> `ritual`, achada pelo mesmo mecanismo.
-
-Duas armadilhas de portao que ja custaram um build, escritas para nao voltarem:
-
-- **Portao que nao pode falhar.** O portao 7 chegou a ter como condicao
-  `os.path.exists(relatorio)` -- e o relatorio e sempre escrito. A condicao
-  agora e o conteudo, nao o arquivo.
-- **Portao que rebaixa a propria baseline.** O portao 4 gravava a cobertura
-  nova mesmo quando falhava, entao uma regressao era acusada uma vez e nunca
-  mais. So grava quando passa.
-
-E uma sobre a excecao: zero conflito num kind pode ser concordancia real, nao
-falta de instrumentacao -- mas isso se **mede** (`shield`: dos 112 com 2+
-fontes, 0 divergem de `source.book` contra o AoN) e a evidencia fica escrita em
-`CONCORDANCIA_VERIFICADA`, com data.
-
-**"Pos-emissao" quer dizer: depois do ultimo processo que escreve
-`index.json`** -- hoje `fundir_renomeados.py`, nao `emitir_textos.py`. Rodar
-antes deixa passar os campos que a fusao acrescenta (`superseded_by`,
-`aliases`, `historico`), que e o defeito do portao 7 da v1 pelo avesso. O
-portao 9 alem disso e **aritmeticamente impossivel** antes da fusao: o censo
-conta so o vigente, e antes da fusao os legados ainda estao na contagem sem
-marca nenhuma.
-
-> O piso do portao 8 e 20, nao 100: com 100, tres dos seis kinds que a
-> auditoria provou silenciados continuariam passando -- `ancestry` (50
-> registros com 2+ fontes e 3 divergencias reais), `class` (27 / 2) e
-> `familiar-ability` (72).
-
-O build **falha** em qualquer um deles. Portao 9 e o unico com tolerancia, e ela
-e escrita por kind no proprio relatorio, com o motivo -- e onde entram os
-desvios de categorizacao conhecidos (o AoN indexa heranca versatil como
-`ancestry`, por exemplo).
-
-> Os portoes 8 e 9 nasceram da auditoria: o 8 porque `conflitos` zerado em 6
-> kinds passou despercebido por um build inteiro, o 9 porque a ausencia de
-> `ritual`, `relic` e `language` so apareceu quando alguem contou contra um
-> gabarito externo. **Metrica sem gabarito externo nao mede cobertura.**
-
-> E a licao que atravessa todos: **o denominador tem de ser o universo, nao o
-> subconjunto ja processado.** "Prosa em 100% (17.866/17.866)" era 95% real --
-> os 907 registros sem referencia nenhuma nunca entravam na conta.
+> **Por que o 8 existe.** `dados_brutos/tabelas_conjuracao_pdf.json` guardava as
+> tabelas de conjuracao lidas dos PDFs oficiais -- o War of Immortals e imagem
+> pura, entao as paginas foram renderizadas e as tabelas lidas a olho. Ele
+> nasceu em `dados_brutos/`, que o `.gitignore` exclui alegando "reconstruivel
+> pelos pins". Isso vale para o clone do Foundry e o dump do AoN; nao valia para
+> ele. Sumiu, o `TODO.md` seguiu marcando o item como CONCLUIDO e o relatorio
+> seguiu citando o caminho. Nada reclamou.
+>
+> **A distincao que o portao materializa:** `dados_brutos/` e dump de fonte,
+> reproduzivel por script a partir de um pin, e fica fora do git.
+> `dados_derivados/` e tudo que exigiu leitura, julgamento ou arbitragem humana,
+> e **vai para o git**. O teste e uma pergunta so: existe comando que refaz isso
+> sozinho?
+>
+> Perda ja conhecida vive em `artefatos_perdidos.json` com motivo, dano medido e
+> decisao pendente -- aparece no relatorio sem quebrar o build. Perda **nova**
+> quebra. O objetivo nao e impedir toda perda; e impedir perda **silenciosa**.

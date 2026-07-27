@@ -6,37 +6,103 @@ Os extratores rodam em paralelo e cada um so enxerga a propria familia de
 entidade. Esta camada e serial de proposito: ela e a unica que ve a base
 inteira, e por isso e a unica que consegue
 
-  1. detectar duas entidades distintas colidindo no mesmo id -- ANTES de fundir
-  2. fundir registros que colidem no mesmo id canonico, registrando divergencia
-  3. normalizar a grafia do livro no valor emitido, nao so na comparacao
+  1. normalizar grafia de nome e de livro entre fontes
+  2. fundir registros que colidem no mesmo id canonico
+  3. detectar pares legado/remaster que os extratores nao uniram
   4. registrar toda divergencia em `conflitos`, nunca escolher em silencio
-
-A ordem de (1) importa: na v1 a fusao de id acontecia antes de qualquer
-verificacao, e o portao que procurava duplicata rodava depois -- perguntava se
-existia duplicata depois de a duplicata ter sido eliminada. Foi por essa fresta
-que `death-from-above` (dois feats distintos) virou uma quimera.
 
 Entrada: pipeline/saida/*.json
 Saida:   pipeline/base/index.json + pipeline/base/relatorio_reconciliacao.md
 """
-import collections
-import json
-import os
-import sys
+import json, os, re, sys, unicodedata, collections
+import traits_uniao
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, AQUI)
-import comum  # noqa: E402
-
 ENTRADA = ["classes.json", "feats.json", "magias.json", "ancestrias.json",
            "equipamento.json", "companheiros.json", "referencia.json",
-           "rituais.json", "relicos_idiomas.json"]
+           "rituais.json", "aon_kinds.json"]
 
+# precedencia por campo, conforme specs/2026-07-26-schema-base.md
+PRECEDENCIA = {
+    "grants":   ["foundry", "pf2etools", "aon"],
+    "requires": ["pf2etools", "foundry", "aon"],
+    "name":     ["aon", "foundry", "pf2etools"],
+    "traits":   ["aon", "foundry", "pf2etools"],
+    "rarity":   ["aon", "foundry", "pf2etools"],
+    "text":     ["aon", "foundry", "pf2etools"],
+    "source":   ["aon", "foundry", "pf2etools"],
+    "level":    ["foundry", "pf2etools", "aon"],
+}
+PADRAO = ["foundry", "aon", "pf2etools"]
+
+# Obras publicadas sob ORC. Constante de modulo porque `desmembrar_colisoes.py`
+# cria registros depois desta etapa e precisa da mesma regra de inferencia.
 LIVROS_ORC = {"player core", "player core 2", "gm core", "monster core",
               "npc core", "war of immortals", "battlecry", "shining kingdoms",
               "howl of the wild", "rage of elements", "divine mysteries"}
 
-CAMPOS_IGNORADOS = ("conflitos", "prov", "xref", "traits", "aliases_traits")
+
+def normalizar(s):
+    """Nome comparavel: sem acento, sem pontuacao, caixa baixa, espaco unico."""
+    if not s:
+        return ""
+    s = unicodedata.normalize("NFKD", str(s))
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    s = s.lower().replace("'", "").replace("’", "")
+    s = re.sub(r"[-‐-―_/]+", " ", s)   # hifen de qualquer tipo vira espaco
+    s = re.sub(r"[^a-z0-9 ]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def normalizar_livro(b):
+    """'Pathfinder Dark Archive (Remastered)' e 'Dark Archives (Remastered)' -> mesma chave."""
+    n = normalizar(b)
+    n = re.sub(r"^pathfinder ", "", n)
+    n = re.sub(r"\bremastered\b", "remaster", n)
+    n = re.sub(r"\barchives\b", "archive", n)      # Dark Archive(s)
+    n = re.sub(r"\bcores?\b", "core", n)
+    # o Foundry prefixa a linha editorial que o AoN nao usa:
+    # 'Pathfinder Lost Omens Highhelm' e 'Highhelm' sao a mesma obra
+    n = re.sub(r"^lost omens ", "", n)
+    n = re.sub(r"^adventure path ", "", n)
+    return n.strip()
+
+
+_CANONICO = None
+_SIGLAS = None
+
+
+def expandir_sigla(b):
+    """'G&G' -> 'Guns & Gears'. O pf2etools grava `source` como sigla.
+
+    Sem isso, registro que so existe nessa fonte sai com `source` vazio -- era
+    o caso de `Nine-Ring Sword`, `Wind and Fire Wheel` e `Heavy Power Suit`,
+    os 3 que seguravam o portao 5.
+    """
+    global _SIGLAS
+    if _SIGLAS is None:
+        caminho = f"{AQUI}/siglas_pf2etools.json"
+        _SIGLAS = (json.load(open(caminho)).get("siglas") or {}
+                   if os.path.exists(caminho) else {})
+    return _SIGLAS.get(str(b or "").strip(), b)
+
+
+def canonizar_livro(b):
+    """Grafia unica por obra, do mapa gerado a partir do AoN.
+
+    `normalizar_livro` ja existia mas so rodava na COMPARACAO -- o valor
+    emitido continuava saindo em duas grafias para 26 obras (11.116 registros),
+    e 161 registros carregavam `\\r\\n` literal dentro do titulo.
+    """
+    global _CANONICO
+    if _CANONICO is None:
+        caminho = f"{AQUI}/canonico_livros.json"
+        _CANONICO = (json.load(open(caminho)).get("canonico") or {}
+                     if os.path.exists(caminho) else {})
+    if not b:
+        return b
+    limpo = " ".join(str(expandir_sigla(b)).replace("\r", " ").replace("\n", " ").split())
+    return _CANONICO.get(normalizar_livro(limpo), limpo)
 
 
 def carregar():
@@ -52,566 +118,144 @@ def carregar():
         for r in lista:
             if isinstance(r, dict) and r.get("id"):
                 r.setdefault("_origem", arq)
+                # canoniza ANTES de comparar: senao a mesma obra em duas grafias
+                # vira conflito falso, e o valor emitido sai nas duas formas
+                src = r.get("source")
+                if isinstance(src, dict) and src.get("book"):
+                    src["book"] = canonizar_livro(src["book"])
                 regs.append(r)
     return regs
 
 
-def fonte_do_campo(reg, campo):
-    """De qual fonte veio este campo neste registro.
-
-    Preferencia: o proprio `prov`. Sem prov, cai para a unica fonte do `xref`
-    -- e quando nem isso decide, o campo e do proprio pipeline. Nunca
-    'desconhecida': a spec v2 proibiu o valor.
-    """
-    p = (reg.get("prov") or {}).get(campo)
-    if p:
-        f = comum.fonte_de(p)
-        if f in comum.FONTES:
-            return f
-    fontes = [k for k in (reg.get("xref") or {})
-              if k in ("aon", "foundry", "pf2etools")]
-    if len(fontes) == 1:
-        return fontes[0]
-    return "waybuilder"
-
-
 def fundir(grupo):
-    """Funde N registros do mesmo id canonico usando a escolha compartilhada.
+    """Funde N registros do mesmo id canonico, registrando divergencia."""
+    base = dict(grupo[0])
+    conflitos = list(base.get("conflitos") or [])
+    prov = dict(base.get("prov") or {})
+    xref = dict(base.get("xref") or {})
 
-    Divergencia entre fontes vira `conflitos` sempre -- e a mesma operacao da
-    escolha, nao um passo opcional depois dela.
-    """
-    campos = []
-    for r in grupo:
-        for k in r:
-            if not k.startswith("_") and k not in CAMPOS_IGNORADOS and k not in campos:
-                campos.append(k)
-
-    base, prov, conflitos = {}, {}, []
-    for k in campos:
-        # `source` e composto: comparar o dict inteiro transforma diferenca de
-        # grafia do livro em conflito falso (era boa parte dos 72 conflitos de
-        # source) e faz um lado com pagina perder para outro sem. Vai por
-        # subcampo.
-        if k == "source":
-            subcampos, fontes_src = {}, {}
-            for r in grupo:
-                src = r.get(k) or {}
-                f = fonte_do_campo(r, k)
-                for sub, v in src.items():
-                    if not comum.vazio(v):
-                        subcampos.setdefault(sub, {}).setdefault(f, v)
-            novo = {}
-            for sub, por_fonte_sub in subcampos.items():
-                valor, p, confs = comum.escolher(f"source.{sub}", por_fonte_sub)
-                if valor is not None:
-                    novo[sub] = valor
-                    fontes_src[sub] = p
-                    conflitos += confs
-            if novo:
-                base[k] = novo
-                for sub, p in fontes_src.items():
-                    prov[f"source.{sub}"] = p
-                prov[k] = fontes_src.get("book") or next(iter(fontes_src.values()))
-            continue
-
-        por_fonte = {}
-        for r in grupo:
-            v = r.get(k)
-            if comum.vazio(v):
-                continue
-            f = fonte_do_campo(r, k)
-            if f in por_fonte and not comum._iguais(k, por_fonte[f], v):
-                # Duas entradas resolvem para a MESMA fonte com valores
-                # diferentes. Ficar com a primeira em silencio descartava 67
-                # valores por build (`wb:spell/object-reading` perdia
-                # 'uncommon' e o livro do Player Core 2). Vira conflito com
-                # sufixo, e a escolha continua sendo da precedencia.
-                por_fonte[f"{f}_2"] = v
-            else:
-                por_fonte.setdefault(f, v)
-        valor, p, confs = comum.escolher(k, por_fonte)
-        if valor is not None:
-            base[k] = valor
-            # `prov` do registro original tem mais detalhe (marca de inferencia)
-            origem = next((r for r in grupo
-                           if not comum.vazio(r.get(k)) and fonte_do_campo(r, k) == comum.fonte_de(p)),
-                          None)
-            detalhado = (origem.get("prov") or {}).get(k) if origem else None
-            prov[k] = detalhado if comum.prov_valido(detalhado or "") else p
-            conflitos += confs
-
-    # traits e uniao das fontes, nao escolha.
-    #
-    # Os extratores ja colapsam as tres fontes num registro so, entao aqui
-    # chega um `traits` unico -- a uniao sobre o grupo seria vacua (medido:
-    # 1 contribuinte em 15.802 registros) e `bastard-sword` continuaria com
-    # `two-hand` em vez de `two-hand-d12`, que e exatamente o dado que a
-    # auditoria mostrou sendo destruido.
-    #
-    # O que cada fonte dizia nao se perdeu: esta no proprio `conflitos` que o
-    # extrator gravou, com uma chave por fonte. E de la que a uniao sai.
+    # `traits` e uniao, nunca disputa: resolvido antes do laco de precedencia
     por_fonte_traits = {}
     for r in grupo:
         if r.get("traits"):
-            por_fonte_traits.setdefault(fonte_do_campo(r, "traits"), []).extend(r["traits"])
-        for c in (r.get("conflitos") or []):
-            if c.get("campo") != "traits":
-                continue
-            for fonte, valor in c.items():
-                if fonte in comum.FONTES and isinstance(valor, list):
-                    por_fonte_traits.setdefault(fonte, []).extend(valor)
-    traits, aliases_traits, contribuiram = comum.uniao_traits(por_fonte_traits)
-    base["traits"] = traits          # sempre lista: nunca null (achado A13)
-    if aliases_traits:
-        base["aliases_traits"] = aliases_traits
-    if contribuiram:
-        # `traits` e o unico campo cuja prov e lista: ele nao tem vencedora,
-        # tem contribuintes (spec v2, "`traits` e uniao, nao precedencia").
-        prov["traits"] = [comum.prov_lido(f) for f in sorted(contribuiram)
-                          if f in comum.FONTES]
+            fonte = (r.get("prov") or {}).get("traits") or r.get("_origem") or "desconhecida"
+            por_fonte_traits.setdefault(str(fonte), []).extend(r["traits"])
 
-    # xref tem um slot por fonte, e homonimo declarado ocupa dois: o doc legado
-    # e o vigente tem o MESMO nome (5.599 pares no AoN -- `Tusks` feat-1286 ->
-    # `Tusks` feat-4519), entao caem no mesmo slug e disputam o slot. Na v1 o
-    # `update` sobrescrevia um deles em silencio. Agora o vigente fica em
-    # `aon` e o substituido em `legado_aon`.
-    ponte = comum.carregar_ponte()
-    xref = {}
-    for r in grupo:
-        for fonte, valor in (r.get("xref") or {}).items():
-            atual = xref.get(fonte)
-            if atual is None or atual == valor:
-                xref[fonte] = valor
-            elif fonte == "aon":
-                novo_legado = comum.e_legado(valor, ponte)
-                atual_legado = comum.e_legado(atual, ponte)
-                if novo_legado and not atual_legado:
-                    xref["legado_aon"] = valor
-                elif atual_legado and not novo_legado:
-                    xref["legado_aon"], xref["aon"] = atual, valor
-                else:
-                    xref.setdefault(f"{fonte}_alt", valor)
-            else:
-                xref.setdefault(f"{fonte}_alt", valor)
-    base["xref"] = xref
-    base["prov"] = prov
-    for r in grupo:
-        conflitos += list(r.get("conflitos") or [])
-    # `traits` saiu da tabela de precedencia, entao "conflito de traits" deixa
-    # de existir como categoria: o que cada fonte dizia virou uniao, e as
-    # fontes que contribuiram estao em `prov.traits`. Manter o conflito aqui
-    # inflava a contagem de divergencia (2.176 de 3.004) e fazia o portao 8
-    # passar por ruido -- `shield` passava com 47 conflitos, todos de trait.
-    conflitos = [c for c in conflitos if c.get("campo") != "traits"]
+    for outro in grupo[1:]:
+        for k, v in outro.items():
+            if k.startswith("_") or k in ("conflitos", "prov", "xref", "traits"):
+                continue
+            atual = base.get(k)
+            if atual is None or atual == "" or atual == []:
+                base[k] = v
+                prov[k] = (outro.get("prov") or {}).get(k, "desconhecida")
+            elif v not in (None, "", []) and json.dumps(atual, sort_keys=True, default=str) != \
+                                             json.dumps(v, sort_keys=True, default=str):
+                ordem = PRECEDENCIA.get(k, PADRAO)
+                fa = prov.get(k, "desconhecida")
+                fb = (outro.get("prov") or {}).get(k, "desconhecida")
+                ia = ordem.index(fa) if fa in ordem else 99
+                ib = ordem.index(fb) if fb in ordem else 99
+                escolhido = fa if ia <= ib else fb
+                if ib < ia:
+                    base[k] = v
+                    prov[k] = fb
+                conflitos.append({"campo": k, fa: atual, fb: v, "escolhido": escolhido})
+        xref.update(outro.get("xref") or {})
+        prov.update({k: v for k, v in (outro.get("prov") or {}).items() if k not in prov})
+        conflitos += list(outro.get("conflitos") or [])
+
+    if por_fonte_traits:
+        finais, aliases, fontes = traits_uniao.unir(por_fonte_traits)
+        base["traits"] = finais
+        if aliases:
+            base["aliases_traits"] = sorted(
+                set(base.get("aliases_traits") or []) | set(aliases))
+        prov["traits"] = fontes
+
+    base["prov"], base["xref"] = prov, xref
     if conflitos:
         base["conflitos"] = conflitos
     base.pop("_origem", None)
     return base
 
 
-def carregar_curadoria():
-    caminho = f"{AQUI}/colisoes_identidade.json"
-    if not os.path.exists(caminho):
-        return {}
-    with open(caminho) as fh:
-        return {k: v for k, v in json.load(fh).items() if not k.startswith("_")}
-
-
-def aplicar_correcoes(reg, correcoes):
-    for campo, valor in (correcoes or {}).items():
-        if "." in campo:
-            pai, filho = campo.split(".", 1)
-            reg.setdefault(pai, {})[filho] = valor
-        else:
-            reg[campo] = valor
-        reg.setdefault("prov", {})[campo] = comum.prov_lido("aon")
-        # O conflito daquele campo era sintoma da quimera, nao divergencia
-        # entre fontes: com as entidades separadas e o valor arbitrado contra
-        # o AoN, ele vira ruido -- e ruido em portao faz o portao parar de ser
-        # lido.
-        if reg.get("conflitos"):
-            reg["conflitos"] = [c for c in reg["conflitos"]
-                                if c.get("campo") != campo] or None
-            if reg["conflitos"] is None:
-                reg.pop("conflitos")
-        reg.setdefault("arbitrado", []).append(campo)
-
-
-def sanear_xref_curado(reg, entrada):
-    """Tira do registro o xref que pertence a OUTRA entidade homonima.
-
-    Quando o casamento errado acontece dentro do extrator (ele casa por nome e
-    emite um registro so), nao ha dois registros para desmembrar: ha um
-    registro com o `xref` de duas entidades e os campos misturados.
-    `wb:feat/death-from-above` saia com o `foundry` do feat de arquetipo nivel
-    8 e o `aon` do feat mitico nivel 16.
-
-    O que da para consertar sem inventar dado: manter so os xrefs que a
-    curadoria declara para esta entidade, e apagar dos `conflitos` os valores
-    que vinham da fonte removida -- eles nunca foram divergencia, eram a outra
-    entidade falando.
-    """
-    minha = next((e for e in entrada["entidades"] if e["id"] == reg["id"]), None)
-    if not minha:
-        return False
-    xref = reg.get("xref") or {}
-    outras = {v for e in entrada["entidades"] if e["id"] != reg["id"]
-              for v in e["xref"].values()}
-    removidas = []
-    for fonte, valor in list(xref.items()):
-        esperado = minha["xref"].get(fonte)
-        if esperado and valor != esperado and valor in outras:
-            xref.pop(fonte)
-            removidas.append(fonte)
-    if not removidas:
-        return False
-    novos = []
-    for c in (reg.get("conflitos") or []):
-        c = {k: v for k, v in c.items() if k not in removidas}
-        fontes = [k for k in c if k not in ("campo", "escolhido")]
-        if len(fontes) > 1:
-            novos.append(c)
-    if novos:
-        reg["conflitos"] = novos
-    else:
-        reg.pop("conflitos", None)
-    reg.setdefault("prov", {})["xref"] = comum.prov_lido("waybuilder")
-    return True
-
-
-def desmembrar_curado(grupo, curadoria):
-    """Separa homonimos usando o xref que cada fonte declara.
-
-    Nao e heuristica: cada entidade da curadoria diz por qual id de fonte ela
-    e reconhecida, verificado caso a caso contra o AoN e o checkout do Foundry
-    (docs/2026-07-26_colisoes-identidade.md).
-    """
-    entrada = curadoria.get(grupo[0]["id"])
-    if not entrada:
-        return None
-    if len(grupo) == 1:
-        reg = dict(grupo[0])
-        mudou = sanear_xref_curado(reg, entrada)
-        minha = next((e for e in entrada["entidades"] if e["id"] == reg["id"]), None)
-        if minha:
-            aplicar_correcoes(reg, minha.get("correcoes"))
-            mudou = True
-        return [reg] if mudou else None
-    saida = []
-    for reg in grupo:
-        xref = reg.get("xref") or {}
-        destino = None
-        for ent in entrada["entidades"]:
-            if any(xref.get(fonte) == valor for fonte, valor in ent["xref"].items()):
-                destino = ent
-                break
-        novo = dict(reg)
-        if destino and destino["id"] != reg["id"]:
-            novo["id"] = destino["id"]
-            novo["desmembrado_de"] = reg["id"]
-            novo.setdefault("prov", {})["id"] = comum.prov_lido("aon")
-        if destino:
-            aplicar_correcoes(novo, destino.get("correcoes"))
-        saida.append(novo)
-    return saida if len({r["id"] for r in saida}) > 1 else None
-
-
-def desmembrar(grupo):
-    """Duas entidades distintas no mesmo id: cada uma ganha slug proprio.
-
-    Detector (spec): conflito com valores categoricamente disjuntos nao e
-    divergencia de fonte, e sinal de fusao indevida. Roda ANTES de fundir.
-    """
-    if len(grupo) < 2:
-        return None
-    for i, a in enumerate(grupo):
-        for b in grupo[i + 1:]:
-            if not comum.traits_disjuntos(a.get("traits"), b.get("traits")):
-                continue
-            saida = []
-            for reg in grupo:
-                outro = b if reg is a else a
-                sufixo = comum.sufixo_desambiguador(reg, outro)
-                novo = dict(reg)
-                if sufixo:
-                    novo["id"] = f"{reg['id']}-{comum.slug_trait(sufixo)}"
-                    novo.setdefault("prov", {})["id"] = comum.prov_lido("waybuilder")
-                    novo["desmembrado_de"] = reg["id"]
-                saida.append(novo)
-            if len({r["id"] for r in saida}) > 1:
-                return saida
-    return None
-
-
-def preferir_doc_vigente(base):
-    """Registro casado com o doc LEGADO do AoN passa a apontar para o vigente.
-
-    O AoN publica dois docs para a mesma entidade quando ela sobreviveu ao
-    remaster com o mesmo nome (`Acrobat` archetype-4 e archetype-236). Quando o
-    extrator casa com o legado, o registro fica preso a versao antiga e a fusao
-    depois reporta o vigente como "alvo declarado ausente da base" -- que e
-    falso: ele esta la, so ligado ao doc errado.
-
-    So troca quando o alvo tem o mesmo nome normalizado e nenhum outro registro
-    ja o ocupa. O id legado nao some: vai para `xref.legado_aon`.
-    """
-    ponte = comum.carregar_ponte()
-    ocupados = {(r.get("xref") or {}).get("aon") for r in base}
-    trocados = 0
-    for r in base:
-        aon = (r.get("xref") or {}).get("aon")
-        doc = ponte.get(aon) if aon else None
-        if not doc or not doc.get("remaster_id"):
-            continue
-        for alvo in comum.como_lista(doc["remaster_id"]):
-            doc_alvo = ponte.get(alvo)
-            if not doc_alvo or alvo in ocupados:
-                continue
-            if doc_alvo.get("category") != doc.get("category"):
-                continue
-            if comum.normalizar(doc_alvo.get("name")) != comum.normalizar(r.get("name")):
-                continue
-            r["xref"]["legado_aon"] = aon
-            r["xref"]["aon"] = alvo
-            ocupados.add(alvo)
-            r.setdefault("prov", {})["xref.aon"] = comum.prov_inferido("aon", "remaster_id")
-            trocados += 1
-            break
-    return trocados
-
-
-def resolver_referencias(base):
-    """Conserta referencia `wb:` quebrada quando o alvo existe com outro nome.
-
-    O parser de pre-requisito cita o nome que leu na fonte e monta o id a
-    partir dele. Quando a fonte usa o nome LEGADO (`Mage Hand`, que no remaster
-    e `Telekinetic Hand`; `Sweetbreath Gnoll` -> `Sweetbreath Kholo`), o id
-    nasce apontando para coisa que nao existe. Duas tentativas, nesta ordem:
-    nome normalizado do proprio slug, e o nome resolvido pela ponte do AoN.
-
-    Devolve (corrigidas, ainda_quebradas).
-    """
-    ids = {r["id"] for r in base}
-    por_nome = {}
-    for r in base:
-        for nome in [r.get("name")] + list(r.get("aliases") or []):
-            if nome:
-                por_nome.setdefault((r.get("kind"), comum.normalizar(nome)), r["id"])
-
-    curado = {}
-    caminho = f"{AQUI}/aliases_referencias.json"
-    if os.path.exists(caminho):
-        with open(caminho) as fh:
-            curado = json.load(fh)
-    mapear = {k: v["para"] for k, v in (curado.get("mapear") or {}).items()}
-    ignorar = set(curado.get("ignorar") or {})
-
-    ponte = comum.carregar_ponte()
-    por_nome_aon = {}
-    for doc in ponte.values():
-        if doc.get("name"):
-            por_nome_aon.setdefault(comum.normalizar(doc["name"]), []).append(doc)
-    aon_para_wb = {}
-    por_id_kind = {}
-    for r in base:
-        por_id_kind[r["id"]] = r.get("kind")
-        aon = (r.get("xref") or {}).get("aon")
-        if aon:
-            aon_para_wb[aon] = r["id"]
-
-    # Sufixo que nomeia a FAMILIA da sub-escolha. O parser de pre-requisito le
-    # "Enigma Muse" na prosa e monta `wb:class-feature/enigma-muse`, mas o
-    # registro vindo do Foundry se chama so "Enigma"; e ha o caso inverso
-    # ("Empiricism" contra "Empiricism Methodology"). Sao os dois lados da
-    # mesma escolha de segundo nivel.
-    SUFIXOS_FAMILIA = ("muse", "racket", "cause", "calling", "methodology",
-                       "school", "doctrine", "instinct", "thesis", "field",
-                       "study", "implement", "ikon", "gate", "order", "style",
-                       "mystery", "patron", "bloodline", "conscious mind",
-                       "subconscious mind", "wizard", "specialty")
-
-    def variacoes(nome):
-        yield nome
-        for suf in SUFIXOS_FAMILIA:
-            if nome.endswith(" " + suf):
-                yield nome[: -len(suf) - 1]
-            else:
-                yield f"{nome} {suf}"
-
-    def resolver(alvo):
-        if alvo in ids or not alvo.startswith("wb:") or alvo.startswith("wb:text/"):
-            return None
-        if alvo in mapear and mapear[alvo] in ids:
-            return mapear[alvo]
-        kind, _, slug = alvo[3:].partition("/")
-        nome = comum.normalizar(slug.replace("-", " "))
-        for tentativa in variacoes(nome):
-            achado = por_nome.get((kind, tentativa))
-            if achado:
-                return achado
-        for doc in por_nome_aon.get(nome, []):
-            for destino in comum.como_lista(doc.get("remaster_id")):
-                alvo = aon_para_wb.get(destino)
-                # O kind TEM de bater: sem isto, `wb:heritage/versatile` era
-                # resolvido para `wb:trait/versatile` (o trait de ARMA) e o
-                # predicado passava a dizer outra coisa. Referencia resolvida
-                # para o alvo errado ainda por cima some da contagem do portao
-                # 3 -- o portao melhorava por estar mais errado.
-                if alvo and por_id_kind.get(alvo) == kind:
-                    return alvo
-        return None
-
-    corrigidas, quebradas = 0, set()
-
-    def anda(v):
-        nonlocal corrigidas
-        if isinstance(v, dict):
-            for k, x in list(v.items()):
-                if isinstance(x, str) and x.startswith("wb:"):
-                    novo = resolver(x)
-                    if novo:
-                        v[k] = novo
-                        corrigidas += 1
-                    elif x not in ids and not x.startswith("wb:text/"):
-                        quebradas.add(x)
-                else:
-                    anda(x)
-        elif isinstance(v, list):
-            for i, x in enumerate(v):
-                if isinstance(x, str) and x.startswith("wb:"):
-                    novo = resolver(x)
-                    if novo:
-                        v[i] = novo
-                        corrigidas += 1
-                    elif x not in ids and not x.startswith("wb:text/"):
-                        quebradas.add(x)
-                else:
-                    anda(x)
-
-    def poda(no):
-        """Tira do predicado o termo que nao e entidade (prosa que virou id).
-
-        Devolve o no limpo ou None quando o termo inteiro deve sair. O texto
-        original nao se perde: continua em `requires_texto`.
-        """
-        if isinstance(no, dict):
-            if isinstance(no.get("has"), str) and no["has"] in ignorar:
-                return None
-            limpo = {}
-            for k, v in no.items():
-                if k in ("all", "any", "not") and isinstance(v, list):
-                    itens = [x for x in (poda(i) for i in v) if x is not None]
-                    if not itens:
-                        continue
-                    limpo[k] = itens
-                else:
-                    limpo[k] = v
-            return limpo or None
-        if isinstance(no, list):
-            itens = [x for x in (poda(i) for i in no) if x is not None]
-            return itens or None
-        return no
-
-    podados = 0
-    for r in base:
-        if ignorar and r.get("requires"):
-            limpo = poda(r["requires"])
-            if limpo != r["requires"]:
-                podados += 1
-                if limpo is None:
-                    r.pop("requires", None)
-                    (r.get("prov") or {}).pop("requires", None)
-                else:
-                    r["requires"] = limpo
-        for campo in ("requires", "grants", "progressao"):
-            if r.get(campo):
-                anda({campo: r[campo]} if isinstance(r[campo], str) else r[campo])
-    if podados:
-        print(f"predicados podados de referencia que nao e entidade: {podados}")
-    return corrigidas, sorted(quebradas)
-
-
 def main():
     regs = carregar()
     print(f"carregados: {len(regs)} registros de {len(ENTRADA)} familias")
 
-    # --- 1. PORTAO 7 (pre-fusao): duas entidades no mesmo id ---------------
+    # --- 1. fundir colisoes de id ---
     por_id = collections.defaultdict(list)
     for r in regs:
         por_id[r["id"]].append(r)
-
-    curadoria = carregar_curadoria()
-    desmembrados = []
-    regs2 = []
-    for ident, grupo in por_id.items():
-        novo = desmembrar_curado(grupo, curadoria)
-        if novo is None and len(grupo) > 1:
-            novo = desmembrar(grupo)
-        if novo:
-            desmembrados.append((ident, sorted({r["id"] for r in novo})))
-            regs2 += novo
-        else:
-            regs2 += grupo
-
-    # consolidar duplicado declarado na curadoria (mesma entidade em dois ids)
-    consolida = {}
-    for entrada in curadoria.values():
-        consolida.update(entrada.get("consolidar") or {})
-    if consolida:
-        for r in regs2:
-            if r["id"] in consolida:
-                r["id"] = consolida[r["id"]]
-        print(f"ids consolidados por curadoria: {len(consolida)}")
-    print(f"colisoes de identidade desmembradas: {len(desmembrados)}")
-
-    # --- 2. fundir colisoes de id que sobraram ----------------------------
-    por_id = collections.defaultdict(list)
-    for r in regs2:
-        por_id[r["id"]].append(r)
     colisoes = {k: v for k, v in por_id.items() if len(v) > 1}
-    base = [fundir(v) if len(v) > 1 else fundir([v[0]]) for v in por_id.values()]
+    base = [fundir(v) if len(v) > 1 else {k2: v2 for k2, v2 in v[0].items() if k2 != "_origem"}
+            for v in por_id.values()]
     print(f"colisoes de id fundidas: {len(colisoes)}  ->  base com {len(base)} registros")
 
-    # --- 3. source.book na forma canonica, com a grafia crua preservada ----
-    canon = comum.eleger_canonicos(
-        (r.get("source") or {}).get("book") for r in base)
-    normalizados = 0
+    # --- 1b. traits: refazer como uniao onde o extrator aplicou precedencia ---
+    # Os extratores escolheram uma fonte antes de o reconciliador ver o dado,
+    # mas gravaram cada faceta em `conflitos` -- da para reconstruir sem
+    # re-rodar extrator nenhum.
+    reparados = sum(1 for r in base if traits_uniao.unir_do_conflito(r))
+    com_alias_trait = sum(1 for r in base if r.get("aliases_traits"))
+    print(f"traits refeitos como uniao: {reparados}  "
+          f"(registros com aliases_traits: {com_alias_trait})")
+
+    # --- 2. suspeitas de par nao unido: mesmo kind + mesmo nome normalizado ---
+    por_chave = collections.defaultdict(list)
+    for r in base:
+        por_chave[(r.get("kind"), normalizar(r.get("name")))].append(r)
+    suspeitos = {k: v for k, v in por_chave.items() if len(v) > 1}
+    print(f"suspeitas de par nao unido (mesmo kind+nome normalizado): {len(suspeitos)}")
+
+    # --- 2b. inferir license ausente, marcando a inferencia ---
+    inferidas = 0
     for r in base:
         src = r.get("source") or {}
         r["source"] = src
-        bruto = comum.limpar_livro(src.get("book"))
-        if not bruto:
-            continue
-        forma = canon.get(comum.chave_livro(bruto), bruto)
-        if forma != src.get("book"):
-            if forma != bruto or bruto != src.get("book"):
-                src["book_raw"] = src.get("book")
-            src["book"] = forma
-            r.setdefault("prov", {})["source.book"] = comum.prov_lido(
-                comum.fonte_de((r.get("prov") or {}).get("source") or "aon"))
-            normalizados += 1
-    print(f"source.book normalizado na escrita: {normalizados}")
-
-    # --- 4. inferir license ausente, marcando a inferencia -----------------
-    inferidas = 0
-    for r in base:
-        src = r["source"]
         if src.get("license"):
             continue
-        livro = comum.chave_livro(src.get("book") or "")
+        livro = normalizar_livro(src.get("book") or "")
         if src.get("remaster") is True or livro in LIVROS_ORC:
             src["license"] = "ORC"
         elif livro:
-            src["license"] = "OGL"
+            src["license"] = "OGL"      # tudo anterior ao Remaster
         else:
-            continue
-        src["license_inferida"] = True      # visivel no registro, nao so em prov
-        r.setdefault("prov", {})["source.license"] = comum.prov_inferido("waybuilder", "livro")
+            continue                    # sem livro nao da para inferir
+        r.setdefault("prov", {})["source.license"] = "inferida:livro"
         inferidas += 1
     print(f"license inferida a partir do livro: {inferidas}")
 
-    # --- 5. descartar artefato organizacional (pasta do Foundry) -----------
+    # --- 2b2. duplicata de nome curto vinda so do pf2etools ---
+    # `wb:armor/hide` e `wb:armor/hide-armor` sao o mesmo item: o pf2etools
+    # grafa sem o substantivo do kind. Esses registros vinham sem `source`, e o
+    # portao 5 os reportava como "sem license" -- o sintoma foi lido errado
+    # desde o inicio: e falha de CASAMENTO, nao falta de licenca.
+    por_kind_nome = {}
+    for r in base:
+        por_kind_nome[(r.get("kind"), normalizar(r.get("name")))] = r
+    curtos = []
+    for r in base:
+        if (r.get("source") or {}).get("book"):
+            continue
+        if list((r.get("xref") or {}).keys()) != ["pf2etools"]:
+            continue
+        kind = r.get("kind")
+        nome = normalizar(r.get("name"))
+        alvo = por_kind_nome.get((kind, f"{nome} {kind}"))
+        if alvo is not None and alvo["id"] != r["id"]:
+            aliases = set(alvo.get("aliases") or []) | {r.get("name")}
+            aliases.discard(alvo.get("name"))
+            alvo["aliases"] = sorted(a for a in aliases if a)
+            alvo.setdefault("xref", {}).update(
+                {f"pf2etools_curto": (r.get("xref") or {}).get("pf2etools")})
+            curtos.append(r["id"])
+    if curtos:
+        base = [r for r in base if r["id"] not in set(curtos)]
+        print(f"duplicatas de nome curto (pf2etools) fundidas: {len(curtos)} -> {curtos}")
+
+    # --- 2c. descartar artefato organizacional (pasta do Foundry, nao conteudo) ---
     def e_artefato(r):
         return (not (r.get("source") or {}).get("book")
                 and not r.get("traits")
@@ -622,41 +266,67 @@ def main():
     if descartados:
         print(f"artefatos organizacionais descartados: {len(descartados)} -> {descartados}")
 
-    # --- 5b. apontar para o doc vigente do AoN quando ele existe ------------
-    trocados = preferir_doc_vigente(base)
-    print(f"xref.aon movido do doc legado para o vigente: {trocados}")
+    # --- 2d. `mechanized` passa a ser derivado, nao opiniao de extrator ---
+    # Media: 12.923 registros com true e `grants` vazio, 374 com false e grants
+    # cheio, e kinds inteiros (deity, trait, ritual, language) com false por
+    # decisao de quem escreveu o extrator. Eram quatro significados diferentes
+    # no mesmo campo.
+    # A spec ja define o unico que importa -- "true = o app calcula pelos
+    # grants" --, entao o valor e exatamente isso e nada mais. `false` nao e
+    # lacuna: e o caso normal do principio zero, o jogador le e resolve na mesa.
+    trocados = 0
+    for r in base:
+        derivado = bool(r.get("grants"))
+        if r.get("mechanized") != derivado:
+            trocados += 1
+        r["mechanized"] = derivado
+    print(f"mechanized derivado de grants: {trocados} registros corrigidos")
 
-    # --- 6. referencia citando nome legado aponta para o registro certo -----
-    corrigidas, quebradas = resolver_referencias(base)
-    print(f"referencias wb: corrigidas por nome/ponte: {corrigidas}  "
-          f"(seguem quebradas: {len(quebradas)})")
+    # --- 3. portoes de qualidade ---
+    falhas = collections.Counter()
+    for r in base:
+        if not r.get("prov"):
+            falhas["sem prov"] += 1
+        if not ((r.get("source") or {}).get("license")):
+            falhas["sem license"] += 1
+        if not r.get("id", "").startswith("wb:"):
+            falhas["id fora do padrao"] += 1
+    ids = collections.Counter(r["id"] for r in base)
+    dups = [i for i, n in ids.items() if n > 1]
+    if dups:
+        falhas["id duplicado apos fusao"] = len(dups)
 
     os.makedirs(f"{AQUI}/base", exist_ok=True)
-    with open(f"{AQUI}/base/index.json", "w") as fh:
-        json.dump(base, fh, ensure_ascii=False, separators=(",", ":"))
+    json.dump(base, open(f"{AQUI}/base/index.json", "w"),
+              ensure_ascii=False, separators=(",", ":"))
 
     kinds = collections.Counter(r.get("kind") for r in base)
     com_conf = sum(1 for r in base if r.get("conflitos"))
+
     linhas = ["# Relatorio de reconciliacao", "",
               f"- registros de entrada: **{len(regs)}**",
-              f"- colisoes de identidade desmembradas: **{len(desmembrados)}**",
               f"- colisoes de id fundidas: **{len(colisoes)}**",
               f"- base final: **{len(base)}** registros",
               f"- registros com divergencia registrada: **{com_conf}**",
-              f"- source.book normalizado: **{normalizados}**",
-              f"- license inferida: **{inferidas}**", "",
+              f"- suspeitas de par nao unido: **{len(suspeitos)}**", "",
               "## Por kind", ""]
     linhas += [f"- `{k}`: {n}" for k, n in kinds.most_common()]
-    if desmembrados:
-        linhas += ["", "## Colisoes de identidade desmembradas", ""]
-        for ident, novos in desmembrados:
-            linhas.append(f"- `{ident}` -> {', '.join('`%s`' % n for n in novos)}")
+    linhas += ["", "## Portoes de qualidade", ""]
+    linhas += ([f"- FALHA {k}: {n}" for k, n in falhas.items()] if falhas
+               else ["- todos passaram"])
+    if suspeitos:
+        linhas += ["", "## Suspeitas de par nao unido (amostra)", "",
+                   "Mesmo kind e mesmo nome normalizado, ids diferentes.", ""]
+        for (kind, nome), v in list(suspeitos.items())[:40]:
+            ids_s = ", ".join(f"`{x['id']}`" for x in v)
+            livros = ", ".join(sorted({str((x.get('source') or {}).get('book')) for x in v}))
+            linhas.append(f"- **{kind}** / _{nome}_ -> {ids_s}  ({livros})")
     open(f"{AQUI}/base/relatorio_reconciliacao.md", "w").write("\n".join(linhas) + "\n")
 
+    print(f"\nportoes: {'FALHOU -> ' + str(dict(falhas)) if falhas else 'todos passaram'}")
     print(f"kinds: {dict(kinds)}")
     print(f"-> base/index.json  ({os.path.getsize(f'{AQUI}/base/index.json')/1e6:.1f} MB)")
-    print("portoes de qualidade: rodar pipeline/portoes.py depois de emitir_textos e fundir")
-    return 0
+    return 1 if falhas else 0
 
 
 if __name__ == "__main__":

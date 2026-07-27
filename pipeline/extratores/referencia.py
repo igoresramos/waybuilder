@@ -55,9 +55,8 @@ import comum  # noqa: E402
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
 _CANDIDATOS_FOUNDRY = [
     os.environ.get("WB_FOUNDRY_PACKS", ""),
+    os.path.join(BRUTOS, "foundry_repo", "packs", "pf2e"),
     os.path.join(BRUTOS, "foundry", "packs", "pf2e"),
-    "/tmp/claude-1000/-mnt-c-Users-igor0/39eadbed-e8eb-4194-8557-74f05193fdc1"
-    "/scratchpad/pf2e-research/pf2e/packs/pf2e",
 ]
 
 AON_URL = "https://elasticsearch.aonprd.com/aon/_search"

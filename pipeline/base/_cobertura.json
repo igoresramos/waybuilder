@@ -1,0 +1,29 @@
+{
+ "total": 19429,
+ "por_kind": {
+  "class": 27,
+  "class-feature": 826,
+  "feat": 6270,
+  "archetype": 244,
+  "spell": 1649,
+  "ancestry": 50,
+  "heritage": 326,
+  "background": 502,
+  "armor": 216,
+  "equipment": 6320,
+  "shield": 125,
+  "weapon": 1040,
+  "animal-companion": 113,
+  "familiar-ability": 132,
+  "familiar-specific": 38,
+  "eidolon": 13,
+  "apparition": 14,
+  "trait": 551,
+  "skill": 33,
+  "domain": 61,
+  "deity": 483,
+  "ritual": 151,
+  "relic": 122,
+  "language": 123
+ }
+}

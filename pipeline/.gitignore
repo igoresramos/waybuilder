@@ -1,7 +1,19 @@
 # Dumps brutos das fontes: reconstruiveis pelos pins registrados na spec
 # (specs/2026-07-26-schema-base.md). Nao versionados por peso.
+#
+# ATENCAO: so entra aqui o que um script REFAZ SOZINHO -- buscar_fontes.sh traz
+# o clone do Foundry, dump_aon.py traz o dump do AoN. Artefato derivado a mao
+# (lido de PDF, arbitrado, curado) vai em dados_derivados/, que E versionado.
+# Ja custou a tabela de conjuracao do Animist, gravada aqui por engano e
+# perdida em silencio. O portao 8 existe para isso nao repetir.
 dados_brutos/
 
 # Bytecode
 __pycache__/
 *.pyc
+
+# Backups de sessao (comparacao antes/depois), nao versionar
+saida_baseline/
+base_backup_prefusao/
+
+pf2etools_repo/

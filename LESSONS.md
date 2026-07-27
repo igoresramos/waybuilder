@@ -18,6 +18,93 @@ project: waybuilder
 
 ## Aprendizados
 
+### Consumir o dado descobre em uma tarde o que auditar nao acha em duas sessoes
+Duas auditorias amplas leram a base campo a campo e nao viram que
+`wb:class/wizard` declarava 49 features de nivel 1, entre elas as 23 escolas de
+magia -- todas ao mesmo tempo. Bastou **um motor tentando montar uma ficha** para
+o problema saltar na primeira linha impressa.
+
+Auditoria pergunta "este campo esta preenchido e coerente?". Consumo pergunta
+"da para fazer a coisa?". A segunda pergunta e mais barata e acha classe de erro
+que a primeira nao alcanca, porque o defeito nao estava em nenhum campo: estava
+na **relacao** entre eles.
+
+Corolario para o resto do projeto: antes de investir no item caro (os ~40 Rule
+Elements), escrever o consumidor mais simples que exercite o schema.
+
+### A fonte declara a estrutura; inferir e o ultimo recurso
+Para separar "o que a classe concede" de "o que ela manda escolher" foram
+tentados dois caminhos ruins antes do certo:
+1. casar por nome contra as categorias do AoN -- pegava `arcane-school` mas
+   perdia as escolas de Runelord e as de organizacao do Lost Omens
+2. heuristica de "varias features no mesmo nivel sao mutuamente exclusivas" --
+   nunca chegou a ser escrita, e teria falso positivo garantido
+
+O certo estava em `system.items` da classe no Foundry: **15 entradas**, que e
+exatamente o que o VTT usa para montar personagem, com "Arcane School" aparecendo
+uma vez so, como a escolha que e. A fonte ja respondia a pergunta.
+
+Mesmo padrao das 141 siglas de livro do pf2etools (`js/parser.js`) e do
+`remaster_id` do AoN. Tres vezes seguidas a resposta estava declarada na fonte
+enquanto o instinto era inferir do conteudo.
+
+### Fonte que vive fora do repo desaparece, e o pipeline mente sobre isso
+Ate 26/07 sete dos dez extratores e o `emitir_textos` apontavam para um clone do
+Foundry num diretorio de scratchpad de sessao (`/tmp/claude-.../pf2e`). A sessao
+acabou, o clone sumiu, e **nada quebrou de forma visivel**: `carregar_aon()`
+devolve `[]` quando o dump nao existe, e os candidatos de caminho caem para o
+proximo em silencio. Re-executar o extrator de equipamento produzia 5.698
+registros contra os 7.496 da base, mono-fonte, exit code 0.
+
+Duas licoes distintas:
+1. **Fonte externa tem que ter script de reconstrucao versionado**, com o pin
+   dentro dele (`buscar_fontes.sh`, `dump_aon.py`). O `.gitignore` do pipeline
+   dizia "reconstruiveis pelos pins registrados na spec" -- mas nao havia
+   nenhum script que fizesse isso, so a frase.
+2. **Degradar em silencio e pior que falhar.** Toda queda para fonte parcial
+   deve ser erro alto, nao lista vazia. O sintoma so apareceu porque a contagem
+   foi comparada com a anterior.
+
+### O detector tem que mirar o defeito, nao o sintoma imaginado
+O portao 7 da spec perguntava "existe `name` normalizado repetido no mesmo
+`kind`?". Nunca disparava -- nem antes nem depois da fusao. A razao: a
+ambiguidade **nao produz dois registros**. O extrator casa por nome, escolhe um
+candidato entre os N da fonte, e os outros somem sem deixar rastro na base.
+Perguntar a base sobre duplicata e perguntar para a vitima, nao para a cena.
+
+O detector correto compara a base contra o **censo da fonte**: registro cujo
+nome tem N entidades no AoN, com assinatura (level, traits) divergente. Achou
+159 colisoes reais, contra as 5 que a inspecao manual conhecia.
+
+Corolario que vale para o resto do projeto: **duas fontes concordarem nao e
+evidencia de nada se as duas foram lidas pelo mesmo casamento errado.**
+
+### Quando o casamento erra, a precedencia por campo espalha o erro
+`Death from Above` casou com o doc mitico do AoN (nv16) mas ficou com `level: 8`
+-- porque a precedencia manda `level` vir do Foundry, e o doc do Foundry era da
+**outra** entidade. O registro nao ficou "meio certo": ficou uma quimera que nao
+corresponde a nada publicado. Precedencia por campo pressupoe que as fontes
+falam do mesmo objeto; quando essa premissa cai, ela deixa de conter o erro e
+passa a distribui-lo.
+
+Por isso desmembrar exige realinhar o registro original, nao so criar o irmao.
+
+### Similaridade de prosa nao e evidencia de identidade
+A fusao por Jaccard >= 0.62 sobre 900 caracteres deletou 597 registros com 35%
+de acerto. `aeon-stone` engoliu 24 pedras distintas porque a prosa de todas
+comeca igual. Chave declarada pela fonte (`remaster_id`/`legacy_id`) achou 942
+pares -- **mais** cobertura e sem os falsos. Prosa serve para desempatar entre
+candidatos ja restritos por uma chave, nunca para criar o par.
+
+### Metrica com denominador errado esconde exatamente o que deveria denunciar
+"Prosa em 100%" dividia pelas referencias existentes. Registro sem referencia
+nenhuma nao entrava no denominador -- os 907 mais invisiveis do dataset eram os
+unicos que a metrica nao conseguia ver. Medida honesta: 82,6%. Depois de usar o
+dump completo do AoN e criar as referencias que faltavam: 99,2%.
+
+Ao corrigir uma metrica, corrigir o buraco na mesma passada -- senao ela volta a
+mentir na proxima leitura.
+
 ### Onde cada fonte e forte e fraca (verificado)
 - **Foundry** (`packs/pf2e/`, 28.841 arquivos JSON): unica com efeito mecanico
   executavel. `classFeatLevels: [1,2,4,6,...]` como array literal;
@@ -305,127 +392,72 @@ Nenhuma das 11 classes conjuradoras tem a tabela numerica de slots por rank
 mecanizada -- so a progressao de proficiencia. O Animist apenas era o caso onde
 faltava tambem a proficiencia, o que o tornou visivel.
 
-Recuperadas do PDF ate agora: Animist (War of Immortals p.12-13, hibrido
+Recuperadas do PDF na epoca: Animist (War of Immortals p.12-13, hibrido
 prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of
 Magic). Exemplar e Kineticist foram **confirmados como nao-conjuradores** -- nao
 havia tabela faltando.
 
-### O guarda que protege pode ser o que destroi -- meça antes de aceitar
+> **Correcao de 2026-07-27.** Este paragrafo ficou desatualizado nos dois
+> sentidos. Para melhor: as 11 conjuradoras hoje tem a tabela completa em
+> `base/index.json`, vinda do pf2etools. Para pior: a tabela do **Animist se
+> perdeu** -- ele e a unica classe que dependia so do arquivo lido do PDF, e
+> esse arquivo morava em `dados_brutos/`. Ver a licao seguinte.
 
-A auditoria propos tres guardas para a fusao legado<->remaster: vetar quando
-`level`/`price_cp`/`damage` divergem, vetar N->1, vetar legado de livro
-posterior ao Remaster. Pareciam obviamente certos -- e barram **77,8% dos pares
-que o proprio AoN declara**.
+### O AoN materializa tabela em `markdown`, nao em `text`
+A licao mais cara desta sequencia, e a raiz de todas as outras. O doc de classe
+do AoN tem **dois** campos de texto: `text`, achatado, sem tabela nenhuma, e
+`markdown`, que carrega a pagina inteira em HTML -- **com as tabelas**.
 
-- **N->1 e o caso normal**, nao anomalia: 351 alvos recebem 2+ legados dentro
-  da mesma categoria. `Magic Wand` recebe as 10 varas por rank de magia,
-  `Bewitching Bloom` recebe as 10 flores. Vetar N->1 desfaz o dedupe.
-- **`level`/`price` divergentes sao errata de remaster**: `Hand of the Mage`
-  nv2 -> `Charlatan's Gloves` nv3.
-- **A fronteira de data e falsa**: Rage of Elements e de 2023-08-02 e ha legado
-  declarado publicado em 2024.
+O extrator lia so `text`. Dai saiu a conclusao "nem Foundry nem AoN
+materializam a tabela numerica, so citam 'Animist Spells per Day' como nome de
+tabela", que virou comentario de funcao, virou relatorio, virou item de TODO --
+e mandou alguem ler as paginas 12-13 do War of Immortals a olho, num PDF que e
+imagem pura. O resultado foi para um diretorio ignorado pelo git e se perdeu.
 
-E o mais importante: o que protegia contra o dano original (`aeon-stone`
-engolindo 24 pedras) **nunca foi o guarda**. Das 24 pedras, so 5 declaram
-`remaster_id` -- era a chave da fonte, e o fato de nada ser deletado. Guarda
-desenhado contra um sintoma acaba punindo o caso legitimo que tem o mesmo
-sintoma. Medir a taxa de veto sobre o dado real, antes de ligar o guarda.
+**O dado estava no cache que o proprio extrator ja baixava**
+(`dados_brutos/aon/class__animist.json` tem o `markdown` com as duas tabelas).
 
-### `remaster_id` de class-feature aponta para a CLASSE, nao para a feature
+Quando reextraido: as **11** classes conjuradoras tem a tabela completa, e o
+parser reproduz **10 delas celula a celula** contra o pf2etools, que e fonte
+independente. Validacao assim -- derivar de uma fonte e conferir contra outra
+que ja estava na base -- e o que separa "extrai" de "extrai certo".
 
-Medido: **351 de 351**. `Evasion` (class-feature-25) declara `remaster_id`
-`class-56`, que e o **Alchemist**. Uma implementacao ingenua de "funde quando a
-fonte declara" fundiria a feature dentro da classe.
+Regra pratica: antes de declarar que uma fonte **nao tem** um dado, listar os
+campos que ela devolve e olhar o maior deles. `text` costuma ser projecao com
+perda de um campo mais rico ao lado.
 
-Regra: **ponte entre entidades so vale dentro da mesma categoria.** E a
-consequencia tem de ser escrita: renomeacao real de class-feature
-(`Armor of Fury` -> `Armor Mastery`) fica **sem chave**, e tem de sair da
-progressao da classe no Foundry.
+### "Reconstruivel pelos pins" nao vale para o que uma pessoa leu a olho
+`pipeline/.gitignore` excluia `dados_brutos/` inteiro justificando que era
+"reconstruivel pelos pins registrados na spec". Verdade para o clone do Foundry
+(`buscar_fontes.sh`) e o dump do AoN (`dump_aon.py`). **Falso** para
+`tabelas_conjuracao_pdf.json`, que veio de paginas renderizadas de um PDF
+imagem-only e lidas a olho -- nao ha pin nem comando que refaca.
 
-### O AoN publica dois documentos para a mesma entidade
+Ele sumiu sem ruido nenhum: nunca entrou no git (`git log --all
+--diff-filter=A` sobre o caminho devolve vazio), o `TODO.md` seguiu marcando o
+item 14 como CONCLUIDO, e o relatorio em `docs/` seguiu citando o caminho. O
+build passava.
 
-Quando algo sobrevive ao remaster com o mesmo nome, ha o doc legado e o
-vigente: `Acrobat` e `archetype-4` **e** `archetype-236`; `Tusks` e `feat-1286`
-**e** `feat-4519`. Sao 5.599 pares assim.
+Tres coisas fizeram a perda ser recuperavel em parte:
+1. o **relatorio** estava em `docs/`, que e versionado -- livro, pagina, metodo
+   e todos os achados qualitativos sobreviveram;
+2. a proficiencia registrada nele (1/7/15/19) **bate exatamente** com a base
+   hoje, o que prova que o resgate e fiel e nao reconstrucao de memoria;
+3. Magus e Summoner tinham segunda fonte (pf2etools), entao nao dependiam dele.
 
-Dois efeitos, os dois silenciosos:
-1. Indice construido com `dict[chave] = doc` fica com **o ultimo lido**, que
-   pode ser o legado -- e o registro herda livro e pagina da edicao antiga
-   (`Acrobat` saiu como Advanced Player's Guide em vez de Player Core 2 p.183).
-2. `xref` tem um slot por fonte, e os dois docs disputam o mesmo slot: um
-   sobrescreve o outro sem aviso.
+O que nao voltou: a matriz `slots_per_level` do Animist, que era dado de fonte
+unica.
 
-Regra: escolher o vigente **explicitamente** (o que nao tem `remaster_id`) e
-guardar o outro em `xref.legado_aon`.
+Regra que ficou, materializada no **portao 8**: dump de fonte reproduzivel por
+pin vive em `dados_brutos/` e fica fora do git; **tudo que exigiu leitura,
+julgamento ou arbitragem humana vive em `dados_derivados/` e vai para o git**.
+O teste e uma pergunta so -- existe comando que refaz isso sozinho? Perda
+conhecida fica registrada em `artefatos_perdidos.json` com motivo, dano medido
+e decisao. O portao nao impede perda; impede perda **silenciosa**.
 
-### Portao tem de declarar em que ponto do pipeline roda
-
-O portao 7 da v1 procurava nome duplicado **depois** de a fusao ter eliminado a
-duplicata: media 0 e sempre mediria. O inverso tambem quebra -- portao de `prov`
-rodando antes do ultimo processo que escreve o artefato nao ve os campos que
-esse processo acrescenta.
-
-Regra: "pos-emissao" significa **depois do ultimo escritor do arquivo**, e isso
-fica escrito na spec, nao na cabeca de quem implementou.
-
-### Referencia quebrada costuma ser nome legado, nao entidade faltando
-
-61 ids `wb:` inexistentes citados por `requires` pareciam buraco de modelagem.
-51 eram problema de **nome**: o parser le o nome que a fonte escreveu e monta o
-id a partir dele.
-
-Tres caminhos resolveram, nesta ordem: nome normalizado do proprio slug; sufixo
-de familia da sub-escolha (o parser le "Enigma Muse", o registro se chama
-"Enigma"); e a ponte do AoN (`Mage Hand` -> `Telekinetic Hand`). O resto virou
-mapa curado com evidencia (as causes do Champion -- `Paladin`/`Redeemer`/
-`Liberator` viraram `Justice`/`Redemption`/`Liberation` no Player Core 2).
-
-Sobra util: id que nao resolve por nenhum caminho vira **excecao declarada com
-motivo escrito**, nao falha eterna. Portao que falha para sempre para de ser
-lido.
-
-### Regra certa implementada na camada errada nao vale nada
-
-A spec v2 diz que `traits` e uniao das tres fontes. A funcao de uniao existe,
-tem teste, e roda. E mesmo assim `bastard-sword` continuava saindo com
-`two-hand` em vez de `two-hand-d12`.
-
-Motivo: os **extratores** ja colapsam as tres fontes num registro so, com
-`traits` escolhido por precedencia. A uniao rodava uma camada depois, sobre um
-conjunto que ja tinha uma fonte so -- medido: **1 contribuinte em 15.802
-registros**. A regra estava certa, o teste estava verde, e o dado continuava
-sendo destruido.
-
-Duas licoes: **teste de funcao nao substitui invariante sobre o artefato**
-(hoje ha um teste que le a base emitida e confere `two-hand-d12`), e antes de
-declarar uma regra implementada, procurar **onde o dado realmente passa**.
-
-### Portao pode passar por acidente, e ai e pior que nao existir
-
-Quatro dos meus portoes passavam sem medir:
-
-- condicao era `os.path.exists(relatorio)` -- e o relatorio e sempre escrito;
-- contava conflito de `traits`, que a spec tirou da precedencia (`shield`
-  passava com 47 conflitos, 100% ruido);
-- gravava a baseline de cobertura **mesmo quando falhava**, entao a regressao
-  seria acusada uma vez e nunca mais;
-- iterava uma allow-list de kinds escrita a mao -- cego justamente para o kind
-  que ninguem lembrou de listar, que e o proposito do portao.
-
-Teste util: **se o defeito que este portao existe para achar acontecesse agora,
-ele falharia?** Se a resposta depende de um arquivo existir, de um campo que
-sempre esta la, ou de uma lista que eu mesmo escrevi, o portao nao esta
-medindo. Assim que o portao de censo passou a varrer as categorias da fonte em
-vez da minha lista, achou dois kinds ausentes na primeira rodada.
-
-### Ausencia lembrada de cabeca nao e gabarito
-
-O TODO listava `Life-Saving Yowl` (Catfolk nv17, Player Core 2) como ausente da
-base. Nenhuma das tres fontes tem esse nome -- e o PDF do Player Core 2 tambem
-nao. O feat existe e chama-se **Caterwaul**, FEAT 13, e ja estava na base.
-
-Mesma classe da licao do denominador: a lista de verificacao tem de sair do
-proprio livro ou do censo da fonte. Nome citado de memoria gera caca a fantasma.
+Corolario de metodo: a varredura que achou isso -- conferir todo caminho citado
+em arquivo versionado contra o disco -- custou segundos e achou **3** ausencias
+em 42 caminhos. Vale rodar em qualquer projeto que guarde artefato fora do git.
 
 ### Trait no PF2e e vocabulario puro, nao mecanica
 0 de 561 traits tem efeito estruturado. Os campos `resistance`/`weakness`/

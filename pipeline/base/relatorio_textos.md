@@ -1,17 +1,14 @@
 # Emissao de prosa
 
-- registros com prosa: **19249/19418** (99.1% da base)
-- referencias criadas neste passo: 902
-- chaves de prosa sem registro apontando (orfas): 0
-- origem: {'aon': 17876, 'foundry': 1357, 'pf2etools': 16, 'aon:nome': 1}
-- prosa total: 17.9 MB
-- sem prosa: 168
+- cobertura sobre a base: **20236/20402** (99.2%)
+- referencias resolvidas: 20236/20236
+- registros sem referencia de texto: 166
+- origem: {'aon': 18853, 'foundry': 1275, 'pf2etools': 46, 'aon:nome': 62}
+- prosa total: 19.0 MB
+- sem prosa: 166
 
 ## Sem prosa
 
-- `wb:armor/heavy-barding-large`
-- `wb:armor/heavy-barding-small-or-medium`
-- `wb:armor/light-barding`
 - `wb:equipment/agate`
 - `wb:equipment/alabaster`
 - `wb:equipment/alabaster-and-obsidian-game-set`
@@ -31,6 +28,7 @@
 - `wb:equipment/bronze-bowl-with-wave-imagery`
 - `wb:equipment/bronze-brazier-with-asmodean-artwork`
 - `wb:equipment/bronze-chalice-with-bloodstones`
+- `wb:equipment/butterfly`
 - `wb:equipment/carnelian`
 - `wb:equipment/carved-wooden-game-set`
 - `wb:equipment/ceremonial-dagger-with-onyx-hilt`
@@ -45,7 +43,6 @@
 - `wb:equipment/copper-and-spinel-puzzle-box`
 - `wb:equipment/copper-pieces`
 - `wb:equipment/copper-statuette-of-a-salamander`
-- `wb:equipment/coral`
 - `wb:equipment/coral-idol-of-an-elemental-lord`
 - `wb:equipment/crystal-dinner-set-fine-silverware`
 - `wb:equipment/crystallized-dragon-heart`
@@ -65,6 +62,7 @@
 - `wb:equipment/famous-portrait-by-a-master`
 - `wb:equipment/fine-gold-spyglass`
 - `wb:equipment/garnet`
+- `wb:equipment/gerbil`
 - `wb:equipment/gilded-ceremonial-armor`
 - `wb:equipment/gilded-scepter-with-sapphire`
 - `wb:equipment/gold-and-aquamarine-diadem`
@@ -77,6 +75,7 @@
 - `wb:equipment/gold-pieces`
 - `wb:equipment/gold-rapier-with-amethysts`
 - `wb:equipment/gold-urn-with-scenes-of-judgment`
+- `wb:equipment/hamster`
 - `wb:equipment/hand-mirror-with-decorated-frame`
 - `wb:equipment/hematite`
 - `wb:equipment/illuminated-manuscript`
@@ -137,7 +136,6 @@
 - `wb:equipment/ryhasphineas-hourglass`
 - `wb:equipment/saints-bone-with-lost-scriptures`
 - `wb:equipment/sapphire`
-- `wb:equipment/sard`
 - `wb:equipment/sardonyx`
 - `wb:equipment/scrimshaw-whale-bone`
 - `wb:equipment/set-of-decorated-ceramic-plates`

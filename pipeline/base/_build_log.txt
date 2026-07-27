@@ -1,0 +1,182 @@
+== 0. fontes fixadas ==
+foundry: ja no pin 87f9e5028baaa10b70fdc766260b7886def17e04
+foundry: 28841 arquivos em packs/pf2e
+pf2etools: ja no pin 7d1ec43f84437b43668cd677265f42b8e9a0bb05
+pf2etools: espelhando data/ para a convencao dos extratores
+pf2etools: 382 arquivos JSON
+ok
+== 1. extratores ==
+(pulado -- exporte WB_REEXTRAIR=1 para re-extrair das fontes)
+== 2. reconciliar ==
+carregados: 20490 registros de 9 familias
+colisoes de id fundidas: 405  ->  base com 20085 registros
+traits refeitos como uniao: 2056  (registros com aliases_traits: 1459)
+suspeitas de par nao unido (mesmo kind+nome normalizado): 344
+license inferida a partir do livro: 3286
+artefatos organizacionais descartados: 1 -> ['wb:archetype/shared-archetype-feats']
+mechanized derivado de grants: 13761 registros corrigidos
+
+portoes: todos passaram
+kinds: {'class': 27, 'class-feature': 826, 'feat': 6412, 'archetype': 247, 'spell': 1642, 'ancestry': 50, 'heritage': 326, 'background': 615, 'armor': 216, 'equipment': 6164, 'shield': 125, 'weapon': 1038, 'animal-companion': 113, 'familiar-ability': 133, 'familiar-specific': 39, 'eidolon': 13, 'apparition': 14, 'trait': 561, 'skill': 33, 'domain': 64, 'deity': 484, 'ritual': 151, 'relic': 219, 'language': 155, 'arcane-school': 23, 'arcane-thesis': 10, 'bloodline': 28, 'cause': 13, 'conscious-mind': 12, 'doctrine': 5, 'druidic-order': 13, 'element': 6, 'hellknight-order': 14, 'hunters-edge': 7, 'hybrid-study': 8, 'ikon': 21, 'implement': 19, 'innovation': 7, 'instinct': 16, 'lesson': 31, 'methodology': 9, 'muse': 9, 'mystery': 22, 'patron': 27, 'racket': 10, 'research-field': 8, 'style': 11, 'subconscious-mind': 8, 'way': 11, 'draconic-exemplar': 44, 'mythic-calling': 15, 'deviant-ability-classification': 10}
+-> base/index.json  (16.8 MB)
+== 3. auditar divergencia entre fontes ==
+registros que ganharam conflito nesta passada: 396
+divergencias encontradas por campo: {'source.book': 320, 'name': 51, 'rarity': 37}
+registros com conflito registrado na base: 1545
+-> base/relatorio_conflitos.md
+== 4. desmembrar colisoes de identidade ==
+registros desmembrados: 318
+base: 20084 -> 20402
+-> base/relatorio_colisoes.md
+== 4b. injetar tabela de conjuracao nas classes ==
+tabelas aplicadas: 11
+classes com slots na base: 11
+== 4c. separar sub-escolha de concessao na progressao ==
+classes com sub-escolha separada: 25
+entradas movidas de concessao para opcao: 428
+-> base/relatorio_subclasses.md
+== 4d. resolver referencias orfas do predicado ==
+referencias orfas resolvidas: 67
+nao resolvidas: 20 (15 ids distintos)
+-> base/relatorio_referencias.md
+== 4e. derivar o gate de nivel (class_level x character_level) ==
+gates derivados: 6429
+  archetype       2156
+  classe          2001
+  ancestria       1234
+  geral           1038
+
+registros usando class_level:     2003  (eram 79)
+registros usando character_level: 4428
+-> base/relatorio_gate_nivel.md
+== 4f. ensinar o predicado a falar de subclasse ==
+`has` convertidos para `subclass`: 206
+  outras-opcoes         129
+  muse                   30
+  hybrid-study           13
+  way                    11
+  racket                 10
+  cause                   6
+  doctrine                3
+  instinct                2
+  arcane-school           2
+
+classes com progressao de proficiencia por subclasse: 1
+  Cleric: ['cloistered_cleric', 'warpriest']
+-> base/relatorio_subclasse_predicado.md
+== 4g. unificar o modelo de efeito em grants ==
+registros que ganharam grants: 964
+  background                           605
+  heritage                             309
+  ancestry                              50
+  heritage: sem efeito derivavel        17
+  background: sem efeito derivavel      10
+
+tipos de efeito emitidos: {'ability_boost': 796, 'skill_training': 590, 'grant_feat': 534, 'requires_ancestry': 309, 'hp_ancestry': 50, 'size': 50, 'speed': 50, 'sense': 37, 'ability_flaw': 34}
+base com grants: 3738 de 20402 (18.3%)
+-> base/relatorio_efeitos.md
+== 4h. converter rule elements declarativos ==
+registros que ganharam efeito: 492  (589 grants)
+por kind: {'feat': 267, 'class-feature': 152, 'heritage': 55, 'background': 16, 'class': 1, 'weapon': 1}
+
+nao convertidos (ficam como prosa, por decisao):
+    1793  FlatModifier: precisa do interpretador
+    1497  ItemAlteration: precisa do interpretador
+    1079  RollOption: precisa do interpretador
+     604  ActiveEffectLike sem path de rank
+     568  ChoiceSet: precisa do interpretador
+     540  Note: precisa do interpretador
+     415  GrantItem sem alvo na base
+     338  Resistance: precisa do interpretador
+-> base/relatorio_rule_elements.md
+== 5. emitir prosa ==
+indice de prosa: 43686 AoN(id), 26727 AoN(nome), 20181 Foundry, 11189 pf2etools
+referencias de texto criadas para registros que nao tinham: 993
+  class             27 textos  0.43 MB
+  class-feature    826 textos  0.70 MB
+  feat            6429 textos  3.91 MB
+  archetype        248 textos  0.40 MB
+  spell           1653 textos  1.58 MB
+  ancestry          50 textos  0.37 MB
+  heritage         326 textos  0.16 MB
+  background       615 textos  0.54 MB
+  armor            216 textos  0.21 MB
+  equipment       6271 textos  8.00 MB
+  shield           125 textos  0.12 MB
+  weapon          1050 textos  1.25 MB
+  animal-companion   113 textos  0.09 MB
+  familiar-ability   133 textos  0.06 MB
+  familiar-specific    39 textos  0.03 MB
+  eidolon           13 textos  0.03 MB
+  apparition        14 textos  0.02 MB
+  trait            561 textos  0.08 MB
+  skill             33 textos  0.01 MB
+  domain            64 textos  0.01 MB
+  deity            486 textos  0.08 MB
+  ritual           151 textos  0.30 MB
+  relic            219 textos  0.12 MB
+  language         157 textos  0.01 MB
+  arcane-school     23 textos  0.02 MB
+  arcane-thesis     10 textos  0.01 MB
+  bloodline         28 textos  0.03 MB
+  cause             13 textos  0.01 MB
+  conscious-mind    12 textos  0.03 MB
+  doctrine           5 textos  0.01 MB
+  druidic-order     13 textos  0.01 MB
+  element            6 textos  0.01 MB
+  hellknight-order    14 textos  0.02 MB
+  hunters-edge       7 textos  0.01 MB
+  hybrid-study       8 textos  0.01 MB
+  ikon              21 textos  0.02 MB
+  implement         19 textos  0.04 MB
+  innovation         7 textos  0.06 MB
+  instinct          16 textos  0.03 MB
+  lesson            31 textos  0.01 MB
+  methodology        9 textos  0.01 MB
+  muse               9 textos  0.01 MB
+  mystery           22 textos  0.05 MB
+  patron            27 textos  0.02 MB
+  racket            10 textos  0.01 MB
+  research-field     8 textos  0.01 MB
+  style             11 textos  0.00 MB
+  subconscious-mind     8 textos  0.01 MB
+  way               11 textos  0.01 MB
+  draconic-exemplar    44 textos  0.01 MB
+  mythic-calling    15 textos  0.01 MB
+  deviant-ability-classification    10 textos  0.01 MB
+
+referencias resolvidas: 20236/20236
+cobertura sobre a base: 20236/20402 (99.2%)
+registros sem referencia de texto: 166
+origem: {'aon': 18853, 'foundry': 1275, 'pf2etools': 46, 'aon:nome': 62}
+prosa total: 19.0 MB
+SEM PROSA (166): ['wb:equipment/agate', 'wb:equipment/alabaster', 'wb:equipment/alabaster-and-obsidian-game-set', 'wb:equipment/alabaster-idol', 'wb:equipment/alisendras-fan', 'wb:equipment/amber', 'wb:equipment/amethyst', 'wb:equipment/amphora-with-lavish-scenes', 'wb:equipment/ancient-dragon-skull-etched-with-mystic-sigils', 'wb:equipment/aquamarine', 'wb:equipment/augstens-cudgel', 'wb:equipment/azurite']
+== 6. portoes, fase pre-fusao ==
+fase pre-fusao: 20402 registros  (indices: aon=43686, foundry=28689)
+  portao 1  OK    prov por campo preenchido: 0
+  portao 2  OK    level divergente sem conflito: 0
+  portao 3  n/a   requires citando id inexistente
+  portao 4  n/a   cobertura caindo vs build anterior
+  portao 5  OK    license ausente: 0
+  portao 6  FALHA  traits disjunto apos uniao: 1
+  portao 7  FALHA  homonimo no mesmo kind: 13
+  portao 8  n/a   artefato citado que sumiu do disco
+-> base/relatorio_portoes_pre-fusao.md   (2 portao(es) falhando)
+== 7. fundir legacy/remaster ==
+pares declarados pelo AoN: 1268
+  vetados por campo estruturado divergente: 604
+  desempatados por prosa (sucessor multiplo): 77
+base: 20402 -> 19738 registros (664 absorvidos)
+registros com alias: 293
+-> base/relatorio_fusao.md
+== 8. portoes, fase final ==
+fase final: 19738 registros  (indices: aon=43686, foundry=28689)
+  portao 1  OK    prov por campo preenchido: 0
+  portao 2  OK    level divergente sem conflito: 0
+  portao 3  FALHA  requires citando id inexistente: 23
+  portao 4  OK    cobertura caindo vs build anterior: 0
+  portao 5  OK    license ausente: 0
+  portao 6  FALHA  traits disjunto apos uniao: 1
+  portao 7  n/a   homonimo no mesmo kind
+  portao 8  OK    artefato citado que sumiu do disco: 0
+-> base/relatorio_portoes_final.md   (2 portao(es) falhando)

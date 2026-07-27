@@ -4,8 +4,7 @@ Pathfinder 2e (Waybuilder).
 Obedece `specs/2026-07-26-schema-base.md`:
 
   - envelope com `id`, `kind`, `prov` por campo e `conflitos`
-  - `grants_completos`/`requires_parseado` separam o que o app calcula do
-    que so exibe (substituem `mechanized`, ver comum.mecanizacao())
+  - `mechanized` separa o que o app calcula do que so exibe
   - `requires` sugere, nunca bloqueia -- Principio zero
 
 Precedencia por campo (igual aos extratores irmaos):
@@ -29,6 +28,7 @@ Somente biblioteca padrao. Ponto de entrada: `extrair() -> list[dict]`.
 
 from __future__ import annotations
 
+import glob
 import json
 import os
 import re
@@ -45,16 +45,12 @@ PIPELINE = os.path.dirname(AQUI)
 PROJETO = os.path.dirname(PIPELINE)
 BRUTOS = os.path.join(PIPELINE, "dados_brutos")
 
-sys.path.insert(0, PIPELINE)
-import comum  # noqa: E402
-
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
 
 _CANDIDATOS_FOUNDRY = [
     os.environ.get("WB_FOUNDRY_PACKS", ""),
+    os.path.join(BRUTOS, "foundry_repo", "packs", "pf2e"),
     os.path.join(BRUTOS, "foundry", "packs", "pf2e"),
-    "/tmp/claude-1000/-mnt-c-Users-igor0/39eadbed-e8eb-4194-8557-74f05193fdc1"
-    "/scratchpad/pf2e-research/pf2e/packs/pf2e",
 ]
 
 
@@ -297,10 +293,18 @@ RARIDADES = {"common", "uncommon", "rare", "unique"}
 
 
 def carregar_aon(categoria):
-    for cand in (os.path.join(BRUTOS, "aon_equipment_%s.json" % categoria),
+    # `aon_dump/<categoria>.json` e o dump completo do indice (dump_aon.py) --
+    # as categorias do AoN se chamam exatamente weapon/armor/shield/equipment.
+    # Os dois caminhos antigos NUNCA existiram em disco: a funcao devolvia lista
+    # vazia em silencio e o extrator saia mono-fonte, com 5.698 registros no
+    # lugar de 7.496, exit code 0.
+    for cand in (os.path.join(BRUTOS, "aon_dump", "%s.json" % categoria),
+                 os.path.join(BRUTOS, "aon_equipment_%s.json" % categoria),
                  os.path.join(BRUTOS, "aon", "aon_equipment_%s.json" % categoria)):
         if os.path.exists(cand):
             return _ler_json(cand)
+    print("  ! sem dump do AoN para '%s' -- rode dump_aon.py" % categoria,
+          file=sys.stderr)
     return []
 
 
@@ -338,56 +342,53 @@ def norm_aon(a):
 # pf2etools nesta extracao fica restrita aos itens base)
 # --------------------------------------------------------------------------
 
+_SIGLAS_PF2E = None
+
+
+def expandir_sigla_pf2etools(s):
+    """'G&G' -> 'Guns & Gears', pelo mapa gerado de js/parser.js da propria fonte."""
+    global _SIGLAS_PF2E
+    if _SIGLAS_PF2E is None:
+        caminho = os.path.join(PIPELINE, "siglas_pf2etools.json")
+        try:
+            _SIGLAS_PF2E = json.load(open(caminho)).get("siglas") or {}
+        except Exception:
+            _SIGLAS_PF2E = {}
+    return _SIGLAS_PF2E.get(str(s or "").strip(), s)
+
+
 def carregar_pf2etools_base():
+    """`baseitems.json` (armas/armaduras/escudos base) + `items-<livro>.json`.
+
+    O comentario acima dizia que nao havia cache local dos `items-<livro>.json`
+    e por isso a cobertura do pf2etools ficava restrita aos itens base. Depois
+    que a fonte passou a ser clonada inteira (2026-07-26) sao 90 arquivos com
+    2.632 itens magicos -- deixar de fora era descartar a terceira opiniao
+    justamente onde o catalogo e maior.
+    """
+    itens = []
     caminho = os.path.join(BRUTOS, "pf2etools", "baseitems.json")
-    if not os.path.exists(caminho):
-        return []
-    try:
-        d = _ler_json(caminho)
-    except Exception:
-        return []
-    return d.get("baseitem", []) or []
-
-
-# --------------------------------------------------------------------------
-# A7 (auditoria 2026-07-26): 22 registros vindos so do pf2etools sao o MESMO
-# item que ja existe na base com nome sufixado -- o pf2etools cataloga base
-# items de armadura pelo nome curto do grupo ("Hide"), o Foundry/AoN pelo nome
-# completo ("Hide Armor"). Antes de emitir um registro novo, tenta casar o
-# nome-base contra o que ja existe com um sufixo de tipo conhecido.
-# --------------------------------------------------------------------------
-
-SUFIXO_NOME_POR_KIND = {"armor": " Armor", "shield": " Shield", "weapon": " Weapon"}
-
-
-def casar_nome_base_sufixado(nome, kind_nome, kind_por_chave_foundry):
-    """Se `nome` (curto, so-pf2etools) e na verdade o mesmo item que ja existe
-    no Foundry/AoN sob um nome com sufixo de tipo conhecido ('Hide' ->
-    'Hide Armor'), devolve a chave do registro existente. Senao, None."""
-    sufixo = SUFIXO_NOME_POR_KIND.get(kind_nome)
-    if not sufixo:
-        return None
-    candidata = chave(nome + sufixo)
-    if kind_por_chave_foundry.get(candidata) == kind_nome:
-        return candidata
-    return None
-
-
-# Abreviaturas de livro do pf2etools resolviveis com dado que ja esta no
-# projeto (nao inventado): "G&G" e confirmado pelo proprio Foundry, que
-# publica outros itens do mesmo livro com o titulo por extenso
-# ("Pathfinder Guns & Gears", pipeline/dados_brutos/foundry/.../power-suit.json).
-# So entra aqui abreviatura com essa confirmacao local -- "LOGM" e "FRP2" (as
-# duas outras que aparecem nos orfaos de pf2etools) NAO tem doc irmao no
-# Foundry/AoN para confirmar o titulo, entao ficam de fora: o registro correspondente
-# e recusado, nao chutado (ver relatorio).
-LIVRO_POR_ABREV_PF2ETOOLS = {
-    "G&G": "Pathfinder Guns & Gears",
-}
+    if os.path.exists(caminho):
+        try:
+            itens.extend(_ler_json(caminho).get("baseitem", []) or [])
+        except Exception:
+            pass
+    for arq in sorted(glob.glob(os.path.join(BRUTOS, "pf2etools", "items-*.json"))):
+        try:
+            itens.extend(_ler_json(arq).get("item", []) or [])
+        except Exception:
+            continue
+    return itens
 
 
 def norm_pf2etools(it):
-    cat = (it.get("category") or "").lower()
+    # `baseitems.json` grava `category` como string; `items-<livro>.json` grava
+    # como lista ("category": ["Poison"]). Aceitar so um dos dois estoura no
+    # primeiro item magico.
+    cat_bruta = it.get("category") or ""
+    if isinstance(cat_bruta, list):
+        cat_bruta = cat_bruta[0] if cat_bruta else ""
+    cat = str(cat_bruta).lower()
     kind = {"weapon": "weapon", "armor": "armor", "shield": "shield"}.get(cat, "equipment")
     return {
         "nome": it.get("name"),
@@ -458,15 +459,10 @@ def extrair():
         "conflitos_por_campo": Counter(),
         "homonimos": Counter(),
         "kind_reconciliado": Counter(),
-        "grants_completos_true": 0,
-        "grants_completos_false": 0,
-        "grants_completos_null": 0,
-        "requires_parseado_true": 0,
-        "requires_parseado_false": 0,
+        "mechanized_true": 0,
+        "mechanized_false": 0,
         "rules_ignoradas": Counter(),
         "sem_source": 0,
-        "casados_por_sufixo": Counter(),
-        "recusados": [],
     }
 
     # ---- agrupamento por (kind, chave-do-nome) -------------------------
@@ -499,11 +495,6 @@ def extrair():
     for kind_nome, lst in tools_por_kind.items():
         for r in lst:
             ch = chave(r["nome"])
-            if ch not in kind_por_chave_foundry:
-                casada = casar_nome_base_sufixado(r["nome"], kind_nome, kind_por_chave_foundry)
-                if casada:
-                    est["casados_por_sufixo"][kind_nome] += 1
-                    ch = casada
             k = (kind_por_chave_foundry.get(ch, kind_nome), ch)
             r["_remaster"] = r["remaster"]
             r["_kind"] = k[0]
@@ -598,13 +589,17 @@ def extrair():
             source = {"book": f["livro"], "license": f["licenca"],
                       "remaster": bool(f["remaster"])}
             prov["source"] = "foundry"
-        elif t and t.get("fonte") in LIVRO_POR_ABREV_PF2ETOOLS:
-            # A7: registro so-pf2etools sem gemeo (nome-base nao casou com
-            # nenhum ja existente) -- completa a fonte em vez de descartar,
-            # so quando a abreviatura do livro e confirmavel por outro dado
-            # do proprio projeto (ver LIVRO_POR_ABREV_PF2ETOOLS).
-            source = {"book": LIVRO_POR_ABREV_PF2ETOOLS[t["fonte"]], "page": t.get("pagina")}
-            prov["source"] = comum.prov_lido("pf2etools")
+        elif t and t["fonte"]:
+            # Terceiro ramo, que faltava: item que so existe no pf2etools saia
+            # com `source` vazio por construcao, ainda que `norm_pf2etools` ja
+            # lesse `fonte` e `pagina`. Eram `Nine-Ring Sword`,
+            # `Wind and Fire Wheel` e `Heavy Power Suit` -- os 3 registros que
+            # seguravam o portao 5, lidos como "sem licenca" quando o problema
+            # era outro. A fonte grava sigla ("G&G"), expandida pelo mapa que
+            # `gerar_siglas_pf2etools.py` extrai do proprio repo.
+            source = {"book": expandir_sigla_pf2etools(t["fonte"]),
+                      "page": t["pagina"], "remaster": bool(t["remaster"])}
+            prov["source"] = "pf2etools"
         completar_licenca(source, prov)
         if source is None or not source.get("license"):
             est["sem_source"] += 1
@@ -721,28 +716,11 @@ def extrair():
             if grants:
                 prov["grants"] = "foundry"
 
-        # ---- grants_completos / requires_parseado (A2 da auditoria) -------
-        # Nenhum kind deste extrator esta em KINDS_SEM_GRANTS; e nenhum
-        # produz `requires` (fica sempre None) -- nao ha requires_texto pra
-        # parsear, entao requires_parseado e sempre True (nada a parsear e
-        # sucesso, nao falha, conforme a spec).
-        grants_completos, requires_parseado = comum.mecanizacao(
-            kind,
-            tinha_mecanica=bool(f and f["rules"]),
-            perdeu_mecanica=perdeu,
-            tem_requires_texto=False,
-            requires_saiu=False,
-        )
-        if grants_completos is None:
-            est["grants_completos_null"] += 1
-        elif grants_completos:
-            est["grants_completos_true"] += 1
+        mechanized = not perdeu
+        if mechanized:
+            est["mechanized_true"] += 1
         else:
-            est["grants_completos_false"] += 1
-        if requires_parseado:
-            est["requires_parseado_true"] += 1
-        else:
-            est["requires_parseado_false"] += 1
+            est["mechanized_false"] += 1
 
         reg = {
             "id": "wb:%s/%s" % (kind, sl),
@@ -755,8 +733,7 @@ def extrair():
             "requires": None,
             "grants": grants,
             "text": ("wb:text/%s/%s" % (kind, sl)) if "text" in prov else None,
-            "grants_completos": grants_completos,
-            "requires_parseado": requires_parseado,
+            "mechanized": mechanized,
             "xref": {},
             "prov": prov,
         }
@@ -770,22 +747,9 @@ def extrair():
             if a["legacy_id"]:
                 reg["legado_de"] = a["legacy_id"]
         if t:
-            # slug do proprio nome do pf2etools, nao do nome canonico do
-            # registro -- podem divergir quando o casamento de A7 uniu um
-            # nome-base curto (pf2etools) a um registro de nome completo
-            # (foundry/aon), ex.: "Hide" casado em "wb:armor/hide-armor".
-            reg["xref"]["pf2etools"] = "baseitems#" + slug(t["nome"])
+            reg["xref"]["pf2etools"] = "baseitems#" + sl
         if conflitos:
             reg["conflitos"] = conflitos
-
-        # ---- A7: recusar registro sem fonte identificavel ------------------
-        if source is None or not reg["xref"]:
-            est["recusados"].append({
-                "id": reg["id"], "name": nome, "xref": dict(reg["xref"]),
-                "motivo": "source vazio" if source is None else "xref vazio",
-            })
-            continue
-
         registros.append(reg)
 
     ESTATISTICAS.clear()
@@ -812,17 +776,10 @@ def main():
               "w", encoding="utf-8") as fh:
         json.dump(ser, fh, ensure_ascii=False, indent=1)
 
-    print("registros por kind (candidatos avaliados, antes de recusas):")
+    print("registros por kind:")
     for k, v in est["por_kind"].most_common():
         print("  %-10s %d" % (k, v))
-    print("total candidatos ..... %d" % sum(est["por_kind"].values()))
-    print("total emitidos ....... %d" % len(registros))
-    print("total recusados (A7) . %d" % len(est["recusados"]))
-    for r in est["recusados"]:
-        print("  RECUSADO %-40s %-12s xref=%s" % (r["id"], r["motivo"], r["xref"]))
-    print()
-    print("casados por sufixo conhecido (A7, ex.: 'Hide' -> 'Hide Armor'): %s" %
-          dict(est["casados_por_sufixo"]))
+    print("total ................ %d" % sum(est["por_kind"].values()))
     print()
     print("com estrutura mecanica / so prosa, por kind:")
     for k in est["por_kind"]:
@@ -832,10 +789,7 @@ def main():
     print("kind reconciliado (aon/pf2etools divergia do foundry): %s" %
           dict(est["kind_reconciliado"]))
     print("runas detectadas: %s" % dict(est["runas_detectadas"]))
-    print("grants_completos true/false/null: %d / %d / %d" % (
-        est["grants_completos_true"], est["grants_completos_false"], est["grants_completos_null"]))
-    print("requires_parseado true/false: %d / %d" % (
-        est["requires_parseado_true"], est["requires_parseado_false"]))
+    print("mechanized true/false: %d / %d" % (est["mechanized_true"], est["mechanized_false"]))
     print("sem source/licenca: %d" % est["sem_source"])
     print("conflitos por campo: %s" % dict(est["conflitos_por_campo"]))
     print()
