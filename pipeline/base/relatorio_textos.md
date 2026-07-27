@@ -1,18 +1,14 @@
 # Emissao de prosa
 
-- cobertura sobre a base: **19727/19896** (99.2%)
-- referencias resolvidas: 19727/19727
-- registros sem referencia de texto: 169
-- origem: {'aon': 18436, 'foundry': 1273, 'pf2etools': 15, 'aon:nome': 3}
-- prosa total: 19.5 MB
-- sem prosa: 169
+- cobertura sobre a base: **19819/19985** (99.2%)
+- referencias resolvidas: 19819/19819
+- registros sem referencia de texto: 166
+- origem: {'aon': 18436, 'foundry': 1275, 'pf2etools': 46, 'aon:nome': 62}
+- prosa total: 18.5 MB
+- sem prosa: 166
 
 ## Sem prosa
 
-- `wb:armor/heavy-barding-large`
-- `wb:armor/heavy-barding-small-or-medium`
-- `wb:armor/heavy-power-suit`
-- `wb:armor/light-barding`
 - `wb:equipment/agate`
 - `wb:equipment/alabaster`
 - `wb:equipment/alabaster-and-obsidian-game-set`
@@ -32,6 +28,7 @@
 - `wb:equipment/bronze-bowl-with-wave-imagery`
 - `wb:equipment/bronze-brazier-with-asmodean-artwork`
 - `wb:equipment/bronze-chalice-with-bloodstones`
+- `wb:equipment/butterfly`
 - `wb:equipment/carnelian`
 - `wb:equipment/carved-wooden-game-set`
 - `wb:equipment/ceremonial-dagger-with-onyx-hilt`
@@ -65,6 +62,7 @@
 - `wb:equipment/famous-portrait-by-a-master`
 - `wb:equipment/fine-gold-spyglass`
 - `wb:equipment/garnet`
+- `wb:equipment/gerbil`
 - `wb:equipment/gilded-ceremonial-armor`
 - `wb:equipment/gilded-scepter-with-sapphire`
 - `wb:equipment/gold-and-aquamarine-diadem`
@@ -77,6 +75,7 @@
 - `wb:equipment/gold-pieces`
 - `wb:equipment/gold-rapier-with-amethysts`
 - `wb:equipment/gold-urn-with-scenes-of-judgment`
+- `wb:equipment/hamster`
 - `wb:equipment/hand-mirror-with-decorated-frame`
 - `wb:equipment/hematite`
 - `wb:equipment/illuminated-manuscript`
@@ -176,5 +175,3 @@
 - `wb:equipment/virtuoso-silver-flute`
 - `wb:equipment/wide-landscape-by-an-expert`
 - `wb:equipment/zircon`
-- `wb:weapon/nine-ring-sword`
-- `wb:weapon/wind-and-fire-wheel`

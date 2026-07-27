@@ -38,6 +38,56 @@ n=$(find "$FOUNDRY_DIR/packs/pf2e" -name '*.json' | wc -l)
 echo "foundry: $n arquivos em packs/pf2e"
 [ "$n" -gt 20000 ] || { echo "ERRO: checkout incompleto"; exit 1; }
 
-# pf2etools e AoN: dumps versionados em dados_brutos/, nada a fazer aqui.
-# Se um dia sairem do git, e aqui que a reconstrucao entra.
+# --------------------------------------------------------------------------
+# pf2etools
+# --------------------------------------------------------------------------
+# Ate 2026-07-26 esta fonte vivia como 242 arquivos baixados um a um por HTTP,
+# adivinhando nomes -- daí os 50 arquivos `.json.missing`, que sao chutes de
+# nome que nao existem no repo, nao conteudo faltando. O repo tem 524 arquivos.
+# `requires` tem precedencia pf2etools, entao rodar com 46% da fonte significa
+# construir o predicado -- onde a houserule mora -- sobre dado parcial.
+#
+# ATENCAO: o repo vivo e `Pf2eToolsOrg/Pf2eTools`. `Pf2ools` (sem o "e") e um
+# repo morto.
+PF2E_TOOLS_PIN="7d1ec43f84437b43668cd677265f42b8e9a0bb05"   # dev, 2026-06-07
+PF2E_TOOLS_REPO="$BRUTOS/pf2etools_repo"
+PF2E_TOOLS_DIR="$BRUTOS/pf2etools"
+
+if [ -d "$PF2E_TOOLS_REPO/.git" ]; then
+  atual="$(git -C "$PF2E_TOOLS_REPO" rev-parse HEAD)"
+  if [ "$atual" = "$PF2E_TOOLS_PIN" ]; then
+    echo "pf2etools: ja no pin $PF2E_TOOLS_PIN"
+  else
+    echo "pf2etools: HEAD em $atual, movendo para o pin"
+    git -C "$PF2E_TOOLS_REPO" fetch --depth 1 origin "$PF2E_TOOLS_PIN"
+    git -C "$PF2E_TOOLS_REPO" checkout "$PF2E_TOOLS_PIN"
+  fi
+else
+  echo "pf2etools: clonando"
+  git clone --depth 1 --branch dev \
+    https://github.com/Pf2eToolsOrg/Pf2eTools.git "$PF2E_TOOLS_REPO"
+fi
+
+# Os extratores esperam tudo achatado em pf2etools/, com ancestries/ e
+# backgrounds/ em subpasta. Espelhar a convencao em vez de reescrever 7
+# extratores.
+echo "pf2etools: espelhando data/ para a convencao dos extratores"
+mkdir -p "$PF2E_TOOLS_DIR"
+for sub in class feats items spells optionalfeatures; do
+  [ -d "$PF2E_TOOLS_REPO/data/$sub" ] && cp -f "$PF2E_TOOLS_REPO/data/$sub/"*.json "$PF2E_TOOLS_DIR/" 2>/dev/null || true
+done
+cp -f "$PF2E_TOOLS_REPO/data/"*.json "$PF2E_TOOLS_DIR/" 2>/dev/null || true
+for sub in ancestries backgrounds; do
+  mkdir -p "$PF2E_TOOLS_DIR/$sub"
+  cp -f "$PF2E_TOOLS_REPO/data/$sub/"*.json "$PF2E_TOOLS_DIR/$sub/" 2>/dev/null || true
+done
+# marcadores de tentativa de download antiga: nao sao conteudo
+find "$PF2E_TOOLS_DIR" -name '*.json.missing' -delete
+
+n_pf=$(find "$PF2E_TOOLS_DIR" -name '*.json' | wc -l)
+echo "pf2etools: $n_pf arquivos JSON"
+# 382 e o total em escopo. Os 524 do repo incluem bestiary/ (129), book/ (5),
+# generated/ (4) e adventure/ (1), que a spec poe fora de escopo.
+[ "$n_pf" -ge 380 ] || { echo "ERRO: espelhamento incompleto"; exit 1; }
+
 echo "ok"

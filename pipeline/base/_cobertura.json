@@ -1,5 +1,5 @@
 {
- "total": 19250,
+ "total": 19429,
  "por_kind": {
   "class": 27,
   "class-feature": 826,
@@ -9,10 +9,10 @@
   "ancestry": 50,
   "heritage": 326,
   "background": 502,
-  "armor": 204,
-  "equipment": 6165,
-  "shield": 118,
-  "weapon": 1035,
+  "armor": 216,
+  "equipment": 6320,
+  "shield": 125,
+  "weapon": 1040,
   "animal-companion": 113,
   "familiar-ability": 132,
   "familiar-specific": 38,

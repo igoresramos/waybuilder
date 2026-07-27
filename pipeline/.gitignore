@@ -9,3 +9,5 @@ __pycache__/
 # Backups de sessao (comparacao antes/depois), nao versionar
 saida_baseline/
 base_backup_prefusao/
+
+pf2etools_repo/

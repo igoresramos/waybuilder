@@ -140,16 +140,55 @@ def merge_traits(foundry_traits: list[str] | None, aon_traits: list[str] | None)
 # --------------------------------------------------------------------------
 
 def load_foundry_rituals() -> list[dict]:
-    docs = []
-    for path in glob.glob(os.path.join(FOUNDRY_RITUALS_DIR, "*.json")):
-        with open(path, encoding="utf-8") as f:
-            try:
-                d = json.load(f)
-            except json.JSONDecodeError:
-                continue
-        if not isinstance(d, dict) or d.get("type") != "spell":
+    """Rituais do Foundry.
+
+    Nao existe pasta `rituals/` no repo: ritual e uma magia com o bloco
+    `system.ritual` preenchido, dentro de `packs/pf2e/spells/`. O caminho antigo
+    (`dados_brutos/foundry/spells/rituals/`) era um recorte feito a mao numa
+    sessao anterior; quando ele sumiu, a funcao passou a devolver lista vazia em
+    silencio e 6 rituais **exclusivos do Foundry** sumiram da base --
+    `Unfettered Mark`, `Destroy Mindscape` e outros 4 de Adventure Path, que o
+    AoN nao indexa em `category=ritual`.
+    """
+    candidatos = [
+        os.environ.get("WB_FOUNDRY_PACKS", ""),
+        os.path.join(DADOS, "foundry_repo", "packs", "pf2e"),
+    ]
+    docs, vistos = [], set()
+    for raiz in candidatos:
+        if not raiz or not os.path.isdir(os.path.join(raiz, "spells")):
             continue
-        docs.append(d)
+        for path in glob.glob(os.path.join(raiz, "spells", "**", "*.json"),
+                              recursive=True):
+            try:
+                with open(path, encoding="utf-8") as f:
+                    d = json.load(f)
+            except (json.JSONDecodeError, OSError):
+                continue
+            if not isinstance(d, dict) or d.get("type") != "spell":
+                continue
+            if not (d.get("system") or {}).get("ritual"):
+                continue
+            if d.get("_id") in vistos:
+                continue
+            vistos.add(d.get("_id"))
+            docs.append(d)
+        break
+
+    # recorte antigo, se ainda existir -- nunca perde o que ja tinha
+    for path in glob.glob(os.path.join(FOUNDRY_RITUALS_DIR, "*.json")):
+        try:
+            with open(path, encoding="utf-8") as f:
+                d = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            continue
+        if isinstance(d, dict) and d.get("type") == "spell" and d.get("_id") not in vistos:
+            vistos.add(d.get("_id"))
+            docs.append(d)
+
+    if not docs:
+        print("  ! nenhum ritual do Foundry encontrado -- rode buscar_fontes.sh",
+              file=sys.stderr)
     return docs
 
 

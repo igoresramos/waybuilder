@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **19250**
+- registros avaliados: **19429**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -51,15 +51,11 @@
 
 **PASSOU** -- 0 ocorrencia(s).
 
-- linha de base ausente -- grave com --gravar-cobertura
 
 ## Portao 5 -- license ausente
 
-**FALHOU** -- 3 ocorrencia(s).
+**PASSOU** -- 0 ocorrencia(s).
 
-- `wb:armor/heavy-power-suit`
-- `wb:weapon/nine-ring-sword`
-- `wb:weapon/wind-and-fire-wheel`
 
 ## Portao 6 -- traits disjunto apos uniao
 

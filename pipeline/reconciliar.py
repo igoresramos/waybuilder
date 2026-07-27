@@ -69,6 +69,22 @@ def normalizar_livro(b):
 
 
 _CANONICO = None
+_SIGLAS = None
+
+
+def expandir_sigla(b):
+    """'G&G' -> 'Guns & Gears'. O pf2etools grava `source` como sigla.
+
+    Sem isso, registro que so existe nessa fonte sai com `source` vazio -- era
+    o caso de `Nine-Ring Sword`, `Wind and Fire Wheel` e `Heavy Power Suit`,
+    os 3 que seguravam o portao 5.
+    """
+    global _SIGLAS
+    if _SIGLAS is None:
+        caminho = f"{AQUI}/siglas_pf2etools.json"
+        _SIGLAS = (json.load(open(caminho)).get("siglas") or {}
+                   if os.path.exists(caminho) else {})
+    return _SIGLAS.get(str(b or "").strip(), b)
 
 
 def canonizar_livro(b):
@@ -85,7 +101,7 @@ def canonizar_livro(b):
                      if os.path.exists(caminho) else {})
     if not b:
         return b
-    limpo = " ".join(str(b).replace("\r", " ").replace("\n", " ").split())
+    limpo = " ".join(str(expandir_sigla(b)).replace("\r", " ").replace("\n", " ").split())
     return _CANONICO.get(normalizar_livro(limpo), limpo)
 
 

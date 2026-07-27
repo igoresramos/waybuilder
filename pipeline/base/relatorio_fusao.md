@@ -5,11 +5,11 @@ entra so para desempatar sucessor multiplo. Campo estruturado
 divergente veta a fusao.
 
 - pares declarados pelo AoN: **1160**
-- fundidos: **646**
-- vetados por divergencia estrutural: **514**
+- fundidos: **556**
+- vetados por divergencia estrutural: **604**
 - desempatados por prosa: **76**
-- base: 19896 -> **19250** registros
-- registros com alias: **350**
+- base: 19985 -> **19429** registros
+- registros com alias: **277**
 
 ## Vetados -- par declarado, conteudo divergente
 
@@ -43,10 +43,14 @@ fundir aqui apagaria dado.
 - `wb:class-feature/resolve` x `wb:class/bard` -- kind: 'class-feature' != 'class'
 - `wb:class-feature/deific-weapon` x `wb:class/champion` -- kind: 'class-feature' != 'class'
 - `wb:class-feature/champion-s-reaction` x `wb:class/champion` -- kind: 'class-feature' != 'class'
+- `wb:equipment/winter-wolf-elixir` x `wb:equipment/witchwarg-elixir` -- level: '4+' != 4
 - `wb:equipment/winter-wolf-elixir-moderate` x `wb:equipment/witchwarg-elixir` -- level: 12 != 4
 - `wb:equipment/winter-wolf-elixir-greater` x `wb:equipment/witchwarg-elixir` -- level: 16 != 4
+- `wb:equipment/smokestick` x `wb:equipment/smoke-ball` -- level: '1+' != 1
 - `wb:equipment/smokestick-greater` x `wb:equipment/smoke-ball` -- level: 7 != 1
+- `wb:equipment/darkwood-armor` x `wb:equipment/duskwood-armor` -- level: '12+' != 12
 - `wb:equipment/darkwood-armor-high-grade` x `wb:equipment/duskwood-armor` -- level: 19 != 12
+- `wb:equipment/mithral-armor` x `wb:equipment/dawnsilver-armor` -- level: '12+' != 12
 - `wb:equipment/mithral-armor-high-grade` x `wb:equipment/dawnsilver-armor` -- level: 19 != 12
 - `wb:equipment/breastplate-of-command` x `wb:armor/warleaders-bulwark` -- kind: 'equipment' != 'armor'
 - `wb:equipment/breastplate-of-command-greater` x `wb:armor/warleaders-bulwark` -- level: 18 != 10; price_cp: 2200000 != 100000; kind: 'equipment' != 'armor'
@@ -58,24 +62,20 @@ fundir aqui apagaria dado.
 - `wb:equipment/cloak-of-devouring-thorns-transmutation` x `wb:equipment/cloak-of-gnawing-leaves` -- level: 12 != 3
 - `wb:equipment/stalk-goggles-greater` x `wb:equipment/stalk-goggles` -- level: 3 != 1; price_cp: 6000 != 2000
 - `wb:equipment/stalk-goggles-major` x `wb:equipment/stalk-goggles` -- level: 8 != 1; price_cp: 45000 != 2000
+- `wb:equipment/dragons-breath-potion` x `wb:equipment/energy-breath-potion` -- level: '7+' != 7
 - `wb:equipment/dragons-breath-potion-adult` x `wb:equipment/energy-breath-potion` -- level: 12 != 7
 - `wb:equipment/dragons-breath-potion-wyrm` x `wb:equipment/energy-breath-potion` -- level: 17 != 7
 - `wb:equipment/pickled-demon-tongue-greater` x `wb:equipment/pickled-demon-tongue` -- level: 8 != 3; price_cp: 46000 != 6000
 - `wb:equipment/pickled-demon-tongue-major` x `wb:equipment/pickled-demon-tongue` -- level: 12 != 3; price_cp: 175000 != 6000
 - `wb:equipment/polished-demon-horn-greater` x `wb:equipment/polished-demon-horn` -- level: 8 != 3; price_cp: 45000 != 5500
 - `wb:equipment/polished-demon-horn-major` x `wb:equipment/polished-demon-horn` -- level: 12 != 3; price_cp: 175000 != 5500
-- `wb:equipment/aether-marble-moderate` x `wb:equipment/aether-marbles` -- level: 12 != 4
-- `wb:equipment/aether-marble-greater` x `wb:equipment/aether-marbles` -- level: 18 != 4
+- `wb:equipment/aether-marble` x `wb:equipment/aether-marbles` -- level: 4 != '4+'
+- `wb:equipment/aether-marble-lesser` x `wb:equipment/aether-marbles` -- level: 4 != '4+'
+- `wb:equipment/aether-marble-moderate` x `wb:equipment/aether-marbles` -- level: 12 != '4+'
+- `wb:equipment/aether-marble-greater` x `wb:equipment/aether-marbles` -- level: 18 != '4+'
+- `wb:equipment/feather-token` x `wb:equipment/marvelous-miniature` -- level: '1+' != 1
 - `wb:equipment/feather-token-chest` x `wb:equipment/marvelous-miniature` -- level: 3 != 1
 - `wb:equipment/feather-token-swan-boat` x `wb:equipment/marvelous-miniature` -- level: 8 != 1
-- `wb:equipment/bag-of-holding-type-ii` x `wb:equipment/spacious-pouch` -- level: 7 != 4
-- `wb:equipment/bag-of-holding-type-iii` x `wb:equipment/spacious-pouch` -- level: 11 != 4
-- `wb:equipment/bag-of-holding-type-iv` x `wb:equipment/spacious-pouch` -- level: 13 != 4
-- `wb:equipment/healers-tools-expanded` x `wb:equipment/healers-toolkit` -- level: 3 != 0; price_cp: 5000 != 500
-- `wb:equipment/horn-of-fog` x `wb:equipment/cloud-pouch` -- price_cp: 23000 != 22500
-- `wb:equipment/rod-of-wonder` x `wb:equipment/madcap-top` -- price_cp: 46500 != 45900
-- `wb:equipment/privacy-ward-fulu-room-abjuration` x `wb:equipment/privacy-ward-fulu` -- level: 5 != 1
-- `wb:equipment/privacy-ward-fulu-chamber-abjuration` x `wb:equipment/privacy-ward-fulu` -- level: 9 != 1
 
 ## Sucessor multiplo, desempatado por prosa
 
@@ -245,7 +245,6 @@ fundir aqui apagaria dado.
 - **Delirium** -> **Disorientation** _(domain)_
 - **Void** -> **Nothingness** _(domain)_
 - **Wyrmkin** -> **Dragon** _(domain)_
-- **Winter Wolf Elixir** -> **Witchwarg Elixir** _(equipment)_
 - **Winter Wolf Elixir (Lesser)** -> **Witchwarg Elixir** _(equipment)_
 - **Specialist's Ring** -> **Accolade Robe** _(equipment)_
 - **Hunting Spider Venom** -> **Spider Venom** _(equipment)_
@@ -253,61 +252,43 @@ fundir aqui apagaria dado.
 - **Basic Cane** -> **Cane** _(equipment)_
 - **Basic Crutch** -> **Crutch** _(equipment)_
 - **Basic Hearing Aid** -> **Hearing Aid** _(equipment)_
-- **Smokestick** -> **Smoke Ball** _(equipment)_
 - **Smokestick (Lesser)** -> **Smoke Ball** _(equipment)_
 - **Basic Prosthesis** -> **Prosthesis** _(equipment)_
 - **Basic Corrective Lenses** -> **Corrective Lenses** _(equipment)_
 - **Sunrod** -> **Glow Rod** _(equipment)_
 - **Tindertwig** -> **Matchstick** _(equipment)_
-- **Darkwood Armor** -> **Duskwood Armor** _(equipment)_
 - **Darkwood Armor (Standard-Grade)** -> **Duskwood Armor** _(equipment)_
-- **Mithral Armor** -> **Dawnsilver Armor** _(equipment)_
 - **Mithral Armor (Standard-Grade)** -> **Dawnsilver Armor** _(equipment)_
 - **Clothing (Winter)** -> **Clothing** _(equipment)_
 - **Salve of Slipperiness** -> **Tricky Liniment** _(equipment)_
 - **Barkskin Potion** -> **Oak Potion** _(equipment)_
-- **Dragon's Breath Potion** -> **Energy Breath Potion** _(equipment)_
 - **Dragon's Breath Potion (Young)** -> **Energy Breath Potion** _(equipment)_
 - **Potion of Tongues** -> **Potion of Truespeech** _(equipment)_
 - **Alchemist's Tools** -> **Alchemist's Toolkit** _(equipment)_
 - **Owlbear Claw** -> **Predator's Claw** _(equipment)_
-- **Aether Marble** -> **Aether Marbles** _(equipment)_
-- **Aether Marble (Lesser)** -> **Aether Marbles** _(equipment)_
 - **Telekinetic Converter** -> **Telekinetic Converters** _(equipment)_
-- **Feather Token** -> **Marvelous Miniature** _(equipment)_
 - **Feather Token (Ladder)** -> **Marvelous Miniature** _(equipment)_
 - **Javelin of Lightning** -> **Trident of Lightning** _(equipment)_
-- **Bag of Holding** -> **Spacious Pouch** _(equipment)_
 - **Bag of Holding (Type I)** -> **Spacious Pouch** _(equipment)_
 - **Healer's Tools** -> **Healer's Toolkit** _(equipment)_
 - **Broom of Flying** -> **Flying Broomstick** _(equipment)_
 - **Everburning Torch** -> **Everlight Crystal** _(equipment)_
 - **Holly and Mistletoe** -> **Primal Symbol** _(equipment)_
-- **Privacy Ward Fulu (Hallway)** -> **Privacy Ward Fulu** _(equipment)_
 - **Darkwood Object (Standard-Grade)** -> **Duskwood** _(equipment)_
 - **Mithral Object (Standard-Grade)** -> **Dawnsilver** _(equipment)_
 - **Glamered** -> **Raiment** _(equipment)_
 - **Dancing** -> **Animated** _(equipment)_
-- **Disrupting** -> **Vitalizing** _(equipment)_
 - **Artisan's Tools** -> **Artisan's Toolkit** _(equipment)_
 - **Speed** -> **Quickstrike** _(equipment)_
 - **Spell-Storing** -> **Spell Reservoir** _(equipment)_
-- **Darkwood Shield** -> **Duskwood Shield** _(equipment)_
 - **Darkwood Buckler (Standard-Grade)** -> **Duskwood Shield** _(equipment)_
 - **Darkwood Shield (Standard-Grade)** -> **Duskwood Shield** _(equipment)_
 - **Darkwood Tower Shield (Standard-Grade)** -> **Duskwood Shield** _(equipment)_
 - **Mithral Shield** -> **Dawnsilver Shield** _(equipment)_
 - **Mithral Buckler (Standard-Grade)** -> **Dawnsilver Shield** _(equipment)_
 - **Mithral Shield (Standard-Grade)** -> **Dawnsilver Shield** _(equipment)_
-- **Magic Wand (1st-Level Spell)** -> **Magic Wand** _(equipment)_
-- **Wand of Continuation (1st-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- **Wand of Manifold Missiles** -> **Wand of Shardstorm** _(equipment)_
 - **Wand of Manifold Missiles (1st-Level Spell)** -> **Wand of Shardstorm** _(equipment)_
-- **Wand of Smoldering Fireballs (3rd-Level Spell)** -> **Wand of Smoldering Fireballs** _(equipment)_
-- **Wand of Widening (1st-Level Spell)** -> **Wand of Widening** _(equipment)_
-- **Darkwood Weapon** -> **Duskwood Weapon** _(equipment)_
 - **Darkwood Weapon (Standard-Grade)** -> **Duskwood Weapon** _(equipment)_
-- **Mithral Weapon** -> **Dawnsilver Weapon** _(equipment)_
 - **Mithral Weapon (Standard-Grade)** -> **Dawnsilver Weapon** _(equipment)_
 - **Oathbow** -> **Hunter's Anthem** _(weapon)_
 - **Anklets of Alacrity** -> **Cloak of Swiftness** _(equipment)_
@@ -316,16 +297,9 @@ fundir aqui apagaria dado.
 - **Circlet of Persuasion** -> **Necklace of Allure** _(equipment)_
 - **Diadem of Intellect** -> **Crown of Intellect** _(equipment)_
 - **Headband of Inspired Wisdom** -> **Headwrap of Wisdom** _(equipment)_
-- **Horseshoes of Speed** -> **Alacritous Horsehoes** _(equipment)_
-- **Aeon Stone (Dull Gray)** -> **Aeon Stone** _(equipment)_
 - **Boots of Speed** -> **Propulsive Boots** _(equipment)_
-- **Bracers of Armor** -> **Bands of Force** _(equipment)_
 - **Cape of the Mountebank** -> **Charlatan's Cape** _(equipment)_
 - **Cloak of Elvenkind** -> **Cloak of Illusions** _(equipment)_
-- **Timepiece (Grand Clock)** -> **Timepiece** _(equipment)_
-- **Awakened Metal Shot (Awakened Cold Iron Shot)** -> **Awakened Metal Shot** _(equipment)_
-- **Awakened Metal Shot (Awakened Silver Shot)** -> **Awakened Metal Shot** _(equipment)_
-- **Black Powder (Dose or Round)** -> **Black Powder** _(equipment)_
 - **Repair Kit** -> **Repair Toolkit** _(equipment)_
 - **Waterproof Firearm Carrying Case** -> **Waterproof Carrying Case** _(equipment)_
 - **Druid's Vestments** -> **Living Mantle** _(equipment)_
@@ -338,50 +312,22 @@ fundir aqui apagaria dado.
 - **Dragontooth Club** -> **Dragontooth Leiomano** _(weapon)_
 - **Ghast Stiletto** -> **Ghoul Stiletto** _(weapon)_
 - **Hat of Disguise** -> **Masquerade Scarf** _(equipment)_
-- **Hat of the Magi** -> **Mage's Hat** _(equipment)_
-- **Assassin Vine Wine** -> **Arbor Wine** _(equipment)_
 - **Owlbear Egg** -> **Owl Screech Egg** _(equipment)_
 - **Warding Punch** -> **Warding Element Draught** _(equipment)_
 - **Addition Suppressant** -> **Affliction Suppressant** _(equipment)_
 - **Addiction Suppressant (Lesser)** -> **Affliction Suppressant** _(equipment)_
 - **Necklace of Fireballs** -> **Frozen Lava** _(equipment)_
-- **Choker-Arm Mutagen** -> **Bendy-Arm Mutagen** _(equipment)_
 - **Choker-Arm Mutagen (Lesser)** -> **Bendy-Arm Mutagen** _(equipment)_
-- **Theatrical Mutagen (Greater)** -> **Theatrical Mutagen** _(equipment)_
-- **Poison Concentrator (Lesser)** -> **Poison Concentrator** _(equipment)_
 - **Tanglefoot Extruder** -> **Splatrope Extruder** _(equipment)_
 - **Death Knell Powder** -> **Execution Powder** _(equipment)_
 - **Hunger Oil** -> **Gnawbone Toxin** _(equipment)_
 - **Liar's Demise** -> **Fraudslayer Oil** _(equipment)_
 - **Sight-Theft Grift** -> **Sightless Tincture** _(equipment)_
-- **Ring of Energy Resistance** -> **Charm of Resistance** _(equipment)_
-- **Bralani Breath** -> **Deadlock Mint** _(equipment)_
 - **Dragon Throat Scale** -> **Dragon Breath Scale** _(equipment)_
 - **Fearcracker** -> **Ghostcracker** _(equipment)_
-- **Demolition Fulu (Lesser)** -> **Demolition Fulu** _(equipment)_
-- **Thousand-Pains Fulu (Stone)** -> **Thousand-Pains Fulu** _(equipment)_
-- **Conduit Shot (Lesser)** -> **Conduit Shot** _(equipment)_
-- **Depth Charge (I)** -> **Depth Charge** _(equipment)_
-- **Magnetic Shot (Lesser)** -> **Magnetic Shot** _(equipment)_
-- **Weapon Shot (Lesser)** -> **Weapon Shot** _(equipment)_
-- **Heartening Missive (Butterfly)** -> **Heartening Missive** _(equipment)_
 - **Messanger Missive** -> **Messenger Missive** _(equipment)_
-- **Disrupting Oil** -> **Burial Oil** _(equipment)_
-- **Life-Boosting Oil (Lesser)** -> **Life-Boosting Oil** _(equipment)_
-- **Oil of Ownership (Lesser)** -> **Oil of Ownership** _(equipment)_
-- **Serpent Oil (Lesser)** -> **Serpent Oil** _(equipment)_
-- **Faerie Dragon Liqueur** -> **Fey Dragonet Liqueur** _(equipment)_
-- **Roaring Potion (Lesser)** -> **Roaring Potion** _(equipment)_
-- **Tentacle Potion (Lesser)** -> **Tentacle Potion** _(equipment)_
-- **Snarling Badger (Lesser)** -> **Snarling Badger** _(equipment)_
 - **Slippers of Spider Climbing** -> **Clawed Bracers** _(equipment)_
 - **Marvelous Pigment** -> **Miraculous Paintbrush** _(equipment)_
-- **Moonlit Spellgun (Minor)** -> **Moonlit Spellgun** _(equipment)_
-- **Potion Patch (Lesser)** -> **Potion Patch** _(equipment)_
-- **Sparkling Spellgun (Lesser)** -> **Sparking Spellgun** _(equipment)_
-- **Spiritual Warhorn (Lesser)** -> **Spiritual Warhorn** _(equipment)_
-- **Torrent Spellgun (Lesser)** -> **Torrent Spellgun** _(equipment)_
-- **Tome of Restorative Cleansing (Lesser)** -> **Tome of Restorative Cleansing** _(equipment)_
 - **Winged Boots** -> **Winged Sandals** _(equipment)_
 - **Portable Hole** -> **Planar Tunnel** _(equipment)_
 - **Bound Guardian** -> **Fauna Guardian** _(equipment)_
@@ -393,47 +339,20 @@ fundir aqui apagaria dado.
 - **Varisian Emblem (Ragario)** -> **Unifying Emblem** _(equipment)_
 - **Varisian Emblem (Vangloris)** -> **Unifying Emblem** _(equipment)_
 - **Varisian Emblem (Voratalo)** -> **Unifying Emblem** _(equipment)_
-- **Wyrm on the Wing** -> **Wyrm's Wingspan** _(equipment)_
 - **Judgment Thurible** -> **Judgement Thurible** _(equipment)_
 - **Wyrm Claw** -> **Wyrm Spindle** _(equipment)_
-- **Wand of Choking Mist (2nd-Level Spell)** -> **Wand of Choking Mist** _(equipment)_
-- **Wand of Chromatic Blastt (4th-Level Spell)** -> **Wand of Chromatic Burst** _(equipment)_
-- **Wand of Clinging Rime (7th-Level Spell)** -> **Wand of Clinging Rime** _(equipment)_
-- **Wand of Dazzling Rays (3rd-Level Spell)** -> **Wand of Dazzling Rays** _(equipment)_
-- **Wand of Dumbfounding Doom (3rd-Level Spell)** -> **Wand of Dumbfounding Doom** _(equipment)_
-- **Wand of Hawthorn (2nd-Level Spell)** -> **Wand of Hawthorn** _(equipment)_
-- **Wand of Hybrid Form (2nd-Level Spell)** -> **Wand of Hybrid Form** _(equipment)_
-- **Wand of Legerdemain (1st-Level Spell)** -> **Wand of Legerdemain** _(equipment)_
-- **Wand of Mental Purification (1st-Level Spell)** -> **Wand of Mental Purification** _(equipment)_
-- **Wand of Mercy (1st-Level Spell)** -> **Wand of Mercy** _(equipment)_
 - **Wand of Noisome Acid (2nd-Level Spell)** -> **Wand of Noisome Acid** _(equipment)_
-- **Wand of Paralytic Shock (3rd-Level Spell)** -> **Wand of Paralytic Shock** _(equipment)_
-- **Wand of Pernicious Poison (1st-Level Spell)** -> **Wand of Pernicious Poison** _(equipment)_
-- **Wand of Reaching (1st-Level Spell)** -> **Wand of Reaching** _(equipment)_
-- **Wand of Refracting Rays (4th-Level Spell)** -> **Wand of Refracting Rays** _(equipment)_
-- **Wand of Rolling Flames (2nd-level spell)** -> **Wand of Rolling Flames** _(equipment)_
 - **Wand of Shattering Images** -> **Wand of Shocking Haze** _(equipment)_
 - **Wand of Teeming Ghosts (2nd-Level Spell)** -> **Wand of Teeming Ghosts** _(equipment)_
-- **Wand of Toxic Blades (6th-Level Spell)** -> **Wand of Toxic Blades** _(equipment)_
-- **Clarity Goggles (Lesser)** -> **Clarity Goggles** _(equipment)_
-- **Mirror Goggles (Lesser)** -> **Mirror Goggles** _(equipment)_
 - **Ki-Channeling Beads** -> **Mala Beads of Foresight** _(equipment)_
-- **Helm of Underwater Action** -> **Submersible Helm** _(equipment)_
-- **Armory Bracelet (Minor)** -> **Armory Bracelet** _(equipment)_
 - **Spiritsight Sight** -> **Spiritsight Ring** _(equipment)_
 - **Lich Soul Cage** -> **Soul Cage** _(equipment)_
 - **Draconic Toxin Bottle** -> **Energy Toxin Bottle** _(equipment)_
-- **Hat of Disagreeable Disguise** -> **Handkerchief of Disagreeable Disguise** _(equipment)_
-- **Tattletale Orb (Clear Quartz)** -> **Tattletale Orb** _(equipment)_
 - **Thieves' Tools** -> **Thieves' Toolkit** _(equipment)_
-- **Scroll** -> **Magic Scroll** _(equipment)_
 - **1st-Level Scroll** -> **Magic Scroll** _(equipment)_
-- **Focus Cathartic** -> **Bottled Catharsis** _(equipment)_
 - **Focus Cathartic (Lesser)** -> **Bottled Catharsis** _(equipment)_
-- **Sinew-Shock Serum** -> **Surging Serum** _(equipment)_
 - **Sinew-Shock Serum (Lesser)** -> **Surging Serum** _(equipment)_
 - **Sovereign Glue** -> **Everlasting Adhesive** _(equipment)_
-- **Oil of Object Animation** -> **Oil of Dynamism** _(equipment)_
 - **Potion of Expeditious Retreat** -> **Potion of Emergency Escape** _(equipment)_
 - **Spellcasting (1st level)** -> **Spellcasting** _(equipment)_
 - **Spellcasting (2nd level)** -> **Spellcasting** _(equipment)_
@@ -444,18 +363,9 @@ fundir aqui apagaria dado.
 - **Spellcasting (7th level)** -> **Spellcasting** _(equipment)_
 - **Spellcasting (8th level)** -> **Spellcasting** _(equipment)_
 - **Spellcasting (9th level)** -> **Spellcasting** _(equipment)_
-- **Mask of the Banshee** -> **Guise of the Smirking Devil** _(equipment)_
-- **Wand of Crackling Lightning (3rd-Level Spell)** -> **Wand of Crackling Lightning** _(equipment)_
-- **Wand of Hopeless Night (2nd-Level Spell)** -> **Wand of Hopeless Night** _(equipment)_
-- **Wand of Overflowing Life (3rd-Level Spell)** -> **Wand of Overflowing Life** _(equipment)_
-- **Wand of the Snowfields (5th-Level Spell)** -> **Wand of the Snowfields** _(equipment)_
-- **Wand of the Spider (2nd-Level Spell)** -> **Wand of the Spider** _(equipment)_
-- **Tanglefoot Bag** -> **Glue Bomb** _(equipment)_
 - **Tanglefoot Bag (Lesser)** -> **Glue Bomb** _(equipment)_
-- **Thunderstone** -> **Blasting Stone** _(equipment)_
 - **Thunderstone (Lesser)** -> **Blasting Stone** _(equipment)_
 - **Green Wyrmling Breath Potion** -> **Horned Dragon Breath Potion** _(equipment)_
-- **Salamander Elixir** -> **Cooling Elixir** _(equipment)_
 - **Salamander Elixir (Lesser)** -> **Cooling Elixir** _(equipment)_
 - **Extra Reagents** -> **Extra Alchemy** _(familiar-ability)_
 - **Faerie Dragon** -> **Fey Dragonet** _(familiar-specific)_

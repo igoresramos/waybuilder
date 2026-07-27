@@ -120,6 +120,31 @@ def main():
         baixados += len(regs)
         print(f"  {cat:32} {len(regs):>6}")
 
+    # Apelidos: varios extratores procuram `dados_brutos/aon_<algo>.json` com
+    # nomes proprios e, nao achando, vao para a REDE (ou caem para lista vazia
+    # em silencio). Materializar aqui torna o build offline de verdade.
+    APELIDOS = {
+        "aon_feats.json": "feat", "aon_spells.json": "spell",
+        "aon_traits.json": "trait", "aon_skills.json": "skill",
+        "aon_deities.json": "deity", "aon_domains.json": "domain",
+        "aon_archetypes.json": "archetype", "aon_ancestries.json": "ancestry",
+        "aon_heritages.json": "heritage", "aon_backgrounds.json": "background",
+        "aon_rituals.json": "ritual", "aon_relics.json": "relic",
+        "aon_languages.json": "language", "aon_classes.json": "class",
+        "aon_class_features.json": "class-feature",
+        "aon_companheiros.json": "animal-companion",
+    }
+    criados = 0
+    for apelido, cat in APELIDOS.items():
+        origem = os.path.join(DESTINO, f"{cat}.json")
+        destino = os.path.join(os.path.dirname(DESTINO), apelido)
+        if os.path.exists(origem) and not os.path.exists(destino):
+            json.dump(json.load(open(origem)), open(destino, "w"),
+                      ensure_ascii=False, separators=(",", ":"))
+            criados += 1
+    if criados:
+        print(f"apelidos criados para extratores legados: {criados}")
+
     manifesto["_censo_remoto"] = censo
     manifesto["_pin"] = time.strftime("%Y-%m-%d")
     json.dump(manifesto, open(os.path.join(DESTINO, "_manifesto.json"), "w"),

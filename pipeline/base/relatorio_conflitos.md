@@ -6,7 +6,7 @@ Esta passada compara a base contra o AoN e o Foundry em disco, pelo
 divergencia nunca e silenciada.
 
 - registros que ganharam conflito: **396**
-- registros com conflito na base: **934**
+- registros com conflito na base: **1545**
 
 ## Por campo
 

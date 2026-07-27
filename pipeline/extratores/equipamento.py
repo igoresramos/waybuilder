@@ -28,6 +28,7 @@ Somente biblioteca padrao. Ponto de entrada: `extrair() -> list[dict]`.
 
 from __future__ import annotations
 
+import glob
 import json
 import os
 import re
@@ -292,10 +293,18 @@ RARIDADES = {"common", "uncommon", "rare", "unique"}
 
 
 def carregar_aon(categoria):
-    for cand in (os.path.join(BRUTOS, "aon_equipment_%s.json" % categoria),
+    # `aon_dump/<categoria>.json` e o dump completo do indice (dump_aon.py) --
+    # as categorias do AoN se chamam exatamente weapon/armor/shield/equipment.
+    # Os dois caminhos antigos NUNCA existiram em disco: a funcao devolvia lista
+    # vazia em silencio e o extrator saia mono-fonte, com 5.698 registros no
+    # lugar de 7.496, exit code 0.
+    for cand in (os.path.join(BRUTOS, "aon_dump", "%s.json" % categoria),
+                 os.path.join(BRUTOS, "aon_equipment_%s.json" % categoria),
                  os.path.join(BRUTOS, "aon", "aon_equipment_%s.json" % categoria)):
         if os.path.exists(cand):
             return _ler_json(cand)
+    print("  ! sem dump do AoN para '%s' -- rode dump_aon.py" % categoria,
+          file=sys.stderr)
     return []
 
 
@@ -333,19 +342,53 @@ def norm_aon(a):
 # pf2etools nesta extracao fica restrita aos itens base)
 # --------------------------------------------------------------------------
 
+_SIGLAS_PF2E = None
+
+
+def expandir_sigla_pf2etools(s):
+    """'G&G' -> 'Guns & Gears', pelo mapa gerado de js/parser.js da propria fonte."""
+    global _SIGLAS_PF2E
+    if _SIGLAS_PF2E is None:
+        caminho = os.path.join(PIPELINE, "siglas_pf2etools.json")
+        try:
+            _SIGLAS_PF2E = json.load(open(caminho)).get("siglas") or {}
+        except Exception:
+            _SIGLAS_PF2E = {}
+    return _SIGLAS_PF2E.get(str(s or "").strip(), s)
+
+
 def carregar_pf2etools_base():
+    """`baseitems.json` (armas/armaduras/escudos base) + `items-<livro>.json`.
+
+    O comentario acima dizia que nao havia cache local dos `items-<livro>.json`
+    e por isso a cobertura do pf2etools ficava restrita aos itens base. Depois
+    que a fonte passou a ser clonada inteira (2026-07-26) sao 90 arquivos com
+    2.632 itens magicos -- deixar de fora era descartar a terceira opiniao
+    justamente onde o catalogo e maior.
+    """
+    itens = []
     caminho = os.path.join(BRUTOS, "pf2etools", "baseitems.json")
-    if not os.path.exists(caminho):
-        return []
-    try:
-        d = _ler_json(caminho)
-    except Exception:
-        return []
-    return d.get("baseitem", []) or []
+    if os.path.exists(caminho):
+        try:
+            itens.extend(_ler_json(caminho).get("baseitem", []) or [])
+        except Exception:
+            pass
+    for arq in sorted(glob.glob(os.path.join(BRUTOS, "pf2etools", "items-*.json"))):
+        try:
+            itens.extend(_ler_json(arq).get("item", []) or [])
+        except Exception:
+            continue
+    return itens
 
 
 def norm_pf2etools(it):
-    cat = (it.get("category") or "").lower()
+    # `baseitems.json` grava `category` como string; `items-<livro>.json` grava
+    # como lista ("category": ["Poison"]). Aceitar so um dos dois estoura no
+    # primeiro item magico.
+    cat_bruta = it.get("category") or ""
+    if isinstance(cat_bruta, list):
+        cat_bruta = cat_bruta[0] if cat_bruta else ""
+    cat = str(cat_bruta).lower()
     kind = {"weapon": "weapon", "armor": "armor", "shield": "shield"}.get(cat, "equipment")
     return {
         "nome": it.get("name"),
@@ -546,6 +589,17 @@ def extrair():
             source = {"book": f["livro"], "license": f["licenca"],
                       "remaster": bool(f["remaster"])}
             prov["source"] = "foundry"
+        elif t and t["fonte"]:
+            # Terceiro ramo, que faltava: item que so existe no pf2etools saia
+            # com `source` vazio por construcao, ainda que `norm_pf2etools` ja
+            # lesse `fonte` e `pagina`. Eram `Nine-Ring Sword`,
+            # `Wind and Fire Wheel` e `Heavy Power Suit` -- os 3 registros que
+            # seguravam o portao 5, lidos como "sem licenca" quando o problema
+            # era outro. A fonte grava sigla ("G&G"), expandida pelo mapa que
+            # `gerar_siglas_pf2etools.py` extrai do proprio repo.
+            source = {"book": expandir_sigla_pf2etools(t["fonte"]),
+                      "page": t["pagina"], "remaster": bool(t["remaster"])}
+            prov["source"] = "pf2etools"
         completar_licenca(source, prov)
         if source is None or not source.get("license"):
             est["sem_source"] += 1

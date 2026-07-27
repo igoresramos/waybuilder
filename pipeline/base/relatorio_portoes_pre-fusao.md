@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `pre-fusao`
 
-- registros avaliados: **19896**
+- registros avaliados: **19985**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -22,11 +22,8 @@ NAO SE APLICA nesta fase.
 
 ## Portao 5 -- license ausente
 
-**FALHOU** -- 3 ocorrencia(s).
+**PASSOU** -- 0 ocorrencia(s).
 
-- `wb:armor/heavy-power-suit`
-- `wb:weapon/nine-ring-sword`
-- `wb:weapon/wind-and-fire-wheel`
 
 ## Portao 6 -- traits disjunto apos uniao
 

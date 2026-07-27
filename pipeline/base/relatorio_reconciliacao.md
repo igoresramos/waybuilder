@@ -1,17 +1,17 @@
 # Relatorio de reconciliacao
 
-- registros de entrada: **19986**
-- colisoes de id fundidas: **404**
-- base final: **19578** registros
-- registros com divergencia registrada: **549**
+- registros de entrada: **20073**
+- colisoes de id fundidas: **405**
+- base final: **19667** registros
+- registros com divergencia registrada: **1166**
 - suspeitas de par nao unido: **233**
 
 ## Por kind
 
 - `feat`: 6412
-- `equipment`: 6099
+- `equipment`: 6164
 - `spell`: 1642
-- `weapon`: 1033
+- `weapon`: 1038
 - `class-feature`: 826
 - `background`: 615
 - `trait`: 561
@@ -19,11 +19,11 @@
 - `heritage`: 326
 - `archetype`: 247
 - `relic`: 219
-- `armor`: 204
+- `armor`: 216
 - `language`: 155
 - `ritual`: 151
 - `familiar-ability`: 133
-- `shield`: 118
+- `shield`: 125
 - `animal-companion`: 113
 - `domain`: 64
 - `ancestry`: 50
@@ -35,7 +35,7 @@
 
 ## Portoes de qualidade
 
-- FALHA sem license: 3
+- todos passaram
 
 ## Suspeitas de par nao unido (amostra)
 
