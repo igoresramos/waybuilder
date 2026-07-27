@@ -6,6 +6,49 @@ project: waybuilder
 
 ## 2026-07-26
 
+### Sessao | 18:40-21:15 | igor + claude-code
+Exploracao dos PDFs oficiais e revisao ampla da base. **Nada foi reprocessado --
+a base de 18.176 registros segue intacta**; esta sessao produziu diagnostico,
+correcao de spec e um extrator novo.
+
+- **35 PDFs oficiais** extraidos dos zips do Downloads (1,7 GB, fora do git).
+  Os 1.027 mapas `.webp` foram ignorados por decisao do Igor
+- **8 agentes despachados**, a maioria em paralelo: tabelas de conjuracao,
+  arbitragem de divergencias, ambientacao, cobertura, mecanica dos Lost Omens,
+  normalizacao de traits, colisoes de identidade, extrator de rituais
+- **Achado 1 -- `traits` nao e campo de precedencia, e de uniao.** Responde por
+  88% dos 2.299 conflitos e quase nenhum era divergencia: 72 facetas
+  complementares, 31 ancestria renomeada no remaster (com a precedencia
+  escolhendo o nome LEGADO numa base remaster-first), 18 granularidade
+  (`two-hand-d12` virando `two-hand`, perdendo o dado de dano). Spec corrigida
+- **Achado 2 -- `wb:<kind>/<slug>` assume nome unico por kind, e nao e.**
+  5 colisoes confirmadas contra AoN e Foundry (`death-from-above` sao dois
+  feats distintos fundidos numa quimera). Detector melhor achado pelo agente:
+  registro-irmao com sufixo e `xref` incompleto -- 59 candidatos, com falso
+  positivo conhecido nos `-greater`/`-major` de item
+- **Achado 3 -- faltava o kind `ritual` inteiro.** Zero em 18.176, e a palavra
+  nao aparecia na spec: omissao de escopo, nao falha de extrator. Extrator
+  escrito, **151 rituais** (a estimativa de 31 era so dos dois Player Core)
+- **Achado 4 -- a tabela de slots de conjuracao nao existe para classe nenhuma.**
+  Nao era buraco do Animist. Animist, Magus e Summoner recuperados do PDF;
+  Exemplar e Kineticist confirmados nao-conjuradores
+- **Arbitragem contra PDF: premissa invalida.** Montei um teste tratando o
+  impresso como arbitro; deu 63% e o defeito foi meu -- as fontes digitais
+  incorporam errata posterior a publicacao, entao o teste mediu concordancia
+  com o impresso, nao acerto
+- **Lost Omens: ambientacao ignorada** por decisao do Igor (e flavor puro, e o
+  conteudo mecanico daqueles capitulos ja esta na base). Mas sobrou mecanica
+  real nao estruturada: 305 registros com linha `Access` citando organizacao ou
+  regiao e `requires` vazio
+- **Cobertura auditada**: Treasure Vault 898 nomes / 100%; Player Core, Player
+  Core 2, War of Immortals e Ancestry Guide 1.377 nomes / 99,8% fora rituals
+- **`pipeline/normalizacao_traits.json`**: 17 renomeados, 9 removidos sem
+  sucessor, 18 familias parametrizadas, cada entrada com `prov` citando pagina.
+  Corrigiu dois erros meus que ja estavam na spec -- `oread`/`sylph`/`undine`
+  nao viraram `naari` (so `ifrit`), e `illusion` sobreviveu ao remaster
+- Nota de wiki criada: `merge-n-fontes-precedencia-vs-uniao.md`
+- **Encerrada com 1 agente rodando** (auditoria ampla em Opus)
+
 ### Evento | igor + claude-code
 - Projeto criado via /tartarus:novo
 

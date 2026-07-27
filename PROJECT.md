@@ -5,7 +5,7 @@ status: planning
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 4
+hours: 6.5
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -79,9 +79,19 @@ hidden: false
 > fundidos, zero par nao unido. Index 15,2 MB + prosa 16,7 MB.
 > Resíduo unico: 6 registros sem `license` (portao de qualidade 5 falhando).
 >
-> Falta o construtor. Os dois proximos itens sao de modelagem, nao de extracao:
-> o grafo de progressao de dois niveis e a linguagem de predicado sabendo falar
-> de subclasse.
+> **A revisao de 2026-07-26 achou tres defeitos que precisam de re-emissao
+> antes de construir por cima:**
+> 1. `traits` usava precedencia e devia ser uniao -- 88% dos conflitos, com
+>    perda de dado real (`two-hand-d12` virava `two-hand`) e injecao de nome
+>    legado de ancestria numa base remaster-first. Spec ja corrigida, mapa de
+>    normalizacao pronto em `pipeline/normalizacao_traits.json`
+> 2. `wb:<kind>/<slug>` assume nome unico por kind -- 5 colisoes confirmadas,
+>    59 candidatos levantados
+> 3. Faltava o kind `ritual` inteiro -- extrator escrito, 151 registros em
+>    `pipeline/saida/rituais.json`, ainda **fora** de `ENTRADA` do reconciliador
+>
+> Falta o construtor. Depois da re-emissao, os proximos sao de modelagem: o
+> grafo de progressao de dois niveis e o predicado sabendo falar de subclasse.
 >
 > **Comece por `README.md`** -- ele e o ponto de retomada.
 

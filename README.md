@@ -55,6 +55,13 @@ Ordem de execucao: extratores -> `reconciliar` -> `emitir_textos` -> `fundir_ren
 2.299 com divergencia registrada, 359 com alias. Index 15,2 MB + prosa 16,7 MB.
 Residuo: 6 registros sem `license`.
 
+**A base precisa ser re-emitida antes de se construir por cima dela.** A revisao
+de 26/07 achou tres defeitos no dado ja emitido -- `traits` usando precedencia
+em vez de uniao, colisao de identidade por slug, e o kind `ritual` ausente. Os
+tres estao corrigidos na spec e nos insumos (`pipeline/normalizacao_traits.json`,
+`pipeline/saida/rituais.json`), mas **o pipeline ainda nao rodou de novo**.
+Detalhe em `TODO.md` itens 17, 20 e 21, e nas secoes novas do `LESSONS.md`.
+
 ## As tres fontes, e o que cada uma serve
 
 | Fonte | Serve para | Pin |
