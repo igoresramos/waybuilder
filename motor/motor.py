@@ -34,6 +34,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 from collections import defaultdict
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
@@ -43,6 +44,25 @@ INDEX = os.path.join(PROJETO, "pipeline", "base", "index.json")
 RANKS = ["untrained", "trained", "expert", "master", "legendary"]
 RANK_BONUS = {"untrained": 0, "trained": 2, "expert": 4, "master": 6, "legendary": 8}
 ATRIBUTOS = ["str", "dex", "con", "int", "wis", "cha"]
+
+
+def _comparar(tenho, operador: str, alvo) -> bool:
+    if operador == ">=":
+        return tenho >= alvo
+    if operador == "<=":
+        return tenho <= alvo
+    if operador == "==":
+        return tenho == alvo
+    return True          # operador desconhecido nao reprova: o app nao arbitra
+
+
+def norm_slug(s: str) -> str:
+    """'cloistered_cleric' e 'cloistered-cleric' sao a mesma chave."""
+    return re.sub(r"[^a-z0-9]+", "-", str(s or "").lower()).strip("-")
+
+
+def norm_chave(registro: dict) -> str:
+    return norm_slug(registro.get("name") or registro.get("id", "").split("/")[-1])
 
 
 def melhor_rank(a: str | None, b: str | None) -> str:
@@ -320,7 +340,16 @@ class Personagem:
         if self.ancestria:
             aplicar_boosts(self.ancestria.get("boosts"),
                            self.ancestria.get("name", "ancestria"))
-            for f in (self.ancestria.get("flaw") or []):
+            # `flaw` vem como DICT (`{"ability_flaw": {...}}`), nao como lista.
+            # Iterar um dict entrega as chaves -- strings --, o isinstance
+            # reprovava e o defeito era descartado em silencio. Achado ao
+            # comparar com os iconics: todo personagem de ancestria com defeito
+            # de CON saia com 1 ponto de modificador a mais, e portanto
+            # `nivel` HP a mais.
+            defeitos = self.ancestria.get("flaw") or []
+            if isinstance(defeitos, dict):
+                defeitos = [defeitos]
+            for f in defeitos:
                 ab = f.get("ability_flaw") if isinstance(f, dict) else None
                 for op in ((ab or {}).get("opcoes") or []):
                     self.boosts[op] -= 1
@@ -345,11 +374,22 @@ class Personagem:
             self.origem_boost.append(
                 f"{classe.get('name')}: SEM boost de chave (regra 8 -- so a 1a classe)")
 
-        # boosts livres declarados no documento
+        # Boosts livres declarados no documento, **so ate o nivel atual**.
+        # O documento pode carregar escolha de nivel futuro -- planejamento de
+        # progressao e caso normal, e o schema guarda decisao, nao resultado.
+        # Aplicar tudo faz um personagem de nivel 3 andar com os atributos de
+        # nivel 5: achado comparando com os iconics, cujo arquivo de nivel 3 ja
+        # traz os boosts do 5.
         for e in self._escolhas("boosts_livres"):
+            quando = e.get("em")
+            if isinstance(quando, int) and quando > self.nivel:
+                self.avisos.append(
+                    f"boosts de nivel {quando} ignorados -- personagem tem "
+                    f"nivel {self.nivel}")
+                continue
             for atributo in (e.get("pega") or []):
                 self.boosts[atributo] += 1
-                self.origem_boost.append(f"nivel {e.get('em')}: +{atributo} (livre)")
+                self.origem_boost.append(f"nivel {quando}: +{atributo} (livre)")
 
         self.atributos = {a: 10 + 2 * self.boosts.get(a, 0) for a in ATRIBUTOS}
         self.modificadores = {a: (v - 10) // 2 for a, v in self.atributos.items()}
@@ -367,7 +407,7 @@ class Personagem:
                 {"origem": self.ancestria.get("name"), "hp": hp_anc, "nota": "ancestria"})
 
         con = self.modificadores.get("con", 0)
-        for nivel in sorted(self.classe_do_nivel):
+        for nivel in sorted(self.classe_do_nivel):  # noqa: B007 (usado abaixo)
             cid = self.classe_do_nivel[nivel]
             classe = self.base.get(cid)
             por_nivel = 0
@@ -379,7 +419,47 @@ class Personagem:
             self.hp_detalhe.append({
                 "origem": f"nivel {nivel} ({classe.get('name')})",
                 "hp": ganho, "nota": f"{por_nivel} da classe + {con} de CON"})
+
+        # feat que concede HP -- `Toughness` e o caso classico
+        # (`flat_modifier` com selector `hp` e valor `@actor.level`). Sem isto o
+        # HP fica exatamente `nivel` pontos abaixo do oficial, que foi como a
+        # validacao contra os iconics da Paizo achou esta lacuna.
+        for wb_id, feat in self._feats_escolhidos():
+            for g in feat.get("grants") or []:
+                fm = g.get("flat_modifier") if isinstance(g, dict) else None
+                if not fm or fm.get("selector") != "hp":
+                    continue
+                valor = self._resolver_valor(fm.get("value"))
+                if valor:
+                    total += valor
+                    self.hp_detalhe.append({
+                        "origem": feat.get("name", wb_id), "hp": valor,
+                        "nota": f"feat ({fm.get('value')})"})
         self.hp = total
+
+    def _feats_escolhidos(self):
+        for e in self.doc.get("escolhas", []):
+            wb_id = e.get("pega")
+            if isinstance(wb_id, str) and wb_id.startswith("wb:feat/"):
+                feat = self.base.opcional(wb_id)
+                if feat is not None:
+                    yield wb_id, feat
+
+    def _resolver_valor(self, expressao):
+        """Resolve a expressao do Foundry no valor deste personagem.
+
+        Regra 19: em texto de regra impresso, "your level" significa **nivel de
+        personagem** -- e `@actor.level` e exatamente isso.
+        """
+        if isinstance(expressao, (int, float)):
+            return int(expressao)
+        texto = str(expressao or "").strip()
+        if texto in ("@actor.level", "@actor.details.level.value"):
+            return self.nivel
+        try:
+            return int(texto)
+        except ValueError:
+            return 0
 
     # -- regras 12 e 14: slots de feat --------------------------------------
 
@@ -461,6 +541,26 @@ class Personagem:
     def _dc_de_conjuracao(self, classe: dict, nivel_classe: int, sc: dict) -> dict:
         """Regra 3: bonus = nivel_de_PERSONAGEM + rank; o RANK vem do nivel da classe."""
         prog = sc.get("proficiency") or {}
+
+        # A progressao pode depender da SUBCLASSE. O Clerigo e o caso publicado:
+        # Cloistered chega a legendary no 19, Warpriest para em master. Ler a
+        # progressao "da classe" aqui daria o numero errado para metade dos
+        # Clerigos -- e e por isso que `class_level` sozinho nao basta.
+        aninhadas = {k: v for k, v in prog.items() if isinstance(v, dict)}
+        if aninhadas:
+            escolhida = self._subclasse_de(classe["id"])
+            chave = None
+            if escolhida:
+                alvo = norm_chave(self.base.opcional(escolhida) or {})
+                chave = next((k for k in aninhadas if norm_slug(k) == alvo), None)
+            if chave is None:
+                chave = sorted(aninhadas)[0]
+                self.avisos.append(
+                    f"{classe.get('name')}: progressao de conjuracao depende da "
+                    f"subclasse ({', '.join(sorted(aninhadas))}) e nenhuma foi "
+                    f"escolhida -- usando `{chave}`")
+            prog = aninhadas[chave]
+
         rank = "untrained"
         for nome in RANKS:
             exigido = prog.get(nome)
@@ -493,6 +593,148 @@ class Personagem:
             return 0
         return self.nivel + RANK_BONUS[rank]
 
+    def _subclasse_de(self, classe_id: str) -> str | None:
+        """A sub-escolha que este personagem fez para a classe dada."""
+        classe = self.base.opcional(classe_id) or {}
+        opcoes = {o for bloco in (classe.get("subclasses") or [])
+                  for o in (bloco.get("opcoes") or [])}
+        for e in self._escolhas("subclasse"):
+            if e.get("pega") in opcoes:
+                return e["pega"]
+        return None
+
+    # -- avaliacao do predicado ---------------------------------------------
+
+    def avaliar(self, predicado) -> tuple[bool, list[str]]:
+        """Avalia o predicado contra este personagem.
+
+        Devolve (atende, motivos). **Nunca** e usado para negar uma escolha --
+        o principio zero e explicito: `requires` sugere e ordena, nunca bloqueia.
+        Serve para o app dizer "estes combinam com o que voce tem" e para marcar
+        o que esta fora.
+        """
+        if predicado in (None, {}, []):
+            return True, []
+        if not isinstance(predicado, dict):
+            return True, []
+
+        if "all" in predicado:
+            motivos = []
+            ok = True
+            for c in predicado["all"]:
+                passou, m = self.avaliar(c)
+                ok = ok and passou
+                motivos += m
+            return ok, motivos
+        if "any" in predicado:
+            resultados = [self.avaliar(c) for c in predicado["any"]]
+            if any(r[0] for r in resultados):
+                return True, []
+            return False, [m for _, ms in resultados for m in ms]
+        if "not" in predicado:
+            passou, _ = self.avaliar(predicado["not"])
+            return (not passou), ([] if not passou else ["condicao proibida presente"])
+
+        for termo, valor in predicado.items():
+            metodo = getattr(self, f"_termo_{termo}", None)
+            if metodo is None:
+                continue          # termo desconhecido nao reprova: nao arbitra
+            passou, motivo = metodo(valor)
+            if not passou:
+                return False, [motivo]
+        return True, []
+
+    def _termo_class_level(self, valor) -> tuple[bool, str]:
+        """`class_level` e o termo que so existe por causa da houserule."""
+        for slug, exigencia in (valor or {}).items():
+            cid = f"wb:class/{slug}"
+            tenho = self.nivel_de(cid)
+            nome = (self.base.opcional(cid) or {}).get("name", slug)
+            for op, alvo in (exigencia or {}).items():
+                if not _comparar(tenho, op, alvo):
+                    return False, (f"exige {nome} nivel {op} {alvo}; "
+                                   f"tem {tenho} (personagem {self.nivel})")
+        return True, ""
+
+    def _termo_character_level(self, valor) -> tuple[bool, str]:
+        for op, alvo in (valor or {}).items():
+            if not _comparar(self.nivel, op, alvo):
+                return False, f"exige nivel de personagem {op} {alvo}; tem {self.nivel}"
+        return True, ""
+
+    def _termo_ability(self, valor) -> tuple[bool, str]:
+        for atributo, exigencia in (valor or {}).items():
+            tenho = self.atributos.get(atributo, 10)
+            for op, alvo in (exigencia or {}).items():
+                if not _comparar(tenho, op, alvo):
+                    return False, f"exige {atributo.upper()} {op} {alvo}; tem {tenho}"
+        return True, ""
+
+    def _termo_proficiency(self, valor) -> tuple[bool, str]:
+        for chave, exigencia in (valor or {}).items():
+            tenho = self.proficiencias.get(chave, "untrained")
+            for op, alvo in (exigencia or {}).items():
+                ia = RANKS.index(tenho) if tenho in RANKS else 0
+                ib = RANKS.index(alvo) if alvo in RANKS else 0
+                if not _comparar(ia, op, ib):
+                    return False, f"exige {chave} {op} {alvo}; tem {tenho}"
+        return True, ""
+
+    def _termo_has(self, valor) -> tuple[bool, str]:
+        # `pega` nem sempre e um id: `boosts_livres` guarda uma LISTA de
+        # atributos. Filtrar por str antes do set, senao estoura no primeiro
+        # personagem que distribuiu boosts.
+        tudo = {e.get("pega") for e in self.doc.get("escolhas", [])
+                if isinstance(e.get("pega"), str)}
+        tudo |= {f["id"] for f in self.features}
+        tudo |= {c for c in self.ordem_de_classe}
+        for reg in (self.ancestria, self.heranca, self.background):
+            if reg:
+                tudo.add(reg["id"])
+        if valor in tudo:
+            return True, ""
+        nome = (self.base.opcional(valor) or {}).get("name", valor)
+        return False, f"exige ter {nome}"
+
+    def _termo_subclass(self, valor) -> tuple[bool, str]:
+        """A camada do meio: nem classe, nem personagem."""
+        for slug, alvo in (valor or {}).items():
+            escolhida = self._subclasse_de(f"wb:class/{slug}")
+            if escolhida != alvo:
+                nome = (self.base.opcional(alvo) or {}).get("name", alvo)
+                atual = (self.base.opcional(escolhida) or {}).get("name", "nenhuma") \
+                    if escolhida else "nenhuma"
+                return False, f"exige a sub-escolha {nome}; tem {atual}"
+        return True, ""
+
+    def _termo_trait(self, valor) -> tuple[bool, str]:
+        alvos = valor if isinstance(valor, list) else [valor]
+        meus = set()
+        for reg in (self.ancestria, self.heranca, self.background):
+            if reg:
+                meus |= {str(t).lower() for t in (reg.get("traits") or [])}
+        for cid in self.ordem_de_classe:
+            meus.add(str(self.base.get(cid).get("name") or "").lower())
+        faltando = [a for a in alvos if str(a).lower() not in meus]
+        return (not faltando), (f"exige o trait {faltando}" if faltando else "")
+
+    def disponiveis(self, kind: str = "feat", limite: int | None = None) -> list[dict]:
+        """O que combina com o personagem -- a pergunta central do construtor.
+
+        `requires` ORDENA a lista; nao a filtra. O que esta fora aparece
+        marcado, nunca escondido.
+        """
+        saida = []
+        for r in self.base.por_id.values():
+            if r.get("kind") != kind:
+                continue
+            atende, motivos = self.avaliar(r.get("requires"))
+            saida.append({"id": r["id"], "nome": r.get("name"),
+                          "level": r.get("level"), "atende": atende,
+                          "motivos": motivos})
+        saida.sort(key=lambda x: (not x["atende"], x["level"] or 0, x["nome"] or ""))
+        return saida[:limite] if limite else saida
+
     # -- principio zero: sinaliza, nunca bloqueia ---------------------------
 
     def _checar_requisitos(self) -> None:
@@ -511,26 +753,16 @@ class Personagem:
                 self.fora_do_requisito.append(
                     {"feat": wb_id, "motivo": "id ausente da base"})
                 continue
-            exigido = feat.get("level")
-            if not isinstance(exigido, int):
-                continue
-
-            if e.get("slot") == "free_archetype":
-                # regra 13: arquetipo nao pertence a classe nenhuma
-                disponivel, contra = self.nivel, "nivel de personagem"
-            else:
-                classe = self._classe_do_feat(feat)
-                if classe:
-                    disponivel = self.nivel_de(classe)
-                    contra = f"nivel de {self.base.get(classe).get('name')}"
-                else:
-                    disponivel, contra = self.nivel, "nivel de personagem"
-
-            if disponivel < exigido:
+            # O predicado ja carrega o gate de nivel derivado
+            # (`pipeline/derivar_gate_nivel.py`), entao a checagem manual de
+            # nivel que existia aqui virou caso particular de avaliar o
+            # predicado inteiro -- e agora `proficiency`, `has`, `ability` e
+            # `subclass` tambem sao verificados.
+            atende, motivos = self.avaliar(feat.get("requires"))
+            if not atende:
                 self.fora_do_requisito.append({
                     "feat": feat.get("name", wb_id),
-                    "motivo": f"exige nivel {exigido}, personagem tem "
-                              f"{disponivel} ({contra})"})
+                    "motivo": "; ".join(motivos) or "predicado nao atendido"})
 
     def _classe_do_feat(self, feat: dict) -> str | None:
         """A classe de um feat sai do trait, nao de lista escrita a mao."""

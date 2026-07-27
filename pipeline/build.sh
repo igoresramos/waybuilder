@@ -45,6 +45,15 @@ python3 aplicar_subclasses.py
 echo "== 4d. resolver referencias orfas do predicado =="
 python3 resolver_referencias.py
 
+echo "== 4e. derivar o gate de nivel (class_level x character_level) =="
+python3 derivar_gate_nivel.py
+
+echo "== 4f. ensinar o predicado a falar de subclasse =="
+python3 derivar_subclasse.py
+
+echo "== 4g. unificar o modelo de efeito em grants =="
+python3 unificar_efeitos.py
+
 echo "== 5. emitir prosa =="
 python3 emitir_textos.py
 

@@ -108,6 +108,20 @@ def main():
             print(f"      {c['dc']['nota']}")
     linha("Focus pool (regra 22)", v["focus_pool"])
 
+    bloco("O QUE VOCE PODE PEGAR (o predicado ORDENA, nunca filtra)")
+    lista = p.disponiveis("feat")
+    atendem = [f for f in lista if f["atende"]]
+    linha("Feats que combinam", f"{len(atendem)} de {len(lista)}")
+    for f in atendem[:8]:
+        print(f"      nv{(f['level'] or 0):<2} {f['nome']}")
+    if len(atendem) > 8:
+        print(f"      ... e mais {len(atendem) - 8}")
+    print()
+    fora = [f for f in lista if not f["atende"]][:3]
+    print("  fora do requisito (aparecem marcados, nunca escondidos):")
+    for f in fora:
+        print(f"      nv{(f['level'] or 0):<2} {f['nome']}  --  {'; '.join(f['motivos'])[:60]}")
+
     if v["fora_do_requisito"]:
         bloco("FORA DO REQUISITO (principio zero: sinaliza, NUNCA bloqueia)")
         for f in v["fora_do_requisito"]:

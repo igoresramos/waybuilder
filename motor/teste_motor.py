@@ -185,6 +185,123 @@ eixos = {s["eixo"] for s in p.slots_de_subclasse}
 checar("arcane-school" in eixos and "arcane-thesis" in eixos,
        "e ganha slot de escolha para Escola e Tese", f"eixos: {eixos}")
 
+# -- item 1: gate de nivel derivado ---------------------------------------
+print("\ngate de nivel derivado -- class_level x character_level")
+accompany = BASE.get("wb:feat/accompany")            # bard, nivel 8
+checar("class_level" in str(accompany.get("requires")),
+       "feat de classe ganha gate em class_level", str(accompany.get("requires"))[:90])
+
+# Bardo 8 dentro de um personagem 8: atende
+bardo8 = personagem(niveis(("wb:class/bard", 8)))
+atende, _ = bardo8.avaliar(accompany["requires"])
+checar(atende, "Bardo 8 (personagem 8) atende um feat de Bardo nivel 8")
+
+# Bardo 2 dentro de um personagem 8: NAO atende, e e o ponto da houserule
+misto = personagem(niveis((FIGHTER, 6), ("wb:class/bard", 2)))
+atende, motivos = misto.avaliar(accompany["requires"])
+checar(not atende,
+       "Guerreiro 6 / Bardo 2 (personagem 8) NAO atende -- o gate e por CLASSE",
+       f"motivos: {motivos}")
+checar(misto.nivel == 8, "e o personagem tem nivel 8 mesmo assim",
+       f"deu {misto.nivel}")
+
+# feat geral usa nivel de personagem.
+# Escolhido um cujo predicado seja SO o gate: `Advanced First Aid` tambem e
+# geral nivel 7, mas exige `medicine >= master` -- reprovaria por outro motivo
+# e o teste nao provaria nada sobre o gate.
+geral = next((r for r in BASE.por_id.values()
+              if r.get("kind") == "feat" and r.get("gate_de_nivel") == "geral"
+              and r.get("level") in (7, 8)
+              and list(r.get("requires") or {}) == ["character_level"]), None)
+checar(geral is not None, "existe feat geral de nivel 7-8 so com gate de nivel")
+if geral:
+    atende, motivos = misto.avaliar(geral["requires"])
+    checar(atende,
+           f"e o personagem 8 atende ({geral['name']}, nivel {geral['level']}) "
+           f"-- feat geral mira o nivel de PERSONAGEM", f"motivos: {motivos}")
+    so_bardo2 = personagem(niveis(("wb:class/bard", 2)))
+    atende2, _ = so_bardo2.avaliar(geral["requires"])
+    checar(not atende2, "e um personagem 2 nao atende o mesmo feat")
+
+# -- item 2: subclasse -----------------------------------------------------
+print("\npredicado sabendo falar de SUBCLASSE")
+cleric = BASE.get("wb:class/cleric")
+prof = (cleric.get("spellcasting") or {}).get("proficiency") or {}
+checar("cloistered_cleric" in prof and "warpriest" in prof,
+       "o Clerigo carrega duas progressoes de conjuracao, por Doutrina")
+
+def clerigo(doutrina, n=15):
+    esc = niveis((CLERIC, n))
+    if doutrina:
+        esc.append({"em": 1, "slot": "subclasse", "pega": doutrina})
+    return personagem(esc)
+
+cloistered = clerigo("wb:class-feature/cloistered-cleric")
+warpriest = clerigo("wb:class-feature/warpriest")
+r_clo = cloistered.conjuracao[0]["dc"]["rank"]
+r_war = warpriest.conjuracao[0]["dc"]["rank"]
+checar(r_clo == "master", "Cloistered 15 e master", f"deu {r_clo}")
+checar(r_war == "expert", "Warpriest 15 ainda e expert", f"deu {r_war}")
+checar(r_clo != r_war,
+       "mesma classe, mesmo nivel, ranks diferentes -- `class_level` sozinho "
+       "nao alcancaria isso")
+
+sem_escolha = clerigo(None)
+checar(any("subclasse" in a for a in sem_escolha.avisos),
+       "sem escolher a Doutrina, o motor AVISA em vez de escolher calado")
+
+# -- item 3: efeito unificado ---------------------------------------------
+print("\nmodelo de efeito unificado -- ancestria e background em `grants`")
+anao = BASE.get("wb:ancestry/dwarf")
+tipos = {k for g in (anao.get("grants") or []) for k in g}
+checar("hp_ancestry" in tipos and "size" in tipos and "speed" in tipos,
+       "ancestria emite hp, size e speed em grants", f"tipos: {sorted(tipos)}")
+checar(anao.get("hp") == 10,
+       "e os campos originais permanecem -- a projecao adiciona, nao substitui")
+checar(anao.get("mechanized") is True,
+       "`mechanized` deixa de mentir: ancestria tem efeito calculavel")
+
+bg = next(r for r in BASE.por_id.values()
+          if r.get("kind") == "background" and r.get("grants"))
+tipos_bg = {k for g in bg["grants"] for k in g}
+checar(bool(tipos_bg & {"skill_training", "ability_boost", "grant_feat"}),
+       "background tambem", f"{bg['name']}: {sorted(tipos_bg)}")
+
+# -- a pergunta central do construtor --------------------------------------
+print("\na pergunta central -- 'o que meu personagem pode pegar?'")
+p = personagem(niveis((FIGHTER, 3), (WIZARD, 2)))
+lista = p.disponiveis("feat")
+atendem = [f for f in lista if f["atende"]]
+checar(len(atendem) > 0, f"{len(atendem)} feats combinam de {len(lista)}")
+checar(len(atendem) < len(lista),
+       "e a lista NAO e toda a base -- o predicado ordena de verdade")
+nomes = {f["nome"] for f in atendem}
+checar("Accompany" not in nomes,
+       "feat de Bardo nivel 8 nao aparece para um Guerreiro 3 / Mago 2")
+checar(all(not f["atende"] or f["motivos"] == [] for f in lista),
+       "quem atende nao carrega motivo de recusa")
+
+# -- regressao: `pega` nem sempre e um id ---------------------------------
+print("\nregressao -- `boosts_livres` guarda LISTA em `pega`")
+doc = {"esquema": "x", "escolhas": niveis((FIGHTER, 2)) + [
+    {"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "int"]},
+    {"em": 2, "slot": "class_feat", "pega": "wb:feat/double-slice"}]}
+try:
+    p = Personagem(doc, BASE)
+    checar(p.atributos["str"] >= 12, "personagem com boosts livres deriva sem estourar")
+except TypeError as exc:
+    checar(False, "personagem com boosts livres deriva sem estourar", str(exc))
+
+# -- o predicado pega erro de montagem que o jogador comete ---------------
+print("\nsub-escolha errada e detectada, nao silenciada")
+esc = niveis((WIZARD, 2)) + [
+    {"em": 1, "slot": "subclasse", "pega": "wb:class-feature/school-of-battle-magic"},
+    {"em": 1, "slot": "class_feat", "pega": "wb:feat/hand-of-the-apprentice"}]
+p = personagem(esc)
+checar(any("Hand of the Apprentice" in f["feat"] for f in p.fora_do_requisito),
+       "Hand of the Apprentice exige Universalist -- com Battle Magic, sinaliza",
+       f"{p.fora_do_requisito}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

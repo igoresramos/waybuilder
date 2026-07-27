@@ -246,11 +246,54 @@ E aqui que a houserule mora. Termo de nivel e **sempre explicito** -- nunca um
 
 Operadores: `all`, `any`, `not`, `>=`, `<=`, `==`.
 Termos: `class_level`, `character_level`, `ability`, `proficiency`, `has`,
-`trait`, `spellcasting_tradition`.
+`trait`, `spellcasting_tradition`, `subclass`.
 
 No PF2e oficial `class_level` e `character_level` sao sempre o mesmo numero.
 A base guarda os dois separados assim mesmo -- e o que permite o builder existir
 sem migracao depois.
+
+### O gate de nivel e DERIVADO, nao lido
+
+> Medido em 2026-07-27: `class_level` aparecia em **79 de 19.738 registros** --
+> o termo que justifica o projeto inteiro estava praticamente vazio. E nao
+> porque falta dado: porque **nenhuma fonte precisa da distincao**, ja que no
+> PF2e os dois numeros sao sempre iguais.
+>
+> No PF2e o pre-requisito de um feat **nunca menciona nivel**: o nivel do feat
+> *e* o gate. `Accompany`, com trait `bard` e `level: 8`, quer dizer "voce e um
+> Bardo de nivel 8". Sob a houserule isso se parte em dois, e a regra de
+> derivacao e mecanica:
+
+| O feat tem | Gate derivado | Regra |
+|---|---|---|
+| trait de classe X | `class_level[X] >= N` | 12 |
+| trait `archetype` | `character_level >= N` | 13 |
+| trait de ancestria Y | `character_level >= N` **e** `has` a ancestria | 14 |
+| nenhum dos anteriores | `character_level >= N` | 14 |
+
+`archetype` vence trait de classe: arquetipo nao pertence a classe nenhuma.
+O `requires` declarado pela fonte **nunca e sobrescrito** -- o gate entra como
+mais uma clausula de um `all`, e clausula ja presente nao e duplicada.
+
+### `subclass`: a camada do meio
+
+```json
+{"subclass": {"cleric": "wb:class-feature/warpriest"}}
+```
+
+> `has` nao serve para isto: e generico demais, e nao distingue "escolheu esta
+> doutrina" de "pegou este feat". Um predicado que nao distingue nao consegue
+> expressar "so para Warpriest".
+>
+> O caso que obriga o termo a existir e publicado: a proficiencia de conjuracao
+> do Clerigo depende da **Doutrina**. Cloistered segue o conjurador pleno
+> (expert 7, master 15, legendary 19); Warpriest e mais lento e nunca chega a
+> legendary (expert 11, master 19). Duas progressoes, mesma classe, mesmo nivel
+> -- `class_level` sozinho nao alcanca.
+>
+> O dado ja vinha certo desde a primeira extracao, em
+> `spellcasting.proficiency`, com as duas progressoes separadas. Faltava o
+> termo e faltava alguem consumir.
 
 ## Linguagem de efeito (`grants`)
 
@@ -269,6 +312,38 @@ sem migracao depois.
 
 Ranks sao **palavra** (`untrained|trained|expert|master|legendary`), nunca numero
 solto. O numero do Foundry (0-4) e traduzido na entrada.
+
+### `grants` vale para TODO kind, nao so para `class`
+
+> Medido em 2026-07-27: esta era a unica linguagem de efeito da spec, e so
+> `class` a usava. Ancestria guardava o efeito em campos soltos (`hp`, `size`,
+> `speed`, `boosts`, `senses`, `flaw`, `languages`); background usava outro
+> conjunto (`skill_training`, `attribute`, `skill`, `feat`). Tres formatos para
+> o mesmo conceito.
+>
+> Consequencia visivel: `mechanized`, definido como `== bool(grants)`, marcava
+> 50 ancestrias e 502 backgrounds como "o jogador resolve na mao", quando o
+> efeito deles e calculavel e ja estava estruturado -- so que noutro lugar.
+> Um motor precisava conhecer os tres formatos, e cada kind novo viraria caso
+> especial.
+
+Termos adicionais, emitidos pela projecao canonica de ancestria e background:
+
+```json
+[
+  {"hp_ancestry": 10},
+  {"size": "med"},
+  {"speed": {"land": 20}},
+  {"sense": "darkvision"},
+  {"language": {"auto": ["common", "dwarven"], "free": 1}},
+  {"skill_training": {"auto": ["arcana"], "lore": ["Azlant Lore"]}},
+  {"grant_feat": ["wb:feat/assurance"]},
+  {"requires_ancestry": "wb:ancestry/dwarf"}
+]
+```
+
+Os campos originais **permanecem**: a projecao adiciona, nunca substitui. Nada
+se perde e quem lia `r["hp"]` continua funcionando.
 
 ## Kinds em escopo
 
