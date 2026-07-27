@@ -6,6 +6,33 @@ project: waybuilder
 
 ## 2026-07-27
 
+### Sessao | 15:10-21:00 | quatro agentes em paralelo, base re-emitida, nove portoes verdes | igor + claude-code
+
+Igor mandou seguir em tudo, em agentes, validando cada retorno. Quatro frentes
+em paralelo: dump do AoN + re-extracao, extrator de `tactic`/`class-kit`,
+integracao da tabela de conjuracao do PDF, e as decisoes de schema.
+
+**As decisoes da v2 sairam da MEDICAO, nao de opiniao.** Spell passa a emitir
+`level` porque as tres fontes usam `level` e nenhuma usa `rank` (AoN 2.461/2.461,
+Foundry 1.802/1.802, pf2etools 2.055/2.055). `traits` ausente vira `[]` porque
+as fontes concordam que nao ha trait. Fusao de `source` por subcampo foi
+DESCARTADA: o Foundry nao publica pagina (0 de 28.788) e a mudanca recuperaria
+quatro paginas. E o `mechanized` nao valia o rename -- o que vale sao os 1.564
+registros cujo doc do Foundry TEM rule elements e que sairam com `grants` vazio.
+
+**A base foi re-emitida**: 19.705 registros, 54 kinds, nove portoes verdes. Ao
+longo da validacao apareceram cinco defeitos que nenhum portao pegava antes:
+`aon_kinds.py` dava o slug limpo a quem chegasse primeiro no dump (o canonico
+saia como `alchemical-sciences-methodology-5` e sumia na fusao); a curadoria de
+colisao corrigia xref e level mas nao os traits, deixando a quimera de pe dentro
+do proprio caso curado; `prov` de campo vazio fazia a metrica medir a si mesma;
+e dois bugs de extrator (caminho e glob nao-recursivo em `ancestrias.py`,
+apostrofo no slug de `classes.py`).
+
+**Licao de coordenacao:** meus `git checkout --` de restauracao apagaram o
+trabalho nao-commitado de um agente que estava escrevendo no mesmo diretorio.
+Com agentes ativos, restaurar por arquivo e usar backup no scratchpad.
+
 ### Sessao | 14:00-15:10 | porte da linha paralela: portoes, fusao e suite verde | igor + claude-code
 
 Igor mandou tocar os itens 1, 2 e 3 do doc de comparacao das duas linhas.

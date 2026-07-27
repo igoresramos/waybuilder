@@ -73,9 +73,15 @@ hidden: false
 > schema da base e o schema do documento de personagem estao escritos, revisados
 > adversarialmente e commitados.
 >
-> **19.738 registros em 52 kinds** (24 originais + 28 de sub-escolha promovidos a
-> kind proprio), prosa em **99,2%** (166 sem prosa), 1.550 com
-> divergencia registrada, 281 desmembrados de colisao de identidade.
+> **19.705 registros em 54 kinds** (24 originais + 28 de sub-escolha promovidos a
+> kind proprio + `tactic` e `class-kit`, que so o censo do AoN acusou), prosa em
+> **99,0%** (191 sem prosa), 1.990 com divergencia registrada, 125 desmembrados
+> de colisao de identidade.
+>
+> Re-emitida em 2026-07-27 com o dump completo do AoN (43.686 docs): **os nove
+> portoes passam**, inclusive o 7 na fase pre-fusao. Spells com `level` foram de
+> 22 para 1.655, `traits: null` zerou, e os desmembrados cairam de 310 para 125
+> -- os 185 a menos eram duplicata criada a partir de doc legado.
 >
 > A re-emissao de 2026-07-26 fechou os cinco defeitos da auditoria: a fusao
 > Legacy<->Remaster passou a usar o `remaster_id` do AoN em vez de similaridade
