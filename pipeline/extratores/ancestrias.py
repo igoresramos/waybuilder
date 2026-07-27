@@ -34,11 +34,29 @@ DADOS_BRUTOS = PIPELINE_DIR / "dados_brutos"
 SAIDA_DIR = PIPELINE_DIR / "saida"
 RELATORIOS_DIR = PIPELINE_DIR / "relatorios"
 
-FOUNDRY_REPO = Path(
-    os.environ.get("WB_FOUNDRY_REPO", DADOS_BRUTOS / "foundry_repo")
-)
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
-FOUNDRY_PACKS = FOUNDRY_REPO / "packs" / "pf2e"
+
+
+def _achar_foundry_packs() -> Path:
+    """O clone local pode se chamar `foundry_repo/` (buscar_fontes.sh) ou
+    `foundry/` (cache que outros extratores constroem) -- mesma ambiguidade
+    ja corrigida em comum.packs_foundry() e nos irmaos desta pasta
+    (equipamento.py, feats.py etc). Esta funcao so olhava `foundry_repo/` e
+    caia silenciosamente pra 0 registros nesta maquina, que so tem `foundry/`."""
+    for cand in (
+        os.environ.get("WB_FOUNDRY_REPO", ""),
+        DADOS_BRUTOS / "foundry_repo",
+        DADOS_BRUTOS / "foundry",
+    ):
+        if not cand:
+            continue
+        p = Path(cand) / "packs" / "pf2e"
+        if (p / "ancestries").is_dir():
+            return p
+    return DADOS_BRUTOS / "foundry_repo" / "packs" / "pf2e"
+
+
+FOUNDRY_PACKS = _achar_foundry_packs()
 
 PF2ETOOLS_DIR = DADOS_BRUTOS / "pf2etools"
 
@@ -152,7 +170,10 @@ def load_foundry_heritages():
 
 def load_foundry_backgrounds():
     out = {}
-    for f in sorted((FOUNDRY_PACKS / "backgrounds").glob("*.json")):
+    # rglob, nao glob: backgrounds tem subpastas (pathfinder-society/,
+    # adventure-paths/) igual heritages -- glob() nao-recursivo deixava 182
+    # dos 515 arquivos de fora em silencio.
+    for f in sorted((FOUNDRY_PACKS / "backgrounds").rglob("*.json")):
         if f.name == "_folders.json":
             continue
         d = _load_json(f)

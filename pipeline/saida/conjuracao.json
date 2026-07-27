@@ -28,12 +28,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-wizard-pc1.json, tabela 'Wizard Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Player Core p.195)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/wizard.json",
         "foundry_feature": "packs/pf2e/class-features/wizard-spellcasting.json",
-        "pf2etools": "class-wizard-pc1.json"
+        "pf2etools": "class-wizard-pc1.json",
+        "pdf": "Player Core p.195"
       },
       "tradition": "arcane",
       "type": "prepared",
@@ -261,6 +262,9 @@
             "9": 3,
             "10": 1
           },
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         },
         "20": {
@@ -276,6 +280,9 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         }
@@ -295,13 +302,14 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (regex sobre as 12 class-features de doutrina first..final-doctrine-{cloistered-cleric,warpriest}, ver conjuracao.md)",
         "focus_pool": "foundry (regex sobre Domain Initiate, feat granted pela Primeira Doutrina)",
-        "slots_per_level": "pf2etools (class-cleric-pc1.json, tabela 'Cleric Spells per Day')",
+        "slots_per_level": "waybuilder (PDF, Player Core p.111)",
         "divine_font": "foundry (regex sobre packs/pf2e/class-features/divine-font.json)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/cleric.json",
         "foundry_feature": "packs/pf2e/class-features/cleric-spellcasting.json",
-        "pf2etools": "class-cleric-pc1.json"
+        "pf2etools": "class-cleric-pc1.json",
+        "pdf": "Player Core p.111"
       },
       "tradition": "divine",
       "type": "prepared",
@@ -544,6 +552,9 @@
             "9": 3,
             "10": 1
           },
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         },
         "20": {
@@ -559,6 +570,9 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         }
@@ -592,12 +606,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-druid-pc1.json, tabela 'Druid Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Player Core p.125)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/druid.json",
         "foundry_feature": "packs/pf2e/class-features/druid-spellcasting.json",
-        "pf2etools": "class-druid-pc1.json"
+        "pf2etools": "class-druid-pc1.json",
+        "pdf": "Player Core p.125"
       },
       "tradition": "primal",
       "type": "prepared",
@@ -825,6 +840,9 @@
             "9": 3,
             "10": 1
           },
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         },
         "20": {
@@ -840,6 +858,9 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         }
@@ -859,12 +880,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-sorcerer.json, tabela 'Sorcerer Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Player Core 2 p.147)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/sorcerer.json",
         "foundry_feature": "packs/pf2e/class-features/sorcerer-spellcasting.json",
-        "pf2etools": "class-sorcerer.json"
+        "pf2etools": "class-sorcerer.json",
+        "pdf": "Player Core 2 p.147"
       },
       "tradition": "variavel (definida pela escolha de bloodline; nao ha tradicao fixa na class-feature)",
       "type": "spontaneous",
@@ -1092,6 +1114,9 @@
             "9": 4,
             "10": 1
           },
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         },
         "20": {
@@ -1107,6 +1132,9 @@
             "8": 4,
             "9": 4,
             "10": 1
+          },
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         }
@@ -1126,12 +1154,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-bard-pc1.json, tabela 'Bard Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Player Core p.97)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/bard.json",
         "foundry_feature": "packs/pf2e/class-features/occult-spellcasting.json",
-        "pf2etools": "class-bard-pc1.json"
+        "pf2etools": "class-bard-pc1.json",
+        "pdf": "Player Core p.97"
       },
       "tradition": "occult",
       "type": "spontaneous",
@@ -1359,6 +1388,9 @@
             "9": 3,
             "10": 1
           },
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         },
         "20": {
@@ -1374,6 +1406,9 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         }
@@ -1393,12 +1428,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-witch-pc1.json, tabela 'Witch Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Player Core p.181)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/witch.json",
         "foundry_feature": "packs/pf2e/class-features/witch-spellcasting.json",
-        "pf2etools": "class-witch-pc1.json"
+        "pf2etools": "class-witch-pc1.json",
+        "pdf": "Player Core p.181"
       },
       "tradition": "variavel (definida pela escolha de patron; nao ha tradicao fixa na class-feature)",
       "type": "prepared",
@@ -1626,6 +1662,9 @@
             "9": 3,
             "10": 1
           },
+          "ranks_raw": {
+            "10": "1*"
+          },
           "max_rank": 10
         },
         "20": {
@@ -1641,6 +1680,9 @@
             "8": 3,
             "9": 3,
             "10": 1
+          },
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         }
@@ -1660,12 +1702,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-oracle.json, tabela 'Oracle Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Player Core 2 p.131)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/oracle.json",
         "foundry_feature": "packs/pf2e/class-features/oracle-spellcasting.json",
-        "pf2etools": "class-oracle.json"
+        "pf2etools": "class-oracle.json",
+        "pdf": "Player Core 2 p.131"
       },
       "tradition": "divine",
       "type": "spontaneous",
@@ -1684,236 +1727,718 @@
         "1": {
           "cantrips": 5,
           "ranks": {
-            "1": 2
+            "1": 3
           },
           "max_rank": 1
         },
         "2": {
           "cantrips": 5,
           "ranks": {
-            "1": 3
+            "1": 4
           },
           "max_rank": 1
         },
         "3": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 2
+            "1": 4,
+            "2": 3
           },
           "max_rank": 2
         },
         "4": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3
+            "1": 4,
+            "2": 4
           },
           "max_rank": 2
         },
         "5": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 2
+            "1": 4,
+            "2": 4,
+            "3": 3
           },
           "max_rank": 3
         },
         "6": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3
+            "1": 4,
+            "2": 4,
+            "3": 4
           },
           "max_rank": 3
         },
         "7": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 3
           },
           "max_rank": 4
         },
         "8": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4
           },
           "max_rank": 4
         },
         "9": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 3
           },
           "max_rank": 5
         },
         "10": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4
           },
           "max_rank": 5
         },
         "11": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 3
           },
           "max_rank": 6
         },
         "12": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4
           },
           "max_rank": 6
         },
         "13": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 3
           },
           "max_rank": 7
         },
         "14": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4
           },
           "max_rank": 7
         },
         "15": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 3
           },
           "max_rank": 8
         },
         "16": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4
           },
           "max_rank": 8
         },
         "17": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3,
-            "9": 2
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 3
           },
           "max_rank": 9
         },
         "18": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3,
-            "9": 3
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 4
           },
           "max_rank": 9
         },
         "19": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3,
-            "9": 3,
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 4,
             "10": 1
+          },
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         },
         "20": {
           "cantrips": 5,
           "ranks": {
-            "1": 3,
-            "2": 3,
-            "3": 3,
-            "4": 3,
-            "5": 3,
-            "6": 3,
-            "7": 3,
-            "8": 3,
-            "9": 3,
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 4,
             "10": 1
+          },
+          "ranks_raw": {
+            "10": "1*"
           },
           "max_rank": 10
         }
       },
       "slots_footnotes": [
         "* The oracular clarity class feature gives you a 10th level spell slot that works differently from other spell slots."
+      ],
+      "conflitos": [
+        {
+          "campo": "slots_per_level",
+          "escolhido": "waybuilder",
+          "waybuilder": {
+            "1": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3
+              },
+              "max_rank": 1
+            },
+            "2": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4
+              },
+              "max_rank": 1
+            },
+            "3": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 3
+              },
+              "max_rank": 2
+            },
+            "4": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4
+              },
+              "max_rank": 2
+            },
+            "5": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 3
+              },
+              "max_rank": 3
+            },
+            "6": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4
+              },
+              "max_rank": 3
+            },
+            "7": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 3
+              },
+              "max_rank": 4
+            },
+            "8": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4
+              },
+              "max_rank": 4
+            },
+            "9": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 3
+              },
+              "max_rank": 5
+            },
+            "10": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4
+              },
+              "max_rank": 5
+            },
+            "11": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 3
+              },
+              "max_rank": 6
+            },
+            "12": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4
+              },
+              "max_rank": 6
+            },
+            "13": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 3
+              },
+              "max_rank": 7
+            },
+            "14": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4
+              },
+              "max_rank": 7
+            },
+            "15": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 3
+              },
+              "max_rank": 8
+            },
+            "16": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4
+              },
+              "max_rank": 8
+            },
+            "17": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4,
+                "9": 3
+              },
+              "max_rank": 9
+            },
+            "18": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4,
+                "9": 4
+              },
+              "max_rank": 9
+            },
+            "19": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4,
+                "9": 4,
+                "10": 1
+              },
+              "ranks_raw": {
+                "10": "1*"
+              },
+              "max_rank": 10
+            },
+            "20": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 4,
+                "2": 4,
+                "3": 4,
+                "4": 4,
+                "5": 4,
+                "6": 4,
+                "7": 4,
+                "8": 4,
+                "9": 4,
+                "10": 1
+              },
+              "ranks_raw": {
+                "10": "1*"
+              },
+              "max_rank": 10
+            }
+          },
+          "pf2etools": {
+            "1": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 2
+              },
+              "max_rank": 1
+            },
+            "2": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3
+              },
+              "max_rank": 1
+            },
+            "3": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 2
+              },
+              "max_rank": 2
+            },
+            "4": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3
+              },
+              "max_rank": 2
+            },
+            "5": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 2
+              },
+              "max_rank": 3
+            },
+            "6": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3
+              },
+              "max_rank": 3
+            },
+            "7": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 2
+              },
+              "max_rank": 4
+            },
+            "8": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3
+              },
+              "max_rank": 4
+            },
+            "9": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 2
+              },
+              "max_rank": 5
+            },
+            "10": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3
+              },
+              "max_rank": 5
+            },
+            "11": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 2
+              },
+              "max_rank": 6
+            },
+            "12": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3
+              },
+              "max_rank": 6
+            },
+            "13": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 2
+              },
+              "max_rank": 7
+            },
+            "14": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3
+              },
+              "max_rank": 7
+            },
+            "15": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 2
+              },
+              "max_rank": 8
+            },
+            "16": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3
+              },
+              "max_rank": 8
+            },
+            "17": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3,
+                "9": 2
+              },
+              "max_rank": 9
+            },
+            "18": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3,
+                "9": 3
+              },
+              "max_rank": 9
+            },
+            "19": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3,
+                "9": 3,
+                "10": 1
+              },
+              "max_rank": 10
+            },
+            "20": {
+              "cantrips": 5,
+              "ranks": {
+                "1": 3,
+                "2": 3,
+                "3": 3,
+                "4": 3,
+                "5": 3,
+                "6": 3,
+                "7": 3,
+                "8": 3,
+                "9": 3,
+                "10": 1
+              },
+              "max_rank": 10
+            }
+          }
+        }
       ]
     },
     "psychic": {
@@ -1925,12 +2450,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-psychic.json, tabela 'Psychic Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Dark Archive p.11)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/psychic.json",
         "foundry_feature": "packs/pf2e/class-features/psychic-spellcasting.json",
-        "pf2etools": "class-psychic.json"
+        "pf2etools": "class-psychic.json",
+        "pdf": "Dark Archive p.11"
       },
       "tradition": "occult",
       "type": "spontaneous",
@@ -1948,82 +2474,83 @@
       "slots_per_level": {
         "1": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 1
           },
-          "max_rank": 1,
-          "cantrips_raw": "3*"
+          "max_rank": 1
         },
         "2": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2
           },
-          "max_rank": 1,
-          "cantrips_raw": "3*"
+          "max_rank": 1
         },
         "3": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 1
           },
-          "max_rank": 2,
-          "cantrips_raw": "3*"
+          "max_rank": 2
         },
         "4": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2
           },
-          "max_rank": 2,
-          "cantrips_raw": "3*"
+          "max_rank": 2
         },
         "5": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
             "3": 1
           },
-          "max_rank": 3,
-          "cantrips_raw": "3*"
+          "max_rank": 3
         },
         "6": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
             "3": 2
           },
-          "max_rank": 3,
-          "cantrips_raw": "3*"
+          "max_rank": 3
         },
         "7": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
             "3": 2,
             "4": 1
           },
-          "max_rank": 4,
-          "cantrips_raw": "3*"
+          "max_rank": 4
         },
         "8": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
             "3": 2,
             "4": 2
           },
-          "max_rank": 4,
-          "cantrips_raw": "3*"
+          "max_rank": 4
         },
         "9": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2031,11 +2558,11 @@
             "4": 2,
             "5": 1
           },
-          "max_rank": 5,
-          "cantrips_raw": "3*"
+          "max_rank": 5
         },
         "10": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2043,11 +2570,11 @@
             "4": 2,
             "5": 2
           },
-          "max_rank": 5,
-          "cantrips_raw": "3*"
+          "max_rank": 5
         },
         "11": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2056,11 +2583,11 @@
             "5": 2,
             "6": 1
           },
-          "max_rank": 6,
-          "cantrips_raw": "3*"
+          "max_rank": 6
         },
         "12": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2069,11 +2596,11 @@
             "5": 2,
             "6": 2
           },
-          "max_rank": 6,
-          "cantrips_raw": "3*"
+          "max_rank": 6
         },
         "13": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2083,11 +2610,11 @@
             "6": 2,
             "7": 1
           },
-          "max_rank": 7,
-          "cantrips_raw": "3*"
+          "max_rank": 7
         },
         "14": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2097,11 +2624,11 @@
             "6": 2,
             "7": 2
           },
-          "max_rank": 7,
-          "cantrips_raw": "3*"
+          "max_rank": 7
         },
         "15": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2112,11 +2639,11 @@
             "7": 2,
             "8": 1
           },
-          "max_rank": 8,
-          "cantrips_raw": "3*"
+          "max_rank": 8
         },
         "16": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2127,11 +2654,11 @@
             "7": 2,
             "8": 2
           },
-          "max_rank": 8,
-          "cantrips_raw": "3*"
+          "max_rank": 8
         },
         "17": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2143,11 +2670,11 @@
             "8": 2,
             "9": 1
           },
-          "max_rank": 9,
-          "cantrips_raw": "3*"
+          "max_rank": 9
         },
         "18": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2159,11 +2686,11 @@
             "8": 2,
             "9": 2
           },
-          "max_rank": 9,
-          "cantrips_raw": "3*"
+          "max_rank": 9
         },
         "19": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2176,11 +2703,14 @@
             "9": 2,
             "10": 1
           },
-          "max_rank": 10,
-          "cantrips_raw": "3*"
+          "ranks_raw": {
+            "10": "1*"
+          },
+          "max_rank": 10
         },
         "20": {
           "cantrips": 3,
+          "cantrips_raw": "3*",
           "ranks": {
             "1": 2,
             "2": 2,
@@ -2193,8 +2723,10 @@
             "9": 2,
             "10": 1
           },
-          "max_rank": 10,
-          "cantrips_raw": "3*"
+          "ranks_raw": {
+            "10": "1*"
+          },
+          "max_rank": 10
         }
       },
       "slots_footnotes": [
@@ -2682,12 +3214,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-magus.json, tabela 'Magus Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Secrets of Magic p.39)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/magus.json",
         "foundry_feature": "packs/pf2e/class-features/arcane-spellcasting-magus.json",
-        "pf2etools": "class-magus.json"
+        "pf2etools": "class-magus.json",
+        "pdf": "Secrets of Magic p.39"
       },
       "tradition": "arcane",
       "type": "prepared",
@@ -2754,6 +3287,9 @@
             "3": 2,
             "4": 2
           },
+          "ranks_raw": {
+            "2": "0*"
+          },
           "max_rank": 4
         },
         "8": {
@@ -2761,6 +3297,9 @@
           "ranks": {
             "3": 2,
             "4": 2
+          },
+          "ranks_raw": {
+            "2": "0*"
           },
           "max_rank": 4
         },
@@ -2770,6 +3309,9 @@
             "4": 2,
             "5": 2
           },
+          "ranks_raw": {
+            "2": "0*"
+          },
           "max_rank": 5
         },
         "10": {
@@ -2777,6 +3319,9 @@
           "ranks": {
             "4": 2,
             "5": 2
+          },
+          "ranks_raw": {
+            "2": "0*"
           },
           "max_rank": 5
         },
@@ -2786,6 +3331,9 @@
             "5": 2,
             "6": 2
           },
+          "ranks_raw": {
+            "3": "0*"
+          },
           "max_rank": 6
         },
         "12": {
@@ -2793,6 +3341,9 @@
           "ranks": {
             "5": 2,
             "6": 2
+          },
+          "ranks_raw": {
+            "3": "0*"
           },
           "max_rank": 6
         },
@@ -2802,6 +3353,9 @@
             "6": 2,
             "7": 2
           },
+          "ranks_raw": {
+            "4": "0*"
+          },
           "max_rank": 7
         },
         "14": {
@@ -2809,6 +3363,9 @@
           "ranks": {
             "6": 2,
             "7": 2
+          },
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 7
         },
@@ -2818,6 +3375,9 @@
             "7": 2,
             "8": 2
           },
+          "ranks_raw": {
+            "4": "0*"
+          },
           "max_rank": 8
         },
         "16": {
@@ -2825,6 +3385,9 @@
           "ranks": {
             "7": 2,
             "8": 2
+          },
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 8
         },
@@ -2834,6 +3397,9 @@
             "8": 2,
             "9": 2
           },
+          "ranks_raw": {
+            "4": "0*"
+          },
           "max_rank": 9
         },
         "18": {
@@ -2841,6 +3407,9 @@
           "ranks": {
             "8": 2,
             "9": 2
+          },
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 9
         },
@@ -2850,6 +3419,9 @@
             "8": 2,
             "9": 2
           },
+          "ranks_raw": {
+            "4": "0*"
+          },
           "max_rank": 9
         },
         "20": {
@@ -2857,6 +3429,9 @@
           "ranks": {
             "8": 2,
             "9": 2
+          },
+          "ranks_raw": {
+            "4": "0*"
           },
           "max_rank": 9
         }
@@ -2876,12 +3451,13 @@
         "type": "foundry (regex sobre descricao da class-feature de conjuracao)",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre a class-feature dona do focus pool nativo)",
-        "slots_per_level": "pf2etools (class-summoner.json, tabela 'Summoner Spells per Day')"
+        "slots_per_level": "waybuilder (PDF, Secrets of Magic p.55)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/summoner.json",
         "foundry_feature": "packs/pf2e/class-features/summoner-spellcasting.json",
-        "pf2etools": "class-summoner.json"
+        "pf2etools": "class-summoner.json",
+        "pdf": "Secrets of Magic p.55"
       },
       "tradition": "variavel (definida pela escolha de eidolon; nao ha tradicao fixa na class-feature)",
       "type": "spontaneous",

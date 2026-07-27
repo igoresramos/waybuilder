@@ -5,24 +5,25 @@ Pin do Foundry: `87f9e5028baaa10b70fdc766260b7886def17e04`
 ## Cobertura
 
 - Classes cobertas: **11** (wizard, cleric, druid, sorcerer, bard, witch, oracle, psychic, animist, magus, summoner)
-- Tabela de slots (1-20, todos os ranks) confirmada via pf2etools: **10** classes (wizard, cleric, druid, sorcerer, bard, witch, oracle, psychic, magus, summoner)
+- Tabela de slots (1-20, todos os ranks) confirmada via PDF (livro impresso, fonte primaria desde a integracao de 2026-07-27): **10** classes (wizard, cleric, druid, sorcerer, bard, witch, oracle, psychic, magus, summoner)
+- Confirmada so via pf2etools (PDF nao tinha a classe ou nao venceu): **0** classes (-)
 - Sem cobertura de tabela completa: **0** (-)
 
 ## De onde veio cada pedaco do dado, por classe
 
 | Classe | tradition/type | proficiencia | focus pool | slots/nivel | extra |
 |---|---|---|---|---|---|
-| Wizard | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-wizard-pc1.json, tabela 'Wizard Spells per Day') | - |
-| Cleric | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (regex sobre as 12 class-features de doutrina first..final-doctrine-{cloistered-cleric,warpriest}, ver conjuracao.md) | foundry (regex sobre Domain Initiate, feat granted pela Primeira Doutrina) | pf2etools (class-cleric-pc1.json, tabela 'Cleric Spells per Day') | divine_font: foundry (divine-font.json) |
-| Druid | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-druid-pc1.json, tabela 'Druid Spells per Day') | - |
-| Sorcerer | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-sorcerer.json, tabela 'Sorcerer Spells per Day') | - |
-| Bard | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-bard-pc1.json, tabela 'Bard Spells per Day') | - |
-| Witch | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-witch-pc1.json, tabela 'Witch Spells per Day') | - |
-| Oracle | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-oracle.json, tabela 'Oracle Spells per Day') | - |
-| Psychic | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-psychic.json, tabela 'Psychic Spells per Day') | - |
+| Wizard | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Player Core p.195) | - |
+| Cleric | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (regex sobre as 12 class-features de doutrina first..final-doctrine-{cloistered-cleric,warpriest}, ver conjuracao.md) | foundry (regex sobre Domain Initiate, feat granted pela Primeira Doutrina) | waybuilder (PDF, Player Core p.111) | divine_font: foundry (divine-font.json) |
+| Druid | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Player Core p.125) | - |
+| Sorcerer | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Player Core 2 p.147) | - |
+| Bard | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Player Core p.97) | - |
+| Witch | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Player Core p.181) | - |
+| Oracle | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Player Core 2 p.131) | - |
+| Psychic | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Dark Archive p.11) | - |
 | Animist | aon (campo 'tradition': ['Divine']) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre animist-apparition-spellcasting.json, secao 'Vessel Spells') | aon (campo markdown do doc de classe, tabela 'Animist Spells per Day'; parser validado contra as outras 10 conjuradoras vs pf2etools) | cobertura parcial -- ver secao dedicada abaixo |
-| Magus | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-magus.json, tabela 'Magus Spells per Day') | - |
-| Summoner | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-summoner.json, tabela 'Summoner Spells per Day') | - |
+| Magus | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Secrets of Magic p.39) | - |
+| Summoner | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | waybuilder (PDF, Secrets of Magic p.55) | - |
 
 ## Descoberta principal: onde a tabela numerica REALMENTE vive
 

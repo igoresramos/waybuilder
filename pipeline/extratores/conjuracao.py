@@ -51,6 +51,10 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]  # .../waybuilder
 PIPELINE_DIR = PROJECT_ROOT / "pipeline"
+
+sys.path.insert(0, str(PIPELINE_DIR))
+import comum  # noqa: E402 -- so depois de PIPELINE_DIR estar no sys.path
+
 RAW_DIR = PIPELINE_DIR / "dados_brutos"
 FOUNDRY_CACHE = RAW_DIR / "foundry"
 # O clone completo no pin, reconstruido por buscar_fontes.sh. FOUNDRY_CACHE e
@@ -354,6 +358,164 @@ def parse_slot_table(table: dict) -> tuple[dict, list | None]:
 
 
 # ---------------------------------------------------------------------------
+# Tabela de slots (PDF -- fonte primaria, ver docs/pdfs/2026-07-26_tabelas-
+# conjuracao.md). Leitura humana dos livros oficiais, guardada em
+# dados_derivados/ (versionada) porque nao e reproduzivel por pin/script como
+# as outras fontes -- ver _doc do proprio arquivo.
+# ---------------------------------------------------------------------------
+
+PDF_TABELAS_PATH = PIPELINE_DIR / "dados_derivados" / "tabelas_conjuracao_pdf.json"
+
+_PDF_CELL_SIMPLE_RE = re.compile(r"^(\d+)\*?$")
+
+
+def _parse_pdf_cell(val):
+    """Celula da tabela de slots do PDF -> (valor: int|None, bruto: str|None).
+
+    Convencoes achadas na leitura de 2026-07-26/27 (ver docs/pdfs/2026-07-26_
+    tabelas-conjuracao.md): inteiro puro (int) nao tem bruto -- nada pra
+    preservar. String 'N*' (ex. Magus '0*', rank 10 de varias classes '1*')
+    extrai o inteiro E preserva o texto original, porque o asterisco remete a
+    uma nota de rodape que muda o significado do numero (ex. slot que so
+    existe por uma feature especifica). String 'X+Y' (Animist, dois pools de
+    slot independentes que NAO se somam) nao vira inteiro -- valor fica None,
+    so o bruto sobrevive."""
+    if isinstance(val, int):
+        return val, None
+    if isinstance(val, str):
+        m = _PDF_CELL_SIMPLE_RE.match(val.strip())
+        if m:
+            n = int(m.group(1))
+            bruto = val if val.strip() != str(n) else None
+            return n, bruto
+        return None, val
+    return None, None
+
+
+def parse_pdf_slot_table(pdf_entry: dict) -> dict:
+    """Converte `pdf_entry["slots"]` (celulas cruas do PDF, chave "notacao"
+    ignorada) no MESMO formato de retorno de `parse_slot_table` (pf2etools):
+    {"<nivel>": {"cantrips": int|None, "cantrips_raw": str (so se a celula
+    nao for um inteiro puro), "ranks": {"<rank>": int, ...}, "ranks_raw":
+    {"<rank>": str, ...} (so as celulas que precisaram de bruto), "max_rank":
+    int}}.
+
+    Rank com valor 0 (ex. '0*' do Magus) ou notacao hibrida (valor None) NAO
+    entra em `ranks` -- mesma convencao de `parse_slot_table`: um rank sem
+    slot fica de fora do dict numerico comparavel, senao uma celula '0*' do
+    PDF acusaria divergencia contra um pf2etools que simplesmente omite o
+    rank (ver `_tabelas_slots_iguais`). `max_rank` conta a COLUNA de rank
+    presente na tabela, nao o valor numerico -- por isso um nivel so com
+    notacao hibrida ainda tem `max_rank` correto (ranks fica vazio, a coluna
+    existiu)."""
+    por_nivel = {}
+    for nivel, celulas in pdf_entry["slots"].items():
+        if nivel == "notacao":
+            continue
+        entry: dict = {}
+        cantrips, cantrips_raw = _parse_pdf_cell(celulas.get("cantrips"))
+        entry["cantrips"] = cantrips
+        if cantrips_raw is not None:
+            entry["cantrips_raw"] = cantrips_raw
+
+        rank_cols = [k for k in celulas if k != "cantrips"]
+        ranks, ranks_raw = {}, {}
+        for rank_k in rank_cols:
+            valor, bruto = _parse_pdf_cell(celulas[rank_k])
+            if bruto is not None:
+                ranks_raw[rank_k] = bruto
+            if valor:
+                ranks[rank_k] = valor
+        entry["ranks"] = ranks
+        if ranks_raw:
+            entry["ranks_raw"] = ranks_raw
+        entry["max_rank"] = max((int(k) for k in rank_cols), default=0)
+        por_nivel[nivel] = entry
+    return por_nivel
+
+
+def _tabelas_slots_iguais(a: dict, b: dict) -> bool:
+    """Duas tabelas de slots (por_nivel, ja no formato de parse_*_slot_table)
+    sao a MESMA tabela pra fins de conflito? Compara so o que e comparavel
+    entre PDF e pf2etools -- cantrips e `ranks` (o dict numerico) por nivel.
+    Ignora `ranks_raw`/`cantrips_raw`: sao marca de notacao exclusiva do PDF
+    (asterisco, hibrido), sem equivalente no pf2etools, e nao podem por si so
+    acusar divergencia (o caso do Magus '0*' -- ver teste
+    test_diferenca_so_de_notacao_zero_nao_conflita)."""
+    if set(a) != set(b):
+        return False
+    for nivel, na in a.items():
+        nb = b[nivel]
+        if na.get("cantrips") != nb.get("cantrips"):
+            return False
+        if na.get("ranks", {}) != nb.get("ranks", {}):
+            return False
+    return True
+
+
+def escolher_slots(pdf, pf2etools):
+    """Escolhe a tabela de slots vencedora entre PDF (fonte 'waybuilder') e
+    pf2etools, e registra divergencia no MESMO formato de `comum.escolher()`
+    (dict com campo/escolhido/<fonte>: valor por fonte divergente).
+
+    Nao reusa `comum.escolher()` direto porque a precedencia aqui NAO e por
+    tabela generica: o PDF (livro impresso, remaster confirmado por
+    livro/pagina em `load_pdf_tabelas()`) vence sempre que as duas fontes
+    existem -- e o achado do Oracle (docs/pdfs/2026-07-26_tabelas-conjuracao.
+    md): o pf2etools so tem a variante legado (2/3 slots), o PDF tem o
+    remaster (3/4), e o PDF e que bate com o Foundry e com a regra vigente.
+    A comparacao usa `_tabelas_slots_iguais` (nao `==` puro) para nao acusar
+    divergencia so por notacao (asterisco/hibrido) que o pf2etools nem tem
+    campo equivalente pra comparar."""
+    candidatos = {f: v for f, v in {"waybuilder": pdf, "pf2etools": pf2etools}.items()
+                  if not comum.vazio(v)}
+    if not candidatos:
+        return None, None, []
+    if "waybuilder" not in candidatos:
+        fonte = next(iter(candidatos))
+        return candidatos[fonte], comum.prov_lido(fonte), []
+
+    valor = candidatos["waybuilder"]
+    prov = comum.prov_lido("waybuilder")
+    outras = {f: v for f, v in candidatos.items() if f != "waybuilder"}
+    divergentes = {f: v for f, v in outras.items() if not _tabelas_slots_iguais(v, valor)}
+    if not divergentes:
+        return valor, prov, []
+
+    registro = {"campo": "slots_per_level", "escolhido": "waybuilder", "waybuilder": valor}
+    registro.update(divergentes)
+    return valor, prov, [registro]
+
+
+_PDF_TABELAS_CACHE: dict | None = None
+
+
+def load_pdf_tabelas() -> dict:
+    """Carrega `dados_derivados/tabelas_conjuracao_pdf.json` e devolve
+    {slug: {"livro":, "pagina":, ..., "slots_per_level": por_nivel}} so das
+    classes conjuradoras (`conjuradora` != False no JSON) -- Exemplar e
+    Kineticist estao no arquivo (leitura confirmou que NAO sao conjuradoras)
+    mas ficam de fora do retorno, ja que nao ha tabela de slot pra montar.
+    Cacheia em memoria (o JSON nao muda durante uma execucao do pipeline)."""
+    global _PDF_TABELAS_CACHE
+    if _PDF_TABELAS_CACHE is not None:
+        return _PDF_TABELAS_CACHE
+
+    doc = json.loads(PDF_TABELAS_PATH.read_text(encoding="utf-8"))
+    tabelas = {}
+    for entrada in doc["classes"]:
+        if entrada.get("conjuradora") is False:
+            continue
+        item = dict(entrada)
+        if "slots" in entrada:
+            item["slots_per_level"] = parse_pdf_slot_table(entrada)
+        tabelas[entrada["classe"]] = item
+
+    _PDF_TABELAS_CACHE = tabelas
+    return tabelas
+
+
+# ---------------------------------------------------------------------------
 # Proficiencia de conjuracao
 # ---------------------------------------------------------------------------
 
@@ -582,25 +744,44 @@ def build_class_entry(slug: str, relatorio: dict) -> dict:
         entry["prov"]["focus_pool"] = "foundry (regex sobre a class-feature dona do focus pool nativo)"
 
     # ---- slots por nivel ----
+    # PDF (livro impresso, ver load_pdf_tabelas()) e a fonte primaria; pf2etools
+    # entra so pra deteccao de divergencia (achado real: Oracle legado x
+    # remaster, docs/pdfs/2026-07-26_tabelas-conjuracao.md). escolher_slots()
+    # decide e registra o conflito no formato de comum.escolher().
     pf2etools_file = PF2ETOOLS_FILES.get(slug)
+    footnotes = None
+    tabela_nome = None
+    pf2etools_slots = None
     if pf2etools_file:
         doc = pf2etools_load(pf2etools_file)
         table = find_spells_per_day_table(doc) if doc else None
         if table:
-            slots, footnotes = parse_slot_table(table)
-            entry["slots_per_level"] = slots
-            entry["slots_footnotes"] = footnotes
-            entry["prov"]["slots_per_level"] = f"pf2etools ({pf2etools_file}, tabela '{table.get('name')}')"
+            pf2etools_slots, footnotes = parse_slot_table(table)
+            tabela_nome = table.get("name")
             entry["xref"]["pf2etools"] = pf2etools_file
-            relatorio["slots_confirmados_pf2etools"].append(slug)
-        else:
-            entry["slots_per_level"] = None
-            entry["prov"]["slots_per_level"] = f"NAO ENCONTRADO em {pf2etools_file}"
-            relatorio["sem_cobertura"].append(slug)
-    else:
-        entry["slots_per_level"] = None
-        entry["prov"]["slots_per_level"] = "sem arquivo no pf2etools (classe nao esta no index.json da fonte)"
+
+    pdf_entry = load_pdf_tabelas().get(slug)
+    pdf_slots = pdf_entry.get("slots_per_level") if pdf_entry else None
+
+    slots, prov_slots, conflitos_slots = escolher_slots(pdf_slots, pf2etools_slots)
+    entry["slots_per_level"] = slots
+    entry["slots_footnotes"] = footnotes
+    if conflitos_slots:
+        entry["conflitos"] = entry.get("conflitos", []) + conflitos_slots
+
+    if slots is None:
+        entry["prov"]["slots_per_level"] = (
+            f"NAO ENCONTRADO em {pf2etools_file}" if pf2etools_file
+            else "sem arquivo no pf2etools (classe nao esta no index.json da fonte) e sem entrada no PDF"
+        )
         relatorio["sem_cobertura"].append(slug)
+    elif prov_slots == comum.prov_lido("waybuilder"):
+        entry["prov"]["slots_per_level"] = f"waybuilder (PDF, {pdf_entry.get('livro')} p.{pdf_entry.get('pagina')})"
+        entry["xref"]["pdf"] = f"{pdf_entry.get('livro')} p.{pdf_entry.get('pagina')}"
+        relatorio["slots_confirmados_pdf"] = relatorio.get("slots_confirmados_pdf", []) + [slug]
+    else:
+        entry["prov"]["slots_per_level"] = f"pf2etools ({pf2etools_file}, tabela '{tabela_nome}')"
+        relatorio["slots_confirmados_pf2etools"].append(slug)
 
     # ---- Divine Font (so Clerico) ----
     if slug == "cleric":
@@ -705,7 +886,7 @@ def build_animist_entry() -> dict:
 # ---------------------------------------------------------------------------
 
 def extrair() -> dict:
-    relatorio = {"slots_confirmados_pf2etools": [], "sem_cobertura": []}
+    relatorio = {"slots_confirmados_pf2etools": [], "slots_confirmados_pdf": [], "sem_cobertura": []}
     classes = {}
     for slug in CLASSES_COBERTAS:
         if slug == "animist":
@@ -740,9 +921,15 @@ def escrever_relatorio(dados: dict) -> str:
     linhas.append("## Cobertura\n")
     linhas.append(f"- Classes cobertas: **{len(CLASSES_COBERTAS)}** ({', '.join(CLASSES_COBERTAS)})")
     linhas.append(
-        f"- Tabela de slots (1-20, todos os ranks) confirmada via pf2etools: "
+        f"- Tabela de slots (1-20, todos os ranks) confirmada via PDF (livro "
+        f"impresso, fonte primaria desde a integracao de 2026-07-27): "
+        f"**{len(relatorio['slots_confirmados_pdf'])}** classes "
+        f"({', '.join(relatorio['slots_confirmados_pdf']) or '-'})"
+    )
+    linhas.append(
+        f"- Confirmada so via pf2etools (PDF nao tinha a classe ou nao venceu): "
         f"**{len(relatorio['slots_confirmados_pf2etools'])}** classes "
-        f"({', '.join(relatorio['slots_confirmados_pf2etools'])})"
+        f"({', '.join(relatorio['slots_confirmados_pf2etools']) or '-'})"
     )
     linhas.append(
         f"- Sem cobertura de tabela completa: **{len(relatorio['sem_cobertura'])}** "
@@ -919,8 +1106,16 @@ def main() -> None:
     (RELATORIOS_DIR / "conjuracao.md").write_text(relatorio_md, encoding="utf-8")
 
     print(f"[conjuracao] {len(dados['classes'])} classes escritas em saida/conjuracao.json")
+    slots_completos = (
+        len(relatorio_interno["slots_confirmados_pdf"])
+        + len(relatorio_interno["slots_confirmados_pf2etools"])
+        + len(relatorio_interno.get("slots_confirmados_aon", []))
+    )
     print(
-        f"[conjuracao] slots completos: {len(relatorio_interno['slots_confirmados_pf2etools'])}, "
+        f"[conjuracao] slots completos: {slots_completos} "
+        f"(pdf: {len(relatorio_interno['slots_confirmados_pdf'])}, "
+        f"pf2etools: {len(relatorio_interno['slots_confirmados_pf2etools'])}, "
+        f"aon: {len(relatorio_interno.get('slots_confirmados_aon', []))}), "
         f"sem cobertura: {len(relatorio_interno['sem_cobertura'])}"
     )
 

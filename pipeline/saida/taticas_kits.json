@@ -1,0 +1,3283 @@
+[
+  {
+    "id": "wb:tactic/alley-oop",
+    "kind": "tactic",
+    "name": "Alley-oop",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/alley-oop",
+    "xref": {
+      "aon": "tactic-15",
+      "foundry": "Z0HyZyvCe3Y1Chaa"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Alley-oop Single Action Source Battlecry! pg. 26 Tactic Type Expert --- Your team excels at sharing resources and delivering them exactly where they need to be. Signal a squadmate within the aura of your banner who is holding or wearing a consumable that can be activated as a single action. That squadmate can toss their consumable to any other squadmate within the aura of your banner as a free action, and the receiving squadmate can catch and activate the consumable as a reaction. If the receiving squadmate chooses not to catch the consumable or if they don’t have a free hand to catch it with, it lands on the ground in their space. --- Special If the consumable is a piece of activated ammunition and the receiving squadmate is wielding a compatible weapon that takes 1 or fewer actions to reload, they can load the ammunition into their weapon as part of the reaction used to catch and activate it. The ammunition remains activated until the end of their next turn.",
+    "tactic": {
+      "type": "expert",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/bloody-guillotine",
+    "kind": "tactic",
+    "name": "Bloody Guillotine",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 28,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/bloody-guillotine",
+    "xref": {
+      "aon": "tactic-27",
+      "foundry": "zt5fgBBOQpr84CGE"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Bloody Guillotine Two Actions Source Battlecry! pg. 28 Tactic Type Legendary Frequency once per day --- Your squad performs a brutal combination attack that levels an enemy and attempts to put them down permanently. Choose and signal up to three squadmates within the aura of your commander’s banner. Each squadmate can Stride up to half their Speed directly toward a single enemy you designate as a free action. Any who end their movement adjacent to the designated target can attempt to Trip or Strike it as a reaction. The first time a prone enemy is successfully dealt damage by a Strike from this tactic, they must immediately attempt a Fortitude save against your class DC or die; this is a death and incapacitation effect. All enemies who witness a creature slain by Bloody Guillotine must succeed at a Will save against your class DC or become sickened 1 for 1 round (sickened 2 for 1 round on a critical failure); this is an emotion and mental effect.",
+    "tactic": {
+      "type": "legendary",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per day"
+    }
+  },
+  {
+    "id": "wb:tactic/buckle-cut-blitz",
+    "kind": "tactic",
+    "name": "Buckle-cut blitz",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/buckle-cut-blitz",
+    "xref": {
+      "aon": "tactic-16",
+      "foundry": "3sNSr6NEVkUZ0dIr"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Buckle-cut blitz Two Actions Source Battlecry! pg. 26 Tactic Type Expert --- Your squad dashes past enemies, slicing their boot laces and breaking their belt buckles. Signal up to two squadmates within the aura of your commander’s banner; these squadmates can Stride up to their Speed as a reaction. Each enemy they are adjacent to at any point during this movement must attempt a Reflex save against your class DC or become clumsy 1 for 1 round (clumsy 2 on a critical failure).",
+    "tactic": {
+      "type": "expert",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/coordinating-maneuvers",
+    "kind": "tactic",
+    "name": "Coordinating Maneuvers",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/coordinating-maneuvers",
+    "xref": {
+      "aon": "tactic-7",
+      "foundry": "Kp325Qf0qpF6RCDE"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Coordinating Maneuvers Single Action Source Battlecry! pg. 26 Tactic Type Offensive --- Your team works to slip enemies into a disadvantageous position. Signal one squadmate within the aura of your banner; that squadmate can immediately Step as a free action. If they end this movement next to an opponent, they can attempt to Reposition that target as a reaction.",
+    "tactic": {
+      "type": "offensive",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/corpse-crenellation",
+    "kind": "tactic",
+    "name": "Corpse Crenellation",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "uncommon",
+    "source": {
+      "book": "Pathfinder #223: Hell's Destiny",
+      "page": 227,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/corpse-crenellation",
+    "xref": {
+      "aon": "tactic-36",
+      "foundry": "yT2A0CxSA5nJ8e7n"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Corpse Crenellation Two Actions Source Pathfinder #223: Hell's Destiny pg. 227 Tactic Type Master Frequency once per 10 minutes --- With methodical, shocking efficiency, some Chelaxian and Hellknight squads can turn the corpses of their slain foes into temporary earthworks. Signal up to two squadmates within the aura of your commander’s banner. These squadmates can Stride up to half their Speed and attempt a melee or ranged Strike against one enemy you designate as a reaction. If the enemy is reduced to 0 Hit Points by these Strikes, the enemy’s body provides lesser cover to all squadmates in or adjacent to the enemy’s space until the end of your next turn or until the enemy is no longer unconscious or dead. During this time, any squadmate who Takes Cover can also first Stride up to half their Speed, but they must end this movement in or adjacent to the fallen enemy’s space. A squadmate who’s at least two sizes smaller than the fallen enemy instead gains standard cover. --- Special If one of your squadmates knows or has prepared a cantrip that deals damage and requires 2 or fewer actions to cast, they can cast it targeting the designated enemy instead of taking the other actions normally granted by this tactic, gaining all other listed benefits.",
+    "tactic": {
+      "type": "master",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per 10 minutes"
+    }
+  },
+  {
+    "id": "wb:tactic/cry-havoc",
+    "kind": "tactic",
+    "name": "Cry Havoc!",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 28,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/cry-havoc",
+    "xref": {
+      "aon": "tactic-28",
+      "foundry": "k50ynPhpPSPZ4Akg"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Cry Havoc! Three Actions Source Battlecry! pg. 28 Tactic Type Legendary Frequency once per day --- Your squad rallies with a resounding clangor that drowns out all other sounds of war. Choose an enemy you are observing and signal all squadmates within the aura of your commander’s banner. All squadmates can Stride up to twice their Speed directly toward the target as a reaction, yelling and trampling. When any squadmate enters a square adjacent to any enemy, that enemy must attempt a basic Fortitude save against your class DC or take 2d6 bludgeoning damage and 2d6 sonic damage, plus an additional 2d6 bludgeoning and 2d6 sonic damage for every squadmate participating in Cry Havoc! (enemies who critically fail are deafened for 1 round). Regardless of the outcome, the enemy is then temporarily immune to any further damage from Cry Havoc! for 24 hours. Squadmates can use Cry Havoc! while Burrowing, Climbing, Flying, or Swimming instead of Striding if they have the corresponding movement type.",
+    "tactic": {
+      "type": "legendary",
+      "actions": 3,
+      "actions_texto": "Three Actions",
+      "frequency": "once per day"
+    }
+  },
+  {
+    "id": "wb:tactic/defensive-retreat",
+    "kind": "tactic",
+    "name": "Defensive Retreat",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 25,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/defensive-retreat",
+    "xref": {
+      "aon": "tactic-1",
+      "foundry": "UJi0VYnhVSdnl9II"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Defensive Retreat Two Actions Source Battlecry! pg. 25 Tactic Type Mobility --- You call for a careful retreat. Signal all squadmates within the aura of your banner; each can immediately Step up to three times as a free action. Each Step must take them farther away from at least one hostile creature they are observing and can only take them closer to a hostile creature if doing so is the only way for them to move toward safety (such as if they’re surrounded).",
+    "tactic": {
+      "type": "mobility",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/demoralizing-charge",
+    "kind": "tactic",
+    "name": "Demoralizing Charge",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 27,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/demoralizing-charge",
+    "xref": {
+      "aon": "tactic-17",
+      "foundry": "q1dvlKJI2Kfegc4Y"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Demoralizing Charge Two Actions Source Battlecry! pg. 27 Tactic Type Expert --- Your team’s coordinated assault strikes fear into your enemies’ hearts. Signal up to two squadmates within the aura of your commander’s banner; as a free action, those squadmates can immediately Stride toward an enemy they are observing. If they end this movement adjacent to an enemy, they can attempt to Strike that enemy as a reaction. For each of these Strikes that are successful, the target enemy must succeed at a Will save against your class DC or become frightened 1 (frightened 2 on a critical failure); this is an emotion, fear, and mental effect. If both Strikes target the same enemy, that enemy attempts the save only once after the final attack and takes a –1 circumstance penalty to their Will save to resist this effect (this penalty increases to –2 if both Strikes are successful or to –3 if both Strikes are successful and either is a critical hit.)",
+    "tactic": {
+      "type": "expert",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/double-team",
+    "kind": "tactic",
+    "name": "Double Team",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/double-team",
+    "xref": {
+      "aon": "tactic-8",
+      "foundry": "c5jVVnNYlP5HB6Ob"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Double Team Two Actions Source Battlecry! pg. 26 Tactic Type Offensive --- Your team works together to set an enemy up for a vicious attack. Signal one squadmate who has an opponent within their reach. That ally can Shove or Reposition an opponent as a free action. If their maneuver is successful and the target ends their movement adjacent to a different squadmate, the second squadmate can attempt a melee Strike against that target as a reaction.",
+    "tactic": {
+      "type": "offensive",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/end-it",
+    "kind": "tactic",
+    "name": "End it!",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "incapacitation",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/end-it",
+    "xref": {
+      "aon": "tactic-9",
+      "foundry": "lI4JCQcqvrZE2U5n"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "requires_texto": "aon",
+      "tactic": "aon"
+    },
+    "requires_texto": "You and your allies currently outnumber enemies on the battlefield, and you or a squadmate have reduced an enemy to 0 Hit Points since the start of your last turn.",
+    "grants_completos": false,
+    "requires_parseado": false,
+    "texto": "End it! Two Actions Source Battlecry! pg. 26 Tactic Type Offensive Requirements You and your allies currently outnumber enemies on the battlefield, and you or a squadmate have reduced an enemy to 0 Hit Points since the start of your last turn. --- At your proclamation that victory is already at hand, your allies march forward with an authoritative stomp, scattering your enemies in terror. Signal all squadmates within the aura of your banner; you and each ally can Step as a free action directly toward a hostile creature. Any hostile creatures within 10 feet of a squadmate after this movement must attempt a Will save against your class DC; on a failure they become fleeing for 1 round, and on a critical failure they become fleeing for 1 round and frightened 2. This is an emotion, fear, and mental effect.",
+    "tactic": {
+      "type": "offensive",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/executioners-volley",
+    "kind": "tactic",
+    "name": "Executioner's Volley",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 28,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/executioners-volley",
+    "xref": {
+      "aon": "tactic-29",
+      "foundry": "GkcfzMAJVX159ua7"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Executioner's Volley Two Actions Source Battlecry! pg. 28 Tactic Type Legendary Frequency once per day --- You command your squadmates to act as a lethal firing squad. You and each squadmate within the aura of your commander’s banner can attempt a ranged Strike as a reaction against a single target you choose; combine the damage from all attacks for the purpose of resistances and weaknesses. If the designated target is a living creature, these attacks gain the death trait. If the designated target dies as a result of this tactic, all other enemies within the affected area of your commander’s banner must succeed at a Will save against your class DC or be frightened 2; this is an emotion, fear, and mental effect. --- Special If one of your squadmates knows or has prepared a cantrip with a range of 30 feet or more that deals damage and requires 2 or fewer actions to cast, they can cast it targeting the designated enemy instead of taking the other actions normally granted by this tactic, gaining all other listed benefits.",
+    "tactic": {
+      "type": "legendary",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per day"
+    }
+  },
+  {
+    "id": "wb:tactic/for-talmandor-for-freedom",
+    "kind": "tactic",
+    "name": "For Talmandor! For Freedom!",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "rare",
+    "source": {
+      "book": "Pathfinder #223: Hell's Destiny",
+      "page": 227,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/for-talmandor-for-freedom",
+    "xref": {
+      "aon": "tactic-37",
+      "foundry": "2U7V8K0zSFGyZHrP"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "For Talmandor! For Freedom! Two Actions Source Pathfinder #223: Hell's Destiny pg. 227 Tactic Type Legendary Frequency once per day --- You raise your banner high with a reminder of what you and your allies truly fight for, granting them unshakable conviction. For yourself and each squadmate in your banner’s aura when you use this tactic, you can attempt to counteract one effect affecting that creature. Your counteract modifier is your Warfare Lore modifier. The effect must have the mental trait or impose the clumsy, controlled, fleeing, frightened, grabbed, immobilized, paralyzed, restrained, slowed, or stunned condition.",
+    "conflitos": [
+      {
+        "campo": "tactic.actions",
+        "escolhido": "aon",
+        "aon": 2,
+        "foundry": 1,
+        "nota": "icone Foundry (TwoActions.webp) contradiz o proprio system.actions.value do doc Foundry; AoN bate com o icone"
+      }
+    ],
+    "tactic": {
+      "type": "legendary",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per day"
+    }
+  },
+  {
+    "id": "wb:tactic/gather-to-me",
+    "kind": "tactic",
+    "name": "Gather to Me!",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 25,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/gather-to-me",
+    "xref": {
+      "aon": "tactic-2",
+      "foundry": "URxnrN8ji84AoVup"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Gather to Me! Single Action Source Battlecry! pg. 25 Tactic Type Mobility --- You signal your team to move into position together. Signal all squadmates; each can immediately Stride as a reaction, though each must end their movement inside your banner’s aura, or as close to your banner’s aura as their movement Speed allows. Squadmates can use Gather to Me! while Burrowing, Climbing, Flying, or Swimming instead of Striding if they have the corresponding movement type.",
+    "tactic": {
+      "type": "mobility",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/insta-ballista",
+    "kind": "tactic",
+    "name": "Insta-Ballista",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 29,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/insta-ballista",
+    "xref": {
+      "aon": "tactic-30",
+      "foundry": "ut0jFv67YpvHBzD9"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Insta-Ballista Two Actions Source Battlecry! pg. 29 Tactic Type Legendary Frequency once per day --- Your squad quickly assembles a special impromptu ballista and fires it to lethal effect. Signal all squadmates you previously chose to participate in this tactic (see Special); these squadmates must be within the aura of your commander’s banner. They can all Stride as a free action to assemble into a close formation; as long as all the chosen squadmates end their movement no more than 10 feet away from any of the other chosen squadmates. They quickly assemble an impromptu ballista and fire it at an enemy of your choice within 200 feet. This is a ranged Strike using your proficiency bonus with martial weapons and gets an item bonus to the attack roll you make with it equal to the number of assisting squadmates (maximum +4). It deals 10d12 piercing damage. Once the attack is completed, the pieces of the impromptu ballista fall apart. --- Special You must choose all squadmates who will participate in this tactic at the time you prepare it. Those squadmates must carry the pieces of your impromptu ballista, which can be made out of easily scavenged materials; these pieces are 8 Bulk in total and can be divided in 1 Bulk increments among any number of the chosen squadmates.",
+    "tactic": {
+      "type": "legendary",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per day"
+    }
+  },
+  {
+    "id": "wb:tactic/mirrored-wall",
+    "kind": "tactic",
+    "name": "Mirrored Wall",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic",
+      "visual"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 27,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/mirrored-wall",
+    "xref": {
+      "aon": "tactic-22",
+      "foundry": "EKEZGfOBKTNWTFDe"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "requires_texto": "aon",
+      "tactic": "aon"
+    },
+    "requires_texto": "At least one of your squadmates is in bright light or has a focused light source available, such as a bull's eye lantern.",
+    "grants_completos": false,
+    "requires_parseado": false,
+    "texto": "Mirrored Wall Two Actions Source Battlecry! pg. 27 Tactic Type Master Frequency once per 10 minutes Requirements At least one of your squadmates is in bright light or has a focused light source available, such as a bull's eye lantern. --- Your squadmates have polished their shields to a reflective sheen and now position them to reflect a blinding light into your enemy’s eyes. All of your squadmates can Raise a Shield or cast shield as a reaction. Then, signal a squadmate within the aura of your commander’s banner who currently has a shield raised (including spellcasting allies with an active casting of the shield cantrip), and choose an enemy within 60 feet. The formation bounces light off the raised shield and into the enemy’s eyes; the target must succeed at a Fortitude saving throw against your class DC or become blinded for 1 round (on a critical failure, the creature remains dazzled for 3 rounds after the blindness ends). You can signal additional allies with raised shields to participate in this tactic; the target takes a circumstance penalty on this save equal to the number of additional participating squadmates (to a maximum –4 circumstance penalty to the target’s save).",
+    "tactic": {
+      "type": "master",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per 10 minutes"
+    }
+  },
+  {
+    "id": "wb:tactic/mountaineering-training",
+    "kind": "tactic",
+    "name": "Mountaineering Training",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 25,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/mountaineering-training",
+    "xref": {
+      "aon": "tactic-3",
+      "foundry": "bAXkEXAlnBx78S7t"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Mountaineering Training Single Action Source Battlecry! pg. 25 Tactic Type Mobility --- Your instructions make it easier for you and your allies to scale dangerous surfaces. Signal all squadmates; until the end of your next turn, you and each ally gain a climb Speed of 20 feet. --- Special If you have this tactic prepared, you can use Warfare Lore in place of Athletics for checks you make to Climb.",
+    "tactic": {
+      "type": "mobility",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/naval-training",
+    "kind": "tactic",
+    "name": "Naval Training",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 25,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/naval-training",
+    "xref": {
+      "aon": "tactic-4",
+      "foundry": "zuTNF3UEr0ZNleqR"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Naval Training Single Action Source Battlecry! pg. 25 Tactic Type Mobility --- Your instructions make it easier for you and your allies to swim through dangerous waters. Signal all squadmates; until the end of your next turn, you and each ally gain a swim Speed of 20 feet. --- Special If you have this tactic prepared, you can use Warfare Lore in place of Athletics for checks you make to Swim.",
+    "tactic": {
+      "type": "mobility",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/passage-of-lines",
+    "kind": "tactic",
+    "name": "Passage of Lines",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 25,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/passage-of-lines",
+    "xref": {
+      "aon": "tactic-5",
+      "foundry": "BfC5pWAns8PNewW3"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Passage of Lines Single Action Source Battlecry! pg. 25 Tactic Type Mobility PFS Note This tactic can be used by prone PCs, but not PCs who are grappled, immobilized, or otherwise unable to move of their own volition. --- You command your allies to regroup, allowing endangered units to fall back while rested units press the advantage. Signal all squadmates within the aura of your commander’s banner; each can swap positions with another willing ally adjacent to them. An ally can’t swap into a space it can’t fit into, and if one of the allies occupies more squares than the other, the smaller ally can move into any part of the larger ally’s space as long as the two remain adjacent after the swap.",
+    "tactic": {
+      "type": "mobility",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/pincer-attack",
+    "kind": "tactic",
+    "name": "Pincer Attack",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/pincer-attack",
+    "xref": {
+      "aon": "tactic-10",
+      "foundry": "zLFfwNmmPTND6OMO"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Pincer Attack Single Action Source Battlecry! pg. 26 Tactic Type Offensive --- You call for an aggressive formation designed for exploiting enemies’ vulnerabilities. Signal all squadmates; each can Step as a reaction. If any of your allies ends this movement adjacent to an opponent, that opponent is off-guard to melee attacks from you and all other squadmates who responded to Pincer Attack until the start of your next turn.",
+    "tactic": {
+      "type": "offensive",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/piranha-assault",
+    "kind": "tactic",
+    "name": "Piranha Assault",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 27,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/piranha-assault",
+    "xref": {
+      "aon": "tactic-23",
+      "foundry": "NVLqYqkkQaCdnWWk"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Piranha Assault Single Action Source Battlecry! pg. 27 Tactic Type Master Frequency once per 10 minutes --- You know that a thousand small bites can fell a large foe just as surely a single well-placed hit. Designate a creature within the aura of your commander’s banner and signal all squadmates; for 1 minute, each time they attack that creature and deal damage to it of a type the creature resists, they ignore an amount of that creature’s resistance equal to your level.",
+    "tactic": {
+      "type": "master",
+      "actions": 1,
+      "actions_texto": "Single Action",
+      "frequency": "once per 10 minutes"
+    }
+  },
+  {
+    "id": "wb:tactic/pop-drop-and-lock",
+    "kind": "tactic",
+    "name": "Pop, Drop, and Lock",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 28,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/pop-drop-and-lock",
+    "xref": {
+      "aon": "tactic-24",
+      "foundry": "6YIG6eVGTplWubGb"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Pop, Drop, and Lock Two Actions Source Battlecry! pg. 28 Tactic Type Master Frequency once per 10 minutes --- You command your squadmates to perform a devastating coordinated takedown. Signal up to three squadmates within the aura of your commander’s banner who all have the same enemy within their reach; the squadmates can attempt to Strike, Trip, or Grapple the opponent as a reaction. Each squadmate can only attempt one specific action granted by this tactic, the actions can be attempted in any order and a specific action can only be attempted once as part of this tactic.",
+    "tactic": {
+      "type": "master",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per 10 minutes"
+    }
+  },
+  {
+    "id": "wb:tactic/protective-screen",
+    "kind": "tactic",
+    "name": "Protective Screen",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 25,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/protective-screen",
+    "xref": {
+      "aon": "tactic-6",
+      "foundry": "5yBBgZ7OCWWJsnLo"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Protective Screen Single Action Source Battlecry! pg. 25 Tactic Type Mobility --- You’ve trained your allies in a technique designed to protect war mages. Signal one squadmate; as a reaction, that squadmate Strides directly toward any other squadmate who is within the aura of your banner. If the first squadmate ends their movement adjacent to another squadmate, the second squadmate does not trigger reactions when casting spells or making ranged attacks until the end of their next turn or until they are no longer adjacent to the first squadmate, whichever comes first. If the first squadmate ends their movement adjacent to more than one other squadmate, the first squadmate must choose which of the adjacent squadmates gains this benefit.",
+    "tactic": {
+      "type": "mobility",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/ready-aim-fire",
+    "kind": "tactic",
+    "name": "Ready, Aim, Fire!",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 28,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/ready-aim-fire",
+    "xref": {
+      "aon": "tactic-25",
+      "foundry": "iuFPNbfhVXvbCPRO"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Ready, Aim, Fire! Two Actions Source Battlecry! pg. 28 Tactic Type Master Frequency once per 10 minutes --- You signal a volley of ranged attacks from your allies. Choose an enemy and signal up to three squadmates within the aura of your commander’s banner; your squadmates can Interact to reload as a free action and attempt a ranged Strike against the enemy as a reaction. --- Special If one of your squadmates knows or has prepared a cantrip with a range of 30 feet or more that deals damage and requires 2 or fewer actions to cast, they can cast it targeting the enemy instead of taking the other actions normally granted by this tactic.",
+    "tactic": {
+      "type": "master",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per 10 minutes"
+    }
+  },
+  {
+    "id": "wb:tactic/reload",
+    "kind": "tactic",
+    "name": "Reload!",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/reload",
+    "xref": {
+      "aon": "tactic-11",
+      "foundry": "NjS64g60oV74XZjq"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Reload! Single Action Source Battlecry! pg. 26 Tactic Type Offensive --- Your drill instruction kicks in, and your allies rapidly reload their weapons to prepare for the next volley. Signal all squadmates; each can immediately Interact to reload as a reaction. --- Special When leading a siege weapon crew, you can use this tactic to command your squadmates to Load a siege weapon instead.",
+    "tactic": {
+      "type": "offensive",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/roaring-charge",
+    "kind": "tactic",
+    "name": "Roaring Charge",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 28,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/roaring-charge",
+    "xref": {
+      "aon": "tactic-26",
+      "foundry": "ILwYke30PIAr2CVX"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Roaring Charge Two Actions Source Battlecry! pg. 28 Tactic Type Master Frequency once per 10 minutes --- You and your squad surge forward with a mighty roar. Signal all squadmates within the aura of your commander’s banner. As a reaction, these squadmates can Stride up to twice their Speed directly toward any enemy they are observing. Any creature within 10 feet of a squadmate once all movement from this tactic has been completed must attempt a Will save against your class DC with the following results. This is an emotion, fear, incapacitation, and mental effect. Critical Success No effect. Success The target is frightened 1. Failure The target is frightened 2. Critical Failure The target is frightened 3 and fleeing for 1 round.",
+    "tactic": {
+      "type": "master",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per 10 minutes"
+    }
+  },
+  {
+    "id": "wb:tactic/sanguine-revitalization",
+    "kind": "tactic",
+    "name": "Sanguine Revitalization",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 29,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/sanguine-revitalization",
+    "xref": {
+      "aon": "tactic-31",
+      "foundry": "ZI7TLmmUu7fYLrP0"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Sanguine Revitalization Two Actions Source Battlecry! pg. 29 Tactic Type Legendary Frequency once per day --- Your squad is rejuvenated by the arterial spray of your enemies. Choose a creature within the aura of your commander’s banner and signal all squadmates within the aura who are wielding a piercing or slashing melee weapon, or who have a piercing or slashing melee unarmed attack. Those allies can Stride up to half their Speed as a free action. If they end this movement within reach of the designated target, they can Strike the target with the required weapon or unarmed attack as a reaction. Once all Strikes are completed, if the target took damage and is not immune to bleed damage, it must succeed at a Fortitude saving throw against your class DC or take 10 points of persistent bleed damage. The target takes a circumstance penalty on their save equal to the number of successful Strikes made as part of this tactic (up to a maximum –4 circumstance penalty). Your squadmates are energized by the display of your enemy’s imminent defeat; each squadmate in a 20-foot emanation is healed for 10d6 Hit Points.",
+    "tactic": {
+      "type": "legendary",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per day"
+    }
+  },
+  {
+    "id": "wb:tactic/seek-and-destroy",
+    "kind": "tactic",
+    "name": "Seek and Destroy",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "uncommon",
+    "source": {
+      "book": "Pathfinder #223: Hell's Destiny",
+      "page": 227,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/seek-and-destroy",
+    "xref": {
+      "aon": "tactic-34",
+      "foundry": "h3NqgU6MEEF7mgzH"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Seek and Destroy Two Actions Source Pathfinder #223: Hell's Destiny pg. 227 Tactic Type Expert Frequency once per 10 minutes --- You direct your team to uncover hidden foes and exploit newly discovered weaknesses. Signal up to two squadmates within the aura of your commander’s banner; they can immediately Seek as a free action. Afterward, each can spend a reaction to either Point Out an enemy, Stride toward an enemy they’re observing, or attempt to Strike an enemy they’re observing. Each of the squadmates deals additional precision damage equal to half your level with their next successful Strike before the end of your next turn against a creature that has become observed by them from a successful Perception check to Seek.",
+    "tactic": {
+      "type": "expert",
+      "actions": 2,
+      "actions_texto": "Two Actions",
+      "frequency": "once per 10 minutes"
+    }
+  },
+  {
+    "id": "wb:tactic/shadows-in-the-moonlight",
+    "kind": "tactic",
+    "name": "Shadows in the Moonlight",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Pathfinder #223: Hell's Destiny",
+      "page": 227,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/shadows-in-the-moonlight",
+    "xref": {
+      "aon": "tactic-33",
+      "foundry": "EZcykqDJzQyZmJ7E"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Shadows in the Moonlight Single Action or Two Actions Source Pathfinder #223: Hell's Destiny pg. 227 Tactic Type Mobility --- Your commands help your team evade notice. Signal all squadmates within your banner’s aura; until the end of your next turn, you and each ally count as Following the Expert for any checks to Hide or Sneak and can ignore the noisy trait on any armor you wear. If you spend 2 actions to use this tactic, up to two squadmates within your banner’s aura can also either Hide or Sneak as a free action. --- Special If you have this tactic prepared, you can use Warfare Lore in place of Stealth for checks you attempt to Hide and Sneak.",
+    "tactic": {
+      "type": "mobility",
+      "actions": 1,
+      "actions_texto": "Single Action or Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/shields-up",
+    "kind": "tactic",
+    "name": "Shields Up!",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/shields-up",
+    "xref": {
+      "aon": "tactic-12",
+      "foundry": "LAo3ERyiaHx3E8qg"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Shields Up! Single Action Source Battlecry! pg. 26 Tactic Type Offensive --- You signal your allies to ready their defenses. Signal all squadmates within the aura of your commander’s banner; each can immediately Raise a Shield as a reaction. Squadmates who are wielding a parry weapon can instead position that weapon defensively as a reaction. --- Special If one of your squadmates knows or has prepared the shield cantrip, they can cast it as a reaction instead of taking the actions normally granted by this tactic.",
+    "tactic": {
+      "type": "offensive",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/slip-and-sizzle",
+    "kind": "tactic",
+    "name": "Slip and Sizzle",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 27,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/slip-and-sizzle",
+    "xref": {
+      "aon": "tactic-18",
+      "foundry": "OULAoPQYFoiRhjXP"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Slip and Sizzle Two Actions Source Battlecry! pg. 27 Tactic Type Expert --- Your team executes a brutal technique designed to knock down an opponent and blast them with magical devastation. Signal up to two squadmates within the aura of your commander’s banner; one of these squadmates must be adjacent to an opponent and the other must be capable of casting a spell that deals damage. The first squadmate can attempt to Trip the adjacent opponent as a reaction. If this Trip is successful, the second squadmate can cast a ranged spell that deals damage and takes 2 or fewer actions to cast. This spell is cast as a reaction and must either target the tripped opponent or include the tripped opponent in the spell’s area. If the second squadmate cast a spell using slots or Focus Points as part of this tactic, they are slowed 1 until the end of their next turn and do not gain a reaction when they regain actions at the start of their next turn.",
+    "tactic": {
+      "type": "expert",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/strike-hard",
+    "kind": "tactic",
+    "name": "Strike Hard!",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/strike-hard",
+    "xref": {
+      "aon": "tactic-13",
+      "foundry": "73W3mBLXRPfeVl3G"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Strike Hard! Two Actions Source Battlecry! pg. 26 Tactic Type Offensive --- You command an ally to attack. Signal a squadmate within the aura of your commander’s banner. That ally immediately attempts a Strike as a reaction.",
+    "tactic": {
+      "type": "offensive",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/stupefying-raid",
+    "kind": "tactic",
+    "name": "Stupefying Raid",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 27,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/stupefying-raid",
+    "xref": {
+      "aon": "tactic-19",
+      "foundry": "7HRhXh46dJVb241Y"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Stupefying Raid Two Actions Source Battlecry! pg. 27 Tactic Type Expert --- Your team dashes about in a series of maneuvers that leave the enemy befuddled. Signal up to two squadmates within the aura of your commander’s banner; these squadmates can Stride up to their Speed as a reaction. Each enemy they are adjacent to at any point during this movement must attempt a Will save against your class DC or become stupefied 1 for 1 round (stupefied 2 on a critical failure); this is a mental effect.",
+    "tactic": {
+      "type": "expert",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/tactical-takedown",
+    "kind": "tactic",
+    "name": "Tactical Takedown",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 26,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/tactical-takedown",
+    "xref": {
+      "aon": "tactic-14",
+      "foundry": "KtxzyElOleyy74Lg"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Tactical Takedown Two Actions Source Battlecry! pg. 26 Tactic Type Offensive --- You direct a coordinated maneuver that sends an enemy tumbling down. Signal up to two squadmates within the aura of your commander’s banner. Each of those allies can Stride up to half their Speed as a reaction. If they both end this movement adjacent to an enemy, that enemy must succeed at a Reflex save against your class DC or fall prone.",
+    "tactic": {
+      "type": "offensive",
+      "actions": 2,
+      "actions_texto": "Two Actions"
+    }
+  },
+  {
+    "id": "wb:tactic/take-the-high-ground",
+    "kind": "tactic",
+    "name": "Take the High Ground",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 27,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/take-the-high-ground",
+    "xref": {
+      "aon": "tactic-20",
+      "foundry": "HUJBYqs2vTTBeZgO"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Take the High Ground Single Action Source Battlecry! pg. 27 Tactic Type Expert --- Your ally leaps to secure the high ground with a little help from the squad. Signal a squadmate within the aura of your commander’s banner; as a free action, that squadmate can Stride directly toward any other squadmate you are both observing. If the first squadmate ends this movement adjacent to another squadmate, the first squadmate can immediately Leap up to 25 feet horizontally or 15 feet vertically as a reaction, boosted by the other squadmate. This distance increases to 40 feet horizontally or 25 feet vertically if you have legendary proficiency in Warfare Lore.",
+    "tactic": {
+      "type": "expert",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/the-bigger-they-are",
+    "kind": "tactic",
+    "name": "The Bigger They Are",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 27,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/the-bigger-they-are",
+    "xref": {
+      "aon": "tactic-21",
+      "foundry": "Czcdh3pPzQ7y1cV7"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "The Bigger They Are Single Action Source Battlecry! pg. 27 Tactic Type Master --- Regardless of your individual strengths, collectively your squad has the power to move mountains and topple giants. Signal a squadmate within the aura of your commander’s banner. That squadmate can attempt to Reposition, Shove, or Trip a target within their reach. Each other squadmate who is adjacent to the original squadmate or the target can attempt to assist with the maneuver as a reaction. For each squadmate who assists in this way, the original squadmate increases the maximum size of creature they can target (for example, if a total of two squadmates participated in this maneuver, the initial squadmate could target a creature up to two sizes larger than them.) The original squadmate gains a circumstance bonus on their check to Reposition, Shove, or Trip equal to the number of additional squadmates who assisted in the maneuver (maximum +4).",
+    "tactic": {
+      "type": "master",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:tactic/valkyries-charge",
+    "kind": "tactic",
+    "name": "Valkyrie's Charge",
+    "level": null,
+    "traits": [
+      "brandish",
+      "commander",
+      "tactic"
+    ],
+    "rarity": "common",
+    "source": {
+      "book": "Battlecry!",
+      "page": 29,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/valkyries-charge",
+    "xref": {
+      "aon": "tactic-32",
+      "foundry": "DGmzeAr4IfCnKN0R"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Valkyrie's Charge Three Actions Source Battlecry! pg. 29 Tactic Type Legendary Frequency once per day --- You and your allies defy death and defeat to make a glorious final charge. You restore 80 Hit Points to each squadmate within the aura of your commander’s banner; this effect has the healing trait. If an affected ally was unconscious due to their Hit Points being reduced to 0, they can immediately Stand and pick up any dropped weapons as a free action. Then, each affected squadmate can, as a free action, Stride up to twice their Speed directly toward an enemy they are observing; if they end this movement with an enemy within their reach, they can attempt to Strike that enemy as a reaction. Squadmates can use Valkyrie’s Charge while Burrowing, Climbing, Flying, or Swimming instead of Striding if they have the corresponding movement type.",
+    "tactic": {
+      "type": "legendary",
+      "actions": 3,
+      "actions_texto": "Three Actions",
+      "frequency": "once per day"
+    }
+  },
+  {
+    "id": "wb:tactic/wait-for-it",
+    "kind": "tactic",
+    "name": "Wait for It...",
+    "level": null,
+    "traits": [
+      "commander",
+      "tactic"
+    ],
+    "rarity": "uncommon",
+    "source": {
+      "book": "Pathfinder #223: Hell's Destiny",
+      "page": 227,
+      "remaster": true,
+      "license": "ORC"
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/tactic/wait-for-it",
+    "xref": {
+      "aon": "tactic-35",
+      "foundry": "5stdIykWux9WHqce"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon+foundry",
+      "text": "aon",
+      "tactic": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Wait for It... Single Action Source Pathfinder #223: Hell's Destiny pg. 227 Tactic Type Expert --- Your team intuitively keeps their guard up even while waiting for the ideal moment to act. Signal up to two squadmates within the aura of your commander’s banner; while these squadmates Delay or Ready an action, they gain a +1 circumstance bonus to AC and saving throws. A squadmate’s bonus lasts until the end of your next turn, until they stop Delaying, or until the end of the current creature’s turn when the squadmate uses the designated action they Readied, whichever happens first. In addition, you can grant one of the squadmates an extra reaction from your drilled reactions class feature, but it can be used only to perform a designated action they Readied.",
+    "tactic": {
+      "type": "expert",
+      "actions": 1,
+      "actions_texto": "Single Action"
+    }
+  },
+  {
+    "id": "wb:class-kit/alchemist-kit-legacy",
+    "kind": "class-kit",
+    "name": "Alchemist Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/alchemist-kit-legacy",
+    "xref": {
+      "aon": "class-kit-1"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Alchemist Kit Source Core Rulebook pg. 289 Price 8 gp, 4 sp, 2 cp Money Left Over 6 gp, 5 sp, 8 cp Bulk 3, 7 light Armor Studded Leather Armor Weapons Dagger, Sling, 20 sling bullets Gear Adventurer's Pack, Alchemist's Tools, Basic Crafter's Book, 2 sets of caltrops Options repair kit (2 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "alchemist",
+      "price": 842,
+      "price_texto": "8 gp, 4 sp, 2 cp",
+      "money_left_over_texto": "6 gp, 5 sp, 8 cp",
+      "bulk": 3.7,
+      "armor": [
+        "Studded Leather Armor"
+      ],
+      "weapons": [
+        "Dagger",
+        "Sling",
+        "20 sling bullets"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Alchemist's Tools",
+        "Basic Crafter's Book",
+        "2 sets of caltrops"
+      ],
+      "options": [
+        "repair kit (2 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/alchemist-kit",
+    "kind": "class-kit",
+    "name": "Alchemist Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core 2",
+      "page": 277,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/alchemist-kit",
+    "xref": {
+      "aon": "class-kit-25"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Alchemist Kit Source Player Core 2 pg. 277 Price 8 gp, 3 sp, 2 cp Money Left Over 6 gp, 6 sp, 8 cp Bulk 3, 7 light Armor Studded Leather Armor Weapons sling with 20 bullets, Dagger Gear caltrops (2 sets), Alchemist's Toolkit, Adventurer's Pack Options repair toolkit (2 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "alchemist",
+      "price": 832,
+      "price_texto": "8 gp, 3 sp, 2 cp",
+      "money_left_over_texto": "6 gp, 6 sp, 8 cp",
+      "bulk": 3.7,
+      "armor": [
+        "Studded Leather Armor"
+      ],
+      "weapons": [
+        "sling with 20 bullets",
+        "Dagger"
+      ],
+      "gear": [
+        "caltrops (2 sets)",
+        "Alchemist's Toolkit",
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "repair toolkit (2 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/barbarian-kit-legacy",
+    "kind": "class-kit",
+    "name": "Barbarian Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/barbarian-kit-legacy",
+    "xref": {
+      "aon": "class-kit-2"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Barbarian Kit Source Core Rulebook pg. 289 Price 4 gp Money Left Over 11 gp Bulk 3, 5 light Armor Hide Armor Weapons 4 Javelins Gear Adventurer's Pack, Grappling Hook Options greataxe (2 gp), greatclub (1 gp), greatsword (2 gp), or battle axe and steel shield (3 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "barbarian",
+      "price": 400,
+      "price_texto": "4 gp",
+      "money_left_over_texto": "11 gp",
+      "bulk": 3.5,
+      "armor": [
+        "Hide Armor"
+      ],
+      "weapons": [
+        "4 Javelins"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Grappling Hook"
+      ],
+      "options": [
+        "greataxe (2 gp)",
+        "greatclub (1 gp)",
+        "greatsword (2 gp)",
+        "or battle axe and steel shield (3 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/barbarian-kit",
+    "kind": "class-kit",
+    "name": "Barbarian Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core 2",
+      "page": 277,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/barbarian-kit",
+    "xref": {
+      "aon": "class-kit-26"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Barbarian Kit Source Player Core 2 pg. 277 Price 4 gp Money Left Over 11 gp Bulk 3, 5 light Armor Hide Armor Weapons javelins (4) Gear Grappling Hook, Adventurer's Pack Options greataxe (2 gp), greatclub (1 gp), greatsword (2 gp), or battle axe and steel shield (3 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "barbarian",
+      "price": 400,
+      "price_texto": "4 gp",
+      "money_left_over_texto": "11 gp",
+      "bulk": 3.5,
+      "armor": [
+        "Hide Armor"
+      ],
+      "weapons": [
+        "javelins (4)"
+      ],
+      "gear": [
+        "Grappling Hook",
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "greataxe (2 gp)",
+        "greatclub (1 gp)",
+        "greatsword (2 gp)",
+        "or battle axe and steel shield (3 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/bard-kit",
+    "kind": "class-kit",
+    "name": "Bard Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core",
+      "page": 268,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/bard-kit",
+    "xref": {
+      "aon": "class-kit-17"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Bard Kit Source Player Core pg. 268 Price 7 gp, 5 sp, 2 cp Money Left Over 7 gp, 4 sp, 8 cp Bulk 4, 4 light Armor Studded Leather Armor Weapons sling with 20 bullets, Rapier, Dagger Gear Adventurer's Pack, Musical Instrument (Handheld) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "bard",
+      "price": 752,
+      "price_texto": "7 gp, 5 sp, 2 cp",
+      "money_left_over_texto": "7 gp, 4 sp, 8 cp",
+      "bulk": 4.4,
+      "armor": [
+        "Studded Leather Armor"
+      ],
+      "weapons": [
+        "sling with 20 bullets",
+        "Rapier",
+        "Dagger"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Musical Instrument (Handheld)"
+      ],
+      "options": []
+    }
+  },
+  {
+    "id": "wb:class-kit/bard-kit-legacy",
+    "kind": "class-kit",
+    "name": "Bard Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/bard-kit-legacy",
+    "xref": {
+      "aon": "class-kit-3"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Bard Kit Source Core Rulebook pg. 289 Price 7 gp, 5 sp, 2 cp Money Left Over 7 gp, 4 sp, 8 cp Bulk 4, 4 light Armor Studded Leather Armor Weapons Dagger, Rapier, Sling, 20 Sling Bullets Gear Adventurer's Pack, Musical Instrument (Handheld) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "bard",
+      "price": 752,
+      "price_texto": "7 gp, 5 sp, 2 cp",
+      "money_left_over_texto": "7 gp, 4 sp, 8 cp",
+      "bulk": 4.4,
+      "armor": [
+        "Studded Leather Armor"
+      ],
+      "weapons": [
+        "Dagger",
+        "Rapier",
+        "Sling",
+        "20 Sling Bullets"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Musical Instrument (Handheld)"
+      ],
+      "options": []
+    }
+  },
+  {
+    "id": "wb:class-kit/champion-kit",
+    "kind": "class-kit",
+    "name": "Champion Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core 2",
+      "page": 277,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/champion-kit",
+    "xref": {
+      "aon": "class-kit-27"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Champion Kit Source Player Core 2 pg. 277 Price 8 gp, 7 sp Money Left Over 6 gp, 3 sp Bulk 3, 7 light Armor Chain Mail Weapons javelins (4), Dagger Gear Grappling Hook, Crowbar, Adventurer's Pack Options steel shield (2 gp), your deity's favored weapon (see your deities entry; use the Price listed in the weapon's entry) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "champion",
+      "price": 870,
+      "price_texto": "8 gp, 7 sp",
+      "money_left_over_texto": "6 gp, 3 sp",
+      "bulk": 3.7,
+      "armor": [
+        "Chain Mail"
+      ],
+      "weapons": [
+        "javelins (4)",
+        "Dagger"
+      ],
+      "gear": [
+        "Grappling Hook",
+        "Crowbar",
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "steel shield (2 gp)",
+        "your deity's favored weapon (see your deities entry; use the Price listed in the weapon's entry)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/champion-kit-legacy",
+    "kind": "class-kit",
+    "name": "Champion Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/champion-kit-legacy",
+    "xref": {
+      "aon": "class-kit-4"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Champion Kit Source Core Rulebook pg. 289 Price 4 gp, 7 sp Money Left Over 10 gp, 3 sp Bulk 3, 7 light Armor Hide Armor Weapons Dagger, 4 Javelins Gear Adventurer's Pack, Crowbar, Grappling Hook Options steel shield (2 gp), your deity's favored weapon (see your deities entry; use the Price listed in the weapon's entry) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "champion",
+      "price": 470,
+      "price_texto": "4 gp, 7 sp",
+      "money_left_over_texto": "10 gp, 3 sp",
+      "bulk": 3.7,
+      "armor": [
+        "Hide Armor"
+      ],
+      "weapons": [
+        "Dagger",
+        "4 Javelins"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Crowbar",
+        "Grappling Hook"
+      ],
+      "options": [
+        "steel shield (2 gp)",
+        "your deity's favored weapon (see your deities entry; use the Price listed in the weapon's entry)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/cleric-kit",
+    "kind": "class-kit",
+    "name": "Cleric Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core",
+      "page": 268,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/cleric-kit",
+    "xref": {
+      "aon": "class-kit-18"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Cleric Kit Source Player Core pg. 268 Price 1 gp, 7 sp Money Left Over 13 gp, 3 sp Bulk 1, 2 light Armor Explorer's Clothing Gear Adventurer's Pack, Religious Symbol (Wooden) Options your deity's favored weapon (see your deities entry; use the Price listed in the weapon's entry), chain mail (6 gp), healer's toolkit (5 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "cleric",
+      "price": 170,
+      "price_texto": "1 gp, 7 sp",
+      "money_left_over_texto": "13 gp, 3 sp",
+      "bulk": 1.2,
+      "armor": [
+        "Explorer's Clothing"
+      ],
+      "weapons": [],
+      "gear": [
+        "Adventurer's Pack",
+        "Religious Symbol (Wooden)"
+      ],
+      "options": [
+        "your deity's favored weapon (see your deities entry; use the Price listed in the weapon's entry)",
+        "chain mail (6 gp)",
+        "healer's toolkit (5 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/cleric-kit-legacy",
+    "kind": "class-kit",
+    "name": "Cleric Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/cleric-kit-legacy",
+    "xref": {
+      "aon": "class-kit-5"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Cleric Kit Source Core Rulebook pg. 289 Price 2 gp, 2 sp Money Left Over 12 gp, 8 sp Bulk 1, 3 light Gear Adventurer's Pack, 2 sets of caltrops, Religious Symbol (Wooden) Options your deity's favored weapon (see your deities entry; use the Price listed in the weapon's entry), hide armor (2 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "cleric",
+      "price": 220,
+      "price_texto": "2 gp, 2 sp",
+      "money_left_over_texto": "12 gp, 8 sp",
+      "bulk": 1.3,
+      "armor": [],
+      "weapons": [],
+      "gear": [
+        "Adventurer's Pack",
+        "2 sets of caltrops",
+        "Religious Symbol (Wooden)"
+      ],
+      "options": [
+        "your deity's favored weapon (see your deities entry; use the Price listed in the weapon's entry)",
+        "hide armor (2 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/druid-kit",
+    "kind": "class-kit",
+    "name": "Druid Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core",
+      "page": 268,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/druid-kit",
+    "xref": {
+      "aon": "class-kit-19"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Druid Kit Source Player Core pg. 268 Price 4 gp Money Left Over 11 gp Bulk 4, 4 light Armor Hide Armor Weapons 4 javelins, Spear Gear Adventurer's Pack, Primal Symbol Options healer's toolkit (5 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "druid",
+      "price": 400,
+      "price_texto": "4 gp",
+      "money_left_over_texto": "11 gp",
+      "bulk": 4.4,
+      "armor": [
+        "Hide Armor"
+      ],
+      "weapons": [
+        "4 javelins",
+        "Spear"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Primal Symbol"
+      ],
+      "options": [
+        "healer's toolkit (5 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/druid-kit-legacy",
+    "kind": "class-kit",
+    "name": "Druid Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/druid-kit-legacy",
+    "xref": {
+      "aon": "class-kit-6"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Druid Kit Source Core Rulebook pg. 289 Price 4 gp, 4 sp Money Left Over 10 gp, 6 sp Bulk 4, 4 light Armor Leather Armor Weapons Longspear, 4 Javelins Gear Adventurer's Pack, Holly and Mistletoe Options healer's tools (5 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "druid",
+      "price": 440,
+      "price_texto": "4 gp, 4 sp",
+      "money_left_over_texto": "10 gp, 6 sp",
+      "bulk": 4.4,
+      "armor": [
+        "Leather Armor"
+      ],
+      "weapons": [
+        "Longspear",
+        "4 Javelins"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Holly and Mistletoe"
+      ],
+      "options": [
+        "healer's tools (5 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/fighter-kit",
+    "kind": "class-kit",
+    "name": "Fighter Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core",
+      "page": 268,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/fighter-kit",
+    "xref": {
+      "aon": "class-kit-20"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Fighter Kit Source Player Core pg. 268 Price 5 gp, 8 sp Money Left Over 9 gp, 2 sp Bulk 2, 2 light Armor Scale Mail Weapons Dagger Gear Grappling Hook, Adventurer's Pack Options greatsword (2 gp), longbow with 20 arrows (6 gp, 2 sp), or longsword and steel shield (3 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "fighter",
+      "price": 580,
+      "price_texto": "5 gp, 8 sp",
+      "money_left_over_texto": "9 gp, 2 sp",
+      "bulk": 2.2,
+      "armor": [
+        "Scale Mail"
+      ],
+      "weapons": [
+        "Dagger"
+      ],
+      "gear": [
+        "Grappling Hook",
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "greatsword (2 gp)",
+        "longbow with 20 arrows (6 gp, 2 sp)",
+        "or longsword and steel shield (3 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/fighter-kit-legacy",
+    "kind": "class-kit",
+    "name": "Fighter Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/fighter-kit-legacy",
+    "xref": {
+      "aon": "class-kit-7"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Fighter Kit Source Core Rulebook pg. 289 Price 3 gp, 8 sp Money Left Over 11 gp, 2 sp Bulk 3, 2 light Armor Hide Armor Weapons Dagger Gear Adventurer's Pack, Grappling Hook Options greatsword (2 gp), longbow with 20 arrows (6 gp, 2 sp), or longsword and steel shield (3 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "fighter",
+      "price": 380,
+      "price_texto": "3 gp, 8 sp",
+      "money_left_over_texto": "11 gp, 2 sp",
+      "bulk": 3.2,
+      "armor": [
+        "Hide Armor"
+      ],
+      "weapons": [
+        "Dagger"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Grappling Hook"
+      ],
+      "options": [
+        "greatsword (2 gp)",
+        "longbow with 20 arrows (6 gp, 2 sp)",
+        "or longsword and steel shield (3 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/investigator-kit-legacy",
+    "kind": "class-kit",
+    "name": "Investigator Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Advanced Player's Guide",
+      "page": 249,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/investigator-kit-legacy",
+    "xref": {
+      "aon": "class-kit-13"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Investigator Kit Source Advanced Player's Guide pg. 249 Price 9 gp, 2 sp Money Left Over 5 gp, 8 sp Bulk 3, 5 light Armor Studded Leather Armor Weapons Sap, Shortsword, Crossbow, 20 bolts Gear Adventurer's Pack, Crowbar Options alchemist's tools (3 gp), simple manacles (3 gp), writing set (1 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "investigator",
+      "price": 920,
+      "price_texto": "9 gp, 2 sp",
+      "money_left_over_texto": "5 gp, 8 sp",
+      "bulk": 3.5,
+      "armor": [
+        "Studded Leather Armor"
+      ],
+      "weapons": [
+        "Sap",
+        "Shortsword",
+        "Crossbow",
+        "20 bolts"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Crowbar"
+      ],
+      "options": [
+        "alchemist's tools (3 gp)",
+        "simple manacles (3 gp)",
+        "writing set (1 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/investigator-kit",
+    "kind": "class-kit",
+    "name": "Investigator Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core 2",
+      "page": 277,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/investigator-kit",
+    "xref": {
+      "aon": "class-kit-28"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Investigator Kit Source Player Core 2 pg. 277 Price 9 gp, 2 sp Money Left Over 5 gp, 8 sp Bulk 3, 5 light Armor Studded Leather Armor Weapons Shortsword, Sap, crossbow with 20 bolts Gear Crowbar, Adventurer's Pack Options alchemist’s toolkit (3 gp), simple manacles (3 gp), writing set (1 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "investigator",
+      "price": 920,
+      "price_texto": "9 gp, 2 sp",
+      "money_left_over_texto": "5 gp, 8 sp",
+      "bulk": 3.5,
+      "armor": [
+        "Studded Leather Armor"
+      ],
+      "weapons": [
+        "Shortsword",
+        "Sap",
+        "crossbow with 20 bolts"
+      ],
+      "gear": [
+        "Crowbar",
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "alchemist’s toolkit (3 gp)",
+        "simple manacles (3 gp)",
+        "writing set (1 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/monk-kit",
+    "kind": "class-kit",
+    "name": "Monk Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core 2",
+      "page": 277,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/monk-kit",
+    "xref": {
+      "aon": "class-kit-29"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Monk Kit Source Player Core 2 pg. 277 Price 5 gp, 3 sp Money Left Over 9 gp, 7 sp Bulk 3, 3 light Armor Explorer's Clothing Weapons darts (10) Gear Grappling Hook, Climbing Kit, Adventurer's Pack, Smoke Ball (Lesser) Options staff (0 gp), longspear (5 sp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "monk",
+      "price": 530,
+      "price_texto": "5 gp, 3 sp",
+      "money_left_over_texto": "9 gp, 7 sp",
+      "bulk": 3.3,
+      "armor": [
+        "Explorer's Clothing"
+      ],
+      "weapons": [
+        "darts (10)"
+      ],
+      "gear": [
+        "Grappling Hook",
+        "Climbing Kit",
+        "Adventurer's Pack",
+        "Smoke Ball (Lesser)"
+      ],
+      "options": [
+        "staff (0 gp)",
+        "longspear (5 sp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/monk-kit-legacy",
+    "kind": "class-kit",
+    "name": "Monk Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/monk-kit-legacy",
+    "xref": {
+      "aon": "class-kit-8"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Monk Kit Source Core Rulebook pg. 289 Price 5 gp, 3 sp Money Left Over 9 gp, 7 sp Bulk 3, 2 light Weapons 10 darts Gear Adventurer's Pack, Climbing Kit, Grappling Hook, Smokestick (Lesser) Options staff (0 sp), longspear (5 sp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "monk",
+      "price": 530,
+      "price_texto": "5 gp, 3 sp",
+      "money_left_over_texto": "9 gp, 7 sp",
+      "bulk": 3.2,
+      "armor": [],
+      "weapons": [
+        "10 darts"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Climbing Kit",
+        "Grappling Hook",
+        "Smokestick (Lesser)"
+      ],
+      "options": [
+        "staff (0 sp)",
+        "longspear (5 sp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/oracle-kit-legacy",
+    "kind": "class-kit",
+    "name": "Oracle Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Advanced Player's Guide",
+      "page": 249,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/oracle-kit-legacy",
+    "xref": {
+      "aon": "class-kit-14"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Oracle Kit Source Advanced Player's Guide pg. 249 Price 5 gp, 5 sp, 2 cp Money Left Over 9 gp, 4 sp, 8 cp Bulk 3, 3 light Armor Studded Leather Armor Weapons Mace, Sling, 20 sling bullets Gear Adventurer's Pack Options steel shield (2 gp), healer's tools (5 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "oracle",
+      "price": 552,
+      "price_texto": "5 gp, 5 sp, 2 cp",
+      "money_left_over_texto": "9 gp, 4 sp, 8 cp",
+      "bulk": 3.3,
+      "armor": [
+        "Studded Leather Armor"
+      ],
+      "weapons": [
+        "Mace",
+        "Sling",
+        "20 sling bullets"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "steel shield (2 gp)",
+        "healer's tools (5 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/oracle-kit",
+    "kind": "class-kit",
+    "name": "Oracle Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core 2",
+      "page": 277,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/oracle-kit",
+    "xref": {
+      "aon": "class-kit-30"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Oracle Kit Source Player Core 2 pg. 277 Price 5 gp, 5 sp, 2 cp Money Left Over 9 gp, 4 sp, 8 cp Bulk 3, 3 light Armor Studded Leather Armor Weapons sling with 20 bullets, Mace Gear Adventurer's Pack Options steel shield (2 gp), healer’s toolkit (5 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "oracle",
+      "price": 552,
+      "price_texto": "5 gp, 5 sp, 2 cp",
+      "money_left_over_texto": "9 gp, 4 sp, 8 cp",
+      "bulk": 3.3,
+      "armor": [
+        "Studded Leather Armor"
+      ],
+      "weapons": [
+        "sling with 20 bullets",
+        "Mace"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "steel shield (2 gp)",
+        "healer’s toolkit (5 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/ranger-kit",
+    "kind": "class-kit",
+    "name": "Ranger Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core",
+      "page": 268,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/ranger-kit",
+    "xref": {
+      "aon": "class-kit-21"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Ranger Kit Source Player Core pg. 268 Price 3 gp, 7 sp Money Left Over 11 gp, 3 sp Bulk 2, 1 light Armor Leather Armor Weapons Dagger Gear Adventurer's Pack Options longbow with 20 arrows (6 gp, 2 sp), longsword and steel shield (3 gp), 2 shortswords (1 gp, 8 sp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "ranger",
+      "price": 370,
+      "price_texto": "3 gp, 7 sp",
+      "money_left_over_texto": "11 gp, 3 sp",
+      "bulk": 2.1,
+      "armor": [
+        "Leather Armor"
+      ],
+      "weapons": [
+        "Dagger"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "longbow with 20 arrows (6 gp, 2 sp)",
+        "longsword and steel shield (3 gp)",
+        "2 shortswords (1 gp, 8 sp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/ranger-kit-legacy",
+    "kind": "class-kit",
+    "name": "Ranger Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/ranger-kit-legacy",
+    "xref": {
+      "aon": "class-kit-9"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Ranger Kit Source Core Rulebook pg. 289 Price 3 gp, 7 sp Money Left Over 11 gp, 3 sp Bulk 2, 1 light Armor Leather Armor Weapons Dagger Gear Adventurer's Pack Options longbow and 20 arrows (6 gp, 2 sp), longsword and steel shield (3 gp), 2 shortswords (1gp, 8 sp), snare kit (5 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "ranger",
+      "price": 370,
+      "price_texto": "3 gp, 7 sp",
+      "money_left_over_texto": "11 gp, 3 sp",
+      "bulk": 2.1,
+      "armor": [
+        "Leather Armor"
+      ],
+      "weapons": [
+        "Dagger"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "longbow and 20 arrows (6 gp, 2 sp)",
+        "longsword and steel shield (3 gp)",
+        "2 shortswords (1gp, 8 sp)",
+        "snare kit (5 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/rogue-kit-legacy",
+    "kind": "class-kit",
+    "name": "Rogue Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/rogue-kit-legacy",
+    "xref": {
+      "aon": "class-kit-10"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Rogue Kit Source Core Rulebook pg. 289 Price 6 gp, 2 sp Money Left Over 8 gp, 8 sp Bulk 4, 1 light Armor Leather Armor Weapons Dagger, Rapier Gear Adventurer's Pack, Climbing Kit Options thieves' tools (3 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "rogue",
+      "price": 620,
+      "price_texto": "6 gp, 2 sp",
+      "money_left_over_texto": "8 gp, 8 sp",
+      "bulk": 4.1,
+      "armor": [
+        "Leather Armor"
+      ],
+      "weapons": [
+        "Dagger",
+        "Rapier"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Climbing Kit"
+      ],
+      "options": [
+        "thieves' tools (3 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/rogue-kit",
+    "kind": "class-kit",
+    "name": "Rogue Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core",
+      "page": 268,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/rogue-kit",
+    "xref": {
+      "aon": "class-kit-22"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Rogue Kit Source Player Core pg. 268 Price 6 gp, 2 sp Money Left Over 8 gp, 8 sp Bulk 4, 1 light Armor Leather Armor Weapons Rapier, Dagger Gear Adventurer's Pack Options thieves' toolkit (3 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "rogue",
+      "price": 620,
+      "price_texto": "6 gp, 2 sp",
+      "money_left_over_texto": "8 gp, 8 sp",
+      "bulk": 4.1,
+      "armor": [
+        "Leather Armor"
+      ],
+      "weapons": [
+        "Rapier",
+        "Dagger"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "thieves' toolkit (3 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/sorcerer-kit-legacy",
+    "kind": "class-kit",
+    "name": "Sorcerer Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/sorcerer-kit-legacy",
+    "xref": {
+      "aon": "class-kit-11"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Sorcerer Kit Source Core Rulebook pg. 289 Price 2 gp, 3 sp, 2 cp Money Left Over 12 gp, 6 sp, 8 cp Bulk 1, 6 light Weapons Dagger, Sling, 20 sling bullets Gear Adventurer's Pack, 2 sets of caltrops Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "sorcerer",
+      "price": 232,
+      "price_texto": "2 gp, 3 sp, 2 cp",
+      "money_left_over_texto": "12 gp, 6 sp, 8 cp",
+      "bulk": 1.6,
+      "armor": [],
+      "weapons": [
+        "Dagger",
+        "Sling",
+        "20 sling bullets"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "2 sets of caltrops"
+      ],
+      "options": []
+    }
+  },
+  {
+    "id": "wb:class-kit/sorcerer-kit",
+    "kind": "class-kit",
+    "name": "Sorcerer Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core 2",
+      "page": 277,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/sorcerer-kit",
+    "xref": {
+      "aon": "class-kit-31"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Sorcerer Kit Source Player Core 2 pg. 277 Price 2 gp, 4 sp, 2 cp Money Left Over 12 gp, 5 sp, 8 cp Bulk 1, 7 light Armor Explorer's Clothing Weapons sling with 20 bullets, Dagger Gear Adventurer's Pack Options adventurer’s pack, caltrops (2 sets) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "sorcerer",
+      "price": 242,
+      "price_texto": "2 gp, 4 sp, 2 cp",
+      "money_left_over_texto": "12 gp, 5 sp, 8 cp",
+      "bulk": 1.7,
+      "armor": [
+        "Explorer's Clothing"
+      ],
+      "weapons": [
+        "sling with 20 bullets",
+        "Dagger"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "adventurer’s pack",
+        "caltrops (2 sets)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/swashbuckler-kit-legacy",
+    "kind": "class-kit",
+    "name": "Swashbuckler Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Advanced Player's Guide",
+      "page": 249,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/swashbuckler-kit-legacy",
+    "xref": {
+      "aon": "class-kit-15"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Swashbuckler Kit Source Advanced Player's Guide pg. 249 Price 8 gp, 7 sp Money Left Over 6 gp, 3 sp Bulk 3, 3 light Armor Leather Armor Weapons Hand Crossbow, 20 bolts, Rapier Gear Adventurer's Pack Options buckler (1 gp), dueling cape (5 sp), fine clothing (2 gp), grappling hook (1 sp), main-gauche (5 sp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "swashbuckler",
+      "price": 870,
+      "price_texto": "8 gp, 7 sp",
+      "money_left_over_texto": "6 gp, 3 sp",
+      "bulk": 3.3,
+      "armor": [
+        "Leather Armor"
+      ],
+      "weapons": [
+        "Hand Crossbow",
+        "20 bolts",
+        "Rapier"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "buckler (1 gp)",
+        "dueling cape (5 sp)",
+        "fine clothing (2 gp)",
+        "grappling hook (1 sp)",
+        "main-gauche (5 sp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/swashbuckler-kit",
+    "kind": "class-kit",
+    "name": "Swashbuckler Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core 2",
+      "page": 277,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/swashbuckler-kit",
+    "xref": {
+      "aon": "class-kit-32"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Swashbuckler Kit Source Player Core 2 pg. 277 Price 8 gp, 7 sp Money Left Over 6 gp, 3 sp Bulk 3, 3 light Armor Leather Armor Weapons hand crossbow with 20 bolts, Rapier Gear Adventurer's Pack Options buckler (1 gp), dueling cape (5 sp), fine clothing (2 gp), grappling hook (1 sp), main-gauche (5 sp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "swashbuckler",
+      "price": 870,
+      "price_texto": "8 gp, 7 sp",
+      "money_left_over_texto": "6 gp, 3 sp",
+      "bulk": 3.3,
+      "armor": [
+        "Leather Armor"
+      ],
+      "weapons": [
+        "hand crossbow with 20 bolts",
+        "Rapier"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "buckler (1 gp)",
+        "dueling cape (5 sp)",
+        "fine clothing (2 gp)",
+        "grappling hook (1 sp)",
+        "main-gauche (5 sp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/witch-kit-legacy",
+    "kind": "class-kit",
+    "name": "Witch Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Advanced Player's Guide",
+      "page": 249,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/witch-kit-legacy",
+    "xref": {
+      "aon": "class-kit-16"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Witch Kit Source Advanced Player's Guide pg. 249 Price 2 gp, 3 sp, 2 cp Money Left Over 12 gp, 6 sp, 8 cp Bulk 2, 6 light Armor Explorer's Clothing Weapons Sickle, Sling, 20 sling bullets, Staff Gear Adventurer's Pack, Material Component Pouch Options cookware (1 gp), healer's tools (5 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "witch",
+      "price": 232,
+      "price_texto": "2 gp, 3 sp, 2 cp",
+      "money_left_over_texto": "12 gp, 6 sp, 8 cp",
+      "bulk": 2.6,
+      "armor": [
+        "Explorer's Clothing"
+      ],
+      "weapons": [
+        "Sickle",
+        "Sling",
+        "20 sling bullets",
+        "Staff"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Material Component Pouch"
+      ],
+      "options": [
+        "cookware (1 gp)",
+        "healer's tools (5 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/witch-kit",
+    "kind": "class-kit",
+    "name": "Witch Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core",
+      "page": 268,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/witch-kit",
+    "xref": {
+      "aon": "class-kit-23"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Witch Kit Source Player Core pg. 268 Price 1 gp, 8 sp, 2 cp Money Left Over 13 gp, 1 sp, 8 cp Bulk 2, 5 light Armor Explorer's Clothing Weapons Sickle, sling with 20 bullets, Staff Gear Adventurer's Pack Options cookware (1 gp), healer's toolkit (5 gp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "witch",
+      "price": 182,
+      "price_texto": "1 gp, 8 sp, 2 cp",
+      "money_left_over_texto": "13 gp, 1 sp, 8 cp",
+      "bulk": 2.5,
+      "armor": [
+        "Explorer's Clothing"
+      ],
+      "weapons": [
+        "Sickle",
+        "sling with 20 bullets",
+        "Staff"
+      ],
+      "gear": [
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "cookware (1 gp)",
+        "healer's toolkit (5 gp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/wizard-kit-legacy",
+    "kind": "class-kit",
+    "name": "Wizard Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Core Rulebook",
+      "page": 289,
+      "remaster": false,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/wizard-kit-legacy",
+    "xref": {
+      "aon": "class-kit-12"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Wizard Kit Source Core Rulebook pg. 289 Price 3 gp Money Left Over 12 gp Bulk 2, 2 light Weapons Staff Gear Adventurer's Pack, Material Component Pouch, Writing Set Options crossbow with 20 bolts (3 gp, 2 sp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "wizard",
+      "price": 300,
+      "price_texto": "3 gp",
+      "money_left_over_texto": "12 gp",
+      "bulk": 2.2,
+      "armor": [],
+      "weapons": [
+        "Staff"
+      ],
+      "gear": [
+        "Adventurer's Pack",
+        "Material Component Pouch",
+        "Writing Set"
+      ],
+      "options": [
+        "crossbow with 20 bolts (3 gp, 2 sp)"
+      ]
+    }
+  },
+  {
+    "id": "wb:class-kit/wizard-kit",
+    "kind": "class-kit",
+    "name": "Wizard Kit",
+    "level": null,
+    "traits": [],
+    "rarity": "common",
+    "source": {
+      "book": "Player Core",
+      "page": 268,
+      "remaster": true,
+      "license": null
+    },
+    "requires": null,
+    "grants": [],
+    "text": "wb:text/class-kit/wizard-kit",
+    "xref": {
+      "aon": "class-kit-24"
+    },
+    "prov": {
+      "name": "aon",
+      "level": "aon",
+      "traits": "aon",
+      "rarity": "aon",
+      "source": "aon",
+      "text": "aon",
+      "kit": "aon"
+    },
+    "grants_completos": false,
+    "requires_parseado": true,
+    "texto": "Wizard Kit Source Player Core pg. 268 Price 2 gp, 6 sp Money Left Over 12 gp, 4 sp Bulk 2, 2 light Armor Explorer's Clothing Weapons Staff Gear Writing Set, Adventurer's Pack Options crossbow with 20 bolts (3 gp, 2 sp) Class Kits Source Core Rulebook pg. 289 If you want to quickly decide how to spend your starting money on what your class needs, start with one of these kits. Note than an adventurer’s pack, which is included in each kit, contains a backpack, a bedroll, 10 pieces of chalk, flint and steel, 50 feet of rope, 2 weeks’ rations, soap, 5 torches, and a waterskin. Click here for the full rules on Class Kits.",
+    "kit": {
+      "class": "wizard",
+      "price": 260,
+      "price_texto": "2 gp, 6 sp",
+      "money_left_over_texto": "12 gp, 4 sp",
+      "bulk": 2.2,
+      "armor": [
+        "Explorer's Clothing"
+      ],
+      "weapons": [
+        "Staff"
+      ],
+      "gear": [
+        "Writing Set",
+        "Adventurer's Pack"
+      ],
+      "options": [
+        "crossbow with 20 bolts (3 gp, 2 sp)"
+      ]
+    }
+  }
+]

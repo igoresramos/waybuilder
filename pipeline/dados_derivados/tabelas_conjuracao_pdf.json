@@ -1,66 +1,2002 @@
 {
-  "_doc": "Resgate do antigo pipeline/dados_brutos/tabelas_conjuracao_pdf.json, perdido por ter nascido em diretorio ignorado pelo git. Reconstruido em 2026-07-27 a partir de docs/pdfs/2026-07-26_tabelas-conjuracao.md, que estava versionado e sobreviveu. Toda afirmacao aqui vem daquele relatorio ou de conferencia contra base/index.json. NENHUM numero foi inventado: o que se perdeu esta como null com o motivo ao lado.",
+  "_doc": "Tabela de slots de conjuracao lida a olho/pdftotext dos livros oficiais (War of Immortals, Secrets of Magic, Rage of Elements, Player Core, Player Core 2, Dark Archive) -- exigiu leitura/julgamento humano, por isso mora aqui (dados_derivados/, versionado) e nao em dados_brutos/ (dump reproduzivel por pin, fora do git, ver pipeline/.gitignore). Consolidado em 2026-07-27 a partir de pipeline/dados_brutos/tabelas_conjuracao_pdf.json, que tinha a rodada completa das 11 classes conjuradoras (a versao anterior deste arquivo, criada logo apos a perda do original em dados_brutos/, so tinha 3 das 11 -- animist/magus/summoner -- porque a recuperacao das 8 restantes (bard/cleric/druid/oracle/psychic/sorcerer/witch/wizard) aconteceu DEPOIS, e ficou presa no lugar errado, sujeita a se perder de novo pela mesma causa raiz. NENHUM numero foi alterado nesta migracao, so o arquivo trocou de pasta e o _doc foi atualizado.",
   "origem": {
-    "relatorio": "docs/pdfs/2026-07-26_tabelas-conjuracao.md",
-    "sessao": "2026-07-26 18:40-21:30",
-    "metodo": "War of Immortals e PDF imagem-only (pdftotext e pdffonts confirmam zero camada de texto); paginas renderizadas com pdftoppm -r 100 -png e tabelas lidas a olho. Secrets of Magic e Rage of Elements tem texto real, lidos com pdftotext -layout.",
-    "convencao_de_pagina": "numero impresso no rodape do livro, igual ao campo source.page do index.json"
+    "gerado_em": "2026-07-26",
+    "metodo": "leitura direta das paginas renderizadas em imagem (War of Immortals e imagem-only, sem camada de texto) e pdftotext -layout para PDFs com texto (Secrets of Magic)",
+    "paginacao": "campo 'pagina' = numero impresso no rodape da pagina do livro (mesma convencao do campo source.page ja usado em index.json)",
+    "observacao_geral": "index.json (base canonica) confirma que NENHUMA classe conjuradora tem tabela numerica de slots mecanizada hoje -- so a progressao de proficiencia (expert/master/legendary) esta la. As proficiencias extraidas aqui batem exatamente com o que ja esta em index.json (progressao[].concede) para animist, magus e summoner -- validacao cruzada positiva. Rodada 2026-07-27: recuperadas as 8 classes restantes (Bard, Cleric, Druid, Oracle, Psychic, Sorcerer, Witch, Wizard) do Player Core, Player Core 2 e Dark Archive (Psychic, unica classe nunca remasterizada). Todas as 8 vieram de PDF com camada de texto real (pdftotext -layout, sem necessidade de render+imagem). 7 das 8 batem 100% com a tabela estruturada do pf2etools (cross-check independente nivel a nivel, ranks 1-10, niveis 1-20). A excecao e o Oracle: o pf2etools so tem o arquivo LEGADO (pre-remaster, sem variante -pc1), que mostra o padrao antigo (2 slots no rank de entrada, 3 no seguinte) e diverge do PDF remaster (3 no rank de entrada, 4 no seguinte). Resolvido cruzando com Foundry (oracle-spellcasting.json, texto literal confirma 3 no rank de entrada) -- ver notas da entrada oracle. Cobertura de tabela de slots agora e 11/11 classes conjuradoras, exceto Animist que continua parcial (ver entrada dedicada).",
+    "atualizado_em": "2026-07-27"
   },
-  "classes": {
-    "animist": {
-      "conjuradora": true,
-      "fonte": {"book": "War of Immortals", "page": [12, 13],
-                "nota": "p.12 advancement table, p.13 spells per day"},
-      "tradition": "divine",
-      "type": "hibrido -- dois pools independentes que nao se misturam: animist spellcasting (prepared, lista divine comum) + apparition spellcasting (spontaneous, repertorio das apparitions atuned no dia)",
-      "proficiency": {"trained": 1, "expert": 7, "master": 15, "legendary": 19},
-      "proficiency_varia_por_subclasse": false,
-      "irregularidade": "niveis 19-20 ganham um slot de apparition rank 10 marcado '0+1*', vindo da feature supreme incarnation; funciona diferente dos slots normais. O mecanismo interno nao foi lido em detalhe.",
-      "slots_per_level": "presente em pipeline/saida/conjuracao.json",
-      "slots_per_level_status": "RECUPERADO em 2026-07-27, de fonte que estava em disco o tempo todo. A afirmacao anterior -- 'nem Foundry nem AoN materializam a tabela' -- era MEIA verdade: o item de classe do Foundry so tem o flag spellcasting:1, mas o doc de classe do AoN carrega a tabela inteira em HTML dentro do campo `markdown`. O extrator lia so o campo `text`, que e a versao achatada, sem tabela. O cache do proprio extrator (dados_brutos/aon/class__animist.json) ja continha o markdown. Parser em pipeline/tabelas_conjuracao_aon.py, validado contra as outras 10 conjuradoras: reproduz as 10 celula a celula contra o pf2etools, fonte independente. Teto de rank 9, mais um slot de apparition rank 10 pela feature de nivel 19.",
-      "conferido_contra_base": "proficiency 1/7/15/19 e tradition divine batem exatamente com base/index.json em 2026-07-27, o que confirma que este resgate e fiel ao original"
+  "classes": [
+    {
+      "classe": "animist",
+      "livro": "War of Immortals",
+      "pagina": 13,
+      "pagina_advancement_table": 12,
+      "tradicao": "divine",
+      "tipo": "hibrido: prepared (animist spellcasting) + spontaneous (apparition spellcasting), dois pools de slots independentes que NAO se misturam",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 7,
+        "master": 15,
+        "legendary": 19,
+        "depende_de_subclasse": false,
+        "nota": "progressao unica, nao varia por apparition escolhida. Confirmado tambem em index.json (progressao: expert-spellcaster@7, master-spellcaster@15, legendary-spellcaster@19)."
+      },
+      "slots": {
+        "notacao": "cada valor e 'X+Y' onde X = slots via animist spellcasting (prepared, lista divine comum) e Y = slots via apparition spellcasting (spontaneous, repertorio das apparitions atuned). Tabela fonte: 'Animist Spells per Day', pagina 13.",
+        "1": {
+          "cantrips": "2+2",
+          "1": "1+1"
+        },
+        "2": {
+          "cantrips": "2+2",
+          "1": "2+1"
+        },
+        "3": {
+          "cantrips": "2+2",
+          "1": "2+1",
+          "2": "1+1"
+        },
+        "4": {
+          "cantrips": "2+2",
+          "1": "2+1",
+          "2": "2+1"
+        },
+        "5": {
+          "cantrips": "2+2",
+          "1": "2+1",
+          "2": "2+1",
+          "3": "1+1"
+        },
+        "6": {
+          "cantrips": "2+2",
+          "1": "2+1",
+          "2": "2+1",
+          "3": "2+1"
+        },
+        "7": {
+          "cantrips": "2+3",
+          "1": "2+1",
+          "2": "2+1",
+          "3": "2+1",
+          "4": "1+1"
+        },
+        "8": {
+          "cantrips": "2+3",
+          "1": "2+1",
+          "2": "2+1",
+          "3": "2+1",
+          "4": "2+1"
+        },
+        "9": {
+          "cantrips": "2+3",
+          "1": "2+1",
+          "2": "2+1",
+          "3": "2+1",
+          "4": "2+1",
+          "5": "1+1"
+        },
+        "10": {
+          "cantrips": "2+3",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+1",
+          "5": "2+1"
+        },
+        "11": {
+          "cantrips": "2+3",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+1",
+          "6": "1+1"
+        },
+        "12": {
+          "cantrips": "2+3",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+1",
+          "6": "2+1"
+        },
+        "13": {
+          "cantrips": "2+3",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+1",
+          "7": "1+1"
+        },
+        "14": {
+          "cantrips": "2+3",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+1",
+          "7": "2+1"
+        },
+        "15": {
+          "cantrips": "2+4",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+1",
+          "8": "1+1"
+        },
+        "16": {
+          "cantrips": "2+4",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+1",
+          "8": "2+1"
+        },
+        "17": {
+          "cantrips": "2+4",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+2",
+          "8": "2+1",
+          "9": "1+1"
+        },
+        "18": {
+          "cantrips": "2+4",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+2",
+          "8": "2+1",
+          "9": "2+1"
+        },
+        "19": {
+          "cantrips": "2+4",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+2",
+          "8": "2+2",
+          "9": "2+1",
+          "10": "0+1*"
+        },
+        "20": {
+          "cantrips": "2+4",
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+2",
+          "8": "2+2",
+          "9": "2+1",
+          "10": "0+1*"
+        }
+      },
+      "notas": "1st-rank aparece na coluna '1' mesmo no nivel 1 (nao ha coluna cantrip separada de slot 0 alem de cantrips). *Rank 10 (nivel 19-20): feature 'supreme incarnation' da um slot de apparition de rank 10 que funciona diferente dos demais slots (nao e um slot normal, ver texto da feature). Cantrips tambem tem componente dupla (animist+apparition) mas a tabela imprime como valor unico combinado (ex: 2+2 = 2 cantrips animist + 2 cantrips apparition)."
     },
-    "magus": {
-      "conjuradora": true,
-      "fonte": {"book": "Secrets of Magic", "page": [36, 39],
-                "nota": "p.36 advancement table, p.39 spells per day"},
-      "tradition": "arcane",
-      "type": "prepared (spellbook, como wizard)",
-      "regra_propria": "no maximo 2 slots do rank mais alto disponivel + 2 do rank imediatamente abaixo",
-      "proficiency": {"trained": 1, "expert": 9, "master": 17},
-      "chega_a_legendary": false,
-      "irregularidade": "a partir do nivel 7 um rank aparece com asterisco na tabela -- slot que so existe pela feature studious spells (p.41, nao lida em detalhe). Registrada a existencia, nao o mecanismo.",
-      "slots_per_level": "presente em base/index.json",
-      "slots_per_level_status": "NAO PERDIDO. Extraido do pf2etools por conjuracao.py, sem dependencia deste arquivo. 20 niveis, max_rank 9 no nivel 20.",
-      "conferido_contra_base": "proficiency 1/9/17 bate com base/index.json em 2026-07-27"
+    {
+      "classe": "bard",
+      "livro": "Player Core",
+      "pagina": 97,
+      "pagina_advancement_table": 96,
+      "tradicao": "occult",
+      "tipo": "spontaneous (spell repertoire)",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 7,
+        "master": 15,
+        "legendary": 19,
+        "depende_de_subclasse": false,
+        "nota": "progressao padrao trained(1)/expert(7)/master(15)/legendary(19) -- confirmada em 2 fontes: advancement table do PDF (pagina 96) e Foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster'), ja mecanizada em index.json."
+      },
+      "metodo": "texto (pdftotext -layout, PDF com camada de texto real -- pdffonts confirmou fontes embutidas, nao e scan)",
+      "slots": {
+        "notacao": "tabela fonte 'Bard Spells per Day', pagina 97. 'N*' no rank 10 (niveis 19-20) = a feature 'magnum opus' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "1": {
+          "cantrips": 5,
+          "1": 2
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 3
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 2
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3
+        },
+        "5": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 2
+        },
+        "6": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "7": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 2
+        },
+        "8": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3
+        },
+        "9": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 2
+        },
+        "10": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3
+        },
+        "11": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 2
+        },
+        "12": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3
+        },
+        "13": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 2
+        },
+        "14": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3
+        },
+        "15": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 2
+        },
+        "16": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3
+        },
+        "17": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 2
+        },
+        "18": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3
+        },
+        "19": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        },
+        "20": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        }
+      },
+      "cross_check": "pf2etools (class-bard-pc1.json, tabela 'Bard Spells per Day'): match EXATO em todos os 20 niveis, todos os ranks, incluindo cantrips e o slot marcado do rank 10. Padrao bate tambem com a regra geral de conjurador pleno (2 slots no rank de entrada, 3 no seguinte, rank novo a cada nivel impar, cantrips fixo em 5).",
+      "notas": "Remaster: Bard usa spell repertoire (spontaneo) mas a CONTAGEM de slots segue o padrao identico ao dos conjuradores prepared (2 no rank de entrada, 3 no seguinte) -- nao ganha o slot bonus que Oracle/Sorcerer tem. Confirmado batendo PDF x pf2etools."
     },
-    "summoner": {
-      "conjuradora": true,
-      "fonte": {"book": "Secrets of Magic", "page": [52, 55],
-                "nota": "p.52 advancement table, p.55 spells per day"},
-      "tradition": "depende do eidolon escolhido (arcane/divine/occult/primal) -- nao e fixo por classe",
-      "type": "spontaneous",
-      "regra_propria": "o repertorio ENCOLHE: toda vez que sobe de rank de slot, perde 2 spells do repertorio do rank mais baixo que caiu",
-      "proficiency": {"trained": 1, "expert": 9, "master": 17},
-      "chega_a_legendary": false,
-      "slots_per_level": "presente em base/index.json",
-      "slots_per_level_status": "NAO PERDIDO. Mesma origem do Magus. 20 niveis, max_rank 9 no nivel 20.",
-      "conferido_contra_base": "proficiency 1/9/17 bate com base/index.json em 2026-07-27"
+    {
+      "classe": "cleric",
+      "livro": "Player Core",
+      "pagina": 111,
+      "pagina_advancement_table": 110,
+      "tradicao": "divine",
+      "tipo": "prepared",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": null,
+        "master": null,
+        "legendary": null,
+        "depende_de_subclasse": false,
+        "nota": "progressao padrao trained(1)/expert(7)/master(15)/legendary(19) -- confirmada em 2 fontes: advancement table do PDF (pagina 110) e Foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster'), ja mecanizada em index.json."
+      },
+      "metodo": "texto (pdftotext -layout, PDF com camada de texto real -- pdffonts confirmou fontes embutidas, nao e scan)",
+      "slots": {
+        "notacao": "tabela fonte 'Cleric Spells per Day', pagina 111. 'N*' no rank 10 (niveis 19-20) = a feature 'miraculous spell' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "1": {
+          "cantrips": 5,
+          "1": 2
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 3
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 2
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3
+        },
+        "5": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 2
+        },
+        "6": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "7": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 2
+        },
+        "8": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3
+        },
+        "9": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 2
+        },
+        "10": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3
+        },
+        "11": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 2
+        },
+        "12": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3
+        },
+        "13": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 2
+        },
+        "14": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3
+        },
+        "15": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 2
+        },
+        "16": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3
+        },
+        "17": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 2
+        },
+        "18": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3
+        },
+        "19": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        },
+        "20": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        }
+      },
+      "cross_check": "pf2etools (class-cleric-pc1.json, tabela 'Cleric Spells per Day'): match EXATO em todos os 20 niveis, todos os ranks, incluindo cantrips e o slot marcado do rank 10. Padrao bate tambem com a regra geral de conjurador pleno (2 slots no rank de entrada, 3 no seguinte, rank novo a cada nivel impar, cantrips fixo em 5).",
+      "notas": "A tabela impressa marca com '*' o rank mais alto disponivel em cada nivel (nota: 'Your divine font gives you additional heal or harm spells of this rank. The number is 4 at 1st level, 5 at 5th level, and 6 at 15th level') -- e so informativo de ONDE o Divine Font se aplica, nao um numero diferente do que ja esta na celula. Os +4/+5/+6 slots extras do Divine Font em si ja estao capturados a parte (extract_divine_font() em conjuracao.py, campo divine_font em conjuracao.json) -- nao duplicados aqui. Doutrina (Cloistered/Warpriest) afeta a PROFICIENCIA (ja tratado a parte, TODO item 73), nao a contagem de slots -- a advancement table do cleric (pagina 110) nao lista milestones de spellcaster porque isso vem das 12 features de doutrina, nao da advancement table generica."
     },
-    "exemplar": {
+    {
+      "classe": "druid",
+      "livro": "Player Core",
+      "pagina": 125,
+      "pagina_advancement_table": 124,
+      "tradicao": "primal",
+      "tipo": "prepared",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 7,
+        "master": 15,
+        "legendary": 19,
+        "depende_de_subclasse": false,
+        "nota": "progressao padrao trained(1)/expert(7)/master(15)/legendary(19) -- confirmada em 2 fontes: advancement table do PDF (pagina 124) e Foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster'), ja mecanizada em index.json."
+      },
+      "metodo": "texto (pdftotext -layout, PDF com camada de texto real -- pdffonts confirmou fontes embutidas, nao e scan)",
+      "slots": {
+        "notacao": "tabela fonte 'Druid Spells per Day', pagina 125. 'N*' no rank 10 (niveis 19-20) = a feature 'primal hierophant' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "1": {
+          "cantrips": 5,
+          "1": 2
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 3
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 2
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3
+        },
+        "5": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 2
+        },
+        "6": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "7": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 2
+        },
+        "8": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3
+        },
+        "9": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 2
+        },
+        "10": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3
+        },
+        "11": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 2
+        },
+        "12": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3
+        },
+        "13": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 2
+        },
+        "14": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3
+        },
+        "15": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 2
+        },
+        "16": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3
+        },
+        "17": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 2
+        },
+        "18": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3
+        },
+        "19": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        },
+        "20": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        }
+      },
+      "cross_check": "pf2etools (class-druid-pc1.json, tabela 'Druid Spells per Day'): match EXATO em todos os 20 niveis, todos os ranks, incluindo cantrips e o slot marcado do rank 10. Padrao bate tambem com a regra geral de conjurador pleno (2 slots no rank de entrada, 3 no seguinte, rank novo a cada nivel impar, cantrips fixo em 5).",
+      "notas": "Padrao identico ao Bard/Cleric/Witch/Wizard -- conjurador pleno prepared, sem irregularidade alem do rank 10."
+    },
+    {
+      "classe": "exemplar",
+      "livro": "War of Immortals",
+      "pagina": 30,
       "conjuradora": false,
-      "fonte": {"book": "War of Immortals", "page": [29, 30]},
-      "motivo": "Initial Proficiencies e advancement table nao citam spellcasting, spell attack nem spell DC em nivel nenhum. Mecanica e divine spark canalizado em ikons (immanence passivo + transcendence ativo), sem spell slots.",
-      "slots_per_level": null,
-      "slots_per_level_status": "NAO EXISTE -- nao ha o que preencher"
+      "notas": "NAO e classe conjuradora. Advancement table (pag. 30) e Initial Proficiencies (pag. 29) nao listam spellcasting, spell attack ou spell DC em nenhum nivel. Mecanica propria: 'divine spark' canalizado em ate 3 'ikons' (immanence passivo + transcendence ativo), sem spell slots. Confirmado tambem por index.json (grants da classe nao tem 'spellcasting': true)."
     },
-    "kineticist": {
+    {
+      "classe": "kineticist",
+      "livro": "Rage of Elements",
+      "pagina": 13,
       "conjuradora": false,
-      "fonte": {"book": "Rage of Elements", "page": [13]},
-      "motivo": "usa kinetic gate + impulses (acao com trait impulse); nao lanca spells e nao tem spell slots.",
-      "slots_per_level": null,
-      "slots_per_level_status": "NAO EXISTE -- nao ha o que preencher"
+      "notas": "NAO e classe conjuradora (verificado por texto, pdftotext -layout, PDF com camada de texto real). Usa 'kinetic gate' + impulses (acoes magicas com trait impulse), nao spells nem spell slots. Confirmado tambem por index.json (sem 'spellcasting': true)."
+    },
+    {
+      "classe": "magus",
+      "livro": "Secrets of Magic",
+      "pagina": 39,
+      "pagina_advancement_table": 36,
+      "tradicao": "arcane",
+      "tipo": "prepared (spellbook, como wizard, mas maximo de 2 slots do rank mais alto e 2 do rank imediatamente abaixo)",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 9,
+        "master": 17,
+        "legendary": null,
+        "depende_de_subclasse": false,
+        "nota": "Magus NAO chega a legendary spellcaster (para em master no nivel 17). Confirmado em index.json (progressao tem expert-spellcaster@9 e master-spellcaster@17, sem entrada legendary)."
+      },
+      "slots": {
+        "notacao": "tabela fonte 'Table 2-2: Magus Spells per Day', pagina 39. '-*' = rank cuja unica vaga vem exclusivamente da feature 'studious spells' (nivel 7+, slot extra fixo para spells especificas, nao e slot normal preparavel livremente -- ver pagina 41 do livro).",
+        "1": {
+          "cantrips": 5,
+          "1": 1
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 2
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 2,
+          "2": 1
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 2,
+          "2": 2
+        },
+        "5": {
+          "cantrips": 5,
+          "2": 2,
+          "3": 2
+        },
+        "6": {
+          "cantrips": 5,
+          "2": 2,
+          "3": 2
+        },
+        "7": {
+          "cantrips": 5,
+          "2": "0*",
+          "3": 2,
+          "4": 2
+        },
+        "8": {
+          "cantrips": 5,
+          "2": "0*",
+          "3": 2,
+          "4": 2
+        },
+        "9": {
+          "cantrips": 5,
+          "2": "0*",
+          "4": 2,
+          "5": 2
+        },
+        "10": {
+          "cantrips": 5,
+          "2": "0*",
+          "4": 2,
+          "5": 2
+        },
+        "11": {
+          "cantrips": 5,
+          "3": "0*",
+          "5": 2,
+          "6": 2
+        },
+        "12": {
+          "cantrips": 5,
+          "3": "0*",
+          "5": 2,
+          "6": 2
+        },
+        "13": {
+          "cantrips": 5,
+          "4": "0*",
+          "6": 2,
+          "7": 2
+        },
+        "14": {
+          "cantrips": 5,
+          "4": "0*",
+          "6": 2,
+          "7": 2
+        },
+        "15": {
+          "cantrips": 5,
+          "4": "0*",
+          "7": 2,
+          "8": 2
+        },
+        "16": {
+          "cantrips": 5,
+          "4": "0*",
+          "7": 2,
+          "8": 2
+        },
+        "17": {
+          "cantrips": 5,
+          "4": "0*",
+          "8": 2,
+          "9": 2
+        },
+        "18": {
+          "cantrips": 5,
+          "4": "0*",
+          "8": 2,
+          "9": 2
+        },
+        "19": {
+          "cantrips": 5,
+          "4": "0*",
+          "8": 2,
+          "9": 2
+        },
+        "20": {
+          "cantrips": 5,
+          "4": "0*",
+          "8": 2,
+          "9": 2
+        }
+      },
+      "notas": "Regra explicita do livro: no maximo 2 slots do rank mais alto disponivel, e (se ja castar rank 2+) no maximo 2 slots do rank imediatamente abaixo -- os ranks intermediarios ficam vazios ('-') conforme o magus sobe de nivel e os ranks baixos saem de uso. A coluna marcada com '*' e um slot fixo que so existe por causa da feature 'studious spells' (ganha no nivel 7), nao e um slot preparavel livremente como os outros -- registrei como '0*' para deixar explicito que a leitura literal da tabela mostra travessao, mas a feature dá acesso a spells especificas nesse rank. Nao inventei o mecanismo de studious spells em detalhe -- so confirmei a existencia via titulo da nota de rodape da tabela; o detalhe fica na pagina 41, nao lida."
+    },
+    {
+      "classe": "oracle",
+      "livro": "Player Core 2",
+      "pagina": 131,
+      "pagina_advancement_table": 130,
+      "tradicao": "divine",
+      "tipo": "spontaneous (spell repertoire)",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 7,
+        "master": 15,
+        "legendary": 19,
+        "depende_de_subclasse": false,
+        "nota": "progressao padrao trained(1)/expert(7)/master(15)/legendary(19) -- confirmada em 2 fontes: advancement table do PDF (pagina 130) e Foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster'), ja mecanizada em index.json."
+      },
+      "metodo": "texto (pdftotext -layout, PDF com camada de texto real -- pdffonts confirmou fontes embutidas, nao e scan)",
+      "slots": {
+        "notacao": "tabela fonte 'Oracle Spells per Day', pagina 131. 'N*' no rank 10 (niveis 19-20) = a feature 'oracular clarity' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "1": {
+          "cantrips": 5,
+          "1": 3
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 4
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 3
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4
+        },
+        "5": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 3
+        },
+        "6": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4
+        },
+        "7": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 3
+        },
+        "8": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4
+        },
+        "9": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 3
+        },
+        "10": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4
+        },
+        "11": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 3
+        },
+        "12": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4
+        },
+        "13": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 3
+        },
+        "14": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4
+        },
+        "15": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 3
+        },
+        "16": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4
+        },
+        "17": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4,
+          "9": 3
+        },
+        "18": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4,
+          "9": 4
+        },
+        "19": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4,
+          "9": 4,
+          "10": "1*"
+        },
+        "20": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4,
+          "9": 4,
+          "10": "1*"
+        }
+      },
+      "cross_check": "pf2etools (class-oracle.json) DIVERGE: arquivo e a versao LEGADO/pre-remaster (sem variante -pc1 disponivel na fonte) e mostra o padrao antigo (2 slots no rank de entrada, 3 no seguinte) -- o Oracle NAO tinha o slot bonus antes do remaster. Confirmado com Foundry (oracle-spellcasting.json, texto literal: 'Each day, you can cast up to three 1st-rank spells'), que reflete a regra ATUAL (remaster) e bate 100% com o PDF do Player Core 2 (3 no rank de entrada, 4 no seguinte). Cross-check usado aqui: Foundry (fonte b), nao pf2etools -- e a UNICA classe das 8 onde as duas fontes auxiliares divergem entre si.",
+      "notas": "IRREGULARIDADE CONFIRMADA E CORRIGIDA: a primeira tentativa de cross-check via pf2etools apontou o padrao generico (2/3), que e o valor LEGADO (pre-remaster) -- o Oracle remaster (Player Core 2) ganhou 1 slot A MAIS por rank (3 no rank de entrada, 4 no seguinte), igual ao Sorcerer. Isso NAO estava documentado no pf2etools (arquivo sem variante -pc1) e so foi pego comparando literalmente PDF vs pf2etools linha a linha -- diferenca real de regra entre edicoes, nao erro de leitura. Fonte que resolveu o conflito: Foundry (oracle-spellcasting.json), que reflete a regra remaster vigente. Tradicao divine e fixa (nao depende de mystery, ao contrario do que se poderia supor por analogia com sorcerer/witch)."
+    },
+    {
+      "classe": "psychic",
+      "livro": "Dark Archive",
+      "pagina": 11,
+      "pagina_advancement_table": 11,
+      "tradicao": "occult",
+      "tipo": "spontaneous (spell repertoire)",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 7,
+        "master": 15,
+        "legendary": 19,
+        "depende_de_subclasse": false,
+        "nota": "progressao padrao trained(1)/expert(7)/master(15)/legendary(19) -- confirmada em 2 fontes: advancement table do PDF (pagina 11) e Foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster'), ja mecanizada em index.json."
+      },
+      "metodo": "texto (pdftotext -layout, PDF com camada de texto real -- pdffonts confirmou fontes embutidas, nao e scan)",
+      "slots": {
+        "notacao": "tabela fonte 'Table 2: Psychic Spells per Day (legado, pre-remaster -- classe nunca reeditada em Player Core/Player Core 2, nem pf2etools nem foundry tem variante remaster)', pagina 11. 'N*' no rank 10 (niveis 19-20) = a feature 'infinite mind' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "1": {
+          "cantrips": "3*",
+          "1": 1
+        },
+        "2": {
+          "cantrips": "3*",
+          "1": 2
+        },
+        "3": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 1
+        },
+        "4": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2
+        },
+        "5": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 1
+        },
+        "6": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2
+        },
+        "7": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 1
+        },
+        "8": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2
+        },
+        "9": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 1
+        },
+        "10": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2
+        },
+        "11": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 1
+        },
+        "12": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2
+        },
+        "13": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 1
+        },
+        "14": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2
+        },
+        "15": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2,
+          "8": 1
+        },
+        "16": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2,
+          "8": 2
+        },
+        "17": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2,
+          "8": 2,
+          "9": 1
+        },
+        "18": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2,
+          "8": 2,
+          "9": 2
+        },
+        "19": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2,
+          "8": 2,
+          "9": 2,
+          "10": "1*"
+        },
+        "20": {
+          "cantrips": "3*",
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "4": 2,
+          "5": 2,
+          "6": 2,
+          "7": 2,
+          "8": 2,
+          "9": 2,
+          "10": "1*"
+        }
+      },
+      "cross_check": "pf2etools (class-psychic.json, tabela 'Table 2: Psychic Spells per Day'): match EXATO em todos os 20 niveis, todos os ranks, incluindo cantrips e o slot marcado do rank 10. NAO segue a regra generica de conjurador pleno -- variante propria da classe (ver notas), confirmada so por pf2etools.",
+      "notas": "Classe NUNCA foi reimpressa em Player Core ou Player Core 2 -- unica fonte oficial continua sendo Dark Archive (2022, pre-remaster, usa 'level' em vez de 'rank' na tabela). Padrao proprio, mais fraco que os outros: 1 slot no rank de entrada (nao 2), sobe pra 2 no nivel seguinte (nao 3), nunca chega a 3 slots em rank nenhum. Cantrips base e 3 (nao 5) -- rodape diz 'Your conscious mind gives you three additional cantrips with amps', ou seja sao 3 cantrips normais + 3 psi cantrips especiais via feature de conscious mind, nao 6 cantrips normais. Compensado por outras features da classe (amps, thought echoes) fora do escopo de slots. Cross-check via pf2etools (class-psychic.json) e MESMA fonte fisica (Dark Archive) materializada por outro pipeline -- e um cross-check mais fraco que os outros 7 (nao e fonte independente do livro), registrado aqui com essa ressalva."
+    },
+    {
+      "classe": "sorcerer",
+      "livro": "Player Core 2",
+      "pagina": 147,
+      "pagina_advancement_table": 146,
+      "tradicao": "variavel (definida pela escolha de bloodline; nao ha tradicao fixa na class-feature)",
+      "tipo": "spontaneous (spell repertoire)",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 7,
+        "master": 15,
+        "legendary": 19,
+        "depende_de_subclasse": false,
+        "nota": "progressao padrao trained(1)/expert(7)/master(15)/legendary(19) -- confirmada em 2 fontes: advancement table do PDF (pagina 146) e Foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster'), ja mecanizada em index.json."
+      },
+      "metodo": "texto (pdftotext -layout, PDF com camada de texto real -- pdffonts confirmou fontes embutidas, nao e scan)",
+      "slots": {
+        "notacao": "tabela fonte 'Sorcerer Spells per Day', pagina 147. 'N*' no rank 10 (niveis 19-20) = a feature 'bloodline paragon' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "1": {
+          "cantrips": 5,
+          "1": 3
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 4
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 3
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4
+        },
+        "5": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 3
+        },
+        "6": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4
+        },
+        "7": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 3
+        },
+        "8": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4
+        },
+        "9": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 3
+        },
+        "10": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4
+        },
+        "11": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 3
+        },
+        "12": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4
+        },
+        "13": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 3
+        },
+        "14": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4
+        },
+        "15": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 3
+        },
+        "16": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4
+        },
+        "17": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4,
+          "9": 3
+        },
+        "18": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4,
+          "9": 4
+        },
+        "19": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4,
+          "9": 4,
+          "10": "1*"
+        },
+        "20": {
+          "cantrips": 5,
+          "1": 4,
+          "2": 4,
+          "3": 4,
+          "4": 4,
+          "5": 4,
+          "6": 4,
+          "7": 4,
+          "8": 4,
+          "9": 4,
+          "10": "1*"
+        }
+      },
+      "cross_check": "pf2etools (class-sorcerer.json, tabela 'Sorcerer Spells per Day'): match EXATO em todos os 20 niveis, todos os ranks, incluindo cantrips e o slot marcado do rank 10. NAO segue a regra generica de conjurador pleno -- variante propria da classe (ver notas), confirmada so por pf2etools.",
+      "notas": "IRREGULARIDADE: mesmo padrao do Oracle -- 3 slots no rank de entrada, 4 no seguinte (bonus classico dos 2 conjuradores 'spontaneos' remaster). Tradicao variavel por bloodline. pf2etools so tem arquivo legado (class-sorcerer.json, sem -pc1/-pc2), mas os numeros batem 100% com a tabela do Player Core 2 remaster lida diretamente do PDF."
+    },
+    {
+      "classe": "summoner",
+      "livro": "Secrets of Magic",
+      "pagina": 55,
+      "pagina_advancement_table": 52,
+      "tradicao": "depende do tipo de eidolon escolhido (arcane, divine, occult ou primal -- o eidolon determina a lista de spells do summoner, nao e fixo)",
+      "tipo": "spontaneous com repertorio (spell repertoire cresce e ENCOLHE por nivel -- perde o rank mais baixo de slots ao subir, e junto perde 2 spells do repertorio nesse rank)",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 9,
+        "master": 17,
+        "legendary": null,
+        "depende_de_subclasse": false,
+        "nota": "Summoner tambem para em master (nivel 17), sem legendary. Confirmado em index.json (progressao: expert-spellcaster@9, master-spellcaster@17, sem legendary)."
+      },
+      "slots": {
+        "notacao": "tabela fonte 'Table 2-4: Summoner Spells per Day', pagina 55. Mesmo formato de 'no maximo 2 do rank mais alto + 2 do rank abaixo' do magus, mas sem coluna com asterisco (summoner nao tem studious spells).",
+        "1": {
+          "cantrips": 5,
+          "1": 1
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 2
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 2,
+          "2": 1
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 2,
+          "2": 2
+        },
+        "5": {
+          "cantrips": 5,
+          "2": 2,
+          "3": 2
+        },
+        "6": {
+          "cantrips": 5,
+          "2": 2,
+          "3": 2
+        },
+        "7": {
+          "cantrips": 5,
+          "3": 2,
+          "4": 2
+        },
+        "8": {
+          "cantrips": 5,
+          "3": 2,
+          "4": 2
+        },
+        "9": {
+          "cantrips": 5,
+          "4": 2,
+          "5": 2
+        },
+        "10": {
+          "cantrips": 5,
+          "4": 2,
+          "5": 2
+        },
+        "11": {
+          "cantrips": 5,
+          "5": 2,
+          "6": 2
+        },
+        "12": {
+          "cantrips": 5,
+          "5": 2,
+          "6": 2
+        },
+        "13": {
+          "cantrips": 5,
+          "6": 2,
+          "7": 2
+        },
+        "14": {
+          "cantrips": 5,
+          "6": 2,
+          "7": 2
+        },
+        "15": {
+          "cantrips": 5,
+          "7": 2,
+          "8": 2
+        },
+        "16": {
+          "cantrips": 5,
+          "7": 2,
+          "8": 2
+        },
+        "17": {
+          "cantrips": 5,
+          "8": 2,
+          "9": 2
+        },
+        "18": {
+          "cantrips": 5,
+          "8": 2,
+          "9": 2
+        },
+        "19": {
+          "cantrips": 5,
+          "8": 2,
+          "9": 2
+        },
+        "20": {
+          "cantrips": 5,
+          "8": 2,
+          "9": 2
+        }
+      },
+      "notas": "Ranks mais baixos ficam vazios ('-' na tabela) conforme o summoner sobe -- ele so mantem slots dos 2 ranks mais altos disponiveis a cada momento (regra do livro: max 2 slots do rank mais alto + 2 do rank -1). O repertorio de spells encolhe junto: toda vez que perde um rank de slot, perde 2 spells do repertorio daquele rank tambem (ver texto pagina 55-56, nao transcrito aqui por ser prosa, nao tabela)."
+    },
+    {
+      "classe": "witch",
+      "livro": "Player Core",
+      "pagina": 181,
+      "pagina_advancement_table": 180,
+      "tradicao": "variavel (definida pela escolha de patron; nao ha tradicao fixa na class-feature)",
+      "tipo": "prepared",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 7,
+        "master": 15,
+        "legendary": 19,
+        "depende_de_subclasse": false,
+        "nota": "progressao padrao trained(1)/expert(7)/master(15)/legendary(19) -- confirmada em 2 fontes: advancement table do PDF (pagina 180) e Foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster'), ja mecanizada em index.json."
+      },
+      "metodo": "texto (pdftotext -layout, PDF com camada de texto real -- pdffonts confirmou fontes embutidas, nao e scan)",
+      "slots": {
+        "notacao": "tabela fonte 'Witch Spells per Day', pagina 181. 'N*' no rank 10 (niveis 19-20) = a feature 'patron's gift' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "1": {
+          "cantrips": 5,
+          "1": 2
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 3
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 2
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3
+        },
+        "5": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 2
+        },
+        "6": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "7": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 2
+        },
+        "8": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3
+        },
+        "9": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 2
+        },
+        "10": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3
+        },
+        "11": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 2
+        },
+        "12": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3
+        },
+        "13": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 2
+        },
+        "14": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3
+        },
+        "15": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 2
+        },
+        "16": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3
+        },
+        "17": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 2
+        },
+        "18": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3
+        },
+        "19": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        },
+        "20": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        }
+      },
+      "cross_check": "pf2etools (class-witch-pc1.json, tabela 'Witch Spells per Day'): match EXATO em todos os 20 niveis, todos os ranks, incluindo cantrips e o slot marcado do rank 10. Padrao bate tambem com a regra geral de conjurador pleno (2 slots no rank de entrada, 3 no seguinte, rank novo a cada nivel impar, cantrips fixo em 5).",
+      "notas": "Tradicao variavel por patron (ver TRADITION_VARIAVEL em conjuracao.py) -- a class-feature de conjuracao nao fixa uma tradicao, mesma mecanica do Sorcerer (bloodline) e Summoner (eidolon). Contagem de slots segue o padrao pleno normal (nao ganha bonus como Oracle/Sorcerer)."
+    },
+    {
+      "classe": "wizard",
+      "livro": "Player Core",
+      "pagina": 195,
+      "pagina_advancement_table": 194,
+      "tradicao": "arcane",
+      "tipo": "prepared",
+      "proficiencia_conjuracao": {
+        "trained": 1,
+        "expert": 7,
+        "master": 15,
+        "legendary": 19,
+        "depende_de_subclasse": false,
+        "nota": "progressao padrao trained(1)/expert(7)/master(15)/legendary(19) -- confirmada em 2 fontes: advancement table do PDF (pagina 194) e Foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster'), ja mecanizada em index.json."
+      },
+      "metodo": "texto (pdftotext -layout, PDF com camada de texto real -- pdffonts confirmou fontes embutidas, nao e scan)",
+      "slots": {
+        "notacao": "tabela fonte 'Wizard Spells per Day', pagina 195. 'N*' no rank 10 (niveis 19-20) = a feature 'archwizard's spellcraft' da esse slot, que funciona diferente dos demais slots (ver rodape da tabela no livro; mecanismo interno nao explorado aqui, so a existencia).",
+        "1": {
+          "cantrips": 5,
+          "1": 2
+        },
+        "2": {
+          "cantrips": 5,
+          "1": 3
+        },
+        "3": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 2
+        },
+        "4": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3
+        },
+        "5": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 2
+        },
+        "6": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3
+        },
+        "7": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 2
+        },
+        "8": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3
+        },
+        "9": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 2
+        },
+        "10": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3
+        },
+        "11": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 2
+        },
+        "12": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3
+        },
+        "13": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 2
+        },
+        "14": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3
+        },
+        "15": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 2
+        },
+        "16": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3
+        },
+        "17": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 2
+        },
+        "18": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3
+        },
+        "19": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        },
+        "20": {
+          "cantrips": 5,
+          "1": 3,
+          "2": 3,
+          "3": 3,
+          "4": 3,
+          "5": 3,
+          "6": 3,
+          "7": 3,
+          "8": 3,
+          "9": 3,
+          "10": "1*"
+        }
+      },
+      "cross_check": "pf2etools (class-wizard-pc1.json, tabela 'Wizard Spells per Day'): match EXATO em todos os 20 niveis, todos os ranks, incluindo cantrips e o slot marcado do rank 10. Padrao bate tambem com a regra geral de conjurador pleno (2 slots no rank de entrada, 3 no seguinte, rank novo a cada nivel impar, cantrips fixo em 5).",
+      "notas": "Padrao identico ao Bard/Cleric/Druid/Witch -- conjurador pleno prepared (spellbook), sem irregularidade alem do rank 10."
     }
-  },
-  "fora_de_escopo_na_epoca": "Cleric, Wizard, Druid, Bard, Sorcerer, Oracle, Psychic e Witch nao foram lidos do PDF (estao no Player Core / Player Core 2, que nao foram abertos). As tabelas dessas 8 classes vieram do pf2etools e estao completas em base/index.json."
+  ]
 }

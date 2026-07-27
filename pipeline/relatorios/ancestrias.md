@@ -7,10 +7,10 @@ Extrator: `pipeline/extratores/ancestrias.py`. Fontes: Foundry pf2e (commit `87f
 | kind | registros emitidos | boosts estruturados | flaw/skill_training estruturados |
 |---|---|---|---|
 | ancestry | 50 | 50/50 | 34/50 (flaw) |
-| heritage | 346 | n/a | 88/346 totalmente mecanizados (`grants_completos=true`) |
+| heritage | 326 | n/a | 68/326 totalmente mecanizados (`mechanized=true`) |
 | background | 514 | 514/514 | 481/514 (skill_training) |
 
-Nenhum registro emitido veio so de prosa: todos os 910 registros sao enumerados a partir do Foundry, que sempre traz os campos estruturados em campo proprio (boosts/flaw/hp/speed/skill_training). "Ausente" acima significa RAW genuino (ex.: Human sem flaw, Amnesiac sem skill_training), nao falha de parsing -- ver secao de campos nao mapeados.
+Nenhum registro emitido veio so de prosa: todos os 890 registros sao enumerados a partir do Foundry, que sempre traz os campos estruturados em campo proprio (boosts/flaw/hp/speed/skill_training). "Ausente" acima significa RAW genuino (ex.: Human sem flaw, Amnesiac sem skill_training), nao falha de parsing -- ver secao de campos nao mapeados.
 
 ## Mapa Legacy -> Remaster (fonte: AoN, conjunto completo)
 
@@ -117,7 +117,7 @@ AoN tem 94 docs de ancestry, 436 de heritage e 612 de background (Legacy + Remas
 
 - **`ancestry.items`** (equipamento concedido, ex.: Clan Dagger do Dwarf, presente em 36/50 ancestrias do Foundry): fora do escopo pedido (hp/size/speed/boosts/flaw/languages/traits/senses/heritages). Nao emitido.
 
-- **`heritage.grants` parcial**: o Foundry usa ~20 tipos de rule element distintos nas heranças (GrantItem, ActiveEffectLike, ItemAlteration, Sense, Resistance, AdjustDegreeOfSuccess, RollOption, Strike, BaseSpeed, ChoiceSet, Note, CreatureSize, ActorTraits, TokenLight, DamageDice, Aura, AdjustModifier, AdjustStrike, Weakness). So `FlatModifier` foi traduzido pra linguagem de efeito do schema (bate 1:1 com o exemplo do contrato). `grants_completos=true` em 88/346 registros (41 deles por nao terem rule element nenhum -- heranças puramente narrativas). O resto precisa do interpretador de rule elements (item de trabalho proprio, ja registrado em LESSONS.md do projeto).
+- **`heritage.grants` parcial**: o Foundry usa ~20 tipos de rule element distintos nas heranças (GrantItem, ActiveEffectLike, ItemAlteration, Sense, Resistance, AdjustDegreeOfSuccess, RollOption, Strike, BaseSpeed, ChoiceSet, Note, CreatureSize, ActorTraits, TokenLight, DamageDice, Aura, AdjustModifier, AdjustStrike, Weakness). So `FlatModifier` foi traduzido pra linguagem de efeito do schema (bate 1:1 com o exemplo do contrato). `mechanized=true` em 68/326 registros (41 deles por nao terem rule element nenhum -- heranças puramente narrativas). O resto precisa do interpretador de rule elements (item de trabalho proprio, ja registrado em LESSONS.md do projeto).
 
 - **`background.feats_granted` como lista, nao campo singular**: 2 backgrounds (Hermean Heritor, Returned) concedem 2 feats, nao 1. Campo sai como lista em vez de objeto unico.
 
