@@ -6,44 +6,44 @@ items:
   # Ordem sugerida: 24 -> 29 -> 21 -> 20 -> 28/11 -> 17 -> 27 -> 26 -> 25 -> 30
   # ==========================================================================
   - id: 24
-    texto: "CRITICO, FACA PRIMEIRO -- a fusao Legacy<->Remaster destruiu dado. fundir_renomeados.py decide por similaridade de PROSA e deletou 597 registros; 393/597 (65,8%) fundiram registros com level/price_cp/damage diferentes, e amostra de 60 contra o remaster_id do AoN confirmou so 21 (35%) como fusao correta. wb:equipment/aeon-stone engoliu 24 pedras distintas; 'Poi'->'Shield Bash'; 'Tonfa'->'Shuan Ji' (mesmo livro); 6 armas viraram 'Gaff'. REVERTER e refazer usando remaster_id/legacy_id do AoN como chave. Prosa so como desempate. E ANTES de fundir, checar se algum campo estruturado discorda -- se discorda, nao funde"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. CRITICO, FACA PRIMEIRO -- a fusao Legacy<->Remaster destruiu dado. fundir_renomeados.py decide por similaridade de PROSA e deletou 597 registros; 393/597 (65,8%) fundiram registros com level/price_cp/damage diferentes, e amostra de 60 contra o remaster_id do AoN confirmou so 21 (35%) como fusao correta. wb:equipment/aeon-stone engoliu 24 pedras distintas; 'Poi'->'Shield Bash'; 'Tonfa'->'Shuan Ji' (mesmo livro); 6 armas viraram 'Gaff'. REVERTER e refazer usando remaster_id/legacy_id do AoN como chave. Prosa so como desempate. E ANTES de fundir, checar se algum campo estruturado discorda -- se discorda, nao funde"
+    prioridade: concluido
   - id: 29
-    texto: "Portoes de qualidade: dos 7 da spec, so o 5 esta implementado. O 1 falharia (2.694 sem prov.text), o 3 falharia (111 registros com requires citando 61 ids inexistentes). O portao 7 e TAUTOLOGICO -- pergunta por nome duplicado depois de a duplicata ter sido fundida, que e exatamente a fresta do death-from-above; tem que rodar ANTES da fusao. Implementar os 7 antes de re-emitir, senao a re-emissao repete os mesmos erros em silencio"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. Portoes de qualidade: dos 7 da spec, so o 5 esta implementado. O 1 falharia (2.694 sem prov.text), o 3 falharia (111 registros com requires citando 61 ids inexistentes). O portao 7 e TAUTOLOGICO -- pergunta por nome duplicado depois de a duplicata ter sido fundida, que e exatamente a fresta do death-from-above; tem que rodar ANTES da fusao. Implementar os 7 antes de re-emitir, senao a re-emissao repete os mesmos erros em silencio"
+    prioridade: concluido
   - id: 21
-    texto: "COLISAO DE IDENTIDADE: wb:<kind>/<slug> assume nome unico por kind e nao e. 5 confirmadas contra AoN e Foundry: death-from-above (arquetipo nv8 vs mitico nv16, War of Immortals p.128), reckless-abandon (goblin vs barbaro nv16), dual-weapon-reload, even-the-odds, play-to-the-crowd. Desmembramento proposto caso a caso em docs/2026-07-26_colisoes-identidade.md. Detector melhor que traits disjuntos: registro-irmao com sufixo e xref incompleto -- 59 candidatos com conflito registrado, MAS com falso positivo conhecido nos -greater/-major/-true de item, que sao variantes legitimas. Pendente: ~16 candidatos por salto de level nao verificados, e wb:weapon/temperbrand indeterminado"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. COLISAO DE IDENTIDADE: wb:<kind>/<slug> assume nome unico por kind e nao e. 5 confirmadas contra AoN e Foundry: death-from-above (arquetipo nv8 vs mitico nv16, War of Immortals p.128), reckless-abandon (goblin vs barbaro nv16), dual-weapon-reload, even-the-odds, play-to-the-crowd. Desmembramento proposto caso a caso em docs/2026-07-26_colisoes-identidade.md. Detector melhor que traits disjuntos: registro-irmao com sufixo e xref incompleto -- 59 candidatos com conflito registrado, MAS com falso positivo conhecido nos -greater/-major/-true de item, que sao variantes legitimas. Pendente: ~16 candidatos por salto de level nao verificados, e wb:weapon/temperbrand indeterminado"
+    prioridade: concluido
   - id: 20
-    texto: "traits como UNIAO: spec JA corrigida e pipeline/normalizacao_traits.json JA pronto (17 renomeados, 9 removidos sem sucessor, 18 familias parametrizadas, cada entrada com prov citando pagina). FALTA aplicar no reconciliador -- hoje so rituais.py consome o mapa. Responde por 88% dos 2.299 conflitos: 72 facetas complementares, 31 ancestria renomeada, 18 granularidade (two-hand-d12 virava two-hand, perdendo o dado de dano)"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. traits como UNIAO: spec JA corrigida e pipeline/normalizacao_traits.json JA pronto (17 renomeados, 9 removidos sem sucessor, 18 familias parametrizadas, cada entrada com prov citando pagina). FALTA aplicar no reconciliador -- hoje so rituais.py consome o mapa. Responde por 88% dos 2.299 conflitos: 72 facetas complementares, 31 ancestria renomeada, 18 granularidade (two-hand-d12 virava two-hand, perdendo o dado de dano)"
+    prioridade: concluido
   - id: 28
-    texto: "source.book sai com DUAS grafias para 26 obras, afetando 10.723 registros (59%), mais 160 com \\r\\n literal dentro do nome. Engloba o item 11 (normalizar_livro rodando so na comparacao): o problema nao e so comparar, e o valor emitido"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. source.book sai com DUAS grafias para 26 obras, afetando 10.723 registros (59%), mais 160 com \\r\\n literal dentro do nome. Engloba o item 11 (normalizar_livro rodando so na comparacao): o problema nao e so comparar, e o valor emitido"
+    prioridade: concluido
   - id: 11
-    texto: "BUG barato, subconjunto do 28: aplicar normalizar_livro() antes de COMPARAR source em reconciliar.py. A funcao ja existe mas so roda depois; por isso boa parte dos 72 conflitos de source e falso"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. BUG barato, subconjunto do 28: aplicar normalizar_livro() antes de COMPARAR source em reconciliar.py. A funcao ja existe mas so roda depois; por isso boa parte dos 72 conflitos de source e falso"
+    prioridade: concluido
   - id: 17
-    texto: "Kind ritual: extrator PRONTO (pipeline/extratores/rituais.py) com 151 registros em pipeline/saida/rituais.json -- a estimativa de 31 era so dos dois Player Core. FALTA: incluir 'rituais.json' no ENTRADA de reconciliar.py. Pendencias menores do extrator: pf2etools nao tem a categoria (cross-check de level caiu para foundry-vs-aon), e 4 requirements ficaram em prosa sem virar predicado"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. Kind ritual: extrator PRONTO (pipeline/extratores/rituais.py) com 151 registros em pipeline/saida/rituais.json -- a estimativa de 31 era so dos dois Player Core. FALTA: incluir 'rituais.json' no ENTRADA de reconciliar.py. Pendencias menores do extrator: pf2etools nao tem a categoria (cross-check de level caiu para foundry-vs-aon), e 4 requirements ficaram em prosa sem virar predicado"
+    prioridade: concluido
   - id: 27
-    texto: "Dois kinds que a spec NUNCA listou, medidos contra o censo do AoN: `relic` (-116) e `language` (-85). Mesma classe de erro do ritual -- omissao ao escrever a lista de kinds, nao falha de extrator. Mais: background esta -167 (33% do kind!)"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. Dois kinds que a spec NUNCA listou, medidos contra o censo do AoN: `relic` (-116) e `language` (-85). Mesma classe de erro do ritual -- omissao ao escrever a lista de kinds, nao falha de extrator. Mais: background esta -167 (33% do kind!)"
+    prioridade: concluido
   - id: 26
-    texto: "Divergencia silenciada: 6 kinds (class-feature, background, heritage, familiar-ability, ancestry, class) tem 1.618 registros com 2+ fontes e ZERO conflitos registrados. Comprovadas 145 divergencias reais de source.book contra o Foundry, nenhuma anotada. Esses extratores nao implementam deteccao de conflito -- logo 2.299 e PISO, nao total"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. Divergencia silenciada: 6 kinds (class-feature, background, heritage, familiar-ability, ancestry, class) tem 1.618 registros com 2+ fontes e ZERO conflitos registrados. Comprovadas 145 divergencias reais de source.book contra o Foundry, nenhuma anotada. Esses extratores nao implementam deteccao de conflito -- logo 2.299 e PISO, nao total"
+    prioridade: concluido
   - id: 25
-    texto: "`mechanized` significa 4 coisas diferentes conforme o extrator: 12.742 registros (70,1%) tem true com grants vazio, e 370 tem false com grants cheio. O false se distribui por KIND inteiro -- e propriedade do extrator, nao do dado. Definir o significado unico na spec e fazer todos obedecerem"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-26. `mechanized` significa 4 coisas diferentes conforme o extrator: 12.742 registros (70,1%) tem true com grants vazio, e 370 tem false com grants cheio. O false se distribui por KIND inteiro -- e propriedade do extrator, nao do dado. Definir o significado unico na spec e fazer todos obedecerem"
+    prioridade: concluido
   - id: 30
-    texto: "907 registros sem prosa (5,0%), nao os 100% reportados. A metrica de emitir_textos.py divide pelas referencias existentes, nao pela base -- registro sem referencia nenhuma nao entra no denominador. Corrigir a METRICA junto com o buraco, senao ela volta a mentir"
-    prioridade: media
+    texto: "CONCLUIDO 2026-07-26. 907 registros sem prosa (5,0%), nao os 100% reportados. A metrica de emitir_textos.py divide pelas referencias existentes, nao pela base -- registro sem referencia nenhuma nao entra no denominador. Corrigir a METRICA junto com o buraco, senao ela volta a mentir"
+    prioridade: concluido
   - id: 14
     texto: "Tabela numerica de slots de conjuracao: NENHUMA das 11 classes tem. Recuperadas do PDF e guardadas em pipeline/dados_brutos/tabelas_conjuracao_pdf.json: Animist (War of Immortals p.12-13, hibrido prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of Magic). Exemplar e Kineticist confirmados NAO-conjuradores. Faltam as 8 do Player Core / Player Core 2"
     prioridade: alta
   - id: 31
-    texto: "22 registros so-pf2etools sao duplicatas de registros ja existentes (wb:armor/hide vs wb:armor/hide-armor). Explicam os 6 sem license, os 23 sem rarity e 16 dos sem prosa -- o portao 5 estava detectando FALHA DE CASAMENTO, nao falta de licenca. O sintoma foi lido errado desde o inicio"
-    prioridade: media
+    texto: "CONCLUIDO 2026-07-26. 22 registros so-pf2etools sao duplicatas de registros ja existentes (wb:armor/hide vs wb:armor/hide-armor). Explicam os 6 sem license, os 23 sem rarity e 16 dos sem prosa -- o portao 5 estava detectando FALHA DE CASAMENTO, nao falta de licenca. O sintoma foi lido errado desde o inicio"
+    prioridade: concluido
   - id: 32
     texto: "spell usa `rank` e nunca `level`, fora do envelope da spec -- qualquer filtro por nivel descarta as 1.639 magias em silencio. Mais 513 sem tradicoes, das quais 50 nao sao focus. Decidir: spell vira excecao documentada, ou passa a emitir level tambem"
     prioridade: media
@@ -61,6 +61,19 @@ items:
     prioridade: baixa
   - id: 13
     texto: "A regra de precedencia grants->foundry e letra morta: grants nunca gera conflito real no dataset, o merge adota silenciosamente o lado nao-vazio. Ou exercitar ou remover da spec"
+    prioridade: baixa
+
+  - id: 35
+    texto: "DECISAO DO IGOR: 3 registros (wb:armor/heavy-power-suit, wb:weapon/nine-ring-sword, wb:weapon/wind-and-fire-wheel) tem source vazio e nao existem em fonte nenhuma EM DISCO -- nem AoN, nem Foundry, nem o dump local do pf2etools. Vieram de consulta ao vivo ao pf2etools numa sessao antiga. Sao o que resta do portao 5. Opcoes: (a) re-baixar o pf2etools completo e reextrair, (b) marcar license como indeterminada com prov explicita, (c) remover. Nao inventei licenca"
+    prioridade: media
+  - id: 36
+    texto: "13 colisoes de identidade que desmembrar_colisoes.py NAO resolveu: a base casou com um doc do AoN que nao representa nenhum dos grupos, entao escolher qual e o 'certo' exigiria arbitrar. Listadas em base/relatorio_colisoes.md como REVISAR. E o que resta do portao 7"
+    prioridade: media
+  - id: 37
+    texto: "O dump local do pf2etools esta INCOMPLETO -- ha varios arquivos .missing em dados_brutos/pf2etools/ e a busca por 6 registros conhecidos devolveu zero. Diferente do Foundry e do AoN, essa fonte nao tem script de reconstrucao (buscar_fontes.sh so cobre o Foundry; dump_aon.py cobre o AoN). Enquanto isso, `requires` -- cuja precedencia e pf2etools -- roda com fonte parcial"
+    prioridade: alta
+  - id: 38
+    texto: "160 registros (0,85%) tem source.book fora do mapa canonico do AoN: APs recentes (Bastion of Blasphemies, Crypt of Runes), Paizo Blog, e siglas cruas do pf2etools ('PC1'). Nao tem grafia duplicada -- so nao ha entrada no AoN para canonizar contra. Resolver com mapa de siglas verificado, nunca por chute"
     prioridade: baixa
 
   # ==========================================================================

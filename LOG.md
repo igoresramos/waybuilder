@@ -6,6 +6,46 @@ project: waybuilder
 
 ## 2026-07-26
 
+### Sessao | re-emissao do bloco 1 | igor + claude-code
+Executado o bloco 1 inteiro do TODO (re-emissao da base). 11 itens fechados.
+
+**Bloqueio achado antes de qualquer item, e nao registrado em lugar nenhum:**
+7 dos 10 extratores e o `emitir_textos` apontavam para um clone do Foundry em
+`/tmp/claude-.../scratchpad/pf2e-research`, de uma sessao ja encerrada. O clone
+nao existia mais e **o pipeline nao rodava** -- re-executar o extrator de
+equipamento dava 5.698 registros contra os 7.496 da base, mono-fonte, exit code
+0. Pior: `carregar_aon()` cai para lista vazia em silencio quando o dump falta,
+e os dumps do AoN para equipamento nunca tinham sido salvos. **A base de 18.176
+registros nao era reproduzivel a partir do repo.**
+- clone refeito no pin dentro de `dados_brutos/`, `buscar_fontes.sh` reconstroi
+- `dump_aon.py` novo: indice `aon` inteiro em disco, 43.686 docs em 93
+  categorias (bate com o censo remoto)
+- os 7 caminhos hardcoded de `/tmp` foram substituidos
+
+**Itens fechados:** 29 (os 7 portoes), 20 (traits como uniao), 24 (fusao por
+`remaster_id`), 30 (metrica de prosa), 17 (rituais), 28 e 11 (grafia de livro),
+27 (relic/language/background), 21 (colisoes desmembradas), 26 (divergencia
+detectada), 25 (`mechanized` derivado), 31 (confirmado: era falha de casamento).
+
+**Numeros:** base 18.176 -> **19.250 registros em 24 kinds**. Prosa de 95%
+reportado (82,6% real) para **99,2%**. 586 registros que a fusao por prosa tinha
+deletado foram recuperados. 318 irmaos criados no desmembramento. Portoes 1, 2 e
+4 passam; 3, 5 e 7 seguem abertos com causa documentada.
+
+**Duas correcoes a spec, verificadas contra as fontes:**
+- `Death from Above`: a spec dizia "o Foundry separa os dois; o AoN indexa so o
+  mitico". E o contrario nos dois lados. O defeito nunca foi fusao de
+  duplicatas -- e **casamento ambiguo**, escolher 1 entre N em silencio
+- `mechanized` passou a ser derivado (`== bool(grants)`); significava quatro
+  coisas conforme o extrator
+
+**Aberto para decisao do Igor:** 3 registros (`heavy-power-suit`,
+`nine-ring-sword`, `wind-and-fire-wheel`) nao existem em fonte nenhuma em disco
+-- vieram de consulta ao vivo ao pf2etools. Nao inventei licenca (item 35). E o
+dump local do pf2etools esta incompleto, sem script de reconstrucao (item 37) --
+`requires`, cuja precedencia e pf2etools, roda hoje com fonte parcial.
+
+
 ### Sessao | 18:40-21:30 | igor + claude-code
 Exploracao dos PDFs oficiais e revisao ampla da base. **O pipeline nao foi
 re-rodado**, entao o `index.json` esta byte a byte como estava no inicio -- mas

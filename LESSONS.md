@@ -18,6 +18,63 @@ project: waybuilder
 
 ## Aprendizados
 
+### Fonte que vive fora do repo desaparece, e o pipeline mente sobre isso
+Ate 26/07 sete dos dez extratores e o `emitir_textos` apontavam para um clone do
+Foundry num diretorio de scratchpad de sessao (`/tmp/claude-.../pf2e`). A sessao
+acabou, o clone sumiu, e **nada quebrou de forma visivel**: `carregar_aon()`
+devolve `[]` quando o dump nao existe, e os candidatos de caminho caem para o
+proximo em silencio. Re-executar o extrator de equipamento produzia 5.698
+registros contra os 7.496 da base, mono-fonte, exit code 0.
+
+Duas licoes distintas:
+1. **Fonte externa tem que ter script de reconstrucao versionado**, com o pin
+   dentro dele (`buscar_fontes.sh`, `dump_aon.py`). O `.gitignore` do pipeline
+   dizia "reconstruiveis pelos pins registrados na spec" -- mas nao havia
+   nenhum script que fizesse isso, so a frase.
+2. **Degradar em silencio e pior que falhar.** Toda queda para fonte parcial
+   deve ser erro alto, nao lista vazia. O sintoma so apareceu porque a contagem
+   foi comparada com a anterior.
+
+### O detector tem que mirar o defeito, nao o sintoma imaginado
+O portao 7 da spec perguntava "existe `name` normalizado repetido no mesmo
+`kind`?". Nunca disparava -- nem antes nem depois da fusao. A razao: a
+ambiguidade **nao produz dois registros**. O extrator casa por nome, escolhe um
+candidato entre os N da fonte, e os outros somem sem deixar rastro na base.
+Perguntar a base sobre duplicata e perguntar para a vitima, nao para a cena.
+
+O detector correto compara a base contra o **censo da fonte**: registro cujo
+nome tem N entidades no AoN, com assinatura (level, traits) divergente. Achou
+159 colisoes reais, contra as 5 que a inspecao manual conhecia.
+
+Corolario que vale para o resto do projeto: **duas fontes concordarem nao e
+evidencia de nada se as duas foram lidas pelo mesmo casamento errado.**
+
+### Quando o casamento erra, a precedencia por campo espalha o erro
+`Death from Above` casou com o doc mitico do AoN (nv16) mas ficou com `level: 8`
+-- porque a precedencia manda `level` vir do Foundry, e o doc do Foundry era da
+**outra** entidade. O registro nao ficou "meio certo": ficou uma quimera que nao
+corresponde a nada publicado. Precedencia por campo pressupoe que as fontes
+falam do mesmo objeto; quando essa premissa cai, ela deixa de conter o erro e
+passa a distribui-lo.
+
+Por isso desmembrar exige realinhar o registro original, nao so criar o irmao.
+
+### Similaridade de prosa nao e evidencia de identidade
+A fusao por Jaccard >= 0.62 sobre 900 caracteres deletou 597 registros com 35%
+de acerto. `aeon-stone` engoliu 24 pedras distintas porque a prosa de todas
+comeca igual. Chave declarada pela fonte (`remaster_id`/`legacy_id`) achou 942
+pares -- **mais** cobertura e sem os falsos. Prosa serve para desempatar entre
+candidatos ja restritos por uma chave, nunca para criar o par.
+
+### Metrica com denominador errado esconde exatamente o que deveria denunciar
+"Prosa em 100%" dividia pelas referencias existentes. Registro sem referencia
+nenhuma nao entrava no denominador -- os 907 mais invisiveis do dataset eram os
+unicos que a metrica nao conseguia ver. Medida honesta: 82,6%. Depois de usar o
+dump completo do AoN e criar as referencias que faltavam: 99,2%.
+
+Ao corrigir uma metrica, corrigir o buraco na mesma passada -- senao ela volta a
+mentir na proxima leitura.
+
 ### Onde cada fonte e forte e fraca (verificado)
 - **Foundry** (`packs/pf2e/`, 28.841 arquivos JSON): unica com efeito mecanico
   executavel. `classFeatLevels: [1,2,4,6,...]` como array literal;

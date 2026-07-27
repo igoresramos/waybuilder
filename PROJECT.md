@@ -69,33 +69,36 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
-> Design fechado e **base canonica montada**. As 22 regras de multiclasse, o
+> Design fechado e **base canonica re-emitida**. As 22 regras de multiclasse, o
 > schema da base e o schema do documento de personagem estao escritos, revisados
 > adversarialmente e commitados.
 >
-> O pipeline roda ponta a ponta (7 extratores -> reconciliar -> prosa -> fusao)
-> e produz **18.176 registros em 21 kinds**, prosa em **95%** (907 sem prosa),
-> **pelo menos** 2.299 com divergencia registrada -- 6 kinds nao detectam
-> conflito, entao esse numero e piso. Index 15,2 MB + prosa 16,7 MB.
+> **19.250 registros em 24 kinds**, prosa em **99,2%** (169 sem prosa), 951 com
+> divergencia registrada, 281 desmembrados de colisao de identidade.
 >
-> **A base NAO esta fechada. A auditoria de 2026-07-26 achou perda de dado
-> real** -- a fusao Legacy<->Remaster deletou 597 registros decidindo por
-> similaridade de prosa, e so 35% das fusoes estavam certas
-> (`wb:equipment/aeon-stone` engoliu 24 pedras distintas). Reverter e refazer
-> com o `remaster_id` do AoN e o item mais urgente da lista.
+> A re-emissao de 2026-07-26 fechou os cinco defeitos da auditoria: a fusao
+> Legacy<->Remaster passou a usar o `remaster_id` do AoN em vez de similaridade
+> de prosa (**586 registros deletados foram recuperados**; `aeon-stone` voltou de
+> 17 para 40); `traits` virou uniao; as colisoes de identidade foram
+> desmembradas; entraram `ritual`, `relic`, `language` e 168 backgrounds que
+> faltavam; e os 7 portoes de qualidade existem de fato.
 >
-> **Os outros defeitos que precisam de re-emissao:**
-> 1. `traits` usava precedencia e devia ser uniao -- 88% dos conflitos, com
->    perda de dado real (`two-hand-d12` virava `two-hand`) e injecao de nome
->    legado de ancestria numa base remaster-first. Spec ja corrigida, mapa de
->    normalizacao pronto em `pipeline/normalizacao_traits.json`
-> 2. `wb:<kind>/<slug>` assume nome unico por kind -- 5 colisoes confirmadas,
->    59 candidatos levantados
-> 3. Faltava o kind `ritual` inteiro -- extrator escrito, 151 registros em
->    `pipeline/saida/rituais.json`, ainda **fora** de `ENTRADA` do reconciliador
+> **Antes disso, um bloqueio nao registrado precisou ser resolvido:** 7 dos 10
+> extratores apontavam para um clone do Foundry num diretorio de scratchpad de
+> sessao (`/tmp/...`) que ja nao existia. O pipeline nao rodava, e re-executar
+> produzia uma base menor e mono-fonte **sem erro nenhum**. Fonte refeita dentro
+> de `dados_brutos/`, com `buscar_fontes.sh` e `dump_aon.py` reconstruindo as
+> duas maiores.
 >
-> Falta o construtor. Depois da re-emissao, os proximos sao de modelagem: o
-> grafo de progressao de dois niveis e o predicado sabendo falar de subclasse.
+> **O que segue aberto:** 3 portoes com pendencia pequena e documentada -- 80
+> `requires` citando class-features de segundo nivel que a base nunca extraiu
+> (fecha junto com o grafo de progressao), 3 registros orfaos de fonte nao
+> reproduzivel, e 13 colisoes que exigiriam arbitrar.
+>
+> Falta o construtor. Os proximos sao de modelagem: o grafo de progressao de dois
+> niveis -- que o AoN **ja entrega categorizado** (`arcane-thesis`, `muse`,
+> `racket`, `instinct`, `doctrine`, `bloodline`...) -- e o predicado sabendo
+> falar de subclasse.
 >
 > **Comece por `README.md`** -- ele e o ponto de retomada.
 
