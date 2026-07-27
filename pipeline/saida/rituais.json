@@ -1308,11 +1308,12 @@
     "name": "Blight",
     "level": 4,
     "traits": [
-      "negative",
       "plant",
       "void"
     ],
-    "aliases_traits": [],
+    "aliases_traits": [
+      "negative"
+    ],
     "rarity": "uncommon",
     "source": {
       "book": "Player Core",
@@ -4053,11 +4054,13 @@
     "name": "Form of the Sandpoint Devil",
     "level": 6,
     "traits": [
-      "evil",
       "polymorph",
-      "transmutation"
+      "transmutation",
+      "unholy"
     ],
-    "aliases_traits": [],
+    "aliases_traits": [
+      "evil"
+    ],
     "rarity": "rare",
     "source": {
       "book": "Monsters of Myth",
@@ -4580,10 +4583,11 @@
     "name": "Halt Death",
     "level": 10,
     "traits": [
-      "positive",
       "vitality"
     ],
-    "aliases_traits": [],
+    "aliases_traits": [
+      "positive"
+    ],
     "rarity": "rare",
     "source": {
       "book": "Battlecry!",
@@ -5608,11 +5612,12 @@
       "beast",
       "consecration",
       "necromancy",
-      "positive",
       "primal",
       "vitality"
     ],
-    "aliases_traits": [],
+    "aliases_traits": [
+      "positive"
+    ],
     "rarity": "rare",
     "source": {
       "book": "Monsters of Myth",
@@ -6453,11 +6458,12 @@
     "level": 4,
     "traits": [
       "plant",
-      "positive",
       "vitality",
       "wood"
     ],
-    "aliases_traits": [],
+    "aliases_traits": [
+      "positive"
+    ],
     "rarity": "uncommon",
     "source": {
       "book": "Player Core",
@@ -7031,10 +7037,11 @@
     "name": "Ravenous Reanimation",
     "level": 7,
     "traits": [
-      "evil",
       "unholy"
     ],
-    "aliases_traits": [],
+    "aliases_traits": [
+      "evil"
+    ],
     "rarity": "rare",
     "source": {
       "book": "Monster Core 2",
@@ -9312,10 +9319,11 @@
     "traits": [
       "curse",
       "mythic",
-      "negative",
       "void"
     ],
-    "aliases_traits": [],
+    "aliases_traits": [
+      "negative"
+    ],
     "rarity": "rare",
     "source": {
       "book": "War of Immortals",

@@ -66,18 +66,27 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DADOS = os.path.join(BASE_DIR, "dados_brutos")
 FOUNDRY_RITUALS_DIR = os.path.join(DADOS, "foundry", "spells", "rituals")
 AON_RITUALS_FILE = os.path.join(DADOS, "aon_rituals.json")
+NORMALIZACAO_TRAITS_FILE = os.path.join(BASE_DIR, "normalizacao_traits.json")
 
 
 # --------------------------------------------------------------------------
 # Uniao de traits (regra nova da spec -- ver "traits e uniao, nao precedencia")
 # --------------------------------------------------------------------------
 
-# mapa legado -> remaster (ancestrias renomeadas). Praticamente nunca aparece
-# em traits de ritual, mas o extrator nasce obedecendo a regra mesmo assim.
-LEGACY_TO_REMASTER_TRAITS = {
-    "aasimar": "nephilim", "tiefling": "nephilim", "aphorite": "nephilim", "ganzi": "nephilim",
-    "ifrit": "naari", "oread": "naari", "sylph": "naari", "undine": "naari",
-}
+def _load_legacy_to_remaster_traits() -> dict:
+    """Mapa legado -> remaster, fonte unica pipeline/normalizacao_traits.json
+    (17 renomeados com prov por entrada). Nao hardcoded aqui -- esse arquivo e
+    compartilhado entre extratores e e a fonte de verdade da regra 1 da spec.
+    `removidos_sem_sucessor` (9 traits de escola/alinhamento que sumiram sem
+    substituto) fica so documentado, nao filtrado daqui: mante-los na uniao
+    preserva a informacao legado (a spec pede "nada e descartado"), e o proprio
+    arquivo existe justamente pra essa divergencia nao ser lida como colisao
+    de identidade (portao de qualidade 6) -- ver relatorio."""
+    with open(NORMALIZACAO_TRAITS_FILE, encoding="utf-8") as f:
+        return json.load(f)["renomeados"]
+
+
+LEGACY_TO_REMASTER_TRAITS = _load_legacy_to_remaster_traits()
 
 RARITY_WORDS = {"common", "uncommon", "rare", "unique"}
 
