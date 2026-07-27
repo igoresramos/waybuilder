@@ -311,5 +311,91 @@ class TestHigieneDoSlot(unittest.TestCase):
         self.assertTrue(sinal_de_arquetipo(p), "nada sinalizado")
 
 
+# -- o que a dedicacao CONCEDE ---------------------------------------------
+
+class TestGrantsDaDedicacao(unittest.TestCase):
+    """A dedicacao entra na ficha como linha e nao entrega o que concede.
+
+    O motor le o array `grants` das CLASSES e das FEATURES de classe
+    (`_proficiencias`); de FEAT ele so aproveita `flat_modifier` com selector
+    `hp` (`_hp`). Entao tudo que uma dedicacao concede -- `proficiency`,
+    `skill_training`, `grant_feat`, `grant_item` -- fica inerte.
+
+    Tamanho medido no pin atual, so entre as 226 dedicacoes:
+      grant_item      114        grant_feat       67 (67 com alvo estatico)
+      proficiency      49        skill_training   20
+      flat_modifier    34
+
+    E o defeito mais caro do trilho de Free Archetype: sob a regra 2 o
+    personagem SEMPRE tem esses slots, entao o que se perde aqui se perde em
+    toda ficha do sistema.
+    """
+
+    def setUp(self):
+        self.p = carregar("guerreiro4-fa-dedicacao-com-grants.json")
+
+    def test_a_dedicacao_entra_no_slot_sem_erro(self):
+        """A linha aparece: o problema nao e a escolha, e o efeito dela."""
+        self.assertEqual(picks_de_arquetipo(self.p), ["wb:feat/shieldmarshal-dedication"])
+        self.assertEqual(self.p.fora_do_requisito, [], motivos(self.p))
+        self.assertEqual(self.p.avisos, [])
+
+    def test_o_dado_esta_na_base(self):
+        g = json.dumps(feat("wb:feat/shieldmarshal-dedication").get("grants"))
+        self.assertIn('"society": "expert"', g)
+        self.assertIn("wb:feat/streetwise", g)
+        self.assertIn("wb:feat/courtly-graces", g)
+
+    @unittest.expectedFailure
+    def test_lacuna_proficiencia_concedida_pela_dedicacao(self):
+        """LACUNA. Shieldmarshal Dedication concede `society: expert` na chave
+        plana `proficiency` -- a MESMA chave que o motor ja le de classe e de
+        feature. So que `_proficiencias` nao percorre os feats escolhidos,
+        entao Society continua untrained (49 dedicacoes nessa situacao)."""
+        self.assertEqual(self.p.proficiencias.get("society"), "expert")
+
+    @unittest.expectedFailure
+    def test_lacuna_grant_feat_estatico_nao_e_aplicado(self):
+        """LACUNA. Streetwise e Courtly Graces sao concedidos por `grant_feat`
+        com alvo estatico e simplesmente nao existem na ficha."""
+        tudo = {f.get("id") for f in self.p.features}
+        tudo |= {e.get("pega") for e in self.p.doc["escolhas"]}
+        self.assertIn("wb:feat/streetwise", tudo)
+        self.assertIn("wb:feat/courtly-graces", tudo)
+
+    @unittest.expectedFailure
+    def test_lacuna_feature_de_classe_concedida_pela_dedicacao(self):
+        """LACUNA. Barbarian Dedication concede `wb:class-feature/rage`. Um
+        Guerreiro 4 com essa dedicacao sob Free Archetype nao fica com Rage em
+        lugar nenhum da visao calculada."""
+        def barbaro(d):
+            d["escolhas"] = [e for e in d["escolhas"] if e.get("slot") != "free_archetype"]
+            d["escolhas"].append({"em": 2, "slot": "free_archetype",
+                                  "pega": "wb:feat/barbarian-dedication"})
+        p = carregar("guerreiro4-fa-dedicacao-com-grants.json", barbaro)
+        nomes = [f["nome"] for f in p.features]
+        self.assertIn("Rage", nomes)
+
+    @unittest.expectedFailure
+    def test_lacuna_grant_que_mexe_no_hp(self):
+        """LACUNA com numero. Battle Harbinger Dedication concede Toughness,
+        que vale `@actor.level` de HP. O motor SABE somar Toughness -- so nao
+        sabe que a dedicacao o concedeu. Medido: 52 de HP com a dedicacao
+        contra 56 pegando Toughness a mao, num personagem de nivel 4."""
+        def dedicacao(d, extra=None):
+            d["escolhas"] = [e for e in d["escolhas"] if e.get("slot") != "free_archetype"]
+            d["escolhas"].append({"em": 2, "slot": "free_archetype",
+                                  "pega": "wb:feat/battle-harbinger-dedication"})
+            if extra:
+                d["escolhas"].append(extra)
+        so_dedicacao = carregar("guerreiro4-fa-dedicacao-com-grants.json", dedicacao)
+        a_mao = carregar("guerreiro4-fa-dedicacao-com-grants.json",
+                         lambda d: dedicacao(d, {"em": 2, "slot": "class_feat",
+                                                 "pega": "wb:feat/toughness"}))
+        self.assertEqual(a_mao.hp - so_dedicacao.hp, 0,
+                         f"a dedicacao devia render os mesmos {so_dedicacao.nivel} "
+                         f"HP de Toughness")
+
+
 if __name__ == "__main__":
     unittest.main()
