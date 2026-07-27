@@ -76,6 +76,10 @@ items:
     texto: "160 registros (0,85%) tem source.book fora do mapa canonico do AoN: APs recentes (Bastion of Blasphemies, Crypt of Runes), Paizo Blog, e siglas cruas do pf2etools ('PC1'). Nao tem grafia duplicada -- so nao ha entrada no AoN para canonizar contra. Resolver com mapa de siglas verificado, nunca por chute"
     prioridade: baixa
 
+  - id: 39
+    texto: "REGRA 17 FURA EM CONJURADOR PARCIAL -- decisao do Igor. A simulacao de 2.000 personagens de classe unica achou: Magus e Summoner param no rank 9 de slot (nao 10), entao `rank_efetivo = ceil(nivel/2)` da a eles +1 rank de elevacao mesmo PUROS, no nivel 19 e 20. A houserule vaza para o jogo padrao em 2 das 11 classes conjuradoras. A spec afirma 'Mago 20 puro nao muda porque o +2 nao tem para onde ir a partir do rank 10' -- verdade para conjurador pleno, falso para parcial. Opcoes: (a) capar a elevacao pelo max_rank nativo da classe, (b) aceitar como buff intencional a conjurador parcial, (c) tratar so quando ha multiclasse. Nao arbitrei"
+    prioridade: alta
+
   # ==========================================================================
   # BLOCO 2 -- MODELAGEM. Depende da base re-emitida.
   # ==========================================================================

@@ -473,24 +473,55 @@ class Personagem:
         slots e quebraria a regra 21 (a rota de nivel nunca pode render mais que
         a de dedicacao... nem menos).
         """
-        self.slots: dict[str, list[int]] = {}
-        self.slots["class"] = [n for n in range(1, self.nivel + 1) if n % 2 == 0]
-        self.slots["skill"] = [n for n in range(1, self.nivel + 1) if n % 2 == 0]
-        self.slots["general"] = [n for n in range(1, self.nivel + 1) if n % 4 == 3]
-        self.slots["ancestry"] = [n for n in range(1, self.nivel + 1) if n % 4 == 1]
+        # Cadencia BASICA (regra 14), valida para qualquer personagem
+        basica = {
+            "class": [n for n in range(1, self.nivel + 1) if n % 2 == 0],
+            "skill": [n for n in range(1, self.nivel + 1) if n % 2 == 0],
+            "general": [n for n in range(1, self.nivel + 1) if n % 4 == 3],
+            "ancestry": [n for n in range(1, self.nivel + 1) if n % 4 == 1],
+        }
+
+        # Regra 15: quando uma CLASSE concede cadencia extra, o extra passa a
+        # valer a partir do nivel de personagem em que aquela classe entrou.
+        # O Ladino concede skill feat todo nivel e o Investigador concede skill
+        # increase todo nivel -- usar so a cadencia basica dava a eles metade
+        # dos slots. A tabela vem de `feat_slot` da classe, que o Foundry
+        # declara em `skillFeatLevels` e afins.
+        entrada_da_classe = {}
+        for nivel, cid in sorted(self.classe_do_nivel.items()):
+            entrada_da_classe.setdefault(cid, nivel)
+
+        extras: dict[str, set[int]] = {k: set(v) for k, v in basica.items()}
+        for cid, desde in entrada_da_classe.items():
+            classe = self.base.get(cid)
+            for g in classe.get("grants") or []:
+                fs = g.get("feat_slot") if isinstance(g, dict) else None
+                if not fs or not fs.get("kind"):
+                    continue
+                chave = fs["kind"]
+                if chave not in extras:
+                    extras[chave] = set(basica.get(chave, []))
+                for n in (fs.get("levels") or []):
+                    # so conta a partir de quando a classe entrou (regra 15) e
+                    # ate o nivel atual
+                    if desde <= n <= self.nivel:
+                        extras[chave].add(n)
+
+        self.slots = {k: sorted(v) for k, v in extras.items()}
         # regra 2: Free Archetype sempre ligado -- slot em todo nivel par
         self.slots["free_archetype"] = [n for n in range(1, self.nivel + 1) if n % 2 == 0]
 
-        # regra 8: a primeira classe da um class feat no nivel 1, se a classe der
-        self.class_feat_nivel_1 = False
-        if self.primeira_classe:
-            classe = self.base.get(self.primeira_classe)
-            for g in classe.get("grants") or []:
-                fs = g.get("feat_slot") if isinstance(g, dict) else None
-                if fs and fs.get("kind") == "class" and 1 in (fs.get("levels") or []):
-                    self.class_feat_nivel_1 = True
-        if self.class_feat_nivel_1:
-            self.slots["class"] = [1] + self.slots["class"]
+        # regra 8: o class feat de nivel 1 so vem da PRIMEIRA classe
+        self.class_feat_nivel_1 = 1 in (self.slots.get("class") or [])
+        if 1 in (self.slots.get("class") or []) and self.primeira_classe:
+            concede = any(
+                1 in ((g.get("feat_slot") or {}).get("levels") or [])
+                and (g.get("feat_slot") or {}).get("kind") == "class"
+                for g in (self.base.get(self.primeira_classe).get("grants") or [])
+                if isinstance(g, dict))
+            if not concede:
+                self.slots["class"] = [n for n in self.slots["class"] if n != 1]
+                self.class_feat_nivel_1 = False
 
         # o que o documento realmente gastou
         self.gastos: dict[str, list[dict]] = defaultdict(list)
