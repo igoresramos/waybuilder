@@ -45,6 +45,19 @@ RANKS = ["untrained", "trained", "expert", "master", "legendary"]
 RANK_BONUS = {"untrained": 0, "trained": 2, "expert": 4, "master": 6, "legendary": 8}
 ATRIBUTOS = ["str", "dex", "con", "int", "wis", "cha"]
 
+# Cinto de seguranca contra dado malformado, NAO contra o jogador. Medido em
+# 2026-07-27 (motor/testes_ciclos/medir_grafo_real.py) sobre os 19705
+# registros da base inteira: o grafo de `grant_feat`/`grant_item` com alvo
+# ESTATICO (sem uuid dinamico `{...}`) nao tem NENHUM ciclo de 2+ nos, e a
+# cadeia mais funda encontrada tem 3 nos. O unico padrao "circular" real sao
+# 31 registros que concedem A SI MESMOS (ex.: `Rage`, `Hunt Prey`, `Devise a
+# Stratagem` -- artefato do Foundry pra reaplicar o proprio efeito, nao um
+# erro de dado), e esses ja saem podados no primeiro passo porque a origem
+# entra em `visitados` antes de percorrer. Este teto e so a rede: se um dado
+# futuro (novo livro, erro de extracao) formar uma cadeia mais funda, o motor
+# CORTA e AVISA -- nunca trava, nunca perde em silencio.
+MAX_PROFUNDIDADE_GRANTS = 8
+
 
 def _comparar(tenho, operador: str, alvo) -> bool:
     if operador == ">=":
@@ -122,6 +135,7 @@ class Personagem:
         self._defesa()
         self._ataques()
         self._checar_requisitos()
+        self._grants_em_cadeia()
 
     # -- regra 1: estrutura -------------------------------------------------
 
@@ -1402,6 +1416,76 @@ class Personagem:
             if nome in traits:
                 return cid
         return None
+
+    # -- guarda contra ciclo/cadeia funda em grant_feat/grant_item ----------
+
+    def _grants_em_cadeia(self) -> None:
+        """Percorre `grant_feat`/`grant_item` de tudo que o personagem tem
+        (feats escolhidos + features de classe/subclasse), com guarda de
+        profundidade e visitados -- ver `MAX_PROFUNDIDADE_GRANTS` e
+        `_resolver_cadeia_de_grants`.
+
+        O motor NAO aplica automaticamente o que a cadeia concede (isso
+        continua sendo escolha do jogador, escrita em `escolhas` -- principio
+        zero: sugere, nunca decide por conta propria). Esta passada so
+        SINALIZA dois casos que hoje passariam batido: grant_item com uuid
+        dinamico (depende de escolha ainda nao feita) e cadeia cortada por
+        profundidade/dado malformado. Nunca perde em silencio.
+        """
+        for wb_id, feat in self._feats_escolhidos():
+            self._resolver_cadeia_de_grants(wb_id, feat.get("grants") or [], {wb_id})
+        for f in self.features:
+            if f.get("id"):
+                self._resolver_cadeia_de_grants(f["id"], f.get("grants") or [], {f["id"]})
+
+    def _resolver_cadeia_de_grants(self, origem_id: str, grants: list,
+                                    visitados: set, profundidade: int = 0) -> None:
+        """Um passo da cadeia. `visitados` e compartilhado entre as chamadas
+        recursivas de uma mesma origem -- e o que poda auto-referencia (A
+        concede A mesma) sem gerar aviso: o alvo ja esta em `visitados` desde
+        o primeiro passo, entao e tratado como "ja tenho", nao como perda.
+        """
+        if profundidade > MAX_PROFUNDIDADE_GRANTS:
+            self.avisos.append(
+                f"{origem_id}: cadeia de grants cortada em profundidade "
+                f"{MAX_PROFUNDIDADE_GRANTS} (possivel ciclo ou dado malformado)")
+            return
+        for g in grants or []:
+            if not isinstance(g, dict):
+                continue
+            if "grant_feat" in g:
+                alvos = g["grant_feat"]
+                alvos = alvos if isinstance(alvos, list) else [alvos]
+                for alvo in alvos:
+                    if not isinstance(alvo, str):
+                        continue
+                    if "{" in alvo:
+                        self.avisos.append(
+                            f"{origem_id}: grant_feat depende de escolha do "
+                            f"jogador ({alvo}) -- nao resolvivel automaticamente")
+                        continue
+                    if alvo in visitados:
+                        continue      # ja concedido nesta cadeia -- poda sem avisar
+                    alvo_reg = self.base.opcional(alvo)
+                    if alvo_reg is None:
+                        self.avisos.append(
+                            f"{origem_id}: grant_feat aponta pra id ausente "
+                            f"da base: {alvo}")
+                        continue
+                    visitados.add(alvo)
+                    self._resolver_cadeia_de_grants(
+                        alvo, alvo_reg.get("grants") or [], visitados, profundidade + 1)
+            if "grant_item" in g:
+                gi = g["grant_item"]
+                uuid = gi.get("uuid") if isinstance(gi, dict) else gi
+                if isinstance(uuid, str) and "{" in uuid:
+                    # uuid dinamico: so a escolha do jogador fecha isto. NAO e
+                    # "alvo nao encontrado" -- e "pendente", e o app tem que
+                    # distinguir os dois casos.
+                    self.avisos.append(
+                        f"{origem_id}: grant_item depende de escolha do "
+                        f"jogador (uuid dinamico `{uuid}`) -- pendente, nao "
+                        f"e alvo ausente")
 
     # -- saida --------------------------------------------------------------
 

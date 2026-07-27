@@ -1,0 +1,27 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {"versao": "2026-07-27", "pin_foundry": "87f9e502"},
+  "identidade": {
+    "nome": "Teste Ciclo de Grants",
+    "jogador": "teste-motor",
+    "notas": "Documento so para provar o caso relatado pelo Igor: Ancestral Paragon (general) com grant_item de uuid dinamico apontando pra uma escolha de feat de ancestria."
+  },
+  "escolhas": [
+    {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/dwarf"},
+    {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/ancient-blooded-dwarf"},
+    {"em": "criacao", "slot": "background", "pega": "wb:background/scholar-of-the-ancients"},
+    {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+    {"em": 1, "slot": "subclasse", "pega": "wb:class-feature/warrior-of-legend"},
+    {"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "int", "con"]},
+    {"em": 1, "slot": "class_feat", "pega": "wb:feat/double-slice"},
+    {"em": 1, "slot": "ancestry_feat", "pega": "wb:feat/dwarven-lore"},
+    {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+    {"em": 2, "slot": "class_feat", "pega": "wb:feat/aggressive-block"},
+    {"em": 2, "slot": "skill_feat", "pega": "wb:feat/assurance"},
+    {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+    {"em": 3, "slot": "general_feat", "pega": "wb:feat/ancestral-paragon"}
+  ],
+  "atores": [],
+  "inventario": [],
+  "manual": {"nota": "teste", "hp_bonus": 0, "proficiencias_forcadas": {}, "itens_caseiros": []}
+}
