@@ -71,7 +71,7 @@ def indice_aon():
 
 def indice_foundry():
     """_id do Foundry -> registro, com cache em disco (28k arquivos)."""
-    cache = f"{BRUTOS}/_idx_foundry_nivel.json"
+    cache = f"{BRUTOS}/_idx_foundry_campos.json"
     if os.path.exists(cache):
         return json.load(open(cache))
     raiz = os.environ.get("WB_FOUNDRY_PACKS", f"{BRUTOS}/foundry_repo/packs/pf2e")
@@ -86,8 +86,14 @@ def indice_foundry():
         if not isinstance(d, dict) or not d.get("_id"):
             continue
         sistema = d.get("system") or {}
-        nivel = (sistema.get("level") or {}).get("value")
-        idx[d["_id"]] = {"name": d.get("name"), "level": nivel}
+        pub = sistema.get("publication") or sistema.get("source") or {}
+        idx[d["_id"]] = {
+            "name": d.get("name"),
+            "level": (sistema.get("level") or {}).get("value"),
+            "book": (pub.get("title") if isinstance(pub, dict) else None)
+                    or (pub.get("value") if isinstance(pub, dict) else None),
+            "rarity": (sistema.get("traits") or {}).get("rarity"),
+        }
     json.dump(idx, open(cache, "w"), separators=(",", ":"))
     return idx
 

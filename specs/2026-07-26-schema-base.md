@@ -102,6 +102,18 @@ Nunca do ID de nenhuma fonte -- IDs de terceiros vivem em `xref`.
   nunca silenciada.
 - **`mechanized`** separa as duas camadas: `true` = o app calcula pelos `grants`;
   `false` = so exibe o texto e o jogador controla na mao. Nunca trava o build.
+
+  > **E derivado, nao declarado: `mechanized == bool(grants)`.** Medido em
+  > 2026-07-26: o campo significava quatro coisas diferentes conforme o
+  > extrator. 12.923 registros (70,1%) tinham `true` com `grants` vazio -- ou
+  > seja, prometiam calculo sem nada para calcular -- e 374 tinham `false` com
+  > `grants` cheio. Pior, o `false` se distribuia por **kind inteiro** (`deity`,
+  > `trait`, `ritual`, `language`, `skill`): era propriedade de quem escreveu o
+  > extrator, nao do dado.
+  >
+  > Como a unica coisa que o app consegue calcular sao os `grants`, o valor e
+  > exatamente isso. Extrator nao declara mais este campo; o reconciliador
+  > deriva.
 - **`text`** e uma referencia, nao o texto. A prosa vive em arquivo separado
   (3,6 MB gzip) e carrega sob demanda.
 

@@ -247,6 +247,22 @@ def main():
     if descartados:
         print(f"artefatos organizacionais descartados: {len(descartados)} -> {descartados}")
 
+    # --- 2d. `mechanized` passa a ser derivado, nao opiniao de extrator ---
+    # Media: 12.923 registros com true e `grants` vazio, 374 com false e grants
+    # cheio, e kinds inteiros (deity, trait, ritual, language) com false por
+    # decisao de quem escreveu o extrator. Eram quatro significados diferentes
+    # no mesmo campo.
+    # A spec ja define o unico que importa -- "true = o app calcula pelos
+    # grants" --, entao o valor e exatamente isso e nada mais. `false` nao e
+    # lacuna: e o caso normal do principio zero, o jogador le e resolve na mesa.
+    trocados = 0
+    for r in base:
+        derivado = bool(r.get("grants"))
+        if r.get("mechanized") != derivado:
+            trocados += 1
+        r["mechanized"] = derivado
+    print(f"mechanized derivado de grants: {trocados} registros corrigidos")
+
     # --- 3. portoes de qualidade ---
     falhas = collections.Counter()
     for r in base:
