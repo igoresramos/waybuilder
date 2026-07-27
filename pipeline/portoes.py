@@ -470,10 +470,15 @@ def main():
         linhas.append("")
 
     if "--gravar-cobertura" in sys.argv:
-        json.dump({"total": len(base),
-                   "por_kind": dict(collections.Counter(r.get("kind") for r in base))},
-                  open(COBERTURA, "w"), indent=1)
-        print(f"  linha de base de cobertura gravada em {COBERTURA}")
+        # so fixa a linha de base a partir de um build limpo: gravar depois de
+        # falhar rebaixa a referencia e a regressao e acusada uma vez so
+        if falhou:
+            print(f"  linha de base NAO gravada -- {falhou} portao(es) falhando")
+        else:
+            json.dump({"total": len(base),
+                       "por_kind": dict(collections.Counter(r.get("kind") for r in base))},
+                      open(COBERTURA, "w"), indent=1)
+            print(f"  linha de base de cobertura gravada em {COBERTURA}")
 
     open(f"{BASE}/relatorio_portoes_{fase}.md", "w").write("\n".join(linhas) + "\n")
     print(f"-> base/relatorio_portoes_{fase}.md   "

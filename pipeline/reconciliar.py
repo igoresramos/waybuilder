@@ -160,7 +160,13 @@ def fundir(grupo):
                 if ib < ia:
                     base[k] = v
                     prov[k] = fb
-                conflitos.append({"campo": k, fa: atual, fb: v, "escolhido": escolhido})
+                # duas entradas da MESMA fonte colidiriam na chave do dict e o
+                # registro passaria a mentir sobre qual valor venceu (o segundo
+                # sobrescreve o primeiro). Desambigua como `comum.escolher` faz.
+                registro = {"campo": k, fa: atual}
+                registro[fb if fb != fa else f"{fb}_2"] = v
+                registro["escolhido"] = escolhido
+                conflitos.append(registro)
         xref.update(outro.get("xref") or {})
         prov.update({k: v for k, v in (outro.get("prov") or {}).items() if k not in prov})
         conflitos += list(outro.get("conflitos") or [])
