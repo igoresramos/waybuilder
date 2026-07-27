@@ -19,7 +19,8 @@ import traits_uniao
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 ENTRADA = ["classes.json", "feats.json", "magias.json", "ancestrias.json",
-           "equipamento.json", "companheiros.json", "referencia.json"]
+           "equipamento.json", "companheiros.json", "referencia.json",
+           "rituais.json"]
 
 # precedencia por campo, conforme specs/2026-07-26-schema-base.md
 PRECEDENCIA = {
@@ -54,7 +55,32 @@ def normalizar_livro(b):
     n = re.sub(r"\bremastered\b", "remaster", n)
     n = re.sub(r"\barchives\b", "archive", n)      # Dark Archive(s)
     n = re.sub(r"\bcores?\b", "core", n)
+    # o Foundry prefixa a linha editorial que o AoN nao usa:
+    # 'Pathfinder Lost Omens Highhelm' e 'Highhelm' sao a mesma obra
+    n = re.sub(r"^lost omens ", "", n)
+    n = re.sub(r"^adventure path ", "", n)
     return n.strip()
+
+
+_CANONICO = None
+
+
+def canonizar_livro(b):
+    """Grafia unica por obra, do mapa gerado a partir do AoN.
+
+    `normalizar_livro` ja existia mas so rodava na COMPARACAO -- o valor
+    emitido continuava saindo em duas grafias para 26 obras (11.116 registros),
+    e 161 registros carregavam `\\r\\n` literal dentro do titulo.
+    """
+    global _CANONICO
+    if _CANONICO is None:
+        caminho = f"{AQUI}/canonico_livros.json"
+        _CANONICO = (json.load(open(caminho)).get("canonico") or {}
+                     if os.path.exists(caminho) else {})
+    if not b:
+        return b
+    limpo = " ".join(str(b).replace("\r", " ").replace("\n", " ").split())
+    return _CANONICO.get(normalizar_livro(limpo), limpo)
 
 
 def carregar():
@@ -70,6 +96,11 @@ def carregar():
         for r in lista:
             if isinstance(r, dict) and r.get("id"):
                 r.setdefault("_origem", arq)
+                # canoniza ANTES de comparar: senao a mesma obra em duas grafias
+                # vira conflito falso, e o valor emitido sai nas duas formas
+                src = r.get("source")
+                if isinstance(src, dict) and src.get("book"):
+                    src["book"] = canonizar_livro(src["book"])
                 regs.append(r)
     return regs
 
@@ -176,6 +207,34 @@ def main():
         r.setdefault("prov", {})["source.license"] = "inferida:livro"
         inferidas += 1
     print(f"license inferida a partir do livro: {inferidas}")
+
+    # --- 2b2. duplicata de nome curto vinda so do pf2etools ---
+    # `wb:armor/hide` e `wb:armor/hide-armor` sao o mesmo item: o pf2etools
+    # grafa sem o substantivo do kind. Esses registros vinham sem `source`, e o
+    # portao 5 os reportava como "sem license" -- o sintoma foi lido errado
+    # desde o inicio: e falha de CASAMENTO, nao falta de licenca.
+    por_kind_nome = {}
+    for r in base:
+        por_kind_nome[(r.get("kind"), normalizar(r.get("name")))] = r
+    curtos = []
+    for r in base:
+        if (r.get("source") or {}).get("book"):
+            continue
+        if list((r.get("xref") or {}).keys()) != ["pf2etools"]:
+            continue
+        kind = r.get("kind")
+        nome = normalizar(r.get("name"))
+        alvo = por_kind_nome.get((kind, f"{nome} {kind}"))
+        if alvo is not None and alvo["id"] != r["id"]:
+            aliases = set(alvo.get("aliases") or []) | {r.get("name")}
+            aliases.discard(alvo.get("name"))
+            alvo["aliases"] = sorted(a for a in aliases if a)
+            alvo.setdefault("xref", {}).update(
+                {f"pf2etools_curto": (r.get("xref") or {}).get("pf2etools")})
+            curtos.append(r["id"])
+    if curtos:
+        base = [r for r in base if r["id"] not in set(curtos)]
+        print(f"duplicatas de nome curto (pf2etools) fundidas: {len(curtos)} -> {curtos}")
 
     # --- 2c. descartar artefato organizacional (pasta do Foundry, nao conteudo) ---
     def e_artefato(r):

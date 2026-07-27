@@ -1,610 +1,489 @@
 # Fusao de renomeados
 
-Politica: nome nao importa, regra e conteudo importam. Par confirmado vira
-um registro so; todos os nomes ficam em `aliases`. **Nada e descartado.**
+Chave: `remaster_id`/`legacy_id` do AoN. Prosa **nao** cria par --
+entra so para desempatar sucessor multiplo. Campo estruturado
+divergente veta a fusao.
 
-- base: 18773 -> **18176** registros
-- pares fundidos: **597**
-- registros com alias: **359**
-- pulados por prosa curta demais para julgar: 573
-- criterio: similaridade >= 0.62 **e** >= 15 termos distintivos
+- pares declarados pelo AoN: **698**
+- fundidos: **365**
+- vetados por divergencia estrutural: **333**
+- desempatados por prosa: **76**
+- base: 18921 -> **18556** registros
+- registros com alias: **302**
 
-## Fusoes
+## Vetados -- par declarado, conteudo divergente
 
-- `1.00` **Armor of Fury** -> **Armor Mastery** _(class-feature)_
-- `1.00` **Evasion** -> **Blast Dodger** _(class-feature)_
-- `1.00` **Align Ki** -> **Align Qi** _(feat)_
-- `1.00` **Armor Regiment Training** -> **Armored Regiment Training** _(feat)_
-- `1.00` **Critical Debilitations** -> **Critical Debilitation** _(feat)_
-- `1.00` **Diviner Sense** -> **Keen Magical Detection** _(feat)_
-- `1.00` **Exude Abyssal Corruption** -> **Exude Demonic Corruption** _(feat)_
-- `1.00` **Favored Enemy** -> **Favored Prey** _(feat)_
-- `1.00` **Forge-Blessd Shot** -> **Forge-Blessed Shot** _(feat)_
-- `1.00` **Harbinger's Claw** -> **Harbinger's Caw** _(feat)_
-- `1.00` **Improved Familiar** -> **Improved Familiar (Familiar Master)** _(feat)_
-- `1.00` **Irrepressible** -> **Irrepressible (Halfling)** _(feat)_
-- `1.00` **Irrepressible (Ganzi)** -> **Irrepressible (Nephilim)** _(feat)_
-- `1.00` **Ki Center** -> **Qi Center** _(feat)_
-- `1.00` **Nocturnal Grippli** -> **Nocturnal Tripkee** _(feat)_
-- `1.00` **Point-Blank Shot** -> **Point Blank Stance** _(feat)_
-- `1.00` **Scattering Shot** -> **Shattering Shot** _(feat)_
-- `1.00` **Skill Mastery (Investigator)** -> **Skill Mastery** _(feat)_
-- `1.00` **Solar Rejuvenation (Leshy)** -> **Solar Rejuvenation** _(feat)_
-- `1.00` **Whisper of Warning** -> **Whispers of Warning** _(feat)_
-- `1.00` **Artillerst** -> **Artillerist** _(archetype)_
-- `1.00` **Ablative Armor Plating** -> **Ablative Armor Plating (Greater)** _(equipment)_
-- `1.00` **Ablative Shield Plating** -> **Ablative Shield Plating (Greater)** _(equipment)_
-- `1.00` **Affliction Suppressant** -> **Affliction Suppressant (Greater)** _(equipment)_
-- `1.00` **Alchemical Chart** -> **Alchemical Chart (Greater)** _(equipment)_
-- `1.00` **Animal Nip (Lesser)** -> **Animal Nip** _(equipment)_
-- `1.00` **Animal Nip (Moderate)** -> **Animal Nip** _(equipment)_
-- `1.00` **Animal Repellent** -> **Animal Repellent (Greater)** _(equipment)_
-- `1.00` **Arbor Wine (Aged)** -> **Arbor Wine** _(equipment)_
-- `1.00` **Armory Bracelet** -> **Armory Bracelet (Greater)** _(equipment)_
-- `1.00` **Assassin's Bracers** -> **Assassin's Bracers (Type I)** _(equipment)_
-- `1.00` **Astrolabe** -> **Mariner's Astrolabe** _(equipment)_
-- `1.00` **Bane Ammunition** -> **Bane Ammunition (Greater)** _(equipment)_
-- `1.00` **Bendy-Arm Mutagen** -> **Bendy-Arm Mutagen (Greater)** _(equipment)_
-- `1.00` **Bewitching Bloom** -> **Bewitching Bloom (Amaranth)** _(equipment)_
-- `1.00` **Black Powder** -> **Black Powder (Horn)** _(equipment)_
-- `1.00` **Black Powder (Dose or Round)** -> **Black Powder (Horn)** _(equipment)_
-- `1.00` **Black Tendril Shot** -> **Black Tendril Shot (Greater)** _(equipment)_
-- `1.00` **Blast Boots** -> **Blast Boots (Greater)** _(equipment)_
-- `1.00` **Blister Ammunition** -> **Blister Ammunition (Greater)** _(equipment)_
-- `1.00` **Blood Booster** -> **Blood Booster (Greater)** _(equipment)_
-- `1.00` **Blood Sight Elixir** -> **Blood Sight Elixir (Greater)** _(equipment)_
-- `1.00` **Bortled Favorite** -> **Bortled Favorite (Lesser)** _(equipment)_
-- `1.00` **Bravery Baldric** -> **Bravery Baldric (Fleet)** _(equipment)_
-- `1.00` **Bravery Baldric (Healthful, Greater)** -> **Bravery Baldric (Fleet)** _(equipment)_
-- `1.00` **Camouflage Dye** -> **Camouflage Dye (Greater)** _(equipment)_
-- `1.00` **Chromatic Jellyfish Oil** -> **Chromatic Jellyfish Oil (Greater)** _(equipment)_
-- `1.00` **Clarity Goggles** -> **Clarity Goggles (Greater)** _(equipment)_
-- `1.00` **Clockwork Goggles (Major)** -> **Clockwork Goggles** _(equipment)_
-- `1.00` **Colorful Coating** -> **Colorful Coating (Blue)** _(equipment)_
-- `1.00` **Conduit Shot** -> **Conduit Shot (Greater)** _(equipment)_
-- `1.00` **Conrasu Coin** -> **Conrasu Coin (Arbiter)** _(equipment)_
-- `1.00` **Contagion Metabolizer** -> **Contagion Metabolizer (Greater)** _(equipment)_
-- `1.00` **Crackling Bubble Gum** -> **Crackling Bubble Gum (Greater)** _(equipment)_
-- `1.00` **Cryomister** -> **Cryomister (Lesser)** _(equipment)_
-- `1.00` **Cryomister (Greater)** -> **Cryomister (Lesser)** _(equipment)_
-- `1.00` **Cryomister (Major)** -> **Cryomister (Lesser)** _(equipment)_
-- `1.00` **Cyrusian Wand** -> **Cyrusian Wand (1st-rank Spell)** _(equipment)_
-- `1.00` **Deadweight Mutagen** -> **Deadweight Mutagen (Greater)** _(equipment)_
-- `1.00` **Demolition Fulu** -> **Demolition Fulu (Greater)** _(equipment)_
-- `1.00` **Emetic Paste** -> **Emetic Paste (Greater)** _(equipment)_
-- `1.00` **Energy Mutagen** -> **Energy Mutagen (Greater)** _(equipment)_
-- `1.00` **Etheric Essence Disruptor** -> **Etheric Essence Disruptor (Greater)** _(equipment)_
-- `1.00` **Explosive Mine** -> **Explosive Mine (Greater)** _(equipment)_
-- `1.00` **Eyes of the Eagle** -> **Eyes of the Cat** _(equipment)_
-- `1.00` **Ferrofluid Urchin (Greater)** -> **Ferrofluid Urchin** _(equipment)_
-- `1.00` **Ferrofluid Urchin (Lesser)** -> **Ferrofluid Urchin** _(equipment)_
-- `1.00` **Ferrofluid Urchin (Moderate)** -> **Ferrofluid Urchin** _(equipment)_
-- `1.00` **Flare Beacon** -> **Flare Beacon (Greater)** _(equipment)_
-- `1.00` **Floating Tent (Four-Person)** -> **Floating Tent** _(equipment)_
-- `1.00` **Floating Tent (Pup)** -> **Floating Tent** _(equipment)_
-- `1.00` **Fossil Fragment (Amber Mosquito)** -> **Fossil Fragment** _(equipment)_
-- `1.00` **Fossil Fragment (Brontosaurus Phalange)** -> **Fossil Fragment** _(equipment)_
-- `1.00` **Fossil Fragment (Deinonychus Claw)** -> **Fossil Fragment** _(equipment)_
-- `1.00` **Fossil Fragment (Eurypterid Paddle)** -> **Fossil Fragment** _(equipment)_
-- `1.00` **Fossil Fragment (Petrified Wood)** -> **Fossil Fragment** _(equipment)_
-- `1.00` **Fossil Fragment (Triceratops Frill)** -> **Fossil Fragment** _(equipment)_
-- `1.00` **Fossil Fragment (Tyrannosaur Tooth)** -> **Fossil Fragment** _(equipment)_
-- `1.00` **Fury Cocktail** -> **Fury Cocktail (Greater)** _(equipment)_
-- `1.00` **Gearbinder Oil** -> **Gearbinder Oil (Greater)** _(equipment)_
-- `1.00` **Greater Burglar's Rosebud** -> **Burglar's Rosebud** _(equipment)_
-- `1.00` **Greater Cloak of Social Graces** -> **Cloak of Social Graces** _(equipment)_
-- `1.00` **Greater Crown of the Master** -> **Crown of the Master** _(equipment)_
-- `1.00` **Greater Gloves of Precision** -> **Gloves of Precision** _(equipment)_
-- `1.00` **Greater Golden Wings** -> **Golden Wings** _(equipment)_
-- `1.00` **Greater Irritating Seedpod** -> **Irritating Seedpod** _(equipment)_
-- `1.00` **Greater Kinetic Wraps of Strength** -> **Kinetic Wraps of Strength** _(equipment)_
-- `1.00` **Greater Moritype** -> **Moritype** _(equipment)_
-- `1.00` **Greater Pickled Demon Tongue** -> **Pickled Demon Tongue** _(equipment)_
-- `1.00` **Greater Polished Demon Horn** -> **Polished Demon Horn** _(equipment)_
-- `1.00` **Greater Sihedron Medallion** -> **Sihedron Medallion** _(equipment)_
-- `1.00` **Greater Sihedron Ring** -> **Sihedron Ring** _(equipment)_
-- `1.00` **Greater Stalk Goggles** -> **Stalk Goggles** _(equipment)_
-- `1.00` **Hag Eye (Frightful)** -> **Hag Eye** _(equipment)_
-- `1.00` **Hag Eye (Oracular)** -> **Hag Eye** _(equipment)_
-- `1.00` **Hag Eye (Smokey)** -> **Hag Eye** _(equipment)_
-- `1.00` **Hag Eye (Stoney)** -> **Hag Eye** _(equipment)_
-- `1.00` **Healing Vapor** -> **Healing Vapor (Greater)** _(equipment)_
-- `1.00` **Heartening Missive** -> **Heartening Missive (Bull)** _(equipment)_
-- `1.00` **Impact Foam Chassis** -> **Impact Foam Chassis (Greater)** _(equipment)_
-- `1.00` **Implosion Dust** -> **Implosion Dust (Greater)** _(equipment)_
-- `1.00` **Insight Coffee** -> **Insight Coffee (Greater)** _(equipment)_
-- `1.00` **Lesser Irritating Seedpod** -> **Irritating Seedpod** _(equipment)_
-- `1.00` **Life Shot** -> **Life Shot (Greater)** _(equipment)_
-- `1.00` **Life-Boosting Oil** -> **Life-Boosting Oil (Greater)** _(equipment)_
-- `1.00` **Lucky Draw Bandolier (Greater)** -> **Lucky Draw Bandolier** _(equipment)_
-- `1.00` **Magnetic Shot** -> **Magnetic Shot (Greater)** _(equipment)_
-- `1.00` **Major Cloak of Social Graces** -> **Cloak of Social Graces** _(equipment)_
-- `1.00` **Major Golden Wings** -> **Golden Wings** _(equipment)_
-- `1.00` **Major Irritating Seedpod** -> **Irritating Seedpod** _(equipment)_
-- `1.00` **Major Pickled Demon Tongue** -> **Pickled Demon Tongue** _(equipment)_
-- `1.00` **Major Polished Demon Horn** -> **Polished Demon Horn** _(equipment)_
-- `1.00` **Major Sihedron Medallion** -> **Sihedron Medallion** _(equipment)_
-- `1.00` **Major Stalk Goggles** -> **Stalk Goggles** _(equipment)_
-- `1.00` **Marvelous Miniature (Swift Sparrow)** -> **Marvelous Miniature** _(equipment)_
-- `1.00` **Material Essence Disruptor** -> **Material Essence Disruptor (Greater)** _(equipment)_
-- `1.00` **Mirror Goggles** -> **Mirror Goggles (Greater)** _(equipment)_
-- `1.00` **Moonlit Spellgun** -> **Moonlit Spellgun (Greater)** _(equipment)_
-- `1.00` **Numbing Tonic** -> **Numbing Tonic (Greater)** _(equipment)_
-- `1.00` **Octopus Potion (Greater)** -> **Octopus Potion** _(equipment)_
-- `1.00` **Octopus Potion (Lesser)** -> **Octopus Potion** _(equipment)_
-- `1.00` **Octopus Potion (Moderate)** -> **Octopus Potion** _(equipment)_
-- `1.00` **Oil of Ownership** -> **Oil of Ownership (Greater)** _(equipment)_
-- `1.00` **Olfactory Stimulators (Bloodhound)** -> **Olfactory Stimulators** _(equipment)_
-- `1.00` **Ooze Ammunition** -> **Ooze Ammunition (Greater)** _(equipment)_
-- `1.00` **Pathfinder Chronicle** -> **Scholarly Journal** _(equipment)_
-- `1.00` **Peachwood** -> **Peachwood Branch** _(equipment)_
-- `1.00` **Peachwood Object (High-Grade)** -> **Peachwood Branch** _(equipment)_
-- `1.00` **Peachwood Object (Standard-Grade)** -> **Peachwood Branch** _(equipment)_
-- `1.00` **Poison Concentrator** -> **Poison Concentrator (Greater)** _(equipment)_
-- `1.00` **Poison Fizz** -> **Poison Fizz (Greater)** _(equipment)_
-- `1.00` **Portable Weapon Mount** -> **Portable Weapon Mount (Monopod)** _(equipment)_
-- `1.00` **Portable Weapon Mount (Tripod, Shielded)** -> **Portable Weapon Mount (Monopod)** _(equipment)_
-- `1.00` **Potion Patch** -> **Potion Patch (Greater)** _(equipment)_
-- `1.00` **Privacy Ward Fulu** -> **Privacy Ward Fulu (Chamber)** _(equipment)_
-- `1.00` **Purifying Spoon (Ladle)** -> **Purifying Spoon** _(equipment)_
-- `1.00` **Purifying Spoon (Tablespoon)** -> **Purifying Spoon** _(equipment)_
-- `1.00` **Purifying Spoon (Teaspoon)** -> **Purifying Spoon** _(equipment)_
-- `1.00` **Rainbow Vinegar** -> **Rainbow Vinegar (Greater)** _(equipment)_
-- `1.00` **Revealing Mist** -> **Revealing Mist (Greater)** _(equipment)_
-- `1.00` **Roaring Potion** -> **Roaring Potion (Greater)** _(equipment)_
-- `1.00` **Rusting Ammunition** -> **Rusting Ammunition (Greater)** _(equipment)_
-- `1.00` **Sanguine Mutagen** -> **Sanguine Mutagen (Greater)** _(equipment)_
-- `1.00` **Sense-Dulling Hood** -> **Sense-Dulling Hood (Greater)** _(equipment)_
-- `1.00` **Serpent Oil** -> **Serpent Oil (Greater)** _(equipment)_
-- `1.00` **Seventh Prism** -> **Seventh Prism (Pentagonal)** _(equipment)_
-- `1.00` **Silver (Ingot)** -> **Silver** _(equipment)_
-- `1.00` **Silver Crescent** -> **Silver Crescent (Greater)** _(equipment)_
-- `1.00` **Snarling Badger** -> **Snarling Badger (Greater)** _(equipment)_
-- `1.00` **Soothing Powder** -> **Soothing Powder (Greater)** _(equipment)_
-- `1.00` **Soothing Tonic** -> **Soothing Tonic (Greater)** _(equipment)_
-- `1.00` **Sparking Spellgun** -> **Sparking Spellgun (Greater)** _(equipment)_
-- `1.00` **Spiderfoot Brew** -> **Spiderfoot Brew (Greater)** _(equipment)_
-- `1.00` **Spiritual Warhorn** -> **Spiritual Warhorn (Greater)** _(equipment)_
-- `1.00` **Sprite Apple** -> **Sprite Apple (Chartreuse)** _(equipment)_
-- `1.00` **Spun Cloud (Black)** -> **Spun Cloud** _(equipment)_
-- `1.00` **Spun Cloud (Blue)** -> **Spun Cloud** _(equipment)_
-- `1.00` **Spun Cloud (Green)** -> **Spun Cloud** _(equipment)_
-- `1.00` **Spun Cloud (Red)** -> **Spun Cloud** _(equipment)_
-- `1.00` **Spun Cloud (White)** -> **Spun Cloud** _(equipment)_
-- `1.00` **Stone Body Mutagen** -> **Stone Body Mutagen (Greater)** _(equipment)_
-- `1.00` **Tattletale Orb** -> **Tattletale Orb (Clear Quartz)** _(equipment)_
-- `1.00` **Tentacle Potion** -> **Tentacle Potion (Greater)** _(equipment)_
-- `1.00` **Theatrical Mutagen** -> **Theatrical Mutagen (Greater)** _(equipment)_
-- `1.00` **Thorn of Milani** -> **Thorn of Milani (Lesser)** _(equipment)_
-- `1.00` **Thousand-Pains Fulu** -> **Thousand-Pains Fulu (Blade)** _(equipment)_
-- `1.00` **Timepiece** -> **Timepiece (Desktop Clock)** _(equipment)_
-- `1.00` **Tome of Restorative Cleansing** -> **Tome of Restorative Cleansing (Greater)** _(equipment)_
-- `1.00` **Torrent Spellgun** -> **Torrent Spellgun (Greater)** _(equipment)_
-- `1.00` **True Golden Wings** -> **Golden Wings** _(equipment)_
-- `1.00` **Unifying Emblem** -> **Unifying Emblem (Lyrune-Quah)** _(equipment)_
-- `1.00` **Vaccine** -> **Vaccine (Greater)** _(equipment)_
-- `1.00` **Wand of Purification** -> **Wand of Purification (2nd-rank Spell)** _(equipment)_
-- `1.00` **Waterproof Carrying Case** -> **Waterproof Firearm Carrying Case** _(equipment)_
-- `1.00` **Weapon Shot** -> **Weapon Shot (Greater)** _(equipment)_
-- `1.00` **Wind-up Wings** -> **Wind-up Wings (Flutterback)** _(equipment)_
-- `1.00` **Warding Escutcheon (Greater)** -> **Warding Escutcheon** _(shield)_
-- `0.98` **Phase Arrow** -> **Incorporeal Shot** _(feat)_
-- `0.98` **Implausible Purchase** -> **Implausible Purchase (Investigator)** _(feat)_
-- `0.98` **Repeating Crossbow Magazine** -> **Repeating Hand Crossbow Magazine** _(equipment)_
-- `0.98` **Trample** -> **Trample (Sarangay)** _(feat)_
-- `0.98` **Snap Out of It!** -> **Snap Out of It! (Marshal)** _(feat)_
-- `0.97` **Stunning Fist** -> **Stunning Blows** _(feat)_
-- `0.97` **Arrow Snatching** -> **Projectile Snatching** _(feat)_
-- `0.97` **Mithral Tree** -> **Dawnsilver Tree** _(weapon)_
-- `0.97` **Predictive Purchase** -> **Predictive Purchase (Investigator)** _(feat)_
-- `0.97` **Soulsight (Sorcerer)** -> **Soulsight (Bard)** _(feat)_
-- `0.96` **Repeating Heavy Crossbow Magazine** -> **Repeating Hand Crossbow Magazine** _(equipment)_
-- `0.96` **Wooden Taws** -> **8-Round Magazine** _(equipment)_
-- `0.95` **Impose Order (Aphorite)** -> **Impose Order** _(feat)_
-- `0.95` **Aeon Stone (Agate Ellipsoid)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon  Stone (Amber Sphere)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Azure Briolette)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon  Stone (Black Disc)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Black Pearl)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Clear Quartz Octagon)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Clear Spindle)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Cymophane Cabochon)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Dull Gray)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Dusty Rose Prism)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Gold Nodule)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Lavender and Green Ellipsoid)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Mottled Ellipsoid)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Olivine Pendeloque)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Orange Prism)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Pale Lavender Ellipsoid)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Pale Orange Rhomboid)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Pearlescent Pyramid)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Pearly White Spindle)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Pink Rhomboid)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Polished Pebble)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Rainbow Prism)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Tourmaline Sphere)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Aeon Stone (Western Star)** -> **Aeon Stone** _(equipment)_
-- `0.95` **Arrow of Death** -> **Fatal Shot** _(feat)_
-- `0.95` **Flicker** -> **Flickering Twirl** _(feat)_
-- `0.95` **Faerie Dragon** -> **Fey Dragonet** _(familiar-specific)_
-- `0.95` **Magic Wand (1st-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Magic Wand (2nd-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Magic Wand (3rd-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Magic Wand (4th-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Magic Wand (5th-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Magic Wand (6th-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Magic Wand (7th-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Magic Wand (8th-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Magic Wand (9th-Level Spell)** -> **Magic Wand** _(equipment)_
-- `0.95` **Grippli Glide** -> **Tripkee Glide** _(feat)_
-- `0.94` **Wand of Continuation (1st-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- `0.94` **Wand of Continuation (2nd-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- `0.94` **Wand of Continuation (3rd-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- `0.94` **Wand of Continuation (4th-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- `0.94` **Wand of Continuation (5th-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- `0.94` **Wand of Continuation (6th-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- `0.94` **Wand of Continuation (7th-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- `0.94` **Wand of Continuation (8th-Level Spell)** -> **Wand of Continuation** _(equipment)_
-- `0.94` **Enchanting Arrow** -> **Enchanting Shot** _(feat)_
-- `0.94` **Tusks** -> **Tusks (Orc)** _(feat)_
-- `0.94` **Potion of Tongues** -> **Potion of Truespeech** _(equipment)_
-- `0.94` **Sparkling Spellgun (Greater)** -> **Sparking Spellgun (Greater)** _(equipment)_
-- `0.94` **Sparkling Spellgun (Lesser)** -> **Sparking Spellgun (Greater)** _(equipment)_
-- `0.94` **Sparkling Spellgun (Moderate)** -> **Sparking Spellgun (Greater)** _(equipment)_
-- `0.94` **Spell Repertoire (Summoner)** -> **Spell Repertoire (Bard)** _(class-feature)_
-- `0.94` **Spiritsight Sight** -> **Spiritsight Ring** _(equipment)_
-- `0.93` **Horseshoes of Speed** -> **Alacritous Horsehoes** _(equipment)_
-- `0.93` **Horseshoes of Speed (Greater)** -> **Alacritous Horsehoes** _(equipment)_
-- `0.93` **Seeker Arrow** -> **Homing Shot** _(feat)_
-- `0.93` **Lurching Chomp** -> **Luring Chomp** _(feat)_
-- `0.93` **Repair Kit** -> **Repair Toolkit** _(equipment)_
-- `0.93` **Repair Kit (Superb)** -> **Repair Toolkit** _(equipment)_
-- `0.92` **Knowledge is Power** -> **Knowledge is Power (Wizard)** _(feat)_
-- `0.92` **Power Attack** -> **Vicious Swing** _(feat)_
-- `0.92` **Shared Luck (Catfolk)** -> **Luck of the Clowder** _(feat)_
-- `0.92` **Salve of Slipperiness** -> **Tricky Liniment** _(equipment)_
-- `0.92` **Improved Evasion** -> **Assured Evasion** _(class-feature)_
-- `0.92` **Backpack Catapult Stones** -> **Backpack Ballista Bolts** _(equipment)_
-- `0.92` **Ki-Channeling Beads** -> **Mala Beads of Foresight** _(equipment)_
-- `0.92` **Mithral** -> **Dawnsilver** _(equipment)_
-- `0.92` **Mithral Chunk** -> **Dawnsilver** _(equipment)_
-- `0.92` **Mithral Ingot** -> **Dawnsilver** _(equipment)_
-- `0.92` **Mithral Object (High-Grade)** -> **Dawnsilver** _(equipment)_
-- `0.92` **Mithral Object (Standard-Grade)** -> **Dawnsilver** _(equipment)_
-- `0.91` **Decree of Banisment** -> **Decree of Banishment** _(feat)_
-- `0.91` **Broom of Flying** -> **Flying Broomstick** _(equipment)_
-- `0.91` **Spellcasting (1st level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Spellcasting (2nd level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Spellcasting (3rd level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Spellcasting (4th level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Spellcasting (5th level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Spellcasting (6th level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Spellcasting (7th level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Spellcasting (8th level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Spellcasting (9th level)** -> **Spellcasting** _(equipment)_
-- `0.91` **Knockdown** -> **Slam Down** _(feat)_
-- `0.91` **Darkwood** -> **Duskwood** _(equipment)_
-- `0.91` **Darkwood Branch** -> **Duskwood** _(equipment)_
-- `0.91` **Darkwood Lumber** -> **Duskwood** _(equipment)_
-- `0.91` **Darkwood Object (High-Grade)** -> **Duskwood** _(equipment)_
-- `0.91` **Darkwood Object (Standard-Grade)** -> **Duskwood** _(equipment)_
-- `0.91` **Wand of Overflowing Life (3rd-Level Spell)** -> **Wand of Overflowing Life** _(equipment)_
-- `0.91` **Wand of Overflowing Life (4th-Level Spell)** -> **Wand of Overflowing Life** _(equipment)_
-- `0.91` **Wand of Overflowing Life (5th-Level Spell)** -> **Wand of Overflowing Life** _(equipment)_
-- `0.91` **Wand of Overflowing Life (6th-Level Spell)** -> **Wand of Overflowing Life** _(equipment)_
-- `0.91` **Wand of Overflowing Life (7th-Level Spell)** -> **Wand of Overflowing Life** _(equipment)_
-- `0.91` **Wand of Overflowing Life (8th-Level Spell)** -> **Wand of Overflowing Life** _(equipment)_
-- `0.91` **Spring Attack** -> **Dashing Strike** _(feat)_
-- `0.91` **Bag of Holding** -> **Spacious Pouch** _(equipment)_
-- `0.91` **Bag of Holding (Type I)** -> **Spacious Pouch** _(equipment)_
-- `0.91` **Bag of Holding (Type II)** -> **Spacious Pouch** _(equipment)_
-- `0.91` **Bag of Holding (Type III)** -> **Spacious Pouch** _(equipment)_
-- `0.91` **Bag of Holding (Type IV)** -> **Spacious Pouch** _(equipment)_
-- `0.91` **Remember thy Names** -> **Remember Their Names** _(feat)_
-- `0.90` **Exemplar Resilency** -> **Barbarian Resiliency** _(feat)_
-- `0.90` **Armiger's Mobility** -> **Hellknight Mobility** _(feat)_
-- `0.90` **Darkwood Weapon** -> **Duskwood Weapon** _(equipment)_
-- `0.90` **Darkwood Weapon (High-Grade)** -> **Duskwood Weapon** _(equipment)_
-- `0.90` **Darkwood Weapon (Standard-Grade)** -> **Duskwood Weapon** _(equipment)_
-- `0.90` **Courageous Opportunity** -> **Reflexive Courage** _(feat)_
-- `0.90` **Wand of Hopeless Night (2nd-Level Spell)** -> **Wand of Hopeless Night** _(equipment)_
-- `0.90` **Wand of Hopeless Night (4th-Level Spell)** -> **Wand of Hopeless Night** _(equipment)_
-- `0.90` **Empathetic Envoy** -> **Empathic Envoy** _(feat)_
-- `0.90` **Speed** -> **Quickstrike** _(equipment)_
-- `0.90` **Choker-Arm Mutagen** -> **Bendy-Arm Mutagen (Greater)** _(equipment)_
-- `0.90` **Choker-Arm Mutagen (Greater)** -> **Bendy-Arm Mutagen (Greater)** _(equipment)_
-- `0.90` **Choker-Arm Mutagen (Lesser)** -> **Bendy-Arm Mutagen (Greater)** _(equipment)_
-- `0.90` **Choker-Arm Mutagen (Major)** -> **Bendy-Arm Mutagen (Greater)** _(equipment)_
-- `0.90` **Choker-Arm Mutagen (Moderate)** -> **Bendy-Arm Mutagen (Greater)** _(equipment)_
-- `0.90` **Cape of the Mountebank** -> **Charlatan's Cape** _(equipment)_
-- `0.90` **Sunrod** -> **Glow Rod** _(equipment)_
-- `0.90` **Thunderstone** -> **Blasting Stone** _(equipment)_
-- `0.90` **Thunderstone (Greater)** -> **Blasting Stone** _(equipment)_
-- `0.90` **Thunderstone (Lesser)** -> **Blasting Stone** _(equipment)_
-- `0.90` **Thunderstone (Major)** -> **Blasting Stone** _(equipment)_
-- `0.90` **Thunderstone (Moderate)** -> **Blasting Stone** _(equipment)_
-- `0.89` **Soulsight** -> **Soulsight (Bard)** _(feat)_
-- `0.89` **Archaic Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Bi-Resonant Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Chronicler Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Elemental Wayfinder (Air)** -> **Wayfinder** _(equipment)_
-- `0.89` **Elemental Wayfinder (Earth)** -> **Wayfinder** _(equipment)_
-- `0.89` **Elemental Wayfinder (Fire)** -> **Wayfinder** _(equipment)_
-- `0.89` **Elemental Wayfinder (Water)** -> **Wayfinder** _(equipment)_
-- `0.89` **Fashionable Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Homeward Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Hummingbird Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Mithral Weapon** -> **Dawnsilver Weapon** _(equipment)_
-- `0.89` **Mithral Weapon (High-Grade)** -> **Dawnsilver Weapon** _(equipment)_
-- `0.89` **Mithral Weapon (Standard-Grade)** -> **Dawnsilver Weapon** _(equipment)_
-- `0.89` **Razmiri Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Shining Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Vanishing Wayfinder** -> **Wayfinder** _(equipment)_
-- `0.89` **Wayfinder of Rescue** -> **Wayfinder** _(equipment)_
-- `0.89` **Efficient Apport** -> **Reclined Apport** _(spell)_
-- `0.89` **Wand of Manifold Missiles** -> **Wand of Shardstorm** _(equipment)_
-- `0.89` **Wand of Manifold Missiles (1st-Level Spell)** -> **Wand of Shardstorm** _(equipment)_
-- `0.89` **Wand of Manifold Missiles (3rd-Level Spell)** -> **Wand of Shardstorm** _(equipment)_
-- `0.89` **Wand of Manifold Missiles (5th-Level Spell)** -> **Wand of Shardstorm** _(equipment)_
-- `0.89` **Wand of Manifold Missiles (7th-Level Spell)** -> **Wand of Shardstorm** _(equipment)_
-- `0.89` **Resolve** -> **Disciplined Mind** _(class-feature)_
-- `0.89` **Guardian's Deflection** -> **Guardian's Deflection (Swashbuckler)** _(feat)_
-- `0.89` **Mithral Buckler (High-Grade)** -> **Dawnsilver Buckler (High-Grade)** _(equipment)_
-- `0.89` **Mithral Buckler (Standard-Grade)** -> **Dawnsilver Buckler (High-Grade)** _(equipment)_
-- `0.89` **Mithral Shield** -> **Dawnsilver Buckler (High-Grade)** _(equipment)_
-- `0.89` **Mithral Shield (High-Grade)** -> **Dawnsilver Buckler (High-Grade)** _(equipment)_
-- `0.89` **Mithral Shield (Standard-Grade)** -> **Dawnsilver Buckler (High-Grade)** _(equipment)_
-- `0.88` **Wand of Widening (1st-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Wand of Widening (2nd-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Wand of Widening (3rd-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Wand of Widening (4th-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Wand of Widening (5th-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Wand of Widening (6th-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Wand of Widening (7th-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Wand of Widening (8th-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Wand of Widening (9th-Level Spell)** -> **Wand of Widening** _(equipment)_
-- `0.88` **Expanded Luck** -> **Lucky Break** _(feat)_
-- `0.88` **Embolded With Glorious Purpose** -> **Emboldened with Glorious Purpose** _(feat)_
-- `0.88` **Spell Penetration** -> **Irresistible Magic** _(feat)_
-- `0.87` **Smokestick** -> **Smoke Ball** _(equipment)_
-- `0.87` **Smokestick (Greater)** -> **Smoke Ball** _(equipment)_
-- `0.87` **Smokestick (Lesser)** -> **Smoke Ball** _(equipment)_
-- `0.87` **Pass Vengeful Judgement** -> **Pass Vengeful Judgment** _(feat)_
-- `0.87` **Recycled Cogwheel** -> **Recycled Cogwheels** _(feat)_
-- `0.87` **Darkwood Buckler (High-Grade)** -> **Duskwood Buckler (High-Grade)** _(equipment)_
-- `0.87` **Darkwood Buckler (Standard-Grade)** -> **Duskwood Buckler (High-Grade)** _(equipment)_
-- `0.87` **Darkwood Shield** -> **Duskwood Buckler (High-Grade)** _(equipment)_
-- `0.87` **Darkwood Shield (High-Grade)** -> **Duskwood Buckler (High-Grade)** _(equipment)_
-- `0.87` **Darkwood Shield (Standard-Grade)** -> **Duskwood Buckler (High-Grade)** _(equipment)_
-- `0.87` **Darkwood Tower Shield (High-Grade)** -> **Duskwood Buckler (High-Grade)** _(equipment)_
-- `0.87` **Darkwood Tower Shield (Standard-Grade)** -> **Duskwood Buckler (High-Grade)** _(equipment)_
-- `0.87` **Messanger Missive** -> **Messenger Missive** _(equipment)_
-- `0.87` **Messanger Missive (Multiple)** -> **Messenger Missive** _(equipment)_
-- `0.86` **Counterspell** -> **Counterspell (Prepared)** _(feat)_
-- `0.86` **Hat of Disagreeable Disguise** -> **Handkerchief of Disagreeable Disguise** _(equipment)_
-- `0.86` **Hat of Disagreeable Disguise (Greater)** -> **Handkerchief of Disagreeable Disguise** _(equipment)_
-- `0.86` **Silence the Profane (Avenger)** -> **Silence the Profane** _(feat)_
-- `0.86` **Silence the Profane (Vindicator)** -> **Silence the Profane** _(feat)_
-- `0.86` **Purple Worm Venom** -> **Cave Worm Venom** _(equipment)_
-- `0.86` **Greater Resolve** -> **Perfected Mind** _(class-feature)_
-- `0.86` **Dancing** -> **Animated** _(equipment)_
-- `0.86` **Wand of Smoldering Fireballs (3rd-Level Spell)** -> **Wand of Smoldering Fireballs** _(equipment)_
-- `0.86` **Wand of Smoldering Fireballs (5th-Level Spell)** -> **Wand of Smoldering Fireballs** _(equipment)_
-- `0.86` **Wand of Smoldering Fireballs (7th-Level Spell)** -> **Wand of Smoldering Fireballs** _(equipment)_
-- `0.86` **Wand of Smoldering Fireballs (9th-Level Spell)** -> **Wand of Smoldering Fireballs** _(equipment)_
-- `0.86` **Orator's Fillibuster** -> **Orator's Filibuster** _(feat)_
-- `0.85` **Darkwood Armor** -> **Duskwood Armor** _(equipment)_
-- `0.85` **Darkwood Armor (High-Grade)** -> **Duskwood Armor** _(equipment)_
-- `0.85` **Darkwood Armor (Standard-Grade)** -> **Duskwood Armor** _(equipment)_
-- `0.85` **No Hands, No Problems** -> **No Hands, No Problem** _(feat)_
-- `0.85` **Animal Empathy (Druid)** -> **Animal Empathy** _(feat)_
-- `0.85` **Startling Appearance** -> **Startling Appearance (Vigilante)** _(feat)_
-- `0.85` **Sneak Savant** -> **Sneak Adept** _(feat)_
-- `0.85` **Oil of Object Animation** -> **Oil of Dynamism** _(equipment)_
-- `0.85` **Oil of Object Animation (Greater)** -> **Oil of Dynamism** _(equipment)_
-- `0.85` **Owlbear Egg** -> **Owl Screech Egg** _(equipment)_
-- `0.85` **Sovereign Glue** -> **Everlasting Adhesive** _(equipment)_
-- `0.84` **Mithral Armor** -> **Dawnsilver Armor** _(equipment)_
-- `0.84` **Mithral Armor (High-Grade)** -> **Dawnsilver Armor** _(equipment)_
-- `0.84` **Mithral Armor (Standard-Grade)** -> **Dawnsilver Armor** _(equipment)_
-- `0.84` **Khakkara** -> **Khakkhara** _(weapon)_
-- `0.84` **Boots of Speed** -> **Propulsive Boots** _(equipment)_
-- `0.84` **Bralani Breath** -> **Deadlock Mint** _(equipment)_
-- `0.84` **Bralani Breath (Greater)** -> **Deadlock Mint** _(equipment)_
-- `0.83` **Bone Rider** -> **Fossil Rider** _(feat)_
-- `0.83` **Combat Reflexes** -> **Tactical Reflexes** _(feat)_
-- `0.83` **Flash of Omipotence** -> **Flash of Omnipotence** _(feat)_
-- `0.83` **Larger than Life (Kitsune)** -> **Larger than Life** _(feat)_
-- `0.83` **Quick Recovery (Yaoguai)** -> **Quick Recovery** _(feat)_
-- `0.83` **Vengful Remnant** -> **Vengeful Remnant** _(feat)_
-- `0.83` **Deflect Arrow** -> **Deflect Projectile** _(feat)_
-- `0.82` **Alchemist Armor Mastery (Level 19)** -> **Light Armor Mastery** _(class-feature)_
-- `0.82` **Wand of Crackling Lightning (3rd-Level Spell)** -> **Wand of Crackling Lightning** _(equipment)_
-- `0.82` **Wand of Crackling Lightning (4th-Level Spell)** -> **Wand of Crackling Lightning** _(equipment)_
-- `0.82` **Wand of Crackling Lightning (6th-Level Spell)** -> **Wand of Crackling Lightning** _(equipment)_
-- `0.82` **Wand of Crackling Lightning (8th-Level Spell)** -> **Wand of Crackling Lightning** _(equipment)_
-- `0.81` **Efficient Alchemy** -> **Efficient Alchemy (Alchemist)** _(feat)_
-- `0.81` **Golem Dynamo** -> **Construct Dynamo** _(feat)_
-- `0.81` **Blessed Blood (Aasimar)** -> **Blessed Blood (Nephilim)** _(feat)_
-- `0.81` **Cunning Hair** -> **Flexible Tail** _(feat)_
-- `0.81` **Javelin of Lightning** -> **Trident of Lightning** _(equipment)_
-- `0.81` **Certain Strategem** -> **Certain Stratagem** _(feat)_
-- `0.80` **Hellknight Order Cross-Training** -> **Order Cross-Training** _(feat)_
-- `0.80` **Kursarigama** -> **Kusarigama** _(weapon)_
-- `0.80` **Nocturnal Sense** -> **Nocturnal Senses** _(feat)_
-- `0.80` **Precious Arrow** -> **Precious Ammunition** _(feat)_
-- `0.80` **Vigorous Inspiration** -> **Vigorous Anthem** _(feat)_
-- `0.80` **Glamered** -> **Raiment** _(equipment)_
-- `0.80` **Healer's Tools** -> **Healer's Toolkit** _(equipment)_
-- `0.80` **Healer's Tools (Expanded)** -> **Healer's Toolkit** _(equipment)_
-- `0.80` **Fracture Time Flow** -> **Fracture Timeflow** _(feat)_
-- `0.80` **Silversheen** -> **Silver Salve** _(equipment)_
-- `0.80` **Fautless Defense** -> **Faultless Defense** _(feat)_
-- `0.79` **Bravery Baldric (Restoration Greater)** -> **Bravery Baldric (Fleet)** _(equipment)_
-- `0.79` **Bravery Baldric (Restoration)** -> **Bravery Baldric (Fleet)** _(equipment)_
-- `0.79` **Bravery Baldric (Stoneskin)** -> **Bravery Baldric (Fleet)** _(equipment)_
-- `0.79` **Basic Cathartic Spellcasting** -> **Basic Eldritch Archer Spellcasting** _(feat)_
-- `0.79` **Advanced Martial Magic** -> **Advanced Breakthrough** _(feat)_
-- `0.79` **Grippli Lore** -> **Tripkee Lore** _(feat)_
-- `0.79` **Wild Shape** -> **Untamed Form** _(feat)_
-- `0.79` **Firework Technican** -> **Firework Technician** _(archetype)_
-- `0.79` **Gnoll Lore** -> **Kholo Lore** _(feat)_
-- `0.79` **Form of the Fiend** -> **Bestial Manifestation** _(feat)_
-- `0.79` **Twinned Defense (Swashbuckler)** -> **Twinned Defense (Fighter)** _(feat)_
-- `0.79` **Tanglefoot Bag** -> **Glue Bomb** _(equipment)_
-- `0.79` **Tanglefoot Bag (Greater)** -> **Glue Bomb** _(equipment)_
-- `0.79` **Tanglefoot Bag (Lesser)** -> **Glue Bomb** _(equipment)_
-- `0.79` **Tanglefoot Bag (Major)** -> **Glue Bomb** _(equipment)_
-- `0.79` **Tanglefoot Bag (Moderate)** -> **Glue Bomb** _(equipment)_
-- `0.78` **The Harder They Fall (Rogue)** -> **The Harder They Fall** _(feat)_
-- `0.78` **Metamagic Channel** -> **Spellshape Channel** _(feat)_
-- `0.78` **Winter Wolf Elixir** -> **Witchwarg Elixir** _(equipment)_
-- `0.78` **Winter Wolf Elixir (Greater)** -> **Witchwarg Elixir** _(equipment)_
-- `0.78` **Winter Wolf Elixir (Lesser)** -> **Witchwarg Elixir** _(equipment)_
-- `0.78` **Winter Wolf Elixir (Moderate)** -> **Witchwarg Elixir** _(equipment)_
-- `0.78` **Laughing Gnoll** -> **Laughing Kholo** _(feat)_
-- `0.78` **Skill Mastery (Rogue)** -> **Skill Mastery** _(feat)_
-- `0.78` **Woodland Stride** -> **Forest Passage** _(feat)_
-- `0.78` **Sense Good** -> **Sense Holiness** _(feat)_
-- `0.77` **Crystalline Cloud** -> **Extraplanar Cloud** _(feat)_
-- `0.77` **Tanglefoot Extruder** -> **Splatrope Extruder** _(equipment)_
-- `0.77` **Hellknight Signifer Dedication** -> **Hellknight Signifer Preferment** _(feat)_
-- `0.76` **Disrupting Oil** -> **Burial Oil** _(equipment)_
-- `0.76` **Disrupting Oil (Greater)** -> **Burial Oil** _(equipment)_
-- `0.76` **Shadow Essence** -> **Nethershade** _(equipment)_
-- `0.75` **Draconic Scent (Dragon Disciple)** -> **Draconic Scent** _(feat)_
-- `0.75` **Expert Disassembler** -> **Expert Disassembly** _(feat)_
-- `0.75` **Vermilion Threads** -> **Vermillion Threads** _(feat)_
-- `0.75` **Wild Empathy** -> **Animal Empathy (Ranger)** _(feat)_
-- `0.75` **Alchemist's Tools** -> **Alchemist's Toolkit** _(equipment)_
-- `0.75` **Tindertwig** -> **Matchstick** _(equipment)_
-- `0.75` **Broadspear** -> **Filcher's Fork** _(weapon)_
-- `0.75` **Tattoo Transformation** -> **Absorb Familiar** _(familiar-ability)_
-- `0.74` **Magic Sense (Magus)** -> **Magic Sense** _(feat)_
-- `0.74` **Sense Evil** -> **Sense Unholiness** _(feat)_
-- `0.74` **Rallying Charge** -> **Rallying Charge (Knight Vigilant)** _(feat)_
-- `0.74` **Slink** -> **Refined Motion in Darkness** _(feat)_
-- `0.74` **Bear Hug (Ursine Avenger)** -> **Bear Hug** _(feat)_
-- `0.74` **Attack of Opportunity** -> **Reactive Strike** _(feat)_
-- `0.74` **Concealable Picks** -> **Thieves' Toolkit** _(equipment)_
-- `0.74` **Concealable Thieves' Tools** -> **Thieves' Toolkit** _(equipment)_
-- `0.74` **Thieves' Tools** -> **Thieves' Toolkit** _(equipment)_
-- `0.74` **Thieves' Tools (Infiltrator Picks)** -> **Thieves' Toolkit** _(equipment)_
-- `0.74` **Thieves' Tools (Infiltrator)** -> **Thieves' Toolkit** _(equipment)_
-- `0.74` **Thieves' Tools (Replacement Picks)** -> **Thieves' Toolkit** _(equipment)_
-- `0.74` **Wand of Slaying** -> **Wand of Slaughter** _(equipment)_
-- `0.74` **Wand of Slaying (7th-Level Spell)** -> **Wand of Slaughter** _(equipment)_
-- `0.74` **Wand of Slaying (8th-Level Spell)** -> **Wand of Slaughter** _(equipment)_
-- `0.74` **Wand of Slaying (9th-Level Spell)** -> **Wand of Slaughter** _(equipment)_
-- `0.74` **Rungu** -> **Cruuk** _(weapon)_
-- `0.73` **Blackfinger Blight** -> **Astringent Venom** _(equipment)_
-- `0.73` **Faerie Dragon Liqueur** -> **Fey Dragonet Liqueur** _(equipment)_
-- `0.73` **Faerie Dragon Liqueur (Adult)** -> **Fey Dragonet Liqueur** _(equipment)_
-- `0.73` **Faerie Dragon Liqueur (Wyrm)** -> **Fey Dragonet Liqueur** _(equipment)_
-- `0.73` **Faerie Dragon Liqueur (Young)** -> **Fey Dragonet Liqueur** _(equipment)_
-- `0.73` **Dangle (Vanara)** -> **Dangle** _(feat)_
-- `0.73` **Advanced Synergy** -> **Advanced Breakthrough** _(feat)_
-- `0.73` **Barkskin Potion** -> **Oak Potion** _(equipment)_
-- `0.73` **Wand of the Spider (2nd-Level Spell)** -> **Wand of the Spider** _(equipment)_
-- `0.73` **Wand of the Spider (4th-Level Spell)** -> **Wand of the Spider** _(equipment)_
-- `0.73` **Dandpatta** -> **Horsechopper** _(weapon)_
-- `0.73` **Lotus Above the Mud** -> **Lotus Above the Wind** _(feat)_
-- `0.73` **Talwar** -> **Elven Curve Blade** _(weapon)_
-- `0.72` **Owlbear Claw** -> **Predator's Claw** _(equipment)_
-- `0.72` **Improved Knockdown** -> **Crashing Slam** _(feat)_
-- `0.72` **Sun Shot** -> **Sling Bullets** _(equipment)_
-- `0.72` **Gada** -> **Dwarven Waraxe** _(weapon)_
-- `0.72` **Dueling Parry (Fighter)** -> **Dueling Parry** _(feat)_
-- `0.72` **Triggerbrand Salvo** -> **Stab and Blast** _(feat)_
-- `0.71` **Eternal Wings** -> **Eternal Wings (Nephilim)** _(feat)_
-- `0.71` **Incredible Luck** -> **Incredible Luck (Swashbuckler)** _(feat)_
-- `0.71` **Spirit Strikes** -> **Quietus Strikes** _(feat)_
-- `0.71` **Opening Stance (Fighter)** -> **Opening Stance** _(feat)_
-- `0.71` **Hunting Spider Venom** -> **Spider Venom** _(equipment)_
-- `0.71` **Salamander Elixir** -> **Cooling Elixir** _(equipment)_
-- `0.71` **Salamander Elixir (Greater)** -> **Cooling Elixir** _(equipment)_
-- `0.71` **Salamander Elixir (Lesser)** -> **Cooling Elixir** _(equipment)_
-- `0.71` **Salamander Elixir (Moderate)** -> **Cooling Elixir** _(equipment)_
-- `0.71` **Spiderfoot Brew (Major)** -> **Spiderfoot Brew (Greater)** _(equipment)_
-- `0.70` **Drag Down** -> **Steal for the Depths** _(feat)_
-- `0.70` **Exquisite Sword Cane Sheath** -> **Gaff** _(weapon)_
-- `0.70` **Magic Arrow** -> **Magic Ammunition** _(feat)_
-- `0.70` **Battle Assessment** -> **Combat Reading** _(feat)_
-- `0.70` **Raining Knives Snare** -> **Omnidirectional Spear Snare** _(equipment)_
-- `0.70` **Dueling Dance (Swashbuckler)** -> **Dueling Dance (Fighter)** _(feat)_
-- `0.70` **Vishkanya Lore** -> **Leshy Lore** _(feat)_
-- `0.69` **Ghast Stiletto** -> **Ghoul Stiletto** _(weapon)_
-- `0.69` **Camoflage Coat** -> **Camouflage Coat** _(feat)_
-- `0.69` **Elven Branched Spear** -> **Horsechopper** _(weapon)_
-- `0.69` **Rhoka Sword** -> **Gaff** _(weapon)_
-- `0.69` **Universal Solvent** -> **Absolute Solvent** _(equipment)_
-- `0.69` **Universal Solvent (Greater)** -> **Absolute Solvent** _(equipment)_
-- `0.69` **Universal Solvent (Major)** -> **Absolute Solvent** _(equipment)_
-- `0.69` **Universal Solvent (Moderate)** -> **Absolute Solvent** _(equipment)_
-- `0.68` **Counterspell (Spontaneous)** -> **Counterspell (Prepared)** _(feat)_
-- `0.68` **Potion of Expeditious Retreat** -> **Potion of Emergency Escape** _(equipment)_
-- `0.68` **Draconic Toxin Bottle** -> **Energy Toxin Bottle** _(equipment)_
-- `0.68` **Artisan's Tools** -> **Artisan's Toolkit** _(equipment)_
-- `0.68` **Artisan's Tools (Sterling)** -> **Artisan's Toolkit** _(equipment)_
-- `0.68` **Malyass Root Paste** -> **Tangle Root Toxin** _(equipment)_
-- `0.68` **Exquisite Sword Cane** -> **Elven Curve Blade** _(weapon)_
-- `0.68` **Crystalline Dust** -> **Extraplanar Haze** _(feat)_
-- `0.68` **Green Wyrmling Breath Potion** -> **Horned Dragon Breath Potion** _(equipment)_
-- `0.68` **Wand of the Snowfields (5th-Level Spell)** -> **Wand of the Snowfields** _(equipment)_
-- `0.68` **Wand of the Snowfields (7th-Level Spell)** -> **Wand of the Snowfields** _(equipment)_
-- `0.68` **Greater Kinetic Durability** -> **Greater Juggernaut** _(class-feature)_
-- `0.68` **Thundermace** -> **Gaff** _(weapon)_
-- `0.68` **Atlatl** -> **Blowgun** _(weapon)_
-- `0.67` **Necrotic Infusion** -> **Divine Infusion** _(feat)_
-- `0.67` **Wyvern Sting** -> **Spider Sting** _(spell)_
-- `0.67` **Bolts (Phalanx Piercer)** -> **Gaff** _(weapon)_
-- `0.67` **Telekinetic Converter** -> **Telekinetic Converters** _(equipment)_
-- `0.67` **Marvelous Pigment** -> **Miraculous Paintbrush** _(equipment)_
-- `0.67` **Forest Stealth** -> **Swamp Stealth** _(feat)_
-- `0.67` **Headband of Inspired Wisdom** -> **Headwrap of Wisdom** _(equipment)_
-- `0.66` **Axe Musket (Melee)** -> **Slide Pistol** _(weapon)_
-- `0.66` **Axe Musket (Ranged)** -> **Slide Pistol** _(weapon)_
-- `0.66` **Spray Pellet** -> **Gaff** _(weapon)_
-- `0.66` **Mask of the Banshee** -> **Guise of the Smirking Devil** _(equipment)_
-- `0.66` **Mask of the Banshee (Greater)** -> **Guise of the Smirking Devil** _(equipment)_
-- `0.66` **Celestial Wings** -> **Divine Wings** _(feat)_
-- `0.66` **Iruxi Glide** -> **Leshy Glide** _(feat)_
-- `0.66` **Pierce the Darkness** -> **Orc Sight** _(feat)_
-- `0.66` **Thorn Whip** -> **Gaff** _(weapon)_
-- `0.66` **Black Powder Knuckle Dusters (Melee)** -> **Slide Pistol** _(weapon)_
-- `0.66` **Black Powder Knuckle Dusters (Ranged)** -> **Slide Pistol** _(weapon)_
-- `0.65` **Disrupt Ki** -> **Disrupt Qi** _(feat)_
-- `0.65` **Rapier Pistol (Melee)** -> **Slide Pistol** _(weapon)_
-- `0.65` **Rapier Pistol (Ranged)** -> **Slide Pistol** _(weapon)_
-- `0.65` **Well of Potential** -> **Energized Font** _(feat)_
-- `0.65` **Bag of Devouring** -> **Mother Maw** _(equipment)_
-- `0.65` **Bag of Devouring Type I** -> **Mother Maw** _(equipment)_
-- `0.65` **Bag of Devouring Type II** -> **Mother Maw** _(equipment)_
-- `0.65` **Bag of Devouring Type III** -> **Mother Maw** _(equipment)_
-- `0.65` **Clever Shadow** -> **Flexible Tail** _(feat)_
-- `0.65` **Dueling Parry (Swashbuckler)** -> **Dueling Parry** _(feat)_
-- `0.64` **Tonfa** -> **Shuan Ji** _(weapon)_
-- `0.64` **Fire's Pathway** -> **Nature's Pathway** _(spell)_
-- `0.64` **Cane Pistol (Melee)** -> **Slide Pistol** _(weapon)_
-- `0.64` **Cane Pistol (Ranged)** -> **Slide Pistol** _(weapon)_
-- `0.64` **Kalis** -> **Aldori Dueling Sword** _(weapon)_
-- `0.64` **Eternal Wings (Aasimar)** -> **Eternal Wings (Nephilim)** _(feat)_
-- `0.64` **Eternal Wings (Sylph)** -> **Eternal Wings (Nephilim)** _(feat)_
-- `0.64` **Radiant Infusion** -> **Divine Infusion** _(feat)_
-- `0.64` **Visap** -> **Injection Spear** _(weapon)_
-- `0.63` **Dragontooth Club** -> **Dragontooth Leiomano** _(weapon)_
-- `0.63` **Lich Dust** -> **Enervating Powder** _(equipment)_
-- `0.63` **Skillful Tail (Ganzi)** -> **Flexible Tail** _(feat)_
-- `0.63` **Spell-Storing** -> **Spell Reservoir** _(equipment)_
-- `0.63` **Poi** -> **Shield Bash** _(weapon)_
-- `0.63` **Kris** -> **Main-gauche** _(weapon)_
-- `0.63` **Summon Celestial Kin** -> **Summon Nephilim Kin** _(feat)_
-- `0.63` **Intercorporate** -> **Resilient Physiology** _(feat)_
-- `0.62` **Eidolon Weapon Specialization** -> **Weapon Specialization** _(class-feature)_
-- `0.62` **Dagger Pistol (Melee)** -> **Slide Pistol** _(weapon)_
-- `0.62` **Dagger Pistol (Ranged)** -> **Slide Pistol** _(weapon)_
-- `0.62` **Crescent Cross (Melee)** -> **Gakgung** _(weapon)_
-- `0.62` **Crescent Cross (Ranged)** -> **Gakgung** _(weapon)_
-- `0.62` **Astrolabe (Mariner's)** -> **Mariner's Astrolabe** _(equipment)_
-- `0.62` **Astrolabe (Standard)** -> **Mariner's Astrolabe** _(equipment)_
+O AoN liga os dois, mas um campo estruturado discorda. Revisar a mao;
+fundir aqui apagaria dado.
+
+- `wb:archetype/hellknight-signifer` x `wb:archetype/hellknight` -- level: 6 != 2
+- `wb:class-feature/ability-boosts` x `wb:class/alchemist` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/stubborn` x `wb:class/gunslinger` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/evasion` x `wb:class/gunslinger` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/iron-will` x `wb:class/alchemist` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/druid-weapon-expertise` x `wb:class/druid` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/perpetual-infusions-bomber` x `wb:class/alchemist` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/alertness` x `wb:class/alchemist` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/perpetual-potency-bomber` x `wb:class/alchemist` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/improved-evasion` x `wb:class/ranger` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/second-skin` x `wb:class/ranger` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/alchemical-alacrity` x `wb:class/alchemist` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/perpetual-perfection-bomber` x `wb:class/alchemist` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/arcane-spellcasting-magus` x `wb:class/wizard` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/wizard-weapon-expertise` x `wb:class/wizard` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/greater-resolve` x `wb:class/investigator` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/swashbuckler-s-style` x `wb:class/swashbuckler` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/formula-book` x `wb:class/alchemist` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/heightened-senses` x `wb:class/barbarian` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/armor-of-fury` x `wb:class/barbarian` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/spell-repertoire-psychic` x `wb:class/psychic` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/occult-spellcasting` x `wb:class/bard` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/second-implement` x `wb:class/thaumaturge` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/spell-repertoire-summoner` x `wb:class/bard` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/resolve` x `wb:class/bard` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/deific-weapon` x `wb:class/champion` -- kind: 'class-feature' != 'class'
+- `wb:class-feature/champion-s-reaction` x `wb:class/champion` -- kind: 'class-feature' != 'class'
+- `wb:equipment/winter-wolf-elixir-moderate` x `wb:equipment/witchwarg-elixir` -- level: 12 != 4
+- `wb:equipment/winter-wolf-elixir-greater` x `wb:equipment/witchwarg-elixir` -- level: 16 != 4
+- `wb:equipment/smokestick-greater` x `wb:equipment/smoke-ball` -- level: 7 != 1
+- `wb:equipment/darkwood-armor-high-grade` x `wb:equipment/duskwood-armor` -- level: 19 != 12
+- `wb:equipment/mithral-armor-high-grade` x `wb:equipment/dawnsilver-armor` -- level: 19 != 12
+- `wb:equipment/breastplate-of-command` x `wb:armor/warleaders-bulwark` -- kind: 'equipment' != 'armor'
+- `wb:equipment/breastplate-of-command-greater` x `wb:armor/warleaders-bulwark` -- level: 18 != 10; price_cp: 2200000 != 100000; kind: 'equipment' != 'armor'
+- `wb:equipment/celestial-armor` x `wb:armor/holy-chain` -- kind: 'equipment' != 'armor'
+- `wb:equipment/demon-armor` x `wb:armor/unholy-plate` -- kind: 'equipment' != 'armor'
+- `wb:armor/plate-armor-of-the-deep` x `wb:armor/tideplate` -- level: 15 != 10; price_cp: 650000 != 100000
+- `wb:equipment/rhino-hide` x `wb:armor/onslaught-hide` -- kind: 'equipment' != 'armor'
+- `wb:equipment/stalk-goggles-greater` x `wb:equipment/stalk-goggles` -- level: 3 != 1; price_cp: 6000 != 2000
+- `wb:equipment/stalk-goggles-major` x `wb:equipment/stalk-goggles` -- level: 8 != 1; price_cp: 45000 != 2000
+- `wb:equipment/dragons-breath-potion-adult` x `wb:equipment/energy-breath-potion` -- level: 12 != 7
+- `wb:equipment/dragons-breath-potion-wyrm` x `wb:equipment/energy-breath-potion` -- level: 17 != 7
+- `wb:equipment/pickled-demon-tongue-greater` x `wb:equipment/pickled-demon-tongue` -- level: 8 != 3; price_cp: 46000 != 6000
+- `wb:equipment/pickled-demon-tongue-major` x `wb:equipment/pickled-demon-tongue` -- level: 12 != 3; price_cp: 175000 != 6000
+- `wb:equipment/polished-demon-horn-greater` x `wb:equipment/polished-demon-horn` -- level: 8 != 3; price_cp: 45000 != 5500
+- `wb:equipment/polished-demon-horn-major` x `wb:equipment/polished-demon-horn` -- level: 12 != 3; price_cp: 175000 != 5500
+- `wb:equipment/aether-marble-moderate` x `wb:equipment/aether-marbles` -- level: 12 != 4
+- `wb:equipment/aether-marble-greater` x `wb:equipment/aether-marbles` -- level: 18 != 4
+- `wb:equipment/feather-token-chest` x `wb:equipment/marvelous-miniature` -- level: 3 != 1
+- `wb:equipment/feather-token-swan-boat` x `wb:equipment/marvelous-miniature` -- level: 8 != 1
+- `wb:equipment/bag-of-holding-type-ii` x `wb:equipment/spacious-pouch` -- level: 7 != 4
+- `wb:equipment/bag-of-holding-type-iii` x `wb:equipment/spacious-pouch` -- level: 11 != 4
+- `wb:equipment/bag-of-holding-type-iv` x `wb:equipment/spacious-pouch` -- level: 13 != 4
+- `wb:equipment/healers-tools-expanded` x `wb:equipment/healers-toolkit` -- level: 3 != 0; price_cp: 5000 != 500
+- `wb:equipment/horn-of-fog` x `wb:equipment/cloud-pouch` -- price_cp: 23000 != 22500
+- `wb:equipment/rod-of-wonder` x `wb:equipment/madcap-top` -- price_cp: 46500 != 45900
+- `wb:equipment/darkwood` x `wb:equipment/duskwood` -- level: 0 != 8
+- `wb:equipment/darkwood-branch` x `wb:equipment/duskwood` -- level: 0 != 8
+- `wb:equipment/darkwood-lumber` x `wb:equipment/duskwood` -- level: 0 != 8
+- `wb:equipment/darkwood-object-high-grade` x `wb:equipment/duskwood` -- level: 16 != 8
+
+## Sucessor multiplo, desempatado por prosa
+
+- `feat-1356` -> ['feat-4554', 'feat-4558'] escolheu `feat-4554` (0.406)
+- `spell-8` -> ['ritual-125', 'spell-1592'] escolheu `spell-1592` (0.179)
+- `spell-196` -> ['ritual-125', 'spell-1592'] escolheu `spell-1592` (0.167)
+- `spell-231` -> ['ritual-125', 'spell-1592'] escolheu `spell-1592` (0.151)
+- `spell-377` -> ['ritual-125', 'spell-1592'] escolheu `spell-1592` (0.203)
+- `equipment-148` -> ['equipment-3277', 'equipment-3277-3115'] escolheu `equipment-3277` (0.805)
+- `equipment-640` -> ['equipment-2962', 'equipment-2962-2826', 'equipment-2962-2827', 'equipment-2962-2828', 'equipment-2962-2829', 'equipment-2962-2830', 'equipment-2962-2831', 'equipment-2962-2832', 'equipment-2962-2833', 'equipment-2962-2834', 'equipment-2962-2835'] escolheu `equipment-2962` (0.206)
+- `equipment-1077` -> ['equipment-3054', 'equipment-3054-2970'] escolheu `equipment-3054` (0.14)
+- `equipment-4489` -> ['equipment-1956', 'equipment-1956-1720', 'equipment-1956-1721', 'equipment-1956-1722', 'equipment-1956-1723'] escolheu `equipment-1956` (0.122)
+- `equipment-2416` -> ['equipment-4032', 'equipment-4032-3716', 'equipment-4032-3717', 'equipment-4032-3718'] escolheu `equipment-4032` (0.869)
+- `equipment-406` -> ['equipment-3013', 'equipment-3013-2868', 'equipment-3013-2869'] escolheu `equipment-3013` (0.932)
+- `equipment-4441` -> ['equipment-1908', 'equipment-1908-1662'] escolheu `equipment-1908` (0.6)
+- `equipment-413` -> ['equipment-3056', 'equipment-3056-2981'] escolheu `equipment-3056` (0.291)
+- `equipment-3` -> ['equipment-2703', 'equipment-2703-2471'] escolheu `equipment-2703` (0.682)
+- `equipment-249` -> ['equipment-3032', 'equipment-3032-2890', 'equipment-3032-2891', 'equipment-3032-2892', 'equipment-3032-2893'] escolheu `equipment-3032` (0.909)
+- `equipment-416` -> ['equipment-3058', 'equipment-3058-2985', 'equipment-3058-2986'] escolheu `equipment-3058` (0.373)
+- `equipment-1347` -> ['equipment-2775', 'equipment-2775-2554'] escolheu `equipment-2775` (0.384)
+- `equipment-4491` -> ['equipment-1958', 'equipment-1958-1727', 'equipment-1958-1728', 'equipment-1958-1729', 'equipment-1958-1730'] escolheu `equipment-1958` (0.897)
+- `equipment-79` -> ['equipment-3288', 'equipment-3288-3126', 'equipment-3288-3127', 'equipment-3288-3128', 'equipment-3288-3129'] escolheu `equipment-3288` (0.897)
+- `equipment-689` -> ['equipment-3299', 'equipment-3299-3167', 'equipment-3299-3168', 'equipment-3299-3169', 'equipment-3299-3170', 'equipment-3299-3171'] escolheu `equipment-3299` (0.39)
+- `equipment-4554` -> ['equipment-2021', 'equipment-2021-1782'] escolheu `equipment-2021` (0.836)
+- `equipment-4602` -> ['equipment-2069', 'equipment-2069-1826'] escolheu `equipment-2069` (0.759)
+- `equipment-440` -> ['equipment-3064', 'equipment-3064-2992'] escolheu `equipment-3064` (0.096)
+- `equipment-455` -> ['equipment-3065', 'equipment-3065-2994', 'equipment-3065-2995'] escolheu `equipment-3065` (0.6)
+- `equipment-424` -> ['equipment-3069', 'equipment-3069-3001'] escolheu `equipment-3069` (0.435)
+- `equipment-98` -> ['equipment-3304', 'equipment-3304-3180', 'equipment-3304-3181', 'equipment-3304-3182'] escolheu `equipment-3304` (0.706)
+- `equipment-273` -> ['equipment-2918', 'equipment-2918-2774', 'equipment-2918-2775', 'equipment-2918-2776', 'equipment-2918-2777'] escolheu `equipment-2918` (0.911)
+- `equipment-141` -> ['equipment-2800', 'equipment-2800-2599', 'equipment-2800-2600'] escolheu `equipment-2800` (0.854)
+- `equipment-312` -> ['equipment-2815', 'equipment-2815-2637', 'equipment-2815-2638', 'equipment-2815-2639', 'equipment-2815-2640', 'equipment-2815-2641', 'equipment-2815-2642'] escolheu `equipment-2815` (0.867)
+- `equipment-376` -> ['equipment-2858', 'equipment-2858-2692', 'equipment-2858-2693'] escolheu `equipment-2858` (0.903)
+- `equipment-275` -> ['equipment-2917', 'equipment-2917-2770', 'equipment-2917-2771', 'equipment-2917-2772', 'equipment-2917-2773'] escolheu `equipment-2917` (0.915)
+- `equipment-144` -> ['equipment-2799', 'equipment-2799-2597', 'equipment-2799-2598'] escolheu `equipment-2799` (0.844)
+- `equipment-314` -> ['equipment-2814', 'equipment-2814-2633', 'equipment-2814-2634', 'equipment-2814-2635', 'equipment-2814-2636'] escolheu `equipment-2814` (0.886)
+- `equipment-377` -> ['equipment-2857', 'equipment-2857-2690', 'equipment-2857-2691'] escolheu `equipment-2857` (0.893)
+- `equipment-294` -> ['equipment-2852', 'equipment-2852-2684'] escolheu `equipment-2852` (0.5)
+- `equipment-185` -> ['equipment-2941', 'equipment-2941-2809', 'equipment-2941-2810', 'equipment-2941-2811'] escolheu `equipment-2941` (0.385)
+- `equipment-434` -> ['equipment-3092', 'equipment-3092-3032'] escolheu `equipment-3092` (0.431)
+- `equipment-449` -> ['equipment-3000', 'equipment-3000-2853', 'equipment-3000-2854', 'equipment-3000-2855', 'equipment-3000-2856', 'equipment-3000-2857', 'equipment-3000-2858', 'equipment-3000-2859', 'equipment-3020', 'equipment-3020-2876', 'equipment-3020-2877', 'equipment-3020-2878', 'equipment-3020-2879', 'equipment-3020-2880', 'equipment-3020-2881', 'equipment-3020-2882'] escolheu `equipment-3000` (0.254)
+- `equipment-4618` -> ['equipment-2085', 'equipment-2085-1842', 'equipment-2085-1844'] escolheu `equipment-2085` (0.732)
+- `equipment-244` -> ['equipment-3002', 'equipment-3002-2860', 'equipment-3002-2862', 'equipment-3002-2864'] escolheu `equipment-3002` (0.291)
+
+## Fusoes aplicadas
+
+- **Hellknight Armiger** -> **Hellknight** _(archetype)_
+- **Artillerst** -> **Artillerist** _(archetype)_
+- **Firework Technican** -> **Firework Technician** _(archetype)_
+- **Drow Shootist** -> **Crossbow Infiltrator** _(archetype)_
+- **Dwarven Pantheon** -> **Stone's Blood** _(deity)_
+- **Elven Pantheon** -> **Sovyrian Conclave** _(deity)_
+- **The Prismatic Ray** -> **Radiant Prism** _(deity)_
+- **Delirium** -> **Disorientation** _(domain)_
+- **Void** -> **Nothingness** _(domain)_
+- **Wyrmkin** -> **Dragon** _(domain)_
+- **Winter Wolf Elixir** -> **Witchwarg Elixir** _(equipment)_
+- **Winter Wolf Elixir (Lesser)** -> **Witchwarg Elixir** _(equipment)_
+- **Specialist's Ring** -> **Accolade Robe** _(equipment)_
+- **Hunting Spider Venom** -> **Spider Venom** _(equipment)_
+- **Silversheen** -> **Silver Salve** _(equipment)_
+- **Basic Cane** -> **Cane** _(equipment)_
+- **Basic Crutch** -> **Crutch** _(equipment)_
+- **Basic Hearing Aid** -> **Hearing Aid** _(equipment)_
+- **Smokestick** -> **Smoke Ball** _(equipment)_
+- **Smokestick (Lesser)** -> **Smoke Ball** _(equipment)_
+- **Basic Prosthesis** -> **Prosthesis** _(equipment)_
+- **Basic Corrective Lenses** -> **Corrective Lenses** _(equipment)_
+- **Sunrod** -> **Glow Rod** _(equipment)_
+- **Tindertwig** -> **Matchstick** _(equipment)_
+- **Darkwood Armor** -> **Duskwood Armor** _(equipment)_
+- **Darkwood Armor (Standard-Grade)** -> **Duskwood Armor** _(equipment)_
+- **Mithral Armor** -> **Dawnsilver Armor** _(equipment)_
+- **Mithral Armor (Standard-Grade)** -> **Dawnsilver Armor** _(equipment)_
+- **Clothing (Winter)** -> **Clothing** _(equipment)_
+- **Salve of Slipperiness** -> **Tricky Liniment** _(equipment)_
+- **Barkskin Potion** -> **Oak Potion** _(equipment)_
+- **Dragon's Breath Potion** -> **Energy Breath Potion** _(equipment)_
+- **Dragon's Breath Potion (Young)** -> **Energy Breath Potion** _(equipment)_
+- **Potion of Tongues** -> **Potion of Truespeech** _(equipment)_
+- **Alchemist's Tools** -> **Alchemist's Toolkit** _(equipment)_
+- **Owlbear Claw** -> **Predator's Claw** _(equipment)_
+- **Aether Marble** -> **Aether Marbles** _(equipment)_
+- **Aether Marble (Lesser)** -> **Aether Marbles** _(equipment)_
+- **Telekinetic Converter** -> **Telekinetic Converters** _(equipment)_
+- **Feather Token** -> **Marvelous Miniature** _(equipment)_
+- **Feather Token (Ladder)** -> **Marvelous Miniature** _(equipment)_
+- **Javelin of Lightning** -> **Trident of Lightning** _(equipment)_
+- **Bag of Holding** -> **Spacious Pouch** _(equipment)_
+- **Bag of Holding (Type I)** -> **Spacious Pouch** _(equipment)_
+- **Healer's Tools** -> **Healer's Toolkit** _(equipment)_
+- **Broom of Flying** -> **Flying Broomstick** _(equipment)_
+- **Everburning Torch** -> **Everlight Crystal** _(equipment)_
+- **Holly and Mistletoe** -> **Primal Symbol** _(equipment)_
+- **Darkwood Object (Standard-Grade)** -> **Duskwood** _(equipment)_
+- **Mithral Object (Standard-Grade)** -> **Dawnsilver** _(equipment)_
+- **Glamered** -> **Raiment** _(equipment)_
+- **Dancing** -> **Animated** _(equipment)_
+- **Disrupting** -> **Vitalizing** _(equipment)_
+- **Artisan's Tools** -> **Artisan's Toolkit** _(equipment)_
+- **Speed** -> **Quickstrike** _(equipment)_
+- **Spell-Storing** -> **Spell Reservoir** _(equipment)_
+- **Darkwood Shield** -> **Duskwood Shield** _(equipment)_
+- **Darkwood Buckler (Standard-Grade)** -> **Duskwood Shield** _(equipment)_
+- **Darkwood Shield (Standard-Grade)** -> **Duskwood Shield** _(equipment)_
+- **Darkwood Tower Shield (Standard-Grade)** -> **Duskwood Shield** _(equipment)_
+- **Mithral Shield** -> **Dawnsilver Shield** _(equipment)_
+- **Mithral Buckler (Standard-Grade)** -> **Dawnsilver Shield** _(equipment)_
+- **Mithral Shield (Standard-Grade)** -> **Dawnsilver Shield** _(equipment)_
+- **Magic Wand (1st-Level Spell)** -> **Magic Wand** _(equipment)_
+- **Wand of Continuation (1st-Level Spell)** -> **Wand of Continuation** _(equipment)_
+- **Wand of Manifold Missiles** -> **Wand of Shardstorm** _(equipment)_
+- **Wand of Manifold Missiles (1st-Level Spell)** -> **Wand of Shardstorm** _(equipment)_
+- **Wand of Smoldering Fireballs (3rd-Level Spell)** -> **Wand of Smoldering Fireballs** _(equipment)_
+- **Wand of Widening (1st-Level Spell)** -> **Wand of Widening** _(equipment)_
+- **Darkwood Weapon** -> **Duskwood Weapon** _(equipment)_
+- **Darkwood Weapon (Standard-Grade)** -> **Duskwood Weapon** _(equipment)_
+- **Mithral Weapon** -> **Dawnsilver Weapon** _(equipment)_
+- **Mithral Weapon (Standard-Grade)** -> **Dawnsilver Weapon** _(equipment)_
+- **Oathbow** -> **Hunter's Anthem** _(weapon)_
+- **Anklets of Alacrity** -> **Cloak of Swiftness** _(equipment)_
+- **Belt of Giant Strength** -> **Bracers of Strength** _(equipment)_
+- **Belt of Regeneration** -> **Belt of Long Life** _(equipment)_
+- **Circlet of Persuasion** -> **Necklace of Allure** _(equipment)_
+- **Diadem of Intellect** -> **Crown of Intellect** _(equipment)_
+- **Headband of Inspired Wisdom** -> **Headwrap of Wisdom** _(equipment)_
+- **Horseshoes of Speed** -> **Alacritous Horsehoes** _(equipment)_
+- **Aeon Stone (Dull Gray)** -> **Aeon Stone** _(equipment)_
+- **Boots of Speed** -> **Propulsive Boots** _(equipment)_
+- **Bracers of Armor** -> **Bands of Force** _(equipment)_
+- **Cape of the Mountebank** -> **Charlatan's Cape** _(equipment)_
+- **Cloak of Elvenkind** -> **Cloak of Illusions** _(equipment)_
+- **Repair Kit** -> **Repair Toolkit** _(equipment)_
+- **Waterproof Firearm Carrying Case** -> **Waterproof Carrying Case** _(equipment)_
+- **Druid's Vestments** -> **Living Mantle** _(equipment)_
+- **Eyes of the Eagle** -> **Eyes of the Cat** _(equipment)_
+- **Gloves of Storing** -> **Retrieval Belt** _(equipment)_
+- **Spellbreaking** -> **Spellwatch** _(equipment)_
+- **Goggles of Night** -> **Obsidian Goggles** _(equipment)_
+- **Alghollthu Lash** -> **Alghollthu Whip** _(weapon)_
+- **Dragonscale Staff** -> **Dragonscale Bo Staff** _(weapon)_
+- **Dragontooth Club** -> **Dragontooth Leiomano** _(weapon)_
+- **Ghast Stiletto** -> **Ghoul Stiletto** _(weapon)_
+- **Hat of Disguise** -> **Masquerade Scarf** _(equipment)_
+- **Hat of the Magi** -> **Mage's Hat** _(equipment)_
+- **Assassin Vine Wine** -> **Arbor Wine** _(equipment)_
+- **Owlbear Egg** -> **Owl Screech Egg** _(equipment)_
+- **Warding Punch** -> **Warding Element Draught** _(equipment)_
+- **Addition Suppressant** -> **Affliction Suppressant** _(equipment)_
+- **Necklace of Fireballs** -> **Frozen Lava** _(equipment)_
+- **Choker-Arm Mutagen** -> **Bendy-Arm Mutagen** _(equipment)_
+- **Choker-Arm Mutagen (Lesser)** -> **Bendy-Arm Mutagen** _(equipment)_
+- **Tanglefoot Extruder** -> **Splatrope Extruder** _(equipment)_
+- **Sight-Theft Grift** -> **Sightless Tincture** _(equipment)_
+- **Ring of Energy Resistance** -> **Charm of Resistance** _(equipment)_
+- **Bralani Breath** -> **Deadlock Mint** _(equipment)_
+- **Dragon Throat Scale** -> **Dragon Breath Scale** _(equipment)_
+- **Fearcracker** -> **Ghostcracker** _(equipment)_
+- **Messanger Missive** -> **Messenger Missive** _(equipment)_
+- **Disrupting Oil** -> **Burial Oil** _(equipment)_
+- **Faerie Dragon Liqueur (Adult)** -> **Fey Dragonet Liqueur** _(equipment)_
+- **Slippers of Spider Climbing** -> **Clawed Bracers** _(equipment)_
+- **Marvelous Pigment** -> **Miraculous Paintbrush** _(equipment)_
+- **Sparkling Spellgun (Lesser)** -> **Sparking Spellgun** _(equipment)_
+- **Winged Boots** -> **Winged Sandals** _(equipment)_
+- **Portable Hole** -> **Planar Tunnel** _(equipment)_
+- **Bound Guardian** -> **Fauna Guardian** _(equipment)_
+- **Varisian Emblem** -> **Unifying Emblem** _(equipment)_
+- **Varisian Emblem (Avaria)** -> **Unifying Emblem** _(equipment)_
+- **Varisian Emblem (Avidais)** -> **Unifying Emblem** _(equipment)_
+- **Varisian Emblem (Carnasia)** -> **Unifying Emblem** _(equipment)_
+- **Varisian Emblem (Idolis)** -> **Unifying Emblem** _(equipment)_
+- **Varisian Emblem (Ragario)** -> **Unifying Emblem** _(equipment)_
+- **Varisian Emblem (Vangloris)** -> **Unifying Emblem** _(equipment)_
+- **Varisian Emblem (Voratalo)** -> **Unifying Emblem** _(equipment)_
+- **Wyrm on the Wing** -> **Wyrm's Wingspan** _(equipment)_
+- **Judgment Thurible** -> **Judgement Thurible** _(equipment)_
+- **Wyrm Claw** -> **Wyrm Spindle** _(equipment)_
+- **Wand of Choking Mist (2nd-Level Spell)** -> **Wand of Choking Mist** _(equipment)_
+- **Wand of Chromatic Blastt (4th-Level Spell)** -> **Wand of Chromatic Burst** _(equipment)_
+- **Wand of Clinging Rime (7th-Level Spell)** -> **Wand of Clinging Rime** _(equipment)_
+- **Wand of Dazzling Rays (3rd-Level Spell)** -> **Wand of Dazzling Rays** _(equipment)_
+- **Wand of Dumbfounding Doom (3rd-Level Spell)** -> **Wand of Dumbfounding Doom** _(equipment)_
+- **Wand of Hawthorn (2nd-Level Spell)** -> **Wand of Hawthorn** _(equipment)_
+- **Wand of Hybrid Form (2nd-Level Spell)** -> **Wand of Hybrid Form** _(equipment)_
+- **Wand of Legerdemain (1st-Level Spell)** -> **Wand of Legerdemain** _(equipment)_
+- **Wand of Mental Purification (1st-Level Spell)** -> **Wand of Mental Purification** _(equipment)_
+- **Wand of Mercy (1st-Level Spell)** -> **Wand of Mercy** _(equipment)_
+- **Wand of Paralytic Shock (3rd-Level Spell)** -> **Wand of Paralytic Shock** _(equipment)_
+- **Wand of Pernicious Poison (1st-Level Spell)** -> **Wand of Pernicious Poison** _(equipment)_
+- **Wand of Reaching (1st-Level Spell)** -> **Wand of Reaching** _(equipment)_
+- **Wand of Refracting Rays (4th-Level Spell)** -> **Wand of Refracting Rays** _(equipment)_
+- **Wand of Rolling Flames (2nd-level spell)** -> **Wand of Rolling Flames** _(equipment)_
+- **Wand of Shattering Images** -> **Wand of Shocking Haze** _(equipment)_
+- **Wand of Toxic Blades (6th-Level Spell)** -> **Wand of Toxic Blades** _(equipment)_
+- **Ki-Channeling Beads** -> **Mala Beads of Foresight** _(equipment)_
+- **Helm of Underwater Action** -> **Submersible Helm** _(equipment)_
+- **Spiritsight Sight** -> **Spiritsight Ring** _(equipment)_
+- **Lich Soul Cage** -> **Soul Cage** _(equipment)_
+- **Draconic Toxin Bottle** -> **Energy Toxin Bottle** _(equipment)_
+- **Hat of Disagreeable Disguise** -> **Handkerchief of Disagreeable Disguise** _(equipment)_
+- **Thieves' Tools** -> **Thieves' Toolkit** _(equipment)_
+- **Scroll** -> **Magic Scroll** _(equipment)_
+- **1st-Level Scroll** -> **Magic Scroll** _(equipment)_
+- **Focus Cathartic** -> **Bottled Catharsis** _(equipment)_
+- **Focus Cathartic (Lesser)** -> **Bottled Catharsis** _(equipment)_
+- **Sinew-Shock Serum** -> **Surging Serum** _(equipment)_
+- **Sinew-Shock Serum (Lesser)** -> **Surging Serum** _(equipment)_
+- **Sovereign Glue** -> **Everlasting Adhesive** _(equipment)_
+- **Oil of Object Animation** -> **Oil of Dynamism** _(equipment)_
+- **Potion of Expeditious Retreat** -> **Potion of Emergency Escape** _(equipment)_
+- **Spellcasting (1st level)** -> **Spellcasting** _(equipment)_
+- **Spellcasting (2nd level)** -> **Spellcasting** _(equipment)_
+- **Spellcasting (3rd level)** -> **Spellcasting** _(equipment)_
+- **Spellcasting (4th level)** -> **Spellcasting** _(equipment)_
+- **Spellcasting (5th level)** -> **Spellcasting** _(equipment)_
+- **Spellcasting (6th level)** -> **Spellcasting** _(equipment)_
+- **Spellcasting (7th level)** -> **Spellcasting** _(equipment)_
+- **Spellcasting (8th level)** -> **Spellcasting** _(equipment)_
+- **Spellcasting (9th level)** -> **Spellcasting** _(equipment)_
+- **Mask of the Banshee** -> **Guise of the Smirking Devil** _(equipment)_
+- **Wand of Crackling Lightning (3rd-Level Spell)** -> **Wand of Crackling Lightning** _(equipment)_
+- **Wand of Hopeless Night (2nd-Level Spell)** -> **Wand of Hopeless Night** _(equipment)_
+- **Wand of Overflowing Life (3rd-Level Spell)** -> **Wand of Overflowing Life** _(equipment)_
+- **Wand of the Snowfields (5th-Level Spell)** -> **Wand of the Snowfields** _(equipment)_
+- **Wand of the Spider (2nd-Level Spell)** -> **Wand of the Spider** _(equipment)_
+- **Tanglefoot Bag** -> **Glue Bomb** _(equipment)_
+- **Tanglefoot Bag (Lesser)** -> **Glue Bomb** _(equipment)_
+- **Thunderstone** -> **Blasting Stone** _(equipment)_
+- **Thunderstone (Lesser)** -> **Blasting Stone** _(equipment)_
+- **Green Wyrmling Breath Potion** -> **Horned Dragon Breath Potion** _(equipment)_
+- **Salamander Elixir** -> **Cooling Elixir** _(equipment)_
+- **Salamander Elixir (Lesser)** -> **Cooling Elixir** _(equipment)_
+- **Extra Reagents** -> **Extra Alchemy** _(familiar-ability)_
+- **Faerie Dragon** -> **Fey Dragonet** _(familiar-specific)_
+- **Leech-Clipper** -> **Leech-Clip** _(feat)_
+- **Solar Rejuvenation (Leshy)** -> **Solar Rejuvenation** _(feat)_
+- **Feral Mutagen** -> **Mutant Physique** _(feat)_
+- **Razor Claws** -> **Iruxi Armaments** _(feat)_
+- **Sharp Fangs** -> **Iruxi Armaments** _(feat)_
+- **Tail Whip** -> **Iruxi Armaments** _(feat)_
+- **Hellknight Order Cross-Training** -> **Order Cross-Training** _(feat)_
+- **Sense Chaos** -> **Sense Iniquity** _(feat)_
+- **Hellknight Signifer Dedication** -> **Hellknight Signifer Preferment** _(feat)_
+- **Glib Mutagen** -> **Mutant Innervation** _(feat)_
+- **Expanded Luck** -> **Lucky Break** _(feat)_
+- **Shared Luck (Catfolk)** -> **Luck of the Clowder** _(feat)_
+- **Quick Stow (Ratfolk)** -> **Quick Stow** _(feat)_
+- **Eyes of the Night** -> **Eyes of Night** _(feat)_
+- **Celestial Eyes** -> **Nephilim Eyes** _(feat)_
+- **Celestial Lore** -> **Nephilim Lore** _(feat)_
+- **Blessed Blood (Aasimar)** -> **Blessed Blood (Nephilim)** _(feat)_
+- **Celestial Resistance** -> **Nephilim Resistance** _(feat)_
+- **Empyreal Blessing** -> **Extraplanar Supplication** _(feat)_
+- **Angelic Magic** -> **Celestial Magic** _(feat)_
+- **Archon Magic** -> **Celestial Magic** _(feat)_
+- **Celestial Wings** -> **Divine Wings** _(feat)_
+- **Aasimar's Mercy** -> **Celestial Mercy** _(feat)_
+- **Summon Celestial Kin** -> **Summon Nephilim Kin** _(feat)_
+- **Celestial Word** -> **Divine Declaration** _(feat)_
+- **Eternal Wings (Aasimar)** -> **Eternal Wings** _(feat)_
+- **Spirit Strikes** -> **Quietus Strikes** _(feat)_
+- **Fiendish Eyes** -> **Nephilim Eyes** _(feat)_
+- **Fiendish Lore** -> **Nephilim Lore** _(feat)_
+- **Form of the Fiend** -> **Bestial Manifestation** _(feat)_
+- **Fiendish Resistance** -> **Nephilim Resistance** _(feat)_
+- **Malicious Bane** -> **Extraplanar Supplication** _(feat)_
+- **Daemon Magic** -> **Fiendish Magic** _(feat)_
+- **Demon Magic** -> **Fiendish Magic** _(feat)_
+- **Devil Magic** -> **Fiendish Magic** _(feat)_
+- **Fiendish Wings** -> **Divine Wings** _(feat)_
+- **Light from Darkness** -> **Divine Countermeasures** _(feat)_
+- **Fiend's Door** -> **Slip Sideways** _(feat)_
+- **Summon Fiendish Kin** -> **Summon Nephilim Kin** _(feat)_
+- **Fiendish Word** -> **Divine Declaration** _(feat)_
+- **Relentless Wings** -> **Eternal Wings** _(feat)_
+- **Tree Climber (Elf)** -> **Tree Climber** _(feat)_
+- **Attack of Opportunity** -> **Reactive Strike** _(feat)_
+- **Buckler Expertise** -> **Elegant Buckler** _(feat)_
+- **Dueling Parry (Swashbuckler)** -> **Extravagant Parry** _(feat)_
+- **Temporary Potions** -> **Double, Double** _(feat)_
+- **Subtle Delivery** -> **Blowgun Poisoner** _(feat)_
+- **Nocturnal Sense** -> **Nocturnal Senses** _(feat)_
+- **Courageous Opportunity** -> **Reflexive Courage** _(feat)_
+- **Vigorous Inspiration** -> **Vigorous Anthem** _(feat)_
+- **Esoteric Oath** -> **Oath of The Slayer** _(feat)_
+- **Lightslayer Oath** -> **Oath of The Slayer** _(feat)_
+- **Smite Good** -> **Smite** _(feat)_
+- **Sense Good** -> **Sense Holiness** _(feat)_
+- **Radiant Infusion** -> **Divine Infusion** _(feat)_
+- **Align Ki** -> **Align Qi** _(feat)_
+- **Ki Center** -> **Qi Center** _(feat)_
+- **Call Bonded Item** -> **Call Wizardly Tools** _(feat)_
+- **Diviner Sense** -> **Keen Magical Detection** _(feat)_
+- **Second Chance Spell** -> **Second Thoughts** _(feat)_
+- **Skill Mastery (Investigator)** -> **Skill Mastery** _(feat)_
+- **Inspire Competence** -> **Uplifting Overture** _(feat)_
+- **Evasiveness (Swashbuckler)** -> **Evasiveness** _(feat)_
+- **Inspire Defense** -> **Rallying Anthem** _(feat)_
+- **Inspire Heroics** -> **Fortissimo Composition** _(feat)_
+- **Enchanting Arrow** -> **Enchanting Shot** _(feat)_
+- **Magic Arrow** -> **Magic Ammunition** _(feat)_
+- **Precious Arrow** -> **Precious Ammunition** _(feat)_
+- **Seeker Arrow** -> **Homing Shot** _(feat)_
+- **Phase Arrow** -> **Incorporeal Shot** _(feat)_
+- **Arrow of Death** -> **Fatal Shot** _(feat)_
+- **Snap Out of It! (Marshal)** -> **Snap Out of It!** _(feat)_
+- **Pirate Weapon Training** -> **Pirate Combat Training** _(feat)_
+- **Expert Disassembler** -> **Expert Disassembly** _(feat)_
+- **Startling Appearance (Vigilante)** -> **Startling Appearance** _(feat)_
+- **Criminal Connections** -> **Leverage Connections** _(feat)_
+- **Quick Contacts** -> **Leverage Connections** _(feat)_
+- **Ranged Reprisal** -> **Nimble Reprisal** _(feat)_
+- **Dragonslayer Oath** -> **Oath of The Slayer** _(feat)_
+- **Fiendsbane Oath** -> **Oath of The Slayer** _(feat)_
+- **Shining Oath** -> **Oath of The Slayer** _(feat)_
+- **Vengeful Oath** -> **Oath of The Avenger** _(feat)_
+- **Smite Evil** -> **Smite** _(feat)_
+- **Saberteeth** -> **Saber Teeth** _(feat)_
+- **Second Ally** -> **Second Blessing** _(feat)_
+- **Vanth's Weapon Familiarity** -> **Duskwalker Weapon Familiarity** _(feat)_
+- **Sense Evil** -> **Sense Unholiness** _(feat)_
+- **Radiant Blade Spirit** -> **Radiant Armament** _(feat)_
+- **Ratfolk Growth** -> **Greater than the Sum** _(feat)_
+- **Harbinger's Caw** -> **Harbinger's Claw** _(feat)_
+- **Internal Cohesion** -> **Aeonbound** _(feat)_
+- **Lemma of Vision** -> **Nephilim Eyes** _(feat)_
+- **Crystalline Dust** -> **Extraplanar Haze** _(feat)_
+- **Intercorporate** -> **Resilient Physiology** _(feat)_
+- **Crystalline Cloud** -> **Extraplanar Cloud** _(feat)_
+- **Impose Order (Aphorite)** -> **Impose Order** _(feat)_
+- **Anchoring Aura** -> **Aura of Righteousness** _(feat)_
+- **Ganzi Gaze** -> **Nephilim Eyes** _(feat)_
+- **Smashing Tail** -> **Bestial Manifestation** _(feat)_
+- **Skillful Tail (Ganzi)** -> **Skillful Tail** _(feat)_
+- **Radiant Blade Master** -> **Armament Paragon** _(feat)_
+- **Holy Castigation** -> **Divine Castigation** _(feat)_
+- **Drow Shootist Dedication** -> **Crossbow Infiltrator Dedication** _(feat)_
+- **Turn Undead** -> **Panic the Dead** _(feat)_
+- **Gnoll Lore** -> **Kholo Lore** _(feat)_
+- **Gnoll Weapon Familiarity** -> **Kholo Weapon Familiarity** _(feat)_
+- **Laughing Gnoll** -> **Laughing Kholo** _(feat)_
+- **Grippli Weapon Familiarity** -> **Tripkee Weapon Familiarity** _(feat)_
+- **Bone Rider** -> **Fossil Rider** _(feat)_
+- **Align Armament** -> **Sanctify Armament** _(feat)_
+- **Channeled Succor** -> **Restorative Channel** _(feat)_
+- **Extend Armament Alignment** -> **Lasting Armament** _(feat)_
+- **Metamagic Channel** -> **Spellshape Channel** _(feat)_
+- **Wild Shape** -> **Untamed Form** _(feat)_
+- **Thousand Faces** -> **Anthropomorphic Shape** _(feat)_
+- **Woodland Stride** -> **Forest Passage** _(feat)_
+- **Form Lock (Wrestler)** -> **Form Lock** _(feat)_
+- **Leyline Conduit** -> **Ley Line Conduit** _(feat)_
+- **Point-Blank Shot** -> **Point Blank Stance** _(feat)_
+- **Power Attack** -> **Vicious Swing** _(feat)_
+- **Knockdown** -> **Slam Down** _(feat)_
+- **Exude Abyssal Corruption** -> **Exude Demonic Corruption** _(feat)_
+- **Combat Reflexes** -> **Tactical Reflexes** _(feat)_
+- **Stonecunning** -> **Stonemason's Eye** _(feat)_
+- **Improved Knockdown** -> **Crashing Slam** _(feat)_
+- **Spring Attack** -> **Dashing Strike** _(feat)_
+- **Stance Savant (Fighter)** -> **Opening Stance (Fighter)** _(feat)_
+- **Ki Rush** -> **Qi Spells** _(feat)_
+- **Ki Strike** -> **Qi Spells** _(feat)_
+- **Stunning Fist** -> **Stunning Blows** _(feat)_
+- **Deflect Arrow** -> **Deflect Projectile** _(feat)_
+- **Wholeness of Body** -> **Harmonize Self** _(feat)_
+- **Abundant Step** -> **Advanced Qi Spells** _(feat)_
+- **Ki Blast** -> **Advanced Qi Spells** _(feat)_
+- **Arrow Snatching** -> **Projectile Snatching** _(feat)_
+- **Disrupt Ki** -> **Disrupt Qi** _(feat)_
+- **Stance Savant (Monk)** -> **Reflexive Stance** _(feat)_
+- **Timeless Body** -> **Peerless Form** _(feat)_
+- **Favored Enemy** -> **Favored Prey** _(feat)_
+- **Sneak Savant** -> **Sneak Adept** _(feat)_
+- **Critical Debilitations** -> **Critical Debilitation** _(feat)_
+- **Vengeful Hatred** -> **Mountain Strategy** _(feat)_
+- **Bespell Weapon** -> **Bespell Strikes** _(feat)_
+- **Metamagic Mastery** -> **Spellshape Mastery** _(feat)_
+- **Spell Penetration** -> **Irresistible Magic** _(feat)_
+- **Scroll Savant** -> **Scroll Adept** _(feat)_
+- **Inspirational Performance** -> **Anthemic Performance** _(feat)_
+- **Healing Touch** -> **Devout Magic** _(feat)_
+- **Divine Ally** -> **Devout Blessing** _(feat)_
+- **Opportunist** -> **Reactive Striker** _(feat)_
+- **Connections** -> **Leverage Connections** _(feat)_
+- **Scattering Shot** -> **Shattering Shot** _(feat)_
+- **Firearm Expert** -> **Advanced Firearm Familiarity** _(feat)_
+- **Forge-Blessd Shot** -> **Forge-Blessed Shot** _(feat)_
+- **Hellknight Armiger Dedication** -> **Hellknight Dedication** _(feat)_
+- **Armiger's Mobility** -> **Hellknight Mobility** _(feat)_
+- **Flicker** -> **Flickering Twirl** _(feat)_
+- **Alchemical Savant** -> **Alchemical Assessment** _(feat)_
+- **Miracle** -> **Manifestation** _(spell)_
+- **Primal Phenomenon** -> **Manifestation** _(spell)_
+- **Wish** -> **Manifestation** _(spell)_
+- **Alter Reality** -> **Manifestation** _(spell)_
+- **Metamagic** -> **Spellshape** _(trait)_
+- **Negative** -> **Void** _(trait)_
+- **Positive** -> **Vitality** _(trait)_
+- **Gnoll** -> **Kholo** _(trait)_
+- **Couatl** -> **Coatl** _(trait)_
+- **Petitioner** -> **Shade** _(trait)_
+- **Locathah** -> **Athamaru** _(trait)_
+- **Duergar** -> **Hryngar** _(trait)_
+- **Half-Elf** -> **Aiuvarin** _(trait)_
+- **Half-Orc** -> **Dromaar** _(trait)_
+- **Khakkara** -> **Khakkhara** _(weapon)_
+- **Rungu** -> **Cruuk** _(weapon)_
+- **Dwarven War Axe** -> **Dwarven Waraxe** _(weapon)_
+- **Kursarigama** -> **Kusarigama** _(weapon)_

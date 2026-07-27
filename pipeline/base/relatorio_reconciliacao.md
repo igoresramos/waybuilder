@@ -1,9 +1,9 @@
 # Relatorio de reconciliacao
 
-- registros de entrada: **18849**
+- registros de entrada: **19000**
 - colisoes de id fundidas: **75**
-- base final: **18773** registros
-- registros com divergencia registrada: **209**
+- base final: **18921** registros
+- registros com divergencia registrada: **220**
 - suspeitas de par nao unido: **0**
 
 ## Por kind
@@ -18,7 +18,8 @@
 - `background`: 332
 - `heritage`: 326
 - `archetype`: 247
-- `armor`: 207
+- `armor`: 204
+- `ritual`: 151
 - `familiar-ability`: 133
 - `shield`: 118
 - `animal-companion`: 113
@@ -32,4 +33,4 @@
 
 ## Portoes de qualidade
 
-- FALHA sem license: 6
+- FALHA sem license: 3
