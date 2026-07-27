@@ -53,6 +53,18 @@ RANK_POR_NUMERO = {0: "untrained", 1: "trained", 2: "expert",
 PATH_RANK = re.compile(
     r"^system\.(?:skills|proficiencies|martial|attributes)\.(?:[\w-]+\.)*([\w-]+)\.rank$")
 
+# Condicao e estado de combate, que o AoN indexa como `condition` e o portao 9
+# declara fora de escopo: o construtor monta personagem, nao roda combate.
+# `GrantItem` de condicao nao e conteudo faltando -- e efeito de VTT.
+CONDICOES = {
+    "clumsy", "quickened", "off-guard", "flat-footed", "concealed", "encumbered",
+    "enfeebled", "slowed", "drained", "stupefied", "dazzled", "sickened",
+    "immobilized", "frightened", "fatigued", "prone", "fleeing", "grabbed",
+    "restrained", "unconscious", "wounded", "doomed", "blinded", "deafened",
+    "hidden", "invisible", "paralyzed", "petrified", "confused", "controlled",
+    "persistent damage",
+}
+
 
 def rules_do_foundry():
     """_id do Foundry -> lista de rule elements."""
@@ -97,10 +109,21 @@ def converter(regras, por_nome=None):
                 pulados["GrantItem com predicate"] += 1
                 continue
             uuid = str(r.get("uuid") or "")
+            # UUID com template (`...Item.{item|flags.pf2e.heritage}`) nao
+            # carrega nome nenhum: aponta para o que o JOGADOR escolheu, e o
+            # split por ponto entrega o fim do template. Contar isso como "sem
+            # alvo na base" fazia o relatorio mentir -- sao 163 ocorrencias que
+            # pareciam conteudo faltando e sao referencia dinamica.
+            if "{" in uuid or "}" in uuid:
+                pulados["GrantItem com UUID dinamico (escolha do jogador)"] += 1
+                continue
             nome = uuid.split(".")[-1].strip()
             alvo = por_nome.get(normalizar(nome))
             if alvo is None:
-                pulados["GrantItem sem alvo na base"] += 1
+                if normalizar(nome) in CONDICOES:
+                    pulados["GrantItem de condicao de combate (fora de escopo)"] += 1
+                else:
+                    pulados["GrantItem sem alvo na base"] += 1
                 continue
             campo = "grant_spell" if alvo.get("kind") == "spell" else "grant_feat"
             grants.append({campo: [alvo["id"]]})
