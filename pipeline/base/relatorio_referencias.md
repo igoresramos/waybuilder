@@ -1,61 +1,65 @@
-# Referencias resolvidas por nome
+# Referencias resolvidas
 
 `requires` citava ids que a base nao tem -- mas as entidades existem,
 com outro slug. O extrator derivou o id do nome que tinha em maos,
-antes de a reconciliacao decidir o nome canonico.
+antes de a reconciliacao decidir o nome canonico. Quando nem o nome
+sobreviveu (o Remaster renomeou dos dois lados), quem liga e o
+`remaster_id` publicado pelo proprio AoN.
 
-- resolvidas: **67**
-- nao resolvidas: **20**
+- resolvidas por nome: **4**
+- resolvidas por curadoria (`aliases_referencias.json`): **3**
+- resolvidas pela ponte legado->remaster do AoN: **52**
+- removidas por nao serem entidade: **3**
+- nao resolvidas: **0**
 
-## Resolvidas
+## Pela ponte do AoN (nome mudou dos dois lados)
 
-- `wb:class-feature/alchemical-sciences` -> `wb:methodology/alchemical-sciences`  (Alchemical Sciences)
-- `wb:class-feature/archwizards-spellcraft` -> `wb:class-feature/archwizard-s-spellcraft`  (Archwizard's Spellcraft)
-- `wb:class-feature/plunderer-of-the-hives-riches` -> `wb:class-feature/plunderer-of-the-hive-s-riches`  (Plunderer of the Hive's Riches)
-- `wb:class-feature/enigma-muse` -> `wb:class-feature/enigma`  (Enigma)
-- `wb:class-feature/champions-aura` -> `wb:class-feature/champion-s-aura`  (Champion's Aura)
-- `wb:class-feature/ruffian-racket` -> `wb:class-feature/ruffian`  (Ruffian)
-- `wb:class-feature/caretakers-calling` -> `wb:mythic-calling/caretakers-calling`  (Caretaker's Calling)
-- `wb:class-feature/mastermind-racket` -> `wb:class-feature/mastermind`  (Mastermind)
-- `wb:class-feature/warrior-muse` -> `wb:class-feature/warrior`  (Warrior)
-- `wb:class-feature/demagogues-calling` -> `wb:mythic-calling/demagogues-calling`  (Demagogue's Calling)
-- `wb:class-feature/thespians-calling` -> `wb:mythic-calling/thespians-calling`  (Thespian's Calling)
-- `wb:class-feature/scoundrel-racket` -> `wb:class-feature/scoundrel`  (Scoundrel)
-- `wb:class-feature/polymath-muse` -> `wb:class-feature/polymath`  (Polymath)
-- `wb:class-feature/maestro-muse` -> `wb:class-feature/maestro`  (Maestro)
-- `wb:class-feature/acrobats-calling` -> `wb:mythic-calling/acrobats-calling`  (Acrobat's Calling)
-- `wb:class-feature/trespasser-in-deaths-realm` -> `wb:class-feature/trespasser-in-death-s-realm`  (Trespasser In Death's Realm)
-- `wb:class-feature/universalist-wizard` -> `wb:arcane-school/universalist`  (Universalist)
-- `wb:class-feature/thiefs-calling` -> `wb:mythic-calling/thiefs-calling`  (Thief's Calling)
-- `wb:class-feature/redeemer-cause` -> `wb:cause/redeemer`  (Redeemer)
-- `wb:class-feature/liberator-cause` -> `wb:cause/liberator`  (Liberator)
-- `wb:class-feature/empiricism` -> `wb:methodology/empiricism`  (Empiricism)
-- `wb:class-feature/interrogation` -> `wb:methodology/interrogation`  (Interrogation)
-- `wb:class-feature/hunters-edge` -> `wb:class-feature/hunter-s-edge`  (Hunter's Edge)
-- `wb:class-feature/artisans-calling` -> `wb:mythic-calling/artisans-calling`  (Artisan's Calling)
-- `wb:class-feature/patrons-gift` -> `wb:class-feature/patron-s-gift`  (Patron's Gift)
-- `wb:class-feature/thief-racket` -> `wb:class-feature/thief`  (Thief)
-- `wb:class-feature/paladin-cause` -> `wb:cause/paladin`  (Paladin)
-- `wb:class-feature/hunters-calling` -> `wb:mythic-calling/hunters-calling`  (Hunter's Calling)
-- `wb:class-feature/guardians-calling` -> `wb:mythic-calling/guardians-calling`  (Guardian's Calling)
-- `wb:class-feature/forensic-medicine` -> `wb:methodology/forensic-medicine`  (Forensic Medicine)
-- `wb:class-feature/warpriest-doctrine` -> `wb:class-feature/warpriest`  (Warpriest)
-- `wb:class-feature/wild-order` -> `wb:druidic-order/wild`  (Wild)
+- `wb:feat/hellknight-armiger-dedication` -> `wb:feat/hellknight-dedication`
+- `wb:feat/hellknight-signifer-dedication` -> `wb:feat/hellknight-signifer-preferment`
+- `wb:spell/mage-hand` -> `wb:spell/telekinetic-hand`
+- `wb:feat/crystalline-dust` -> `wb:feat/extraplanar-haze`
+- `wb:feat/shining-oath` -> `wb:feat/oath-of-the-slayer`
+- `wb:feat/esoteric-oath` -> `wb:feat/oath-of-the-slayer`
+- `wb:feat/divine-ally` -> `wb:feat/devout-blessing`
+- `wb:feat/fiendsbane-oath` -> `wb:feat/oath-of-the-slayer`
+- `wb:feat/wild-shape` -> `wb:feat/untamed-form`
+- `wb:heritage/sweetbreath-gnoll` -> `wb:heritage/sweetbreath-kholo`
+- `wb:spell/cloudkill` -> `wb:spell/toxic-cloud`
+- `wb:spell/floating-disk` -> `wb:spell/carryall`
+- `wb:heritage/witch-gnoll` -> `wb:heritage/witch-kholo`
+- `wb:spell/obscuring-mist` -> `wb:spell/mist`
+- `wb:feat/dueling-parry-swashbuckler` -> `wb:feat/extravagant-parry`
+- `wb:feat/ki-strike` -> `wb:feat/qi-spells`
+- `wb:feat/wholeness-of-body` -> `wb:feat/harmonize-self`
+- `wb:feat/sharp-fangs` -> `wb:feat/iruxi-armaments`
+- `wb:feat/gnoll-weapon-familiarity` -> `wb:feat/kholo-weapon-familiarity`
+- `wb:feat/grippli-weapon-familiarity` -> `wb:feat/tripkee-weapon-familiarity`
+- `wb:feat/attack-of-opportunity` -> `wb:feat/reactive-strike`
+- `wb:spell/ki-strike` -> `wb:feat/qi-spells`
+- `wb:feat/skillful-tail-ganzi` -> `wb:feat/skillful-tail`
+- `wb:feat/drow-shootist-dedication` -> `wb:feat/crossbow-infiltrator-dedication`
+- `wb:feat/deflect-arrow` -> `wb:feat/deflect-projectile`
+- `wb:feat/tail-whip` -> `wb:feat/iruxi-armaments`
+- `wb:spell/vampiric-touch` -> `wb:spell/vampiric-feast`
+- `wb:spell/black-tentacles` -> `wb:spell/slither`
+- `wb:feat/stunning-fist` -> `wb:feat/stunning-blows`
+- `wb:feat/vanths-weapon-familiarity` -> `wb:feat/duskwalker-weapon-familiarity`
+- `wb:spell/dancing-lights` -> `wb:spell/light`
+- `wb:feat/dragonslayer-oath` -> `wb:feat/oath-of-the-slayer`
 
-## Nao resolvidas
+## Por curadoria conferida a mao
 
-- `wb:spell/mage-hand` citado 2x
-- `wb:heritage/you-have-a-versatile` citado 2x
-- `wb:spell/obscuring-mist` citado 2x
-- `wb:heritage/cataphract` citado 2x
-- `wb:spell/vampiric-touch` citado 2x
-- `wb:heritage/versatile` citado 1x
-- `wb:heritage/sweetbreath-gnoll` citado 1x
-- `wb:spell/cloudkill` citado 1x
-- `wb:spell/floating-disk` citado 1x
-- `wb:heritage/witch-gnoll` citado 1x
-- `wb:feat/dual-weapon-dedication` citado 1x
-- `wb:spell/ki-strike` citado 1x
-- `wb:feat/underworld-connections` citado 1x
-- `wb:spell/black-tentacles` citado 1x
-- `wb:spell/dancing-lights` citado 1x
+- `wb:feat/dual-weapon-dedication` -> `wb:feat/dual-weapon-warrior-dedication` -- a base tem `wb:feat/dual-weapon-warrior-dedication` e `wb:archetype/dual-weapon-warrior`; a dedicacao citada e a do arquetipo, com o nome abreviado na
+- `wb:heritage/cataphract` -> `wb:heritage/cataphract-fleshwarp` -- a base tem `wb:heritage/cataphract-fleshwarp`; o parser cortou o nome da ancestria do fim do nome da heranca
+
+## Removidas: o parser virou frase em id
+
+- `wb:heritage/versatile` -- mesmo caso do irmao you-have-a-versatile: o parser transformou a expressao "versatile heritage" em id. A linguagem de predicado ainda nao tem termo para trait de heranca versatil
+- `wb:heritage/you-have-a-versatile` -- nao e entidade: o parser transformou a frase 'You have a versatile heritage.' em id. O predicado correto seria um termo sobre TRAIT de heranca versatil, que a linguagem ainda nao t
+
+## Resolvidas por nome
+
+- `wb:methodology/alchemical-sciences` -> `wb:methodology/alchemical-sciences-methodology-5`  (Alchemical Sciences)
+- `wb:methodology/empiricism` -> `wb:methodology/empiricism-methodology-6`  (Empiricism)
+- `wb:methodology/interrogation` -> `wb:methodology/interrogation-methodology-8`  (Interrogation)
+- `wb:methodology/forensic-medicine` -> `wb:methodology/forensic-medicine-methodology-7`  (Forensic Medicine)

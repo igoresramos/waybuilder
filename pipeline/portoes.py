@@ -73,8 +73,14 @@ def indice_aon():
     vazio e os portoes 2 e 7 se desligavam sozinhos, passando por ausencia de
     dado. Os apelidos cobrem os kinds de jogador e chegam para os dois.
     """
+    # `_manifesto.json` e a ULTIMA coisa que dump_aon.py grava. Sem ele o dump
+    # esta em andamento ou morreu no meio, e usar o que ja caiu em disco troca
+    # o indice inteiro por um pedaco em silencio -- durante um dump o AoN
+    # chegou a ficar com 8.642 docs no lugar de 33.348, e nenhum portao
+    # reclamou porque um indice pequeno nao e um indice vazio.
+    completo = os.path.exists(f"{AON_DUMP}/_manifesto.json")
     arquivos = [f for f in glob.glob(f"{AON_DUMP}/*.json")
-                if not os.path.basename(f).startswith("_")]
+                if not os.path.basename(f).startswith("_")] if completo else []
     if not arquivos:
         arquivos = sorted(glob.glob(f"{BRUTOS}/aon_*.json"))
     idx = {}

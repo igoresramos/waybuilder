@@ -67,9 +67,56 @@ def referencias(obj):
             yield from referencias(x)
 
 
+def carregar_curadoria():
+    """`aliases_referencias.json`: o que o nome sozinho nao resolve.
+
+    Tres secoes, cada entrada com `verificado` dizendo contra o que foi
+    conferida. O arquivo existia desde 2026-07-27 e NENHUM script o lia -- era
+    o terceiro caso do mesmo padrao (ver `colisoes_identidade.json`).
+    """
+    caminho = f"{AQUI}/aliases_referencias.json"
+    if not os.path.exists(caminho):
+        return {}, {}, {}
+    d = json.load(open(caminho))
+    return (d.get("mapear") or {}, d.get("ignorar") or {},
+            d.get("sem_sucessor_conhecido") or {})
+
+
+def ponte_remaster(por_aon):
+    """nome normalizado do doc LEGADO -> id `wb:` do sucessor na base.
+
+    O Remaster renomeou em massa e o predicado guardou o nome antigo: `Attack
+    of Opportunity` virou `Reactive Strike`, `Wild Shape` virou `Untamed Form`,
+    `Mage Hand` virou `Telekinetic Hand`, toda ancestria `gnoll` virou `kholo`.
+    Resolver por nome nao acha nada disso -- o nome mudou dos dois lados. Quem
+    liga um ao outro e o `remaster_id` que o proprio AoN publica, e essa e
+    evidencia declarada pela fonte, nao heuristica.
+    """
+    sys.path.insert(0, AQUI)
+    import portoes
+    aon = portoes.indice_aon()
+    if not aon:
+        return {}
+    mapa = {}
+    for d in aon.values():
+        if not d.get("name"):
+            continue
+        sucessores = d.get("remaster_id")
+        for s in (sucessores if isinstance(sucessores, list) else [sucessores]):
+            # `remaster_id: ['0']` e "removido no remaster", nao renomeado
+            if not s or str(s) == "0" or str(s) not in por_aon:
+                continue
+            mapa.setdefault(norm(d["name"]), por_aon[str(s)]["id"])
+    return mapa
+
+
 def main():
     base = json.load(open(f"{BASE}/index.json"))
     ids = {r["id"] for r in base}
+    mapear, ignorar, sem_sucessor = carregar_curadoria()
+    por_aon = {str((r.get("xref") or {}).get("aon")): r
+               for r in base if (r.get("xref") or {}).get("aon")}
+    legado = ponte_remaster(por_aon)
 
     # nome normalizado -> ids, com quem tem `grants` na frente
     por_nome = collections.defaultdict(list)
@@ -80,11 +127,38 @@ def main():
                                            0 if r.get("kind") == "class-feature" else 1))
 
     resolvidas, nao_resolvidas = [], collections.Counter()
+    por_curadoria, por_ponte, removidas = [], [], []
     for r in base:
-        for container, chave in referencias(r.get("requires")):
-            alvo = container[chave]
+        # materializa antes: o laco troca chave de container (`has` ->
+        # `nao_modelavel`) e mutar durante a travessia estoura o gerador
+        for container, chave in list(referencias(r.get("requires"))):
+            alvo = container.get(chave)
+            if not isinstance(alvo, str):
+                continue
             if not alvo.startswith("wb:") or alvo in ids:
                 continue
+
+            # 1. curadoria: mapeamento conferido a mao vence qualquer heuristica
+            if alvo in mapear:
+                destino = mapear[alvo].get("para")
+                if destino in ids:
+                    container[chave] = destino
+                    por_curadoria.append((alvo, destino))
+                    continue
+            if alvo in ignorar:
+                # nao e entidade: o parser virou frase em id ("You have a
+                # versatile heritage."). Vira termo `nao_modelavel`, que o
+                # avaliador do motor ignora por ser termo desconhecido -- e o
+                # contrario de `has: None`, que ele tentaria avaliar. O texto
+                # original continua legivel em `requires_texto`.
+                container.pop(chave, None)
+                container["nao_modelavel"] = alvo
+                removidas.append((alvo, ignorar[alvo].get("motivo", "")))
+                continue
+            if alvo in sem_sucessor:
+                nao_resolvidas[alvo] += 1
+                continue
+
             kind, _, slug = alvo[3:].partition("/")
             # o kind citado e parte da referencia, nao ruido: resolver
             # `wb:heritage/versatile` para `wb:trait/versatile` troca uma
@@ -99,6 +173,21 @@ def main():
                 escolhido = next((c for c in candidatos
                                   if c.get("kind") in SUBESCOLHAS_KINDS), None)
             if escolhido is None:
+                # 3. ultimo recurso: o nome mudou dos dois lados no Remaster.
+                # A ponte do AoN e quem liga, e ela pode cruzar o kind citado
+                # (`wb:spell/ki-strike` -> `wb:feat/qi-spells`): aqui isso e
+                # aceitavel porque quem une e a FONTE declarando sucessao, nao
+                # semelhanca de nome -- o risco que o guarda de kind evita e
+                # justamente o do palpite por nome.
+                destino = None
+                for v in variantes(slug):
+                    if v in legado:
+                        destino = legado[v]
+                        break
+                if destino:
+                    container[chave] = destino
+                    por_ponte.append((alvo, destino))
+                    continue
                 nao_resolvidas[alvo] += 1
                 continue
             container[chave] = escolhido["id"]
@@ -109,17 +198,49 @@ def main():
     json.dump(base, open(f"{BASE}/index.json", "w"),
               ensure_ascii=False, separators=(",", ":"))
 
-    print(f"referencias orfas resolvidas: {len(resolvidas)}")
+    print(f"referencias orfas resolvidas: {len(resolvidas)} por nome, "
+          f"{len(por_curadoria)} por curadoria, {len(por_ponte)} pela ponte do AoN")
+    print(f"removidas (nao eram entidade): {len(removidas)}")
     print(f"nao resolvidas: {sum(nao_resolvidas.values())} "
           f"({len(nao_resolvidas)} ids distintos)")
 
-    linhas = ["# Referencias resolvidas por nome", "",
+    linhas = ["# Referencias resolvidas", "",
               "`requires` citava ids que a base nao tem -- mas as entidades existem,",
               "com outro slug. O extrator derivou o id do nome que tinha em maos,",
-              "antes de a reconciliacao decidir o nome canonico.", "",
-              f"- resolvidas: **{len(resolvidas)}**",
-              f"- nao resolvidas: **{sum(nao_resolvidas.values())}**", "",
-              "## Resolvidas", ""]
+              "antes de a reconciliacao decidir o nome canonico. Quando nem o nome",
+              "sobreviveu (o Remaster renomeou dos dois lados), quem liga e o",
+              "`remaster_id` publicado pelo proprio AoN.", "",
+              f"- resolvidas por nome: **{len(resolvidas)}**",
+              f"- resolvidas por curadoria (`aliases_referencias.json`): **{len(por_curadoria)}**",
+              f"- resolvidas pela ponte legado->remaster do AoN: **{len(por_ponte)}**",
+              f"- removidas por nao serem entidade: **{len(removidas)}**",
+              f"- nao resolvidas: **{sum(nao_resolvidas.values())}**", ""]
+    if por_ponte:
+        linhas += ["## Pela ponte do AoN (nome mudou dos dois lados)", ""]
+        vistos_p = set()
+        for antigo, novo in por_ponte:
+            if antigo not in vistos_p:
+                vistos_p.add(antigo)
+                linhas.append(f"- `{antigo}` -> `{novo}`")
+        linhas.append("")
+    if por_curadoria:
+        linhas += ["## Por curadoria conferida a mao", ""]
+        vistos_c = set()
+        for antigo, novo in por_curadoria:
+            if antigo not in vistos_c:
+                vistos_c.add(antigo)
+                linhas.append(f"- `{antigo}` -> `{novo}` -- "
+                              f"{mapear[antigo].get('verificado', '')[:150]}")
+        linhas.append("")
+    if removidas:
+        linhas += ["## Removidas: o parser virou frase em id", ""]
+        vistos_r = set()
+        for antigo, motivo in removidas:
+            if antigo not in vistos_r:
+                vistos_r.add(antigo)
+                linhas.append(f"- `{antigo}` -- {motivo[:180]}")
+        linhas.append("")
+    linhas += ["## Resolvidas por nome", ""]
     vistos = set()
     for antigo, novo, nome in resolvidas:
         if antigo in vistos:
