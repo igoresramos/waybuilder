@@ -117,6 +117,7 @@ class Personagem:
         self._hp()
         self._slots_de_feat()
         self._conjuracao()
+        self._atores()
         self._focus()
         self._defesa()
         self._ataques()
@@ -568,8 +569,78 @@ class Personagem:
                 "max_rank_do_slot": max_rank_cru,
                 "rank_efetivo": rank_efetivo,
                 "elevacao": max(0, rank_efetivo - max_rank_cru),
+                "rank_de_invocacao": self.cap_invocacao(nivel_classe),  # regra 17b
                 "dc": self._dc_de_conjuracao(classe, nivel_classe, sc),
             })
+
+    # -- regra 17b: teto para o que cria criatura ---------------------------
+
+    def cap_invocacao(self, nivel_classe: int) -> int:
+        """Rank maximo de magia com trait `summon` ou `incarnate`.
+
+        O termo externo faz a regra se autoproteger: com classe unica os dois
+        niveis sao iguais, o `+2` nunca chega a valer e o RAW sai intacto sem
+        caso especial. Um Summoner 20 puro da min(12, 10) = 10.
+        """
+        return min(math.ceil(nivel_classe / 2) + 2, math.ceil(self.nivel / 2))
+
+    def cap_ator(self, nivel_classe: int) -> int:
+        """Nivel maximo de companheiro, familiar ou eidolon.
+
+        Sem o `/2`, de proposito. Rank de magia ja nasce em escala de metade do
+        nivel; nivel de criatura esta na mesma escala do nivel de personagem.
+        Dividir por dois faria um Ranger 12 PURO cair para companheiro nivel 6,
+        quebrando classe unica == RAW.
+        """
+        return min(nivel_classe + 2, self.nivel)
+
+    def eleva_por_invocacao(self, magia: dict) -> bool:
+        """A magia cria criatura que age sozinha? Deriva so de trait.
+
+        `summon` (14 magias) e `incarnate` (23) nao tem interseccao -- a
+        segunda cobre as invocacoes de rank 4 a 10. Spirit Link e Protector
+        Tree NAO entram: nao criam nada, sao efeito continuo.
+        """
+        traits = set(magia.get("traits") or [])
+        return bool(traits & {"summon", "incarnate"})
+
+    def _atores(self) -> None:
+        """Regra 17b: companheiro, familiar e eidolon capados pela classe que
+        os concedeu, com folga de 2, nunca acima do nivel de personagem."""
+        self.atores = []
+        for a in self.doc.get("atores") or []:
+            cid, nota = self._classe_do_ator(a)
+            nivel_classe = self.nivel_de(cid) if cid else self.nivel
+            self.atores.append({
+                "tipo": a.get("tipo"),
+                "nome": a.get("nome") or "",
+                "concedido_por": a.get("concedido_por"),
+                "classe": self.base.opcional(cid or "").get("name") if cid else None,
+                "nivel_de_classe": nivel_classe,
+                "nivel": self.cap_ator(nivel_classe),
+                "nota": nota,
+                "escolhas": a.get("escolhas") or [],
+            })
+
+    def _classe_do_ator(self, ator: dict) -> tuple[str | None, str | None]:
+        """De qual classe veio o ator. `classe` explicito ganha; senao tenta o
+        `concedido_por`; senao assume a classe de maior nivel e AVISA -- chutar
+        em silencio daria o cap errado sem ninguem perceber."""
+        if ator.get("classe"):
+            return ator["classe"], None
+        origem = ator.get("concedido_por")
+        if origem:
+            for cid in self.ordem_de_classe:
+                nome = (self.base.opcional(cid) or {}).get("name", "")
+                if nome and nome.lower().replace(" ", "-") in origem:
+                    return cid, None
+        if not self.ordem_de_classe:
+            return None, "sem classe para ancorar o nivel do ator"
+        maior = max(self.ordem_de_classe, key=self.nivel_de)
+        return maior, (f"classe de origem nao declarada; usei "
+                       f"{(self.base.opcional(maior) or {}).get('name')} "
+                       f"(a de maior nivel). Declare `classe` no ator para "
+                       f"travar o cap da regra 17b")
 
     def _dc_de_conjuracao(self, classe: dict, nivel_classe: int, sc: dict) -> dict:
         """Regra 3: bonus = nivel_de_PERSONAGEM + rank; o RANK vem do nivel da classe."""
@@ -928,6 +999,7 @@ class Personagem:
             "pericias_livres": self.pericias_livres,
             "slots": self.slots,
             "conjuracao": self.conjuracao,
+            "atores": self.atores,
             "focus_pool": self.focus_pool,
             "ac": self.ac,
             "ataques": self.ataques,

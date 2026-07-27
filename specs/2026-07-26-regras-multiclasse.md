@@ -133,9 +133,53 @@ tabela nativa do PF2e. Sem houserule.
 **17.** **Elevacao:** `rank_efetivo = ceil(nivel_de_personagem / 2)`.
 Vale para truque, focus spell e magia de slot.
 
-**17b.** **Teto para magia que age sozinha.** Magia com o trait `summon`, e magia
-de efeito continuo autonomo (Spirit Link, Protector Tree), elevam no maximo
-`rank_do_slot + 2`.
+**17b.** **Teto para o que cria criatura.** Vale para magia com o trait `summon`
+**ou** `incarnate`, e para companheiro, familiar e eidolon.
+
+```
+magia summon/incarnate   rank  = min( ceil(class_level/2) + 2 , ceil(nivel_de_personagem/2) )
+companheiro/eidolon      nivel = min( class_level + 2        , nivel_de_personagem )
+```
+
+> **Escopo corrigido em 2026-07-27 (Igor).** A versao anterior dizia "magia com
+> o trait `summon`, e magia de efeito continuo autonomo (Spirit Link, Protector
+> Tree)". Errado nas duas metades.
+>
+> **Spirit Link e Protector Tree saem.** Nao criam nada -- sao efeito continuo.
+> Verificado: os traits delas sao `healing/spirit` e `plant/wood`, nenhuma tem
+> `summon`. Com isso morre tambem o problema da lista curada, porque o criterio
+> passa a ser inteiramente derivavel de trait.
+>
+> **`incarnate` entra.** O trait `summon` pega 14 magias; `incarnate` pega
+> outras 23, **sem interseccao nenhuma**, e sao as invocacoes de rank 4 a 10 --
+> Summon Kaiju, Summon Archmage, Summon Draconic Legion, Skeleton Army. Sao 37
+> no total, todas por trait, zero curadoria.
+>
+> A definicao do proprio trait: *"similar in theme to spells that summon
+> creatures, but it doesn't conjure a minion with the summoned trait"*. Isso
+> **reforca** inclui-la: minion custa uma acao por rodada para comandar
+> (*"acts on your turn... when you spend an action to issue"*), e incarnate nao
+> custa. Pelo argumento de economia de acao que justifica esta regra, incarnate
+> e o caso mais forte.
+>
+> **A forma da conta.** O termo externo faz a regra se autoproteger: com classe
+> unica os dois niveis sao iguais, o `+2` nunca chega a valer e o RAW sai
+> intacto sem caso especial.
+>
+> | | conta | resultado |
+> |---|---|---|
+> | Summoner 2 / personagem 12 | `min(1+2, 6)` | rank 3 |
+> | Summoner 20 puro | `min(10+2, 10)` | rank 10 -- RAW |
+> | Mago 2 / personagem 5 | `min(1+2, 3)` | rank 3 -- a regra 17 sobrevive |
+> | Ranger 2 / personagem 12 | `min(2+2, 12)` | companheiro nivel 4 |
+> | Ranger 12 puro | `min(14, 12)` | companheiro nivel 12 -- RAW |
+>
+> **Por que a criatura nao leva o `/2`.** Rank de magia ja nasce em escala de
+> metade do nivel, e nao passa de 10 -- dai o teto externo ser
+> `ceil(nivel/2)`. Nivel de criatura esta na mesma escala do nivel de
+> personagem; dividir por dois cortaria pela metade uma coisa que nao era
+> metade de nada, e um Ranger 12 **puro** cairia para companheiro nivel 6,
+> quebrando classe unica == RAW.
 
 > Principio: invocacao **cria** economia de acao em vez de gasta-la. Todo o
 > argumento de autocontencao da regra 17 se apoia em o dip perder acoes

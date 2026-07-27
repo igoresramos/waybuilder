@@ -334,6 +334,65 @@ checar(any("cleric" in i or "doctrine" in i for i in ids_a),
        "e a identidade de Clerigo vem junto (regra 7)",
        f"features de Clerigo: {[i for i in ids_a if 'cleric' in i][:3]}")
 
+# -- regra 17b: teto do que cria criatura -----------------------------------
+print("\nregra 17b -- teto de invocacao e de ator")
+
+
+def _monta(classes, atores=None):
+    esc, n = [], 0
+    for cid, q in classes:
+        for _ in range(q):
+            n += 1
+            esc.append({"em": n, "slot": "nivel_de_classe", "pega": cid})
+    return Personagem({"escolhas": esc, "atores": atores or [],
+                       "inventario": [], "manual": {}}, BASE)
+
+
+def _conj(p, nome):
+    return next((c for c in p.conjuracao if c["classe"] == nome), None)
+
+# o caso que o Igor deu: Summoner 2 num personagem 12
+c = _conj(_monta([("wb:class/summoner", 2), ("wb:class/fighter", 10)]), "Summoner")
+checar(c and c["rank_efetivo"] == 6,
+       "heightened normal e ceil(12/2) = 6 (regra 17)",
+       f"deu {c and c['rank_efetivo']}")
+checar(c and c["rank_de_invocacao"] == 3,
+       "mas invocacao para em min(ceil(2/2)+2, 6) = 3 (regra 17b)",
+       f"deu {c and c['rank_de_invocacao']}")
+
+# classe unica: o +2 nunca chega a valer, RAW intacto sem caso especial
+c = _conj(_monta([("wb:class/summoner", 20)]), "Summoner")
+checar(c and c["rank_de_invocacao"] == 10,
+       "Summoner 20 puro invoca no 10 -- o teto externo protege o RAW",
+       f"deu {c and c['rank_de_invocacao']}")
+
+# a regra 17 tem que sobreviver ao teto, senao o dip morre
+c = _conj(_monta([("wb:class/wizard", 2), ("wb:class/fighter", 3)]), "Wizard")
+checar(c and c["rank_de_invocacao"] == 3,
+       "Mago 2 / personagem 5 invoca no 3 -- a regra 17 sobrevive a 17b",
+       f"deu {c and c['rank_de_invocacao']}")
+
+COMP = [{"tipo": "companheiro", "nome": "Princesa", "classe": "wb:class/ranger",
+         "escolhas": [{"slot": "animal", "pega": "wb:animal-companion/badger"}]}]
+a = _monta([("wb:class/ranger", 2), ("wb:class/fighter", 10)], COMP).atores[0]
+checar(a["nivel"] == 4,
+       "companheiro de Ranger 2 num personagem 12 fica no nivel 4",
+       f"deu {a['nivel']}")
+a = _monta([("wb:class/ranger", 12)], COMP).atores[0]
+checar(a["nivel"] == 12,
+       "Ranger 12 PURO tem companheiro nivel 12 -- classe unica == RAW",
+       f"deu {a['nivel']}")
+
+# recorte por trait, sem lista curada
+mag = {"traits": ["concentrate", "manipulate", "summon"]}
+inc = {"traits": ["concentrate", "incarnate"]}
+link = {"traits": ["concentrate", "healing", "manipulate", "spirit"]}
+p = _monta([("wb:class/wizard", 5)])
+checar(p.eleva_por_invocacao(mag) and p.eleva_por_invocacao(inc),
+       "a 17b pega trait `summon` E `incarnate`")
+checar(not p.eleva_por_invocacao(link),
+       "e NAO pega Spirit Link -- efeito continuo nao cria criatura")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")
