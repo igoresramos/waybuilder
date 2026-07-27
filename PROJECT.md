@@ -90,7 +90,12 @@ hidden: false
 > de `dados_brutos/`, com `buscar_fontes.sh` e `dump_aon.py` reconstruindo as
 > duas maiores.
 >
-> **O motor ja monta ficha (2026-07-27).** Fatia vertical 1 fechada: `motor/`
+> **O motor ja monta ficha COMPLETA (2026-07-27).** HP, AC (com cap de DEX,
+> escudo, penalidade), ataque e dano por arma, proficiencias, identidade de
+> classe, conjuracao e a lista do que pode pegar. Validado contra os iconics da
+> Paizo: **117 de 129 batem (91%)**.
+>
+> **(historico)** Fatia vertical 1 fechada: `motor/`
 > implementa 11 das 22 regras e imprime `Guerreiro 3 / Mago 2` completo, com 24
 > assercoes de teste travando cada regra. A houserule aparece viva -- Mago 2 num
 > personagem 5 tem os slots de um Mago 2 e conjura no rank 3; Mago 5 puro ganha
@@ -101,17 +106,24 @@ hidden: false
 > separa concessao de escolha usando `system.items` do Foundry como fonte
 > autoritativa) e a tabela de slots de conjuracao (item 14).
 >
-> **O que segue aberto:** portao 3 (23 referencias, era 80), portao 6 (1) e
-> portao 7 (13 colisoes que exigiriam arbitrar).
+> **Os tres itens de modelagem fecharam** (gate de nivel, subclasse no predicado,
+> efeito unificado). `class_level` foi de 79 para 1.932 registros.
 >
-> **Os tres proximos, em ordem de valor:**
-> 1. **gate de nivel derivado** -- `class_level` existe em 79 de 19.738
->    registros e e a razao de o projeto existir. E derivavel: feat com trait de
->    classe e level N significa `class_level[X] >= N`
-> 2. **predicado sabendo falar de subclasse** -- metade do caminho pronta
-> 3. **modelo de efeito unificado** -- classe usa `grants`, ancestria usa campos
->    soltos, background usa outro conjunto; a spec define `grants` como a
->    linguagem unica e ela so vale em `class`
+> **PROXIMO PASSO, decidido com o Igor:** o app e para construir o personagem
+> INTEIRO, como o Pathbuilder -- todos os numeros na ficha. Fica de fora so
+> retraining e arbitragem de mesa. Nessa ordem:
+> 1. **Atores** -- companheiro, familiar e eidolon com stats proprios. A spec ja
+>    diz que e o mesmo motor com menos slots; hoje o motor so verifica que
+>    existem
+> 2. **Runas** -- potencia e impacto (`+1 striking longsword`). O campo
+>    `potencia` ja e lido, falta modelar runa como item
+> 3. **Interpretador parcial de Rule Elements** -- para o dano condicional das
+>    subclasses (item 42/43). Deixou de ser "fora de escopo": dano de rage e
+>    numero de ficha
+>
+> **Aberto para decisao:** itens 39 (regra 17 fura em Magus/Summoner), 41
+> (tradicao por subclasse em Sorcerer/Summoner/Witch e prosa), 42 (8 eixos de
+> subclasse sem efeito).
 >
 > **Comece por `README.md`** -- ele e o ponto de retomada.
 

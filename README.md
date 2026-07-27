@@ -62,11 +62,15 @@ o portao 7 roda **antes** da fusao.
 
 Para re-extrair das fontes: `WB_REEXTRAIR=1 ./build.sh`.
 
-## Estado da base (2026-07-26, apos a re-emissao)
+## Estado da base (2026-07-27)
 
-**19.250 registros em 24 kinds.** Prosa em **99,2%** (169 sem prosa), 951 com
-divergencia registrada, 350 com alias, 1.459 com `aliases_traits`, 281
-desmembrados de colisao de identidade.
+**19.738 registros em 24 kinds.** Prosa em **99,2%**. Portoes 1, 2, 4 e 5
+passam; o 3 esta em 23 (era 80) e o 6 em 1.
+
+Alem da re-emissao, esta camada foi construida depois: gate de nivel derivado
+(`class_level` em 1.932 registros, era 79), `subclass` no predicado, efeito
+unificado em `grants` e 422 registros com efeito vindo dos Rule Elements do
+Foundry.
 
 Os cinco defeitos da auditoria de 26/07 estao **resolvidos**:
 
@@ -93,8 +97,8 @@ Os cinco defeitos da auditoria de 26/07 estao **resolvidos**:
 
 | Portao | Falhas | Causa |
 |---|---|---|
-| 3 -- `requires` orfao | 80 | citam class-features de **segundo nivel** (`enigma-muse`, `ruffian-racket`, `universalist-wizard`) que a base nunca extraiu. Fecha junto com o item 2 |
-| 5 -- sem `license` | 3 | `heavy-power-suit`, `nine-ring-sword`, `wind-and-fire-wheel`: vieram de consulta ao vivo ao pf2etools numa sessao antiga e **nao existem em fonte nenhuma em disco**. Precisam de decisao |
+| 3 -- `requires` orfao | 23 (era 80) | vocabulario nao unificado, nao falta de conteudo. `resolver_referencias.py` casou 58 por nome |
+| 6 -- traits disjunto | 1 | resto de conflito de traits |
 | 7 -- homonimo | 13 | casaram com doc do AoN que nao representa nenhum grupo; desmembrar exigiria arbitrar |
 
 > **Correcao a spec, verificada contra as fontes:** ela dizia que em
@@ -117,15 +121,33 @@ Cuidado: **`Pf2ools` sem o "e" e um repo morto.** A fonte viva e `Pf2eToolsOrg`.
 
 ```
 motor/
-  motor.py        documento de personagem -> visao calculada
-  ficha.py        imprime a ficha       (python3 ficha.py)
-  teste_motor.py  24 assercoes, uma por regra  (python3 teste_motor.py)
+  motor.py            documento de personagem -> visao calculada
+  ficha.py            imprime a ficha            (python3 ficha.py)
+  teste_motor.py      assercoes, uma por regra   (python3 teste_motor.py)
+  validar_iconics.py  confere contra os personagens oficiais da Paizo
+  simular_raw.py      2.000 personagens RAW, invariantes vs tabela do Foundry
   exemplos/guerreiro3-mago2.json
 ```
+
+**Tres niveis de verificacao, e cada um pega coisa que os outros nao pegam:**
+
+| | o que faz | estado |
+|---|---|---|
+| `teste_motor.py` | trava cada regra da spec | todas passam |
+| `validar_iconics.py` | compara com os iconics da Paizo (Valeros, Ezren...) | **117/129 (91%)** |
+| `simular_raw.py` | invariantes sobre 2.000 personagens de classe unica | 1 violacao conhecida (item 39) |
+
+A logica do segundo: a houserule so diverge do RAW quando ha mais de uma classe,
+entao **classe unica tem que bater exatamente com o oficial**. Se nao bate, o
+motor esta errado -- sem discussao de balanceamento.
 
 Fatia vertical 1 fechada: `Guerreiro 3 / Mago 2` sai completo -- HP decomposto
 por nivel, proficiencias com origem, identidade de classe, slots de escolha,
 conjuracao e DC. 11 das 22 regras implementadas (as que cabem em niveis 1-5).
+
+A ficha traz HP decomposto por nivel, AC (com cap de DEX, escudo e penalidade de
+armadura), ataque e dano por arma equipada, proficiencias com origem, identidade
+de classe, slots, conjuracao e a lista do que o personagem pode pegar.
 
 A houserule aparece viva na ficha:
 
