@@ -633,6 +633,169 @@ class Personagem:
     PROF_BASE = ["unarmed", "unarmored", "barding", "fortitude", "reflex",
                  "will", "perception", "acrobatics", "athletics"]
 
+    # Feats reais na base (pipeline/base/index.json, kind=feat) que concedem
+    # cada avanco. Usados para DERIVAR o teto de maturidade em vez de ler
+    # `ator["maturidade"]` como resultado pronto. Cada lista cobre aliases
+    # duplicados que a base carrega para o mesmo feat (ex.: "Mature Animal
+    # Companion" e "Mature Animal Companion (Druid)" sao o mesmo texto, mesma
+    # fonte, dois ids -- artefato do dump, nao duas regras).
+    FEATS_MATURIDADE = {
+        "mature": {
+            "wb:class/druid": ["wb:feat/mature-animal-companion",
+                                "wb:feat/mature-animal-companion-druid"],
+            "wb:class/ranger": ["wb:feat/mature-animal-companion-ranger"],
+        },
+        "incredible": {
+            "wb:class/druid": ["wb:feat/incredible-companion",
+                                "wb:feat/incredible-companion-druid"],
+            "wb:class/ranger": ["wb:feat/incredible-companion-ranger"],
+        },
+        "specialized": {
+            "wb:class/druid": ["wb:feat/specialized-companion-druid"],
+            "wb:class/ranger": ["wb:feat/specialized-companion-ranger"],
+        },
+    }
+    # Arquetipo Animal Trainer (Pathfinder #152: Legacy of the Lost God):
+    # trilha PROPRIA, gate por character_level -- isso e RAW normal de
+    # arquetipo, nao houserule, e essa trilha nao passa pelas feats de
+    # Druid/Ranger acima. Mature Trained Companion / Splendid Companion /
+    # Specialized Companion (Animal Trainer) equivalem a
+    # mature/incredible/specialized dessa trilha independente.
+    FEATS_MATURIDADE_ARQUETIPO = {
+        "mature": ["wb:feat/mature-trained-companion"],
+        "incredible": ["wb:feat/splendid-companion"],
+        "specialized": ["wb:feat/specialized-companion-animal-trainer"],
+    }
+    ORDEM_TIER = ["young", "mature", "incredible"]
+
+    # RAW (rules-2120, Player Core p.211, "Specialized Animal Companions"):
+    # "Its proficiency rank for unarmed attacks increases to expert. Its
+    # proficiency ranks for saving throws and Perception increase to master.
+    # Increase its Dexterity modifier by 1 and its Intelligence modifier by 2.
+    # Its unarmed attack damage increases from two dice to three dice, and it
+    # increases its additional damage with unarmed attacks from 2 to 4 or from
+    # 3 to 6." O dano extra sempre DOBRA (nimble 2->4, savage 3->6) -- por
+    # isso o codigo multiplica em vez de gravar os dois numeros na tabela.
+    #
+    # O "extra benefit" por TIPO de especializacao (Ambusher/Bully/Daredevil/
+    # Racer/Tracker/Wrecker) NAO esta aqui: e escolha do jogador sem campo no
+    # schema nem na base, entao nao da pra derivar -- ver docs/2026-07-27_atores.md.
+    SPECIALIZADO = {
+        "attr_delta": {"dex": 1, "int": 2},
+        "dados": 3,
+        "pericias_upgrade": {"unarmed": "expert", "perception": "master",
+                              "fortitude": "master", "reflex": "master",
+                              "will": "master"},
+    }
+
+    def _maturidade_do_companheiro(self, cid: str | None) -> tuple[str, bool]:
+        """Deriva o teto de maturidade dos feats de avanco REALMENTE
+        escolhidos (nao so presentes no requisito -- escolhidos de fato),
+        conferindo o requisito de cada um contra o nivel de CLASSE que
+        concedeu o companheiro. E a houserule central deste ponto: um Ranger
+        6 dentro de um personagem 20 so passa disso se tiver 6 niveis de
+        Ranger, porque `class_level` no `requires` do feat e comparado com
+        `self.nivel_de(cid)`, nunca com `self.nivel`.
+
+        A trilha do arquetipo Animal Trainer usa `character_level` porque
+        isso e RAW normal de arquetipo, sem desvio.
+
+        Devolve (tier, especializado). `tier` em young/mature/incredible;
+        `especializado` marca se o teto real e specialized, que so existe em
+        cima de incredible (Specialized Animal Companions, Player Core p.211)."""
+        escolhidos = {wb_id for wb_id, _ in self._feats_escolhidos()}
+
+        def valido(feat_ids) -> bool:
+            for fid in feat_ids:
+                if fid not in escolhidos:
+                    continue
+                feat = self.base.opcional(fid)
+                if feat is not None and self.avaliar(feat.get("requires"))[0]:
+                    return True
+            return False
+
+        tier = "young"
+        if cid and valido(self.FEATS_MATURIDADE["mature"].get(cid, [])):
+            tier = "mature"
+            if valido(self.FEATS_MATURIDADE["incredible"].get(cid, [])):
+                tier = "incredible"
+        if valido(self.FEATS_MATURIDADE_ARQUETIPO["mature"]):
+            tier = max(tier, "mature", key=self.ORDEM_TIER.index)
+            if valido(self.FEATS_MATURIDADE_ARQUETIPO["incredible"]):
+                tier = max(tier, "incredible", key=self.ORDEM_TIER.index)
+
+        especializado = False
+        if tier == "incredible":
+            if cid and valido(self.FEATS_MATURIDADE["specialized"].get(cid, [])):
+                especializado = True
+            if valido(self.FEATS_MATURIDADE_ARQUETIPO["specialized"]):
+                especializado = True
+        return tier, especializado
+
+    # Feats que ABREM ESCOLHA (nimble ou savage) em vez de decidir sozinhos --
+    # o mesmo padrao de `ChoiceSet` que o Foundry usa em ~243 dos 6.044 feats
+    # (medido no pin atual, ver docs/2026-07-27_atores.md). A base ainda nao
+    # extrai esse tipo de escolha PARA FEATS (so para eixo de subclasse, em
+    # `classe["subclasses"]`), entao aqui o feat e citado a mao. Splendid
+    # Companion (arquetipo Animal Trainer) tambem abre a mesma escolha --
+    # texto do feat, Pathfinder #152 p.76: "It becomes a nimble or savage
+    # animal companion (your choice)".
+    FEATS_QUE_ABREM_ESCOLHA = {
+        "wb:feat/incredible-companion": ["nimble", "savage"],
+        "wb:feat/incredible-companion-druid": ["nimble", "savage"],
+        "wb:feat/incredible-companion-ranger": ["nimble", "savage"],
+        "wb:feat/splendid-companion": ["nimble", "savage"],
+    }
+
+    def _resolver_grau_incredible(self, ator: dict, tier: str) -> tuple[str | None, dict | None]:
+        """`tier` (young/mature/incredible) ja vem derivado dos feats. Incredible
+        Companion (e Splendid Companion) nao dizem sozinhos se o companheiro
+        fica nimble ou savage -- e escolha do jogador, aberta pelo feat.
+
+        Registrada com o MESMO vocabulario que o eixo de subclasse ja usa
+        (`eixo`/`nivel`/`slot`/`escolhe`/`opcoes`, ver `classe["subclasses"]`
+        e `self.slots_de_subclasse`), para o front poder reusar o mesmo
+        componente de picker -- e nao um campo ad-hoc feito so pra isso. A
+        escolha do jogador mora no `escolhas` do proprio ator (mesmo lugar
+        onde `{"slot": "animal", "pega": ...}` ja vive), no slot novo
+        `grau_avancado`.
+
+        Devolve (grau_resolvido_ou_None, entrada_do_picker_ou_None). SEM
+        escolha feita, `grau` vem None -- nao ha default silencioso para
+        nimble nem para young. Escolha nao feita e estado legitimo; quem
+        chamar decide como exibir a ficha enquanto isso (aqui: capada no
+        ultimo grau CERTO, `mature`)."""
+        if tier != "incredible":
+            return tier, None
+
+        escolhidos = {wb_id for wb_id, _ in self._feats_escolhidos()}
+        feat_id = next((fid for fid in self.FEATS_QUE_ABREM_ESCOLHA if fid in escolhidos), None)
+        feat = self.base.opcional(feat_id) if feat_id else None
+        opcoes = self.FEATS_QUE_ABREM_ESCOLHA.get(feat_id, ["nimble", "savage"])
+
+        declarado = next((e.get("pega") for e in (ator.get("escolhas") or [])
+                          if e.get("slot") == "grau_avancado"), None)
+        escolhido = declarado if declarado in opcoes else None
+
+        entrada = {
+            "origem": "feat",
+            "feat": feat_id,
+            "nome_do_feat": (feat or {}).get("name", feat_id),
+            "ator": ator.get("nome") or "",
+            "eixo": "grau-incredible-companion",
+            "nivel": (feat or {}).get("level"),
+            "slot": "grau_avancado",
+            "escolhe": 1,
+            "opcoes": opcoes,
+            "escolhido": escolhido,
+        }
+        if escolhido is None:
+            self.avisos.append(
+                f"companheiro {ator.get('nome') or ''}: {entrada['nome_do_feat']} "
+                f"aberto, falta escolher entre {'/'.join(opcoes)} (slot "
+                f"`grau_avancado` no `escolhas` do ator)")
+        return escolhido, entrada
+
     def _atores(self) -> None:
         """Ficha do companheiro, familiar e eidolon.
 
@@ -641,6 +804,7 @@ class Personagem:
         nivel + rank + atributo, exatamente como o personagem.
         """
         self.atores = []
+        self.escolhas_de_feat: list[dict] = []
         for a in self.doc.get("atores") or []:
             cid, nota = self._classe_do_ator(a)
             nivel_classe = self.nivel_de(cid) if cid else self.nivel
@@ -655,13 +819,30 @@ class Personagem:
                 "escolhas": a.get("escolhas") or [],
             }
             if a.get("tipo") == "companheiro":
-                ator.update(self._ficha_de_companheiro(a, ator["nivel"]))
+                tier, especializado = self._maturidade_do_companheiro(cid)
+                grau, pendente = self._resolver_grau_incredible(a, tier)
+                if pendente:
+                    self.escolhas_de_feat.append(pendente)
+                if grau is None and especializado:
+                    self.avisos.append(
+                        f"companheiro {a.get('nome') or ''}: Specialized "
+                        f"Companion detectado, mas o grau nimble/savage ainda "
+                        f"nao foi escolhido -- specialized nao aplicado ate "
+                        f"resolver")
+                if grau is None:
+                    especializado = False
+                ator["grau_pendente"] = grau is None
+                ator.update(self._ficha_de_companheiro(a, ator["nivel"],
+                                                        grau or "mature", especializado))
             self.atores.append(ator)
 
-    def _ficha_de_companheiro(self, ator: dict, nivel: int) -> dict:
+    def _ficha_de_companheiro(self, ator: dict, nivel: int, grau: str,
+                              especializado: bool) -> dict:
         """RAW, Player Core p.206: atributos do stat block com os ajustes de
         avanco; HP de ancestria mais (6 + CON) por nivel; proficiencia treinada
-        na lista base, elevada pelo avanco."""
+        na lista base, elevada pelo avanco. `grau` e `especializado` ja vem
+        DERIVADOS dos feats (`_maturidade_do_companheiro` /
+        `_resolver_grau_incredible`) -- aqui e so aplicar os numeros."""
         pega = next((e.get("pega") for e in (ator.get("escolhas") or [])
                      if e.get("slot") == "animal"), None)
         especie = self.base.opcional(pega or "") or {}
@@ -669,11 +850,22 @@ class Personagem:
         if not st:
             return {"aviso": f"especie do companheiro nao encontrada: {pega}"}
 
-        grau = (ator.get("maturidade") or "young").lower()
         av = self.AVANCO.get(grau) or self.AVANCO["young"]
         attr = dict(st.get("atributos") or {})
         for k, v in av["attr"].items():
             attr[k] = attr.get(k, 0) + v
+        dados = av["dados"]
+        dano_extra = av["dano_extra"]
+        pericias_av = dict(av["pericias"])
+
+        # Specialized Animal Companions (Player Core p.211, rules-2120): delta
+        # por cima do nimble/savage ja acumulado -- ver SPECIALIZADO.
+        if especializado:
+            for k, v in self.SPECIALIZADO["attr_delta"].items():
+                attr[k] = attr.get(k, 0) + v
+            dados = self.SPECIALIZADO["dados"]
+            dano_extra *= 2
+            pericias_av.update(self.SPECIALIZADO["pericias_upgrade"])
 
         # RAW: "ancestry Hit Points from its type, plus a number of Hit Points
         # equal to 6 plus its Constitution modifier for each level you have"
@@ -682,7 +874,7 @@ class Personagem:
         prof = {k: "trained" for k in self.PROF_BASE}
         for p in (st.get("pericia_inicial") or []):
             prof[p.lower()] = "trained"
-        for k, v in av["pericias"].items():
+        for k, v in pericias_av.items():
             # "if it was already trained in one of those skills from its type,
             # increase its proficiency rank in that skill to expert"
             if v == "trained" and prof.get(k) == "trained":
@@ -701,8 +893,8 @@ class Personagem:
             # finesse usa DEX quando compensa; o resto e STR, como no personagem
             usa = "dex" if ("finesse" in (atk.get("traits") or [])
                             and attr.get("dex", 0) > attr.get("str", 0)) else "str"
-            dano = (f"{av['dados']}d{face}" if face else "?")
-            mod = attr.get("str", 0) + av["dano_extra"]
+            dano = (f"{dados}d{face}" if face else "?")
+            mod = attr.get("str", 0) + dano_extra
             ataques.append({
                 "nome": atk.get("nome"),
                 "ataque": bonus("unarmed", usa),
@@ -715,6 +907,7 @@ class Personagem:
         return {
             "especie": especie.get("name"),
             "maturidade": grau,
+            "especializado": especializado,
             "tamanho": st.get("tamanho"),
             "velocidade": st.get("velocidade"),
             "sentidos": st.get("sentidos"),
@@ -1110,6 +1303,7 @@ class Personagem:
             "slots": self.slots,
             "conjuracao": self.conjuracao,
             "atores": self.atores,
+            "escolhas_de_feat": self.escolhas_de_feat,
             "focus_pool": self.focus_pool,
             "ac": self.ac,
             "ataques": self.ataques,

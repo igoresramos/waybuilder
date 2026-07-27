@@ -1,0 +1,184 @@
+==============================================================================
+1. RECORTE POR TRAIT
+==============================================================================
+fonte: pipeline/base/index.json (kind=spell, campos traits/rank/texto)
+magias no index                 : 1649
+trait `summon`                  : 14
+trait `incarnate`               : 23
+interseccao                     : 0
+total sob a 17b                 : 37
+
+distribuicao de rank `summon`   : {1: 7, 2: 1, 5: 6}
+distribuicao de rank `incarnate`: {4: 1, 5: 1, 6: 1, 7: 3, 8: 8, 9: 4, 10: 5}
+rank minimo `incarnate`         : 4
+
+`incarnate` com heightened estruturado : 1  ['Summon Healing Servitor']
+`incarnate` com heightened so em prosa : 0  []
+=> incarnate nao eleva: acima do portao o dip tem o MESMO poder que o puro.
+   O teto sobre incarnate e binario (acesso), nao gradual.
+
+`summon` com escada de nivel de criatura: 12/14
+
+==============================================================================
+2. ESCADA rank-da-magia -> nivel-da-criatura
+==============================================================================
+fonte: prosa do campo `texto` em pipeline/base/index.json (kind=spell, campos traits/rank/texto)
+escada canonica (Summon Animal):
+   rank  1 -> criatura nivel  -1
+   rank  2 -> criatura nivel   1
+   rank  3 -> criatura nivel   2
+   rank  4 -> criatura nivel   3
+   rank  5 -> criatura nivel   5
+   rank  6 -> criatura nivel   7
+   rank  7 -> criatura nivel   9
+   rank  8 -> criatura nivel  11
+   rank  9 -> criatura nivel  13
+   rank 10 -> criatura nivel  15
+magias `summon` que divergem da escada canonica: 0
+
+==============================================================================
+3. PROGRESSAO DA ROTA GRATUITA (dedicacao de arquetipo, RAW)
+==============================================================================
+fonte: pipeline/dados_brutos/pf2etools_repo/data/quickrules.json -> pf2-h3 'Spellcasting Archetypes' (APG p.149)
+ganhos de slot lidos do texto: {4: 1, 6: 2, 8: 3, 12: 4, 14: 5, 16: 6, 18: 7, 20: 8}
+nivel de personagem -> rank maximo de slot de arquetipo:
+   4:1  6:2  8:3  10:3  12:4  14:5  16:6  18:7  20:8
+
+==============================================================================
+4. CHECAGEM: a formula do motor bate com a spec?
+==============================================================================
+fonte: motor/motor.py -> Personagem.cap_invocacao / .conjuracao
+pares (class_level, char_level) testados : 231
+divergencias motor vs spec               : 0
+
+checagem fim-a-fim, personagem sintetico completo pelo motor:
+   Wizard 20 puro           cl=20 slot_cru=10 rank_efetivo(17)=10 rank_invoc(17b)=10 slots={'1': 3, '2': 3, '3': 3, '4': 3, '5': 3, '6': 3, '7': 3, '8': 3, '9': 3, '10': 1}
+   Fighter 18 / Wizard 2    cl= 2 slot_cru= 1 rank_efetivo(17)=10 rank_invoc(17b)= 3 slots={'1': 3}
+   Fighter 19 / Wizard 1    cl= 1 slot_cru= 1 rank_efetivo(17)=10 rank_invoc(17b)= 3 slots={'1': 2}
+
+==============================================================================
+5. COMPARACAO DOS QUATRO REGIMES
+==============================================================================
+fonte de poder de criatura: pipeline/dados_brutos/bench_monstros.json (mediana AoN por nivel)
+premissas:
+   - Alvo: monstro MEDIANO do bench_monstros no MESMO nivel do personagem.
+   - Minion: usa atk/dmg medianos do bench_monstros no nivel da criatura.
+   - Acoes -- identicas nos 4 regimes: 3 para conjurar, 1 por rodada para comandar o minion (trait minion). Nenhum regime gasta acao a mais.
+   - Minion comandado recebe 2 acoes: 2 Strikes com MAP 0 / -5.
+   - Combate de 4 rodadas. Rodada 1 o conjurador gasta as 3 acoes conjurando e nao sobra acao para comandar; o minion age nas rodadas 2, 3 e 4.
+   - Gear/atributo/DC do conjurador NAO entram: nao afetam invocacao.
+   - Dedicacao roda RAW puro (regra 18): sem elevacao e sem teto 17b.
+
+------------------------------------------------------------------------------
+NIVEL DE PERSONAGEM 12  (alvo: monstro mediano nivel 12, AC 33, HP 215, n=157)
+------------------------------------------------------------------------------
+regime                                cl rank criat     DPR   4-rod    HP
+(a) conjurador PURO (RAW)             12    6     7     5.9    17.8   115
+(b) dip 2 SEM teto 17b                 2    6     7     5.9    17.8   115
+(c) dip 2 COM teto 17b                 2    3     2     0.7     2.1    30
+(c') dip 1 COM teto 17b                1    3     2     0.7     2.1    30
+(d) dedicacao FREE ARCHETYPE           0    4     3     0.9     2.7    45
+(e) PROPOSTA piso-dedicacao, dip 2     2    4     3     0.9     2.7    45
+
+   (c) vs (d): rank 3 vs 4 | criatura nivel 2 vs 3 | dano 4 rodadas 2.1 vs 2.7
+   (c) entrega 78% do que a rota GRATUITA entrega  -> regra 21 VIOLADA
+   (c) entrega 12% do conjurador puro (a)
+   (d) entrega 15% do conjurador puro (a)
+   (e) entrega 15% do conjurador puro (a), 100% da dedicacao
+   niveis de classe necessarios para o dip EMPATAR com a dedicacao: 3
+   magias `incarnate` acessiveis (de 23): (a) 3  (c) 0  (d) 1  (e-proposta) 1
+
+------------------------------------------------------------------------------
+NIVEL DE PERSONAGEM 15  (alvo: monstro mediano nivel 15, AC 37, HP 280, n=127)
+------------------------------------------------------------------------------
+regime                                cl rank criat     DPR   4-rod    HP
+(a) conjurador PURO (RAW)             15    8    11    14.9    44.8   195
+(b) dip 2 SEM teto 17b                 2    8    11    14.9    44.8   195
+(c) dip 2 COM teto 17b                 2    3     2     0.3     1.0    30
+(c') dip 1 COM teto 17b                1    3     2     0.3     1.0    30
+(d) dedicacao FREE ARCHETYPE           0    5     5     1.3     3.9    75
+(e) PROPOSTA piso-dedicacao, dip 2     2    5     5     1.3     3.9    75
+
+   (c) vs (d): rank 3 vs 5 | criatura nivel 2 vs 5 | dano 4 rodadas 1.0 vs 3.9
+   (c) entrega 27% do que a rota GRATUITA entrega  -> regra 21 VIOLADA
+   (c) entrega 2% do conjurador puro (a)
+   (d) entrega 9% do conjurador puro (a)
+   (e) entrega 9% do conjurador puro (a), 100% da dedicacao
+   niveis de classe necessarios para o dip EMPATAR com a dedicacao: 5
+   magias `incarnate` acessiveis (de 23): (a) 14  (c) 0  (d) 2  (e-proposta) 2
+
+------------------------------------------------------------------------------
+NIVEL DE PERSONAGEM 20  (alvo: monstro mediano nivel 20, AC 45, HP 380, n=76)
+------------------------------------------------------------------------------
+regime                                cl rank criat     DPR   4-rod    HP
+(a) conjurador PURO (RAW)             20   10    15    13.9    41.8   280
+(b) dip 2 SEM teto 17b                 2   10    15    13.9    41.8   280
+(c) dip 2 COM teto 17b                 2    3     2     0.0     0.0    30
+(c') dip 1 COM teto 17b                1    3     2     0.0     0.0    30
+(d) dedicacao FREE ARCHETYPE           0    8    11     2.3     6.9   195
+(e) PROPOSTA piso-dedicacao, dip 2     2    8    11     2.3     6.9   195
+
+   (c) vs (d): rank 3 vs 8 | criatura nivel 2 vs 11 | dano 4 rodadas 0.0 vs 6.9
+   (c) entrega 0% do que a rota GRATUITA entrega  -> regra 21 VIOLADA
+   (c) entrega 0% do conjurador puro (a)
+   (d) entrega 16% do conjurador puro (a)
+   (e) entrega 16% do conjurador puro (a), 100% da dedicacao
+   niveis de classe necessarios para o dip EMPATAR com a dedicacao: 11
+   magias `incarnate` acessiveis (de 23): (a) 23  (c) 0  (d) 14  (e-proposta) 14
+
+==============================================================================
+6. AS INCARNATE QUE O TETO BLOQUEIA (evidencia de que o cap importa)
+==============================================================================
+   rank  4  uncommon  Pest Swarm                             dados no texto: 4d6 4d6 2d8 2d4 4d6 4d6
+   rank  5  uncommon  Summon Healing Servitor                dados no texto: 3d8 1d8
+   rank  6  common    Skeleton Army                          dados no texto: 4d8 2d8 6d6
+   rank  7  rare      Final Fate of The Locust Host          dados no texto: 5d8 5d8
+   rank  7  common    Summon Stampede                        dados no texto: 8d8
+   rank  7  common    Tempest of Shades                      dados no texto: (sem dado)
+   rank  8  uncommon  Clockwork Devotion                     dados no texto: 4d10 4d8 4d8 2d8
+   rank  8  common    Holy Host                              dados no texto: 8d6 4d6 8d6 8d6 4d6 2d6
+   rank  8  common    Summon Archmage                        dados no texto: 3d4
+   rank  8  common    Summon Deific Herald                   dados no texto: (sem dado)
+   rank  8  common    Summon Elemental Herald                dados no texto: 10d8 10d6 5d10 10d6 3d6 6d6
+   rank  8  rare      Summon Irii                            dados no texto: (sem dado)
+   rank  8  rare      Summon Warden of the Wild              dados no texto: 6d6 4d6 10d6 8d6 10d6
+   rank  8  common    Unholy Army                            dados no texto: 10d6 6d6 8d8 6d6 2d6 3d6
+   rank  9  rare      Beseech Arcanotheign                   dados no texto: 8d12 5d12 5d12
+   rank  9  rare      Call Fluxwraith                        dados no texto: 1d4
+   rank  9  rare      Summon Ancient Fleshforged             dados no texto: 8d12 10d8 10d8 10d10
+   rank  9  common    Summon Draconic Legion                 dados no texto: 10d8 9d8
+   rank 10  uncommon  Conquering Soldiers                    dados no texto: 6d12 12d12
+   rank 10  rare      Garden Of The Green Man's Growth       dados no texto: 10d8 12d6 4d6
+   rank 10  rare      Jassim's Allegiance                    dados no texto: 5d12 5d12 10d6 2d8
+   rank 10  rare      Summon Kaiju                           dados no texto: 16d8 6d12 6d10 8d12 10d6 4d6
+   rank 10  rare      Summon Oliphaunt Of Jandelay           dados no texto: 8d10 8d8
+
+==============================================================================
+6b. MAGIAS `summon` SEM ESCADA (o teto nao tem o que reduzir nelas)
+==============================================================================
+   rank 1  Phantasmal Minion: You summon a phantasmal minion. The minion is roughly the shape of a humanoid. You can choose to have it be invisible or have an ephemeral appearance, but it's obviously a magical effect, not a real creature.
+   rank 1  Summon Lesser Servitor: While deities jealously guard their most powerful servants from the summoning spells of those who aren't steeped in the faith, this spell allows you to conjure an inhabitant of the Outer Sphere with or without the deity
+
+==============================================================================
+7. VERIFICACAO DA PROPOSTA (piso na rota gratuita)
+==============================================================================
+formula: rank = min( max( ceil(cl/2)+2 , rank_dedicacao(char) ), ceil(char/2) )
+classe unica continua == RAW em todos os 20 niveis: SIM
+pares (cl, char) com char>=4 testados          : 204
+violacoes da regra 21 -- formula ATUAL         : 50
+violacoes da regra 21 -- formula PROPOSTA      : 0
+
+exemplos trabalhados que a spec cita, sob a proposta:
+   Summoner 2 / personagem 12   atual= 3  proposta= 4  (sem teto seria 6)
+   Summoner 20 puro             atual=10  proposta=10  (sem teto seria 10)
+   Mago 2 / personagem 5        atual= 3  proposta= 3  (sem teto seria 3)
+   Mago 1 / personagem 20       atual= 3  proposta= 8  (sem teto seria 10)
+   Mago 10 / Guerreiro 10       atual= 7  proposta= 8  (sem teto seria 10)
+
+==============================================================================
+8. RESUMO
+==============================================================================
+char  (a) puro  (c) 17b  (d) ded  (e) prop    c/d    c/a  empate
+  12      17.8      2.1      2.7       2.7    78%    12%       3
+  15      44.8      1.0      3.9       3.9    27%     2%       5
+  20      41.8      0.0      6.9       6.9     0%     0%      11

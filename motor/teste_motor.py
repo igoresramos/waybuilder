@@ -46,6 +46,7 @@ def niveis(*pares):
 
 
 FIGHTER, WIZARD, CLERIC = "wb:class/fighter", "wb:class/wizard", "wb:class/cleric"
+RANGER = "wb:class/ranger"
 
 
 # -- regra 1 ---------------------------------------------------------------
@@ -392,6 +393,111 @@ checar(p.eleva_por_invocacao(mag) and p.eleva_por_invocacao(inc),
        "a 17b pega trait `summon` E `incarnate`")
 checar(not p.eleva_por_invocacao(link),
        "e NAO pega Spirit Link -- efeito continuo nao cria criatura")
+
+# -- maturidade do companheiro DERIVADA dos feats, nao lida do documento ----
+print("\nmaturidade do companheiro -- derivada dos feats de avanco escolhidos")
+
+
+def _companheiro_ranger(nivel_ranger, feats, escolha_grau=None):
+    """Ranger PURO com o companheiro Badger, para isolar a trilha de avanco.
+
+    `wb:feat/mature-animal-companion-ranger` exige (na base) `has:
+    wb:feat/animal-companion` -- o id SEM sufixo `-ranger`, mesmo para Ranger
+    -- entao o feat de nivel 1 pego e sempre esse."""
+    esc = [{"em": n, "slot": "nivel_de_classe", "pega": RANGER}
+           for n in range(1, nivel_ranger + 1)]
+    esc.append({"em": 1, "slot": "class_feat", "pega": "wb:feat/animal-companion"})
+    for f in feats:
+        esc.append({"em": nivel_ranger, "slot": "class_feat", "pega": f})
+    ator_esc = [{"slot": "animal", "pega": "wb:animal-companion/badger"}]
+    if escolha_grau:
+        ator_esc.append({"slot": "grau_avancado", "pega": escolha_grau})
+    atores = [{"tipo": "companheiro", "nome": "Princesa", "classe": RANGER,
+               "escolhas": ator_esc}]
+    return Personagem({"escolhas": esc, "atores": atores,
+                       "inventario": [], "manual": {}}, BASE)
+
+
+p1 = _companheiro_ranger(6, [])
+checar(p1.atores[0]["maturidade"] == "young",
+       "Ranger 6 sem feat de avanco: companheiro fica young",
+       f"deu {p1.atores[0]['maturidade']}")
+
+p2 = _companheiro_ranger(6, ["wb:feat/mature-animal-companion-ranger"])
+checar(p2.atores[0]["maturidade"] == "mature",
+       "Ranger 6 com Mature Animal Companion (Ranger): mature",
+       f"deu {p2.atores[0]['maturidade']}")
+
+# houserule: o gate do feat compara com o nivel de CLASSE que concedeu o
+# companheiro, nunca com o nivel de personagem
+doc3 = {"esquema": "x",
+        "escolhas": niveis((FIGHTER, 14), (RANGER, 6)) + [
+            {"em": 20, "slot": "class_feat", "pega": "wb:feat/animal-companion"},
+            {"em": 20, "slot": "class_feat", "pega": "wb:feat/mature-animal-companion-ranger"},
+            {"em": 20, "slot": "class_feat", "pega": "wb:feat/incredible-companion-ranger"},
+        ],
+        "atores": [{"tipo": "companheiro", "nome": "Princesa", "classe": RANGER,
+                    "escolhas": [{"slot": "animal", "pega": "wb:animal-companion/badger"}]}]}
+p3 = Personagem(doc3, BASE)
+checar(p3.nivel == 20 and p3.nivel_de(RANGER) == 6,
+       "Guerreiro 14 / Ranger 6: personagem 20, mas so 6 niveis de Ranger",
+       f"nivel={p3.nivel} ranger={p3.nivel_de(RANGER)}")
+checar(p3.atores[0]["maturidade"] == "mature",
+       "Incredible Companion (Ranger) pego com Ranger 6 (exige >=10) NAO sobe "
+       "de mature -- o gate e por nivel de CLASSE, nao de personagem 20",
+       f"deu {p3.atores[0]['maturidade']}")
+checar(not any(e["ator"] == "Princesa" for e in p3.escolhas_de_feat),
+       "e nem chega a abrir o picker nimble/savage -- o teto real e mature")
+
+# Incredible Companion nao decide sozinho entre nimble/savage -- isso e
+# escolha do jogador. Sem a escolha, a ficha NAO vira nimble por default: fica
+# capada no ultimo grau CERTO (mature) e a escolha aparece como PENDENTE, no
+# mesmo vocabulario que o eixo de subclasse ja usa (eixo/nivel/slot/escolhe/opcoes).
+p4 = _companheiro_ranger(10, ["wb:feat/mature-animal-companion-ranger",
+                              "wb:feat/incredible-companion-ranger"])
+checar(p4.atores[0]["maturidade"] == "mature",
+       "Incredible Companion valido mas sem escolher nimble/savage: ficha fica "
+       "no ultimo grau CERTO -- nunca vira nimble por default silencioso",
+       f"deu {p4.atores[0]['maturidade']}")
+checar(p4.atores[0]["grau_pendente"] is True,
+       "e o ator fica marcado com a escolha pendente")
+pend = next((e for e in p4.escolhas_de_feat if e["ator"] == "Princesa"), None)
+checar(pend is not None, "a escolha pendente aparece em `escolhas_de_feat`")
+if pend:
+    checar(pend["eixo"] == "grau-incredible-companion" and pend["slot"] == "grau_avancado"
+           and pend["escolhe"] == 1 and set(pend["opcoes"]) == {"nimble", "savage"},
+           "registrada com o MESMO vocabulario do eixo de subclasse "
+           "(eixo/nivel/slot/escolhe/opcoes)", f"{pend}")
+    checar(pend["escolhido"] is None, "e sem default silencioso -- escolhido fica None")
+checar(any("falta escolher" in a for a in p4.avisos),
+       "o motor avisa que falta escolher, em vez de assumir")
+
+# Com a escolha declarada (no `escolhas` do proprio ator, slot `grau_avancado`),
+# savage se aplica, e Specialized Companion (Player Core p.211, rules-2120)
+# soma o delta -- unarmed vira expert, saves/Percepcao viram master, dano
+# extra DOBRA (savage 3 -> 6) e os dados sobem de 2 para 3.
+p5 = _companheiro_ranger(16, ["wb:feat/mature-animal-companion-ranger",
+                              "wb:feat/incredible-companion-ranger",
+                              "wb:feat/specialized-companion-ranger"],
+                         escolha_grau="savage")
+a5 = p5.atores[0]
+checar(a5["maturidade"] == "savage" and a5["especializado"] is True,
+       "com a escolha declarada: savage + specialized aplicados",
+       f"maturidade={a5['maturidade']} especializado={a5['especializado']}")
+checar(a5["grau_pendente"] is False, "e o ator nao fica mais pendente")
+checar(a5["atributos"]["dex"] == 5 and a5["atributos"]["int"] == -2,
+       "Specialized soma DEX+1/INT+2 por cima do savage "
+       "(Badger DEX 2->4 savage->5 specialized; INT -4->-2 specialized)",
+       f"{a5['atributos']}")
+checar(a5["hp"] == 168, "HP = 8 de ancestria + (6+4) x 16 = 168", f"deu {a5['hp']}")
+jaws = next(x for x in a5["ataques"] if x["nome"] == "jaws")
+checar(jaws["dano"] == "3d8+11",
+       "dano extra dobra (savage 3 -> 6) e os dados sobem pra 3d8 "
+       "(Specialized Animal Companions)", f"deu {jaws['dano']}")
+checar(a5["proficiencias"]["unarmed"] == "expert"
+       and a5["proficiencias"]["perception"] == "master",
+       "unarmed vira expert (1a vez) e saves/Percepcao viram master",
+       f"{a5['proficiencias']}")
 
 print("\n" + "=" * 58)
 if FALHAS:
