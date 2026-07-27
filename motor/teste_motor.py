@@ -542,7 +542,7 @@ checar(p.cap_invocacao(2) == 3,
        f"deu {p.cap_invocacao(2)}")
 
 # -- regra 23: dedicacao da propria classe ---------------------------------
-print("\nregra 23 -- dedicacao da propria classe: liberada so com multiclasse")
+print("\nregra 23 -- exclusao mutua entre nivel de classe e dedicacao da mesma classe")
 
 BOOSTS = [{"em": 1, "slot": "boosts_livres", "pega": ["int", "wis", "dex", "con"]},
           {"em": 5, "slot": "boosts_livres", "pega": ["int", "wis", "con", "dex"]}]
@@ -557,16 +557,28 @@ def _com_dedicacao(nivel_de_wizard, nivel_total):
                 if f["id"] == "wb:feat/wizard-dedication")
 
 
-f = _com_dedicacao(20, 20)
-checar(not f["atende"] and any("propria classe" in m for m in f["motivos"]),
-       "Mago 20 PURO nao pega Wizard Dedication (RAW), e o motivo aparece",
-       f"atende={f['atende']} motivos={f['motivos']}")
-checar(_com_dedicacao(2, 20)["atende"],
-       "mas Mago 2 / Guerreiro 18 pega -- bloquear seria a regra 21 ao "
-       "contrario: custaria os 8 slots que o Guerreiro tem de graca")
-checar(_com_dedicacao(10, 20)["atende"], "e Mago 10 / Guerreiro 10 tambem")
+for nivel_wizard, rotulo in ((20, "Mago 20 puro"), (2, "Mago 2 / Guerreiro 18"),
+                             (10, "Mago 10 / Guerreiro 10")):
+    f = _com_dedicacao(nivel_wizard, 20)
+    checar(not f["atende"] and any("regra 23" in m for m in f["motivos"]),
+           f"{rotulo} nao pega Wizard Dedication, e o motivo aparece",
+           f"atende={f['atende']} motivos={f['motivos']}")
 checar(_com_dedicacao(0, 20)["atende"],
        "quem nao tem nivel de Mago nenhum segue pegando, como sempre")
+
+# sentido inverso: mesma ficha, ordem trocada -- tem de pegar igual
+esc = [{"em": i + 1, "slot": "nivel_de_classe",
+        "pega": WIZARD if i < 2 else FIGHTER} for i in range(20)]
+esc += [{"em": 2, "slot": "archetype_feat", "pega": "wb:feat/wizard-dedication"}]
+p = personagem(esc + BOOSTS)
+checar(any("nivel de classe" in x["feat"] for x in p.fora_do_requisito),
+       "e pegar NIVEL de Mago tendo Wizard Dedication cai igual (exclusao mutua)",
+       f"fora_do_requisito={[x['feat'] for x in p.fora_do_requisito]}")
+
+esc_sem = [{"em": i + 1, "slot": "nivel_de_classe", "pega": FIGHTER} for i in range(20)]
+esc_sem += [{"em": 2, "slot": "archetype_feat", "pega": "wb:feat/wizard-dedication"}]
+checar(not personagem(esc_sem + BOOSTS).fora_do_requisito,
+       "Guerreiro 20 so com a dedicacao, sem nivel de Mago: nada a apontar")
 
 # o veto e cirurgico: so a dedicacao DAQUELA classe
 p = personagem([{"em": i + 1, "slot": "nivel_de_classe", "pega": WIZARD}

@@ -1303,18 +1303,23 @@ class Personagem:
         RAW (Advanced Player's Guide, "Multiclass Archetypes"): *"You can't
         select a multiclass archetype's dedication feat if you are a member of
         the class of the same name."* Nada na base modelava isso -- um Mago 20
-        puro recebia `atende: True` para Wizard Dedication, e classe unica tem
-        de bater com o RAW.
+        puro recebia `atende: True` para Wizard Dedication.
 
-        A houserule LEVANTA a proibicao quando ha multiclasse de verdade,
-        porque o motivo dela deixa de existir: no PF2e oficial a dedicacao
-        seria redundante (o Mago ja conjura melhor). Um Mago 2 dentro de um
-        personagem 20 nao conjura melhor coisa nenhuma.
+        DECISAO DO IGOR (2026-07-27): a exclusao vale sempre que o personagem
+        tem QUALQUER nivel da classe, e e MUTUA -- ver
+        `_veto_classe_de_dedicacao_ja_pega` para a ordem inversa.
 
-        E bloquear seria a regra 21 ao contrario: sob Free Archetype o Guerreiro
-        20 pega Wizard Dedication de graca e leva 8 slots (ranks 1-8). Se o
-        Mago 2 / Guerreiro 18 nao pudesse, gastar 2 niveis de classe custaria
-        esses 8 slots -- a rota de nivel entregando MENOS que a de dedicacao.
+        Eu havia argumentado por liberar no caso multiclasse, alegando que
+        bloquear custaria ao Mago 2 os 8 slots que o Guerreiro 20 leva de graca
+        sob Free Archetype. **O argumento estava inflado**: o personagem
+        continua podendo pegar qualquer uma das outras 26 dedicacoes e levar os
+        mesmos 8 slots. O que a exclusao tira e a ESCOLHA DA TRADICAO, nao os
+        slots -- entao a regra 21 nao e violada.
+
+        E a exclusao resolve uma incoerencia real: com as duas rotas na mesma
+        classe, a mesma magia sairia em DOIS ranks na mesma ficha, o do slot de
+        classe elevado pela regra 17 e o do slot de arquetipo, que pela regra 18
+        roda RAW puro.
 
         Principio zero continua valendo: isto marca `fora do requisito`, com o
         motivo escrito. Nunca esconde nem impede.
@@ -1326,10 +1331,10 @@ class Personagem:
         if not cid:
             return None
         nc = self.nivel_de(cid)
-        if nc == 0 or nc != self.nivel:
-            return None          # nao tem a classe, ou e multiclasse de fato
-        return (f"RAW: nao se pega a dedicacao da propria classe quando ela e "
-                f"a unica ({self.base.get(cid).get('name')} {nc} de {self.nivel})")
+        if nc == 0:
+            return None
+        return (f"regra 23: o personagem ja tem {nc} nivel(is) de "
+                f"{self.base.get(cid).get('name')}; as duas rotas se excluem")
 
     # -- principio zero: sinaliza, nunca bloqueia ---------------------------
 
@@ -1355,10 +1360,39 @@ class Personagem:
             # predicado inteiro -- e agora `proficiency`, `has`, `ability` e
             # `subclass` tambem sao verificados.
             atende, motivos = self.avaliar(feat.get("requires"))
+            veto = self._veto_dedicacao_da_propria_classe(feat)
+            if veto:
+                atende, motivos = False, motivos + [veto]
             if not atende:
                 self.fora_do_requisito.append({
                     "feat": feat.get("name", wb_id),
                     "motivo": "; ".join(motivos) or "predicado nao atendido"})
+        self._veto_classe_de_dedicacao_ja_pega()
+
+    def _veto_classe_de_dedicacao_ja_pega(self) -> None:
+        """Regra 23, o outro sentido: nivel de classe X com dedicacao de X.
+
+        A exclusao e MUTUA. O primeiro sentido (pegar a dedicacao tendo a
+        classe) e barrado em `_veto_dedicacao_da_propria_classe`; este barra a
+        ordem inversa, que produz exatamente a mesma ficha e passaria batido se
+        so um lado fosse checado.
+
+        O que a exclusao resolve: sem ela, a mesma magia sai em DOIS ranks na
+        mesma ficha -- o slot de classe elevado pela regra 17 e o slot de
+        arquetipo, que pela regra 18 roda RAW puro.
+        """
+        pegos = {norm_slug((self.base.opcional(e.get("pega")) or {}).get("name") or "")
+                 for e in self.doc.get("escolhas", [])
+                 if isinstance(e.get("pega"), str)
+                 and e["pega"].startswith("wb:feat/")}
+        for nome, cid in self._classes_multiclasse().items():
+            nc = self.nivel_de(cid)
+            if nc and f"{nome}-dedication" in pegos:
+                self.fora_do_requisito.append({
+                    "feat": f"{self.base.get(cid).get('name')} (nivel de classe)",
+                    "motivo": (f"regra 23: o personagem tem {nc} nivel(is) de "
+                               f"{self.base.get(cid).get('name')} E a dedicacao "
+                               f"da mesma classe. As duas rotas se excluem")})
 
     def _classe_do_feat(self, feat: dict) -> str | None:
         """A classe de um feat sai do trait, nao de lista escrita a mao."""
