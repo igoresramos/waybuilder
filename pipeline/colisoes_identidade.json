@@ -53,6 +53,18 @@
     ]
   },
 
+  "wb:feat/efficient-alchemy": {
+    "verificado": "o AoN tem tres entidades: feat-100 'Efficient Alchemy (Alchemist)' nv4 (CRB) -> feat-5771 'Efficient Alchemy' nv4 (Player Core 2), e feat-1163 'Efficient Alchemy (Paragon)' nv20 (Pathfinder #150). O pf2etools chama a PARAGON de 'Efficient Alchemy' (feats-aoa6.json, level 20), entao ela colidia no slug do feat de nivel 4 e injetava o nivel 20 -- quimera sem traits disjuntos para denunciar (os dois sao 'alchemist'), achada pelo salto de level",
+    "entidades": [
+      {"id": "wb:feat/efficient-alchemy",
+       "xref": {"aon": "feat-5771", "foundry": "Compendium.pf2e.feats-srd.Item.c7jNms3ZQ8eaMUqv"},
+       "correcoes": {"level": 4}},
+      {"id": "wb:feat/efficient-alchemy-paragon",
+       "xref": {"aon": "feat-1163", "pf2etools": "AoA6#efficient-alchemy"},
+       "correcoes": {"level": 20}}
+    ]
+  },
+
   "wb:feat/play-to-the-crowd": {
     "verificado": "AoN feat-6335/feat-1978 (Archetype Gladiator/Concentrate, nv4, Player Core 2) e feat-7637 (Archetype Dandy/Skill, nv12, Pathfinder #204). Nao aparece como traits disjuntos -- os dois lados compartilham 'archetype'; achado pelo salto de level",
     "entidades": [

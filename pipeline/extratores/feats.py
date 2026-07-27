@@ -1158,6 +1158,22 @@ def extrair():
     registros = []
     for k, grupo in sorted(porchave.items()):
         f, t, a = grupo["foundry"], grupo["pf2etools"], grupo["aon"]
+
+        # Casamento por nome com salto grande de nivel nao e divergencia de
+        # fonte: sao duas entidades homonimas. O pf2etools chama de "Efficient
+        # Alchemy" o feat de nivel 20 que o AoN indexa como "Efficient Alchemy
+        # (Paragon)"; casar por nome injetava nivel 20 no feat de nivel 4 e
+        # produzia uma quimera que os `traits` nao denunciam (ambos
+        # `alchemist`). Divergencia real de nivel e de 1 ou 2, nao de 16.
+        consenso = next((x["level"] for x in (f, a)
+                         if x and x.get("level") is not None), None)
+        if t and consenso is not None and t.get("level") is not None \
+                and abs(t["level"] - consenso) >= 8:
+            est["pf2etools_recusado_por_nivel"] = \
+                est.get("pf2etools_recusado_por_nivel", 0) + 1
+            est.setdefault("pf2etools_recusado_exemplos", {})[k] = \
+                f"pf2etools nv{t['level']} contra nv{consenso} das outras fontes"
+            t = None
         nome = (a or f or t)["nome"]
         sl = slug(nome)
         if not sl:

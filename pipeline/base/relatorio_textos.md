@@ -3,7 +3,7 @@
 - registros com prosa: **19249/19418** (99.1% da base)
 - referencias criadas neste passo: 902
 - chaves de prosa sem registro apontando (orfas): 0
-- origem: {'aon': 17879, 'foundry': 1354, 'pf2etools': 16, 'aon:nome': 1}
+- origem: {'aon': 17876, 'foundry': 1357, 'pf2etools': 16, 'aon:nome': 1}
 - prosa total: 17.9 MB
 - sem prosa: 168
 

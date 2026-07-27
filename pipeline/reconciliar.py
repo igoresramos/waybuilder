@@ -198,6 +198,58 @@ def aplicar_correcoes(reg, correcoes):
         else:
             reg[campo] = valor
         reg.setdefault("prov", {})[campo] = comum.prov_lido("aon")
+        # O conflito daquele campo era sintoma da quimera, nao divergencia
+        # entre fontes: com as entidades separadas e o valor arbitrado contra
+        # o AoN, ele vira ruido -- e ruido em portao faz o portao parar de ser
+        # lido.
+        if reg.get("conflitos"):
+            reg["conflitos"] = [c for c in reg["conflitos"]
+                                if c.get("campo") != campo] or None
+            if reg["conflitos"] is None:
+                reg.pop("conflitos")
+        reg.setdefault("arbitrado", []).append(campo)
+
+
+def sanear_xref_curado(reg, entrada):
+    """Tira do registro o xref que pertence a OUTRA entidade homonima.
+
+    Quando o casamento errado acontece dentro do extrator (ele casa por nome e
+    emite um registro so), nao ha dois registros para desmembrar: ha um
+    registro com o `xref` de duas entidades e os campos misturados.
+    `wb:feat/death-from-above` saia com o `foundry` do feat de arquetipo nivel
+    8 e o `aon` do feat mitico nivel 16.
+
+    O que da para consertar sem inventar dado: manter so os xrefs que a
+    curadoria declara para esta entidade, e apagar dos `conflitos` os valores
+    que vinham da fonte removida -- eles nunca foram divergencia, eram a outra
+    entidade falando.
+    """
+    minha = next((e for e in entrada["entidades"] if e["id"] == reg["id"]), None)
+    if not minha:
+        return False
+    xref = reg.get("xref") or {}
+    outras = {v for e in entrada["entidades"] if e["id"] != reg["id"]
+              for v in e["xref"].values()}
+    removidas = []
+    for fonte, valor in list(xref.items()):
+        esperado = minha["xref"].get(fonte)
+        if esperado and valor != esperado and valor in outras:
+            xref.pop(fonte)
+            removidas.append(fonte)
+    if not removidas:
+        return False
+    novos = []
+    for c in (reg.get("conflitos") or []):
+        c = {k: v for k, v in c.items() if k not in removidas}
+        fontes = [k for k in c if k not in ("campo", "escolhido")]
+        if len(fontes) > 1:
+            novos.append(c)
+    if novos:
+        reg["conflitos"] = novos
+    else:
+        reg.pop("conflitos", None)
+    reg.setdefault("prov", {})["xref"] = comum.prov_lido("waybuilder")
+    return True
 
 
 def desmembrar_curado(grupo, curadoria):
@@ -210,6 +262,14 @@ def desmembrar_curado(grupo, curadoria):
     entrada = curadoria.get(grupo[0]["id"])
     if not entrada:
         return None
+    if len(grupo) == 1:
+        reg = dict(grupo[0])
+        mudou = sanear_xref_curado(reg, entrada)
+        minha = next((e for e in entrada["entidades"] if e["id"] == reg["id"]), None)
+        if minha:
+            aplicar_correcoes(reg, minha.get("correcoes"))
+            mudou = True
+        return [reg] if mudou else None
     saida = []
     for reg in grupo:
         xref = reg.get("xref") or {}
@@ -449,9 +509,9 @@ def main():
     desmembrados = []
     regs2 = []
     for ident, grupo in por_id.items():
-        novo = None
-        if len(grupo) > 1:
-            novo = desmembrar_curado(grupo, curadoria) or desmembrar(grupo)
+        novo = desmembrar_curado(grupo, curadoria)
+        if novo is None and len(grupo) > 1:
+            novo = desmembrar(grupo)
         if novo:
             desmembrados.append((ident, sorted({r["id"] for r in novo})))
             regs2 += novo

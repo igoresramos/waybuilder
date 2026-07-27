@@ -6,7 +6,7 @@ absorvido fica na base com `superseded_by`.
 
 - registros na base: **19418** (nenhum deletado)
 - pares declarados pela fonte: **734**
-- fundidos: **655** (destes, 441 com mudanca anotada -- errata de level/preco ou consolidacao)
+- fundidos: **655** (destes, 440 com mudanca anotada -- errata de level/preco ou consolidacao)
 - vetados (categoria/kind diferente): **79**
 - alvo declarado que a base nao tem: **67**
 - registros OGL sem vinculo nenhum declarado: **6351**
@@ -367,7 +367,6 @@ da progressao da classe no Foundry.
 - **Domain Wellspring** -> **Domain Focus** _(feat)_: level: 18 -> 12
 - **Dragonslayer Oath** -> **Oath of The Slayer** _(feat)_: consolidacao: o alvo recebe 5 legados
 - **Dwarven Weapon Cunning** -> **Dwarven Weapon Familiarity** _(feat)_: level: 5 -> 1
-- **Efficient Alchemy (Alchemist)** -> **Efficient Alchemy** _(feat)_: level: 4 -> 20
 - **Elven Weapon Elegance** -> **Elven Weapon Familiarity** _(feat)_: level: 5 -> 1
 - **Empyreal Blessing** -> **Extraplanar Supplication** _(feat)_: consolidacao: o alvo recebe 2 legados
 - **Esoteric Oath** -> **Oath of The Slayer** _(feat)_: consolidacao: o alvo recebe 5 legados

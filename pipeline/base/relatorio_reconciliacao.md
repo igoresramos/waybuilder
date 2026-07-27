@@ -1,10 +1,10 @@
 # Relatorio de reconciliacao
 
 - registros de entrada: **19498**
-- colisoes de identidade desmembradas: **1**
+- colisoes de identidade desmembradas: **7**
 - colisoes de id fundidas: **79**
 - base final: **19418** registros
-- registros com divergencia registrada: **2874**
+- registros com divergencia registrada: **2867**
 - source.book normalizado: **1066**
 - license inferida: **2010**
 
@@ -37,4 +37,10 @@
 
 ## Colisoes de identidade desmembradas
 
+- `wb:feat/death-from-above` -> `wb:feat/death-from-above`
+- `wb:feat/dual-weapon-reload` -> `wb:feat/dual-weapon-reload`
+- `wb:feat/efficient-alchemy` -> `wb:feat/efficient-alchemy`
+- `wb:feat/even-the-odds` -> `wb:feat/even-the-odds`
 - `wb:feat/know-it-all` -> `wb:feat/know-it-all-archetype`, `wb:feat/know-it-all-player-core`
+- `wb:feat/play-to-the-crowd` -> `wb:feat/play-to-the-crowd`
+- `wb:feat/reckless-abandon` -> `wb:feat/reckless-abandon`

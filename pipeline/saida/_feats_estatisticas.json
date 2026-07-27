@@ -5,12 +5,12 @@
  "aon_arquetipos": 336,
  "registros": 6421,
  "com_prereq": 4261,
- "prereq_ok": 3608,
- "prereq_falha": 653,
+ "prereq_ok": 3609,
+ "prereq_falha": 652,
  "prereq_por_fonte": {
-  "pf2etools": 2615,
+  "pf2etools": 2612,
   "foundry": 95,
-  "aon": 1350,
+  "aon": 1353,
   "aon(arquetipo)": 201
  },
  "falhas_por_padrao": {
@@ -152,7 +152,6 @@
   "deity who grants the cold": 1,
   "an implement that grants a reaction": 1,
   "follower of a specific religion": 3,
-  "you have at least one aura from a champion feat": 1,
   "{skill}": 2,
   "master in the skill associated with your eidolon's tradition": 1,
   "master in the skill associated with your patron's tradition": 1,
@@ -559,7 +558,6 @@
   "deity who grants the cold": "master in {@skill Survival}; deity who grants the cold, fire, nature, or travel domain",
   "an implement that grants a reaction": "an implement that grants a reaction",
   "follower of a specific religion": "master in {@skill Diplomacy|PC1}, follower of a specific religion or philosophy",
-  "you have at least one aura from a champion feat": "You have at least one aura from a champion feat or feature.",
   "{skill}": "{@feat Basic Sorcerer Spellcasting}; master in {@skill Arcana}, {@skill Nature}, {@skill Occultism}, or {@skill Religion}, depending on bloodline",
   "master in the skill associated with your eidolon's tradition": "{@feat Basic Summoner Spellcasting|SoM}, master in the skill associated with your eidolon's tradition",
   "master in the skill associated with your patron's tradition": "{@feat Basic Witch Spellcasting|PC1}, master in the skill associated with your patron's tradition",
@@ -829,8 +827,8 @@
  },
  "grants_completos_true": 6394,
  "grants_completos_false": 27,
- "requires_parseado_true": 5834,
- "requires_parseado_false": 587,
+ "requires_parseado_true": 5835,
+ "requires_parseado_false": 586,
  "motivo_grants_incompletos": {
   "rule-element-nao-modelado": 27
  },
@@ -879,16 +877,16 @@
  },
  "conflitos_por_campo": {
   "traits": 503,
-  "level": 46,
+  "level": 42,
   "rarity": 7
  },
  "cobertura_fontes": {
-  "FTA": 4047,
+  "FTA": 4043,
   "F": 100,
-  "FA": 1878,
-  "TA": 270,
+  "FA": 1882,
+  "TA": 269,
   "FT": 18,
-  "A": 90,
+  "A": 91,
   "T": 18
  },
  "homonimos": {
@@ -900,5 +898,13 @@
   "so-aon-afirma-arquetipo": 340,
   "aon-multivalorado": 58,
   "aon-nao-tem-o-do-foundry": 5
+ },
+ "pf2etools_recusado_por_nivel": 5,
+ "pf2etools_recusado_exemplos": {
+  "efficient alchemy": "pf2etools nv20 contra nv4 das outras fontes",
+  "even the odds": "pf2etools nv14 contra nv4 das outras fontes",
+  "expand aura": "pf2etools nv16 contra nv6 das outras fontes",
+  "oracular warning": "pf2etools nv10 contra nv1 das outras fontes",
+  "soaring form": "pf2etools nv17 contra nv9 das outras fontes"
  }
 }

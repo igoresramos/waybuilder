@@ -29,9 +29,9 @@ portao ausente e portao aprovado nao podem parecer a mesma coisa.
 
 0 registros
 
-### Portao 6 -- traits disjuntos sobrando depois da uniao: **PASSA**
+### Portao 6 -- traits disjuntos ou salto de level sobrando depois da uniao: **PASSA**
 
-0 grupos ainda fundidos num id so; 1 ja desmembrados
+0 grupos ainda fundidos num id so; 0 com salto de level >= 8 em kind de escolha; 1 ja desmembrados
 
 - `wb:feat/know-it-all`: ['archetype'] x ['bard', 'thaumaturge']
 

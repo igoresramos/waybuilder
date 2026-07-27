@@ -226,9 +226,31 @@ def main():
                 linha = (f"`{ident}`: {sorted(a.get('traits') or [])} x "
                          f"{sorted(b.get('traits') or [])}")
                 (ja_tratados if ident in resolvidos else disjuntos).append(linha)
-    r.portao(6, "traits disjuntos sobrando depois da uniao", not disjuntos,
+    # Segundo sinal, para a colisao que os traits nao denunciam: salto grande
+    # de `level` entre fontes. `Efficient Alchemy` (nv4, arquetipo) e
+    # `Efficient Alchemy (Paragon)` (nv20) tem o MESMO trait `alchemist`, e a
+    # quimera so aparece aqui. Restrito a kind de escolha (feat, class-feature,
+    # archetype): em equipment, level 0 contra level 8 e materia-prima contra
+    # variante do mesmo material, ja verificado como legitimo.
+    KINDS_DE_ESCOLHA = {"feat", "class-feature", "archetype", "heritage"}
+    saltos = []
+    for reg in base:
+        if reg.get("kind") not in KINDS_DE_ESCOLHA or reg.get("desmembrado_de"):
+            continue
+        for c in (reg.get("conflitos") or []):
+            if c.get("campo") != "level":
+                continue
+            vals = [v for k, v in c.items()
+                    if k not in ("campo", "escolhido") and isinstance(v, int)]
+            if len(vals) >= 2 and max(vals) - min(vals) >= 8:
+                saltos.append(f"`{reg['id']}` level {sorted(vals)} -- "
+                              f"suspeita de duas entidades no mesmo id")
+    r.portao(6, "traits disjuntos ou salto de level sobrando depois da uniao",
+             not disjuntos and not saltos,
              f"{len(disjuntos)} grupos ainda fundidos num id so; "
-             f"{len(ja_tratados)} ja desmembrados", disjuntos + ja_tratados)
+             f"{len(saltos)} com salto de level >= 8 em kind de escolha; "
+             f"{len(ja_tratados)} ja desmembrados",
+             disjuntos + saltos + ja_tratados)
 
     # --- 7. confere que o desmembramento rodou antes da fusao --------------
     rel = f"{BASE}/relatorio_reconciliacao.md"
