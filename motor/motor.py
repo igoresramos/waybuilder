@@ -118,6 +118,8 @@ class Personagem:
         self._slots_de_feat()
         self._conjuracao()
         self._focus()
+        self._defesa()
+        self._ataques()
         self._checar_requisitos()
 
     # -- regra 1: estrutura -------------------------------------------------
@@ -615,6 +617,110 @@ class Personagem:
                 pool += int(((sc.get("focus_pool") or {}).get("base") or 0))
         self.focus_pool = min(3, pool)
 
+    # -- AC e ataque: a ficha tem que trazer os numeros ---------------------
+
+    def _equipados(self, kind: str) -> list[dict]:
+        saida = []
+        for item in self.doc.get("inventario", []):
+            if not item.get("equipado") and not item.get("investido"):
+                continue
+            reg = self.base.opcional(item.get("item", ""))
+            if reg is not None and reg.get("kind") == kind:
+                saida.append({"registro": reg, "entrada": item})
+        return saida
+
+    def _defesa(self) -> None:
+        """AC = 10 + DEX (limitado pelo cap da armadura) + proficiencia + item.
+
+        Regra 3 vale aqui como em tudo: o bonus de proficiencia e
+        `nivel_de_personagem + rank`, e o rank sai da categoria da armadura que
+        esta sendo usada -- que pode ter vindo de qualquer classe (regra 4).
+        """
+        dex = self.modificadores.get("dex", 0)
+        armaduras = self._equipados("armor")
+        escudos = self._equipados("shield")
+
+        if armaduras:
+            arm = armaduras[0]["registro"]
+            categoria = arm.get("armor_category") or "unarmored"
+            cap = arm.get("dex_cap")
+            dex_usada = min(dex, cap) if isinstance(cap, int) else dex
+            item_bonus = int(arm.get("ac_bonus") or 0)
+            potencia = int(armaduras[0]["entrada"].get("potencia") or 0)
+            nome = arm.get("name")
+            penalidade = arm.get("check_penalty")
+            forca = arm.get("strength")
+        else:
+            categoria, dex_usada, item_bonus, potencia = "unarmored", dex, 0, 0
+            nome, penalidade, forca = "sem armadura", None, None
+
+        rank = self.proficiencias.get(categoria, "untrained")
+        prof = (self.nivel + RANK_BONUS[rank]) if rank != "untrained" else 0
+        total = 10 + dex_usada + prof + item_bonus + potencia
+
+        # a penalidade de armadura so vale se a FOR nao alcanca o minimo
+        aplica_penalidade = (isinstance(forca, int)
+                             and self.atributos.get("str", 10) < forca)
+
+        self.ac = {
+            "total": total,
+            "armadura": nome,
+            "categoria": categoria,
+            "rank": rank,
+            "detalhe": f"10 + DEX {dex_usada:+d} + prof {prof} "
+                       f"({rank}, nivel {self.nivel}) + item {item_bonus + potencia}",
+            "dex_perdida": max(0, dex - dex_usada),
+            "check_penalty": penalidade if aplica_penalidade else 0,
+            "escudo": ({"nome": escudos[0]["registro"].get("name"),
+                        "ac": int(escudos[0]["registro"].get("ac_bonus") or 0)}
+                       if escudos else None),
+        }
+
+    def _ataques(self) -> None:
+        """Ataque = nivel + rank da categoria + atributo + item; dano = dados + atributo.
+
+        `finesse` deixa usar DEX no ataque; o dano continua em FOR, salvo
+        excecao que depende de feature (Thief usa DEX, e isso vem de rule
+        element com predicado -- por isso nao esta aqui).
+        """
+        self.ataques = []
+        for equipado in self._equipados("weapon"):
+            arma = equipado["registro"]
+            entrada = equipado["entrada"]
+            traits = {str(t).lower() for t in (arma.get("traits") or [])}
+            categoria = arma.get("weapon_category") or "simple"
+            rank = self.proficiencias.get(categoria, "untrained")
+            prof = (self.nivel + RANK_BONUS[rank]) if rank != "untrained" else 0
+
+            forca = self.modificadores.get("str", 0)
+            destreza = self.modificadores.get("dex", 0)
+            usa_dex = "finesse" in traits and destreza > forca
+            atributo = destreza if usa_dex else forca
+            # arma a distancia usa DEX no ataque e nao soma atributo no dano
+            distancia = bool(arma.get("range")) and "thrown" not in traits
+            if distancia:
+                atributo, usa_dex = destreza, True
+
+            potencia = int(entrada.get("potencia") or 0)
+            dano = arma.get("damage") or {}
+            mod_dano = 0 if distancia else forca
+
+            self.ataques.append({
+                "arma": arma.get("name"),
+                "categoria": categoria,
+                "rank": rank,
+                "ataque": self.nivel + RANK_BONUS[rank] + atributo + potencia
+                          if rank != "untrained" else atributo + potencia,
+                "atributo_do_ataque": "dex" if usa_dex else "str",
+                "dano": f"{dano.get('dados', 1)}{dano.get('dado', '')}"
+                        f"{mod_dano:+d}" if mod_dano else
+                        f"{dano.get('dados', 1)}{dano.get('dado', '')}",
+                "tipo_de_dano": dano.get("tipo") or dano.get("type"),
+                "traits": sorted(traits),
+                "detalhe": f"nivel {self.nivel} + prof {prof} ({rank}) + "
+                           f"{'DEX' if usa_dex else 'FOR'} {atributo:+d}",
+            })
+
     # -- regra 3: bonus derivado --------------------------------------------
 
     def bonus(self, chave: str) -> int:
@@ -823,6 +929,8 @@ class Personagem:
             "slots": self.slots,
             "conjuracao": self.conjuracao,
             "focus_pool": self.focus_pool,
+            "ac": self.ac,
+            "ataques": self.ataques,
             "features": self.features,
             "subclasses": self.slots_de_subclasse,
             "fora_do_requisito": self.fora_do_requisito,

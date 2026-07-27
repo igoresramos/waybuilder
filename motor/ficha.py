@@ -56,6 +56,20 @@ def main():
         linha(s.capitalize(), f"{total:+d}   ({rank}, nivel {v['nivel']} + "
                               f"{RANK_BONUS[rank]} + mod {mod:+d})")
 
+    ac = v.get("ac") or {}
+    if ac:
+        linha("Classe de Armadura", f"{ac['total']}   ({ac['detalhe']})")
+        print(f"      armadura: {ac['armadura']} [{ac['categoria']}, {ac['rank']}]"
+              + (f" | escudo: {ac['escudo']['nome']} +{ac['escudo']['ac']}" if ac.get("escudo") else "")
+              + (f" | DEX perdida: {ac['dex_perdida']}" if ac.get("dex_perdida") else ""))
+
+    if v.get("ataques"):
+        bloco("ATAQUES")
+        for a in v["ataques"]:
+            linha(a["arma"], f"{a['ataque']:+d}   dano {a['dano']}   "
+                             f"({a['rank']}, {a['atributo_do_ataque'].upper()})")
+            print(f"      {a['detalhe']}")
+
     bloco("PROFICIENCIA (regra 3: bonus = nivel de personagem + rank)")
     perc = v["proficiencias"].get("perception", "untrained")
     linha("Percepcao", f"{p.bonus('perception') + p.modificadores.get('wis',0):+d}   ({perc})")
