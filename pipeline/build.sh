@@ -36,6 +36,15 @@ python3 auditar_conflitos.py
 echo "== 4. desmembrar colisoes de identidade =="
 python3 desmembrar_colisoes.py
 
+echo "== 4b. injetar tabela de conjuracao nas classes =="
+python3 aplicar_conjuracao.py
+
+echo "== 4c. separar sub-escolha de concessao na progressao =="
+python3 aplicar_subclasses.py
+
+echo "== 4d. resolver referencias orfas do predicado =="
+python3 resolver_referencias.py
+
 echo "== 5. emitir prosa =="
 python3 emitir_textos.py
 

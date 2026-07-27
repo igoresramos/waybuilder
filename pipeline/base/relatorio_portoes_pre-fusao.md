@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `pre-fusao`
 
-- registros avaliados: **19985**
+- registros avaliados: **20402**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -49,7 +49,7 @@ NAO SE APLICA nesta fase.
 - **COLISAO** `wb:equipment/brimstone-fumes` casou com `equipment-3327` mas o AoN tem 2 entidades: equipment-109(nv16,Alchemical,Consumable,Evil,I); equipment-2895(nv16,Alchemical,Consumable,Inhale)
 - **COLISAO** `wb:equipment/lethargy-poison` casou com `equipment-3340` mas o AoN tem 2 entidades: equipment-120(nv2,Alchemical,Consumable,Incapa); equipment-2902(nv2,Alchemical,Consumable,Incapa)
 - 
-- _Alem disso, 435 casos de mesmo level e mesmos traits -- par legacy/remaster que o AoN nao declarou via `remaster_id`. Fusao legitima, nao bloqueia o build._
+- _Alem disso, 454 casos de mesmo level e mesmos traits -- par legacy/remaster que o AoN nao declarou via `remaster_id`. Fusao legitima, nao bloqueia o build._
 - - `wb:feat/advanced-monastic-weaponry` casou com `feat-7108` mas o AoN tem 2 entidades: feat-5997(nv6,Monk); feat-7108(nv6,Monk)
 - - `wb:feat/banshee-cry-display` casou com `feat-8533` mas o AoN tem 2 entidades: feat-3250(nv12,Archetype); feat-8533(nv12,Archetype)
 - - `wb:feat/coughing-dragon-display` casou com `feat-8529` mas o AoN tem 2 entidades: feat-3246(nv4,Archetype); feat-8529(nv4,Archetype)

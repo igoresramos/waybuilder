@@ -4,12 +4,12 @@ Chave: `remaster_id`/`legacy_id` do AoN. Prosa **nao** cria par --
 entra so para desempatar sucessor multiplo. Campo estruturado
 divergente veta a fusao.
 
-- pares declarados pelo AoN: **1160**
-- fundidos: **556**
+- pares declarados pelo AoN: **1268**
+- fundidos: **664**
 - vetados por divergencia estrutural: **604**
-- desempatados por prosa: **76**
-- base: 19985 -> **19429** registros
-- registros com alias: **277**
+- desempatados por prosa: **77**
+- base: 20402 -> **19738** registros
+- registros com alias: **293**
 
 ## Vetados -- par declarado, conteudo divergente
 
@@ -122,6 +122,11 @@ fundir aqui apagaria dado.
 
 ## Fusoes aplicadas
 
+- **Improved Familiar Attunement** -> **Improved Familiar Attunement** _(arcane-thesis)_
+- **Metamagical Experimentation** -> **Experimental Spellshaping** _(arcane-thesis)_
+- **Spell Blending** -> **Spell Blending** _(arcane-thesis)_
+- **Spell Substitution** -> **Spell Substitution** _(arcane-thesis)_
+- **Staff Nexus** -> **Staff Nexus** _(arcane-thesis)_
 - **Hellknight Armiger** -> **Hellknight** _(archetype)_
 - **Artillerst** -> **Artillerist** _(archetype)_
 - **Firework Technican** -> **Firework Technician** _(archetype)_
@@ -239,12 +244,40 @@ fundir aqui apagaria dado.
 - **Barrister** -> **Barrister** _(background)_
 - **Bounty Hunter** -> **Bounty Hunter** _(background)_
 - **Charlatan** -> **Charlatan** _(background)_
+- **Aberrant** -> **Aberrant** _(bloodline)_
+- **Undead** -> **Undead** _(bloodline)_
+- **Angelic** -> **Angelic** _(bloodline)_
+- **Demonic** -> **Demonic** _(bloodline)_
+- **Diabolic** -> **Diabolic** _(bloodline)_
+- **Draconic** -> **Draconic** _(bloodline)_
+- **Elemental** -> **Elemental** _(bloodline)_
+- **Fey** -> **Fey** _(bloodline)_
+- **Hag** -> **Hag** _(bloodline)_
+- **Imperial** -> **Imperial** _(bloodline)_
+- **Paladin** -> **Justice** _(cause)_
+- **Redeemer** -> **Redemption** _(cause)_
+- **Liberator** -> **Liberation** _(cause)_
+- **Tyrant** -> **Obedience** _(cause)_
+- **Desecrator** -> **Desecration** _(cause)_
+- **Antipaladin** -> **Iniquity** _(cause)_
+- **The Distant Grasp** -> **The Distant Grasp** _(conscious-mind)_
+- **The Infinite Eye** -> **The Infinite Eye** _(conscious-mind)_
+- **The Oscillating Wave** -> **The Oscillating Wave** _(conscious-mind)_
+- **The Silent Whisper** -> **The Silent Whisper** _(conscious-mind)_
+- **The Tangible Dream** -> **The Tangible Dream** _(conscious-mind)_
+- **The Unbound Step** -> **The Unbound Step** _(conscious-mind)_
 - **Dwarven Pantheon** -> **Stone's Blood** _(deity)_
 - **Elven Pantheon** -> **Sovyrian Conclave** _(deity)_
 - **The Prismatic Ray** -> **Radiant Prism** _(deity)_
+- **Cloistered Cleric** -> **Cloistered Cleric** _(doctrine)_
+- **Warpriest** -> **Warpriest** _(doctrine)_
 - **Delirium** -> **Disorientation** _(domain)_
 - **Void** -> **Nothingness** _(domain)_
 - **Wyrmkin** -> **Dragon** _(domain)_
+- **Animal** -> **Animal** _(druidic-order)_
+- **Leaf** -> **Leaf** _(druidic-order)_
+- **Storm** -> **Storm** _(druidic-order)_
+- **Wild** -> **Untamed** _(druidic-order)_
 - **Winter Wolf Elixir (Lesser)** -> **Witchwarg Elixir** _(equipment)_
 - **Specialist's Ring** -> **Accolade Robe** _(equipment)_
 - **Hunting Spider Venom** -> **Spider Venom** _(equipment)_
@@ -528,6 +561,24 @@ fundir aqui apagaria dado.
 - **Armiger's Mobility** -> **Hellknight Mobility** _(feat)_
 - **Flicker** -> **Flickering Twirl** _(feat)_
 - **Alchemical Savant** -> **Alchemical Assessment** _(feat)_
+- **Flurry** -> **Flurry** _(hunters-edge)_
+- **Precision** -> **Precision** _(hunters-edge)_
+- **Outwit** -> **Outwit** _(hunters-edge)_
+- **Amulet** -> **Amulet** _(implement)_
+- **Bell** -> **Bell** _(implement)_
+- **Chalice** -> **Chalice** _(implement)_
+- **Lantern** -> **Lantern** _(implement)_
+- **Mirror** -> **Mirror** _(implement)_
+- **Regalia** -> **Regalia** _(implement)_
+- **Tome** -> **Tome** _(implement)_
+- **Wand** -> **Wand** _(implement)_
+- **Weapon** -> **Weapon** _(implement)_
+- **Animal** -> **Animal** _(instinct)_
+- **Dragon** -> **Dragon** _(instinct)_
+- **Fury** -> **Fury** _(instinct)_
+- **Giant** -> **Giant** _(instinct)_
+- **Spirit** -> **Spirit** _(instinct)_
+- **Superstition** -> **Superstition** _(instinct)_
 - **Common** -> **Common** _(language)_
 - **Sylvan** -> **Fey** _(language)_
 - **Undercommon** -> **Sakvroth** _(language)_
@@ -562,6 +613,50 @@ fundir aqui apagaria dado.
 - **Halfling** -> **Halfling** _(language)_
 - **Jotun** -> **Jotun** _(language)_
 - **Orcish** -> **Orcish** _(language)_
+- **Lesson of Dreams** -> **Lesson of Dreams** _(lesson)_
+- **Lesson of Renewal** -> **Lesson of Renewal** _(lesson)_
+- **Lesson of Favors** -> **Lesson of Favors** _(lesson)_
+- **Lesson of Bargains** -> **Lesson of Bargains** _(lesson)_
+- **Lesson of the Elements** -> **Lesson of the Elements** _(lesson)_
+- **Lesson of Life** -> **Lesson of Life** _(lesson)_
+- **Lesson of Protection** -> **Lesson of Protection** _(lesson)_
+- **Lesson of Vengeance** -> **Lesson of Vengeance** _(lesson)_
+- **Lesson of Mischief** -> **Lesson of Mischief** _(lesson)_
+- **Lesson of Shadow** -> **Lesson of Shadow** _(lesson)_
+- **Lesson of Snow** -> **Lesson of Snow** _(lesson)_
+- **Lesson of Death** -> **Lesson of Death** _(lesson)_
+- **Alchemical Sciences** -> **Alchemical Sciences** _(methodology)_
+- **Empiricism** -> **Empiricism** _(methodology)_
+- **Forensic Medicine** -> **Forensic Medicine** _(methodology)_
+- **Interrogation** -> **Interrogation** _(methodology)_
+- **Enigma** -> **Enigma** _(muse)_
+- **Maestro** -> **Maestro** _(muse)_
+- **Polymath** -> **Polymath** _(muse)_
+- **Warrior** -> **Warrior** _(muse)_
+- **Ancestors** -> **Ancestors** _(mystery)_
+- **Ash** -> **Ash** _(mystery)_
+- **Battle** -> **Battle** _(mystery)_
+- **Bones** -> **Bones** _(mystery)_
+- **Cosmos** -> **Cosmos** _(mystery)_
+- **Flames** -> **Flames** _(mystery)_
+- **Life** -> **Life** _(mystery)_
+- **Lore** -> **Lore** _(mystery)_
+- **Tempest** -> **Tempest** _(mystery)_
+- **Time** -> **Time** _(mystery)_
+- **Mosquito Witch** -> **Mosquito Witch** _(patron)_
+- **Pacts** -> **The Unseen Broker** _(patron)_
+- **Curse** -> **The Resentment** _(patron)_
+- **Fate** -> **Spinner of Threads** _(patron)_
+- **Fervor** -> **Faith's Flamekeeper** _(patron)_
+- **Night** -> **Starless Shadow** _(patron)_
+- **Rune** -> **The Inscribed One** _(patron)_
+- **Wild** -> **Wilding Steward** _(patron)_
+- **Winter** -> **Silence in Snow** _(patron)_
+- **Baba Yaga** -> **Baba Yaga** _(patron)_
+- **Ruffian** -> **Ruffian** _(racket)_
+- **Scoundrel** -> **Scoundrel** _(racket)_
+- **Thief** -> **Thief** _(racket)_
+- **Mastermind** -> **Mastermind** _(racket)_
 - **Deadly Spark** -> **Deadly Spark** _(relic)_
 - **Form of Fury** -> **Form of Fury** _(relic)_
 - **Track of the Beast** -> **Track of the Beast** _(relic)_
@@ -659,10 +754,23 @@ fundir aqui apagaria dado.
 - **Ripples and Waves** -> **Ripples and Waves** _(relic)_
 - **Call of the Wild** -> **Call of the Wild** _(relic)_
 - **Feral Claws** -> **Feral Claws** _(relic)_
+- **Bomber** -> **Bomber** _(research-field)_
+- **Chirurgeon** -> **Chirurgeon** _(research-field)_
+- **Mutagenist** -> **Mutagenist** _(research-field)_
+- **Toxicologist** -> **Toxicologist** _(research-field)_
 - **Miracle** -> **Manifestation** _(spell)_
 - **Primal Phenomenon** -> **Manifestation** _(spell)_
 - **Wish** -> **Manifestation** _(spell)_
 - **Alter Reality** -> **Manifestation** _(spell)_
+- **Battledancer** -> **Battledancer** _(style)_
+- **Braggart** -> **Braggart** _(style)_
+- **Fencer** -> **Fencer** _(style)_
+- **Gymnast** -> **Gymnast** _(style)_
+- **Wit** -> **Wit** _(style)_
+- **Emotional Acceptance** -> **Emotional Acceptance** _(subconscious-mind)_
+- **Gathered Lore** -> **Gathered Lore** _(subconscious-mind)_
+- **Precise Discipline** -> **Precise Discipline** _(subconscious-mind)_
+- **Wandering Reverie** -> **Wandering Reverie** _(subconscious-mind)_
 - **Metamagic** -> **Spellshape** _(trait)_
 - **Negative** -> **Void** _(trait)_
 - **Positive** -> **Vitality** _(trait)_

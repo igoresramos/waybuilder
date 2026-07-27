@@ -22,7 +22,24 @@ import traits_uniao                                # noqa: E402
 DUMP = os.path.join(PIPELINE, "dados_brutos", "aon_dump")
 SAIDA = os.path.join(PIPELINE, "saida", "aon_kinds.json")
 
-KINDS_PADRAO = ["relic", "language", "background"]
+# Sub-escolhas de classe: a segunda camada da progressao. Quando voce sobe de
+# Bardo escolhe uma Musa, de Ladino um Racket, de Mago uma Escola e uma Tese.
+# Modelando so `classe -> feature`, elas ficam invisiveis -- e pior, entram na
+# progressao como se fossem concedidas: o Wizard listava **37 features no nivel
+# 1**, das quais a maioria e opcao mutuamente exclusiva.
+#
+# O AoN ja categoriza cada eixo separadamente, entao nao ha o que inferir.
+# 80 `requires` da base ja citam essas entidades (portao 3) e nao achavam nada.
+SUBESCOLHAS = [
+    "arcane-school", "arcane-thesis", "bloodline", "cause", "conscious-mind",
+    "doctrine", "druidic-order", "element", "hellknight-order", "hunters-edge",
+    "hybrid-study", "ikon", "implement", "innovation", "instinct", "lesson",
+    "methodology", "muse", "mystery", "patron", "racket", "research-field",
+    "style", "subconscious-mind", "way", "draconic-exemplar", "mythic-calling",
+    "deviant-ability-classification",
+]
+
+KINDS_PADRAO = ["relic", "language", "background"] + SUBESCOLHAS
 
 # `background` ja tinha 332 registros vindos do extrator de ancestrias, mas o
 # censo do AoN tem 499 entidades: faltavam 168, quase todas de Player's Guide de

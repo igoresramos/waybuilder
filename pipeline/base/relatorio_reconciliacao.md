@@ -1,10 +1,10 @@
 # Relatorio de reconciliacao
 
-- registros de entrada: **20073**
+- registros de entrada: **20490**
 - colisoes de id fundidas: **405**
-- base final: **19667** registros
+- base final: **20084** registros
 - registros com divergencia registrada: **1166**
-- suspeitas de par nao unido: **233**
+- suspeitas de par nao unido: **344**
 
 ## Por kind
 
@@ -27,11 +27,39 @@
 - `animal-companion`: 113
 - `domain`: 64
 - `ancestry`: 50
+- `draconic-exemplar`: 44
 - `familiar-specific`: 39
 - `skill`: 33
+- `lesson`: 31
+- `bloodline`: 28
 - `class`: 27
+- `patron`: 27
+- `arcane-school`: 23
+- `mystery`: 22
+- `ikon`: 21
+- `implement`: 19
+- `instinct`: 16
+- `mythic-calling`: 15
 - `apparition`: 14
+- `hellknight-order`: 14
 - `eidolon`: 13
+- `cause`: 13
+- `druidic-order`: 13
+- `conscious-mind`: 12
+- `style`: 11
+- `way`: 11
+- `arcane-thesis`: 10
+- `racket`: 10
+- `deviant-ability-classification`: 10
+- `methodology`: 9
+- `muse`: 9
+- `hybrid-study`: 8
+- `research-field`: 8
+- `subconscious-mind`: 8
+- `hunters-edge`: 7
+- `innovation`: 7
+- `element`: 6
+- `doctrine`: 5
 
 ## Portoes de qualidade
 
