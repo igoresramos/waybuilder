@@ -604,23 +604,133 @@ class Personagem:
         traits = set(magia.get("traits") or [])
         return bool(traits & {"summon", "incarnate"})
 
+    # Avanco do companheiro, RAW (Player Core p.206 e 211), citado no relatorio
+    # docs/2026-07-27_atores.md. `nimble` e `savage` partem de `mature`, entao
+    # os ajustes sao cumulativos com ele.
+    AVANCO = {
+        "young":  {"attr": {}, "dados": 1, "dano_extra": 0, "pericias": {}},
+        "mature": {"attr": {"str": 1, "dex": 1, "con": 1, "wis": 1},
+                   "dados": 2, "dano_extra": 0,
+                   "pericias": {"perception": "expert", "fortitude": "expert",
+                                "reflex": "expert", "will": "expert",
+                                "intimidation": "trained", "stealth": "trained",
+                                "survival": "trained"}},
+        "nimble": {"attr": {"str": 2, "dex": 3, "con": 2, "wis": 2},
+                   "dados": 2, "dano_extra": 2,
+                   "pericias": {"perception": "expert", "fortitude": "expert",
+                                "reflex": "expert", "will": "expert",
+                                "intimidation": "trained", "stealth": "trained",
+                                "survival": "trained", "acrobatics": "expert"}},
+        "savage": {"attr": {"str": 3, "dex": 2, "con": 2, "wis": 2},
+                   "dados": 2, "dano_extra": 3,
+                   "pericias": {"perception": "expert", "fortitude": "expert",
+                                "reflex": "expert", "will": "expert",
+                                "intimidation": "trained", "stealth": "trained",
+                                "survival": "trained", "athletics": "expert"}},
+    }
+    # RAW: "trained in its unarmed attacks, unarmored defense, barding, all
+    # saving throws, Perception, Acrobatics, and Athletics"
+    PROF_BASE = ["unarmed", "unarmored", "barding", "fortitude", "reflex",
+                 "will", "perception", "acrobatics", "athletics"]
+
     def _atores(self) -> None:
-        """Regra 17b: companheiro, familiar e eidolon capados pela classe que
-        os concedeu, com folga de 2, nunca acima do nivel de personagem."""
+        """Ficha do companheiro, familiar e eidolon.
+
+        Nivel pela regra 17b; o resto e RAW puro -- "animal companions
+        calculate their modifiers and DCs just as you do", entao bonus =
+        nivel + rank + atributo, exatamente como o personagem.
+        """
         self.atores = []
         for a in self.doc.get("atores") or []:
             cid, nota = self._classe_do_ator(a)
             nivel_classe = self.nivel_de(cid) if cid else self.nivel
-            self.atores.append({
+            ator = {
                 "tipo": a.get("tipo"),
                 "nome": a.get("nome") or "",
                 "concedido_por": a.get("concedido_por"),
-                "classe": self.base.opcional(cid or "").get("name") if cid else None,
+                "classe": (self.base.opcional(cid) or {}).get("name") if cid else None,
                 "nivel_de_classe": nivel_classe,
                 "nivel": self.cap_ator(nivel_classe),
                 "nota": nota,
                 "escolhas": a.get("escolhas") or [],
+            }
+            if a.get("tipo") == "companheiro":
+                ator.update(self._ficha_de_companheiro(a, ator["nivel"]))
+            self.atores.append(ator)
+
+    def _ficha_de_companheiro(self, ator: dict, nivel: int) -> dict:
+        """RAW, Player Core p.206: atributos do stat block com os ajustes de
+        avanco; HP de ancestria mais (6 + CON) por nivel; proficiencia treinada
+        na lista base, elevada pelo avanco."""
+        pega = next((e.get("pega") for e in (ator.get("escolhas") or [])
+                     if e.get("slot") == "animal"), None)
+        especie = self.base.opcional(pega or "") or {}
+        st = especie.get("stats") or {}
+        if not st:
+            return {"aviso": f"especie do companheiro nao encontrada: {pega}"}
+
+        grau = (ator.get("maturidade") or "young").lower()
+        av = self.AVANCO.get(grau) or self.AVANCO["young"]
+        attr = dict(st.get("atributos") or {})
+        for k, v in av["attr"].items():
+            attr[k] = attr.get(k, 0) + v
+
+        # RAW: "ancestry Hit Points from its type, plus a number of Hit Points
+        # equal to 6 plus its Constitution modifier for each level you have"
+        hp = int(st.get("hp") or 0) + (6 + attr.get("con", 0)) * nivel
+
+        prof = {k: "trained" for k in self.PROF_BASE}
+        for p in (st.get("pericia_inicial") or []):
+            prof[p.lower()] = "trained"
+        for k, v in av["pericias"].items():
+            # "if it was already trained in one of those skills from its type,
+            # increase its proficiency rank in that skill to expert"
+            if v == "trained" and prof.get(k) == "trained":
+                prof[k] = "expert"
+            else:
+                prof[k] = v
+
+        def bonus(chave, atributo):
+            return nivel + RANK_BONUS[prof.get(chave, "untrained")] + attr.get(atributo, 0)
+
+        ataques = []
+        for atk in (st.get("ataques") or []):
+            dado = str(atk.get("dano") or "")
+            face = dado.split("d")[-1] if "d" in dado else None
+            agil = "agile" in (atk.get("traits") or [])
+            # finesse usa DEX quando compensa; o resto e STR, como no personagem
+            usa = "dex" if ("finesse" in (atk.get("traits") or [])
+                            and attr.get("dex", 0) > attr.get("str", 0)) else "str"
+            dano = (f"{av['dados']}d{face}" if face else "?")
+            mod = attr.get("str", 0) + av["dano_extra"]
+            ataques.append({
+                "nome": atk.get("nome"),
+                "ataque": bonus("unarmed", usa),
+                "dano": f"{dano}{mod:+d}" if mod else dano,
+                "tipo": atk.get("tipo"),
+                "traits": atk.get("traits") or [],
+                "agil": agil,
             })
+
+        return {
+            "especie": especie.get("name"),
+            "maturidade": grau,
+            "tamanho": st.get("tamanho"),
+            "velocidade": st.get("velocidade"),
+            "sentidos": st.get("sentidos"),
+            "atributos": attr,
+            "hp": hp,
+            "hp_detalhe": f"{st.get('hp')} de ancestria + (6 {attr.get('con',0):+d}) x {nivel}",
+            "ac": 10 + attr.get("dex", 0) + nivel + RANK_BONUS[prof["unarmored"]],
+            "proficiencias": prof,
+            "saves": {s: bonus(s, {"fortitude": "con", "reflex": "dex",
+                                   "will": "wis"}[s])
+                      for s in ("fortitude", "reflex", "will")},
+            "percepcao": bonus("perception", "wis"),
+            "ataques": ataques,
+            "support": st.get("support_benefit"),
+            "manobra_avancada": st.get("advanced_maneuver") if grau in ("nimble", "savage") else None,
+        }
 
     def _classe_do_ator(self, ator: dict) -> tuple[str | None, str | None]:
         """De qual classe veio o ator. `classe` explicito ganha; senao tenta o
