@@ -357,8 +357,9 @@ c = _conj(_monta([("wb:class/summoner", 2), ("wb:class/fighter", 10)]), "Summone
 checar(c and c["rank_efetivo"] == 6,
        "heightened normal e ceil(12/2) = 6 (regra 17)",
        f"deu {c and c['rank_efetivo']}")
-checar(c and c["rank_de_invocacao"] == 3,
-       "mas invocacao para em min(ceil(2/2)+2, 6) = 3 (regra 17b)",
+checar(c and c["rank_de_invocacao"] == 4,
+       "mas invocacao para em 4 (regra 17b) -- a folga da 2, o PISO da "
+       "dedicacao puxa para 4, e o teto de heightened (6) nao morde",
        f"deu {c and c['rank_de_invocacao']}")
 
 # classe unica: o +2 nunca chega a valer, RAW intacto sem caso especial
@@ -498,6 +499,47 @@ checar(a5["proficiencias"]["unarmed"] == "expert"
        and a5["proficiencias"]["perception"] == "master",
        "unarmed vira expert (1a vez) e saves/Percepcao viram master",
        f"{a5['proficiencias']}")
+
+# -- regra 21: o dip nunca pode render menos que a rota gratuita ------------
+print("\nregra 21 -- dip >= dedicacao no mesmo nivel de personagem")
+
+
+def _dip(nivel_de_classe, nivel_total, classe=WIZARD):
+    """`nivel_de_classe` niveis da classe, o resto em Fighter."""
+    esc = [{"em": i + 1, "slot": "nivel_de_classe",
+            "pega": classe if i < nivel_de_classe else FIGHTER}
+           for i in range(nivel_total)]
+    return personagem(esc)
+
+
+# Varredura exaustiva, nao amostra: e um invariante, entao vale em TODO par.
+# Sem o piso, a simulacao de 2026-07-27 achou 50 destes 204 pares violando.
+violacoes = []
+for nivel_personagem in range(4, 21):
+    for nc in range(1, nivel_personagem + 1):
+        p = _dip(nc, nivel_personagem)
+        if p.cap_invocacao(nc) < p.rank_de_dedicacao():
+            violacoes.append((nc, nivel_personagem,
+                              p.cap_invocacao(nc), p.rank_de_dedicacao()))
+checar(not violacoes,
+       "em 204 pares (nivel de classe x nivel de personagem), nenhum dip "
+       "invoca abaixo da dedicacao gratuita",
+       f"{len(violacoes)} violacoes, ex: {violacoes[:3]}")
+
+# e o piso nao pode furar o teto de heightened: classe unica continua RAW
+furou = [n for n in range(1, 21) if _dip(n, n).cap_invocacao(n) != math.ceil(n / 2)]
+checar(not furou,
+       "e classe unica segue exatamente o RAW nos 20 niveis",
+       f"furou em {furou}")
+
+p = _dip(2, 12)
+checar(p.cap_invocacao(2) == 4,
+       "Mago 2 / personagem 12 sobe de 3 para 4 -- empata com a dedicacao",
+       f"deu {p.cap_invocacao(2)}")
+p = _dip(2, 5)
+checar(p.cap_invocacao(2) == 3,
+       "e Mago 2 / personagem 5 segue em 3: o piso nao distorce nivel baixo",
+       f"deu {p.cap_invocacao(2)}")
 
 print("\n" + "=" * 58)
 if FALHAS:

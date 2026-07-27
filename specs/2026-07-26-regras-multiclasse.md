@@ -137,9 +137,37 @@ Vale para truque, focus spell e magia de slot.
 **ou** `incarnate`, e para companheiro, familiar e eidolon.
 
 ```
-magia summon/incarnate   rank  = min( ceil(class_level/2) + 2 , ceil(nivel_de_personagem/2) )
-companheiro/eidolon      nivel = min( class_level + 2        , nivel_de_personagem )
+magia summon/incarnate   rank  = min( max( ceil(class_level/2) + 2 , rank_de_dedicacao ) , ceil(nivel/2) )
+companheiro/eidolon      nivel = min( class_level + 2 , nivel_de_personagem )
 ```
+
+`rank_de_dedicacao` e o rank de slot que a rota gratuita entrega naquele nivel
+de PERSONAGEM, verbatim de "Spellcasting Archetypes" (Player Core): rank 1 no
+nivel 4, 2 no 6, 3 no 8, 4 no 12, 5 no 14, 6 no 16, 7 no 18, 8 no 20.
+
+> **Piso acrescentado em 2026-07-27 (Igor), depois da simulacao.** A primeira
+> versao tinha so `ceil(class_level/2) + 2` e o teto de heightened. A simulacao
+> em `docs/simulacoes/2026-07-27_simulacao-17b.md` mediu **50 de 204 pares**
+> violando a regra 21: no nivel 20 o dip ficava em **0%** da dedicacao gratuita
+> -- criatura nivel 2 contra AC 45 nao acerta nem com 20 natural. Para so
+> empatar com o feat gratuito, o dip precisaria de 11 niveis de classe.
+>
+> **A regra do Igor, literal:** *"o dip tem que obrigatoriamente ser pelo menos
+> tao forte quanto uma dedicacao no mesmo nivel de personagem"*. Ele acrescentou
+> que acha que deveria ser ainda mais forte, mas nao fixou quanto -- entao o
+> piso e `>=`, nao `>`.
+>
+> Isso e a regra 21 afiada de "um nivel inteiro tem de render mais que um feat
+> gratuito" para um invariante testavel. Esta travado em `teste_motor.py` como
+> varredura EXAUSTIVA dos 204 pares (nivel de classe x nivel de personagem),
+> nao amostra: invariante vale em todo par ou nao e invariante.
+>
+> **Consequencia a decidir.** O piso e chato numa faixa: no personagem 20, os
+> niveis de classe 1 a 12 dao todos rank 8, porque o piso da dedicacao domina.
+> Do 13 em diante volta a subir (9), e 16+ chega a 10. Ou seja, entre o 2o e o
+> 12o nivel de Mago o personagem nao ganha nada NESTE eixo -- ganha nos outros
+> (HP, proficiencia, identidade, slots de magia que nao e invocacao). Se o
+> "deveria ser mais forte" virar numero, e aqui que ele entra.
 
 > **Escopo corrigido em 2026-07-27 (Igor).** A versao anterior dizia "magia com
 > o trait `summon`, e magia de efeito continuo autonomo (Spirit Link, Protector
@@ -168,9 +196,10 @@ companheiro/eidolon      nivel = min( class_level + 2        , nivel_de_personag
 >
 > | | conta | resultado |
 > |---|---|---|
-> | Summoner 2 / personagem 12 | `min(1+2, 6)` | rank 3 |
-> | Summoner 20 puro | `min(10+2, 10)` | rank 10 -- RAW |
-> | Mago 2 / personagem 5 | `min(1+2, 3)` | rank 3 -- a regra 17 sobrevive |
+> | Summoner 2 / personagem 12 | `min(max(3, 4), 6)` | rank 4 -- o piso puxa |
+> | Summoner 2 / personagem 20 | `min(max(3, 8), 10)` | rank 8 -- empata com a dedicacao |
+> | Summoner 20 puro | `min(max(12, 8), 10)` | rank 10 -- RAW |
+> | Mago 2 / personagem 5 | `min(max(3, 1), 3)` | rank 3 -- a regra 17 sobrevive |
 > | Ranger 2 / personagem 12 | `min(2+2, 12)` | companheiro nivel 4 |
 > | Ranger 12 puro | `min(14, 12)` | companheiro nivel 12 -- RAW |
 >
@@ -187,9 +216,12 @@ companheiro/eidolon      nivel = min( class_level + 2        , nivel_de_personag
 > nao entra: curar custa duas acoes tuas, todas as vezes.
 >
 > Numeros verificados (Summon Animal, `Heightened (10th) Level 15`, personagem
-> nivel 20): dip de Mago 1 cai de criatura nivel 15 para **nivel 2**;
-> Mago 10 / Guerreiro 10 fica em **nivel 9**; Mago 20 puro nao muda, porque o
-> `+2` nao tem para onde ir a partir do rank 10.
+> nivel 20). **Atualizados em 2026-07-27, depois do piso da regra 21** -- os
+> valores antigos (`nivel 2` para o dip de Mago 1, `nivel 9` para o Mago 10)
+> vinham da formula sem piso e eram exatamente a violacao que a simulacao
+> achou: dip de Mago 1 e Mago 10 / Guerreiro 10 param os dois no **rank 8**,
+> que e o que a dedicacao entrega de graca no nivel 20; Mago 20 puro nao muda,
+> porque nem a folga nem o piso passam do teto de heightened.
 >
 > Descartado: usar o rank cru do slot. Mataria tambem o multiclasse honesto --
 > um Mago 10 invocando criatura nivel 5 num personagem 20 e decoracao.
@@ -275,8 +307,29 @@ O criterio comum: quando o custo de modelar supera o custo de um mestre dizer
 "nao", nao modela. O app nunca **impede** esses casos -- so nao os automatiza.
 
 **21.** **Regra de sanidade:** a rota de nivel de classe nunca pode entregar
-menos que a rota de dedicacao. Se entregar, niveis param de valer a pena e o
-design inteiro cai.
+menos que a rota de dedicacao **no mesmo nivel de personagem**. Se entregar,
+niveis param de valer a pena e o design inteiro cai.
+
+> **Afiada em 2026-07-27 (Igor), de principio para invariante testavel.**
+> Literal: *"o dip tem que obrigatoriamente ser pelo menos tao forte quanto uma
+> dedicacao no mesmo nivel de personagem"*. Ele acha que deveria ser ainda mais
+> forte, mas nao fixou quanto -- entao vale `>=`, nao `>`.
+>
+> A comparacao e contra a rota **gratuita**: sob Free Archetype (regra 2, sempre
+> ligada) a dedicacao nao custa feat de classe, e pela regra 18 roda RAW puro.
+> O piso, portanto, e o que o personagem teria de graca.
+>
+> **Isto nao e comentario, e teste.** `motor/teste_motor.py` varre os 204 pares
+> (nivel de classe x nivel de personagem, personagem 4..20) e falha se um so
+> deles ficar abaixo. Foi assim que a regra 17b nasceu quebrada e foi pega: 50
+> pares violando, com o dip em 0% da dedicacao no nivel 20.
+>
+> **Aviso de leitura:** o invariante vale **por eixo medido**, e hoje o unico
+> eixo com teto explicito e invocacao. Um dip perde para a dedicacao naquele
+> eixo e ganha em varios outros (HP, proficiencia, identidade de classe, slots
+> de magia comum). Comparar o pacote inteiro daria outro resultado -- e esta
+> regra deliberadamente NAO faz isso, porque o pacote inteiro sempre favorece o
+> dip e o invariante ficaria vazio.
 
 ## Focus points
 

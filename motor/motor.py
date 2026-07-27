@@ -575,14 +575,48 @@ class Personagem:
 
     # -- regra 17b: teto para o que cria criatura ---------------------------
 
-    def cap_invocacao(self, nivel_classe: int) -> int:
-        """Rank maximo de magia com trait `summon` ou `incarnate`.
+    # Rank de slot que a dedicacao de conjuracao concede, por nivel de
+    # PERSONAGEM. Citado verbatim da regra "Spellcasting Archetypes" (Player
+    # Core, dump do AoN category=rules): "Basic Spellcasting Feat: usually
+    # available at 4th level, these feats grant a 1st-rank spell slot. At 6th
+    # level, a 2nd-rank spell slot. At 8th level, a 3rd-rank spell slot.
+    # Expert: 12th -> 4th-rank, 14th -> 5th, 16th -> 6th.
+    # Master: 18th -> 7th-rank, 20th -> 8th-rank."
+    RANK_DEDICACAO = [(20, 8), (18, 7), (16, 6), (14, 5), (12, 4),
+                      (8, 3), (6, 2), (4, 1)]
 
-        O termo externo faz a regra se autoproteger: com classe unica os dois
-        niveis sao iguais, o `+2` nunca chega a valer e o RAW sai intacto sem
-        caso especial. Um Summoner 20 puro da min(12, 10) = 10.
+    def rank_de_dedicacao(self, nivel_personagem: int | None = None) -> int:
+        """O que a rota GRATUITA entrega neste nivel de personagem.
+
+        Sob Free Archetype (regra 2, sempre ligada) a dedicacao nao custa nada
+        alem do slot gratuito de arquetipo, e pela regra 18 ela roda RAW puro.
+        E por isso que ela e o piso: qualquer coisa que custe nivel de classe
+        tem de render pelo menos isto.
         """
-        return min(math.ceil(nivel_classe / 2) + 2, math.ceil(self.nivel / 2))
+        n = self.nivel if nivel_personagem is None else nivel_personagem
+        return next((r for lvl, r in self.RANK_DEDICACAO if n >= lvl), 0)
+
+    def cap_invocacao(self, nivel_classe: int) -> int:
+        """Rank maximo de magia com trait `summon` ou `incarnate` (regra 17b).
+
+            min( max( ceil(class_level/2) + 2 , rank_de_dedicacao ), ceil(nivel/2) )
+
+        Tres termos, cada um com um trabalho:
+
+        - `ceil(class_level/2) + 2` -- a folga que a houserule concede a quem
+          gastou nivel de classe;
+        - `rank_de_dedicacao` -- o PISO da regra 21: gastar um nivel inteiro de
+          personagem tem de render pelo menos o que a dedicacao entrega de
+          graca sob Free Archetype. Sem ele a simulacao de 2026-07-27 achou 50
+          de 204 pares violando, com o dip chegando a **0%** da dedicacao no
+          nivel 20 -- criatura nivel 2 contra AC 45 nao acerta nem com nat 20;
+        - `ceil(nivel/2)` -- o teto de heightened, que vale para tudo e faz a
+          regra se autoproteger: com classe unica os dois niveis sao iguais,
+          nem a folga nem o piso chegam a valer, e o RAW sai intacto sem caso
+          especial.
+        """
+        folga = math.ceil(nivel_classe / 2) + 2
+        return min(max(folga, self.rank_de_dedicacao()), math.ceil(self.nivel / 2))
 
     def cap_ator(self, nivel_classe: int) -> int:
         """Nivel maximo de companheiro, familiar ou eidolon.
