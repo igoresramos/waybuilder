@@ -1,0 +1,113 @@
+"""Testes dos portoes de qualidade.
+
+O risco que estes testes cobrem nao e o portao reprovar quem deve reprovar --
+e o portao PASSAR por acidente, medindo conjunto vazio ou campo que nunca
+existe. Foi o que aconteceu na v1 com o portao 7 (procurava duplicata depois de
+a duplicata ter sido eliminada) e com o relatorio de prosa (dividia pelo
+subconjunto ja processado).
+
+Estes testes rodam sobre o artefato real quando ele existe; sem base emitida,
+sao pulados em vez de dar falso verde.
+"""
+import json
+import os
+import sys
+import unittest
+
+RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, RAIZ)
+
+import comum  # noqa: E402
+
+BASE = os.path.join(RAIZ, "base", "index.json")
+
+
+@unittest.skipUnless(os.path.exists(BASE), "base ainda nao emitida")
+class TestInvariantesDaBase(unittest.TestCase):
+    """Cada teste aqui e uma promessa escrita na spec v2."""
+
+    @classmethod
+    def setUpClass(cls):
+        with open(BASE) as fh:
+            cls.base = json.load(fh)
+        cls.ids = {r["id"] for r in cls.base}
+
+    def test_nenhum_prov_desconhecida(self):
+        ruins = [(r["id"], c, p) for r in self.base
+                 for c, p in (r.get("prov") or {}).items()
+                 if not comum.prov_valido(p)]
+        self.assertEqual(ruins[:5], [], f"{len(ruins)} prov fora do vocabulario")
+
+    def test_traits_nunca_e_null(self):
+        nulos = [r["id"] for r in self.base if r.get("traits") is None]
+        self.assertEqual(nulos[:5], [], f"{len(nulos)} registros com traits null")
+
+    def test_spell_tem_rank_e_level_espelhados(self):
+        quebrados = [r["id"] for r in self.base
+                     if r.get("kind") == "spell" and r.get("rank") is not None
+                     and r.get("level") != r.get("rank")]
+        self.assertEqual(quebrados[:5], [])
+
+    def test_superseded_by_aponta_para_registro_existente(self):
+        orfaos = [(r["id"], s) for r in self.base
+                  for s in (r.get("superseded_by") or []) if s not in self.ids]
+        self.assertEqual(orfaos[:5], [])
+
+    def test_id_unico(self):
+        self.assertEqual(len(self.ids), len(self.base))
+
+    def test_kind_sem_grants_nao_responde_false(self):
+        # `false` significa "perdi mecanica", e kind que nao produz grants nao
+        # pode ter perdido nada
+        ruins = [r["id"] for r in self.base
+                 if r.get("kind") in comum.KINDS_SEM_GRANTS
+                 and r.get("grants_completos") is False]
+        self.assertEqual(ruins[:5], [])
+
+    def test_mechanized_nao_voltou(self):
+        sobrou = [r["id"] for r in self.base if "mechanized" in r]
+        self.assertEqual(sobrou[:5], [])
+
+    def test_source_book_sem_lixo_bruto(self):
+        sujos = [r["id"] for r in self.base
+                 if "\r" in ((r.get("source") or {}).get("book") or "")
+                 or "\n" in ((r.get("source") or {}).get("book") or "")]
+        self.assertEqual(sujos[:5], [])
+
+    def test_uma_grafia_por_livro(self):
+        por_chave = {}
+        for r in self.base:
+            livro = (r.get("source") or {}).get("book")
+            if livro:
+                por_chave.setdefault(comum.chave_livro(livro), set()).add(livro)
+        ambiguos = {k: v for k, v in por_chave.items() if len(v) > 1}
+        self.assertEqual(ambiguos, {})
+
+
+@unittest.skipUnless(os.path.exists(BASE), "base ainda nao emitida")
+class TestPortoesMedemAlgo(unittest.TestCase):
+    """Portao que passa sobre conjunto vazio nao esta medindo nada."""
+
+    @classmethod
+    def setUpClass(cls):
+        with open(BASE) as fh:
+            cls.base = json.load(fh)
+
+    def test_ha_registro_com_duas_fontes_para_o_portao_8_medir(self):
+        multi = sum(1 for r in self.base
+                    if len([k for k in (r.get("xref") or {})
+                            if k in ("aon", "foundry", "pf2etools")]) >= 2)
+        self.assertGreater(multi, 1000)
+
+    def test_ha_conflito_registrado_para_o_portao_2_medir(self):
+        com_conf = sum(1 for r in self.base if r.get("conflitos"))
+        self.assertGreater(com_conf, 100)
+
+    def test_ha_referencia_wb_para_o_portao_3_medir(self):
+        import portoes
+        citados = sum(len(portoes.ids_citados(r)) for r in self.base)
+        self.assertGreater(citados, 1000)
+
+
+if __name__ == "__main__":
+    unittest.main()

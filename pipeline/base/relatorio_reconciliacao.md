@@ -1,11 +1,11 @@
 # Relatorio de reconciliacao
 
-- registros de entrada: **19436**
+- registros de entrada: **19451**
 - colisoes de identidade desmembradas: **1**
 - colisoes de id fundidas: **76**
-- base final: **19359** registros
-- registros com divergencia registrada: **2759**
-- source.book normalizado: **1042**
+- base final: **19374** registros
+- registros com divergencia registrada: **2761**
+- source.book normalizado: **1057**
 - license inferida: **2013**
 
 ## Por kind
@@ -14,7 +14,7 @@
 - `equipment`: 6099
 - `spell`: 1642
 - `weapon`: 1031
-- `class-feature`: 826
+- `class-feature`: 841
 - `trait`: 561
 - `background`: 514
 - `deity`: 484

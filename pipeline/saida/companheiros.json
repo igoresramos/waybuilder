@@ -7439,7 +7439,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -7473,7 +7473,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -7709,7 +7709,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -7748,7 +7748,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -7787,7 +7787,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -7827,7 +7827,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -7867,7 +7867,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -7919,14 +7919,22 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
   "legado_de": [
    "familiar-ability-93"
   ],
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Player Core",
+    "foundry": "Pathfinder Rage of Elements"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/focused-rejuvenation",
@@ -7953,7 +7961,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -7992,7 +8000,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -8023,7 +8031,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8056,7 +8064,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8102,7 +8110,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -8136,7 +8144,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8169,7 +8177,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8202,7 +8210,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8241,7 +8249,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -8272,7 +8280,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8328,7 +8336,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -8374,7 +8382,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -8408,7 +8416,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8441,7 +8449,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8474,7 +8482,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8507,7 +8515,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8540,7 +8548,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "tipo_habilidade": "Master"
@@ -8570,7 +8578,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8603,7 +8611,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8636,7 +8644,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8669,7 +8677,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8702,7 +8710,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8735,7 +8743,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8768,7 +8776,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8801,7 +8809,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8834,7 +8842,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -8906,7 +8914,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -8947,7 +8955,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -8989,7 +8997,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -9031,7 +9039,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -9074,7 +9082,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -9115,7 +9123,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -9157,7 +9165,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
@@ -9191,7 +9199,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "tipo_habilidade": "Familiar"
@@ -9221,7 +9229,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -9254,7 +9262,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -9287,7 +9295,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -9320,7 +9328,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "tipo_habilidade": "Master"
@@ -9751,10 +9759,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/versatile-form",
@@ -9781,10 +9797,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/kindling",
@@ -9811,10 +9835,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Master"
+  "tipo_habilidade": "Master",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/dazzling-show",
@@ -9844,11 +9876,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "traits": "foundry"
   },
-  "tipo_habilidade": "Specific Familiar - Kinnars"
+  "tipo_habilidade": "Specific Familiar - Kinnars",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/soul-bond",
@@ -9875,10 +9915,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Specific Familiar - Kinnars"
+  "tipo_habilidade": "Specific Familiar - Kinnars",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/vina-song",
@@ -9911,11 +9959,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "traits": "foundry"
   },
-  "tipo_habilidade": "Specific Familiar - Kinnars"
+  "tipo_habilidade": "Specific Familiar - Kinnars",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/stunning-flare",
@@ -9946,11 +10002,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "traits": "foundry"
   },
-  "tipo_habilidade": "Specific Familiar - Lantern Wisp"
+  "tipo_habilidade": "Specific Familiar - Lantern Wisp",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/shadow-projection",
@@ -9979,11 +10043,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "traits": "foundry"
   },
-  "tipo_habilidade": "Specific Familiar - Makhluk Wayang"
+  "tipo_habilidade": "Specific Familiar - Makhluk Wayang",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/flatten",
@@ -10010,10 +10082,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Specific Familiar - Shikigami"
+  "tipo_habilidade": "Specific Familiar - Shikigami",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/mass-produced",
@@ -10040,10 +10120,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Specific Familiar - Shikigami"
+  "tipo_habilidade": "Specific Familiar - Shikigami",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/seal-bearer",
@@ -10070,10 +10158,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Specific Familiar - Shikigami"
+  "tipo_habilidade": "Specific Familiar - Shikigami",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/pot-of-tea",
@@ -10102,11 +10198,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "traits": "foundry"
   },
-  "tipo_habilidade": "Specific Familiar - Tapir Sage"
+  "tipo_habilidade": "Specific Familiar - Tapir Sage",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Tian Xia Character Guide",
+    "foundry": "Pathfinder Lost Omens Tian Xia Character Guide"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/ink-spray",
@@ -10193,11 +10297,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "traits": "foundry"
   },
-  "tipo_habilidade": "Specific Familiar - Dust Bunny"
+  "tipo_habilidade": "Specific Familiar - Dust Bunny",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Foolish Housekeeping and Other Articles",
+    "foundry": "Paizo Blog: Foolish Housekeeping and Other Articles"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/forage",
@@ -10375,7 +10487,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "legado_de": [
@@ -10669,7 +10781,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "tipo_habilidade": "Familiar"
@@ -10699,7 +10811,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "tipo_habilidade": "Familiar"
@@ -10932,10 +11044,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Grand Bazaar",
+    "foundry": "Pathfinder Lost Omens The Grand Bazaar"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/gills",
@@ -10962,10 +11082,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Grand Bazaar",
+    "foundry": "Pathfinder Lost Omens The Grand Bazaar"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/greater-resistance",
@@ -11005,11 +11133,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Grand Bazaar",
+    "foundry": "Pathfinder Lost Omens The Grand Bazaar"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/snoop",
@@ -11036,10 +11172,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Grand Bazaar",
+    "foundry": "Pathfinder Lost Omens The Grand Bazaar"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/threat-display",
@@ -11066,10 +11210,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Grand Bazaar",
+    "foundry": "Pathfinder Lost Omens The Grand Bazaar"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/tremorsense",
@@ -11104,11 +11256,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Grand Bazaar",
+    "foundry": "Pathfinder Lost Omens The Grand Bazaar"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/wavesense",
@@ -11143,11 +11303,19 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon",
    "grants": "foundry"
   },
-  "tipo_habilidade": "Familiar"
+  "tipo_habilidade": "Familiar",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Grand Bazaar",
+    "foundry": "Pathfinder Lost Omens The Grand Bazaar"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/tattoo-transformation",
@@ -11174,10 +11342,18 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
-  "tipo_habilidade": "Master"
+  "tipo_habilidade": "Master",
+  "conflitos": [
+   {
+    "campo": "source.book",
+    "escolhido": "aon",
+    "aon": "Grand Bazaar",
+    "foundry": "Pathfinder Lost Omens The Grand Bazaar"
+   }
+  ]
  },
  {
   "id": "wb:familiar-ability/haunting-melody",
@@ -11581,7 +11757,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "tipo_habilidade": "Familiar"
@@ -11611,7 +11787,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "tipo_habilidade": "Familiar"
@@ -11641,7 +11817,7 @@
   "prov": {
    "name": "aon",
    "rarity": "aon",
-   "source": "aon(heuristica:remaster_id)+foundry(licenca)",
+   "source": "aon",
    "text": "aon"
   },
   "tipo_habilidade": "Familiar"
@@ -11732,6 +11908,1104 @@
    "text": "aon"
   },
   "tipo_habilidade": "Specific Familiar - Elemental Wisp"
+ },
+ {
+  "id": "wb:familiar-ability/animated",
+  "kind": "familiar-ability",
+  "name": "Animated",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Divine Mysteries",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [
+   {
+    "speed": {
+     "tipo": "land",
+     "valor": 25
+    }
+   }
+  ],
+  "text": "wb:text/familiar-ability/animated",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.wcFeaZ0TmoaLtpIQ"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/augury",
+  "kind": "familiar-ability",
+  "name": "Augury",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Book of the Dead",
+   "page": null,
+   "license": "OGL",
+   "remaster": false
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/augury",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.mKmBgQmPmiLOlEvw"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/elemental-familiar-air",
+  "kind": "familiar-ability",
+  "name": "Elemental Familiar (Air)",
+  "level": null,
+  "traits": [
+   "air"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Rage of Elements",
+   "page": null,
+   "license": "OGL",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [
+   {
+    "actor_traits": [
+     "air"
+    ]
+   }
+  ],
+  "text": "wb:text/familiar-ability/elemental-familiar-air",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.RIx6b1GvTEBh4ExW"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/elemental-familiar-earth",
+  "kind": "familiar-ability",
+  "name": "Elemental Familiar (Earth)",
+  "level": null,
+  "traits": [
+   "earth"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Rage of Elements",
+   "page": null,
+   "license": "OGL",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [
+   {
+    "resistance": {
+     "tipo": "physical",
+     "valor": "floor(@actor.level/2)"
+    }
+   },
+   {
+    "actor_traits": [
+     "earth"
+    ]
+   }
+  ],
+  "text": "wb:text/familiar-ability/elemental-familiar-earth",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.ZV4J5YTZGrqh6cvY"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/elemental-familiar-fire",
+  "kind": "familiar-ability",
+  "name": "Elemental Familiar (Fire)",
+  "level": null,
+  "traits": [
+   "fire"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Rage of Elements",
+   "page": null,
+   "license": "OGL",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [
+   {
+    "actor_traits": [
+     "fire"
+    ]
+   }
+  ],
+  "text": "wb:text/familiar-ability/elemental-familiar-fire",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.5019hvUZcNe9dLEO"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/elemental-familiar-metal",
+  "kind": "familiar-ability",
+  "name": "Elemental Familiar (Metal)",
+  "level": null,
+  "traits": [
+   "metal"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Rage of Elements",
+   "page": null,
+   "license": "OGL",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [
+   {
+    "actor_traits": [
+     "metal"
+    ]
+   }
+  ],
+  "text": "wb:text/familiar-ability/elemental-familiar-metal",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.ZJdMyCjRvUTtg90u"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/elemental-familiar-water",
+  "kind": "familiar-ability",
+  "name": "Elemental Familiar (Water)",
+  "level": null,
+  "traits": [
+   "water"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Rage of Elements",
+   "page": null,
+   "license": "OGL",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [
+   {
+    "actor_traits": [
+     "water"
+    ]
+   }
+  ],
+  "text": "wb:text/familiar-ability/elemental-familiar-water",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.mIl4YjbssQ5AERWS"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/elemental-familiar-wood",
+  "kind": "familiar-ability",
+  "name": "Elemental Familiar (Wood)",
+  "level": null,
+  "traits": [
+   "wood"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Rage of Elements",
+   "page": null,
+   "license": "OGL",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [
+   {
+    "actor_traits": [
+     "wood"
+    ]
+   }
+  ],
+  "text": "wb:text/familiar-ability/elemental-familiar-wood",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.XYb2udoNGaE0M11Y"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/erudite",
+  "kind": "familiar-ability",
+  "name": "Erudite",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Lost Omens Knights of Lastwall",
+   "page": null,
+   "license": "OGL",
+   "remaster": false
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/erudite",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.cy7bdQqVANipyljS"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-balanced-luck",
+  "kind": "familiar-ability",
+  "name": "Familiar of Balanced Luck",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-balanced-luck",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.6ZmgkMHUGGb1mDhr"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-bolstering-aid",
+  "kind": "familiar-ability",
+  "name": "Familiar of Bolstering Aid",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Divine Mysteries",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-bolstering-aid",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.HNoR0D2sKQaDNh5Z"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-enticing-negotiation",
+  "kind": "familiar-ability",
+  "name": "Familiar of Enticing Negotiation",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Divine Mysteries",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-enticing-negotiation",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.xXMPZXcwQgKRAu38"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-flowing-script",
+  "kind": "familiar-ability",
+  "name": "Familiar of Flowing Script",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-flowing-script",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.9ypX5ZMor6RMiFKv"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-freezing-rime",
+  "kind": "familiar-ability",
+  "name": "Familiar of Freezing Rime",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-freezing-rime",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.9xTjRt8LkZPB42Vi"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-insightful-observation",
+  "kind": "familiar-ability",
+  "name": "Familiar of Insightful Observation",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Rival Academies",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-insightful-observation",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.YptMhsztTS9dYGAY"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-keen-senses",
+  "kind": "familiar-ability",
+  "name": "Familiar of Keen Senses",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-keen-senses",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.onye3PN84lmca11D"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-nimble-flight",
+  "kind": "familiar-ability",
+  "name": "Familiar of Nimble Flight",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Howl of the Wild",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-nimble-flight",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.uFsWy6Ii1WxA0u0w"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-obscuring-snowfall",
+  "kind": "familiar-ability",
+  "name": "Familiar of Obscuring Snowfall",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Divine Mysteries",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-obscuring-snowfall",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.Fouq5RMNS8P1CDzx"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-ongoing-misery",
+  "kind": "familiar-ability",
+  "name": "Familiar of Ongoing Misery",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-ongoing-misery",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.mu9OL8v4rmr9311e"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-overwhelming-tides",
+  "kind": "familiar-ability",
+  "name": "Familiar of Overwhelming Tides",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Howl of the Wild",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-overwhelming-tides",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.xH7lvZkYYAAuxR62"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-paired-perplexity",
+  "kind": "familiar-ability",
+  "name": "Familiar of Paired Perplexity",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Divine Mysteries",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-paired-perplexity",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.bhpa7DVdMsaNfodz"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-parasitic-might",
+  "kind": "familiar-ability",
+  "name": "Familiar of Parasitic Might",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Howl of the Wild",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-parasitic-might",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.J5Wyh1EPmk848ivR"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-restored-spirit",
+  "kind": "familiar-ability",
+  "name": "Familiar of Restored Spirit",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-restored-spirit",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.ZCze1FY3Rmnvd6Dx"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-stalking-night",
+  "kind": "familiar-ability",
+  "name": "Familiar of Stalking Night",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-stalking-night",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.FeEts6s2ABVEi0H6"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/familiar-of-swarms-heart",
+  "kind": "familiar-ability",
+  "name": "Familiar of Swarm's Heart",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Divine Mysteries",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/familiar-of-swarms-heart",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.t6nzeTpsTJDwAUFZ"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/grasping-tendrils",
+  "kind": "familiar-ability",
+  "name": "Grasping Tendrils",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/grasping-tendrils",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.LUBS9csNNgRTui4p"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/lightning-armillary",
+  "kind": "familiar-ability",
+  "name": "Lightning Armillary",
+  "level": null,
+  "traits": [
+   "electricity"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Tian Xia Character Guide",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/lightning-armillary",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.zwWgHjcU0iZ6gUDY"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/lightning-needles",
+  "kind": "familiar-ability",
+  "name": "Lightning Needles",
+  "level": null,
+  "traits": [
+   "electricity"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Tian Xia Character Guide",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/lightning-needles",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.0R18Nd0CotPo9KD7"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/luminous",
+  "kind": "familiar-ability",
+  "name": "Luminous",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Lost Omens Knights of Lastwall",
+   "page": null,
+   "license": "OGL",
+   "remaster": false
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/luminous",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.ou91pzf9TlOnIjYn"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/mask-freeze",
+  "kind": "familiar-ability",
+  "name": "Mask Freeze",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Lost Omens Character Guide",
+   "page": null,
+   "license": "OGL",
+   "remaster": false
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/mask-freeze",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.C16JgmeJJG249WXz"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/medic",
+  "kind": "familiar-ability",
+  "name": "Medic",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Lost Omens Knights of Lastwall",
+   "page": null,
+   "license": "OGL",
+   "remaster": false
+  },
+  "requires": null,
+  "grants": [
+   {
+    "grant_item": {
+     "uuid": "Compendium.pf2e.spells-srd.Item.Heal"
+    }
+   }
+  ],
+  "text": "wb:text/familiar-ability/medic",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.ReIgBsaM95BTvHpN"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/path-of-the-tempest",
+  "kind": "familiar-ability",
+  "name": "Path of the Tempest",
+  "level": null,
+  "traits": [
+   "air"
+  ],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Tian Xia Character Guide",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/path-of-the-tempest",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.O0XJIvMGK36yg9TJ"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "traits": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/purify-air",
+  "kind": "familiar-ability",
+  "name": "Purify Air",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/purify-air",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.43xB5UnexISlfRa5"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/radiant",
+  "kind": "familiar-ability",
+  "name": "Radiant",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Lost Omens Knights of Lastwall",
+   "page": null,
+   "license": "OGL",
+   "remaster": false
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/radiant",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.3y6GGXQgyJ4Hq4Yt"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/soul-sight",
+  "kind": "familiar-ability",
+  "name": "Soul Sight",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Book of the Dead",
+   "page": null,
+   "license": "OGL",
+   "remaster": false
+  },
+  "requires": null,
+  "grants": [
+   {
+    "sense": {
+     "tipo": "lifesense",
+     "acuidade": null,
+     "alcance": 30
+    }
+   }
+  ],
+  "text": "wb:text/familiar-ability/soul-sight",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.o0fxDDUu2ZSWYDTr"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry",
+   "grants": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/spirit-touch",
+  "kind": "familiar-ability",
+  "name": "Spirit Touch",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Book of the Dead",
+   "page": null,
+   "license": "OGL",
+   "remaster": false
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/spirit-touch",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.nrPl3Dz7fbnmas7T"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/synchronize-spirit",
+  "kind": "familiar-ability",
+  "name": "Synchronize Spirit",
+  "level": null,
+  "traits": [],
+  "rarity": null,
+  "source": {
+   "book": "Pathfinder Lost Omens Divine Mysteries",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/synchronize-spirit",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.jPvjeX1CsUZQSszu"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry"
+  }
+ },
+ {
+  "id": "wb:familiar-ability/verdant-burst",
+  "kind": "familiar-ability",
+  "name": "Verdant Burst",
+  "level": null,
+  "traits": [],
+  "rarity": "common",
+  "source": {
+   "book": "Pathfinder Player Core",
+   "page": null,
+   "license": "ORC",
+   "remaster": true
+  },
+  "requires": null,
+  "grants": [],
+  "text": "wb:text/familiar-ability/verdant-burst",
+  "grants_completos": true,
+  "requires_parseado": true,
+  "xref": {
+   "foundry": "Compendium.pf2e.familiar-abilities.Item.SKIS1xexaOvrecdV"
+  },
+  "prov": {
+   "name": "foundry",
+   "source": "foundry",
+   "rarity": "foundry"
+  }
  },
  {
   "id": "wb:familiar-specific/faerie-dragon",

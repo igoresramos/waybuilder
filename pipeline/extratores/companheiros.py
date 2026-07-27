@@ -150,7 +150,14 @@ def carregar_aon():
 
 
 def carregar_foundry_familiar_abilities(packs):
-    """chave(nome) -> {id, rules, publication, traits}"""
+    """chave(nome) -> {id, nome, rules, publication, traits, rarity, descricao}.
+
+    `nome`/`rarity`/`descricao` existem pra cobertura mutua (achado A10): 38
+    das 191 familiar-abilities do Foundry nao tem par no AoN (as 6 `Elemental
+    Familiar (Air/Earth/.../Wood)` e ~20 `Familiar of ...` do Divine
+    Mysteries) -- sem esses campos aqui, nao da pra emitir um registro
+    mono-Foundry pra elas, so pra cruzar grants/traits/license de quem ja
+    casou por nome com o AoN."""
     out = {}
     if not packs:
         return out
@@ -168,9 +175,12 @@ def carregar_foundry_familiar_abilities(packs):
             continue
         out[chave(nome)] = {
             "id": d.get("_id"),
+            "nome": nome,
             "rules": s.get("rules", []) or [],
             "publication": s.get("publication", {}) or {},
             "traits": [slug(t) for t in (s.get("traits", {}) or {}).get("value", []) or []],
+            "rarity": (s.get("traits", {}) or {}).get("rarity"),
+            "descricao": (s.get("description", {}) or {}).get("value"),
         }
     return out
 
@@ -483,12 +493,29 @@ def extrair():
             else:
                 est["familiar_ability_grants_completos_false"] += 1
             pub = f.get("publication") or {}
+            # source.book: escolha por precedencia + registro de divergencia
+            # na MESMA operacao (comum.escolher). Achado A3: antes disto o
+            # book do Foundry so entrava pra fornecer license, nunca era
+            # comparado contra o do AoN -- 60 das 112 familiar-abilities
+            # casadas tem grafia de livro divergente (ex.: aon "Core
+            # Rulebook" x foundry "Pathfinder Player Core"), e saia tudo sem
+            # `conflitos`.
+            aon_book = (reg.get("source") or {}).get("book")
+            book, book_prov, conf = comum.escolher(
+                "source.book", {"aon": aon_book, "foundry": pub.get("title")})
+            if conf:
+                reg.setdefault("conflitos", []).extend(conf)
             if pub.get("license"):
                 if reg["source"] is None:
-                    reg["source"] = {"book": None, "page": None}
+                    reg["source"] = {"book": book, "page": None}
+                else:
+                    reg["source"]["book"] = book
                 reg["source"]["license"] = pub["license"]
                 reg["source"]["remaster"] = bool(pub.get("remaster"))
-                reg["prov"]["source"] = (reg["prov"].get("source") or "aon") + "+foundry(licenca)"
+                reg["prov"]["source"] = book_prov or "foundry"
+            elif book and reg.get("source") is not None:
+                reg["source"]["book"] = book
+                reg["prov"]["source"] = book_prov or reg["prov"].get("source")
             if f["traits"] and not reg["traits"]:
                 reg["traits"] = f["traits"]
                 reg["prov"]["traits"] = "foundry"
@@ -497,6 +524,57 @@ def extrair():
             # habilidade, nada a converter -- baseline de `montar()` (true) fica.
             est["familiar_ability_grants_completos_true"] += 1
         registros.append(reg)
+
+    # ---- familiar-ability so-Foundry (achado A10) -------------------------
+    # A enumeracao acima sai do AoN; cobertura mutua exige o inverso tambem:
+    # 38 das 191 familiar-abilities do Foundry nao tem par no AoN por nome
+    # (as 6 `Elemental Familiar (Air/Earth/Fire/Metal/Water/Wood)` e ~20
+    # `Familiar of ...` do Divine Mysteries). Sem isto, portao 9 falhava
+    # (base 133 / censo 142, piso 135). Mono-fonte Foundry -- portao 5 aceita
+    # xref de uma fonte so.
+    so_foundry = 0
+    for k, f in sorted(foundry_fa.items()):
+        if k in fa_slug_por_chave:
+            continue
+        nome = f["nome"]
+        sl = slug(nome)
+        grants, perdeu = converter_grants_familiar(f["rules"], est["rules_ignoradas"])
+        grants_completos, requires_parseado = comum.mecanizacao(
+            "familiar-ability", bool(f["rules"]), perdeu, False, True)
+        pub = f.get("publication") or {}
+        prov = {"name": "foundry"}
+        source = None
+        if pub.get("title") or pub.get("license"):
+            source = {"book": pub.get("title"), "page": None,
+                      "license": pub.get("license"), "remaster": bool(pub.get("remaster"))}
+            prov["source"] = "foundry"
+        if f["traits"]:
+            prov["traits"] = "foundry"
+        if f.get("rarity"):
+            prov["rarity"] = "foundry"
+        if grants:
+            prov["grants"] = "foundry"
+        reg = {
+            "id": f"wb:familiar-ability/{sl}",
+            "kind": "familiar-ability",
+            "name": nome,
+            "level": None,
+            "traits": f["traits"],
+            "rarity": f.get("rarity"),
+            "source": source,
+            "requires": None,
+            "grants": grants,
+            "text": f"wb:text/familiar-ability/{sl}",
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
+            "xref": {"foundry": "Compendium.pf2e.familiar-abilities.Item." + (f["id"] or "")},
+            "prov": prov,
+        }
+        registros.append(reg)
+        est["registros"] += 1
+        est["por_kind"]["familiar-ability"] += 1
+        so_foundry += 1
+    est["familiar_ability_so_foundry"] = so_foundry
 
     # ---- familiar-specific -----------------------------------------------
     for d in por_cat.get("familiar-specific", []):

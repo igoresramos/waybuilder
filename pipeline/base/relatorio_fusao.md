@@ -4,11 +4,11 @@ Criterio: funde so com `remaster_id`/`legacy_id` declarado pelo AoN.
 Prosa nao decide; aparece so como confirmacao. Nada e deletado -- o
 absorvido fica na base com `superseded_by`.
 
-- registros na base: **19359** (nenhum deletado)
+- registros na base: **19374** (nenhum deletado)
 - pares declarados pela fonte: **734**
 - fundidos: **655** (destes, 441 com mudanca anotada -- errata de level/preco ou consolidacao)
 - vetados (categoria/kind diferente): **79**
-- alvo declarado que a base nao tem: **136**
+- alvo declarado que a base nao tem: **67**
 - registros OGL sem vinculo nenhum declarado: **6336**
 - registros com alias: **364**
 
@@ -23,7 +23,7 @@ da progressao da classe no Foundry.
 - `wb:class-feature/alertness` -> `wb:class/alchemist` — categoria diferente: class-feature -> class (prosa 0.02)
 - `wb:class-feature/arcane-spellcasting-magus` -> `wb:class/wizard` — categoria diferente: class-feature -> class (prosa 0.11)
 - `wb:class-feature/armor-of-fury` -> `wb:class/barbarian` — categoria diferente: class-feature -> class (prosa 0.05)
-- `wb:class-feature/champion-s-reaction` -> `wb:class/champion` — categoria diferente: class-feature -> class (prosa 0.08)
+- `wb:class-feature/champions-reaction` -> `wb:class/champion` — categoria diferente: class-feature -> class (prosa 0.08)
 - `wb:class-feature/deific-weapon` -> `wb:class/champion` — categoria diferente: class-feature -> class (prosa 0.06)
 - `wb:class-feature/druid-weapon-expertise` -> `wb:class/druid` — categoria diferente: class-feature -> class (prosa 0.03)
 - `wb:class-feature/evasion` -> `wb:class/gunslinger` — categoria diferente: class-feature -> class (prosa 0.02)
@@ -54,7 +54,7 @@ da progressao da classe no Foundry.
 - `wb:class-feature/spell-repertoire-psychic` -> `wb:class/psychic` — categoria diferente: class-feature -> class (prosa 0.09)
 - `wb:class-feature/spell-repertoire-summoner` -> `wb:class/bard` — categoria diferente: class-feature -> class (prosa 0.08)
 - `wb:class-feature/stubborn` -> `wb:class/gunslinger` — categoria diferente: class-feature -> class (prosa 0.04)
-- `wb:class-feature/swashbuckler-s-style` -> `wb:class/swashbuckler` — categoria diferente: class-feature -> class (prosa 0.07)
+- `wb:class-feature/swashbucklers-style` -> `wb:class/swashbuckler` — categoria diferente: class-feature -> class (prosa 0.07)
 - `wb:class-feature/wizard-weapon-expertise` -> `wb:class/wizard` — categoria diferente: class-feature -> class (prosa 0.04)
 - `wb:equipment/breastplate-of-command` -> `wb:armor/warleaders-bulwark` — kind diferente: equipment -> armor (prosa 0.81)
 - `wb:equipment/breastplate-of-command-greater` -> `wb:armor/warleaders-bulwark` — kind diferente: equipment -> armor (prosa 0.81)
@@ -1202,75 +1202,6 @@ da progressao da classe no Foundry.
 
 ## Alvo declarado ausente da base (buraco de cobertura)
 
-- `wb:archetype/acrobat` aponta para `archetype-236`, que nao foi extraido
-- `wb:archetype/archaeologist` aponta para `archetype-237`, que nao foi extraido
-- `wb:archetype/archer` aponta para `archetype-238`, que nao foi extraido
-- `wb:archetype/assassin` aponta para `archetype-239`, que nao foi extraido
-- `wb:archetype/bard` aponta para `archetype-211`, que nao foi extraido
-- `wb:archetype/bastion` aponta para `archetype-240`, que nao foi extraido
-- `wb:archetype/beast-gunner` aponta para `archetype-116`, que nao foi extraido
-- `wb:archetype/beastmaster` aponta para `archetype-241`, que nao foi extraido
-- `wb:archetype/blessed-one` aponta para `archetype-242`, que nao foi extraido
-- `wb:archetype/bounty-hunter` aponta para `archetype-243`, que nao foi extraido
-- `wb:archetype/bullet-dancer` aponta para `archetype-117`, que nao foi extraido
-- `wb:archetype/cavalier` aponta para `archetype-244`, que nao foi extraido
-- `wb:archetype/celebrity` aponta para `archetype-245`, que nao foi extraido
-- `wb:archetype/champion` aponta para `archetype-230`, que nao foi extraido
-- `wb:archetype/cleric` aponta para `archetype-212`, que nao foi extraido
-- `wb:archetype/dandy` aponta para `archetype-246`, que nao foi extraido
-- `wb:archetype/demolitionist` aponta para `archetype-118`, que nao foi extraido
-- `wb:archetype/druid` aponta para `archetype-213`, que nao foi extraido
-- `wb:archetype/dual-weapon-warrior` aponta para `archetype-247`, que nao foi extraido
-- `wb:archetype/duelist` aponta para `archetype-248`, que nao foi extraido
-- `wb:archetype/eldritch-archer` aponta para `archetype-249`, que nao foi extraido
-- `wb:archetype/elementalist` aponta para `archetype-207`, que nao foi extraido
-- `wb:archetype/familiar-master` aponta para `archetype-250`, que nao foi extraido
-- `wb:archetype/fighter` aponta para `archetype-214`, que nao foi extraido
-- `wb:archetype/gelid-shard` aponta para `archetype-201`, que nao foi extraido
-- `wb:archetype/gladiator` aponta para `archetype-251`, que nao foi extraido
-- `wb:archetype/gunslinger` aponta para `archetype-114`, que nao foi extraido
-- `wb:archetype/herbalist` aponta para `archetype-252`, que nao foi extraido
-- `wb:archetype/inventor` aponta para `archetype-108`, que nao foi extraido
-- `wb:archetype/investigator` aponta para `archetype-231`, que nao foi extraido
-- `wb:archetype/linguist` aponta para `archetype-253`, que nao foi extraido
-- `wb:archetype/marshal` aponta para `archetype-254`, que nao foi extraido
-- `wb:archetype/martial-artist` aponta para `archetype-255`, que nao foi extraido
-- `wb:archetype/mauler` aponta para `archetype-256`, que nao foi extraido
-- `wb:archetype/medic` aponta para `archetype-257`, que nao foi extraido
-- `wb:archetype/monk` aponta para `archetype-232`, que nao foi extraido
-- `wb:archetype/oracle` aponta para `archetype-233`, que nao foi extraido
-- `wb:archetype/overwatch` aponta para `archetype-109`, que nao foi extraido
-- `wb:archetype/pirate` aponta para `archetype-258`, que nao foi extraido
-- `wb:archetype/pistol-phenom` aponta para `archetype-120`, que nao foi extraido
-- `wb:archetype/poisoner` aponta para `archetype-259`, que nao foi extraido
-- `wb:archetype/ranger` aponta para `archetype-215`, que nao foi extraido
-- `wb:archetype/ritualist` aponta para `archetype-260`, que nao foi extraido
-- `wb:archetype/scout` aponta para `archetype-261`, que nao foi extraido
-- `wb:archetype/scroll-trickster` aponta para `archetype-262`, que nao foi extraido
-- `wb:archetype/scrounger` aponta para `archetype-263`, que nao foi extraido
-- `wb:archetype/sentinel` aponta para `archetype-264`, que nao foi extraido
-- `wb:archetype/snarecrafter` aponta para `archetype-265`, que nao foi extraido
-- `wb:archetype/sniping-duo` aponta para `archetype-121`, que nao foi extraido
-- `wb:archetype/spellshot` aponta para `archetype-122`, que nao foi extraido
-- `wb:archetype/sterling-dynamo` aponta para `archetype-110`, que nao foi extraido
-- `wb:archetype/swashbuckler` aponta para `archetype-235`, que nao foi extraido
-- `wb:archetype/talisman-dabbler` aponta para `archetype-266`, que nao foi extraido
-- `wb:archetype/trapsmith` aponta para `archetype-111`, que nao foi extraido
-- `wb:archetype/trick-driver` aponta para `archetype-112`, que nao foi extraido
-- `wb:archetype/unexpected-sharpshooter` aponta para `archetype-123`, que nao foi extraido
-- `wb:archetype/ursine-avenger-hood` aponta para `archetype-200`, que nao foi extraido
-- `wb:archetype/vehicle-mechanic` aponta para `archetype-113`, que nao foi extraido
-- `wb:archetype/vigilante` aponta para `archetype-267`, que nao foi extraido
-- `wb:archetype/viking` aponta para `archetype-268`, que nao foi extraido
-- `wb:archetype/weapon-improviser` aponta para `archetype-269`, que nao foi extraido
-- `wb:archetype/witch` aponta para `archetype-217`, que nao foi extraido
-- `wb:background/child-of-the-twin-village` aponta para `background-587`, que nao foi extraido
-- `wb:background/deckhand` aponta para `background-640`, que nao foi extraido
-- `wb:background/dreams-of-vengeance` aponta para `background-575`, que nao foi extraido
-- `wb:background/lost-loved-one` aponta para `background-576`, que nao foi extraido
-- `wb:background/sense-of-belonging` aponta para `background-577`, que nao foi extraido
-- `wb:background/total-power` aponta para `background-578`, que nao foi extraido
-- `wb:background/wanderlust` aponta para `background-579`, que nao foi extraido
 - `wb:equipment/aligned-oil` aponta para `0`, que nao foi extraido
 - `wb:equipment/anarchic` aponta para `0`, que nao foi extraido
 - `wb:equipment/axiomatic` aponta para `0`, que nao foi extraido

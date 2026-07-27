@@ -11,19 +11,30 @@ Cobre, por classe conjuradora (nivel de classe 1..20):
   - slots extra de feature de classe: Divine Font (Clerico)
 
 Fontes (fixadas, mesmo pin/branch do resto do pipeline):
+  - pipeline/dados_brutos/tabelas_conjuracao_pdf.json -- tabela numerica de
+    slots lida DIRETO dos PDFs oficiais (Player Core, Player Core 2, Dark
+    Archive, Secrets of Magic, War of Immortals), com livro e pagina por
+    classe. E a fonte VENCEDORA da tabela numerica (`slots_per_level`) desde
+    2026-07-27: o pf2etools tem, para o Oracle, so a variante LEGADO
+    (pre-remaster, 2/3 slots) porque a branch `dev` nao tem arquivo `-pc2`
+    pra essa classe -- o PDF do Player Core 2 e o texto do Foundry
+    (oracle-spellcasting.json, "cast up to three 1st-rank spells") confirmam
+    que o remaster vigente e 3/4. Ver docs/pdfs/2026-07-26_tabelas-conjuracao.md
+    e comum.prov_lido("waybuilder") + escolher_slots() abaixo.
   - foundryvtt/pf2e, commit 87f9e5028baaa10b70fdc766260b7886def17e04
     packs/pf2e/classes/*.json (proficiencia inicial + marcos de rank-up,
     key ability, items{} para achar as class-features donas da conjuracao),
     packs/pf2e/class-features/*.json (texto das features de conjuracao --
     tradicao, tipo, focus pool, Divine Font -- via regex sobre a prosa;
-    NAO existe rule element com a tabela numerica de slots, ver relatorio),
+    NAO existe rule element com a tabela numerica de slots, ver relatorio).
+    Cross-check da tabela de slots (nao fonte primaria).
     packs/pf2e/feats/class/cleric/level-1/domain-initiate.json (focus pool
     do Clerico Cloistered, que so vem via feat granted pela doutrina, nao
     por class-feature nativa).
   - Pf2eToolsOrg/Pf2eTools, branch dev, data/class/class-<slug>[-pc1].json
-    -- UNICA das 3 fontes com a tabela "<Classe> Spells per Day" ja
-    estruturada como `{"type": "table", "rows": [...]}`. E a fonte primaria
-    dos numeros de slot desta extracao.
+    -- tabela "<Classe> Spells per Day" ja estruturada como
+    `{"type": "table", "rows": [...]}`. Cross-check da tabela de slots (nao
+    fonte primaria mais -- ver nota do Oracle acima).
   - Archives of Nethys, elasticsearch.aonprd.com/aon/_search -- usado so
     para o Animista (unica classe sem tabela pf2etools), como texto de
     apoio pontual (nao tem a tabela materializada tambem).
@@ -55,8 +66,12 @@ RAW_DIR = PIPELINE_DIR / "dados_brutos"
 FOUNDRY_CACHE = RAW_DIR / "foundry"
 AON_CACHE = RAW_DIR / "aon"
 PF2ETOOLS_CACHE = RAW_DIR / "pf2etools"
+PDF_TABELAS_PATH = RAW_DIR / "tabelas_conjuracao_pdf.json"
 SAIDA_DIR = PIPELINE_DIR / "saida"
 RELATORIOS_DIR = PIPELINE_DIR / "relatorios"
+
+sys.path.insert(0, str(PIPELINE_DIR))
+import comum  # noqa: E402
 
 FOUNDRY_PIN = "87f9e5028baaa10b70fdc766260b7886def17e04"
 
@@ -339,6 +354,139 @@ def parse_slot_table(table: dict) -> tuple[dict, list | None]:
 
 
 # ---------------------------------------------------------------------------
+# Tabela de slots (PDF oficial -- fonte vencedora, ver docstring do modulo)
+# ---------------------------------------------------------------------------
+
+_pdf_tabelas_cache: dict | None = None
+
+
+def load_pdf_tabelas() -> dict:
+    """classe -> registro de tabelas_conjuracao_pdf.json. Arquivo unico, lido
+    do disco (recuperado a mao dos PDFs oficiais em rodada anterior do
+    pipeline, ver docs/pdfs/2026-07-26_tabelas-conjuracao.md); sem chamada de
+    rede, cacheado em memoria pra nao reabrir a cada classe."""
+    global _pdf_tabelas_cache
+    if _pdf_tabelas_cache is None:
+        dados = json.loads(PDF_TABELAS_PATH.read_text(encoding="utf-8"))
+        _pdf_tabelas_cache = {
+            c["classe"]: c for c in dados["classes"] if c.get("conjuradora", True)
+        }
+    return _pdf_tabelas_cache
+
+
+def _parse_pdf_cell(raw) -> tuple[int | None, str | None]:
+    """Interpreta uma celula de `tabelas_conjuracao_pdf.json`. Devolve
+    (valor_numerico_ou_None, bruto_ou_None).
+
+    Nao forca tudo pra inteiro: notacao hibrida de pool duplo ('X+Y', so o
+    Animist usa) nao tem um unico numero que a represente, entao fica so no
+    bruto. Sufixo de rodape ('1*') extrai o inteiro normalmente E guarda o
+    texto original -- mesma convencao que `parse_slot_table` ja usa pra
+    `cantrips_raw`."""
+    if isinstance(raw, bool):
+        return None, str(raw)
+    if isinstance(raw, int):
+        return raw, None
+    if isinstance(raw, str):
+        s = raw.strip()
+        if "+" in s:
+            return None, s  # notacao hibrida (Animist) -- preservada como esta
+        m = re.match(r"^(\d+)", s)
+        if m:
+            n = int(m.group(1))
+            return n, (s if s != str(n) else None)
+        return None, s
+    return None, raw
+
+
+def parse_pdf_slot_table(pdf_entry: dict) -> dict:
+    """Converte `pdf_entry["slots"]` (nivel -> {"cantrips": ..., "1".."10": ...})
+    pro mesmo formato de `parse_slot_table` (nivel -> {cantrips, ranks,
+    max_rank}), pra dar pra comparar direto com a tabela pf2etools.
+
+    Rank com valor 0 (ex.: magus '0*', slot que so existe via feature
+    "studious spells") NAO entra em `ranks` -- mesma convencao de
+    `parse_slot_table`, que tambem trata `n` falso (rank sem slot) como
+    ausente. Sem isso, comparar contra pf2etools (que omite esses ranks)
+    acusaria divergencia numerica onde nao ha nenhuma, so notacao diferente
+    pra "zero". O texto original (com o `*`) fica preservado em `ranks_raw`
+    de qualquer forma -- nada e descartado, so nao entra no numero comparavel."""
+    por_nivel = {}
+    for nivel, celulas in pdf_entry["slots"].items():
+        if nivel == "notacao" or not isinstance(celulas, dict):
+            continue
+        cantrips_val, cantrips_raw = _parse_pdf_cell(celulas.get("cantrips"))
+        ranks: dict[str, int] = {}
+        ranks_raw: dict[str, str] = {}
+        for rank_n in range(1, 11):
+            chave = str(rank_n)
+            if chave not in celulas:
+                continue
+            val, raw = _parse_pdf_cell(celulas[chave])
+            if val:
+                ranks[chave] = val
+            if raw is not None:
+                ranks_raw[chave] = raw
+        entry = {"ranks": ranks}
+        if cantrips_val is not None:
+            entry["cantrips"] = cantrips_val
+        if cantrips_raw:
+            entry["cantrips_raw"] = cantrips_raw
+        if ranks_raw:
+            entry["ranks_raw"] = ranks_raw
+        presentes = sorted(set(ranks) | set(ranks_raw), key=int)
+        entry["max_rank"] = int(presentes[-1]) if presentes else 0
+        por_nivel[nivel] = entry
+    return por_nivel
+
+
+def _tabelas_slots_iguais(a: dict, b: dict) -> bool:
+    """Compara so a parte numerica limpa (`cantrips`, `ranks`) de duas tabelas
+    nivel->entry. Ignora `*_raw`/`max_rank` -- anotam a mesma coisa de forma
+    diferente entre fontes (ex.: pf2etools nao guarda raw de rank, so PDF
+    guarda), nao mudam o numero em si."""
+    if set(a) != set(b):
+        return False
+    for nivel in a:
+        ea, eb = a[nivel], b[nivel]
+        if ea.get("cantrips") != eb.get("cantrips"):
+            return False
+        if ea.get("ranks") != eb.get("ranks"):
+            return False
+    return True
+
+
+def escolher_slots(pdf_por_nivel: dict | None,
+                    pf2etools_por_nivel: dict | None) -> tuple[dict | None, str | None, list]:
+    """Escolhe `slots_per_level` e registra divergencia -- mesmo par
+    (valor, prov, conflitos) que `comum.escolher()` devolve, mesmo formato de
+    entrada em `conflitos` ({"campo", "escolhido", <fonte>: <valor>, ...}).
+
+    NAO chama `comum.escolher()` direto: essa funcao usa `comum.PRECEDENCIA`,
+    que nao conhece o campo "slots_per_level" e cairia no `PADRAO`
+    (foundry/aon/pf2etools) -- "waybuilder" nem entra na lista, entao pf2etools
+    venceria sempre, inclusive no caso do Oracle onde o pf2etools tem so a
+    tabela LEGADO. A tabela do PDF (fonte "waybuilder", ver `comum.prov_lido`)
+    e a UNICA das fontes fixadas com o numero remaster certo pra todas as 11
+    classes -- pf2etools e foundry entram so como cross-check. Ver spec v2,
+    secao "Vocabulario de prov"."""
+    if pdf_por_nivel is None:
+        if pf2etools_por_nivel is None:
+            return None, None, []
+        return pf2etools_por_nivel, comum.prov_lido("pf2etools"), []
+
+    conflitos = []
+    if pf2etools_por_nivel is not None and not _tabelas_slots_iguais(pdf_por_nivel, pf2etools_por_nivel):
+        conflitos.append({
+            "campo": "slots_per_level",
+            "escolhido": "waybuilder",
+            "waybuilder": pdf_por_nivel,
+            "pf2etools": pf2etools_por_nivel,
+        })
+    return pdf_por_nivel, comum.prov_lido("waybuilder"), conflitos
+
+
+# ---------------------------------------------------------------------------
 # Proficiencia de conjuracao
 # ---------------------------------------------------------------------------
 
@@ -567,24 +715,49 @@ def build_class_entry(slug: str, relatorio: dict) -> dict:
         entry["prov"]["focus_pool"] = "foundry (regex sobre a class-feature dona do focus pool nativo)"
 
     # ---- slots por nivel ----
+    # PDF (waybuilder) e a fonte vencedora; pf2etools entra so como cross-check
+    # (ver docstring de escolher_slots -- caso do Oracle e o motivo).
+    pdf_entry = load_pdf_tabelas().get(slug)
+    pdf_por_nivel = parse_pdf_slot_table(pdf_entry) if pdf_entry else None
+
     pf2etools_file = PF2ETOOLS_FILES.get(slug)
+    pf2etools_por_nivel, pf2etools_footnotes = None, None
     if pf2etools_file:
         doc = pf2etools_load(pf2etools_file)
         table = find_spells_per_day_table(doc) if doc else None
         if table:
-            slots, footnotes = parse_slot_table(table)
-            entry["slots_per_level"] = slots
-            entry["slots_footnotes"] = footnotes
-            entry["prov"]["slots_per_level"] = f"pf2etools ({pf2etools_file}, tabela '{table.get('name')}')"
+            pf2etools_por_nivel, pf2etools_footnotes = parse_slot_table(table)
             entry["xref"]["pf2etools"] = pf2etools_file
-            relatorio["slots_confirmados_pf2etools"].append(slug)
+
+    slots, slots_prov, slots_conflitos = escolher_slots(pdf_por_nivel, pf2etools_por_nivel)
+    entry["slots_per_level"] = slots
+    entry["prov"]["slots_per_level"] = slots_prov
+    if slots_conflitos:
+        entry.setdefault("conflitos", []).extend(slots_conflitos)
+
+    if pdf_entry:
+        entry["source"] = {
+            "book": pdf_entry["livro"],
+            "page": pdf_entry["pagina"],
+            "page_advancement_table": pdf_entry.get("pagina_advancement_table"),
+        }
+        entry["slots_footnotes"] = {
+            "notacao": pdf_entry.get("slots", {}).get("notacao"),
+            "notas": pdf_entry.get("notas"),
+        }
+        if pf2etools_por_nivel is not None:
+            relatorio["slots_confirmados_pdf"].append(slug)
+            if slots_conflitos:
+                relatorio["conflitos_registrados"].append(slug)
         else:
-            entry["slots_per_level"] = None
-            entry["prov"]["slots_per_level"] = f"NAO ENCONTRADO em {pf2etools_file}"
-            relatorio["sem_cobertura"].append(slug)
+            relatorio["slots_confirmados_pdf"].append(f"{slug} (sem cross-check pf2etools)")
+    elif pf2etools_por_nivel is not None:
+        # nao deveria acontecer nas 11 classes cobertas (o PDF tem todas) --
+        # fallback pra nao travar o build se algum dia faltar uma entrada
+        entry["slots_footnotes"] = pf2etools_footnotes
+        relatorio["slots_confirmados_pf2etools"].append(slug)
     else:
-        entry["slots_per_level"] = None
-        entry["prov"]["slots_per_level"] = "sem arquivo no pf2etools (classe nao esta no index.json da fonte)"
+        entry["slots_footnotes"] = None
         relatorio["sem_cobertura"].append(slug)
 
     # ---- Divine Font (so Clerico) ----
@@ -596,27 +769,27 @@ def build_class_entry(slug: str, relatorio: dict) -> dict:
 
 
 def build_animist_entry() -> dict:
-    """Animista: sem tabela numerica completa em nenhuma das 3 fontes (nao
-    esta no pf2etools; AoN e Foundry so tem a prosa da mecanica, sem a
-    tabela materializada). Cobertura parcial e deliberada -- ver relatorio.
+    """Animista: sem arquivo no pf2etools (nao esta no index.json da fonte) e
+    Foundry/AoN so tem a prosa da mecanica, sem tabela materializada -- por
+    isso nao ha cross-check estruturado pra `slots_per_level` aqui, so a
+    fonte vencedora (PDF, War of Immortals p.12-13).
 
-    Os poucos numeros abaixo vieram confirmados em DUAS fontes independentes
-    (Foundry packs/pf2e/class-features/animist-apparition-spellcasting.json
-    E AoN, doc class-64, campo 'text'): nivel 1 do pool principal (1 slot
-    rank 1 + 2 cantrips) e o exemplo textual do nivel 2 ("2+1" 1st-rank).
-    O resto da tabela (niveis 3-20, pool de apparition completo) NAO foi
-    confirmado e fica None -- nao foi codificado a mao pra nao arriscar
-    numero errado sem fonte."""
-    doc = load_foundry_class("animist")
-    feat = load_foundry_feature("animist-apparition-spellcasting")
-    text = strip_html(feat["system"]["description"]["value"])
-
+    Ate a rodada de PDF de 2026-07-27 a tabela so tinha 2 pontos confirmados
+    via texto (nivel 1 e um exemplo textual do nivel 2 batido contra AoN).
+    Agora o PDF (imagem-only, lido direto das paginas renderizadas) tem a
+    tabela completa niveis 1-20, com notacao 'X+Y' propria da classe -- dois
+    pools independentes (animist prepared + apparition spontaneous) que a
+    tabela impressa soma numa celula so. Preservada como esta (ver
+    `_parse_pdf_cell`/`parse_pdf_slot_table`): nao da pra reduzir 'X+Y' a um
+    inteiro sem perder informacao, entao o valor numerico fica None e o
+    bruto ('2+1' etc.) vai pra `ranks_raw`/`cantrips_raw`."""
     aon_hits = aon_query("Animist", "class")
-    aon_text = aon_hits[0].get("text", "") if aon_hits else ""
-
     trad = extract_tradition_e_tipo("animist")
 
-    return {
+    pdf_entry = load_pdf_tabelas().get("animist")
+    slots = parse_pdf_slot_table(pdf_entry) if pdf_entry else None
+
+    entry = {
         "id": "wb:class-feature/animist-apparition-spellcasting",
         "class": "Animist",
         "key_ability": extract_key_ability("animist"),
@@ -624,32 +797,13 @@ def build_animist_entry() -> dict:
         "type": "prepared (pool principal) + spontaneous (pool de apparition, separado)",
         "proficiency": extract_generic_proficiency("animist"),
         "focus_pool": extract_focus_pool("animist"),
-        "slots_per_level": None,
-        "slots_coverage": "parcial -- so nivel 1 (confirmado) e um exemplo textual do nivel 2",
-        "slots_confirmed_partial": {
-            "1": {
-                "main_pool": {"cantrips": 2, "ranks": {"1": 1}},
-                "apparition_pool": {"cantrips": 2, "ranks": {"1": 1}},
-                "confirmado_em": ["foundry", "aon"],
-            },
-            "2": {
-                "main_pool": {"ranks": {"1": 2}},
-                "apparition_pool_extra_1st_rank": 1,
-                "nota": "AoN descreve como '2+1' 1st-rank slots (2 do pool principal + 1 do pool de apparition)",
-                "confirmado_em": ["aon"],
-            },
-        },
-        "slots_not_covered": (
-            "tabela completa niveis 1-20 de ambos os pools (principal e apparition) "
-            "nao existe estruturada em nenhuma das 3 fontes fixadas; nao foi "
-            "codificada a mao para nao arriscar numero nao verificavel"
-        ),
+        "slots_per_level": slots,
         "prov": {
             "tradition": "aon (campo 'tradition': ['Divine'])",
             "type": "foundry (texto: 'you are a prepared spellcaster'; pool de apparition e explicitamente 'spontaneous')",
             "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
             "focus_pool": "foundry (regex sobre animist-apparition-spellcasting.json, secao 'Vessel Spells')",
-            "slots_per_level": "NAO COBERTO -- ver slots_not_covered",
+            "slots_per_level": comum.prov_lido("waybuilder") if slots else None,
         },
         "xref": {
             "foundry_class": "packs/pf2e/classes/animist.json",
@@ -657,6 +811,19 @@ def build_animist_entry() -> dict:
             "aon": aon_hits[0]["_id"] if aon_hits else None,
         },
     }
+    if pdf_entry:
+        entry["source"] = {
+            "book": pdf_entry["livro"],
+            "page": pdf_entry["pagina"],
+            "page_advancement_table": pdf_entry.get("pagina_advancement_table"),
+        }
+        entry["slots_footnotes"] = {
+            "notacao": pdf_entry.get("slots", {}).get("notacao"),
+            "notas": pdf_entry.get("notas"),
+        }
+    else:
+        entry["slots_footnotes"] = None
+    return entry
 
 
 # ---------------------------------------------------------------------------
@@ -664,12 +831,20 @@ def build_animist_entry() -> dict:
 # ---------------------------------------------------------------------------
 
 def extrair() -> dict:
-    relatorio = {"slots_confirmados_pf2etools": [], "sem_cobertura": []}
+    relatorio = {
+        "slots_confirmados_pdf": [],       # fonte vencedora (PDF) presente, com ou sem cross-check
+        "slots_confirmados_pf2etools": [], # fallback: so pf2etools (nao deveria disparar nas 11 cobertas)
+        "conflitos_registrados": [],       # classes onde PDF e pf2etools divergem (ver escolher_slots)
+        "sem_cobertura": [],
+    }
     classes = {}
     for slug in CLASSES_COBERTAS:
         if slug == "animist":
             classes[slug] = build_animist_entry()
-            relatorio["sem_cobertura"].append("animist (parcial -- so nivel 1-2, ver relatorio)")
+            if classes[slug].get("slots_per_level"):
+                relatorio["slots_confirmados_pdf"].append("animist (sem cross-check pf2etools -- classe nao esta na fonte)")
+            else:
+                relatorio["sem_cobertura"].append("animist")
             continue
         classes[slug] = build_class_entry(slug, relatorio)
 
@@ -693,10 +868,21 @@ def escrever_relatorio(dados: dict) -> str:
     linhas.append("## Cobertura\n")
     linhas.append(f"- Classes cobertas: **{len(CLASSES_COBERTAS)}** ({', '.join(CLASSES_COBERTAS)})")
     linhas.append(
-        f"- Tabela de slots (1-20, todos os ranks) confirmada via pf2etools: "
-        f"**{len(relatorio['slots_confirmados_pf2etools'])}** classes "
-        f"({', '.join(relatorio['slots_confirmados_pf2etools'])})"
+        f"- Tabela de slots (1-20, todos os ranks) com o PDF oficial como fonte "
+        f"vencedora: **{len(relatorio['slots_confirmados_pdf'])}** classes "
+        f"({', '.join(relatorio['slots_confirmados_pdf'])})"
     )
+    linhas.append(
+        f"- Conflito PDF x pf2etools registrado em `conflitos`: "
+        f"**{len(relatorio['conflitos_registrados'])}** classes "
+        f"({', '.join(relatorio['conflitos_registrados']) or '-'})"
+    )
+    if relatorio["slots_confirmados_pf2etools"]:
+        linhas.append(
+            f"- Fallback: so pf2etools, sem entrada no PDF (nao deveria acontecer "
+            f"nas 11 cobertas): **{len(relatorio['slots_confirmados_pf2etools'])}** "
+            f"({', '.join(relatorio['slots_confirmados_pf2etools'])})"
+        )
     linhas.append(
         f"- Sem cobertura de tabela completa: **{len(relatorio['sem_cobertura'])}** "
         f"({', '.join(relatorio['sem_cobertura']) or '-'})\n"
@@ -712,8 +898,10 @@ def escrever_relatorio(dados: dict) -> str:
         extra = "-"
         if slug == "cleric":
             extra = "divine_font: foundry (divine-font.json)"
+        elif slug == "oracle":
+            extra = "CONFLITO com pf2etools -- ver secao dedicada abaixo"
         elif slug == "animist":
-            extra = "cobertura parcial -- ver secao dedicada abaixo"
+            extra = "notacao hibrida X+Y (dois pools) -- ver secao dedicada abaixo"
         linhas.append(
             f"| {c['class']} | {prov.get('tradition','-')} | {prov.get('proficiency','-')} "
             f"| {prov.get('focus_pool','-')} | {prov.get('slots_per_level','-')} | {extra} |"
@@ -723,29 +911,39 @@ def escrever_relatorio(dados: dict) -> str:
     linhas.append(
         "O relatorio de `classes.py` (extrator irmao) registrou que a tabela de "
         "slots \"fica em rule elements, nao decodificados nesta passada\". "
-        "Investigado a fundo para esta extracao: **isso nao procede**. Nenhuma "
-        "class-feature de conjuracao (Wizard Spellcasting, Cleric Spellcasting, "
-        "Sorcerer Spellcasting etc.) tem `system.rules` com dado numerico de "
-        "slots -- a lista `rules[]` dessas features ou esta vazia, ou so tem "
+        "Investigado a fundo: **isso nao procede**. Nenhuma class-feature de "
+        "conjuracao (Wizard Spellcasting, Cleric Spellcasting, Sorcerer "
+        "Spellcasting etc.) tem `system.rules` com dado numerico de slots -- a "
+        "lista `rules[]` dessas features ou esta vazia, ou so tem "
         "`GrantItem`/`ChoiceSet` para mecanica auxiliar (ex.: escolha heal/harm "
         "do Divine Font). O Foundry carrega a tabela em tempo de execucao via "
         "codigo TypeScript (nao dado), nao emite ela em nenhum arquivo JSON dos "
-        "compendios. A tabela numerica estruturada **so existe no pf2etools**, "
-        "como um bloco `{\"type\": \"table\", \"name\": \"<Classe> Spells per Day\"}` "
-        "dentro de `classFeature[]`/`subclassFeature[]` -- ver "
-        "`find_spells_per_day_table()` em conjuracao.py.\n"
+        "compendios -- so serve de CROSS-CHECK textual pontual (ex.: Oracle "
+        "abaixo), nunca de fonte estruturada. O pf2etools tem a tabela "
+        "estruturada (`{\"type\": \"table\", \"name\": \"<Classe> Spells per Day\"}` "
+        "dentro de `classFeature[]`/`subclassFeature[]`, ver "
+        "`find_spells_per_day_table()`), mas **so como cross-check** desde "
+        "2026-07-27: pra 5 classes (sorcerer/oracle/psychic/magus/summoner) a "
+        "branch `dev` so tem o arquivo LEGADO (pre-remaster), e no caso do "
+        "Oracle isso da o numero ERRADO (ver secao dedicada). A fonte vencedora "
+        "da tabela numerica agora e `pipeline/dados_brutos/tabelas_conjuracao_pdf.json` "
+        "-- lida direto dos PDFs oficiais (Player Core, Player Core 2, Dark "
+        "Archive, Secrets of Magic, War of Immortals), com livro e pagina "
+        "citados por classe. Ver `escolher_slots()` em conjuracao.py.\n"
     )
 
     linhas.append("## Numeros confirmados em 2+ fontes vs. 1 fonte so\n")
     linhas.append(
-        "- **Slots por nivel/rank (a tabela inteira)**: confirmados em **1 fonte "
-        "so** (pf2etools) para as 10 classes com tabela. Nao ha uma segunda fonte "
-        "estruturada para cruzar -- nem Foundry nem AoN materializam a tabela "
-        "numerica (ver secao acima). Validado indiretamente por consistencia "
-        "interna: Wizard/Cleric/Druid/Bard/Witch/Oracle tem a MESMA progressao "
-        "(padrao de conjurador pleno: cantrips=5, 2 slots no rank 1, abre rank "
-        "novo em nivel impar, rank 10 so no 19-20), o que bate com o "
-        "conhecimento publicado do sistema."
+        "- **Slots por nivel/rank (a tabela inteira)**: fonte vencedora e o PDF "
+        "oficial (`tabelas_conjuracao_pdf.json`, `prov: \"waybuilder\"`), pra "
+        "todas as 11 classes conjuradoras. Cross-check via pf2etools disponivel "
+        "pra 10 delas (todas exceto animist, que nao esta no index.json da "
+        "fonte) -- 9 batem exato, 1 diverge (**Oracle**, ver secao dedicada e "
+        "`conflitos` no registro da classe). Validado tambem por consistencia "
+        "interna: Wizard/Cleric/Druid/Bard/Witch tem a MESMA progressao (padrao "
+        "de conjurador pleno: cantrips=5, 2 slots no rank 1, abre rank novo em "
+        "nivel impar, rank 10 so no 19-20), o que bate com o conhecimento "
+        "publicado do sistema."
     )
     linhas.append(
         "- **Marcos de rank-up de proficiencia (trained/expert/master/legendary)**: "
@@ -782,8 +980,22 @@ def escrever_relatorio(dados: dict) -> str:
         "remaster (Player Core) vigente."
     )
     linhas.append(
-        "- **Animista**: ver secao dedicada abaixo -- unica classe sem tabela "
-        "completa confirmada."
+        "- **Oracle -- CONFLITO real, registrado**: pf2etools (`class-oracle.json`, "
+        "arquivo legado, sem variante `-pc1`) mostra o padrao generico (2 slots "
+        "no rank de entrada, 3 no seguinte). O PDF (Player Core 2, p.131) mostra "
+        "3/4 -- o Oracle remaster ganhou o mesmo slot bonus que o Sorcerer ja "
+        "tinha. Cruzado com Foundry (`oracle-spellcasting.json`, texto literal "
+        "\"cast up to three 1st-rank spells\"), que confirma o PDF. Registrado em "
+        "`classes['oracle']['conflitos']` -- `escolhido: \"waybuilder\"`, com o "
+        "valor do pf2etools preservado no proprio registro, nao descartado."
+    )
+    linhas.append(
+        "- **Animista**: PDF (War of Immortals, imagem-only, p.12-13) tem a "
+        "tabela completa niveis 1-20, com notacao propria 'X+Y' (pool animist + "
+        "pool apparition, independentes) -- preservada como esta, sem forcar "
+        "inteiro. Sem cross-check estruturado (nao esta no index.json do "
+        "pf2etools); nivel 1 bate com o que ja estava confirmado via texto "
+        "(Foundry + AoN) em rodada anterior."
     )
 
     linhas.append("\n## O que teve que ser codificado a mao (e por que)\n")
@@ -791,27 +1003,19 @@ def escrever_relatorio(dados: dict) -> str:
         "**Nada foi codificado a mao (`prov: \"codificada:manual\"`) nesta "
         "extracao.** Todo numero emitido em `slots_per_level`, `proficiency`, "
         "`focus_pool` e `divine_font` vem de parsing programatico (regex/table "
-        "walk) rodado em tempo de execucao contra arquivo de fonte real "
-        "cacheado em `pipeline/dados_brutos/`. Onde a fonte simplesmente nao "
-        "tinha o dado (Animista, tabela completa), a saida fica `None`/parcial "
-        "em vez de um numero inventado."
+        "walk/leitura de JSON) rodado em tempo de execucao contra arquivo de "
+        "fonte real cacheado em `pipeline/dados_brutos/` -- inclusive "
+        "`tabelas_conjuracao_pdf.json`, que e ele mesmo o produto de uma "
+        "extracao anterior (leitura de PDF, nao numero chutado por este "
+        "extrator)."
     )
 
     linhas.append("\n## Classes sem cobertura (parcial ou total)\n")
     linhas.append(
-        "- **animist**: proficiencia, tradicao, tipo e focus pool cobertos "
-        "(fonte: Foundry). Tabela de slots por nivel **NAO coberta** -- so os "
-        "dois pontos de nivel 1 e 2 citados em texto (2 fontes concordantes "
-        "no nivel 1: Foundry + AoN). Motivo: animista nao esta no index.json "
-        "do pf2etools (`data/class/index.json`, checado com fetch direto -- "
-        "404 pra `class-animist(-pc1/-pc2).json`), e nem Foundry nem AoN "
-        "materializam a tabela numerica em nenhum campo (so referenciam "
-        "'Animist Spells per Day' como nome de tabela, sem os valores)."
-    )
-    linhas.append(
-        "- Nenhuma outra classe das 11 pedidas ficou descoberta -- wizard, "
-        "cleric, druid, sorcerer, bard, witch, oracle, psychic, magus e "
-        "summoner tem a tabela 1-20 completa."
+        "- Nenhuma das 11 classes conjuradoras ficou sem tabela de slots: o PDF "
+        "cobre as 11 (10 com padrao numerico simples + Animist com notacao "
+        "hibrida). Cross-check estruturado via pf2etools cobre 10 das 11 (falta "
+        "so animist, que nao esta no index.json da fonte)."
     )
 
     linhas.append("\n## Fontes legado vs. remaster (pf2etools)\n")

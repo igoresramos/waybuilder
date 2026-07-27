@@ -310,6 +310,89 @@ prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of
 Magic). Exemplar e Kineticist foram **confirmados como nao-conjuradores** -- nao
 havia tabela faltando.
 
+### O guarda que protege pode ser o que destroi -- meça antes de aceitar
+
+A auditoria propos tres guardas para a fusao legado<->remaster: vetar quando
+`level`/`price_cp`/`damage` divergem, vetar N->1, vetar legado de livro
+posterior ao Remaster. Pareciam obviamente certos -- e barram **77,8% dos pares
+que o proprio AoN declara**.
+
+- **N->1 e o caso normal**, nao anomalia: 351 alvos recebem 2+ legados dentro
+  da mesma categoria. `Magic Wand` recebe as 10 varas por rank de magia,
+  `Bewitching Bloom` recebe as 10 flores. Vetar N->1 desfaz o dedupe.
+- **`level`/`price` divergentes sao errata de remaster**: `Hand of the Mage`
+  nv2 -> `Charlatan's Gloves` nv3.
+- **A fronteira de data e falsa**: Rage of Elements e de 2023-08-02 e ha legado
+  declarado publicado em 2024.
+
+E o mais importante: o que protegia contra o dano original (`aeon-stone`
+engolindo 24 pedras) **nunca foi o guarda**. Das 24 pedras, so 5 declaram
+`remaster_id` -- era a chave da fonte, e o fato de nada ser deletado. Guarda
+desenhado contra um sintoma acaba punindo o caso legitimo que tem o mesmo
+sintoma. Medir a taxa de veto sobre o dado real, antes de ligar o guarda.
+
+### `remaster_id` de class-feature aponta para a CLASSE, nao para a feature
+
+Medido: **351 de 351**. `Evasion` (class-feature-25) declara `remaster_id`
+`class-56`, que e o **Alchemist**. Uma implementacao ingenua de "funde quando a
+fonte declara" fundiria a feature dentro da classe.
+
+Regra: **ponte entre entidades so vale dentro da mesma categoria.** E a
+consequencia tem de ser escrita: renomeacao real de class-feature
+(`Armor of Fury` -> `Armor Mastery`) fica **sem chave**, e tem de sair da
+progressao da classe no Foundry.
+
+### O AoN publica dois documentos para a mesma entidade
+
+Quando algo sobrevive ao remaster com o mesmo nome, ha o doc legado e o
+vigente: `Acrobat` e `archetype-4` **e** `archetype-236`; `Tusks` e `feat-1286`
+**e** `feat-4519`. Sao 5.599 pares assim.
+
+Dois efeitos, os dois silenciosos:
+1. Indice construido com `dict[chave] = doc` fica com **o ultimo lido**, que
+   pode ser o legado -- e o registro herda livro e pagina da edicao antiga
+   (`Acrobat` saiu como Advanced Player's Guide em vez de Player Core 2 p.183).
+2. `xref` tem um slot por fonte, e os dois docs disputam o mesmo slot: um
+   sobrescreve o outro sem aviso.
+
+Regra: escolher o vigente **explicitamente** (o que nao tem `remaster_id`) e
+guardar o outro em `xref.legado_aon`.
+
+### Portao tem de declarar em que ponto do pipeline roda
+
+O portao 7 da v1 procurava nome duplicado **depois** de a fusao ter eliminado a
+duplicata: media 0 e sempre mediria. O inverso tambem quebra -- portao de `prov`
+rodando antes do ultimo processo que escreve o artefato nao ve os campos que
+esse processo acrescenta.
+
+Regra: "pos-emissao" significa **depois do ultimo escritor do arquivo**, e isso
+fica escrito na spec, nao na cabeca de quem implementou.
+
+### Referencia quebrada costuma ser nome legado, nao entidade faltando
+
+61 ids `wb:` inexistentes citados por `requires` pareciam buraco de modelagem.
+51 eram problema de **nome**: o parser le o nome que a fonte escreveu e monta o
+id a partir dele.
+
+Tres caminhos resolveram, nesta ordem: nome normalizado do proprio slug; sufixo
+de familia da sub-escolha (o parser le "Enigma Muse", o registro se chama
+"Enigma"); e a ponte do AoN (`Mage Hand` -> `Telekinetic Hand`). O resto virou
+mapa curado com evidencia (as causes do Champion -- `Paladin`/`Redeemer`/
+`Liberator` viraram `Justice`/`Redemption`/`Liberation` no Player Core 2).
+
+Sobra util: id que nao resolve por nenhum caminho vira **excecao declarada com
+motivo escrito**, nao falha eterna. Portao que falha para sempre para de ser
+lido.
+
+### Ausencia lembrada de cabeca nao e gabarito
+
+O TODO listava `Life-Saving Yowl` (Catfolk nv17, Player Core 2) como ausente da
+base. Nenhuma das tres fontes tem esse nome -- e o PDF do Player Core 2 tambem
+nao. O feat existe e chama-se **Caterwaul**, FEAT 13, e ja estava na base.
+
+Mesma classe da licao do denominador: a lista de verificacao tem de sair do
+proprio livro ou do censo da fonte. Nome citado de memoria gera caca a fantasma.
+
 ### Trait no PF2e e vocabulario puro, nao mecanica
 0 de 561 traits tem efeito estruturado. Os campos `resistance`/`weakness`/
 `speed`/`skill_mod` do AoN vem vazios em 100% deles, e o Foundry

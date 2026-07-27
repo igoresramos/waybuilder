@@ -1369,6 +1369,13 @@ def extrair():
         if r.get("excluir"):
             continue
         sl = slug(r["nome"])
+        # O AoN publica dois docs para o arquetipo que sobreviveu ao remaster
+        # com o mesmo nome (`Acrobat` = archetype-4 legado e archetype-236
+        # vigente). Sem escolha explicita, vencia o ultimo lido -- e o registro
+        # herdava livro e pagina da edicao antiga.
+        anterior = arq_por_slug.get(sl)
+        if anterior is not None and anterior.get("remaster_id") in (None, [], ""):
+            continue
         arq_por_slug[sl] = r
     for d in sorted(dirs_arq):
         arq_por_slug.setdefault(d, None)
@@ -1399,10 +1406,17 @@ def extrair():
         ded = licenca_dedicacao.get(sl)
         source = None
         if r and r["livro"]:
-            source = {"book": r["livro"], "page": r["pagina"],
+            # Escolher e registrar divergencia sao a mesma operacao: o livro do
+            # AoN e o do feat de Dedication do Foundry discordam de verdade em
+            # parte dos arquetipos, e ate agora isso saia em silencio (era o
+            # kind `archetype` no portao 8).
+            livro, prov_livro, confs = comum.escolher(
+                "source.book", {"aon": r["livro"], "foundry": ded[2] if ded else None})
+            conflitos += confs
+            source = {"book": livro, "page": r["pagina"],
                       "license": ded[0] if ded else None,
                       "remaster": bool(ded[1]) if ded else False}
-            prov["source"] = "aon" if not ded else "aon+foundry"
+            prov["source"] = prov_livro or "aon"
         elif ded:
             source = {"book": ded[2], "license": ded[0], "remaster": bool(ded[1])}
             prov["source"] = "foundry"

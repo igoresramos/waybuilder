@@ -1,6 +1,6 @@
 # Portoes de qualidade
 
-Base: **19359** registros, 24 kinds.
+Base: **19374** registros, 24 kinds.
 Todos os portoes sao reportados, inclusive os que passam --
 portao ausente e portao aprovado nao podem parecer a mesma coisa.
 
@@ -12,20 +12,14 @@ portao ausente e portao aprovado nao podem parecer a mesma coisa.
 
 0 divergencias silenciadas, 0 spells com espelho quebrado
 
-### Portao 3 -- requires/grants/progressao citando id inexistente: **FALHA**
+### Portao 3 -- requires/grants/progressao citando id inexistente: **PASSA**
 
-12 citacoes para 10 ids inexistentes
+0 citacoes para 0 ids inexistentes nao declarados; 2 declarados sem sucessor conhecido
 
 - `wb:class-feature/universalist-wizard` (2x, ex. em `wb:feat/hand-of-the-apprentice`)
-- `wb:class-feature/guardians-calling` (2x, ex. em `wb:feat/repel-assault`)
-- `wb:class-feature/caretakers-calling` (1x, ex. em `wb:feat/call-from-deaths-door`)
-- `wb:class-feature/demagogues-calling` (1x, ex. em `wb:feat/cutting-rebuke`)
-- `wb:class-feature/thespians-calling` (1x, ex. em `wb:feat/cutting-rebuke`)
-- `wb:class-feature/acrobats-calling` (1x, ex. em `wb:feat/feet-that-stride-the-sky`)
-- `wb:class-feature/thiefs-calling` (1x, ex. em `wb:feat/hands-that-unweave-disaster`)
-- `wb:class-feature/artisans-calling` (1x, ex. em `wb:feat/mythic-containment`)
 - `wb:feat/underworld-connections` (1x, ex. em `wb:feat/quick-contacts`)
-- `wb:class-feature/hunters-calling` (1x, ex. em `wb:feat/read-the-wind`)
+- declarado: `wb:class-feature/universalist-wizard` -- escola Universalist do Legacy. O remaster trocou as escolas do Mago por outras dez (School of Ars Grammatica, Battle Magic, Civic Wizardry, Gates, Kalistrade, Magical Technologies, Mentalism, Protean Form, Rooted Wisdom, Unified Magical Theory) e nenhuma e sucessora direta. Fica quebrada ate a decisao de modelagem
+- declarado: `wb:feat/underworld-connections` -- feat do Advanced Player's Guide citado por wb:feat/quick-contacts. Zero ocorrencias no dump do AoN e no checkout do Foundry -- e ausencia das fontes, nao do pipeline
 
 ### Portao 4 -- queda de cobertura contra o build anterior: **PASSA**
 
@@ -47,10 +41,9 @@ portao ausente e portao aprovado nao podem parecer a mesma coisa.
 
 ### Portao 8 -- kind com 2+ fontes e zero divergencia registrada: **FALHA**
 
-3 kinds sem instrumentacao de conflito
+2 kinds sem instrumentacao de conflito
 
 - `archetype`: 242 registros com 2+ fontes, 0 conflitos
-- `class`: 27 registros com 2+ fontes, 0 conflitos
 - `familiar-ability`: 73 registros com 2+ fontes, 0 conflitos
 
 ### Portao 9 -- cobertura por kind contra o censo do AoN: **FALHA**
@@ -62,7 +55,7 @@ portao ausente e portao aprovado nao podem parecer a mesma coisa.
 - `animal-companion`: base 113 / censo 96 [tolerancia 20%: especializacao e avanco ficam fora por decisao de escopo]
 - `archetype`: base 247 / censo 244
 - `background`: base 514 / censo 499
-- `class-feature`: base 826 / censo 721 [tolerancia 10%: o AoN indexa escolha de subclasse em categoria propria (mystery, patron, instinct, doctrine)]
+- `class-feature`: base 841 / censo 721 [tolerancia 10%: o AoN indexa escolha de subclasse em categoria propria (mystery, patron, instinct, doctrine)]
 - `deity`: base 484 / censo 484
 - `domain`: base 64 / censo 63
 - `feat`: base 6411 / censo 6085

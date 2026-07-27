@@ -282,6 +282,100 @@ def construir_licencas_deity():
     return tabela
 
 
+def carregar_foundry_deities():
+    """chave(nome) -> doc completo do Foundry, pra cobertura mutua (achado
+    A10): 6 nomes que existem so no Foundry, sem par no AoN nem por nome
+    exato nem normalizado -- Alocer, Chinostes, Norns, Atheists and Free
+    Agents, Lissala (The Order of Virtue), The Curtain Call. `_andar` ja
+    desce em subdiretorio (deities/ tem 34, um por panteao/categoria) --
+    `construir_licencas_deity()` ja lia todos pra tabela de licenca; so
+    ninguem promovia o nome pra registro `wb:deity/*` quando faltava no AoN."""
+    out = {}
+    packs = _packs_foundry()
+    if not packs:
+        return out
+    raiz = os.path.join(packs, "deities")
+    if not os.path.isdir(raiz):
+        return out
+    for caminho in _andar(raiz):
+        try:
+            d = _ler_json(caminho)
+        except Exception:
+            continue
+        if not isinstance(d, dict) or d.get("type") != "deity" or not d.get("name"):
+            continue
+        out[chave(d["name"])] = d
+    return out
+
+
+def extrair_deities_foundry_only(foundry_deities, aon_deity_names, domain_slugs, est):
+    """Deidades que so existem no Foundry -- mono-fonte (`xref` so com
+    `foundry`), legitimo pelo portao 5. `Lissala (The Order of Virtue)` e
+    tratada como entidade PROPRIA, distinta de `Lissala` (que o AoN tem):
+    mesma convencao de `normalize_name()` em ancestrias.py, que nao derruba
+    parenteses porque eles distinguem variantes reais."""
+    registros = []
+    for k, d in sorted(foundry_deities.items()):
+        if k in aon_deity_names:
+            continue
+        nome = d["name"]
+        sl = slug(nome)
+        if not sl:
+            continue
+        s = d.get("system", {}) or {}
+        pub = s.get("publication") or {}
+        prov = {"name": "foundry"}
+        source = None
+        if pub.get("title") or pub.get("license"):
+            source = {"book": pub.get("title"), "page": None,
+                      "license": pub.get("license"), "remaster": bool(pub.get("remaster"))}
+            prov["source"] = "foundry"
+        grants_completos, requires_parseado = comum.mecanizacao("deity", False, False, False, True)
+        reg = {
+            "id": f"wb:deity/{sl}",
+            "kind": "deity",
+            "name": nome,
+            "level": None,
+            "traits": [],
+            "rarity": None,
+            "source": source,
+            "requires": None,
+            "grants": [],
+            "text": f"wb:text/deity/{sl}",
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
+            "xref": {"foundry": f"Compendium.pf2e.deities.Item.{d.get('_id')}"},
+            "prov": prov,
+        }
+        atributos = [ATRIBUTOS.get(a.lower(), a.lower()) for a in (s.get("attribute") or [])]
+        if atributos:
+            reg["divine_attribute"] = atributos
+            reg["prov"]["divine_attribute"] = "foundry"
+        font = s.get("font") or []
+        if font:
+            reg["divine_font"] = [f.lower() for f in font]
+            reg["prov"]["divine_font"] = "foundry"
+        doms = s.get("domains") or {}
+        doms_primarios, doms_alt = doms.get("primary") or [], doms.get("alternate") or []
+        if doms_primarios or doms_alt:
+            reg["domains"] = {
+                "primary": _refs(doms_primarios, "domain", domain_slugs),
+                "alternate": _refs(doms_alt, "domain", domain_slugs),
+            }
+            reg["prov"]["domains"] = "foundry"
+        arma = s.get("weapons") or []
+        if arma:
+            reg["favored_weapon"] = [f"wb:equipment/{slug(a)}" for a in arma]
+            reg["prov"]["favored_weapon"] = "foundry"
+        sanct = (s.get("sanctification") or {}).get("what") or []
+        if sanct:
+            reg["sanctification"] = [x.lower() for x in sanct]
+            reg["prov"]["sanctification"] = "foundry"
+        registros.append(reg)
+    est["deity_so_foundry"] = len(registros)
+    return registros
+
+
 def _fonte(primary_source, primary_source_raw, licencas):
     if not primary_source:
         return None, None
@@ -628,6 +722,14 @@ def extrair():
     reg_domains = extrair_domains(domain_hits, licencas, est, deity_slugs_prelim)
     domain_slugs = est["domain_slugs"]
     reg_deities = extrair_deities(deity_hits, licencas, licencas_deity, est, domain_slugs)
+
+    # deities so-Foundry (achado A10): cobertura mutua, mesmo padrao aplicado
+    # a heritage/familiar-ability -- o Foundry tem nome que o AoN nao indexa.
+    foundry_deities = carregar_foundry_deities()
+    aon_deity_names = {chave(h.get("name", "")) for h in deity_hits}
+    reg_deities_foundry = extrair_deities_foundry_only(
+        foundry_deities, aon_deity_names, domain_slugs, est)
+    reg_deities += reg_deities_foundry
 
     # licenca: cobertura
     todos = reg_traits + reg_skills + reg_domains + reg_deities

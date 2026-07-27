@@ -158,6 +158,17 @@ def main():
              f"{len(espelho)} spells com espelho quebrado", silenciados)
 
     # --- 3. referencia wb: quebrada ---------------------------------------
+    #
+    # Excecao declarada, no mesmo espirito da tolerancia do portao 9: id sem
+    # sucessor conhecido, com o motivo escrito em aliases_referencias.json,
+    # nao falha o build -- mas continua listado. Portao que falha para sempre
+    # vira ruido e para de ser lido.
+    declaradas = {}
+    curado = f"{AQUI}/aliases_referencias.json"
+    if os.path.exists(curado):
+        with open(curado) as fh:
+            declaradas = (json.load(fh).get("sem_sucessor_conhecido") or {})
+
     quebradas = collections.Counter()
     onde = {}
     for reg in base:
@@ -165,9 +176,13 @@ def main():
             if alvo not in ids:
                 quebradas[alvo] += 1
                 onde.setdefault(alvo, reg["id"])
-    r.portao(3, "requires/grants/progressao citando id inexistente", not quebradas,
-             f"{sum(quebradas.values())} citacoes para {len(quebradas)} ids inexistentes",
-             [f"`{k}` ({v}x, ex. em `{onde[k]}`)" for k, v in quebradas.most_common(25)])
+    inesperadas = {k: v for k, v in quebradas.items() if k not in declaradas}
+    r.portao(3, "requires/grants/progressao citando id inexistente", not inesperadas,
+             f"{sum(inesperadas.values())} citacoes para {len(inesperadas)} ids "
+             f"inexistentes nao declarados; {len(quebradas) - len(inesperadas)} "
+             f"declarados sem sucessor conhecido",
+             [f"`{k}` ({v}x, ex. em `{onde[k]}`)" for k, v in quebradas.most_common(25)]
+             + [f"declarado: `{k}` -- {v}" for k, v in declaradas.items()])
 
     # --- 4. cobertura contra o build anterior ------------------------------
     atual = collections.Counter(reg.get("kind") for reg in base)

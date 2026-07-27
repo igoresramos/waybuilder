@@ -1127,7 +1127,7 @@
       },
       {
         "nivel": 9,
-        "concede": "wb:class-feature/performer-s-heart"
+        "concede": "wb:class-feature/performers-heart"
       },
       {
         "nivel": 11,
@@ -1151,7 +1151,7 @@
       },
       {
         "nivel": 17,
-        "concede": "wb:class-feature/greater-performer-s-heart"
+        "concede": "wb:class-feature/greater-performers-heart"
       },
       {
         "nivel": 19,
@@ -1329,11 +1329,11 @@
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/champion-s-aura"
+        "concede": "wb:class-feature/champions-aura"
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/champion-s-reaction"
+        "concede": "wb:class-feature/champions-reaction"
       },
       {
         "nivel": 1,
@@ -1449,7 +1449,7 @@
       },
       {
         "nivel": 19,
-        "concede": "wb:class-feature/hero-s-defiance"
+        "concede": "wb:class-feature/heros-defiance"
       }
     ],
     "text": "wb:text/class/champion",
@@ -1915,7 +1915,7 @@
     "progressao": [
       {
         "nivel": 1,
-        "concede": "wb:class-feature/commander-s-banner"
+        "concede": "wb:class-feature/commanders-banner"
       },
       {
         "nivel": 1,
@@ -2464,7 +2464,7 @@
       },
       {
         "nivel": 7,
-        "concede": "wb:class-feature/plunderer-of-the-hive-s-riches"
+        "concede": "wb:class-feature/plunderer-of-the-hives-riches"
       },
       {
         "nivel": 7,
@@ -2476,7 +2476,7 @@
       },
       {
         "nivel": 7,
-        "concede": "wb:class-feature/trespasser-in-death-s-realm"
+        "concede": "wb:class-feature/trespasser-in-deaths-realm"
       },
       {
         "nivel": 7,
@@ -2923,11 +2923,11 @@
     "progressao": [
       {
         "nivel": 1,
-        "concede": "wb:class-feature/guardian-s-armor"
+        "concede": "wb:class-feature/guardians-armor"
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/guardian-s-techniques"
+        "concede": "wb:class-feature/guardians-techniques"
       },
       {
         "nivel": 1,
@@ -3145,11 +3145,11 @@
     "progressao": [
       {
         "nivel": 1,
-        "concede": "wb:class-feature/gunslinger-s-way"
+        "concede": "wb:class-feature/gunslingers-way"
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/slinger-s-precision"
+        "concede": "wb:class-feature/slingers-precision"
       },
       {
         "nivel": 1,
@@ -3229,7 +3229,7 @@
       },
       {
         "nivel": 17,
-        "concede": "wb:class-feature/shootist-s-edge"
+        "concede": "wb:class-feature/shootists-edge"
       },
       {
         "nivel": 19,
@@ -3694,7 +3694,7 @@
       },
       {
         "nivel": 17,
-        "concede": "wb:class-feature/anvil-s-hardness"
+        "concede": "wb:class-feature/anvils-hardness"
       },
       {
         "nivel": 17,
@@ -4175,7 +4175,7 @@
       },
       {
         "nivel": 5,
-        "concede": "wb:class-feature/gate-s-threshold"
+        "concede": "wb:class-feature/gates-threshold"
       },
       {
         "nivel": 7,
@@ -4191,7 +4191,7 @@
       },
       {
         "nivel": 9,
-        "concede": "wb:class-feature/second-gate-s-threshold"
+        "concede": "wb:class-feature/second-gates-threshold"
       },
       {
         "nivel": 11,
@@ -4211,7 +4211,7 @@
       },
       {
         "nivel": 13,
-        "concede": "wb:class-feature/third-gate-s-threshold"
+        "concede": "wb:class-feature/third-gates-threshold"
       },
       {
         "nivel": 13,
@@ -4231,7 +4231,7 @@
       },
       {
         "nivel": 17,
-        "concede": "wb:class-feature/fourth-gate-s-threshold"
+        "concede": "wb:class-feature/fourth-gates-threshold"
       },
       {
         "nivel": 19,
@@ -4939,7 +4939,7 @@
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/curse-of-the-sky-s-call"
+        "concede": "wb:class-feature/curse-of-the-skys-call"
       },
       {
         "nivel": 1,
@@ -5499,7 +5499,7 @@
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/hunter-s-edge"
+        "concede": "wb:class-feature/hunters-edge"
       },
       {
         "nivel": 1,
@@ -5543,7 +5543,7 @@
       },
       {
         "nivel": 9,
-        "concede": "wb:class-feature/nature-s-edge"
+        "concede": "wb:class-feature/natures-edge"
       },
       {
         "nivel": 9,
@@ -5559,7 +5559,7 @@
       },
       {
         "nivel": 11,
-        "concede": "wb:class-feature/warden-s-endurance"
+        "concede": "wb:class-feature/wardens-endurance"
       },
       {
         "nivel": 13,
@@ -5792,7 +5792,7 @@
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/rogue-s-racket"
+        "concede": "wb:class-feature/rogues-racket"
       },
       {
         "nivel": 1,
@@ -6674,7 +6674,7 @@
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/swashbuckler-s-style"
+        "concede": "wb:class-feature/swashbucklers-style"
       },
       {
         "nivel": 1,
@@ -6942,7 +6942,7 @@
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/implement-s-empowerment"
+        "concede": "wb:class-feature/implements-empowerment"
       },
       {
         "nivel": 1,
@@ -7339,7 +7339,7 @@
       },
       {
         "nivel": 1,
-        "concede": "wb:class-feature/faith-s-flamekeeper"
+        "concede": "wb:class-feature/faiths-flamekeeper"
       },
       {
         "nivel": 1,
@@ -7531,7 +7531,7 @@
       },
       {
         "nivel": 19,
-        "concede": "wb:class-feature/patron-s-gift"
+        "concede": "wb:class-feature/patrons-gift"
       }
     ],
     "text": "wb:text/class/witch",
@@ -7875,7 +7875,7 @@
       },
       {
         "nivel": 19,
-        "concede": "wb:class-feature/archwizard-s-spellcraft"
+        "concede": "wb:class-feature/archwizards-spellcraft"
       },
       {
         "nivel": 19,
@@ -7977,7 +7977,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/acrobat-s-calling",
+    "id": "wb:class-feature/acrobats-calling",
     "kind": "class-feature",
     "name": "Acrobat's Calling",
     "class": [],
@@ -7993,7 +7993,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/acrobat-s-calling",
+    "text": "wb:text/class-feature/acrobats-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -9730,7 +9730,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/anvil-s-hardness",
+    "id": "wb:class-feature/anvils-hardness",
     "kind": "class-feature",
     "name": "Anvil's Hardness",
     "class": [
@@ -9753,7 +9753,7 @@
         }
       }
     ],
-    "text": "wb:text/class-feature/anvil-s-hardness",
+    "text": "wb:text/class-feature/anvils-hardness",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -9996,7 +9996,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/archwizard-s-spellcraft",
+    "id": "wb:class-feature/archwizards-spellcraft",
     "kind": "class-feature",
     "name": "Archwizard's Spellcraft",
     "class": [
@@ -10013,7 +10013,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/archwizard-s-spellcraft",
+    "text": "wb:text/class-feature/archwizards-spellcraft",
     "grants_completos": true,
     "requires_parseado": true,
     "xref": {
@@ -10221,7 +10221,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/artisan-s-calling",
+    "id": "wb:class-feature/artisans-calling",
     "kind": "class-feature",
     "name": "Artisan's Calling",
     "class": [],
@@ -10237,7 +10237,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/artisan-s-calling",
+    "text": "wb:text/class-feature/artisans-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -10558,7 +10558,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/barrow-s-edge",
+    "id": "wb:class-feature/barrows-edge",
     "kind": "class-feature",
     "name": "Barrow's Edge",
     "class": [],
@@ -10573,7 +10573,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/barrow-s-edge",
+    "text": "wb:text/class-feature/barrows-edge",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -12062,7 +12062,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/bookkeeper-s-calling",
+    "id": "wb:class-feature/bookkeepers-calling",
     "kind": "class-feature",
     "name": "Bookkeeper's Calling",
     "class": [],
@@ -12078,7 +12078,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/bookkeeper-s-calling",
+    "text": "wb:text/class-feature/bookkeepers-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -12421,7 +12421,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/caretaker-s-calling",
+    "id": "wb:class-feature/caretakers-calling",
     "kind": "class-feature",
     "name": "Caretaker's Calling",
     "class": [],
@@ -12437,7 +12437,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/caretaker-s-calling",
+    "text": "wb:text/class-feature/caretakers-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -12686,7 +12686,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/champion-s-aura",
+    "id": "wb:class-feature/champions-aura",
     "kind": "class-feature",
     "name": "Champion's Aura",
     "class": [
@@ -12703,7 +12703,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/champion-s-aura",
+    "text": "wb:text/class-feature/champions-aura",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -12722,7 +12722,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/champion-s-reaction",
+    "id": "wb:class-feature/champions-reaction",
     "kind": "class-feature",
     "name": "Champion's Reaction",
     "class": [
@@ -12739,7 +12739,7 @@
       "remaster": false
     },
     "grants": [],
-    "text": "wb:text/class-feature/champion-s-reaction",
+    "text": "wb:text/class-feature/champions-reaction",
     "grants_completos": true,
     "requires_parseado": true,
     "xref": {
@@ -13102,7 +13102,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/commander-s-banner",
+    "id": "wb:class-feature/commanders-banner",
     "kind": "class-feature",
     "name": "Commander's Banner",
     "class": [
@@ -13119,7 +13119,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/commander-s-banner",
+    "text": "wb:text/class-feature/commanders-banner",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -13976,7 +13976,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/curse-of-the-sky-s-call",
+    "id": "wb:class-feature/curse-of-the-skys-call",
     "kind": "class-feature",
     "name": "Curse of the Sky's Call",
     "class": [
@@ -13995,7 +13995,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/curse-of-the-sky-s-call",
+    "text": "wb:text/class-feature/curse-of-the-skys-call",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -14513,7 +14513,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/demagogue-s-calling",
+    "id": "wb:class-feature/demagogues-calling",
     "kind": "class-feature",
     "name": "Demagogue's Calling",
     "class": [],
@@ -14529,7 +14529,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/demagogue-s-calling",
+    "text": "wb:text/class-feature/demagogues-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -15360,7 +15360,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/doomsayer-s-calling",
+    "id": "wb:class-feature/doomsayers-calling",
     "kind": "class-feature",
     "name": "Doomsayer's Calling",
     "class": [],
@@ -15376,7 +15376,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/doomsayer-s-calling",
+    "text": "wb:text/class-feature/doomsayers-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -15651,7 +15651,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/dreamer-s-calling",
+    "id": "wb:class-feature/dreamers-calling",
     "kind": "class-feature",
     "name": "Dreamer's Calling",
     "class": [],
@@ -15667,7 +15667,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/dreamer-s-calling",
+    "text": "wb:text/class-feature/dreamers-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -17828,7 +17828,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/faith-s-flamekeeper",
+    "id": "wb:class-feature/faiths-flamekeeper",
     "kind": "class-feature",
     "name": "Faith's Flamekeeper",
     "class": [
@@ -17845,7 +17845,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/faith-s-flamekeeper",
+    "text": "wb:text/class-feature/faiths-flamekeeper",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -19359,7 +19359,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/fourth-gate-s-threshold",
+    "id": "wb:class-feature/fourth-gates-threshold",
     "kind": "class-feature",
     "name": "Fourth Gate's Threshold",
     "class": [
@@ -19376,7 +19376,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/fourth-gate-s-threshold",
+    "text": "wb:text/class-feature/fourth-gates-threshold",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -19535,7 +19535,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/gate-s-threshold",
+    "id": "wb:class-feature/gates-threshold",
     "kind": "class-feature",
     "name": "Gate's Threshold",
     "class": [
@@ -19552,7 +19552,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/gate-s-threshold",
+    "text": "wb:text/class-feature/gates-threshold",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -20432,7 +20432,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/greater-performer-s-heart",
+    "id": "wb:class-feature/greater-performers-heart",
     "kind": "class-feature",
     "name": "Greater Performer's Heart",
     "class": [
@@ -20455,7 +20455,7 @@
         }
       }
     ],
-    "text": "wb:text/class-feature/greater-performer-s-heart",
+    "text": "wb:text/class-feature/greater-performers-heart",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -20869,7 +20869,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/guardian-s-armor",
+    "id": "wb:class-feature/guardians-armor",
     "kind": "class-feature",
     "name": "Guardian's Armor",
     "class": [
@@ -20886,7 +20886,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/guardian-s-armor",
+    "text": "wb:text/class-feature/guardians-armor",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -20905,7 +20905,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/guardian-s-calling",
+    "id": "wb:class-feature/guardians-calling",
     "kind": "class-feature",
     "name": "Guardian's Calling",
     "class": [],
@@ -20921,7 +20921,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/guardian-s-calling",
+    "text": "wb:text/class-feature/guardians-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -20940,7 +20940,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/guardian-s-techniques",
+    "id": "wb:class-feature/guardians-techniques",
     "kind": "class-feature",
     "name": "Guardian's Techniques",
     "class": [
@@ -20957,7 +20957,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/guardian-s-techniques",
+    "text": "wb:text/class-feature/guardians-techniques",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -21066,7 +21066,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/gunslinger-s-way",
+    "id": "wb:class-feature/gunslingers-way",
     "kind": "class-feature",
     "name": "Gunslinger's Way",
     "class": [
@@ -21083,7 +21083,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/gunslinger-s-way",
+    "text": "wb:text/class-feature/gunslingers-way",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -21222,7 +21222,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/handler-s-calling",
+    "id": "wb:class-feature/handlers-calling",
     "kind": "class-feature",
     "name": "Handler's Calling",
     "class": [],
@@ -21238,7 +21238,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/handler-s-calling",
+    "text": "wb:text/class-feature/handlers-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -21479,7 +21479,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/hero-s-defiance",
+    "id": "wb:class-feature/heros-defiance",
     "kind": "class-feature",
     "name": "Hero's Defiance",
     "class": [
@@ -21496,7 +21496,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/hero-s-defiance",
+    "text": "wb:text/class-feature/heros-defiance",
     "grants_completos": true,
     "requires_parseado": true,
     "xref": {
@@ -21664,7 +21664,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/hunter-s-calling",
+    "id": "wb:class-feature/hunters-calling",
     "kind": "class-feature",
     "name": "Hunter's Calling",
     "class": [],
@@ -21680,7 +21680,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/hunter-s-calling",
+    "text": "wb:text/class-feature/hunters-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -21699,7 +21699,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/hunter-s-edge",
+    "id": "wb:class-feature/hunters-edge",
     "kind": "class-feature",
     "name": "Hunter's Edge",
     "class": [
@@ -21716,7 +21716,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/hunter-s-edge",
+    "text": "wb:text/class-feature/hunters-edge",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -21887,7 +21887,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/implement-s-empowerment",
+    "id": "wb:class-feature/implements-empowerment",
     "kind": "class-feature",
     "name": "Implement's Empowerment",
     "class": [
@@ -21904,7 +21904,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/implement-s-empowerment",
+    "text": "wb:text/class-feature/implements-empowerment",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -27515,7 +27515,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/nature-s-edge",
+    "id": "wb:class-feature/natures-edge",
     "kind": "class-feature",
     "name": "Nature's Edge",
     "class": [
@@ -27532,7 +27532,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/nature-s-edge",
+    "text": "wb:text/class-feature/natures-edge",
     "grants_completos": true,
     "requires_parseado": true,
     "xref": {
@@ -28957,7 +28957,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/patron-s-gift",
+    "id": "wb:class-feature/patrons-gift",
     "kind": "class-feature",
     "name": "Patron's Gift",
     "class": [
@@ -28974,7 +28974,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/patron-s-gift",
+    "text": "wb:text/class-feature/patrons-gift",
     "grants_completos": true,
     "requires_parseado": true,
     "xref": {
@@ -29402,7 +29402,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/performer-s-heart",
+    "id": "wb:class-feature/performers-heart",
     "kind": "class-feature",
     "name": "Performer's Heart",
     "class": [
@@ -29423,7 +29423,7 @@
         }
       }
     ],
-    "text": "wb:text/class-feature/performer-s-heart",
+    "text": "wb:text/class-feature/performers-heart",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -30142,7 +30142,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/plunderer-of-the-hive-s-riches",
+    "id": "wb:class-feature/plunderer-of-the-hives-riches",
     "kind": "class-feature",
     "name": "Plunderer of the Hive's Riches",
     "class": [
@@ -30159,7 +30159,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/plunderer-of-the-hive-s-riches",
+    "text": "wb:text/class-feature/plunderer-of-the-hives-riches",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -32023,7 +32023,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/rogue-s-racket",
+    "id": "wb:class-feature/rogues-racket",
     "kind": "class-feature",
     "name": "Rogue's Racket",
     "class": [
@@ -32040,7 +32040,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/rogue-s-racket",
+    "text": "wb:text/class-feature/rogues-racket",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -32247,7 +32247,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/runelord-s-calling",
+    "id": "wb:class-feature/runelords-calling",
     "kind": "class-feature",
     "name": "Runelord's Calling",
     "class": [],
@@ -32263,7 +32263,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/runelord-s-calling",
+    "text": "wb:text/class-feature/runelords-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -32324,7 +32324,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/saga-s-calling",
+    "id": "wb:class-feature/sagas-calling",
     "kind": "class-feature",
     "name": "Saga's Calling",
     "class": [],
@@ -32340,7 +32340,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/saga-s-calling",
+    "text": "wb:text/class-feature/sagas-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -32359,7 +32359,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/sage-s-calling",
+    "id": "wb:class-feature/sages-calling",
     "kind": "class-feature",
     "name": "Sage's Calling",
     "class": [],
@@ -32375,7 +32375,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/sage-s-calling",
+    "text": "wb:text/class-feature/sages-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -33134,7 +33134,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/second-gate-s-threshold",
+    "id": "wb:class-feature/second-gates-threshold",
     "kind": "class-feature",
     "name": "Second Gate's Threshold",
     "class": [
@@ -33151,7 +33151,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/second-gate-s-threshold",
+    "text": "wb:text/class-feature/second-gates-threshold",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -33726,7 +33726,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/shootist-s-edge",
+    "id": "wb:class-feature/shootists-edge",
     "kind": "class-feature",
     "name": "Shootist's Edge",
     "class": [
@@ -33749,7 +33749,7 @@
         }
       }
     ],
-    "text": "wb:text/class-feature/shootist-s-edge",
+    "text": "wb:text/class-feature/shootists-edge",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -33972,7 +33972,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/skybearer-s-belt",
+    "id": "wb:class-feature/skybearers-belt",
     "kind": "class-feature",
     "name": "Skybearer's Belt",
     "class": [],
@@ -33987,7 +33987,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/skybearer-s-belt",
+    "text": "wb:text/class-feature/skybearers-belt",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -34006,7 +34006,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/slinger-s-precision",
+    "id": "wb:class-feature/slingers-precision",
     "kind": "class-feature",
     "name": "Slinger's Precision",
     "class": [
@@ -34023,7 +34023,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/slinger-s-precision",
+    "text": "wb:text/class-feature/slingers-precision",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -35630,7 +35630,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/swashbuckler-s-style",
+    "id": "wb:class-feature/swashbucklers-style",
     "kind": "class-feature",
     "name": "Swashbuckler's Style",
     "class": [
@@ -35647,7 +35647,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/swashbuckler-s-style",
+    "text": "wb:text/class-feature/swashbucklers-style",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -36666,7 +36666,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/thespian-s-calling",
+    "id": "wb:class-feature/thespians-calling",
     "kind": "class-feature",
     "name": "Thespian's Calling",
     "class": [],
@@ -36682,7 +36682,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/thespian-s-calling",
+    "text": "wb:text/class-feature/thespians-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -36773,7 +36773,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/thief-s-calling",
+    "id": "wb:class-feature/thiefs-calling",
     "kind": "class-feature",
     "name": "Thief's Calling",
     "class": [],
@@ -36789,7 +36789,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/thief-s-calling",
+    "text": "wb:text/class-feature/thiefs-calling",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -36968,7 +36968,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/third-gate-s-threshold",
+    "id": "wb:class-feature/third-gates-threshold",
     "kind": "class-feature",
     "name": "Third Gate's Threshold",
     "class": [
@@ -36985,7 +36985,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/third-gate-s-threshold",
+    "text": "wb:text/class-feature/third-gates-threshold",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -37150,7 +37150,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/titan-s-breaker",
+    "id": "wb:class-feature/titans-breaker",
     "kind": "class-feature",
     "name": "Titan's Breaker",
     "class": [],
@@ -37165,7 +37165,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/titan-s-breaker",
+    "text": "wb:text/class-feature/titans-breaker",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -37328,7 +37328,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/trespasser-in-death-s-realm",
+    "id": "wb:class-feature/trespasser-in-deaths-realm",
     "kind": "class-feature",
     "name": "Trespasser In Death's Realm",
     "class": [
@@ -37345,7 +37345,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/trespasser-in-death-s-realm",
+    "text": "wb:text/class-feature/trespasser-in-deaths-realm",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -38218,7 +38218,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/victor-s-wreath",
+    "id": "wb:class-feature/victors-wreath",
     "kind": "class-feature",
     "name": "Victor's Wreath",
     "class": [],
@@ -38233,7 +38233,7 @@
       "remaster": true
     },
     "grants": [],
-    "text": "wb:text/class-feature/victor-s-wreath",
+    "text": "wb:text/class-feature/victors-wreath",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {
@@ -38559,7 +38559,7 @@
     "conflitos": []
   },
   {
-    "id": "wb:class-feature/warden-s-endurance",
+    "id": "wb:class-feature/wardens-endurance",
     "kind": "class-feature",
     "name": "Warden's Endurance",
     "class": [
@@ -38582,7 +38582,7 @@
         }
       }
     ],
-    "text": "wb:text/class-feature/warden-s-endurance",
+    "text": "wb:text/class-feature/wardens-endurance",
     "grants_completos": false,
     "requires_parseado": true,
     "xref": {

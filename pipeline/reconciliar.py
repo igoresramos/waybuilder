@@ -526,6 +526,10 @@ def main():
     if descartados:
         print(f"artefatos organizacionais descartados: {len(descartados)} -> {descartados}")
 
+    # --- 5b. apontar para o doc vigente do AoN quando ele existe ------------
+    trocados = preferir_doc_vigente(base)
+    print(f"xref.aon movido do doc legado para o vigente: {trocados}")
+
     # --- 6. referencia citando nome legado aponta para o registro certo -----
     corrigidas, quebradas = resolver_referencias(base)
     print(f"referencias wb: corrigidas por nome/ponte: {corrigidas}  "

@@ -91,10 +91,11 @@
  "deity_com_sanctification": 374,
  "deity_triplice_completa": 476,
  "deity_licenca_direta_foundry": 471,
+ "deity_so_foundry": 9,
  "registros_sem_licenca": 135,
- "registros_total": 1144,
- "traits_citados_total": 418,
- "traits_orfaos_total": 16,
+ "registros_total": 1153,
+ "traits_citados_total": 426,
+ "traits_orfaos_total": 24,
  "traits_orfaos_top": [
   [
    "fatal-d10",
@@ -135,6 +136,38 @@
   [
    "two-hand-d12",
    2
+  ],
+  [
+   "persona-underdog",
+   1
+  ],
+  [
+   "persona-leader",
+   1
+  ],
+  [
+   "persona-scholar",
+   1
+  ],
+  [
+   "persona-warrior",
+   1
+  ],
+  [
+   "persona-wildcard",
+   1
+  ],
+  [
+   "persona-guardian",
+   1
+  ],
+  [
+   "persona-scoundrel",
+   1
+  ],
+  [
+   "persona-flirt",
+   1
   ],
   [
    "fatal-d12",
@@ -192,6 +225,30 @@
   "two-hand-d12": [
    "equipamento.json"
   ],
+  "persona-underdog": [
+   "ancestrias.json"
+  ],
+  "persona-leader": [
+   "ancestrias.json"
+  ],
+  "persona-scholar": [
+   "ancestrias.json"
+  ],
+  "persona-warrior": [
+   "ancestrias.json"
+  ],
+  "persona-wildcard": [
+   "ancestrias.json"
+  ],
+  "persona-guardian": [
+   "ancestrias.json"
+  ],
+  "persona-scoundrel": [
+   "ancestrias.json"
+  ],
+  "persona-flirt": [
+   "ancestrias.json"
+  ],
   "fatal-d12": [
    "equipamento.json"
   ],
@@ -219,8 +276,8 @@
   },
   "deity": {
    "pf2etools": 272,
-   "so_pf2etools": 7,
-   "so_nosso": 221
+   "so_pf2etools": 3,
+   "so_nosso": 226
   },
   "domain": {
    "pf2etools": 61,
