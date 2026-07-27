@@ -452,6 +452,122 @@ def portao_8_artefato_citado(base, ctx):
     return len(novos), detalhe
 
 
+# ---------------------------------------------------------------------------
+# Portao 9: censo do AoN por categoria -- o unico gabarito EXTERNO
+# ---------------------------------------------------------------------------
+
+# Categoria implicita de cada dump por apelido: os arquivos por categoria nao
+# gravam o campo `category` (so a ponte remaster grava), entao sem isto 8.303
+# docs caem num balde sem categoria e o censo mede errado.
+CENSO_APELIDO = {
+    "aon_feats.json": "feat", "aon_spells.json": "spell",
+    "aon_traits.json": "trait", "aon_deities.json": "deity",
+    "aon_domains.json": "domain", "aon_skills.json": "skill",
+    "aon_archetypes.json": "archetype", "aon_ancestries.json": "ancestry",
+    "aon_heritages.json": "heritage", "aon_backgrounds.json": "background",
+    "aon_rituals.json": "ritual", "aon_relics.json": "relic",
+    "aon_languages.json": "language", "aon_companheiros.json": "animal-companion",
+    "aon_equipment_equipment.json": "equipment", "aon_equipment_weapon.json": "weapon",
+    "aon_equipment_armor.json": "armor", "aon_equipment_shield.json": "shield",
+    "aon_tactics.json": "tactic", "aon_class_kits.json": "class-kit",
+}
+
+# Nao e conteudo de personagem jogavel: monstro, perigo, veiculo, texto de
+# regra, barra lateral, pagina de indice. Fora do escopo do construtor.
+FORA_DE_ESCOPO = {
+    "action", "category-page", "condition", "creature", "creature-ability",
+    "creature-adjustment", "creature-family", "curse", "hazard", "item-bonus",
+    "plane", "rules", "sidebar", "skill-general-action", "vehicle",
+    "siege-weapon", "kingdom-structure", "class-sample", "source", "article",
+    "trap", "npc", "spell-effect", "creature-theme-template",
+}
+
+# Categoria do AoN -> kinds da base que a atendem. So entra aqui quem NAO casa
+# pelo proprio nome.
+COBERTO_POR = {
+    "animal-companion": ("animal-companion",),
+    "animal-companion-advanced": ("animal-companion",),
+    "animal-companion-specialization": ("animal-companion",),
+    "animal-companion-unique": ("animal-companion",),
+}
+
+
+def censo_aon():
+    """categoria -> quantos docs VIGENTES o AoN publica.
+
+    Vigente = nao declara `remaster_id`. O doc legado que aponta sucessor nao
+    conta como entidade a cobrir: ele vira alias do sucessor na base.
+    """
+    docs = {}
+    for f in sorted(glob.glob(f"{BRUTOS}/aon_*.json")):
+        implicita = CENSO_APELIDO.get(os.path.basename(f))
+        try:
+            lista = json.load(open(f))
+        except Exception:
+            continue
+        if not isinstance(lista, list):
+            continue
+        for r in lista:
+            if not isinstance(r, dict) or not r.get("id"):
+                continue
+            d = docs.setdefault(str(r["id"]), {"cat": None, "rid": None})
+            d["cat"] = d["cat"] or r.get("category") or implicita
+            d["rid"] = d["rid"] or r.get("remaster_id")
+    censo = collections.Counter()
+    for d in docs.values():
+        if not d["rid"] and d["cat"]:
+            censo[str(d["cat"])] += 1
+    return censo
+
+
+def portao_9_censo(base, ctx):
+    """Kind inteiro ausente, medido contra o censo do AoN por categoria.
+
+    Os outros portoes comparam a base com ela mesma (o build anterior) ou com
+    o que ela ja cita. Nenhum responde "existe conteudo la fora que nunca
+    entrou". Foi assim que `tactic` (as tacticas do Commander, Battlecry!) e
+    `class-kit` ficaram de fora sem nada reclamar: nao houve queda, nao houve
+    referencia orfa -- eles simplesmente nunca existiram aqui.
+
+    Ausencia ja decidida vive em `censo_ausencias.json` com motivo, igual ao
+    portao 8 faz com perda de artefato. Ausencia NOVA quebra.
+    """
+    censo = censo_aon()
+    if not censo:
+        return None, ["DESLIGADO: sem dump do AoN em disco (rode dump_aon.py)"]
+
+    conhecidas = {}
+    caminho = f"{AQUI}/censo_ausencias.json"
+    if os.path.exists(caminho):
+        conhecidas = json.load(open(caminho)).get("ausencias") or {}
+
+    por_kind = collections.Counter(r.get("kind") for r in base)
+    novas, ja_sabidas = [], []
+    for cat, esperado in sorted(censo.items()):
+        if cat in FORA_DE_ESCOPO:
+            continue
+        kinds = COBERTO_POR.get(cat, (cat,))
+        obtido = sum(por_kind.get(k, 0) for k in kinds)
+        if obtido >= esperado:
+            continue
+        falta = esperado - obtido
+        registro = conhecidas.get(cat)
+        linha = (f"`{cat}`: AoN publica {esperado} vigentes, a base tem "
+                 f"{obtido} em {'+'.join(kinds)} -- faltam {falta}")
+        if registro and falta <= registro.get("falta_aceita", 0):
+            ja_sabidas.append(f"{linha} -- {registro.get('motivo', 'sem motivo')}")
+        else:
+            novas.append(linha + (f" (registrado aceitava {registro['falta_aceita']})"
+                                  if registro else ""))
+
+    detalhe = list(novas)
+    if ja_sabidas:
+        detalhe.append(f"\n_Ausencias ja decididas ({len(ja_sabidas)}) -- visiveis, "
+                       f"nao bloqueiam:_")
+        detalhe += [f"- {x}" for x in ja_sabidas]
+    return len(novas), detalhe
+
+
 PORTOES = [
     (1, "prov por campo preenchido", portao_1_prov, ("pre-fusao", "final")),
     (2, "level divergente sem conflito", portao_2_level, ("pre-fusao", "final")),
@@ -461,6 +577,7 @@ PORTOES = [
     (6, "traits disjunto apos uniao", portao_6_traits, ("pre-fusao", "final")),
     (7, "homonimo no mesmo kind", portao_7_homonimo, ("pre-fusao",)),
     (8, "artefato citado que sumiu do disco", portao_8_artefato_citado, ("final",)),
+    (9, "kind ausente vs censo do AoN", portao_9_censo, ("final",)),
 ]
 
 
