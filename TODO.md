@@ -80,6 +80,13 @@ items:
     texto: "REGRA 17 FURA EM CONJURADOR PARCIAL -- decisao do Igor. A simulacao de 2.000 personagens de classe unica achou: Magus e Summoner param no rank 9 de slot (nao 10), entao `rank_efetivo = ceil(nivel/2)` da a eles +1 rank de elevacao mesmo PUROS, no nivel 19 e 20. A houserule vaza para o jogo padrao em 2 das 11 classes conjuradoras. A spec afirma 'Mago 20 puro nao muda porque o +2 nao tem para onde ir a partir do rank 10' -- verdade para conjurador pleno, falso para parcial. Opcoes: (a) capar a elevacao pelo max_rank nativo da classe, (b) aceitar como buff intencional a conjurador parcial, (c) tratar so quando ha multiclasse. Nao arbitrei"
     prioridade: alta
 
+  - id: 40
+    texto: "SUBCLASSE NAO ALTERA NADA (parcialmente resolvido). Levantado pelo Igor a partir do caso Cloistered/Warpriest: das 176 opcoes de sub-escolha (bloodline 18, patron 24, mystery 12, instinct 16, racket 6, doctrine 3, muse 5, arcane-school 23, cause 13, implement 10...), **175 nao tinham efeito estruturado** -- escolher subclasse nao mudava numero nenhum na ficha. O dado existe: 584 das 841 class-features do Foundry tem Rule Elements. converter_rule_elements.py converteu os 99 declarativos (ActiveEffectLike com path de rank, sem predicate). FALTA o grosso, que depende de reimplementar o interpretador do Foundry: 1.784 FlatModifier, 1.495 ItemAlteration, 1.113 GrantItem, 1.077 RollOption, 563 ChoiceSet, 337 Resistance. E o item que a spec chama de 'maior custo do projeto'"
+    prioridade: alta
+  - id: 41
+    texto: "TRADICAO DE MAGIA POR SUBCLASSE nao e modelavel hoje. Sorcerer, Summoner e Witch tem `spellcasting.tradition` gravado como PROSA -- literalmente a string 'variavel (definida pela escolha de bloodline/eidolon/patron)'. A tradicao real vem da subclasse (Genie=arcane, Nymph=primal...) e esta so no texto ('Spell List Arcane'). Consequencia: o predicado `spellcasting_tradition` da spec nao funciona para 3 das 10 classes conjuradoras, e a ficha mostra a string descritiva no lugar da tradicao. Extrair do texto e viavel (padrao 'Spell List <tradicao>'), mas e derivacao de prosa -- decidir se entra"
+    prioridade: alta
+
   # ==========================================================================
   # BLOCO 2 -- MODELAGEM. Depende da base re-emitida.
   # ==========================================================================

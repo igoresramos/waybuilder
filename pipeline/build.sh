@@ -54,6 +54,9 @@ python3 derivar_subclasse.py
 echo "== 4g. unificar o modelo de efeito em grants =="
 python3 unificar_efeitos.py
 
+echo "== 4h. converter rule elements declarativos =="
+python3 converter_rule_elements.py
+
 echo "== 5. emitir prosa =="
 python3 emitir_textos.py
 
