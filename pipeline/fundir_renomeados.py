@@ -57,17 +57,12 @@ def toks(s):
 
 
 def carregar_aon():
-    idx = {}
-    for f in glob.glob(f"{AON_DUMP}/*.json"):
-        if os.path.basename(f).startswith("_"):
-            continue
-        try:
-            for d in json.load(open(f)):
-                if isinstance(d, dict) and d.get("id"):
-                    idx[str(d["id"])] = d
-        except Exception:
-            continue
-    return idx
+    # copia unica do indice: `portoes.indice_aon` sabe cair nos apelidos
+    # versionados quando `aon_dump/` nao esta em disco. Duas copias da mesma
+    # leitura eram duas oportunidades de uma maquina ficar sem a ponte.
+    sys.path.insert(0, AQUI)
+    import portoes
+    return portoes.indice_aon()
 
 
 def como_lista(v):

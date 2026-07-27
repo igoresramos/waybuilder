@@ -295,6 +295,29 @@ def uniao_traits(por_fonte):
 
 
 # --------------------------------------------------------------------------
+# localizacao das fontes em disco
+# --------------------------------------------------------------------------
+
+def packs_foundry(brutos=None):
+    """Raiz dos packs do Foundry, ou None se o clone nao esta em disco.
+
+    O clone chega com dois nomes conforme quem o baixou (`buscar_fontes.sh`
+    grava em `foundry/`, o tarball do pin grava em `foundry_repo/`). Os
+    extratores ja tentavam os dois; portoes, emitir_textos, aplicar_subclasses
+    e converter_rule_elements so conheciam um -- e nesta maquina caiam no lado
+    errado, desligando o portao 2 e pulando a conversao de rule elements sem
+    que nada acusasse.
+    """
+    brutos = brutos or os.path.join(AQUI, "dados_brutos")
+    for c in (os.environ.get("WB_FOUNDRY_PACKS", ""),
+              os.path.join(brutos, "foundry_repo", "packs", "pf2e"),
+              os.path.join(brutos, "foundry", "packs", "pf2e")):
+        if c and os.path.isdir(c):
+            return c
+    return None
+
+
+# --------------------------------------------------------------------------
 # ponte legado <-> remaster (a chave que o AoN publica)
 # --------------------------------------------------------------------------
 

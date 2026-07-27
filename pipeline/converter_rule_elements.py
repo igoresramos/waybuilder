@@ -56,7 +56,11 @@ PATH_RANK = re.compile(
 
 def rules_do_foundry():
     """_id do Foundry -> lista de rule elements."""
-    raiz = os.environ.get("WB_FOUNDRY_PACKS", f"{BRUTOS}/foundry_repo/packs/pf2e")
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import comum
+    raiz = comum.packs_foundry(BRUTOS)
+    if not raiz:
+        return {}
     idx = {}
     for f in glob.glob(f"{raiz}/**/*.json", recursive=True):
         try:

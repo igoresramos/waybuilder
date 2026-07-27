@@ -41,7 +41,8 @@ def concedidas_pelo_foundry():
     exclusiva. O Foundry lista **15**, e entre elas "Arcane School" aparece uma
     vez so, como a escolha que e.
     """
-    raiz = os.environ.get("WB_FOUNDRY_PACKS", f"{BRUTOS}/foundry_repo/packs/pf2e")
+    import comum
+    raiz = comum.packs_foundry(BRUTOS) or ""
     mapa = {}
     for f in glob.glob(f"{raiz}/classes/*.json"):
         try:

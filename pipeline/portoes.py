@@ -22,6 +22,8 @@ Saida: relatorio em base/relatorio_portoes.md, codigo 1 se algum portao falha.
 import json, os, re, sys, glob, collections, subprocess, unicodedata
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, AQUI)
+import comum                                          # noqa: E402
 RAIZ = os.path.dirname(AQUI)
 BASE = f"{AQUI}/base"
 BRUTOS = f"{AQUI}/dados_brutos"
@@ -63,17 +65,40 @@ def preenchido(v):
 # ---------------------------------------------------------------------------
 
 def indice_aon():
-    """id do AoN -> registro. Usa o dump completo; sem ele, o portao 2 desliga."""
+    """id do AoN -> registro. Usa o dump completo; sem ele, cai nos apelidos.
+
+    `dump_aon.py` grava o dump por categoria em `aon_dump/` e copia cada
+    categoria para `dados_brutos/aon_<apelido>.json`. So os apelidos ficam
+    versionados -- entao numa maquina que nunca rodou o dump o indice vinha
+    vazio e os portoes 2 e 7 se desligavam sozinhos, passando por ausencia de
+    dado. Os apelidos cobrem os kinds de jogador e chegam para os dois.
+    """
+    arquivos = [f for f in glob.glob(f"{AON_DUMP}/*.json")
+                if not os.path.basename(f).startswith("_")]
+    if not arquivos:
+        arquivos = sorted(glob.glob(f"{BRUTOS}/aon_*.json"))
     idx = {}
-    for f in glob.glob(f"{AON_DUMP}/*.json"):
-        if os.path.basename(f).startswith("_"):
-            continue
+    for f in arquivos:
         try:
-            for r in json.load(open(f)):
-                if isinstance(r, dict) and r.get("id"):
-                    idx[str(r["id"])] = r
+            docs = json.load(open(f))
         except Exception:
             continue
+        if not isinstance(docs, list):
+            continue                       # aon_censo.json e um mapa, nao docs
+        for r in docs:
+            if not isinstance(r, dict) or not r.get("id"):
+                continue
+            chave = str(r["id"])
+            # o mesmo doc aparece em mais de um arquivo com recortes de campo
+            # diferentes (a ponte remaster traz `category` e `trait`, o dump por
+            # categoria traz `pfs` e `legacy_id`). Sobrescrever perderia campo,
+            # entao completa em vez de trocar.
+            anterior = idx.get(chave)
+            if anterior:
+                for k, v in anterior.items():
+                    if r.get(k) in (None, "", [], {}):
+                        r[k] = v
+            idx[chave] = r
     return idx
 
 
@@ -82,8 +107,8 @@ def indice_foundry():
     cache = f"{BRUTOS}/_idx_foundry_campos.json"
     if os.path.exists(cache):
         return json.load(open(cache))
-    raiz = os.environ.get("WB_FOUNDRY_PACKS", f"{BRUTOS}/foundry_repo/packs/pf2e")
-    if not os.path.isdir(raiz):
+    raiz = comum.packs_foundry(BRUTOS)
+    if not raiz:
         return {}
     idx = {}
     for f in glob.glob(f"{raiz}/**/*.json", recursive=True):
@@ -130,7 +155,7 @@ def portao_2_level(base, ctx):
     """`level` divergente entre fontes sem entrada em `conflitos`."""
     aon, foundry = ctx["aon"], ctx["foundry"]
     if not aon and not foundry:
-        return 0, ["DESLIGADO: sem dump do AoN nem clone do Foundry em disco"]
+        return None, ["DESLIGADO: sem dump do AoN nem clone do Foundry em disco"]
     achados = []
     for r in base:
         if r.get("kind") == "class-feature":
@@ -181,7 +206,7 @@ def portao_3_requires(base, ctx):
 def portao_4_cobertura(base, ctx):
     """Cobertura por kind nao cai em relacao ao build anterior."""
     if not os.path.exists(COBERTURA):
-        return 0, ["linha de base ausente -- grave com --gravar-cobertura"]
+        return None, ["linha de base ausente -- grave com --gravar-cobertura"]
     ant = json.load(open(COBERTURA))
     atual = collections.Counter(r.get("kind") for r in base)
     quedas = []
@@ -268,7 +293,7 @@ def portao_7_homonimo(base, ctx):
     """
     aon = ctx["aon"]
     if not aon:
-        return 0, ["DESLIGADO: sem dump do AoN em disco (rode dump_aon.py)"]
+        return None, ["DESLIGADO: sem dump do AoN em disco (rode dump_aon.py)"]
 
     por_nome = collections.defaultdict(list)
     for d in aon.values():
@@ -368,7 +393,7 @@ def portao_8_artefato_citado(base, ctx):
     """
     versionados = _arquivos_versionados()
     if versionados is None:
-        return 0, ["git indisponivel -- portao desligado"]
+        return None, ["git indisponivel -- portao desligado"]
 
     pat_arquivo = re.compile(
         r"(?:pipeline|motor|docs|specs)/[A-Za-z0-9_./-]+\.[a-z]{2,6}")
@@ -455,12 +480,24 @@ def main():
     linhas = [f"# Portoes de qualidade -- fase `{fase}`", "",
               f"- registros avaliados: **{len(base)}**", ""]
     falhou = 0
+    desligados = []
     for num, nome, fn, fases in PORTOES:
         if fase not in fases:
             linhas.append(f"## Portao {num} -- {nome}\n\nNAO SE APLICA nesta fase.\n")
             print(f"  portao {num}  n/a   {nome}")
             continue
         n, detalhe = fn(base, ctx)
+        # `None` = o portao nao rodou por falta de fonte. Nao e aprovacao: um
+        # portao que se desliga sozinho e devolve zero passa por ausencia de
+        # dado, que e o defeito que estes portoes existem para pegar.
+        if n is None:
+            desligados.append(num)
+            print(f"  portao {num}  ??    {nome}: NAO MEDIDO")
+            linhas.append(f"## Portao {num} -- {nome}\n")
+            linhas.append("**NAO MEDIDO** -- fonte ausente, nao conta como aprovacao.\n")
+            linhas += [f"- {d}" for d in detalhe]
+            linhas.append("")
+            continue
         ok = n == 0
         falhou += 0 if ok else 1
         print(f"  portao {num}  {'OK  ' if ok else 'FALHA'}  {nome}: {n}")
@@ -469,11 +506,17 @@ def main():
         linhas += [f"- {d}" for d in detalhe]
         linhas.append("")
 
+    if desligados:
+        linhas.insert(3, f"- portoes NAO MEDIDOS (fonte ausente): "
+                         f"**{', '.join(str(d) for d in desligados)}**\n")
+
     if "--gravar-cobertura" in sys.argv:
         # so fixa a linha de base a partir de um build limpo: gravar depois de
         # falhar rebaixa a referencia e a regressao e acusada uma vez so
-        if falhou:
-            print(f"  linha de base NAO gravada -- {falhou} portao(es) falhando")
+        if falhou or desligados:
+            motivo = (f"{falhou} portao(es) falhando" if falhou
+                      else f"portao(es) {desligados} nao medido(s)")
+            print(f"  linha de base NAO gravada -- {motivo}")
         else:
             json.dump({"total": len(base),
                        "por_kind": dict(collections.Counter(r.get("kind") for r in base))},

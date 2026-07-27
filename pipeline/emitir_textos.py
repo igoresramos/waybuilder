@@ -75,8 +75,10 @@ def indexar_aon():
     return idx
 
 
-CLONE = os.environ.get("WB_FOUNDRY_PACKS",
-                       f"{BRUTO}/foundry_repo/packs/pf2e")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import comum                                          # noqa: E402
+
+CLONE = comum.packs_foundry(BRUTO) or f"{BRUTO}/foundry_repo/packs/pf2e"
 
 
 def indexar_foundry():
