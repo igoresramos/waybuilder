@@ -6,7 +6,7 @@ Pin do Foundry: `87f9e5028baaa10b70fdc766260b7886def17e04`
 
 - Classes cobertas: **11** (wizard, cleric, druid, sorcerer, bard, witch, oracle, psychic, animist, magus, summoner)
 - Tabela de slots (1-20, todos os ranks) confirmada via pf2etools: **10** classes (wizard, cleric, druid, sorcerer, bard, witch, oracle, psychic, magus, summoner)
-- Sem cobertura de tabela completa: **1** (animist (parcial -- so nivel 1-2, ver relatorio))
+- Sem cobertura de tabela completa: **0** (-)
 
 ## De onde veio cada pedaco do dado, por classe
 
@@ -20,7 +20,7 @@ Pin do Foundry: `87f9e5028baaa10b70fdc766260b7886def17e04`
 | Witch | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-witch-pc1.json, tabela 'Witch Spells per Day') | - |
 | Oracle | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-oracle.json, tabela 'Oracle Spells per Day') | - |
 | Psychic | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-psychic.json, tabela 'Psychic Spells per Day') | - |
-| Animist | aon (campo 'tradition': ['Divine']) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre animist-apparition-spellcasting.json, secao 'Vessel Spells') | NAO COBERTO -- ver slots_not_covered | cobertura parcial -- ver secao dedicada abaixo |
+| Animist | aon (campo 'tradition': ['Divine']) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre animist-apparition-spellcasting.json, secao 'Vessel Spells') | aon (campo markdown do doc de classe, tabela 'Animist Spells per Day'; parser validado contra as outras 10 conjuradoras vs pf2etools) | cobertura parcial -- ver secao dedicada abaixo |
 | Magus | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-magus.json, tabela 'Magus Spells per Day') | - |
 | Summoner | foundry (regex sobre descricao da class-feature de conjuracao) | foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster') | foundry (regex sobre a class-feature dona do focus pool nativo) | pf2etools (class-summoner.json, tabela 'Summoner Spells per Day') | - |
 

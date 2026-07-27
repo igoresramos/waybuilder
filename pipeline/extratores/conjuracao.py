@@ -596,23 +596,33 @@ def build_class_entry(slug: str, relatorio: dict) -> dict:
 
 
 def build_animist_entry() -> dict:
-    """Animista: sem tabela numerica completa em nenhuma das 3 fontes (nao
-    esta no pf2etools; AoN e Foundry so tem a prosa da mecanica, sem a
-    tabela materializada). Cobertura parcial e deliberada -- ver relatorio.
+    """Animista: tabela completa, vinda do markdown do AoN.
 
-    Os poucos numeros abaixo vieram confirmados em DUAS fontes independentes
-    (Foundry packs/pf2e/class-features/animist-apparition-spellcasting.json
-    E AoN, doc class-64, campo 'text'): nivel 1 do pool principal (1 slot
-    rank 1 + 2 cantrips) e o exemplo textual do nivel 2 ("2+1" 1st-rank).
-    O resto da tabela (niveis 3-20, pool de apparition completo) NAO foi
-    confirmado e fica None -- nao foi codificado a mao pra nao arriscar
-    numero errado sem fonte."""
+    CORRECAO DE 2026-07-27. Esta funcao afirmava que a tabela "nao existe
+    estruturada em nenhuma das 3 fontes fixadas". Estava errado, e o erro saiu
+    caro: alguem foi ler as paginas 12-13 do War of Immortals a olho (o PDF e
+    imagem pura), o resultado foi para um diretorio ignorado pelo git e se
+    perdeu.
+
+    A tabela estava no cache que esta propria funcao ja baixava. O doc de
+    classe do AoN tem dois campos de texto: `text`, achatado e sem tabela, e
+    `markdown`, que carrega a tabela inteira em HTML. So o primeiro era lido.
+
+    O parser vive em pipeline/tabelas_conjuracao_aon.py e foi validado contra
+    as outras 10 conjuradoras: reproduz as 10 celula a celula contra o
+    pf2etools, que e fonte independente."""
     doc = load_foundry_class("animist")
     feat = load_foundry_feature("animist-apparition-spellcasting")
     text = strip_html(feat["system"]["description"]["value"])
 
     aon_hits = aon_query("Animist", "class")
     aon_text = aon_hits[0].get("text", "") if aon_hits else ""
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    from tabelas_conjuracao_aon import tabela_de_slots, normalizar
+
+    crua = tabela_de_slots(aon_hits[0].get("markdown", "")) if aon_hits else None
+    slots = normalizar(crua) if crua else None
 
     trad = extract_tradition_e_tipo("animist")
 
@@ -624,8 +634,26 @@ def build_animist_entry() -> dict:
         "type": "prepared (pool principal) + spontaneous (pool de apparition, separado)",
         "proficiency": extract_generic_proficiency("animist"),
         "focus_pool": extract_focus_pool("animist"),
-        "slots_per_level": None,
-        "slots_coverage": "parcial -- so nivel 1 (confirmado) e um exemplo textual do nivel 2",
+        "slots_per_level": slots,
+        "slots_coverage": ("completa -- 20 niveis do markdown do AoN"
+                           if slots else
+                           "FALHOU -- markdown do AoN sem a tabela esperada"),
+        "slots_hibridos": {str(nv): {("cantrips" if k == "_cantrips" else str(k)): v
+                                     for k, v in sorted(r.items(), key=lambda x: str(x[0]))
+                                     if k != "_por_feature"}
+                           for nv, r in sorted((crua or {}).items())},
+        "slots_nota_hibrida": (
+            "O Animist tem DOIS pools que nao se misturam: animist spellcasting "
+            "(prepared, divino) e apparition spellcasting (spontaneous, "
+            "repertorio das apparitions). A tabela do AoN escreve 'a+b'. "
+            "slots_per_level traz a SOMA; slots_hibridos preserva a separacao, "
+            "que importa porque um pool nao pode conjurar o do outro."),
+        "slots_rank_10": (
+            "A tabela vai ate o rank 9. A feature Supreme Incarnation (nivel 19) "
+            "concede um slot de apparition de rank 10 que funciona diferente dos "
+            "demais. O rodape do AoN chama a feature de 'supreme apparition', "
+            "enquanto a tabela de avanco da mesma pagina chama de 'supreme "
+            "incarnation' -- divergencia da fonte, registrada sem arbitrar."),
         "slots_confirmed_partial": {
             "1": {
                 "main_pool": {"cantrips": 2, "ranks": {"1": 1}},
@@ -639,17 +667,15 @@ def build_animist_entry() -> dict:
                 "confirmado_em": ["aon"],
             },
         },
-        "slots_not_covered": (
-            "tabela completa niveis 1-20 de ambos os pools (principal e apparition) "
-            "nao existe estruturada em nenhuma das 3 fontes fixadas; nao foi "
-            "codificada a mao para nao arriscar numero nao verificavel"
-        ),
+        "slots_not_covered": None,
         "prov": {
             "tradition": "aon (campo 'tradition': ['Divine'])",
             "type": "foundry (texto: 'you are a prepared spellcaster'; pool de apparition e explicitamente 'spontaneous')",
             "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
             "focus_pool": "foundry (regex sobre animist-apparition-spellcasting.json, secao 'Vessel Spells')",
-            "slots_per_level": "NAO COBERTO -- ver slots_not_covered",
+            "slots_per_level": ("aon (campo markdown do doc de classe, tabela "
+                                "'Animist Spells per Day'; parser validado "
+                                "contra as outras 10 conjuradoras vs pf2etools)"),
         },
         "xref": {
             "foundry_class": "packs/pf2e/classes/animist.json",
@@ -668,8 +694,14 @@ def extrair() -> dict:
     classes = {}
     for slug in CLASSES_COBERTAS:
         if slug == "animist":
-            classes[slug] = build_animist_entry()
-            relatorio["sem_cobertura"].append("animist (parcial -- so nivel 1-2, ver relatorio)")
+            entrada = build_animist_entry()
+            classes[slug] = entrada
+            if not entrada.get("slots_per_level"):
+                relatorio["sem_cobertura"].append(
+                    "animist (markdown do AoN sem a tabela esperada)")
+            else:
+                relatorio["slots_confirmados_aon"] = (
+                    relatorio.get("slots_confirmados_aon", []) + [slug])
             continue
         classes[slug] = build_class_entry(slug, relatorio)
 

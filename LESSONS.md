@@ -403,6 +403,29 @@ havia tabela faltando.
 > perdeu** -- ele e a unica classe que dependia so do arquivo lido do PDF, e
 > esse arquivo morava em `dados_brutos/`. Ver a licao seguinte.
 
+### O AoN materializa tabela em `markdown`, nao em `text`
+A licao mais cara desta sequencia, e a raiz de todas as outras. O doc de classe
+do AoN tem **dois** campos de texto: `text`, achatado, sem tabela nenhuma, e
+`markdown`, que carrega a pagina inteira em HTML -- **com as tabelas**.
+
+O extrator lia so `text`. Dai saiu a conclusao "nem Foundry nem AoN
+materializam a tabela numerica, so citam 'Animist Spells per Day' como nome de
+tabela", que virou comentario de funcao, virou relatorio, virou item de TODO --
+e mandou alguem ler as paginas 12-13 do War of Immortals a olho, num PDF que e
+imagem pura. O resultado foi para um diretorio ignorado pelo git e se perdeu.
+
+**O dado estava no cache que o proprio extrator ja baixava**
+(`dados_brutos/aon/class__animist.json` tem o `markdown` com as duas tabelas).
+
+Quando reextraido: as **11** classes conjuradoras tem a tabela completa, e o
+parser reproduz **10 delas celula a celula** contra o pf2etools, que e fonte
+independente. Validacao assim -- derivar de uma fonte e conferir contra outra
+que ja estava na base -- e o que separa "extrai" de "extrai certo".
+
+Regra pratica: antes de declarar que uma fonte **nao tem** um dado, listar os
+campos que ela devolve e olhar o maior deles. `text` costuma ser projecao com
+perda de um campo mais rico ao lado.
+
 ### "Reconstruivel pelos pins" nao vale para o que uma pessoa leu a olho
 `pipeline/.gitignore` excluia `dados_brutos/` inteiro justificando que era
 "reconstruivel pelos pins registrados na spec". Verdade para o clone do Foundry

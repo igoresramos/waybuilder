@@ -10,9 +10,9 @@
       "motivo": "War of Immortals e PDF imagem-only; as paginas 12-13 foram renderizadas com pdftoppm e lidas a olho. Nao ha script que refaca.",
       "nunca_entrou_no_git": true,
       "verificado_por": "git log --all --diff-filter=A -- '*tabelas_conjuracao_pdf.json' devolve vazio",
-      "dano_real": "apenas o Animist. Magus e Summoner estao completos em base/index.json, extraidos do pf2etools por conjuracao.py, sem dependencia deste arquivo.",
-      "recuperado": "pipeline/dados_derivados/tabelas_conjuracao_pdf.json guarda tudo que o relatorio versionado preservou. Falta so a matriz slots_per_level do Animist.",
-      "decisao": "PENDENTE -- ver item 14 do TODO"
+      "dano_real": "NENHUM, confirmado em 2026-07-27. O unico dado exclusivo era a tabela do Animist, e ela foi reextraida do campo `markdown` do doc de classe do AoN -- que ja estava no cache do proprio extrator. Magus e Summoner nunca dependeram deste arquivo (vem do pf2etools).",
+      "recuperado": "integral. pipeline/dados_derivados/tabelas_conjuracao_pdf.json guarda o conteudo qualitativo (do relatorio versionado) e a tabela do Animist voltou por pipeline/tabelas_conjuracao_aon.py, validado contra as outras 10 conjuradoras.",
+      "decisao": "RESOLVIDO -- o arquivo continua perdido, mas nenhum dado dele esta"
     },
     {
       "caminho": "pipeline/dados_brutos/pdfs/",

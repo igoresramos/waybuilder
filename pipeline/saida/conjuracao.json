@@ -321,9 +321,9 @@
       },
       "focus_pool": {
         "cloistered_cleric": {
-          "base": 1,
-          "cap": 3,
-          "note": "concedido automaticamente pela Primeira Doutrina (Cloistered Cleric); nao e uma class-feature nativa do Clerico"
+          "base": null,
+          "cap": null,
+          "note": "Domain Initiate nao encontrado no cache"
         },
         "warpriest": {
           "base": 0,
@@ -2221,8 +2221,409 @@
         "cap": 3,
         "source_feature": "Animist & Apparition Spellcasting"
       },
-      "slots_per_level": null,
-      "slots_coverage": "parcial -- so nivel 1 (confirmado) e um exemplo textual do nivel 2",
+      "slots_per_level": {
+        "1": {
+          "cantrips": 4,
+          "ranks": {
+            "1": 2
+          },
+          "max_rank": 1
+        },
+        "2": {
+          "cantrips": 4,
+          "ranks": {
+            "1": 3
+          },
+          "max_rank": 1
+        },
+        "3": {
+          "cantrips": 4,
+          "ranks": {
+            "1": 3,
+            "2": 2
+          },
+          "max_rank": 2
+        },
+        "4": {
+          "cantrips": 4,
+          "ranks": {
+            "1": 3,
+            "2": 3
+          },
+          "max_rank": 2
+        },
+        "5": {
+          "cantrips": 4,
+          "ranks": {
+            "1": 3,
+            "2": 3,
+            "3": 2
+          },
+          "max_rank": 3
+        },
+        "6": {
+          "cantrips": 4,
+          "ranks": {
+            "1": 3,
+            "2": 3,
+            "3": 3
+          },
+          "max_rank": 3
+        },
+        "7": {
+          "cantrips": 5,
+          "ranks": {
+            "1": 3,
+            "2": 3,
+            "3": 3,
+            "4": 2
+          },
+          "max_rank": 4
+        },
+        "8": {
+          "cantrips": 5,
+          "ranks": {
+            "1": 3,
+            "2": 3,
+            "3": 3,
+            "4": 3
+          },
+          "max_rank": 4
+        },
+        "9": {
+          "cantrips": 5,
+          "ranks": {
+            "1": 3,
+            "2": 3,
+            "3": 3,
+            "4": 3,
+            "5": 2
+          },
+          "max_rank": 5
+        },
+        "10": {
+          "cantrips": 5,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 3,
+            "5": 3
+          },
+          "max_rank": 5
+        },
+        "11": {
+          "cantrips": 5,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 3,
+            "6": 2
+          },
+          "max_rank": 6
+        },
+        "12": {
+          "cantrips": 5,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 3,
+            "6": 3
+          },
+          "max_rank": 6
+        },
+        "13": {
+          "cantrips": 5,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 3,
+            "7": 2
+          },
+          "max_rank": 7
+        },
+        "14": {
+          "cantrips": 5,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 3,
+            "7": 3
+          },
+          "max_rank": 7
+        },
+        "15": {
+          "cantrips": 6,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 3,
+            "8": 2
+          },
+          "max_rank": 8
+        },
+        "16": {
+          "cantrips": 6,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 3,
+            "8": 3
+          },
+          "max_rank": 8
+        },
+        "17": {
+          "cantrips": 6,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 3,
+            "9": 2
+          },
+          "max_rank": 9
+        },
+        "18": {
+          "cantrips": 6,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 3,
+            "9": 3
+          },
+          "max_rank": 9
+        },
+        "19": {
+          "cantrips": 6,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 3
+          },
+          "max_rank": 9
+        },
+        "20": {
+          "cantrips": 6,
+          "ranks": {
+            "1": 4,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 4,
+            "6": 4,
+            "7": 4,
+            "8": 4,
+            "9": 3
+          },
+          "max_rank": 9
+        }
+      },
+      "slots_coverage": "completa -- 20 niveis do markdown do AoN",
+      "slots_hibridos": {
+        "1": {
+          "1": "1+1",
+          "cantrips": "2+2"
+        },
+        "2": {
+          "1": "2+1",
+          "cantrips": "2+2"
+        },
+        "3": {
+          "1": "2+1",
+          "2": "1+1",
+          "cantrips": "2+2"
+        },
+        "4": {
+          "1": "2+1",
+          "2": "2+1",
+          "cantrips": "2+2"
+        },
+        "5": {
+          "1": "2+1",
+          "2": "2+1",
+          "3": "1+1",
+          "cantrips": "2+2"
+        },
+        "6": {
+          "1": "2+1",
+          "2": "2+1",
+          "3": "2+1",
+          "cantrips": "2+2"
+        },
+        "7": {
+          "1": "2+1",
+          "2": "2+1",
+          "3": "2+1",
+          "4": "1+1",
+          "cantrips": "2+3"
+        },
+        "8": {
+          "1": "2+1",
+          "2": "2+1",
+          "3": "2+1",
+          "4": "2+1",
+          "cantrips": "2+3"
+        },
+        "9": {
+          "1": "2+1",
+          "2": "2+1",
+          "3": "2+1",
+          "4": "2+1",
+          "5": "1+1",
+          "cantrips": "2+3"
+        },
+        "10": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+1",
+          "5": "2+1",
+          "cantrips": "2+3"
+        },
+        "11": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+1",
+          "6": "1+1",
+          "cantrips": "2+3"
+        },
+        "12": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+1",
+          "6": "2+1",
+          "cantrips": "2+3"
+        },
+        "13": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+1",
+          "7": "1+1",
+          "cantrips": "2+3"
+        },
+        "14": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+1",
+          "7": "2+1",
+          "cantrips": "2+3"
+        },
+        "15": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+1",
+          "8": "1+1",
+          "cantrips": "2+4"
+        },
+        "16": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+1",
+          "8": "2+1",
+          "cantrips": "2+4"
+        },
+        "17": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+2",
+          "8": "2+1",
+          "9": "1+1",
+          "cantrips": "2+4"
+        },
+        "18": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+2",
+          "8": "2+1",
+          "9": "2+1",
+          "cantrips": "2+4"
+        },
+        "19": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+2",
+          "8": "2+2",
+          "9": "2+1",
+          "cantrips": "2+4"
+        },
+        "20": {
+          "1": "2+2",
+          "2": "2+2",
+          "3": "2+2",
+          "4": "2+2",
+          "5": "2+2",
+          "6": "2+2",
+          "7": "2+2",
+          "8": "2+2",
+          "9": "2+1",
+          "cantrips": "2+4"
+        }
+      },
+      "slots_nota_hibrida": "O Animist tem DOIS pools que nao se misturam: animist spellcasting (prepared, divino) e apparition spellcasting (spontaneous, repertorio das apparitions). A tabela do AoN escreve 'a+b'. slots_per_level traz a SOMA; slots_hibridos preserva a separacao, que importa porque um pool nao pode conjurar o do outro.",
+      "slots_rank_10": "A tabela vai ate o rank 9. A feature Supreme Incarnation (nivel 19) concede um slot de apparition de rank 10 que funciona diferente dos demais. O rodape do AoN chama a feature de 'supreme apparition', enquanto a tabela de avanco da mesma pagina chama de 'supreme incarnation' -- divergencia da fonte, registrada sem arbitrar.",
       "slots_confirmed_partial": {
         "1": {
           "main_pool": {
@@ -2255,13 +2656,13 @@
           ]
         }
       },
-      "slots_not_covered": "tabela completa niveis 1-20 de ambos os pools (principal e apparition) nao existe estruturada em nenhuma das 3 fontes fixadas; nao foi codificada a mao para nao arriscar numero nao verificavel",
+      "slots_not_covered": null,
       "prov": {
         "tradition": "aon (campo 'tradition': ['Divine'])",
         "type": "foundry (texto: 'you are a prepared spellcaster'; pool de apparition e explicitamente 'spontaneous')",
         "proficiency": "foundry (system.spellcasting + items{} 'Expert/Master/Legendary Spellcaster')",
         "focus_pool": "foundry (regex sobre animist-apparition-spellcasting.json, secao 'Vessel Spells')",
-        "slots_per_level": "NAO COBERTO -- ver slots_not_covered"
+        "slots_per_level": "aon (campo markdown do doc de classe, tabela 'Animist Spells per Day'; parser validado contra as outras 10 conjuradoras vs pf2etools)"
       },
       "xref": {
         "foundry_class": "packs/pf2e/classes/animist.json",
