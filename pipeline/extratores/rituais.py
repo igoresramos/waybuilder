@@ -36,7 +36,9 @@ Precedencia por campo (ver specs/2026-07-26-schema-base.md):
     reaproveitados via import (ritual e spell no Foundry: mesmo schema system.*)
   - text, name, traits, rarity, source/remaster -> aon (Paizo, mais completa)
   - level -> foundry, conferido contra aon (pf2etools indisponivel pra rituais)
-  - traits -> UNIAO das fontes (regra nova da spec, nao precedencia -- ver merge_traits)
+  - traits -> UNIAO das fontes (regra nova da spec, nao precedencia -- ver merge_traits).
+    Mapa legado->remaster lido de pipeline/normalizacao_traits.json (fonte
+    compartilhada entre extratores, nao hardcoded aqui).
 
 Campos proprios de ritual (nao existem em magias.py, empacotados no bloco
 "ritual" pra nao poluir o envelope -- ver relatorio pra justificativa completa
@@ -49,7 +51,8 @@ pra personagem -- e conhecimento/utilidade resolvido na mesa), mesmo quando ha
 dado estrutural do Foundry (tempo, custo, pericias). Ver spec: "mechanized: false
 nao e lacuna, e caso normal."
 
-stdlib-only. Le apenas pipeline/dados_brutos/ (offline, sem rede).
+stdlib-only. Le pipeline/dados_brutos/ e pipeline/normalizacao_traits.json
+(offline, sem rede).
 """
 from __future__ import annotations
 

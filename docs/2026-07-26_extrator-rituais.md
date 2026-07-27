@@ -149,16 +149,28 @@ builder algum dia vai resolver um ritual sozinho.
 ## 5. `traits`: uniao, nao precedencia (regra nova aplicada do zero)
 
 Este e o primeiro extrator escrito depois da regra "traits e uniao" entrar na
-spec, e nasce obedecendo:
+spec, e nasce obedecendo -- com um ajuste no meio do trabalho: a spec e o
+arquivo `pipeline/normalizacao_traits.json` foram atualizados por outra sessao
+enquanto este extrator estava sendo escrito (a versao 1 do mapa legado tinha
+`oread/sylph/undine -> naari`, corrigida depois pra so `ifrit -> naari`). O
+extrator foi ajustado pra consumir o arquivo compartilhado em vez de manter
+mapa proprio hardcoded -- ver `_load_legacy_to_remaster_traits()`.
 
-1. Mapa legado -> remaster (`aasimar/tiefling/... -> nephilim`,
-   `ifrit/oread/... -> naari`) -- implementado em `LEGACY_TO_REMASTER_TRAITS`,
-   mas **nao disparou nenhuma vez** nos 151 rituais (0 em `aliases_traits`).
-   Faz sentido: trait de ancestria e raro em ritual.
-2. Absorcao por granularidade (trait parametrizado absorve o base, ex.
-   `two-hand-d12` absorve `two-hand`) -- implementado (`_absorb_granularity`),
-   tambem sem disparo nos dados de ritual (o padrao de sufixo `-d\d+`/`-\d+`
-   e coisa de arma/item, nao de trait de ritual).
+1. **Mapa legado -> remaster**, carregado de `pipeline/normalizacao_traits.json`
+   (`renomeados`, 17 entradas com prov citando fonte/pagina cada uma) -- **nao
+   hardcoded no extrator**. Disparou em **7 dos 151 rituais**: `positive ->
+   vitality` (*Halt Death*, *Mother's Blessing*, *Plant Growth*), `evil ->
+   unholy` (*Form of the Sandpoint Devil*, *Ravenous Reanimation*), `negative
+   -> void` (*Blight*, *Void Harvest*). O termo legado fica em `aliases_traits`
+   de cada um desses 7 registros.
+2. **Absorcao por granularidade** (trait parametrizado absorve o base, ex.
+   `two-hand-d12` absorve `two-hand`) -- implementado como regex generica
+   (`_absorb_granularity`, cobre todo sufixo `-d\d+`/`-\d+`/`-aim-d\d+`, igual
+   o texto da spec). Conferido contra a lista explicita de familias
+   parametrizadas em `normalizacao_traits.json` (`two-hand`, `fatal`,
+   `fatal-aim`, `deadly`, `volley`, `thrown`, etc.) -- todas cobertas pelo
+   padrao generico, sem precisar de lista hardcoded. Sem disparo nos dados de
+   ritual (trait parametrizado e coisa de arma/item, ritual nao carrega).
 3. Uniao alfabetica do que sobra.
 
 **Filtro adicional que magias.py nao tem**: a AoN mistura raridade (`Rare`,
@@ -171,11 +183,18 @@ trait fantasma (teria acontecido em ~140+ dos 151 registros).
 Resultado: **48 dos 144 rituais casados** (Foundry + AoN) tinham trait-sets
 diferentes entre as duas fontes -- na maioria, a AoN ainda carrega o trait de
 escola de magia legado (`necromancy`, `transmutation`, `evocation`,
-`abjuration`, `conjuration`) que o remaster removeu do Foundry. Com
-precedencia (qualquer uma das duas fontes vencendo sozinha) esses traits
-teriam sumido ou duplicado incorretamente; com uniao, sobrevivem os dois.
-`prov.traits` registra quais fontes contribuiram por registro (`["foundry"]`,
-`["aon"]` ou `["foundry", "aon"]`).
+`abjuration`, `conjuration`) que o remaster removeu do Foundry. Esses 5 termos
+estao listados em `normalizacao_traits.json` -> `removidos_sem_sucessor`
+(9 traits de escola/alinhamento sem substituto no remaster) -- **mantidos na
+uniao** (nao filtrados): a AoN legado ainda descreve uma faceta real do
+conceito, e a propria existencia dessa lista no arquivo compartilhado existe
+pra essas divergencias especificas NAO dispararem o portao de qualidade 6
+("suspeita de colisao de identidade") por engano -- ja estao documentadas e
+explicadas, nao sao sinal de fusao de entidades diferentes. Com precedencia
+(qualquer uma das duas fontes vencendo sozinha) esses traits teriam sumido ou
+duplicado incorretamente; com uniao, sobrevivem os dois. `prov.traits`
+registra quais fontes contribuiram por registro (`["foundry"]`, `["aon"]` ou
+`["foundry", "aon"]`).
 
 43 rituais (28%) ficam sem nenhum trait (alem da raridade, que e campo
 separado) -- normal: muitos rituais remaster nao tem trait de escola nem
