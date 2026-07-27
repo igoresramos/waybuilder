@@ -1,6 +1,5 @@
 {
   "_doc": "Referencias `wb:` que o parser de pre-requisito monta a partir do nome LEGADO e que a resolucao automatica (nome, sufixo de familia, ponte do AoN) nao alcanca. Cada entrada foi verificada contra o checkout do Foundry no pin ou contra o dump do AoN -- a evidencia esta no campo `verificado`. Nao e lugar para palpite: entrada sem verificacao nao entra.",
-
   "mapear": {
     "wb:class-feature/paladin-cause": {
       "para": "wb:class-feature/justice",
@@ -27,14 +26,16 @@
       "verificado": "a base tem `wb:feat/dual-weapon-warrior-dedication` e `wb:archetype/dual-weapon-warrior`; a dedicacao citada e a do arquetipo, com o nome abreviado na prosa"
     }
   },
-
   "ignorar": {
     "wb:heritage/you-have-a-versatile": {
       "motivo": "nao e entidade: o parser transformou a frase 'You have a versatile heritage.' em id. O predicado correto seria um termo sobre TRAIT de heranca versatil, que a linguagem ainda nao tem. Some da referencia e fica registrado como requires_texto",
       "verificado": "requires_texto de wb:feat/awakened-yaoguai-heritage e literalmente 'You have a versatile heritage.'"
+    },
+    "wb:heritage/versatile": {
+      "motivo": "mesmo caso do irmao you-have-a-versatile: o parser transformou a expressao \"versatile heritage\" em id. A linguagem de predicado ainda nao tem termo para trait de heranca versatil",
+      "verificado": "requires_texto de wb:feat/ascended-dragonet-heritage e \"versatile heritage\"; wb:trait/versatile existe mas e o trait de ARMA Versatile, entidade sem relacao"
     }
   },
-
   "sem_sucessor_conhecido": {
     "wb:class-feature/universalist-wizard": "escola Universalist do Legacy. O remaster trocou as escolas do Mago por outras dez (School of Ars Grammatica, Battle Magic, Civic Wizardry, Gates, Kalistrade, Magical Technologies, Mentalism, Protean Form, Rooted Wisdom, Unified Magical Theory) e nenhuma e sucessora direta. Fica quebrada ate a decisao de modelagem",
     "wb:feat/underworld-connections": "feat do Advanced Player's Guide citado por wb:feat/quick-contacts. Zero ocorrencias no dump do AoN e no checkout do Foundry -- e ausencia das fontes, nao do pipeline"

@@ -121,8 +121,15 @@ def fundir(grupo):
             if comum.vazio(v):
                 continue
             f = fonte_do_campo(r, k)
-            # duas entradas da mesma fonte: a primeira ja e a boa
-            por_fonte.setdefault(f, v)
+            if f in por_fonte and not comum._iguais(k, por_fonte[f], v):
+                # Duas entradas resolvem para a MESMA fonte com valores
+                # diferentes. Ficar com a primeira em silencio descartava 67
+                # valores por build (`wb:spell/object-reading` perdia
+                # 'uncommon' e o livro do Player Core 2). Vira conflito com
+                # sufixo, e a escolha continua sendo da precedencia.
+                por_fonte[f"{f}_2"] = v
+            else:
+                por_fonte.setdefault(f, v)
         valor, p, confs = comum.escolher(k, por_fonte)
         if valor is not None:
             base[k] = valor
@@ -134,11 +141,26 @@ def fundir(grupo):
             prov[k] = detalhado if comum.prov_valido(detalhado or "") else p
             conflitos += confs
 
-    # traits e uniao das fontes, nao escolha
+    # traits e uniao das fontes, nao escolha.
+    #
+    # Os extratores ja colapsam as tres fontes num registro so, entao aqui
+    # chega um `traits` unico -- a uniao sobre o grupo seria vacua (medido:
+    # 1 contribuinte em 15.802 registros) e `bastard-sword` continuaria com
+    # `two-hand` em vez de `two-hand-d12`, que e exatamente o dado que a
+    # auditoria mostrou sendo destruido.
+    #
+    # O que cada fonte dizia nao se perdeu: esta no proprio `conflitos` que o
+    # extrator gravou, com uma chave por fonte. E de la que a uniao sai.
     por_fonte_traits = {}
     for r in grupo:
         if r.get("traits"):
             por_fonte_traits.setdefault(fonte_do_campo(r, "traits"), []).extend(r["traits"])
+        for c in (r.get("conflitos") or []):
+            if c.get("campo") != "traits":
+                continue
+            for fonte, valor in c.items():
+                if fonte in comum.FONTES and isinstance(valor, list):
+                    por_fonte_traits.setdefault(fonte, []).extend(valor)
     traits, aliases_traits, contribuiram = comum.uniao_traits(por_fonte_traits)
     base["traits"] = traits          # sempre lista: nunca null (achado A13)
     if aliases_traits:
@@ -176,6 +198,12 @@ def fundir(grupo):
     base["prov"] = prov
     for r in grupo:
         conflitos += list(r.get("conflitos") or [])
+    # `traits` saiu da tabela de precedencia, entao "conflito de traits" deixa
+    # de existir como categoria: o que cada fonte dizia virou uniao, e as
+    # fontes que contribuiram estao em `prov.traits`. Manter o conflito aqui
+    # inflava a contagem de divergencia (2.176 de 3.004) e fazia o portao 8
+    # passar por ruido -- `shield` passava com 47 conflitos, todos de trait.
+    conflitos = [c for c in conflitos if c.get("campo") != "traits"]
     if conflitos:
         base["conflitos"] = conflitos
     base.pop("_origem", None)
@@ -385,7 +413,9 @@ def resolver_referencias(base):
         if doc.get("name"):
             por_nome_aon.setdefault(comum.normalizar(doc["name"]), []).append(doc)
     aon_para_wb = {}
+    por_id_kind = {}
     for r in base:
+        por_id_kind[r["id"]] = r.get("kind")
         aon = (r.get("xref") or {}).get("aon")
         if aon:
             aon_para_wb[aon] = r["id"]
@@ -422,8 +452,14 @@ def resolver_referencias(base):
                 return achado
         for doc in por_nome_aon.get(nome, []):
             for destino in comum.como_lista(doc.get("remaster_id")):
-                if destino in aon_para_wb:
-                    return aon_para_wb[destino]
+                alvo = aon_para_wb.get(destino)
+                # O kind TEM de bater: sem isto, `wb:heritage/versatile` era
+                # resolvido para `wb:trait/versatile` (o trait de ARMA) e o
+                # predicado passava a dizer outra coisa. Referencia resolvida
+                # para o alvo errado ainda por cima some da contagem do portao
+                # 3 -- o portao melhorava por estar mais errado.
+                if alvo and por_id_kind.get(alvo) == kind:
+                    return alvo
         return None
 
     corrigidas, quebradas = 0, set()

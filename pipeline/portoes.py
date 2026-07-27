@@ -51,8 +51,53 @@ CENSO = {
     "skill":             ("skill", 0.02, ""),
     "archetype":         ("archetype", 0.02, ""),
     "familiar-ability":  ("familiar-ability", 0.05, ""),
+    "tactic":            ("tactic", 0.02, ""),
+    "class-kit":         ("class-kit", 0.02, ""),
+    "equipment":         ("equipment", 0.02,
+                          "a base emite variante por grau/runa que o AoN indexa "
+                          "como uma entrada so, entao o excesso e esperado"),
+    "weapon":            ("weapon", 0.02, "idem equipment"),
+    "armor":             ("armor", 0.02, "idem equipment"),
+    "shield":            ("shield", 0.02, "idem equipment"),
+    "class":             ("class", 0.02, ""),
+    "familiar-specific": ("familiar-specific", 0.03, ""),
     "animal-companion":  ("animal-companion", 0.20,
                           "especializacao e avanco ficam fora por decisao de escopo"),
+}
+
+
+# Categorias do censo do AoN que estao FORA do escopo por decisao registrada
+# na spec (bestiario, perigo, NPC, veiculo, conteudo de aventura, regra de
+# reino). Categoria de fora fica aqui, nao no silencio.
+FORA_DE_ESCOPO = {
+    "creature", "creature-family", "creature-ability", "creature-adjustment",
+    "hazard", "npc", "vehicle", "siege-weapon", "kingdom-structure",
+    "kingdom-event", "rules", "sidebar", "action", "item-bonus", "source",
+    "category-page", "article", "class-sample", "curse", "condition",
+    "disease", "draconic-exemplar", "monster-family",
+    "plane", "adventure", "trap", "spell-effect", "affliction", "campaign",
+    "creature-theme-template", "weather-hazard", "equipment-list",
+    # verificados contra a base em 2026-07-27, com o motivo:
+    "deity-category",   # agrupamento editorial de deidades, nao entidade
+    "campsite-meal",    # subsistema de acampamento do Kingmaker, nao escolha de ficha
+    "warfare-tactic",   # regra de reino/guerra do Kingmaker -- a spec ja exclui
+}
+
+# Categoria do AoN que a base ja cobre DENTRO de outro kind. Nao e ausencia,
+# e diferenca de taxonomia -- e fica escrito para ninguem "descobrir" de novo.
+CATEGORIA_COBERTA = {
+    "ikon": "class-feature (21 de 21 conferidos por nome: as ikons do Exemplar "
+            "sao class-features na base)",
+    "arcane-school": "trait (22 de 23: as escolas do Legacy sao traits; a base "
+                     "segue a taxonomia remaster)",
+}
+
+# Kinds que podem ficar sem prosa, com o motivo escrito. Tudo que nao esta
+# aqui e obrigado a ter `text`.
+ISENTOS_DE_PROSA = {
+    "equipment": "objeto de tesouro (gema, obra de arte) nao tem texto de regra "
+                 "em fonte nenhuma -- so nome, nivel e preco",
+    "armor": "barding de montaria segue a tabela da armadura base, sem texto proprio",
 }
 
 
@@ -196,7 +241,11 @@ def main():
     r.portao(4, "queda de cobertura contra o build anterior", not quedas,
              ("sem build anterior registrado" if not os.path.exists(hist)
               else f"{len(quedas)} kinds encolheram"), quedas)
-    json.dump(dict(atual), open(hist, "w"), indent=1)
+    # Gravar a baseline mesmo quando o portao falha rebaixa a linha de
+    # comparacao: a regressao seria acusada uma vez e nunca mais.
+    if not quedas:
+        with open(hist, "w") as fh:
+            json.dump(dict(atual), fh, indent=1)
 
     # --- 5. license ausente ou xref vazio ----------------------------------
     ruins = []
@@ -256,8 +305,11 @@ def main():
     rel = f"{BASE}/relatorio_reconciliacao.md"
     rodou = os.path.exists(rel) and "Colisoes de identidade" in open(rel).read()
     desmembrados = sum(1 for reg in base if reg.get("desmembrado_de"))
+    # A condicao e `rodou`, nao `os.path.exists(rel)`: reconciliar SEMPRE
+    # escreve esse arquivo, entao checar a existencia era um portao que nunca
+    # podia falhar -- o mesmo defeito do portao 7 da v1, de novo.
     r.portao(7, "deteccao de colisao de identidade rodou antes da fusao (em reconciliar.py)",
-             os.path.exists(rel),
+             rodou,
              f"{desmembrados} registros marcados com `desmembrado_de`"
              + ("" if rodou else " -- relatorio sem secao de colisoes"))
 
@@ -268,7 +320,10 @@ def main():
         fontes = [k for k in (reg.get("xref") or {}) if k in ("aon", "foundry", "pf2etools")]
         if len(fontes) >= 2:
             por_kind[reg["kind"]][0] += 1
-            if reg.get("conflitos"):
+            # `traits` saiu da precedencia e nao produz mais conflito; contar
+            # conflito de traits fazia `shield` passar com 47 conflitos que
+            # eram 100% ruido de trait.
+            if any(c.get("campo") != "traits" for c in (reg.get("conflitos") or [])):
                 por_kind[reg["kind"]][1] += 1
     # Piso de 20, nao de 100: com 100, tres dos seis kinds que a auditoria
     # provou silenciados continuariam passando -- `ancestry` (50 registros com
@@ -281,14 +336,29 @@ def main():
              f"{len(mudos)} kinds sem instrumentacao de conflito", mudos)
 
     # --- 9. contagem por kind contra o censo do AoN ------------------------
+    #
+    # Iterar sobre CENSO (allow-list escrita a mao) deixava o portao cego para
+    # exatamente o que ele existe para achar: kind que ninguem lembrou de
+    # listar. A varredura agora parte das CATEGORIAS DO CENSO, e categoria sem
+    # kind mapeado vira aviso no relatorio em vez de silencio.
     censo_arq = f"{BRUTOS}/aon_censo.json"
-    faltas, notas = [], []
+    faltas, notas, sem_mapa = [], [], []
     if os.path.exists(censo_arq):
-        censo = json.load(open(censo_arq))
-        for kind, (cat, tol, motivo) in sorted(CENSO.items()):
-            alvo = censo.get(cat)
-            if alvo is None:
+        with open(censo_arq) as fh:
+            censo = json.load(fh)
+        cat_para_kind = {cat: kind for kind, (cat, _, _) in CENSO.items()}
+        for cat, alvo in sorted(censo.items(), key=lambda kv: -kv[1]):
+            kind = cat_para_kind.get(cat)
+            if kind is None:
+                if cat in FORA_DE_ESCOPO or alvo < 20:
+                    continue
+                if cat in CATEGORIA_COBERTA:
+                    notas.append(f"`{cat}` ({alvo}) coberta por {CATEGORIA_COBERTA[cat]}")
+                    continue
+                sem_mapa.append(f"`{cat}` ({alvo} docs vigentes) sem kind mapeado "
+                                "-- decidir se entra no escopo ou vai para FORA_DE_ESCOPO")
                 continue
+            _, tol, motivo = CENSO[kind]
             tem = atual.get(kind, 0)
             piso = alvo * (1 - tol)
             linha = f"`{kind}`: base {tem} / censo {alvo}"
@@ -299,8 +369,23 @@ def main():
                 notas.append(linha + (f" [tolerancia {tol:.0%}: {motivo}]" if motivo else ""))
     else:
         notas.append("censo ausente -- rode dados_brutos/_dump_aon_extras.py")
-    r.portao(9, "cobertura por kind contra o censo do AoN", not faltas,
-             f"{len(faltas)} kinds abaixo do piso", faltas + notas)
+    r.portao(9, "cobertura por kind contra o censo do AoN",
+             not faltas and not sem_mapa,
+             f"{len(faltas)} kinds abaixo do piso, "
+             f"{len(sem_mapa)} categorias do censo sem kind mapeado",
+             faltas + sem_mapa + notas)
+
+    # --- 10. prosa: todo registro emitido tem `text` ----------------------
+    #
+    # A spec promete isso e nenhum portao cobria -- justificativa em documento
+    # sem portao e regressao futura de graca.
+    sem_texto = collections.Counter(reg.get("kind") for reg in base if not reg.get("text"))
+    fora = {k: n for k, n in sem_texto.items() if k not in ISENTOS_DE_PROSA}
+    r.portao(10, "todo registro emitido tem prosa", not fora,
+             f"{sum(sem_texto.values())} registros sem `text` "
+             f"({sum(fora.values())} em kind nao isento)",
+             [f"`{k}`: {n}" for k, n in sorted(sem_texto.items())]
+             + [f"isencao declarada: `{k}` -- {v}" for k, v in ISENTOS_DE_PROSA.items()])
 
     cab = ["# Portoes de qualidade", "",
            f"Base: **{len(base)}** registros, {len(atual)} kinds.",

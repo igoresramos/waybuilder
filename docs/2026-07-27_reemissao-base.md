@@ -87,19 +87,58 @@ conflito nenhum.
 
 ## Estado dos portoes
 
-Rodando `python3 pipeline/portoes.py` ao fim do pipeline:
+Rodando `python3 pipeline/rodar.py` ponta a ponta. **Os 9 passam.**
 
 | portao | estado |
 |---|---|
-| 1 prov por campo, vocabulario fechado | PASSA (0 campos sem prov valido; a v1 tinha 2.694 sem `prov.text` e 152 `"desconhecida"`) |
+| 1 prov por campo, vocabulario fechado | PASSA -- 0 campos sem prov valido (a v1 tinha 2.694 sem `prov.text` e 152 `"desconhecida"`) |
 | 2 level/rank divergente sem conflito + espelho `rank==level` | PASSA |
-| 3 referencia `wb:` quebrada | **falha residual**: de 111 citacoes / 61 ids na v1 para 12 citacoes / 10 ids |
-| 4 queda de cobertura contra o build anterior | PASSA |
+| 3 referencia `wb:` quebrada | PASSA -- 0 nao declaradas (de 111 citacoes / 61 ids na v1); 2 declaradas com motivo escrito |
+| 4 queda de cobertura contra o build anterior | PASSA -- 0 kinds encolheram |
 | 5 license presente e xref nao vazio | PASSA (os 6 da v1 eram falha de casamento, nao de licenca) |
-| 6 traits disjuntos sobrando | PASSA |
+| 6 traits disjuntos **ou salto de level** sobrando | PASSA |
 | 7 colisao de identidade detectada antes da fusao | PASSA |
-| 8 kind com 2+ fontes e zero divergencia | em correcao |
-| 9 cobertura contra o censo do AoN | em correcao (`familiar-ability` 133/142) |
+| 8 kind com 2+ fontes e zero divergencia | PASSA -- os 6 kinds mudos agora registram (ancestry 25, background 225, class 2, heritage 170, familiar-ability 22) |
+| 9 cobertura contra o censo do AoN | PASSA -- 0 kinds abaixo do piso |
+
+### O detector que faltava: salto de level
+
+Os `traits` nao denunciam toda quimera. `Efficient Alchemy` (feat de arquetipo
+nivel 4) e `Efficient Alchemy (Paragon)` (nivel 20) tem o **mesmo** trait
+`alchemist` -- o unico sinal e o nivel. O portao 6 passou a acusar salto de
+`level` >= 8 em kind de escolha (`feat`, `class-feature`, `archetype`,
+`heritage`), e nao em `equipment`, onde nivel 0 contra 8 e materia-prima contra
+variante do mesmo material -- caso ja verificado como legitimo.
+
+Achou quatro quimeras que a v1 tinha e ninguem via, todas desfeitas:
+`death-from-above` (nv8 arquetipo com `xref.aon` do mitico nv16),
+`even-the-odds`, `play-to-the-crowd` e `efficient-alchemy`. Duas causas
+distintas, as duas corrigidas:
+
+1. **casamento por nome dentro do extrator** -- o pf2etools chama de `Efficient
+   Alchemy` o feat que o AoN indexa como `Efficient Alchemy (Paragon)`. O
+   extrator agora recusa casar por nome quando o nivel diverge 8 ou mais, e
+   registra o que recusou (5 casos).
+2. **`xref` de duas entidades no mesmo registro** -- a curadoria de colisoes
+   passou a sanear: mantem so os xrefs declarados para aquela entidade e
+   apaga dos `conflitos` os valores que vinham da fonte removida. Eles nunca
+   foram divergencia; eram a outra entidade falando.
+
+## Numeros finais
+
+| metrica | v1 | v2 |
+|---|---|---|
+| registros | 18.176 | **19.418** |
+| kinds | 21 | **24** |
+| registros com divergencia registrada | 2.299 (piso) | **2.867** |
+| registros com `superseded_by` | -- (597 deletados) | **646**, nenhum deletado |
+| registros com alias | 359 | 364 |
+| index.json | 15,2 MB | 20,9 MB |
+| prosa | 16,7 MB | 17,9 MB |
+
+O index cresceu porque a base cresceu e porque `prov`, `conflitos` e o
+historico de fusao agora existem de verdade. A separacao indice/prosa (item 4
+do TODO, alvo de 0,53 MB de indice) continua pendente e e onde esse peso sai.
 
 ### Sobre os ids que seguem quebrados
 

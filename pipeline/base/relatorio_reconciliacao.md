@@ -4,7 +4,7 @@
 - colisoes de identidade desmembradas: **7**
 - colisoes de id fundidas: **79**
 - base final: **19418** registros
-- registros com divergencia registrada: **2867**
+- registros com divergencia registrada: **747**
 - source.book normalizado: **1066**
 - license inferida: **2010**
 

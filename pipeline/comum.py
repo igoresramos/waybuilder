@@ -173,10 +173,17 @@ def fonte_de(prov_valor):
 # --------------------------------------------------------------------------
 
 def _iguais(campo, a, b):
+    """Dois valores sao o MESMO valor?
+
+    Normalizacao agressiva so vale para nome de livro, onde a diferenca de
+    grafia entre fontes e ruido conhecido. Para o resto a comparacao e
+    literal: a spec diz que `"God's"` contra `"Gods'"` **e** divergencia real,
+    e normalizar mascarava 46 pares assim (`Needle In The God's Eyes` contra
+    `Needle in the Gods' Eyes`, `Advanced Runic Mind Smithing` contra
+    `Mind-Smithing`).
+    """
     if campo in ("source.book", "book"):
         return chave_livro(a) == chave_livro(b)
-    if isinstance(a, str) and isinstance(b, str):
-        return normalizar(a) == normalizar(b)
     return json.dumps(a, sort_keys=True, default=str) == \
            json.dumps(b, sort_keys=True, default=str)
 
@@ -202,8 +209,14 @@ def escolher(campo, por_fonte):
     # subcampo herda a precedencia do pai: `source.page` segue `source`
     ordem = PRECEDENCIA.get(campo) or PRECEDENCIA.get(campo.split(".")[0]) or PADRAO
 
+    def fonte_base(f):
+        """`aon_2` (segunda entrada da mesma fonte) ordena como `aon`."""
+        raiz = f.rsplit("_", 1)[0]
+        return raiz if raiz in FONTES else f
+
     def rank(f):
-        return ordem.index(f) if f in ordem else len(ordem)
+        b = fonte_base(f)
+        return ordem.index(b) if b in ordem else len(ordem)
     vencedora = sorted(candidatos, key=lambda f: (rank(f), f))[0]
     valor = candidatos[vencedora]
 
@@ -214,7 +227,7 @@ def escolher(campo, por_fonte):
         registro = {"campo": campo, "escolhido": vencedora, vencedora: valor}
         registro.update(divergentes)
         conflitos.append(registro)
-    return valor, prov_lido(vencedora), conflitos
+    return valor, prov_lido(fonte_base(vencedora)), conflitos
 
 
 # --------------------------------------------------------------------------
