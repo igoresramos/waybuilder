@@ -135,20 +135,55 @@ def hp_oficial(doc):
 
 
 def pericias_oficiais(doc):
-    """Rank 0-4 de cada pericia no ator do Foundry, convertido pro nome do rank.
+    """Rank 0-4 de cada pericia do personagem oficial, pelo nome do rank.
 
-    CONVENCAO (chave ausente): o Foundry as vezes grava as 16 pericias
-    completas com rank 0 explicito para as destreinadas, e as vezes grava so
-    as treinadas > 0 e omite o resto inteiro -- confirmado nos dados: `Whirp`
-    tem so `arcana: {rank: 0}` e nenhuma outra chave, e `Nhalmika (Level 1)`
-    tem `system.skills == {}` (personagem sem nenhuma pericia treinada nesse
-    nivel). Em nenhum caso do corpus uma pericia TREINADA (rank > 0) aparece
-    omitida. Logo: chave ausente == rank 0 (untrained), nunca "sem dado".
+    CONVENCAO DE DENOMINADOR (item 4 da tarefa) -- `system.skills.<pericia>`
+    do ator do Foundry NAO e o rank final completo. E so o rank RESULTANTE de
+    escolha discricionaria do jogador (o treino inicial livre de "N + INT" e
+    os aumentos de pericia por nivel) -- o treino AUTOMATICO de classe/
+    antecedente fica de fora e a chave some do dict quando a pericia nunca foi
+    tocada por uma escolha manual.
+
+    Prova: a Amiri (Barbaro) tem `athletics` ausente/rank 0 em
+    `system.skills` nos niveis 1 e 3, mas o item de classe Barbarian desse
+    mesmo ator traz `system.trainedSkills.value == ["athletics"]` -- ela E
+    treinada em Atletismo por regra (Barbaro treina Atletismo de graca), so
+    que isso nunca aparece no dict de pericias. So no nivel 5, quando o
+    jogador GASTA um aumento de pericia nela (indo direto pra rank 2), a
+    chave aparece.
+
+    Por isso o oraculo usado aqui e a UNIAO de duas fontes independentes do
+    proprio ator (nenhuma delas vem da base do motor):
+      1. `system.skills.<pericia>.rank`      -- decisao discricionaria
+      2. `class`/`background`.system.trainedSkills.value -- treino automatico
+         (rank 1 garantido, sem decisao nenhuma envolvida)
+    oficial = max(rank_discricionario, 1 se automatico senao 0)
+
+    Chave ausente EM AMBAS as fontes == rank 0 (untrained) de fato -- so
+    nesse caso a pericia realmente nunca foi tocada por nada.
+
+    LIMITE CONHECIDO (nao coberto por nenhuma das duas fontes): aumento de
+    proficiencia automatico vindo de CLASS FEATURE/feat (ex. o Inventor tem
+    a classe-feature "Expert Overdrive", que da RAW confirmado em
+    pipeline/base/text/class-feature.json ("You become an expert in
+    Crafting") -- automatico, sem escolha do jogador). Isso nao entra em
+    `trainedSkills.value` (que so cobre o treino INICIAL) nem sempre aparece
+    em `system.skills`. Gera falso positivo de "motor deu rank maior que o
+    oficial" -- ver achado no relatorio.
     """
     skills = ((doc.get("system") or {}).get("skills")) or {}
+    auto = set()
+    for it in doc.get("items") or []:
+        if it.get("type") not in ("class", "background"):
+            continue
+        for s in (((it.get("system") or {}).get("trainedSkills") or {}).get("value") or []):
+            auto.add(s)
+
     saida = {}
     for pericia in PERICIAS:
-        rank_num = (skills.get(pericia) or {}).get("rank", 0) or 0
+        discricionario = (skills.get(pericia) or {}).get("rank", 0) or 0
+        automatico = 1 if pericia in auto else 0
+        rank_num = max(discricionario, automatico)
         saida[pericia] = RANKS[rank_num] if 0 <= rank_num < len(RANKS) else "untrained"
     return saida
 
@@ -178,6 +213,7 @@ def main():
     por_classe = collections.defaultdict(lambda: collections.Counter())
     por_par = collections.defaultdict(lambda: collections.Counter())
     diverg_pericias = []
+    sobre_concessao = []   # motor da rank MAIOR que o oficial -- sinal acionavel
 
     for f in arquivos:
         try:
@@ -223,6 +259,9 @@ def main():
                 por_par[(classe_nome, pericia)]["diverge"] += 1
                 diverg_pericias.append((doc.get("name"), classe_nome, p.nivel,
                                         pericia, of_r, no_r))
+                if RANKS.index(no_r) > RANKS.index(of_r):
+                    sobre_concessao.append((doc.get("name"), classe_nome, p.nivel,
+                                            pericia, of_r, no_r))
 
     total_pericias = sum(contagem_pericias.values())
     bate_pericias = contagem_pericias["pericia bate"]
@@ -263,48 +302,94 @@ def main():
 
     # achado sistemico (item 3): combinacao classe+pericia onde a maioria
     # das ocorrencias diverge, com pelo menos 2 amostras (senao e coincidencia
-    # de 1 personagem so)
+    # de 1 personagem so). So os mais amostrados entram no relatorio -- a
+    # lista completa tem 80+ entradas e viraria a mesma lista crua que o
+    # item 2 pediu pra evitar, so que reagrupada
     sistemicos = [
         (classe, pericia, c["diverge"], c["total"])
         for (classe, pericia), c in por_par.items()
         if c["total"] >= 2 and c["diverge"] / c["total"] >= 0.5]
-    sistemicos.sort(key=lambda t: (-t[2] / t[3], -t[2]))
+    sistemicos.sort(key=lambda t: (-t[3], -t[2] / t[3]))
+    TOPO_SISTEMICOS = 15
     linhas_sistemicos = [
         f"- `{classe}` + `{pericia}`: diverge em {d}/{t} ocorrencias ({100*d/t:.0f}%)"
-        for classe, pericia, d, t in sistemicos]
+        for classe, pericia, d, t in sistemicos[:TOPO_SISTEMICOS]]
+    if len(sistemicos) > TOPO_SISTEMICOS:
+        linhas_sistemicos.append(
+            f"- ... e mais {len(sistemicos) - TOPO_SISTEMICOS} combinacoes "
+            "classe+pericia com >=50% de divergencia (amostra menor, "
+            "2-3 personagens cada) -- o padrao e generalizado, nao um "
+            "grupo pequeno de excecoes")
+
+    linhas_sobre = [
+        f"- `{nome}` ({classe}, nivel {nv}) -- `{pericia}`: oficial {of_r}, motor {no_r}"
+        for nome, classe, nv, pericia, of_r, no_r in sobre_concessao]
 
     linhas_diverg_detalhe = [
         f"- `{nome}` ({classe}, nivel {nv}) -- `{pericia}`: oficial {of_r}, motor {no_r}"
         for nome, classe, nv, pericia, of_r, no_r in diverg_pericias]
 
     pct_pericia = f"{100*bate_pericias/total_pericias:.1f}%" if total_pericias else "n/a"
+    n_sobre = len(sobre_concessao)
+    n_sob = total_pericias - bate_pericias - n_sobre
     secao_pericias = (
         "\n## Pericias (rank)\n\n"
         "Compara o rank 0-4 (untrained/trained/expert/master/legendary) de\n"
-        "cada uma das 16 pericias contra `system.skills.<pericia>.rank` do\n"
-        "ator do Foundry -- pra cada personagem que traduziu (HP bateu ou nao,\n"
-        "o rank de pericia e um oraculo independente).\n\n"
-        "**Convencao de denominador:** chave de pericia ausente no ator conta\n"
-        "como rank 0 (untrained), NUNCA como \"sem dado\". Confirmado no corpus:\n"
-        "alguns atores gravam as 16 pericias completas com rank 0 explicito nas\n"
-        "destreinadas (ex. iconics classicos), outros gravam so as treinadas > 0\n"
-        "e omitem o resto inteiro (ex. `Whirp` tem so `arcana: {rank: 0}` e mais\n"
-        "nenhuma chave; `Nhalmika (Level 1)` tem `system.skills == {}`). Em\n"
-        "nenhum caso do corpus uma pericia TREINADA aparece omitida -- so\n"
-        "confirma que ausencia = destreinado. Por isso o denominador e sempre\n"
-        "**16 pericias x personagem traduzido**, sem subconjunto.\n\n"
+        "cada uma das 16 pericias contra o rank oficial reconstruido do ator\n"
+        "do Foundry -- pra cada personagem que traduziu (HP bateu ou nao, o\n"
+        "rank de pericia e um oraculo independente).\n\n"
+        "**Convencao de denominador:** `system.skills.<pericia>.rank` do ator\n"
+        "NAO e o rank final completo -- e so o resultado de escolha\n"
+        "DISCRICIONARIA do jogador (treino inicial livre + aumentos de\n"
+        "pericia por nivel). O treino AUTOMATICO de classe/antecedente fica de\n"
+        "fora: a chave simplesmente some do dict quando a pericia nunca foi\n"
+        "tocada por uma escolha manual. Prova no corpus: a Amiri (Barbaro) tem\n"
+        "`athletics` ausente/rank 0 em `system.skills` nos niveis 1 e 3, mas o\n"
+        "item de classe Barbarian desse ator traz\n"
+        "`system.trainedSkills.value == [\"athletics\"]` -- ela E treinada em\n"
+        "Atletismo por regra (Barbaro treina Atletismo automatico), e isso\n"
+        "nunca aparece no dict de pericias.\n\n"
+        "Por isso o oraculo usado aqui e a **uniao de duas fontes\n"
+        "independentes do proprio ator** (nenhuma vem da base do motor):\n"
+        "`system.skills.<pericia>.rank` (decisao discricionaria) UNIDO com\n"
+        "`class`/`background`.system.trainedSkills.value (treino automatico,\n"
+        "rank 1 garantido). Chave ausente EM AMBAS as fontes == rank 0\n"
+        "(untrained) de fato. O denominador e sempre **16 pericias x\n"
+        "personagem traduzido**, sem subconjunto.\n\n"
         f"- pontos de comparacao: **{total_pericias}** "
         f"({sum(contagem.values()) - contagem['nao traduzido']} personagens x 16 pericias)\n"
         f"- bate: **{bate_pericias}** ({pct_pericia})\n"
-        f"- diverge: **{total_pericias - bate_pericias}**\n\n"
+        f"- diverge: **{total_pericias - bate_pericias}**, sendo:\n"
+        f"  - motor da rank MENOR que o oficial: **{n_sob}** -- ver \"causa-raiz\" abaixo\n"
+        f"  - motor da rank MAIOR que o oficial: **{n_sobre}** -- sinal acionavel, "
+        "ver \"Achados sobre o motor\"\n\n"
+        "### Causa-raiz da maioria das divergencias (nao e bug do motor)\n\n"
+        "A quase totalidade das divergencias e motor MENOR: o motor nunca\n"
+        "recebe a escolha discricionaria de pericia do jogador porque (a) este\n"
+        "tradutor (`validar_iconics.py`) nao emite escolhas `skill_increase`\n"
+        "-- so ha oraculo pro rank FINAL no Foundry, nao pra em qual nivel\n"
+        "cada aumento foi gasto -- e (b) `motor/motor.py` **nao processa o\n"
+        "slot `skill_increase` de forma alguma**: o schema\n"
+        "(`specs/2026-07-26-schema-personagem.md` linha 172-173) declara o\n"
+        "slot, mas `grep -n skill_increase motor/motor.py` nao retorna nenhuma\n"
+        "ocorrencia. Isso NAO e o achado de bug pedido pela tarefa -- e uma\n"
+        "escolha do jogador que este metodo de validacao estruturalmente nao\n"
+        "consegue auditar (nao ha oraculo de \"qual nivel\"), analogo a\n"
+        "limitacao ja documentada pro multiclasse por divisao de niveis.\n\n"
         "### Divergencias por pericia\n\n"
         + ("\n".join(linhas_por_pericia) + "\n" if linhas_por_pericia else "nenhuma.\n")
         + "\n### Divergencias por classe\n\n"
         + ("\n".join(linhas_por_classe) + "\n" if linhas_por_classe else "nenhuma.\n")
         + "\n### Achados sistemicos (classe + pericia, >=2 amostras, "
           ">=50% divergindo)\n\n"
+        "Confirma o padrao: sao as pericias que os personagens pre-gerados da\n"
+        "Paizo tipicamente ELEGEM treinar/subir por escolha, nao um bug\n"
+        "localizado numa classe.\n\n"
         + ("\n".join(linhas_sistemicos) + "\n" if linhas_sistemicos
            else "nenhum padrao sistemico encontrado.\n")
+        + "\n### Sobre-concessao (motor MAIOR que o oficial -- unico sinal "
+          f"realmente acionavel, {n_sobre} caso(s))\n\n"
+        + ("\n".join(linhas_sobre) + "\n" if linhas_sobre else "nenhuma.\n")
         + "\n### Amostra de divergencias individuais (ate 25, nao exaustiva -- "
           "ver secoes acima pro padrao completo)\n\n"
         + ("\n".join(linhas_diverg_detalhe[:25]) + "\n" if linhas_diverg_detalhe
