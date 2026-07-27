@@ -87,6 +87,10 @@ items:
     texto: "TRADICAO DE MAGIA POR SUBCLASSE nao e modelavel hoje. Sorcerer, Summoner e Witch tem `spellcasting.tradition` gravado como PROSA -- literalmente a string 'variavel (definida pela escolha de bloodline/eidolon/patron)'. A tradicao real vem da subclasse (Genie=arcane, Nymph=primal...) e esta so no texto ('Spell List Arcane'). Consequencia: o predicado `spellcasting_tradition` da spec nao funciona para 3 das 10 classes conjuradoras, e a ficha mostra a string descritiva no lugar da tradicao. Extrair do texto e viavel (padrao 'Spell List <tradicao>'), mas e derivacao de prosa -- decidir se entra"
     prioridade: alta
 
+  - id: 42
+    texto: "COBERTURA DE EFEITO POR SUBCLASSE -- levantamento completo, 8 eixos seguem zerados e a causa NAO e falha de extracao. Com efeito: muse 5/5, patron 16/24, oracle mystery 10/12, thaumaturge implement 8/10, gunslinger way 5/6, rogue racket 5/6, magus hybrid-study 2/8, swashbuckler style 2/6, wizard arcane-thesis 1/6, cleric doctrine 1/3. ZERADOS: barbarian instinct (16 opcoes, 27 feats dependem), champion cause (13, 9 feats), wizard arcane-school (23), witch lesson (20), psychic conscious-mind (6) e subconscious-mind (4), ranger hunters-edge (4, 14 feats), alchemist research-field (4). Medido: das 90 opcoes desses eixos, 62 NAO TEM rule element no Foundry (sao catalogo do AoN, o Foundry nao modela) e as 28 restantes usam ItemAlteration (60), DamageAlteration (12), DamageDice (7) -- mecanica de dano e de ataque. A prosa tambem nao ajuda: so 8 de 77 tem padrao regular. CONCLUSAO: o que falta e majoritariamente MECANICA DE COMBATE, que o principio zero poe fora de escopo (o app nao roda mecanica). O que importa para montar ficha -- proficiencia, pericia, feat e spell concedidos -- ja foi convertido. Decidir se vale um interpretador parcial so para dano de rage e afins"
+    prioridade: media
+
   # ==========================================================================
   # BLOCO 2 -- MODELAGEM. Depende da base re-emitida.
   # ==========================================================================
