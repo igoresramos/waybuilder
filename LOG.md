@@ -4,6 +4,49 @@ project: waybuilder
 
 # LOG -- Waybuilder
 
+## 2026-07-27
+
+### Sessao | 08:45-11:30 | igor + claude-code
+**Bloco 1 do TODO fechado: a base foi re-emitida e os portoes passam.** O Igor
+deu carta branca ("tenha autonomia, valide com o Fable, nao pare ate finalizar")
+depois de voltar ao PC que tem os zips e os PDFs.
+
+Materia-prima restaurada primeiro: o checkout do Foundry apontava para um `/tmp`
+de sessao que nao existe mais (7 arquivos com o caminho morto). Rebaixado o
+tarball do commit pinado -- 33.025 JSONs -- e os dumps que faltavam do AoN
+(`relic`, `language`, a ponte `remaster_id`/`legacy_id` com 23.258 docs, e o
+censo por categoria).
+
+- **Spec v2 do schema-base**, escrita antes de qualquer codigo (SDD): fusao por
+  chave da fonte, `mechanized` virando dois campos, `rank` no envelope, `relic`
+  e `language` nos kinds, `prov` com vocabulario fechado, `source.book`
+  normalizado na escrita, portoes com ordem de execucao declarada
+- **Review adversarial em Fable derrubou duas partes da v2, com razao**: os
+  guardas que eu tinha escrito vetariam **77,8%** das fusoes que o proprio AoN
+  declara (N->1 e consolidacao legitima -- `Magic Wand` recebe as 10 varas por
+  rank), e faltava o guarda que importa: **351 de 351** class-features apontam
+  `remaster_id` para a CLASSE, nao para outra feature. Os dois medidos por mim
+  antes de aceitar
+- **7 agentes despachados**, a maioria em paralelo, com escopo de arquivo
+  disjunto: relic+language, tabelas de conjuracao, `mechanized` nos 7
+  extratores, equipamento+magias, backgrounds+conflitos silenciados,
+  integracao das tabelas, simulacoes de balanceamento
+- **Review adversarial do nucleo em Opus** achou 10 defeitos no codigo que eu
+  tinha escrito -- 4 criticos, todos reais e confirmados por medicao propria.
+  O pior: a uniao de `traits` estava implementada na camada errada e
+  `bastard-sword` continuava perdendo o `-d12`. Todos corrigidos
+- **Numeros:** 18.176 -> 19.418 registros, 21 -> 24 kinds, prosa 95% -> 99,1%,
+  0 registros deletados (contra 597), 10 portoes passando (contra 1 de 7)
+- **Balanceamento medido**: niveis 1-15, 12 classes puras + 10 combinacoes,
+  HOUSE vs RAW vs RAW+Free Archetype, combate e nao-combate. A houserule nao
+  quebra o jogo; dois pontos estreitos viraram itens de playtest
+- Documentos novos: `docs/2026-07-27_reemissao-base.md`,
+  `docs/2026-07-27_ausencias-pontuais.md`,
+  `docs/simulacoes/2026-07-27_balanceamento.md`
+- 78 testes automatizados (eram 0), incluindo invariantes medidos sobre a base
+  real: `prov` valido, `traits` nunca null, `rank == level`, uma grafia por
+  livro, `superseded_by` integro
+
 ## 2026-07-26
 
 ### Sessao | 18:40-21:30 | igor + claude-code

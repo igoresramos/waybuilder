@@ -384,6 +384,40 @@ Sobra util: id que nao resolve por nenhum caminho vira **excecao declarada com
 motivo escrito**, nao falha eterna. Portao que falha para sempre para de ser
 lido.
 
+### Regra certa implementada na camada errada nao vale nada
+
+A spec v2 diz que `traits` e uniao das tres fontes. A funcao de uniao existe,
+tem teste, e roda. E mesmo assim `bastard-sword` continuava saindo com
+`two-hand` em vez de `two-hand-d12`.
+
+Motivo: os **extratores** ja colapsam as tres fontes num registro so, com
+`traits` escolhido por precedencia. A uniao rodava uma camada depois, sobre um
+conjunto que ja tinha uma fonte so -- medido: **1 contribuinte em 15.802
+registros**. A regra estava certa, o teste estava verde, e o dado continuava
+sendo destruido.
+
+Duas licoes: **teste de funcao nao substitui invariante sobre o artefato**
+(hoje ha um teste que le a base emitida e confere `two-hand-d12`), e antes de
+declarar uma regra implementada, procurar **onde o dado realmente passa**.
+
+### Portao pode passar por acidente, e ai e pior que nao existir
+
+Quatro dos meus portoes passavam sem medir:
+
+- condicao era `os.path.exists(relatorio)` -- e o relatorio e sempre escrito;
+- contava conflito de `traits`, que a spec tirou da precedencia (`shield`
+  passava com 47 conflitos, 100% ruido);
+- gravava a baseline de cobertura **mesmo quando falhava**, entao a regressao
+  seria acusada uma vez e nunca mais;
+- iterava uma allow-list de kinds escrita a mao -- cego justamente para o kind
+  que ninguem lembrou de listar, que e o proposito do portao.
+
+Teste util: **se o defeito que este portao existe para achar acontecesse agora,
+ele falharia?** Se a resposta depende de um arquivo existir, de um campo que
+sempre esta la, ou de uma lista que eu mesmo escrevi, o portao nao esta
+medindo. Assim que o portao de censo passou a varrer as categorias da fonte em
+vez da minha lista, achou dois kinds ausentes na primeira rodada.
+
 ### Ausencia lembrada de cabeca nao e gabarito
 
 O TODO listava `Life-Saving Yowl` (Catfolk nv17, Player Core 2) como ausente da

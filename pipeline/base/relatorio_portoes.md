@@ -39,26 +39,26 @@ portao ausente e portao aprovado nao podem parecer a mesma coisa.
 
 2 registros marcados com `desmembrado_de`
 
-### Portao 8 -- kind com 2+ fontes e zero divergencia registrada: **FALHA**
+### Portao 8 -- kind com 2+ fontes e zero divergencia registrada: **PASSA**
 
-1 kinds sem instrumentacao de conflito
+0 kinds sem instrumentacao de conflito, 1 com concordancia verificada
 
-- `shield`: 112 registros com 2+ fontes, 0 conflitos
+- `shield`: 0 conflitos -- medido em 2026-07-27: dos 112 shields com 2+ fontes, 0 divergem de `source.book` contra o doc do AoN apontado pelo proprio xref
 
 ### Portao 9 -- cobertura por kind contra o censo do AoN: **FALHA**
 
-3 kinds abaixo do piso, 0 categorias do censo sem kind mapeado
+2 kinds abaixo do piso, 0 categorias do censo sem kind mapeado
 
-- `equipment`: base 6099 / censo 6304 -- abaixo do piso (6178) [tolerancia: a base emite variante por grau/runa que o AoN indexa como uma entrada so, entao o excesso e esperado]
 - `tactic`: base 0 / censo 37 -- abaixo do piso (36)
 - `class-kit`: base 0 / censo 32 -- abaixo do piso (31)
+- `equipment`: base 7452 / censo 6304 [tolerancia 2%: categoria guarda-chuva: soma equipment+weapon+armor+shield]
 - `feat`: base 6411 / censo 6085
 - `spell`: base 1642 / censo 1661
 - `class-feature`: base 841 / censo 721 [tolerancia 10%: o AoN indexa escolha de subclasse em categoria propria (mystery, patron, instinct, doctrine)]
 - `trait`: base 561 / censo 556
 - `background`: base 514 / censo 499
 - `deity`: base 490 / censo 484
-- `weapon`: base 1031 / censo 372 [tolerancia 2%: idem equipment]
+- `weapon`: base 1031 / censo 372 [tolerancia 2%: a base emite variante por grau/runa que o AoN indexa como uma entrada so, entao o excesso e esperado]
 - `heritage`: base 346 / censo 335 [tolerancia 3%: o AoN indexa heranca versatil como ancestry]
 - `archetype`: base 247 / censo 244
 - `ritual`: base 151 / censo 145
@@ -68,7 +68,7 @@ portao ausente e portao aprovado nao podem parecer a mesma coisa.
 - `animal-companion`: base 113 / censo 96 [tolerancia 20%: especializacao e avanco ficam fora por decisao de escopo]
 - `ancestry`: base 50 / censo 68 [tolerancia 30%: o AoN conta heranca versatil dentro de ancestry]
 - `domain`: base 64 / censo 63
-- `armor`: base 204 / censo 42 [tolerancia 2%: idem equipment]
+- `armor`: base 204 / censo 42 [tolerancia 2%: idem weapon]
 - `familiar-specific`: base 39 / censo 38
 - `skill`: base 33 / censo 33
 - `class`: base 27 / censo 27

@@ -53,12 +53,17 @@ CENSO = {
     "familiar-ability":  ("familiar-ability", 0.05, ""),
     "tactic":            ("tactic", 0.02, ""),
     "class-kit":         ("class-kit", 0.02, ""),
+    # `equipment` no AoN e categoria guarda-chuva: arma, armadura e escudo
+    # entram nela. Comparar so contra o kind `equipment` da base acusava um
+    # deficit de 205 que nao existe -- medido: 0 dos 6.304 vigentes esta
+    # ausente da base quando se contam os quatro kinds juntos.
     "equipment":         ("equipment", 0.02,
+                          "categoria guarda-chuva: soma equipment+weapon+armor+shield"),
+    "weapon":            ("weapon", 0.02,
                           "a base emite variante por grau/runa que o AoN indexa "
                           "como uma entrada so, entao o excesso e esperado"),
-    "weapon":            ("weapon", 0.02, "idem equipment"),
-    "armor":             ("armor", 0.02, "idem equipment"),
-    "shield":            ("shield", 0.02, "idem equipment"),
+    "armor":             ("armor", 0.02, "idem weapon"),
+    "shield":            ("shield", 0.02, "idem weapon"),
     "class":             ("class", 0.02, ""),
     "familiar-specific": ("familiar-specific", 0.03, ""),
     "animal-companion":  ("animal-companion", 0.20,
@@ -94,6 +99,13 @@ CATEGORIA_COBERTA = {
 
 # Kinds que podem ficar sem prosa, com o motivo escrito. Tudo que nao esta
 # aqui e obrigado a ter `text`.
+# Kind onde zero conflito nao e falta de instrumentacao: as fontes concordam
+# mesmo. Exige medicao, nao suposicao -- a evidencia fica escrita aqui.
+CONCORDANCIA_VERIFICADA = {
+    "shield": "medido em 2026-07-27: dos 112 shields com 2+ fontes, 0 divergem "
+              "de `source.book` contra o doc do AoN apontado pelo proprio xref",
+}
+
 ISENTOS_DE_PROSA = {
     "equipment": "objeto de tesouro (gema, obra de arte) nao tem texto de regra "
                  "em fonte nenhuma -- so nome, nivel e preco",
@@ -329,11 +341,17 @@ def main():
     # provou silenciados continuariam passando -- `ancestry` (50 registros com
     # 2+ fontes e 3 divergencias reais de source.book), `class` (27 / 2) e
     # `familiar-ability` (72).
+    concordam = []
     for kind, (multi, com_conf) in sorted(por_kind.items()):
-        if multi >= 20 and com_conf == 0:
+        if multi < 20 or com_conf:
+            continue
+        if kind in CONCORDANCIA_VERIFICADA:
+            concordam.append(f"`{kind}`: 0 conflitos -- {CONCORDANCIA_VERIFICADA[kind]}")
+        else:
             mudos.append(f"`{kind}`: {multi} registros com 2+ fontes, 0 conflitos")
     r.portao(8, "kind com 2+ fontes e zero divergencia registrada", not mudos,
-             f"{len(mudos)} kinds sem instrumentacao de conflito", mudos)
+             f"{len(mudos)} kinds sem instrumentacao de conflito, "
+             f"{len(concordam)} com concordancia verificada", mudos + concordam)
 
     # --- 9. contagem por kind contra o censo do AoN ------------------------
     #
@@ -347,6 +365,8 @@ def main():
         with open(censo_arq) as fh:
             censo = json.load(fh)
         cat_para_kind = {cat: kind for kind, (cat, _, _) in CENSO.items()}
+        # categoria do AoN -> kinds da base que a cobrem juntos
+        SOMA = {"equipment": ["equipment", "weapon", "armor", "shield"]}
         for cat, alvo in sorted(censo.items(), key=lambda kv: -kv[1]):
             kind = cat_para_kind.get(cat)
             if kind is None:
@@ -359,7 +379,7 @@ def main():
                                 "-- decidir se entra no escopo ou vai para FORA_DE_ESCOPO")
                 continue
             _, tol, motivo = CENSO[kind]
-            tem = atual.get(kind, 0)
+            tem = sum(atual.get(k, 0) for k in SOMA.get(cat, [kind]))
             piso = alvo * (1 - tol)
             linha = f"`{kind}`: base {tem} / censo {alvo}"
             if tem < piso:

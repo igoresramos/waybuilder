@@ -195,6 +195,15 @@ Quando a fonte vencedora nao tem o campo, cai para a proxima na ordem acima e
 > outra fonte passar a emitir efeito, a precedencia ja esta escrita. Registrado
 > aqui para nao voltar como "regra que nunca dispara, remover".
 
+**Comparar valores e literal, menos para nome de livro.** So `source.book`
+compara por chave normalizada -- a diferenca de grafia entre fontes ali e ruido
+conhecido. No resto, `"God's"` contra `"Gods'"` **e** divergencia real e tem de
+aparecer em `conflitos`; normalizar mascarava 46 pares desses.
+
+**Duas entradas que resolvem para a mesma fonte com valores diferentes viram
+conflito, nao descarte.** Ficar com a primeira em silencio apagava 67 valores
+por build.
+
 **A escolha por precedencia e o registro da divergencia sao a mesma operacao.**
 Ela vive em **uma** funcao compartilhada (`pipeline/comum.py`), nao replicada por
 extrator.
@@ -291,7 +300,22 @@ Regra: `traits` e a **uniao das tres fontes**, aplicada nesta ordem:
 3. **Uniao do que sobrar**, ordenada alfabeticamente.
 
 `prov.traits` passa a registrar a **lista de fontes que contribuiram**, nao uma
-vencedora: `"traits": ["foundry", "aon"]`.
+vencedora: `"traits": ["foundry", "aon"]`. E **`traits` nao gera `conflitos`**:
+o campo saiu da precedencia, entao "divergencia de trait" deixou de ser uma
+categoria -- o que cada fonte dizia esta na uniao e em `prov.traits`.
+
+> Onde a uniao acontece importa. Os extratores colapsam as tres fontes num
+> registro so **antes** da reconciliacao, entao unir no reconciliador sobre o
+> grupo de registros e vacuo -- medido: 1 contribuinte em 15.802 registros, e
+> `bastard-sword` continuava com `two-hand` em vez de `two-hand-d12`, que e
+> exatamente o dado que a auditoria mostrou sendo destruido.
+>
+> O que cada fonte dizia **nao se perde**: fica no proprio `conflitos` que o
+> extrator gravou, com uma chave por fonte. E de la que a uniao sai hoje. O
+> efeito na base: `two-hand-d12` passou de 2 registros para 10, e `two-hand`
+> puro caiu de 19 para 2. A correcao definitiva e o extrator chamar a uniao
+> direto -- o caminho pelo `conflitos` e o mesmo resultado sem reescrever
+> sete extratores.
 
 ## Fusao legado <-> remaster
 
@@ -550,8 +574,36 @@ passam**: portao ausente e portao aprovado nao podem parecer a mesma coisa.
 | 5 | registro emitido sem `license`, ou com `xref` vazio | pos-merge |
 | 6 | `traits` categoricamente disjunto sobrando depois das tres regras de uniao | pos-merge |
 | 7 | duas entidades distintas colidindo no mesmo id | **pre-fusao**, sobre as colisoes de id |
-| 8 | kind com >=20 registros de 2+ fontes e **zero** `conflitos` | pos-merge |
-| 9 | contagem por kind contra o censo do AoN (`category` menos `remaster_id`), tolerancia declarada por kind | pos-emissao |
+| 8 | kind com >=20 registros de 2+ fontes e **zero** `conflitos` (sem contar `traits`) | pos-merge |
+| 9 | toda **categoria** do censo do AoN (`category` menos `remaster_id`) mapeia para kind, e nenhum kind fica abaixo do piso | pos-emissao |
+| 10 | registro emitido sem `text`, em kind fora da lista de isencao declarada | pos-emissao |
+
+O portao 9 varre as **categorias do censo**, nao uma lista de kinds escrita a
+mao. A diferenca e o proposito: uma allow-list e cega justamente para o que ele
+existe para achar -- o kind que ninguem lembrou de listar. Categoria sem kind
+mapeado tem tres saidas, todas escritas: entra no escopo, entra em
+`FORA_DE_ESCOPO` com o motivo, ou entra em `CATEGORIA_COBERTA` quando a base ja
+a cobre dentro de outro kind (`ikon` sao class-features; `arcane-school` sao
+traits).
+
+> Assim que passou a varrer o censo, o portao achou dois kinds de jogador
+> ausentes -- `tactic` (37, as tacticas do Commander no Battlecry!) e
+> `class-kit` (32, os kits de equipamento inicial). Mesma classe de omissao do
+> `ritual`, achada pelo mesmo mecanismo.
+
+Duas armadilhas de portao que ja custaram um build, escritas para nao voltarem:
+
+- **Portao que nao pode falhar.** O portao 7 chegou a ter como condicao
+  `os.path.exists(relatorio)` -- e o relatorio e sempre escrito. A condicao
+  agora e o conteudo, nao o arquivo.
+- **Portao que rebaixa a propria baseline.** O portao 4 gravava a cobertura
+  nova mesmo quando falhava, entao uma regressao era acusada uma vez e nunca
+  mais. So grava quando passa.
+
+E uma sobre a excecao: zero conflito num kind pode ser concordancia real, nao
+falta de instrumentacao -- mas isso se **mede** (`shield`: dos 112 com 2+
+fontes, 0 divergem de `source.book` contra o AoN) e a evidencia fica escrita em
+`CONCORDANCIA_VERIFICADA`, com data.
 
 **"Pos-emissao" quer dizer: depois do ultimo processo que escreve
 `index.json`** -- hoje `fundir_renomeados.py`, nao `emitir_textos.py`. Rodar

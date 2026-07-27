@@ -124,6 +124,42 @@ distintas, as duas corrigidas:
    apaga dos `conflitos` os valores que vinham da fonte removida. Eles nunca
    foram divergencia; eram a outra entidade falando.
 
+## O que o review adversarial do codigo achou depois
+
+Um review em Opus sobre o codigo novo (comum/reconciliar/fundir/portoes) achou
+10 defeitos, 4 criticos. Todos foram confirmados por medicao propria antes de
+aceitar, e todos foram corrigidos. Os que mudaram dado:
+
+1. **A uniao de `traits` estava na camada errada.** Os extratores colapsam as
+   tres fontes antes da reconciliacao, entao unir sobre o grupo era vacuo (1
+   contribuinte em 15.802 registros) e `bastard-sword` continuava com
+   `two-hand` em vez de `two-hand-d12` -- exatamente o dado que a auditoria
+   mostrou sendo destruido. Agora a uniao sai do proprio `conflitos` que o
+   extrator gravou: `two-hand-d12` foi de 2 para 10 registros, `two-hand` puro
+   caiu de 19 para 2.
+2. **Referencia resolvida para o kind errado.** O ramo da ponte do AoN nao
+   conferia `kind`, entao `wb:heritage/versatile` virava `wb:trait/versatile`
+   -- o trait de ARMA. Pior: cada referencia resolvida errado **saia da
+   contagem** do portao 3, que melhorava por estar mais errado.
+3. **67 valores descartados em silencio por build.** Duas entradas que
+   resolviam para a mesma fonte com valores diferentes: a segunda sumia.
+   Agora vira conflito.
+4. **Comparacao normalizada demais mascarava 46 divergencias reais** --
+   `Needle In The God's Eyes` contra `Needle in the Gods' Eyes`. A spec diz
+   textualmente que isso **e** divergencia. Normalizacao agora so vale para
+   nome de livro.
+
+E quatro portoes que passavam por acidente: o 7 tinha como condicao a
+existencia de um arquivo que sempre e escrito; o 8 contava conflito de
+`traits`, que a spec tirou da precedencia (`shield` passava com 47 conflitos,
+todos ruido); o 4 gravava a baseline mesmo falhando, entao uma regressao seria
+acusada uma vez e nunca mais; o 9 iterava uma allow-list escrita a mao, cego
+justamente para o kind que ninguem lembrou de listar.
+
+Assim que o 9 passou a varrer as **categorias do censo**, achou dois kinds de
+jogador ausentes -- `tactic` (37, as tacticas do Commander) e `class-kit` (32).
+Mesma classe de omissao do `ritual`, achada pelo mesmo mecanismo.
+
 ## Numeros finais
 
 | metrica | v1 | v2 |

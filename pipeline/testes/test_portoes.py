@@ -109,5 +109,43 @@ class TestPortoesMedemAlgo(unittest.TestCase):
         self.assertGreater(citados, 1000)
 
 
+@unittest.skipUnless(os.path.exists(BASE), "base ainda nao emitida")
+class TestUniaoDeTraitsNoArtefato(unittest.TestCase):
+    """Teste de funcao nao substitui invariante sobre o artefato.
+
+    A uniao de traits tinha teste unitario verde enquanto o dado emitido
+    continuava perdendo o parametro do trait -- porque a uniao rodava numa
+    camada onde ja chegava uma fonte so. Este teste le a base de verdade.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        with open(BASE) as fh:
+            cls.base = json.load(fh)
+
+    def test_bastard_sword_mantem_o_dado_do_trait(self):
+        bs = [r for r in self.base if r["id"] == "wb:weapon/bastard-sword"]
+        self.assertTrue(bs, "wb:weapon/bastard-sword sumiu da base")
+        self.assertIn("two-hand-d12", bs[0].get("traits") or [])
+
+    def test_parametrizado_absorve_o_base_na_base_inteira(self):
+        # nenhum registro pode ter os dois: o parametrizado engole o base
+        ruins = [r["id"] for r in self.base
+                 if "two-hand" in (r.get("traits") or [])
+                 and any(t.startswith("two-hand-") for t in r["traits"])]
+        self.assertEqual(ruins, [])
+
+    def test_traits_nao_gera_mais_conflito(self):
+        # `traits` saiu da precedencia: conflito de trait nao e categoria
+        conf = [r["id"] for r in self.base
+                for c in (r.get("conflitos") or []) if c.get("campo") == "traits"]
+        self.assertEqual(conf[:5], [], f"{len(conf)} registros com conflito de traits")
+
+    def test_nome_legado_de_ancestria_nao_sobrevive_nos_traits(self):
+        legados = {"tiefling", "aasimar", "ifrit", "gnoll", "half-elf", "grippli"}
+        ruins = [r["id"] for r in self.base if legados & set(r.get("traits") or [])]
+        self.assertEqual(ruins[:5], [])
+
+
 if __name__ == "__main__":
     unittest.main()

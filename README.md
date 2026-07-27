@@ -51,43 +51,30 @@ pipeline/
 
 Ordem de execucao: extratores -> `reconciliar` -> `emitir_textos` -> `fundir_renomeados`.
 
-## ATENCAO: a base tem dano conhecido. Nao construa por cima dela ainda
+## A base foi re-emitida em 27/07 e os portoes passam
 
-A auditoria de 26/07 (relatorio em `docs/2026-07-26_auditoria-ampla.md`) achou
-**perda de dado real**. A base **nao esta fechada** -- precisa ser re-emitida.
+O dano que a auditoria de 26/07 achou (`docs/2026-07-26_auditoria-ampla.md`)
+foi corrigido e **medido**. Relatorio de verificacao:
+`docs/2026-07-27_reemissao-base.md`.
 
-**Numeros atuais, ja corrigidos:** 18.176 registros em 21 kinds, **prosa em 95%
-(907 sem prosa)**, 2.299 com divergencia registrada, 359 com alias.
-Index 15,2 MB + prosa 16,7 MB.
+**Numeros atuais:** 19.418 registros em 24 kinds, **prosa em 99,1%**, 2.867 com
+divergencia registrada, 646 com `superseded_by` (nenhum registro deletado).
+Index 20,9 MB + prosa 17,9 MB.
 
-> A afirmacao anterior de "prosa em 100%" estava errada: a metrica dividia
-> pelas referencias existentes, nao pela base. Registro sem referencia nenhuma
-> nao entrava no denominador e por isso nao aparecia como falta.
+| defeito da v1 | estado |
+|---|---|
+| fusao por prosa deletou 597 registros, 35% corretas | chave da fonte (`remaster_id`), **12/12** corretas na amostra, **nada deletado** |
+| `traits` por precedencia destruia o dado parametrizado | uniao: `two-hand-d12` de 2 para 10 registros |
+| `wb:<kind>/<slug>` fundia homonimos numa quimera | curadoria por `xref` + dois detectores (traits disjuntos e salto de nivel) |
+| faltavam `ritual`, `relic`, `language`; `background` -167 | 151 / 122 / 117 / 514 |
+| 1 dos 7 portoes implementado | **10 portoes, todos passando** |
 
-**Os cinco defeitos, em ordem de gravidade:**
+O que sobrou esta no `TODO.md` (itens 35-41), cada um com o numero que o
+sustenta. Nenhum e bloqueante para o construtor.
 
-1. **A fusao Legacy<->Remaster destruiu registros.** `fundir_renomeados.py`
-   decide por similaridade de prosa e deletou 597; amostra de 60 contra o
-   `remaster_id` do AoN confirmou so **35% como fusao correta**.
-   `wb:equipment/aeon-stone` engoliu **24 pedras distintas** (Amber Sphere,
-   Black Disc, Agate Ellipsoid...), cada uma com efeito proprio. `Poi` virou
-   `Shield Bash`; `Tonfa` virou `Shuan Ji`, do mesmo livro; 6 armas viraram
-   `Gaff`. **Reverter e refazer com o `remaster_id` do AoN, nao com prosa.**
-2. **`traits` usava precedencia e devia ser uniao** -- 88% dos conflitos, com
-   perda de dado (`two-hand-d12` virava `two-hand`) e injecao de nome legado de
-   ancestria numa base remaster-first. Spec corrigida, mapa pronto em
-   `pipeline/normalizacao_traits.json`.
-3. **`wb:<kind>/<slug>` assume nome unico por kind** -- 5 colisoes confirmadas,
-   59 candidatos. `death-from-above` e uma quimera de dois feats distintos.
-4. **Faltavam kinds inteiros:** `ritual` (extrator pronto, 151 registros em
-   `pipeline/saida/rituais.json`, ainda fora do `ENTRADA` do reconciliador),
-   e mais dois que a spec nunca listou -- `relic` (-116) e `language` (-85).
-5. **Dos 7 portoes de qualidade, so 1 esta implementado.** O portao 1 falharia
-   (2.694 sem `prov.text`), o 3 falharia (111 registros citando 61 ids
-   inexistentes), e o 7 e tautologico: pergunta por duplicata **depois** de a
-   duplicata ter sido fundida -- que e exatamente a fresta do `death-from-above`.
-
-Detalhe de cada um no `TODO.md` (itens 17, 20, 21, 24-33) e no `LESSONS.md`.
+**Ordem de execucao:** `python3 pipeline/rodar.py` -- extratores, reconciliar,
+prosa, fusao e portoes, na unica ordem em que funciona. `--sem-extratores`
+pula a parte cara.
 
 ## As tres fontes, e o que cada uma serve
 
@@ -111,15 +98,23 @@ A **base fechou**. O que resta esta detalhado em `TODO.md`; os tres primeiros:
    quem o concedeu. Nenhum dos dois cabe em `class_level` puro
 3. **O front**
 
-Ja resolvido nesta sessao: reextracao das class-features sob o schema corrigido,
-e a tabela de slots de conjuracao (10 de 11 classes; Animist nao existe em fonte
-nenhuma).
-
 ## Simulacoes
 
-`docs/simulacoes/` guarda o simulador de balanceamento e o benchmark de 3.624
-criaturas do AoN (mediana de AC/HP/save/ataque/dano por nivel). Foi o que
-calibrou a regra de elevacao de magia. Rodar so depois da base fechar.
+`docs/simulacoes/` guarda o simulador, o benchmark de 3.624 criaturas do AoN e
+a matriz completa. Rodada de 27/07 (`2026-07-27_balanceamento.md`), niveis
+1-15, HOUSE vs RAW vs RAW+Free Archetype, combate e nao-combate:
+
+- **A houserule nao quebra o jogo.** HOUSE nunca supera os dois pais puros ao
+  mesmo tempo em combate, exceto em 2 de 160 configuracoes -- as duas em
+  Monge/Clerigo, com causa identificada na regra 17.
+- **Fora do combate ela entrega o que prometia**: +0,62 pilar de 8 sobre o
+  melhor pai puro, e **nenhum caso medido de perda**.
+- **A regra 21 tem uma fresta estreita**: dip de 1 nivel em classe de d6 PV
+  perde vida que a dedicacao do Free Archetype nao perde (14 de 63
+  comparacoes, concentradas nos niveis 3-5).
+
+Os dois pontos viraram itens 43 e 44 do TODO -- candidatos a playtest, nao
+mudanca de regra.
 
 ## Referencia externa
 

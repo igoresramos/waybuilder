@@ -1,0 +1,4 @@
+# Bytecode, em qualquer subdiretorio do projeto (o de pipeline/ so cobria
+# pipeline; docs/simulacoes/ tambem gera).
+__pycache__/
+*.pyc

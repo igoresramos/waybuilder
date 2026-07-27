@@ -1,11 +1,11 @@
 ---
 project: waybuilder
 category: pessoal
-status: planning
+status: active
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 7
+hours: 10
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -19,9 +19,10 @@ hidden: false
 > dedicacao do PF2e oficial. O nome e piada com o Pathbuilder 2e, o app que ele
 > substitui, e ecoa o Wayfinder, a bussola da Pathfinder Society.
 >
-> Depende de uma base de dados canonica que hoje nao existe: o merge de tres
-> fontes que isoladamente sao incompletas. Base e construtor sao um projeto so,
-> construidos em fatias verticais.
+> Depende de uma base de dados canonica -- o merge de tres fontes que
+> isoladamente sao incompletas. Essa base **existe e esta fechada** desde
+> 2026-07-27. Base e construtor sao um projeto so, construidos em fatias
+> verticais.
 
 ## Quem usa
 > Igor e a mesa dele.
@@ -69,33 +70,31 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
-> Design fechado e **base canonica montada**. As 22 regras de multiclasse, o
-> schema da base e o schema do documento de personagem estao escritos, revisados
-> adversarialmente e commitados.
+> **A base canonica esta fechada.** Re-emitida em 2026-07-27 sob a spec v2, com
+> os 10 portoes de qualidade passando. As 22 regras de multiclasse, o schema da
+> base e o schema do documento de personagem seguem escritos e revisados
+> adversarialmente.
 >
-> O pipeline roda ponta a ponta (7 extratores -> reconciliar -> prosa -> fusao)
-> e produz **18.176 registros em 21 kinds**, prosa em **95%** (907 sem prosa),
-> **pelo menos** 2.299 com divergencia registrada -- 6 kinds nao detectam
-> conflito, entao esse numero e piso. Index 15,2 MB + prosa 16,7 MB.
+> O pipeline roda ponta a ponta (`python3 pipeline/rodar.py`: 10 extratores ->
+> reconciliar -> prosa -> fusao -> portoes) e produz **19.418 registros em 24
+> kinds**, prosa em **99,1%**, 2.867 com divergencia registrada, 646 com
+> `superseded_by` e **nenhum registro deletado**. Index 20,9 MB + prosa 17,9 MB.
 >
-> **A base NAO esta fechada. A auditoria de 2026-07-26 achou perda de dado
-> real** -- a fusao Legacy<->Remaster deletou 597 registros decidindo por
-> similaridade de prosa, e so 35% das fusoes estavam certas
-> (`wb:equipment/aeon-stone` engoliu 24 pedras distintas). Reverter e refazer
-> com o `remaster_id` do AoN e o item mais urgente da lista.
+> O dano que a auditoria de 26/07 achou foi corrigido e medido -- a fusao
+> legado/remaster passou a usar a chave que o AoN publica (12/12 corretas na
+> amostra, contra 35% antes), `traits` virou uniao de verdade
+> (`two-hand-d12` de 2 para 10 registros), e entraram os kinds que faltavam:
+> `ritual` 151, `relic` 122, `language` 117, `background` de 332 para 514.
+> Verificacao completa em `docs/2026-07-27_reemissao-base.md`.
 >
-> **Os outros defeitos que precisam de re-emissao:**
-> 1. `traits` usava precedencia e devia ser uniao -- 88% dos conflitos, com
->    perda de dado real (`two-hand-d12` virava `two-hand`) e injecao de nome
->    legado de ancestria numa base remaster-first. Spec ja corrigida, mapa de
->    normalizacao pronto em `pipeline/normalizacao_traits.json`
-> 2. `wb:<kind>/<slug>` assume nome unico por kind -- 5 colisoes confirmadas,
->    59 candidatos levantados
-> 3. Faltava o kind `ritual` inteiro -- extrator escrito, 151 registros em
->    `pipeline/saida/rituais.json`, ainda **fora** de `ENTRADA` do reconciliador
+> As regras caseiras tambem foram medidas: a matriz de balanceamento
+> (`docs/simulacoes/2026-07-27_balanceamento.md`, niveis 1-15, HOUSE vs RAW vs
+> RAW+Free Archetype) diz que **a houserule nao quebra o jogo** -- 2 pontos
+> fora da curva em 160 configuracoes, e um bonus de versatilidade fora do
+> combate sem nenhuma perda medida.
 >
-> Falta o construtor. Depois da re-emissao, os proximos sao de modelagem: o
-> grafo de progressao de dois niveis e o predicado sabendo falar de subclasse.
+> **O proximo passo e modelagem, nao dado**: o grafo de progressao de dois
+> niveis e o predicado sabendo falar de subclasse. Depois, o front.
 >
 > **Comece por `README.md`** -- ele e o ponto de retomada.
 
