@@ -153,6 +153,10 @@ items:
     texto: "679 CONCESSOES DE `GrantItem` NAO RESOLVIDAS (427 nomes distintos), classificadas: 163 sao UUID DINAMICO do Foundry (`Compendium...{item|flags.pf2e.heritage}`) e o parser pega o fim do template como se fosse nome -- viram 'sem alvo' quando na verdade sao referencia a uma escolha do jogador; 156 sao CONDICAO DE COMBATE (Clumsy 32x, Quickened 31x, Off-Guard 22x, Concealed 15x), que o AoN indexa como `condition` e o portao 9 declara fora de escopo -- o construtor nao precisa; e 360 sao o resto, onde uma amostra mostra itens INTERNOS do Foundry sem contrapartida no AoN (`Rewrite Fate` 15x, `Basic/Advanced Undead Benefits`, `Animal Attack`, `Final Surge` -- nenhum existe no AoN). Acionavel primeiro: separar o UUID dinamico no relatorio, que hoje mente dizendo 'sem alvo na base'"
     prioridade: media
 
+  - id: 61
+    texto: "EXTRATOR REDUNDANTE: `pipeline/extratores/relicos_idiomas.py` roda (esta em rodar.py::EXTRATORES) e gera saida/relicos_idiomas.json com 239 registros, mas `relicos_idiomas.json` NUNCA esteve em `reconciliar.py::ENTRADA` -- a saida dele nao entra na base. Isso NAO e perda de dado: medido, relic e language chegam por `aon_kinds.json`, que cobre melhor (122 de 122 relic da base estao la, contra 51 do extrator dedicado; 121 de 123 language contra 95). Ou seja, o extrator dedicado e trabalho duplicado que ninguem consome, nao um buraco. Decidir: tirar do runner, ou promover a fonte e tirar os dois kinds do aon_kinds. Nao deletei -- mencionar antes de remover"
+    prioridade: baixa
+
   # ==========================================================================
   # BLOCO 2 -- MODELAGEM. Depende da base re-emitida.
   # ==========================================================================
