@@ -607,6 +607,26 @@ def portao_9_censo(base, ctx):
             ja_sabidas.append(f"{linha} -- {registro.get('motivo', 'sem motivo')}")
 
     detalhe = list(novas)
+
+    # Cobertura por RARIDADE, medida junto: "o raro e o incomum entraram?" e
+    # uma pergunta diferente de "o kind entrou?", e so esta responde. Fica no
+    # relatorio de todo build, nao num levantamento avulso que envelhece.
+    por_rar = collections.Counter()
+    falta_rar = collections.Counter()
+    for cat in censo:
+        if cat in FORA_DE_ESCOPO:
+            continue
+        for i, n in censo[cat].items():
+            rar = str((ctx.get("aon") or {}).get(i, {}).get("rarity") or "?").lower()
+            por_rar[rar] += 1
+            if i not in citados and norm(n) not in nomes:
+                falta_rar[rar] += 1
+    detalhe.append("\n_Cobertura por raridade (AoN vigente em escopo):_")
+    for rar in sorted(por_rar, key=lambda x: -por_rar[x]):
+        n_tot, n_falta = por_rar[rar], falta_rar.get(rar, 0)
+        detalhe.append(f"- `{rar}`: {n_tot - n_falta} de {n_tot} na base "
+                       f"({100 * (n_tot - n_falta) / max(n_tot, 1):.1f}%)")
+
     if ja_sabidas:
         detalhe.append(f"\n_Ausencias ja decididas ({len(ja_sabidas)} categorias) -- "
                        f"visiveis, nao bloqueiam:_")
