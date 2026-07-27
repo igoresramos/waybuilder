@@ -5,16 +5,16 @@ respeitada em `class`. Ancestria usava campos soltos, background
 usava outro conjunto. Os campos originais permanecem -- isto
 adiciona a projecao canonica, nao substitui.
 
-- registros que ganharam `grants`: **964**
-- base com `grants`: **3738** de 20402 (18.3%)
+- registros que ganharam `grants`: **985**
+- base com `grants`: **3768** de 20375 (18.5%)
 
 ## Por kind
 
-- `background`: 605
+- `background`: 626
 - `heritage`: 309
 - `ancestry`: 50
-- `heritage: sem efeito derivavel`: 17
-- `background: sem efeito derivavel`: 10
+- `heritage: sem efeito derivavel`: 37
+- `background: sem efeito derivavel`: 11
 
 ## Exemplos
 
@@ -64,7 +64,7 @@ adiciona a projecao canonica, nao substitui.
  }
 ]
 ```
-### background -- `wb:background/academic-scion` (Academic Scion)
+### background -- `wb:background/abadars-avenger` (Abadar's Avenger)
 
 ```json
 [
@@ -72,7 +72,7 @@ adiciona a projecao canonica, nao substitui.
   "ability_boost": {
    "opcoes": [
     "cha",
-    "int"
+    "wis"
    ],
    "quantidade": 1
   }
@@ -86,16 +86,16 @@ adiciona a projecao canonica, nao substitui.
  {
   "skill_training": {
    "auto": [
-    "arcana"
+    "religion"
    ],
    "lore": [
-    "Academia Lore"
+    "Goka Lore"
    ]
   }
  },
  {
   "grant_feat": [
-   "{'name': 'Arcane Sense', 'foundry_uuid': 'Compendium.pf2e.feats-srd.Item.Arcane Sense'}"
+   "Assurance"
   ]
  }
 ]

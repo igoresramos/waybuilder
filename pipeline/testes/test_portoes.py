@@ -48,8 +48,8 @@ class TestInvariantesDaBase(unittest.TestCase):
         ruins = [(r["id"], c) for r in self.base
                  for c, p in (r.get("prov") or {}).items()
                  if not p or "desconhecida" in str(p)]
-        self.assertLessEqual(len(ruins), 812,
-                             f"{len(ruins)} prov sem fonte -- piora conhecida de 812")
+        self.assertLessEqual(len(ruins), 12,
+                             f"{len(ruins)} prov sem fonte -- piora conhecida de 12")
 
     @unittest.expectedFailure
     def test_nenhum_prov_desconhecida(self):
@@ -63,18 +63,17 @@ class TestInvariantesDaBase(unittest.TestCase):
                  if not comum.prov_valido(p)]
         self.assertEqual(ruins[:5], [], f"{len(ruins)} prov fora do vocabulario")
 
-    @unittest.expectedFailure
     def test_traits_nunca_e_null(self):
-        # 66 registros: 39 class-feature e 27 class. Emitir `[]` no lugar de
-        # null e mudanca de schema -- ver a mesma discussao em test_reconciliar.
+        # eram 66 (39 class-feature, 27 class). Decidido medindo as fontes:
+        # ausencia real, nao desconhecimento (Foundry 0/66, AoN 2/66 -- e nesses
+        # 2 o "trait" e so a raridade, que ja vive em `rarity`).
         nulos = [r["id"] for r in self.base if r.get("traits") is None]
         self.assertEqual(nulos[:5], [], f"{len(nulos)} registros com traits null")
 
-    @unittest.expectedFailure
     def test_spell_tem_rank_e_level_espelhados(self):
-        # GAP DA SPEC v2: 1.638 dos 1.649 spells tem `rank` e `level: null`.
-        # Nao quebra o motor (ele nao indexa magia por `level`), mas deixa o
-        # campo `level` significando coisas diferentes conforme o kind.
+        # decidido medindo as fontes: as TRES usam `level` e NENHUMA usa `rank`
+        # (AoN 2.461/2.461, Foundry 1.802/1.802, pf2etools 2.055/2.055;
+        # Fireball e level 3 nas tres). `rank` e a palavra da prosa remaster.
         quebrados = [r["id"] for r in self.base
                      if r.get("kind") == "spell" and r.get("rank") is not None
                      and r.get("level") != r.get("rank")]
@@ -263,9 +262,11 @@ class TestUniaoDeTraitsNoArtefato(unittest.TestCase):
         self.assertFalse(traits_uniao.e_fonte("antes"))
         self.assertTrue(traits_uniao.e_fonte("aon"))
         self.assertTrue(traits_uniao.e_fonte("aon_2"))
+        # o canonico e o feat de ARQUETIPO (feat-7610, nv8) por decisao da
+        # curadoria; o mitico vive no irmao. Ter os dois traits e a quimera.
         dfa = [r for r in self.base if r["id"] == "wb:feat/death-from-above"]
         if dfa:
-            self.assertNotIn("archetype", dfa[0].get("traits") or [])
+            self.assertNotIn("mythic", dfa[0].get("traits") or [])
 
 
 if __name__ == "__main__":

@@ -4,12 +4,12 @@
  "aon_armor": 75,
  "aon_shield": 32,
  "aon_equipment": 8642,
- "pf2etools_base_total": 410,
+ "pf2etools_base_total": 3042,
  "por_kind": {
-  "armor": 207,
-  "equipment": 6137,
-  "shield": 118,
-  "weapon": 1034
+  "armor": 216,
+  "equipment": 6203,
+  "shield": 125,
+  "weapon": 1039
  },
  "com_estrutura_mecanica": {
   "armor": 202,
@@ -18,9 +18,10 @@
   "weapon": 1030
  },
  "so_prosa": {
-  "armor": 5,
-  "equipment": 178,
-  "weapon": 4
+  "armor": 14,
+  "equipment": 244,
+  "shield": 7,
+  "weapon": 9
  },
  "runas_detectadas": {
   "property": 101,
@@ -28,35 +29,40 @@
   "reinforcing": 5
  },
  "cobertura_fontes": {
-  "armor:FA": 145,
-  "armor:F": 23,
-  "armor:FTA": 32,
-  "armor:T": 4,
-  "armor:FT": 2,
+  "armor:FA": 81,
+  "armor:FTA": 96,
+  "armor:F": 22,
+  "armor:T": 13,
+  "armor:FT": 3,
   "armor:A": 1,
-  "equipment:A": 1739,
-  "equipment:FA": 3593,
-  "equipment:F": 805,
-  "shield:FA": 96,
-  "shield:FTA": 16,
+  "equipment:A": 1284,
+  "equipment:FTA": 1621,
+  "equipment:FA": 1972,
+  "equipment:TA": 455,
+  "equipment:F": 792,
+  "equipment:T": 66,
+  "equipment:FT": 13,
+  "shield:FTA": 55,
+  "shield:FA": 57,
+  "shield:T": 7,
   "shield:F": 6,
-  "weapon:FA": 661,
-  "weapon:FTA": 233,
-  "weapon:F": 67,
+  "weapon:FTA": 469,
+  "weapon:FA": 425,
+  "weapon:F": 66,
   "weapon:A": 48,
-  "weapon:FT": 19,
-  "weapon:TA": 4,
-  "weapon:T": 2
+  "weapon:FT": 20,
+  "weapon:T": 7,
+  "weapon:TA": 4
  },
  "conflitos_por_campo": {
   "traits": 1677,
-  "level": 58
+  "level": 672
  },
  "homonimos": {
-  "armor": 112,
-  "weapon": 577,
+  "armor": 114,
+  "weapon": 578,
   "shield": 67,
-  "equipment": 1983
+  "equipment": 2095
  },
  "kind_reconciliado": {
   "weapon->equipment": 23,
@@ -64,7 +70,7 @@
   "equipment->weapon": 898,
   "equipment->shield": 143
  },
- "mechanized_true": 7440,
+ "mechanized_true": 7527,
  "mechanized_false": 56,
  "rules_ignoradas": {
   "RollOption": 314,
@@ -93,5 +99,5 @@
   "CriticalSpecialization": 8,
   "FastHealing": 1
  },
- "sem_source": 1636
+ "sem_source": 1723
 }

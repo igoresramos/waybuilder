@@ -107,8 +107,32 @@ def aplicar_curadoria(base, aon, ids, relatorio):
                 novos.append(alvo)
             # o xref curado MANDA: e ele que diz qual doc descreve qual entidade
             alvo["xref"] = dict(ent.get("xref") or {})
+            # ...e os traits tem de seguir o xref. Sem realinhar, o registro
+            # canonico fica com o trait da OUTRA entidade: `death-from-above`
+            # ficava `['archetype', 'mythic']` -- o `mythic` era do irmao, e a
+            # quimera que o desmembramento existe para desfazer sobrevivia
+            # dentro do proprio caso curado.
+            doc_curado = aon.get(str((ent.get("xref") or {}).get("aon") or ""))
+            if doc_curado and doc_curado.get("trait"):
+                antes_tr = list(alvo.get("traits") or [])
+                finais, aliases, _ = traits_uniao.unir(
+                    {"aon": [str(t) for t in doc_curado["trait"]]})
+                if finais and sorted(antes_tr) != finais:
+                    alvo["traits"] = finais
+                    alvo.setdefault("prov", {})["traits"] = ["aon"]
+                    alvo.setdefault("conflitos", []).append(
+                        {"campo": "traits", "antes": antes_tr,
+                         "aon": finais, "escolhido": "aon"})
+                if aliases:
+                    alvo["aliases_traits"] = sorted(
+                        set(alvo.get("aliases_traits") or []) | set(aliases))
             for campo, valor in (ent.get("correcoes") or {}).items():
                 _fixar(alvo, campo, valor)
+            # o irmao aponta de volta para o id que colidiu, tenha ele sido
+            # criado agora ou ja existisse na base -- e por este campo que o
+            # portao 7 sabe que o caso foi tratado
+            if alvo["id"] != chave:
+                alvo["desmembrado_de"] = chave
             tratados.add(alvo["id"])
             relatorio.append(
                 f"- CURADORIA `{alvo['id']}`{' (criado)' if i and alvo in novos else ''}: "

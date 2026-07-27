@@ -4,15 +4,15 @@ No PF2e o pre-requisito de um feat nunca menciona nivel -- o nivel do
 feat **e** o gate. Sob a houserule isso se parte em dois numeros, e e
 onde a regra caseira inteira mora.
 
-- gates derivados: **6429**
-- registros usando `class_level`: **2003** (eram 79)
-- registros usando `character_level`: **4428**
+- gates derivados: **6432**
+- registros usando `class_level`: **2007** (eram 79)
+- registros usando `character_level`: **4427**
 
 ## Por grupo
 
-- `archetype`: 2156
-- `classe`: 2001
-- `ancestria`: 1234
+- `archetype`: 2154
+- `classe`: 2005
+- `ancestria`: 1235
 - `geral`: 1038
 
 ## Exemplo de cada grupo

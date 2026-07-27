@@ -9,34 +9,35 @@ rank e sem `predicate`. O resto depende do interpretador do Foundry
 (`item:trait:finesse`, `self:effect:rage`, `@actor.flags`) e fica como
 prosa -- que pelo principio zero **nao e lacuna**.
 
-- registros que ganharam efeito: **492**
-- grants adicionados: **589**
+- registros que ganharam efeito: **484**
+- grants adicionados: **576**
 
 ## Nao convertidos
 
-- FlatModifier: precisa do interpretador: 1793
+- FlatModifier: precisa do interpretador: 1817
 - ItemAlteration: precisa do interpretador: 1497
-- RollOption: precisa do interpretador: 1079
-- ActiveEffectLike sem path de rank: 604
-- ChoiceSet: precisa do interpretador: 568
-- Note: precisa do interpretador: 540
-- GrantItem sem alvo na base: 415
-- Resistance: precisa do interpretador: 338
-- ActiveEffectLike com predicate: 263
-- DamageDice: precisa do interpretador: 254
-- GrantItem com predicate: 239
+- RollOption: precisa do interpretador: 1088
+- ActiveEffectLike sem path de rank: 634
+- ChoiceSet: precisa do interpretador: 623
+- Note: precisa do interpretador: 543
+- Resistance: precisa do interpretador: 340
+- GrantItem com predicate: 293
+- GrantItem sem alvo na base: 290
+- ActiveEffectLike com predicate: 269
+- DamageDice: precisa do interpretador: 255
 - AdjustDegreeOfSuccess: precisa do interpretador: 239
-- AdjustModifier: precisa do interpretador: 227
+- AdjustModifier: precisa do interpretador: 228
 - Strike: precisa do interpretador: 201
-- BaseSpeed: precisa do interpretador: 172
+- GrantItem com UUID dinamico (escolha do jogador): 184
+- BaseSpeed: precisa do interpretador: 173
 - Aura: precisa do interpretador: 126
-- Sense: precisa do interpretador: 109
-- MartialProficiency: precisa do interpretador: 108
-- CriticalSpecialization: precisa do interpretador: 99
-- TokenLight: precisa do interpretador: 98
+- MartialProficiency: precisa do interpretador: 111
+- Sense: precisa do interpretador: 110
+- CriticalSpecialization: precisa do interpretador: 100
+- TokenLight: precisa do interpretador: 100
 - AdjustStrike: precisa do interpretador: 94
-- DamageAlteration: precisa do interpretador: 87
-- ActorTraits: precisa do interpretador: 59
+- DamageAlteration: precisa do interpretador: 88
+- ActorTraits: precisa do interpretador: 65
 - valor de rank nao literal: 58
 - TokenEffectIcon: precisa do interpretador: 47
 - EphemeralEffect: precisa do interpretador: 29
@@ -44,6 +45,7 @@ prosa -- que pelo principio zero **nao e lacuna**.
 - CraftingAbility: precisa do interpretador: 21
 - Immunity: precisa do interpretador: 21
 - Weakness: precisa do interpretador: 19
+- GrantItem de condicao de combate (fora de escopo): 17
 - SpecialStatistic: precisa do interpretador: 12
 - DexterityModifierCap: precisa do interpretador: 12
 - SubstituteRoll: precisa do interpretador: 8

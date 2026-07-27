@@ -5,14 +5,14 @@ Esta passada compara a base contra o AoN e o Foundry em disco, pelo
 `xref`, e anota o que discorda -- o contrato da spec e que
 divergencia nunca e silenciada.
 
-- registros que ganharam conflito: **396**
-- registros com conflito na base: **1545**
+- registros que ganharam conflito: **386**
+- registros com conflito na base: **2001**
 
 ## Por campo
 
-- `source.book`: 320
+- `source.book`: 312
 - `name`: 51
-- `rarity`: 37
+- `rarity`: 35
 
 ## Por kind
 
@@ -21,10 +21,6 @@ divergencia nunca e silenciada.
 - **class-feature**: {'source.book': 37, 'name': 51}
 - **feat**: {'source.book': 63}
 - **spell**: {'rarity': 2, 'source.book': 20}
-- **heritage**: {'source.book': 5, 'rarity': 1}
 - **armor**: {'source.book': 2, 'rarity': 3}
 - **ritual**: {'source.book': 3}
-- **familiar-ability**: {'source.book': 2}
-- **ancestry**: {'source.book': 1}
-- **background**: {'rarity': 1}
 - **shield**: {'source.book': 1}

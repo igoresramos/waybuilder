@@ -155,10 +155,11 @@ def main():
                 container["nao_modelavel"] = alvo
                 removidas.append((alvo, ignorar[alvo].get("motivo", "")))
                 continue
-            if alvo in sem_sucessor:
-                nao_resolvidas[alvo] += 1
-                continue
-
+            # `sem_sucessor_conhecido` NAO curto-circuita: a entidade pode ter
+            # entrado depois de o arquivo ser escrito. Foi o caso de
+            # `universalist-wizard`, declarado sem sucessor enquanto
+            # `wb:arcane-school/universalist` ja estava na base. So conta como
+            # nao resolvida se as tentativas abaixo falharem.
             kind, _, slug = alvo[3:].partition("/")
             # o kind citado e parte da referencia, nao ruido: resolver
             # `wb:heritage/versatile` para `wb:trait/versatile` troca uma

@@ -328,6 +328,16 @@ def portao_7_homonimo(base, ctx):
     # casos ja resolvidos por desmembrar_colisoes.py: o irmao existe, entao a
     # multiplicidade na fonte deixou de ser ambiguidade nao tratada
     ja_desmembrados = {r["desmembrado_de"] for r in base if r.get("desmembrado_de")}
+    # e os curados a mao em `colisoes_identidade.json`, com o xref de cada
+    # entidade conferido doc a doc. Quando o irmao ja existia na base, a
+    # curadoria nao precisa marcar `desmembrado_de` -- e ele que estava
+    # faltando aqui, fazendo o portao acusar caso ja decidido. Mesmo contrato
+    # dos portoes 8 e 9: decisao registrada aparece no relatorio, nao bloqueia.
+    curadas = {}
+    _cur = f"{AQUI}/colisoes_identidade.json"
+    if os.path.exists(_cur):
+        curadas = {k for k in json.load(open(_cur)) if k.startswith("wb:")}
+    ja_desmembrados |= curadas
 
     achados = []
     for r in base:
@@ -665,7 +675,13 @@ def main():
 
     if "--gravar-cobertura" in sys.argv:
         # so fixa a linha de base a partir de um build limpo: gravar depois de
-        # falhar rebaixa a referencia e a regressao e acusada uma vez so
+        # falhar rebaixa a referencia e a regressao e acusada uma vez so.
+        # `--aceitar-queda` e a saida para queda INTENCIONAL (consolidar
+        # duplicata, por exemplo): exige a flag explicita, entao o rebaixamento
+        # vira decisao registrada no comando, nunca efeito colateral.
+        if "--aceitar-queda" in sys.argv and falhou and not desligados:
+            print("  queda de cobertura aceita explicitamente (--aceitar-queda)")
+            falhou = 0
         if falhou or desligados:
             motivo = (f"{falhou} portao(es) falhando" if falhou
                       else f"portao(es) {desligados} nao medido(s)")

@@ -133,7 +133,15 @@ def extrair(kinds=None):
             print(f"  ! sem dump para '{kind}' em {caminho}", file=sys.stderr)
             continue
         vistos = {}
-        for d in json.load(open(caminho)):
+        # o VIGENTE pega o slug limpo, o legado leva o sufixo. Sem esta ordem
+        # quem chega primeiro no dump e que fica com o id bonito, e ai o
+        # canonico sai como `wb:methodology/alchemical-sciences-methodology-5`
+        # enquanto `wb:methodology/alchemical-sciences` some na fusao -- toda
+        # referencia que cita o nome limpo vira orfa.
+        docs = sorted(json.load(open(caminho)),
+                      key=lambda d: (1 if d.get("remaster_id") else 0,
+                                     str(d.get("id"))))
+        for d in docs:
             reg = converter(d, kind)
             if not reg:
                 continue

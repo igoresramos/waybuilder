@@ -315,9 +315,36 @@ def main():
     if dups:
         falhas["id duplicado apos fusao"] = len(dups)
 
+    # `prov` com valor vazio nao e proveniencia, e ruido: a chave existe, o
+    # portao 1 a aceita como preenchida e a metrica de "campo sem fonte" passa
+    # a medir lixo (1.851 entradas, 1.467 delas so de `background` em requires/
+    # grants/mechanized, campos que aquele extrator nem popula). Sem valor, a
+    # chave nao diz nada que a ausencia dela ja nao diga.
+    # Tambem sai o `prov` de campo que NAO esta preenchido (489 backgrounds
+    # diziam `prov.requires = "desconhecida"` com `requires: null` -- afirmar
+    # que nao se sabe a fonte de um campo vazio e ruido puro) e o de campo
+    # DERIVADO pelo proprio pipeline (`mechanized`, `kind`, `id`), que nao veio
+    # de fonte nenhuma. O que sobra e divida de verdade: campo preenchido cuja
+    # fonte se perdeu.
+    # `text` NAO entra: o portao 1 exige prov para ele (a fonte da prosa).
+    DERIVADOS = ("mechanized", "kind", "id")
+    prov_vazio = 0
+    for r in base:
+        p = r.get("prov")
+        if not isinstance(p, dict):
+            continue
+        limpos = {k: v for k, v in p.items()
+                  if v not in (None, "", [], {})
+                  and k not in DERIVADOS
+                  and r.get(k.split(".")[0]) not in (None, "", [], {})}
+        prov_vazio += len(p) - len(limpos)
+        r["prov"] = limpos
+
     os.makedirs(f"{AQUI}/base", exist_ok=True)
     json.dump(base, open(f"{AQUI}/base/index.json", "w"),
               ensure_ascii=False, separators=(",", ":"))
+    if prov_vazio:
+        print(f"  entradas de prov sem valor removidas: {prov_vazio}")
 
     kinds = collections.Counter(r.get("kind") for r in base)
     com_conf = sum(1 for r in base if r.get("conflitos"))
