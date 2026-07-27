@@ -4,12 +4,12 @@ Chave: `remaster_id`/`legacy_id` do AoN. Prosa **nao** cria par --
 entra so para desempatar sucessor multiplo. Campo estruturado
 divergente veta a fusao.
 
-- pares declarados pelo AoN: **942**
-- fundidos: **609**
-- vetados por divergencia estrutural: **333**
+- pares declarados pelo AoN: **1160**
+- fundidos: **646**
+- vetados por divergencia estrutural: **514**
 - desempatados por prosa: **76**
-- base: 19578 -> **18969** registros
-- registros com alias: **315**
+- base: 19896 -> **19250** registros
+- registros com alias: **350**
 
 ## Vetados -- par declarado, conteudo divergente
 
@@ -54,6 +54,8 @@ fundir aqui apagaria dado.
 - `wb:equipment/demon-armor` x `wb:armor/unholy-plate` -- kind: 'equipment' != 'armor'
 - `wb:armor/plate-armor-of-the-deep` x `wb:armor/tideplate` -- level: 15 != 10; price_cp: 650000 != 100000
 - `wb:equipment/rhino-hide` x `wb:armor/onslaught-hide` -- kind: 'equipment' != 'armor'
+- `wb:equipment/cloak-of-thirsty-fronds-transmutation` x `wb:equipment/cloak-of-gnawing-leaves` -- level: 7 != 3
+- `wb:equipment/cloak-of-devouring-thorns-transmutation` x `wb:equipment/cloak-of-gnawing-leaves` -- level: 12 != 3
 - `wb:equipment/stalk-goggles-greater` x `wb:equipment/stalk-goggles` -- level: 3 != 1; price_cp: 6000 != 2000
 - `wb:equipment/stalk-goggles-major` x `wb:equipment/stalk-goggles` -- level: 8 != 1; price_cp: 45000 != 2000
 - `wb:equipment/dragons-breath-potion-adult` x `wb:equipment/energy-breath-potion` -- level: 12 != 7
@@ -72,10 +74,8 @@ fundir aqui apagaria dado.
 - `wb:equipment/healers-tools-expanded` x `wb:equipment/healers-toolkit` -- level: 3 != 0; price_cp: 5000 != 500
 - `wb:equipment/horn-of-fog` x `wb:equipment/cloud-pouch` -- price_cp: 23000 != 22500
 - `wb:equipment/rod-of-wonder` x `wb:equipment/madcap-top` -- price_cp: 46500 != 45900
-- `wb:equipment/darkwood` x `wb:equipment/duskwood` -- level: 0 != 8
-- `wb:equipment/darkwood-branch` x `wb:equipment/duskwood` -- level: 0 != 8
-- `wb:equipment/darkwood-lumber` x `wb:equipment/duskwood` -- level: 0 != 8
-- `wb:equipment/darkwood-object-high-grade` x `wb:equipment/duskwood` -- level: 16 != 8
+- `wb:equipment/privacy-ward-fulu-room-abjuration` x `wb:equipment/privacy-ward-fulu` -- level: 5 != 1
+- `wb:equipment/privacy-ward-fulu-chamber-abjuration` x `wb:equipment/privacy-ward-fulu` -- level: 9 != 1
 
 ## Sucessor multiplo, desempatado por prosa
 
@@ -117,7 +117,7 @@ fundir aqui apagaria dado.
 - `equipment-185` -> ['equipment-2941', 'equipment-2941-2809', 'equipment-2941-2810', 'equipment-2941-2811'] escolheu `equipment-2941` (0.385)
 - `equipment-434` -> ['equipment-3092', 'equipment-3092-3032'] escolheu `equipment-3092` (0.431)
 - `equipment-449` -> ['equipment-3000', 'equipment-3000-2853', 'equipment-3000-2854', 'equipment-3000-2855', 'equipment-3000-2856', 'equipment-3000-2857', 'equipment-3000-2858', 'equipment-3000-2859', 'equipment-3020', 'equipment-3020-2876', 'equipment-3020-2877', 'equipment-3020-2878', 'equipment-3020-2879', 'equipment-3020-2880', 'equipment-3020-2881', 'equipment-3020-2882'] escolheu `equipment-3000` (0.254)
-- `equipment-4618` -> ['equipment-2085', 'equipment-2085-1842', 'equipment-2085-1844'] escolheu `equipment-2085` (0.732)
+- `equipment-4618` -> ['equipment-2085', 'equipment-2085-1842', 'equipment-2085-1843', 'equipment-2085-1844'] escolheu `equipment-2085` (0.732)
 - `equipment-244` -> ['equipment-3002', 'equipment-3002-2860', 'equipment-3002-2862', 'equipment-3002-2864'] escolheu `equipment-3002` (0.291)
 
 ## Fusoes aplicadas
@@ -283,6 +283,7 @@ fundir aqui apagaria dado.
 - **Broom of Flying** -> **Flying Broomstick** _(equipment)_
 - **Everburning Torch** -> **Everlight Crystal** _(equipment)_
 - **Holly and Mistletoe** -> **Primal Symbol** _(equipment)_
+- **Privacy Ward Fulu (Hallway)** -> **Privacy Ward Fulu** _(equipment)_
 - **Darkwood Object (Standard-Grade)** -> **Duskwood** _(equipment)_
 - **Mithral Object (Standard-Grade)** -> **Dawnsilver** _(equipment)_
 - **Glamered** -> **Raiment** _(equipment)_
@@ -321,6 +322,10 @@ fundir aqui apagaria dado.
 - **Bracers of Armor** -> **Bands of Force** _(equipment)_
 - **Cape of the Mountebank** -> **Charlatan's Cape** _(equipment)_
 - **Cloak of Elvenkind** -> **Cloak of Illusions** _(equipment)_
+- **Timepiece (Grand Clock)** -> **Timepiece** _(equipment)_
+- **Awakened Metal Shot (Awakened Cold Iron Shot)** -> **Awakened Metal Shot** _(equipment)_
+- **Awakened Metal Shot (Awakened Silver Shot)** -> **Awakened Metal Shot** _(equipment)_
+- **Black Powder (Dose or Round)** -> **Black Powder** _(equipment)_
 - **Repair Kit** -> **Repair Toolkit** _(equipment)_
 - **Waterproof Firearm Carrying Case** -> **Waterproof Carrying Case** _(equipment)_
 - **Druid's Vestments** -> **Living Mantle** _(equipment)_
@@ -338,21 +343,45 @@ fundir aqui apagaria dado.
 - **Owlbear Egg** -> **Owl Screech Egg** _(equipment)_
 - **Warding Punch** -> **Warding Element Draught** _(equipment)_
 - **Addition Suppressant** -> **Affliction Suppressant** _(equipment)_
+- **Addiction Suppressant (Lesser)** -> **Affliction Suppressant** _(equipment)_
 - **Necklace of Fireballs** -> **Frozen Lava** _(equipment)_
 - **Choker-Arm Mutagen** -> **Bendy-Arm Mutagen** _(equipment)_
 - **Choker-Arm Mutagen (Lesser)** -> **Bendy-Arm Mutagen** _(equipment)_
+- **Theatrical Mutagen (Greater)** -> **Theatrical Mutagen** _(equipment)_
+- **Poison Concentrator (Lesser)** -> **Poison Concentrator** _(equipment)_
 - **Tanglefoot Extruder** -> **Splatrope Extruder** _(equipment)_
+- **Death Knell Powder** -> **Execution Powder** _(equipment)_
+- **Hunger Oil** -> **Gnawbone Toxin** _(equipment)_
+- **Liar's Demise** -> **Fraudslayer Oil** _(equipment)_
 - **Sight-Theft Grift** -> **Sightless Tincture** _(equipment)_
 - **Ring of Energy Resistance** -> **Charm of Resistance** _(equipment)_
 - **Bralani Breath** -> **Deadlock Mint** _(equipment)_
 - **Dragon Throat Scale** -> **Dragon Breath Scale** _(equipment)_
 - **Fearcracker** -> **Ghostcracker** _(equipment)_
+- **Demolition Fulu (Lesser)** -> **Demolition Fulu** _(equipment)_
+- **Thousand-Pains Fulu (Stone)** -> **Thousand-Pains Fulu** _(equipment)_
+- **Conduit Shot (Lesser)** -> **Conduit Shot** _(equipment)_
+- **Depth Charge (I)** -> **Depth Charge** _(equipment)_
+- **Magnetic Shot (Lesser)** -> **Magnetic Shot** _(equipment)_
+- **Weapon Shot (Lesser)** -> **Weapon Shot** _(equipment)_
+- **Heartening Missive (Butterfly)** -> **Heartening Missive** _(equipment)_
 - **Messanger Missive** -> **Messenger Missive** _(equipment)_
 - **Disrupting Oil** -> **Burial Oil** _(equipment)_
-- **Faerie Dragon Liqueur (Adult)** -> **Fey Dragonet Liqueur** _(equipment)_
+- **Life-Boosting Oil (Lesser)** -> **Life-Boosting Oil** _(equipment)_
+- **Oil of Ownership (Lesser)** -> **Oil of Ownership** _(equipment)_
+- **Serpent Oil (Lesser)** -> **Serpent Oil** _(equipment)_
+- **Faerie Dragon Liqueur** -> **Fey Dragonet Liqueur** _(equipment)_
+- **Roaring Potion (Lesser)** -> **Roaring Potion** _(equipment)_
+- **Tentacle Potion (Lesser)** -> **Tentacle Potion** _(equipment)_
+- **Snarling Badger (Lesser)** -> **Snarling Badger** _(equipment)_
 - **Slippers of Spider Climbing** -> **Clawed Bracers** _(equipment)_
 - **Marvelous Pigment** -> **Miraculous Paintbrush** _(equipment)_
+- **Moonlit Spellgun (Minor)** -> **Moonlit Spellgun** _(equipment)_
+- **Potion Patch (Lesser)** -> **Potion Patch** _(equipment)_
 - **Sparkling Spellgun (Lesser)** -> **Sparking Spellgun** _(equipment)_
+- **Spiritual Warhorn (Lesser)** -> **Spiritual Warhorn** _(equipment)_
+- **Torrent Spellgun (Lesser)** -> **Torrent Spellgun** _(equipment)_
+- **Tome of Restorative Cleansing (Lesser)** -> **Tome of Restorative Cleansing** _(equipment)_
 - **Winged Boots** -> **Winged Sandals** _(equipment)_
 - **Portable Hole** -> **Planar Tunnel** _(equipment)_
 - **Bound Guardian** -> **Fauna Guardian** _(equipment)_
@@ -377,19 +406,25 @@ fundir aqui apagaria dado.
 - **Wand of Legerdemain (1st-Level Spell)** -> **Wand of Legerdemain** _(equipment)_
 - **Wand of Mental Purification (1st-Level Spell)** -> **Wand of Mental Purification** _(equipment)_
 - **Wand of Mercy (1st-Level Spell)** -> **Wand of Mercy** _(equipment)_
+- **Wand of Noisome Acid (2nd-Level Spell)** -> **Wand of Noisome Acid** _(equipment)_
 - **Wand of Paralytic Shock (3rd-Level Spell)** -> **Wand of Paralytic Shock** _(equipment)_
 - **Wand of Pernicious Poison (1st-Level Spell)** -> **Wand of Pernicious Poison** _(equipment)_
 - **Wand of Reaching (1st-Level Spell)** -> **Wand of Reaching** _(equipment)_
 - **Wand of Refracting Rays (4th-Level Spell)** -> **Wand of Refracting Rays** _(equipment)_
 - **Wand of Rolling Flames (2nd-level spell)** -> **Wand of Rolling Flames** _(equipment)_
 - **Wand of Shattering Images** -> **Wand of Shocking Haze** _(equipment)_
+- **Wand of Teeming Ghosts (2nd-Level Spell)** -> **Wand of Teeming Ghosts** _(equipment)_
 - **Wand of Toxic Blades (6th-Level Spell)** -> **Wand of Toxic Blades** _(equipment)_
+- **Clarity Goggles (Lesser)** -> **Clarity Goggles** _(equipment)_
+- **Mirror Goggles (Lesser)** -> **Mirror Goggles** _(equipment)_
 - **Ki-Channeling Beads** -> **Mala Beads of Foresight** _(equipment)_
 - **Helm of Underwater Action** -> **Submersible Helm** _(equipment)_
+- **Armory Bracelet (Minor)** -> **Armory Bracelet** _(equipment)_
 - **Spiritsight Sight** -> **Spiritsight Ring** _(equipment)_
 - **Lich Soul Cage** -> **Soul Cage** _(equipment)_
 - **Draconic Toxin Bottle** -> **Energy Toxin Bottle** _(equipment)_
 - **Hat of Disagreeable Disguise** -> **Handkerchief of Disagreeable Disguise** _(equipment)_
+- **Tattletale Orb (Clear Quartz)** -> **Tattletale Orb** _(equipment)_
 - **Thieves' Tools** -> **Thieves' Toolkit** _(equipment)_
 - **Scroll** -> **Magic Scroll** _(equipment)_
 - **1st-Level Scroll** -> **Magic Scroll** _(equipment)_
@@ -431,6 +466,7 @@ fundir aqui apagaria dado.
 - **Sharp Fangs** -> **Iruxi Armaments** _(feat)_
 - **Tail Whip** -> **Iruxi Armaments** _(feat)_
 - **Hellknight Order Cross-Training** -> **Order Cross-Training** _(feat)_
+- **Hellknight Dedication** -> **Hellknight Preferment** _(feat)_
 - **Sense Chaos** -> **Sense Iniquity** _(feat)_
 - **Hellknight Signifer Dedication** -> **Hellknight Signifer Preferment** _(feat)_
 - **Glib Mutagen** -> **Mutant Innervation** _(feat)_
@@ -729,5 +765,6 @@ fundir aqui apagaria dado.
 - **Half-Orc** -> **Dromaar** _(trait)_
 - **Khakkara** -> **Khakkhara** _(weapon)_
 - **Rungu** -> **Cruuk** _(weapon)_
+- **Cane Pistol (Melee)** -> **Cane Pistol (Ranged)** _(weapon)_
 - **Dwarven War Axe** -> **Dwarven Waraxe** _(weapon)_
 - **Kursarigama** -> **Kusarigama** _(weapon)_

@@ -35,6 +35,12 @@ PRECEDENCIA = {
 }
 PADRAO = ["foundry", "aon", "pf2etools"]
 
+# Obras publicadas sob ORC. Constante de modulo porque `desmembrar_colisoes.py`
+# cria registros depois desta etapa e precisa da mesma regra de inferencia.
+LIVROS_ORC = {"player core", "player core 2", "gm core", "monster core",
+              "npc core", "war of immortals", "battlecry", "shining kingdoms",
+              "howl of the wild", "rage of elements", "divine mysteries"}
+
 
 def normalizar(s):
     """Nome comparavel: sem acento, sem pontuacao, caixa baixa, espaco unico."""
@@ -188,9 +194,6 @@ def main():
     print(f"suspeitas de par nao unido (mesmo kind+nome normalizado): {len(suspeitos)}")
 
     # --- 2b. inferir license ausente, marcando a inferencia ---
-    LIVROS_ORC = {"player core", "player core 2", "gm core", "monster core",
-                  "npc core", "war of immortals", "battlecry", "shining kingdoms",
-                  "howl of the wild", "rage of elements", "divine mysteries"}
     inferidas = 0
     for r in base:
         src = r.get("source") or {}

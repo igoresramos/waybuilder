@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **18969**
+- registros avaliados: **19250**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -63,8 +63,9 @@
 
 ## Portao 6 -- traits disjunto apos uniao
 
-**PASSOU** -- 0 ocorrencia(s).
+**FALHOU** -- 1 ocorrencia(s).
 
+- `wb:weapon/leiomano`: [['fatal-d10', 'versatile-s'], ['fatal', 'uncommon', 'versatile']]
 
 ## Portao 7 -- homonimo no mesmo kind
 

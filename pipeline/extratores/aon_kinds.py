@@ -17,6 +17,8 @@ import json, os, re, sys, unicodedata, collections
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PIPELINE = os.path.dirname(AQUI)
+sys.path.insert(0, PIPELINE)
+import traits_uniao                                # noqa: E402
 DUMP = os.path.join(PIPELINE, "dados_brutos", "aon_dump")
 SAIDA = os.path.join(PIPELINE, "saida", "aon_kinds.json")
 
@@ -67,8 +69,10 @@ def converter(d, kind):
         return None
     livro, pagina = partir_fonte(d.get("primary_source_raw") or d.get("primary_source"))
     lancamento = str(d.get("release_date") or "")
-    traits = sorted({str(t).strip().lower().replace(" ", "-")
-                     for t in (d.get("trait") or []) if str(t).strip()})
+    # mesma uniao do reconciliador (mapa legado->remaster + absorcao por
+    # granularidade), senao o trait entra cru e desfaz o item 20
+    traits, aliases_traits, _ = traits_uniao.unir(
+        {"aon": [str(t) for t in (d.get("trait") or [])]})
     reg = {
         "id": f"wb:{kind}/{slug(nome)}",
         "kind": kind,

@@ -201,6 +201,9 @@ def portao_6_traits(base, ctx):
                 continue
             conjuntos = [set(v) for k, v in c.items()
                          if k not in ("campo", "escolhido") and isinstance(v, list)]
+            # conjunto vazio e disjunto de tudo por vacuidade -- ausencia de
+            # informacao, nao evidencia de que sao duas entidades
+            conjuntos = [s for s in conjuntos if s]
             if len(conjuntos) >= 2 and not set.intersection(*conjuntos):
                 achados.append(f"`{r['id']}`: {[sorted(s) for s in conjuntos]}")
     return len(achados), achados[:40]
@@ -265,8 +268,14 @@ def portao_7_homonimo(base, ctx):
         if cat:
             por_nome[(cat, norm(d.get("name")))].append(d)
 
+    # casos ja resolvidos por desmembrar_colisoes.py: o irmao existe, entao a
+    # multiplicidade na fonte deixou de ser ambiguidade nao tratada
+    ja_desmembrados = {r["desmembrado_de"] for r in base if r.get("desmembrado_de")}
+
     achados = []
     for r in base:
+        if r.get("desmembrado_de") or r["id"] in ja_desmembrados:
+            continue
         # class-feature e UM registro compartilhado por N classes, por decisao da
         # spec ("nivel de class-feature pertence a classe"). O AoN indexa um doc
         # por classe concedente -- `Alertness` tem 12 --, entao multiplicidade
