@@ -4,12 +4,12 @@ Chave: `remaster_id`/`legacy_id` do AoN. Prosa **nao** cria par --
 entra so para desempatar sucessor multiplo. Campo estruturado
 divergente veta a fusao.
 
-- pares declarados pelo AoN: **698**
-- fundidos: **365**
+- pares declarados pelo AoN: **942**
+- fundidos: **609**
 - vetados por divergencia estrutural: **333**
 - desempatados por prosa: **76**
-- base: 18921 -> **18556** registros
-- registros com alias: **302**
+- base: 19578 -> **18969** registros
+- registros com alias: **315**
 
 ## Vetados -- par declarado, conteudo divergente
 
@@ -126,6 +126,119 @@ fundir aqui apagaria dado.
 - **Artillerst** -> **Artillerist** _(archetype)_
 - **Firework Technican** -> **Firework Technician** _(archetype)_
 - **Drow Shootist** -> **Crossbow Infiltrator** _(archetype)_
+- **Acolyte** -> **Acolyte** _(background)_
+- **Criminal** -> **Criminal** _(background)_
+- **Detective** -> **Detective** _(background)_
+- **Emissary** -> **Emissary** _(background)_
+- **Entertainer** -> **Entertainer** _(background)_
+- **Raised by Belief** -> **Raised by Belief** _(background)_
+- **Farmhand** -> **Farmhand** _(background)_
+- **Field Medic** -> **Field Medic** _(background)_
+- **Fortune Teller** -> **Fortune Teller** _(background)_
+- **Bandit** -> **Bandit** _(background)_
+- **Barber** -> **Barber** _(background)_
+- **Bookkeeper** -> **Bookkeeper** _(background)_
+- **Cook** -> **Cook** _(background)_
+- **Courier** -> **Courier** _(background)_
+- **Gambler** -> **Gambler** _(background)_
+- **Cultist** -> **Cultist** _(background)_
+- **Insurgent** -> **Insurgent** _(background)_
+- **Outrider** -> **Outrider** _(background)_
+- **Pilgrim** -> **Pilgrim** _(background)_
+- **Refugee** -> **Refugee** _(background)_
+- **Root Worker** -> **Root Worker** _(background)_
+- **Scavenger** -> **Scavenger** _(background)_
+- **Servant** -> **Servant** _(background)_
+- **Squire** -> **Squire** _(background)_
+- **Tax Collector** -> **Tax Collector** _(background)_
+- **Gladiator** -> **Gladiator** _(background)_
+- **Teacher** -> **Teacher** _(background)_
+- **Ward** -> **Ward** _(background)_
+- **Amnesiac** -> **Amnesiac** _(background)_
+- **Blessed** -> **Blessed** _(background)_
+- **Cursed** -> **Cursed** _(background)_
+- **Feral Child** -> **Feral Child** _(background)_
+- **Feybound** -> **Feybound** _(background)_
+- **Haunted** -> **Haunted** _(background)_
+- **Returned** -> **Returned** _(background)_
+- **Royalty** -> **Royalty** _(background)_
+- **Guard** -> **Guard** _(background)_
+- **Acrobat** -> **Acrobat** _(background)_
+- **Herbalist** -> **Herbalist** _(background)_
+- **Deckhand** -> **Deckhand** _(background)_
+- **Hermit** -> **Hermit** _(background)_
+- **Hunter** -> **Hunter** _(background)_
+- **Astrologer** -> **Astrologer** _(background)_
+- **Laborer** -> **Laborer** _(background)_
+- **Martial Disciple** -> **Martial Disciple** _(background)_
+- **Merchant** -> **Merchant** _(background)_
+- **Miner** -> **Miner** _(background)_
+- **Noble** -> **Noble** _(background)_
+- **Nomad** -> **Nomad** _(background)_
+- **Prisoner** -> **Prisoner** _(background)_
+- **Animal Whisperer** -> **Animal Whisperer** _(background)_
+- **Sailor** -> **Sailor** _(background)_
+- **Scout** -> **Scout** _(background)_
+- **Child of the Twin Village** -> **Child of the Twin Village** _(background)_
+- **Empty Whispers** -> **Empty Whispers** _(background)_
+- **Legacy of the Hammer** -> **Legacy of the Hammer** _(background)_
+- **Reborn Soul** -> **Reborn Soul** _(background)_
+- **Street Urchin** -> **Street Urchin** _(background)_
+- **Tinker** -> **Tinker** _(background)_
+- **Dreams of Vengeance** -> **Dreams of Vengeance** _(background)_
+- **Lost Loved One** -> **Lost Loved One** _(background)_
+- **Sense of Belonging** -> **Sense of Belonging** _(background)_
+- **Total Power** -> **Total Power** _(background)_
+- **Wanderlust** -> **Wanderlust** _(background)_
+- **Wishes for Riches** -> **Wishes for Riches** _(background)_
+- **Warrior** -> **Warrior** _(background)_
+- **Scholar** -> **Scholar** _(background)_
+- **Artisan** -> **Artisan** _(background)_
+- **Artist** -> **Artist** _(background)_
+- **Anti-Tech Activist** -> **Anti-Tech Activist** _(background)_
+- **Clockfighter** -> **Clockfighter** _(background)_
+- **Barkeep** -> **Barkeep** _(background)_
+- **Clockwork Researcher** -> **Clockwork Researcher** _(background)_
+- **Codebreaker** -> **Codebreaker** _(background)_
+- **Disciple of the Gear** -> **Disciple of the Gear** _(background)_
+- **Driver** -> **Driver** _(background)_
+- **Hounded Thief** -> **Hounded Thief** _(background)_
+- **Junker** -> **Junker** _(background)_
+- **Mechanic** -> **Mechanic** _(background)_
+- **Medicinal Clocksmith** -> **Medicinal Clocksmith** _(background)_
+- **Printer** -> **Printer** _(background)_
+- **Saboteur** -> **Saboteur** _(background)_
+- **Toymaker** -> **Toymaker** _(background)_
+- **Discarded Duplicate** -> **Discarded Duplicate** _(background)_
+- **Mechanical Symbiosis** -> **Mechanical Symbiosis** _(background)_
+- **Saved by Clockwork** -> **Saved by Clockwork** _(background)_
+- **Tech-Reliant** -> **Tech-Reliant** _(background)_
+- **Wished Alive** -> **Wished Alive** _(background)_
+- **Back-Alley Doctor** -> **Back-Alley Doctor** _(background)_
+- **Cannoneer** -> **Cannoneer** _(background)_
+- **Deputy** -> **Deputy** _(background)_
+- **Fireworks Performer** -> **Fireworks Performer** _(background)_
+- **Gunsmith** -> **Gunsmith** _(background)_
+- **Hired Killer** -> **Hired Killer** _(background)_
+- **Farmsteader** -> **Farmsteader** _(background)_
+- **Junk Collector** -> **Junk Collector** _(background)_
+- **Saloon Entertainer** -> **Saloon Entertainer** _(background)_
+- **Spotter** -> **Spotter** _(background)_
+- **Undertaker** -> **Undertaker** _(background)_
+- **Wandering Preacher** -> **Wandering Preacher** _(background)_
+- **Waste Walker** -> **Waste Walker** _(background)_
+- **Alkenstar Outlaw** -> **Alkenstar Outlaw** _(background)_
+- **Alkenstar Sojourner** -> **Alkenstar Sojourner** _(background)_
+- **Circuit Judge** -> **Circuit Judge** _(background)_
+- **Goldhand Arms Dealer** -> **Goldhand Arms Dealer** _(background)_
+- **Press-Ganged (G&G)** -> **Press-Ganged (G&G)** _(background)_
+- **Sheriff** -> **Sheriff** _(background)_
+- **Otherworldly Mission** -> **Otherworldly Mission** _(background)_
+- **Revenant** -> **Revenant** _(background)_
+- **Tall Tale** -> **Tall Tale** _(background)_
+- **Barrister** -> **Barrister** _(background)_
+- **Bounty Hunter** -> **Bounty Hunter** _(background)_
+- **Charlatan** -> **Charlatan** _(background)_
 - **Dwarven Pantheon** -> **Stone's Blood** _(deity)_
 - **Elven Pantheon** -> **Sovyrian Conclave** _(deity)_
 - **The Prismatic Ray** -> **Radiant Prism** _(deity)_
@@ -469,6 +582,137 @@ fundir aqui apagaria dado.
 - **Armiger's Mobility** -> **Hellknight Mobility** _(feat)_
 - **Flicker** -> **Flickering Twirl** _(feat)_
 - **Alchemical Savant** -> **Alchemical Assessment** _(feat)_
+- **Common** -> **Common** _(language)_
+- **Sylvan** -> **Fey** _(language)_
+- **Undercommon** -> **Sakvroth** _(language)_
+- **Abyssal** -> **Chthonian** _(language)_
+- **Aklo** -> **Aklo** _(language)_
+- **Aquan** -> **Thalassic** _(language)_
+- **Auran** -> **Sussuran** _(language)_
+- **Celestial** -> **Empyrean** _(language)_
+- **Gnoll** -> **Kholo** _(language)_
+- **Ignan** -> **Pyric** _(language)_
+- **Infernal** -> **Diabolic** _(language)_
+- **Draconic** -> **Draconic** _(language)_
+- **Necril** -> **Necril** _(language)_
+- **Shadowtongue** -> **Shadowtongue** _(language)_
+- **Terran** -> **Petran** _(language)_
+- **Druidic** -> **Wildsong** _(language)_
+- **Dwarven** -> **Dwarven** _(language)_
+- **Hallit** -> **Hallit** _(language)_
+- **Kelish** -> **Kelish** _(language)_
+- **Mwangi** -> **Mwangi** _(language)_
+- **Elven** -> **Elven** _(language)_
+- **Osiriani** -> **Osiriani** _(language)_
+- **Shoanti** -> **Shoanti** _(language)_
+- **Skald** -> **Skald** _(language)_
+- **Tien** -> **Tien** _(language)_
+- **Varisian** -> **Varisian** _(language)_
+- **Vudrani** -> **Vudrani** _(language)_
+- **Grippli** -> **Tripkee** _(language)_
+- **Gnomish** -> **Gnomish** _(language)_
+- **Goblin** -> **Goblin** _(language)_
+- **Ysoki** -> **Ysoki** _(language)_
+- **Halfling** -> **Halfling** _(language)_
+- **Jotun** -> **Jotun** _(language)_
+- **Orcish** -> **Orcish** _(language)_
+- **Deadly Spark** -> **Deadly Spark** _(relic)_
+- **Form of Fury** -> **Form of Fury** _(relic)_
+- **Track of the Beast** -> **Track of the Beast** _(relic)_
+- **Form of Vengeance** -> **Form of Vengeance** _(relic)_
+- **Divine Retribution** -> **Divine Retribution** _(relic)_
+- **Heaven's Grace** -> **Heaven's Grace** _(relic)_
+- **Word of Faith** -> **Word of Faith** _(relic)_
+- **Holy Light** -> **Sacred Glow** _(relic)_
+- **Righteous Call** -> **Righteous Call** _(relic)_
+- **Angelic Vessel** -> **Angelic Vessel** _(relic)_
+- **Death Gaze** -> **Death Gaze** _(relic)_
+- **Fascinating** -> **Fascinating** _(relic)_
+- **Inspiring** -> **Inspiring** _(relic)_
+- **Feather Steps** -> **Feather Steps** _(relic)_
+- **Living Death** -> **Living Death** _(relic)_
+- **Muse** -> **Muse** _(relic)_
+- **Charming** -> **Charming** _(relic)_
+- **Artistic Perfection** -> **Artistic Perfection** _(relic)_
+- **Dominant Emotion** -> **Dominant Emotion** _(relic)_
+- **Emotion Surge** -> **Emotion Surge** _(relic)_
+- **Fervor** -> **Fervor** _(relic)_
+- **Emotion Conduit** -> **Emotion Conduit** _(relic)_
+- **Fervent Spell** -> **Fervent Spell** _(relic)_
+- **Quickening Emotion** -> **Quickening Emotion** _(relic)_
+- **Beginner's Luck** -> **Beginner's Luck** _(relic)_
+- **Shroud of the Afterlife** -> **Shroud of the Afterlife** _(relic)_
+- **Swap Luck** -> **Swap Luck** _(relic)_
+- **Whammy** -> **Whammy** _(relic)_
+- **Clean Luck** -> **Clean Luck** _(relic)_
+- **Steal Luck** -> **Steal Luck** _(relic)_
+- **Against All Odds** -> **Against All Odds** _(relic)_
+- **Borrow Time** -> **Borrow Time** _(relic)_
+- **Sands of the Hourglass** -> **Sands of the Hourglass** _(relic)_
+- **Precognition** -> **Precognition** _(relic)_
+- **Temporal Pulse** -> **Temporal Pulse** _(relic)_
+- **Time Jump** -> **Time Jump** _(relic)_
+- **Pierce the Veil** -> **Pierce the Veil** _(relic)_
+- **Time Reversal** -> **Time Reversal** _(relic)_
+- **Intelligent Relic** -> **Intelligent Relic** _(relic)_
+- **Enthralling** -> **Enthralling** _(relic)_
+- **Tide of Death** -> **Tide of Death** _(relic)_
+- **Grim Specter** -> **Grim Specter** _(relic)_
+- **Ease Burden** -> **Ease Burden** _(relic)_
+- **Rolling Geode** -> **Rolling Geode** _(relic)_
+- **Shattered Earth** -> **Shattered Earth** _(relic)_
+- **Raise Ramparts** -> **Raise Ramparts** _(relic)_
+- **Underground Bounty** -> **Underground Bounty** _(relic)_
+- **Wind Barrier** -> **Wind Barrier** _(relic)_
+- **Living Statue** -> **Living Statue** _(relic)_
+- **Curse Wound** -> **Curse Wound** _(relic)_
+- **Fiendish Defiance** -> **Fiendish Defiance** _(relic)_
+- **Little Helper** -> **Little Helper** _(relic)_
+- **Fiendish Bargain** -> **Fiendish Bargain** _(relic)_
+- **Profane Fervor** -> **Profane Fervor** _(relic)_
+- **Command Legion** -> **Command Legion** _(relic)_
+- **Flare Bolt** -> **Flare Bolt** _(relic)_
+- **Heat Haze** -> **Heat Haze** _(relic)_
+- **Incandescent Sight** -> **Incandescent Sight** _(relic)_
+- **Lightning Storm** -> **Lightning Storm** _(relic)_
+- **Jet Propulsion** -> **Jet Propulsion** _(relic)_
+- **Searing Wave** -> **Searing Wave** _(relic)_
+- **Blazing Soul** -> **Blazing Soul** _(relic)_
+- **Bestow Life** -> **Bestow Life** _(relic)_
+- **Healing Wave** -> **Healing Wave** _(relic)_
+- **Overflowing Life** -> **Overflowing Life** _(relic)_
+- **Inextinguishable** -> **Inextinguishable** _(relic)_
+- **Vitality Siphon** -> **Vitality Siphon** _(relic)_
+- **Life Everlasting** -> **Life Everlasting** _(relic)_
+- **Linguistic Nexus** -> **Linguistic Nexus** _(relic)_
+- **Propelling Winds** -> **Propelling Winds** _(relic)_
+- **Recalculate** -> **Recalculate** _(relic)_
+- **Repository of Knowledge** -> **Repository of Knowledge** _(relic)_
+- **Perception Filter** -> **Perception Filter** _(relic)_
+- **Psychic Scream** -> **Psychic Scream** _(relic)_
+- **Mental Bastion** -> **Mental Bastion** _(relic)_
+- **Apothecary's Garden** -> **Apothecary's Garden** _(relic)_
+- **Pollen Spray** -> **Pollen Spray** _(relic)_
+- **Sprout Ally** -> **Sprout Ally** _(relic)_
+- **Grappling Vine** -> **Grappling Vine** _(relic)_
+- **Petal Dance** -> **Petal Dance** _(relic)_
+- **Living Storm** -> **Living Storm** _(relic)_
+- **Megaflora** -> **Megaflora** _(relic)_
+- **Encompassing Darkness** -> **Encompassing Darkness** _(relic)_
+- **Obscure** -> **Obscure** _(relic)_
+- **Shadow Smith** -> **Shadow Smith** _(relic)_
+- **Dancing Shadow** -> **Dancing Shadow** _(relic)_
+- **Dark Roads** -> **Dark Roads** _(relic)_
+- **Umbral Body** -> **Umbral Body** _(relic)_
+- **Lashing Currents** -> **Lashing Currents** _(relic)_
+- **Monsoon Curtain** -> **Monsoon Curtain** _(relic)_
+- **Tidal Crash** -> **Tidal Crash** _(relic)_
+- **Beast Senses** -> **Beast Senses** _(relic)_
+- **Bottomless Reservoir** -> **Bottomless Reservoir** _(relic)_
+- **Flowing Footsteps** -> **Flowing Footsteps** _(relic)_
+- **Ripples and Waves** -> **Ripples and Waves** _(relic)_
+- **Call of the Wild** -> **Call of the Wild** _(relic)_
+- **Feral Claws** -> **Feral Claws** _(relic)_
 - **Miracle** -> **Manifestation** _(spell)_
 - **Primal Phenomenon** -> **Manifestation** _(spell)_
 - **Wish** -> **Manifestation** _(spell)_

@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **18556**
+- registros avaliados: **18969**
 
 ## Portao 1 -- prov por campo preenchido
 
