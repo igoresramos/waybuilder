@@ -142,9 +142,22 @@ objeto. Escolher uma fonte joga fora o que a outra sabia.
 
 Regra: `traits` e a **uniao das tres fontes**, aplicada nesta ordem:
 
-1. **Mapa legado -> remaster.** `aasimar`, `tiefling`, `aphorite`, `ganzi` ->
-   `nephilim`; `ifrit`, `oread`, `sylph`, `undine` -> `naari`. O termo legado vai
+1. **Mapa legado -> remaster.** Vive em `pipeline/normalizacao_traits.json`, com
+   `prov` por entrada citando fonte e pagina -- entrada sem proveniencia nao
+   entra. Hoje: **17 renomeados** (`aasimar`/`tiefling`/`aphorite`/`ganzi` ->
+   `nephilim`, `ifrit` -> `naari`, `metamagic` -> `spellshape`, `negative` ->
+   `void`, `positive` -> `vitality`, `good` -> `holy`, `evil` -> `unholy`,
+   `gnoll` -> `kholo`, `duergar` -> `hryngar`, `half-elf` -> `aiuvarin`,
+   `half-orc` -> `dromaar`, `locathah` -> `athamaru`, `couatl` -> `coatl`,
+   `petitioner` -> `shade`) e **9 removidos sem sucessor**. O termo legado vai
    para `aliases_traits`, nunca some.
+
+   > Duas correcoes ao rascunho inicial desta regra, ambas verificadas no AoN:
+   > **`oread`, `sylph` e `undine` NAO viraram `naari`** -- so `ifrit` renomeou.
+   > A familia Geniekin do Monster Core 2 lista Naari, Oread, Suli, Sylph e
+   > Undine como cinco nomes irmaos distintos, nao um merge.
+   > E **`illusion` sobreviveu ao remaster** (Player Core p.457): das oito
+   > escolas de magia, sete foram eliminadas, essa nao.
 2. **Absorcao por granularidade.** O trait parametrizado absorve o base:
    presentes `two-hand-d12` e `two-hand`, fica so `two-hand-d12`. A regra vale
    para todo sufixo de parametro (`-d\d+`, `-\d+`, `-aim-d\d+`).

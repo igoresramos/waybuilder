@@ -177,7 +177,6 @@ def dedupe_aon_legacy_remaster(docs: list[dict]) -> tuple[list[dict], dict]:
 # Resultado por grau de sucesso (bloco proprio de ritual -- ver relatorio)
 # --------------------------------------------------------------------------
 
-_DEGREE_LABELS = ["Critical Success", "Success", "Failure", "Critical Failure"]
 _DEGREE_KEYS = {
     "Critical Success": "critical_success",
     "Success": "success",
@@ -304,6 +303,8 @@ def extrair() -> list[dict]:
         prov_source = None
         if aon:
             source_book = aon.get("primary_source") or (aon.get("source") or [None])[0]
+            if source_book:
+                source_book = source_book.strip()  # achado: alguns titulos da AoN vem com \r\n colado
             raw = aon.get("primary_source_raw") or aon.get("text") or ""
             m = re.search(r"pg\.\s*(\d+)", raw)
             if m:
@@ -311,7 +312,7 @@ def extrair() -> list[dict]:
             if source_book:
                 prov_source = "aon"
         if not source_book and fsys:
-            source_book = fsys["publication"]["title"]
+            source_book = fsys["publication"]["title"].strip()
             prov_source = "foundry"
         license_ = fsys["publication"]["license"] if fsys else None
         is_remaster_aon = bool(aon.get("legacy_id")) if aon else False
