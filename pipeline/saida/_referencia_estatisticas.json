@@ -91,140 +91,143 @@
  "deity_com_sanctification": 374,
  "deity_triplice_completa": 476,
  "deity_licenca_direta_foundry": 471,
+ "deity_so_foundry": 9,
  "registros_sem_licenca": 135,
- "registros_total": 1144,
- "traits_citados_total": 435,
- "traits_orfaos_total": 47,
+ "registros_total": 1153,
+ "traits_citados_total": 433,
+ "traits_orfaos_total": 29,
  "traits_orfaos_top": [
   [
-   "two-hand-d8",
-   155
-  ],
-  [
-   "versatile-p",
-   72
-  ],
-  [
-   "versatile-s",
-   57
-  ],
-  [
-   "deadly-d8",
-   53
-  ],
-  [
-   "thrown-20",
-   38
-  ],
-  [
-   "thrown-10",
-   35
-  ],
-  [
-   "deadly-d10",
-   35
-  ],
-  [
-   "fatal-d10",
-   34
-  ],
-  [
-   "fatal-d8",
-   21
-  ],
-  [
-   "two-hand-d10",
-   18
-  ],
-  [
-   "fatal-d12",
-   16
-  ],
-  [
-   "deadly-d6",
-   16
-  ],
-  [
-   "versatile-b",
-   11
-  ],
-  [
-   "two-hand-d12",
-   10
-  ],
-  [
-   "jousting-d6",
-   9
-  ],
-  [
-   "scatter-10",
-   9
-  ],
-  [
-   "volley-30",
+   "large",
    8
   ],
   [
-   "scatter-5",
+   "fatal-d10",
    7
   ],
   [
-   "fatal-aim-d12",
+   "huge",
    6
   ],
   [
-   "entrench-melee",
-   4
+   "fatal-d8",
+   6
   ],
   [
-   "shield-throw-30",
-   4
+   "two-hand-d8",
+   6
   ],
   [
-   "integrated-1d6-s",
-   4
+   "deadly-d8",
+   3
   ],
   [
-   "shield-throw-20",
-   4
+   "thrown-20",
+   3
   ],
   [
-   "integrated-1d6-s-versatile-p",
-   4
+   "gargantuan",
+   2
+  ],
+  [
+   "versatile-s",
+   2
+  ],
+  [
+   "versatile-p",
+   2
   ],
   [
    "capacity-3",
-   4
+   2
   ],
   [
-   "attached-to-shield",
-   4
+   "scatter-5",
+   2
   ],
   [
-   "deadly-d12",
-   4
+   "two-hand-d12",
+   2
   ],
   [
-   "capacity-5",
-   4
+   "persona-underdog",
+   1
   ],
   [
-   "entrench-ranged",
-   3
+   "persona-leader",
+   1
   ],
   [
-   "thrown-30",
-   3
+   "persona-scholar",
+   1
+  ],
+  [
+   "persona-warrior",
+   1
+  ],
+  [
+   "persona-wildcard",
+   1
+  ],
+  [
+   "persona-guardian",
+   1
+  ],
+  [
+   "persona-scoundrel",
+   1
+  ],
+  [
+   "persona-flirt",
+   1
+  ],
+  [
+   "small",
+   1
+  ],
+  [
+   "medium",
+   1
+  ],
+  [
+   "fatal-d12",
+   1
+  ],
+  [
+   "jousting-d6",
+   1
+  ],
+  [
+   "capacity-2",
+   1
+  ],
+  [
+   "fatal-aim-d10",
+   1
+  ],
+  [
+   "thrown-10",
+   1
+  ],
+  [
+   "deadly-d10",
+   1
   ]
  ],
  "traits_orfaos_fontes": {
+  "large": [
+   "equipamento.json"
+  ],
+  "fatal-d10": [
+   "equipamento.json"
+  ],
+  "huge": [
+   "equipamento.json"
+  ],
+  "fatal-d8": [
+   "equipamento.json"
+  ],
   "two-hand-d8": [
-   "equipamento.json"
-  ],
-  "versatile-p": [
-   "equipamento.json"
-  ],
-  "versatile-s": [
    "equipamento.json"
   ],
   "deadly-d8": [
@@ -233,79 +236,70 @@
   "thrown-20": [
    "equipamento.json"
   ],
-  "thrown-10": [
+  "gargantuan": [
    "equipamento.json"
   ],
-  "deadly-d10": [
+  "versatile-s": [
    "equipamento.json"
   ],
-  "fatal-d10": [
-   "equipamento.json"
-  ],
-  "fatal-d8": [
-   "equipamento.json"
-  ],
-  "two-hand-d10": [
-   "equipamento.json"
-  ],
-  "fatal-d12": [
-   "equipamento.json"
-  ],
-  "deadly-d6": [
-   "equipamento.json"
-  ],
-  "versatile-b": [
-   "equipamento.json"
-  ],
-  "two-hand-d12": [
-   "equipamento.json"
-  ],
-  "jousting-d6": [
-   "equipamento.json"
-  ],
-  "scatter-10": [
-   "equipamento.json"
-  ],
-  "volley-30": [
-   "equipamento.json"
-  ],
-  "scatter-5": [
-   "equipamento.json"
-  ],
-  "fatal-aim-d12": [
-   "equipamento.json"
-  ],
-  "entrench-melee": [
-   "equipamento.json"
-  ],
-  "shield-throw-30": [
-   "equipamento.json"
-  ],
-  "integrated-1d6-s": [
-   "equipamento.json"
-  ],
-  "shield-throw-20": [
-   "equipamento.json"
-  ],
-  "integrated-1d6-s-versatile-p": [
+  "versatile-p": [
    "equipamento.json"
   ],
   "capacity-3": [
    "equipamento.json"
   ],
-  "attached-to-shield": [
+  "scatter-5": [
    "equipamento.json"
   ],
-  "deadly-d12": [
+  "two-hand-d12": [
    "equipamento.json"
   ],
-  "capacity-5": [
+  "persona-underdog": [
+   "ancestrias.json"
+  ],
+  "persona-leader": [
+   "ancestrias.json"
+  ],
+  "persona-scholar": [
+   "ancestrias.json"
+  ],
+  "persona-warrior": [
+   "ancestrias.json"
+  ],
+  "persona-wildcard": [
+   "ancestrias.json"
+  ],
+  "persona-guardian": [
+   "ancestrias.json"
+  ],
+  "persona-scoundrel": [
+   "ancestrias.json"
+  ],
+  "persona-flirt": [
+   "ancestrias.json"
+  ],
+  "small": [
    "equipamento.json"
   ],
-  "entrench-ranged": [
+  "medium": [
    "equipamento.json"
   ],
-  "thrown-30": [
+  "fatal-d12": [
+   "equipamento.json"
+  ],
+  "jousting-d6": [
+   "equipamento.json"
+  ],
+  "capacity-2": [
+   "equipamento.json"
+  ],
+  "fatal-aim-d10": [
+   "equipamento.json"
+  ],
+  "thrown-10": [
+   "equipamento.json"
+  ],
+  "deadly-d10": [
    "equipamento.json"
   ]
  },
@@ -317,8 +311,8 @@
   },
   "deity": {
    "pf2etools": 272,
-   "so_pf2etools": 7,
-   "so_nosso": 221
+   "so_pf2etools": 3,
+   "so_nosso": 226
   },
   "domain": {
    "pf2etools": 61,

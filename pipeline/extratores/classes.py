@@ -31,6 +31,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 import urllib.error
 import urllib.request
 from collections import defaultdict, Counter
@@ -74,7 +75,15 @@ FOUNDRY_FEATURE_UUID_PREFIX = "Compendium.pf2e.classfeatures.Item."
 # ---------------------------------------------------------------------------
 
 def slugify(name: str) -> str:
-    s = name.lower()
+    # mesma convencao dos irmaos (equipamento.py, feats.py, referencia.py,
+    # companheiros.py, aon_kinds.py): apostrofo SOME (Acrobat's -> Acrobats),
+    # nao vira hifen -- estava divergindo aqui e trocando o id de toda
+    # class-feature possessiva ("Acrobat's Calling" virava acrobat-s-calling
+    # em vez de acrobats-calling, 47 ids no total, cache do AoN igualmente
+    # invalidado por vir do slug antigo).
+    s = unicodedata.normalize("NFKD", name or "")
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    s = s.lower().replace("'", "").replace("’", "")
     s = re.sub(r"[^a-z0-9]+", "-", s)
     return s.strip("-")
 
