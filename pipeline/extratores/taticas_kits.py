@@ -188,7 +188,9 @@ def extrair_tactics(vigentes, foundry_idx, est):
         reg = aon_kinds.converter(aon, "tactic")
         if not reg:
             continue
-        del reg["mechanized"]
+        # `mechanized` fica: a base inteira (19.738 registros) esta na v1 e
+        # os dois campos da v2 nao foram adotados (TODO item 59). Emitir schema
+        # diferente so nos 69 novos deixaria a base com dois vocabularios.
 
         # 1) filtra palavra de raridade que vazou pra dentro de `traits`
         # (converter() nao faz essa limpeza -- achado 4/37 aqui).
@@ -213,11 +215,10 @@ def extrair_tactics(vigentes, foundry_idx, est):
             reg["requires_texto"] = requirement
             reg["prov"]["requires_texto"] = "aon"
 
-        grants_completos, requires_parseado = comum.mecanizacao(
-            "tactic", tinha_mecanica=True, perdeu_mecanica=True,
-            tem_requires_texto=bool(requirement), requires_saiu=False)
-        reg["grants_completos"] = grants_completos
-        reg["requires_parseado"] = requires_parseado
+        # `mechanized == bool(grants)` e a definicao da v1; `grants` aqui e
+        # sempre vazio porque a spec nao tem vocabulario para efeito de tactic
+        # nem para pacote inicial de itens.
+        reg["mechanized"] = bool(reg.get("grants"))
 
         # 4) prosa embutida (harmless -- emitir_textos.py reprocessa do
         # dados_brutos direto, nao le este campo; mesma convencao de
@@ -369,7 +370,9 @@ def extrair_class_kits(vigentes, est):
         reg = aon_kinds.converter(aon, "class-kit")
         if not reg:
             continue
-        del reg["mechanized"]
+        # `mechanized` fica: a base inteira (19.738 registros) esta na v1 e
+        # os dois campos da v2 nao foram adotados (TODO item 59). Emitir schema
+        # diferente so nos 69 novos deixaria a base com dois vocabularios.
         # id/text seguem o slug resolvido (pode levar sufixo -legacy)
         reg["id"] = f"wb:class-kit/{sl}"
         reg["text"] = f"wb:text/class-kit/{sl}"
@@ -379,11 +382,10 @@ def extrair_class_kits(vigentes, est):
         # book+remaster -- mesma convencao de relicos_idiomas.py.
         reg["source"]["license"] = None
 
-        grants_completos, requires_parseado = comum.mecanizacao(
-            "class-kit", tinha_mecanica=True, perdeu_mecanica=True,
-            tem_requires_texto=False, requires_saiu=False)
-        reg["grants_completos"] = grants_completos
-        reg["requires_parseado"] = requires_parseado
+        # `mechanized == bool(grants)` e a definicao da v1; `grants` aqui e
+        # sempre vazio porque a spec nao tem vocabulario para efeito de tactic
+        # nem para pacote inicial de itens.
+        reg["mechanized"] = bool(reg.get("grants"))
 
         reg["texto"] = _limpar_texto(aon.get("text"))
         reg["prov"]["text"] = "aon"
