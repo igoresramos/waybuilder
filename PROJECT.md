@@ -73,7 +73,8 @@ hidden: false
 > schema da base e o schema do documento de personagem estao escritos, revisados
 > adversarialmente e commitados.
 >
-> **19.250 registros em 24 kinds**, prosa em **99,2%** (169 sem prosa), 951 com
+> **19.738 registros em 52 kinds** (24 originais + 28 de sub-escolha promovidos a
+> kind proprio), prosa em **99,2%** (166 sem prosa), 1.550 com
 > divergencia registrada, 281 desmembrados de colisao de identidade.
 >
 > A re-emissao de 2026-07-26 fechou os cinco defeitos da auditoria: a fusao

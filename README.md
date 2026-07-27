@@ -64,8 +64,9 @@ Para re-extrair das fontes: `WB_REEXTRAIR=1 ./build.sh`.
 
 ## Estado da base (2026-07-27)
 
-**19.738 registros em 24 kinds.** Prosa em **99,2%**. Portoes 1, 2, 4 e 5
-passam; o 3 esta em 23 (era 80) e o 6 em 1.
+**19.738 registros em 52 kinds** (24 originais + 28 eixos de sub-escolha
+promovidos a kind proprio pelo item 2 do TODO). Prosa em **99,2%**. Portoes 1,
+2, 4 e 5 passam; o 3 esta em 23 (era 80) e o 6 em 1.
 
 Alem da re-emissao, esta camada foi construida depois: gate de nivel derivado
 (`class_level` em 1.932 registros, era 79), `subclass` no predicado, efeito
@@ -164,28 +165,19 @@ divergem, que e exatamente o ponto.
 
 ## O que falta
 
-O bloco de re-emissao fechou. O que resta esta em `TODO.md`; os tres primeiros:
+O bloco de re-emissao fechou. O que resta esta em `TODO.md`; os quatro
+primeiros:
 
-1. **Gate de nivel derivado** -- `class_level` aparece em 79 de 19.738
-   registros, e e a razao de o Waybuilder existir. No PF2e o pre-requisito de
-   feat nunca menciona nivel: o nivel do feat **e** o gate. Feat com trait
-   `bard` e level 8 significa `class_level[bard] >= 8`, e isso e derivavel de
-   dado que ja esta na base -- 1.945 feats de classe, 1.215 de ancestria, 996
-   gerais. Sem isso o construtor nao responde "o que meu Guerreiro 3 / Mago 2
-   pode pegar", que e a pergunta central.
-2. **Predicado precisa falar de SUBCLASSE** -- a proficiencia de conjuracao do
-   Clerigo depende da Doutrina, e o nivel do companheiro e o `class_level` de
-   quem o concedeu. Nenhum dos dois cabe em `class_level` puro.
-   > Metade do caminho ja esta feita: as 28 categorias de sub-escolha do AoN
-   > entraram como kind proprio e cada classe carrega
-   > `subclasses: [{eixo, nivel, opcoes}]`. Falta o predicado saber mira-las.
-3. **Modelo de efeito unificado** -- o mesmo conceito mora em tres formatos:
-   classe usa `grants`, ancestria usa campos soltos (`hp`, `size`, `speed`,
-   `boosts`), background usa outro conjunto (`skill_training`, `attribute`).
-   A spec define `grants` como **a** linguagem de efeito e ela so e respeitada
-   em `class`. O motor ja convive com os tres; cada tipo novo de conteudo vira
-   caso especial enquanto isso durar.
-4. **O front**
+1. **Atores** -- companheiro, familiar e eidolon com stats proprios. A spec
+   diz que e o mesmo motor com menos slots; hoje o motor so verifica que
+   existem.
+2. **Runas** -- potencia e impacto (`+1 striking longsword`). O campo
+   `potencia` ja e lido; falta modelar runa como item.
+3. **Interpretador parcial de Rule Elements** -- para o dano condicional das
+   subclasses (itens 42 e 43 do TODO). Deixou de ser "fora de escopo" depois
+   da correcao de escopo do Igor em 2026-07-27: dano de rage e numero de
+   ficha.
+4. **O front** -- PWA client-side, offline, sem backend.
 
 ## Simulacoes
 
