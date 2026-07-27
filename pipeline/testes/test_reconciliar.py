@@ -91,10 +91,12 @@ class TestFundir(unittest.TestCase):
         r = reconciliar.fundir([a, b])
         self.assertEqual(r["traits"], ["magical", "two-hand-d12"])
 
-    @unittest.expectedFailure
     def test_registro_sem_traits_sai_com_lista_vazia(self):
-        # GAP DA SPEC v2: aqui `traits` ausente continua ausente. Medido: 66
-        # registros com traits null na base (39 class-feature, 27 class).
+        # DECIDIDO 2026-07-27 (TODO item 53): traits ausente vira `[]`, nunca
+        # `null` -- ausencia real (Foundry 0/66, AoN 2/66), nao desconhecimento.
+        # Corrigido em reconciliar.fundir/traits_ausente_vira_lista_vazia.
+        # Medido antes do fix: 66 registros com traits null na base (39
+        # class-feature, 27 class); so vale no artefato depois do rebuild.
         r = reconciliar.fundir([reg(xref={"aon": "a1"})])
         self.assertEqual(r["traits"], [])
 

@@ -38,6 +38,9 @@ Saida:   pipeline/base/index.json reescrito + relatorio_fusao.md
 import json, os, re, collections, unicodedata, glob, sys
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, AQUI)
+from reconciliar import normalizar_livro, LIVROS_ORC     # noqa: E402
+
 BASE = f"{AQUI}/base"
 AON_DUMP = f"{AQUI}/dados_brutos/aon_dump"
 
@@ -174,8 +177,70 @@ def main():
         absorvidos.add(legado["id"])
 
     final = [r for r in base if r["id"] not in absorvidos]
+
+    # --- 5. adotar o sucessor quando SO o legado entrou --------------------
+    # A fusao acima exige os dois lados na base. Quando o extrator casou com o
+    # doc legado e o sucessor nunca entrou, nao ha o que fundir e o registro
+    # fica servindo dado pre-remaster para sempre -- 69 casos, 62 deles
+    # arquetipos (`Acrobat` preso em archetype-45/Advanced Player's Guide,
+    # enquanto o vigente e archetype-236/Player Core 2).
+    #
+    # O sintoma que denuncia e a LICENCA: o livro citado e OGL e o conteudo
+    # vigente e ORC, ou o contrario. Medido: os 69 citam o livro errado, o
+    # nome muda em 1 e o `level` em NENHUM -- por isso adotar e seguro aqui,
+    # sem o veto que a fusao precisa.
+    presentes = {str((r.get("xref") or {}).get("aon")) for r in final}
+    adotados = []
+    for r in final:
+        atual = str((r.get("xref") or {}).get("aon") or "")
+        doc = aon.get(atual)
+        if not doc:
+            continue
+        sucessores = [str(s) for s in como_lista(doc.get("remaster_id"))]
+        sucessores = [s for s in sucessores if s and s != "0"]
+        if not sucessores or any(s in presentes for s in sucessores):
+            continue
+        novo = aon.get(sucessores[0])
+        if not novo:
+            continue
+        antes = {"livro": (r.get("source") or {}).get("book"), "nome": r.get("name")}
+        r.setdefault("xref", {})["aon"] = sucessores[0]
+        r["xref"]["legado_aon"] = atual
+        if novo.get("name") and novo["name"] != r.get("name"):
+            r.setdefault("aliases", [])
+            if antes["nome"] and antes["nome"] not in r["aliases"]:
+                r["aliases"] = sorted(set(r["aliases"]) | {antes["nome"]})
+            r["name"] = novo["name"]
+            r.setdefault("prov", {})["name"] = "aon"
+        livro = novo.get("primary_source")
+        livro = livro[0] if isinstance(livro, list) else livro
+        if livro:
+            src = r.setdefault("source", {})
+            src["book"] = livro
+            # a PAGINA e do livro antigo: trocar so o titulo deixa `Player
+            # Core 2 pg. 155`, que e a pagina do Advanced Player's Guide. O
+            # numero certo esta em `primary_source_raw` do doc novo (`Player
+            # Core 2 pg. 183`); sem ele, melhor nao ter pagina do que ter a
+            # errada.
+            bruto = novo.get("primary_source_raw")
+            bruto = bruto[0] if isinstance(bruto, list) else bruto
+            m = re.search(r"pg\.\s*(\d+)", str(bruto or ""))
+            if m:
+                src["page"] = int(m.group(1))
+            else:
+                src.pop("page", None)
+            # licenca segue o livro: o remaster e ORC, o legado era OGL
+            src["license"] = "ORC" if normalizar_livro(livro) in LIVROS_ORC else "OGL"
+            src["remaster"] = normalizar_livro(livro) in LIVROS_ORC
+            r.setdefault("prov", {})["source"] = "aon"
+        r.setdefault("historico", []).append({
+            "nome_legado": antes["nome"], "livro_legado": antes["livro"],
+            "id_legado": atual, "chave": "aon:remaster_id (sucessor ausente da base)"})
+        adotados.append((r["id"], antes["livro"], livro))
+
     json.dump(final, open(f"{BASE}/index.json", "w"),
               ensure_ascii=False, separators=(",", ":"))
+    print(f"registros que adotaram o sucessor (so o legado tinha entrado): {len(adotados)}")
 
     com_alias = sum(1 for r in final if r.get("aliases"))
     print(f"pares declarados pelo AoN: {len(resolvidos)}")

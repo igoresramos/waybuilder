@@ -127,6 +127,17 @@ def carregar():
     return regs
 
 
+def traits_ausente_vira_lista_vazia(registro):
+    """`traits` ausente (`null`) e ausencia REAL, nao desconhecimento -- as
+    fontes concordam que nao ha trait (TODO item 53, decidido 2026-07-27
+    medindo: Foundry 0/66, AoN 2/66). `[]` e a representacao correta, nunca
+    `null`. Ponto central: chamado tanto pelo caminho de fusao (`fundir`)
+    quanto pelo caminho de fonte unica (`main`), pra nao espalhar a regra."""
+    if registro.get("traits") is None:
+        registro["traits"] = []
+    return registro
+
+
 def fundir(grupo):
     """Funde N registros do mesmo id canonico, registrando divergencia."""
     base = dict(grupo[0])
@@ -178,6 +189,7 @@ def fundir(grupo):
             base["aliases_traits"] = sorted(
                 set(base.get("aliases_traits") or []) | set(aliases))
         prov["traits"] = fontes
+    traits_ausente_vira_lista_vazia(base)
 
     base["prov"], base["xref"] = prov, xref
     if conflitos:
@@ -195,7 +207,8 @@ def main():
     for r in regs:
         por_id[r["id"]].append(r)
     colisoes = {k: v for k, v in por_id.items() if len(v) > 1}
-    base = [fundir(v) if len(v) > 1 else {k2: v2 for k2, v2 in v[0].items() if k2 != "_origem"}
+    base = [fundir(v) if len(v) > 1 else
+            traits_ausente_vira_lista_vazia({k2: v2 for k2, v2 in v[0].items() if k2 != "_origem"})
             for v in por_id.values()]
     print(f"colisoes de id fundidas: {len(colisoes)}  ->  base com {len(base)} registros")
 
