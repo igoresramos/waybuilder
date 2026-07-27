@@ -4,12 +4,14 @@ A houserule so diverge do RAW quando ha mais de uma classe. Logo, um
 personagem de **classe unica** montado por este motor tem que bater
 exatamente com o oficial -- se nao bater, o motor esta errado.
 
+## HP
+
 - avaliados: **136**
 - hp bate: **117**
 - hp diverge: **12**
 - nao traduzido: **7**
 
-## Por personagem
+### Por personagem
 
 - OK   `Amiri (Level 1)` nivel 1 -- HP oficial 22, motor 22
 - OK   `Amiri (Level 3)` nivel 3 -- HP oficial 50, motor 50
@@ -147,3 +149,275 @@ exatamente com o oficial -- se nao bater, o motor esta errado.
 - DIFF `Muruwa` nivel 1 -- HP oficial 15, motor 9
 - OK   `Ufi` nivel 1 -- HP oficial 17, motor 17
 - OK   `Zane Ikundi` nivel 1 -- HP oficial 15, motor 15
+
+## Pericias (rank)
+
+Compara o rank 0-4 (untrained/trained/expert/master/legendary) de
+cada uma das 16 pericias contra `system.skills.<pericia>.rank` do
+ator do Foundry -- pra cada personagem que traduziu (HP bateu ou nao,
+o rank de pericia e um oraculo independente).
+
+**Convencao de denominador:** chave de pericia ausente no ator conta
+como rank 0 (untrained), NUNCA como "sem dado". Confirmado no corpus:
+alguns atores gravam as 16 pericias completas com rank 0 explicito nas
+destreinadas (ex. iconics classicos), outros gravam so as treinadas > 0
+e omitem o resto inteiro (ex. `Whirp` tem so `arcana: {rank: 0}` e mais
+nenhuma chave; `Nhalmika (Level 1)` tem `system.skills == {}`). Em
+nenhum caso do corpus uma pericia TREINADA aparece omitida -- so
+confirma que ausencia = destreinado. Por isso o denominador e sempre
+**16 pericias x personagem traduzido**, sem subconjunto.
+
+- pontos de comparacao: **2064** (129 personagens x 16 pericias)
+- bate: **1187** (57.5%)
+- diverge: **877**
+
+### Divergencias por pericia
+
+- `diplomacy`: 80/129 divergem (62%)
+- `athletics`: 79/129 divergem (61%)
+- `survival`: 73/129 divergem (57%)
+- `acrobatics`: 72/129 divergem (56%)
+- `stealth`: 69/129 divergem (53%)
+- `crafting`: 63/129 divergem (49%)
+- `society`: 60/129 divergem (47%)
+- `medicine`: 54/129 divergem (42%)
+- `intimidation`: 49/129 divergem (38%)
+- `religion`: 49/129 divergem (38%)
+- `nature`: 48/129 divergem (37%)
+- `occultism`: 48/129 divergem (37%)
+- `thievery`: 45/129 divergem (35%)
+- `deception`: 43/129 divergem (33%)
+- `arcana`: 27/129 divergem (21%)
+- `performance`: 18/129 divergem (14%)
+
+### Divergencias por classe
+
+- `Rogue`: 132/208 divergem (63%)
+- `Fighter`: 54/144 divergem (38%)
+- `Bard`: 53/112 divergem (47%)
+- `Sorcerer`: 52/144 divergem (36%)
+- `Cleric`: 46/144 divergem (32%)
+- `Wizard`: 44/80 divergem (55%)
+- `Investigator`: 43/64 divergem (67%)
+- `Witch`: 42/80 divergem (52%)
+- `Barbarian`: 38/112 divergem (34%)
+- `Gunslinger`: 33/112 divergem (29%)
+- `Monk`: 30/96 divergem (31%)
+- `Alchemist`: 27/48 divergem (56%)
+- `Swashbuckler`: 27/64 divergem (42%)
+- `Thaumaturge`: 27/48 divergem (56%)
+- `Druid`: 26/96 divergem (27%)
+- `Commander`: 24/48 divergem (50%)
+- `Ranger`: 23/64 divergem (36%)
+- `Guardian`: 22/48 divergem (46%)
+- `Oracle`: 22/64 divergem (34%)
+- `Inventor`: 21/48 divergem (44%)
+- `Champion`: 19/48 divergem (40%)
+- `Exemplar`: 18/48 divergem (38%)
+- `Animist`: 18/48 divergem (38%)
+- `Psychic`: 18/48 divergem (38%)
+- `Kineticist`: 18/48 divergem (38%)
+
+### Achados sistemicos (classe + pericia, >=2 amostras, >=50% divergindo)
+
+- `Rogue` + `acrobatics`: diverge em 13/13 ocorrencias (100%)
+- `Rogue` + `athletics`: diverge em 13/13 ocorrencias (100%)
+- `Barbarian` + `acrobatics`: diverge em 7/7 ocorrencias (100%)
+- `Barbarian` + `intimidation`: diverge em 7/7 ocorrencias (100%)
+- `Barbarian` + `survival`: diverge em 7/7 ocorrencias (100%)
+- `Bard` + `deception`: diverge em 7/7 ocorrencias (100%)
+- `Bard` + `society`: diverge em 7/7 ocorrencias (100%)
+- `Bard` + `stealth`: diverge em 7/7 ocorrencias (100%)
+- `Bard` + `thievery`: diverge em 7/7 ocorrencias (100%)
+- `Druid` + `stealth`: diverge em 6/6 ocorrencias (100%)
+- `Druid` + `survival`: diverge em 6/6 ocorrencias (100%)
+- `Monk` + `athletics`: diverge em 6/6 ocorrencias (100%)
+- `Wizard` + `crafting`: diverge em 5/5 ocorrencias (100%)
+- `Wizard` + `diplomacy`: diverge em 5/5 ocorrencias (100%)
+- `Wizard` + `nature`: diverge em 5/5 ocorrencias (100%)
+- `Wizard` + `occultism`: diverge em 5/5 ocorrencias (100%)
+- `Wizard` + `religion`: diverge em 5/5 ocorrencias (100%)
+- `Wizard` + `society`: diverge em 5/5 ocorrencias (100%)
+- `Witch` + `nature`: diverge em 5/5 ocorrencias (100%)
+- `Witch` + `stealth`: diverge em 5/5 ocorrencias (100%)
+- `Witch` + `survival`: diverge em 5/5 ocorrencias (100%)
+- `Ranger` + `acrobatics`: diverge em 4/4 ocorrencias (100%)
+- `Ranger` + `athletics`: diverge em 4/4 ocorrencias (100%)
+- `Ranger` + `crafting`: diverge em 4/4 ocorrencias (100%)
+- `Ranger` + `stealth`: diverge em 4/4 ocorrencias (100%)
+- `Swashbuckler` + `acrobatics`: diverge em 4/4 ocorrencias (100%)
+- `Swashbuckler` + `athletics`: diverge em 4/4 ocorrencias (100%)
+- `Swashbuckler` + `society`: diverge em 4/4 ocorrencias (100%)
+- `Swashbuckler` + `stealth`: diverge em 4/4 ocorrencias (100%)
+- `Swashbuckler` + `thievery`: diverge em 4/4 ocorrencias (100%)
+- `Oracle` + `athletics`: diverge em 4/4 ocorrencias (100%)
+- `Oracle` + `diplomacy`: diverge em 4/4 ocorrencias (100%)
+- `Oracle` + `religion`: diverge em 4/4 ocorrencias (100%)
+- `Oracle` + `survival`: diverge em 4/4 ocorrencias (100%)
+- `Investigator` + `crafting`: diverge em 4/4 ocorrencias (100%)
+- `Investigator` + `deception`: diverge em 4/4 ocorrencias (100%)
+- `Investigator` + `medicine`: diverge em 4/4 ocorrencias (100%)
+- `Investigator` + `nature`: diverge em 4/4 ocorrencias (100%)
+- `Investigator` + `society`: diverge em 4/4 ocorrencias (100%)
+- `Investigator` + `stealth`: diverge em 4/4 ocorrencias (100%)
+- `Investigator` + `thievery`: diverge em 4/4 ocorrencias (100%)
+- `Inventor` + `arcana`: diverge em 3/3 ocorrencias (100%)
+- `Inventor` + `athletics`: diverge em 3/3 ocorrencias (100%)
+- `Inventor` + `crafting`: diverge em 3/3 ocorrencias (100%)
+- `Inventor` + `occultism`: diverge em 3/3 ocorrencias (100%)
+- `Inventor` + `society`: diverge em 3/3 ocorrencias (100%)
+- `Inventor` + `stealth`: diverge em 3/3 ocorrencias (100%)
+- `Inventor` + `thievery`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `acrobatics`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `athletics`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `crafting`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `diplomacy`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `medicine`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `society`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `stealth`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `survival`: diverge em 3/3 ocorrencias (100%)
+- `Alchemist` + `thievery`: diverge em 3/3 ocorrencias (100%)
+- `Guardian` + `athletics`: diverge em 3/3 ocorrencias (100%)
+- `Guardian` + `diplomacy`: diverge em 3/3 ocorrencias (100%)
+- `Guardian` + `intimidation`: diverge em 3/3 ocorrencias (100%)
+- `Guardian` + `medicine`: diverge em 3/3 ocorrencias (100%)
+- `Guardian` + `nature`: diverge em 3/3 ocorrencias (100%)
+- `Guardian` + `religion`: diverge em 3/3 ocorrencias (100%)
+- `Guardian` + `survival`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `arcana`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `crafting`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `deception`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `diplomacy`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `medicine`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `nature`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `occultism`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `religion`: diverge em 3/3 ocorrencias (100%)
+- `Thaumaturge` + `society`: diverge em 3/3 ocorrencias (100%)
+- `Exemplar` + `acrobatics`: diverge em 3/3 ocorrencias (100%)
+- `Exemplar` + `athletics`: diverge em 3/3 ocorrencias (100%)
+- `Exemplar` + `diplomacy`: diverge em 3/3 ocorrencias (100%)
+- `Exemplar` + `intimidation`: diverge em 3/3 ocorrencias (100%)
+- `Exemplar` + `religion`: diverge em 3/3 ocorrencias (100%)
+- `Animist` + `medicine`: diverge em 3/3 ocorrencias (100%)
+- `Animist` + `nature`: diverge em 3/3 ocorrencias (100%)
+- `Animist` + `occultism`: diverge em 3/3 ocorrencias (100%)
+- `Animist` + `religion`: diverge em 3/3 ocorrencias (100%)
+- `Animist` + `society`: diverge em 3/3 ocorrencias (100%)
+- `Animist` + `survival`: diverge em 3/3 ocorrencias (100%)
+- `Champion` + `athletics`: diverge em 3/3 ocorrencias (100%)
+- `Champion` + `diplomacy`: diverge em 3/3 ocorrencias (100%)
+- `Champion` + `religion`: diverge em 3/3 ocorrencias (100%)
+- `Champion` + `society`: diverge em 3/3 ocorrencias (100%)
+- `Champion` + `stealth`: diverge em 3/3 ocorrencias (100%)
+- `Psychic` + `crafting`: diverge em 3/3 ocorrencias (100%)
+- `Psychic` + `diplomacy`: diverge em 3/3 ocorrencias (100%)
+- `Psychic` + `medicine`: diverge em 3/3 ocorrencias (100%)
+- `Psychic` + `occultism`: diverge em 3/3 ocorrencias (100%)
+- `Psychic` + `society`: diverge em 3/3 ocorrencias (100%)
+- `Psychic` + `survival`: diverge em 3/3 ocorrencias (100%)
+- `Commander` + `acrobatics`: diverge em 3/3 ocorrencias (100%)
+- `Commander` + `athletics`: diverge em 3/3 ocorrencias (100%)
+- `Commander` + `crafting`: diverge em 3/3 ocorrencias (100%)
+- `Commander` + `diplomacy`: diverge em 3/3 ocorrencias (100%)
+- `Commander` + `intimidation`: diverge em 3/3 ocorrencias (100%)
+- `Commander` + `occultism`: diverge em 3/3 ocorrencias (100%)
+- `Commander` + `society`: diverge em 3/3 ocorrencias (100%)
+- `Commander` + `survival`: diverge em 3/3 ocorrencias (100%)
+- `Kineticist` + `acrobatics`: diverge em 3/3 ocorrencias (100%)
+- `Kineticist` + `diplomacy`: diverge em 3/3 ocorrencias (100%)
+- `Kineticist` + `intimidation`: diverge em 3/3 ocorrencias (100%)
+- `Kineticist` + `nature`: diverge em 3/3 ocorrencias (100%)
+- `Kineticist` + `stealth`: diverge em 3/3 ocorrencias (100%)
+- `Kineticist` + `survival`: diverge em 3/3 ocorrencias (100%)
+- `Cleric` + `medicine`: diverge em 8/9 ocorrencias (89%)
+- `Fighter` + `diplomacy`: diverge em 8/9 ocorrencias (89%)
+- `Barbarian` + `athletics`: diverge em 6/7 ocorrencias (86%)
+- `Barbarian` + `nature`: diverge em 6/7 ocorrencias (86%)
+- `Bard` + `diplomacy`: diverge em 6/7 ocorrencias (86%)
+- `Bard` + `occultism`: diverge em 6/7 ocorrencias (86%)
+- `Bard` + `performance`: diverge em 6/7 ocorrencias (86%)
+- `Rogue` + `deception`: diverge em 11/13 ocorrencias (85%)
+- `Rogue` + `survival`: diverge em 11/13 ocorrencias (85%)
+- `Druid` + `diplomacy`: diverge em 5/6 ocorrencias (83%)
+- `Monk` + `religion`: diverge em 5/6 ocorrencias (83%)
+- `Monk` + `stealth`: diverge em 5/6 ocorrencias (83%)
+- `Wizard` + `acrobatics`: diverge em 4/5 ocorrencias (80%)
+- `Wizard` + `arcana`: diverge em 4/5 ocorrencias (80%)
+- `Wizard` + `survival`: diverge em 4/5 ocorrencias (80%)
+- `Witch` + `arcana`: diverge em 4/5 ocorrencias (80%)
+- `Witch` + `occultism`: diverge em 4/5 ocorrencias (80%)
+- `Witch` + `thievery`: diverge em 4/5 ocorrencias (80%)
+- `Cleric` + `athletics`: diverge em 7/9 ocorrencias (78%)
+- `Cleric` + `religion`: diverge em 7/9 ocorrencias (78%)
+- `Sorcerer` + `crafting`: diverge em 7/9 ocorrencias (78%)
+- `Sorcerer` + `deception`: diverge em 7/9 ocorrencias (78%)
+- `Fighter` + `acrobatics`: diverge em 7/9 ocorrencias (78%)
+- `Fighter` + `athletics`: diverge em 7/9 ocorrencias (78%)
+- `Fighter` + `crafting`: diverge em 7/9 ocorrencias (78%)
+- `Rogue` + `stealth`: diverge em 10/13 ocorrencias (77%)
+- `Rogue` + `thievery`: diverge em 10/13 ocorrencias (77%)
+- `Ranger` + `intimidation`: diverge em 3/4 ocorrencias (75%)
+- `Ranger` + `survival`: diverge em 3/4 ocorrencias (75%)
+- `Swashbuckler` + `deception`: diverge em 3/4 ocorrencias (75%)
+- `Swashbuckler` + `diplomacy`: diverge em 3/4 ocorrencias (75%)
+- `Oracle` + `crafting`: diverge em 3/4 ocorrencias (75%)
+- `Investigator` + `diplomacy`: diverge em 3/4 ocorrencias (75%)
+- `Investigator` + `occultism`: diverge em 3/4 ocorrencias (75%)
+- `Investigator` + `performance`: diverge em 3/4 ocorrencias (75%)
+- `Investigator` + `religion`: diverge em 3/4 ocorrencias (75%)
+- `Bard` + `acrobatics`: diverge em 5/7 ocorrencias (71%)
+- `Gunslinger` + `acrobatics`: diverge em 5/7 ocorrencias (71%)
+- `Gunslinger` + `athletics`: diverge em 5/7 ocorrencias (71%)
+- `Rogue` + `intimidation`: diverge em 9/13 ocorrencias (69%)
+- `Rogue` + `medicine`: diverge em 9/13 ocorrencias (69%)
+- `Sorcerer` + `diplomacy`: diverge em 6/9 ocorrencias (67%)
+- `Monk` + `diplomacy`: diverge em 4/6 ocorrencias (67%)
+- `Exemplar` + `survival`: diverge em 2/3 ocorrencias (67%)
+- `Champion` + `intimidation`: diverge em 2/3 ocorrencias (67%)
+- `Champion` + `thievery`: diverge em 2/3 ocorrencias (67%)
+- `Rogue` + `crafting`: diverge em 8/13 ocorrencias (62%)
+- `Rogue` + `society`: diverge em 8/13 ocorrencias (62%)
+- `Witch` + `crafting`: diverge em 3/5 ocorrencias (60%)
+- `Witch` + `medicine`: diverge em 3/5 ocorrencias (60%)
+- `Witch` + `religion`: diverge em 3/5 ocorrencias (60%)
+- `Gunslinger` + `crafting`: diverge em 4/7 ocorrencias (57%)
+- `Gunslinger` + `medicine`: diverge em 4/7 ocorrencias (57%)
+- `Gunslinger` + `society`: diverge em 4/7 ocorrencias (57%)
+- `Gunslinger` + `stealth`: diverge em 4/7 ocorrencias (57%)
+- `Cleric` + `diplomacy`: diverge em 5/9 ocorrencias (56%)
+- `Sorcerer` + `arcana`: diverge em 5/9 ocorrencias (56%)
+- `Sorcerer` + `intimidation`: diverge em 5/9 ocorrencias (56%)
+- `Sorcerer` + `survival`: diverge em 5/9 ocorrencias (56%)
+- `Fighter` + `intimidation`: diverge em 5/9 ocorrencias (56%)
+- `Rogue` + `occultism`: diverge em 7/13 ocorrencias (54%)
+- `Druid` + `medicine`: diverge em 3/6 ocorrencias (50%)
+- `Druid` + `nature`: diverge em 3/6 ocorrencias (50%)
+- `Monk` + `acrobatics`: diverge em 3/6 ocorrencias (50%)
+
+### Amostra de divergencias individuais (ate 25, nao exaustiva -- ver secoes acima pro padrao completo)
+
+- `Amiri (Level 1)` (Barbarian, nivel 1) -- `acrobatics`: oficial trained, motor untrained
+- `Amiri (Level 1)` (Barbarian, nivel 1) -- `athletics`: oficial untrained, motor trained
+- `Amiri (Level 1)` (Barbarian, nivel 1) -- `intimidation`: oficial trained, motor untrained
+- `Amiri (Level 1)` (Barbarian, nivel 1) -- `nature`: oficial trained, motor untrained
+- `Amiri (Level 1)` (Barbarian, nivel 1) -- `survival`: oficial untrained, motor trained
+- `Amiri (Level 3)` (Barbarian, nivel 3) -- `acrobatics`: oficial trained, motor untrained
+- `Amiri (Level 3)` (Barbarian, nivel 3) -- `athletics`: oficial untrained, motor trained
+- `Amiri (Level 3)` (Barbarian, nivel 3) -- `intimidation`: oficial expert, motor untrained
+- `Amiri (Level 3)` (Barbarian, nivel 3) -- `nature`: oficial trained, motor untrained
+- `Amiri (Level 3)` (Barbarian, nivel 3) -- `survival`: oficial untrained, motor trained
+- `Amiri (Level 5)` (Barbarian, nivel 5) -- `acrobatics`: oficial trained, motor untrained
+- `Amiri (Level 5)` (Barbarian, nivel 5) -- `athletics`: oficial expert, motor trained
+- `Amiri (Level 5)` (Barbarian, nivel 5) -- `intimidation`: oficial expert, motor untrained
+- `Amiri (Level 5)` (Barbarian, nivel 5) -- `medicine`: oficial trained, motor untrained
+- `Amiri (Level 5)` (Barbarian, nivel 5) -- `nature`: oficial trained, motor untrained
+- `Amiri (Level 5)` (Barbarian, nivel 5) -- `stealth`: oficial trained, motor untrained
+- `Amiri (Level 5)` (Barbarian, nivel 5) -- `survival`: oficial untrained, motor trained
+- `Droven (Level 1)` (Inventor, nivel 1) -- `arcana`: oficial trained, motor untrained
+- `Droven (Level 1)` (Inventor, nivel 1) -- `athletics`: oficial trained, motor untrained
+- `Droven (Level 1)` (Inventor, nivel 1) -- `crafting`: oficial untrained, motor trained
+- `Droven (Level 1)` (Inventor, nivel 1) -- `occultism`: oficial trained, motor untrained
+- `Droven (Level 1)` (Inventor, nivel 1) -- `society`: oficial trained, motor untrained
+- `Droven (Level 1)` (Inventor, nivel 1) -- `stealth`: oficial trained, motor untrained
+- `Droven (Level 1)` (Inventor, nivel 1) -- `thievery`: oficial trained, motor untrained
+- `Droven (Level 3)` (Inventor, nivel 3) -- `arcana`: oficial trained, motor untrained
