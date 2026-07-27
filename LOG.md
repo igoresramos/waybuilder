@@ -4,6 +4,50 @@ project: waybuilder
 
 # LOG -- Waybuilder
 
+## 2026-07-27
+
+### Sessao | fonte limpa + fatia vertical 1 | igor + claude-code
+
+**Item 37 -- pf2etools completo.** A terceira fonte vivia como 242 arquivos
+baixados um a um por HTTP, adivinhando nomes; os 50 `.json.missing` eram chutes
+de nome, nao conteudo faltando. Clone no pin (7d1ec43f), 382 arquivos em escopo.
+Os 140 novos caem nos buracos: `baseitems.json`, `deities.json`, `traits.json`,
+`archetypes.json`, `companionsfamiliars.json`, `optionalfeatures.json`.
+
+Prova de reproducibilidade: 7 dos 8 extratores deram contagem **identica**. O
+oitavo (rituais) achou defeito real -- nao existe pasta `rituals/` no Foundry,
+ritual e magia com `system.ritual`; o extrator lia um recorte feito a mao numa
+sessao antiga e, quando sumiu, 6 rituais exclusivos do Foundry sumiam calados.
+
+Portao 5 zerado: os 3 orfaos nao eram falta de licenca -- o bloco de `source` do
+extrator de equipamento so tinha ramo para AoN e Foundry, entao item exclusivo do
+pf2etools saia com `source` vazio por construcao. Mais as 141 siglas de livro
+extraidas de `js/parser.js` da propria fonte. Itens magicos ligados: +2.632.
+
+**Fatia vertical 1 -- o motor monta ficha.** `motor/` implementa 11 das 22
+regras, com 24 assercoes travando cada uma. Guerreiro 3 / Mago 2 sai completo.
+A houserule aparece viva: Mago 2 num personagem 5 tem os slots de um Mago 2 e
+conjura no rank 3 (+2 de elevacao); Mago 5 puro ganha elevacao zero.
+
+O que a fatia descobriu, que era o motivo de faze-la:
+- **a progressao misturava concessao com escolha** -- `wb:class/wizard` declarava
+  49 features, sendo 15 concedidas; o resto sao as 23 escolas e 5 teses, opcao
+  mutuamente exclusiva. Um motor ingenuo daria todas ao Mago 1. Fonte
+  autoritativa: `system.items` da classe no Foundry
+- **item 2 fechado**: as 28 categorias de sub-escolha do AoN viraram kind proprio
+- **item 14 fechado**: a tabela de slots existia desde a primeira sessao e nunca
+  entrou na base, por ser mapa e nao lista
+- **portao 3: 80 -> 23** -- nao faltava conteudo, faltava vocabulario unificado
+
+Base: 19.429 -> 19.738. Portoes 1, 2, 4 e 5 passam.
+
+**Avaliacao pedida pelo Igor, registrada porque muda a prioridade:** o risco do
+projeto saiu de "os dados estao errados" para "o modelo de efeito e fragmentado e
+a regra nunca foi testada na mesa". O efeito mecanico mora em tres formatos
+(classe usa `grants`, ancestria usa campos soltos, background usa outro
+conjunto) e a spec define `grants` como a linguagem unica. E `class_level`, a
+razao de o projeto existir, aparece em 79 de 19.738 registros.
+
 ## 2026-07-26
 
 ### Sessao | re-emissao do bloco 1 | igor + claude-code

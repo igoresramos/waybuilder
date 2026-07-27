@@ -90,15 +90,28 @@ hidden: false
 > de `dados_brutos/`, com `buscar_fontes.sh` e `dump_aon.py` reconstruindo as
 > duas maiores.
 >
-> **O que segue aberto:** 3 portoes com pendencia pequena e documentada -- 80
-> `requires` citando class-features de segundo nivel que a base nunca extraiu
-> (fecha junto com o grafo de progressao), 3 registros orfaos de fonte nao
-> reproduzivel, e 13 colisoes que exigiriam arbitrar.
+> **O motor ja monta ficha (2026-07-27).** Fatia vertical 1 fechada: `motor/`
+> implementa 11 das 22 regras e imprime `Guerreiro 3 / Mago 2` completo, com 24
+> assercoes de teste travando cada regra. A houserule aparece viva -- Mago 2 num
+> personagem 5 tem os slots de um Mago 2 e conjura no rank 3; Mago 5 puro ganha
+> elevacao zero, que e o comportamento correto.
 >
-> Falta o construtor. Os proximos sao de modelagem: o grafo de progressao de dois
-> niveis -- que o AoN **ja entrega categorizado** (`arcane-thesis`, `muse`,
-> `racket`, `instinct`, `doctrine`, `bloodline`...) -- e o predicado sabendo
-> falar de subclasse.
+> Fechados junto: o grafo de progressao de dois niveis (item 2 -- as 28
+> categorias de sub-escolha do AoN viraram kind proprio, e a progressao agora
+> separa concessao de escolha usando `system.items` do Foundry como fonte
+> autoritativa) e a tabela de slots de conjuracao (item 14).
+>
+> **O que segue aberto:** portao 3 (23 referencias, era 80), portao 6 (1) e
+> portao 7 (13 colisoes que exigiriam arbitrar).
+>
+> **Os tres proximos, em ordem de valor:**
+> 1. **gate de nivel derivado** -- `class_level` existe em 79 de 19.738
+>    registros e e a razao de o projeto existir. E derivavel: feat com trait de
+>    classe e level N significa `class_level[X] >= N`
+> 2. **predicado sabendo falar de subclasse** -- metade do caminho pronta
+> 3. **modelo de efeito unificado** -- classe usa `grants`, ancestria usa campos
+>    soltos, background usa outro conjunto; a spec define `grants` como a
+>    linguagem unica e ela so vale em `class`
 >
 > **Comece por `README.md`** -- ele e o ponto de retomada.
 

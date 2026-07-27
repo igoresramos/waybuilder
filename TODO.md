@@ -39,8 +39,8 @@ items:
     texto: "CONCLUIDO 2026-07-26. 907 registros sem prosa (5,0%), nao os 100% reportados. A metrica de emitir_textos.py divide pelas referencias existentes, nao pela base -- registro sem referencia nenhuma nao entra no denominador. Corrigir a METRICA junto com o buraco, senao ela volta a mentir"
     prioridade: concluido
   - id: 14
-    texto: "Tabela numerica de slots de conjuracao: NENHUMA das 11 classes tem. Recuperadas do PDF e guardadas em pipeline/dados_brutos/tabelas_conjuracao_pdf.json: Animist (War of Immortals p.12-13, hibrido prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of Magic). Exemplar e Kineticist confirmados NAO-conjuradores. Faltam as 8 do Player Core / Player Core 2"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-27. Tabela numerica de slots de conjuracao: NENHUMA das 11 classes tem. Recuperadas do PDF e guardadas em pipeline/dados_brutos/tabelas_conjuracao_pdf.json: Animist (War of Immortals p.12-13, hibrido prepared divine + spontaneous pela apparition), Magus e Summoner (Secrets of Magic). Exemplar e Kineticist confirmados NAO-conjuradores. Faltam as 8 do Player Core / Player Core 2"
+    prioridade: concluido
   - id: 31
     texto: "CONCLUIDO 2026-07-26. 22 registros so-pf2etools sao duplicatas de registros ja existentes (wb:armor/hide vs wb:armor/hide-armor). Explicam os 6 sem license, os 23 sem rarity e 16 dos sem prosa -- o portao 5 estava detectando FALHA DE CASAMENTO, nao falta de licenca. O sintoma foi lido errado desde o inicio"
     prioridade: concluido
@@ -80,8 +80,8 @@ items:
   # BLOCO 2 -- MODELAGEM. Depende da base re-emitida.
   # ==========================================================================
   - id: 2
-    texto: "Grafo de progressao de dois niveis: classe -> feature -> sub-escolha. 62 class-features de segundo nivel ficam invisiveis hoje (teses e escolas do Mago, ordens Hellknight, ikons do Exemplar, gates do Kineticist, research fields do Alchemist)"
-    prioridade: alta
+    texto: "CONCLUIDO 2026-07-27. Grafo de progressao de dois niveis: classe -> feature -> sub-escolha. 62 class-features de segundo nivel ficam invisiveis hoje (teses e escolas do Mago, ordens Hellknight, ikons do Exemplar, gates do Kineticist, research fields do Alchemist)"
+    prioridade: concluido
   - id: 3
     texto: "Linguagem de predicado precisa falar de SUBCLASSE, nao so de classe. A proficiencia de conjuracao do Clerigo depende da Doutrina (Cloistered chega a legendary no 19, Warpriest para em master). Fura a premissa da regra 3 das houserules. Tambem: nivel do companheiro e o class_level de quem o concedeu, nao o nivel de personagem"
     prioridade: alta

@@ -113,24 +113,57 @@ Os cinco defeitos da auditoria de 26/07 estao **resolvidos**:
 
 Cuidado: **`Pf2ools` sem o "e" e um repo morto.** A fonte viva e `Pf2eToolsOrg`.
 
+## O motor ja monta ficha
+
+```
+motor/
+  motor.py        documento de personagem -> visao calculada
+  ficha.py        imprime a ficha       (python3 ficha.py)
+  teste_motor.py  24 assercoes, uma por regra  (python3 teste_motor.py)
+  exemplos/guerreiro3-mago2.json
+```
+
+Fatia vertical 1 fechada: `Guerreiro 3 / Mago 2` sai completo -- HP decomposto
+por nivel, proficiencias com origem, identidade de classe, slots de escolha,
+conjuracao e DC. 11 das 22 regras implementadas (as que cabem em niveis 1-5).
+
+A houserule aparece viva na ficha:
+
+```
+Wizard 2  --  arcane, prepared
+  Slots                  rank 1: 3          <- nivel de CLASSE (regra 16)
+  Rank maximo do slot    1
+  Rank efetivo           3   (ceil(5/2))    <- nivel de PERSONAGEM (regra 17)
+  Elevacao ganha         +2 rank(s)
+```
+
+Mago 5 puro ganha elevacao **zero** -- a regra so age onde os dois numeros
+divergem, que e exatamente o ponto.
+
 ## O que falta
 
 O bloco de re-emissao fechou. O que resta esta em `TODO.md`; os tres primeiros:
 
-1. **Grafo de progressao de dois niveis** -- 62 class-features de segundo nivel
-   (teses do Mago, ordens Hellknight, ikons do Exemplar, gates do Kineticist)
-   ficam invisiveis modelando so `classe -> feature`.
-   > O portao 3 aponta exatamente para ca: 80 `requires` ja citam essas
-   > entidades. E o AoN **ja as categoriza**, uma categoria por eixo --
-   > `arcane-thesis` (10), `muse` (9), `racket` (10), `instinct` (16),
-   > `doctrine` (5), `research-field` (8), `hellknight-order` (14), `ikon` (21),
-   > `bloodline` (28), `mystery` (22), `way` (11), `patron` (27)... Todas ja
-   > estao em `dados_brutos/aon_dump/`. `extratores/aon_kinds.py` extrai
-   > categoria do AoN de forma generica -- e o caminho mais curto.
+1. **Gate de nivel derivado** -- `class_level` aparece em 79 de 19.738
+   registros, e e a razao de o Waybuilder existir. No PF2e o pre-requisito de
+   feat nunca menciona nivel: o nivel do feat **e** o gate. Feat com trait
+   `bard` e level 8 significa `class_level[bard] >= 8`, e isso e derivavel de
+   dado que ja esta na base -- 1.945 feats de classe, 1.215 de ancestria, 996
+   gerais. Sem isso o construtor nao responde "o que meu Guerreiro 3 / Mago 2
+   pode pegar", que e a pergunta central.
 2. **Predicado precisa falar de SUBCLASSE** -- a proficiencia de conjuracao do
    Clerigo depende da Doutrina, e o nivel do companheiro e o `class_level` de
-   quem o concedeu. Nenhum dos dois cabe em `class_level` puro
-3. **O front**
+   quem o concedeu. Nenhum dos dois cabe em `class_level` puro.
+   > Metade do caminho ja esta feita: as 28 categorias de sub-escolha do AoN
+   > entraram como kind proprio e cada classe carrega
+   > `subclasses: [{eixo, nivel, opcoes}]`. Falta o predicado saber mira-las.
+3. **Modelo de efeito unificado** -- o mesmo conceito mora em tres formatos:
+   classe usa `grants`, ancestria usa campos soltos (`hp`, `size`, `speed`,
+   `boosts`), background usa outro conjunto (`skill_training`, `attribute`).
+   A spec define `grants` como **a** linguagem de efeito e ela so e respeitada
+   em `class`. O motor ja convive com os tres; cada tipo novo de conteudo vira
+   caso especial enquanto isso durar.
+4. **O front**
 
 ## Simulacoes
 

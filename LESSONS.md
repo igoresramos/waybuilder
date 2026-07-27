@@ -18,6 +18,36 @@ project: waybuilder
 
 ## Aprendizados
 
+### Consumir o dado descobre em uma tarde o que auditar nao acha em duas sessoes
+Duas auditorias amplas leram a base campo a campo e nao viram que
+`wb:class/wizard` declarava 49 features de nivel 1, entre elas as 23 escolas de
+magia -- todas ao mesmo tempo. Bastou **um motor tentando montar uma ficha** para
+o problema saltar na primeira linha impressa.
+
+Auditoria pergunta "este campo esta preenchido e coerente?". Consumo pergunta
+"da para fazer a coisa?". A segunda pergunta e mais barata e acha classe de erro
+que a primeira nao alcanca, porque o defeito nao estava em nenhum campo: estava
+na **relacao** entre eles.
+
+Corolario para o resto do projeto: antes de investir no item caro (os ~40 Rule
+Elements), escrever o consumidor mais simples que exercite o schema.
+
+### A fonte declara a estrutura; inferir e o ultimo recurso
+Para separar "o que a classe concede" de "o que ela manda escolher" foram
+tentados dois caminhos ruins antes do certo:
+1. casar por nome contra as categorias do AoN -- pegava `arcane-school` mas
+   perdia as escolas de Runelord e as de organizacao do Lost Omens
+2. heuristica de "varias features no mesmo nivel sao mutuamente exclusivas" --
+   nunca chegou a ser escrita, e teria falso positivo garantido
+
+O certo estava em `system.items` da classe no Foundry: **15 entradas**, que e
+exatamente o que o VTT usa para montar personagem, com "Arcane School" aparecendo
+uma vez so, como a escolha que e. A fonte ja respondia a pergunta.
+
+Mesmo padrao das 141 siglas de livro do pf2etools (`js/parser.js`) e do
+`remaster_id` do AoN. Tres vezes seguidas a resposta estava declarada na fonte
+enquanto o instinto era inferir do conteudo.
+
 ### Fonte que vive fora do repo desaparece, e o pipeline mente sobre isso
 Ate 26/07 sete dos dez extratores e o `emitir_textos` apontavam para um clone do
 Foundry num diretorio de scratchpad de sessao (`/tmp/claude-.../pf2e`). A sessao
