@@ -541,6 +541,42 @@ checar(p.cap_invocacao(2) == 3,
        "e Mago 2 / personagem 5 segue em 3: o piso nao distorce nivel baixo",
        f"deu {p.cap_invocacao(2)}")
 
+# -- regra 23: dedicacao da propria classe ---------------------------------
+print("\nregra 23 -- dedicacao da propria classe: liberada so com multiclasse")
+
+BOOSTS = [{"em": 1, "slot": "boosts_livres", "pega": ["int", "wis", "dex", "con"]},
+          {"em": 5, "slot": "boosts_livres", "pega": ["int", "wis", "con", "dex"]}]
+
+
+def _com_dedicacao(nivel_de_wizard, nivel_total):
+    esc = [{"em": i + 1, "slot": "nivel_de_classe",
+            "pega": WIZARD if i < nivel_de_wizard else FIGHTER}
+           for i in range(nivel_total)]
+    p = personagem(esc + BOOSTS)
+    return next(f for f in p.disponiveis("feat")
+                if f["id"] == "wb:feat/wizard-dedication")
+
+
+f = _com_dedicacao(20, 20)
+checar(not f["atende"] and any("propria classe" in m for m in f["motivos"]),
+       "Mago 20 PURO nao pega Wizard Dedication (RAW), e o motivo aparece",
+       f"atende={f['atende']} motivos={f['motivos']}")
+checar(_com_dedicacao(2, 20)["atende"],
+       "mas Mago 2 / Guerreiro 18 pega -- bloquear seria a regra 21 ao "
+       "contrario: custaria os 8 slots que o Guerreiro tem de graca")
+checar(_com_dedicacao(10, 20)["atende"], "e Mago 10 / Guerreiro 10 tambem")
+checar(_com_dedicacao(0, 20)["atende"],
+       "quem nao tem nivel de Mago nenhum segue pegando, como sempre")
+
+# o veto e cirurgico: so a dedicacao DAQUELA classe
+p = personagem([{"em": i + 1, "slot": "nivel_de_classe", "pega": WIZARD}
+                for i in range(20)] + BOOSTS)
+outra = next(f for f in p.disponiveis("feat")
+             if f["id"] == "wb:feat/cleric-dedication")
+checar(outra["atende"],
+       "e o Mago 20 puro continua podendo pegar Cleric Dedication",
+       f"motivos={outra['motivos']}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

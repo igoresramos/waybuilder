@@ -335,6 +335,48 @@ niveis param de valer a pena e o design inteiro cai.
 
 **22.** Pool unico do personagem, teto 3, independente de quantas classes.
 
+## Dedicacao da propria classe
+
+**23.** A dedicacao de multiclasse da propria classe fica **liberada quando ha
+multiclasse de verdade**, e proibida so quando aquela classe e a unica do
+personagem.
+
+> **RAW** (Advanced Player's Guide, "Multiclass Archetypes", verbatim do dump do
+> AoN): *"You can't select a multiclass archetype's dedication feat if you are a
+> member of the class of the same name."*
+>
+> **Por que a houserule levanta.** No PF2e oficial a proibicao existe porque
+> seria redundante: o Mago ja conjura melhor do que a dedicacao daria. A regra
+> impede besteira, nao impede poder. Um Mago 2 dentro de um personagem 20 nao
+> conjura melhor coisa nenhuma, entao o motivo da regra evapora.
+>
+> **Por que bloquear seria a regra 21 ao contrario.** Sob Free Archetype
+> (regra 2, sempre ligada) o Guerreiro 20 pega Wizard Dedication de graca e
+> leva 8 slots, ranks 1 a 8. Se o Mago 2 / Guerreiro 18 nao pudesse, gastar
+> 2 niveis de classe **custaria** esses 8 slots -- a rota de nivel entregando
+> menos que a de dedicacao, que e exatamente o que a regra 21 proibe.
+>
+> | | slots de arquetipo | slots de classe |
+> |---|---|---|
+> | Guerreiro 20 + Wizard Dedication | 8 | 0 |
+> | Mago 2 / Guerreiro 18 bloqueado | 0 | 3, elevados a rank 10 |
+> | Mago 2 / Guerreiro 18 liberado | 8 | 3, elevados a rank 10 |
+>
+> **A fronteira, e por que ela e essa.** Proibido apenas quando
+> `class_level == nivel_de_personagem`, isto e, classe unica -- que e
+> precisamente onde "classe unica == RAW" tem de valer. Onde os dois numeros
+> divergem, a situacao e uma que o RAW nunca previu.
+>
+> **Divergencia que ja existia e isto corrige:** nada na base modelava a
+> clausula RAW. Um Mago 20 puro recebia `atende: true` para Wizard Dedication,
+> porque o `requires` do feat so pede INT 14 e nivel 2 -- a proibicao vive numa
+> regra geral de arquetipo, nao no pre-requisito do feat. Os 27 arquetipos de
+> multiclasse sao derivados (arquetipo cujo nome e nome de classe), nunca lista
+> escrita a mao.
+>
+> Principio zero continua valendo: isto **marca** fora do requisito, com o
+> motivo escrito. Nao esconde nem impede.
+
 ---
 
 ## Fora de escopo

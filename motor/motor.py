@@ -1274,11 +1274,62 @@ class Personagem:
             if r.get("kind") != kind:
                 continue
             atende, motivos = self.avaliar(r.get("requires"))
+            extra = self._veto_dedicacao_da_propria_classe(r)
+            if extra:
+                atende, motivos = False, motivos + [extra]
             saida.append({"id": r["id"], "nome": r.get("name"),
                           "level": r.get("level"), "atende": atende,
                           "motivos": motivos})
         saida.sort(key=lambda x: (not x["atende"], x["level"] or 0, x["nome"] or ""))
         return saida[:limite] if limite else saida
+
+    def _classes_multiclasse(self) -> dict[str, str]:
+        """nome normalizado -> id da classe, para os 27 arquetipos de
+        multiclasse. Derivado: arquetipo cujo nome e nome de classe. Nao ha
+        lista escrita a mao, que ja errou tres vezes neste projeto."""
+        if getattr(self, "_mc_cache", None) is None:
+            classes = {norm_slug(r["name"]): r["id"]
+                       for r in self.base.por_id.values()
+                       if r.get("kind") == "class" and r.get("name")}
+            self._mc_cache = {norm_slug(r["name"]): classes[norm_slug(r["name"])]
+                              for r in self.base.por_id.values()
+                              if r.get("kind") == "archetype" and r.get("name")
+                              and norm_slug(r["name"]) in classes}
+        return self._mc_cache
+
+    def _veto_dedicacao_da_propria_classe(self, feat: dict) -> str | None:
+        """Regra 23: dedicacao de multiclasse da propria classe.
+
+        RAW (Advanced Player's Guide, "Multiclass Archetypes"): *"You can't
+        select a multiclass archetype's dedication feat if you are a member of
+        the class of the same name."* Nada na base modelava isso -- um Mago 20
+        puro recebia `atende: True` para Wizard Dedication, e classe unica tem
+        de bater com o RAW.
+
+        A houserule LEVANTA a proibicao quando ha multiclasse de verdade,
+        porque o motivo dela deixa de existir: no PF2e oficial a dedicacao
+        seria redundante (o Mago ja conjura melhor). Um Mago 2 dentro de um
+        personagem 20 nao conjura melhor coisa nenhuma.
+
+        E bloquear seria a regra 21 ao contrario: sob Free Archetype o Guerreiro
+        20 pega Wizard Dedication de graca e leva 8 slots (ranks 1-8). Se o
+        Mago 2 / Guerreiro 18 nao pudesse, gastar 2 niveis de classe custaria
+        esses 8 slots -- a rota de nivel entregando MENOS que a de dedicacao.
+
+        Principio zero continua valendo: isto marca `fora do requisito`, com o
+        motivo escrito. Nunca esconde nem impede.
+        """
+        nome = norm_slug(feat.get("name") or "")
+        if not nome.endswith("-dedication"):
+            return None
+        cid = self._classes_multiclasse().get(nome[:-len("-dedication")])
+        if not cid:
+            return None
+        nc = self.nivel_de(cid)
+        if nc == 0 or nc != self.nivel:
+            return None          # nao tem a classe, ou e multiclasse de fato
+        return (f"RAW: nao se pega a dedicacao da propria classe quando ela e "
+                f"a unica ({self.base.get(cid).get('name')} {nc} de {self.nivel})")
 
     # -- principio zero: sinaliza, nunca bloqueia ---------------------------
 
