@@ -3,7 +3,7 @@
 - registros de entrada: **18849**
 - colisoes de id fundidas: **75**
 - base final: **18773** registros
-- registros com divergencia registrada: **2359**
+- registros com divergencia registrada: **209**
 - suspeitas de par nao unido: **0**
 
 ## Por kind

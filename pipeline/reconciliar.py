@@ -15,6 +15,7 @@ Entrada: pipeline/saida/*.json
 Saida:   pipeline/base/index.json + pipeline/base/relatorio_reconciliacao.md
 """
 import json, os, re, sys, unicodedata, collections
+import traits_uniao
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 ENTRADA = ["classes.json", "feats.json", "magias.json", "ancestrias.json",
@@ -80,9 +81,16 @@ def fundir(grupo):
     prov = dict(base.get("prov") or {})
     xref = dict(base.get("xref") or {})
 
+    # `traits` e uniao, nunca disputa: resolvido antes do laco de precedencia
+    por_fonte_traits = {}
+    for r in grupo:
+        if r.get("traits"):
+            fonte = (r.get("prov") or {}).get("traits") or r.get("_origem") or "desconhecida"
+            por_fonte_traits.setdefault(str(fonte), []).extend(r["traits"])
+
     for outro in grupo[1:]:
         for k, v in outro.items():
-            if k.startswith("_") or k in ("conflitos", "prov", "xref"):
+            if k.startswith("_") or k in ("conflitos", "prov", "xref", "traits"):
                 continue
             atual = base.get(k)
             if atual is None or atual == "" or atual == []:
@@ -104,6 +112,14 @@ def fundir(grupo):
         prov.update({k: v for k, v in (outro.get("prov") or {}).items() if k not in prov})
         conflitos += list(outro.get("conflitos") or [])
 
+    if por_fonte_traits:
+        finais, aliases, fontes = traits_uniao.unir(por_fonte_traits)
+        base["traits"] = finais
+        if aliases:
+            base["aliases_traits"] = sorted(
+                set(base.get("aliases_traits") or []) | set(aliases))
+        prov["traits"] = fontes
+
     base["prov"], base["xref"] = prov, xref
     if conflitos:
         base["conflitos"] = conflitos
@@ -123,6 +139,15 @@ def main():
     base = [fundir(v) if len(v) > 1 else {k2: v2 for k2, v2 in v[0].items() if k2 != "_origem"}
             for v in por_id.values()]
     print(f"colisoes de id fundidas: {len(colisoes)}  ->  base com {len(base)} registros")
+
+    # --- 1b. traits: refazer como uniao onde o extrator aplicou precedencia ---
+    # Os extratores escolheram uma fonte antes de o reconciliador ver o dado,
+    # mas gravaram cada faceta em `conflitos` -- da para reconstruir sem
+    # re-rodar extrator nenhum.
+    reparados = sum(1 for r in base if traits_uniao.unir_do_conflito(r))
+    com_alias_trait = sum(1 for r in base if r.get("aliases_traits"))
+    print(f"traits refeitos como uniao: {reparados}  "
+          f"(registros com aliases_traits: {com_alias_trait})")
 
     # --- 2. suspeitas de par nao unido: mesmo kind + mesmo nome normalizado ---
     por_chave = collections.defaultdict(list)

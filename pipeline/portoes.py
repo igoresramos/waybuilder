@@ -200,27 +200,114 @@ def portao_6_traits(base, ctx):
     return len(achados), achados[:40]
 
 
-def portao_7_homonimo(base, ctx):
-    """Nome normalizado repetido no mesmo kind sem distincao explicita no slug.
+def _grupos_de_identidade(docs):
+    """Agrupa docs do AoN que sao o mesmo conteudo em edicoes diferentes.
 
-    RODA ANTES DA FUSAO. Depois dela a duplicata ja virou um registro so e o
-    portao passa por construcao -- que era o defeito da versao anterior.
+    `remaster_id`/`legacy_id` ligam a versao legada a sua sucessora. Dois docs
+    ligados assim nao sao ambiguidade -- sao o mesmo feat antes e depois do
+    Remaster. O que sobra depois de agrupar e que e homonimo de verdade.
     """
+    pai = {str(d.get("id")): str(d.get("id")) for d in docs}
+
+    def raiz(x):
+        while pai.get(x, x) != x:
+            pai[x] = pai.get(pai[x], pai[x])
+            x = pai[x]
+        return x
+
+    for d in docs:
+        i = str(d.get("id"))
+        for chave in ("remaster_id", "legacy_id"):
+            # o AoN emite esses campos como LISTA ('remaster_id': ['feat-4388']),
+            # nao como escalar -- tratar como string casa zero pares
+            alvo = d.get(chave)
+            for a in (alvo if isinstance(alvo, list) else [alvo]):
+                if a is None:
+                    continue
+                a = str(a)
+                if a in pai:
+                    ra, rb = raiz(i), raiz(a)
+                    if ra != rb:
+                        pai[ra] = rb
+    grupos = collections.defaultdict(list)
+    for d in docs:
+        grupos[raiz(str(d.get("id")))].append(d)
+    return list(grupos.values())
+
+
+def portao_7_homonimo(base, ctx):
+    """Casamento ambiguo: a fonte tem N entidades para o nome que a base casou com 1.
+
+    A versao anterior deste portao perguntava se dois registros da base tinham o
+    mesmo nome no mesmo kind. Nunca disparava -- em nenhuma fase -- porque a
+    ambiguidade nunca chega a produzir dois registros: o extrator casa por nome,
+    escolhe **um** candidato entre os N da fonte, e os outros somem sem rastro.
+
+    Medido em 2026-07-26: `Death from Above` tem 1 doc no Foundry (nivel 8,
+    archetype) e 2 no AoN (feat-7610 archetype nivel 8; feat-7380 mitico nivel
+    16). A base emitiu nivel 8 com traits `mythic` -- cruzou o Foundry com o
+    doc errado do AoN e perdeu o outro feat inteiro. Idem `Reckless Abandon`,
+    com 4 docs no AoN formando 2 pares legacy/remaster distintos.
+    """
+    aon = ctx["aon"]
+    if not aon:
+        return 0, ["DESLIGADO: sem dump do AoN em disco (rode dump_aon.py)"]
+
     por_nome = collections.defaultdict(list)
-    for r in base:
-        por_nome[(r.get("kind"), norm(r.get("name")))].append(r)
+    for d in aon.values():
+        cat = str(d.get("category") or "")
+        if cat:
+            por_nome[(cat, norm(d.get("name")))].append(d)
+
     achados = []
-    for (kind, nome), grupo in sorted(por_nome.items()):
-        if len(grupo) < 2:
+    for r in base:
+        # class-feature e UM registro compartilhado por N classes, por decisao da
+        # spec ("nivel de class-feature pertence a classe"). O AoN indexa um doc
+        # por classe concedente -- `Alertness` tem 12 --, entao multiplicidade
+        # ali e o modelo funcionando, nao colisao.
+        if r.get("kind") == "class-feature":
             continue
-        slugs = [r["id"].split("/", 1)[-1] for r in grupo]
-        # distincao explicita = os slugs diferem por sufixo de variante conhecido
-        if all(SUFIXO_VARIANTE.search(s) for s in slugs[1:]):
+        chave = (r.get("kind"), norm(r.get("name")))
+        candidatos = por_nome.get(chave)
+        if not candidatos or len(candidatos) < 2:
             continue
-        if len(set(slugs)) == len(slugs) and any(SUFIXO_VARIANTE.search(s) for s in slugs):
-            continue
-        achados.append(f"**{kind}** / _{nome}_ -> " + ", ".join(f"`{r['id']}`" for r in grupo))
-    return len(achados), achados[:40]
+        grupos = _grupos_de_identidade(candidatos)
+        if len(grupos) < 2:
+            continue          # so pares legacy/remaster: fusao legitima
+        slug = r["id"].split("/", 1)[-1]
+        if SUFIXO_VARIANTE.search(slug):
+            continue          # ja desmembrado com sufixo
+
+        # Criterio da propria spec: "conflito com valores categoricamente
+        # disjuntos nao e divergencia de fonte -- e sinal de que duas entidades
+        # foram fundidas". Grupos que batem em level E traits sao a mesma coisa
+        # em duas edicoes (par legacy/remaster que o AoN nao declarou); grupos
+        # que divergem sao entidades diferentes disputando o mesmo slug.
+        assinaturas = {(g[0].get("level"),
+                        tuple(sorted(map(str, g[0].get("trait") or []))))
+                       for g in grupos}
+        casado = str((r.get("xref") or {}).get("aon") or "")
+        resumo = "; ".join(
+            f"{g[0].get('id')}(nv{g[0].get('level')},"
+            f"{','.join(map(str, g[0].get('trait') or []))[:28]})"
+            for g in grupos[:4])
+        linha = (f"`{r['id']}` casou com `{casado or '-'}` mas o AoN tem "
+                 f"{len(grupos)} entidades: {resumo}")
+        if len(assinaturas) > 1:
+            achados.append(("colisao", linha))
+        else:
+            achados.append(("par-nao-declarado", linha))
+
+    graves = [l for t, l in achados if t == "colisao"]
+    brandos = [l for t, l in achados if t == "par-nao-declarado"]
+    detalhe = [f"**COLISAO** {l}" for l in graves[:40]]
+    if brandos:
+        detalhe.append(f"")
+        detalhe.append(f"_Alem disso, {len(brandos)} casos de mesmo level e mesmos "
+                       f"traits -- par legacy/remaster que o AoN nao declarou via "
+                       f"`remaster_id`. Fusao legitima, nao bloqueia o build._")
+        detalhe += [f"- {l}" for l in brandos[:15]]
+    return len(graves), detalhe
 
 
 PORTOES = [

@@ -5,3 +5,7 @@ dados_brutos/
 # Bytecode
 __pycache__/
 *.pyc
+
+# Backups de sessao (comparacao antes/depois), nao versionar
+saida_baseline/
+base_backup_prefusao/
