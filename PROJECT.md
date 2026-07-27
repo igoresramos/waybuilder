@@ -5,7 +5,7 @@ status: planning
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 7
+hours: 8.5
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -110,21 +110,43 @@ hidden: false
 > **Os tres itens de modelagem fecharam** (gate de nivel, subclasse no predicado,
 > efeito unificado). `class_level` foi de 79 para 1.932 registros.
 >
+> **Sessao de 2026-07-27 (05:41-07:03).** As 11 classes conjuradoras tem tabela
+> de slots completa -- o Animist, ultimo buraco, foi recuperado do campo
+> `markdown` do AoN, que o extrator nunca lia. Tres regras novas implementadas e
+> testadas: **17b** (teto do que cria criatura: `summon` + `incarnate`, 37
+> magias, mais companheiro e eidolon), **21** afiada de principio para invariante
+> varrido nos 204 pares, e **23** (exclusao mutua entre nivel de classe e
+> dedicacao da mesma classe). Ficha do companheiro em RAW puro, com maturidade
+> derivada dos feats.
+>
+> Criado o **portao 8** contra perda silenciosa de artefato, depois de uma perda
+> real: dump de fonte reproduzivel por pin fica em `dados_brutos/` e fora do git;
+> tudo que exigiu leitura ou arbitragem humana vai em `dados_derivados/`, que e
+> versionado.
+>
 > **PROXIMO PASSO, decidido com o Igor:** o app e para construir o personagem
 > INTEIRO, como o Pathbuilder -- todos os numeros na ficha. Fica de fora so
 > retraining e arbitragem de mesa. Nessa ordem:
-> 1. **Atores** -- companheiro, familiar e eidolon com stats proprios. A spec ja
->    diz que e o mesmo motor com menos slots; hoje o motor so verifica que
->    existem
-> 2. **Runas** -- potencia e impacto (`+1 striking longsword`). O campo
->    `potencia` ja e lido, falta modelar runa como item
-> 3. **Interpretador parcial de Rule Elements** -- para o dano condicional das
->    subclasses (item 42/43). Deixou de ser "fora de escopo": dano de rage e
->    numero de ficha
+> 1. **Slots abertos, genericos** -- 243 dos 6.044 feats (4%) abrem escolha, e a
+>    cadeia de desbloqueio chega a profundidade 4. Slot tem de ser DERIVADO do
+>    estado a cada escolha, nunca arvore estatica. Primeiro caso de teste pronto
+>    e sem dado novo: o beneficio por especializacao do companheiro
+>    (Ambusher/Bully/Daredevil/Racer/Tracker/Wrecker)
+> 2. **Familiar e eidolon** -- so tem nivel e o cap da 17b. O eidolon usa
+>    estatisticas do proprio Summoner, entao a ficha dele nao e independente
+> 3. **Runas** -- potencia e impacto (`+1 striking longsword`)
+> 4. **Interpretador parcial de Rule Elements** -- dano condicional das
+>    subclasses (itens 42/43). Dano de rage e numero de ficha
 >
-> **Aberto para decisao:** itens 39 (regra 17 fura em Magus/Summoner), 41
-> (tradicao por subclasse em Sorcerer/Summoner/Witch e prosa), 42 (8 eixos de
-> subclasse sem efeito).
+> **Aberto para decisao do Igor:**
+> - a regra 17b vale para slot de ARQUETIPO? A regra 18 diz que Free Archetype
+>   roda RAW puro, mas isso deixa a rota gratuita passar a comprada em alguns
+>   niveis. A spec nao decide
+> - o piso da regra 21 achata uma faixa: no personagem 20, os niveis de classe 1
+>   a 12 dao todos rank 8. Se o "deveria ser ainda mais forte" virar numero, e
+>   ai que ele entra
+> - itens 41 (tradicao por subclasse em Sorcerer/Summoner/Witch e prosa) e 42
+>   (8 eixos de subclasse sem efeito)
 >
 > **Comece por `README.md`** -- ele e o ponto de retomada.
 

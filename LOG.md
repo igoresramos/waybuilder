@@ -6,6 +6,82 @@ project: waybuilder
 
 ## 2026-07-27
 
+### Sessao | 05:41-07:03 | perda de artefato, Animist recuperado, regras 17b/21/23 | igor + claude-code
+
+**Perda de artefato, e o portao que faltava.** `dados_brutos/tabelas_conjuracao_pdf.json`
+-- as tabelas de conjuracao lidas a olho de paginas renderizadas do War of
+Immortals -- nunca entrou no git e sumiu. O `.gitignore` excluia `dados_brutos/`
+alegando "reconstruivel pelos pins": verdade para o clone do Foundry e o dump do
+AoN, falso para trabalho derivado a mao. O `TODO.md` seguia marcando o item 14
+como CONCLUIDO e o relatorio seguia citando o caminho; nada reclamava.
+
+Varredura de todo caminho citado em arquivo versionado: 42 caminhos, **3 nao
+existiam**. Um era perda real, dois eram scripts de dump substituidos por
+`dump_aon.py` (sem perda de dado, mas `companheiros.py` mandava rodar um script
+inexistente -- bug real). Criados `pipeline/dados_derivados/` (versionado),
+`artefatos_perdidos.json` (perda registrada com motivo, dano medido e decisao) e
+o **portao 8**: caminho citado que some quebra o build; perda ja conhecida
+aparece no relatorio sem bloquear.
+
+**O Animist voltou, e de fonte melhor que o PDF.** A conclusao de 26/07 dizia
+que "nem Foundry nem AoN materializam a tabela". Meia verdade: o item de classe
+do Foundry so tem o flag `spellcasting: 1`, mas o doc de classe do AoN carrega a
+tabela inteira em HTML no campo `markdown` -- e o extrator lia so `text`, a
+projecao achatada. **O dado estava no cache que o proprio extrator ja baixava.**
+Foi essa conclusao errada que mandou alguem ler o PDF a olho.
+
+Parser em `pipeline/tabelas_conjuracao_aon.py`, validado contra as outras 10
+conjuradoras: reproduz as 10 **celula a celula**, incluindo truques, contra o
+pf2etools -- fonte independente. As 11 conjuradoras agora tem tabela completa.
+Animist tem teto de rank 9 (terceira classe assim, com Magus e Summoner) mais um
+slot de apparition rank 10 pela Supreme Incarnation.
+
+**A conferencia registro a registro pagou.** `build.sh` rodado e comparado com o
+commit anterior via `comparar_bases.py` novo: 19.738 -> 19.738, zero sumiram,
+zero nasceram. O primeiro build alterou **dois** registros, e o segundo era
+regressao minha: o focus pool do Cloistered Cleric zerou. Causa raiz maior que o
+sintoma -- `load_foundry_feat` le de `dados_brutos/foundry/feats/`, que tem **0
+arquivos contra 6.045 no clone**, porque `classes.py` so popula `classes/` e
+`class-features/`. Falta silenciosa: devolve `None` e o campo vira `null`.
+Corrigido com fallback para o clone. Build final: **1 registro alterado**, o
+pretendido.
+
+**Regra 17b -- teto do que cria criatura.** Escopo corrigido pelo Igor: Spirit
+Link e Protector Tree saem (nao criam nada), `incarnate` entra -- 23 magias, zero
+interseccao com `summon`, sao as invocacoes de rank 4 a 10. 37 no total, so por
+trait, zero curadoria.
+
+**Regra 21 virou invariante testado.** A simulacao (Opus, relatorio em
+`docs/simulacoes/`) achou **50 de 204 pares** violando: no nivel 20 o dip ficava
+em 0% da dedicacao gratuita. Decisao do Igor: *"o dip tem que obrigatoriamente
+ser pelo menos tao forte quanto uma dedicacao no mesmo nivel de personagem"*.
+Piso implementado, e a regra virou varredura EXAUSTIVA dos 204 pares em
+`teste_motor.py`.
+
+**Regra 23 -- exclusao mutua** entre nivel de classe X e dedicacao de X, nos dois
+sentidos. Corrige divergencia que ja existia: um Mago 20 puro recebia
+`atende: true` para Wizard Dedication, porque a proibicao mora numa regra geral
+de arquetipo e nao no `requires` do feat.
+
+**Ficha do companheiro, RAW puro**, com as regras citadas verbatim em
+`docs/2026-07-27_atores.md`. Maturidade derivada dos feats, nao lida do
+documento. A escolha nimble/savage virou **slot no vocabulario generico**
+(`eixo/nivel/slot/escolhe/opcoes`), nao campo ad-hoc -- correcao de rumo do Igor
+no meio da tarefa do agente.
+
+**Medido a pedido do Igor:** 243 dos 6.044 feats (4%) abrem escolha, e a cadeia
+de desbloqueio na base chega a **profundidade 4**. O encadeamento NAO esta no
+formato do Foundry (opcoes de `ChoiceSet` sao valores ou consultas, nunca
+ponteiro para item com escolha dentro) -- e grafo de dependencia, nao arvore
+aninhada. Conclusao: slot tem de ser derivado do estado a cada escolha, nunca
+arvore estatica.
+
+**Duas afirmacoes minhas corrigidas no caminho**, registradas para nao voltarem:
+o item 39 nao era defeito (heightened vem do nivel de personagem e independe do
+teto de slot -- a assercao do validador e que estava errada, com 18 falsas
+violacoes); e o argumento de que bloquear a dedicacao propria custaria 8 slots
+estava inflado (o personagem pega qualquer uma das outras 26).
+
 ### Sessao | fonte limpa + fatia vertical 1 | igor + claude-code
 
 **Item 37 -- pf2etools completo.** A terceira fonte vivia como 242 arquivos
