@@ -5,7 +5,7 @@ status: planning
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 6.5
+hours: 7
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -74,10 +74,9 @@ hidden: false
 > adversarialmente e commitados.
 >
 > O pipeline roda ponta a ponta (7 extratores -> reconciliar -> prosa -> fusao)
-> e produz **18.176 registros em 21 kinds**, prosa em 100% (17.866/17.866),
-> 2.299 com divergencia entre fontes registrada, 597 pares Legacy<->Remaster
-> fundidos, zero par nao unido. Index 15,2 MB + prosa 16,7 MB.
-> Resíduo unico: 6 registros sem `license` (portao de qualidade 5 falhando).
+> e produz **18.176 registros em 21 kinds**, prosa em **95%** (907 sem prosa),
+> **pelo menos** 2.299 com divergencia registrada -- 6 kinds nao detectam
+> conflito, entao esse numero e piso. Index 15,2 MB + prosa 16,7 MB.
 >
 > **A base NAO esta fechada. A auditoria de 2026-07-26 achou perda de dado
 > real** -- a fusao Legacy<->Remaster deletou 597 registros decidindo por

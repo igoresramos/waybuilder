@@ -6,9 +6,10 @@ project: waybuilder
 
 ## 2026-07-26
 
-### Sessao | 18:40-21:15 | igor + claude-code
-Exploracao dos PDFs oficiais e revisao ampla da base. **Nada foi reprocessado --
-a base de 18.176 registros segue intacta**; esta sessao produziu diagnostico,
+### Sessao | 18:40-21:30 | igor + claude-code
+Exploracao dos PDFs oficiais e revisao ampla da base. **O pipeline nao foi
+re-rodado**, entao o `index.json` esta byte a byte como estava no inicio -- mas
+a sessao descobriu que ele ja continha dano. Esta sessao produziu diagnostico,
 correcao de spec e um extrator novo.
 
 - **35 PDFs oficiais** extraidos dos zips do Downloads (1,7 GB, fora do git).
