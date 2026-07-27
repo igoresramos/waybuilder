@@ -61,7 +61,7 @@
     {
       "em": 1,
       "slot": "ancestry_feat",
-      "pega": "wb:feat/natural-ambition"
+      "pega": "wb:feat/haughty-obstinacy"
     },
     {
       "em": 2,
@@ -101,12 +101,12 @@
     {
       "em": 4,
       "slot": "class_feat",
-      "pega": "wb:feat/knockdown"
+      "pega": "wb:feat/dual-handed-assault"
     },
     {
       "em": 4,
       "slot": "skill_feat",
-      "pega": "wb:feat/quick-jump"
+      "pega": "wb:feat/additional-lore"
     }
   ],
   "atores": [],

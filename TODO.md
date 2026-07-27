@@ -157,6 +157,22 @@ items:
     texto: "EXTRATOR REDUNDANTE: `pipeline/extratores/relicos_idiomas.py` roda (esta em rodar.py::EXTRATORES) e gera saida/relicos_idiomas.json com 239 registros, mas `relicos_idiomas.json` NUNCA esteve em `reconciliar.py::ENTRADA` -- a saida dele nao entra na base. Isso NAO e perda de dado: medido, relic e language chegam por `aon_kinds.json`, que cobre melhor (122 de 122 relic da base estao la, contra 51 do extrator dedicado; 121 de 123 language contra 95). Ou seja, o extrator dedicado e trabalho duplicado que ninguem consome, nao um buraco. Decidir: tirar do runner, ou promover a fonte e tirar os dois kinds do aon_kinds. Nao deletei -- mencionar antes de remover"
     prioridade: baixa
 
+  - id: 62
+    texto: "FREE ARCHETYPE -- O MOTOR NAO ENTREGA O QUE A DEDICACAO PROMETE. Achado central da rodada de agentes de 2026-07-27, e o mais importante para o objetivo do Igor. O motor le `grants` so para as chaves planas de CLASSE e de FEATURE; `grant_feat`/`grant_item` ficam INERTES e grants de FEAT ESCOLHIDO nunca sao aplicados. Medido: 388 registros concedem algo resolvivel (249 feat, 71 class-feature, 42 heritage, 24 background), entre eles 68 DEDICACOES de arquetipo. barbarian-dedication deveria dar `wb:class-feature/rage`; cleric-dedication, `deity-cleric`; ranger-dedication, `hunt-prey`; witch-dedication, `familiar-witch`; alchemist-dedication, `alchemical-crafting` + `quick-alchemy`; swashbuckler-dedication, `panache` + `stylish-combatant`. Pior: ate grant PLANO de feat e ignorado -- `wizard-dedication` tem `{\"proficiency\": {\"arcana\": \"trained\"}}` e a ficha sai com arcana sem rank. Sob Free Archetype, que e a regra 2 e esta SEMPRE ligada, isso significa que a dedicacao entra no slot e nao entrega nada. Consertar em `motor.py::_proficiencias` (aplicar grants de feat) e no ponto que aplica `grant_feat`. O guarda de profundidade ja existe, entao nao ha risco de loop"
+    prioridade: alta
+  - id: 63
+    texto: "FREE ARCHETYPE -- HIGIENE DE SLOT INEXISTENTE. `motor.py::_slots_de_feat` coleta as escolhas em `self.gastos` mas NUNCA as confronta com `self.slots`. Consequencias medidas com fichas de teste em motor/exemplos/: (a) feat SEM trait `archetype` entra no slot de free_archetype sem aviso -- `Reactive Shield`, traits `['fighter','guardian']`, ocupa o slot e a ficha sai limpa; (b) pick de free_archetype em nivel IMPAR passa; (c) 3 picks num personagem com 2 slots passa. Um unico ponto de conserto resolve os tres. Fonte de dado existe: 2.128 feats tem trait `archetype`"
+    prioridade: alta
+  - id: 64
+    texto: "FREE ARCHETYPE -- DUAS REGRAS DO PF2e QUE NAO EXISTEM NEM NO DADO NEM NO CODIGO. (1) 'nao se pode pegar uma NOVA dedicacao antes de ter 2 outros feats do arquetipo anterior' -- e a regra que impede colecionar dedicacao; sem ela um nivel 20 pega 10 dedicacoes e o Free Archetype vira buffet. Testado: Archer Dedication no nv2 e Marshal Dedication no nv4 com zero feats de Archer no meio nao gera sinal nenhum. (2) 'feat de arquetipo exige a dedicacao daquele arquetipo' como regra ESTRUTURAL e nao caso a caso -- hoje o motor so sabe pelo `requires` da base, e em 181 feats de arquetipo nao-dedicacao o `requires` nao cita dedicacao alguma (so nivel), entao o motor fica calado. As duas sao derivaveis do dado que ja existe (trait `dedication` + o arquetipo dono do feat). Lembrar do PRINCIPIO ZERO: sinalizar, nunca bloquear"
+    prioridade: alta
+  - id: 65
+    texto: "MOTOR -- `_termo_has` avalia contra o documento INTEIRO, sem recorte temporal (motor.py, funcao `_termo_has`). Pegar `Quick Shot` no nivel 2 e `Archer Dedication` no nivel 4 -- ordem invertida, ilegal -- passa limpo, porque no fim das contas o personagem 'tem' a dedicacao. Falta comparar com o `em` da escolha. Mesmo grupo: `disponiveis()` assina por `kind` e nao por slot, entao nao existe 'o que posso por NESTE slot de arquetipo' -- a tela receberia os 6.273 feats"
+    prioridade: media
+  - id: 66
+    texto: "MOTOR -- conjuracao por dedicacao nao entra na ficha. `motor.py::_conjuracao` itera so `ordem_de_classe`, entao Cleric Dedication + Basic Cleric Spellcasting no trilho gratuito produz `conjuracao: []`. A regra 18 fala em slots de arquetipo que a visao calculada nao tem. Menor, mas quebra o caso 'conjurador por arquetipo', que e comum em mesa"
+    prioridade: media
+
   # ==========================================================================
   # BLOCO 2 -- MODELAGEM. Depende da base re-emitida.
   # ==========================================================================

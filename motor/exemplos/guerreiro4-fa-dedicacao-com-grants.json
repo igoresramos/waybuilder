@@ -5,9 +5,9 @@
     "pin_foundry": "87f9e502"
   },
   "identidade": {
-    "nome": "Bran Duas Dedicacoes",
+    "nome": "Bran Marechal de Papel",
     "jogador": "Igor",
-    "notas": "LACUNA CONHECIDA (regra RAW nao implementada). No PF2e nao se pega uma NOVA dedicacao antes de ter 2 feats do arquetipo anterior. Aqui Archer Dedication entra no nivel 2 e Marshal Dedication no 4, com ZERO feats de Archer no meio. O motor nao conta feats por arquetipo, entao nao sinaliza."
+    "notas": "LACUNA CENTRAL. Shieldmarshal Dedication concede TRES coisas: `proficiency: society expert` (chave plana) e dois feats por `grant_feat` (Streetwise e Courtly Graces). O motor le o array `grants` so das classes e das features de classe -- de FEAT ele so aproveita `flat_modifier` de HP. Resultado: a dedicacao entra na ficha como linha, e nada do que ela concede aparece. Society continua untrained e os dois feats concedidos nao existem. Requisito escolhido de proposito sem atributo nem pericia (so `character_level >= 2`), para a ficha sair limpa e o unico defeito visivel ser a concessao perdida."
   },
   "escolhas": [
     {
@@ -81,7 +81,7 @@
     {
       "em": 2,
       "slot": "free_archetype",
-      "pega": "wb:feat/archer-dedication"
+      "pega": "wb:feat/shieldmarshal-dedication"
     },
     {
       "em": 3,
@@ -107,51 +107,6 @@
       "em": 4,
       "slot": "skill_feat",
       "pega": "wb:feat/additional-lore"
-    },
-    {
-      "em": 4,
-      "slot": "free_archetype",
-      "pega": "wb:feat/marshal-dedication"
-    },
-    {
-      "em": 5,
-      "slot": "nivel_de_classe",
-      "pega": "wb:class/fighter"
-    },
-    {
-      "em": 5,
-      "slot": "ancestry_feat",
-      "pega": "wb:feat/cooperative-nature"
-    },
-    {
-      "em": 5,
-      "slot": "boosts_livres",
-      "pega": [
-        "str",
-        "dex",
-        "con",
-        "wis"
-      ]
-    },
-    {
-      "em": 6,
-      "slot": "nivel_de_classe",
-      "pega": "wb:class/fighter"
-    },
-    {
-      "em": 6,
-      "slot": "free_archetype",
-      "pega": "wb:feat/quick-shot"
-    },
-    {
-      "em": 6,
-      "slot": "class_feat",
-      "pega": "wb:feat/dazing-blow"
-    },
-    {
-      "em": 6,
-      "slot": "skill_feat",
-      "pega": "wb:feat/dubious-knowledge"
     }
   ],
   "atores": [],
