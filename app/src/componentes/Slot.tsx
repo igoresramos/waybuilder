@@ -46,18 +46,32 @@ interface Props {
   tipo?: string;
 }
 
-/** As abas do topo do modal, por tipo de slot -- como no Pathbuilder. */
+/**
+ * As abas do topo do modal -- as mesmas quatro do Pathbuilder, e pela mesma
+ * razao: quem abre um slot de feat de classe quer ver os feats da classe, mas
+ * quem esta pensando em multiclasse quer ver as dedicacoes, e sao listas de
+ * tamanho muito diferente (125 contra 226 contra 1.902) para conviverem numa so.
+ *
+ * `De classe` cai fora quando o slot ja e de outra natureza (pericia, geral):
+ * ali nao existe "o feat da minha classe", e a aba sairia sempre vazia.
+ */
+const temTrait = (r: Record<string, unknown>, t: string) =>
+  ((r.traits as string[]) ?? []).includes(t);
+
 export const FILTROS_DE_FEAT: Filtro[] = [
-  { id: "todos", rotulo: "Todos", casa: () => true },
+  {
+    id: "classe", rotulo: "De classe",
+    casa: (r) => !temTrait(r, "archetype"),
+  },
   {
     id: "dedicacao", rotulo: "Dedicacoes",
-    casa: (r) => ((r.traits as string[]) ?? []).includes("dedication"),
+    casa: (r) => temTrait(r, "dedication"),
   },
   {
     id: "arquetipo", rotulo: "De arquetipo",
-    casa: (r) => ((r.traits as string[]) ?? []).includes("archetype")
-      && !((r.traits as string[]) ?? []).includes("dedication"),
+    casa: (r) => temTrait(r, "archetype") && !temTrait(r, "dedication"),
   },
+  { id: "todos", rotulo: "Todos", casa: () => true },
 ];
 
 export const FILTROS_DE_RARIDADE: Filtro[] = [

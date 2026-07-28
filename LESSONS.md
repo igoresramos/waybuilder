@@ -648,3 +648,23 @@ primeiro campo, ou o apelido quando ha). Mas **as tags aninham**:
 ingenuo. Resolver de dentro para fora ate estabilizar cobre qualquer
 profundidade -- e um teste varre a base inteira cobrando que nenhum requisito
 sobre com `{@`.
+
+### Dedicacao era inalcancavel pelo slot de feat de classe
+Ao alinhar as abas do picker com o Pathbuilder (`De classe | Dedicacoes |
+De arquetipo | Todos`), a aba de dedicacoes saiu VAZIA -- e o motivo nao era a
+tela. `_aceita_no_slot("class_feat")` exigia que o feat tivesse a trait da
+classe, e **nenhuma das 226 dedicacoes carrega trait de classe**. Resultado: a
+unica porta para dedicacao era o slot de Free Archetype.
+
+Isso e contra o RAW -- no PF2e oficial se entra num arquetipo gastando um slot de
+feat de CLASSE -- e e especialmente ruim num projeto cuja regra da casa
+substitui a dedicacao: sem o caminho RAW funcionando nao da para comparar os
+dois. Corrigido: o slot aceita tambem `archetype`. A regra 23 continua marcando
+a dedicacao da propria classe como fora-do-requisito, sem esconder.
+
+**A licao de metodo e o oraculo.** A correcao no TS quebrou 20 testes de paridade
+contra o gabarito Python de uma vez -- exatamente o que o gabarito existe para
+fazer. Corrigir so o lado que estava na frente teria criado duas regras
+divergentes em silencio. O ciclo certo: corrigir nas DUAS implementacoes, rodar
+os 95 testes do Python, `gerar_fixtures.py`, e so entao os do TS. Vale para
+qualquer mudanca em `candidatos` ou `_aceita_no_slot`.

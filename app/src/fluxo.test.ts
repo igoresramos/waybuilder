@@ -478,3 +478,39 @@ describe("Lore na ficha", () => {
     }
   });
 });
+
+/**
+ * RAW: feat de arquetipo pode ser gasto num slot de feat de CLASSE -- e assim
+ * que se entra num arquetipo no PF2e oficial.
+ *
+ * Nenhuma das 226 dedicacoes carrega trait de classe, entao enquanto o slot
+ * exigiu a trait da classe elas eram inalcancaveis por ali, e a unica porta
+ * para dedicacao era o slot de Free Archetype. Num projeto cuja regra da casa
+ * SUBSTITUI a dedicacao, o caminho RAW precisa existir para ser comparado.
+ */
+describe("dedicacao cabe no slot de feat de classe", () => {
+  const guerreiro = (nivel = 2) => {
+    let d = doc.novoDocumento("Teste");
+    d = doc.escolher(d, "ancestralidade", "criacao", "wb:ancestry/human");
+    for (let n = 1; n <= nivel; n++) d = doc.definirClasseDoNivel(d, n, "wb:class/fighter");
+    return derivar(d);
+  };
+
+  it("a dedicacao aparece entre os candidatos", () => {
+    const ids = guerreiro().candidatos("class_feat", 2).map((c) => c.id);
+    expect(ids).toContain("wb:feat/rogue-dedication");
+  });
+
+  it("o feat da propria classe continua vindo", () => {
+    const nomes = guerreiro().candidatos("class_feat", 1).map((c) => c.nome);
+    expect(nomes).toContain("Sudden Charge");
+  });
+
+  it("regra 23: a dedicacao da PROPRIA classe aparece marcada, nao some", () => {
+    const c = guerreiro().candidatos("class_feat", 2)
+      .find((x) => x.id === "wb:feat/fighter-dedication");
+    expect(c, "Fighter Dedication sumiu da lista").toBeTruthy();
+    expect(c!.atende).toBe(false);
+    expect(c!.motivos.join(" ")).toBeTruthy();
+  });
+});

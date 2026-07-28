@@ -1719,7 +1719,20 @@ class Personagem:
             # classes, e basta pertencer a UMA das que ele tem.
             minhas = {str(self.base.get(c).get("name") or "").lower()
                       for c in self.ordem_de_classe}
-            return bool(traits & minhas)
+            if traits & minhas:
+                return True
+            # RAW: feat de ARQUETIPO pode ser gasto num slot de feat de classe --
+            # e literalmente assim que se entra num arquetipo no PF2e oficial.
+            # Nenhuma das 226 dedicacoes carrega trait de classe, entao exigir a
+            # trait tornava todas inalcancaveis por este slot, e a unica porta
+            # para dedicacao virava o slot de Free Archetype. Num projeto cuja
+            # regra da casa SUBSTITUI a dedicacao, o caminho RAW tem de continuar
+            # existindo para poder ser comparado com ela.
+            #
+            # A regra 23 continua valendo: `_veto_dedicacao_da_propria_classe`
+            # marca a dedicacao do proprio Guerreiro como fora-do-requisito, sem
+            # esconde-la.
+            return "archetype" in traits
         return True
 
     def candidatos(self, slot: str, em: int | None = None,

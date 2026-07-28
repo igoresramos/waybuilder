@@ -1917,7 +1917,18 @@ export class Personagem implements ContextoDePredicado {
         const chave = verdadeiro(n) ? String(n).toLowerCase() : "";
         if (traits.has(chave)) return true;
       }
-      return false;
+      // RAW: feat de ARQUÉTIPO pode ser gasto num slot de feat de classe -- é
+      // literalmente assim que se entra num arquétipo no PF2e oficial. Nenhuma
+      // das 226 dedicações carrega trait de classe, então exigir a trait da
+      // classe as tornava inalcançáveis por este slot, e a única porta para
+      // dedicação virava o slot de Free Archetype. Num projeto cuja regra da
+      // casa SUBSTITUI a dedicação, o caminho RAW tem de continuar existindo
+      // para poder ser comparado com ela.
+      //
+      // A regra 23 (exclusão mútua entre nível de classe e dedicação da mesma
+      // classe) continua valendo: `_veto_dedicacao_da_propria_classe` marca a
+      // dedicação do próprio Guerreiro como fora-do-requisito, sem escondê-la.
+      return traits.has("archetype");
     }
     return true;
   }
