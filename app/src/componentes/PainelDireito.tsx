@@ -6,14 +6,21 @@
  * trocar de aba para ver o que mudou. Num construtor, o retorno imediato e o
  * ponto todo.
  *
- * Formato copiado do Pathbuilder, que o Igor usa: atributo vira MODIFICADOR
- * (`DEX +3`, nao `16`), e pericia mostra o TOTAL rolavel (`+8`), com o rank
- * como etiqueta ao lado. Numa mesa ninguem rola "expert" -- rola +8.
+ * Disposicao copiada do Pathbuilder, que o Igor usa: faixa de atributos no
+ * topo, defesas logo abaixo com a CA dentro de um escudo, e o corpo em duas
+ * faixas -- a coluna estreita de pericias sempre a vista, as abas ao lado.
+ * Pericia nao e aba: e o numero que mais se consulta na mesa, e tirar da vista
+ * custaria um clique por rolagem.
+ *
+ * Atributo vira MODIFICADOR (`DEX +3`, nao `16`), e pericia mostra o TOTAL
+ * rolavel (`+8`), com o rank como pastilha ao lado. Numa mesa ninguem rola
+ * "expert" -- rola +8.
  */
 import { useMemo, useState } from "react";
 import type { Base } from "../motor/base";
 import type { Personagem } from "../motor/personagem";
 import type { Rank, Visao } from "../motor/tipos";
+import { IconeEscudo } from "./Icones";
 
 const RANK_BONUS: Record<Rank, number> = {
   untrained: 0, trained: 2, expert: 4, master: 6, legendary: 8,
@@ -26,7 +33,9 @@ const SALVAGUARDAS = [
   ["fortitude", "Fortitude"], ["reflex", "Reflexos"], ["will", "Vontade"],
 ] as const;
 
-type Aba = "pericias" | "ataques" | "feats" | "concedido" | "sinais";
+type Aba = "ataques" | "feats" | "concedido" | "sinais";
+
+const sinal = (n: number) => `${n >= 0 ? "+" : ""}${n}`;
 
 export function PainelDireito({
   p, v, base,
@@ -35,7 +44,7 @@ export function PainelDireito({
   v: Visao;
   base: Base;
 }) {
-  const [aba, setAba] = useState<Aba>("pericias");
+  const [aba, setAba] = useState<Aba>("ataques");
 
   /** Toda pericia da base, treinada ou nao -- destreinada tambem se rola. */
   const pericias = useMemo(() => {
@@ -81,8 +90,7 @@ export function PainelDireito({
           {ATRIBUTOS.map((a) => (
             <div key={a} className="atributo">
               <span className="rotulo">{a.toUpperCase()}</span>
-              <strong>{(v.modificadores[a] ?? 0) >= 0 ? "+" : ""}
-                {v.modificadores[a] ?? 0}</strong>
+              <strong>{sinal(v.modificadores[a] ?? 0)}</strong>
             </div>
           ))}
         </div>
@@ -90,13 +98,22 @@ export function PainelDireito({
 
       <section className="bloco defesas">
         <div className="ca" title={v.ac.detalhe}>
+          <IconeEscudo />
           <span className="rotulo">CA</span>
           <strong>{v.ac.total}</strong>
         </div>
         <div className="defesas-direita">
-          <div className="barra-hp">
-            <div className="preenchida" style={{ width: "100%" }} />
-            <span>HP {v.hp}/{v.hp}</span>
+          <div className="barras">
+            {/* faixa, preenchimento e texto empilhados em grid */}
+            <div className="barra">
+              <span className="faixa" />
+              <span className="preenchida" style={{ width: "100%" }} />
+              <span className="rotulo">HP {v.hp}/{v.hp}</span>
+            </div>
+            <div className="barra vazia">
+              <span className="faixa" />
+              <span className="rotulo">Sem escudo</span>
+            </div>
           </div>
           <div className="saves">
             {SALVAGUARDAS.map(([chave, nome]) => {
@@ -104,7 +121,7 @@ export function PainelDireito({
               return (
                 <div key={chave} className="save">
                   <span className={`prof p-${s.rank}`}>{SIGLA[s.rank]}</span>
-                  <strong>{s.total >= 0 ? "+" : ""}{s.total}</strong>
+                  <strong>{sinal(s.total)}</strong>
                   <span className="nome">{nome}</span>
                 </div>
               );
@@ -113,117 +130,118 @@ export function PainelDireito({
         </div>
       </section>
 
-      <section className="bloco percepcao">
-        <div className="save">
-          <span className={`prof p-${perc.rank}`}>{SIGLA[perc.rank]}</span>
-          <strong>{perc.total >= 0 ? "+" : ""}{perc.total}</strong>
-          <span className="nome">Percepcao</span>
-        </div>
-        <div className="save">
-          <strong>{v.focus_pool}</strong>
-          <span className="nome">Pontos de foco</span>
-        </div>
-      </section>
+      <div className="ficha-corpo">
+        {/* a coluna estreita: o que se consulta a toda rolagem */}
+        <div className="coluna-pericias">
+          <div className="cartao-mini percepcao">
+            <div className="save">
+              <span className={`prof p-${perc.rank}`}>{SIGLA[perc.rank]}</span>
+              <strong>{sinal(perc.total)}</strong>
+              <span className="nome">Percepcao</span>
+            </div>
+            <div className="save">
+              <strong>{v.focus_pool}</strong>
+              <span className="nome">Pontos de foco</span>
+            </div>
+          </div>
 
-      <section className="bloco abas">
-        <nav className="menu-abas">
-          {([
-            ["pericias", "Pericias"],
-            ["ataques", `Ataques (${v.ataques.length})`],
-            ["feats", "Feats"],
-            ["concedido", `Concedido (${v.concedidos.length})`],
-            ["sinais", `Sinais (${v.fora_do_requisito.length + v.avisos.length})`],
-          ] as const).map(([id, rotulo]) => (
-            <button key={id} className={aba === id ? "sel" : ""}
-                    onClick={() => setAba(id)}>
-              {rotulo}
-            </button>
-          ))}
-        </nav>
-
-        {aba === "pericias" && (
-          <ul className="lista-pericias">
-            {pericias.map((s) => (
-              <li key={s.chave}>
-                <span className={`prof p-${s.rank}`}>{SIGLA[s.rank]}</span>
-                <strong>{s.total >= 0 ? "+" : ""}{s.total}</strong>
-                <span className="nome">{s.nome}</span>
-                {/* de onde veio o rank -- e o que deixa conferir em vez de confiar */}
-                <span className="origem">
-                  {(p.origem_proficiencia.get(s.chave) ?? []).join(", ")}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {aba === "ataques" && (
-          <ul className="lista-simples">
-            {v.ataques.map((a, i) => (
-              <li key={i}>
-                <strong>{a.ataque >= 0 ? "+" : ""}{a.ataque}</strong>
-                <span className="nome">{a.arma}</span>
-                <span className="dado">{a.dano} {a.tipo_de_dano}</span>
-                <span className="origem">{a.detalhe}</span>
-              </li>
-            ))}
-            {!v.ataques.length && (
-              <li className="vazio">nenhuma arma equipada no documento</li>
-            )}
-          </ul>
-        )}
-
-        {aba === "feats" && (
-          <ul className="lista-simples">
-            {v.features.map((f, i) => (
-              <li key={`${f.id}-${i}`}>
-                <span className="quando">
-                  {f.nivel_de_classe != null ? `nv${f.nivel_de_classe}` : ""}
-                </span>
-                <span className="nome">{f.nome}</span>
-                <span className="origem">{f.classe ?? f.origem}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {aba === "concedido" && (
-          <ul className="lista-simples">
-            {v.concedidos.filter((c) => c.nome !== c.por).map((c) => (
-              <li key={c.id}>
-                <span className="nome">{c.nome}</span>
-                <span className="origem">via {c.por}</span>
-              </li>
-            ))}
-            {!v.concedidos.length && (
-              <li className="vazio">nada concedido automaticamente</li>
-            )}
-          </ul>
-        )}
-
-        {aba === "sinais" && (
-          <>
-            <p className="nota">
-              o requisito <strong>sugere e ordena</strong> -- nada aqui impede a
-              ficha de existir
-            </p>
-            <ul className="lista-simples">
-              {v.fora_do_requisito.map((f, i) => (
-                <li key={`r${i}`}>
-                  <span className="nome">{f.feat}</span>
-                  <span className="origem">{f.motivo}</span>
+          <div className="cartao-mini">
+            <ul className="lista-pericias">
+              {pericias.map((s) => (
+                <li key={s.chave} title={(p.origem_proficiencia.get(s.chave) ?? []).join(", ")}>
+                  <span className={`prof p-${s.rank}`}>{SIGLA[s.rank]}</span>
+                  <strong>{sinal(s.total)}</strong>
+                  <span className="nome">{s.nome}</span>
                 </li>
               ))}
-              {v.avisos.map((a, i) => (
-                <li key={`a${i}`}><span className="origem">{a}</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <section className="area-abas">
+          <nav className="menu-abas">
+            {([
+              ["ataques", `Ataques (${v.ataques.length})`],
+              ["feats", "Feats"],
+              ["concedido", `Concedido (${v.concedidos.length})`],
+              ["sinais", `Sinais (${v.fora_do_requisito.length + v.avisos.length})`],
+            ] as const).map(([id, rotulo]) => (
+              <button key={id} className={aba === id ? "sel" : ""}
+                      onClick={() => setAba(id)}>
+                {rotulo}
+              </button>
+            ))}
+          </nav>
+
+          {aba === "ataques" && (
+            <ul className="lista-simples">
+              {v.ataques.map((a, i) => (
+                <li key={i}>
+                  <strong>{sinal(a.ataque)}</strong>
+                  <span className="nome">{a.arma}</span>
+                  <span className="dado">{a.dano} {a.tipo_de_dano}</span>
+                  <span className="origem">{a.detalhe}</span>
+                </li>
               ))}
-              {!v.fora_do_requisito.length && !v.avisos.length && (
-                <li className="vazio">nada a apontar</li>
+              {!v.ataques.length && (
+                <li className="vazio">nenhuma arma equipada no documento</li>
               )}
             </ul>
-          </>
-        )}
-      </section>
+          )}
+
+          {aba === "feats" && (
+            <ul className="lista-simples">
+              {v.features.map((f, i) => (
+                <li key={`${f.id}-${i}`}>
+                  <span className="quando">
+                    {f.nivel_de_classe != null ? `nv${f.nivel_de_classe}` : ""}
+                  </span>
+                  <span className="nome">{f.nome}</span>
+                  <span className="origem">{f.classe ?? f.origem}</span>
+                </li>
+              ))}
+              {!v.features.length && <li className="vazio">nada ainda</li>}
+            </ul>
+          )}
+
+          {aba === "concedido" && (
+            <ul className="lista-simples">
+              {v.concedidos.filter((c) => c.nome !== c.por).map((c) => (
+                <li key={c.id}>
+                  <span className="nome">{c.nome}</span>
+                  <span className="origem">via {c.por}</span>
+                </li>
+              ))}
+              {!v.concedidos.length && (
+                <li className="vazio">nada concedido automaticamente</li>
+              )}
+            </ul>
+          )}
+
+          {aba === "sinais" && (
+            <>
+              <p className="nota">
+                o requisito <strong>sugere e ordena</strong> -- nada aqui impede a
+                ficha de existir
+              </p>
+              <ul className="lista-simples">
+                {v.fora_do_requisito.map((f, i) => (
+                  <li key={`r${i}`}>
+                    <span className="nome">{f.feat}</span>
+                    <span className="origem">{f.motivo}</span>
+                  </li>
+                ))}
+                {v.avisos.map((a, i) => (
+                  <li key={`a${i}`}><span className="origem">{a}</span></li>
+                ))}
+                {!v.fora_do_requisito.length && !v.avisos.length && (
+                  <li className="vazio">nada a apontar</li>
+                )}
+              </ul>
+            </>
+          )}
+        </section>
+      </div>
     </aside>
   );
 }

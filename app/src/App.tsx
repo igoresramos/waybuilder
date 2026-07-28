@@ -20,6 +20,7 @@ import type { Candidato, Documento, Registro } from "./motor/tipos";
 import { carregarNucleo } from "./carregarBase";
 import { Slot, FILTROS_DE_FEAT, FILTROS_DE_RARIDADE } from "./componentes/Slot";
 import { PainelDireito } from "./componentes/PainelDireito";
+import { IconeCog } from "./componentes/Icones";
 import * as doc from "./doc";
 import "./estilo.css";
 
@@ -119,42 +120,35 @@ export default function App() {
       <div className="colunas">
         <main className="coluna-build">
           <section className="bloco identidade">
-            <Slot base={base} rotulo="Ancestralidade"
+            <Slot base={base} rotulo="Ancestralidade" tipo="ancestralidade"
                   candidatos={cru(opcoesDe("ancestry"))} filtros={FILTROS_DE_RARIDADE}
                   escolhido={escolhaEm("ancestralidade", "criacao")}
                   aoEscolher={(x) => setD(doc.escolher(d, "ancestralidade", "criacao", x))}
                   aoLimpar={() => setD(doc.limpar(d, "ancestralidade", "criacao"))} />
-            <Slot base={base} rotulo="Heranca"
+            <Slot base={base} rotulo="Heranca" tipo="heranca"
                   candidatos={cru(opcoesDe("heritage"))} filtros={FILTROS_DE_RARIDADE}
                   escolhido={escolhaEm("heranca", "criacao")}
                   aoEscolher={(x) => setD(doc.escolher(d, "heranca", "criacao", x))}
                   aoLimpar={() => setD(doc.limpar(d, "heranca", "criacao"))} />
-            <Slot base={base} rotulo="Background"
+            <Slot base={base} rotulo="Background" tipo="background"
                   candidatos={cru(opcoesDe("background"))} filtros={FILTROS_DE_RARIDADE}
                   escolhido={escolhaEm("background", "criacao")}
                   aoEscolher={(x) => setD(doc.escolher(d, "background", "criacao", x))}
                   aoLimpar={() => setD(doc.limpar(d, "background", "criacao"))} />
 
-            <div className="boosts">
-              <div className="cabecalho-boost">
-                <span className="slot-rotulo">Boosts de atributo</span>
-                <span className={v.boosts.declarados === v.boosts.direito ? "ok" : "pend"}>
-                  {v.boosts.declarados} / {v.boosts.direito}
-                </span>
-              </div>
-              <BoostPicker d={d} setD={setD} />
-            </div>
+            <Boosts d={d} setD={setD}
+                    declarados={v.boosts.declarados} direito={v.boosts.direito} />
           </section>
 
           {Array.from({ length: Math.max(alvo, nivel) }, (_, i) => i + 1).map((n) => (
             <section key={n} className={`bloco nivel ${n > nivel ? "futuro" : ""}`}>
               <h3>
-                nivel {n}
+                Nivel {n}
                 {n > nivel && <span className="marca-futuro">nao alcancado</span>}
               </h3>
 
               <Slot base={base}
-                rotulo="Classe deste nivel"
+                rotulo="Classe deste nivel" tipo="class"
                 candidatos={cru(opcoesDe("class"))}
                 escolhido={escolhaEm("nivel_de_classe", n)}
                 aoEscolher={(x) => setD(doc.definirClasseDoNivel(d, n, x))}
@@ -163,7 +157,7 @@ export default function App() {
               {n <= nivel && TRILHOS.filter((t) =>
                 (v.slots[t.cadencia] ?? []).includes(n),
               ).map((t) => (
-                <Slot base={base} key={t.slot} rotulo={t.rotulo}
+                <Slot base={base} key={t.slot} rotulo={t.rotulo} tipo={t.slot}
                       filtros={FILTROS_DE_FEAT}
                       candidatos={p.candidatos(t.slot, n)}
                       escolhido={escolhaEm(t.slot, n)}
@@ -172,7 +166,7 @@ export default function App() {
               ))}
 
               {n <= nivel && v.aumentos_de_pericia.niveis.includes(n) && (
-                <Slot base={base} rotulo="Aumento de pericia"
+                <Slot base={base} rotulo="Aumento de pericia" tipo="skill_increase"
                       candidatos={p.candidatos("skill_increase", n)}
                       escolhido={escolhaEm("skill_increase", n)}
                       aoEscolher={(x) => setD(doc.escolher(d, "skill_increase", n, x))}
@@ -220,6 +214,36 @@ export default function App() {
         <PainelDireito p={p} v={v} base={base} />
       </div>
     </div>
+  );
+}
+
+/**
+ * Boost de atributo: um botao-cog com o QUE FALTA sobreposto, como no
+ * Pathbuilder. E a peca que resolve o problema de "escolha agregada" -- boost
+ * nao e um slot com um valor, sao N escolhas que so importam somadas, e um
+ * numero grande na engrenagem diz de relance quantas faltam sem ocupar linha.
+ */
+function Boosts({
+  d, setD, declarados, direito,
+}: {
+  d: Documento; setD: (x: Documento) => void; declarados: number; direito: number;
+}) {
+  const [aberto, setAberto] = useState(false);
+  const faltam = Math.max(0, direito - declarados);
+  return (
+    <>
+      <div className="cogs">
+        <button className={`cog ${faltam === 0 ? "pronto" : ""}`}
+                onClick={() => setAberto(!aberto)}>
+          <span className="cog-face">
+            <IconeCog />
+            <strong>{faltam === 0 ? declarados : faltam}</strong>
+          </span>
+          <span className="cog-rotulo">Boosts</span>
+        </button>
+      </div>
+      {aberto && <BoostPicker d={d} setD={setD} />}
+    </>
   );
 }
 

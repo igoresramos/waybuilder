@@ -1,25 +1,28 @@
 /**
  * A linha de escolha do build, e o modal que ela abre.
  *
- * Formato copiado do Pathbuilder, que o Igor usa: rotulo cinza pequeno em
- * cima, valor embaixo, e vazio como **"Nao escolhido" em vermelho** -- e o que
- * faz um build de 20 niveis ser legivel de relance, porque o olho acha o
- * buraco sem ler nada.
+ * Formato copiado do Pathbuilder, que o Igor usa: icone a esquerda, rotulo
+ * cinza pequeno em cima, valor embaixo, e vazio como **"Nao escolhido" em
+ * vermelho** -- e o que faz um build de 20 niveis ser legivel de relance,
+ * porque o olho acha o buraco sem ler nada.
  *
  * O modal tem tres partes, e a do meio e a que faltava na primeira versao:
- *   filtros por categoria  ->  lista  ->  TEXTO COMPLETO do item selecionado
+ *   abas de categoria  ->  lista  ->  TEXTO COMPLETO do item selecionado
  * Ninguem escolhe um feat pelo nome. O jogador le o que ele faz, os traits, o
  * requisito e a fonte, e so entao aceita. A prosa vem sob demanda de
  * `base/text/`, que por isso nunca viaja na carga inicial.
  *
- * PRINCIPIO ZERO: o que nao atende o requisito aparece na lista, marcado, com
- * o motivo -- e continua selecionavel. O slot filtra por TIPO; o requisito so
+ * PRINCIPIO ZERO: o que nao atende o requisito aparece na MESMA lista, em
+ * cinza, depois dos que atendem -- e continua selecionavel. Nao ha "mostrar
+ * mais": esconder o feat de nivel 6 impede justamente o planejamento, que e
+ * metade do que se faz num construtor. O slot filtra por TIPO; o requisito so
  * ordena e explica.
  */
 import { useEffect, useMemo, useState } from "react";
 import type { Base } from "../motor/base";
 import type { Candidato } from "../motor/tipos";
 import { prosa } from "../carregarBase";
+import { iconeDeSlot } from "./Icones";
 
 export interface Filtro {
   id: string;
@@ -35,9 +38,11 @@ interface Props {
   aoEscolher: (id: string) => void;
   aoLimpar?: () => void;
   filtros?: Filtro[];
+  /** tipo do slot -- so decide qual icone aparece na linha */
+  tipo?: string;
 }
 
-/** Os filtros do topo do modal, por tipo de slot -- como no Pathbuilder. */
+/** As abas do topo do modal, por tipo de slot -- como no Pathbuilder. */
 export const FILTROS_DE_FEAT: Filtro[] = [
   { id: "todos", rotulo: "Todos", casa: () => true },
   {
@@ -58,8 +63,11 @@ export const FILTROS_DE_RARIDADE: Filtro[] = [
   { id: "rare", rotulo: "Raro+", casa: (r) => r.rarity === "rare" || r.rarity === "unique" },
 ];
 
+/** Nome legivel de um id da base; cai no proprio id quando o registro sumiu. */
+const nomeDe = (base: Base, id: string) => base.opcional(id)?.name ?? id;
+
 export function Slot({
-  rotulo, candidatos, base, escolhido, aoEscolher, aoLimpar, filtros,
+  rotulo, candidatos, base, escolhido, aoEscolher, aoLimpar, filtros, tipo,
 }: Props) {
   const [aberto, setAberto] = useState(false);
   const nome = escolhido
@@ -70,9 +78,12 @@ export function Slot({
   return (
     <div className="slot">
       <button className="slot-linha" onClick={() => setAberto(true)}>
-        <span className="slot-rotulo">{rotulo}</span>
-        <span className={`slot-valor ${nome ? "" : "vazio"}`}>
-          {nome ?? "Nao escolhido"}
+        <span className="slot-icone">{iconeDeSlot(tipo ?? rotulo.toLowerCase())}</span>
+        <span className="slot-texto">
+          <span className="slot-rotulo">{rotulo}</span>
+          <span className={`slot-valor ${nome ? "" : "vazio"}`}>
+            {nome ?? "Nao escolhido"}
+          </span>
         </span>
       </button>
       {escolhido && aoLimpar && (
@@ -86,6 +97,7 @@ export function Slot({
           filtros={filtros}
           escolhido={escolhido ?? null}
           aoFechar={() => setAberto(false)}
+          aoLimpar={aoLimpar}
           aoAceitar={(id) => { aoEscolher(id); setAberto(false); }}
         />
       )}
@@ -94,7 +106,7 @@ export function Slot({
 }
 
 function Modal({
-  titulo, candidatos, base, filtros, escolhido, aoFechar, aoAceitar,
+  titulo, candidatos, base, filtros, escolhido, aoFechar, aoAceitar, aoLimpar,
 }: {
   titulo: string;
   candidatos: Candidato[];
@@ -103,12 +115,12 @@ function Modal({
   escolhido: string | null;
   aoFechar: () => void;
   aoAceitar: (id: string) => void;
+  aoLimpar?: () => void;
 }) {
   const [busca, setBusca] = useState("");
   const [filtro, setFiltro] = useState(filtros?.[0]?.id ?? "todos");
   const [sel, setSel] = useState<string | null>(escolhido);
   const [texto, setTexto] = useState<string | null>(null);
-  const [verFora, setVerFora] = useState(false);
 
   // Esc fecha: o modal cobre a tela e sair dele nao pode exigir mira
   useEffect(() => {
@@ -126,10 +138,11 @@ function Modal({
     return () => { vivo = false; };
   }, [sel, base]);
 
-  const { atendem, fora } = useMemo(() => {
+  /** Uma lista so: os que atendem primeiro, os que nao atendem em seguida. */
+  const lista = useMemo(() => {
     const q = busca.trim().toLowerCase();
     const f = filtros?.find((x) => x.id === filtro);
-    const lista = candidatos.filter((c) => {
+    const casa = candidatos.filter((c) => {
       if (q && !(c.nome ?? "").toLowerCase().includes(q) && !c.id.includes(q)) {
         return false;
       }
@@ -137,24 +150,11 @@ function Modal({
       const reg = base.opcional(c.id);
       return reg ? f.casa(reg as Record<string, unknown>) : true;
     });
-    return {
-      atendem: lista.filter((c) => c.atende),
-      fora: lista.filter((c) => !c.atende),
-    };
+    return [...casa.filter((c) => c.atende), ...casa.filter((c) => !c.atende)];
   }, [candidatos, busca, filtro, filtros, base]);
 
   const reg = sel ? base.opcional(sel) : null;
   const marcado = candidatos.find((c) => c.id === sel);
-
-  const linha = (c: Candidato, forinha = false) => (
-    <li key={c.id} className={sel === c.id ? "sel" : ""}>
-      <button onClick={() => setSel(c.id)} className={forinha ? "marcado" : ""}>
-        <span className="nome">{c.nome ?? c.id}</span>
-        {c.level != null && <span className="nv">{c.level}</span>}
-        {c.ja_pego && <span className="ja">tem</span>}
-      </button>
-    </li>
-  );
 
   return (
     <div className="modal-fundo" onClick={aoFechar}>
@@ -181,24 +181,36 @@ function Modal({
 
         <div className="modal-corpo">
           <ul className="modal-lista">
-            {atendem.map((c) => linha(c))}
-            {!atendem.length && <li className="vazio">nada encontrado</li>}
-
-            {fora.length > 0 && (
-              <li className="separador">
-                <button className="link" onClick={() => setVerFora(!verFora)}>
-                  {verFora ? "esconder" : "mostrar"} {fora.length} fora do requisito
+            {lista.map((c) => (
+              <li key={c.id} className={sel === c.id ? "sel" : ""}>
+                <button onClick={() => setSel(c.id)}
+                        className={c.atende ? "" : "marcado"}>
+                  <span className="nome">{c.nome ?? c.id}</span>
+                  {c.ja_pego && <span className="ja">tem</span>}
+                  {c.level != null && <span className="nv">{c.level}</span>}
                 </button>
               </li>
-            )}
-            {verFora && fora.map((c) => linha(c, true))}
+            ))}
+            {!lista.length && <li className="vazio">nada encontrado</li>}
           </ul>
 
           <div className="modal-detalhe">
             {!reg && <p className="vazio">selecione para ler</p>}
             {reg && (
               <>
-                <h4>{reg.name}</h4>
+                <div className="cabeca">
+                  <h4>{reg.name}</h4>
+                  {reg.level != null && <span className="nv">{reg.level}</span>}
+                </div>
+                {/* TODAS as traits, sempre -- trait nao e enfeite, e requisito:
+                    so quem tem a trait `human` pega feat de humano.
+
+                    Heranca e um caso a parte, e a fonte e que manda: no Foundry
+                    260 das 326 herancas tem `traits.value` VAZIO, e o vinculo
+                    com a ancestralidade mora em `system.ancestry`. Inventar uma
+                    trait `human` em Ambitious Human seria fabricar dado que
+                    nenhuma fonte declara -- entao o vinculo aparece como o que
+                    e, marcado, ao lado das traits reais. */}
                 <div className="traits">
                   {reg.rarity && reg.rarity !== "common" && (
                     <span className={`trait r-${reg.rarity}`}>{reg.rarity}</span>
@@ -206,7 +218,25 @@ function Modal({
                   {(reg.traits ?? []).map((t) => (
                     <span key={t} className="trait">{t}</span>
                   ))}
+                  {typeof reg.ancestry === "string" && (
+                    <span className="trait vinculo" title="vinculo declarado pela fonte">
+                      {nomeDe(base, reg.ancestry)}
+                    </span>
+                  )}
+                  {!(reg.traits ?? []).length && typeof reg.ancestry !== "string" && (
+                    <span className="trait falta">sem trait na fonte</span>
+                  )}
                 </div>
+                {/* O PRE-REQUISITO em prosa, como o Pathbuilder imprime:
+                    "Prerequisites trained in Diplomacy". Vem da base em
+                    `requires_texto`; quando falta, o gate ainda existe em
+                    `requires` (o trait de ancestralidade de Natural Ambition,
+                    por exemplo) e aparece no aviso logo abaixo. */}
+                {typeof reg.requires_texto === "string" && (
+                  <p className="prereq">
+                    <b>Pre-requisitos</b> {reg.requires_texto}
+                  </p>
+                )}
                 {marcado && !marcado.atende && (
                   <p className="fora-aviso">
                     fora do requisito: {marcado.motivos.join("; ")}
@@ -229,11 +259,14 @@ function Modal({
         </div>
 
         <footer>
-          <button onClick={aoFechar}>Cancelar</button>
           <button className="aceitar" disabled={!sel}
                   onClick={() => sel && aoAceitar(sel)}>
             Aceitar
           </button>
+          <button onClick={aoFechar}>Cancelar</button>
+          {aoLimpar && escolhido && (
+            <button onClick={() => { aoLimpar(); aoFechar(); }}>Limpar</button>
+          )}
         </footer>
       </div>
     </div>

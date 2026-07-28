@@ -522,3 +522,34 @@ em 42 caminhos. Vale rodar em qualquer projeto que guarde artefato fora do git.
 
 Consequencia: nao adianta procurar efeito de trait em fonte nenhuma. Se o
 construtor precisar de mecanica por trait, ela e nossa e tem de ser escrita.
+
+### Heranca nao tem trait em fonte nenhuma -- o que existe e o vinculo
+Ao portar a pele do Pathbuilder (2026-07-28) o picker parecia bugado: clicar
+numa heranca, numa classe ou num arquetipo nao mostrava trait alguma. A suspeita
+obvia -- extrator perdendo campo -- estava errada. Medido nas duas fontes:
+
+| kind | nossa base | Foundry (fonte) |
+|---|---|---|
+| heranca com trait | 67 / 334 | **66 / 326** |
+| classe com trait | 0 / 27 | **0 / 27** |
+
+`Ambitious Human` no Foundry tem `system.traits.value: []` e
+`system.ancestry: {name: "Human"}`. O AoN idem: `Fighter` e `Acrobat` vem sem
+`trait`. Ou seja: a base espelha a fonte com fidelidade; o que a fonte guarda no
+lugar da trait e o **vinculo** (`ancestry`), e a base ja o preserva.
+
+O que a tela faz agora: mostra o vinculo marcado como vinculo -- borda accent,
+nao pastilha cheia -- e reserva o aviso vermelho `sem trait na fonte` para quem
+nao tem nem trait nem vinculo. Derivar `traits: ["human"]` a partir do vinculo
+foi considerado e recusado: fabricaria dado que nenhuma fonte declara e faria a
+base deixar de ser espelho -- e `_termo_trait` passaria a satisfazer requisito
+com dado inventado.
+
+Metodo que vale repetir: **antes de acusar o pipeline de perder campo, contar o
+campo na fonte bruta.** Custou tres comandos e evitou uma re-emissao inteira da
+base sobre um defeito que nao existia.
+
+### One for All nao esta na base
+Feat de Swashbuckler citado pelo Igor; a base tem 79 feats com trait
+`swashbuckler` e esse nao esta entre eles. Ausencia real, ainda nao
+diagnosticada -- entra na trilha de censo de ausencias, nao na de UI.

@@ -1,20 +1,40 @@
 /* Waybuilder -- duas colunas: build a esquerda, ficha viva a direita.
    Tema escuro (uso e mesa de jogo, muitas vezes a noite) e densidade alta:
    um construtor mostra dezenas de numeros ao mesmo tempo, e rolar demais e
-   pior que ler apertado. */
+   pior que ler apertado.
+
+   A pele segue o Pathbuilder 2e, que e o app que o Igor usa na mesa -- os
+   valores vem medidos do app ao vivo, nao chutados (ver
+   docs/referencia-pathbuilder/). Familiaridade de relance vale mais que
+   originalidade visual num construtor com 20 niveis abertos.
+
+   Tres regras que o Pathbuilder segue e que aqui valem tambem:
+     1. o accent NUNCA preenche fundo -- marca por texto, borda ou sublinhado;
+     2. botao e outline-only, sem variante preenchida;
+     3. nada de caixa alta e nada de letter-spacing. */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fontes/InterVariable.woff2") format("woff2");
+}
 
 :root {
-  --fundo: #14161a;
-  --painel: #1c1f26;
-  --alto: #232733;
-  --borda: #2e3440;
-  --texto: #dde3ec;
-  --fraco: #8a94a6;
+  --fundo: #171a1e;
+  --card: #222831;
+  --painel: #2a323d;
+  --borda: #2d4059;
+  --texto: #ffffff;
+  --fraco: #a1a1a1;
+  --accent: #ff5722;
+  --vermelho: #d9695f;
   --ok: #7bc47f;
   --pend: #e0b354;
-  --vermelho: #d9695f;
-  --acento: #7aa2d8;
-  --r: 6px;
+  --r: 10px;
+  --r-p: 8px;
+  --u: 7px;
 }
 
 * { box-sizing: border-box; }
@@ -23,234 +43,288 @@ body {
   margin: 0;
   background: var(--fundo);
   color: var(--texto);
-  font: 13px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font: 14px/1.4 "Inter", system-ui, sans-serif;
 }
+
+/* o Pathbuilder ENCOLHE em tela menor em vez de reflowar -- e uma ferramenta
+   densa de desktop, e reflow so espalharia os numeros */
+@media (max-width: 1400px) { body { font-size: 12px; } }
 
 button {
   font: inherit; color: inherit; cursor: pointer;
-  background: var(--alto); border: 1px solid var(--borda);
-  border-radius: var(--r); padding: 4px 9px;
+  background: transparent; border: 1px solid var(--texto);
+  border-radius: var(--r-p); padding: 4px 8px;
 }
-button:hover:not(:disabled) { border-color: var(--acento); }
-button:disabled { opacity: .4; cursor: default; }
-input {
-  font: inherit; color: inherit; background: var(--fundo);
-  border: 1px solid var(--borda); border-radius: var(--r); padding: 4px 7px;
+button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+button:disabled { opacity: .35; cursor: default; }
+input, select {
+  font: inherit; color: inherit; background: var(--painel);
+  border: 1px solid var(--borda); border-radius: 5px; padding: 4px 7px;
 }
-code { background: var(--alto); padding: 1px 5px; border-radius: 4px; }
+code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .carregando { display: grid; place-content: center; min-height: 100vh; color: var(--fraco); }
 .carregando.erro { color: var(--vermelho); text-align: center; }
-.nota { color: var(--fraco); font-size: 11px; margin: 6px 0 0; }
+.nota { color: var(--fraco); font-size: .9em; margin: 6px 0 0; }
 
-.app { max-width: 1500px; margin: 0 auto; padding: 12px; }
-
-/* -- topo -- */
+/* -- barra superior: identifica o personagem e nada mais ------------------- */
 .topo {
-  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-  padding-bottom: 10px; border-bottom: 1px solid var(--borda); margin-bottom: 12px;
+  display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+  height: 44px; padding: 0 var(--u); border-bottom: 2px solid var(--accent);
 }
-.topo .nome { width: 200px; font-size: 15px; }
-.resumo-classe { color: var(--acento); font-weight: 600; }
+.topo .nome { width: 220px; background: transparent; border-color: transparent; }
+.topo .nome:focus { border-color: var(--borda); }
+.resumo-classe { color: var(--fraco); }
 .alvo { display: flex; align-items: center; gap: 6px; margin-left: auto; color: var(--fraco); }
 .alvo input { width: 56px; }
 .acoes { display: flex; gap: 6px; }
 
-/* -- duas colunas: e a mudanca central. A ficha nunca sai da tela. -- */
-.colunas { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 12px; align-items: start; }
-.painel-direito { position: sticky; top: 12px; display: grid; gap: 10px; }
+.app { padding: 0; }
+
+/* -- duas colunas: a ficha nunca sai da tela ------------------------------- */
+.colunas {
+  display: grid; grid-template-columns: 371px minmax(0, 1fr);
+  gap: 14px; align-items: start; padding: var(--u);
+}
+.coluna-build { height: calc(100vh - 58px); overflow-y: auto; padding-right: var(--u); }
+.painel-direito { display: grid; gap: var(--u); }
 
 .bloco {
-  background: var(--painel); border: 1px solid var(--borda);
-  border-radius: var(--r); padding: 10px;
+  background: var(--card); border-radius: var(--r);
+  padding: var(--u) 14px; margin-bottom: var(--u);
 }
-.coluna-build .bloco { margin-bottom: 10px; }
+
+/* -- um card por nivel ----------------------------------------------------- */
 .nivel h3 {
-  margin: 0 0 8px; font-size: 12px; text-transform: uppercase;
-  letter-spacing: 1px; color: var(--acento);
-  display: flex; align-items: center; gap: 8px;
+  margin: 0 0 var(--u); font-size: 1em; font-weight: 400;
+  color: var(--accent); text-align: center;
+  display: flex; align-items: baseline; justify-content: center; gap: 8px;
 }
-.nivel.futuro { opacity: .55; }
-.marca-futuro {
-  color: var(--fraco); font-size: 10px; text-transform: none; letter-spacing: 0;
+.nivel.futuro { opacity: .5; }
+.marca-futuro { color: var(--fraco); font-size: .85em; }
+.concedido-no-nivel { list-style: none; margin: 4px 0 0; padding: 0; }
+.concedido-no-nivel li {
+  padding: 3px 8px; color: var(--fraco); border-radius: 5px;
 }
-.concedido-no-nivel {
-  list-style: none; margin: 6px 0 0; padding: 6px 0 0;
-  border-top: 1px dashed var(--borda); color: var(--fraco); font-size: 11px;
-}
-.concedido-no-nivel li::before { content: "+ "; color: var(--ok); }
-.subir, .remover { width: 100%; margin-top: 6px; }
+.concedido-no-nivel li:hover { background: var(--painel); }
+.subir, .remover { width: 100%; margin-top: 6px; border-color: var(--borda); }
 .remover { color: var(--fraco); }
 
-/* -- slot: a linha de escolha do build -- */
-.slot { position: relative; margin-bottom: 4px; }
+/* -- slot: a linha de escolha. icone | rotulo cinza / valor ---------------- */
+.slot { position: relative; margin-bottom: 6px; }
 .slot-linha {
-  width: 100%; text-align: left; background: var(--alto);
-  display: flex; flex-direction: column; gap: 1px; padding: 5px 9px;
+  width: 100%; text-align: left; background: var(--painel);
+  border: 1px solid transparent; border-radius: var(--r-p);
+  display: flex; align-items: center; gap: 10px; padding: 6px 10px;
 }
-.slot-rotulo { color: var(--fraco); font-size: 10px; text-transform: uppercase; letter-spacing: .6px; }
-.slot-valor { font-size: 13px; }
+.slot-linha:hover { border-color: var(--accent); color: inherit; }
+.slot-icone { width: 26px; height: 28px; flex: none; opacity: .85; }
+.slot-texto { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.slot-rotulo { color: var(--fraco); font-size: .85em; }
+.slot-valor { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .slot-valor.vazio { color: var(--vermelho); }
 .slot-x {
-  position: absolute; right: 4px; top: 6px; background: transparent;
-  border-color: transparent; color: var(--fraco); padding: 2px 6px; font-size: 11px;
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  background: transparent; border-color: transparent; color: var(--fraco);
+  padding: 2px 6px; font-size: .85em;
 }
-.slot-lista {
-  margin-top: 4px; padding: 8px; background: var(--fundo);
-  border: 1px solid var(--borda); border-radius: var(--r);
-}
-.slot-lista .busca { width: 100%; margin-bottom: 6px; }
-.slot-lista ul { list-style: none; margin: 0; padding: 0; max-height: 260px; overflow-y: auto; }
-.slot-lista li button {
-  width: 100%; text-align: left; background: transparent; border-color: transparent;
-  display: flex; gap: 8px; align-items: baseline; padding: 3px 6px; flex-wrap: wrap;
-}
-.slot-lista li button:hover { background: var(--alto); }
-.slot-lista .nome { flex: 1; }
-.slot-lista .nv { color: var(--fraco); font-size: 11px; }
-.slot-lista .ja { color: var(--ok); font-size: 10px; }
-.slot-lista .motivo { flex-basis: 100%; color: var(--fraco); font-size: 10px; }
-.slot-lista .marcados li button { border-left: 2px solid var(--pend); opacity: .8; }
-.slot-lista .vazio { color: var(--fraco); padding: 6px; }
-.slot-lista .fora { border-top: 1px solid var(--borda); margin-top: 6px; padding-top: 4px; }
-.link { background: transparent; border-color: transparent; color: var(--fraco); font-size: 11px; padding: 2px 0; }
 
-/* -- boosts -- */
+/* -- botao-cog: escolha agregada, com o que falta sobreposto --------------- */
+.cogs { display: flex; gap: 6px; justify-content: center; margin-bottom: var(--u); }
+.cog {
+  width: 92px; min-height: 74px; padding: 5px 4px; border-radius: var(--r-p);
+  border: 1px solid var(--borda); background: transparent;
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.cog:hover { border-color: var(--accent); color: inherit; }
+/* numero sobreposto a engrenagem: um so olhar diz quantas escolhas faltam */
+.cog-face { display: grid; width: 44px; height: 44px; flex: none; place-items: center; }
+.cog-face > * { grid-area: 1 / 1; }
+.cog-face svg { width: 44px; height: 44px; color: var(--borda); }
+.cog-face strong { font-size: 1.25em; line-height: 1; }
+.cog-rotulo { font-size: .8em; color: var(--fraco); text-align: center; line-height: 1.15; }
+.cog.pronto .cog-face strong { color: var(--ok); }
+
+/* -- boosts ---------------------------------------------------------------- */
 .cabecalho-boost { display: flex; justify-content: space-between; align-items: baseline; }
 .cabecalho-boost .ok { color: var(--ok); }
-.cabecalho-boost .pend { color: var(--pend); }
-.boost-picker .linha { display: flex; gap: 3px; margin: 6px 0; }
-.boost-picker .linha button { flex: 1; padding: 4px 0; font-size: 11px; }
-.boost-picker .linha button.sel { border-color: var(--acento); color: var(--acento); }
-.boost-picker .add { width: 100%; }
-.declarados { list-style: none; margin: 6px 0 0; padding: 0; color: var(--fraco); font-size: 11px; }
+.cabecalho-boost .pend { color: var(--accent); }
+.boost-picker .linha { display: flex; gap: 4px; margin: 6px 0; }
+.boost-picker .linha button { flex: 1; padding: 4px 0; font-size: .9em; border-color: var(--borda); }
+.boost-picker .linha button.sel { border-color: var(--accent); color: var(--accent); }
+.boost-picker .add { width: 100%; border-color: var(--borda); }
+.declarados { list-style: none; margin: 6px 0 0; padding: 0; color: var(--fraco); font-size: .9em; }
 .declarados li { display: flex; justify-content: space-between; align-items: center; }
 
-/* -- painel direito: a ficha viva -- */
+/* -- ficha: topo com atributos --------------------------------------------- */
 .linha-atributos { display: flex; gap: 4px; }
-.atributo { flex: 1; text-align: center; background: var(--alto); border-radius: 4px; padding: 4px 0; }
-.atributo .rotulo { display: block; color: var(--fraco); font-size: 10px; }
-.atributo strong { font-size: 15px; }
+.atributo { flex: 1; text-align: center; }
+.atributo .rotulo { display: block; color: var(--fraco); font-size: .85em; }
+.atributo strong { font-size: 1.05em; font-weight: 700; }
 
-.defesas { display: flex; gap: 12px; align-items: center; }
-.ca { text-align: center; min-width: 60px; }
-.ca .rotulo { display: block; color: var(--fraco); font-size: 10px; }
-.ca strong { font-size: 30px; line-height: 1; }
-.defesas-direita { flex: 1; }
-.barra-hp {
-  position: relative; height: 20px; background: var(--alto);
-  border-radius: 4px; overflow: hidden; margin-bottom: 6px;
-}
-.barra-hp .preenchida { position: absolute; inset: 0; background: #2f5d3a; }
-.barra-hp span {
-  position: relative; display: block; text-align: center;
-  line-height: 20px; font-size: 11px;
-}
-.saves, .percepcao { display: flex; gap: 10px; }
-.save { display: flex; align-items: baseline; gap: 5px; }
-.save strong { font-size: 14px; }
-.save .nome { color: var(--fraco); font-size: 11px; }
-.percepcao { justify-content: space-between; }
+/* -- defesas: CA no escudo, barras, saves ---------------------------------- */
+.defesas { display: flex; gap: 14px; align-items: center; }
+.ca { position: relative; width: 77px; height: 77px; flex: none; display: grid; place-items: center; }
+.ca svg { position: absolute; inset: 0; width: 77px; height: 77px; color: var(--accent); }
+.ca .rotulo { position: relative; font-size: .8em; color: var(--fraco); margin-top: -22px; }
+.ca strong { position: absolute; font-size: 1.9em; line-height: 1; margin-top: 8px; }
+.defesas-direita { flex: 1; display: flex; gap: 14px; align-items: center; }
+.barras { flex: 1; display: grid; gap: 4px; }
 
+/* faixa, preenchimento e texto empilhados em GRID -- e como o Pathbuilder
+   monta, e evita o absolute que quebra quando o texto cresce */
+.barra { display: grid; height: 23px; border-radius: 5px; overflow: hidden; }
+.barra > * { grid-area: 1 / 1; }
+.barra .faixa { background: var(--painel); }
+.barra .preenchida { background: #1e3a5f; }
+.barra .rotulo { text-align: center; line-height: 23px; font-size: .95em; }
+.barra.vazia .rotulo { color: var(--fraco); }
+
+.saves { display: grid; gap: 4px; }
+.save { display: flex; align-items: center; gap: 8px; }
+.save strong { min-width: 26px; text-align: right; }
+.save .nome { color: var(--texto); }
+.percepcao { display: grid; gap: 4px; }
+
+/* -- pastilha de rank ------------------------------------------------------ */
 .prof {
-  display: inline-flex; width: 15px; height: 15px; border-radius: 3px;
-  align-items: center; justify-content: center;
-  font-size: 9px; font-weight: 700; background: var(--alto); color: var(--fraco);
+  display: inline-flex; width: 16px; height: 16px; border-radius: 50%;
+  align-items: center; justify-content: center; flex: none;
+  font-size: .75em; font-weight: 700; background: var(--painel); color: var(--fraco);
 }
-.p-trained { background: #2f5d3a; color: #cfe8d4; }
-.p-expert { background: #2b4a6b; color: #d3e4f5; }
-.p-master { background: #5b4a86; color: #e2d9f5; }
-.p-legendary { background: #7a5a25; color: #f6e6c8; }
+.p-trained, .p-expert, .p-master, .p-legendary { background: var(--accent); color: #fff; }
+.p-master { background: #c1440e; }
+.p-legendary { background: #8c2f00; }
 
-.menu-abas { display: flex; gap: 3px; flex-wrap: wrap; margin-bottom: 8px; }
-.menu-abas button { font-size: 11px; padding: 3px 7px; }
-.menu-abas button.sel { border-color: var(--acento); color: var(--acento); }
+/* -- abas: texto puro, ativa em accent com sublinhado ---------------------- */
+.menu-abas {
+  display: flex; gap: 18px; flex-wrap: wrap;
+  border-bottom: 1px solid var(--borda); margin-bottom: var(--u);
+}
+.menu-abas button {
+  border: 0; border-bottom: 2px solid transparent; border-radius: 0;
+  padding: 4px 0 6px; color: var(--fraco); font-size: 1.05em;
+}
+.menu-abas button:hover { color: var(--texto); border-color: transparent; }
+.menu-abas button.sel { color: var(--accent); border-bottom-color: var(--accent); }
 
-.lista-pericias, .lista-simples { list-style: none; margin: 0; padding: 0; max-height: 46vh; overflow-y: auto; }
+.lista-pericias, .lista-simples { list-style: none; margin: 0; padding: 0; }
 .lista-pericias li, .lista-simples li {
-  display: flex; gap: 7px; align-items: baseline;
-  padding: 2px 0; border-bottom: 1px solid var(--borda);
+  display: flex; gap: 9px; align-items: center; padding: 3px 0;
 }
-.lista-pericias li:last-child, .lista-simples li:last-child { border: 0; }
-.lista-pericias strong, .lista-simples strong { min-width: 30px; text-align: right; }
+.lista-pericias strong, .lista-simples strong { min-width: 28px; text-align: right; }
 .lista-pericias .nome, .lista-simples .nome { flex: 1; }
 .lista-pericias .origem, .lista-simples .origem {
-  color: var(--fraco); font-size: 10px; text-align: right;
+  color: var(--fraco); font-size: .85em; text-align: right;
   max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.lista-simples .quando, .lista-simples .dado { color: var(--fraco); font-size: 11px; }
-.lista-simples .vazio { color: var(--fraco); }
+.lista-simples .quando, .lista-simples .dado { color: var(--fraco); font-size: .9em; }
+.lista-simples .vazio, .lista-pericias .vazio { color: var(--fraco); }
 
-@media (max-width: 1000px) {
+/* a ficha em duas faixas: coluna estreita de pericias | area de abas */
+.ficha-corpo { display: grid; grid-template-columns: 194px minmax(0, 1fr); gap: var(--u); }
+.ficha-corpo .coluna-pericias { display: grid; gap: var(--u); align-content: start; }
+.ficha-corpo .area-abas { background: var(--fundo); border-radius: var(--r); padding: var(--u) 14px; }
+.cartao-mini { background: var(--card); border-radius: var(--r); padding: var(--u) 10px; }
+.cartao-mini .titulo { color: var(--fraco); font-size: .9em; margin-bottom: 4px; }
+
+@media (max-width: 1100px) {
   .colunas { grid-template-columns: 1fr; }
-  .painel-direito { position: static; }
+  .coluna-build { height: auto; overflow: visible; }
+  .ficha-corpo { grid-template-columns: 1fr; }
 }
 
-/* -- modal do picker: filtros, lista e o TEXTO do item --------------------
+/* -- picker: abas, lista com badge de nivel, detalhe com prosa -------------
    Ninguem escolhe um feat pelo nome. O jogador le o que ele faz, os traits, o
-   requisito e a fonte antes de aceitar -- que e como o Pathbuilder faz e como
-   a primeira versao daqui NAO fazia. */
+   requisito e a fonte antes de aceitar.
+
+   PRINCIPIO ZERO: o que nao atende aparece na MESMA lista, em cinza, depois dos
+   que atendem -- nunca escondido atras de um "mostrar mais". O Pathbuilder faz
+   igual, e e o que deixa o jogador ver o feat de nivel 6 que ele quer planejar. */
 .modal-fundo {
   position: fixed; inset: 0; background: rgba(0, 0, 0, .6);
   display: grid; place-items: center; z-index: 50; padding: 20px;
 }
 .modal {
-  background: var(--painel); border: 1px solid var(--borda); border-radius: 8px;
-  width: min(980px, 100%); max-height: 88vh; display: flex; flex-direction: column;
+  background: var(--fundo); border-radius: var(--r-p);
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 6px 18px rgba(0, 0, 0, .5));
+  width: min(1250px, 100%); height: min(800px, 92vh);
+  display: flex; flex-direction: column;
 }
 .modal > header {
-  display: flex; gap: 12px; align-items: center;
-  padding: 10px 12px; border-bottom: 1px solid var(--borda);
+  display: flex; gap: 14px; align-items: center; padding: 10px 14px 0;
 }
-.modal > header h3 { margin: 0; font-size: 14px; color: var(--acento); }
-.modal > header .busca { flex: 1; }
-.modal .filtros { display: flex; gap: 4px; padding: 8px 12px 0; flex-wrap: wrap; }
-.modal .filtros button { font-size: 11px; padding: 3px 9px; }
-.modal .filtros button.sel { border-color: var(--acento); color: var(--acento); }
+.modal > header h3 { margin: 0; font-size: 1.5em; font-weight: 700; }
+.modal > header .busca { margin-left: auto; width: 240px; }
 
-.modal-corpo { display: grid; grid-template-columns: 300px 1fr; gap: 0; flex: 1; min-height: 0; }
-.modal-lista {
-  list-style: none; margin: 0; padding: 8px; overflow-y: auto;
-  border-right: 1px solid var(--borda);
+/* filtros como abas, exatamente como o picker do Pathbuilder */
+.modal .filtros {
+  display: flex; gap: 22px; align-items: center;
+  padding: 6px 14px 0; border-bottom: 1px solid var(--accent); margin: 0 14px;
 }
+.modal .filtros button {
+  border: 0; border-bottom: 2px solid transparent; border-radius: 0;
+  padding: 4px 0 8px; color: var(--fraco); font-size: 1.05em;
+}
+.modal .filtros button:hover { color: var(--texto); }
+.modal .filtros button.sel { color: var(--accent); }
+
+.modal-corpo { display: grid; grid-template-columns: 340px minmax(0, 1fr); flex: 1; min-height: 0; }
+.modal-lista { list-style: none; margin: 0; padding: 8px 14px; overflow-y: auto; }
 .modal-lista li button {
-  width: 100%; text-align: left; background: transparent; border-color: transparent;
-  display: flex; gap: 8px; align-items: baseline; padding: 4px 7px;
+  width: 100%; text-align: left; background: transparent; border: 0; border-radius: 5px;
+  display: flex; gap: 8px; align-items: center; padding: 5px 8px;
 }
-.modal-lista li.sel button { background: var(--alto); border-color: var(--acento); }
-.modal-lista li button:hover { background: var(--alto); }
-.modal-lista .nome { flex: 1; }
-.modal-lista .nv { color: var(--fraco); font-size: 11px; }
-.modal-lista .ja { color: var(--ok); font-size: 10px; }
-.modal-lista button.marcado { border-left: 2px solid var(--pend); opacity: .75; }
-.modal-lista .separador { border-top: 1px solid var(--borda); margin-top: 6px; padding-top: 4px; }
-.modal-lista .vazio { color: var(--fraco); padding: 6px; }
+.modal-lista li button:hover { background: var(--card); color: inherit; }
+.modal-lista li.sel button { color: var(--accent); }
+.modal-lista .nome { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.modal-lista .ja { color: var(--ok); font-size: .8em; }
+/* inelegivel: cinza, na mesma lista, ainda clicavel */
+.modal-lista button.marcado { color: var(--fraco); }
+.modal-lista li.sel button.marcado { color: var(--accent); }
+.modal-lista .vazio { color: var(--fraco); padding: 6px 8px; }
 
-.modal-detalhe { padding: 12px 14px; overflow-y: auto; }
-.modal-detalhe h4 { margin: 0 0 6px; font-size: 15px; }
-.modal-detalhe .vazio { color: var(--fraco); }
-.traits { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 8px; }
-.trait {
-  background: var(--alto); border: 1px solid var(--borda); border-radius: 3px;
-  padding: 1px 6px; font-size: 10px; text-transform: uppercase; letter-spacing: .4px;
+/* badge de nivel a direita da linha -- o numero e a explicacao de por que o
+   item esta cinza, sem precisar de texto */
+.nv {
+  flex: none; min-width: 26px; padding: 1px 5px; border-radius: 4px;
+  background: var(--painel); color: var(--texto);
+  font-size: .85em; text-align: center;
 }
-.trait.r-uncommon { border-color: #7a5a25; color: #f0d9a8; }
-.trait.r-rare { border-color: #2b4a6b; color: #bcd8f5; }
-.trait.r-unique { border-color: #5b4a86; color: #ded2f7; }
+.nv.alto { background: var(--accent); }
+
+.modal-detalhe { padding: 14px 18px; overflow-y: auto; }
+.modal-detalhe .cabeca { display: flex; align-items: baseline; gap: 10px; }
+.modal-detalhe h4 { margin: 0; font-size: 1.15em; font-weight: 700; }
+.modal-detalhe .cabeca .nv { margin-left: auto; }
+.modal-detalhe .vazio { color: var(--fraco); }
+.traits { display: flex; gap: 4px; flex-wrap: wrap; margin: 8px 0; }
+.trait {
+  background: var(--borda); border-radius: 0; padding: 2px 7px; font-size: .85em;
+}
+/* vinculo declarado pela fonte (heranca -> ancestralidade), que nao e trait */
+.trait.vinculo { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+.trait.falta { background: transparent; border: 1px dashed var(--vermelho); color: var(--vermelho); }
+.trait.r-uncommon { background: #7a5a25; }
+.trait.r-rare { background: #1e3a5f; }
+.trait.r-unique { background: #4a2f6b; }
+/* o pre-requisito em prosa, como o Pathbuilder imprime */
+.prereq { margin: 0 0 10px; }
+.prereq b { font-weight: 700; }
 .fora-aviso {
-  background: rgba(224, 179, 84, .08); border-left: 2px solid var(--pend);
-  padding: 6px 9px; font-size: 11px; color: var(--pend);
+  background: rgba(255, 87, 34, .08); border-left: 2px solid var(--accent);
+  padding: 6px 10px; font-size: .9em; color: var(--accent);
 }
 .fora-aviso em { color: var(--fraco); }
-.prosa { white-space: pre-wrap; line-height: 1.55; }
-.fonte { color: var(--fraco); font-size: 11px; margin-top: 10px; }
+.prosa { white-space: pre-wrap; line-height: 1.5; }
+.fonte { color: var(--fraco); font-size: .9em; font-style: italic; margin-top: 12px; }
 
-.modal > footer {
-  display: flex; justify-content: flex-end; gap: 8px;
-  padding: 10px 12px; border-top: 1px solid var(--borda);
-}
-.modal .aceitar { border-color: var(--acento); color: var(--acento); }
+.modal > footer { display: flex; gap: 8px; padding: 10px 14px; }
+.modal .aceitar { border-color: var(--accent); color: var(--accent); }
 
 @media (max-width: 780px) {
   .modal-corpo { grid-template-columns: 1fr; }
-  .modal-lista { border-right: 0; border-bottom: 1px solid var(--borda); max-height: 34vh; }
+  .modal-lista { max-height: 34vh; border-bottom: 1px solid var(--borda); }
 }
+
+/* -- icones proprios (o Pathbuilder usa PNG licenciado; aqui e SVG nosso) -- */
+.icone { width: 100%; height: 100%; display: block; }
