@@ -169,8 +169,13 @@ def main():
             so_catalogo = [
                 r["id"] for r in base
                 if r.get("kind") == eixo and norm(r.get("name")) not in nomes_com_mecanica]
+            # nao existe nivel 0 no PF2e: um bloco assim vira slot impossivel de
+            # preencher na tela. Caso unico na base (Campeao, Blessed Armament /
+            # Blessed Shield), vindo do dado da fonte -- normalizar para 1, que
+            # e onde a escolha acontece de fato.
+            nivel_bloco = dados["nivel"] if (dados["nivel"] or 0) >= 1 else 1
             blocos.append({
-                "eixo": eixo, "nivel": dados["nivel"], "slot": "subclasse",
+                "eixo": eixo, "nivel": nivel_bloco, "slot": "subclasse",
                 "escolhe": 1,
                 "opcoes": sorted(da_progressao | set(so_catalogo)),
                 "com_mecanica": sorted(da_progressao),

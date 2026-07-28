@@ -75,3 +75,9 @@ python3 normalizar_traits.py
 
 echo "== 8. portoes, fase final =="
 python3 portoes.py --fase final
+
+echo "== 9. emitir o payload do app =="
+# ultimo passo, e depois dos portoes de proposito: o que o cliente carrega e
+# DERIVADO da base auditada, nunca o contrario. Corta metadado de build (prov,
+# xref, conflitos) e a prosa que vazou inline.
+python3 emitir_app.py

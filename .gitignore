@@ -2,3 +2,9 @@
 # pipeline; docs/simulacoes/ tambem gera).
 __pycache__/
 *.pyc
+
+# Payload do app: 18 MB derivados 100% de base/index.json por `emitir_app.py`,
+# regeneravel com `./build.sh` (passo 9). O manifesto FICA versionado -- e o
+# registro historico do tamanho, que e o numero que o orcamento do PWA vigia.
+pipeline/base/app/*
+!pipeline/base/app/_manifesto.json
