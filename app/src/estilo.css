@@ -371,3 +371,35 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .inventario button { border-color: var(--borda-forte); font-size: .9em; padding: 2px 8px; }
 .inventario li.guardado button[aria-pressed="false"] { color: var(--fraco); }
 .inventario .link { border-color: transparent; color: var(--fraco); }
+
+/* -- funil: o filtro fino do picker --------------------------------------- */
+.funil { position: relative; flex: none; }
+.funil-botao {
+  width: 31px; height: 31px; border-radius: 5px; padding: 0;
+  display: grid; place-items: center; border-color: var(--borda-forte);
+}
+.funil-botao.ligado { border-color: var(--accent); color: var(--accent); }
+.funil-marca {
+  position: absolute; top: 3px; right: 3px; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--accent);
+}
+.funil-painel {
+  position: absolute; right: 0; top: 36px; z-index: 60; width: 320px;
+  background: var(--card); border-radius: var(--r-p); padding: 10px 12px;
+  display: grid; gap: 8px;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, .6));
+}
+.funil-linha { display: flex; align-items: center; gap: 8px; color: var(--fraco); }
+.funil-linha input[type="checkbox"] { accent-color: var(--accent); width: 15px; height: 15px; }
+.funil-nivel { width: 70px; }
+.funil-titulo { color: var(--fraco); font-size: .85em; margin-top: 2px; }
+.funil-traits { display: flex; flex-wrap: wrap; gap: 4px; max-height: 190px; overflow-y: auto; }
+.funil-traits .trait {
+  cursor: pointer; border: 1px solid transparent; background: var(--borda);
+  color: var(--texto); font-size: .85em; border-radius: 0; padding: 2px 7px;
+}
+.funil-traits .trait:hover { border-color: var(--accent); color: var(--texto); }
+.funil-traits .trait.sel { background: #7a3010; border-color: var(--accent); }
+.funil-traits .conta { color: var(--fraco); }
+.funil-traits .trait.sel .conta { color: #ffcbb8; }
+.funil-limpar { justify-self: start; border-color: var(--borda-forte); }

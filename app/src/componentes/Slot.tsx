@@ -25,6 +25,8 @@ import { prosa } from "../carregarBase";
 import { iconeDeSlot } from "./Icones";
 import { Traits } from "./Traits";
 import { ListaVirtual } from "./ListaVirtual";
+import { limparMarcacao } from "../marcacao";
+import { Funil, FUNIL_VAZIO, aplicarFunil, type EstadoDoFunil } from "./Funil";
 
 export interface Filtro {
   id: string;
@@ -121,6 +123,7 @@ function Modal({
   const [filtro, setFiltro] = useState(filtros?.[0]?.id ?? "todos");
   const [sel, setSel] = useState<string | null>(escolhido);
   const [texto, setTexto] = useState<string | null>(null);
+  const [funil, setFunil] = useState<EstadoDoFunil>(FUNIL_VAZIO);
 
   // Esc fecha: o modal cobre a tela e sair dele nao pode exigir mira
   useEffect(() => {
@@ -150,8 +153,9 @@ function Modal({
       const reg = base.opcional(c.id);
       return reg ? f.casa(reg as Record<string, unknown>) : true;
     });
-    return [...casa.filter((c) => c.atende), ...casa.filter((c) => !c.atende)];
-  }, [candidatos, busca, filtro, filtros, base]);
+    const filtrada = aplicarFunil(casa, funil, base);
+    return [...filtrada.filter((c) => c.atende), ...filtrada.filter((c) => !c.atende)];
+  }, [candidatos, busca, filtro, filtros, base, funil]);
 
   const reg = sel ? base.opcional(sel) : null;
   const marcado = candidatos.find((c) => c.id === sel);
@@ -166,6 +170,8 @@ function Modal({
             placeholder={`buscar entre ${candidatos.length}...`}
             value={busca} onChange={(e) => setBusca(e.target.value)}
           />
+          <Funil candidatos={candidatos} base={base}
+                 estado={funil} aoMudar={setFunil} />
         </header>
 
         {filtros && (
@@ -182,7 +188,7 @@ function Modal({
         <div className="modal-corpo">
           <ListaVirtual
             className="modal-lista" itens={lista} altura={640}
-            vazio={<li className="vazio">nada encontrado</li>}
+            vazio={<li className="vazio">nada passa nos filtros de agora</li>}
           >
             {(c) => (
               <li key={c.id} className={sel === c.id ? "sel" : ""}>
@@ -213,7 +219,7 @@ function Modal({
                     por exemplo) e aparece no aviso logo abaixo. */}
                 {typeof reg.requires_texto === "string" && (
                   <p className="prereq">
-                    <b>Pre-requisitos</b> {reg.requires_texto}
+                    <b>Pre-requisitos</b> {limparMarcacao(reg.requires_texto)}
                   </p>
                 )}
                 {marcado && !marcado.atende && (

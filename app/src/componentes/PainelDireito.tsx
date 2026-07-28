@@ -38,6 +38,18 @@ type Aba = "ataques" | "equipamento" | "feats" | "concedido" | "sinais";
 
 const sinal = (n: number) => `${n >= 0 ? "+" : ""}${n}`;
 
+/**
+ * `lore:alcohol lore` -> `Lore: Alcohol`.
+ *
+ * A chave da proficiencia as vezes ja carrega o sufixo "lore" (vem assim da
+ * fonte), e prefixar cegamente produzia `Lore: Alcohol Lore` na ficha.
+ */
+function nomeDeLore(chave: string): string {
+  const bruto = chave.slice(5).replace(/\s*\blore\b\s*$/i, "").trim();
+  const titulo = bruto.replace(/\b\w/g, (c) => c.toUpperCase());
+  return `Lore: ${titulo}`;
+}
+
 export function PainelDireito({
   p, v, base, d, setD,
 }: {
@@ -49,10 +61,29 @@ export function PainelDireito({
 }) {
   const [aba, setAba] = useState<Aba>("ataques");
 
-  /** Toda pericia da base, treinada ou nao -- destreinada tambem se rola. */
+  /**
+   * Toda pericia da base, treinada ou nao -- destreinada tambem se rola.
+   *
+   * Ficam de fora dois grupos, e por criterios DIFERENTES -- foi o que me
+   * pegou na primeira tentativa:
+   *
+   * 1. as DEZESSEIS de reino do Kingmaker (Agriculture, Arts, Boating,
+   *    Defense, Engineering, Exploration, Folklore, Industry, Intrigue, Magic,
+   *    Politics, Scholarship, Statecraft, Trade, Warfare, Wilderness), que
+   *    trazem `lore: true`;
+   * 2. o `Lore` generico, que traz **`lore: false`** e por isso escapa do
+   *    criterio acima. Ele e a CATEGORIA, nao uma pericia: o personagem tem
+   *    `Lore: Alcohol`, nunca "Lore".
+   *
+   * Regra de reino esta fora do escopo do projeto, e essas dezesseis nao tem
+   * `attribute` -- caiam no fallback de INT e apareciam somando +INT numa ficha
+   * comum, ao lado das 17 de verdade. As Lore que o personagem TEM (a
+   * `Lore: Alcohol` que o background Barkeep concede) entram logo abaixo, por
+   * `proficiencias`, que e de onde elas realmente vem.
+   */
   const pericias = useMemo(() => {
     const linhas = [...base.por_id.values()]
-      .filter((r) => r.kind === "skill" && r.id !== "wb:skill/lore")
+      .filter((r) => r.kind === "skill" && r.lore !== true && r.id !== "wb:skill/lore")
       .map((r) => {
         const chave = r.id.split("/").pop()!;
         const rank = (v.proficiencias[chave] ?? "untrained") as Rank;
@@ -67,7 +98,7 @@ export function PainelDireito({
       if (!chave.startsWith("lore:")) continue;
       const mod = v.modificadores.int ?? 0;
       linhas.push({
-        chave, nome: `Lore: ${chave.slice(5)}`, rank: rank as Rank, attr: "int",
+        chave, nome: nomeDeLore(chave), rank: rank as Rank, attr: "int",
         total: rank === "untrained" ? mod : v.nivel + RANK_BONUS[rank as Rank] + mod,
       });
     }

@@ -17,6 +17,8 @@ import { Base } from "./motor/base";
 import { Personagem } from "./motor/personagem";
 import type { Documento, Registro } from "./motor/tipos";
 import * as doc from "./doc";
+import { limparMarcacao } from "./marcacao";
+import { aplicarFunil, FUNIL_VAZIO } from "./componentes/Funil";
 
 const RAIZ = join(__dirname, "..", "..");
 const PAYLOAD = join(RAIZ, "pipeline", "base", "app", "por-kind");
@@ -334,5 +336,145 @@ describe("heranca combina com a ancestralidade", () => {
   it("sem ancestralidade escolhida, mostra tudo em vez de lista vazia", () => {
     const todas = nomes(doc.novoDocumento("Teste"));
     expect(todas.length).toBeGreaterThan(300);
+  });
+});
+
+/**
+ * A marcacao do Pf2eTools sobra em 53% dos requisitos e deixa o texto ilegivel
+ * justo onde ele precisa ser lido de relance.
+ */
+describe("marcacao das fontes some do texto", () => {
+  it("troca o link pelo rotulo", () => {
+    expect(limparMarcacao("trained in {@skill Athletics|PC1}"))
+      .toBe("trained in Athletics");
+    expect(limparMarcacao("{@feat Everstand Stance|LOCG}"))
+      .toBe("Everstand Stance");
+    expect(limparMarcacao("{@feat Aggressive Block|PC1} or {@feat Brutish Shove|PC1}"))
+      .toBe("Aggressive Block or Brutish Shove");
+    expect(limparMarcacao("devotion spell ({@spell lay on hands})"))
+      .toBe("devotion spell (lay on hands)");
+  });
+
+  it("respeita o apelido quando a fonte da um", () => {
+    expect(limparMarcacao("{@feat Sudden Charge|PC1|carga subita}")).toBe("carga subita");
+  });
+
+  it("nao mexe em texto sem marcacao", () => {
+    expect(limparMarcacao("Charisma 14")).toBe("Charisma 14");
+  });
+
+  it("nenhum requisito da base sobra com marcacao", () => {
+    const sujos: string[] = [];
+    for (const r of base.por_id.values()) {
+      const t = r.requires_texto;
+      if (typeof t === "string" && limparMarcacao(t).includes("{@")) sujos.push(r.id);
+    }
+    expect(sujos).toEqual([]);
+  });
+});
+
+/**
+ * A ficha mostra as 17 pericias do jogo, nao as 33 linhas do kind `skill`.
+ *
+ * As 16 de reino do Kingmaker vivem no mesmo kind, marcadas com `lore: true` e
+ * sem `attribute`. Passavam pelo filtro da tela e apareciam somando +INT (o
+ * fallback) ao lado das de verdade, numa ficha que nao joga regra de reino.
+ */
+describe("pericias da ficha", () => {
+  const REINO = [
+    "Agriculture", "Arts", "Boating", "Defense", "Engineering", "Exploration",
+    "Folklore", "Industry", "Intrigue", "Magic", "Politics", "Scholarship",
+    "Statecraft", "Trade", "Warfare", "Wilderness",
+  ];
+
+  const daFicha = () => [...base.por_id.values()]
+    .filter((r) => r.kind === "skill" && r.lore !== true && r.id !== "wb:skill/lore")
+    .map((r) => r.name);
+
+  // 16 fixas. A 17a linha da coluna do Pathbuilder e a `Lore: Alcohol` que o
+  // background concede -- ela vem de `proficiencias`, nao do catalogo.
+  it("sao as 16 pericias do Player Core", () => {
+    expect(daFicha()).toHaveLength(16);
+    expect(daFicha()).toContain("Acrobatics");
+    expect(daFicha()).toContain("Thievery");
+  });
+
+  it("nenhuma pericia de reino entra", () => {
+    for (const r of REINO) expect(daFicha()).not.toContain(r);
+  });
+
+  it("as 16 tem atributo -- nenhuma cai no fallback", () => {
+    for (const r of base.por_id.values()) {
+      if (r.kind !== "skill" || r.lore === true) continue;
+      expect(r.attribute, `${r.name} sem attribute`).toBeTruthy();
+    }
+  });
+});
+
+/**
+ * O funil do picker. Nada ligado por padrao -- esconder e escolha do jogador.
+ */
+describe("filtro fino do picker", () => {
+  const guerreiro = () => {
+    let d = doc.novoDocumento("Teste");
+    d = doc.escolher(d, "ancestralidade", "criacao", "wb:ancestry/human");
+    d = doc.definirClasseDoNivel(d, 1, "wb:class/fighter");
+    return derivar(d).candidatos("class_feat", 1);
+  };
+
+  it("vazio nao mexe na lista", () => {
+    const todos = guerreiro();
+    expect(aplicarFunil(todos, FUNIL_VAZIO, base)).toHaveLength(todos.length);
+  });
+
+  it("`so o que posso pegar` tira os marcados", () => {
+    const todos = guerreiro();
+    const so = aplicarFunil(todos, { ...FUNIL_VAZIO, soAtende: true }, base);
+    expect(so.length).toBeLessThan(todos.length);
+    expect(so.every((c) => c.atende)).toBe(true);
+  });
+
+  it("nivel maximo corta pelo nivel do feat", () => {
+    const ate2 = aplicarFunil(guerreiro(), { ...FUNIL_VAZIO, nivelMax: 2 }, base);
+    expect(ate2.length).toBeGreaterThan(0);
+    expect(ate2.every((c) => (c.level ?? 0) <= 2)).toBe(true);
+  });
+
+  it("trait e E, nao OU", () => {
+    const todos = guerreiro();
+    const press = aplicarFunil(todos, { ...FUNIL_VAZIO, traits: ["press"] }, base);
+    const dois = aplicarFunil(todos, { ...FUNIL_VAZIO, traits: ["press", "flourish"] }, base);
+    expect(dois.length).toBeLessThanOrEqual(press.length);
+    for (const c of dois) {
+      const t = (base.opcional(c.id)?.traits ?? []) as string[];
+      expect(t).toContain("press");
+      expect(t).toContain("flourish");
+    }
+  });
+});
+
+describe("Lore na ficha", () => {
+  it("o Lore generico nao e pericia do personagem", () => {
+    const daFicha = [...base.por_id.values()]
+      .filter((r) => r.kind === "skill" && r.lore !== true && r.id !== "wb:skill/lore");
+    expect(daFicha).toHaveLength(16);
+    expect(daFicha.map((r) => r.id)).not.toContain("wb:skill/lore");
+  });
+
+  it("o background concede a Lore com nome limpo, sem duplicar o sufixo", () => {
+    let d = doc.novoDocumento("Teste");
+    d = doc.escolher(d, "ancestralidade", "criacao", "wb:ancestry/human");
+    d = doc.escolher(d, "background", "criacao", "wb:background/barkeep");
+    const chaves = Object.keys(derivar(d).visao().proficiencias)
+      .filter((k) => k.startsWith("lore:"));
+    expect(chaves.length).toBeGreaterThan(0);
+    // e a formatacao que a ficha usa
+    const nome = (c: string) =>
+      `Lore: ${c.slice(5).replace(/\s*\blore\b\s*$/i, "").trim()
+        .replace(/\b\w/g, (x) => x.toUpperCase())}`;
+    for (const c of chaves) {
+      expect(nome(c)).not.toMatch(/Lore$/);
+      expect(nome(c)).toMatch(/^Lore: \S/);
+    }
   });
 });

@@ -618,3 +618,33 @@ e classe nao tem gate estrutural, entao ali a lista crua esta correta.
 
 Detalhe de comportamento: sem ancestralidade escolhida, mostrar TUDO. Lista vazia
 num slot recem-aberto parece defeito, e o jogador ainda vai voltar ali.
+
+### As 16 pericias de reino do Kingmaker moram no mesmo kind
+A ficha listava 33 pericias, e o Igor pegou comparando com o Pathbuilder dele.
+As 16 sobrando -- Agriculture, Arts, Boating, Defense, Engineering, Exploration,
+Folklore, Industry, Intrigue, Magic, Politics, Scholarship, Statecraft, Trade,
+Warfare, Wilderness -- sao as **Kingdom Skills do Kingmaker**, que a base guarda
+no mesmo `kind: skill` das de verdade, marcadas com `lore: true` e **sem
+`attribute`**. Regra de reino esta fora do escopo do projeto.
+
+Sem `attribute`, elas caiam no fallback de INT e apareciam somando +INT numa
+ficha comum. O sintoma (`+1` em tudo) nao parecia bug de catalogo.
+
+Pegadinha dentro da pegadinha: o `Lore` generico tem **`lore: false`**, entao
+filtrar por `lore !== true` nao o remove. Sao dois criterios distintos --
+`lore: true` tira as de reino, e o id `wb:skill/lore` tira a categoria. A ficha
+mostra **16 fixas**; a 17a linha do Pathbuilder e a `Lore: Alcohol` que o
+background concede, e essa vem de `proficiencias`, nao do catalogo.
+
+### Marcacao do Pf2eTools sobra em 53% dos requisitos
+`requires_texto` vem com a sintaxe de link da fonte -- `trained in
+{@skill Athletics|PC1}`, `{@feat Everstand Stance|LOCG}` -- em 2.112 dos 3.960
+feats que tem requisito. Sem limpar, o pre-requisito fica ilegivel justo onde
+precisa ser lido de relance.
+
+Uma regra so cobre as 20 tags observadas (`{@tag Rotulo|FONTE|apelido}` -> o
+primeiro campo, ou o apelido quando ha). Mas **as tags aninham**:
+`{@note (or {@feat Shape of the Cloud Dragon|SoT3})}` derrubava um `[^}]*`
+ingenuo. Resolver de dentro para fora ate estabilizar cobre qualquer
+profundidade -- e um teste varre a base inteira cobrando que nenhum requisito
+sobre com `{@`.
