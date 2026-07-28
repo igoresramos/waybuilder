@@ -419,3 +419,13 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .sabor > .link { padding: 2px 0; border-color: transparent; color: var(--fraco); }
 .sabor > .link:hover { color: var(--accent); }
 .sabor .conta { color: var(--fraco); }
+
+/* concedido tambem se le -- botao que nao parece botao, so sublinha no hover */
+.link-concedido {
+  border: 0; padding: 0; background: transparent; color: inherit;
+  font: inherit; text-align: left; border-radius: 0;
+}
+.link-concedido:hover:not(:disabled) { color: var(--accent); border: 0; }
+.link-concedido:disabled { opacity: 1; cursor: default; }
+.modal-leitura { width: min(760px, 100%); height: auto; max-height: 82vh; }
+.modal-leitura > header { align-items: baseline; }

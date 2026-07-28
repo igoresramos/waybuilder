@@ -80,11 +80,21 @@ export function definirClasseDoNivel(
   nivel: number,
   classeId: string,
 ): Documento {
-  const escolhas = doc.escolhas.filter(
+  const atual = doc.escolhas.find(
+    (e) => e.slot === "nivel_de_classe" && e.em === nivel,
+  );
+  const trocou = atual !== undefined && atual.pega !== classeId;
+
+  // trocar a classe deste nivel invalida o que foi escolhido a partir dele --
+  // feat de classe e sub-escolha pertencem a UMA classe. E o que o Pathbuilder
+  // faz, e sem isso a ficha guarda escolha impossivel.
+  const partida = trocou ? limparDependentesDeClasse(doc, nivel) : doc;
+
+  const escolhas = partida.escolhas.filter(
     (e) => !(e.slot === "nivel_de_classe" && e.em === nivel),
   );
   escolhas.push({ em: nivel, slot: "nivel_de_classe", pega: classeId });
-  return { ...doc, escolhas: ordenar(escolhas) };
+  return { ...partida, escolhas: ordenar(escolhas) };
 }
 
 /**
@@ -241,5 +251,66 @@ export function alternarEquipado(doc: Documento, item: string): Documento {
     inventario: (doc.inventario ?? []).map(
       (i) => (i.item === item ? { ...i, equipado: !i.equipado } : i),
     ),
+  };
+}
+
+// -- sub-escolha de classe ---------------------------------------------------
+//
+// Uma classe pode abrir VARIOS eixos de sub-escolha no mesmo nivel: o Campeao
+// tem `cause` e dois blocos de `outras-opcoes` no nivel 1. Ate 2026-07-28 a tela
+// gravava os tres com a mesma chave `(slot: "subclasse", em: 1)`, e `escolher()`
+// substitui por essa chave -- entao escolher a causa sobrescrevia os outros dois
+// e os tres apareciam com o MESMO valor.
+//
+// O eixo entra na chave. O motor nao muda: ele varre `_escolhas("subclasse")`
+// inteiro e casa por `pega`, sem olhar `em` nem `eixo`.
+
+const mesmaSub = (e: Escolha, nivel: number, eixo: string | null) =>
+  e.slot === "subclasse" && e.em === nivel && (e.eixo ?? null) === eixo;
+
+export function escolherSubclasse(
+  doc: Documento, nivel: number, eixo: string | null, pega: string,
+): Documento {
+  const escolhas = doc.escolhas.filter((e) => !mesmaSub(e, nivel, eixo));
+  escolhas.push({ em: nivel, slot: "subclasse", eixo, pega });
+  return { ...doc, escolhas: ordenar(escolhas) };
+}
+
+export function limparSubclasse(
+  doc: Documento, nivel: number, eixo: string | null,
+): Documento {
+  return { ...doc, escolhas: doc.escolhas.filter((e) => !mesmaSub(e, nivel, eixo)) };
+}
+
+export function subclasseEm(
+  doc: Documento, nivel: number, eixo: string | null,
+): string | null {
+  const e = doc.escolhas.find((x) => mesmaSub(x, nivel, eixo));
+  return typeof e?.pega === "string" ? e.pega : null;
+}
+
+/**
+ * Escolhas que so fazem sentido por causa da classe daquele nivel.
+ *
+ * Trocar a classe de um nivel invalida o que foi escolhido a partir dali: um
+ * feat de Alquimista nao pertence a um Campeao, e a sub-escolha de uma classe
+ * nao existe na outra. O Pathbuilder zera esses blocos ao trocar, e sem isso a
+ * ficha guarda escolha impossivel -- foi assim que um `Alchemical Familiar`
+ * sobreviveu numa ficha de Campeao.
+ *
+ * Some do nivel alterado PARA A FRENTE, e so o que depende de classe. O que e
+ * de ancestralidade, background ou pericia nao e tocado: continua valendo.
+ */
+const DEPENDEM_DA_CLASSE = new Set(["class_feat", "subclasse", "free_archetype"]);
+
+export function limparDependentesDeClasse(
+  doc: Documento, aPartirDe: number,
+): Documento {
+  return {
+    ...doc,
+    escolhas: doc.escolhas.filter((e) => {
+      if (!DEPENDEM_DA_CLASSE.has(e.slot)) return true;
+      return typeof e.em === "number" ? e.em < aPartirDe : true;
+    }),
   };
 }

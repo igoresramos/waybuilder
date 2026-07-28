@@ -21,6 +21,7 @@ import { carregarNucleo } from "./carregarBase";
 import { Slot, FILTROS_DE_FEAT, FILTROS_DE_RARIDADE } from "./componentes/Slot";
 import { PainelDireito } from "./componentes/PainelDireito";
 import { IconeCog } from "./componentes/Icones";
+import { Detalhe } from "./componentes/Detalhe";
 import * as doc from "./doc";
 import "./estilo.css";
 
@@ -40,6 +41,8 @@ export default function App() {
   const [d, setD] = useState<Documento>(() => doc.novoDocumento());
   const [id] = useState(() => doc.novoId());
   const [alvo, setAlvo] = useState(4);
+  // o registro que o jogador quer LER (concedido, nao escolhido)
+  const [lendo, setLendo] = useState<string | null>(null);
   const arquivo = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -175,12 +178,23 @@ export default function App() {
                       aoLimpar={() => setD(doc.limpar(d, "skill_increase", n))} />
               )}
 
+              {/* Cada EIXO e um slot proprio. O Campeao abre `cause` e dois
+                  blocos de `outras-opcoes` no nivel 1; com a chave sem o eixo,
+                  os tres liam e escreviam a mesma escolha e apareciam com o
+                  mesmo valor. Os candidatos tambem sao por eixo -- oferecer as
+                  opcoes de `cause` num slot de `outras-opcoes` e oferecer o
+                  que nao cabe ali. */}
               {n <= nivel && v.subclasses.filter((b) => b.nivel === n).map((b, i) => (
-                <Slot base={base} key={`sub${i}`} rotulo={`${b.classe} / ${b.eixo}`}
-                      candidatos={p.candidatos("subclasse", n)}
-                      escolhido={escolhaEm("subclasse", n)}
-                      aoEscolher={(x) => setD(doc.escolher(d, "subclasse", n, x))}
-                      aoLimpar={() => setD(doc.limpar(d, "subclasse", n))} />
+                <Slot base={base} key={`sub${i}-${b.eixo ?? ""}`}
+                      rotulo={`${b.classe} / ${b.eixo ?? "sub-escolha"}`}
+                      tipo="class"
+                      candidatos={p.candidatos("subclasse", n)
+                        .filter((c) => (b.opcoes_ids ?? []).includes(c.id))}
+                      escolhido={doc.subclasseEm(d, n, b.eixo ?? null)}
+                      aoEscolher={(x) =>
+                        setD(doc.escolherSubclasse(d, n, b.eixo ?? null, x))}
+                      aoLimpar={() =>
+                        setD(doc.limparSubclasse(d, n, b.eixo ?? null))} />
               ))}
 
               {/* o que este nivel CONCEDEU -- nao e escolha, e consequencia */}
@@ -188,7 +202,17 @@ export default function App() {
                 const dadas = v.features.filter((f) => f.nivel_de_classe === n);
                 return dadas.length ? (
                   <ul className="concedido-no-nivel">
-                    {dadas.map((f, i) => <li key={i}>{f.nome}</li>)}
+                    {dadas.map((f, i) => (
+                      <li key={i}>
+                        {/* concedido tambem se le: o jogador precisa saber o
+                            que ganhou, nao so o que escolheu */}
+                        <button className="link-concedido"
+                                disabled={!f.id}
+                                onClick={() => f.id && setLendo(f.id)}>
+                          {f.nome}
+                        </button>
+                      </li>
+                    ))}
                   </ul>
                 ) : null;
               })()}
@@ -215,6 +239,10 @@ export default function App() {
 
         <PainelDireito p={p} v={v} base={base} d={d} setD={setD} />
       </div>
+
+      {lendo && (
+        <Detalhe base={base} id={lendo} aoFechar={() => setLendo(null)} />
+      )}
     </div>
   );
 }
