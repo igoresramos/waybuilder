@@ -2,26 +2,28 @@
  * Waybuilder -- construtor de personagem de Pathfinder 2e com a regra caseira
  * de multiclasse.
  *
- * Fatia vertical 1: montar do zero ate o nivel 4, com Free Archetype ligado.
+ * DUAS COLUNAS, como o Pathbuilder: o build a esquerda, a ficha viva a
+ * direita. A primeira versao tinha abas separadas e o jogador escolhia um feat
+ * sem ver o numero mudar -- num construtor, o retorno imediato e o ponto todo.
  *
- * O fluxo da tela e o fluxo do documento: a UI edita `escolhas[]` e o motor
- * re-deriva TUDO a cada mudanca. Nao ha estado calculado guardado -- se
- * houvesse, mudanca de regra invalidaria ficha salva, que e exatamente o que a
- * arquitetura evita.
+ * A esquerda mostra TODOS os niveis ate o alvo, nao so os ja preenchidos: um
+ * build de Pathfinder e planejamento, e o jogador quer ver onde os slots caem
+ * la na frente antes de decidir o de agora.
+ *
+ * O documento continua sendo a unica fonte de verdade: a tela edita
+ * `escolhas[]` e o motor re-deriva tudo a cada mudanca.
  */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Base } from "./motor/base";
 import { Personagem } from "./motor/personagem";
-import type { Documento, Registro } from "./motor/tipos";
+import type { Candidato, Documento, Registro } from "./motor/tipos";
 import { carregarNucleo } from "./carregarBase";
-import { Picker } from "./componentes/Picker";
-import { Ficha } from "./telas/Ficha";
+import { Slot, FILTROS_DE_FEAT, FILTROS_DE_RARIDADE } from "./componentes/Slot";
+import { PainelDireito } from "./componentes/PainelDireito";
 import * as doc from "./doc";
 import "./estilo.css";
 
-type Aba = "criacao" | "progressao" | "ficha";
-
-const SLOTS_DO_NIVEL = [
+const TRILHOS = [
   { slot: "class_feat", cadencia: "class", rotulo: "Feat de classe" },
   { slot: "skill_feat", cadencia: "skill", rotulo: "Feat de pericia" },
   { slot: "general_feat", cadencia: "general", rotulo: "Feat geral" },
@@ -36,17 +38,12 @@ export default function App() {
   const [erro, setErro] = useState<string | null>(null);
   const [d, setD] = useState<Documento>(() => doc.novoDocumento());
   const [id] = useState(() => doc.novoId());
-  const [aba, setAba] = useState<Aba>("criacao");
+  const [alvo, setAlvo] = useState(4);
   const arquivo = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    carregarNucleo()
-      .then((r) => setBase(r.base))
-      .catch((e) => setErro(String(e)));
+    carregarNucleo().then((r) => setBase(r.base)).catch((e) => setErro(String(e)));
   }, []);
-
-  // salva a cada mudanca: sem botao de salvar, sem perder trabalho por fechar
-  // a aba. O documento e pequeno e localStorage e sincrono.
   useEffect(() => {
     if (d.escolhas.length) doc.salvar(id, d);
   }, [d, id]);
@@ -62,61 +59,51 @@ export default function App() {
       <div className="carregando erro">
         <h1>nao carregou a base</h1>
         <p>{erro}</p>
-        <p className="nota">
-          rode <code>./sincronizar-base.sh</code> em <code>app/</code>
-        </p>
+        <p className="nota">rode <code>./sincronizar-base.sh</code> em <code>app/</code></p>
       </div>
     );
   }
-  if (!base || !p || !v) {
-    return <div className="carregando">carregando a base...</div>;
-  }
+  if (!base || !p || !v) return <div className="carregando">carregando a base...</div>;
 
   const nivel = doc.nivelDoPersonagem(d);
   const opcoesDe = (kind: string): Registro[] =>
     [...base.por_id.values()].filter((r) => r.kind === kind);
-  const escolhaEm = (slot: string, em: number | "criacao") =>
-    (d.escolhas.find((e) => e.slot === slot && e.em === em)?.pega as string) ??
-    null;
-  const cru = (rs: Registro[]) =>
+  const cru = (rs: Registro[]): Candidato[] =>
     rs.map((r) => ({
       id: r.id, nome: r.name ?? null, level: r.level ?? null,
-      atende: true, motivos: [] as string[], ja_pego: false,
-    }));
+      atende: true, motivos: [], ja_pego: false,
+    })).sort((a, b) => (a.nome ?? "").localeCompare(b.nome ?? ""));
+  const escolhaEm = (slot: string, em: number | "criacao") =>
+    (d.escolhas.find((e) => e.slot === slot && e.em === em)?.pega as string) ?? null;
+
+  const classePrincipal = escolhaEm("nivel_de_classe", 1);
 
   return (
     <div className="app">
       <header className="topo">
-        <div className="marca">
-          <h1>Waybuilder</h1>
+        <input
+          className="nome"
+          value={d.identidade?.nome ?? ""}
+          onChange={(e) =>
+            setD({ ...d, identidade: { ...d.identidade, nome: e.target.value } })}
+          placeholder="nome do personagem"
+        />
+        <span className="resumo-classe">
+          {Object.entries(v.classes).map(([n, q]) => `${n} ${q}`).join(" / ") ||
+            "sem classe"}
+        </span>
+        <div className="alvo">
+          <label>montar ate o nivel</label>
           <input
-            className="nome"
-            value={d.identidade?.nome ?? ""}
-            onChange={(e) =>
-              setD({ ...d, identidade: { ...d.identidade, nome: e.target.value } })
-            }
-            placeholder="nome do personagem"
+            type="number" min={1} max={20} value={alvo}
+            onChange={(e) => setAlvo(Math.max(1, Math.min(20, +e.target.value || 1)))}
           />
         </div>
-        <nav>
-          {(["criacao", "progressao", "ficha"] as Aba[]).map((a) => (
-            <button
-              key={a}
-              className={aba === a ? "ativa" : ""}
-              onClick={() => setAba(a)}
-            >
-              {a}
-            </button>
-          ))}
-        </nav>
         <div className="acoes">
           <button onClick={() => doc.exportar(d)}>exportar</button>
           <button onClick={() => arquivo.current?.click()}>importar</button>
           <input
-            ref={arquivo}
-            type="file"
-            accept="application/json"
-            hidden
+            ref={arquivo} type="file" accept="application/json" hidden
             onChange={async (e) => {
               const f = e.target.files?.[0];
               if (!f) return;
@@ -129,192 +116,146 @@ export default function App() {
         </div>
       </header>
 
-      <div className="resumo">
-        <span>nivel {nivel}</span>
-        <span>{v.hp} HP</span>
-        <span>CA {v.ac.total}</span>
-        <span className={v.slots_abertos.length ? "pend" : "ok"}>
-          {v.slots_abertos.length} pendencia(s)
-        </span>
-      </div>
+      <div className="colunas">
+        <main className="coluna-build">
+          <section className="bloco identidade">
+            <Slot base={base} rotulo="Ancestralidade"
+                  candidatos={cru(opcoesDe("ancestry"))} filtros={FILTROS_DE_RARIDADE}
+                  escolhido={escolhaEm("ancestralidade", "criacao")}
+                  aoEscolher={(x) => setD(doc.escolher(d, "ancestralidade", "criacao", x))}
+                  aoLimpar={() => setD(doc.limpar(d, "ancestralidade", "criacao"))} />
+            <Slot base={base} rotulo="Heranca"
+                  candidatos={cru(opcoesDe("heritage"))} filtros={FILTROS_DE_RARIDADE}
+                  escolhido={escolhaEm("heranca", "criacao")}
+                  aoEscolher={(x) => setD(doc.escolher(d, "heranca", "criacao", x))}
+                  aoLimpar={() => setD(doc.limpar(d, "heranca", "criacao"))} />
+            <Slot base={base} rotulo="Background"
+                  candidatos={cru(opcoesDe("background"))} filtros={FILTROS_DE_RARIDADE}
+                  escolhido={escolhaEm("background", "criacao")}
+                  aoEscolher={(x) => setD(doc.escolher(d, "background", "criacao", x))}
+                  aoLimpar={() => setD(doc.limpar(d, "background", "criacao"))} />
 
-      <main>
-        {aba === "criacao" && (
-          <section className="painel">
-            {(
-              [
-                ["ancestralidade", "ancestry", "Ancestralidade"],
-                ["heranca", "heritage", "Heranca"],
-                ["background", "background", "Background"],
-              ] as const
-            ).map(([slot, kind, rotulo]) => (
-              <Picker
-                key={slot}
-                titulo={rotulo}
-                escolhido={escolhaEm(slot, "criacao")}
-                candidatos={cru(opcoesDe(kind))}
-                aoEscolher={(x) => setD(doc.escolher(d, slot, "criacao", x))}
-                aoLimpar={() => setD(doc.limpar(d, slot, "criacao"))}
-              />
-            ))}
-
-            <div className="picker">
-              <header>
-                <h4>Boosts de atributo</h4>
-              </header>
-              <p className="nota">
-                {v.boosts.declarados} de {v.boosts.direito} escolhidos
-              </p>
-              <ul className="fontes">
-                {v.boosts.fontes.map((f, i) => (
-                  <li key={i}>
-                    {f.origem}: {f.quantidade}{" "}
-                    {f.opcoes ? `(entre ${f.opcoes.join("/")})` : "(livre)"}
-                  </li>
-                ))}
-              </ul>
+            <div className="boosts">
+              <div className="cabecalho-boost">
+                <span className="slot-rotulo">Boosts de atributo</span>
+                <span className={v.boosts.declarados === v.boosts.direito ? "ok" : "pend"}>
+                  {v.boosts.declarados} / {v.boosts.direito}
+                </span>
+              </div>
               <BoostPicker d={d} setD={setD} />
             </div>
           </section>
-        )}
 
-        {aba === "progressao" && (
-          <section className="painel">
-            {nivel === 0 && (
-              <p className="nota">
-                nenhum nivel ainda -- suba para o nivel 1 para comecar
-              </p>
-            )}
-            <div className="niveis">
-              {Array.from({ length: nivel }, (_, i) => i + 1).map((n) => (
-                <div key={n} className="nivel">
-                  <h3>nivel {n}</h3>
+          {Array.from({ length: Math.max(alvo, nivel) }, (_, i) => i + 1).map((n) => (
+            <section key={n} className={`bloco nivel ${n > nivel ? "futuro" : ""}`}>
+              <h3>
+                nivel {n}
+                {n > nivel && <span className="marca-futuro">nao alcancado</span>}
+              </h3>
 
-                  <Picker
-                    titulo="Classe deste nivel (a houserule)"
-                    escolhido={escolhaEm("nivel_de_classe", n)}
-                    candidatos={cru(opcoesDe("class"))}
-                    aoEscolher={(x) => setD(doc.definirClasseDoNivel(d, n, x))}
-                  />
+              <Slot base={base}
+                rotulo="Classe deste nivel"
+                candidatos={cru(opcoesDe("class"))}
+                escolhido={escolhaEm("nivel_de_classe", n)}
+                aoEscolher={(x) => setD(doc.definirClasseDoNivel(d, n, x))}
+              />
 
-                  {SLOTS_DO_NIVEL.filter((s) =>
-                    (v.slots[s.cadencia] ?? []).includes(n),
-                  ).map((s) => (
-                    <Picker
-                      key={s.slot}
-                      titulo={s.rotulo}
-                      escolhido={escolhaEm(s.slot, n)}
-                      candidatos={p.candidatos(s.slot, n)}
-                      aoEscolher={(x) => setD(doc.escolher(d, s.slot, n, x))}
-                      aoLimpar={() => setD(doc.limpar(d, s.slot, n))}
-                    />
-                  ))}
-
-                  {v.aumentos_de_pericia.niveis.includes(n) && (
-                    <Picker
-                      titulo="Aumento de pericia"
-                      escolhido={escolhaEm("skill_increase", n)}
-                      candidatos={p.candidatos("skill_increase", n)}
-                      aoEscolher={(x) =>
-                        setD(doc.escolher(d, "skill_increase", n, x))
-                      }
-                      aoLimpar={() => setD(doc.limpar(d, "skill_increase", n))}
-                    />
-                  )}
-
-                  {v.subclasses
-                    .filter((b) => b.nivel === n && !b.escolhido)
-                    .map((b, i) => (
-                      <Picker
-                        key={`sub-${i}`}
-                        titulo={`${b.classe} / ${b.eixo}`}
-                        escolhido={escolhaEm("subclasse", n)}
-                        candidatos={p.candidatos("subclasse", n)}
-                        aoEscolher={(x) => setD(doc.escolher(d, "subclasse", n, x))}
-                        aoLimpar={() => setD(doc.limpar(d, "subclasse", n))}
-                      />
-                    ))}
-                </div>
+              {n <= nivel && TRILHOS.filter((t) =>
+                (v.slots[t.cadencia] ?? []).includes(n),
+              ).map((t) => (
+                <Slot base={base} key={t.slot} rotulo={t.rotulo}
+                      filtros={FILTROS_DE_FEAT}
+                      candidatos={p.candidatos(t.slot, n)}
+                      escolhido={escolhaEm(t.slot, n)}
+                      aoEscolher={(x) => setD(doc.escolher(d, t.slot, n, x))}
+                      aoLimpar={() => setD(doc.limpar(d, t.slot, n))} />
               ))}
-            </div>
 
-            <div className="controles">
-              <button
-                onClick={() => {
-                  const anterior =
-                    escolhaEm("nivel_de_classe", nivel) ?? opcoesDe("class")[0]?.id;
-                  if (anterior) {
-                    setD(doc.definirClasseDoNivel(d, nivel + 1, anterior));
-                  }
-                }}
-              >
-                + subir para o nivel {nivel + 1}
-              </button>
-              {nivel > 0 && (
-                <button onClick={() => setD(doc.removerUltimoNivel(d))}>
-                  - remover o nivel {nivel}
+              {n <= nivel && v.aumentos_de_pericia.niveis.includes(n) && (
+                <Slot base={base} rotulo="Aumento de pericia"
+                      candidatos={p.candidatos("skill_increase", n)}
+                      escolhido={escolhaEm("skill_increase", n)}
+                      aoEscolher={(x) => setD(doc.escolher(d, "skill_increase", n, x))}
+                      aoLimpar={() => setD(doc.limpar(d, "skill_increase", n))} />
+              )}
+
+              {n <= nivel && v.subclasses.filter((b) => b.nivel === n).map((b, i) => (
+                <Slot base={base} key={`sub${i}`} rotulo={`${b.classe} / ${b.eixo}`}
+                      candidatos={p.candidatos("subclasse", n)}
+                      escolhido={escolhaEm("subclasse", n)}
+                      aoEscolher={(x) => setD(doc.escolher(d, "subclasse", n, x))}
+                      aoLimpar={() => setD(doc.limpar(d, "subclasse", n))} />
+              ))}
+
+              {/* o que este nivel CONCEDEU -- nao e escolha, e consequencia */}
+              {n <= nivel && (() => {
+                const dadas = v.features.filter((f) => f.nivel_de_classe === n);
+                return dadas.length ? (
+                  <ul className="concedido-no-nivel">
+                    {dadas.map((f, i) => <li key={i}>{f.nome}</li>)}
+                  </ul>
+                ) : null;
+              })()}
+
+              {n === nivel + 1 && (
+                <button className="subir"
+                        onClick={() => {
+                          const anterior = escolhaEm("nivel_de_classe", nivel)
+                            ?? classePrincipal ?? opcoesDe("class")[0]?.id;
+                          if (anterior) setD(doc.definirClasseDoNivel(d, n, anterior));
+                        }}>
+                  + subir para o nivel {n}
                 </button>
               )}
-            </div>
-          </section>
-        )}
+            </section>
+          ))}
 
-        {aba === "ficha" && (
-          <Ficha
-            v={v}
-            origemProficiencia={p.origem_proficiencia}
-            hpDetalhe={p.hp_detalhe}
-          />
-        )}
-      </main>
+          {nivel > 0 && (
+            <button className="remover" onClick={() => setD(doc.removerUltimoNivel(d))}>
+              remover o nivel {nivel}
+            </button>
+          )}
+        </main>
+
+        <PainelDireito p={p} v={v} base={base} />
+      </div>
     </div>
   );
 }
 
-/**
- * Boost e o unico slot que aceita VARIAS entradas no mesmo nivel -- por isso
- * nao passa pelo `escolher` comum, que substitui por (slot, nivel).
- */
-function BoostPicker({
-  d, setD,
-}: {
-  d: Documento;
-  setD: (x: Documento) => void;
-}) {
+/** Boost e o unico slot que aceita VARIAS entradas no mesmo nivel. */
+function BoostPicker({ d, setD }: { d: Documento; setD: (x: Documento) => void }) {
   const [sel, setSel] = useState<string[]>([]);
   return (
-    <div className="boosts">
+    <div className="boost-picker">
       <div className="linha">
         {ATRIBUTOS.map((a) => (
-          <button
-            key={a}
-            className={sel.includes(a) ? "sel" : ""}
-            onClick={() =>
-              setSel(sel.includes(a) ? sel.filter((x) => x !== a) : [...sel, a])
-            }
-          >
+          <button key={a} className={sel.includes(a) ? "sel" : ""}
+                  onClick={() => setSel(sel.includes(a)
+                    ? sel.filter((x) => x !== a) : [...sel, a])}>
             {a.toUpperCase()}
           </button>
         ))}
       </div>
-      <button
-        disabled={!sel.length}
-        onClick={() => {
-          const quantos = d.escolhas.filter(
-            (e) => e.slot === "boosts_livres",
-          ).length;
-          setD(doc.definirBoosts(d, "criacao", quantos, sel));
-          setSel([]);
-        }}
-      >
-        adicionar {sel.length || ""} boost(s)
+      <button className="add" disabled={!sel.length}
+              onClick={() => {
+                const q = d.escolhas.filter((e) => e.slot === "boosts_livres").length;
+                setD(doc.definirBoosts(d, "criacao", q, sel));
+                setSel([]);
+              }}>
+        adicionar {sel.length || ""}
       </button>
-      <ul className="fontes">
-        {d.escolhas
-          .filter((e) => e.slot === "boosts_livres")
-          .map((e, i) => (
-            <li key={i}>{(e.pega as string[]).join(", ").toUpperCase()}</li>
-          ))}
+      <ul className="declarados">
+        {d.escolhas.filter((e) => e.slot === "boosts_livres").map((e, i) => (
+          <li key={i}>
+            {(e.pega as string[]).join(" ").toUpperCase()}
+            <button className="slot-x"
+                    onClick={() => setD({
+                      ...d,
+                      escolhas: d.escolhas.filter((x) => x !== e),
+                    })}>x</button>
+          </li>
+        ))}
       </ul>
     </div>
   );
