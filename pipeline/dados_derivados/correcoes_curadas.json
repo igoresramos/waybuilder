@@ -5,10 +5,70 @@
       "id": "wb:class/psychic",
       "campo": "key_ability",
       "valor_atual": [],
-      "valor": ["int", "cha"],
+      "valor": [
+        "int",
+        "cha"
+      ],
       "fonte": "prosa da propria classe (base/text/class.json, wb:text/class/psychic): 'Key Attribute: Intelligence or Charisma. At 1st level, your class gives you an attribute boost to Intelligence or Charisma, as determined by your choice of subconscious mind.'",
       "por_que": "O Foundry declara `system.keyAbility.value: []` para o Psychic -- nao e falha do extrator, e lacuna da fonte: o VTT modela a chave pela subclasse (subconscious mind) em vez de pelo campo da classe. Era a UNICA das 27 classes sem key_ability, e a consequencia foi medida em teste de carga: das 285 fichas geradas, as 6 unicas que violaram a regra 8 (boost de habilidade-chave so da primeira classe) eram todas de Psychic entrando como primeira classe -- a regra nao tinha de onde tirar qual atributo boostar. As outras 26 classes seguem vindo da fonte, sem curadoria.",
       "curado_em": "2026-07-27"
+    },
+    {
+      "id": "wb:feat/fighter-dedication",
+      "campo": "grants",
+      "valor_atual": [
+        {
+          "choice": {
+            "flag": "attribute",
+            "opcoes": 2
+          }
+        },
+        {
+          "choice": {
+            "flag": "skill",
+            "opcoes": 2
+          }
+        },
+        {
+          "skill_training": {
+            "free": 1,
+            "rank": "trained"
+          }
+        },
+        {
+          "proficiency": {
+            "simple": "trained"
+          }
+        }
+      ],
+      "valor": [
+        {
+          "choice": {
+            "flag": "attribute",
+            "opcoes": 2
+          }
+        },
+        {
+          "choice": {
+            "flag": "skill",
+            "opcoes": 2
+          }
+        },
+        {
+          "skill_training": {
+            "free": 1,
+            "rank": "trained"
+          }
+        },
+        {
+          "proficiency": {
+            "simple": "trained",
+            "martial": "trained"
+          }
+        }
+      ],
+      "fonte": "Player Core, Fighter Dedication: 'You become trained in simple weapons and martial weapons. You become trained in your choice of Acrobatics or Athletics...'",
+      "por_que": "O Foundry declara UM rule element de proficiencia para esta dedicacao -- `system.proficiencies.attacks.simple.rank = 1` -- e nao escreve o martial em lugar nenhum (conferido em `foundry/packs/pf2e/feats/archetype/fighter/fighter-dedication.json`, os 6 rules). Nao e falha do extrator: a fonte esta incompleta no ponto. O texto oficial da as DUAS proficiencias, e sem martial a dedicacao de Guerreiro fica pior que o RAW justo no projeto cuja regra da casa existe para ser comparada com o RAW."
     }
   ]
 }

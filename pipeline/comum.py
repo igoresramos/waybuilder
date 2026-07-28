@@ -425,7 +425,19 @@ def mecanizacao(kind, tinha_mecanica, perdeu_mecanica,
     if kind in KINDS_SEM_GRANTS:
         grants_completos = None
     elif not tinha_mecanica:
-        grants_completos = True          # nada a converter e sucesso
+        # `None`, nao `True`. Aqui a fonte nao declarou mecanica nenhuma, e
+        # dizer "completos" faz o consumidor concluir que os `grants` vazios
+        # representam o feat -- quando o que houve foi ausencia de dado.
+        #
+        # Custou caro: 61 das 226 dedicacoes (Cavalier, que devia dar montaria;
+        # Blessed One, que devia dar `lay on hands`) tinham `grants: []` e
+        # `grants_completos: true` ao mesmo tempo, e a auditoria so achou o
+        # problema porque foi olhar `mechanized`. Verificado que nao vem de
+        # extrator preguicoso: no Foundry, 45 das 192 dedicacoes tambem tem zero
+        # rule elements.
+        #
+        # `None` obriga quem le a tratar o caso em vez de confiar.
+        grants_completos = None
     else:
         grants_completos = not perdeu_mecanica
 

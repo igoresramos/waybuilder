@@ -616,7 +616,6 @@
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
-   "wb:feat/named-artillery",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/quick-identification",
@@ -629,7 +628,8 @@
    "wb:feat/bon-mot",
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
-   "wb:feat/charming-liar"
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber"
   ]
  },
  "extras": {

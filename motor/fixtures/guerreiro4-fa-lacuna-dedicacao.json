@@ -1023,7 +1023,7 @@
   "fora_do_requisito": [
    {
     "feat": "Barbarian Resiliency",
-    "motivo": "feat do arquetipo Barbarian exige Barbarian Dedication (RAW do trait archetype), que a ficha nao tem"
+    "motivo": "exige ter Barbarian Dedication"
    }
   ],
   "heranca": "Versatile Human",

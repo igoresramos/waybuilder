@@ -57,6 +57,17 @@ python3 unificar_efeitos.py
 echo "== 4h. converter rule elements declarativos =="
 python3 converter_rule_elements.py
 
+echo "== 4h2. gate de arquetipo (regra do livro que a fonte deixa implicita) =="
+# "You can't select a feat from an archetype unless you have its dedication
+# feat" -- escrito uma vez no livro e em nenhum `requires`. Sem este passo da
+# para pegar feat avancado de arquetipo sem nunca ter pego a dedicacao.
+python3 derivar_gate_arquetipo.py
+
+echo "== 4h3. aplicar aliases do remaster dentro de requires =="
+# a fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao
+# reescreve quem citava o id aposentado
+python3 aplicar_aliases_em_requires.py
+
 echo "== 4i. aplicar correcoes curadas =="
 # o que exigiu leitura da prosa oficial porque as tres fontes estao vazias no
 # ponto. Cada entrada declara o valor que ESPERA achar: se a fonte consertar o

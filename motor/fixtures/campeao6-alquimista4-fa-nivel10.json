@@ -622,14 +622,14 @@
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
-   "wb:feat/named-artillery",
    "wb:feat/additional-lore",
    "wb:feat/alchemical-crafting",
    "wb:feat/assurance",
    "wb:feat/acrobatic-performer",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist"
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter"
   ]
  },
  "extras": {

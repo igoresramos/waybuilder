@@ -709,3 +709,40 @@ caixa alta. Formatador proprio, com as convencoes do PF2e: dado minusculo
 (`Deadly d8`), letra de dano maiuscula (`Versatile P`), numero solto e distancia
 (`Thrown 20 ft.`). Um teste varre a base cobrando que nenhum trait saia em
 minuscula.
+
+### Auditoria de arquetipos: o que dava para consertar e o que nao dava
+Aplicados quatro consertos, todos no PIPELINE (o app nunca corrige dado):
+
+1. **407 feats de arquetipo nao exigiam a propria dedicacao.** A regra existe no
+   livro -- "You can't select a feat from an archetype unless you have its
+   dedication feat" -- escrita UMA vez e nunca repetida em cada feat, e por isso
+   nenhuma das tres fontes a poe em `requires`. Dava para pegar `Absorb Spell`
+   sem nunca ter pego `Spellmaster Dedication`. Derivado em
+   `derivar_gate_arquetipo.py`, como conjuncao que preserva o requisito
+   existente. **Isto nao e fabricar dado**: a diferenca em relacao a inventar
+   trait de heranca (recusado) e que aqui a regra esta escrita e vale para todos.
+2. **26 ids orfaos em `requires`.** A fusao renomeia o registro (`Attack of
+   Opportunity` -> `Reactive Strike`, `Gnoll` -> `Kholo`) e guarda o nome antigo
+   em `aliases`, mas nao volta para reescrever quem citava o morto. 24 tinham
+   alias -- o mapa existia, so nunca fora aplicado. **O portao 3 foi de 26 para
+   0.**
+3. **Fighter Dedication treinava so armas simples.** O texto oficial da simples
+   E marciais; conferido no Foundry, o unico rule element de proficiencia e
+   `attacks.simple.rank`. A fonte esta incompleta, nao o extrator -- caso de
+   curadoria, com a guarda de `valor_atual` que impede sobrescrever em silencio
+   se a fonte consertar depois.
+4. **`grants_completos: true` mentia.** `not tinha_mecanica -> True` tratava
+   "a fonte nao declarou nada" como "converti tudo". 61 dedicacoes tinham
+   `grants: []` e `grants_completos: true` ao mesmo tempo. Passa a `None`, que
+   obriga quem le a tratar o caso.
+
+**O que NAO deu para consertar, e por que nao e preguica:** as 61 dedicacoes sem
+mecanica (Cavalier deveria dar montaria, Blessed One `lay on hands`) e o
+spellcasting das dedicacoes de conjurador. Fui a fonte: no Foundry, **45 das 192
+dedicacoes tambem tem zero rule elements**, e Wizard Dedication tem UM (arcana).
+O dado nao existe em forma estruturada em lugar nenhum -- e o mesmo padrao das
+traits de heranca e das causas do Campeao. Exige mecanizacao manual via
+curadoria, uma a uma.
+
+Mudar dado quebrou a paridade de novo -- 3 fichas do gabarito. O ciclo e sempre:
+mudou base ou regra -> `teste_motor.py` (95) -> `gerar_fixtures.py` -> vitest.

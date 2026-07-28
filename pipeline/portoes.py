@@ -458,9 +458,27 @@ def portao_8_artefato_citado(base, ctx):
     except (OSError, ValueError, KeyError):
         pass
 
+    def existe(caminho: str, citantes: set) -> bool:
+        """Existe a partir da raiz -- ou da pasta de quem cita.
+
+        Um caminho num arquivo de config e relativo AO CONFIG, nao a raiz do
+        repo: `app/tsconfig.app.json` cita `motor/motor.test.ts` querendo dizer
+        `app/src/motor/motor.test.ts`. Checar so contra a raiz acusava perda de
+        um arquivo que esta no disco, e portao que falha sempre para de ser
+        lido -- que e justamente o que este portao existe para impedir.
+        """
+        if os.path.exists(os.path.join(RAIZ, caminho)):
+            return True
+        for citante in citantes:
+            pasta = os.path.dirname(citante)
+            for tentativa in (caminho, os.path.join("src", caminho)):
+                if os.path.exists(os.path.join(RAIZ, pasta, tentativa)):
+                    return True
+        return False
+
     novos, sabidos = [], []
     for c in sorted(citados):
-        if os.path.exists(os.path.join(RAIZ, c)):
+        if existe(c, citados[c]):
             continue
         onde = ", ".join(sorted(citados[c])[:3])
         # Subcaminho de um diretorio ja registrado herda o registro: perder

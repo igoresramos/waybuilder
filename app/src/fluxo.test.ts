@@ -548,3 +548,46 @@ describe("nome de trait", () => {
     expect([...feios]).toEqual([]);
   });
 });
+
+/**
+ * Os consertos de dado aplicados em 2026-07-28, travados contra regressao.
+ * Cada um veio de um achado da auditoria de arquetipos.
+ */
+describe("consertos da auditoria de arquetipos", () => {
+  it("feat de arquetipo exige a dedicacao daquele arquetipo (regra do livro)", () => {
+    const absorb = base.opcional("wb:feat/absorb-spell");
+    expect(absorb, "feat sumiu da base").toBeTruthy();
+    expect(JSON.stringify(absorb!.requires))
+      .toContain("wb:feat/spellmaster-dedication");
+  });
+
+  it("nenhum requires cita id que nao existe na base", () => {
+    const ids = new Set([...base.por_id.values()].map((r) => r.id));
+    const orfas = new Set<string>();
+    for (const r of base.por_id.values()) {
+      const texto = JSON.stringify(r.requires ?? {});
+      for (const m of texto.match(/wb:[a-z-]+\/[a-z0-9-]+/g) ?? []) {
+        if (!ids.has(m)) orfas.add(m);
+      }
+    }
+    // as 2 que sobram nao tem alias na base -- sao ruido de parse de prosa
+    expect([...orfas].sort()).toEqual([
+      "wb:heritage/versatile", "wb:heritage/you-have-a-versatile",
+    ]);
+  });
+
+  it("Fighter Dedication treina simples E marciais, como o texto diz", () => {
+    const fd = base.opcional("wb:feat/fighter-dedication");
+    const prof = (fd!.grants as Array<Record<string, unknown>>)
+      .find((g) => "proficiency" in g)?.proficiency as Record<string, string>;
+    expect(prof.simple).toBe("trained");
+    expect(prof.martial).toBe("trained");
+  });
+
+  it("`grants_completos` nao mente quando a fonte nao declarou mecanica", () => {
+    const mentindo = [...base.por_id.values()].filter(
+      (r) => r.mechanized === false && r.grants_completos === true,
+    );
+    expect(mentindo.map((r) => r.id)).toEqual([]);
+  });
+});
