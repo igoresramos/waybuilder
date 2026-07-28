@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import type { Base } from "../motor/base";
 import type { Registro } from "../motor/tipos";
 import { prosa } from "../carregarBase";
+import { nomeDeTrait } from "../nomeDeTrait";
 
 /** O registro da trait, quando o kind `trait` esta carregado. */
 const registroDaTrait = (base: Base, slug: string): Registro | null =>
@@ -47,7 +48,7 @@ function Chip({ base, slug }: { base: Base; slug: string }) {
   return (
     <span className={`trait ${ehDeAncestria(reg) ? "ancestral" : ""}`}
           title={dica || undefined}>
-      {reg?.name ?? slug}
+      {nomeDeTrait(base, slug)}
     </span>
   );
 }

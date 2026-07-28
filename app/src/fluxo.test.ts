@@ -19,6 +19,7 @@ import type { Documento, Registro } from "./motor/tipos";
 import * as doc from "./doc";
 import { limparMarcacao } from "./marcacao";
 import { aplicarFunil, FUNIL_VAZIO } from "./componentes/Funil";
+import { nomeDeTrait, formatarSlugDeTrait } from "./nomeDeTrait";
 
 const RAIZ = join(__dirname, "..", "..");
 const PAYLOAD = join(RAIZ, "pipeline", "base", "app", "por-kind");
@@ -512,5 +513,38 @@ describe("dedicacao cabe no slot de feat de classe", () => {
     expect(c, "Fighter Dedication sumiu da lista").toBeTruthy();
     expect(c!.atende).toBe(false);
     expect(c!.motivos.join(" ")).toBeTruthy();
+  });
+});
+
+/**
+ * Nome de trait na tela: caixa correta, sempre.
+ *
+ * 62 slugs nao tem registro proprio -- sao os parametrizados de arma
+ * (`two-hand-d8`, `versatile-p`, `deadly-d8`, `thrown-20`) -- e apareciam crus
+ * e em minusculo no meio dos outros.
+ */
+describe("nome de trait", () => {
+  it("usa o registro quando existe", () => {
+    expect(nomeDeTrait(base, "dwarf")).toBe("Dwarf");
+    expect(nomeDeTrait(base, "agile")).toBe("Agile");
+  });
+
+  it("formata os parametrizados de arma", () => {
+    expect(formatarSlugDeTrait("two-hand-d8")).toBe("Two-Hand d8");
+    expect(formatarSlugDeTrait("versatile-p")).toBe("Versatile P");
+    expect(formatarSlugDeTrait("deadly-d10")).toBe("Deadly d10");
+    expect(formatarSlugDeTrait("thrown-20")).toBe("Thrown 20 ft.");
+    expect(formatarSlugDeTrait("jousting-d6")).toBe("Jousting d6");
+  });
+
+  it("nenhum trait da base inteira sai em minuscula", () => {
+    const feios = new Set<string>();
+    for (const r of base.por_id.values()) {
+      for (const t of ((r.traits ?? []) as string[])) {
+        const nome = nomeDeTrait(base, t);
+        if (/^[a-z]/.test(nome)) feios.add(`${t} -> ${nome}`);
+      }
+    }
+    expect([...feios]).toEqual([]);
   });
 });

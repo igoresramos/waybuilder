@@ -26,6 +26,7 @@ import { iconeDeSlot } from "./Icones";
 import { Traits } from "./Traits";
 import { ListaVirtual } from "./ListaVirtual";
 import { limparMarcacao } from "../marcacao";
+import { Prosa } from "./Prosa";
 import { Funil, FUNIL_VAZIO, aplicarFunil, type EstadoDoFunil } from "./Funil";
 
 export interface Filtro {
@@ -243,15 +244,9 @@ function Modal({
                     <em>o requisito sugere e ordena -- da para escolher assim mesmo</em>
                   </p>
                 )}
-                <div className="prosa">
-                  {texto ?? <span className="vazio">sem texto para este registro</span>}
-                </div>
-                {reg.source?.book && (
-                  <p className="fonte">
-                    {reg.source.book}
-                    {reg.source.page ? `, pg. ${reg.source.page}` : ""}
-                  </p>
-                )}
+                {texto
+                  ? <Prosa texto={texto} nome={reg.name} />
+                  : <p className="vazio">sem texto para este registro</p>}
               </>
             )}
           </div>

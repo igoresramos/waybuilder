@@ -668,3 +668,44 @@ fazer. Corrigir so o lado que estava na frente teria criado duas regras
 divergentes em silencio. O ciclo certo: corrigir nas DUAS implementacoes, rodar
 os 95 testes do Python, `gerar_fixtures.py`, e so entao os do TS. Vale para
 qualquer mudanca em `candidatos` ou `_aceita_no_slot`.
+
+### A prosa das fontes vem em bloco unico, mas tem estrutura recuperavel
+O texto que o picker mostrava era um paragrafo so com tudo colado -- nome, custo
+de acao, livro, gatilho, requisito, efeito e, nas ancestralidades, seis secoes de
+folclore. Ilegivel na pratica.
+
+A estrutura existe e foi MEDIDA, nao chutada. Ha duas familias:
+
+| familia | marca | kinds |
+|---|---|---|
+| item de regra | separador `---` entre cabecalho e corpo | feat 98%, spell 100%, weapon 91%, equipment 89% |
+| descritivo | rotulos nomeados, sem `---` | ancestry, heritage, background, class, archetype (0%) |
+
+Os rotulos sao vocabulario fixo da Paizo e dao a classificacao de graca:
+REGRA -- `Frequency`, `Trigger`, `Requirements`, `Effect`, `Special`, os quatro
+graus de sucesso; SABOR -- `You Might`, `Others Probably`,
+`Physical Description`, `Society`, `Alignment and Religion`, `Names`,
+`Adventurers`, `Ethnicities`. Os seis primeiros aparecem em **50 das 50**
+ancestralidades.
+
+Tres pegadinhas que custaram iteracao:
+1. **Delimitar a fonte pelo proximo rotulo nao funciona.** Na ancestralidade nao
+   ha rotulo entre `Source ... pg. 62` e a descricao, e a fonte engolia o texto
+   inteiro. Quem fecha a fonte e o formato dela: `<livro> pg. <numero>`.
+2. **A abertura sem rotulo e ambigua** -- num feat e o efeito, numa ancestralidade
+   e a descricao. O desempate esta na companhia: se ha blocos de sabor e nao ha
+   `---`, a abertura e sabor.
+3. `You Might...` deixa a reticencia para tras ao casar o rotulo.
+
+Na tela: campos curtos primeiro (com barra accent), efeito no meio, e a fantasia
+RECOLHIDA atras de "ler a descricao (7)" -- ela nao some, porque escolher
+ancestralidade e metade sabor, mas nao ocupa a tela de quem compara dois feats.
+
+### Trait parametrizado nao tem registro proprio
+62 slugs distintos nao existem como `wb:trait/*` -- `two-hand-d8` (155 usos),
+`versatile-p` (71), `deadly-d8` (53), `thrown-20` (37). Nao e buraco de dado: o
+parametro faz parte do nome. Apareciam crus e minusculos no meio de traits em
+caixa alta. Formatador proprio, com as convencoes do PF2e: dado minusculo
+(`Deadly d8`), letra de dano maiuscula (`Versatile P`), numero solto e distancia
+(`Thrown 20 ft.`). Um teste varre a base cobrando que nenhum trait saia em
+minuscula.

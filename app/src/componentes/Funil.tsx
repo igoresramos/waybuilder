@@ -15,6 +15,7 @@
 import { useMemo, useState } from "react";
 import type { Base } from "../motor/base";
 import type { Candidato } from "../motor/tipos";
+import { nomeDeTrait } from "../nomeDeTrait";
 
 export interface EstadoDoFunil {
   soAtende: boolean;
@@ -68,8 +69,7 @@ export function Funil({
       .slice(0, 24);
   }, [candidatos, base]);
 
-  const nomeDoTrait = (slug: string) =>
-    base.opcional(`wb:trait/${slug}`)?.name ?? slug;
+  const nomeDoTrait = (slug: string) => nomeDeTrait(base, slug);
 
   const alternarTrait = (t: string) =>
     aoMudar({
