@@ -1,0 +1,43 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {
+    "versao": "2026-07-27",
+    "pin_foundry": "87f9e502"
+  },
+  "identidade": {
+    "nome": "Cassian Duas-Faces",
+    "jogador": "Igor",
+    "notas": "CASO 6 do pedido de auditoria (2026-07-27): exercita a regra 23 (exclusao mutua nivel-de-classe x dedicacao-da-mesma-classe) DE PROPOSITO. Mago 4 puro, mas o slot de Free Archetype do nivel 2 foi gasto em Wizard Dedication -- a dedicacao MULTICLASSE da PROPRIA classe que o personagem ja tem. Pelo principio zero isso NUNCA deveria bloquear a montagem; a expectativa e DUAS entradas em `fora_do_requisito`: uma vinda de `_veto_dedicacao_da_propria_classe` (checada durante a avaliacao normal do requires do feat) e outra de `_veto_classe_de_dedicacao_ja_pega` (passada separada, do lado da classe). FA@4 = Basic Arcana (feat de arquetipo que exige `has: wizard-dedication`) prova que a cadeia continua sendo construida normalmente mesmo com a dedicacao sinalizada como invalida -- nada trava. Elfo (Ancient Elf) escolhido porque os dois boosts de ancestria SAO fixos (DEX, INT -- opcoes de tamanho 1) e aplicados automaticamente pelo motor, ao contrario do Humano; o key ability do Mago (INT, opcao unica) tambem e automatico. Boosts_livres compensam so o que sobra: o livre da ancestria e os dois do background (Hermit: 1 livre + 1 par con/int)."
+  },
+  "escolhas": [
+    { "em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/elf" },
+    { "em": "criacao", "slot": "heranca", "pega": "wb:heritage/ancient-elf" },
+    { "em": "criacao", "slot": "background", "pega": "wb:background/hermit" },
+    { "em": 1, "slot": "nivel_de_classe", "pega": "wb:class/wizard" },
+    { "em": 1, "slot": "subclasse", "pega": "wb:arcane-school/evocation" },
+    { "em": 1, "slot": "subclasse", "pega": "wb:class-feature/spell-blending" },
+    { "em": 1, "slot": "boosts_livres", "pega": ["wis", "int", "con"] },
+    { "em": 1, "slot": "boosts_livres", "pega": ["int", "con", "wis", "dex"] },
+    { "em": 1, "slot": "ancestry_feat", "pega": "wb:feat/elven-lore" },
+    { "em": 2, "slot": "nivel_de_classe", "pega": "wb:class/wizard" },
+    { "em": 2, "slot": "class_feat", "pega": "wb:feat/energy-ablation" },
+    { "em": 2, "slot": "skill_feat", "pega": "wb:feat/assurance" },
+    { "em": 2, "slot": "free_archetype", "pega": "wb:feat/wizard-dedication" },
+    { "em": 3, "slot": "nivel_de_classe", "pega": "wb:class/wizard" },
+    { "em": 3, "slot": "general_feat", "pega": "wb:feat/fleet" },
+    { "em": 4, "slot": "nivel_de_classe", "pega": "wb:class/wizard" },
+    { "em": 4, "slot": "class_feat", "pega": "wb:feat/spell-protection-array" },
+    { "em": 4, "slot": "skill_feat", "pega": "wb:feat/additional-lore" },
+    { "em": 4, "slot": "free_archetype", "pega": "wb:feat/basic-arcana" }
+  ],
+  "atores": [],
+  "inventario": [
+    { "item": "wb:weapon/staff", "qtd": 1, "equipado": true, "potencia": 0 }
+  ],
+  "manual": {
+    "nota": "tudo aqui e escrito pelo jogador e nunca sobrescrito pelo motor",
+    "hp_bonus": 0,
+    "proficiencias_forcadas": {},
+    "itens_caseiros": []
+  }
+}

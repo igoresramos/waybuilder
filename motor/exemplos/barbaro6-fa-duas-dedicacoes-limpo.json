@@ -1,0 +1,51 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {
+    "versao": "2026-07-27",
+    "pin_foundry": "87f9e502"
+  },
+  "identidade": {
+    "nome": "Grosh Punho-de-Ferro",
+    "jogador": "Igor",
+    "notas": "CASO 2 do pedido de auditoria (2026-07-27): classe unica nivel 6 + DUAS dedicacoes de Free Archetype, respeitando a regra RAW do trait `dedication` (nao se pega uma nova dedicacao sem 2 feats do arquetipo anterior). Sequencia: FA@2 Archer Dedication; FA@4 Quick Shot (1o feat nao-dedicacao de Archer); class_feat@6 Crossbow Terror, GASTO NO SLOT DE CLASSE (regra 13: feat de arquetipo pago com class feat tambem vale nivel de personagem -- e o 2o feat nao-dedicacao de Archer, contagem chega a 2 ANTES da nova dedicacao ser processada porque aparece antes no array); FA@6 Marshal Dedication (2a dedicacao) -- nao deveria disparar o aviso de 'nova dedicacao sem 2 feats'. Barbaro (key_ability unico STR) para contrastar com o caso do Ranger: aqui o boost de key ability da classe E aplicado automaticamente pelo motor (regra 8 funciona quando ha 1 unica opcao); os boosts_livres abaixo compensam so ancestria (Orc: 2 livres) e background (Gladiator: 1 livre + 1 par cha/str) -- o motor nao aplica nenhum dos dois sozinho (ver achado no relatorio)."
+  },
+  "escolhas": [
+    { "em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/orc" },
+    { "em": "criacao", "slot": "heranca", "pega": "wb:heritage/battle-ready-orc" },
+    { "em": "criacao", "slot": "background", "pega": "wb:background/gladiator" },
+    { "em": 1, "slot": "nivel_de_classe", "pega": "wb:class/barbarian" },
+    { "em": 1, "slot": "subclasse", "pega": "wb:instinct/fury" },
+    { "em": 1, "slot": "boosts_livres", "pega": ["str", "con", "str", "con"] },
+    { "em": 1, "slot": "boosts_livres", "pega": ["str", "con", "dex", "wis"] },
+    { "em": 1, "slot": "class_feat", "pega": "wb:feat/sudden-charge" },
+    { "em": 1, "slot": "ancestry_feat", "pega": "wb:feat/orc-ferocity" },
+    { "em": 2, "slot": "nivel_de_classe", "pega": "wb:class/barbarian" },
+    { "em": 2, "slot": "class_feat", "pega": "wb:feat/second-wind" },
+    { "em": 2, "slot": "skill_feat", "pega": "wb:feat/assurance" },
+    { "em": 2, "slot": "free_archetype", "pega": "wb:feat/archer-dedication" },
+    { "em": 3, "slot": "nivel_de_classe", "pega": "wb:class/barbarian" },
+    { "em": 3, "slot": "general_feat", "pega": "wb:feat/fleet" },
+    { "em": 4, "slot": "nivel_de_classe", "pega": "wb:class/barbarian" },
+    { "em": 4, "slot": "class_feat", "pega": "wb:feat/fast-movement" },
+    { "em": 4, "slot": "skill_feat", "pega": "wb:feat/additional-lore" },
+    { "em": 4, "slot": "free_archetype", "pega": "wb:feat/quick-shot" },
+    { "em": 5, "slot": "nivel_de_classe", "pega": "wb:class/barbarian" },
+    { "em": 5, "slot": "ancestry_feat", "pega": "wb:feat/athletic-might" },
+    { "em": 6, "slot": "nivel_de_classe", "pega": "wb:class/barbarian" },
+    { "em": 6, "slot": "class_feat", "pega": "wb:feat/crossbow-terror" },
+    { "em": 6, "slot": "skill_feat", "pega": "wb:feat/breath-control" },
+    { "em": 6, "slot": "free_archetype", "pega": "wb:feat/marshal-dedication" }
+  ],
+  "atores": [],
+  "inventario": [
+    { "item": "wb:weapon/greataxe", "qtd": 1, "equipado": true, "potencia": 0 },
+    { "item": "wb:weapon/crossbow", "qtd": 1, "equipado": true, "potencia": 0 },
+    { "item": "wb:armor/explorers-clothing", "qtd": 1, "equipado": true }
+  ],
+  "manual": {
+    "nota": "tudo aqui e escrito pelo jogador e nunca sobrescrito pelo motor",
+    "hp_bonus": 0,
+    "proficiencias_forcadas": {},
+    "itens_caseiros": []
+  }
+}

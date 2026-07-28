@@ -332,7 +332,12 @@ class TestGrantsDaDedicacao(unittest.TestCase):
         """A linha aparece: o problema nao e a escolha, e o efeito dela."""
         self.assertEqual(picks_de_arquetipo(self.p), ["wb:feat/shieldmarshal-dedication"])
         self.assertEqual(self.p.fora_do_requisito, [], motivos(self.p))
-        self.assertEqual(self.p.avisos, [])
+        # nao se exige silencio TOTAL: esta ficha tem o background `warrior`,
+        # que promete um feat cujo alvo o pipeline nao resolveu (item 70) e por
+        # isso avisa com razao. O que este teste trava e que o trilho de
+        # arquetipo esta limpo -- exigir `avisos == []` faria o teste quebrar
+        # por um defeito que nao e o dele.
+        self.assertEqual(sinal_de_arquetipo(self.p), [])
 
     def test_o_dado_esta_na_base(self):
         g = json.dumps(feat("wb:feat/shieldmarshal-dedication").get("grants"))

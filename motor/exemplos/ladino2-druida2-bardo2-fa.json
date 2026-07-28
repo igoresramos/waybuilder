@@ -1,0 +1,61 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {
+    "versao": "2026-07-27",
+    "pin_foundry": "87f9e502"
+  },
+  "identidade": {
+    "nome": "Fizzle Tres-Chapeus",
+    "jogador": "Igor",
+    "notas": "CASO 4 do pedido de auditoria (2026-07-27): multiclasse da casa com TRES classes num personagem nivel 6 -- Ladino 2 (nv1-2) / Druida 2 (nv3-4) / Bardo 2 (nv5-6), com Free Archetype (um unico arquetipo, Marshal, espalhado pelos 3 slots pares pra nao misturar com o teste da regra RAW de 2 feats, que ja e o caso 2). Gnomo de proposito: ao contrario do Humano (2 boosts totalmente livres), o Gnomo tem 2 boosts FIXOS (CHA, CON) e 1 livre, mais falha fixa em FOR -- os fixos E a falha SAO aplicados automaticamente pelo motor (opcoes de tamanho 1), contrastando com o buraco dos boosts livres/pareados (ver achado no relatorio). Racket Thief (Ladino), Animal Order (Druida -- pego via `outras-opcoes` porque a base nao da ao Druida um eixo proprio pra Ordem, so um balaio generico; ver achado sobre o eixo `outras-opcoes`), Muse Enigma (Bardo). class_feat@4 e @6 sao gastos em feats de Druida e Bardo checados contra o nivel DAQUELA classe (regra 12), nao do personagem. skill_feat aparece em TODOS os niveis 1-6 porque o Ladino concede skill feat todo nivel (regra 15) -- e skill_increase idem, testado nos 5 niveis disponiveis (2-6), incluindo um aumento que TREINA uma pericia nova (diplomacy, nivel6) em vez de so subir uma ja treinada."
+  },
+  "escolhas": [
+    { "em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/gnome" },
+    { "em": "criacao", "slot": "heranca", "pega": "wb:heritage/fey-touched-gnome" },
+    { "em": "criacao", "slot": "background", "pega": "wb:background/street-urchin" },
+    { "em": 1, "slot": "nivel_de_classe", "pega": "wb:class/rogue" },
+    { "em": 1, "slot": "subclasse", "pega": "wb:class-feature/thief" },
+    { "em": 1, "slot": "boosts_livres", "pega": ["wis", "dex", "wis"] },
+    { "em": 1, "slot": "boosts_livres", "pega": ["dex", "wis", "cha", "con"] },
+    { "em": 1, "slot": "class_feat", "pega": "wb:feat/nimble-dodge" },
+    { "em": 1, "slot": "ancestry_feat", "pega": "wb:feat/fey-fellowship" },
+    { "em": 1, "slot": "skill_feat", "pega": "wb:feat/assurance" },
+    { "em": 2, "slot": "nivel_de_classe", "pega": "wb:class/rogue" },
+    { "em": 2, "slot": "class_feat", "pega": "wb:feat/mobility" },
+    { "em": 2, "slot": "skill_feat", "pega": "wb:feat/additional-lore" },
+    { "em": 2, "slot": "skill_increase", "pega": "stealth" },
+    { "em": 2, "slot": "free_archetype", "pega": "wb:feat/marshal-dedication" },
+    { "em": 3, "slot": "nivel_de_classe", "pega": "wb:class/druid" },
+    { "em": 3, "slot": "subclasse", "pega": "wb:class-feature/animal-order" },
+    { "em": 3, "slot": "general_feat", "pega": "wb:feat/fleet" },
+    { "em": 3, "slot": "skill_feat", "pega": "wb:feat/breath-control" },
+    { "em": 3, "slot": "skill_increase", "pega": "survival" },
+    { "em": 4, "slot": "nivel_de_classe", "pega": "wb:class/druid" },
+    { "em": 4, "slot": "class_feat", "pega": "wb:feat/plant-empathy" },
+    { "em": 4, "slot": "skill_feat", "pega": "wb:feat/canny-acumen" },
+    { "em": 4, "slot": "skill_increase", "pega": "nature" },
+    { "em": 4, "slot": "free_archetype", "pega": "wb:feat/steel-yourself" },
+    { "em": 5, "slot": "nivel_de_classe", "pega": "wb:class/bard" },
+    { "em": 5, "slot": "subclasse", "pega": "wb:class-feature/enigma" },
+    { "em": 5, "slot": "subclasse", "pega": "wb:class-feature/spell-repertoire-bard" },
+    { "em": 5, "slot": "ancestry_feat", "pega": "wb:feat/adopted-ancestry" },
+    { "em": 5, "slot": "skill_feat", "pega": "wb:feat/armor-proficiency" },
+    { "em": 5, "slot": "skill_increase", "pega": "occultism" },
+    { "em": 6, "slot": "nivel_de_classe", "pega": "wb:class/bard" },
+    { "em": 6, "slot": "class_feat", "pega": "wb:feat/bardic-lore" },
+    { "em": 6, "slot": "skill_feat", "pega": "wb:feat/dubious-knowledge" },
+    { "em": 6, "slot": "skill_increase", "pega": "diplomacy" },
+    { "em": 6, "slot": "free_archetype", "pega": "wb:feat/cadence-call" }
+  ],
+  "atores": [],
+  "inventario": [
+    { "item": "wb:weapon/rapier", "qtd": 1, "equipado": true, "potencia": 0 },
+    { "item": "wb:armor/leather-armor", "qtd": 1, "equipado": true }
+  ],
+  "manual": {
+    "nota": "tudo aqui e escrito pelo jogador e nunca sobrescrito pelo motor",
+    "hp_bonus": 0,
+    "proficiencias_forcadas": {},
+    "itens_caseiros": []
+  }
+}
