@@ -1,0 +1,1445 @@
+{
+ "_doc": "Gabarito do porte TS. Gerado por motor/gerar_fixtures.py a partir do motor Python. NAO editar a mao: regenerar.",
+ "candidatos": {
+  "ancestry_feat@1": [
+   "wb:feat/animal-accomplice",
+   "wb:feat/animal-elocutionist",
+   "wb:feat/burrow-elocutionist",
+   "wb:feat/empathetic-plea",
+   "wb:feat/first-world-magic",
+   "wb:feat/gnome-obsession",
+   "wb:feat/gnome-polyglot",
+   "wb:feat/gnome-weapon-familiarity",
+   "wb:feat/illusion-sense",
+   "wb:feat/life-giving-magic",
+   "wb:feat/natural-performer",
+   "wb:feat/razzle-dazzle",
+   "wb:feat/theoretical-acumen",
+   "wb:feat/unexpected-shift",
+   "wb:feat/fey-fellowship",
+   "wb:feat/fisheye",
+   "wb:feat/grim-insight",
+   "wb:feat/inventive-offensive",
+   "wb:feat/vibrant-display",
+   "wb:feat/briny-beverage",
+   "wb:feat/eclectic-obsession",
+   "wb:feat/energized-font",
+   "wb:feat/gnome-weapon-innovator",
+   "wb:feat/intuitive-illusions",
+   "wb:feat/natural-illusionist",
+   "wb:feat/project-persona",
+   "wb:feat/cautious-curiosity",
+   "wb:feat/first-world-adept",
+   "wb:feat/fortuitous-shift",
+   "wb:feat/life-leap",
+   "wb:feat/scarlet-strands",
+   "wb:feat/vivacious-conduit",
+   "wb:feat/arboreal-conversationalist",
+   "wb:feat/gnome-weapon-expertise",
+   "wb:feat/instinctive-obfuscation",
+   "wb:feat/kijimuna-whistle",
+   "wb:feat/homeward-bound"
+  ],
+  "ancestry_feat@2": [
+   "wb:feat/animal-accomplice",
+   "wb:feat/animal-elocutionist",
+   "wb:feat/burrow-elocutionist",
+   "wb:feat/empathetic-plea",
+   "wb:feat/first-world-magic",
+   "wb:feat/gnome-obsession",
+   "wb:feat/gnome-polyglot",
+   "wb:feat/gnome-weapon-familiarity",
+   "wb:feat/illusion-sense",
+   "wb:feat/life-giving-magic",
+   "wb:feat/natural-performer",
+   "wb:feat/razzle-dazzle",
+   "wb:feat/theoretical-acumen",
+   "wb:feat/unexpected-shift",
+   "wb:feat/fey-fellowship",
+   "wb:feat/fisheye",
+   "wb:feat/grim-insight",
+   "wb:feat/inventive-offensive",
+   "wb:feat/vibrant-display",
+   "wb:feat/briny-beverage",
+   "wb:feat/eclectic-obsession",
+   "wb:feat/energized-font",
+   "wb:feat/gnome-weapon-innovator",
+   "wb:feat/intuitive-illusions",
+   "wb:feat/natural-illusionist",
+   "wb:feat/project-persona",
+   "wb:feat/cautious-curiosity",
+   "wb:feat/first-world-adept",
+   "wb:feat/fortuitous-shift",
+   "wb:feat/life-leap",
+   "wb:feat/scarlet-strands",
+   "wb:feat/vivacious-conduit",
+   "wb:feat/arboreal-conversationalist",
+   "wb:feat/gnome-weapon-expertise",
+   "wb:feat/instinctive-obfuscation",
+   "wb:feat/kijimuna-whistle",
+   "wb:feat/homeward-bound"
+  ],
+  "ancestry_feat@4": [
+   "wb:feat/animal-accomplice",
+   "wb:feat/animal-elocutionist",
+   "wb:feat/burrow-elocutionist",
+   "wb:feat/empathetic-plea",
+   "wb:feat/first-world-magic",
+   "wb:feat/gnome-obsession",
+   "wb:feat/gnome-polyglot",
+   "wb:feat/gnome-weapon-familiarity",
+   "wb:feat/illusion-sense",
+   "wb:feat/life-giving-magic",
+   "wb:feat/natural-performer",
+   "wb:feat/razzle-dazzle",
+   "wb:feat/theoretical-acumen",
+   "wb:feat/unexpected-shift",
+   "wb:feat/fey-fellowship",
+   "wb:feat/fisheye",
+   "wb:feat/grim-insight",
+   "wb:feat/inventive-offensive",
+   "wb:feat/vibrant-display",
+   "wb:feat/briny-beverage",
+   "wb:feat/eclectic-obsession",
+   "wb:feat/energized-font",
+   "wb:feat/gnome-weapon-innovator",
+   "wb:feat/intuitive-illusions",
+   "wb:feat/natural-illusionist",
+   "wb:feat/project-persona",
+   "wb:feat/cautious-curiosity",
+   "wb:feat/first-world-adept",
+   "wb:feat/fortuitous-shift",
+   "wb:feat/life-leap",
+   "wb:feat/scarlet-strands",
+   "wb:feat/vivacious-conduit",
+   "wb:feat/arboreal-conversationalist",
+   "wb:feat/gnome-weapon-expertise",
+   "wb:feat/instinctive-obfuscation",
+   "wb:feat/kijimuna-whistle",
+   "wb:feat/homeward-bound"
+  ],
+  "class_feat@1": [
+   "wb:feat/animal-companion",
+   "wb:feat/animal-empathy",
+   "wb:feat/animal-empathy-druid",
+   "wb:feat/hymn-of-healing",
+   "wb:feat/reach-spell",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/verdant-weapon",
+   "wb:feat/well-versed",
+   "wb:feat/widen-spell",
+   "wb:feat/youre-next",
+   "wb:feat/zoophonic-communication",
+   "wb:feat/bardic-lore",
+   "wb:feat/nimble-dodge",
+   "wb:feat/plant-empathy",
+   "wb:feat/fire-lung",
+   "wb:feat/leshy-familiar",
+   "wb:feat/lingering-composition",
+   "wb:feat/martial-performance",
+   "wb:feat/overextending-feint",
+   "wb:feat/plant-evidence",
+   "wb:feat/shore-step",
+   "wb:feat/steadying-stone",
+   "wb:feat/storm-born",
+   "wb:feat/untamed-form",
+   "wb:feat/versatile-performance",
+   "wb:feat/bestial-snarling",
+   "wb:feat/brutal-beating",
+   "wb:feat/call-of-the-wild",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/clever-gambit",
+   "wb:feat/directed-audience",
+   "wb:feat/distracting-feint",
+   "wb:feat/emotional-push",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/esoteric-polymath",
+   "wb:feat/fanes-fourberie",
+   "wb:feat/loremasters-etude"
+  ],
+  "class_feat@2": [
+   "wb:feat/animal-companion",
+   "wb:feat/animal-empathy",
+   "wb:feat/animal-empathy-druid",
+   "wb:feat/hymn-of-healing",
+   "wb:feat/reach-spell",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/verdant-weapon",
+   "wb:feat/well-versed",
+   "wb:feat/widen-spell",
+   "wb:feat/youre-next",
+   "wb:feat/zoophonic-communication",
+   "wb:feat/bestial-snarling",
+   "wb:feat/call-of-the-wild",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/directed-audience",
+   "wb:feat/emotional-push",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/fanes-fourberie",
+   "wb:feat/loremasters-etude",
+   "wb:feat/minor-magic",
+   "wb:feat/multifarious-muse",
+   "wb:feat/order-explorer",
+   "wb:feat/poison-resistance",
+   "wb:feat/quick-draw",
+   "wb:feat/reliable-squire",
+   "wb:feat/strong-arm",
+   "wb:feat/unbalancing-blow",
+   "wb:feat/underhanded-assault",
+   "wb:feat/bardic-lore",
+   "wb:feat/nimble-dodge",
+   "wb:feat/plant-empathy",
+   "wb:feat/mobility",
+   "wb:feat/fire-lung",
+   "wb:feat/leshy-familiar",
+   "wb:feat/lingering-composition",
+   "wb:feat/martial-performance",
+   "wb:feat/overextending-feint"
+  ],
+  "class_feat@4": [
+   "wb:feat/animal-companion",
+   "wb:feat/animal-empathy",
+   "wb:feat/animal-empathy-druid",
+   "wb:feat/hymn-of-healing",
+   "wb:feat/reach-spell",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/verdant-weapon",
+   "wb:feat/well-versed",
+   "wb:feat/widen-spell",
+   "wb:feat/youre-next",
+   "wb:feat/zoophonic-communication",
+   "wb:feat/bestial-snarling",
+   "wb:feat/call-of-the-wild",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/directed-audience",
+   "wb:feat/emotional-push",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/fanes-fourberie",
+   "wb:feat/loremasters-etude",
+   "wb:feat/minor-magic",
+   "wb:feat/multifarious-muse",
+   "wb:feat/order-explorer",
+   "wb:feat/poison-resistance",
+   "wb:feat/quick-draw",
+   "wb:feat/reliable-squire",
+   "wb:feat/strong-arm",
+   "wb:feat/unbalancing-blow",
+   "wb:feat/underhanded-assault",
+   "wb:feat/bardic-lore",
+   "wb:feat/nimble-dodge",
+   "wb:feat/plant-empathy",
+   "wb:feat/mobility",
+   "wb:feat/fire-lung",
+   "wb:feat/leshy-familiar",
+   "wb:feat/lingering-composition",
+   "wb:feat/martial-performance",
+   "wb:feat/overextending-feint"
+  ],
+  "free_archetype@1": [
+   "wb:feat/acrobat-dedication",
+   "wb:feat/agent-of-all-holds",
+   "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/alter-ego-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archaeologist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/assassin-dedication",
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/battle-harbinger-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bloodrager-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/bullet-dancer-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication"
+  ],
+  "free_archetype@2": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/drake-rider-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/fan-dancer-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/folklorist-dedication",
+   "wb:feat/game-hunter-dedication",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghost-eater-dedication"
+  ],
+  "free_archetype@4": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/drake-rider-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/fan-dancer-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/folklorist-dedication",
+   "wb:feat/game-hunter-dedication",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghost-eater-dedication"
+  ],
+  "general_feat@1": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/civil-service",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/forager",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/intimidating-glare",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/oddity-identification",
+   "wb:feat/pet",
+   "wb:feat/pickpocket",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-identification"
+  ],
+  "general_feat@2": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/civil-service",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/forager",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/intimidating-glare",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/oddity-identification",
+   "wb:feat/pet",
+   "wb:feat/pickpocket",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-identification"
+  ],
+  "general_feat@4": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/civil-service",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/forager",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/intimidating-glare",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/oddity-identification",
+   "wb:feat/pet",
+   "wb:feat/pickpocket",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-identification"
+  ],
+  "skill_feat@1": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/fascinating-performance",
+   "wb:feat/forager",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/intimidating-glare",
+   "wb:feat/natural-medicine",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/oddity-identification",
+   "wb:feat/pickpocket",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-identification",
+   "wb:feat/read-psychometric-resonance",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/root-magic",
+   "wb:feat/schooled-in-secrets",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-expertise",
+   "wb:feat/terrain-stalker",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/additional-lore"
+  ],
+  "skill_feat@2": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/fascinating-performance",
+   "wb:feat/forager",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/intimidating-glare",
+   "wb:feat/natural-medicine",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/oddity-identification",
+   "wb:feat/pickpocket",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-identification",
+   "wb:feat/read-psychometric-resonance",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/root-magic",
+   "wb:feat/schooled-in-secrets",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-expertise",
+   "wb:feat/terrain-stalker",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/armored-stealth"
+  ],
+  "skill_feat@4": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/fascinating-performance",
+   "wb:feat/forager",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/intimidating-glare",
+   "wb:feat/natural-medicine",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/oddity-identification",
+   "wb:feat/pickpocket",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-identification",
+   "wb:feat/read-psychometric-resonance",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/root-magic",
+   "wb:feat/schooled-in-secrets",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-expertise",
+   "wb:feat/terrain-stalker",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/armored-stealth"
+  ]
+ },
+ "extras": {
+  "aumentos_detalhe": [
+   {
+    "de": "trained",
+    "nivel": 2,
+    "para": "expert",
+    "pericia": "stealth"
+   },
+   {
+    "de": "untrained",
+    "nivel": 3,
+    "para": "trained",
+    "pericia": "survival"
+   },
+   {
+    "de": "trained",
+    "nivel": 4,
+    "para": "expert",
+    "pericia": "nature"
+   },
+   {
+    "de": "trained",
+    "nivel": 5,
+    "para": "expert",
+    "pericia": "occultism"
+   },
+   {
+    "de": "expert",
+    "nivel": 6,
+    "para": "expert",
+    "pericia": "diplomacy"
+   }
+  ],
+  "boosts_declarados": 7,
+  "boosts_direito": 11,
+  "boosts_pendentes": [
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Gnome",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": [
+     "con",
+     "dex"
+    ],
+    "origem": "Street Urchin",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Street Urchin",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "criacao (4 livres)",
+    "origem_id": null,
+    "quantidade": 4
+   },
+   {
+    "em": 5,
+    "opcoes": null,
+    "origem": "nivel 5",
+    "origem_id": null,
+    "quantidade": 4
+   }
+  ],
+  "class_feat_nivel_1": true,
+  "classe_do_nivel": {
+   "1": "wb:class/rogue",
+   "2": "wb:class/rogue",
+   "3": "wb:class/druid",
+   "4": "wb:class/druid",
+   "5": "wb:class/bard",
+   "6": "wb:class/bard"
+  },
+  "entrada_da_classe": {
+   "wb:class/bard": 5,
+   "wb:class/druid": 3,
+   "wb:class/rogue": 1
+  },
+  "gastos": {
+   "ancestry_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/fey-fellowship",
+     "slot": "ancestry_feat"
+    },
+    {
+     "em": 5,
+     "pega": "wb:feat/adopted-ancestry",
+     "slot": "ancestry_feat"
+    }
+   ],
+   "class_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/nimble-dodge",
+     "slot": "class_feat"
+    },
+    {
+     "em": 2,
+     "pega": "wb:feat/mobility",
+     "slot": "class_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/plant-empathy",
+     "slot": "class_feat"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/bardic-lore",
+     "slot": "class_feat"
+    }
+   ],
+   "free_archetype": [
+    {
+     "em": 2,
+     "pega": "wb:feat/marshal-dedication",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/steel-yourself",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/cadence-call",
+     "slot": "free_archetype"
+    }
+   ],
+   "general_feat": [
+    {
+     "em": 3,
+     "pega": "wb:feat/fleet",
+     "slot": "general_feat"
+    }
+   ],
+   "skill_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/assurance",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 2,
+     "pega": "wb:feat/additional-lore",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 3,
+     "pega": "wb:feat/breath-control",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/canny-acumen",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 5,
+     "pega": "wb:feat/armor-proficiency",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/dubious-knowledge",
+     "slot": "skill_feat"
+    }
+   ]
+  },
+  "hp_detalhe": [
+   {
+    "hp": 8,
+    "nota": "ancestria",
+    "origem": "Gnome"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 1 (Rogue)"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 2 (Rogue)"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 3 (Druid)"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 4 (Druid)"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 5 (Bard)"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 6 (Bard)"
+   }
+  ],
+  "niveis_por_classe": {
+   "wb:class/bard": 2,
+   "wb:class/druid": 2,
+   "wb:class/rogue": 2
+  },
+  "ordem_de_classe": [
+   "wb:class/rogue",
+   "wb:class/druid",
+   "wb:class/bard"
+  ],
+  "origem_proficiencia": {
+   "advanced": [
+    "Rogue",
+    "Druid",
+    "Bard"
+   ],
+   "diplomacy": [
+    "Marshal Dedication",
+    "aumento de pericia (nivel 6)"
+   ],
+   "fortitude": [
+    "Rogue",
+    "Druid",
+    "Bard"
+   ],
+   "heavy": [
+    "Rogue",
+    "Druid",
+    "Bard"
+   ],
+   "intimidation": [
+    "Marshal Dedication"
+   ],
+   "light": [
+    "Rogue",
+    "Druid",
+    "Bard"
+   ],
+   "martial": [
+    "Rogue",
+    "Bard"
+   ],
+   "medium": [
+    "Druid"
+   ],
+   "nature": [
+    "aumento de pericia (nivel 4)"
+   ],
+   "occultism": [
+    "aumento de pericia (nivel 5)"
+   ],
+   "perception": [
+    "Rogue",
+    "Bard"
+   ],
+   "performance": [
+    "Bard"
+   ],
+   "reflex": [
+    "Rogue"
+   ],
+   "simple": [
+    "Rogue",
+    "Druid",
+    "Bard"
+   ],
+   "stealth": [
+    "aumento de pericia (nivel 2)"
+   ],
+   "survival": [
+    "aumento de pericia (nivel 3)"
+   ],
+   "thievery": [
+    "Thief (Rogue)",
+    "Street Urchin"
+   ],
+   "unarmed": [
+    "Rogue",
+    "Druid",
+    "Bard"
+   ],
+   "unarmored": [
+    "Rogue",
+    "Druid",
+    "Bard"
+   ],
+   "will": [
+    "Rogue",
+    "Druid",
+    "Bard"
+   ]
+  },
+  "pericias_automaticas": {
+   "nature": "Druid",
+   "occultism": "Bard",
+   "performance": "Bard",
+   "stealth": "Rogue"
+  },
+  "pericias_livres_detalhe": [
+   {
+    "classe": "Rogue",
+    "delta": 7,
+    "orcamento": 7
+   },
+   {
+    "classe": "Druid",
+    "delta": 0,
+    "orcamento": 2
+   },
+   {
+    "classe": "Bard",
+    "delta": 0,
+    "orcamento": 4
+   }
+  ]
+ },
+ "ficha": "ladino2-druida2-bardo2-fa",
+ "visao": {
+  "ac": {
+   "armadura": "Leather Armor",
+   "categoria": "light",
+   "check_penalty": 0,
+   "detalhe": "10 + DEX +3 + prof 8 (trained, nivel 6) + item 1",
+   "dex_perdida": 0,
+   "escudo": null,
+   "rank": "trained",
+   "total": 22
+  },
+  "ancestralidade": "Gnome",
+  "ataques": [
+   {
+    "arma": "Rapier",
+    "ataque": 11,
+    "atributo_do_ataque": "dex",
+    "categoria": "martial",
+    "dano": "1d6-1",
+    "detalhe": "nivel 6 + prof 8 (trained) + DEX +3",
+    "rank": "trained",
+    "tipo_de_dano": "piercing",
+    "traits": [
+     "deadly-d8",
+     "disarm",
+     "finesse"
+    ]
+   }
+  ],
+  "atores": [],
+  "atributos": {
+   "cha": 14,
+   "con": 14,
+   "dex": 16,
+   "int": 10,
+   "str": 8,
+   "wis": 16
+  },
+  "aumentos_de_pericia": {
+   "gastos": [
+    {
+     "de": "trained",
+     "nivel": 2,
+     "para": "expert",
+     "pericia": "stealth"
+    },
+    {
+     "de": "untrained",
+     "nivel": 3,
+     "para": "trained",
+     "pericia": "survival"
+    },
+    {
+     "de": "trained",
+     "nivel": 4,
+     "para": "expert",
+     "pericia": "nature"
+    },
+    {
+     "de": "trained",
+     "nivel": 5,
+     "para": "expert",
+     "pericia": "occultism"
+    },
+    {
+     "de": "expert",
+     "nivel": 6,
+     "para": "expert",
+     "pericia": "diplomacy"
+    }
+   ],
+   "niveis": [
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  "avisos": [
+   "wb:background/street-urchin: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Pickpocket', 'foundry_uuid': 'Compendium.pf2e.feat) -- nao aplicado",
+   "skill_increase: diplomacy iria a master, acima do teto expert do nivel 6",
+   "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Gnome (1), Street Urchin (1), Street Urchin (1), criacao (4 livres) (4), nivel 5 (4)"
+  ],
+  "background": "Street Urchin",
+  "boosts": {
+   "declarados": 7,
+   "direito": 11,
+   "fontes": [
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Gnome",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": [
+      "con",
+      "dex"
+     ],
+     "origem": "Street Urchin",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Street Urchin",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "criacao (4 livres)",
+     "origem_id": null,
+     "quantidade": 4
+    },
+    {
+     "em": 5,
+     "opcoes": null,
+     "origem": "nivel 5",
+     "origem_id": null,
+     "quantidade": 4
+    }
+   ]
+  },
+  "classes": {
+   "Bard": 2,
+   "Druid": 2,
+   "Rogue": 2
+  },
+  "concedidos": [
+   {
+    "id": "wb:feat/shield-block",
+    "nome": "Shield Block",
+    "por": "Shield Block",
+    "por_id": "wb:class-feature/shield-block"
+   }
+  ],
+  "conjuracao": [
+   {
+    "classe": "Druid",
+    "dc": {
+     "ataque": 11,
+     "dc": 21,
+     "nota": "nivel de personagem 6 + rank trained (pelo nivel de classe 2) + mod 3",
+     "rank": "trained"
+    },
+    "elevacao": 2,
+    "max_rank_do_slot": 1,
+    "nivel_de_classe": 2,
+    "rank_de_invocacao": 3,
+    "rank_efetivo": 3,
+    "slots": {
+     "1": 3
+    },
+    "tipo": "prepared",
+    "tradicao": "primal",
+    "truques": 5
+   },
+   {
+    "classe": "Bard",
+    "dc": {
+     "ataque": 10,
+     "dc": 20,
+     "nota": "nivel de personagem 6 + rank trained (pelo nivel de classe 2) + mod 2",
+     "rank": "trained"
+    },
+    "elevacao": 2,
+    "max_rank_do_slot": 1,
+    "nivel_de_classe": 2,
+    "rank_de_invocacao": 3,
+    "rank_efetivo": 3,
+    "slots": {
+     "1": 3
+    },
+    "tipo": "spontaneous",
+    "tradicao": "occult",
+    "truques": 5
+   }
+  ],
+  "escolhas_de_feat": [],
+  "features": [
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/rogues-racket",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Rogue's Racket"
+   },
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/sneak-attack",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Sneak Attack"
+   },
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/surprise-attack",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Surprise Attack"
+   },
+   {
+    "classe": "Rogue",
+    "eixo": "racket",
+    "grants": [
+     {
+      "proficiency": {
+       "thievery": "trained"
+      }
+     }
+    ],
+    "id": "wb:class-feature/thief",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Thief"
+   },
+   {
+    "classe": "Druid",
+    "grants": [],
+    "id": "wb:class-feature/anathema-druid",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Anathema (Druid)"
+   },
+   {
+    "classe": "Druid",
+    "grants": [],
+    "id": "wb:class-feature/druid-spellcasting",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Druid Spellcasting"
+   },
+   {
+    "classe": "Druid",
+    "grants": [],
+    "id": "wb:class-feature/druidic-order",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Druidic Order"
+   },
+   {
+    "classe": "Druid",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:feat/shield-block"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/shield-block",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Shield Block"
+   },
+   {
+    "classe": "Druid",
+    "grants": [],
+    "id": "wb:class-feature/voice-of-nature",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Voice of Nature"
+   },
+   {
+    "classe": "Druid",
+    "grants": [],
+    "id": "wb:class-feature/wildsong",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Wildsong"
+   },
+   {
+    "classe": "Druid",
+    "eixo": "outras-opcoes",
+    "grants": [],
+    "id": "wb:class-feature/animal-order",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Animal Order"
+   },
+   {
+    "classe": "Bard",
+    "grants": [],
+    "id": "wb:class-feature/composition-spells",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Composition Spells"
+   },
+   {
+    "classe": "Bard",
+    "grants": [],
+    "id": "wb:class-feature/muses",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Muses"
+   },
+   {
+    "classe": "Bard",
+    "grants": [],
+    "id": "wb:class-feature/occult-spellcasting",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Occult Spellcasting"
+   },
+   {
+    "classe": "Bard",
+    "grants": [],
+    "id": "wb:class-feature/spell-repertoire",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Spell Repertoire"
+   },
+   {
+    "classe": "Bard",
+    "grants": [],
+    "id": "wb:class-feature/spell-repertoire-bard",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Spell Repertoire (Bard)"
+   },
+   {
+    "classe": "Bard",
+    "eixo": "muse",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:feat/bardic-lore"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/enigma",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Enigma"
+   }
+  ],
+  "focus_pool": 2,
+  "fora_do_requisito": [],
+  "heranca": "Fey-touched Gnome",
+  "hp": 68,
+  "modificadores": {
+   "cha": 2,
+   "con": 2,
+   "dex": 3,
+   "int": 0,
+   "str": -1,
+   "wis": 3
+  },
+  "nivel": 6,
+  "pericias_livres": 7,
+  "proficiencias": {
+   "advanced": "untrained",
+   "diplomacy": "expert",
+   "fortitude": "trained",
+   "heavy": "untrained",
+   "intimidation": "expert",
+   "light": "trained",
+   "martial": "trained",
+   "medium": "trained",
+   "nature": "expert",
+   "occultism": "expert",
+   "perception": "expert",
+   "performance": "trained",
+   "reflex": "expert",
+   "simple": "trained",
+   "stealth": "expert",
+   "survival": "trained",
+   "thievery": "trained",
+   "unarmed": "trained",
+   "unarmored": "trained",
+   "will": "expert"
+  },
+  "slots": {
+   "ancestry": [
+    1,
+    5
+   ],
+   "class": [
+    1,
+    2,
+    4,
+    6
+   ],
+   "free_archetype": [
+    2,
+    4,
+    6
+   ],
+   "general": [
+    3
+   ],
+   "skill": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 4,
+    "fontes": [
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Gnome",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": [
+       "con",
+       "dex"
+      ],
+      "origem": "Street Urchin",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Street Urchin",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "criacao (4 livres)",
+      "origem_id": null,
+      "quantidade": 4
+     },
+     {
+      "em": 5,
+      "opcoes": null,
+      "origem": "nivel 5",
+      "origem_id": null,
+      "quantidade": 4
+     }
+    ],
+    "kind": "ability",
+    "rotulo": "boosts de atributo (4 a escolher)",
+    "slot": "boosts_livres"
+   }
+  ],
+  "subclasses": [
+   {
+    "classe": "Rogue",
+    "eixo": "racket",
+    "escolhido": "wb:class-feature/thief",
+    "nivel": 1,
+    "nome": "Thief",
+    "opcoes": 6
+   },
+   {
+    "classe": "Druid",
+    "eixo": "outras-opcoes",
+    "escolhido": "wb:class-feature/animal-order",
+    "nivel": 1,
+    "nome": "Animal Order",
+    "opcoes": 9
+   },
+   {
+    "classe": "Bard",
+    "eixo": "muse",
+    "escolhido": "wb:class-feature/enigma",
+    "nivel": 1,
+    "nome": "Enigma",
+    "opcoes": 5
+   }
+  ]
+ }
+}

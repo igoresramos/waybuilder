@@ -1,0 +1,225 @@
+/* Waybuilder -- estilo unico.
+   Tema escuro porque o uso e mesa de jogo, muitas vezes a noite, e a tela fica
+   ao lado de dado e ficha de papel. Densidade alta: um construtor mostra
+   dezenas de numeros ao mesmo tempo, e rolar demais e pior que ler apertado. */
+
+:root {
+  --fundo: #14161a;
+  --painel: #1c1f26;
+  --painel-alto: #232733;
+  --borda: #2e3440;
+  --texto: #dde3ec;
+  --fraco: #8a94a6;
+  --ok: #7bc47f;
+  --pend: #e0b354;
+  --alerta: #d97e6a;
+  --acento: #7aa2d8;
+  --r: 6px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: var(--painel-alto);
+  border: 1px solid var(--borda);
+  border-radius: var(--r);
+  padding: 5px 10px;
+  cursor: pointer;
+}
+button:hover:not(:disabled) { border-color: var(--acento); }
+button:disabled { opacity: .4; cursor: default; }
+
+input {
+  font: inherit;
+  color: inherit;
+  background: var(--fundo);
+  border: 1px solid var(--borda);
+  border-radius: var(--r);
+  padding: 5px 8px;
+}
+
+code { background: var(--painel-alto); padding: 1px 5px; border-radius: 4px; }
+
+.carregando {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  color: var(--fraco);
+}
+.carregando.erro { color: var(--alerta); text-align: center; }
+
+.app { max-width: 1280px; margin: 0 auto; padding: 16px; }
+
+/* -- topo -- */
+.topo {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--borda);
+}
+.topo h1 { font-size: 17px; margin: 0; letter-spacing: .5px; }
+.marca { display: flex; flex-direction: column; gap: 6px; }
+.topo .nome { width: 220px; }
+.topo nav { display: flex; gap: 6px; margin-left: auto; }
+.topo nav button.ativa { border-color: var(--acento); color: var(--acento); }
+.topo .acoes { display: flex; gap: 6px; }
+
+.resumo {
+  display: flex;
+  gap: 18px;
+  padding: 10px 2px;
+  color: var(--fraco);
+  border-bottom: 1px solid var(--borda);
+  margin-bottom: 16px;
+}
+.resumo .pend { color: var(--pend); }
+.resumo .ok { color: var(--ok); }
+
+/* -- painel de escolha -- */
+.painel {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+  align-items: start;
+}
+.niveis {
+  display: contents;
+}
+.nivel {
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: var(--r);
+  padding: 12px;
+}
+.nivel h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--acento);
+}
+.controles { grid-column: 1 / -1; display: flex; gap: 8px; }
+
+.picker {
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: var(--r);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.nivel .picker { background: var(--painel-alto); }
+.picker header { display: flex; align-items: center; gap: 8px; }
+.picker h4 { margin: 0 0 6px; font-size: 13px; font-weight: 600; }
+.picker .limpar { margin-left: auto; font-size: 11px; padding: 2px 7px; }
+.picker .busca { width: 100%; margin-bottom: 8px; }
+.picker .escolhido {
+  padding: 6px 8px;
+  background: var(--fundo);
+  border-left: 2px solid var(--ok);
+  border-radius: 3px;
+}
+
+.opcoes { list-style: none; margin: 0; padding: 0; max-height: 250px; overflow-y: auto; }
+.opcoes li { margin-bottom: 3px; }
+.opcoes li button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border-color: transparent;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 4px 7px;
+}
+.opcoes li button:hover { background: var(--fundo); }
+.opcoes .nome { flex: 1; }
+.opcoes .nivel { color: var(--fraco); font-size: 11px; }
+.opcoes .marca { color: var(--ok); font-size: 11px; }
+.opcoes .motivo {
+  color: var(--fraco);
+  font-size: 11px;
+  flex-basis: 100%;
+}
+.opcoes.marcadas li button { opacity: .75; border-left: 2px solid var(--pend); }
+.opcoes .vazio { color: var(--fraco); padding: 6px; }
+
+.picker .mais, .picker .fora > button {
+  font-size: 11px;
+  background: transparent;
+  border-color: transparent;
+  color: var(--fraco);
+  padding: 4px 0;
+}
+.picker .fora { border-top: 1px solid var(--borda); margin-top: 8px; }
+.nota { color: var(--fraco); font-size: 11px; margin: 6px 0 0; }
+
+.boosts .linha { display: flex; gap: 4px; margin-bottom: 6px; }
+.boosts .linha button { flex: 1; padding: 5px 0; }
+.boosts .linha button.sel { border-color: var(--acento); color: var(--acento); }
+.fontes { list-style: none; margin: 6px 0 0; padding: 0; color: var(--fraco); font-size: 11px; }
+
+/* -- ficha -- */
+.ficha { display: grid; gap: 14px; }
+.ficha section {
+  background: var(--painel);
+  border: 1px solid var(--borda);
+  border-radius: var(--r);
+  padding: 14px;
+}
+.ficha h3 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--acento);
+}
+.cabecalho { display: flex; justify-content: space-between; align-items: center; }
+.cabecalho h2 { margin: 0; font-size: 20px; }
+.cabecalho .sub { margin: 4px 0 0; color: var(--fraco); }
+.vitais { display: flex; gap: 20px; }
+.vital { text-align: center; }
+.vital strong { display: block; font-size: 26px; }
+.vital span { color: var(--fraco); font-size: 11px; text-transform: uppercase; }
+
+.atributos { display: flex; gap: 10px; justify-content: space-between; }
+.atributo { text-align: center; flex: 1; }
+.atributo .rotulo { display: block; color: var(--fraco); font-size: 11px; }
+.atributo strong { font-size: 18px; }
+.atributo .mod { display: block; color: var(--acento); }
+
+.ficha ul { list-style: none; margin: 0; padding: 0; }
+.ficha li { padding: 3px 0; border-bottom: 1px solid var(--borda); }
+.ficha li:last-child { border: 0; }
+.quando { display: inline-block; min-width: 62px; color: var(--fraco); font-size: 11px; }
+.qtd, .de { color: var(--fraco); }
+.alerta { color: var(--alerta); font-size: 11px; margin-left: 6px; }
+
+.pericias li { display: flex; gap: 10px; align-items: baseline; }
+.pericias .chave { min-width: 130px; }
+.pericias .origem { color: var(--fraco); font-size: 11px; margin-left: auto; text-align: right; }
+.rank { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+.r-trained { color: var(--ok); }
+.r-expert { color: var(--acento); }
+.r-master, .r-legendary { color: var(--pend); }
+
+.pendencias li { color: var(--pend); }
+.sinais li { color: var(--fraco); font-size: 12px; }
+.conjuracao .tradicao { margin-bottom: 10px; }
+.conjuracao h4 { margin: 0 0 4px; font-size: 13px; }
+.conjuracao p { margin: 2px 0; color: var(--fraco); font-size: 12px; }
+
+@media (max-width: 640px) {
+  .topo nav { margin-left: 0; width: 100%; }
+  .painel { grid-template-columns: 1fr; }
+}

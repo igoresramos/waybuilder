@@ -1,0 +1,1094 @@
+{
+ "_doc": "Gabarito do porte TS. Gerado por motor/gerar_fixtures.py a partir do motor Python. NAO editar a mao: regenerar.",
+ "candidatos": {
+  "ancestry_feat@1": [
+   "wb:feat/ancestral-linguistics",
+   "wb:feat/ancestral-longevity",
+   "wb:feat/aquatic-elf-warrior",
+   "wb:feat/demonbane-warrior",
+   "wb:feat/elemental-wrath",
+   "wb:feat/elven-aloofness",
+   "wb:feat/elven-verve",
+   "wb:feat/elven-weapon-familiarity",
+   "wb:feat/forlorn",
+   "wb:feat/free-heart",
+   "wb:feat/friend-of-the-sea",
+   "wb:feat/know-your-own",
+   "wb:feat/nimble-elf",
+   "wb:feat/otherworldly-magic",
+   "wb:feat/political-acumen",
+   "wb:feat/share-thoughts",
+   "wb:feat/touch-of-the-sea",
+   "wb:feat/traditional-ways",
+   "wb:feat/unwavering-mien",
+   "wb:feat/wildborn-magic",
+   "wb:feat/woodcraft",
+   "wb:feat/elven-lore",
+   "wb:feat/ageless-patience",
+   "wb:feat/ancestral-suspicion",
+   "wb:feat/defiance-unto-death",
+   "wb:feat/elven-instincts",
+   "wb:feat/elven-persistence",
+   "wb:feat/elven-weapon-elegance",
+   "wb:feat/forest-stealth",
+   "wb:feat/martial-experience",
+   "wb:feat/shame-the-sin",
+   "wb:feat/swamp-stealth",
+   "wb:feat/wildborn-adept",
+   "wb:feat/brightness-seeker",
+   "wb:feat/demon-hunter",
+   "wb:feat/elf-step",
+   "wb:feat/expert-longevity",
+   "wb:feat/otherworldly-acumen",
+   "wb:feat/political-virtuoso",
+   "wb:feat/sense-thoughts"
+  ],
+  "ancestry_feat@2": [
+   "wb:feat/ancestral-linguistics",
+   "wb:feat/ancestral-longevity",
+   "wb:feat/aquatic-elf-warrior",
+   "wb:feat/demonbane-warrior",
+   "wb:feat/elemental-wrath",
+   "wb:feat/elven-aloofness",
+   "wb:feat/elven-verve",
+   "wb:feat/elven-weapon-familiarity",
+   "wb:feat/forlorn",
+   "wb:feat/free-heart",
+   "wb:feat/friend-of-the-sea",
+   "wb:feat/know-your-own",
+   "wb:feat/nimble-elf",
+   "wb:feat/otherworldly-magic",
+   "wb:feat/political-acumen",
+   "wb:feat/share-thoughts",
+   "wb:feat/touch-of-the-sea",
+   "wb:feat/traditional-ways",
+   "wb:feat/unwavering-mien",
+   "wb:feat/wildborn-magic",
+   "wb:feat/woodcraft",
+   "wb:feat/elven-lore",
+   "wb:feat/ageless-patience",
+   "wb:feat/ancestral-suspicion",
+   "wb:feat/defiance-unto-death",
+   "wb:feat/elven-instincts",
+   "wb:feat/elven-persistence",
+   "wb:feat/elven-weapon-elegance",
+   "wb:feat/forest-stealth",
+   "wb:feat/martial-experience",
+   "wb:feat/shame-the-sin",
+   "wb:feat/swamp-stealth",
+   "wb:feat/wildborn-adept",
+   "wb:feat/brightness-seeker",
+   "wb:feat/demon-hunter",
+   "wb:feat/elf-step",
+   "wb:feat/expert-longevity",
+   "wb:feat/otherworldly-acumen",
+   "wb:feat/political-virtuoso",
+   "wb:feat/sense-thoughts"
+  ],
+  "ancestry_feat@4": [
+   "wb:feat/ancestral-linguistics",
+   "wb:feat/ancestral-longevity",
+   "wb:feat/aquatic-elf-warrior",
+   "wb:feat/demonbane-warrior",
+   "wb:feat/elemental-wrath",
+   "wb:feat/elven-aloofness",
+   "wb:feat/elven-verve",
+   "wb:feat/elven-weapon-familiarity",
+   "wb:feat/forlorn",
+   "wb:feat/free-heart",
+   "wb:feat/friend-of-the-sea",
+   "wb:feat/know-your-own",
+   "wb:feat/nimble-elf",
+   "wb:feat/otherworldly-magic",
+   "wb:feat/political-acumen",
+   "wb:feat/share-thoughts",
+   "wb:feat/touch-of-the-sea",
+   "wb:feat/traditional-ways",
+   "wb:feat/unwavering-mien",
+   "wb:feat/wildborn-magic",
+   "wb:feat/woodcraft",
+   "wb:feat/elven-lore",
+   "wb:feat/ageless-patience",
+   "wb:feat/ancestral-suspicion",
+   "wb:feat/defiance-unto-death",
+   "wb:feat/elven-instincts",
+   "wb:feat/elven-persistence",
+   "wb:feat/elven-weapon-elegance",
+   "wb:feat/forest-stealth",
+   "wb:feat/martial-experience",
+   "wb:feat/shame-the-sin",
+   "wb:feat/swamp-stealth",
+   "wb:feat/wildborn-adept",
+   "wb:feat/brightness-seeker",
+   "wb:feat/demon-hunter",
+   "wb:feat/elf-step",
+   "wb:feat/expert-longevity",
+   "wb:feat/otherworldly-acumen",
+   "wb:feat/political-virtuoso",
+   "wb:feat/sense-thoughts"
+  ],
+  "class_feat@1": [
+   "wb:feat/counterspell",
+   "wb:feat/counterspell-prepared",
+   "wb:feat/eschew-materials",
+   "wb:feat/familiar",
+   "wb:feat/reach-spell",
+   "wb:feat/spellbook-prodigy",
+   "wb:feat/widen-spell",
+   "wb:feat/hand-of-the-apprentice",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/conceal-spell",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/nonlethal-spell",
+   "wb:feat/bespell-strikes",
+   "wb:feat/call-wizardly-tools",
+   "wb:feat/irezoko-tattoo",
+   "wb:feat/linked-focus",
+   "wb:feat/silent-spell",
+   "wb:feat/undying-conviction",
+   "wb:feat/convincing-illusion",
+   "wb:feat/detonating-spell",
+   "wb:feat/explosive-arrival",
+   "wb:feat/irresistible-magic",
+   "wb:feat/knowledge-is-power",
+   "wb:feat/split-slot",
+   "wb:feat/steady-spellcasting",
+   "wb:feat/advanced-school-spell",
+   "wb:feat/bond-conservation",
+   "wb:feat/chaotic-spell",
+   "wb:feat/form-retention",
+   "wb:feat/helts-spelldance",
+   "wb:feat/knowledge-is-power-wizard",
+   "wb:feat/universal-versatility",
+   "wb:feat/overwhelming-energy",
+   "wb:feat/quickened-casting",
+   "wb:feat/scroll-adept",
+   "wb:feat/clever-counterspell",
+   "wb:feat/forcible-energy",
+   "wb:feat/keen-magical-detection",
+   "wb:feat/magic-sense",
+   "wb:feat/necromancers-visage"
+  ],
+  "class_feat@2": [
+   "wb:feat/counterspell",
+   "wb:feat/counterspell-prepared",
+   "wb:feat/eschew-materials",
+   "wb:feat/familiar",
+   "wb:feat/reach-spell",
+   "wb:feat/spellbook-prodigy",
+   "wb:feat/widen-spell",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/conceal-spell",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/nonlethal-spell",
+   "wb:feat/energy-ablation",
+   "wb:feat/hand-of-the-apprentice",
+   "wb:feat/bespell-strikes",
+   "wb:feat/call-wizardly-tools",
+   "wb:feat/irezoko-tattoo",
+   "wb:feat/linked-focus",
+   "wb:feat/silent-spell",
+   "wb:feat/undying-conviction",
+   "wb:feat/convincing-illusion",
+   "wb:feat/detonating-spell",
+   "wb:feat/explosive-arrival",
+   "wb:feat/irresistible-magic",
+   "wb:feat/knowledge-is-power",
+   "wb:feat/split-slot",
+   "wb:feat/steady-spellcasting",
+   "wb:feat/advanced-school-spell",
+   "wb:feat/bond-conservation",
+   "wb:feat/chaotic-spell",
+   "wb:feat/form-retention",
+   "wb:feat/helts-spelldance",
+   "wb:feat/knowledge-is-power-wizard",
+   "wb:feat/universal-versatility",
+   "wb:feat/overwhelming-energy",
+   "wb:feat/quickened-casting",
+   "wb:feat/scroll-adept",
+   "wb:feat/clever-counterspell",
+   "wb:feat/forcible-energy",
+   "wb:feat/keen-magical-detection",
+   "wb:feat/magic-sense"
+  ],
+  "class_feat@4": [
+   "wb:feat/counterspell",
+   "wb:feat/counterspell-prepared",
+   "wb:feat/eschew-materials",
+   "wb:feat/familiar",
+   "wb:feat/reach-spell",
+   "wb:feat/spellbook-prodigy",
+   "wb:feat/widen-spell",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/conceal-spell",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/nonlethal-spell",
+   "wb:feat/bespell-strikes",
+   "wb:feat/irezoko-tattoo",
+   "wb:feat/linked-focus",
+   "wb:feat/undying-conviction",
+   "wb:feat/energy-ablation",
+   "wb:feat/spell-protection-array",
+   "wb:feat/hand-of-the-apprentice",
+   "wb:feat/call-wizardly-tools",
+   "wb:feat/silent-spell",
+   "wb:feat/convincing-illusion",
+   "wb:feat/detonating-spell",
+   "wb:feat/explosive-arrival",
+   "wb:feat/irresistible-magic",
+   "wb:feat/knowledge-is-power",
+   "wb:feat/split-slot",
+   "wb:feat/steady-spellcasting",
+   "wb:feat/advanced-school-spell",
+   "wb:feat/bond-conservation",
+   "wb:feat/chaotic-spell",
+   "wb:feat/form-retention",
+   "wb:feat/helts-spelldance",
+   "wb:feat/knowledge-is-power-wizard",
+   "wb:feat/universal-versatility",
+   "wb:feat/overwhelming-energy",
+   "wb:feat/quickened-casting",
+   "wb:feat/scroll-adept",
+   "wb:feat/clever-counterspell",
+   "wb:feat/forcible-energy",
+   "wb:feat/keen-magical-detection"
+  ],
+  "free_archetype@1": [
+   "wb:feat/acrobat-dedication",
+   "wb:feat/agent-of-all-holds",
+   "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/alter-ego-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archaeologist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/assassin-dedication",
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/battle-harbinger-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bloodrager-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/bullet-dancer-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication"
+  ],
+  "free_archetype@2": [
+   "wb:feat/alchemist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/draconic-acolyte-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/druid-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/inventor-dedication",
+   "wb:feat/investigator-dedication",
+   "wb:feat/juggler-dedication"
+  ],
+  "free_archetype@4": [
+   "wb:feat/alchemist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/draconic-acolyte-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/druid-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/inventor-dedication",
+   "wb:feat/investigator-dedication",
+   "wb:feat/juggler-dedication"
+  ],
+  "general_feat@1": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/express-rider",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/toughness",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/fleet"
+  ],
+  "general_feat@2": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/express-rider",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/toughness",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing"
+  ],
+  "general_feat@4": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/express-rider",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/toughness",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing"
+  ],
+  "skill_feat@1": [
+   "wb:feat/arcane-sense",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/express-rider",
+   "wb:feat/natural-medicine",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/skill-training",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance"
+  ],
+  "skill_feat@2": [
+   "wb:feat/arcane-sense",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/express-rider",
+   "wb:feat/natural-medicine",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/skill-training",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship"
+  ],
+  "skill_feat@4": [
+   "wb:feat/arcane-sense",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/express-rider",
+   "wb:feat/natural-medicine",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/skill-training",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/ambush-tactics",
+   "wb:feat/efficient-explorer",
+   "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces"
+  ]
+ },
+ "extras": {
+  "aumentos_detalhe": [],
+  "boosts_declarados": 7,
+  "boosts_direito": 7,
+  "boosts_pendentes": [
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Elf",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": [
+     "con",
+     "int"
+    ],
+    "origem": "Hermit",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Hermit",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "criacao (4 livres)",
+    "origem_id": null,
+    "quantidade": 4
+   }
+  ],
+  "class_feat_nivel_1": false,
+  "classe_do_nivel": {
+   "1": "wb:class/wizard",
+   "2": "wb:class/wizard",
+   "3": "wb:class/wizard",
+   "4": "wb:class/wizard"
+  },
+  "entrada_da_classe": {
+   "wb:class/wizard": 1
+  },
+  "gastos": {
+   "ancestry_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/elven-lore",
+     "slot": "ancestry_feat"
+    }
+   ],
+   "class_feat": [
+    {
+     "em": 2,
+     "pega": "wb:feat/energy-ablation",
+     "slot": "class_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/spell-protection-array",
+     "slot": "class_feat"
+    }
+   ],
+   "free_archetype": [
+    {
+     "em": 2,
+     "pega": "wb:feat/wizard-dedication",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/basic-arcana",
+     "slot": "free_archetype"
+    }
+   ],
+   "general_feat": [
+    {
+     "em": 3,
+     "pega": "wb:feat/fleet",
+     "slot": "general_feat"
+    }
+   ],
+   "skill_feat": [
+    {
+     "em": 2,
+     "pega": "wb:feat/assurance",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/additional-lore",
+     "slot": "skill_feat"
+    }
+   ]
+  },
+  "hp_detalhe": [
+   {
+    "hp": 6,
+    "nota": "ancestria",
+    "origem": "Elf"
+   },
+   {
+    "hp": 7,
+    "nota": "6 da classe + 1 de CON",
+    "origem": "nivel 1 (Wizard)"
+   },
+   {
+    "hp": 7,
+    "nota": "6 da classe + 1 de CON",
+    "origem": "nivel 2 (Wizard)"
+   },
+   {
+    "hp": 7,
+    "nota": "6 da classe + 1 de CON",
+    "origem": "nivel 3 (Wizard)"
+   },
+   {
+    "hp": 7,
+    "nota": "6 da classe + 1 de CON",
+    "origem": "nivel 4 (Wizard)"
+   }
+  ],
+  "niveis_por_classe": {
+   "wb:class/wizard": 4
+  },
+  "ordem_de_classe": [
+   "wb:class/wizard"
+  ],
+  "origem_proficiencia": {
+   "advanced": [
+    "Wizard"
+   ],
+   "arcana": [
+    "Elven Lore",
+    "Wizard Dedication",
+    "Wizard"
+   ],
+   "fortitude": [
+    "Wizard"
+   ],
+   "heavy": [
+    "Wizard"
+   ],
+   "light": [
+    "Wizard"
+   ],
+   "martial": [
+    "Wizard"
+   ],
+   "medium": [
+    "Wizard"
+   ],
+   "nature": [
+    "Elven Lore"
+   ],
+   "perception": [
+    "Wizard"
+   ],
+   "reflex": [
+    "Wizard"
+   ],
+   "simple": [
+    "Wizard"
+   ],
+   "unarmed": [
+    "Wizard"
+   ],
+   "unarmored": [
+    "Wizard"
+   ],
+   "will": [
+    "Wizard"
+   ]
+  },
+  "pericias_automaticas": {
+   "arcana": "Wizard"
+  },
+  "pericias_livres_detalhe": [
+   {
+    "classe": "Wizard",
+    "delta": 2,
+    "orcamento": 2
+   }
+  ]
+ },
+ "ficha": "mago4-fa-regra23-propria-dedicacao",
+ "visao": {
+  "ac": {
+   "armadura": "sem armadura",
+   "categoria": "unarmored",
+   "check_penalty": 0,
+   "detalhe": "10 + DEX +2 + prof 6 (trained, nivel 4) + item 0",
+   "dex_perdida": 0,
+   "escudo": null,
+   "rank": "trained",
+   "total": 18
+  },
+  "ancestralidade": "Elf",
+  "ataques": [
+   {
+    "arma": "Staff",
+    "ataque": 6,
+    "atributo_do_ataque": "str",
+    "categoria": "simple",
+    "dano": "1d4",
+    "detalhe": "nivel 4 + prof 6 (trained) + FOR +0",
+    "rank": "trained",
+    "tipo_de_dano": "bludgeoning",
+    "traits": [
+     "monk",
+     "two-hand-d8"
+    ]
+   }
+  ],
+  "atores": [],
+  "atributos": {
+   "cha": 10,
+   "con": 12,
+   "dex": 14,
+   "int": 18,
+   "str": 10,
+   "wis": 14
+  },
+  "aumentos_de_pericia": {
+   "gastos": [],
+   "niveis": [
+    3
+   ]
+  },
+  "avisos": [
+   "Wizard: falta escolher `outras-opcoes` (14 opcoes)",
+   "wb:feat/basic-arcana: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.basicArcana}`) -- pendente, nao e alvo ausente",
+   "wb:background/hermit: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Dubious Knowledge', 'foundry_uuid': 'Compendium.pf) -- nao aplicado"
+  ],
+  "background": "Hermit",
+  "boosts": {
+   "declarados": 7,
+   "direito": 7,
+   "fontes": [
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Elf",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": [
+      "con",
+      "int"
+     ],
+     "origem": "Hermit",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Hermit",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "criacao (4 livres)",
+     "origem_id": null,
+     "quantidade": 4
+    }
+   ]
+  },
+  "classes": {
+   "Wizard": 4
+  },
+  "concedidos": [],
+  "conjuracao": [
+   {
+    "classe": "Wizard",
+    "dc": {
+     "ataque": 10,
+     "dc": 20,
+     "nota": "nivel de personagem 4 + rank trained (pelo nivel de classe 4) + mod 4",
+     "rank": "trained"
+    },
+    "elevacao": 0,
+    "max_rank_do_slot": 2,
+    "nivel_de_classe": 4,
+    "rank_de_invocacao": 2,
+    "rank_efetivo": 2,
+    "slots": {
+     "1": 3,
+     "2": 3
+    },
+    "tipo": "prepared",
+    "tradicao": "arcane",
+    "truques": 5
+   }
+  ],
+  "escolhas_de_feat": [],
+  "features": [
+   {
+    "classe": "Wizard",
+    "grants": [],
+    "id": "wb:class-feature/arcane-bond",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Arcane Bond"
+   },
+   {
+    "classe": "Wizard",
+    "grants": [],
+    "id": "wb:class-feature/arcane-school",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Arcane School"
+   },
+   {
+    "classe": "Wizard",
+    "grants": [],
+    "id": "wb:class-feature/arcane-thesis",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Arcane Thesis"
+   },
+   {
+    "classe": "Wizard",
+    "grants": [],
+    "id": "wb:class-feature/wizard-spellcasting",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Wizard Spellcasting"
+   },
+   {
+    "classe": "Wizard",
+    "eixo": "arcane-school",
+    "grants": [],
+    "id": "wb:arcane-school/evocation",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Evocation"
+   },
+   {
+    "classe": "Wizard",
+    "eixo": "arcane-thesis",
+    "grants": [],
+    "id": "wb:class-feature/spell-blending",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Spell Blending"
+   }
+  ],
+  "focus_pool": 0,
+  "fora_do_requisito": [
+   {
+    "feat": "Wizard Dedication",
+    "motivo": "regra 23: o personagem ja tem 4 nivel(is) de Wizard; as duas rotas se excluem"
+   },
+   {
+    "feat": "Wizard (nivel de classe)",
+    "motivo": "regra 23: o personagem tem 4 nivel(is) de Wizard E a dedicacao da mesma classe. As duas rotas se excluem"
+   }
+  ],
+  "heranca": "Ancient Elf",
+  "hp": 34,
+  "modificadores": {
+   "cha": 0,
+   "con": 1,
+   "dex": 2,
+   "int": 4,
+   "str": 0,
+   "wis": 2
+  },
+  "nivel": 4,
+  "pericias_livres": 2,
+  "proficiencias": {
+   "advanced": "untrained",
+   "arcana": "trained",
+   "fortitude": "trained",
+   "heavy": "untrained",
+   "light": "untrained",
+   "martial": "untrained",
+   "medium": "untrained",
+   "nature": "trained",
+   "perception": "trained",
+   "reflex": "trained",
+   "simple": "trained",
+   "unarmed": "trained",
+   "unarmored": "trained",
+   "will": "expert"
+  },
+  "slots": {
+   "ancestry": [
+    1
+   ],
+   "class": [
+    2,
+    4
+   ],
+   "free_archetype": [
+    2,
+    4
+   ],
+   "general": [
+    3
+   ],
+   "skill": [
+    2,
+    4
+   ]
+  },
+  "slots_abertos": [
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "outras-opcoes",
+    "opcoes": 14,
+    "rotulo": "Wizard / outras-opcoes",
+    "slot": "subclasse"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 3)",
+    "slot": "skill_increase"
+   }
+  ],
+  "subclasses": [
+   {
+    "classe": "Wizard",
+    "eixo": "arcane-school",
+    "escolhido": "wb:arcane-school/evocation",
+    "nivel": 1,
+    "nome": "Evocation",
+    "opcoes": 23
+   },
+   {
+    "classe": "Wizard",
+    "eixo": "arcane-thesis",
+    "escolhido": "wb:class-feature/spell-blending",
+    "nivel": 1,
+    "nome": "Spell Blending",
+    "opcoes": 6
+   },
+   {
+    "classe": "Wizard",
+    "eixo": "outras-opcoes",
+    "escolhido": null,
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 14
+   }
+  ]
+ }
+}

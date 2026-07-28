@@ -1,0 +1,1189 @@
+{
+ "_doc": "Gabarito do porte TS. Gerado por motor/gerar_fixtures.py a partir do motor Python. NAO editar a mao: regenerar.",
+ "candidatos": {
+  "ancestry_feat@1": [
+   "wb:feat/adapted-cantrip",
+   "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
+   "wb:feat/courteous-comeback",
+   "wb:feat/devils-advocate",
+   "wb:feat/dragon-spit",
+   "wb:feat/general-training",
+   "wb:feat/gloomseer",
+   "wb:feat/keep-up-appearances",
+   "wb:feat/know-oneself",
+   "wb:feat/natural-ambition",
+   "wb:feat/natural-skill",
+   "wb:feat/quah-bond",
+   "wb:feat/saoc-astrology",
+   "wb:feat/tupilaq-carver",
+   "wb:feat/unconventional-weaponry",
+   "wb:feat/viking-shieldbearer",
+   "wb:feat/witch-warden",
+   "wb:feat/haughty-obstinacy",
+   "wb:feat/adaptive-adept",
+   "wb:feat/darkseer",
+   "wb:feat/ornate-tattoo",
+   "wb:feat/sense-allies",
+   "wb:feat/wavetouched-paragon",
+   "wb:feat/cooperative-soul",
+   "wb:feat/dragon-prince",
+   "wb:feat/group-aid",
+   "wb:feat/hardy-traveler",
+   "wb:feat/heir-of-the-saoc",
+   "wb:feat/incredible-improvisation",
+   "wb:feat/multitalented",
+   "wb:feat/shory-aeromancer",
+   "wb:feat/virtue-forged-tattoos",
+   "wb:feat/advanced-general-training",
+   "wb:feat/bounce-back",
+   "wb:feat/irriseni-ice-witch",
+   "wb:feat/shadow-pact",
+   "wb:feat/shory-aerialist",
+   "wb:feat/stubborn-persistence",
+   "wb:feat/unconventional-expertise"
+  ],
+  "ancestry_feat@2": [
+   "wb:feat/adapted-cantrip",
+   "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
+   "wb:feat/courteous-comeback",
+   "wb:feat/devils-advocate",
+   "wb:feat/dragon-spit",
+   "wb:feat/general-training",
+   "wb:feat/gloomseer",
+   "wb:feat/keep-up-appearances",
+   "wb:feat/know-oneself",
+   "wb:feat/natural-ambition",
+   "wb:feat/natural-skill",
+   "wb:feat/quah-bond",
+   "wb:feat/saoc-astrology",
+   "wb:feat/tupilaq-carver",
+   "wb:feat/unconventional-weaponry",
+   "wb:feat/viking-shieldbearer",
+   "wb:feat/witch-warden",
+   "wb:feat/haughty-obstinacy",
+   "wb:feat/adaptive-adept",
+   "wb:feat/darkseer",
+   "wb:feat/ornate-tattoo",
+   "wb:feat/sense-allies",
+   "wb:feat/wavetouched-paragon",
+   "wb:feat/cooperative-soul",
+   "wb:feat/dragon-prince",
+   "wb:feat/group-aid",
+   "wb:feat/hardy-traveler",
+   "wb:feat/heir-of-the-saoc",
+   "wb:feat/incredible-improvisation",
+   "wb:feat/multitalented",
+   "wb:feat/shory-aeromancer",
+   "wb:feat/virtue-forged-tattoos",
+   "wb:feat/advanced-general-training",
+   "wb:feat/bounce-back",
+   "wb:feat/irriseni-ice-witch",
+   "wb:feat/shadow-pact",
+   "wb:feat/shory-aerialist",
+   "wb:feat/stubborn-persistence",
+   "wb:feat/unconventional-expertise"
+  ],
+  "ancestry_feat@4": [
+   "wb:feat/adapted-cantrip",
+   "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
+   "wb:feat/courteous-comeback",
+   "wb:feat/devils-advocate",
+   "wb:feat/dragon-spit",
+   "wb:feat/general-training",
+   "wb:feat/gloomseer",
+   "wb:feat/keep-up-appearances",
+   "wb:feat/know-oneself",
+   "wb:feat/natural-ambition",
+   "wb:feat/natural-skill",
+   "wb:feat/quah-bond",
+   "wb:feat/saoc-astrology",
+   "wb:feat/tupilaq-carver",
+   "wb:feat/unconventional-weaponry",
+   "wb:feat/viking-shieldbearer",
+   "wb:feat/witch-warden",
+   "wb:feat/haughty-obstinacy",
+   "wb:feat/adaptive-adept",
+   "wb:feat/darkseer",
+   "wb:feat/ornate-tattoo",
+   "wb:feat/sense-allies",
+   "wb:feat/wavetouched-paragon",
+   "wb:feat/cooperative-soul",
+   "wb:feat/dragon-prince",
+   "wb:feat/group-aid",
+   "wb:feat/hardy-traveler",
+   "wb:feat/heir-of-the-saoc",
+   "wb:feat/incredible-improvisation",
+   "wb:feat/multitalented",
+   "wb:feat/shory-aeromancer",
+   "wb:feat/virtue-forged-tattoos",
+   "wb:feat/advanced-general-training",
+   "wb:feat/bounce-back",
+   "wb:feat/irriseni-ice-witch",
+   "wb:feat/shadow-pact",
+   "wb:feat/shory-aerialist",
+   "wb:feat/stubborn-persistence",
+   "wb:feat/unconventional-expertise"
+  ],
+  "class_feat@1": [
+   "wb:feat/ancestral-blood-magic",
+   "wb:feat/blessed-blood-sorcerer",
+   "wb:feat/blood-rising",
+   "wb:feat/counterspell-spontaneous",
+   "wb:feat/dangerous-sorcery",
+   "wb:feat/familiar",
+   "wb:feat/reach-spell",
+   "wb:feat/tap-into-blood",
+   "wb:feat/widen-spell",
+   "wb:feat/anoint-ally",
+   "wb:feat/bleed-out",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/entreat-with-forebears",
+   "wb:feat/arcane-evolution",
+   "wb:feat/bespell-strikes",
+   "wb:feat/elaborate-flourish",
+   "wb:feat/irezoko-tattoo",
+   "wb:feat/occult-evolution",
+   "wb:feat/primal-evolution",
+   "wb:feat/split-shot",
+   "wb:feat/advanced-bloodline",
+   "wb:feat/detonating-spell",
+   "wb:feat/diverting-vortex",
+   "wb:feat/divine-emissary",
+   "wb:feat/energetic-resonance",
+   "wb:feat/energy-ward",
+   "wb:feat/safeguard-spell",
+   "wb:feat/spell-relay",
+   "wb:feat/steady-spellcasting",
+   "wb:feat/bloodline-resistance",
+   "wb:feat/chaotic-spell",
+   "wb:feat/crossblooded-evolution",
+   "wb:feat/explosion-of-power",
+   "wb:feat/helts-spelldance",
+   "wb:feat/safeguarded-spell",
+   "wb:feat/soulsight",
+   "wb:feat/soulsight-sorcerer",
+   "wb:feat/ancestral-mage",
+   "wb:feat/consecrate-spell"
+  ],
+  "class_feat@2": [
+   "wb:feat/ancestral-blood-magic",
+   "wb:feat/blessed-blood-sorcerer",
+   "wb:feat/blood-rising",
+   "wb:feat/counterspell-spontaneous",
+   "wb:feat/dangerous-sorcery",
+   "wb:feat/familiar",
+   "wb:feat/reach-spell",
+   "wb:feat/tap-into-blood",
+   "wb:feat/widen-spell",
+   "wb:feat/anoint-ally",
+   "wb:feat/bleed-out",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/entreat-with-forebears",
+   "wb:feat/propelling-sorcery",
+   "wb:feat/arcane-evolution",
+   "wb:feat/bespell-strikes",
+   "wb:feat/elaborate-flourish",
+   "wb:feat/irezoko-tattoo",
+   "wb:feat/occult-evolution",
+   "wb:feat/primal-evolution",
+   "wb:feat/split-shot",
+   "wb:feat/advanced-bloodline",
+   "wb:feat/detonating-spell",
+   "wb:feat/diverting-vortex",
+   "wb:feat/divine-emissary",
+   "wb:feat/energetic-resonance",
+   "wb:feat/energy-ward",
+   "wb:feat/safeguard-spell",
+   "wb:feat/spell-relay",
+   "wb:feat/steady-spellcasting",
+   "wb:feat/bloodline-resistance",
+   "wb:feat/chaotic-spell",
+   "wb:feat/crossblooded-evolution",
+   "wb:feat/explosion-of-power",
+   "wb:feat/helts-spelldance",
+   "wb:feat/safeguarded-spell",
+   "wb:feat/soulsight",
+   "wb:feat/soulsight-sorcerer",
+   "wb:feat/ancestral-mage"
+  ],
+  "class_feat@4": [
+   "wb:feat/ancestral-blood-magic",
+   "wb:feat/blessed-blood-sorcerer",
+   "wb:feat/blood-rising",
+   "wb:feat/counterspell-spontaneous",
+   "wb:feat/dangerous-sorcery",
+   "wb:feat/familiar",
+   "wb:feat/reach-spell",
+   "wb:feat/tap-into-blood",
+   "wb:feat/widen-spell",
+   "wb:feat/anoint-ally",
+   "wb:feat/bleed-out",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/entreat-with-forebears",
+   "wb:feat/arcane-evolution",
+   "wb:feat/bespell-strikes",
+   "wb:feat/elaborate-flourish",
+   "wb:feat/irezoko-tattoo",
+   "wb:feat/occult-evolution",
+   "wb:feat/primal-evolution",
+   "wb:feat/split-shot",
+   "wb:feat/propelling-sorcery",
+   "wb:feat/divine-evolution",
+   "wb:feat/advanced-bloodline",
+   "wb:feat/detonating-spell",
+   "wb:feat/diverting-vortex",
+   "wb:feat/divine-emissary",
+   "wb:feat/energetic-resonance",
+   "wb:feat/energy-ward",
+   "wb:feat/safeguard-spell",
+   "wb:feat/spell-relay",
+   "wb:feat/steady-spellcasting",
+   "wb:feat/bloodline-resistance",
+   "wb:feat/chaotic-spell",
+   "wb:feat/crossblooded-evolution",
+   "wb:feat/explosion-of-power",
+   "wb:feat/helts-spelldance",
+   "wb:feat/safeguarded-spell",
+   "wb:feat/soulsight",
+   "wb:feat/soulsight-sorcerer"
+  ],
+  "free_archetype@1": [
+   "wb:feat/acrobat-dedication",
+   "wb:feat/agent-of-all-holds",
+   "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/alter-ego-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archaeologist-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/assassin-dedication",
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/battle-harbinger-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bloodrager-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/bullet-dancer-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication"
+  ],
+  "free_archetype@2": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/fan-dancer-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/folklorist-dedication",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/kineticist-dedication",
+   "wb:feat/kitharodian-actor-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication",
+   "wb:feat/living-monolith-dedication",
+   "wb:feat/living-vessel-dedication",
+   "wb:feat/loremaster-dedication",
+   "wb:feat/magaambyan-attendant-dedication",
+   "wb:feat/magic-warrior-dedication",
+   "wb:feat/magus-dedication",
+   "wb:feat/martial-artist-dedication"
+  ],
+  "free_archetype@4": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/fan-dancer-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/folklorist-dedication",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/kineticist-dedication",
+   "wb:feat/kitharodian-actor-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication",
+   "wb:feat/living-monolith-dedication",
+   "wb:feat/living-vessel-dedication",
+   "wb:feat/loremaster-dedication",
+   "wb:feat/magaambyan-attendant-dedication",
+   "wb:feat/magic-warrior-dedication",
+   "wb:feat/magus-dedication",
+   "wb:feat/martial-artist-dedication"
+  ],
+  "general_feat@1": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/toughness",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/fleet",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter"
+  ],
+  "general_feat@2": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/toughness",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/fleet",
+   "wb:feat/acrobatic-performer"
+  ],
+  "general_feat@4": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/toughness",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/additional-circus-trick",
+   "wb:feat/ancestral-paragon",
+   "wb:feat/endure-anarchy",
+   "wb:feat/hireling-manager"
+  ],
+  "skill_feat@1": [
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/impressive-performance",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/reveal-true-name",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/eye-for-numbers",
+   "wb:feat/forager",
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler"
+  ],
+  "skill_feat@2": [
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/impressive-performance",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/reveal-true-name",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/eye-for-numbers"
+  ],
+  "skill_feat@4": [
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/impressive-performance",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/reveal-true-name",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/ambush-tactics",
+   "wb:feat/efficient-explorer",
+   "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler"
+  ]
+ },
+ "extras": {
+  "aumentos_detalhe": [],
+  "boosts_declarados": 8,
+  "boosts_direito": 12,
+  "boosts_pendentes": [
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Human",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Human",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": [
+     "cha",
+     "str"
+    ],
+    "origem": "Gladiator",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Gladiator",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "criacao (4 livres)",
+    "origem_id": null,
+    "quantidade": 4
+   },
+   {
+    "em": 5,
+    "opcoes": null,
+    "origem": "nivel 5",
+    "origem_id": null,
+    "quantidade": 4
+   }
+  ],
+  "class_feat_nivel_1": false,
+  "classe_do_nivel": {
+   "1": "wb:class/sorcerer",
+   "2": "wb:class/sorcerer",
+   "3": "wb:class/sorcerer",
+   "4": "wb:class/sorcerer",
+   "5": "wb:class/sorcerer"
+  },
+  "entrada_da_classe": {
+   "wb:class/sorcerer": 1
+  },
+  "gastos": {
+   "ancestry_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/haughty-obstinacy",
+     "slot": "ancestry_feat"
+    },
+    {
+     "em": 5,
+     "pega": "wb:feat/clever-improviser",
+     "slot": "ancestry_feat"
+    }
+   ],
+   "class_feat": [
+    {
+     "em": 2,
+     "pega": "wb:feat/propelling-sorcery",
+     "slot": "class_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/divine-evolution",
+     "slot": "class_feat"
+    }
+   ],
+   "free_archetype": [
+    {
+     "em": 2,
+     "pega": "wb:feat/archer-dedication",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/quick-shot",
+     "slot": "free_archetype"
+    }
+   ],
+   "general_feat": [
+    {
+     "em": 3,
+     "pega": "wb:feat/fleet",
+     "slot": "general_feat"
+    }
+   ],
+   "skill_feat": [
+    {
+     "em": 2,
+     "pega": "wb:feat/assurance",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/additional-lore",
+     "slot": "skill_feat"
+    }
+   ]
+  },
+  "hp_detalhe": [
+   {
+    "hp": 8,
+    "nota": "ancestria",
+    "origem": "Human"
+   },
+   {
+    "hp": 9,
+    "nota": "6 da classe + 3 de CON",
+    "origem": "nivel 1 (Sorcerer)"
+   },
+   {
+    "hp": 9,
+    "nota": "6 da classe + 3 de CON",
+    "origem": "nivel 2 (Sorcerer)"
+   },
+   {
+    "hp": 9,
+    "nota": "6 da classe + 3 de CON",
+    "origem": "nivel 3 (Sorcerer)"
+   },
+   {
+    "hp": 9,
+    "nota": "6 da classe + 3 de CON",
+    "origem": "nivel 4 (Sorcerer)"
+   },
+   {
+    "hp": 9,
+    "nota": "6 da classe + 3 de CON",
+    "origem": "nivel 5 (Sorcerer)"
+   }
+  ],
+  "niveis_por_classe": {
+   "wb:class/sorcerer": 5
+  },
+  "ordem_de_classe": [
+   "wb:class/sorcerer"
+  ],
+  "origem_proficiencia": {
+   "advanced": [
+    "Sorcerer"
+   ],
+   "fortitude": [
+    "Magical Fortitude (Sorcerer)"
+   ],
+   "heavy": [
+    "Sorcerer"
+   ],
+   "light": [
+    "Sorcerer"
+   ],
+   "lore:Gladatorial Lore": [
+    "Gladiator"
+   ],
+   "martial": [
+    "Sorcerer"
+   ],
+   "medium": [
+    "Sorcerer"
+   ],
+   "perception": [
+    "Sorcerer"
+   ],
+   "performance": [
+    "Gladiator"
+   ],
+   "reflex": [
+    "Sorcerer"
+   ],
+   "simple": [
+    "Sorcerer"
+   ],
+   "unarmed": [
+    "Sorcerer"
+   ],
+   "unarmored": [
+    "Sorcerer"
+   ],
+   "will": [
+    "Sorcerer"
+   ]
+  },
+  "pericias_automaticas": {},
+  "pericias_livres_detalhe": [
+   {
+    "classe": "Sorcerer",
+    "delta": 2,
+    "orcamento": 2
+   }
+  ]
+ },
+ "ficha": "feiticeiro5-fa-diabolico",
+ "visao": {
+  "ac": {
+   "armadura": "sem armadura",
+   "categoria": "unarmored",
+   "check_penalty": 0,
+   "detalhe": "10 + DEX +1 + prof 7 (trained, nivel 5) + item 0",
+   "dex_perdida": 0,
+   "escudo": null,
+   "rank": "trained",
+   "total": 18
+  },
+  "ancestralidade": "Human",
+  "ataques": [
+   {
+    "arma": "Dagger",
+    "ataque": 8,
+    "atributo_do_ataque": "dex",
+    "categoria": "simple",
+    "dano": "1d4",
+    "detalhe": "nivel 5 + prof 7 (trained) + DEX +1",
+    "rank": "trained",
+    "tipo_de_dano": "piercing",
+    "traits": [
+     "agile",
+     "finesse",
+     "thrown-10",
+     "versatile-s"
+    ]
+   }
+  ],
+  "atores": [],
+  "atributos": {
+   "cha": 18,
+   "con": 16,
+   "dex": 12,
+   "int": 10,
+   "str": 10,
+   "wis": 12
+  },
+  "aumentos_de_pericia": {
+   "gastos": [],
+   "niveis": [
+    3,
+    5
+   ]
+  },
+  "avisos": [
+   "wb:background/gladiator: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Impressive Performance', 'foundry_uuid': 'Compendi) -- nao aplicado",
+   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Gladiator (1), Gladiator (1), criacao (4 livres) (4), nivel 5 (4)"
+  ],
+  "background": "Gladiator",
+  "boosts": {
+   "declarados": 8,
+   "direito": 12,
+   "fontes": [
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Human",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Human",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": [
+      "cha",
+      "str"
+     ],
+     "origem": "Gladiator",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Gladiator",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "criacao (4 livres)",
+     "origem_id": null,
+     "quantidade": 4
+    },
+    {
+     "em": 5,
+     "opcoes": null,
+     "origem": "nivel 5",
+     "origem_id": null,
+     "quantidade": 4
+    }
+   ]
+  },
+  "classes": {
+   "Sorcerer": 5
+  },
+  "concedidos": [
+   {
+    "id": "wb:feat/untrained-improvisation",
+    "nome": "Untrained Improvisation",
+    "por": "Clever Improviser",
+    "por_id": "wb:feat/clever-improviser"
+   }
+  ],
+  "conjuracao": [
+   {
+    "classe": "Sorcerer",
+    "dc": {
+     "ataque": 11,
+     "dc": 21,
+     "nota": "nivel de personagem 5 + rank trained (pelo nivel de classe 5) + mod 4",
+     "rank": "trained"
+    },
+    "elevacao": 0,
+    "max_rank_do_slot": 3,
+    "nivel_de_classe": 5,
+    "rank_de_invocacao": 3,
+    "rank_efetivo": 3,
+    "slots": {
+     "1": 4,
+     "2": 4,
+     "3": 3
+    },
+    "tipo": "spontaneous",
+    "tradicao": "variavel (definida pela escolha de bloodline; nao ha tradicao fixa na class-feature)",
+    "truques": 5
+   }
+  ],
+  "escolhas_de_feat": [],
+  "features": [
+   {
+    "classe": "Sorcerer",
+    "grants": [],
+    "id": "wb:class-feature/bloodline",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Bloodline"
+   },
+   {
+    "classe": "Sorcerer",
+    "grants": [],
+    "id": "wb:class-feature/bloodline-spells",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Bloodline Spells"
+   },
+   {
+    "classe": "Sorcerer",
+    "grants": [],
+    "id": "wb:class-feature/sorcerer-spellcasting",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Sorcerer Spellcasting"
+   },
+   {
+    "classe": "Sorcerer",
+    "grants": [],
+    "id": "wb:class-feature/sorcerous-potency",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Sorcerous Potency"
+   },
+   {
+    "classe": "Sorcerer",
+    "grants": [],
+    "id": "wb:class-feature/spell-repertoire",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Spell Repertoire"
+   },
+   {
+    "classe": "Sorcerer",
+    "grants": [],
+    "id": "wb:class-feature/signature-spells",
+    "na_base": true,
+    "nivel_de_classe": 3,
+    "nome": "Signature Spells"
+   },
+   {
+    "classe": "Sorcerer",
+    "grants": [
+     {
+      "proficiency": {
+       "fortitude": "expert"
+      }
+     }
+    ],
+    "id": "wb:class-feature/magical-fortitude",
+    "na_base": true,
+    "nivel_de_classe": 5,
+    "nome": "Magical Fortitude"
+   },
+   {
+    "classe": "Sorcerer",
+    "eixo": "outras-opcoes",
+    "grants": [],
+    "id": "wb:class-feature/bloodline-diabolic",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Bloodline: Diabolic"
+   }
+  ],
+  "focus_pool": 1,
+  "fora_do_requisito": [],
+  "heranca": "Tiefling",
+  "hp": 53,
+  "modificadores": {
+   "cha": 4,
+   "con": 3,
+   "dex": 1,
+   "int": 0,
+   "str": 0,
+   "wis": 1
+  },
+  "nivel": 5,
+  "pericias_livres": 2,
+  "proficiencias": {
+   "advanced": "untrained",
+   "fortitude": "expert",
+   "heavy": "untrained",
+   "light": "untrained",
+   "lore:Gladatorial Lore": "trained",
+   "martial": "untrained",
+   "medium": "untrained",
+   "perception": "trained",
+   "performance": "trained",
+   "reflex": "trained",
+   "simple": "trained",
+   "unarmed": "trained",
+   "unarmored": "trained",
+   "will": "expert"
+  },
+  "slots": {
+   "ancestry": [
+    1,
+    5
+   ],
+   "class": [
+    2,
+    4
+   ],
+   "free_archetype": [
+    2,
+    4
+   ],
+   "general": [
+    3
+   ],
+   "skill": [
+    2,
+    4
+   ]
+  },
+  "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 4,
+    "fontes": [
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Human",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Human",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": [
+       "cha",
+       "str"
+      ],
+      "origem": "Gladiator",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Gladiator",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "criacao (4 livres)",
+      "origem_id": null,
+      "quantidade": 4
+     },
+     {
+      "em": 5,
+      "opcoes": null,
+      "origem": "nivel 5",
+      "origem_id": null,
+      "quantidade": 4
+     }
+    ],
+    "kind": "ability",
+    "rotulo": "boosts de atributo (4 a escolher)",
+    "slot": "boosts_livres"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 3)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 5,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 5)",
+    "slot": "skill_increase"
+   }
+  ],
+  "subclasses": [
+   {
+    "classe": "Sorcerer",
+    "eixo": "outras-opcoes",
+    "escolhido": "wb:class-feature/bloodline-diabolic",
+    "nivel": 1,
+    "nome": "Bloodline: Diabolic",
+    "opcoes": 19
+   }
+  ]
+ }
+}

@@ -1,0 +1,1573 @@
+{
+ "_doc": "Gabarito do porte TS. Gerado por motor/gerar_fixtures.py a partir do motor Python. NAO editar a mao: regenerar.",
+ "candidatos": {
+  "ancestry_feat@1": [
+   "wb:feat/adaptive-vision",
+   "wb:feat/avenge-in-glory",
+   "wb:feat/clan-pistol",
+   "wb:feat/clans-edge",
+   "wb:feat/dongun-education",
+   "wb:feat/dwarven-doughtiness",
+   "wb:feat/dwarven-lore",
+   "wb:feat/dwarven-weapon-familiarity",
+   "wb:feat/explosive-savant",
+   "wb:feat/eye-for-treasure",
+   "wb:feat/fire-savvy",
+   "wb:feat/forge-days-rest",
+   "wb:feat/mountain-strategy",
+   "wb:feat/rivethun-disciple",
+   "wb:feat/rock-runner",
+   "wb:feat/stonemasons-eye",
+   "wb:feat/surface-culture",
+   "wb:feat/unburdened-iron",
+   "wb:feat/clan-lore",
+   "wb:feat/boulder-roll",
+   "wb:feat/clan-protector",
+   "wb:feat/defy-the-darkness",
+   "wb:feat/dwarven-reinforcement",
+   "wb:feat/dwarven-weapon-cunning",
+   "wb:feat/protective-sheath",
+   "wb:feat/sheltering-slab",
+   "wb:feat/spark-fist",
+   "wb:feat/tomb-watchers-glare",
+   "wb:feat/battleforger",
+   "wb:feat/demolitionist",
+   "wb:feat/echoes-in-stone",
+   "wb:feat/energy-blessed",
+   "wb:feat/heroes-call",
+   "wb:feat/mountains-stoutness",
+   "wb:feat/returning-throw",
+   "wb:feat/rivethun-spiritual-attunement",
+   "wb:feat/smoke-sight",
+   "wb:feat/stone-bones",
+   "wb:feat/stonewalker",
+   "wb:feat/crafters-instinct"
+  ],
+  "ancestry_feat@2": [
+   "wb:feat/adaptive-vision",
+   "wb:feat/avenge-in-glory",
+   "wb:feat/clan-pistol",
+   "wb:feat/clans-edge",
+   "wb:feat/dongun-education",
+   "wb:feat/dwarven-doughtiness",
+   "wb:feat/dwarven-lore",
+   "wb:feat/dwarven-weapon-familiarity",
+   "wb:feat/explosive-savant",
+   "wb:feat/eye-for-treasure",
+   "wb:feat/fire-savvy",
+   "wb:feat/forge-days-rest",
+   "wb:feat/mountain-strategy",
+   "wb:feat/rivethun-disciple",
+   "wb:feat/rock-runner",
+   "wb:feat/stonemasons-eye",
+   "wb:feat/surface-culture",
+   "wb:feat/unburdened-iron",
+   "wb:feat/clan-lore",
+   "wb:feat/boulder-roll",
+   "wb:feat/clan-protector",
+   "wb:feat/defy-the-darkness",
+   "wb:feat/dwarven-reinforcement",
+   "wb:feat/dwarven-weapon-cunning",
+   "wb:feat/protective-sheath",
+   "wb:feat/sheltering-slab",
+   "wb:feat/spark-fist",
+   "wb:feat/tomb-watchers-glare",
+   "wb:feat/battleforger",
+   "wb:feat/demolitionist",
+   "wb:feat/echoes-in-stone",
+   "wb:feat/energy-blessed",
+   "wb:feat/heroes-call",
+   "wb:feat/mountains-stoutness",
+   "wb:feat/returning-throw",
+   "wb:feat/rivethun-spiritual-attunement",
+   "wb:feat/smoke-sight",
+   "wb:feat/stone-bones",
+   "wb:feat/stonewalker",
+   "wb:feat/crafters-instinct"
+  ],
+  "ancestry_feat@4": [
+   "wb:feat/adaptive-vision",
+   "wb:feat/avenge-in-glory",
+   "wb:feat/clan-pistol",
+   "wb:feat/clans-edge",
+   "wb:feat/dongun-education",
+   "wb:feat/dwarven-doughtiness",
+   "wb:feat/dwarven-lore",
+   "wb:feat/dwarven-weapon-familiarity",
+   "wb:feat/explosive-savant",
+   "wb:feat/eye-for-treasure",
+   "wb:feat/fire-savvy",
+   "wb:feat/forge-days-rest",
+   "wb:feat/mountain-strategy",
+   "wb:feat/rivethun-disciple",
+   "wb:feat/rock-runner",
+   "wb:feat/stonemasons-eye",
+   "wb:feat/surface-culture",
+   "wb:feat/unburdened-iron",
+   "wb:feat/clan-lore",
+   "wb:feat/boulder-roll",
+   "wb:feat/clan-protector",
+   "wb:feat/defy-the-darkness",
+   "wb:feat/dwarven-reinforcement",
+   "wb:feat/dwarven-weapon-cunning",
+   "wb:feat/protective-sheath",
+   "wb:feat/sheltering-slab",
+   "wb:feat/spark-fist",
+   "wb:feat/tomb-watchers-glare",
+   "wb:feat/battleforger",
+   "wb:feat/demolitionist",
+   "wb:feat/echoes-in-stone",
+   "wb:feat/energy-blessed",
+   "wb:feat/heroes-call",
+   "wb:feat/mountains-stoutness",
+   "wb:feat/returning-throw",
+   "wb:feat/rivethun-spiritual-attunement",
+   "wb:feat/smoke-sight",
+   "wb:feat/stone-bones",
+   "wb:feat/stonewalker",
+   "wb:feat/crafters-instinct"
+  ],
+  "class_feat@1": [
+   "wb:feat/agile-shield-grip",
+   "wb:feat/alchemical-assessment",
+   "wb:feat/alchemical-familiar",
+   "wb:feat/blowgun-poisoner",
+   "wb:feat/brilliant-flash",
+   "wb:feat/defensive-advance",
+   "wb:feat/desperate-prayer",
+   "wb:feat/everstand-stance",
+   "wb:feat/faithful-steed",
+   "wb:feat/far-lobber",
+   "wb:feat/iron-repercussions",
+   "wb:feat/nimble-reprisal",
+   "wb:feat/ongoing-selfishness",
+   "wb:feat/soothing-vials",
+   "wb:feat/splinter-faith",
+   "wb:feat/vicious-vengeance",
+   "wb:feat/deitys-domain",
+   "wb:feat/quick-bomber",
+   "wb:feat/unimpeded-step",
+   "wb:feat/weight-of-guilt",
+   "wb:feat/clotting-elixirs",
+   "wb:feat/conceited-mindset",
+   "wb:feat/demolition-charge",
+   "wb:feat/devoted-guardian",
+   "wb:feat/divine-health",
+   "wb:feat/improvise-admixture",
+   "wb:feat/oath-of-the-avenger",
+   "wb:feat/oath-of-the-defender",
+   "wb:feat/oath-of-the-slayer",
+   "wb:feat/pernicious-poison",
+   "wb:feat/poison-resistance",
+   "wb:feat/reliable-squire",
+   "wb:feat/resilient-mind",
+   "wb:feat/revivifying-mutagen",
+   "wb:feat/smoke-bomb",
+   "wb:feat/accelerating-touch",
+   "wb:feat/acclimated-mount",
+   "wb:feat/aura-of-courage",
+   "wb:feat/aura-of-despair",
+   "wb:feat/calculated-splash"
+  ],
+  "class_feat@2": [
+   "wb:feat/agile-shield-grip",
+   "wb:feat/alchemical-assessment",
+   "wb:feat/alchemical-familiar",
+   "wb:feat/blowgun-poisoner",
+   "wb:feat/brilliant-flash",
+   "wb:feat/defensive-advance",
+   "wb:feat/desperate-prayer",
+   "wb:feat/everstand-stance",
+   "wb:feat/faithful-steed",
+   "wb:feat/far-lobber",
+   "wb:feat/iron-repercussions",
+   "wb:feat/nimble-reprisal",
+   "wb:feat/ongoing-selfishness",
+   "wb:feat/soothing-vials",
+   "wb:feat/splinter-faith",
+   "wb:feat/vicious-vengeance",
+   "wb:feat/clotting-elixirs",
+   "wb:feat/conceited-mindset",
+   "wb:feat/demolition-charge",
+   "wb:feat/devoted-guardian",
+   "wb:feat/divine-health",
+   "wb:feat/improvise-admixture",
+   "wb:feat/oath-of-the-avenger",
+   "wb:feat/oath-of-the-defender",
+   "wb:feat/oath-of-the-slayer",
+   "wb:feat/pernicious-poison",
+   "wb:feat/poison-resistance",
+   "wb:feat/reliable-squire",
+   "wb:feat/resilient-mind",
+   "wb:feat/revivifying-mutagen",
+   "wb:feat/smoke-bomb",
+   "wb:feat/deitys-domain",
+   "wb:feat/quick-bomber",
+   "wb:feat/divine-grace",
+   "wb:feat/unimpeded-step",
+   "wb:feat/weight-of-guilt",
+   "wb:feat/accelerating-touch",
+   "wb:feat/acclimated-mount",
+   "wb:feat/aura-of-courage",
+   "wb:feat/aura-of-despair"
+  ],
+  "class_feat@4": [
+   "wb:feat/agile-shield-grip",
+   "wb:feat/alchemical-assessment",
+   "wb:feat/alchemical-familiar",
+   "wb:feat/blowgun-poisoner",
+   "wb:feat/brilliant-flash",
+   "wb:feat/defensive-advance",
+   "wb:feat/desperate-prayer",
+   "wb:feat/everstand-stance",
+   "wb:feat/faithful-steed",
+   "wb:feat/far-lobber",
+   "wb:feat/iron-repercussions",
+   "wb:feat/nimble-reprisal",
+   "wb:feat/ongoing-selfishness",
+   "wb:feat/soothing-vials",
+   "wb:feat/splinter-faith",
+   "wb:feat/vicious-vengeance",
+   "wb:feat/clotting-elixirs",
+   "wb:feat/conceited-mindset",
+   "wb:feat/demolition-charge",
+   "wb:feat/devoted-guardian",
+   "wb:feat/divine-health",
+   "wb:feat/improvise-admixture",
+   "wb:feat/oath-of-the-avenger",
+   "wb:feat/oath-of-the-defender",
+   "wb:feat/oath-of-the-slayer",
+   "wb:feat/pernicious-poison",
+   "wb:feat/poison-resistance",
+   "wb:feat/reliable-squire",
+   "wb:feat/resilient-mind",
+   "wb:feat/revivifying-mutagen",
+   "wb:feat/smoke-bomb",
+   "wb:feat/accelerating-touch",
+   "wb:feat/aura-of-courage",
+   "wb:feat/aura-of-despair",
+   "wb:feat/calculated-splash",
+   "wb:feat/chemical-purification",
+   "wb:feat/enduring-alchemy",
+   "wb:feat/fermenting-liquors",
+   "wb:feat/healing-bomb",
+   "wb:feat/inspiring-resilience"
+  ],
+  "free_archetype@1": [
+   "wb:feat/acrobat-dedication",
+   "wb:feat/agent-of-all-holds",
+   "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/alter-ego-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archaeologist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/assassin-dedication",
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/battle-harbinger-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bloodrager-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/bullet-dancer-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication"
+  ],
+  "free_archetype@2": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/druid-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/firework-technician-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghost-eater-dedication",
+   "wb:feat/ghost-hunter-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/guardian-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/kineticist-dedication"
+  ],
+  "free_archetype@4": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/druid-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/firework-technician-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghost-eater-dedication",
+   "wb:feat/ghost-hunter-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/guardian-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/kineticist-dedication"
+  ],
+  "general_feat@1": [
+   "wb:feat/acupuncturist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/battle-medicine",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crush-dissent",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fast-recovery",
+   "wb:feat/forensic-acumen",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/improvise-tool",
+   "wb:feat/incredible-initiative",
+   "wb:feat/inoculation",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/medical-researcher",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/risky-surgery",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/stitch-flesh",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/toughness",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/additional-lore"
+  ],
+  "general_feat@2": [
+   "wb:feat/acupuncturist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/battle-medicine",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crush-dissent",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fast-recovery",
+   "wb:feat/forensic-acumen",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/improvise-tool",
+   "wb:feat/incredible-initiative",
+   "wb:feat/inoculation",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/medical-researcher",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/risky-surgery",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/stitch-flesh",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/toughness",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge"
+  ],
+  "general_feat@4": [
+   "wb:feat/acupuncturist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/battle-medicine",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crush-dissent",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fast-recovery",
+   "wb:feat/forensic-acumen",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/improvise-tool",
+   "wb:feat/incredible-initiative",
+   "wb:feat/inoculation",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/medical-researcher",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/risky-surgery",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/stitch-flesh",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/toughness",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge"
+  ],
+  "skill_feat@1": [
+   "wb:feat/acupuncturist",
+   "wb:feat/battle-medicine",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/forensic-acumen",
+   "wb:feat/improvise-tool",
+   "wb:feat/inoculation",
+   "wb:feat/medical-researcher",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/risky-surgery",
+   "wb:feat/seasoned",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/stitch-flesh",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/trick-magic-item",
+   "wb:feat/additional-lore",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick"
+  ],
+  "skill_feat@2": [
+   "wb:feat/acupuncturist",
+   "wb:feat/battle-medicine",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/forensic-acumen",
+   "wb:feat/improvise-tool",
+   "wb:feat/inoculation",
+   "wb:feat/medical-researcher",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/risky-surgery",
+   "wb:feat/seasoned",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/stitch-flesh",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/trick-magic-item",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/tattoo-artist",
+   "wb:feat/vasodilation",
+   "wb:feat/additional-lore",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan"
+  ],
+  "skill_feat@4": [
+   "wb:feat/acupuncturist",
+   "wb:feat/battle-medicine",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/forensic-acumen",
+   "wb:feat/improvise-tool",
+   "wb:feat/inoculation",
+   "wb:feat/medical-researcher",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/risky-surgery",
+   "wb:feat/seasoned",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/stitch-flesh",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/trick-magic-item",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/tattoo-artist",
+   "wb:feat/vasodilation",
+   "wb:feat/ambush-tactics",
+   "wb:feat/efficient-explorer",
+   "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/named-artillery",
+   "wb:feat/additional-lore",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist"
+  ]
+ },
+ "extras": {
+  "aumentos_detalhe": [],
+  "boosts_declarados": 7,
+  "boosts_direito": 16,
+  "boosts_pendentes": [
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Dwarf",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": [
+     "con",
+     "wis"
+    ],
+    "origem": "Field Medic",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Field Medic",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": 1,
+    "opcoes": [
+     "dex",
+     "str"
+    ],
+    "origem": "Champion (habilidade-chave)",
+    "origem_id": "wb:class/champion",
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "criacao (4 livres)",
+    "origem_id": null,
+    "quantidade": 4
+   },
+   {
+    "em": 5,
+    "opcoes": null,
+    "origem": "nivel 5",
+    "origem_id": null,
+    "quantidade": 4
+   },
+   {
+    "em": 10,
+    "opcoes": null,
+    "origem": "nivel 10",
+    "origem_id": null,
+    "quantidade": 4
+   }
+  ],
+  "class_feat_nivel_1": true,
+  "classe_do_nivel": {
+   "1": "wb:class/champion",
+   "10": "wb:class/alchemist",
+   "2": "wb:class/champion",
+   "3": "wb:class/champion",
+   "4": "wb:class/champion",
+   "5": "wb:class/champion",
+   "6": "wb:class/champion",
+   "7": "wb:class/alchemist",
+   "8": "wb:class/alchemist",
+   "9": "wb:class/alchemist"
+  },
+  "entrada_da_classe": {
+   "wb:class/alchemist": 7,
+   "wb:class/champion": 1
+  },
+  "gastos": {
+   "ancestry_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/clan-lore",
+     "slot": "ancestry_feat"
+    },
+    {
+     "em": 5,
+     "pega": "wb:feat/blast-resistance",
+     "slot": "ancestry_feat"
+    },
+    {
+     "em": 9,
+     "pega": "wb:feat/kneel-for-no-god",
+     "slot": "ancestry_feat"
+    }
+   ],
+   "class_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/deitys-domain",
+     "slot": "class_feat"
+    },
+    {
+     "em": 2,
+     "pega": "wb:feat/divine-grace",
+     "slot": "class_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/cruelty",
+     "slot": "class_feat"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/litany-against-wrath",
+     "slot": "class_feat"
+    },
+    {
+     "em": 8,
+     "pega": "wb:feat/quick-bomber",
+     "slot": "class_feat"
+    },
+    {
+     "em": 10,
+     "pega": "wb:feat/efficient-alchemy",
+     "slot": "class_feat"
+    }
+   ],
+   "free_archetype": [
+    {
+     "em": 2,
+     "pega": "wb:feat/bastion-dedication",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/disarming-block",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/nimble-shield-hand",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 8,
+     "pega": "wb:feat/drive-back",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 10,
+     "pega": "wb:feat/destructive-block",
+     "slot": "free_archetype"
+    }
+   ],
+   "general_feat": [
+    {
+     "em": 3,
+     "pega": "wb:feat/fleet",
+     "slot": "general_feat"
+    },
+    {
+     "em": 7,
+     "pega": "wb:feat/diehard",
+     "slot": "general_feat"
+    }
+   ],
+   "skill_feat": [
+    {
+     "em": 2,
+     "pega": "wb:feat/assurance",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/additional-lore",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/breath-control",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 8,
+     "pega": "wb:feat/canny-acumen",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 10,
+     "pega": "wb:feat/adopted-ancestry",
+     "slot": "skill_feat"
+    }
+   ]
+  },
+  "hp_detalhe": [
+   {
+    "hp": 10,
+    "nota": "ancestria",
+    "origem": "Dwarf"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 1 (Champion)"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 2 (Champion)"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 3 (Champion)"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 4 (Champion)"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 5 (Champion)"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 6 (Champion)"
+   },
+   {
+    "hp": 11,
+    "nota": "8 da classe + 3 de CON",
+    "origem": "nivel 7 (Alchemist)"
+   },
+   {
+    "hp": 11,
+    "nota": "8 da classe + 3 de CON",
+    "origem": "nivel 8 (Alchemist)"
+   },
+   {
+    "hp": 11,
+    "nota": "8 da classe + 3 de CON",
+    "origem": "nivel 9 (Alchemist)"
+   },
+   {
+    "hp": 11,
+    "nota": "8 da classe + 3 de CON",
+    "origem": "nivel 10 (Alchemist)"
+   }
+  ],
+  "niveis_por_classe": {
+   "wb:class/alchemist": 4,
+   "wb:class/champion": 6
+  },
+  "ordem_de_classe": [
+   "wb:class/champion",
+   "wb:class/alchemist"
+  ],
+  "origem_proficiencia": {
+   "Alchemical Bombs": [
+    "Alchemist"
+   ],
+   "advanced": [
+    "Champion",
+    "Alchemist"
+   ],
+   "crafting": [
+    "Alchemist"
+   ],
+   "fortitude": [
+    "Champion",
+    "Alchemist"
+   ],
+   "heavy": [
+    "Champion"
+   ],
+   "light": [
+    "Champion",
+    "Alchemist"
+   ],
+   "lore:Warfare Lore": [
+    "Field Medic"
+   ],
+   "martial": [
+    "Champion"
+   ],
+   "medicine": [
+    "Field Medic"
+   ],
+   "medium": [
+    "Champion",
+    "Alchemist"
+   ],
+   "perception": [
+    "Champion",
+    "Alchemist"
+   ],
+   "reflex": [
+    "Alchemist"
+   ],
+   "religion": [
+    "Champion"
+   ],
+   "simple": [
+    "Weapon Expertise (Champion)"
+   ],
+   "unarmed": [
+    "Weapon Expertise (Champion)"
+   ],
+   "unarmored": [
+    "Champion",
+    "Alchemist"
+   ],
+   "weapon-base-alchemical-bomb": [
+    "Alchemist"
+   ],
+   "will": [
+    "Champion"
+   ]
+  },
+  "pericias_automaticas": {
+   "crafting": "Alchemist",
+   "religion": "Champion"
+  },
+  "pericias_livres_detalhe": [
+   {
+    "classe": "Champion",
+    "delta": 2,
+    "orcamento": 2
+   },
+   {
+    "classe": "Alchemist",
+    "delta": 1,
+    "orcamento": 3
+   },
+   {
+    "classe": "Clan Lore",
+    "delta": 1,
+    "orcamento": 1
+   },
+   {
+    "classe": "Clan Lore",
+    "delta": 1,
+    "orcamento": 1
+   }
+  ]
+ },
+ "ficha": "campeao6-alquimista4-fa-nivel10",
+ "visao": {
+  "ac": {
+   "armadura": "Breastplate",
+   "categoria": "medium",
+   "check_penalty": 0,
+   "detalhe": "10 + DEX +1 + prof 12 (trained, nivel 10) + item 4",
+   "dex_perdida": 0,
+   "escudo": {
+    "ac": 2,
+    "nome": "Steel Shield"
+   },
+   "rank": "trained",
+   "total": 27
+  },
+  "ancestralidade": "Dwarf",
+  "ataques": [
+   {
+    "arma": "Warhammer",
+    "ataque": 14,
+    "atributo_do_ataque": "str",
+    "categoria": "martial",
+    "dano": "1d8+2",
+    "detalhe": "nivel 10 + prof 12 (trained) + FOR +2",
+    "rank": "trained",
+    "tipo_de_dano": "bludgeoning",
+    "traits": [
+     "shove"
+    ]
+   }
+  ],
+  "atores": [],
+  "atributos": {
+   "cha": 8,
+   "con": 16,
+   "dex": 12,
+   "int": 10,
+   "str": 14,
+   "wis": 16
+  },
+  "aumentos_de_pericia": {
+   "gastos": [],
+   "niveis": [
+    3,
+    5,
+    7,
+    9
+   ]
+  },
+  "avisos": [
+   "Champion: falta escolher `outras-opcoes` (2 opcoes)",
+   "Champion: falta escolher `outras-opcoes` (3 opcoes)",
+   "Alchemist: falta escolher `outras-opcoes` (5 opcoes)",
+   "wb:background/field-medic: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Battle Medicine', 'foundry_uuid': 'Compendium.pf2e) -- nao aplicado",
+   "boosts de atributo: 7 declarado(s) de 16 a que o personagem tem direito -- faltam 9. Fontes: Dwarf (1), Field Medic (1), Field Medic (1), Champion (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4), nivel 10 (4)"
+  ],
+  "background": "Field Medic",
+  "boosts": {
+   "declarados": 7,
+   "direito": 16,
+   "fontes": [
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Dwarf",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": [
+      "con",
+      "wis"
+     ],
+     "origem": "Field Medic",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Field Medic",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": 1,
+     "opcoes": [
+      "dex",
+      "str"
+     ],
+     "origem": "Champion (habilidade-chave)",
+     "origem_id": "wb:class/champion",
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "criacao (4 livres)",
+     "origem_id": null,
+     "quantidade": 4
+    },
+    {
+     "em": 5,
+     "opcoes": null,
+     "origem": "nivel 5",
+     "origem_id": null,
+     "quantidade": 4
+    },
+    {
+     "em": 10,
+     "opcoes": null,
+     "origem": "nivel 10",
+     "origem_id": null,
+     "quantidade": 4
+    }
+   ]
+  },
+  "classes": {
+   "Alchemist": 4,
+   "Champion": 6
+  },
+  "concedidos": [
+   {
+    "id": "wb:feat/reactive-shield",
+    "nome": "Reactive Shield",
+    "por": "Bastion Dedication",
+    "por_id": "wb:feat/bastion-dedication"
+   },
+   {
+    "id": "wb:class-feature/champions-aura",
+    "nome": "Champion's Aura",
+    "por": "Deity (Champion)",
+    "por_id": "wb:class-feature/deity-champion"
+   },
+   {
+    "id": "wb:feat/shield-block",
+    "nome": "Shield Block",
+    "por": "Shield Block",
+    "por_id": "wb:class-feature/shield-block"
+   },
+   {
+    "id": "wb:feat/alchemical-crafting",
+    "nome": "Alchemical Crafting",
+    "por": "Alchemy",
+    "por_id": "wb:class-feature/alchemy"
+   },
+   {
+    "id": "wb:class-feature/formula-book",
+    "nome": "Formula Book",
+    "por": "Alchemy",
+    "por_id": "wb:class-feature/alchemy"
+   },
+   {
+    "id": "wb:equipment/formula-book-blank",
+    "nome": "Formula Book (Blank)",
+    "por": "Formula Book",
+    "por_id": "wb:class-feature/formula-book"
+   },
+   {
+    "id": "wb:feat/advanced-alchemy",
+    "nome": "Advanced Alchemy",
+    "por": "Alchemy",
+    "por_id": "wb:class-feature/alchemy"
+   },
+   {
+    "id": "wb:class-feature/versatile-vials",
+    "nome": "Versatile Vials",
+    "por": "Alchemy",
+    "por_id": "wb:class-feature/alchemy"
+   },
+   {
+    "id": "wb:feat/quick-alchemy",
+    "nome": "Quick Alchemy",
+    "por": "Alchemy",
+    "por_id": "wb:class-feature/alchemy"
+   }
+  ],
+  "conjuracao": [],
+  "escolhas_de_feat": [],
+  "features": [
+   {
+    "classe": "Champion",
+    "grants": [],
+    "id": "wb:class-feature/cause",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Cause"
+   },
+   {
+    "classe": "Champion",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:class-feature/champions-aura"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/deity-champion",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Deity (Champion)"
+   },
+   {
+    "classe": "Champion",
+    "grants": [],
+    "id": "wb:class-feature/devotion-spells",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Devotion Spells"
+   },
+   {
+    "classe": "Champion",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:feat/shield-block"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/shield-block",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Shield Block"
+   },
+   {
+    "classe": "Champion",
+    "grants": [],
+    "id": "wb:class-feature/blessing-of-the-devoted",
+    "na_base": true,
+    "nivel_de_classe": 3,
+    "nome": "Blessing of the Devoted"
+   },
+   {
+    "classe": "Champion",
+    "grants": [],
+    "id": "wb:class-feature/blessed-swiftness",
+    "na_base": true,
+    "nivel_de_classe": 3,
+    "nome": "Blessed Swiftness"
+   },
+   {
+    "classe": "Champion",
+    "grants": [
+     {
+      "proficiency": {
+       "simple": "expert",
+       "unarmed": "expert"
+      }
+     }
+    ],
+    "id": "wb:class-feature/weapon-expertise",
+    "na_base": true,
+    "nivel_de_classe": 5,
+    "nome": "Weapon Expertise"
+   },
+   {
+    "classe": "Champion",
+    "eixo": "cause",
+    "grants": [],
+    "id": "wb:class-feature/justice",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Justice"
+   },
+   {
+    "classe": "Alchemist",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:feat/alchemical-crafting"
+      ]
+     },
+     {
+      "grant_feat": [
+       "wb:class-feature/formula-book"
+      ]
+     },
+     {
+      "grant_feat": [
+       "wb:feat/advanced-alchemy"
+      ]
+     },
+     {
+      "grant_feat": [
+       "wb:class-feature/versatile-vials"
+      ]
+     },
+     {
+      "grant_feat": [
+       "wb:feat/quick-alchemy"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/alchemy",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Alchemy"
+   },
+   {
+    "classe": "Alchemist",
+    "grants": [],
+    "id": "wb:class-feature/research-field",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Research Field"
+   },
+   {
+    "classe": "Alchemist",
+    "eixo": "research-field",
+    "grants": [],
+    "id": "wb:class-feature/bomber",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Bomber"
+   },
+   {
+    "classe": null,
+    "concedido_por": "wb:class-feature/deity-champion",
+    "grants": [],
+    "id": "wb:class-feature/champions-aura",
+    "na_base": true,
+    "nivel_de_classe": null,
+    "nome": "Champion's Aura",
+    "origem": "Deity (Champion)",
+    "raiz": "wb:class-feature/deity-champion"
+   },
+   {
+    "classe": null,
+    "concedido_por": "wb:class-feature/alchemy",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:equipment/formula-book-blank"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/formula-book",
+    "na_base": true,
+    "nivel_de_classe": null,
+    "nome": "Formula Book",
+    "origem": "Alchemy",
+    "raiz": "wb:class-feature/alchemy"
+   },
+   {
+    "classe": null,
+    "concedido_por": "wb:class-feature/alchemy",
+    "grants": [],
+    "id": "wb:class-feature/versatile-vials",
+    "na_base": true,
+    "nivel_de_classe": null,
+    "nome": "Versatile Vials",
+    "origem": "Alchemy",
+    "raiz": "wb:class-feature/alchemy"
+   }
+  ],
+  "focus_pool": 0,
+  "fora_do_requisito": [
+   {
+    "feat": "Disarming Block",
+    "motivo": "exige athletics >= trained; tem untrained"
+   }
+  ],
+  "heranca": "Ancient-Blooded Dwarf",
+  "hp": 132,
+  "modificadores": {
+   "cha": -1,
+   "con": 3,
+   "dex": 1,
+   "int": 0,
+   "str": 2,
+   "wis": 3
+  },
+  "nivel": 10,
+  "pericias_livres": 5,
+  "proficiencias": {
+   "Alchemical Bombs": "trained",
+   "advanced": "untrained",
+   "crafting": "trained",
+   "fortitude": "expert",
+   "heavy": "trained",
+   "light": "trained",
+   "lore:Warfare Lore": "trained",
+   "martial": "trained",
+   "medicine": "trained",
+   "medium": "trained",
+   "perception": "trained",
+   "reflex": "expert",
+   "religion": "trained",
+   "simple": "expert",
+   "unarmed": "expert",
+   "unarmored": "trained",
+   "weapon-base-alchemical-bomb": "trained",
+   "will": "expert"
+  },
+  "slots": {
+   "ancestry": [
+    1,
+    5,
+    9
+   ],
+   "class": [
+    1,
+    2,
+    4,
+    6,
+    8,
+    10
+   ],
+   "free_archetype": [
+    2,
+    4,
+    6,
+    8,
+    10
+   ],
+   "general": [
+    3,
+    7
+   ],
+   "skill": [
+    2,
+    4,
+    6,
+    8,
+    10
+   ]
+  },
+  "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 9,
+    "fontes": [
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Dwarf",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": [
+       "con",
+       "wis"
+      ],
+      "origem": "Field Medic",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Field Medic",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": 1,
+      "opcoes": [
+       "dex",
+       "str"
+      ],
+      "origem": "Champion (habilidade-chave)",
+      "origem_id": "wb:class/champion",
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "criacao (4 livres)",
+      "origem_id": null,
+      "quantidade": 4
+     },
+     {
+      "em": 5,
+      "opcoes": null,
+      "origem": "nivel 5",
+      "origem_id": null,
+      "quantidade": 4
+     },
+     {
+      "em": 10,
+      "opcoes": null,
+      "origem": "nivel 10",
+      "origem_id": null,
+      "quantidade": 4
+     }
+    ],
+    "kind": "ability",
+    "rotulo": "boosts de atributo (9 a escolher)",
+    "slot": "boosts_livres"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "outras-opcoes",
+    "opcoes": 2,
+    "rotulo": "Champion / outras-opcoes",
+    "slot": "subclasse"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "outras-opcoes",
+    "opcoes": 3,
+    "rotulo": "Champion / outras-opcoes",
+    "slot": "subclasse"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "outras-opcoes",
+    "opcoes": 5,
+    "rotulo": "Alchemist / outras-opcoes",
+    "slot": "subclasse"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 3)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 5,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 5)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 7,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 7)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 9,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 9)",
+    "slot": "skill_increase"
+   }
+  ],
+  "subclasses": [
+   {
+    "classe": "Champion",
+    "eixo": "cause",
+    "escolhido": "wb:class-feature/justice",
+    "nivel": 1,
+    "nome": "Justice",
+    "opcoes": 13
+   },
+   {
+    "classe": "Champion",
+    "eixo": "outras-opcoes",
+    "escolhido": null,
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 2
+   },
+   {
+    "classe": "Champion",
+    "eixo": "outras-opcoes",
+    "escolhido": null,
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 3
+   },
+   {
+    "classe": "Alchemist",
+    "eixo": "outras-opcoes",
+    "escolhido": null,
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 5
+   },
+   {
+    "classe": "Alchemist",
+    "eixo": "research-field",
+    "escolhido": "wb:class-feature/bomber",
+    "nivel": 1,
+    "nome": "Bomber",
+    "opcoes": 4
+   }
+  ]
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "_doc": "resumo das fichas congeladas; o detalhe esta em cada arquivo",
+ "pin_base": "ok",
+ "fichas": [
+  {
+   "ficha": "_teste-validacao-runas-arma-1-striking",
+   "nivel": 4,
+   "hp": 52,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 2
+  },
+  {
+   "ficha": "barbaro6-fa-duas-dedicacoes-limpo",
+   "nivel": 6,
+   "hp": 100,
+   "avisos": 3,
+   "fora_do_requisito": 0,
+   "slots_abertos": 4
+  },
+  {
+   "ficha": "bruxa5-tradicao-patron",
+   "nivel": 5,
+   "hp": 48,
+   "avisos": 5,
+   "fora_do_requisito": 0,
+   "slots_abertos": 16
+  },
+  {
+   "ficha": "campeao6-alquimista4-fa-nivel10",
+   "nivel": 10,
+   "hp": 132,
+   "avisos": 5,
+   "fora_do_requisito": 1,
+   "slots_abertos": 8
+  },
+  {
+   "ficha": "feiticeiro5-fa-diabolico",
+   "nivel": 5,
+   "hp": 53,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 3
+  },
+  {
+   "ficha": "guerreiro2-clerigo2-fa",
+   "nivel": 4,
+   "hp": 48,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 2
+  },
+  {
+   "ficha": "guerreiro3-mago2",
+   "nivel": 5,
+   "hp": 67,
+   "avisos": 3,
+   "fora_do_requisito": 2,
+   "slots_abertos": 6
+  },
+  {
+   "ficha": "guerreiro4-fa-archer",
+   "nivel": 4,
+   "hp": 52,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 2
+  },
+  {
+   "ficha": "guerreiro4-fa-avancado-sem-dedicacao",
+   "nivel": 4,
+   "hp": 52,
+   "avisos": 2,
+   "fora_do_requisito": 1,
+   "slots_abertos": 3
+  },
+  {
+   "ficha": "guerreiro4-fa-class-feat-no-slot",
+   "nivel": 4,
+   "hp": 52,
+   "avisos": 3,
+   "fora_do_requisito": 0,
+   "slots_abertos": 3
+  },
+  {
+   "ficha": "guerreiro4-fa-dedicacao-com-grants",
+   "nivel": 4,
+   "hp": 52,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 3
+  },
+  {
+   "ficha": "guerreiro4-fa-dedicacao-propria-classe",
+   "nivel": 4,
+   "hp": 52,
+   "avisos": 2,
+   "fora_do_requisito": 2,
+   "slots_abertos": 3
+  },
+  {
+   "ficha": "guerreiro4-fa-lacuna-dedicacao",
+   "nivel": 4,
+   "hp": 52,
+   "avisos": 2,
+   "fora_do_requisito": 1,
+   "slots_abertos": 3
+  },
+  {
+   "ficha": "guerreiro6-fa-duas-dedicacoes",
+   "nivel": 6,
+   "hp": 80,
+   "avisos": 2,
+   "fora_do_requisito": 1,
+   "slots_abertos": 3
+  },
+  {
+   "ficha": "invocador5-tradicao-eidolon",
+   "nivel": 5,
+   "hp": 68,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 13
+  },
+  {
+   "ficha": "kineticista6-fa-fogo",
+   "nivel": 6,
+   "hp": 80,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 3
+  },
+  {
+   "ficha": "ladino2-druida2-bardo2-fa",
+   "nivel": 6,
+   "hp": 68,
+   "avisos": 3,
+   "fora_do_requisito": 0,
+   "slots_abertos": 1
+  },
+  {
+   "ficha": "ladino4-aumentos-de-pericia",
+   "nivel": 4,
+   "hp": 48,
+   "avisos": 3,
+   "fora_do_requisito": 0,
+   "slots_abertos": 1
+  },
+  {
+   "ficha": "mago4-fa-regra23-propria-dedicacao",
+   "nivel": 4,
+   "hp": 34,
+   "avisos": 3,
+   "fora_do_requisito": 2,
+   "slots_abertos": 2
+  },
+  {
+   "ficha": "ranger4-fa-marshal",
+   "nivel": 4,
+   "hp": 56,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 2
+  }
+ ]
+}

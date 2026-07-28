@@ -1,0 +1,1209 @@
+{
+ "_doc": "Gabarito do porte TS. Gerado por motor/gerar_fixtures.py a partir do motor Python. NAO editar a mao: regenerar.",
+ "candidatos": {
+  "ancestry_feat@1": [
+   "wb:feat/beast-trainer",
+   "wb:feat/hold-mark",
+   "wb:feat/iron-fists",
+   "wb:feat/orc-lore",
+   "wb:feat/orc-superstition",
+   "wb:feat/orc-warmask",
+   "wb:feat/orc-weapon-familiarity",
+   "wb:feat/tusks",
+   "wb:feat/tusks-orc",
+   "wb:feat/orc-ferocity",
+   "wb:feat/bloody-blows",
+   "wb:feat/defy-death",
+   "wb:feat/demonblood-frenzy",
+   "wb:feat/mask-of-power",
+   "wb:feat/mask-of-rejection",
+   "wb:feat/orc-weapon-carnage",
+   "wb:feat/scar-thick-skin",
+   "wb:feat/spell-survivor",
+   "wb:feat/victorious-vigor",
+   "wb:feat/deaths-drums",
+   "wb:feat/dragon-grip",
+   "wb:feat/mask-of-pain",
+   "wb:feat/pervasive-superstition",
+   "wb:feat/undying-ferocity",
+   "wb:feat/ferocious-beasts",
+   "wb:feat/incredible-ferocity",
+   "wb:feat/lifebloods-call",
+   "wb:feat/mask-of-fear",
+   "wb:feat/orc-weapon-expertise",
+   "wb:feat/spell-devourer",
+   "wb:feat/rampaging-ferocity",
+   "wb:feat/athletic-might"
+  ],
+  "ancestry_feat@2": [
+   "wb:feat/beast-trainer",
+   "wb:feat/hold-mark",
+   "wb:feat/iron-fists",
+   "wb:feat/orc-lore",
+   "wb:feat/orc-superstition",
+   "wb:feat/orc-warmask",
+   "wb:feat/orc-weapon-familiarity",
+   "wb:feat/tusks",
+   "wb:feat/tusks-orc",
+   "wb:feat/orc-ferocity",
+   "wb:feat/bloody-blows",
+   "wb:feat/defy-death",
+   "wb:feat/demonblood-frenzy",
+   "wb:feat/mask-of-power",
+   "wb:feat/mask-of-rejection",
+   "wb:feat/orc-weapon-carnage",
+   "wb:feat/scar-thick-skin",
+   "wb:feat/spell-survivor",
+   "wb:feat/victorious-vigor",
+   "wb:feat/deaths-drums",
+   "wb:feat/dragon-grip",
+   "wb:feat/mask-of-pain",
+   "wb:feat/pervasive-superstition",
+   "wb:feat/undying-ferocity",
+   "wb:feat/ferocious-beasts",
+   "wb:feat/incredible-ferocity",
+   "wb:feat/lifebloods-call",
+   "wb:feat/mask-of-fear",
+   "wb:feat/orc-weapon-expertise",
+   "wb:feat/spell-devourer",
+   "wb:feat/rampaging-ferocity",
+   "wb:feat/athletic-might"
+  ],
+  "ancestry_feat@4": [
+   "wb:feat/beast-trainer",
+   "wb:feat/hold-mark",
+   "wb:feat/iron-fists",
+   "wb:feat/orc-lore",
+   "wb:feat/orc-superstition",
+   "wb:feat/orc-warmask",
+   "wb:feat/orc-weapon-familiarity",
+   "wb:feat/tusks",
+   "wb:feat/tusks-orc",
+   "wb:feat/orc-ferocity",
+   "wb:feat/bloody-blows",
+   "wb:feat/defy-death",
+   "wb:feat/demonblood-frenzy",
+   "wb:feat/mask-of-power",
+   "wb:feat/mask-of-rejection",
+   "wb:feat/orc-weapon-carnage",
+   "wb:feat/scar-thick-skin",
+   "wb:feat/spell-survivor",
+   "wb:feat/victorious-vigor",
+   "wb:feat/deaths-drums",
+   "wb:feat/dragon-grip",
+   "wb:feat/mask-of-pain",
+   "wb:feat/pervasive-superstition",
+   "wb:feat/undying-ferocity",
+   "wb:feat/ferocious-beasts",
+   "wb:feat/incredible-ferocity",
+   "wb:feat/lifebloods-call",
+   "wb:feat/mask-of-fear",
+   "wb:feat/orc-weapon-expertise",
+   "wb:feat/spell-devourer",
+   "wb:feat/rampaging-ferocity",
+   "wb:feat/athletic-might"
+  ],
+  "class_feat@1": [
+   "wb:feat/acute-vision",
+   "wb:feat/adrenaline-rush",
+   "wb:feat/moment-of-clarity",
+   "wb:feat/raging-intimidation",
+   "wb:feat/raging-thrower",
+   "wb:feat/sudden-charge",
+   "wb:feat/draconic-arrogance",
+   "wb:feat/acute-scent",
+   "wb:feat/bashing-charge",
+   "wb:feat/elemental-evolution",
+   "wb:feat/furious-finish",
+   "wb:feat/intimidating-strike",
+   "wb:feat/no-escape",
+   "wb:feat/shake-it-off",
+   "wb:feat/barreling-charge",
+   "wb:feat/brutal-crush",
+   "wb:feat/creature-comforts",
+   "wb:feat/farabellus-flip",
+   "wb:feat/ghost-wrangler",
+   "wb:feat/inured-to-alchemy",
+   "wb:feat/oversized-throw",
+   "wb:feat/raging-athlete",
+   "wb:feat/rip-and-tear",
+   "wb:feat/scars-of-steel",
+   "wb:feat/spiritual-guides",
+   "wb:feat/supernatural-senses",
+   "wb:feat/swipe",
+   "wb:feat/wounded-rage",
+   "wb:feat/animal-skin",
+   "wb:feat/brutal-bully",
+   "wb:feat/cleave",
+   "wb:feat/dragons-rage-breath",
+   "wb:feat/elemental-explosion",
+   "wb:feat/giants-stature",
+   "wb:feat/inner-strength",
+   "wb:feat/mage-hunter",
+   "wb:feat/nocturnal-senses",
+   "wb:feat/pain-tolerance",
+   "wb:feat/reactive-strike",
+   "wb:feat/scouring-rage"
+  ],
+  "class_feat@2": [
+   "wb:feat/acute-vision",
+   "wb:feat/adrenaline-rush",
+   "wb:feat/moment-of-clarity",
+   "wb:feat/raging-intimidation",
+   "wb:feat/raging-thrower",
+   "wb:feat/acute-scent",
+   "wb:feat/bashing-charge",
+   "wb:feat/furious-finish",
+   "wb:feat/intimidating-strike",
+   "wb:feat/no-escape",
+   "wb:feat/shake-it-off",
+   "wb:feat/sudden-charge",
+   "wb:feat/second-wind",
+   "wb:feat/draconic-arrogance",
+   "wb:feat/elemental-evolution",
+   "wb:feat/barreling-charge",
+   "wb:feat/brutal-crush",
+   "wb:feat/creature-comforts",
+   "wb:feat/farabellus-flip",
+   "wb:feat/ghost-wrangler",
+   "wb:feat/inured-to-alchemy",
+   "wb:feat/oversized-throw",
+   "wb:feat/raging-athlete",
+   "wb:feat/rip-and-tear",
+   "wb:feat/scars-of-steel",
+   "wb:feat/spiritual-guides",
+   "wb:feat/supernatural-senses",
+   "wb:feat/swipe",
+   "wb:feat/wounded-rage",
+   "wb:feat/animal-skin",
+   "wb:feat/brutal-bully",
+   "wb:feat/cleave",
+   "wb:feat/dragons-rage-breath",
+   "wb:feat/elemental-explosion",
+   "wb:feat/giants-stature",
+   "wb:feat/inner-strength",
+   "wb:feat/mage-hunter",
+   "wb:feat/nocturnal-senses",
+   "wb:feat/pain-tolerance",
+   "wb:feat/reactive-strike"
+  ],
+  "class_feat@4": [
+   "wb:feat/acute-vision",
+   "wb:feat/adrenaline-rush",
+   "wb:feat/moment-of-clarity",
+   "wb:feat/raging-intimidation",
+   "wb:feat/raging-thrower",
+   "wb:feat/acute-scent",
+   "wb:feat/bashing-charge",
+   "wb:feat/furious-finish",
+   "wb:feat/intimidating-strike",
+   "wb:feat/no-escape",
+   "wb:feat/shake-it-off",
+   "wb:feat/barreling-charge",
+   "wb:feat/inured-to-alchemy",
+   "wb:feat/oversized-throw",
+   "wb:feat/supernatural-senses",
+   "wb:feat/swipe",
+   "wb:feat/wounded-rage",
+   "wb:feat/sudden-charge",
+   "wb:feat/second-wind",
+   "wb:feat/fast-movement",
+   "wb:feat/draconic-arrogance",
+   "wb:feat/elemental-evolution",
+   "wb:feat/brutal-crush",
+   "wb:feat/creature-comforts",
+   "wb:feat/farabellus-flip",
+   "wb:feat/ghost-wrangler",
+   "wb:feat/raging-athlete",
+   "wb:feat/rip-and-tear",
+   "wb:feat/scars-of-steel",
+   "wb:feat/spiritual-guides",
+   "wb:feat/animal-skin",
+   "wb:feat/brutal-bully",
+   "wb:feat/cleave",
+   "wb:feat/dragons-rage-breath",
+   "wb:feat/elemental-explosion",
+   "wb:feat/giants-stature",
+   "wb:feat/inner-strength",
+   "wb:feat/mage-hunter",
+   "wb:feat/nocturnal-senses",
+   "wb:feat/pain-tolerance"
+  ],
+  "free_archetype@1": [
+   "wb:feat/acrobat-dedication",
+   "wb:feat/agent-of-all-holds",
+   "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/alter-ego-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archaeologist-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/assassin-dedication",
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/battle-harbinger-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bloodrager-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/bullet-dancer-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication"
+  ],
+  "free_archetype@2": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/fan-dancer-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/folklorist-dedication",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/guardian-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/kineticist-dedication",
+   "wb:feat/kitharodian-actor-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication",
+   "wb:feat/living-monolith-dedication",
+   "wb:feat/living-vessel-dedication"
+  ],
+  "free_archetype@4": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/fan-dancer-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/folklorist-dedication",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/guardian-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/kineticist-dedication",
+   "wb:feat/kitharodian-actor-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication",
+   "wb:feat/living-monolith-dedication",
+   "wb:feat/living-vessel-dedication"
+  ],
+  "general_feat@1": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/combat-climber",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/titan-wrestler",
+   "wb:feat/toughness",
+   "wb:feat/underwater-marauder"
+  ],
+  "general_feat@2": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/combat-climber",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/titan-wrestler",
+   "wb:feat/toughness",
+   "wb:feat/underwater-marauder"
+  ],
+  "general_feat@4": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/combat-climber",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/fast-recovery",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/titan-wrestler",
+   "wb:feat/toughness",
+   "wb:feat/underwater-marauder"
+  ],
+  "skill_feat@1": [
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/combat-climber",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/titan-wrestler",
+   "wb:feat/underwater-marauder",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/intimidating-glare",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/battle-medicine",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional"
+  ],
+  "skill_feat@2": [
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/combat-climber",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/titan-wrestler",
+   "wb:feat/underwater-marauder",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/discreet-inquiry",
+   "wb:feat/encouraging-words",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/eyes-of-the-city",
+   "wb:feat/glad-hand",
+   "wb:feat/godless-healing",
+   "wb:feat/intimidating-prowess",
+   "wb:feat/lasting-coercion",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/slippery-prey",
+   "wb:feat/terrifying-resistance",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/intimidating-glare",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting"
+  ],
+  "skill_feat@4": [
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/combat-climber",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fascinating-performance",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/no-cause-for-alarm",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-coercion",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/titan-wrestler",
+   "wb:feat/underwater-marauder",
+   "wb:feat/virtuosic-performer",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/discreet-inquiry",
+   "wb:feat/encouraging-words",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/eyes-of-the-city",
+   "wb:feat/glad-hand",
+   "wb:feat/godless-healing",
+   "wb:feat/intimidating-prowess",
+   "wb:feat/lasting-coercion",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/slippery-prey",
+   "wb:feat/terrifying-resistance",
+   "wb:feat/aurochs-headed",
+   "wb:feat/ambush-tactics",
+   "wb:feat/efficient-explorer",
+   "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance"
+  ]
+ },
+ "extras": {
+  "aumentos_detalhe": [],
+  "boosts_declarados": 8,
+  "boosts_direito": 12,
+  "boosts_pendentes": [
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Orc",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Orc",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": [
+     "cha",
+     "str"
+    ],
+    "origem": "Gladiator",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Gladiator",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "criacao (4 livres)",
+    "origem_id": null,
+    "quantidade": 4
+   },
+   {
+    "em": 5,
+    "opcoes": null,
+    "origem": "nivel 5",
+    "origem_id": null,
+    "quantidade": 4
+   }
+  ],
+  "class_feat_nivel_1": true,
+  "classe_do_nivel": {
+   "1": "wb:class/barbarian",
+   "2": "wb:class/barbarian",
+   "3": "wb:class/barbarian",
+   "4": "wb:class/barbarian",
+   "5": "wb:class/barbarian",
+   "6": "wb:class/barbarian"
+  },
+  "entrada_da_classe": {
+   "wb:class/barbarian": 1
+  },
+  "gastos": {
+   "ancestry_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/orc-ferocity",
+     "slot": "ancestry_feat"
+    },
+    {
+     "em": 5,
+     "pega": "wb:feat/athletic-might",
+     "slot": "ancestry_feat"
+    }
+   ],
+   "class_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/sudden-charge",
+     "slot": "class_feat"
+    },
+    {
+     "em": 2,
+     "pega": "wb:feat/second-wind",
+     "slot": "class_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/fast-movement",
+     "slot": "class_feat"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/crossbow-terror",
+     "slot": "class_feat"
+    }
+   ],
+   "free_archetype": [
+    {
+     "em": 2,
+     "pega": "wb:feat/archer-dedication",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/quick-shot",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/marshal-dedication",
+     "slot": "free_archetype"
+    }
+   ],
+   "general_feat": [
+    {
+     "em": 3,
+     "pega": "wb:feat/fleet",
+     "slot": "general_feat"
+    }
+   ],
+   "skill_feat": [
+    {
+     "em": 2,
+     "pega": "wb:feat/assurance",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/additional-lore",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/breath-control",
+     "slot": "skill_feat"
+    }
+   ]
+  },
+  "hp_detalhe": [
+   {
+    "hp": 10,
+    "nota": "ancestria",
+    "origem": "Orc"
+   },
+   {
+    "hp": 15,
+    "nota": "12 da classe + 3 de CON",
+    "origem": "nivel 1 (Barbarian)"
+   },
+   {
+    "hp": 15,
+    "nota": "12 da classe + 3 de CON",
+    "origem": "nivel 2 (Barbarian)"
+   },
+   {
+    "hp": 15,
+    "nota": "12 da classe + 3 de CON",
+    "origem": "nivel 3 (Barbarian)"
+   },
+   {
+    "hp": 15,
+    "nota": "12 da classe + 3 de CON",
+    "origem": "nivel 4 (Barbarian)"
+   },
+   {
+    "hp": 15,
+    "nota": "12 da classe + 3 de CON",
+    "origem": "nivel 5 (Barbarian)"
+   },
+   {
+    "hp": 15,
+    "nota": "12 da classe + 3 de CON",
+    "origem": "nivel 6 (Barbarian)"
+   }
+  ],
+  "niveis_por_classe": {
+   "wb:class/barbarian": 6
+  },
+  "ordem_de_classe": [
+   "wb:class/barbarian"
+  ],
+  "origem_proficiencia": {
+   "advanced": [
+    "Barbarian"
+   ],
+   "athletics": [
+    "Barbarian"
+   ],
+   "diplomacy": [
+    "Marshal Dedication"
+   ],
+   "fortitude": [
+    "Barbarian"
+   ],
+   "heavy": [
+    "Barbarian"
+   ],
+   "intimidation": [
+    "Marshal Dedication"
+   ],
+   "light": [
+    "Barbarian"
+   ],
+   "lore:Gladatorial Lore": [
+    "Gladiator"
+   ],
+   "martial": [
+    "Brutality (Barbarian)"
+   ],
+   "medium": [
+    "Barbarian"
+   ],
+   "perception": [
+    "Barbarian"
+   ],
+   "performance": [
+    "Gladiator"
+   ],
+   "reflex": [
+    "Barbarian"
+   ],
+   "simple": [
+    "Brutality (Barbarian)"
+   ],
+   "unarmed": [
+    "Brutality (Barbarian)"
+   ],
+   "unarmored": [
+    "Barbarian"
+   ],
+   "will": [
+    "Barbarian"
+   ]
+  },
+  "pericias_automaticas": {
+   "athletics": "Barbarian"
+  },
+  "pericias_livres_detalhe": [
+   {
+    "classe": "Barbarian",
+    "delta": 3,
+    "orcamento": 3
+   }
+  ]
+ },
+ "ficha": "barbaro6-fa-duas-dedicacoes-limpo",
+ "visao": {
+  "ac": {
+   "armadura": "Explorer's Clothing",
+   "categoria": "unarmored",
+   "check_penalty": 0,
+   "detalhe": "10 + DEX +1 + prof 8 (trained, nivel 6) + item 0",
+   "dex_perdida": 0,
+   "escudo": null,
+   "rank": "trained",
+   "total": 19
+  },
+  "ancestralidade": "Orc",
+  "ataques": [
+   {
+    "arma": "Greataxe",
+    "ataque": 14,
+    "atributo_do_ataque": "str",
+    "categoria": "martial",
+    "dano": "1d12+4",
+    "detalhe": "nivel 6 + prof 10 (expert) + FOR +4",
+    "rank": "expert",
+    "tipo_de_dano": "slashing",
+    "traits": [
+     "sweep"
+    ]
+   },
+   {
+    "arma": "Crossbow",
+    "ataque": 11,
+    "atributo_do_ataque": "dex",
+    "categoria": "simple",
+    "dano": "1d8",
+    "detalhe": "nivel 6 + prof 10 (expert) + DEX +1",
+    "rank": "expert",
+    "tipo_de_dano": "piercing",
+    "traits": []
+   }
+  ],
+  "atores": [],
+  "atributos": {
+   "cha": 10,
+   "con": 16,
+   "dex": 12,
+   "int": 10,
+   "str": 18,
+   "wis": 12
+  },
+  "aumentos_de_pericia": {
+   "gastos": [],
+   "niveis": [
+    3,
+    5
+   ]
+  },
+  "avisos": [
+   "Barbarian: falta escolher `outras-opcoes` (9 opcoes)",
+   "wb:background/gladiator: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Impressive Performance', 'foundry_uuid': 'Compendi) -- nao aplicado",
+   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Orc (1), Orc (1), Gladiator (1), Gladiator (1), criacao (4 livres) (4), nivel 5 (4)"
+  ],
+  "background": "Gladiator",
+  "boosts": {
+   "declarados": 8,
+   "direito": 12,
+   "fontes": [
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Orc",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Orc",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": [
+      "cha",
+      "str"
+     ],
+     "origem": "Gladiator",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Gladiator",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "criacao (4 livres)",
+     "origem_id": null,
+     "quantidade": 4
+    },
+    {
+     "em": 5,
+     "opcoes": null,
+     "origem": "nivel 5",
+     "origem_id": null,
+     "quantidade": 4
+    }
+   ]
+  },
+  "classes": {
+   "Barbarian": 6
+  },
+  "concedidos": [
+   {
+    "id": "wb:feat/intimidating-glare",
+    "nome": "Intimidating Glare",
+    "por": "Battle-Ready Orc",
+    "por_id": "wb:heritage/battle-ready-orc"
+   }
+  ],
+  "conjuracao": [],
+  "escolhas_de_feat": [],
+  "features": [
+   {
+    "classe": "Barbarian",
+    "grants": [],
+    "id": "wb:class-feature/instinct",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Instinct"
+   },
+   {
+    "classe": "Barbarian",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:class-feature/quick-tempered"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/quick-tempered",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Quick-Tempered"
+   },
+   {
+    "classe": "Barbarian",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:class-feature/rage"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/rage",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Rage"
+   },
+   {
+    "classe": "Barbarian",
+    "grants": [],
+    "id": "wb:class-feature/furious-footfalls",
+    "na_base": true,
+    "nivel_de_classe": 3,
+    "nome": "Furious Footfalls"
+   },
+   {
+    "classe": "Barbarian",
+    "grants": [
+     {
+      "proficiency": {
+       "martial": "expert",
+       "simple": "expert",
+       "unarmed": "expert"
+      }
+     }
+    ],
+    "id": "wb:class-feature/brutality",
+    "na_base": true,
+    "nivel_de_classe": 5,
+    "nome": "Brutality"
+   },
+   {
+    "classe": "Barbarian",
+    "eixo": "instinct",
+    "grants": [],
+    "id": "wb:instinct/fury",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Fury"
+   }
+  ],
+  "focus_pool": 0,
+  "fora_do_requisito": [],
+  "heranca": "Battle-Ready Orc",
+  "hp": 100,
+  "modificadores": {
+   "cha": 0,
+   "con": 3,
+   "dex": 1,
+   "int": 0,
+   "str": 4,
+   "wis": 1
+  },
+  "nivel": 6,
+  "pericias_livres": 3,
+  "proficiencias": {
+   "advanced": "untrained",
+   "athletics": "trained",
+   "diplomacy": "expert",
+   "fortitude": "expert",
+   "heavy": "untrained",
+   "intimidation": "expert",
+   "light": "trained",
+   "lore:Gladatorial Lore": "trained",
+   "martial": "expert",
+   "medium": "trained",
+   "perception": "expert",
+   "performance": "trained",
+   "reflex": "trained",
+   "simple": "expert",
+   "unarmed": "expert",
+   "unarmored": "trained",
+   "will": "expert"
+  },
+  "slots": {
+   "ancestry": [
+    1,
+    5
+   ],
+   "class": [
+    1,
+    2,
+    4,
+    6
+   ],
+   "free_archetype": [
+    2,
+    4,
+    6
+   ],
+   "general": [
+    3
+   ],
+   "skill": [
+    2,
+    4,
+    6
+   ]
+  },
+  "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 4,
+    "fontes": [
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Orc",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Orc",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": [
+       "cha",
+       "str"
+      ],
+      "origem": "Gladiator",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Gladiator",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "criacao (4 livres)",
+      "origem_id": null,
+      "quantidade": 4
+     },
+     {
+      "em": 5,
+      "opcoes": null,
+      "origem": "nivel 5",
+      "origem_id": null,
+      "quantidade": 4
+     }
+    ],
+    "kind": "ability",
+    "rotulo": "boosts de atributo (4 a escolher)",
+    "slot": "boosts_livres"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "outras-opcoes",
+    "opcoes": 9,
+    "rotulo": "Barbarian / outras-opcoes",
+    "slot": "subclasse"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 3)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 5,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 5)",
+    "slot": "skill_increase"
+   }
+  ],
+  "subclasses": [
+   {
+    "classe": "Barbarian",
+    "eixo": "instinct",
+    "escolhido": "wb:instinct/fury",
+    "nivel": 1,
+    "nome": "Fury",
+    "opcoes": 16
+   },
+   {
+    "classe": "Barbarian",
+    "eixo": "outras-opcoes",
+    "escolhido": null,
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 9
+   }
+  ]
+ }
+}

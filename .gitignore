@@ -8,3 +8,8 @@ __pycache__/
 # registro historico do tamanho, que e o numero que o orcamento do PWA vigia.
 pipeline/base/app/*
 !pipeline/base/app/_manifesto.json
+
+# App: dependencias e build, ambos regeneraveis
+app/node_modules/
+app/dist/
+app/public/base/

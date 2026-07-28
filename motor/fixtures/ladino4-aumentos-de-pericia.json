@@ -1,0 +1,1153 @@
+{
+ "_doc": "Gabarito do porte TS. Gerado por motor/gerar_fixtures.py a partir do motor Python. NAO editar a mao: regenerar.",
+ "candidatos": {
+  "ancestry_feat@1": [
+   "wb:feat/adapted-cantrip",
+   "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
+   "wb:feat/courteous-comeback",
+   "wb:feat/devils-advocate",
+   "wb:feat/dragon-spit",
+   "wb:feat/general-training",
+   "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
+   "wb:feat/keep-up-appearances",
+   "wb:feat/know-oneself",
+   "wb:feat/natural-skill",
+   "wb:feat/quah-bond",
+   "wb:feat/saoc-astrology",
+   "wb:feat/tupilaq-carver",
+   "wb:feat/unconventional-weaponry",
+   "wb:feat/viking-shieldbearer",
+   "wb:feat/witch-warden",
+   "wb:feat/natural-ambition",
+   "wb:feat/adaptive-adept",
+   "wb:feat/clever-improviser",
+   "wb:feat/darkseer",
+   "wb:feat/ornate-tattoo",
+   "wb:feat/sense-allies",
+   "wb:feat/wavetouched-paragon",
+   "wb:feat/cooperative-soul",
+   "wb:feat/dragon-prince",
+   "wb:feat/group-aid",
+   "wb:feat/hardy-traveler",
+   "wb:feat/heir-of-the-saoc",
+   "wb:feat/incredible-improvisation",
+   "wb:feat/multitalented",
+   "wb:feat/shory-aeromancer",
+   "wb:feat/virtue-forged-tattoos",
+   "wb:feat/advanced-general-training",
+   "wb:feat/bounce-back",
+   "wb:feat/irriseni-ice-witch",
+   "wb:feat/shadow-pact",
+   "wb:feat/shory-aerialist",
+   "wb:feat/stubborn-persistence"
+  ],
+  "ancestry_feat@2": [
+   "wb:feat/adapted-cantrip",
+   "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
+   "wb:feat/courteous-comeback",
+   "wb:feat/devils-advocate",
+   "wb:feat/dragon-spit",
+   "wb:feat/general-training",
+   "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
+   "wb:feat/keep-up-appearances",
+   "wb:feat/know-oneself",
+   "wb:feat/natural-skill",
+   "wb:feat/quah-bond",
+   "wb:feat/saoc-astrology",
+   "wb:feat/tupilaq-carver",
+   "wb:feat/unconventional-weaponry",
+   "wb:feat/viking-shieldbearer",
+   "wb:feat/witch-warden",
+   "wb:feat/natural-ambition",
+   "wb:feat/adaptive-adept",
+   "wb:feat/clever-improviser",
+   "wb:feat/darkseer",
+   "wb:feat/ornate-tattoo",
+   "wb:feat/sense-allies",
+   "wb:feat/wavetouched-paragon",
+   "wb:feat/cooperative-soul",
+   "wb:feat/dragon-prince",
+   "wb:feat/group-aid",
+   "wb:feat/hardy-traveler",
+   "wb:feat/heir-of-the-saoc",
+   "wb:feat/incredible-improvisation",
+   "wb:feat/multitalented",
+   "wb:feat/shory-aeromancer",
+   "wb:feat/virtue-forged-tattoos",
+   "wb:feat/advanced-general-training",
+   "wb:feat/bounce-back",
+   "wb:feat/irriseni-ice-witch",
+   "wb:feat/shadow-pact",
+   "wb:feat/shory-aerialist",
+   "wb:feat/stubborn-persistence"
+  ],
+  "ancestry_feat@4": [
+   "wb:feat/adapted-cantrip",
+   "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
+   "wb:feat/courteous-comeback",
+   "wb:feat/devils-advocate",
+   "wb:feat/dragon-spit",
+   "wb:feat/general-training",
+   "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
+   "wb:feat/keep-up-appearances",
+   "wb:feat/know-oneself",
+   "wb:feat/natural-skill",
+   "wb:feat/quah-bond",
+   "wb:feat/saoc-astrology",
+   "wb:feat/tupilaq-carver",
+   "wb:feat/unconventional-weaponry",
+   "wb:feat/viking-shieldbearer",
+   "wb:feat/witch-warden",
+   "wb:feat/natural-ambition",
+   "wb:feat/adaptive-adept",
+   "wb:feat/clever-improviser",
+   "wb:feat/darkseer",
+   "wb:feat/ornate-tattoo",
+   "wb:feat/sense-allies",
+   "wb:feat/wavetouched-paragon",
+   "wb:feat/cooperative-soul",
+   "wb:feat/dragon-prince",
+   "wb:feat/group-aid",
+   "wb:feat/hardy-traveler",
+   "wb:feat/heir-of-the-saoc",
+   "wb:feat/incredible-improvisation",
+   "wb:feat/multitalented",
+   "wb:feat/shory-aeromancer",
+   "wb:feat/virtue-forged-tattoos",
+   "wb:feat/advanced-general-training",
+   "wb:feat/bounce-back",
+   "wb:feat/irriseni-ice-witch",
+   "wb:feat/shadow-pact",
+   "wb:feat/shory-aerialist",
+   "wb:feat/stubborn-persistence"
+  ],
+  "class_feat@1": [
+   "wb:feat/plant-evidence",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/nimble-dodge",
+   "wb:feat/overextending-feint",
+   "wb:feat/youre-next",
+   "wb:feat/brutal-beating",
+   "wb:feat/clever-gambit",
+   "wb:feat/distracting-feint",
+   "wb:feat/fanes-fourberie",
+   "wb:feat/minor-magic",
+   "wb:feat/quick-draw",
+   "wb:feat/strong-arm",
+   "wb:feat/unbalancing-blow",
+   "wb:feat/underhanded-assault",
+   "wb:feat/battle-assessment",
+   "wb:feat/devrins-dazzling-diversion",
+   "wb:feat/haft-striker-stance",
+   "wb:feat/head-stomp",
+   "wb:feat/magical-trickster",
+   "wb:feat/masquerade-of-seasons-stance",
+   "wb:feat/mug",
+   "wb:feat/poison-weapon",
+   "wb:feat/predictable",
+   "wb:feat/reactive-pursuit",
+   "wb:feat/sabotage",
+   "wb:feat/scoundrels-surprise",
+   "wb:feat/scouts-warning",
+   "wb:feat/the-harder-they-fall",
+   "wb:feat/the-harder-they-fall-rogue",
+   "wb:feat/twin-distraction",
+   "wb:feat/analyze-weakness",
+   "wb:feat/anticipate-ambush",
+   "wb:feat/far-throw",
+   "wb:feat/fog-cloak",
+   "wb:feat/gang-up",
+   "wb:feat/light-step",
+   "wb:feat/pirouette"
+  ],
+  "class_feat@2": [
+   "wb:feat/plant-evidence",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/fanes-fourberie",
+   "wb:feat/minor-magic",
+   "wb:feat/quick-draw",
+   "wb:feat/strong-arm",
+   "wb:feat/unbalancing-blow",
+   "wb:feat/underhanded-assault",
+   "wb:feat/nimble-dodge",
+   "wb:feat/mobility",
+   "wb:feat/overextending-feint",
+   "wb:feat/youre-next",
+   "wb:feat/brutal-beating",
+   "wb:feat/clever-gambit",
+   "wb:feat/distracting-feint",
+   "wb:feat/battle-assessment",
+   "wb:feat/devrins-dazzling-diversion",
+   "wb:feat/haft-striker-stance",
+   "wb:feat/head-stomp",
+   "wb:feat/magical-trickster",
+   "wb:feat/masquerade-of-seasons-stance",
+   "wb:feat/mug",
+   "wb:feat/poison-weapon",
+   "wb:feat/predictable",
+   "wb:feat/reactive-pursuit",
+   "wb:feat/sabotage",
+   "wb:feat/scoundrels-surprise",
+   "wb:feat/scouts-warning",
+   "wb:feat/the-harder-they-fall",
+   "wb:feat/the-harder-they-fall-rogue",
+   "wb:feat/twin-distraction",
+   "wb:feat/analyze-weakness",
+   "wb:feat/anticipate-ambush",
+   "wb:feat/far-throw",
+   "wb:feat/fog-cloak",
+   "wb:feat/gang-up",
+   "wb:feat/light-step"
+  ],
+  "class_feat@4": [
+   "wb:feat/plant-evidence",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/fanes-fourberie",
+   "wb:feat/minor-magic",
+   "wb:feat/quick-draw",
+   "wb:feat/strong-arm",
+   "wb:feat/unbalancing-blow",
+   "wb:feat/underhanded-assault",
+   "wb:feat/battle-assessment",
+   "wb:feat/haft-striker-stance",
+   "wb:feat/head-stomp",
+   "wb:feat/magical-trickster",
+   "wb:feat/mug",
+   "wb:feat/poison-weapon",
+   "wb:feat/predictable",
+   "wb:feat/reactive-pursuit",
+   "wb:feat/sabotage",
+   "wb:feat/scoundrels-surprise",
+   "wb:feat/scouts-warning",
+   "wb:feat/the-harder-they-fall",
+   "wb:feat/the-harder-they-fall-rogue",
+   "wb:feat/nimble-dodge",
+   "wb:feat/mobility",
+   "wb:feat/dread-striker",
+   "wb:feat/overextending-feint",
+   "wb:feat/youre-next",
+   "wb:feat/brutal-beating",
+   "wb:feat/clever-gambit",
+   "wb:feat/distracting-feint",
+   "wb:feat/devrins-dazzling-diversion",
+   "wb:feat/masquerade-of-seasons-stance",
+   "wb:feat/twin-distraction",
+   "wb:feat/analyze-weakness",
+   "wb:feat/anticipate-ambush",
+   "wb:feat/far-throw",
+   "wb:feat/fog-cloak",
+   "wb:feat/gang-up"
+  ],
+  "free_archetype@1": [
+   "wb:feat/acrobat-dedication",
+   "wb:feat/agent-of-all-holds",
+   "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/alter-ego-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archaeologist-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/assassin-dedication",
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/battle-harbinger-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bloodrager-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/bullet-dancer-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication"
+  ],
+  "free_archetype@2": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/game-hunter-dedication",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/guerrilla-dedication",
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/horizon-walker-dedication",
+   "wb:feat/juggler-dedication",
+   "wb:feat/kineticist-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication",
+   "wb:feat/living-monolith-dedication"
+  ],
+  "free_archetype@4": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/game-hunter-dedication",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/guerrilla-dedication",
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/horizon-walker-dedication",
+   "wb:feat/juggler-dedication",
+   "wb:feat/kineticist-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication",
+   "wb:feat/living-monolith-dedication"
+  ],
+  "general_feat@1": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/forager",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/hefty-hauler",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife"
+  ],
+  "general_feat@2": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/forager",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/hefty-hauler",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife"
+  ],
+  "general_feat@4": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/forager",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/hefty-hauler",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife"
+  ],
+  "skill_feat@1": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/forager",
+   "wb:feat/hefty-hauler",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/skill-training",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife",
+   "wb:feat/terrain-expertise",
+   "wb:feat/titan-wrestler",
+   "wb:feat/underwater-marauder",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/pickpocket",
+   "wb:feat/terrain-stalker",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship"
+  ],
+  "skill_feat@2": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/forager",
+   "wb:feat/hefty-hauler",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/skill-training",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife",
+   "wb:feat/terrain-expertise",
+   "wb:feat/titan-wrestler",
+   "wb:feat/underwater-marauder",
+   "wb:feat/armored-stealth",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/predict-weather",
+   "wb:feat/quiet-allies",
+   "wb:feat/sanctify-water",
+   "wb:feat/shadow-mark",
+   "wb:feat/slippery-prey",
+   "wb:feat/wary-disarmament",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/pickpocket",
+   "wb:feat/terrain-stalker",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting"
+  ],
+  "skill_feat@4": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/forager",
+   "wb:feat/hefty-hauler",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-jump",
+   "wb:feat/reveal-true-name",
+   "wb:feat/skill-training",
+   "wb:feat/stifle-flames",
+   "wb:feat/subtle-theft",
+   "wb:feat/survey-wildlife",
+   "wb:feat/terrain-expertise",
+   "wb:feat/titan-wrestler",
+   "wb:feat/underwater-marauder",
+   "wb:feat/armored-stealth",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/predict-weather",
+   "wb:feat/quiet-allies",
+   "wb:feat/sanctify-water",
+   "wb:feat/shadow-mark",
+   "wb:feat/slippery-prey",
+   "wb:feat/wary-disarmament",
+   "wb:feat/folk-dowsing",
+   "wb:feat/ambush-tactics",
+   "wb:feat/efficient-explorer",
+   "wb:feat/fanes-escape",
+   "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance"
+  ]
+ },
+ "extras": {
+  "aumentos_detalhe": [
+   {
+    "de": "trained",
+    "nivel": 2,
+    "para": "expert",
+    "pericia": "stealth"
+   },
+   {
+    "de": "trained",
+    "nivel": 3,
+    "para": "expert",
+    "pericia": "thievery"
+   },
+   {
+    "de": "untrained",
+    "nivel": 4,
+    "para": "trained",
+    "pericia": "athletics"
+   }
+  ],
+  "boosts_declarados": 6,
+  "boosts_direito": 8,
+  "boosts_pendentes": [
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Human",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Human",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": [
+     "dex",
+     "wis"
+    ],
+    "origem": "Scout",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Scout",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "criacao (4 livres)",
+    "origem_id": null,
+    "quantidade": 4
+   }
+  ],
+  "class_feat_nivel_1": true,
+  "classe_do_nivel": {
+   "1": "wb:class/rogue",
+   "2": "wb:class/rogue",
+   "3": "wb:class/rogue",
+   "4": "wb:class/rogue"
+  },
+  "entrada_da_classe": {
+   "wb:class/rogue": 1
+  },
+  "gastos": {
+   "ancestry_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/natural-ambition",
+     "slot": "ancestry_feat"
+    }
+   ],
+   "class_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/nimble-dodge",
+     "slot": "class_feat"
+    },
+    {
+     "em": 2,
+     "pega": "wb:feat/mobility",
+     "slot": "class_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/dread-striker",
+     "slot": "class_feat"
+    }
+   ],
+   "free_archetype": [
+    {
+     "em": 2,
+     "pega": "wb:feat/archer-dedication",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/quick-shot",
+     "slot": "free_archetype"
+    }
+   ],
+   "general_feat": [
+    {
+     "em": 3,
+     "pega": "wb:feat/fleet",
+     "slot": "general_feat"
+    }
+   ],
+   "skill_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/assurance",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 2,
+     "pega": "wb:feat/additional-lore",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 3,
+     "pega": "wb:feat/pickpocket",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/terrain-stalker",
+     "slot": "skill_feat"
+    }
+   ]
+  },
+  "hp_detalhe": [
+   {
+    "hp": 8,
+    "nota": "ancestria",
+    "origem": "Human"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 1 (Rogue)"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 2 (Rogue)"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 3 (Rogue)"
+   },
+   {
+    "hp": 10,
+    "nota": "8 da classe + 2 de CON",
+    "origem": "nivel 4 (Rogue)"
+   }
+  ],
+  "niveis_por_classe": {
+   "wb:class/rogue": 4
+  },
+  "ordem_de_classe": [
+   "wb:class/rogue"
+  ],
+  "origem_proficiencia": {
+   "advanced": [
+    "Rogue"
+   ],
+   "athletics": [
+    "aumento de pericia (nivel 4)"
+   ],
+   "fortitude": [
+    "Rogue"
+   ],
+   "heavy": [
+    "Rogue"
+   ],
+   "light": [
+    "Rogue"
+   ],
+   "martial": [
+    "Rogue"
+   ],
+   "medium": [
+    "Rogue"
+   ],
+   "perception": [
+    "Rogue"
+   ],
+   "reflex": [
+    "Rogue"
+   ],
+   "simple": [
+    "Rogue"
+   ],
+   "stealth": [
+    "aumento de pericia (nivel 2)"
+   ],
+   "survival": [
+    "Scout"
+   ],
+   "thievery": [
+    "aumento de pericia (nivel 3)"
+   ],
+   "unarmed": [
+    "Rogue"
+   ],
+   "unarmored": [
+    "Rogue"
+   ],
+   "will": [
+    "Rogue"
+   ]
+  },
+  "pericias_automaticas": {
+   "stealth": "Rogue"
+  },
+  "pericias_livres_detalhe": [
+   {
+    "classe": "Rogue",
+    "delta": 7,
+    "orcamento": 7
+   }
+  ]
+ },
+ "ficha": "ladino4-aumentos-de-pericia",
+ "visao": {
+  "ac": {
+   "armadura": "Leather Armor",
+   "categoria": "light",
+   "check_penalty": 0,
+   "detalhe": "10 + DEX +3 + prof 6 (trained, nivel 4) + item 1",
+   "dex_perdida": 0,
+   "escudo": null,
+   "rank": "trained",
+   "total": 20
+  },
+  "ancestralidade": "Human",
+  "ataques": [
+   {
+    "arma": "Shortbow",
+    "ataque": 9,
+    "atributo_do_ataque": "dex",
+    "categoria": "martial",
+    "dano": "1d6",
+    "detalhe": "nivel 4 + prof 6 (trained) + DEX +3",
+    "rank": "trained",
+    "tipo_de_dano": "piercing",
+    "traits": [
+     "deadly-d10"
+    ]
+   }
+  ],
+  "atores": [],
+  "atributos": {
+   "cha": 10,
+   "con": 14,
+   "dex": 16,
+   "int": 12,
+   "str": 10,
+   "wis": 12
+  },
+  "aumentos_de_pericia": {
+   "gastos": [
+    {
+     "de": "trained",
+     "nivel": 2,
+     "para": "expert",
+     "pericia": "stealth"
+    },
+    {
+     "de": "trained",
+     "nivel": 3,
+     "para": "expert",
+     "pericia": "thievery"
+    },
+    {
+     "de": "untrained",
+     "nivel": 4,
+     "para": "trained",
+     "pericia": "athletics"
+    }
+   ],
+   "niveis": [
+    2,
+    3,
+    4
+   ]
+  },
+  "avisos": [
+   "wb:feat/natural-ambition: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.naturalAmbition}`) -- pendente, nao e alvo ausente",
+   "wb:background/scout: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Forager', 'foundry_uuid': 'Compendium.pf2e.feats-s) -- nao aplicado",
+   "boosts de atributo: 6 declarado(s) de 8 a que o personagem tem direito -- faltam 2. Fontes: Human (1), Human (1), Scout (1), Scout (1), criacao (4 livres) (4)"
+  ],
+  "background": "Scout",
+  "boosts": {
+   "declarados": 6,
+   "direito": 8,
+   "fontes": [
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Human",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Human",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": [
+      "dex",
+      "wis"
+     ],
+     "origem": "Scout",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Scout",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "criacao (4 livres)",
+     "origem_id": null,
+     "quantidade": 4
+    }
+   ]
+  },
+  "classes": {
+   "Rogue": 4
+  },
+  "concedidos": [],
+  "conjuracao": [],
+  "escolhas_de_feat": [],
+  "features": [
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/rogues-racket",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Rogue's Racket"
+   },
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/sneak-attack",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Sneak Attack"
+   },
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/surprise-attack",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Surprise Attack"
+   },
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/deny-advantage",
+    "na_base": true,
+    "nivel_de_classe": 3,
+    "nome": "Deny Advantage"
+   },
+   {
+    "classe": "Rogue",
+    "eixo": "racket",
+    "grants": [
+     {
+      "proficiency": {
+       "thievery": "trained"
+      }
+     }
+    ],
+    "id": "wb:class-feature/thief",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Thief"
+   }
+  ],
+  "focus_pool": 0,
+  "fora_do_requisito": [],
+  "heranca": "Versatile Human",
+  "hp": 48,
+  "modificadores": {
+   "cha": 0,
+   "con": 2,
+   "dex": 3,
+   "int": 1,
+   "str": 0,
+   "wis": 1
+  },
+  "nivel": 4,
+  "pericias_livres": 7,
+  "proficiencias": {
+   "advanced": "untrained",
+   "athletics": "trained",
+   "fortitude": "trained",
+   "heavy": "untrained",
+   "light": "trained",
+   "martial": "trained",
+   "medium": "untrained",
+   "perception": "expert",
+   "reflex": "expert",
+   "simple": "trained",
+   "stealth": "expert",
+   "survival": "trained",
+   "thievery": "expert",
+   "unarmed": "trained",
+   "unarmored": "trained",
+   "will": "expert"
+  },
+  "slots": {
+   "ancestry": [
+    1
+   ],
+   "class": [
+    1,
+    2,
+    4
+   ],
+   "free_archetype": [
+    2,
+    4
+   ],
+   "general": [
+    3
+   ],
+   "skill": [
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 2,
+    "fontes": [
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Human",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Human",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": [
+       "dex",
+       "wis"
+      ],
+      "origem": "Scout",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Scout",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "criacao (4 livres)",
+      "origem_id": null,
+      "quantidade": 4
+     }
+    ],
+    "kind": "ability",
+    "rotulo": "boosts de atributo (2 a escolher)",
+    "slot": "boosts_livres"
+   }
+  ],
+  "subclasses": [
+   {
+    "classe": "Rogue",
+    "eixo": "racket",
+    "escolhido": "wb:class-feature/thief",
+    "nivel": 1,
+    "nome": "Thief",
+    "opcoes": 6
+   }
+  ]
+ }
+}

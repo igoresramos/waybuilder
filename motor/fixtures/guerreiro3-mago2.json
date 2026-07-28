@@ -1,0 +1,1326 @@
+{
+ "_doc": "Gabarito do porte TS. Gerado por motor/gerar_fixtures.py a partir do motor Python. NAO editar a mao: regenerar.",
+ "candidatos": {
+  "ancestry_feat@1": [
+   "wb:feat/adaptive-vision",
+   "wb:feat/avenge-in-glory",
+   "wb:feat/clan-lore",
+   "wb:feat/clan-pistol",
+   "wb:feat/clans-edge",
+   "wb:feat/dongun-education",
+   "wb:feat/dwarven-doughtiness",
+   "wb:feat/dwarven-weapon-familiarity",
+   "wb:feat/explosive-savant",
+   "wb:feat/eye-for-treasure",
+   "wb:feat/fire-savvy",
+   "wb:feat/forge-days-rest",
+   "wb:feat/mountain-strategy",
+   "wb:feat/rivethun-disciple",
+   "wb:feat/rock-runner",
+   "wb:feat/stonemasons-eye",
+   "wb:feat/surface-culture",
+   "wb:feat/unburdened-iron",
+   "wb:feat/dwarven-lore",
+   "wb:feat/blast-resistance",
+   "wb:feat/boulder-roll",
+   "wb:feat/clan-protector",
+   "wb:feat/defy-the-darkness",
+   "wb:feat/dwarven-reinforcement",
+   "wb:feat/dwarven-weapon-cunning",
+   "wb:feat/protective-sheath",
+   "wb:feat/sheltering-slab",
+   "wb:feat/spark-fist",
+   "wb:feat/tomb-watchers-glare",
+   "wb:feat/battleforger",
+   "wb:feat/demolitionist",
+   "wb:feat/echoes-in-stone",
+   "wb:feat/energy-blessed",
+   "wb:feat/heroes-call",
+   "wb:feat/kneel-for-no-god",
+   "wb:feat/mountains-stoutness",
+   "wb:feat/returning-throw",
+   "wb:feat/rivethun-spiritual-attunement",
+   "wb:feat/smoke-sight",
+   "wb:feat/stone-bones"
+  ],
+  "ancestry_feat@2": [
+   "wb:feat/adaptive-vision",
+   "wb:feat/avenge-in-glory",
+   "wb:feat/clan-lore",
+   "wb:feat/clan-pistol",
+   "wb:feat/clans-edge",
+   "wb:feat/dongun-education",
+   "wb:feat/dwarven-doughtiness",
+   "wb:feat/dwarven-weapon-familiarity",
+   "wb:feat/explosive-savant",
+   "wb:feat/eye-for-treasure",
+   "wb:feat/fire-savvy",
+   "wb:feat/forge-days-rest",
+   "wb:feat/mountain-strategy",
+   "wb:feat/rivethun-disciple",
+   "wb:feat/rock-runner",
+   "wb:feat/stonemasons-eye",
+   "wb:feat/surface-culture",
+   "wb:feat/unburdened-iron",
+   "wb:feat/dwarven-lore",
+   "wb:feat/blast-resistance",
+   "wb:feat/boulder-roll",
+   "wb:feat/clan-protector",
+   "wb:feat/defy-the-darkness",
+   "wb:feat/dwarven-reinforcement",
+   "wb:feat/dwarven-weapon-cunning",
+   "wb:feat/protective-sheath",
+   "wb:feat/sheltering-slab",
+   "wb:feat/spark-fist",
+   "wb:feat/tomb-watchers-glare",
+   "wb:feat/battleforger",
+   "wb:feat/demolitionist",
+   "wb:feat/echoes-in-stone",
+   "wb:feat/energy-blessed",
+   "wb:feat/heroes-call",
+   "wb:feat/kneel-for-no-god",
+   "wb:feat/mountains-stoutness",
+   "wb:feat/returning-throw",
+   "wb:feat/rivethun-spiritual-attunement",
+   "wb:feat/smoke-sight",
+   "wb:feat/stone-bones"
+  ],
+  "ancestry_feat@4": [
+   "wb:feat/adaptive-vision",
+   "wb:feat/avenge-in-glory",
+   "wb:feat/clan-lore",
+   "wb:feat/clan-pistol",
+   "wb:feat/clans-edge",
+   "wb:feat/dongun-education",
+   "wb:feat/dwarven-doughtiness",
+   "wb:feat/dwarven-weapon-familiarity",
+   "wb:feat/explosive-savant",
+   "wb:feat/eye-for-treasure",
+   "wb:feat/fire-savvy",
+   "wb:feat/forge-days-rest",
+   "wb:feat/mountain-strategy",
+   "wb:feat/rivethun-disciple",
+   "wb:feat/rock-runner",
+   "wb:feat/stonemasons-eye",
+   "wb:feat/surface-culture",
+   "wb:feat/unburdened-iron",
+   "wb:feat/dwarven-lore",
+   "wb:feat/blast-resistance",
+   "wb:feat/boulder-roll",
+   "wb:feat/clan-protector",
+   "wb:feat/defy-the-darkness",
+   "wb:feat/dwarven-reinforcement",
+   "wb:feat/dwarven-weapon-cunning",
+   "wb:feat/protective-sheath",
+   "wb:feat/sheltering-slab",
+   "wb:feat/spark-fist",
+   "wb:feat/tomb-watchers-glare",
+   "wb:feat/battleforger",
+   "wb:feat/demolitionist",
+   "wb:feat/echoes-in-stone",
+   "wb:feat/energy-blessed",
+   "wb:feat/heroes-call",
+   "wb:feat/kneel-for-no-god",
+   "wb:feat/mountains-stoutness",
+   "wb:feat/returning-throw",
+   "wb:feat/rivethun-spiritual-attunement",
+   "wb:feat/smoke-sight",
+   "wb:feat/stone-bones"
+  ],
+  "class_feat@1": [
+   "wb:feat/agile-shield-grip",
+   "wb:feat/combat-assessment",
+   "wb:feat/counterspell",
+   "wb:feat/counterspell-prepared",
+   "wb:feat/eschew-materials",
+   "wb:feat/everstand-stance",
+   "wb:feat/exacting-strike",
+   "wb:feat/familiar",
+   "wb:feat/point-blank-stance",
+   "wb:feat/reach-spell",
+   "wb:feat/reactive-shield",
+   "wb:feat/snagging-strike",
+   "wb:feat/spellbook-prodigy",
+   "wb:feat/sudden-charge",
+   "wb:feat/vicious-swing",
+   "wb:feat/widen-spell",
+   "wb:feat/double-slice",
+   "wb:feat/assisting-shot",
+   "wb:feat/blade-brake",
+   "wb:feat/brutish-shove",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/combat-grab",
+   "wb:feat/conceal-spell",
+   "wb:feat/devoted-guardian",
+   "wb:feat/dragging-strike",
+   "wb:feat/dueling-parry",
+   "wb:feat/dueling-parry-fighter",
+   "wb:feat/energy-ablation",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/intimidating-strike",
+   "wb:feat/lightning-swap",
+   "wb:feat/lunge",
+   "wb:feat/nonlethal-spell",
+   "wb:feat/rebounding-toss",
+   "wb:feat/sleek-reposition",
+   "wb:feat/united-assault",
+   "wb:feat/barreling-charge",
+   "wb:feat/bespell-strikes",
+   "wb:feat/call-wizardly-tools",
+   "wb:feat/cheaters-always-prosper"
+  ],
+  "class_feat@2": [
+   "wb:feat/agile-shield-grip",
+   "wb:feat/combat-assessment",
+   "wb:feat/counterspell",
+   "wb:feat/counterspell-prepared",
+   "wb:feat/eschew-materials",
+   "wb:feat/everstand-stance",
+   "wb:feat/exacting-strike",
+   "wb:feat/familiar",
+   "wb:feat/point-blank-stance",
+   "wb:feat/reach-spell",
+   "wb:feat/reactive-shield",
+   "wb:feat/snagging-strike",
+   "wb:feat/spellbook-prodigy",
+   "wb:feat/sudden-charge",
+   "wb:feat/vicious-swing",
+   "wb:feat/widen-spell",
+   "wb:feat/assisting-shot",
+   "wb:feat/blade-brake",
+   "wb:feat/brutish-shove",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/combat-grab",
+   "wb:feat/conceal-spell",
+   "wb:feat/devoted-guardian",
+   "wb:feat/dragging-strike",
+   "wb:feat/dueling-parry",
+   "wb:feat/dueling-parry-fighter",
+   "wb:feat/energy-ablation",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/intimidating-strike",
+   "wb:feat/lightning-swap",
+   "wb:feat/lunge",
+   "wb:feat/nonlethal-spell",
+   "wb:feat/rebounding-toss",
+   "wb:feat/sleek-reposition",
+   "wb:feat/united-assault",
+   "wb:feat/double-slice",
+   "wb:feat/aggressive-block",
+   "wb:feat/barreling-charge",
+   "wb:feat/bespell-strikes",
+   "wb:feat/call-wizardly-tools"
+  ],
+  "class_feat@4": [
+   "wb:feat/agile-shield-grip",
+   "wb:feat/combat-assessment",
+   "wb:feat/counterspell",
+   "wb:feat/counterspell-prepared",
+   "wb:feat/eschew-materials",
+   "wb:feat/everstand-stance",
+   "wb:feat/exacting-strike",
+   "wb:feat/familiar",
+   "wb:feat/point-blank-stance",
+   "wb:feat/reach-spell",
+   "wb:feat/reactive-shield",
+   "wb:feat/snagging-strike",
+   "wb:feat/spellbook-prodigy",
+   "wb:feat/sudden-charge",
+   "wb:feat/vicious-swing",
+   "wb:feat/widen-spell",
+   "wb:feat/assisting-shot",
+   "wb:feat/blade-brake",
+   "wb:feat/brutish-shove",
+   "wb:feat/cantrip-expansion",
+   "wb:feat/combat-grab",
+   "wb:feat/conceal-spell",
+   "wb:feat/devoted-guardian",
+   "wb:feat/dragging-strike",
+   "wb:feat/dueling-parry",
+   "wb:feat/dueling-parry-fighter",
+   "wb:feat/energy-ablation",
+   "wb:feat/enhanced-familiar",
+   "wb:feat/intimidating-strike",
+   "wb:feat/lightning-swap",
+   "wb:feat/lunge",
+   "wb:feat/nonlethal-spell",
+   "wb:feat/rebounding-toss",
+   "wb:feat/sleek-reposition",
+   "wb:feat/united-assault",
+   "wb:feat/double-slice",
+   "wb:feat/aggressive-block",
+   "wb:feat/barreling-charge",
+   "wb:feat/bespell-strikes",
+   "wb:feat/call-wizardly-tools"
+  ],
+  "free_archetype@1": [
+   "wb:feat/acrobat-dedication",
+   "wb:feat/agent-of-all-holds",
+   "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/alter-ego-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archaeologist-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/assassin-dedication",
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/battle-harbinger-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bloodrager-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/bullet-dancer-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication"
+  ],
+  "free_archetype@2": [
+   "wb:feat/alchemist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/draconic-acolyte-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/firework-technician-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghost-eater-dedication",
+   "wb:feat/ghost-hunter-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/guardian-dedication",
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication"
+  ],
+  "free_archetype@4": [
+   "wb:feat/alchemist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/archer-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/draconic-acolyte-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/firework-technician-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghost-eater-dedication",
+   "wb:feat/ghost-hunter-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/guardian-dedication",
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication"
+  ],
+  "general_feat@1": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crush-dissent",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/improvise-tool",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/toughness",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance"
+  ],
+  "general_feat@2": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crush-dissent",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/improvise-tool",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/toughness",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful"
+  ],
+  "general_feat@4": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-proficiency",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crush-dissent",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/improvise-tool",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/toughness",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful"
+  ],
+  "skill_feat@1": [
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/improvise-tool",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/trick-magic-item",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/quick-identification",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider"
+  ],
+  "skill_feat@2": [
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/improvise-tool",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/trick-magic-item",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/tattoo-artist",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/quick-identification",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces"
+  ],
+  "skill_feat@4": [
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/improvise-tool",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-repair",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/seasoned",
+   "wb:feat/skill-training",
+   "wb:feat/snare-crafting",
+   "wb:feat/specialty-crafting",
+   "wb:feat/student-of-the-canon",
+   "wb:feat/trick-magic-item",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/tattoo-artist",
+   "wb:feat/ambush-tactics",
+   "wb:feat/efficient-explorer",
+   "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/named-artillery",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/quick-identification",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar"
+  ]
+ },
+ "extras": {
+  "aumentos_detalhe": [],
+  "boosts_declarados": 8,
+  "boosts_direito": 12,
+  "boosts_pendentes": [
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Dwarf",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": [
+     "cha",
+     "int"
+    ],
+    "origem": "Scholar of the Ancients",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Scholar of the Ancients",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": 1,
+    "opcoes": [
+     "dex",
+     "str"
+    ],
+    "origem": "Fighter (habilidade-chave)",
+    "origem_id": "wb:class/fighter",
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "criacao (4 livres)",
+    "origem_id": null,
+    "quantidade": 4
+   },
+   {
+    "em": 5,
+    "opcoes": null,
+    "origem": "nivel 5",
+    "origem_id": null,
+    "quantidade": 4
+   }
+  ],
+  "class_feat_nivel_1": true,
+  "classe_do_nivel": {
+   "1": "wb:class/fighter",
+   "2": "wb:class/fighter",
+   "3": "wb:class/fighter",
+   "4": "wb:class/wizard",
+   "5": "wb:class/wizard"
+  },
+  "entrada_da_classe": {
+   "wb:class/fighter": 1,
+   "wb:class/wizard": 4
+  },
+  "gastos": {
+   "ancestry_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/dwarven-lore",
+     "slot": "ancestry_feat"
+    },
+    {
+     "em": 5,
+     "pega": "wb:feat/stonewalker",
+     "slot": "ancestry_feat"
+    }
+   ],
+   "class_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/double-slice",
+     "slot": "class_feat"
+    },
+    {
+     "em": 2,
+     "pega": "wb:feat/aggressive-block",
+     "slot": "class_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/hand-of-the-apprentice",
+     "slot": "class_feat"
+    }
+   ],
+   "general_feat": [
+    {
+     "em": 3,
+     "pega": "wb:feat/fleet",
+     "slot": "general_feat"
+    }
+   ],
+   "skill_feat": [
+    {
+     "em": 2,
+     "pega": "wb:feat/assurance",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/quick-identification",
+     "slot": "skill_feat"
+    }
+   ]
+  },
+  "hp_detalhe": [
+   {
+    "hp": 10,
+    "nota": "ancestria",
+    "origem": "Dwarf"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 1 (Fighter)"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 2 (Fighter)"
+   },
+   {
+    "hp": 13,
+    "nota": "10 da classe + 3 de CON",
+    "origem": "nivel 3 (Fighter)"
+   },
+   {
+    "hp": 9,
+    "nota": "6 da classe + 3 de CON",
+    "origem": "nivel 4 (Wizard)"
+   },
+   {
+    "hp": 9,
+    "nota": "6 da classe + 3 de CON",
+    "origem": "nivel 5 (Wizard)"
+   }
+  ],
+  "niveis_por_classe": {
+   "wb:class/fighter": 3,
+   "wb:class/wizard": 2
+  },
+  "ordem_de_classe": [
+   "wb:class/fighter",
+   "wb:class/wizard"
+  ],
+  "origem_proficiencia": {
+   "advanced": [
+    "Fighter"
+   ],
+   "arcana": [
+    "Wizard",
+    "Scholar of the Ancients"
+   ],
+   "crafting": [
+    "Dwarven Lore"
+   ],
+   "fortitude": [
+    "Fighter"
+   ],
+   "heavy": [
+    "Fighter"
+   ],
+   "light": [
+    "Fighter"
+   ],
+   "lore:Azlant Lore": [
+    "Scholar of the Ancients"
+   ],
+   "martial": [
+    "Fighter"
+   ],
+   "medium": [
+    "Fighter"
+   ],
+   "perception": [
+    "Fighter"
+   ],
+   "reflex": [
+    "Fighter"
+   ],
+   "religion": [
+    "Dwarven Lore"
+   ],
+   "simple": [
+    "Fighter"
+   ],
+   "unarmed": [
+    "Fighter"
+   ],
+   "unarmored": [
+    "Fighter",
+    "Wizard"
+   ],
+   "will": [
+    "Wizard",
+    "Bravery (Fighter)"
+   ]
+  },
+  "pericias_automaticas": {
+   "arcana": "Wizard"
+  },
+  "pericias_livres_detalhe": [
+   {
+    "classe": "Fighter",
+    "delta": 3,
+    "orcamento": 3
+   },
+   {
+    "classe": "Wizard",
+    "delta": 0,
+    "orcamento": 2
+   }
+  ]
+ },
+ "ficha": "guerreiro3-mago2",
+ "visao": {
+  "ac": {
+   "armadura": "Chain Mail",
+   "categoria": "medium",
+   "check_penalty": 0,
+   "detalhe": "10 + DEX +1 + prof 7 (trained, nivel 5) + item 4",
+   "dex_perdida": 1,
+   "escudo": {
+    "ac": 2,
+    "nome": "Steel Shield"
+   },
+   "rank": "trained",
+   "total": 22
+  },
+  "ancestralidade": "Dwarf",
+  "ataques": [
+   {
+    "arma": "Longsword",
+    "ataque": 11,
+    "atributo_do_ataque": "str",
+    "categoria": "martial",
+    "dano": "1d8+2",
+    "detalhe": "nivel 5 + prof 9 (expert) + FOR +2",
+    "rank": "expert",
+    "tipo_de_dano": "slashing",
+    "traits": [
+     "versatile-p"
+    ]
+   },
+   {
+    "arma": "Shortbow",
+    "ataque": 11,
+    "atributo_do_ataque": "dex",
+    "categoria": "martial",
+    "dano": "1d6",
+    "detalhe": "nivel 5 + prof 9 (expert) + DEX +2",
+    "rank": "expert",
+    "tipo_de_dano": "piercing",
+    "traits": [
+     "deadly-d10"
+    ]
+   }
+  ],
+  "atores": [],
+  "atributos": {
+   "cha": 8,
+   "con": 16,
+   "dex": 14,
+   "int": 14,
+   "str": 14,
+   "wis": 12
+  },
+  "aumentos_de_pericia": {
+   "gastos": [],
+   "niveis": [
+    3,
+    5
+   ]
+  },
+  "avisos": [
+   "Wizard: falta escolher `outras-opcoes` (14 opcoes)",
+   "wb:background/scholar-of-the-ancients: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Quick Identification', 'foundry_uuid': 'Compendium) -- nao aplicado",
+   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Dwarf (1), Scholar of the Ancients (1), Scholar of the Ancients (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)"
+  ],
+  "background": "Scholar of the Ancients",
+  "boosts": {
+   "declarados": 8,
+   "direito": 12,
+   "fontes": [
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Dwarf",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": [
+      "cha",
+      "int"
+     ],
+     "origem": "Scholar of the Ancients",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Scholar of the Ancients",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": 1,
+     "opcoes": [
+      "dex",
+      "str"
+     ],
+     "origem": "Fighter (habilidade-chave)",
+     "origem_id": "wb:class/fighter",
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "criacao (4 livres)",
+     "origem_id": null,
+     "quantidade": 4
+    },
+    {
+     "em": 5,
+     "opcoes": null,
+     "origem": "nivel 5",
+     "origem_id": null,
+     "quantidade": 4
+    }
+   ]
+  },
+  "classes": {
+   "Fighter": 3,
+   "Wizard": 2
+  },
+  "concedidos": [
+   {
+    "id": "wb:feat/additional-lore",
+    "nome": "Additional Lore",
+    "por": "Dwarven Lore",
+    "por_id": "wb:feat/dwarven-lore"
+   },
+   {
+    "id": "wb:feat/reactive-strike",
+    "nome": "Reactive Strike",
+    "por": "Reactive Strike",
+    "por_id": "wb:class-feature/reactive-strike"
+   },
+   {
+    "id": "wb:feat/shield-block",
+    "nome": "Shield Block",
+    "por": "Shield Block",
+    "por_id": "wb:class-feature/shield-block"
+   },
+   {
+    "id": "wb:feat/diehard",
+    "nome": "Diehard",
+    "por": "Warrior of Legend",
+    "por_id": "wb:class-feature/warrior-of-legend"
+   }
+  ],
+  "conjuracao": [
+   {
+    "classe": "Wizard",
+    "dc": {
+     "ataque": 9,
+     "dc": 19,
+     "nota": "nivel de personagem 5 + rank trained (pelo nivel de classe 2) + mod 2",
+     "rank": "trained"
+    },
+    "elevacao": 2,
+    "max_rank_do_slot": 1,
+    "nivel_de_classe": 2,
+    "rank_de_invocacao": 3,
+    "rank_efetivo": 3,
+    "slots": {
+     "1": 3
+    },
+    "tipo": "prepared",
+    "tradicao": "arcane",
+    "truques": 5
+   }
+  ],
+  "escolhas_de_feat": [],
+  "features": [
+   {
+    "classe": "Fighter",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:feat/reactive-strike"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/reactive-strike",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Reactive Strike"
+   },
+   {
+    "classe": "Fighter",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:feat/shield-block"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/shield-block",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Shield Block"
+   },
+   {
+    "classe": "Fighter",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:feat/diehard"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/warrior-of-legend",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Warrior of Legend"
+   },
+   {
+    "classe": "Fighter",
+    "grants": [
+     {
+      "proficiency": {
+       "will": "expert"
+      }
+     }
+    ],
+    "id": "wb:class-feature/bravery",
+    "na_base": true,
+    "nivel_de_classe": 3,
+    "nome": "Bravery"
+   },
+   {
+    "classe": "Wizard",
+    "grants": [],
+    "id": "wb:class-feature/arcane-bond",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Arcane Bond"
+   },
+   {
+    "classe": "Wizard",
+    "grants": [],
+    "id": "wb:class-feature/arcane-school",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Arcane School"
+   },
+   {
+    "classe": "Wizard",
+    "grants": [],
+    "id": "wb:class-feature/arcane-thesis",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Arcane Thesis"
+   },
+   {
+    "classe": "Wizard",
+    "grants": [],
+    "id": "wb:class-feature/wizard-spellcasting",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Wizard Spellcasting"
+   },
+   {
+    "classe": "Wizard",
+    "eixo": "arcane-school",
+    "grants": [],
+    "id": "wb:class-feature/school-of-battle-magic",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "School of Battle Magic"
+   },
+   {
+    "classe": "Wizard",
+    "eixo": "arcane-thesis",
+    "grants": [],
+    "id": "wb:class-feature/spell-blending",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Spell Blending"
+   }
+  ],
+  "focus_pool": 0,
+  "fora_do_requisito": [
+   {
+    "feat": "Hand of the Apprentice",
+    "motivo": "exige a sub-escolha Universalist; tem School of Battle Magic"
+   },
+   {
+    "feat": "Stonewalker",
+    "motivo": "exige nivel de personagem >= 9; tem 5"
+   }
+  ],
+  "heranca": "Ancient-Blooded Dwarf",
+  "hp": 67,
+  "modificadores": {
+   "cha": -1,
+   "con": 3,
+   "dex": 2,
+   "int": 2,
+   "str": 2,
+   "wis": 1
+  },
+  "nivel": 5,
+  "pericias_livres": 3,
+  "proficiencias": {
+   "advanced": "trained",
+   "arcana": "trained",
+   "crafting": "trained",
+   "fortitude": "expert",
+   "heavy": "trained",
+   "light": "trained",
+   "lore:Azlant Lore": "trained",
+   "martial": "expert",
+   "medium": "trained",
+   "perception": "expert",
+   "reflex": "expert",
+   "religion": "trained",
+   "simple": "expert",
+   "unarmed": "expert",
+   "unarmored": "trained",
+   "will": "expert"
+  },
+  "slots": {
+   "ancestry": [
+    1,
+    5
+   ],
+   "class": [
+    1,
+    2,
+    4
+   ],
+   "free_archetype": [
+    2,
+    4
+   ],
+   "general": [
+    3
+   ],
+   "skill": [
+    2,
+    4
+   ]
+  },
+  "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 4,
+    "fontes": [
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Dwarf",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": [
+       "cha",
+       "int"
+      ],
+      "origem": "Scholar of the Ancients",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Scholar of the Ancients",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": 1,
+      "opcoes": [
+       "dex",
+       "str"
+      ],
+      "origem": "Fighter (habilidade-chave)",
+      "origem_id": "wb:class/fighter",
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "criacao (4 livres)",
+      "origem_id": null,
+      "quantidade": 4
+     },
+     {
+      "em": 5,
+      "opcoes": null,
+      "origem": "nivel 5",
+      "origem_id": null,
+      "quantidade": 4
+     }
+    ],
+    "kind": "ability",
+    "rotulo": "boosts de atributo (4 a escolher)",
+    "slot": "boosts_livres"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "outras-opcoes",
+    "opcoes": 14,
+    "rotulo": "Wizard / outras-opcoes",
+    "slot": "subclasse"
+   },
+   {
+    "em": 2,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "free archetype (nivel 2)",
+    "slot": "free_archetype"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 3)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 4,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "free archetype (nivel 4)",
+    "slot": "free_archetype"
+   },
+   {
+    "em": 5,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 5)",
+    "slot": "skill_increase"
+   }
+  ],
+  "subclasses": [
+   {
+    "classe": "Wizard",
+    "eixo": "arcane-school",
+    "escolhido": "wb:class-feature/school-of-battle-magic",
+    "nivel": 1,
+    "nome": "School of Battle Magic",
+    "opcoes": 23
+   },
+   {
+    "classe": "Wizard",
+    "eixo": "arcane-thesis",
+    "escolhido": "wb:class-feature/spell-blending",
+    "nivel": 1,
+    "nome": "Spell Blending",
+    "opcoes": 6
+   },
+   {
+    "classe": "Wizard",
+    "eixo": "outras-opcoes",
+    "escolhido": null,
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 14
+   }
+  ]
+ }
+}

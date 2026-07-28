@@ -1,0 +1,1175 @@
+{
+ "_doc": "Gabarito do porte TS. Gerado por motor/gerar_fixtures.py a partir do motor Python. NAO editar a mao: regenerar.",
+ "candidatos": {
+  "ancestry_feat@1": [
+   "wb:feat/ageless-spirit",
+   "wb:feat/caustic-nectar",
+   "wb:feat/grasping-reach",
+   "wb:feat/harmlessly-cute",
+   "wb:feat/leshy-superstition",
+   "wb:feat/pyrophilic-recovery",
+   "wb:feat/seedpod",
+   "wb:feat/shadow-of-the-wilds",
+   "wb:feat/undaunted",
+   "wb:feat/wilderness-born",
+   "wb:feat/leshy-lore",
+   "wb:feat/childlike-plant",
+   "wb:feat/climate-adaptation",
+   "wb:feat/defensive-needles",
+   "wb:feat/leshy-glide",
+   "wb:feat/noble-bloom",
+   "wb:feat/quick-root",
+   "wb:feat/ritual-reversion",
+   "wb:feat/speak-with-kindred",
+   "wb:feat/unassuming-heroes",
+   "wb:feat/bark-and-tendril",
+   "wb:feat/green-dash",
+   "wb:feat/grow-tool",
+   "wb:feat/kodama-call",
+   "wb:feat/lucky-keepsake",
+   "wb:feat/pollinate",
+   "wb:feat/sash-of-the-wind",
+   "wb:feat/solar-rejuvenation",
+   "wb:feat/spore-cloud",
+   "wb:feat/thorned-seedpod",
+   "wb:feat/towering-growth",
+   "wb:feat/call-of-the-green-man",
+   "wb:feat/cloak-of-poison",
+   "wb:feat/flower-chimera",
+   "wb:feat/unfettered-growth",
+   "wb:feat/flourish-and-ruin",
+   "wb:feat/irresistible-bloom",
+   "wb:feat/regrowth",
+   "wb:feat/return-to-the-seed",
+   "wb:feat/anchoring-roots"
+  ],
+  "ancestry_feat@2": [
+   "wb:feat/ageless-spirit",
+   "wb:feat/caustic-nectar",
+   "wb:feat/grasping-reach",
+   "wb:feat/harmlessly-cute",
+   "wb:feat/leshy-superstition",
+   "wb:feat/pyrophilic-recovery",
+   "wb:feat/seedpod",
+   "wb:feat/shadow-of-the-wilds",
+   "wb:feat/undaunted",
+   "wb:feat/wilderness-born",
+   "wb:feat/leshy-lore",
+   "wb:feat/childlike-plant",
+   "wb:feat/climate-adaptation",
+   "wb:feat/defensive-needles",
+   "wb:feat/leshy-glide",
+   "wb:feat/noble-bloom",
+   "wb:feat/quick-root",
+   "wb:feat/ritual-reversion",
+   "wb:feat/speak-with-kindred",
+   "wb:feat/unassuming-heroes",
+   "wb:feat/bark-and-tendril",
+   "wb:feat/green-dash",
+   "wb:feat/grow-tool",
+   "wb:feat/kodama-call",
+   "wb:feat/lucky-keepsake",
+   "wb:feat/pollinate",
+   "wb:feat/sash-of-the-wind",
+   "wb:feat/solar-rejuvenation",
+   "wb:feat/spore-cloud",
+   "wb:feat/thorned-seedpod",
+   "wb:feat/towering-growth",
+   "wb:feat/call-of-the-green-man",
+   "wb:feat/cloak-of-poison",
+   "wb:feat/flower-chimera",
+   "wb:feat/unfettered-growth",
+   "wb:feat/flourish-and-ruin",
+   "wb:feat/irresistible-bloom",
+   "wb:feat/regrowth",
+   "wb:feat/return-to-the-seed",
+   "wb:feat/anchoring-roots"
+  ],
+  "ancestry_feat@4": [
+   "wb:feat/ageless-spirit",
+   "wb:feat/caustic-nectar",
+   "wb:feat/grasping-reach",
+   "wb:feat/harmlessly-cute",
+   "wb:feat/leshy-superstition",
+   "wb:feat/pyrophilic-recovery",
+   "wb:feat/seedpod",
+   "wb:feat/shadow-of-the-wilds",
+   "wb:feat/undaunted",
+   "wb:feat/wilderness-born",
+   "wb:feat/leshy-lore",
+   "wb:feat/childlike-plant",
+   "wb:feat/climate-adaptation",
+   "wb:feat/defensive-needles",
+   "wb:feat/leshy-glide",
+   "wb:feat/noble-bloom",
+   "wb:feat/quick-root",
+   "wb:feat/ritual-reversion",
+   "wb:feat/speak-with-kindred",
+   "wb:feat/unassuming-heroes",
+   "wb:feat/bark-and-tendril",
+   "wb:feat/green-dash",
+   "wb:feat/grow-tool",
+   "wb:feat/kodama-call",
+   "wb:feat/lucky-keepsake",
+   "wb:feat/pollinate",
+   "wb:feat/sash-of-the-wind",
+   "wb:feat/solar-rejuvenation",
+   "wb:feat/spore-cloud",
+   "wb:feat/thorned-seedpod",
+   "wb:feat/towering-growth",
+   "wb:feat/call-of-the-green-man",
+   "wb:feat/cloak-of-poison",
+   "wb:feat/flower-chimera",
+   "wb:feat/unfettered-growth",
+   "wb:feat/flourish-and-ruin",
+   "wb:feat/irresistible-bloom",
+   "wb:feat/regrowth",
+   "wb:feat/return-to-the-seed",
+   "wb:feat/anchoring-roots"
+  ],
+  "class_feat@1": [
+   "wb:feat/aerial-boomerang",
+   "wb:feat/air-cushion",
+   "wb:feat/armor-in-earth",
+   "wb:feat/deflecting-wave",
+   "wb:feat/elemental-familiar-kineticist",
+   "wb:feat/eternal-torch",
+   "wb:feat/flash-forge",
+   "wb:feat/flashforge",
+   "wb:feat/flying-flame",
+   "wb:feat/four-winds",
+   "wb:feat/fresh-produce",
+   "wb:feat/geologic-attunement",
+   "wb:feat/hail-of-splinters",
+   "wb:feat/hardwood-armor",
+   "wb:feat/magnetic-pinions",
+   "wb:feat/metal-carapace",
+   "wb:feat/oceans-balm",
+   "wb:feat/scorching-column",
+   "wb:feat/shard-strike",
+   "wb:feat/stepping-stones",
+   "wb:feat/tidal-hands",
+   "wb:feat/timber-sentinel",
+   "wb:feat/tremor",
+   "wb:feat/versatile-blasts",
+   "wb:feat/weapon-infusion",
+   "wb:feat/whisper-on-the-wind",
+   "wb:feat/winters-clutch",
+   "wb:feat/burning-jet",
+   "wb:feat/extended-kinesis",
+   "wb:feat/voice-of-elements",
+   "wb:feat/voice-of-the-elements-kineticist",
+   "wb:feat/air-shroud",
+   "wb:feat/ambush-bladderwort",
+   "wb:feat/born-to-the-trees",
+   "wb:feat/calcifying-sand",
+   "wb:feat/command-elemental",
+   "wb:feat/igneogenesis",
+   "wb:feat/lava-leap",
+   "wb:feat/lightning-dash",
+   "wb:feat/living-bonfire"
+  ],
+  "class_feat@2": [
+   "wb:feat/aerial-boomerang",
+   "wb:feat/air-cushion",
+   "wb:feat/armor-in-earth",
+   "wb:feat/deflecting-wave",
+   "wb:feat/elemental-familiar-kineticist",
+   "wb:feat/eternal-torch",
+   "wb:feat/flash-forge",
+   "wb:feat/flashforge",
+   "wb:feat/flying-flame",
+   "wb:feat/four-winds",
+   "wb:feat/fresh-produce",
+   "wb:feat/geologic-attunement",
+   "wb:feat/hail-of-splinters",
+   "wb:feat/hardwood-armor",
+   "wb:feat/magnetic-pinions",
+   "wb:feat/metal-carapace",
+   "wb:feat/oceans-balm",
+   "wb:feat/scorching-column",
+   "wb:feat/shard-strike",
+   "wb:feat/stepping-stones",
+   "wb:feat/tidal-hands",
+   "wb:feat/timber-sentinel",
+   "wb:feat/tremor",
+   "wb:feat/versatile-blasts",
+   "wb:feat/weapon-infusion",
+   "wb:feat/whisper-on-the-wind",
+   "wb:feat/winters-clutch",
+   "wb:feat/voice-of-elements",
+   "wb:feat/voice-of-the-elements-kineticist",
+   "wb:feat/burning-jet",
+   "wb:feat/kinetic-activation",
+   "wb:feat/extended-kinesis",
+   "wb:feat/air-shroud",
+   "wb:feat/ambush-bladderwort",
+   "wb:feat/born-to-the-trees",
+   "wb:feat/calcifying-sand",
+   "wb:feat/command-elemental",
+   "wb:feat/igneogenesis",
+   "wb:feat/lava-leap",
+   "wb:feat/lightning-dash"
+  ],
+  "class_feat@4": [
+   "wb:feat/aerial-boomerang",
+   "wb:feat/air-cushion",
+   "wb:feat/armor-in-earth",
+   "wb:feat/deflecting-wave",
+   "wb:feat/elemental-familiar-kineticist",
+   "wb:feat/eternal-torch",
+   "wb:feat/flash-forge",
+   "wb:feat/flashforge",
+   "wb:feat/flying-flame",
+   "wb:feat/four-winds",
+   "wb:feat/fresh-produce",
+   "wb:feat/geologic-attunement",
+   "wb:feat/hail-of-splinters",
+   "wb:feat/hardwood-armor",
+   "wb:feat/magnetic-pinions",
+   "wb:feat/metal-carapace",
+   "wb:feat/oceans-balm",
+   "wb:feat/scorching-column",
+   "wb:feat/shard-strike",
+   "wb:feat/stepping-stones",
+   "wb:feat/tidal-hands",
+   "wb:feat/timber-sentinel",
+   "wb:feat/tremor",
+   "wb:feat/versatile-blasts",
+   "wb:feat/weapon-infusion",
+   "wb:feat/whisper-on-the-wind",
+   "wb:feat/winters-clutch",
+   "wb:feat/voice-of-elements",
+   "wb:feat/voice-of-the-elements-kineticist",
+   "wb:feat/air-shroud",
+   "wb:feat/ambush-bladderwort",
+   "wb:feat/born-to-the-trees",
+   "wb:feat/calcifying-sand",
+   "wb:feat/command-elemental",
+   "wb:feat/igneogenesis",
+   "wb:feat/lava-leap",
+   "wb:feat/lightning-dash",
+   "wb:feat/living-bonfire",
+   "wb:feat/magnetic-field",
+   "wb:feat/plate-in-treasure"
+  ],
+  "free_archetype@1": [
+   "wb:feat/acrobat-dedication",
+   "wb:feat/agent-of-all-holds",
+   "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/alter-ego-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/archaeologist-dedication",
+   "wb:feat/artillerist-dedication",
+   "wb:feat/assassin-dedication",
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication",
+   "wb:feat/bard-dedication",
+   "wb:feat/bastion-dedication",
+   "wb:feat/battle-harbinger-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blackjacket-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bloodrager-dedication",
+   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/bullet-dancer-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/clockwork-reanimator-dedication",
+   "wb:feat/commander-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication"
+  ],
+  "free_archetype@2": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/druid-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/juggler-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication"
+  ],
+  "free_archetype@4": [
+   "wb:feat/alkenstar-agent-dedication",
+   "wb:feat/animal-trainer-dedication",
+   "wb:feat/animist-dedication",
+   "wb:feat/beastmaster-dedication",
+   "wb:feat/blessed-one-dedication",
+   "wb:feat/bright-lion-dedication",
+   "wb:feat/campfire-chronicler-dedication",
+   "wb:feat/captain-dedication",
+   "wb:feat/cathartic-mage-dedication",
+   "wb:feat/cavalier-dedication",
+   "wb:feat/celebrity-dedication",
+   "wb:feat/chelaxian-scion-dedication",
+   "wb:feat/chronoskimmer-dedication",
+   "wb:feat/clawdancer-dedication",
+   "wb:feat/cleric-dedication",
+   "wb:feat/corpse-tender-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/demolitionist-dedication",
+   "wb:feat/dragon-disciple-dedication",
+   "wb:feat/druid-dedication",
+   "wb:feat/dual-weapon-warrior-dedication",
+   "wb:feat/duelist-dedication",
+   "wb:feat/edgewatch-detective-dedication",
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication",
+   "wb:feat/first-frost",
+   "wb:feat/geomancer-dedication",
+   "wb:feat/ghost-dedication",
+   "wb:feat/ghoul-dedication",
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/hallowed-necromancer-dedication",
+   "wb:feat/harrower-dedication",
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication",
+   "wb:feat/juggler-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication"
+  ],
+  "general_feat@1": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-proficiency",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-stalker",
+   "wb:feat/toughness",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/breath-control"
+  ],
+  "general_feat@2": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-proficiency",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-stalker",
+   "wb:feat/toughness",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing"
+  ],
+  "general_feat@4": [
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-proficiency",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider",
+   "wb:feat/fast-recovery",
+   "wb:feat/feather-step",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/natural-medicine",
+   "wb:feat/pet",
+   "wb:feat/pilgrims-token",
+   "wb:feat/practical-magic",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/pull-together",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-stalker",
+   "wb:feat/toughness",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing"
+  ],
+  "skill_feat@1": [
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider",
+   "wb:feat/natural-medicine",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-stalker",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-tracker",
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance"
+  ],
+  "skill_feat@2": [
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider",
+   "wb:feat/natural-medicine",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-stalker",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing"
+  ],
+  "skill_feat@4": [
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider",
+   "wb:feat/natural-medicine",
+   "wb:feat/pilgrims-token",
+   "wb:feat/prepare-elemental-medicine",
+   "wb:feat/quick-identification",
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name",
+   "wb:feat/stifle-flames",
+   "wb:feat/tame-animal",
+   "wb:feat/terrain-stalker",
+   "wb:feat/train-animal",
+   "wb:feat/trick-magic-item",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/exhort-the-faithful",
+   "wb:feat/godless-healing",
+   "wb:feat/mortal-healing",
+   "wb:feat/pei-zing-adept",
+   "wb:feat/sanctify-water",
+   "wb:feat/ambush-tactics",
+   "wb:feat/efficient-explorer",
+   "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator"
+  ]
+ },
+ "extras": {
+  "aumentos_detalhe": [],
+  "boosts_declarados": 7,
+  "boosts_direito": 11,
+  "boosts_pendentes": [
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Leshy",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": [
+     "con",
+     "wis"
+    ],
+    "origem": "Herbalist",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "Herbalist",
+    "origem_id": null,
+    "quantidade": 1
+   },
+   {
+    "em": "criacao",
+    "opcoes": null,
+    "origem": "criacao (4 livres)",
+    "origem_id": null,
+    "quantidade": 4
+   },
+   {
+    "em": 5,
+    "opcoes": null,
+    "origem": "nivel 5",
+    "origem_id": null,
+    "quantidade": 4
+   }
+  ],
+  "class_feat_nivel_1": true,
+  "classe_do_nivel": {
+   "1": "wb:class/kineticist",
+   "2": "wb:class/kineticist",
+   "3": "wb:class/kineticist",
+   "4": "wb:class/kineticist",
+   "5": "wb:class/kineticist",
+   "6": "wb:class/kineticist"
+  },
+  "entrada_da_classe": {
+   "wb:class/kineticist": 1
+  },
+  "gastos": {
+   "ancestry_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/leshy-lore",
+     "slot": "ancestry_feat"
+    },
+    {
+     "em": 5,
+     "pega": "wb:feat/anchoring-roots",
+     "slot": "ancestry_feat"
+    }
+   ],
+   "class_feat": [
+    {
+     "em": 1,
+     "pega": "wb:feat/burning-jet",
+     "slot": "class_feat"
+    },
+    {
+     "em": 2,
+     "pega": "wb:feat/kinetic-activation",
+     "slot": "class_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/blazing-wave",
+     "slot": "class_feat"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/crawling-fire",
+     "slot": "class_feat"
+    }
+   ],
+   "free_archetype": [
+    {
+     "em": 2,
+     "pega": "wb:feat/archer-dedication",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/quick-shot",
+     "slot": "free_archetype"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/crossbow-terror",
+     "slot": "free_archetype"
+    }
+   ],
+   "general_feat": [
+    {
+     "em": 3,
+     "pega": "wb:feat/fleet",
+     "slot": "general_feat"
+    }
+   ],
+   "skill_feat": [
+    {
+     "em": 2,
+     "pega": "wb:feat/assurance",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 4,
+     "pega": "wb:feat/additional-lore",
+     "slot": "skill_feat"
+    },
+    {
+     "em": 6,
+     "pega": "wb:feat/breath-control",
+     "slot": "skill_feat"
+    }
+   ]
+  },
+  "hp_detalhe": [
+   {
+    "hp": 8,
+    "nota": "ancestria",
+    "origem": "Leshy"
+   },
+   {
+    "hp": 12,
+    "nota": "8 da classe + 4 de CON",
+    "origem": "nivel 1 (Kineticist)"
+   },
+   {
+    "hp": 12,
+    "nota": "8 da classe + 4 de CON",
+    "origem": "nivel 2 (Kineticist)"
+   },
+   {
+    "hp": 12,
+    "nota": "8 da classe + 4 de CON",
+    "origem": "nivel 3 (Kineticist)"
+   },
+   {
+    "hp": 12,
+    "nota": "8 da classe + 4 de CON",
+    "origem": "nivel 4 (Kineticist)"
+   },
+   {
+    "hp": 12,
+    "nota": "8 da classe + 4 de CON",
+    "origem": "nivel 5 (Kineticist)"
+   },
+   {
+    "hp": 12,
+    "nota": "8 da classe + 4 de CON",
+    "origem": "nivel 6 (Kineticist)"
+   }
+  ],
+  "niveis_por_classe": {
+   "wb:class/kineticist": 6
+  },
+  "ordem_de_classe": [
+   "wb:class/kineticist"
+  ],
+  "origem_proficiencia": {
+   "advanced": [
+    "Kineticist"
+   ],
+   "fortitude": [
+    "Kineticist"
+   ],
+   "heavy": [
+    "Kineticist"
+   ],
+   "light": [
+    "Kineticist"
+   ],
+   "lore:Herbalism Lore": [
+    "Herbalist"
+   ],
+   "martial": [
+    "Kineticist"
+   ],
+   "medium": [
+    "Kineticist"
+   ],
+   "nature": [
+    "Leshy Lore",
+    "Kineticist",
+    "Herbalist"
+   ],
+   "perception": [
+    "Kineticist"
+   ],
+   "reflex": [
+    "Kineticist"
+   ],
+   "simple": [
+    "Kineticist"
+   ],
+   "stealth": [
+    "Leshy Lore"
+   ],
+   "unarmed": [
+    "Kineticist"
+   ],
+   "unarmored": [
+    "Kineticist"
+   ],
+   "will": [
+    "Will Expertise (Kineticist)"
+   ]
+  },
+  "pericias_automaticas": {
+   "nature": "Kineticist"
+  },
+  "pericias_livres_detalhe": [
+   {
+    "classe": "Kineticist",
+    "delta": 3,
+    "orcamento": 3
+   }
+  ]
+ },
+ "ficha": "kineticista6-fa-fogo",
+ "visao": {
+  "ac": {
+   "armadura": "Explorer's Clothing",
+   "categoria": "unarmored",
+   "check_penalty": 0,
+   "detalhe": "10 + DEX +2 + prof 8 (trained, nivel 6) + item 0",
+   "dex_perdida": 0,
+   "escudo": null,
+   "rank": "trained",
+   "total": 20
+  },
+  "ancestralidade": "Leshy",
+  "ataques": [
+   {
+    "arma": "Composite Shortbow",
+    "ataque": 2,
+    "atributo_do_ataque": "dex",
+    "categoria": "martial",
+    "dano": "1d6",
+    "detalhe": "nivel 6 + prof 0 (untrained) + DEX +2",
+    "rank": "untrained",
+    "tipo_de_dano": "piercing",
+    "traits": [
+     "deadly-d10",
+     "propulsive"
+    ]
+   }
+  ],
+  "atores": [],
+  "atributos": {
+   "cha": 10,
+   "con": 18,
+   "dex": 14,
+   "int": 8,
+   "str": 12,
+   "wis": 16
+  },
+  "aumentos_de_pericia": {
+   "gastos": [],
+   "niveis": [
+    3,
+    5
+   ]
+  },
+  "avisos": [
+   "wb:background/herbalist: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Natural Medicine', 'foundry_uuid': 'Compendium.pf2) -- nao aplicado",
+   "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Leshy (1), Herbalist (1), Herbalist (1), criacao (4 livres) (4), nivel 5 (4)"
+  ],
+  "background": "Herbalist",
+  "boosts": {
+   "declarados": 7,
+   "direito": 11,
+   "fontes": [
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Leshy",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": [
+      "con",
+      "wis"
+     ],
+     "origem": "Herbalist",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "Herbalist",
+     "origem_id": null,
+     "quantidade": 1
+    },
+    {
+     "em": "criacao",
+     "opcoes": null,
+     "origem": "criacao (4 livres)",
+     "origem_id": null,
+     "quantidade": 4
+    },
+    {
+     "em": 5,
+     "opcoes": null,
+     "origem": "nivel 5",
+     "origem_id": null,
+     "quantidade": 4
+    }
+   ]
+  },
+  "classes": {
+   "Kineticist": 6
+  },
+  "concedidos": [
+   {
+    "id": "wb:feat/steady-balance",
+    "nome": "Steady Balance",
+    "por": "Anchoring Roots",
+    "por_id": "wb:feat/anchoring-roots"
+   }
+  ],
+  "conjuracao": [],
+  "escolhas_de_feat": [],
+  "features": [
+   {
+    "classe": "Kineticist",
+    "grants": [
+     {
+      "grant_spell": [
+       "wb:spell/elemental-blast"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/impulses",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Impulses"
+   },
+   {
+    "classe": "Kineticist",
+    "grants": [],
+    "id": "wb:class-feature/kinetic-aura",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Kinetic Aura"
+   },
+   {
+    "classe": "Kineticist",
+    "grants": [],
+    "id": "wb:class-feature/kinetic-gate",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Kinetic Gate"
+   },
+   {
+    "classe": "Kineticist",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:class-feature/extract-element"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/extract-element",
+    "na_base": true,
+    "nivel_de_classe": 3,
+    "nome": "Extract Element"
+   },
+   {
+    "classe": "Kineticist",
+    "grants": [
+     {
+      "proficiency": {
+       "will": "expert"
+      }
+     }
+    ],
+    "id": "wb:class-feature/will-expertise",
+    "na_base": true,
+    "nivel_de_classe": 3,
+    "nome": "Will Expertise"
+   },
+   {
+    "classe": "Kineticist",
+    "grants": [],
+    "id": "wb:class-feature/gates-threshold",
+    "na_base": true,
+    "nivel_de_classe": 5,
+    "nome": "Gate's Threshold"
+   },
+   {
+    "classe": "Kineticist",
+    "grants": [],
+    "id": "wb:class-feature/gate-junction",
+    "na_base": true,
+    "nivel_de_classe": 5,
+    "nome": "Gate Junction"
+   }
+  ],
+  "focus_pool": 0,
+  "fora_do_requisito": [],
+  "heranca": "Fruit Leshy",
+  "hp": 80,
+  "modificadores": {
+   "cha": 0,
+   "con": 4,
+   "dex": 2,
+   "int": -1,
+   "str": 1,
+   "wis": 3
+  },
+  "nivel": 6,
+  "pericias_livres": 3,
+  "proficiencias": {
+   "advanced": "untrained",
+   "fortitude": "expert",
+   "heavy": "untrained",
+   "light": "trained",
+   "lore:Herbalism Lore": "trained",
+   "martial": "untrained",
+   "medium": "untrained",
+   "nature": "trained",
+   "perception": "trained",
+   "reflex": "expert",
+   "simple": "trained",
+   "stealth": "trained",
+   "unarmed": "trained",
+   "unarmored": "trained",
+   "will": "expert"
+  },
+  "slots": {
+   "ancestry": [
+    1,
+    5
+   ],
+   "class": [
+    1,
+    2,
+    4,
+    6
+   ],
+   "free_archetype": [
+    2,
+    4,
+    6
+   ],
+   "general": [
+    3
+   ],
+   "skill": [
+    2,
+    4,
+    6
+   ]
+  },
+  "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 4,
+    "fontes": [
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Leshy",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": [
+       "con",
+       "wis"
+      ],
+      "origem": "Herbalist",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Herbalist",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "criacao (4 livres)",
+      "origem_id": null,
+      "quantidade": 4
+     },
+     {
+      "em": 5,
+      "opcoes": null,
+      "origem": "nivel 5",
+      "origem_id": null,
+      "quantidade": 4
+     }
+    ],
+    "kind": "ability",
+    "rotulo": "boosts de atributo (4 a escolher)",
+    "slot": "boosts_livres"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 3)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 5,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 5)",
+    "slot": "skill_increase"
+   }
+  ],
+  "subclasses": []
+ }
+}
