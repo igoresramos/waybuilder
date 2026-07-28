@@ -191,8 +191,14 @@ class TestOrcamentoDeBoost(unittest.TestCase):
         self.assertEqual(b[0]["escolhe"], p.boosts_direito)
 
     def test_boost_a_mais_tambem_e_sinalizado(self):
+        """Quanto declarar para estourar sai do proprio direito -- numero fixo
+        aqui viraria teste obsoleto a cada ajuste da regra, que foi o que
+        aconteceu quando os 4 boosts da criacao entraram."""
+        base = carregar()
+        excesso = base.boosts_direito - base.boosts_declarados + 1
         p = carregar(mutacao=lambda d: d["escolhas"].append(
-            {"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con"]}))
+            {"em": 1, "slot": "boosts_livres", "pega": ["str"] * excesso}))
+        self.assertGreater(p.boosts_declarados, p.boosts_direito)
         self.assertTrue([a for a in p.avisos if "a mais" in a], p.avisos)
 
     def test_humano_tem_dois_livres_de_ancestria(self):

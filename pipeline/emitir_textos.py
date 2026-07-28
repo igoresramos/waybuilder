@@ -220,11 +220,17 @@ def main():
             faltando.append(r["id"])
             r.pop("text", None)          # referencia sem prosa e referencia pendurada
 
-    # o index passa a carregar as referencias criadas nesta passada
-    json.dump(base, open(f"{BASE}/index.json", "w"),
-              ensure_ascii=False, separators=(",", ":"))
-    print(f"referencias de texto criadas para registros que nao tinham: {criadas}")
-
+    # A prosa vive no sidecar; o indice guarda o PONTEIRO. Quatro extratores
+    # (magias, rituais, equipamento, relicos_idiomas) tambem gravam a prosa
+    # INLINE num campo `texto`, e os dois conviviam: 1.858 registros carregavam
+    # a mesma prosa duas vezes, somando 1,77 MB -- 12,7% do indice. Nao e so
+    # peso: sao duas copias que podem divergir, e a partir dai ninguem sabe qual
+    # vale. Aqui, depois de o sidecar estar gravado com a prosa, a copia inline
+    # sai. Removida SO quando o ponteiro resolve de fato -- senao seria perder
+    # a unica prosa que o registro tem.
+    # OS SIDECARS PRIMEIRO. A remocao da copia inline (abaixo) so pode
+    # acontecer depois que a prosa estiver em disco -- na ordem inversa, uma
+    # falha entre as duas escritas apagaria a unica prosa do registro.
     os.makedirs(f"{BASE}/text", exist_ok=True)
     total_bytes = 0
     for kind, mapa in textos.items():
@@ -232,6 +238,31 @@ def main():
         json.dump(mapa, open(caminho, "w"), ensure_ascii=False, separators=(",", ":"))
         total_bytes += os.path.getsize(caminho)
         print(f"  {kind:14} {len(mapa):>5} textos  {os.path.getsize(caminho)/1e6:.2f} MB")
+
+    # Quatro extratores (magias, rituais, equipamento, relicos_idiomas) gravam
+    # a prosa INLINE num campo `texto`, e ela convivia com o ponteiro: 1.858
+    # registros carregavam a mesma prosa duas vezes, 1,77 MB -- 12,7% do
+    # indice. Nao e so peso: sao duas copias que podem divergir, e a partir dai
+    # ninguem sabe qual vale. Sai a copia, fica o ponteiro -- e so quando o
+    # ponteiro resolve DE FATO no arquivo recem-gravado.
+    escritos = {kind: json.load(open(f"{BASE}/text/{kind}.json"))
+                for kind in textos}
+    inline_removido = 0
+    for r in base:
+        if not r.get("texto"):
+            continue
+        ref, kind = r.get("text"), r.get("kind")
+        if isinstance(ref, str) and escritos.get(kind, {}).get(ref):
+            r.pop("texto", None)
+            inline_removido += 1
+
+    # o index passa a carregar as referencias criadas nesta passada
+    json.dump(base, open(f"{BASE}/index.json", "w"),
+              ensure_ascii=False, separators=(",", ":"))
+    print(f"referencias de texto criadas para registros que nao tinham: {criadas}")
+    if inline_removido:
+        print(f"prosa inline duplicada removida do indice: {inline_removido} "
+              f"registros (a prosa fica no sidecar)")
 
     # portao: nenhuma referencia pendurada.
     # O denominador e a BASE INTEIRA, nao as referencias existentes. Dividir por

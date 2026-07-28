@@ -139,6 +139,33 @@ def main():
             print(f"      {c['dc']['nota']}")
     linha("Focus pool (regra 22)", v["focus_pool"])
 
+    # a terceira pergunta do construtor -- a que a TELA faz. As outras duas
+    # ("o que eu tenho" e "o que esta errado") ja tinham lugar na ficha.
+    abertos = v["slots_abertos"]
+    bloco(f"O QUE FALTA ESCOLHER ({len(abertos)} pendencia(s))")
+    if not abertos:
+        print("  nada -- a ficha esta completa para este nivel")
+    for s in abertos:
+        quantos = f" x{s['escolhe']}" if s.get("escolhe", 1) > 1 else ""
+        print(f"      {str(s['em']):<8} {s['rotulo']}{quantos}")
+    b = v["boosts"]
+    if b["declarados"] != b["direito"]:
+        linha("Boosts de atributo", f"{b['declarados']} de {b['direito']}")
+        for f in b["fontes"]:
+            alvo = "livre" if not f["opcoes"] else f"entre {f['opcoes']}"
+            print(f"      {str(f['em']):<8} {f['origem']}: {f['quantidade']} ({alvo})")
+
+    # e, para o primeiro slot aberto, o que caberia nele
+    do_slot = next((s for s in abertos if s["kind"] == "feat"), None)
+    if do_slot:
+        c = p.candidatos(do_slot["slot"], em=do_slot["em"])
+        cabem = [x for x in c if x["atende"] and not x["ja_pego"]]
+        print()
+        linha(f"Candidatos a `{do_slot['slot']}` nv{do_slot['em']}",
+              f"{len(cabem)} cabem, de {len(c)} elegiveis ao slot")
+        for x in cabem[:6]:
+            print(f"      nv{(x['level'] or 0):<2} {x['nome']}")
+
     bloco("O QUE VOCE PODE PEGAR (o predicado ORDENA, nunca filtra)")
     lista = p.disponiveis("feat")
     atendem = [f for f in lista if f["atende"]]

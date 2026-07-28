@@ -488,8 +488,20 @@ class Personagem:
 
     # -- regra 8: atributos -------------------------------------------------
 
-    # os 4 boosts livres de nivel do PF2e. Nao vem de `grants` -- e regra fixa
-    # do sistema, igual para toda classe.
+    # Os boosts livres do PF2e que NAO vem de `grants` -- sao regra fixa do
+    # sistema, iguais para toda classe, e por isso nenhum registro os declara.
+    #
+    # Na CRIACAO sao 4, aplicados depois de ancestria, background e classe
+    # ("Step 6: Finish Attribute Modifiers", 2e.aonprd.com/Rules.aspx?ID=2036).
+    # Foi a parte que faltou na primeira versao deste orcamento: sem eles o
+    # motor acusava "6 declarados de 5 de direito" numa ficha que na verdade
+    # tinha direito a 9, e o aviso saia invertido -- apontando excesso onde
+    # faltava.
+    #
+    # Depois, 4 a cada 5 niveis. Isto a base declara, na class-feature
+    # `Ability Boosts`: "At 5th level and every 5 levels thereafter, you boost
+    # four different ability scores".
+    BOOSTS_DE_CRIACAO = 4
     NIVEIS_DE_BOOST = (5, 10, 15, 20)
     BOOSTS_POR_NIVEL = 4
 
@@ -600,6 +612,9 @@ class Personagem:
         Os 4 boosts de nivel (5, 10, 15, 20) sao regra fixa do PF2e e nao
         aparecem em `grants` de lugar nenhum -- por isso entram aqui.
         """
+        self.boosts_pendentes.append(
+            {"origem": "criacao (4 livres)", "origem_id": None,
+             "quantidade": self.BOOSTS_DE_CRIACAO, "opcoes": None, "em": "criacao"})
         for n in self.NIVEIS_DE_BOOST:
             if n <= self.nivel:
                 self.boosts_pendentes.append(
