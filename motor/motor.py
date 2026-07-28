@@ -488,19 +488,32 @@ class Personagem:
 
     # -- regra 8: atributos -------------------------------------------------
 
+    # os 4 boosts livres de nivel do PF2e. Nao vem de `grants` -- e regra fixa
+    # do sistema, igual para toda classe.
+    NIVEIS_DE_BOOST = (5, 10, 15, 20)
+    BOOSTS_POR_NIVEL = 4
+
     def _atributos(self) -> None:
         """Regra 8: o boost de habilidade-chave vem SO da primeira classe."""
         self.boosts: dict[str, int] = defaultdict(int)
         self.origem_boost: list[str] = []
+        # o que o personagem tem DIREITO de escolher e ainda nao escolheu.
+        # Sem esta lista, uma ficha sem `boosts_livres` declarado derivava com
+        # todos os atributos em 10, HP menor, e nenhum aviso -- o app nao teria
+        # como montar a lista de pendencias.
+        self.boosts_pendentes: list[dict] = []
 
-        def aplicar_boosts(lista, origem):
+        def aplicar_boosts(lista, origem, origem_id=None):
             for b in lista or []:
                 ab = b.get("ability_boost") if isinstance(b, dict) else None
                 if not ab:
                     continue
                 if ab.get("livre"):
-                    self.origem_boost.append(
-                        f"{origem}: {ab.get('quantidade', 1)} livre(s)")
+                    qtd = ab.get("quantidade", 1)
+                    self.origem_boost.append(f"{origem}: {qtd} livre(s)")
+                    self.boosts_pendentes.append(
+                        {"origem": origem, "origem_id": origem_id,
+                         "quantidade": qtd, "opcoes": None, "em": "criacao"})
                     continue
                 opcoes = ab.get("opcoes") or []
                 if len(opcoes) == 1:
@@ -508,6 +521,10 @@ class Personagem:
                     self.origem_boost.append(f"{origem}: +{opcoes[0]}")
                 else:
                     self.origem_boost.append(f"{origem}: escolha entre {opcoes}")
+                    self.boosts_pendentes.append(
+                        {"origem": origem, "origem_id": origem_id,
+                         "quantidade": ab.get("quantidade", 1),
+                         "opcoes": opcoes, "em": "criacao"})
 
         if self.ancestria:
             aplicar_boosts(self.ancestria.get("boosts"),
@@ -541,6 +558,10 @@ class Personagem:
             elif chaves:
                 self.origem_boost.append(
                     f"{classe.get('name')} (1a classe): escolha entre {chaves}")
+                self.boosts_pendentes.append(
+                    {"origem": f"{classe.get('name')} (habilidade-chave)",
+                     "origem_id": self.primeira_classe, "quantidade": 1,
+                     "opcoes": chaves, "em": 1})
         for cid in self.ordem_de_classe[1:]:
             classe = self.base.get(cid)
             self.origem_boost.append(
@@ -563,8 +584,46 @@ class Personagem:
                 self.boosts[atributo] += 1
                 self.origem_boost.append(f"nivel {quando}: +{atributo} (livre)")
 
+        self._orcamento_de_boost()
+
         self.atributos = {a: 10 + 2 * self.boosts.get(a, 0) for a in ATRIBUTOS}
         self.modificadores = {a: (v - 10) // 2 for a, v in self.atributos.items()}
+
+    def _orcamento_de_boost(self) -> None:
+        """Quantos boosts o personagem tem DIREITO contra quantos declarou.
+
+        Mesma forma da higiene de slot (item 63) e do orcamento de pericia
+        (regra 10): o motor ja sabia LER cada fonte de boost, mas nunca somava
+        o direito nem confrontava com o gasto. Resultado: ficha sem
+        `boosts_livres` saia com tudo 10 e a suite inteira verde.
+
+        Os 4 boosts de nivel (5, 10, 15, 20) sao regra fixa do PF2e e nao
+        aparecem em `grants` de lugar nenhum -- por isso entram aqui.
+        """
+        for n in self.NIVEIS_DE_BOOST:
+            if n <= self.nivel:
+                self.boosts_pendentes.append(
+                    {"origem": f"nivel {n}", "origem_id": None,
+                     "quantidade": self.BOOSTS_POR_NIVEL, "opcoes": None, "em": n})
+
+        direito = sum(b["quantidade"] for b in self.boosts_pendentes)
+        declarado = sum(
+            len(e.get("pega") or []) for e in self._escolhas("boosts_livres")
+            if not (isinstance(e.get("em"), int) and e["em"] > self.nivel))
+
+        self.boosts_direito = direito
+        self.boosts_declarados = declarado
+        if declarado < direito:
+            faltam = direito - declarado
+            de_onde = ", ".join(
+                f"{b['origem']} ({b['quantidade']})" for b in self.boosts_pendentes)
+            self.avisos.append(
+                f"boosts de atributo: {declarado} declarado(s) de {direito} a que "
+                f"o personagem tem direito -- faltam {faltam}. Fontes: {de_onde}")
+        elif declarado > direito:
+            self.avisos.append(
+                f"boosts de atributo: {declarado} declarado(s) para {direito} "
+                f"de direito -- {declarado - direito} a mais")
 
     # -- regra 11: HP -------------------------------------------------------
 
@@ -1504,6 +1563,142 @@ class Personagem:
         faltando = [a for a in alvos if str(a).lower() not in meus]
         return (not faltando), (f"exige o trait {faltando}" if faltando else "")
 
+    # -- o que o app pergunta: slots abertos e candidatos por slot -----------
+
+    def slots_abertos(self) -> list[dict]:
+        """Tudo que esta por preencher, no estado atual.
+
+        A terceira pergunta do construtor. O motor ja sabia responder "o que eu
+        tenho" (`visao`) e "o que esta errado" (`fora_do_requisito`, `avisos`);
+        faltava "o que falta escolher", que e o que guia a tela.
+        """
+        abertos = []
+        gasto_em = defaultdict(list)
+        for e in self.doc.get("escolhas", []):
+            gasto_em[e.get("slot")].append(e.get("em"))
+
+        for slot, cadencia in self.SLOT_PARA_CADENCIA.items():
+            usados = list(gasto_em.get(slot) or [])
+            for nivel in (self.slots.get(cadencia) or []):
+                if nivel in usados:
+                    usados.remove(nivel)
+                    continue
+                abertos.append({
+                    "slot": slot, "em": nivel, "kind": "feat", "escolhe": 1,
+                    "rotulo": f"{slot.replace('_', ' ')} (nivel {nivel})"})
+
+        usados = list(gasto_em.get("skill_increase") or [])
+        for nivel in self.aumentos_de_pericia:
+            if nivel in usados:
+                usados.remove(nivel)
+                continue
+            abertos.append({
+                "slot": "skill_increase", "em": nivel, "kind": "skill",
+                "escolhe": 1, "rotulo": f"aumento de pericia (nivel {nivel})"})
+
+        for bloco in self.slots_de_subclasse:
+            if bloco.get("escolhido") is None:
+                abertos.append({
+                    "slot": "subclasse", "em": bloco.get("nivel"),
+                    "kind": bloco.get("eixo"), "escolhe": 1,
+                    "opcoes": bloco.get("opcoes"),
+                    "rotulo": f"{bloco.get('classe')} / {bloco.get('eixo')}"})
+
+        faltam = self.boosts_direito - self.boosts_declarados
+        if faltam > 0:
+            abertos.append({
+                "slot": "boosts_livres", "em": "criacao", "kind": "ability",
+                "escolhe": faltam, "fontes": self.boosts_pendentes,
+                "rotulo": f"boosts de atributo ({faltam} a escolher)"})
+
+        for slot in ("ancestralidade", "heranca", "background"):
+            atributo = {"ancestralidade": self.ancestria, "heranca": self.heranca,
+                        "background": self.background}[slot]
+            if atributo is None:
+                abertos.append({
+                    "slot": slot, "em": "criacao",
+                    "kind": {"ancestralidade": "ancestry", "heranca": "heritage",
+                             "background": "background"}[slot],
+                    "escolhe": 1, "rotulo": slot})
+
+        abertos.sort(key=lambda s: (s["em"] if isinstance(s["em"], int) else 0,
+                                    s["slot"]))
+        return abertos
+
+    def _aceita_no_slot(self, slot: str, r: dict) -> bool:
+        """Elegibilidade de SLOT -- que e coisa diferente de requisito.
+
+        O slot FILTRA por tipo; `requires` so ORDENA (principio zero). Um feat
+        sem trait `archetype` nao e candidato ao slot gratuito -- isso nao e
+        bloquear escolha, e a definicao do slot. Ja um feat de arquetipo cujo
+        requisito o personagem nao atende APARECE, marcado.
+        """
+        traits = {str(t).lower() for t in (r.get("traits") or [])}
+        if slot == "free_archetype":
+            return "archetype" in traits
+        if slot == "skill_feat":
+            return "skill" in traits
+        if slot == "general_feat":
+            return "general" in traits
+        if slot == "ancestry_feat":
+            nomes = {str((self.ancestria or {}).get("name") or "").lower()}
+            nomes |= {str((self.heranca or {}).get("name") or "").lower()}
+            return bool(traits & (nomes - {""}))
+        if slot == "class_feat":
+            # feat de classe do personagem. Um feat pode servir a varias
+            # classes, e basta pertencer a UMA das que ele tem.
+            minhas = {str(self.base.get(c).get("name") or "").lower()
+                      for c in self.ordem_de_classe}
+            return bool(traits & minhas)
+        return True
+
+    def candidatos(self, slot: str, em: int | None = None,
+                   limite: int | None = None) -> list[dict]:
+        """O que cabe NESTE slot, ordenado -- nunca filtrado por requisito.
+
+        `disponiveis(kind=...)` devolve os 6.273 feats da base; uma tela de
+        escolha nao pode receber isso. Aqui o conjunto de entrada e recortado
+        pela elegibilidade do slot, e o `requires` continua so ordenando.
+        """
+        if slot == "boosts_livres":
+            return [{"id": a, "nome": a.upper(), "level": None,
+                     "atende": True, "motivos": [], "ja_pego": False}
+                    for a in ATRIBUTOS]
+
+        if slot == "subclasse":
+            ids = [o for b in self.slots_de_subclasse
+                   if em is None or b.get("nivel") == em
+                   for o in (b.get("opcoes") or [])]
+            registros = [self.base.opcional(i) for i in ids]
+        elif slot == "skill_increase":
+            registros = [r for r in self.base.por_id.values()
+                         if r.get("kind") == "skill"]
+        elif slot == "nivel_de_classe":
+            registros = [r for r in self.base.por_id.values()
+                         if r.get("kind") == "class"]
+        else:
+            registros = [r for r in self.base.por_id.values()
+                         if r.get("kind") == "feat" and self._aceita_no_slot(slot, r)]
+
+        ja = self._ids_de_feat_escolhidos()
+        saida = []
+        for r in registros:
+            if r is None:
+                continue
+            atende, motivos = self.avaliar(r.get("requires"))
+            veto = self._veto_dedicacao_da_propria_classe(r)
+            if veto:
+                atende, motivos = False, motivos + [veto]
+            if em is not None and isinstance(r.get("level"), int) and r["level"] > em:
+                atende = False
+                motivos = motivos + [f"feat de nivel {r['level']} num slot de nivel {em}"]
+            saida.append({"id": r["id"], "nome": r.get("name"),
+                          "level": r.get("level"), "atende": atende,
+                          "motivos": motivos, "ja_pego": r["id"] in ja})
+        saida.sort(key=lambda x: (not x["atende"], x["ja_pego"],
+                                  x["level"] or 0, x["nome"] or ""))
+        return saida[:limite] if limite else saida
+
     def disponiveis(self, kind: str = "feat", limite: int | None = None) -> list[dict]:
         """O que combina com o personagem -- a pergunta central do construtor.
 
@@ -1893,6 +2088,11 @@ class Personagem:
             "pericias_livres": self.pericias_livres,
             "aumentos_de_pericia": {"niveis": self.aumentos_de_pericia,
                                     "gastos": self.aumentos_detalhe},
+            "boosts": {"direito": self.boosts_direito,
+                       "declarados": self.boosts_declarados,
+                       "fontes": self.boosts_pendentes},
+            # a terceira pergunta do construtor: o que falta escolher
+            "slots_abertos": self.slots_abertos(),
             "slots": self.slots,
             "conjuracao": self.conjuracao,
             "atores": self.atores,

@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `pre-fusao`
 
-- registros avaliados: **19705**
+- registros avaliados: **20375**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -27,15 +27,16 @@ NAO SE APLICA nesta fase.
 
 ## Portao 6 -- traits disjunto apos uniao
 
-**PASSOU** -- 0 ocorrencia(s).
+**FALHOU** -- 1 ocorrencia(s).
 
+- `wb:weapon/leiomano`: [['fatal-d10', 'versatile-s'], ['fatal', 'uncommon', 'versatile']]
 
 ## Portao 7 -- homonimo no mesmo kind
 
 **PASSOU** -- 0 ocorrencia(s).
 
 - 
-- _Alem disso, 337 casos de mesmo level e mesmos traits -- par legacy/remaster que o AoN nao declarou via `remaster_id`. Fusao legitima, nao bloqueia o build._
+- _Alem disso, 338 casos de mesmo level e mesmos traits -- par legacy/remaster que o AoN nao declarou via `remaster_id`. Fusao legitima, nao bloqueia o build._
 - - `wb:feat/advanced-monastic-weaponry` casou com `feat-7108` mas o AoN tem 2 entidades: feat-5997(nv6,Monk); feat-7108(nv6,Monk)
 - - `wb:feat/banshee-cry-display` casou com `feat-8533` mas o AoN tem 2 entidades: feat-3250(nv12,Archetype); feat-8533(nv12,Archetype)
 - - `wb:feat/coughing-dragon-display` casou com `feat-8529` mas o AoN tem 2 entidades: feat-3246(nv4,Archetype); feat-8529(nv4,Archetype)
@@ -49,8 +50,8 @@ NAO SE APLICA nesta fase.
 - - `wb:feat/jumping-jenny-display` casou com `feat-8531` mas o AoN tem 2 entidades: feat-3248(nv8,Archetype); feat-8531(nv8,Archetype)
 - - `wb:feat/keep-pace` casou com `feat-3427` mas o AoN tem 2 entidades: feat-3427(nv6,Archetype); feat-6284(nv6,Archetype)
 - - `wb:feat/master-spotter` casou com `feat-3124` mas o AoN tem 2 entidades: feat-3124(nv12,Archetype); feat-6209(nv12,Archetype)
-- - `wb:feat/master-spotter-investigator` casou com `feat-6209` mas o AoN tem 2 entidades: feat-3124(nv12,Archetype); feat-6209(nv12,Archetype)
 - - `wb:feat/necromantic-resistance` casou com `feat-3477` mas o AoN tem 2 entidades: feat-884(nv4,Archetype); feat-3477(nv4,Archetype)
+- - `wb:feat/sky-and-heaven-stance` casou com `feat-2200` mas o AoN tem 2 entidades: feat-2200(nv6,Archetype,Stance); feat-8807(nv6,Archetype,Stance)
 
 ## Portao 8 -- artefato citado que sumiu do disco
 

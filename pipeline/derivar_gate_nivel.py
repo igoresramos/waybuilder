@@ -90,14 +90,26 @@ def main():
             gate = {"character_level": {">=": nivel}}
             grupo = "archetype"
         elif traits & set(classes):
-            nome = sorted(traits & set(classes))[0]
-            gate = {"class_level": {classes[nome].split("/")[-1]: {">=": nivel}}}
-            grupo = "classe"
+            # UM feat pode pertencer a VARIAS classes, e ai a exigencia e
+            # QUALQUER uma delas -- nunca a primeira em ordem alfabetica.
+            # Ate 2026-07-27 isto era `sorted(...)[0]`, e o resultado era que
+            # `Reach Spell` (bard/cleric/druid/oracle/sorcerer/witch/wizard)
+            # saia como `class_level: {bard}`: pelo motor, um Mago nao podia
+            # pegar Reach Spell. Eram 122 feats travados assim. Doi dobrado na
+            # houserule, que e multiclasse por nivel -- e justo o feat que um
+            # Guerreiro 2/Ladino 2 deveria alcancar pelos dois lados.
+            nomes = sorted(traits & set(classes))
+            gates = [{"class_level": {classes[n].split("/")[-1]: {">=": nivel}}}
+                     for n in nomes]
+            gate = gates[0] if len(gates) == 1 else {"any": gates}
+            grupo = "classe" if len(gates) == 1 else "classe (varias)"
         elif traits & set(ancestrias):
-            nome = sorted(traits & set(ancestrias))[0]
-            gate = {"all": [{"character_level": {">=": nivel}},
-                            {"has": ancestrias[nome]}]}
-            grupo = "ancestria"
+            # mesma correcao: 8 feats tem trait de mais de uma ancestria
+            nomes = sorted(traits & set(ancestrias))
+            alvo = ({"has": ancestrias[nomes[0]]} if len(nomes) == 1
+                    else {"any": [{"has": ancestrias[n]} for n in nomes]})
+            gate = {"all": [{"character_level": {">=": nivel}}, alvo]}
+            grupo = "ancestria" if len(nomes) == 1 else "ancestria (varias)"
         else:
             gate = {"character_level": {">=": nivel}}
             grupo = "geral"

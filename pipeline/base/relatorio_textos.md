@@ -1,17 +1,14 @@
 # Emissao de prosa
 
-- cobertura sobre a base: **20184/20375** (99.1%)
-- referencias resolvidas: 20184/20184
-- registros sem referencia de texto: 191
-- origem: {'aon': 18748, 'foundry': 1356, 'pf2etools': 19, 'aon:nome': 61}
+- cobertura sobre a base: **20209/20375** (99.2%)
+- referencias resolvidas: 20209/20209
+- registros sem referencia de texto: 166
+- origem: {'aon': 18748, 'foundry': 1354, 'pf2etools': 46, 'aon:nome': 61}
 - prosa total: 18.8 MB
-- sem prosa: 191
+- sem prosa: 166
 
 ## Sem prosa
 
-- `wb:armor/heavy-barding-large`
-- `wb:armor/heavy-barding-small-or-medium`
-- `wb:armor/light-barding`
 - `wb:equipment/agate`
 - `wb:equipment/alabaster`
 - `wb:equipment/alabaster-and-obsidian-game-set`
@@ -22,12 +19,9 @@
 - `wb:equipment/amphora-with-lavish-scenes`
 - `wb:equipment/ancient-dragon-skull-etched-with-mystic-sigils`
 - `wb:equipment/aquamarine`
-- `wb:equipment/arrow`
 - `wb:equipment/augstens-cudgel`
 - `wb:equipment/azurite`
 - `wb:equipment/bloodstone`
-- `wb:equipment/blowgun-dart`
-- `wb:equipment/bolt`
 - `wb:equipment/brass-anklet`
 - `wb:equipment/brass-scepter-with-amethyst-head`
 - `wb:equipment/brass-statuette-of-a-bull`
@@ -57,20 +51,16 @@
 - `wb:equipment/diamond-large`
 - `wb:equipment/diamond-small`
 - `wb:equipment/divine-art-piece-created-by-shelyn`
-- `wb:equipment/dreamstone-cursed`
 - `wb:equipment/duskwood-violin-by-a-legend`
 - `wb:equipment/elegant-cloth-doll`
-- `wb:equipment/elemental-wayfinder`
 - `wb:equipment/emerald`
 - `wb:equipment/emerald-brilliant-green`
 - `wb:equipment/engraved-copper-ring`
 - `wb:equipment/enormous-chryselephantine-sculpture-by-a-legend`
 - `wb:equipment/enormous-tapestry-of-a-major-battle`
 - `wb:equipment/etched-copper-ewer`
-- `wb:equipment/extra-ink-and-paper`
 - `wb:equipment/famous-portrait-by-a-master`
 - `wb:equipment/fine-gold-spyglass`
-- `wb:equipment/galtan-orange-cat`
 - `wb:equipment/garnet`
 - `wb:equipment/gerbil`
 - `wb:equipment/gilded-ceremonial-armor`
@@ -87,12 +77,9 @@
 - `wb:equipment/gold-urn-with-scenes-of-judgment`
 - `wb:equipment/hamster`
 - `wb:equipment/hand-mirror-with-decorated-frame`
-- `wb:equipment/heavy-barding`
 - `wb:equipment/hematite`
-- `wb:equipment/house-eagle`
 - `wb:equipment/illuminated-manuscript`
 - `wb:equipment/illustrated-book`
-- `wb:equipment/inflammation-flask`
 - `wb:equipment/inscribed-crocodile-skull`
 - `wb:equipment/intricate-silver-and-gold-music-box`
 - `wb:equipment/iron-and-rock-crystal-brazier`
@@ -111,10 +98,8 @@
 - `wb:equipment/lapis-lazuli`
 - `wb:equipment/lapis-lazuli-pendant`
 - `wb:equipment/leather-flagon-with-caydenite-symbol`
-- `wb:equipment/lich-phylactery`
 - `wb:equipment/life-size-sculpture-by-an-expert`
 - `wb:equipment/living-flame-shaped-into-a-phoenix`
-- `wb:equipment/magical-hearing-aids`
 - `wb:equipment/major-painting-by-a-legend`
 - `wb:equipment/malachite`
 - `wb:equipment/marble-altar`
@@ -143,23 +128,16 @@
 - `wb:equipment/quality-sculpture-by-an-unknown`
 - `wb:equipment/quartz-milky-rose-or-smoky`
 - `wb:equipment/quartz-rock-crystal`
-- `wb:equipment/racers-of-hammers`
 - `wb:equipment/raudltzs-telescope`
-- `wb:equipment/repeating-magazine`
-- `wb:equipment/replacement-cosmetics`
-- `wb:equipment/replacement-filter`
-- `wb:equipment/replacement-picks`
 - `wb:equipment/rhodochrosite`
 - `wb:equipment/rounds-shield-pistol`
 - `wb:equipment/ruby-large`
 - `wb:equipment/ruby-small`
 - `wb:equipment/ryhasphineas-hourglass`
-- `wb:equipment/s-ring`
 - `wb:equipment/saints-bone-with-lost-scriptures`
 - `wb:equipment/sapphire`
 - `wb:equipment/sardonyx`
 - `wb:equipment/scrimshaw-whale-bone`
-- `wb:equipment/seed-pod-of-wisdom`
 - `wb:equipment/set-of-decorated-ceramic-plates`
 - `wb:equipment/set-of-decorated-porcelain-plates`
 - `wb:equipment/set-of-six-ivory-dice`
@@ -185,7 +163,6 @@
 - `wb:equipment/star-sapphire`
 - `wb:equipment/star-sapphire-necklace`
 - `wb:equipment/tankard-owned-by-cayden-cailean`
-- `wb:equipment/the-theatre`
 - `wb:equipment/thought-lens-of-astral-essence`
 - `wb:equipment/tigers-eye`
 - `wb:equipment/topaz`
@@ -197,6 +174,4 @@
 - `wb:equipment/vile-remnant`
 - `wb:equipment/virtuoso-silver-flute`
 - `wb:equipment/wide-landscape-by-an-expert`
-- `wb:equipment/wondrous-figurines`
-- `wb:equipment/xs-lizard`
 - `wb:equipment/zircon`

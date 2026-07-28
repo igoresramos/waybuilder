@@ -79,6 +79,7 @@ def main():
 
     do_foundry = concedidas_pelo_foundry()
     relatorio, total_mov = [], 0
+    nao_eram_escolha = {}          # classe -> quantas voltaram para a progressao
     for classe in [r for r in base if r.get("kind") == "class"]:
         prog = classe.get("progressao") or []
         if not prog:
@@ -110,17 +111,48 @@ def main():
                 eixo = "outras-opcoes"
             else:
                 eixo = candidatos[0][0]
-            bloco = escolhas[eixo]
             nivel = passo.get("nivel")
+            # `outras-opcoes` e o balde do que nao casou com eixo conhecido, e
+            # por isso mistura coisa de niveis diferentes. Chavear por (eixo,
+            # nivel) impede o `min` de colapsar tudo num nivel so -- era assim
+            # que o Campeao aparecia pedindo escolha no NIVEL 0 e o Clerigo
+            # juntava `Deity` (nivel 1) com `Fifth Doctrine` (nivel 11) no
+            # mesmo balaio. Eixo de verdade (racket, instinct, muse...) tem
+            # nivel unico e nao muda de comportamento.
+            chave = (eixo, nivel) if eixo == "outras-opcoes" else (eixo, None)
+            bloco = escolhas[chave]
             bloco["nivel"] = nivel if bloco["nivel"] is None else min(bloco["nivel"], nivel)
-            bloco["opcoes"].append(fid)
+            bloco["opcoes"].append((fid, passo))
             total_mov += 1
 
+        # ESCOLHA DE UMA OPCAO SO NAO E ESCOLHA. Sobrou 1 candidato num nivel
+        # de `outras-opcoes` significa que aquilo e feature de progressao que
+        # a lista do Foundry nao trouxe -- nao um eixo de sub-escolha. Era o
+        # caso do Guerreiro (`Warrior of Legend`), do Monge (`Greater Weapon
+        # Specialization` no nivel 15), do Bardo, do Ladino e do Kineticista:
+        # toda ficha dessas classes saia pedindo uma "escolha" inexistente.
+        devolvidas = 0
+        for chave in [k for k in escolhas if k[0] == "outras-opcoes"]:
+            if len(escolhas[chave]["opcoes"]) == 1:
+                _, passo = escolhas[chave]["opcoes"][0]
+                concedidas.append(passo)
+                del escolhas[chave]
+                devolvidas += 1
+                total_mov -= 1
+        if devolvidas:
+            concedidas.sort(key=lambda p: (p.get("nivel") or 0))
+            nao_eram_escolha[classe.get("name", classe["id"])] = devolvidas
+
+        for dados in escolhas.values():
+            dados["opcoes"] = [fid for fid, _ in dados["opcoes"]]
+
         if not escolhas:
+            classe["progressao"] = concedidas
             continue
         classe["progressao"] = concedidas
         blocos = []
-        for eixo, dados in sorted(escolhas.items()):
+        for (eixo, _nivel_chave), dados in sorted(
+                escolhas.items(), key=lambda kv: (kv[0][0], kv[0][1] or 0)):
             # A progressao do Foundry lista so o que ELE modela: o Barbaro
             # aparecia com 1 instinct, o Mago com 14 escolas. O AoN conhece 16 e
             # 23. As opcoes reais sao a uniao -- o Foundry traz a mecanica, o AoN
@@ -158,6 +190,11 @@ def main():
 
     print(f"classes com sub-escolha separada: {len(relatorio)}")
     print(f"entradas movidas de concessao para opcao: {total_mov}")
+    if nao_eram_escolha:
+        print(f"devolvidas a progressao (eixo de 1 opcao so): "
+              f"{sum(nao_eram_escolha.values())} em {len(nao_eram_escolha)} classes")
+        for c, n in sorted(nao_eram_escolha.items()):
+            print(f"  {c}: {n}")
     open(f"{BASE}/relatorio_subclasses.md", "w").write(
         "# Sub-escolhas de classe\n\n"
         "A progressao tem dois niveis: `classe -> feature -> sub-escolha`. Esta\n"
