@@ -1955,6 +1955,26 @@ export class Personagem implements ContextoDePredicado {
       registros = [...this.base.por_id.values()].filter((r) => r.kind === "skill");
     } else if (slot === "nivel_de_classe") {
       registros = [...this.base.por_id.values()].filter((r) => r.kind === "class");
+    } else if (slot === "heranca") {
+      // Heranca pertence a uma ancestralidade -- nao existe Anao Elfico. O
+      // vinculo esta em `ancestry` (309 das 334 herancas o declaram).
+      //
+      // As 25 que NAO declaram sao as versateis do PF2e (Aiuvarin, Nephilim,
+      // Dhampir, Changeling, Suli...), abertas a qualquer ancestralidade -- e
+      // por isso a ausencia do campo e o que as identifica, nao um descuido.
+      //
+      // Mesmo criterio de `_aceita_no_slot`: isto e filtro por TIPO, nao
+      // requisito. Herança de outra ancestralidade nao e "escolha ruim", e
+      // escolha inexistente, e o principio zero vale para requisito.
+      const minha = this.ancestria === null ? null : this.ancestria.id;
+      registros = [...this.base.por_id.values()].filter((r) => {
+        if (r.kind !== "heritage") return false;
+        // sem ancestralidade escolhida ainda, mostrar tudo: lista vazia num
+        // slot recem-aberto parece defeito, e o jogador ainda vai voltar aqui
+        if (minha === null) return true;
+        const dona = r["ancestry"];
+        return !ehStr(dona) || this.base.resolver(dona) === this.base.resolver(minha);
+      });
     } else {
       registros = [...this.base.por_id.values()]
         .filter((r) => r.kind === "feat" && this._aceita_no_slot(slot, r));

@@ -296,3 +296,43 @@ describe("o payload leva tudo que a base referencia", () => {
     expect([...orfas].sort()).toEqual([...ORFAS_CONHECIDAS].sort());
   });
 });
+
+/**
+ * Heranca pertence a uma ancestralidade -- nao existe Anao Elfico.
+ *
+ * Ate 2026-07-28 a tela montava este slot com a lista CRUA de heritage, e as
+ * 334 herancas apareciam para qualquer ancestralidade. O motor sempre soube
+ * fazer o gate (`_aceita_no_slot` ja fazia isso para feat de ancestria); o slot
+ * e que nao passava por ele.
+ */
+describe("heranca combina com a ancestralidade", () => {
+  const com = (ancestria: string): Documento =>
+    doc.escolher(doc.novoDocumento("Teste"), "ancestralidade", "criacao", ancestria);
+
+  const nomes = (d: Documento) =>
+    derivar(d).candidatos("heranca").map((c) => c.nome ?? c.id);
+
+  it("nao oferece heranca de outra ancestralidade", () => {
+    const doAnao = nomes(com("wb:ancestry/dwarf"));
+    const doElfo = nomes(com("wb:ancestry/elf"));
+
+    expect(doAnao.length).toBeGreaterThan(0);
+    expect(doElfo.length).toBeGreaterThan(0);
+    // heranca especifica de elfo nao pode aparecer para o anao, e vice-versa
+    expect(doAnao).not.toContain("Ancient Elf");
+    expect(doElfo).not.toContain("Ancient-Blooded Dwarf");
+    expect(doAnao).toContain("Ancient-Blooded Dwarf");
+  });
+
+  it("oferece as versateis para qualquer ancestralidade", () => {
+    // as 25 sem campo `ancestry` sao as versateis do PF2e -- abertas a todos
+    for (const a of ["wb:ancestry/dwarf", "wb:ancestry/elf", "wb:ancestry/human"]) {
+      expect(nomes(com(a)), a).toContain("Dhampir");
+    }
+  });
+
+  it("sem ancestralidade escolhida, mostra tudo em vez de lista vazia", () => {
+    const todas = nomes(doc.novoDocumento("Teste"));
+    expect(todas.length).toBeGreaterThan(300);
+  });
+});

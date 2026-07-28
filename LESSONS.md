@@ -597,3 +597,24 @@ DADO: o registro nao existe em `index.json`.
 Travadas uma a uma em `fluxo.test.ts` (`ORFAS_CONHECIDAS`), para que o numero so
 possa cair: se subir e regressao, se descer o teste cobra a atualizacao da lista.
 A correcao pertence ao pipeline (extrator + `resolver_referencias.py`), nao ao app.
+
+### O slot que nao passava pelo motor
+O picker de Heranca oferecia as 334 herancas para qualquer ancestralidade -- dava
+para fazer um Anao com heranca elfica. A causa nao era o motor: `_aceita_no_slot`
+ja fazia exatamente esse gate para feat de ancestria. A tela e que montava este
+slot com a lista CRUA (`cru(opcoesDe("heritage"))`, `atende: true` fixo) em vez
+de perguntar a `candidatos()`.
+
+O dado para o gate ja estava na base: **309 das 334 herancas declaram
+`ancestry`**. As 25 sem o campo sao as versateis do PF2e (Aiuvarin, Nephilim,
+Dhampir, Changeling, Suli...), abertas a qualquer ancestralidade -- a ausencia do
+campo E a identificacao delas, nao um buraco. Anao passou de 334 para 34 opcoes:
+9 anas + 25 versateis.
+
+Regra que fica: **todo slot pergunta ao motor.** Onde a tela monta a lista
+sozinha ela vira uma segunda implementacao da regra, sem teste e sem o dado que
+o motor tem. Verificados os outros usos de `cru()` -- ancestralidade, background
+e classe nao tem gate estrutural, entao ali a lista crua esta correta.
+
+Detalhe de comportamento: sem ancestralidade escolhida, mostrar TUDO. Lista vazia
+num slot recem-aberto parece defeito, e o jogador ainda vai voltar ali.

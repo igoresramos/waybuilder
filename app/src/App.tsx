@@ -125,8 +125,10 @@ export default function App() {
                   escolhido={escolhaEm("ancestralidade", "criacao")}
                   aoEscolher={(x) => setD(doc.escolher(d, "ancestralidade", "criacao", x))}
                   aoLimpar={() => setD(doc.limpar(d, "ancestralidade", "criacao"))} />
+            {/* candidatos, nao `cru`: heranca pertence a uma ancestralidade, e
+                quem sabe disso e o motor */}
             <Slot base={base} rotulo="Heranca" tipo="heranca"
-                  candidatos={cru(opcoesDe("heritage"))} filtros={FILTROS_DE_RARIDADE}
+                  candidatos={p.candidatos("heranca")} filtros={FILTROS_DE_RARIDADE}
                   escolhido={escolhaEm("heranca", "criacao")}
                   aoEscolher={(x) => setD(doc.escolher(d, "heranca", "criacao", x))}
                   aoLimpar={() => setD(doc.limpar(d, "heranca", "criacao"))} />
