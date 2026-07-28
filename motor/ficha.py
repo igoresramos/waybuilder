@@ -88,6 +88,11 @@ def main():
     linha("Escolhas livres (regra 10)", v["pericias_livres"])
     for d in p.pericias_livres_detalhe:
         print(f"      {d['classe']:<20} orcamento {d['orcamento']}  ->  delta {d['delta']}")
+    aum = v["aumentos_de_pericia"]
+    linha("Aumentos de pericia", f"niveis {aum['niveis']}   "
+                                 f"({len(aum['gastos'])} usado(s))")
+    for d in aum["gastos"]:
+        print(f"      nv{d['nivel']:<3} {d['pericia']:<16} {d['de']} -> {d['para']}")
 
     bloco("SLOTS DE ESCOLHA (regra 12: class feat em nivel PAR de personagem)")
     for nome, niveis in v["slots"].items():
@@ -102,6 +107,18 @@ def main():
             marca = "" if f["na_base"] else "  [AUSENTE DA BASE]"
             eixo = f"  <- {f['eixo']}" if f.get("eixo") else ""
             print(f"      nv{f['nivel_de_classe']:<2} {f['nome']}{eixo}{marca}")
+    # o que veio pela cadeia de grants -- sem isto, o efeito de uma dedicacao
+    # aparece nos numeros e nao tem de onde ser explicado
+    # `nome == por` e reaplicacao do proprio efeito (a class-feature Reactive
+    # Strike concede o feat homonimo -- artefato do Foundry, 3 casos na base).
+    # O dado fica na visao; so nao vale linha na ficha.
+    concedidos = [c for c in v["concedidos"] if c["nome"] != c["por"]]
+    if concedidos:
+        print()
+        print("  Concedido (nao escolhido):")
+        for c in concedidos:
+            print(f"      {c['nome']:<28} <- {c['por']}")
+
     if v["subclasses"]:
         print()
         for s in v["subclasses"]:

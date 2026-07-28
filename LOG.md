@@ -6,6 +6,62 @@ project: waybuilder
 
 ## 2026-07-27
 
+### Sessao | 22:30-00:10 | os quatro defeitos do motor, fechados | igor + claude-code
+
+A rodada anterior tinha diagnosticado, com numero, quatro defeitos do motor e
+deixado teste `expectedFailure` para cada um. Esta sessao fechou os quatro. O
+diagnostico comum era uma frase so -- **o motor aceitava as escolhas e nao
+aplicava os efeitos delas** -- e por isso os quatro consertos couberam num
+arquivo.
+
+**Item 62 -- a dedicacao agora entrega.** `_grants_em_cadeia` deixou de so
+sinalizar e passou a APLICAR o que a cadeia concede com alvo estatico:
+class-feature vira linha de feature, feat vira feat efetivo, e
+`_proficiencias`, `_hp` e `_termo_has` leem os feats efetivos em vez de so os
+escolhidos. Alvo dinamico (`{item|flags...}`) continua so sinalizado -- esse
+sim depende de escolha ainda nao feita, e a distincao entre "pendente" e
+"ausente" e o que o app precisa. Os tres numeros do diagnostico foram
+reconferidos na ficha depois do conserto: battle-harbinger 52 -> **56 HP** (e
+pegar Toughness a mao junto nao soma duas vezes), shieldmarshal com **society:
+expert**, Fighter 4 + barbarian-dedication com **Rage** nas features.
+
+**Item 63 -- higiene de slot.** `_higiene_de_slot` confronta gasto com slot nos
+cinco trilhos. Pega escolha a mais, escolha em nivel sem slot, e feat sem trait
+`archetype` ocupando o slot gratuito -- que era o que fazia o Free Archetype
+virar um segundo class feat de graca.
+
+**Item 64 -- as duas regras de dedicacao.** Antes de codar, o texto RAW foi
+conferido na PROPRIA base, nao de memoria: 76 dedicacoes repetem a clausula
+"two other feats from the <X> archetype", e e isso que a implementacao faz --
+contagem em ordem de nivel, por arquetipo. A outra regra (feat de arquetipo
+exige a dedicacao) saiu do vinculo que ja existia no dado: 225 arquetipos, cada
+um com exatamente uma dedicacao, entao nao precisou de lista escrita a mao.
+
+**Item 67 -- aumento de pericia.** A cadencia vem do dado: as 27 classes
+declaram `skill_increase.levels`, 25 no padrao [3,5,..,19] e duas (Ladino e
+Investigador) em todo nivel de 2 a 20. Vale a regra 15, o aumento serve para
+entrar numa pericia (untrained -> trained, que e RAW) e o teto por nivel e
+respeitado. Ficha de referencia nova, `ladino4-aumentos-de-pericia.json`,
+escolhida de proposito numa das duas classes de cadencia diferente: a mesma
+ficha prova que a cadencia veio do dado e nao de tabela escrita no motor.
+
+**Dois achados novos, os dois de dado, os dois registrados (itens 69 e 70):**
+o eixo `outras-opcoes` e um balaio em 25 das 27 classes -- foi por ele que um
+Guerreiro 4 saia com `Warrior of Legend`, que agora tambem concede Diehard, ou
+seja, o erro de dado virou numero na ficha; e 476 alvos de `grant_feat` estao
+sem resolver, **todos de background** (400 sao um dict serializado como
+string), o que so nao travou o item 62 porque nenhum e de feat.
+
+**Honestidade sobre a metrica:** a validacao contra os iconics foi de 62,4% a
+**62,9%** em pericia. Implementar `skill_increase` nao fecha essa lacuna,
+porque as fichas derivadas dos iconics nao declaram em que nivel cada aumento
+foi gasto -- falta o oraculo, nao o motor (item 68). HP seguiu em 117/129, sem
+regressao.
+
+Suites: **42 testes no motor** (era 28) e 88 no pipeline, verdes. Sobrou **um**
+`expectedFailure`, o do item 65 -- `has` avaliado contra o documento inteiro,
+sem recorte temporal.
+
 ### Sessao | 21:00-22:30 | tres agentes no motor: Free Archetype, ciclos e pericias | igor + claude-code
 
 Igor pediu foco no Free Archetype e levantou o medo de cadeia infinita de

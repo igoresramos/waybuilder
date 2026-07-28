@@ -1,0 +1,162 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {
+    "versao": "2026-07-27",
+    "pin_foundry": "87f9e502"
+  },
+  "identidade": {
+    "nome": "Vela Passo-Curto",
+    "jogador": "Igor",
+    "notas": "Ficha do aumento de pericia (item 67). Ladino de proposito: e uma das DUAS classes da base que declaram `skill_increase` em todo nivel de 2 a 20, contra o padrao [3,5,7,...] das outras 25. Com isso a mesma ficha prova as duas coisas de uma vez -- que a cadencia vem do dado e nao de tabela escrita no motor, e que ela e diferente da do Guerreiro no mesmo nivel 4. Os tres aumentos (2, 3, 4) sobem stealth de trained a expert, thievery de trained a expert e athletics de untrained a trained -- este ultimo prova que o aumento tambem serve para ENTRAR numa pericia, que e RAW."
+  },
+  "escolhas": [
+    {
+      "em": "criacao",
+      "slot": "ancestralidade",
+      "pega": "wb:ancestry/human"
+    },
+    {
+      "em": "criacao",
+      "slot": "heranca",
+      "pega": "wb:heritage/versatile-human"
+    },
+    {
+      "em": "criacao",
+      "slot": "background",
+      "pega": "wb:background/scout"
+    },
+    {
+      "em": 1,
+      "slot": "nivel_de_classe",
+      "pega": "wb:class/rogue"
+    },
+    {
+      "em": 1,
+      "slot": "subclasse",
+      "pega": "wb:class-feature/thief"
+    },
+    {
+      "em": 1,
+      "slot": "boosts_livres",
+      "pega": [
+        "dex",
+        "con",
+        "int",
+        "wis"
+      ]
+    },
+    {
+      "em": 1,
+      "slot": "boosts_livres",
+      "pega": [
+        "dex",
+        "con"
+      ]
+    },
+    {
+      "em": 1,
+      "slot": "class_feat",
+      "pega": "wb:feat/nimble-dodge"
+    },
+    {
+      "em": 1,
+      "slot": "skill_feat",
+      "pega": "wb:feat/assurance"
+    },
+    {
+      "em": 1,
+      "slot": "ancestry_feat",
+      "pega": "wb:feat/natural-ambition"
+    },
+    {
+      "em": 2,
+      "slot": "nivel_de_classe",
+      "pega": "wb:class/rogue"
+    },
+    {
+      "em": 2,
+      "slot": "class_feat",
+      "pega": "wb:feat/mobility"
+    },
+    {
+      "em": 2,
+      "slot": "skill_feat",
+      "pega": "wb:feat/additional-lore"
+    },
+    {
+      "em": 2,
+      "slot": "skill_increase",
+      "pega": "stealth"
+    },
+    {
+      "em": 2,
+      "slot": "free_archetype",
+      "pega": "wb:feat/archer-dedication"
+    },
+    {
+      "em": 3,
+      "slot": "nivel_de_classe",
+      "pega": "wb:class/rogue"
+    },
+    {
+      "em": 3,
+      "slot": "general_feat",
+      "pega": "wb:feat/fleet"
+    },
+    {
+      "em": 3,
+      "slot": "skill_feat",
+      "pega": "wb:feat/pickpocket"
+    },
+    {
+      "em": 3,
+      "slot": "skill_increase",
+      "pega": "thievery"
+    },
+    {
+      "em": 4,
+      "slot": "nivel_de_classe",
+      "pega": "wb:class/rogue"
+    },
+    {
+      "em": 4,
+      "slot": "class_feat",
+      "pega": "wb:feat/dread-striker"
+    },
+    {
+      "em": 4,
+      "slot": "skill_feat",
+      "pega": "wb:feat/terrain-stalker"
+    },
+    {
+      "em": 4,
+      "slot": "skill_increase",
+      "pega": "athletics"
+    },
+    {
+      "em": 4,
+      "slot": "free_archetype",
+      "pega": "wb:feat/quick-shot"
+    }
+  ],
+  "atores": [],
+  "inventario": [
+    {
+      "item": "wb:weapon/shortbow",
+      "qtd": 1,
+      "equipado": true,
+      "potencia": 0
+    },
+    {
+      "item": "wb:armor/leather-armor",
+      "qtd": 1,
+      "equipado": true
+    }
+  ],
+  "manual": {
+    "nota": "tudo aqui e escrito pelo jogador e nunca sobrescrito pelo motor",
+    "hp_bonus": 0,
+    "proficiencias_forcadas": {},
+    "itens_caseiros": []
+  }
+}

@@ -92,6 +92,20 @@ class Base:
         with open(caminho, encoding="utf-8") as fh:
             registros = json.load(fh)
         self.por_id = {r["id"]: r for r in registros}
+        self._dedicacao_de: dict | None = None
+
+    def dedicacao_do_arquetipo(self, arquetipo_id: str) -> str | None:
+        """O feat de dedicacao de um arquetipo, achado pelo dado -- nunca por
+        lista escrita a mao. O vinculo e 1:1 na base inteira: 225 arquetipos,
+        nenhum com duas dedicacoes (medido 2026-07-27)."""
+        if self._dedicacao_de is None:
+            self._dedicacao_de = {}
+            for r in self.por_id.values():
+                if (r["id"].startswith("wb:feat/")
+                        and "dedication" in (r.get("traits") or [])
+                        and r.get("archetype")):
+                    self._dedicacao_de.setdefault(r["archetype"], r["id"])
+        return self._dedicacao_de.get(arquetipo_id)
 
     def get(self, wb_id: str) -> dict:
         r = self.por_id.get(wb_id)
@@ -125,6 +139,10 @@ class Personagem:
         self._niveis_de_classe()
         self._ancestria_e_background()
         self._features_de_classe()
+        # antes de `_proficiencias`: a cadeia de grants poe class-feature na
+        # lista de features e feat na lista de feats efetivos, e as duas coisas
+        # sao lidas na derivacao de proficiencia, HP e requisito.
+        self._grants_em_cadeia()
         self._proficiencias()
         self._atributos()
         self._hp()
@@ -135,7 +153,6 @@ class Personagem:
         self._defesa()
         self._ataques()
         self._checar_requisitos()
-        self._grants_em_cadeia()
 
     # -- regra 1: estrutura -------------------------------------------------
 
@@ -158,6 +175,13 @@ class Personagem:
 
         self.nivel = sum(self.niveis_por_classe.values())
         self.primeira_classe = self.ordem_de_classe[0] if self.ordem_de_classe else None
+
+        # nivel de PERSONAGEM em que cada classe entrou -- e o ponto de partida
+        # da regra 15 (cadencia extra so vale dali pra frente), usado tanto
+        # pelos slots de feat quanto pelos aumentos de pericia
+        self.entrada_da_classe: dict[str, int] = {}
+        for nivel, cid in sorted(self.classe_do_nivel.items()):
+            self.entrada_da_classe.setdefault(cid, nivel)
 
         # sanidade: um nivel de personagem, uma classe
         esperados = set(range(1, self.nivel + 1))
@@ -287,7 +311,24 @@ class Personagem:
             for g in f.get("grants") or []:
                 if isinstance(g, dict) and "proficiency" in g:
                     for chave, rank in (g["proficiency"] or {}).items():
-                        aplicar(chave, rank, f"{f['nome']} ({f['classe']})")
+                        aplicar(chave, rank,
+                                f"{f['nome']} ({f.get('classe') or f.get('origem')})")
+
+        # feat tambem eleva rank -- e a lacuna que deixava toda dedicacao
+        # inerte. `wizard-dedication` e `{proficiency: {arcana: trained}}`,
+        # exatamente a mesma chave plana que classe e feature ja usavam; sao
+        # 342 feats com `proficiency`, 72 deles dedicacoes.
+        for wb_id, feat, por in self._feats_efetivos():
+            rotulo = feat.get("name", wb_id)
+            if por:
+                rotulo = f"{rotulo} (via {por})"
+            for g in feat.get("grants") or []:
+                if not isinstance(g, dict):
+                    continue
+                for chave, rank in (g.get("proficiency") or {}).items():
+                    aplicar(chave, rank, rotulo)
+                for pericia in ((g.get("skill_training") or {}).get("auto") or []):
+                    aplicar(pericia, "trained", rotulo)
 
         # regra 9: pericia automatica da classe e identidade, sempre concedida
         self.pericias_automaticas: dict[str, str] = {}
@@ -308,6 +349,66 @@ class Personagem:
 
         # regra 10: orcamento de pericia livre, por delta
         self._orcamento_de_pericia()
+        # o aumento de pericia por nivel -- que todo personagem faz e o motor
+        # nao implementava
+        self._aumentos_de_pericia(aplicar)
+
+    # teto RAW do aumento de pericia, por nivel de PERSONAGEM
+    TETO_DE_RANK = ((15, "legendary"), (7, "master"), (1, "expert"))
+
+    def _aumentos_de_pericia(self, aplicar) -> None:
+        """Skill increase: sobe UM degrau numa pericia, nos niveis que a classe
+        declara.
+
+        O schema declarava `skill_increase` e o motor nao tinha uma linha a
+        respeito -- entao a ficha saia com o rank de origem congelado, e a
+        comparacao com os iconics media essa lacuna, nao o motor.
+
+        A cadencia vem do dado, nunca de tabela escrita aqui: as 27 classes da
+        base declaram `{levels: [...]}` -- 25 no padrao [3,5,..,19] e 2 (Ladino
+        e Investigador) em todo nivel de 2 a 20. Vale a regra 15: a cadencia de
+        uma classe conta a partir do nivel de personagem em que ela entrou.
+        """
+        niveis: set[int] = set()
+        for cid, desde in self.entrada_da_classe.items():
+            for g in self.base.get(cid).get("grants") or []:
+                if not isinstance(g, dict) or "skill_increase" not in g:
+                    continue
+                for n in ((g["skill_increase"] or {}).get("levels") or []):
+                    if desde <= int(n) <= self.nivel:
+                        niveis.add(int(n))
+        self.aumentos_de_pericia = sorted(niveis)
+
+        teto = next(r for n, r in self.TETO_DE_RANK if self.nivel >= n)
+        escolhas = sorted(self._escolhas("skill_increase"),
+                          key=lambda e: e["em"] if isinstance(e.get("em"), int) else 0)
+
+        if len(escolhas) > len(self.aumentos_de_pericia):
+            self.avisos.append(
+                f"skill_increase: {len(escolhas)} aumento(s) escolhido(s) para "
+                f"{len(self.aumentos_de_pericia)} disponivel(is) em "
+                f"{self.aumentos_de_pericia}")
+
+        self.aumentos_detalhe = []
+        for e in escolhas:
+            em = e.get("em")
+            if isinstance(em, int) and em not in self.aumentos_de_pericia:
+                self.avisos.append(
+                    f"skill_increase: aumento no nivel {em}, que nao tem "
+                    f"aumento (niveis validos: {self.aumentos_de_pericia})")
+            for pericia in (e["pega"] if isinstance(e.get("pega"), list) else [e.get("pega")]):
+                if not isinstance(pericia, str):
+                    continue
+                atual = self.proficiencias.get(pericia, "untrained")
+                proximo = RANKS[min(RANKS.index(atual) + 1, len(RANKS) - 1)]
+                if RANKS.index(proximo) > RANKS.index(teto):
+                    self.avisos.append(
+                        f"skill_increase: {pericia} iria a {proximo}, acima do "
+                        f"teto {teto} do nivel {self.nivel}")
+                    proximo = teto
+                aplicar(pericia, proximo, f"aumento de pericia (nivel {em})")
+                self.aumentos_detalhe.append(
+                    {"nivel": em, "pericia": pericia, "de": atual, "para": proximo})
 
     def _orcamento_de_pericia(self) -> None:
         """Regra 10: delta = max(0, orcamento(C) - livres_ja_concedidas).
@@ -328,6 +429,21 @@ class Personagem:
             concedidas += delta
             detalhe.append({"classe": classe.get("name", cid),
                             "orcamento": livre, "delta": delta})
+
+        # feat que treina pericia a escolher SOMA (nao entra no max da regra
+        # 10, que existe so pra impedir o multiclasse de multiplicar o
+        # orcamento das CLASSES). Sao 37 feats, entre eles dedicacoes como
+        # `battle-harbinger`, que da 1 pericia treinada a escolha.
+        for wb_id, feat, por in self._feats_efetivos():
+            for g in feat.get("grants") or []:
+                if not isinstance(g, dict):
+                    continue
+                livre = int((g.get("skill_training") or {}).get("free") or 0)
+                if livre:
+                    concedidas += livre
+                    detalhe.append({"classe": feat.get("name", wb_id),
+                                    "orcamento": livre, "delta": livre})
+
         self.pericias_livres = concedidas
         self.pericias_livres_detalhe = detalhe
 
@@ -441,7 +557,7 @@ class Personagem:
         # (`flat_modifier` com selector `hp` e valor `@actor.level`). Sem isto o
         # HP fica exatamente `nivel` pontos abaixo do oficial, que foi como a
         # validacao contra os iconics da Paizo achou esta lacuna.
-        for wb_id, feat in self._feats_escolhidos():
+        for wb_id, feat, por in self._feats_efetivos():
             for g in feat.get("grants") or []:
                 fm = g.get("flat_modifier") if isinstance(g, dict) else None
                 if not fm or fm.get("selector") != "hp":
@@ -451,7 +567,8 @@ class Personagem:
                     total += valor
                     self.hp_detalhe.append({
                         "origem": feat.get("name", wb_id), "hp": valor,
-                        "nota": f"feat ({fm.get('value')})"})
+                        "nota": f"feat ({fm.get('value')})"
+                                + (f" via {por}" if por else "")})
         self.hp = total
 
     def _feats_escolhidos(self):
@@ -504,12 +621,8 @@ class Personagem:
         # increase todo nivel -- usar so a cadencia basica dava a eles metade
         # dos slots. A tabela vem de `feat_slot` da classe, que o Foundry
         # declara em `skillFeatLevels` e afins.
-        entrada_da_classe = {}
-        for nivel, cid in sorted(self.classe_do_nivel.items()):
-            entrada_da_classe.setdefault(cid, nivel)
-
         extras: dict[str, set[int]] = {k: set(v) for k, v in basica.items()}
-        for cid, desde in entrada_da_classe.items():
+        for cid, desde in self.entrada_da_classe.items():
             classe = self.base.get(cid)
             for g in classe.get("grants") or []:
                 fs = g.get("feat_slot") if isinstance(g, dict) else None
@@ -546,6 +659,57 @@ class Personagem:
             if e.get("slot") in ("class_feat", "skill_feat", "general_feat",
                                  "ancestry_feat", "free_archetype"):
                 self.gastos[e["slot"]].append(e)
+
+        self._higiene_de_slot()
+
+    # cada slot do documento e a lista de niveis que o alimenta
+    SLOT_PARA_CADENCIA = {
+        "class_feat": "class", "skill_feat": "skill", "general_feat": "general",
+        "ancestry_feat": "ancestry", "free_archetype": "free_archetype",
+    }
+
+    def _higiene_de_slot(self) -> None:
+        """Confronta o que foi GASTO com o que existe de slot.
+
+        Ate aqui o motor colecionava `gastos` e `slots` lado a lado sem nunca
+        compara-los: um pick de Free Archetype no nivel 3 (onde nao ha slot),
+        tres picks para dois slots, ou um class feat puro ocupando o slot
+        gratuito passavam os tres em silencio.
+
+        Principio zero: isto SINALIZA, nunca recusa. A escolha continua no
+        documento e a ficha continua derivando.
+        """
+        for slot, cadencia in self.SLOT_PARA_CADENCIA.items():
+            niveis = self.slots.get(cadencia) or []
+            usados = self.gastos.get(slot) or []
+
+            if len(usados) > len(niveis):
+                self.avisos.append(
+                    f"slot {slot}: {len(usados)} escolha(s) para "
+                    f"{len(niveis)} slot(s) disponivel(is) em {niveis}")
+
+            for e in usados:
+                em = e.get("em")
+                if isinstance(em, int) and em not in niveis:
+                    self.avisos.append(
+                        f"slot {slot}: escolha no nivel {em}, que nao tem "
+                        f"slot desse tipo (niveis validos: {niveis})")
+
+        # o slot de Free Archetype (regra 2) so aceita feat de ARQUETIPO --
+        # e a unica coisa que o distingue do slot de class feat. Sem esta
+        # checagem ele vira um segundo class feat de graca em toda ficha.
+        for e in self.gastos.get("free_archetype") or []:
+            wb_id = e.get("pega")
+            if not isinstance(wb_id, str):
+                continue
+            feat = self.base.opcional(wb_id)
+            if feat is None:
+                continue
+            if "archetype" not in (feat.get("traits") or []):
+                self.avisos.append(
+                    f"slot free_archetype: {feat.get('name', wb_id)} nao tem "
+                    f"trait `archetype` -- o slot gratuito so aceita feat de "
+                    f"arquetipo")
 
     # -- regras 16, 17, 18: conjuracao --------------------------------------
 
@@ -1246,6 +1410,9 @@ class Personagem:
         tudo = {e.get("pega") for e in self.doc.get("escolhas", [])
                 if isinstance(e.get("pega"), str)}
         tudo |= {f["id"] for f in self.features}
+        # o que a cadeia concedeu conta como "tenho": no jogo nao ha diferenca
+        # entre o Streetwise que voce pegou e o que a dedicacao te deu
+        tudo |= {c["id"] for c in self.concedidos}
         tudo |= {c for c in self.ordem_de_classe}
         for reg in (self.ancestria, self.heranca, self.background):
             if reg:
@@ -1374,14 +1541,83 @@ class Personagem:
             # predicado inteiro -- e agora `proficiency`, `has`, `ability` e
             # `subclass` tambem sao verificados.
             atende, motivos = self.avaliar(feat.get("requires"))
-            veto = self._veto_dedicacao_da_propria_classe(feat)
-            if veto:
-                atende, motivos = False, motivos + [veto]
+            for veto in (self._veto_dedicacao_da_propria_classe(feat),
+                         self._exige_a_dedicacao_do_arquetipo(feat, motivos)):
+                if veto:
+                    atende, motivos = False, motivos + [veto]
             if not atende:
                 self.fora_do_requisito.append({
                     "feat": feat.get("name", wb_id),
                     "motivo": "; ".join(motivos) or "predicado nao atendido"})
         self._veto_classe_de_dedicacao_ja_pega()
+        self._nova_dedicacao_exige_dois_feats()
+
+    # -- as duas regras do trait `dedication` (RAW) -------------------------
+
+    def _ids_de_feat_escolhidos(self) -> set:
+        return {e["pega"] for e in self.doc.get("escolhas", [])
+                if isinstance(e.get("pega"), str) and e["pega"].startswith("wb:feat/")}
+
+    def _exige_a_dedicacao_do_arquetipo(self, feat: dict, motivos: list) -> str | None:
+        """RAW do trait `archetype`: um feat de arquetipo exige a Dedication
+        daquele arquetipo.
+
+        A base nao escreve isso no `requires` -- 181 feats de arquetipo trazem
+        so `character_level >= N` --, e por isso Barbarian Resiliency entrava
+        numa ficha sem Barbarian Dedication em silencio. O vinculo nao precisa
+        de lista: `feat["archetype"]` aponta o arquetipo e a dedicacao dele e
+        achavel por trait.
+        """
+        traits = feat.get("traits") or []
+        if "archetype" not in traits or "dedication" in traits:
+            return None
+        arq = feat.get("archetype")
+        if not arq:
+            return None
+        ded = self.base.dedicacao_do_arquetipo(arq)
+        if not ded or ded in self._ids_de_feat_escolhidos():
+            return None
+        nome = self.base.get(ded).get("name", ded)
+        # se o `requires` ja reprovou por causa da MESMA dedicacao, nao repetir
+        if any(nome in m for m in motivos):
+            return None
+        return (f"feat do arquetipo {self.base.opcional(arq).get('name', arq) if self.base.opcional(arq) else arq}"
+                f" exige {nome} (RAW do trait archetype), que a ficha nao tem")
+
+    def _nova_dedicacao_exige_dois_feats(self) -> None:
+        """RAW do trait `dedication`, conferido no texto da propria base (76
+        dedicacoes repetem a clausula): "You can't select another dedication
+        feat until you've gained two other feats from the <X> archetype".
+
+        A contagem e NO TEMPO: vale o que o personagem tinha ate o nivel em que
+        a nova dedicacao entrou, nao o que ele tem no fim da ficha.
+        """
+        picks = [e for e in self.doc.get("escolhas", [])
+                 if isinstance(e.get("pega"), str) and e["pega"].startswith("wb:feat/")]
+        # `criacao` vem antes de qualquer nivel numerado
+        picks.sort(key=lambda e: e["em"] if isinstance(e.get("em"), int) else 0)
+
+        contagem: dict[str, int] = defaultdict(int)   # arquetipo -> feats nao-dedicacao
+        dedicados: list[str] = []                     # arquetipos ja dedicados, em ordem
+        for e in picks:
+            feat = self.base.opcional(e["pega"])
+            if feat is None:
+                continue
+            traits = feat.get("traits") or []
+            arq = feat.get("archetype")
+            if "dedication" in traits and arq:
+                faltando = [a for a in dedicados if contagem[a] < 2]
+                if faltando:
+                    nomes = ", ".join(
+                        (self.base.opcional(a) or {}).get("name", a) for a in faltando)
+                    self.fora_do_requisito.append({
+                        "feat": feat.get("name", e["pega"]),
+                        "motivo": (f"nova dedicacao no nivel {e.get('em')} sem os 2 "
+                                   f"feats exigidos de: {nomes} (RAW do trait "
+                                   f"dedication)")})
+                dedicados.append(arq)
+            elif arq:
+                contagem[arq] += 1
 
     def _veto_classe_de_dedicacao_ja_pega(self) -> None:
         """Regra 23, o outro sentido: nivel de classe X com dedicacao de X.
@@ -1417,7 +1653,7 @@ class Personagem:
                 return cid
         return None
 
-    # -- guarda contra ciclo/cadeia funda em grant_feat/grant_item ----------
+    # -- cadeia de grant_feat/grant_item: aplica o estatico, sinaliza o resto -
 
     def _grants_em_cadeia(self) -> None:
         """Percorre `grant_feat`/`grant_item` de tudo que o personagem tem
@@ -1425,18 +1661,69 @@ class Personagem:
         profundidade e visitados -- ver `MAX_PROFUNDIDADE_GRANTS` e
         `_resolver_cadeia_de_grants`.
 
-        O motor NAO aplica automaticamente o que a cadeia concede (isso
-        continua sendo escolha do jogador, escrita em `escolhas` -- principio
-        zero: sugere, nunca decide por conta propria). Esta passada so
-        SINALIZA dois casos que hoje passariam batido: grant_item com uuid
-        dinamico (depende de escolha ainda nao feita) e cadeia cortada por
-        profundidade/dado malformado. Nunca perde em silencio.
+        O que a cadeia entrega com ALVO ESTATICO e aplicado: no PF2e isso nao
+        e escolha nenhuma, e efeito automatico (Barbarian Dedication da Rage,
+        ponto final). O principio zero fala de `requires` -- sugerir em vez de
+        bloquear a ESCOLHA do jogador --, nao de esconder o efeito de uma
+        escolha ja feita. Alvo DINAMICO (`{item|flags...}`) e que depende de
+        escolha ainda nao feita: esse continua so sinalizado, e o app precisa
+        distinguir "pendente" de "ausente".
+
+        Antes desta passada, uma dedicacao entrava na ficha como linha e nao
+        entregava nada -- medido: 52 HP contra 56 (`battle-harbinger`),
+        `society` untrained (`shieldmarshal`), Rage sumido (`barbarian`).
         """
+        self.concedidos: list[dict] = []
+        # o que o personagem ja tem por escolha propria nao pode ser concedido
+        # de novo: senao Toughness pego a mao + Toughness da dedicacao somaria
+        # HP duas vezes.
+        self._ja_tenho = {f["id"] for f in self.features if f.get("id")}
+        self._ja_tenho |= {wb_id for wb_id, _ in self._feats_escolhidos()}
+
+        origens = [(wb_id, feat.get("grants") or [])
+                   for wb_id, feat in self._feats_escolhidos()]
+        # snapshot: a recursao percorre os grants do proprio alvo concedido,
+        # entao features novas nao precisam ser revisitadas por este laco
+        origens += [(f["id"], f.get("grants") or [])
+                    for f in list(self.features) if f.get("id")]
+        for origem_id, grants in origens:
+            self._resolver_cadeia_de_grants(origem_id, grants, {origem_id})
+
+    def _aplicar_concessao(self, origem_id: str, alvo: str, alvo_reg: dict) -> None:
+        """Poe na ficha o que a cadeia concedeu. Class-feature vira linha de
+        feature (e por isso entra em `_proficiencias`, em `_termo_has` e na
+        visao); feat vira feat efetivo, que e o que `_hp` e `_proficiencias`
+        percorrem."""
+        origem_nome = (self.base.opcional(origem_id) or {}).get("name", origem_id)
+        registro = {
+            "id": alvo,
+            "nome": alvo_reg.get("name", alvo),
+            "classe": None,
+            "origem": origem_nome,
+            "nivel_de_classe": None,
+            "grants": alvo_reg.get("grants") or [],
+            "na_base": True,
+            "concedido_por": origem_id,
+        }
+        self.concedidos.append(registro)
+        if alvo.startswith("wb:class-feature/"):
+            self.features.append(registro)
+
+    def _feats_efetivos(self):
+        """Feats escolhidos MAIS os concedidos pela cadeia, sem repetir.
+
+        E a lista que vale para efeito: o jogo nao distingue o Toughness que
+        voce pegou do Toughness que a dedicacao te deu.
+        """
+        vistos = set()
         for wb_id, feat in self._feats_escolhidos():
-            self._resolver_cadeia_de_grants(wb_id, feat.get("grants") or [], {wb_id})
-        for f in self.features:
-            if f.get("id"):
-                self._resolver_cadeia_de_grants(f["id"], f.get("grants") or [], {f["id"]})
+            if wb_id not in vistos:
+                vistos.add(wb_id)
+                yield wb_id, feat, None
+        for c in getattr(self, "concedidos", []):
+            if c["id"].startswith("wb:feat/") and c["id"] not in vistos:
+                vistos.add(c["id"])
+                yield c["id"], self.base.get(c["id"]), c["origem"]
 
     def _resolver_cadeia_de_grants(self, origem_id: str, grants: list,
                                     visitados: set, profundidade: int = 0) -> None:
@@ -1457,7 +1744,14 @@ class Personagem:
                 alvos = g["grant_feat"]
                 alvos = alvos if isinstance(alvos, list) else [alvos]
                 for alvo in alvos:
-                    if not isinstance(alvo, str):
+                    if not isinstance(alvo, str) or not alvo.startswith("wb:"):
+                        # 476 alvos da base sao nome cru ou dict serializado em
+                        # vez de id -- TODOS de background (medido 2026-07-27).
+                        # Nao e "ausente da base", e referencia nao resolvida
+                        # pelo pipeline, e o aviso precisa dizer isso.
+                        self.avisos.append(
+                            f"{origem_id}: grant_feat com alvo nao resolvido "
+                            f"pelo pipeline ({str(alvo)[:60]}) -- nao aplicado")
                         continue
                     if "{" in alvo:
                         self.avisos.append(
@@ -1473,6 +1767,9 @@ class Personagem:
                             f"da base: {alvo}")
                         continue
                     visitados.add(alvo)
+                    if alvo not in self._ja_tenho:
+                        self._ja_tenho.add(alvo)
+                        self._aplicar_concessao(origem_id, alvo, alvo_reg)
                     self._resolver_cadeia_de_grants(
                         alvo, alvo_reg.get("grants") or [], visitados, profundidade + 1)
             if "grant_item" in g:
@@ -1503,6 +1800,8 @@ class Personagem:
             "hp": self.hp,
             "proficiencias": self.proficiencias,
             "pericias_livres": self.pericias_livres,
+            "aumentos_de_pericia": {"niveis": self.aumentos_de_pericia,
+                                    "gastos": self.aumentos_detalhe},
             "slots": self.slots,
             "conjuracao": self.conjuracao,
             "atores": self.atores,
@@ -1511,6 +1810,13 @@ class Personagem:
             "ac": self.ac,
             "ataques": self.ataques,
             "features": self.features,
+            # o que a cadeia de grants entregou sem o jogador escolher. Fica em
+            # lista propria (e nao misturado em `escolhas`) porque a origem
+            # importa: a ficha precisa poder dizer "Streetwise veio da
+            # dedicacao", e o documento continua com so o que foi escolhido.
+            "concedidos": [{"id": c["id"], "nome": c["nome"],
+                            "por": c["origem"], "por_id": c["concedido_por"]}
+                           for c in self.concedidos],
             "subclasses": self.slots_de_subclasse,
             "fora_do_requisito": self.fora_do_requisito,
             "avisos": self.avisos,

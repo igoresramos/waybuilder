@@ -178,10 +178,10 @@ rank 1 garantido). Chave ausente EM AMBAS as fontes == rank 0
 personagem traduzido**, sem subconjunto.
 
 - pontos de comparacao: **2064** (129 personagens x 16 pericias)
-- bate: **1287** (62.4%)
-- diverge: **777**, sendo:
-  - motor da rank MENOR que o oficial: **775** -- ver "causa-raiz" abaixo
-  - motor da rank MAIOR que o oficial: **2** -- sinal acionavel, ver "Sobre-concessao" abaixo
+- bate: **1298** (62.9%)
+- diverge: **766**, sendo:
+  - motor da rank MENOR que o oficial: **763** -- ver "causa-raiz" abaixo
+  - motor da rank MAIOR que o oficial: **3** -- sinal acionavel, ver "Sobre-concessao" abaixo
 
 ### Causa-raiz da maioria das divergencias (nao e bug do motor)
 
@@ -203,15 +203,15 @@ limitacao ja documentada pro multiclasse por divisao de niveis.
 - `diplomacy`: 77/129 divergem (60%)
 - `acrobatics`: 71/129 divergem (55%)
 - `athletics`: 65/129 divergem (50%)
-- `stealth`: 65/129 divergem (50%)
+- `stealth`: 61/129 divergem (47%)
 - `crafting`: 60/129 divergem (47%)
-- `medicine`: 54/129 divergem (42%)
+- `medicine`: 53/129 divergem (41%)
 - `society`: 50/129 divergem (39%)
 - `survival`: 50/129 divergem (39%)
 - `intimidation`: 46/129 divergem (36%)
-- `thievery`: 44/129 divergem (34%)
-- `deception`: 43/129 divergem (33%)
-- `nature`: 42/129 divergem (33%)
+- `deception`: 42/129 divergem (33%)
+- `thievery`: 42/129 divergem (33%)
+- `nature`: 39/129 divergem (30%)
 - `occultism`: 36/129 divergem (28%)
 - `religion`: 34/129 divergem (26%)
 - `arcana`: 24/129 divergem (19%)
@@ -219,27 +219,27 @@ limitacao ja documentada pro multiclasse por divisao de niveis.
 
 ### Divergencias por classe
 
-- `Rogue`: 127/208 divergem (61%)
-- `Fighter`: 52/144 divergem (36%)
+- `Rogue`: 125/208 divergem (60%)
+- `Fighter`: 51/144 divergem (35%)
 - `Sorcerer`: 47/144 divergem (33%)
-- `Bard`: 43/112 divergem (38%)
 - `Cleric`: 41/144 divergem (28%)
+- `Bard`: 41/112 divergem (37%)
 - `Investigator`: 41/64 divergem (64%)
 - `Wizard`: 40/80 divergem (50%)
 - `Witch`: 40/80 divergem (50%)
 - `Gunslinger`: 31/112 divergem (28%)
-- `Monk`: 30/96 divergem (31%)
+- `Monk`: 29/96 divergem (30%)
 - `Barbarian`: 27/112 divergem (24%)
-- `Druid`: 25/96 divergem (26%)
 - `Alchemist`: 23/48 divergem (48%)
 - `Ranger`: 23/64 divergem (36%)
 - `Swashbuckler`: 23/64 divergem (36%)
+- `Druid`: 23/96 divergem (24%)
 - `Inventor`: 20/48 divergem (42%)
-- `Guardian`: 19/48 divergem (40%)
 - `Commander`: 19/48 divergem (40%)
 - `Thaumaturge`: 18/48 divergem (38%)
 - `Oracle`: 17/64 divergem (27%)
 - `Animist`: 17/48 divergem (35%)
+- `Guardian`: 16/48 divergem (33%)
 - `Champion`: 15/48 divergem (31%)
 - `Exemplar`: 14/48 divergem (29%)
 - `Psychic`: 13/48 divergem (27%)
@@ -247,7 +247,7 @@ limitacao ja documentada pro multiclasse por divisao de niveis.
 
 ### Achados sistemicos (classe + pericia, >=2 amostras, >=50% divergindo)
 
-**148** combinacoes classe+pericia batem esse
+**147** combinacoes classe+pericia batem esse
 criterio -- confirma que a causa-raiz acima e generalizada: sao as
 pericias que os personagens pre-gerados da Paizo tipicamente ELEGEM
 treinar/subir por escolha do jogador, nao um bug localizado numa
@@ -255,11 +255,11 @@ classe. Top 15 por tamanho de amostra:
 
 - `Rogue` + `acrobatics`: diverge em 13/13 ocorrencias (100%)
 - `Rogue` + `athletics`: diverge em 13/13 ocorrencias (100%)
-- `Rogue` + `deception`: diverge em 11/13 ocorrencias (85%)
+- `Rogue` + `deception`: diverge em 10/13 ocorrencias (77%)
 - `Rogue` + `survival`: diverge em 10/13 ocorrencias (77%)
-- `Rogue` + `thievery`: diverge em 10/13 ocorrencias (77%)
 - `Rogue` + `intimidation`: diverge em 9/13 ocorrencias (69%)
 - `Rogue` + `medicine`: diverge em 9/13 ocorrencias (69%)
+- `Rogue` + `thievery`: diverge em 9/13 ocorrencias (69%)
 - `Rogue` + `crafting`: diverge em 8/13 ocorrencias (62%)
 - `Rogue` + `society`: diverge em 8/13 ocorrencias (62%)
 - `Rogue` + `occultism`: diverge em 7/13 ocorrencias (54%)
@@ -268,9 +268,9 @@ classe. Top 15 por tamanho de amostra:
 - `Sorcerer` + `crafting`: diverge em 7/9 ocorrencias (78%)
 - `Sorcerer` + `deception`: diverge em 7/9 ocorrencias (78%)
 - `Fighter` + `acrobatics`: diverge em 7/9 ocorrencias (78%)
-- ... e mais 133 combinacoes classe+pericia com >=50% de divergencia (amostra menor, 2-3 personagens cada) -- o padrao e generalizado, nao um grupo pequeno de excecoes
+- ... e mais 132 combinacoes classe+pericia com >=50% de divergencia (amostra menor, 2-3 personagens cada) -- o padrao e generalizado, nao um grupo pequeno de excecoes
 
-### Sobre-concessao (motor MAIOR que o oficial -- unico sinal realmente acionavel, 2 caso(s))
+### Sobre-concessao (motor MAIOR que o oficial -- unico sinal realmente acionavel, 3 caso(s))
 
 Investigado caso a caso -- NAO e bug do motor. Os 2 casos sao
 `Droven` (Inventor) em `crafting`: o motor aplica a class-feature
@@ -287,6 +287,7 @@ listados aqui por transparencia, mas nao indicam problema no motor.
 
 - `Droven (Level 3)` (Inventor, nivel 3) -- `crafting`: oficial trained, motor expert
 - `Droven (Level 5)` (Inventor, nivel 5) -- `crafting`: oficial trained, motor expert
+- `Booker Kaar` (Gunslinger, nivel 3) -- `crafting`: oficial untrained, motor trained
 
 ### Amostra de divergencias individuais (ate 25, nao exaustiva -- ver secoes acima pro padrao completo)
 

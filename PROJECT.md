@@ -5,7 +5,7 @@ status: planning
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 8.5
+hours: 10.2
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -101,6 +101,14 @@ hidden: false
 > escudo, penalidade), ataque e dano por arma, proficiencias, identidade de
 > classe, conjuracao e a lista do que pode pegar. Validado contra os iconics da
 > Paizo: **117 de 129 batem (91%)**.
+>
+> **E agora aplica o efeito das escolhas, nao so as registra (2026-07-27).** A
+> cadeia de `grant_feat`/`grant_item` com alvo estatico e aplicada -- entao a
+> dedicacao de arquetipo entrega o que promete (HP, proficiencia, feat e
+> class-feature concedidos) --, o gasto de slot e confrontado com o slot, as
+> duas regras RAW do trait `dedication` sao checadas e o aumento de pericia por
+> nivel existe. Alvo dinamico continua sinalizado como pendente, que e a
+> distincao que o app precisa. **42 testes** no motor, 88 no pipeline.
 >
 > **(historico)** Fatia vertical 1 fechada: `motor/`
 > implementa 11 das 22 regras e imprime `Guerreiro 3 / Mago 2` completo, com 24
