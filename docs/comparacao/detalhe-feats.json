@@ -1,0 +1,215 @@
+{
+ "pathbuilder": {
+  "Sudden Charge": {
+   "nome": "Sudden Charge",
+   "traits": [
+    "Fighter",
+    "Flourish"
+   ],
+   "nivel": "1",
+   "texto": "With a quick sprint, you dash up to your foe and swing. Stride twice. If you end your move",
+   "linhas": [
+    "+6",
+    "Fortitude",
+    "+6",
+    "Reflex",
+    "+3",
+    "Will",
+    "Weapons",
+    "Defense",
+    "Gear",
+    "Spells",
+    "Pets",
+    "Details",
+    "Feats",
+    "Actions",
+    "Simple WeaponsMartial WeaponsAdvanced WeaponsUnarmed Attacks",
+    "Simple WeaponsMartial WeaponsAdvanced WeaponsUnarmed Attacks",
+    "Simple Weapons",
+    "Martial Weapons",
+    "Advanced Weapons",
+    "Unarmed Attacks",
+    "Add Weapon",
+    "Print",
+    "Sudden Charge",
+    "PC1",
+    "PC1"
+   ]
+  },
+  "Reactive Shield": {
+   "nome": "Reactive Shield",
+   "traits": [
+    "Fighter"
+   ],
+   "nivel": "1",
+   "texto": "Reactive Shield 1 Fighter Trigger An enemy hits you with a melee Strike. Requirements You",
+   "linhas": [
+    "+6",
+    "Fortitude",
+    "+6",
+    "Reflex",
+    "+3",
+    "Will",
+    "Weapons",
+    "Defense",
+    "Gear",
+    "Spells",
+    "Pets",
+    "Details",
+    "Feats",
+    "Actions",
+    "Simple WeaponsMartial WeaponsAdvanced WeaponsUnarmed Attacks",
+    "Simple WeaponsMartial WeaponsAdvanced WeaponsUnarmed Attacks",
+    "Simple Weapons",
+    "Martial Weapons",
+    "Advanced Weapons",
+    "Unarmed Attacks",
+    "Add Weapon",
+    "Print",
+    "Reactive Shield",
+    "Fighter",
+    "Trigger",
+    "Requirements",
+    "PC1",
+    "PC1"
+   ]
+  },
+  "Combat Assessment": {
+   "nome": "Combat Assessment",
+   "traits": [
+    "Fighter"
+   ],
+   "nivel": "1",
+   "texto": "You make a telegraphed attack to learn about your foe. Make a melee Strike. On a hit, you",
+   "linhas": [
+    "+6",
+    "Fortitude",
+    "+6",
+    "Reflex",
+    "+3",
+    "Will",
+    "Weapons",
+    "Defense",
+    "Gear",
+    "Spells",
+    "Pets",
+    "Details",
+    "Feats",
+    "Actions",
+    "Simple WeaponsMartial WeaponsAdvanced WeaponsUnarmed Attacks",
+    "Simple WeaponsMartial WeaponsAdvanced WeaponsUnarmed Attacks",
+    "Simple Weapons",
+    "Martial Weapons",
+    "Advanced Weapons",
+    "Unarmed Attacks",
+    "Add Weapon",
+    "Print",
+    "Combat Assessment",
+    "Fighter",
+    "PC1",
+    "PC1"
+   ]
+  },
+  "Double Slice": {
+   "nome": "Double Slice",
+   "traits": [
+    "Fighter"
+   ],
+   "nivel": "1",
+   "texto": "Double Slice 1 Fighter Requirements You are wielding two melee weapons, each in a differen",
+   "linhas": [
+    "+6",
+    "Fortitude",
+    "+6",
+    "Reflex",
+    "+3",
+    "Will",
+    "Weapons",
+    "Defense",
+    "Gear",
+    "Spells",
+    "Pets",
+    "Details",
+    "Feats",
+    "Actions",
+    "Simple WeaponsMartial WeaponsAdvanced WeaponsUnarmed Attacks",
+    "Simple WeaponsMartial WeaponsAdvanced WeaponsUnarmed Attacks",
+    "Simple Weapons",
+    "Martial Weapons",
+    "Advanced Weapons",
+    "Unarmed Attacks",
+    "Add Weapon",
+    "Print",
+    "Double Slice",
+    "Fighter",
+    "Requirements",
+    "PC1",
+    "PC1"
+   ]
+  }
+ },
+ "waybuilder": {
+  "Sudden Charge": {
+   "nome": "Sudden Charge",
+   "nivel": "1",
+   "traits": [
+    "Barbarian",
+    "Fighter",
+    "Flourish"
+   ],
+   "campos": [],
+   "prereq": null,
+   "texto": "",
+   "fonte": null
+  },
+  "Reactive Shield": {
+   "nome": "Reactive Shield",
+   "nivel": "1",
+   "traits": [
+    "Fighter",
+    "Guardian"
+   ],
+   "campos": [
+    {
+     "rotulo": "Trigger",
+     "valor": "An enemy hits you with a melee Strike"
+    },
+    {
+     "rotulo": "Requirements",
+     "valor": "You are wielding a shield"
+    }
+   ],
+   "prereq": null,
+   "texto": "You can snap your shield into place just as you would take a blow, avoiding the hit at the last second. You immediately use the Raise a Shield action and gain your shield’s bonus to AC. The circumstance bonus from the shield applies to your AC when you’re determining the outcome of the triggering attack.",
+   "fonte": "Player Core pg. 140"
+  },
+  "Combat Assessment": {
+   "nome": "Combat Assessment",
+   "nivel": "1",
+   "traits": [
+    "Commander",
+    "Fighter"
+   ],
+   "campos": [],
+   "prereq": null,
+   "texto": "",
+   "fonte": null
+  },
+  "Double Slice": {
+   "nome": "Double Slice",
+   "nivel": "1",
+   "traits": [
+    "Fighter"
+   ],
+   "campos": [
+    {
+     "rotulo": "Requirements",
+     "valor": "You are wielding two melee weapons, each in a different hand"
+    }
+   ],
+   "prereq": null,
+   "texto": "You lash out at your foe with both weapons. Make two Strikes, one with each of your two melee weapons, each using your current multiple attack penalty. Both Strikes must have the same target. If the second Strike is made with a weapon that doesn’t have the agile trait, it takes a –2 penalty. If both attacks hit, combine their damage, and then add any other applicable effects from both weapons. You add any precision damage only once, to the attack of your choice. Combine the damage from both Strikes and apply resistances and weaknesses only once. This counts as two attacks when calculating your multiple attack penalty. Double Slice leads to... Graceful Poise",
+   "fonte": "Player Core pg. 140"
+  }
+ }
+}
