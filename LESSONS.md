@@ -553,3 +553,47 @@ base sobre um defeito que nao existia.
 Feat de Swashbuckler citado pelo Igor; a base tem 79 feats com trait
 `swashbuckler` e esse nao esta entre eles. Ausencia real, ainda nao
 diagnosticada -- entra na trilha de censo de ausencias, nao na de UI.
+
+### O payload enxuto amputava o app em silencio
+O `sincronizar-base.sh` copiava 8 dos 54 kinds para segurar a carga inicial em
+0,53 MB. O custo nao aparecia como erro em lugar nenhum: o motor calcula ataque
+e dano por arma, CA com cap de DEX e escudo, slots das 11 conjuradoras e ficha
+de companheiro -- e sem `weapon`, `armor`, `shield`, `spell` e
+`animal-companion` no payload, nada disso tinha dado com que trabalhar. A aba de
+Ataques dizia "nenhuma arma equipada" para sempre e todo personagem saia pelado,
+como se fosse comportamento correto.
+
+Pior: 44 das 441 opcoes de subclasse apontavam para 8 kinds ausentes
+(`instinct`, `cause`, `mystery`, `hunters-edge`, `lesson`, `patron`,
+`arcane-school`, `arcane-thesis`), entao o slot de instinto do Barbaro abria um
+picker **vazio** -- o motor tinha os ids, o payload e que nao levava os
+registros.
+
+Base inteira: 1,09 MB gzip, cacheada na primeira visita. O gargalo real nunca
+foi o indice: a prosa sozinha tem 19 MB e continua sob demanda.
+
+Duas regras que ficam:
+1. **Orcamento de bytes que corta CAPACIDADE precisa de teste que falhe.** Nao
+   havia um so teste dizendo "personagem com arma equipada tem ataque"; o corte
+   passou por 77 testes verdes.
+2. **Lista do que carregar vem do manifesto, nao de um array no codigo.** Kind
+   novo no pipeline passa a viajar sozinho, e some a classe inteira de defeito
+   "esqueceram de editar a constante em dois lugares".
+
+### Campeao sem causa e Bruxa sem patrono
+Ao levar a base inteira para o app, 44 opcoes de subclasse que nao resolviam
+cairam para 23 -- e as 23 restantes nao sao problema de payload, sao buraco de
+DADO: o registro nao existe em `index.json`.
+
+- **8 sao `-legacy`** (`instinct/animal-legacy`, `mystery/ash-legacy`, ...):
+  sumiram na fusao Remaster e a referencia ficou apontando para o morto. Defeito
+  de integridade referencial pos-fusao -- a fusao apaga o registro legado mas nao
+  reescreve quem o citava.
+- **6 sao as causas do Campeao** (paladin, redeemer, liberator, tyrant,
+  desecrator, antipaladin) e **8 sao os patronos da Bruxa**. Nunca foram
+  extraidas. Consequencia pratica: hoje essas duas classes abrem o slot de
+  sub-escolha com zero opcoes.
+
+Travadas uma a uma em `fluxo.test.ts` (`ORFAS_CONHECIDAS`), para que o numero so
+possa cair: se subir e regressao, se descer o teste cobra a atualizacao da lista.
+A correcao pertence ao pipeline (extrator + `resolver_referencias.py`), nao ao app.

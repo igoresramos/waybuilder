@@ -149,3 +149,51 @@ como material para decidir depois.
    `docs/referencia-pathbuilder/capturas/05-builder-limpo.png`: mesma disposicao
    de blocos, mesma paleta, mesma densidade.
 3. Nenhum asset do Pathbuilder no repo.
+
+## Adendo -- o teto de payload saiu (2026-07-28, decisao do Igor)
+
+O alvo de 0,53 MB gzip era restricao de projeto, e estava amputando o app em
+silencio. O Igor liberou ("o importante e funcionar"), e a base passa a viajar
+inteira: **54 kinds, 19.705 registros, 1,09 MB gzip**, cacheados na primeira
+visita pelo service worker.
+
+O que o corte custava, em capacidade que o motor JA tinha e nao aparecia:
+
+| faltava | o motor ja fazia | efeito visivel do corte |
+|---|---|---|
+| `weapon` | ataque e dano por arma | aba de Ataques vazia para sempre |
+| `armor`, `shield` | CA com cap de DEX, escudo e penalidade | todo personagem sem armadura |
+| `spell` | slots das 11 classes conjuradoras | conjurador nao escolhe magia |
+| `deity`, `domain` | -- | clerigo e campeao sem divindade |
+| `animal-companion`, `familiar-ability` | ficha de companheiro em RAW | sem pet |
+| 8 kinds de sub-escolha | `candidatos("subclasse")` | 44 das 441 opcoes nao resolviam: o slot de instinto do Barbaro abria um picker VAZIO |
+| `trait` | `_termo_trait` | picker mostrava o slug cru (`versatile-b`) |
+
+A lista de kinds a carregar passou a vir do **manifesto**, nao de um array no
+codigo: kind novo no pipeline viaja sozinho, e some a classe de defeito
+"esqueceram de editar a constante".
+
+### Inventario
+`doc.inventario` existia no schema e nenhuma tela escrevia nele. Entrou a aba
+**Equipamento** com adicionar / equipar / guardar / remover -- guardar mantem o
+item na ficha e fora da conta, que e o que se faz com a besta ao sacar a espada.
+Verificado ponta a ponta: CA 13 -> 17 com Chain Mail, e `+5 Clan Dagger,
+1d4 piercing` na aba de Ataques.
+
+### Refino da UI (skill ui-ux-pro-max)
+- **Contraste**: o vermelho do Pathbuilder (`#d9695f`) da 3,78 sobre o painel e
+  reprova AA justo no texto que mais importa ler de relance ("Nao escolhido").
+  Clareado para `#e8867c` (5,01). Borda de controle separada da de divisoria
+  (`--borda-forte` `#677691`, 3,23) porque a borda e a unica coisa que diz que um
+  botao outline e um botao.
+- **Foco**: anel `:focus-visible` de 2px em todo controle -- `:focus-visible` e
+  nao `:focus`, senao o anel pisca a cada clique num app que e todo clique.
+- **Pressionado**: fundo, nao `transform: scale` -- escala desloca a linha numa
+  coluna densa.
+- **`prefers-reduced-motion`** respeitado.
+- **Virtualizacao**: o picker de Free Archetype tem 2.128 feats e o de
+  equipamento 6.122. Renderizar tudo a cada tecla engasgava a busca num app cujo
+  motor deriva a ficha em 0,30 ms. Janela por scroll, sem biblioteca, com os
+  espacadores mantendo a barra de rolagem do tamanho real -- nao e paginacao e
+  nao esconde nada.
+- **Nome acessivel** nos botoes so-icone (`x` de limpar slot e de remover item).

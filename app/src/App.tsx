@@ -211,7 +211,7 @@ export default function App() {
           )}
         </main>
 
-        <PainelDireito p={p} v={v} base={base} />
+        <PainelDireito p={p} v={v} base={base} d={d} setD={setD} />
       </div>
     </div>
   );
@@ -273,7 +273,7 @@ function BoostPicker({ d, setD }: { d: Documento; setD: (x: Documento) => void }
         {d.escolhas.filter((e) => e.slot === "boosts_livres").map((e, i) => (
           <li key={i}>
             {(e.pega as string[]).join(" ").toUpperCase()}
-            <button className="slot-x"
+            <button className="slot-x" aria-label="remover boost"
                     onClick={() => setD({
                       ...d,
                       escolhas: d.escolhas.filter((x) => x !== e),

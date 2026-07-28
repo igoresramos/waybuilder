@@ -23,6 +23,8 @@ import type { Base } from "../motor/base";
 import type { Candidato } from "../motor/tipos";
 import { prosa } from "../carregarBase";
 import { iconeDeSlot } from "./Icones";
+import { Traits } from "./Traits";
+import { ListaVirtual } from "./ListaVirtual";
 
 export interface Filtro {
   id: string;
@@ -63,9 +65,6 @@ export const FILTROS_DE_RARIDADE: Filtro[] = [
   { id: "rare", rotulo: "Raro+", casa: (r) => r.rarity === "rare" || r.rarity === "unique" },
 ];
 
-/** Nome legivel de um id da base; cai no proprio id quando o registro sumiu. */
-const nomeDe = (base: Base, id: string) => base.opcional(id)?.name ?? id;
-
 export function Slot({
   rotulo, candidatos, base, escolhido, aoEscolher, aoLimpar, filtros, tipo,
 }: Props) {
@@ -87,7 +86,8 @@ export function Slot({
         </span>
       </button>
       {escolhido && aoLimpar && (
-        <button className="slot-x" onClick={aoLimpar} title="limpar">x</button>
+        <button className="slot-x" onClick={aoLimpar}
+                title={`limpar ${rotulo}`} aria-label={`limpar ${rotulo}`}>x</button>
       )}
       {aberto && (
         <Modal
@@ -180,19 +180,22 @@ function Modal({
         )}
 
         <div className="modal-corpo">
-          <ul className="modal-lista">
-            {lista.map((c) => (
+          <ListaVirtual
+            className="modal-lista" itens={lista} altura={640}
+            vazio={<li className="vazio">nada encontrado</li>}
+          >
+            {(c) => (
               <li key={c.id} className={sel === c.id ? "sel" : ""}>
                 <button onClick={() => setSel(c.id)}
-                        className={c.atende ? "" : "marcado"}>
+                        className={c.atende ? "" : "marcado"}
+                        aria-pressed={sel === c.id}>
                   <span className="nome">{c.nome ?? c.id}</span>
                   {c.ja_pego && <span className="ja">tem</span>}
                   {c.level != null && <span className="nv">{c.level}</span>}
                 </button>
               </li>
-            ))}
-            {!lista.length && <li className="vazio">nada encontrado</li>}
-          </ul>
+            )}
+          </ListaVirtual>
 
           <div className="modal-detalhe">
             {!reg && <p className="vazio">selecione para ler</p>}
@@ -202,31 +205,7 @@ function Modal({
                   <h4>{reg.name}</h4>
                   {reg.level != null && <span className="nv">{reg.level}</span>}
                 </div>
-                {/* TODAS as traits, sempre -- trait nao e enfeite, e requisito:
-                    so quem tem a trait `human` pega feat de humano.
-
-                    Heranca e um caso a parte, e a fonte e que manda: no Foundry
-                    260 das 326 herancas tem `traits.value` VAZIO, e o vinculo
-                    com a ancestralidade mora em `system.ancestry`. Inventar uma
-                    trait `human` em Ambitious Human seria fabricar dado que
-                    nenhuma fonte declara -- entao o vinculo aparece como o que
-                    e, marcado, ao lado das traits reais. */}
-                <div className="traits">
-                  {reg.rarity && reg.rarity !== "common" && (
-                    <span className={`trait r-${reg.rarity}`}>{reg.rarity}</span>
-                  )}
-                  {(reg.traits ?? []).map((t) => (
-                    <span key={t} className="trait">{t}</span>
-                  ))}
-                  {typeof reg.ancestry === "string" && (
-                    <span className="trait vinculo" title="vinculo declarado pela fonte">
-                      {nomeDe(base, reg.ancestry)}
-                    </span>
-                  )}
-                  {!(reg.traits ?? []).length && typeof reg.ancestry !== "string" && (
-                    <span className="trait falta">sem trait na fonte</span>
-                  )}
-                </div>
+                <Traits base={base} reg={reg} />
                 {/* O PRE-REQUISITO em prosa, como o Pathbuilder imprime:
                     "Prerequisites trained in Diplomacy". Vem da base em
                     `requires_texto`; quando falta, o gate ainda existe em

@@ -26,10 +26,18 @@
   --card: #222831;
   --painel: #2a323d;
   --borda: #2d4059;
+  /* borda de CONTROLE, nao de divisoria: a borda e a unica coisa que diz que
+     um botao outline e um botao, entao ela precisa dos 3:1 de componente de UI
+     (medido: 3,23 sobre o card). `--borda` fica para linha de separacao, onde o
+     requisito nao se aplica. */
+  --borda-forte: #677691;
   --texto: #ffffff;
   --fraco: #a1a1a1;
   --accent: #ff5722;
-  --vermelho: #d9695f;
+  /* o vermelho do Pathbuilder (#d9695f) da 3,78 sobre o painel e reprova AA
+     justo no texto que mais importa ler de relance -- "Nao escolhido". Clareado
+     ate 5,01 sem sair da familia. */
+  --vermelho: #e8867c;
   --ok: #7bc47f;
   --pend: #e0b354;
   --r: 10px;
@@ -54,12 +62,28 @@ button {
   font: inherit; color: inherit; cursor: pointer;
   background: transparent; border: 1px solid var(--texto);
   border-radius: var(--r-p); padding: 4px 8px;
+  transition: border-color .15s, color .15s, background-color .15s;
 }
 button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+/* feedback de pressionado sem transform: escala desloca o layout numa coluna
+   densa, e o que se quer e confirmar o toque, nao mover a linha */
+button:active:not(:disabled) { background: rgba(255, 87, 34, .12); }
 button:disabled { opacity: .35; cursor: default; }
 input, select {
   font: inherit; color: inherit; background: var(--painel);
-  border: 1px solid var(--borda); border-radius: 5px; padding: 4px 7px;
+  border: 1px solid var(--borda-forte); border-radius: 5px; padding: 4px 7px;
+}
+
+/* Foco visivel em TODO controle. `:focus-visible` e nao `:focus` para o anel
+   nao piscar a cada clique de mouse -- o construtor e clicado o tempo todo. */
+:where(button, input, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-p);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
 code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .carregando { display: grid; place-content: center; min-height: 100vh; color: var(--fraco); }
@@ -270,6 +294,9 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 
 .modal-corpo { display: grid; grid-template-columns: 340px minmax(0, 1fr); flex: 1; min-height: 0; }
 .modal-lista { list-style: none; margin: 0; padding: 8px 14px; overflow-y: auto; }
+/* altura casada com ALTURA em ListaVirtual.tsx -- a virtualizacao depende de a
+   linha ser previsivel, entao ela e fixa aqui de proposito */
+.modal-lista li { height: 30px; }
 .modal-lista li button {
   width: 100%; text-align: left; background: transparent; border: 0; border-radius: 5px;
   display: flex; gap: 8px; align-items: center; padding: 5px 8px;
@@ -301,8 +328,12 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .trait {
   background: var(--borda); border-radius: 0; padding: 2px 7px; font-size: .85em;
 }
+/* trait de ANCESTRALIDADE: e a que decide quem pode pegar o que (o `dwarf` da
+   Clan Dagger), entao nao se perde no meio das outras */
+.trait.ancestral { background: #7a3010; }
 /* vinculo declarado pela fonte (heranca -> ancestralidade), que nao e trait */
 .trait.vinculo { background: transparent; border: 1px solid var(--accent); color: var(--accent); }
+.trait[title] { cursor: help; }
 .trait.falta { background: transparent; border: 1px dashed var(--vermelho); color: var(--vermelho); }
 .trait.r-uncommon { background: #7a5a25; }
 .trait.r-rare { background: #1e3a5f; }
@@ -328,3 +359,15 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 
 /* -- icones proprios (o Pathbuilder usa PNG licenciado; aqui e SVG nosso) -- */
 .icone { width: 100%; height: 100%; display: block; }
+
+/* -- inventario: a porta de entrada que faltava para arma e armadura ------- */
+.equipamento { display: grid; gap: var(--u); }
+.equip-add { display: flex; gap: 8px; align-items: center; }
+.equip-add select { flex: none; }
+.equip-add .slot { flex: 1; margin: 0; }
+.inventario li { gap: 8px; }
+.inventario li.guardado .nome { color: var(--fraco); }
+.inventario .dado { color: var(--fraco); font-size: .85em; }
+.inventario button { border-color: var(--borda-forte); font-size: .9em; padding: 2px 8px; }
+.inventario li.guardado button[aria-pressed="false"] { color: var(--fraco); }
+.inventario .link { border-color: transparent; color: var(--fraco); }

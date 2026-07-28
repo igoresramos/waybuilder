@@ -21,15 +21,17 @@ import * as doc from "./doc";
 const RAIZ = join(__dirname, "..", "..");
 const PAYLOAD = join(RAIZ, "pipeline", "base", "app", "por-kind");
 
-const NUCLEO = [
-  "class", "class-feature", "feat", "ancestry",
-  "heritage", "background", "archetype", "skill",
-];
-
+/**
+ * Carrega o payload INTEIRO, do jeito que o app carrega -- lendo o diretorio,
+ * nao uma lista fixa. Ate 2026-07-28 aqui havia um array com oito kinds, igual
+ * ao do app, e era exatamente por isso que o corte de payload passava por 77
+ * testes verdes: o teste tinha o mesmo ponto cego que o codigo.
+ */
 function carregar(): Base {
   const registros: Registro[] = [];
-  for (const kind of NUCLEO) {
-    registros.push(...JSON.parse(readFileSync(join(PAYLOAD, `${kind}.json`), "utf-8")));
+  for (const arquivo of readdirSync(PAYLOAD)) {
+    if (!arquivo.endsWith(".json")) continue;
+    registros.push(...JSON.parse(readFileSync(join(PAYLOAD, arquivo), "utf-8")));
   }
   return new Base(registros);
 }
@@ -37,14 +39,21 @@ function carregar(): Base {
 const base = carregar();
 const derivar = (d: Documento) => new Personagem(structuredClone(d), base);
 
+/** Os kinds sem os quais nao ha ficha nem escolha -- o piso, nao a lista. */
+const INDISPENSAVEIS = [
+  "class", "class-feature", "feat", "ancestry", "heritage", "background",
+  "archetype", "skill", "trait", "weapon", "armor", "shield",
+];
+
 describe("o payload que o app carrega", () => {
-  it("tem os oito kinds do nucleo", () => {
-    const arquivos = readdirSync(PAYLOAD).map((f) => f.replace(".json", ""));
-    for (const k of NUCLEO) expect(arquivos).toContain(k);
+  it("leva a base inteira, nao uma fatia", () => {
+    const arquivos = readdirSync(PAYLOAD).filter((f) => f.endsWith(".json"));
+    expect(arquivos.length).toBeGreaterThan(40);
+    for (const k of INDISPENSAVEIS) expect(arquivos).toContain(`${k}.json`);
   });
 
-  it("basta para montar ficha -- nenhum kind do nucleo vem vazio", () => {
-    for (const k of NUCLEO) {
+  it("nenhum kind indispensavel vem vazio", () => {
+    for (const k of INDISPENSAVEIS) {
       const n = [...base.por_id.values()].filter((r) => r.kind === k).length;
       expect(n, `kind ${k} vazio`).toBeGreaterThan(0);
     }
@@ -198,5 +207,92 @@ describe("o documento e a unica fonte de verdade", () => {
   it("importar lixo devolve erro em vez de explodir", () => {
     expect(doc.importar("nao e json").erro).toBeTruthy();
     expect(doc.importar('{"foo": 1}').erro).toBeTruthy();
+  });
+});
+
+
+/**
+ * O que o payload enxuto quebrava sem que teste nenhum reclamasse.
+ *
+ * O motor sempre soube calcular ataque por arma e CA por armadura; faltava o
+ * dado no payload e a porta de entrada no documento. Nenhum teste dizia
+ * "personagem com espada tem ataque", entao o app saiu amputado com a suite
+ * inteira verde. Estes tres testes existem para que isso nao se repita em
+ * silencio.
+ */
+describe("equipamento entra na conta", () => {
+  const guerreiro = (): Documento => {
+    let d = doc.novoDocumento("Teste");
+    d = doc.escolher(d, "ancestralidade", "criacao", "wb:ancestry/dwarf");
+    d = doc.definirClasseDoNivel(d, 1, "wb:class/fighter");
+    return d;
+  };
+
+  it("arma equipada vira ataque com dano", () => {
+    const semArma = derivar(guerreiro()).visao();
+    expect(semArma.ataques).toHaveLength(0);
+
+    const comArma = derivar(
+      doc.adicionarItem(guerreiro(), "wb:weapon/clan-dagger"),
+    ).visao();
+    expect(comArma.ataques.length).toBeGreaterThan(0);
+    expect(comArma.ataques[0].arma).toContain("Clan Dagger");
+    expect(comArma.ataques[0].dano).toBeTruthy();
+  });
+
+  it("armadura equipada levanta a CA", () => {
+    const pelado = derivar(guerreiro()).visao();
+    const vestido = derivar(
+      doc.adicionarItem(guerreiro(), "wb:armor/chain-mail"),
+    ).visao();
+    expect(vestido.ac.total).toBeGreaterThan(pelado.ac.total);
+  });
+
+  it("guardar tira da conta sem tirar da ficha", () => {
+    let d = doc.adicionarItem(guerreiro(), "wb:weapon/clan-dagger");
+    expect(derivar(d).visao().ataques.length).toBeGreaterThan(0);
+
+    d = doc.alternarEquipado(d, "wb:weapon/clan-dagger");
+    expect(d.inventario).toHaveLength(1);          // continua na ficha
+    expect(derivar(d).visao().ataques).toHaveLength(0);  // fora da conta
+  });
+});
+
+/**
+ * Sub-escolhas que a base referencia e nao tem. NAO e defeito do payload -- o
+ * registro nao existe em `index.json`. As `-legacy` sumiram na fusao
+ * Remaster e a referencia ficou para tras; as demais nunca foram extraidas, e
+ * entre elas estao as SEIS causas do Campeao (paladin, redeemer, liberator,
+ * tyrant, desecrator, antipaladin) e os OITO patronos da Bruxa -- ou seja, as
+ * duas classes hoje nao tem sub-escolha nenhuma para oferecer.
+ */
+const ORFAS_CONHECIDAS = [
+  "wb:instinct/animal-legacy", "wb:instinct/dragon-legacy",
+  "wb:instinct/fury-legacy", "wb:instinct/giant-legacy",
+  "wb:instinct/spirit-legacy", "wb:instinct/superstition-legacy",
+  "wb:cause/antipaladin", "wb:cause/desecrator", "wb:cause/liberator",
+  "wb:cause/paladin", "wb:cause/redeemer", "wb:cause/tyrant",
+  "wb:mystery/ash-legacy", "wb:lesson/lesson-of-the-elements-legacy",
+  "wb:patron/curse", "wb:patron/fate", "wb:patron/fervor", "wb:patron/night",
+  "wb:patron/pacts", "wb:patron/rune", "wb:patron/wild", "wb:patron/winter",
+  "wb:arcane-thesis/metamagical-experimentation",
+];
+
+describe("o payload leva tudo que a base referencia", () => {
+  it("toda opcao de subclasse resolve num registro", () => {
+    const orfas: string[] = [];
+    for (const r of base.por_id.values()) {
+      if (r.kind !== "class") continue;
+      for (const bloco of (r.subclasses as Array<Record<string, unknown>>) ?? []) {
+        for (const opcao of (bloco.opcoes as string[]) ?? []) {
+          if (typeof opcao === "string" && !base.opcional(opcao)) orfas.push(opcao);
+        }
+      }
+    }
+    // Com o payload de oito kinds eram 44. Sobraram 23 que sao buraco de DADO,
+    // nao de payload: o registro nao existe na base. Travadas aqui uma a uma
+    // para que o numero so possa cair -- se subir, e regressao; se descer, e
+    // conserto e o teste cobra a atualizacao da lista.
+    expect([...orfas].sort()).toEqual([...ORFAS_CONHECIDAS].sort());
   });
 });

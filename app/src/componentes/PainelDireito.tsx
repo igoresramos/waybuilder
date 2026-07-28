@@ -19,8 +19,9 @@
 import { useMemo, useState } from "react";
 import type { Base } from "../motor/base";
 import type { Personagem } from "../motor/personagem";
-import type { Rank, Visao } from "../motor/tipos";
+import type { Documento, Rank, Visao } from "../motor/tipos";
 import { IconeEscudo } from "./Icones";
+import { Equipamento } from "./Equipamento";
 
 const RANK_BONUS: Record<Rank, number> = {
   untrained: 0, trained: 2, expert: 4, master: 6, legendary: 8,
@@ -33,16 +34,18 @@ const SALVAGUARDAS = [
   ["fortitude", "Fortitude"], ["reflex", "Reflexos"], ["will", "Vontade"],
 ] as const;
 
-type Aba = "ataques" | "feats" | "concedido" | "sinais";
+type Aba = "ataques" | "equipamento" | "feats" | "concedido" | "sinais";
 
 const sinal = (n: number) => `${n >= 0 ? "+" : ""}${n}`;
 
 export function PainelDireito({
-  p, v, base,
+  p, v, base, d, setD,
 }: {
   p: Personagem;
   v: Visao;
   base: Base;
+  d: Documento;
+  setD: (x: Documento) => void;
 }) {
   const [aba, setAba] = useState<Aba>("ataques");
 
@@ -162,6 +165,7 @@ export function PainelDireito({
           <nav className="menu-abas">
             {([
               ["ataques", `Ataques (${v.ataques.length})`],
+              ["equipamento", `Equipamento (${(d.inventario ?? []).length})`],
               ["feats", "Feats"],
               ["concedido", `Concedido (${v.concedidos.length})`],
               ["sinais", `Sinais (${v.fora_do_requisito.length + v.avisos.length})`],
@@ -188,6 +192,8 @@ export function PainelDireito({
               )}
             </ul>
           )}
+
+          {aba === "equipamento" && <Equipamento base={base} d={d} setD={setD} />}
 
           {aba === "feats" && (
             <ul className="lista-simples">

@@ -211,3 +211,35 @@ export function importar(texto: string): { doc?: Documento; erro?: string } {
   }
   return { doc: { ...novoDocumento(), ...doc } };
 }
+
+// -- inventario -------------------------------------------------------------
+//
+// O motor le arma, armadura e escudo de `doc.inventario` e so conta o que esta
+// `equipado`. Ate 2026-07-28 nenhuma tela escrevia aqui: o resultado era CA de
+// personagem pelado e a aba de Ataques vazia para sempre, num motor que sabia
+// calcular as duas coisas.
+
+/** Poe um item no inventario, ja equipado -- que e o motivo de se adicionar. */
+export function adicionarItem(doc: Documento, item: string): Documento {
+  const inventario = [...(doc.inventario ?? [])];
+  if (inventario.some((i) => i.item === item)) return doc;
+  inventario.push({ item, qtd: 1, equipado: true });
+  return { ...doc, inventario };
+}
+
+export function removerItem(doc: Documento, item: string): Documento {
+  return {
+    ...doc,
+    inventario: (doc.inventario ?? []).filter((i) => i.item !== item),
+  };
+}
+
+/** Guardar sem descartar: o item continua na ficha, fora do calculo. */
+export function alternarEquipado(doc: Documento, item: string): Documento {
+  return {
+    ...doc,
+    inventario: (doc.inventario ?? []).map(
+      (i) => (i.item === item ? { ...i, equipado: !i.equipado } : i),
+    ),
+  };
+}
