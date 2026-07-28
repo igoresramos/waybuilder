@@ -6,6 +6,41 @@ project: waybuilder
 
 ## 2026-07-27
 
+### Sessao | 21:00-22:30 | tres agentes no motor: Free Archetype, ciclos e pericias | igor + claude-code
+
+Igor pediu foco no Free Archetype e levantou o medo de cadeia infinita de
+concessao ("feat que da feat que da feat"). Tres agentes em paralelo, com
+ownership de arquivo declarado para nao repetirem o atropelo da rodada anterior.
+
+**O achado central, e o mais caro: a dedicacao entra e nao entrega nada.** O
+motor le `grants` so de CLASSE e de FEATURE; grant vindo de FEAT ESCOLHIDO
+nunca e aplicado. Medido em ficha: `battle-harbinger-dedication` concede
+Toughness e o personagem sai com 52 HP contra 56 pegando Toughness a mao;
+`shieldmarshal-dedication` concede `society: expert` e a linha nem aparece;
+Fighter 4 + `barbarian-dedication` sai sem Rage. Entre as 226 dedicacoes:
+grant_item 114, grant_feat 67 (todos com alvo estatico), proficiency 49,
+flat_modifier 34, skill_training 20. Sob Free Archetype -- regra 2, sempre
+ligada -- isso significa que o trilho gratuito custa um slot e devolve so o
+nome. Itens 62 a 66.
+
+**O medo do ciclo infinito nao se sustenta no dado, e agora ha numero.** Grafo
+de concessao dos 19.705 registros: ZERO ciclos, cadeia mais funda de 3 nos, 31
+auto-concessoes que sao artefato do rule element do Foundry. Pesquisa na web
+confirma que nao ha loop conhecido com `Ancestral Paragon` -- ele e mao unica
+(geral -> ancestria). O guarda entrou como cinto de seguranca contra dado
+malformado: profundidade 8, com aviso visivel, nunca truncar calado.
+
+**A validacao por pericia corrigiu uma suposicao minha.** Eu tinha recomendado
+o rank de pericia do Foundry como oraculo forte; ele NAO e o rank final -- so
+registra escolha discricionaria, e o treino automatico de classe vive em
+`trainedSkills.value` dentro do item de classe. Mesmo com o oraculo corrigido,
+os 62,4% medem a lacuna, nao o motor. O que a medicao entregou de verdade foi
+outro achado: o motor NAO implementa `skill_increase`, slot que o schema
+declara -- o aumento de pericia por nivel, que todo personagem faz. Itens 67-68.
+
+As tres frentes convergem no mesmo diagnostico: **o motor aceita as escolhas e
+nao aplica os efeitos delas.**
+
 ### Sessao | 15:10-21:00 | quatro agentes em paralelo, base re-emitida, nove portoes verdes | igor + claude-code
 
 Igor mandou seguir em tudo, em agentes, validando cada retorno. Quatro frentes
