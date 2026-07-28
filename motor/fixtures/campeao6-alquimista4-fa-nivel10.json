@@ -1534,7 +1534,22 @@
     "escolhido": "wb:class-feature/justice",
     "nivel": 1,
     "nome": "Justice",
-    "opcoes": 13
+    "opcoes": 13,
+    "opcoes_ids": [
+     "wb:cause/antipaladin",
+     "wb:cause/desecrator",
+     "wb:cause/liberator",
+     "wb:cause/paladin",
+     "wb:cause/redeemer",
+     "wb:cause/tyrant",
+     "wb:class-feature/desecration",
+     "wb:class-feature/grandeur",
+     "wb:class-feature/iniquity",
+     "wb:class-feature/justice",
+     "wb:class-feature/liberation",
+     "wb:class-feature/obedience",
+     "wb:class-feature/redemption"
+    ]
    },
    {
     "classe": "Champion",
@@ -1542,7 +1557,11 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 2
+    "opcoes": 2,
+    "opcoes_ids": [
+     "wb:class-feature/blessed-armament",
+     "wb:class-feature/blessed-shield"
+    ]
    },
    {
     "classe": "Champion",
@@ -1550,7 +1569,12 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 3
+    "opcoes": 3,
+    "opcoes_ids": [
+     "wb:class-feature/champions-aura",
+     "wb:class-feature/champions-reaction",
+     "wb:class-feature/deific-weapon"
+    ]
    },
    {
     "classe": "Alchemist",
@@ -1558,7 +1582,14 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 5
+    "opcoes": 5,
+    "opcoes_ids": [
+     "wb:class-feature/advanced-alchemy",
+     "wb:class-feature/formula-book",
+     "wb:class-feature/infused-reagents",
+     "wb:class-feature/quick-alchemy",
+     "wb:class-feature/versatile-vials"
+    ]
    },
    {
     "classe": "Alchemist",
@@ -1566,7 +1597,13 @@
     "escolhido": "wb:class-feature/bomber",
     "nivel": 1,
     "nome": "Bomber",
-    "opcoes": 4
+    "opcoes": 4,
+    "opcoes_ids": [
+     "wb:class-feature/bomber",
+     "wb:class-feature/chirurgeon",
+     "wb:class-feature/mutagenist",
+     "wb:class-feature/toxicologist"
+    ]
    }
   ]
  }

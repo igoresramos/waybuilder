@@ -321,6 +321,12 @@ class Personagem:
                     "eixo": bloco.get("eixo"),
                     "nivel": bloco.get("nivel"),
                     "opcoes": len(bloco.get("opcoes") or []),
+                    # a LISTA, alem da contagem: `candidatos("subclasse")`
+                    # precisa dos ids, e ate 2026-07-28 iterava `opcoes` -- que
+                    # e um int -- e levantava TypeError. Nao explodia so porque
+                    # nenhuma ficha de exemplo exercitava esse slot; o porte
+                    # para TypeScript e que trouxe o caso a tona.
+                    "opcoes_ids": list(bloco.get("opcoes") or []),
                     "escolhido": escolha,
                     "nome": (self.base.opcional(escolha) or {}).get("name") if escolha else None,
                 })
@@ -1732,7 +1738,7 @@ class Personagem:
         if slot == "subclasse":
             ids = [o for b in self.slots_de_subclasse
                    if em is None or b.get("nivel") == em
-                   for o in (b.get("opcoes") or [])]
+                   for o in (b.get("opcoes_ids") or [])]
             registros = [self.base.opcional(i) for i in ids]
         elif slot == "skill_increase":
             registros = [r for r in self.base.por_id.values()

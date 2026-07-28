@@ -1146,7 +1146,15 @@
     "escolhido": "wb:class-feature/thief",
     "nivel": 1,
     "nome": "Thief",
-    "opcoes": 6
+    "opcoes": 6,
+    "opcoes_ids": [
+     "wb:class-feature/avenger",
+     "wb:class-feature/eldritch-trickster",
+     "wb:class-feature/mastermind",
+     "wb:class-feature/ruffian",
+     "wb:class-feature/scoundrel",
+     "wb:class-feature/thief"
+    ]
    }
   ]
  }

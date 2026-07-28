@@ -67,11 +67,13 @@ export interface Documento {
 /** Um slot por preencher. E o roteiro do jogador -- a lista guia a tela. */
 export interface SlotAberto {
   slot: string;
-  em: number | "criacao";
-  kind: string;
+  em: number | "criacao" | null;
+  kind: string | null;
   escolhe: number;
   rotulo: string;
-  opcoes?: string[];
+  /** CONTAGEM de opções do eixo de subclasse, não a lista -- é o que o motor
+   * guarda em `slots_de_subclasse` e repassa aqui. */
+  opcoes?: number;
   fontes?: FonteDeBoost[];
 }
 
@@ -93,21 +95,23 @@ export interface FonteDeBoost {
  */
 export interface Candidato {
   id: string;
-  nome?: string;
-  level?: number | null;
+  nome: string | null;
+  level: number | null;
   atende: boolean;
   motivos: string[];
   ja_pego: boolean;
 }
 
 export interface LinhaDeFeature {
-  id: string;
-  nome: string;
+  id: string | null;
+  nome: string | null;
   classe: string | null;
   origem?: string;
   nivel_de_classe: number | null;
+  /** os `grants` crus do registro -- a cadeia os relê, e a visão os expõe */
+  grants: unknown[];
   na_base: boolean;
-  eixo?: string;
+  eixo?: string | null;
   raiz?: string;
   concedido_por?: string;
 }
@@ -127,24 +131,62 @@ export interface ForaDoRequisito {
 
 export interface SlotDeSubclasse {
   classe: string;
-  eixo?: string;
-  nivel?: number | null;
+  eixo: string | null;
+  nivel: number | null;
+  /** quantas opções o eixo tem */
   opcoes: number;
+  /** e QUAIS -- `candidatos("subclasse")` precisa dos ids */
+  opcoes_ids: string[];
   escolhido: string | null;
-  nome?: string | null;
+  nome: string | null;
 }
 
 export interface Conjuracao {
   classe: string;
   nivel_de_classe: number;
-  tradicao?: string;
-  tipo?: string;
-  truques?: number;
+  tradicao: string | null;
+  tipo: string | null;
+  truques: number | null;
   slots: Record<string, number>;
+  /** regra 16: vem do nível de CLASSE cru */
   max_rank_do_slot: number;
+  /** regra 17: ceil(nivel_de_personagem / 2) */
   rank_efetivo: number;
   elevacao: number;
-  dc: { dc: number; ataque: number; nota?: string };
+  /** regra 17b: teto do que cria criatura */
+  rank_de_invocacao: number;
+  dc: { rank: Rank; dc: number; ataque: number; nota: string };
+}
+
+/** AC e a armadura que a produziu. */
+export interface AC {
+  total: number;
+  armadura: string | null;
+  categoria: string;
+  rank: Rank;
+  detalhe: string;
+  dex_perdida: number;
+  check_penalty: number;
+  escudo: { nome: string | null; ac: number } | null;
+}
+
+export interface Ataque {
+  arma: string | null;
+  categoria: string;
+  rank: Rank;
+  ataque: number;
+  atributo_do_ataque: "str" | "dex";
+  dano: string;
+  tipo_de_dano: string | null;
+  traits: string[];
+  detalhe: string;
+}
+
+export interface AumentoDePericia {
+  nivel: number | "criacao" | null;
+  pericia: string;
+  de: Rank;
+  para: Rank;
 }
 
 /** A visao calculada. Cache, nunca fonte de verdade. */
@@ -159,10 +201,7 @@ export interface Visao {
   hp: number;
   proficiencias: Record<string, Rank>;
   pericias_livres: number;
-  aumentos_de_pericia: {
-    niveis: number[];
-    gastos: Array<{ nivel: number | "criacao"; pericia: string; de: Rank; para: Rank }>;
-  };
+  aumentos_de_pericia: { niveis: number[]; gastos: AumentoDePericia[] };
   boosts: { direito: number; declarados: number; fontes: FonteDeBoost[] };
   slots_abertos: SlotAberto[];
   slots: Record<string, number[]>;
@@ -170,8 +209,8 @@ export interface Visao {
   atores: unknown[];
   escolhas_de_feat: unknown;
   focus_pool: number;
-  ac: number;
-  ataques: unknown[];
+  ac: AC;
+  ataques: Ataque[];
   features: LinhaDeFeature[];
   concedidos: Concedido[];
   subclasses: SlotDeSubclasse[];

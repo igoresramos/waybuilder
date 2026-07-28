@@ -1,0 +1,2441 @@
+/**
+ * Porte de `Personagem` em `motor/motor.py`: documento de personagem -> visão
+ * calculada.
+ *
+ * O documento guarda **decisão**, nunca resultado. Tudo aqui é derivado e
+ * descartável: some o motor, o personagem continua intacto no JSON.
+ *
+ * Regras implementadas (numeração da spec):
+ *   1  nivel_de_personagem = SOMA(niveis_de_classe)
+ *   3  bonus total = nivel_de_personagem + rank
+ *   4  duas classes com a mesma proficiencia: vale o melhor rank
+ *   5  class DC e por classe, com rank pelo nivel daquela classe
+ *   7  nivel 1 de classe da o pacote cheio, de qualquer classe
+ *   8  key ability boost e class feat de nivel 1 so da PRIMEIRA classe
+ *   9  pericias automaticas da classe nova sao sempre concedidas
+ *   10 escolhas livres por delta = max(0, orcamento(C) - livres_ja_concedidas)
+ *   11 HP por nivel da classe que recebeu aquele nivel; ancestria no nivel 1
+ *   12 class feat a cada nivel PAR de personagem
+ *   14 cadencia basica segue o nivel de personagem
+ *   16 slots e rank base vem do nivel de CLASSE cru
+ *   17 elevacao: rank_efetivo = ceil(nivel_de_personagem / 2)
+ *   18 elevacao nao vale para slots de arquetipo
+ *   22 focus pool unico do personagem, teto 3
+ *
+ * Princípio zero: `requires` sugere, nunca bloqueia. O motor calcula e SINALIZA
+ * o que está fora do requisito -- nunca recusa.
+ *
+ * Os nomes dos campos derivados são os MESMOS do Python (snake_case) de
+ * propósito: `motor/fixtures/*.json` é o gabarito e as chaves de `extras` são
+ * literalmente os atributos da classe Python. Renomear aqui quebraria a
+ * rastreabilidade linha a linha, que é o que torna este porte verificável.
+ */
+import type { Base } from "./base.ts";
+import type { ContextoDePredicado, ResultadoDeTermo } from "./predicado.ts";
+import { avaliar as avaliarPredicado, comparar } from "./predicado.ts";
+import type {
+  AC, Ataque, AumentoDePericia, Candidato, Concedido, Conjuracao, Documento,
+  ForaDoRequisito, LinhaDeFeature, FonteDeBoost, Rank, Registro, SlotAberto,
+  SlotDeSubclasse, Visao,
+} from "./tipos.ts";
+import { ATRIBUTOS, RANKS } from "./tipos.ts";
+import {
+  RANK_BONUS, comSinal, dictDe, ehDict, ehInt, ehLista, ehStr,
+  empurrar, indiceDeRank, inteiro, listaDe, melhorRank, nome, nomeOu,
+  normChave, normSlug, obter, ordenarNumeros, ordenarPor, ordenarTextos,
+  pyIterar, pyRepr, pyStr, somar, verdadeiro,
+} from "./util.ts";
+
+type Dict = Record<string, unknown>;
+
+/**
+ * Cinto de segurança contra dado malformado, NÃO contra o jogador. Medido em
+ * 2026-07-27 sobre os 19705 registros da base inteira: o grafo de
+ * `grant_feat`/`grant_item` com alvo ESTÁTICO (sem uuid dinâmico `{...}`) não
+ * tem NENHUM ciclo de 2+ nós, e a cadeia mais funda encontrada tem 3 nós. O
+ * único padrão "circular" real são 31 registros que concedem A SI MESMOS (ex.:
+ * `Rage`, `Hunt Prey` -- artefato do Foundry pra reaplicar o próprio efeito,
+ * não um erro de dado), e esses já saem podados no primeiro passo porque a
+ * origem entra em `visitados` antes de percorrer. Este teto é só a rede: se um
+ * dado futuro formar uma cadeia mais funda, o motor CORTA e AVISA -- nunca
+ * trava, nunca perde em silêncio.
+ */
+const MAX_PROFUNDIDADE_GRANTS = 8;
+
+/** Linha da lista de features, como o Python monta o dict. */
+interface Feature extends LinhaDeFeature {
+  grants: unknown[];
+}
+
+interface RegistroConcedido extends Feature {
+  /** o que a cadeia concede sempre tem id -- é o alvo do `grant_feat` */
+  id: string;
+  nome: string;
+  origem: string;
+  concedido_por: string;
+  raiz: string;
+}
+
+interface DetalheDeHP { origem: string | null; hp: number; nota: string }
+interface DetalheDePericiaLivre { classe: string; orcamento: number; delta: number }
+
+function objetoDe<V>(m: Map<string, V>): Record<string, V> {
+  const saida: Record<string, V> = {};
+  for (const [k, v] of m) saida[k] = v;
+  return saida;
+}
+
+export class Personagem implements ContextoDePredicado {
+  readonly doc: Documento;
+  readonly base: Base;
+  avisos: string[] = [];
+
+  // regra 1
+  niveis_por_classe: Map<string, number> = new Map();
+  ordem_de_classe: string[] = [];
+  classe_do_nivel: Map<number, string> = new Map();
+  nivel = 0;
+  primeira_classe: string | null = null;
+  entrada_da_classe: Map<string, number> = new Map();
+
+  // identidade
+  ancestria: Registro | null = null;
+  heranca: Registro | null = null;
+  background: Registro | null = null;
+
+  // regra 7
+  features: Feature[] = [];
+  slots_de_subclasse: SlotDeSubclasse[] = [];
+
+  // regras 3, 4, 5, 7, 9
+  proficiencias: Map<string, Rank> = new Map();
+  origem_proficiencia: Map<string, string[]> = new Map();
+  aplicacoes_de_proficiencia: Map<string, Array<[unknown, string | null]>> = new Map();
+  pericias_automaticas: Map<string, string> = new Map();
+  pericias_livres = 0;
+  pericias_livres_detalhe: DetalheDePericiaLivre[] = [];
+  aumentos_de_pericia: number[] = [];
+  aumentos_detalhe: AumentoDePericia[] = [];
+
+  // regra 8
+  boosts: Map<string, number> = new Map();
+  origem_boost: string[] = [];
+  boosts_pendentes: FonteDeBoost[] = [];
+  boosts_direito = 0;
+  boosts_declarados = 0;
+  atributos: Record<string, number> = {};
+  modificadores: Record<string, number> = {};
+
+  // regra 11
+  hp = 0;
+  hp_detalhe: DetalheDeHP[] = [];
+
+  // regras 12 e 14
+  slots: Map<string, number[]> = new Map();
+  class_feat_nivel_1 = false;
+  gastos: Map<string, Dict[]> = new Map();
+
+  // regras 16, 17, 18
+  conjuracao: Conjuracao[] = [];
+
+  // atores e resto
+  atores: Dict[] = [];
+  escolhas_de_feat: Dict[] = [];
+  focus_pool = 0;
+  ac: AC = {
+    total: 0, armadura: null, categoria: "unarmored", rank: "untrained",
+    detalhe: "", dex_perdida: 0, check_penalty: 0, escudo: null,
+  };
+  ataques: Ataque[] = [];
+  fora_do_requisito: ForaDoRequisito[] = [];
+
+  // cadeia de grants
+  concedidos: RegistroConcedido[] = [];
+  private _raizes: Map<string, string> = new Map();
+  private _ja_tenho: Set<string> = new Set();
+  /** estado opcional entre passos: o feat cujo requisito está sendo avaliado */
+  private _avaliando: string | null = null;
+
+  constructor(doc: Documento, base: Base) {
+    this.doc = doc;
+    this.base = base;
+    this._derivar();
+  }
+
+  // -- escolhas -----------------------------------------------------------
+
+  private _todas_escolhas(): Dict[] {
+    return listaDe((this.doc as unknown as Dict)["escolhas"]).filter(ehDict);
+  }
+
+  private _escolhas(slot: string): Dict[] {
+    return this._todas_escolhas().filter((e) => e["slot"] === slot);
+  }
+
+  private _derivar(): void {
+    this._niveis_de_classe();
+    this._ancestria_e_background();
+    this._features_de_classe();
+    // antes de `_proficiencias`: a cadeia de grants põe class-feature na lista
+    // de features e feat na lista de feats efetivos, e as duas coisas são lidas
+    // na derivação de proficiência, HP e requisito.
+    this._grants_em_cadeia();
+    this._proficiencias();
+    this._atributos();
+    this._hp();
+    this._slots_de_feat();
+    this._conjuracao();
+    this._atores();
+    this._focus();
+    this._defesa();
+    this._ataques();
+    this._checar_requisitos();
+  }
+
+  // -- regra 1: estrutura -------------------------------------------------
+
+  /** Regra 1: nível de personagem é a SOMA dos níveis de classe. */
+  private _niveis_de_classe(): void {
+    // ORDENAR POR NÍVEL, não pela ordem do array: a "primeira classe" de um
+    // personagem é a que recebeu o NÍVEL 1, e não a que o jogador digitou
+    // primeiro. Sem isto, reordenar o JSON muda `primeira_classe` e com ela a
+    // regra 8 (o class feat de nível 1 só vem da primeira classe) -- a mesma
+    // ficha derivava `slots['class'] = [1,2,4]` ou `[2,4]` conforme a ordem de
+    // digitação. Achado pelo teste de embaralhamento, numa ficha multiclasse
+    // (com classe única o defeito é invisível).
+    const por_nivel = ordenarPor(this._escolhas("nivel_de_classe"),
+                                 (e) => [ehInt(e["em"]) ? e["em"] : 0]);
+    for (const e of por_nivel) {
+      const cid = e["pega"];
+      if (!ehStr(cid)) {
+        this.avisos.push(`nivel_de_classe sem classe em \`pega\`: ${pyRepr(e)}`);
+        continue;
+      }
+      if (this.base.opcional(cid) === null) {
+        // barrar aqui é o que impede o id inválido de chegar nos passos
+        // seguintes, que usam `base.get` e levantariam KeyError
+        this.avisos.push(
+          `nivel_de_classe aponta pra classe ausente da base: ${cid}`);
+        continue;
+      }
+      const nivel_personagem = e["em"];
+      if (!ehInt(nivel_personagem)) {
+        this.avisos.push(`nivel_de_classe sem \`em\` numerico: ${pyRepr(e)}`);
+        continue;
+      }
+      somar(this.niveis_por_classe, cid, 1);
+      this.classe_do_nivel.set(nivel_personagem, cid);
+      if (!this.ordem_de_classe.includes(cid)) this.ordem_de_classe.push(cid);
+    }
+
+    this.nivel = [...this.niveis_por_classe.values()].reduce((a, b) => a + b, 0);
+    this.primeira_classe = this.ordem_de_classe[0] ?? null;
+
+    // nível de PERSONAGEM em que cada classe entrou -- é o ponto de partida da
+    // regra 15 (cadência extra só vale dali pra frente), usado tanto pelos
+    // slots de feat quanto pelos aumentos de perícia
+    for (const n of ordenarNumeros(this.classe_do_nivel.keys())) {
+      const cid = this.classe_do_nivel.get(n) as string;
+      if (!this.entrada_da_classe.has(cid)) this.entrada_da_classe.set(cid, n);
+    }
+
+    // sanidade: um nível de personagem, uma classe
+    const vistos = new Set(this.classe_do_nivel.keys());
+    const faltando: number[] = [];
+    for (let n = 1; n <= this.nivel; n += 1) if (!vistos.has(n)) faltando.push(n);
+    const sobrando = ordenarNumeros([...vistos].filter((n) => n < 1 || n > this.nivel));
+    if (faltando.length > 0 || sobrando.length > 0) {
+      if (faltando.length > 0) {
+        this.avisos.push(
+          `niveis de personagem sem classe atribuida: ${pyRepr(faltando)}`);
+      }
+      if (sobrando.length > 0) {
+        this.avisos.push(`niveis fora da faixa 1..${this.nivel}: ${pyRepr(sobrando)}`);
+      }
+    }
+  }
+
+  nivel_de(classe_id: string): number {
+    return this.niveis_por_classe.get(classe_id) ?? 0;
+  }
+
+  // -- ancestralidade, herança, background --------------------------------
+
+  private _ancestria_e_background(): void {
+    const um = (slot: string): Registro | null => {
+      const esc = this._escolhas(slot);
+      return esc.length > 0 ? this.base.opcional(esc[0]["pega"]) : null;
+    };
+    this.ancestria = um("ancestralidade");
+    this.heranca = um("heranca");
+    this.background = um("background");
+    for (const [rotulo, reg] of [["ancestralidade", this.ancestria],
+                                 ["background", this.background]] as const) {
+      if (reg === null) this.avisos.push(`sem ${rotulo} escolhida`);
+    }
+  }
+
+  // -- regra 7: identidade de classe --------------------------------------
+
+  /**
+   * Regra 7: o nível de classe compra IDENTIDADE, e ela vem inteira.
+   *
+   * É o argumento central da houserule: gastar nível de classe vale a pena
+   * porque compra identidade, e nenhuma dedicação compra identidade íntegra.
+   * Se as features não aparecem na ficha, a regra fica sem efeito visível.
+   *
+   * A progressão já vem separada em concedido vs escolhido: sem isso um Mago 1
+   * receberia as 23 escolas de magia de uma vez.
+   */
+  private _features_de_classe(): void {
+    const escolhidas = new Set(this._escolhas("subclasse").map((e) => e["pega"]));
+
+    for (const cid of this.ordem_de_classe) {
+      const classe = this.base.get(cid);
+      const nivel_classe = this.nivel_de(cid);
+
+      for (const p of listaDe(classe["progressao"])) {
+        const passo = dictDe(p);
+        // regra 16/7: a feature vem pelo nível DA CLASSE
+        if (inteiro(passo["nivel"]) > nivel_classe) continue;
+        const fid = obter(passo, "concede");
+        const feature = this.base.opcional(fid);
+        this.features.push({
+          id: ehStr(fid) ? fid : null,
+          nome: nomeOu(feature, pyStr(fid)),
+          classe: nomeOu(classe, cid),
+          nivel_de_classe: ehInt(passo["nivel"]) ? passo["nivel"] : null,
+          grants: listaDe((feature ?? {})["grants"]),
+          na_base: feature !== null,
+        });
+      }
+
+      for (const b of listaDe(classe["subclasses"])) {
+        const bloco = dictDe(b);
+        const nivel_bloco = Object.hasOwn(bloco, "nivel") && verdadeiro(bloco["nivel"])
+          ? inteiro(bloco["nivel"]) : 1;
+        if (nivel_bloco > nivel_classe) continue;
+        const opcoes = listaDe(bloco["opcoes"]);
+        const escolha = opcoes.find((o) => escolhidas.has(o)) ?? null;
+        const reg = escolha === null ? null : this.base.opcional(escolha);
+        this.slots_de_subclasse.push({
+          classe: nomeOu(classe, cid),
+          eixo: ehStr(bloco["eixo"]) ? bloco["eixo"] : null,
+          nivel: ehInt(bloco["nivel"]) ? bloco["nivel"] : null,
+          opcoes: opcoes.length,
+          // a LISTA, alem da contagem: `candidatos("subclasse")` precisa dos
+          // ids. Ate 2026-07-28 o Python iterava `opcoes` -- que e um int --
+          // e levantava TypeError; nao explodia so porque nenhuma ficha de
+          // exemplo exercitava o slot, e foi este porte que trouxe o caso a
+          // tona.
+          opcoes_ids: opcoes.filter(ehStr),
+          escolhido: ehStr(escolha) ? escolha : null,
+          nome: escolha === null ? null : nome(reg),
+        });
+        if (escolha === null) {
+          this.avisos.push(
+            `${pyStr(nome(classe))}: falta escolher \`${pyStr(obter(bloco, "eixo"))}\` `
+            + `(${opcoes.length} opcoes)`);
+        } else if (reg !== null) {
+          this.features.push({
+            id: ehStr(escolha) ? escolha : null,
+            nome: nomeOu(reg, pyStr(escolha)),
+            classe: nomeOu(classe, cid),
+            nivel_de_classe: ehInt(bloco["nivel"]) ? bloco["nivel"] : null,
+            grants: listaDe(reg["grants"]),
+            na_base: true,
+            eixo: ehStr(bloco["eixo"]) ? bloco["eixo"] : null,
+          });
+        }
+      }
+    }
+  }
+
+  // -- regras 3, 4, 5, 7, 9: proficiências --------------------------------
+
+  /**
+   * Cada aplicação guarda o id de QUEM aplicou. É o que permite perguntar
+   * depois "qual seria o rank sem este feat?" -- sem isso, um feat que concede
+   * a mesma perícia que exige satisfaz o próprio requisito.
+   */
+  private _aplicar_proficiencia(chave: string, rank: unknown, origem: string,
+                                origem_id: string | null = null): void {
+    const anterior = this.proficiencias.get(chave);
+    const novo = melhorRank(anterior, rank);
+    this.proficiencias.set(chave, novo);
+    empurrar(this.aplicacoes_de_proficiencia, chave, [rank, origem_id]);
+    if (novo === rank && rank !== anterior) {
+      this.origem_proficiencia.set(chave, [origem]);
+    } else if (rank === novo) {
+      empurrar(this.origem_proficiencia, chave, origem);
+    }
+  }
+
+  /**
+   * Regras 7 e 4: pacote cheio de cada classe, melhor rank entre elas.
+   *
+   * Regra 7 é deliberada e cara: nível 1 de QUALQUER classe entrega saves,
+   * Percepção, armas e armadura completos. Um Monge 1 / Guerreiro 1 no nível 2
+   * tem o melhor perfil defensivo do jogo -- aceito de olho aberto, porque o
+   * nível fica gasto para sempre.
+   */
+  private _proficiencias(): void {
+    for (const cid of this.ordem_de_classe) {
+      const classe = this.base.get(cid);
+      for (const g of listaDe(classe["grants"])) {
+        if (ehDict(g) && Object.hasOwn(g, "proficiency")) {
+          for (const [chave, rank] of Object.entries(dictDe(g["proficiency"]))) {
+            this._aplicar_proficiencia(chave, rank, nomeOu(classe, cid), cid);
+          }
+        }
+      }
+    }
+
+    // as features de identidade também elevam rank (Weapon Mastery, Expert
+    // Spellcaster, Reflex Expertise...). Sem isto a regra 7 entrega a feature
+    // na lista e não no número.
+    for (const f of this.features) {
+      for (const g of f.grants) {
+        if (ehDict(g) && Object.hasOwn(g, "proficiency")) {
+          for (const [chave, rank] of Object.entries(dictDe(g["proficiency"]))) {
+            const de = verdadeiro(f.classe) ? f.classe : obter(f as unknown as Dict, "origem");
+            const raiz = (f as unknown as Dict)["raiz"];
+            this._aplicar_proficiencia(chave, rank, `${pyStr(f.nome)} (${pyStr(de)})`,
+                                       verdadeiro(raiz) ? String(raiz) : f.id);
+          }
+        }
+      }
+    }
+
+    // feat também eleva rank -- é a lacuna que deixava toda dedicação inerte.
+    // `wizard-dedication` é `{proficiency: {arcana: trained}}`, exatamente a
+    // mesma chave plana que classe e feature já usavam; são 342 feats com
+    // `proficiency`, 72 deles dedicações.
+    for (const [wb_id, feat, por] of this._feats_efetivos()) {
+      let rotulo = nomeOu(feat, wb_id);
+      if (verdadeiro(por)) rotulo = `${rotulo} (via ${pyStr(por)})`;
+      // a RAIZ da cadeia, não o elo: se a dedicação X concedeu o feat Y, o que
+      // Y aplica tem de ser descontado ao avaliar o requisito de X
+      const raiz = this._raiz_de(wb_id);
+      for (const g of listaDe(feat["grants"])) {
+        if (!ehDict(g)) continue;
+        for (const [chave, rank] of Object.entries(dictDe(g["proficiency"]))) {
+          this._aplicar_proficiencia(chave, rank, rotulo, raiz);
+        }
+        for (const pericia of listaDe(dictDe(g["skill_training"])["auto"])) {
+          this._aplicar_proficiencia(String(pericia), "trained", rotulo, raiz);
+        }
+      }
+    }
+
+    // regra 9: perícia automática da classe é identidade, sempre concedida
+    for (const cid of this.ordem_de_classe) {
+      const classe = this.base.get(cid);
+      for (const g of listaDe(classe["grants"])) {
+        for (const pericia of listaDe(dictDe(dictDe(g)["skill_training"])["auto"])) {
+          this.pericias_automaticas.set(String(pericia), nomeOu(classe, cid));
+          this._aplicar_proficiencia(String(pericia), "trained", nomeOu(classe, cid));
+        }
+      }
+    }
+
+    // background treina perícia também
+    if (this.background !== null) {
+      const treino = dictDe(this.background["skill_training"]);
+      for (const pericia of listaDe(treino["skills"])) {
+        this._aplicar_proficiencia(String(pericia), "trained",
+                                   nomeOu(this.background, "background"));
+      }
+      for (const lore of listaDe(treino["lore"])) {
+        this._aplicar_proficiencia(`lore:${pyStr(lore)}`, "trained",
+                                   nomeOu(this.background, "background"));
+      }
+    }
+
+    // regra 10: orçamento de perícia livre, por delta
+    this._orcamento_de_pericia();
+    // o aumento de perícia por nível -- que todo personagem faz e o motor não
+    // implementava
+    this._aumentos_de_pericia();
+  }
+
+  /** teto RAW do aumento de perícia, por nível de PERSONAGEM */
+  static readonly TETO_DE_RANK: Array<[number, Rank]> = [
+    [15, "legendary"], [7, "master"], [1, "expert"],
+  ];
+
+  /**
+   * Skill increase: sobe UM degrau numa perícia, nos níveis que a classe
+   * declara.
+   *
+   * A cadência vem do dado, nunca de tabela escrita aqui: as 27 classes da base
+   * declaram `{levels: [...]}` -- 25 no padrão [3,5,..,19] e 2 (Ladino e
+   * Investigador) em todo nível de 2 a 20. Vale a regra 15: a cadência de uma
+   * classe conta a partir do nível de personagem em que ela entrou.
+   */
+  private _aumentos_de_pericia(): void {
+    const niveis = new Set<number>();
+    for (const [cid, desde] of this.entrada_da_classe) {
+      for (const g of listaDe(this.base.get(cid)["grants"])) {
+        if (!ehDict(g) || !Object.hasOwn(g, "skill_increase")) continue;
+        for (const n of listaDe(dictDe(g["skill_increase"])["levels"])) {
+          const v = inteiro(n);
+          if (desde <= v && v <= this.nivel) niveis.add(v);
+        }
+      }
+    }
+    this.aumentos_de_pericia = ordenarNumeros(niveis);
+
+    // o default importa: nível 0 é o ESTADO INICIAL do construtor (ainda sem
+    // classe), e sem ele o `next` estoura StopIteration e o motor inteiro morre
+    // antes de derivar qualquer coisa
+    const teto: Rank = Personagem.TETO_DE_RANK.find(
+      ([n]) => this.nivel >= n)?.[1] ?? "trained";
+    const escolhas = ordenarPor(this._escolhas("skill_increase"),
+                                (e) => [ehInt(e["em"]) ? e["em"] : 0]);
+
+    if (escolhas.length > this.aumentos_de_pericia.length) {
+      this.avisos.push(
+        `skill_increase: ${escolhas.length} aumento(s) escolhido(s) para `
+        + `${this.aumentos_de_pericia.length} disponivel(is) em `
+        + `${pyRepr(this.aumentos_de_pericia)}`);
+    }
+
+    for (const e of escolhas) {
+      const em = obter(e, "em");
+      if (ehInt(em) && !this.aumentos_de_pericia.includes(em)) {
+        this.avisos.push(
+          `skill_increase: aumento no nivel ${em}, que nao tem aumento `
+          + `(niveis validos: ${pyRepr(this.aumentos_de_pericia)})`);
+      }
+      const pegas = ehLista(e["pega"]) ? e["pega"] : [obter(e, "pega")];
+      for (const pericia of pegas) {
+        if (!ehStr(pericia)) continue;
+        // sem esta checagem, um nome errado vira uma linha de proficiência
+        // FANTASMA na ficha, sem nada apontando o erro. `lore:<algo>` é
+        // legítimo -- Lore é aberto por definição.
+        if (!pericia.startsWith("lore:")
+            && this.base.opcional(`wb:skill/${normSlug(pericia)}`) === null) {
+          this.avisos.push(
+            `skill_increase: \`${pericia}\` nao e uma pericia da base `
+            + `-- aumento aplicado assim mesmo, confira o nome`);
+        }
+        const atual = this.proficiencias.get(pericia) ?? "untrained";
+        let proximo = RANKS[Math.min(indiceDeRank(atual) + 1, RANKS.length - 1)];
+        if (indiceDeRank(proximo) > indiceDeRank(teto)) {
+          this.avisos.push(
+            `skill_increase: ${pericia} iria a ${proximo}, acima do teto `
+            + `${teto} do nivel ${this.nivel}`);
+          proximo = teto;
+        }
+        this._aplicar_proficiencia(pericia, proximo, `aumento de pericia (nivel ${pyStr(em)})`);
+        this.aumentos_detalhe.push({
+          nivel: em as number | "criacao" | null, pericia, de: atual, para: proximo,
+        });
+      }
+    }
+  }
+
+  /**
+   * Regra 10: delta = max(0, orçamento(C) - livres_já_concedidas).
+   *
+   * O `max` é o que torna a ordem das classes irrelevante para o total, e o que
+   * impede o multiclasse de multiplicar orçamento de perícia. As automáticas da
+   * regra 9 não entram na conta dos dois lados.
+   */
+  private _orcamento_de_pericia(): void {
+    let concedidas = 0;
+    const detalhe: DetalheDePericiaLivre[] = [];
+    for (const cid of this.ordem_de_classe) {
+      const classe = this.base.get(cid);
+      let livre = 0;
+      for (const g of listaDe(classe["grants"])) {
+        livre = Math.max(livre, inteiro(dictDe(dictDe(g)["skill_training"])["free"]));
+      }
+      // o INT também dá perícias livres, mas isso é recurso de personagem
+      const delta = Math.max(0, livre - concedidas);
+      concedidas += delta;
+      detalhe.push({ classe: nomeOu(classe, cid), orcamento: livre, delta });
+    }
+
+    // feat que treina perícia a escolher SOMA (não entra no max da regra 10,
+    // que existe só pra impedir o multiclasse de multiplicar o orçamento das
+    // CLASSES). São 37 feats, entre eles dedicações como `battle-harbinger`.
+    for (const [wb_id, feat] of this._feats_efetivos()) {
+      for (const g of listaDe(feat["grants"])) {
+        if (!ehDict(g)) continue;
+        const livre = inteiro(dictDe(g["skill_training"])["free"]);
+        if (livre) {
+          concedidas += livre;
+          detalhe.push({ classe: nomeOu(feat, wb_id), orcamento: livre, delta: livre });
+        }
+      }
+    }
+
+    this.pericias_livres = concedidas;
+    this.pericias_livres_detalhe = detalhe;
+  }
+
+  // -- regra 8: atributos -------------------------------------------------
+
+  /**
+   * Os boosts livres do PF2e que NÃO vêm de `grants` -- são regra fixa do
+   * sistema, iguais para toda classe, e por isso nenhum registro os declara.
+   *
+   * Na CRIAÇÃO são 4, aplicados depois de ancestria, background e classe
+   * ("Step 6: Finish Attribute Modifiers"). Foi a parte que faltou na primeira
+   * versão deste orçamento: sem eles o motor acusava "6 declarados de 5 de
+   * direito" numa ficha que na verdade tinha direito a 9, e o aviso saía
+   * invertido -- apontando excesso onde faltava.
+   *
+   * Depois, 4 a cada 5 níveis.
+   */
+  static readonly BOOSTS_DE_CRIACAO = 4;
+  static readonly NIVEIS_DE_BOOST = [5, 10, 15, 20];
+  static readonly BOOSTS_POR_NIVEL = 4;
+
+  /** Regra 8: o boost de habilidade-chave vem SÓ da primeira classe. */
+  private _atributos(): void {
+    const aplicar_boosts = (lista: unknown, origem: string,
+                            origem_id: string | null = null): void => {
+      for (const b of listaDe(lista)) {
+        const ab = ehDict(b) ? b["ability_boost"] : null;
+        if (!verdadeiro(ab)) continue;
+        const d = dictDe(ab);
+        if (verdadeiro(d["livre"])) {
+          const qtd = Object.hasOwn(d, "quantidade") ? inteiro(d["quantidade"]) : 1;
+          this.origem_boost.push(`${origem}: ${qtd} livre(s)`);
+          this.boosts_pendentes.push(
+            { origem, origem_id, quantidade: qtd, opcoes: null, em: "criacao" });
+          continue;
+        }
+        const opcoes = listaDe(d["opcoes"]).map(String);
+        const qtd = Object.hasOwn(d, "quantidade") ? inteiro(d["quantidade"]) : 1;
+        if (opcoes.length === 1) {
+          somar(this.boosts, opcoes[0], qtd);
+          this.origem_boost.push(`${origem}: +${opcoes[0]}`);
+        } else {
+          this.origem_boost.push(`${origem}: escolha entre ${pyRepr(opcoes)}`);
+          this.boosts_pendentes.push(
+            { origem, origem_id, quantidade: qtd, opcoes, em: "criacao" });
+        }
+      }
+    };
+
+    if (this.ancestria !== null) {
+      aplicar_boosts(this.ancestria["boosts"], nomeOu(this.ancestria, "ancestria"));
+      // `flaw` vem como DICT (`{"ability_flaw": {...}}`), não como lista.
+      // Iterar um dict entrega as chaves -- strings --, o isinstance reprovava
+      // e o defeito era descartado em silêncio. Achado ao comparar com os
+      // iconics: todo personagem de ancestria com defeito de CON saía com 1
+      // ponto de modificador a mais, e portanto `nivel` HP a mais.
+      const bruto = this.ancestria["flaw"];
+      const defeitos = ehDict(bruto) ? [bruto] : listaDe(bruto);
+      for (const f of defeitos) {
+        const ab = ehDict(f) ? f["ability_flaw"] : null;
+        for (const op of listaDe(dictDe(ab)["opcoes"])) {
+          somar(this.boosts, String(op), -1);
+          this.origem_boost.push(
+            `${pyStr(nome(this.ancestria))}: -${String(op)} (defeito)`);
+        }
+      }
+    }
+    if (this.background !== null) {
+      aplicar_boosts(this.background["boosts"], nomeOu(this.background, "background"));
+    }
+
+    // regra 8: SÓ a primeira classe dá o boost de habilidade-chave
+    if (this.primeira_classe !== null) {
+      const classe = this.base.get(this.primeira_classe);
+      const chaves = listaDe(classe["key_ability"]).map(String);
+      if (chaves.length === 1) {
+        somar(this.boosts, chaves[0], 1);
+        this.origem_boost.push(`${pyStr(nome(classe))} (1a classe): +${chaves[0]}`);
+      } else if (chaves.length > 0) {
+        this.origem_boost.push(
+          `${pyStr(nome(classe))} (1a classe): escolha entre ${pyRepr(chaves)}`);
+        this.boosts_pendentes.push({
+          origem: `${pyStr(nome(classe))} (habilidade-chave)`,
+          origem_id: this.primeira_classe, quantidade: 1, opcoes: chaves, em: 1,
+        });
+      }
+    }
+    for (const cid of this.ordem_de_classe.slice(1)) {
+      const classe = this.base.get(cid);
+      this.origem_boost.push(
+        `${pyStr(nome(classe))}: SEM boost de chave (regra 8 -- so a 1a classe)`);
+    }
+
+    // Boosts livres declarados no documento, **só até o nível atual**.
+    // O documento pode carregar escolha de nível futuro -- planejamento de
+    // progressão é caso normal, e o schema guarda decisão, não resultado.
+    // Aplicar tudo faz um personagem de nível 3 andar com os atributos de nível
+    // 5: achado comparando com os iconics, cujo arquivo de nível 3 já traz os
+    // boosts do 5.
+    for (const e of this._escolhas("boosts_livres")) {
+      const quando = obter(e, "em");
+      if (ehInt(quando) && quando > this.nivel) {
+        this.avisos.push(
+          `boosts de nivel ${quando} ignorados -- personagem tem nivel ${this.nivel}`);
+        continue;
+      }
+      for (const atributo of pyIterar(e["pega"])) {
+        somar(this.boosts, String(atributo), 1);
+        this.origem_boost.push(`nivel ${pyStr(quando)}: +${String(atributo)} (livre)`);
+      }
+    }
+
+    this._orcamento_de_boost();
+
+    this.atributos = {};
+    this.modificadores = {};
+    for (const a of ATRIBUTOS) this.atributos[a] = 10 + 2 * (this.boosts.get(a) ?? 0);
+    // `//` do Python trunca para -infinito. `Math.trunc` NÃO faz isso, e
+    // atributo abaixo de 10 é caso real (defeito de ancestria).
+    for (const a of ATRIBUTOS) this.modificadores[a] = Math.floor((this.atributos[a] - 10) / 2);
+  }
+
+  /**
+   * Quantos boosts o personagem tem DIREITO contra quantos declarou.
+   *
+   * Mesma forma da higiene de slot e do orçamento de perícia: o motor já sabia
+   * LER cada fonte de boost, mas nunca somava o direito nem confrontava com o
+   * gasto. Resultado: ficha sem `boosts_livres` saía com tudo 10 e a suíte
+   * inteira verde.
+   */
+  private _orcamento_de_boost(): void {
+    this.boosts_pendentes.push({
+      origem: "criacao (4 livres)", origem_id: null,
+      quantidade: Personagem.BOOSTS_DE_CRIACAO, opcoes: null, em: "criacao",
+    });
+    for (const n of Personagem.NIVEIS_DE_BOOST) {
+      if (n <= this.nivel) {
+        this.boosts_pendentes.push({
+          origem: `nivel ${n}`, origem_id: null,
+          quantidade: Personagem.BOOSTS_POR_NIVEL, opcoes: null, em: n,
+        });
+      }
+    }
+
+    const direito = this.boosts_pendentes.reduce((s, b) => s + b.quantidade, 0);
+    let declarado = 0;
+    for (const e of this._escolhas("boosts_livres")) {
+      const em = e["em"];
+      if (ehInt(em) && em > this.nivel) continue;
+      // `len(e.get("pega") or [])`: em string o Python conta CARACTERES
+      declarado += pyIterar(e["pega"]).length;
+    }
+
+    this.boosts_direito = direito;
+    this.boosts_declarados = declarado;
+    if (declarado < direito) {
+      const faltam = direito - declarado;
+      const de_onde = this.boosts_pendentes
+        .map((b) => `${b.origem} (${b.quantidade})`).join(", ");
+      this.avisos.push(
+        `boosts de atributo: ${declarado} declarado(s) de ${direito} a que o `
+        + `personagem tem direito -- faltam ${faltam}. Fontes: ${de_onde}`);
+    } else if (declarado > direito) {
+      this.avisos.push(
+        `boosts de atributo: ${declarado} declarado(s) para ${direito} de `
+        + `direito -- ${declarado - direito} a mais`);
+    }
+  }
+
+  // -- regra 11: HP -------------------------------------------------------
+
+  /** Regra 11: HP por nível vem da classe que recebeu AQUELE nível. */
+  private _hp(): void {
+    let total = 0;
+    if (this.ancestria !== null) {
+      const hp_anc = inteiro(this.ancestria["hp"]);
+      total += hp_anc;
+      this.hp_detalhe.push(
+        { origem: nome(this.ancestria), hp: hp_anc, nota: "ancestria" });
+    }
+
+    const con = this.modificadores["con"] ?? 0;
+    for (const nivel of ordenarNumeros(this.classe_do_nivel.keys())) {
+      const cid = this.classe_do_nivel.get(nivel) as string;
+      const classe = this.base.get(cid);
+      let por_nivel = 0;
+      for (const g of listaDe(classe["grants"])) {
+        if (ehDict(g) && Object.hasOwn(g, "hp_per_level")) por_nivel = inteiro(g["hp_per_level"]);
+      }
+      const ganho = por_nivel + con;
+      total += ganho;
+      this.hp_detalhe.push({
+        origem: `nivel ${nivel} (${pyStr(nome(classe))})`,
+        hp: ganho, nota: `${por_nivel} da classe + ${con} de CON`,
+      });
+    }
+
+    // feat que concede HP -- `Toughness` é o caso clássico (`flat_modifier` com
+    // selector `hp` e valor `@actor.level`). Sem isto o HP fica exatamente
+    // `nivel` pontos abaixo do oficial, que foi como a validação contra os
+    // iconics da Paizo achou esta lacuna.
+    for (const [wb_id, feat, por] of this._feats_efetivos()) {
+      for (const g of listaDe(feat["grants"])) {
+        const fm = ehDict(g) ? g["flat_modifier"] : null;
+        if (!verdadeiro(fm) || dictDe(fm)["selector"] !== "hp") continue;
+        const valor = this._resolver_valor(dictDe(fm)["value"]);
+        if (valor) {
+          total += valor;
+          this.hp_detalhe.push({
+            origem: nomeOu(feat, wb_id), hp: valor,
+            nota: `feat (${pyStr(obter(dictDe(fm), "value"))})`
+                  + (verdadeiro(por) ? ` via ${pyStr(por)}` : ""),
+          });
+        }
+      }
+    }
+    this.hp = total;
+  }
+
+  private *_feats_escolhidos(): Generator<[string, Registro]> {
+    for (const e of this._todas_escolhas()) {
+      const wb_id = e["pega"];
+      if (ehStr(wb_id) && wb_id.startsWith("wb:feat/")) {
+        const feat = this.base.opcional(wb_id);
+        if (feat !== null) yield [wb_id, feat];
+      }
+    }
+  }
+
+  /**
+   * Resolve a expressão do Foundry no valor deste personagem.
+   *
+   * Regra 19: em texto de regra impresso, "your level" significa **nível de
+   * personagem** -- e `@actor.level` é exatamente isso.
+   */
+  private _resolver_valor(expressao: unknown): number {
+    if (typeof expressao === "number") return Math.trunc(expressao);
+    const texto = (verdadeiro(expressao) ? String(expressao) : "").trim();
+    if (texto === "@actor.level" || texto === "@actor.details.level.value") return this.nivel;
+    if (/^[+-]?\d+$/.test(texto)) return Number.parseInt(texto, 10);
+    return 0;
+  }
+
+  // -- regras 12 e 14: slots de feat --------------------------------------
+
+  /**
+   * Regra 12: class feat a cada nível PAR de personagem, não por classe.
+   * Regra 14: a cadência básica (ancestry, general, skill) segue o nível de
+   * personagem, sem mudança.
+   *
+   * A conta é por PERSONAGEM. Somar as tabelas das classes multiplicaria os
+   * slots e quebraria a regra 21 (a rota de nível nunca pode render mais que a
+   * de dedicação... nem menos).
+   */
+  private _slots_de_feat(): void {
+    const faixa: number[] = [];
+    for (let n = 1; n <= this.nivel; n += 1) faixa.push(n);
+    const basica = new Map<string, number[]>([
+      ["class", faixa.filter((n) => n % 2 === 0)],
+      ["skill", faixa.filter((n) => n % 2 === 0)],
+      ["general", faixa.filter((n) => n % 4 === 3)],
+      ["ancestry", faixa.filter((n) => n % 4 === 1)],
+    ]);
+
+    // Regra 15: quando uma CLASSE concede cadência extra, o extra passa a valer
+    // a partir do nível de personagem em que aquela classe entrou. O Ladino
+    // concede skill feat todo nível e o Investigador concede skill increase
+    // todo nível -- usar só a cadência básica dava a eles metade dos slots.
+    const extras = new Map<string, Set<number>>();
+    for (const [k, v] of basica) extras.set(k, new Set(v));
+    for (const [cid, desde] of this.entrada_da_classe) {
+      const classe = this.base.get(cid);
+      for (const g of listaDe(classe["grants"])) {
+        const fs = ehDict(g) ? g["feat_slot"] : null;
+        if (!verdadeiro(fs) || !verdadeiro(dictDe(fs)["kind"])) continue;
+        const chave = String(dictDe(fs)["kind"]);
+        if (!extras.has(chave)) extras.set(chave, new Set(basica.get(chave) ?? []));
+        for (const bruto of listaDe(dictDe(fs)["levels"])) {
+          const n = inteiro(bruto);
+          // só conta a partir de quando a classe entrou (regra 15) e até o
+          // nível atual
+          if (desde <= n && n <= this.nivel) (extras.get(chave) as Set<number>).add(n);
+        }
+      }
+    }
+
+    this.slots = new Map();
+    for (const [k, v] of extras) this.slots.set(k, ordenarNumeros(v));
+    // regra 2: Free Archetype sempre ligado -- slot em todo nível par
+    this.slots.set("free_archetype", faixa.filter((n) => n % 2 === 0));
+
+    // regra 8: o class feat de nível 1 só vem da PRIMEIRA classe
+    const dos_class = this.slots.get("class") ?? [];
+    this.class_feat_nivel_1 = dos_class.includes(1);
+    if (dos_class.includes(1) && this.primeira_classe !== null) {
+      let concede = false;
+      for (const g of listaDe(this.base.get(this.primeira_classe)["grants"])) {
+        if (!ehDict(g)) continue;
+        const fs = dictDe(g["feat_slot"]);
+        if (listaDe(fs["levels"]).some((n) => n === 1) && fs["kind"] === "class") {
+          concede = true;
+        }
+      }
+      if (!concede) {
+        this.slots.set("class", dos_class.filter((n) => n !== 1));
+        this.class_feat_nivel_1 = false;
+      }
+    }
+
+    // o que o documento realmente gastou
+    for (const e of this._todas_escolhas()) {
+      const slot = e["slot"];
+      if (ehStr(slot) && ["class_feat", "skill_feat", "general_feat",
+                          "ancestry_feat", "free_archetype"].includes(slot)) {
+        empurrar(this.gastos, slot, e);
+      }
+    }
+
+    this._higiene_de_slot();
+  }
+
+  /** cada slot do documento e a lista de níveis que o alimenta */
+  static readonly SLOT_PARA_CADENCIA: Array<[string, string]> = [
+    ["class_feat", "class"], ["skill_feat", "skill"], ["general_feat", "general"],
+    ["ancestry_feat", "ancestry"], ["free_archetype", "free_archetype"],
+  ];
+
+  /**
+   * Confronta o que foi GASTO com o que existe de slot.
+   *
+   * Até aqui o motor colecionava `gastos` e `slots` lado a lado sem nunca
+   * compará-los: um pick de Free Archetype no nível 3 (onde não há slot), três
+   * picks para dois slots, ou um class feat puro ocupando o slot gratuito
+   * passavam os três em silêncio.
+   *
+   * Princípio zero: isto SINALIZA, nunca recusa. A escolha continua no documento
+   * e a ficha continua derivando.
+   */
+  private _higiene_de_slot(): void {
+    for (const [slot, cadencia] of Personagem.SLOT_PARA_CADENCIA) {
+      const niveis = this.slots.get(cadencia) ?? [];
+      const usados = this.gastos.get(slot) ?? [];
+
+      if (usados.length > niveis.length) {
+        this.avisos.push(
+          `slot ${slot}: ${usados.length} escolha(s) para ${niveis.length} `
+          + `slot(s) disponivel(is) em ${pyRepr(niveis)}`);
+      }
+
+      for (const e of usados) {
+        const em = obter(e, "em");
+        if (ehInt(em) && !niveis.includes(em)) {
+          this.avisos.push(
+            `slot ${slot}: escolha no nivel ${em}, que nao tem slot desse tipo `
+            + `(niveis validos: ${pyRepr(niveis)})`);
+        }
+      }
+    }
+
+    // o slot de Free Archetype (regra 2) só aceita feat de ARQUÉTIPO -- é a
+    // única coisa que o distingue do slot de class feat. Sem esta checagem ele
+    // vira um segundo class feat de graça em toda ficha.
+    for (const e of this.gastos.get("free_archetype") ?? []) {
+      const wb_id = e["pega"];
+      if (!ehStr(wb_id)) continue;
+      const feat = this.base.opcional(wb_id);
+      if (feat === null) continue;
+      if (!listaDe(feat["traits"]).includes("archetype")) {
+        this.avisos.push(
+          `slot free_archetype: ${nomeOu(feat, wb_id)} nao tem trait `
+          + `\`archetype\` -- o slot gratuito so aceita feat de arquetipo`);
+      }
+    }
+  }
+
+  // -- regras 16, 17, 18: conjuração --------------------------------------
+
+  /**
+   * Regra 16: slots pelo nível de CLASSE cru, tabela nativa do PF2e.
+   * Regra 17: rank efetivo = ceil(nivel_de_personagem / 2).
+   *
+   * É aqui que a houserule inteira aparece. Um Mago 2 dentro de um personagem
+   * de nível 5 tem os SLOTS de um Mago 2 (2 de rank 1) mas conjura no rank 3 --
+   * o slot vem da classe, a potência vem do personagem. Sem os dois números
+   * separados não há como expressar isso.
+   */
+  private _conjuracao(): void {
+    for (const cid of this.ordem_de_classe) {
+      const classe = this.base.get(cid);
+      const sc = classe["spellcasting"];
+      if (!ehDict(sc) || !verdadeiro(sc["slots_per_level"])) continue;
+      const nivel_classe = this.nivel_de(cid);
+      const tabela = dictDe(sc["slots_per_level"])[String(nivel_classe)];
+      if (!verdadeiro(tabela)) {
+        this.avisos.push(
+          `${pyStr(nome(classe))}: sem linha de slots para nivel de classe ${nivel_classe}`);
+        continue;
+      }
+      const t = dictDe(tabela);
+      const rank_efetivo = Math.ceil(this.nivel / 2);          // regra 17
+      const max_rank_cru = inteiro(t["max_rank"]);             // regra 16
+      const ranks: Record<string, number> = {};
+      for (const [k, v] of Object.entries(dictDe(t["ranks"]))) ranks[k] = inteiro(v);
+      this.conjuracao.push({
+        classe: nomeOu(classe, cid),
+        nivel_de_classe: nivel_classe,
+        tradicao: obter(sc, "tradition") as string | null,
+        tipo: obter(sc, "type") as string | null,
+        slots: ranks,
+        truques: obter(t, "cantrips") as number | null,
+        max_rank_do_slot: max_rank_cru,
+        rank_efetivo,
+        elevacao: Math.max(0, rank_efetivo - max_rank_cru),
+        rank_de_invocacao: this.cap_invocacao(nivel_classe),   // regra 17b
+        dc: this._dc_de_conjuracao(classe, nivel_classe, sc),
+      });
+    }
+  }
+
+  // -- regra 17b: teto para o que cria criatura ---------------------------
+
+  /**
+   * Rank de slot que a dedicação de conjuração concede, por nível de
+   * PERSONAGEM. Citado verbatim da regra "Spellcasting Archetypes" (Player
+   * Core): "Basic Spellcasting Feat: usually available at 4th level, these
+   * feats grant a 1st-rank spell slot. At 6th level, a 2nd-rank spell slot. At
+   * 8th level, a 3rd-rank spell slot. Expert: 12th -> 4th-rank, 14th -> 5th,
+   * 16th -> 6th. Master: 18th -> 7th-rank, 20th -> 8th-rank."
+   */
+  static readonly RANK_DEDICACAO: Array<[number, number]> = [
+    [20, 8], [18, 7], [16, 6], [14, 5], [12, 4], [8, 3], [6, 2], [4, 1],
+  ];
+
+  /**
+   * O que a rota GRATUITA entrega neste nível de personagem.
+   *
+   * Sob Free Archetype (regra 2, sempre ligada) a dedicação não custa nada além
+   * do slot gratuito de arquétipo, e pela regra 18 ela roda RAW puro. É por
+   * isso que ela é o piso: qualquer coisa que custe nível de classe tem de
+   * render pelo menos isto.
+   */
+  rank_de_dedicacao(nivel_personagem: number | null = null): number {
+    const n = nivel_personagem === null ? this.nivel : nivel_personagem;
+    return Personagem.RANK_DEDICACAO.find(([lvl]) => n >= lvl)?.[1] ?? 0;
+  }
+
+  /**
+   * Rank máximo de magia com trait `summon` ou `incarnate` (regra 17b).
+   *
+   *     min( max( ceil(class_level/2) + 2 , rank_de_dedicacao ), ceil(nivel/2) )
+   *
+   * Três termos, cada um com um trabalho:
+   *
+   * - `ceil(class_level/2) + 2` -- a folga que a houserule concede a quem gastou
+   *   nível de classe;
+   * - `rank_de_dedicacao` -- o PISO da regra 21: gastar um nível inteiro de
+   *   personagem tem de render pelo menos o que a dedicação entrega de graça sob
+   *   Free Archetype. Sem ele a simulação de 2026-07-27 achou 50 de 204 pares
+   *   violando, com o dip chegando a **0%** da dedicação no nível 20;
+   * - `ceil(nivel/2)` -- o teto de heightened, que vale para tudo e faz a regra
+   *   se autoproteger: com classe única os dois níveis são iguais, nem a folga
+   *   nem o piso chegam a valer, e o RAW sai intacto sem caso especial.
+   */
+  cap_invocacao(nivel_classe: number): number {
+    const folga = Math.ceil(nivel_classe / 2) + 2;
+    return Math.min(Math.max(folga, this.rank_de_dedicacao()), Math.ceil(this.nivel / 2));
+  }
+
+  /**
+   * Nível máximo de companheiro, familiar ou eidolon.
+   *
+   * Sem o `/2`, de propósito. Rank de magia já nasce em escala de metade do
+   * nível; nível de criatura está na mesma escala do nível de personagem.
+   * Dividir por dois faria um Ranger 12 PURO cair para companheiro nível 6,
+   * quebrando classe única == RAW.
+   */
+  cap_ator(nivel_classe: number): number {
+    return Math.min(nivel_classe + 2, this.nivel);
+  }
+
+  /**
+   * A magia cria criatura que age sozinha? Deriva só de trait.
+   *
+   * `summon` (14 magias) e `incarnate` (23) não têm intersecção -- a segunda
+   * cobre as invocações de rank 4 a 10. Spirit Link e Protector Tree NÃO
+   * entram: não criam nada, são efeito contínuo.
+   */
+  eleva_por_invocacao(magia: Dict): boolean {
+    const traits = listaDe(magia["traits"]);
+    return traits.includes("summon") || traits.includes("incarnate");
+  }
+
+  /**
+   * Avanço do companheiro, RAW (Player Core p.206 e 211). `nimble` e `savage`
+   * partem de `mature`, então os ajustes são cumulativos com ele.
+   */
+  static readonly AVANCO: Record<string, {
+    attr: Record<string, number>; dados: number; dano_extra: number;
+    pericias: Record<string, string>;
+  }> = {
+    young: { attr: {}, dados: 1, dano_extra: 0, pericias: {} },
+    mature: {
+      attr: { str: 1, dex: 1, con: 1, wis: 1 }, dados: 2, dano_extra: 0,
+      pericias: {
+        perception: "expert", fortitude: "expert", reflex: "expert",
+        will: "expert", intimidation: "trained", stealth: "trained",
+        survival: "trained",
+      },
+    },
+    nimble: {
+      attr: { str: 2, dex: 3, con: 2, wis: 2 }, dados: 2, dano_extra: 2,
+      pericias: {
+        perception: "expert", fortitude: "expert", reflex: "expert",
+        will: "expert", intimidation: "trained", stealth: "trained",
+        survival: "trained", acrobatics: "expert",
+      },
+    },
+    savage: {
+      attr: { str: 3, dex: 2, con: 2, wis: 2 }, dados: 2, dano_extra: 3,
+      pericias: {
+        perception: "expert", fortitude: "expert", reflex: "expert",
+        will: "expert", intimidation: "trained", stealth: "trained",
+        survival: "trained", athletics: "expert",
+      },
+    },
+  };
+
+  /** RAW: "trained in its unarmed attacks, unarmored defense, barding, all
+   * saving throws, Perception, Acrobatics, and Athletics" */
+  static readonly PROF_BASE = ["unarmed", "unarmored", "barding", "fortitude",
+                               "reflex", "will", "perception", "acrobatics",
+                               "athletics"];
+
+  /**
+   * Feats reais na base que concedem cada avanço. Usados para DERIVAR o teto de
+   * maturidade em vez de ler `ator["maturidade"]` como resultado pronto. Cada
+   * lista cobre aliases duplicados que a base carrega para o mesmo feat (ex.:
+   * "Mature Animal Companion" e "Mature Animal Companion (Druid)" são o mesmo
+   * texto, mesma fonte, dois ids -- artefato do dump, não duas regras).
+   */
+  static readonly FEATS_MATURIDADE: Record<string, Record<string, string[]>> = {
+    mature: {
+      "wb:class/druid": ["wb:feat/mature-animal-companion",
+                         "wb:feat/mature-animal-companion-druid"],
+      "wb:class/ranger": ["wb:feat/mature-animal-companion-ranger"],
+    },
+    incredible: {
+      "wb:class/druid": ["wb:feat/incredible-companion",
+                         "wb:feat/incredible-companion-druid"],
+      "wb:class/ranger": ["wb:feat/incredible-companion-ranger"],
+    },
+    specialized: {
+      "wb:class/druid": ["wb:feat/specialized-companion-druid"],
+      "wb:class/ranger": ["wb:feat/specialized-companion-ranger"],
+    },
+  };
+
+  /**
+   * Arquétipo Animal Trainer: trilha PRÓPRIA, gate por character_level -- isso é
+   * RAW normal de arquétipo, não houserule, e essa trilha não passa pelas feats
+   * de Druid/Ranger acima.
+   */
+  static readonly FEATS_MATURIDADE_ARQUETIPO: Record<string, string[]> = {
+    mature: ["wb:feat/mature-trained-companion"],
+    incredible: ["wb:feat/splendid-companion"],
+    specialized: ["wb:feat/specialized-companion-animal-trainer"],
+  };
+
+  static readonly ORDEM_TIER = ["young", "mature", "incredible"];
+
+  /**
+   * RAW (Player Core p.211, "Specialized Animal Companions"): o dano extra
+   * sempre DOBRA (nimble 2->4, savage 3->6) -- por isso o código multiplica em
+   * vez de gravar os dois números na tabela.
+   *
+   * O "extra benefit" por TIPO de especialização NÃO está aqui: é escolha do
+   * jogador sem campo no schema nem na base, então não dá pra derivar.
+   */
+  static readonly SPECIALIZADO = {
+    attr_delta: { dex: 1, int: 2 } as Record<string, number>,
+    dados: 3,
+    pericias_upgrade: {
+      unarmed: "expert", perception: "master", fortitude: "master",
+      reflex: "master", will: "master",
+    } as Record<string, string>,
+  };
+
+  /**
+   * Deriva o teto de maturidade dos feats de avanço REALMENTE escolhidos (não
+   * só presentes no requisito -- escolhidos de fato), conferindo o requisito de
+   * cada um contra o nível de CLASSE que concedeu o companheiro. É a houserule
+   * central deste ponto: um Ranger 6 dentro de um personagem 20 só passa disso
+   * se tiver 6 níveis de Ranger, porque `class_level` no `requires` do feat é
+   * comparado com `nivel_de(cid)`, nunca com `nivel`.
+   */
+  private _maturidade_do_companheiro(cid: string | null): [string, boolean] {
+    const escolhidos = new Set<string>();
+    for (const [wb_id] of this._feats_escolhidos()) escolhidos.add(wb_id);
+
+    const valido = (feat_ids: string[]): boolean => {
+      for (const fid of feat_ids) {
+        if (!escolhidos.has(fid)) continue;
+        const feat = this.base.opcional(fid);
+        if (feat !== null && this.avaliar(feat["requires"])[0]) return true;
+      }
+      return false;
+    };
+
+    const maior = (a: string, b: string): string =>
+      Personagem.ORDEM_TIER.indexOf(b) > Personagem.ORDEM_TIER.indexOf(a) ? b : a;
+
+    let tier = "young";
+    if (cid !== null && valido(Personagem.FEATS_MATURIDADE["mature"][cid] ?? [])) {
+      tier = "mature";
+      if (valido(Personagem.FEATS_MATURIDADE["incredible"][cid] ?? [])) tier = "incredible";
+    }
+    if (valido(Personagem.FEATS_MATURIDADE_ARQUETIPO["mature"])) {
+      tier = maior(tier, "mature");
+      if (valido(Personagem.FEATS_MATURIDADE_ARQUETIPO["incredible"])) {
+        tier = maior(tier, "incredible");
+      }
+    }
+
+    let especializado = false;
+    if (tier === "incredible") {
+      if (cid !== null && valido(Personagem.FEATS_MATURIDADE["specialized"][cid] ?? [])) {
+        especializado = true;
+      }
+      if (valido(Personagem.FEATS_MATURIDADE_ARQUETIPO["specialized"])) especializado = true;
+    }
+    return [tier, especializado];
+  }
+
+  /**
+   * Feats que ABREM ESCOLHA (nimble ou savage) em vez de decidir sozinhos -- o
+   * mesmo padrão de `ChoiceSet` que o Foundry usa em ~243 dos 6.044 feats. A
+   * base ainda não extrai esse tipo de escolha PARA FEATS (só para eixo de
+   * subclasse), então aqui o feat é citado à mão.
+   */
+  static readonly FEATS_QUE_ABREM_ESCOLHA: Record<string, string[]> = {
+    "wb:feat/incredible-companion": ["nimble", "savage"],
+    "wb:feat/incredible-companion-druid": ["nimble", "savage"],
+    "wb:feat/incredible-companion-ranger": ["nimble", "savage"],
+    "wb:feat/splendid-companion": ["nimble", "savage"],
+  };
+
+  /**
+   * `tier` já vem derivado dos feats. Incredible Companion (e Splendid
+   * Companion) não dizem sozinhos se o companheiro fica nimble ou savage -- é
+   * escolha do jogador, aberta pelo feat.
+   *
+   * Registrada com o MESMO vocabulário que o eixo de subclasse já usa, para o
+   * front poder reusar o mesmo componente de picker.
+   *
+   * SEM escolha feita, `grau` vem null -- não há default silencioso para nimble
+   * nem para young. Escolha não feita é estado legítimo.
+   */
+  private _resolver_grau_incredible(ator: Dict, tier: string): [string | null, Dict | null] {
+    if (tier !== "incredible") return [tier, null];
+
+    const escolhidos = new Set<string>();
+    for (const [wb_id] of this._feats_escolhidos()) escolhidos.add(wb_id);
+    const feat_id = Object.keys(Personagem.FEATS_QUE_ABREM_ESCOLHA)
+      .find((fid) => escolhidos.has(fid)) ?? null;
+    const feat = feat_id !== null ? this.base.opcional(feat_id) : null;
+    const opcoes = (feat_id !== null
+      ? Personagem.FEATS_QUE_ABREM_ESCOLHA[feat_id] : undefined) ?? ["nimble", "savage"];
+
+    const declarado = listaDe(ator["escolhas"]).filter(ehDict)
+      .find((e) => e["slot"] === "grau_avancado")?.["pega"] ?? null;
+    const escolhido = ehStr(declarado) && opcoes.includes(declarado) ? declarado : null;
+
+    const entrada: Dict = {
+      origem: "feat",
+      feat: feat_id,
+      nome_do_feat: nomeOu(feat, pyStr(feat_id)),
+      ator: verdadeiro(ator["nome"]) ? ator["nome"] : "",
+      eixo: "grau-incredible-companion",
+      nivel: obter(feat ?? {}, "level"),
+      slot: "grau_avancado",
+      escolhe: 1,
+      opcoes,
+      escolhido,
+    };
+    if (escolhido === null) {
+      this.avisos.push(
+        `companheiro ${verdadeiro(ator["nome"]) ? pyStr(ator["nome"]) : ""}: `
+        + `${pyStr(entrada["nome_do_feat"])} aberto, falta escolher entre `
+        + `${opcoes.join("/")} (slot \`grau_avancado\` no \`escolhas\` do ator)`);
+    }
+    return [escolhido, entrada];
+  }
+
+  /**
+   * Ficha do companheiro, familiar e eidolon.
+   *
+   * Nível pela regra 17b; o resto é RAW puro -- "animal companions calculate
+   * their modifiers and DCs just as you do", então bônus = nível + rank +
+   * atributo, exatamente como o personagem.
+   */
+  private _atores(): void {
+    for (const bruto of listaDe((this.doc as unknown as Dict)["atores"])) {
+      const a = dictDe(bruto);
+      const [cid, nota] = this._classe_do_ator(a);
+      const nivel_classe = cid !== null ? this.nivel_de(cid) : this.nivel;
+      const ator: Dict = {
+        tipo: obter(a, "tipo"),
+        nome: verdadeiro(a["nome"]) ? a["nome"] : "",
+        concedido_por: obter(a, "concedido_por"),
+        classe: cid !== null ? nome(this.base.opcional(cid)) : null,
+        nivel_de_classe: nivel_classe,
+        nivel: this.cap_ator(nivel_classe),
+        nota,
+        escolhas: listaDe(a["escolhas"]),
+      };
+      if (a["tipo"] === "companheiro") {
+        const [tier, temEspecializado] = this._maturidade_do_companheiro(cid);
+        let especializado = temEspecializado;
+        const [grau, pendente] = this._resolver_grau_incredible(a, tier);
+        if (pendente !== null) this.escolhas_de_feat.push(pendente);
+        if (grau === null && especializado) {
+          this.avisos.push(
+            `companheiro ${verdadeiro(a["nome"]) ? pyStr(a["nome"]) : ""}: `
+            + `Specialized Companion detectado, mas o grau nimble/savage ainda `
+            + `nao foi escolhido -- specialized nao aplicado ate resolver`);
+        }
+        if (grau === null) especializado = false;
+        ator["grau_pendente"] = grau === null;
+        Object.assign(ator, this._ficha_de_companheiro(
+          a, ator["nivel"] as number, grau ?? "mature", especializado));
+      }
+      this.atores.push(ator);
+    }
+  }
+
+  /**
+   * RAW, Player Core p.206: atributos do stat block com os ajustes de avanço;
+   * HP de ancestria mais (6 + CON) por nível; proficiência treinada na lista
+   * base, elevada pelo avanço. `grau` e `especializado` já vêm DERIVADOS dos
+   * feats -- aqui é só aplicar os números.
+   */
+  private _ficha_de_companheiro(ator: Dict, nivel: number, grau: string,
+                                especializado: boolean): Dict {
+    const pega = listaDe(ator["escolhas"]).filter(ehDict)
+      .find((e) => e["slot"] === "animal")?.["pega"] ?? null;
+    const especie = dictDe(this.base.opcional(ehStr(pega) ? pega : ""));
+    const st = dictDe(especie["stats"]);
+    if (Object.keys(st).length === 0) {
+      return { aviso: `especie do companheiro nao encontrada: ${pyStr(pega)}` };
+    }
+
+    const av = Personagem.AVANCO[grau] ?? Personagem.AVANCO["young"];
+    const attr = new Map<string, number>();
+    for (const [k, v] of Object.entries(dictDe(st["atributos"]))) attr.set(k, inteiro(v));
+    for (const [k, v] of Object.entries(av.attr)) attr.set(k, (attr.get(k) ?? 0) + v);
+    let dados = av.dados;
+    let dano_extra = av.dano_extra;
+    const pericias_av = new Map(Object.entries(av.pericias));
+
+    // Specialized Animal Companions (Player Core p.211): delta por cima do
+    // nimble/savage já acumulado
+    if (especializado) {
+      for (const [k, v] of Object.entries(Personagem.SPECIALIZADO.attr_delta)) {
+        attr.set(k, (attr.get(k) ?? 0) + v);
+      }
+      dados = Personagem.SPECIALIZADO.dados;
+      dano_extra *= 2;
+      for (const [k, v] of Object.entries(Personagem.SPECIALIZADO.pericias_upgrade)) {
+        pericias_av.set(k, v);
+      }
+    }
+
+    // RAW: "ancestry Hit Points from its type, plus a number of Hit Points
+    // equal to 6 plus its Constitution modifier for each level you have"
+    const hp = inteiro(st["hp"]) + (6 + (attr.get("con") ?? 0)) * nivel;
+
+    const prof = new Map<string, string>();
+    for (const k of Personagem.PROF_BASE) prof.set(k, "trained");
+    for (const p of listaDe(st["pericia_inicial"])) prof.set(String(p).toLowerCase(), "trained");
+    for (const [k, v] of pericias_av) {
+      // "if it was already trained in one of those skills from its type,
+      // increase its proficiency rank in that skill to expert"
+      if (v === "trained" && prof.get(k) === "trained") prof.set(k, "expert");
+      else prof.set(k, v);
+    }
+
+    const bonus = (chave: string, atributo: string): number =>
+      nivel + RANK_BONUS[(prof.get(chave) ?? "untrained") as Rank] + (attr.get(atributo) ?? 0);
+
+    const ataques: Dict[] = [];
+    for (const bruto of listaDe(st["ataques"])) {
+      const atk = dictDe(bruto);
+      const dado = verdadeiro(atk["dano"]) ? String(atk["dano"]) : "";
+      const face = dado.includes("d") ? dado.split("d")[dado.split("d").length - 1] : null;
+      const traits = listaDe(atk["traits"]);
+      const agil = traits.includes("agile");
+      // finesse usa DEX quando compensa; o resto é STR, como no personagem
+      const usa = traits.includes("finesse")
+        && (attr.get("dex") ?? 0) > (attr.get("str") ?? 0) ? "dex" : "str";
+      const dano = verdadeiro(face) ? `${dados}d${String(face)}` : "?";
+      const mod = (attr.get("str") ?? 0) + dano_extra;
+      ataques.push({
+        nome: obter(atk, "nome"),
+        ataque: bonus("unarmed", usa),
+        dano: mod ? `${dano}${comSinal(mod)}` : dano,
+        tipo: obter(atk, "tipo"),
+        traits,
+        agil,
+      });
+    }
+
+    return {
+      especie: nome(especie),
+      maturidade: grau,
+      especializado,
+      tamanho: obter(st, "tamanho"),
+      velocidade: obter(st, "velocidade"),
+      sentidos: obter(st, "sentidos"),
+      atributos: objetoDe(attr),
+      hp,
+      hp_detalhe: `${pyStr(obter(st, "hp"))} de ancestria + `
+                  + `(6 ${comSinal(attr.get("con") ?? 0)}) x ${nivel}`,
+      ac: 10 + (attr.get("dex") ?? 0) + nivel
+          + RANK_BONUS[(prof.get("unarmored") ?? "untrained") as Rank],
+      proficiencias: objetoDe(prof),
+      saves: {
+        fortitude: bonus("fortitude", "con"),
+        reflex: bonus("reflex", "dex"),
+        will: bonus("will", "wis"),
+      },
+      percepcao: bonus("perception", "wis"),
+      ataques,
+      support: obter(st, "support_benefit"),
+      manobra_avancada: grau === "nimble" || grau === "savage"
+        ? obter(st, "advanced_maneuver") : null,
+    };
+  }
+
+  /**
+   * De qual classe veio o ator. `classe` explícito ganha; senão tenta o
+   * `concedido_por`; senão assume a classe de maior nível e AVISA -- chutar em
+   * silêncio daria o cap errado sem ninguém perceber.
+   */
+  private _classe_do_ator(ator: Dict): [string | null, string | null] {
+    if (verdadeiro(ator["classe"])) return [String(ator["classe"]), null];
+    const origem = ator["concedido_por"];
+    if (verdadeiro(origem)) {
+      for (const cid of this.ordem_de_classe) {
+        const n = nomeOu(this.base.opcional(cid), "");
+        if (verdadeiro(n) && String(origem).includes(n.toLowerCase().replaceAll(" ", "-"))) {
+          return [cid, null];
+        }
+      }
+    }
+    if (this.ordem_de_classe.length === 0) {
+      return [null, "sem classe para ancorar o nivel do ator"];
+    }
+    let maior = this.ordem_de_classe[0];
+    for (const cid of this.ordem_de_classe) {
+      if (this.nivel_de(cid) > this.nivel_de(maior)) maior = cid;
+    }
+    return [maior, `classe de origem nao declarada; usei `
+                   + `${pyStr(nome(this.base.opcional(maior)))} (a de maior nivel). `
+                   + `Declare \`classe\` no ator para travar o cap da regra 17b`];
+  }
+
+  /** Regra 3: bônus = nível_de_PERSONAGEM + rank; o RANK vem do nível da classe. */
+  private _dc_de_conjuracao(classe: Registro, nivel_classe: number,
+                            sc: Dict): Conjuracao["dc"] {
+    let prog = dictDe(sc["proficiency"]);
+
+    // A progressão pode depender da SUBCLASSE. O Clérigo é o caso publicado:
+    // Cloistered chega a legendary no 19, Warpriest para em master. Ler a
+    // progressão "da classe" aqui daria o número errado para metade dos
+    // Clérigos -- e é por isso que `class_level` sozinho não basta.
+    const aninhadas = new Map<string, Dict>();
+    for (const [k, v] of Object.entries(prog)) if (ehDict(v)) aninhadas.set(k, v);
+    if (aninhadas.size > 0) {
+      const escolhida = this._subclasse_de(String(classe["id"]));
+      let chave: string | null = null;
+      if (verdadeiro(escolhida)) {
+        const alvo = normChave(dictDe(this.base.opcional(escolhida)));
+        chave = [...aninhadas.keys()].find((k) => normSlug(k) === alvo) ?? null;
+      }
+      if (chave === null) {
+        chave = ordenarTextos(aninhadas.keys())[0];
+        this.avisos.push(
+          `${pyStr(nome(classe))}: progressao de conjuracao depende da subclasse `
+          + `(${ordenarTextos(aninhadas.keys()).join(", ")}) e nenhuma foi escolhida `
+          + `-- usando \`${chave}\``);
+      }
+      prog = aninhadas.get(chave) as Dict;
+    }
+
+    let rank: Rank = "untrained";
+    for (const n of RANKS) {
+      const exigido = prog[n];
+      if (ehInt(exigido) && nivel_classe >= exigido) rank = melhorRank(rank, n);
+    }
+    const chaves = listaDe(classe["key_ability"]).map(String);
+    const mods = chaves.map((k) => this.modificadores[k] ?? 0);
+    const mod = mods.length > 0 ? Math.max(...mods) : 0;
+    const bonus = this.nivel + RANK_BONUS[rank] + mod;
+    return {
+      rank, dc: 10 + bonus, ataque: bonus,
+      nota: `nivel de personagem ${this.nivel} + rank ${rank} `
+            + `(pelo nivel de classe ${nivel_classe}) + mod ${mod}`,
+    };
+  }
+
+  // -- regra 22: focus ----------------------------------------------------
+
+  /** Regra 22: pool ÚNICO do personagem, teto 3, independente das classes. */
+  private _focus(): void {
+    let pool = 0;
+    for (const cid of this.ordem_de_classe) {
+      const sc = this.base.get(cid)["spellcasting"];
+      if (ehDict(sc)) pool += inteiro(dictDe(sc["focus_pool"])["base"]);
+    }
+    this.focus_pool = Math.min(3, pool);
+  }
+
+  // -- AC e ataque: a ficha tem que trazer os números ---------------------
+
+  private _equipados(kind: string): Array<{ registro: Registro; entrada: Dict }> {
+    const saida: Array<{ registro: Registro; entrada: Dict }> = [];
+    for (const bruto of listaDe((this.doc as unknown as Dict)["inventario"])) {
+      const item = dictDe(bruto);
+      if (!verdadeiro(item["equipado"]) && !verdadeiro(item["investido"])) continue;
+      const reg = this.base.opcional(ehStr(item["item"]) ? item["item"] : "");
+      if (reg !== null && reg.kind === kind) saida.push({ registro: reg, entrada: item });
+    }
+    return saida;
+  }
+
+  /**
+   * AC = 10 + DEX (limitado pelo cap da armadura) + proficiência + item.
+   *
+   * Regra 3 vale aqui como em tudo: o bônus de proficiência é
+   * `nivel_de_personagem + rank`, e o rank sai da categoria da armadura que
+   * está sendo usada -- que pode ter vindo de qualquer classe (regra 4).
+   */
+  private _defesa(): void {
+    const dex = this.modificadores["dex"] ?? 0;
+    const armaduras = this._equipados("armor");
+    const escudos = this._equipados("shield");
+
+    let categoria: string;
+    let dex_usada: number;
+    let item_bonus: number;
+    let potencia: number;
+    let nome_arm: string | null;
+    let penalidade: unknown;
+    let forca: unknown;
+
+    if (armaduras.length > 0) {
+      const arm = armaduras[0].registro;
+      categoria = verdadeiro(arm["armor_category"]) ? String(arm["armor_category"]) : "unarmored";
+      const cap = arm["dex_cap"];
+      dex_usada = ehInt(cap) ? Math.min(dex, cap) : dex;
+      item_bonus = inteiro(arm["ac_bonus"]);
+      potencia = inteiro(armaduras[0].entrada["potencia"]);
+      nome_arm = nome(arm);
+      penalidade = obter(arm, "check_penalty");
+      forca = obter(arm, "strength");
+    } else {
+      categoria = "unarmored";
+      dex_usada = dex;
+      item_bonus = 0;
+      potencia = 0;
+      nome_arm = "sem armadura";
+      penalidade = null;
+      forca = null;
+    }
+
+    const rank = this.proficiencias.get(categoria) ?? "untrained";
+    const prof = rank !== "untrained" ? this.nivel + RANK_BONUS[rank] : 0;
+    const total = 10 + dex_usada + prof + item_bonus + potencia;
+
+    // a penalidade de armadura só vale se a FOR não alcança o mínimo
+    const aplica_penalidade = ehInt(forca) && (this.atributos["str"] ?? 10) < forca;
+
+    this.ac = {
+      total,
+      armadura: nome_arm,
+      categoria,
+      rank,
+      detalhe: `10 + DEX ${comSinal(dex_usada)} + prof ${prof} `
+               + `(${rank}, nivel ${this.nivel}) + item ${item_bonus + potencia}`,
+      dex_perdida: Math.max(0, dex - dex_usada),
+      check_penalty: aplica_penalidade ? (penalidade as number) : 0,
+      escudo: escudos.length > 0
+        ? { nome: nome(escudos[0].registro), ac: inteiro(escudos[0].registro["ac_bonus"]) }
+        : null,
+    };
+  }
+
+  /**
+   * Ataque = nível + rank da categoria + atributo + item; dano = dados +
+   * atributo.
+   *
+   * `finesse` deixa usar DEX no ataque; o dano continua em FOR, salvo exceção
+   * que depende de feature (Thief usa DEX, e isso vem de rule element com
+   * predicado -- por isso não está aqui).
+   */
+  private _ataques(): void {
+    for (const equipado of this._equipados("weapon")) {
+      const arma = equipado.registro;
+      const entrada = equipado.entrada;
+      const traits = new Set(listaDe(arma["traits"]).map((t) => String(t).toLowerCase()));
+      const categoria = verdadeiro(arma["weapon_category"])
+        ? String(arma["weapon_category"]) : "simple";
+      const rank = this.proficiencias.get(categoria) ?? "untrained";
+      const prof = rank !== "untrained" ? this.nivel + RANK_BONUS[rank] : 0;
+
+      const forca = this.modificadores["str"] ?? 0;
+      const destreza = this.modificadores["dex"] ?? 0;
+      let usa_dex = traits.has("finesse") && destreza > forca;
+      let atributo = usa_dex ? destreza : forca;
+      // arma a distância usa DEX no ataque e não soma atributo no dano
+      const distancia = verdadeiro(arma["range"]) && !traits.has("thrown");
+      if (distancia) {
+        atributo = destreza;
+        usa_dex = true;
+      }
+
+      const potencia = inteiro(entrada["potencia"]);
+      const dano = dictDe(arma["damage"]);
+      const mod_dano = distancia ? 0 : forca;
+      const base_do_dano = `${pyStr(Object.hasOwn(dano, "dados") ? dano["dados"] : 1)}`
+                           + `${pyStr(Object.hasOwn(dano, "dado") ? dano["dado"] : "")}`;
+
+      this.ataques.push({
+        arma: nome(arma),
+        categoria,
+        rank,
+        ataque: rank !== "untrained"
+          ? this.nivel + RANK_BONUS[rank] + atributo + potencia
+          : atributo + potencia,
+        atributo_do_ataque: usa_dex ? "dex" : "str",
+        dano: mod_dano ? `${base_do_dano}${comSinal(mod_dano)}` : base_do_dano,
+        tipo_de_dano: (verdadeiro(dano["tipo"]) ? dano["tipo"] : dano["type"] ?? null) as string | null,
+        traits: ordenarTextos(traits),
+        detalhe: `nivel ${this.nivel} + prof ${prof} (${rank}) + `
+                 + `${usa_dex ? "DEX" : "FOR"} ${comSinal(atributo)}`,
+      });
+    }
+  }
+
+  // -- regra 3: bônus derivado --------------------------------------------
+
+  /** Regra 3: bônus total = nível_de_personagem + rank. Rank 0 = sem nível. */
+  bonus(chave: string): number {
+    const rank = this.proficiencias.get(chave) ?? "untrained";
+    if (rank === "untrained") return 0;
+    return this.nivel + RANK_BONUS[rank];
+  }
+
+  /** A sub-escolha que este personagem fez para a classe dada. */
+  private _subclasse_de(classe_id: string): string | null {
+    const classe = dictDe(this.base.opcional(classe_id));
+    const opcoes = new Set<unknown>();
+    for (const b of listaDe(classe["subclasses"])) {
+      for (const o of listaDe(dictDe(b)["opcoes"])) opcoes.add(o);
+    }
+    for (const e of this._escolhas("subclasse")) {
+      if (opcoes.has(e["pega"])) return ehStr(e["pega"]) ? e["pega"] : null;
+    }
+    return null;
+  }
+
+  // -- avaliação do predicado ---------------------------------------------
+
+  /**
+   * Avalia o predicado contra este personagem. Devolve `[atende, motivos]`.
+   *
+   * **Nunca** é usado para negar uma escolha -- o princípio zero é explícito:
+   * `requires` sugere e ordena, nunca bloqueia. Serve para o app dizer "estes
+   * combinam com o que você tem" e para marcar o que está fora.
+   */
+  avaliar(predicado: unknown): [boolean, string[]] {
+    return avaliarPredicado(this, predicado);
+  }
+
+  /** `getattr(self, f"_termo_{termo}", None)`: termo desconhecido não reprova. */
+  termo(nome_do_termo: string, valor: unknown): ResultadoDeTermo | null {
+    switch (nome_do_termo) {
+      case "class_level": return this._termo_class_level(valor);
+      case "character_level": return this._termo_character_level(valor);
+      case "ability": return this._termo_ability(valor);
+      case "proficiency": return this._termo_proficiency(valor);
+      case "has": return this._termo_has(valor);
+      case "subclass": return this._termo_subclass(valor);
+      case "trait": return this._termo_trait(valor);
+      default: return null;
+    }
+  }
+
+  /** `class_level` é o termo que só existe por causa da houserule. */
+  private _termo_class_level(valor: unknown): ResultadoDeTermo {
+    for (const [slug, exigencia] of Object.entries(dictDe(valor))) {
+      const cid = `wb:class/${slug}`;
+      const tenho = this.nivel_de(cid);
+      const nome_da_classe = nomeOu(this.base.opcional(cid), slug);
+      for (const [op, alvo] of Object.entries(dictDe(exigencia))) {
+        if (!comparar(tenho, op, alvo)) {
+          return [false, `exige ${nome_da_classe} nivel ${op} ${pyStr(alvo)}; `
+                         + `tem ${tenho} (personagem ${this.nivel})`];
+        }
+      }
+    }
+    return [true, ""];
+  }
+
+  private _termo_character_level(valor: unknown): ResultadoDeTermo {
+    for (const [op, alvo] of Object.entries(dictDe(valor))) {
+      if (!comparar(this.nivel, op, alvo)) {
+        return [false, `exige nivel de personagem ${op} ${pyStr(alvo)}; tem ${this.nivel}`];
+      }
+    }
+    return [true, ""];
+  }
+
+  private _termo_ability(valor: unknown): ResultadoDeTermo {
+    for (const [atributo, exigencia] of Object.entries(dictDe(valor))) {
+      const tenho = this.atributos[atributo] ?? 10;
+      for (const [op, alvo] of Object.entries(dictDe(exigencia))) {
+        if (!comparar(tenho, op, alvo)) {
+          return [false, `exige ${atributo.toUpperCase()} ${op} ${pyStr(alvo)}; tem ${tenho}`];
+        }
+      }
+    }
+    return [true, ""];
+  }
+
+  /**
+   * O rank que a perícia teria se `excluir` não estivesse na ficha.
+   *
+   * Existe por causa do requisito circular: `acrobat-dedication` EXIGE
+   * acrobatics trained e CONCEDE acrobatics. Desde que o motor passou a aplicar
+   * grants de feat, o requisito passou a ser satisfeito pelo próprio feat, e a
+   * ficha saía limpa onde antes sinalizava. Medido: 25 termos auto-satisfeitos
+   * entre os 6.273 feats com `requires`.
+   */
+  private _rank_sem(chave: string, excluir: string | null): string {
+    const atual = this.proficiencias.get(chave) ?? "untrained";
+    if (!verdadeiro(excluir)) return atual;
+    let restante: Rank = "untrained";
+    for (const [rank, origem_id] of this.aplicacoes_de_proficiencia.get(chave) ?? []) {
+      if (origem_id !== excluir) restante = melhorRank(restante, rank);
+    }
+    return restante;
+  }
+
+  private _termo_proficiency(valor: unknown): ResultadoDeTermo {
+    const excluir = this._avaliando;
+    for (const [chave, exigencia] of Object.entries(dictDe(valor))) {
+      const tenho = this._rank_sem(chave, excluir);
+      for (const [op, alvo] of Object.entries(dictDe(exigencia))) {
+        const ia = indiceDeRank(tenho);
+        const ib = indiceDeRank(alvo);
+        if (!comparar(ia, op, ib)) {
+          return [false, `exige ${chave} ${op} ${pyStr(alvo)}; tem ${tenho}`];
+        }
+      }
+    }
+    return [true, ""];
+  }
+
+  private _termo_has(valor: unknown): ResultadoDeTermo {
+    // `pega` nem sempre é um id: `boosts_livres` guarda uma LISTA de atributos.
+    // Filtrar por str antes do set, senão estoura no primeiro personagem que
+    // distribuiu boosts.
+    const tudo = new Set<unknown>();
+    for (const e of this._todas_escolhas()) if (ehStr(e["pega"])) tudo.add(e["pega"]);
+    const excluir = this._avaliando;
+    // `f.get("raiz")` do Python devolve None quando a chave FALTA -- e feature
+    // de progressão de classe não tem `raiz`. Com `excluir` também None (todo
+    // uso fora de `_checar_requisitos`: `candidatos`, `disponiveis`, atores),
+    // `None != None` é falso e TODA feature de classe some do `has`. Portado
+    // como está: `obter` devolve null na chave ausente, exatamente como o
+    // `.get`. É o que faz `Call Wizardly Tools` sair como fora-do-requisito
+    // ("exige ter Arcane Bond") num Mago que TEM Arcane Bond.
+    for (const f of this.features) {
+      if (obter(f as unknown as Dict, "raiz") !== excluir) tudo.add(f.id);
+    }
+    // o que a cadeia concedeu conta como "tenho": no jogo não há diferença
+    // entre o Streetwise que você pegou e o que a dedicação te deu. Mas o que o
+    // PRÓPRIO feat concedeu não pode satisfazer o requisito dele.
+    for (const c of this.concedidos) if (c.raiz !== excluir) tudo.add(c.id);
+    for (const c of this.ordem_de_classe) tudo.add(c);
+    for (const reg of [this.ancestria, this.heranca, this.background]) {
+      if (reg !== null) tudo.add(reg.id);
+    }
+    // comparar pelo id CANÔNICO dos dois lados: `requires` de 24 feats cita o
+    // nome pré-remaster (`stunning-fist` pelo `stunning-blows`), e sem resolver
+    // o alias o requisito nunca era satisfeito
+    const canonico = this.base.resolver(valor);
+    const resolvidos = new Set<unknown>();
+    for (const t of tudo) resolvidos.add(this.base.resolver(t));
+    if (resolvidos.has(canonico)) return [true, ""];
+    return [false, `exige ter ${nomeOu(this.base.opcional(canonico), pyStr(valor))}`];
+  }
+
+  /** A camada do meio: nem classe, nem personagem. */
+  private _termo_subclass(valor: unknown): ResultadoDeTermo {
+    for (const [slug, alvo] of Object.entries(dictDe(valor))) {
+      const escolhida = this._subclasse_de(`wb:class/${slug}`);
+      if (escolhida !== alvo) {
+        const nome_alvo = nomeOu(this.base.opcional(alvo), pyStr(alvo));
+        const atual = verdadeiro(escolhida)
+          ? nomeOu(this.base.opcional(escolhida), pyStr(escolhida)) : "nenhuma";
+        return [false, `exige a sub-escolha ${nome_alvo}; tem ${atual}`];
+      }
+    }
+    return [true, ""];
+  }
+
+  private _termo_trait(valor: unknown): ResultadoDeTermo {
+    const alvos = ehLista(valor) ? valor : [valor];
+    const meus = new Set<string>();
+    for (const reg of [this.ancestria, this.heranca, this.background]) {
+      if (reg !== null) {
+        for (const t of listaDe(reg["traits"])) meus.add(String(t).toLowerCase());
+      }
+    }
+    for (const cid of this.ordem_de_classe) {
+      const n = this.base.get(cid)["name"];
+      meus.add(verdadeiro(n) ? String(n).toLowerCase() : "");
+    }
+    const faltando = alvos.filter((a) => !meus.has(String(a).toLowerCase()));
+    return [faltando.length === 0,
+            faltando.length > 0 ? `exige o trait ${pyRepr(faltando)}` : ""];
+  }
+
+  // -- o que o app pergunta: slots abertos e candidatos por slot -----------
+
+  /**
+   * Tudo que está por preencher, no estado atual.
+   *
+   * A terceira pergunta do construtor. O motor já sabia responder "o que eu
+   * tenho" (`visao`) e "o que está errado" (`fora_do_requisito`, `avisos`);
+   * faltava "o que falta escolher", que é o que guia a tela.
+   */
+  slots_abertos(): SlotAberto[] {
+    const abertos: SlotAberto[] = [];
+    const gasto_em = new Map<unknown, unknown[]>();
+    for (const e of this._todas_escolhas()) {
+      empurrar(gasto_em, obter(e, "slot"), obter(e, "em"));
+    }
+
+    const removerUm = (lista: unknown[], v: unknown): boolean => {
+      const i = lista.indexOf(v);
+      if (i < 0) return false;
+      lista.splice(i, 1);
+      return true;
+    };
+
+    for (const [slot, cadencia] of Personagem.SLOT_PARA_CADENCIA) {
+      const usados = [...(gasto_em.get(slot) ?? [])];
+      for (const nivel of this.slots.get(cadencia) ?? []) {
+        if (removerUm(usados, nivel)) continue;
+        abertos.push({
+          slot, em: nivel, kind: "feat", escolhe: 1,
+          rotulo: `${slot.replaceAll("_", " ")} (nivel ${nivel})`,
+        });
+      }
+    }
+
+    const usados = [...(gasto_em.get("skill_increase") ?? [])];
+    for (const nivel of this.aumentos_de_pericia) {
+      if (removerUm(usados, nivel)) continue;
+      abertos.push({
+        slot: "skill_increase", em: nivel, kind: "skill", escolhe: 1,
+        rotulo: `aumento de pericia (nivel ${nivel})`,
+      });
+    }
+
+    for (const bloco of this.slots_de_subclasse) {
+      if (bloco.escolhido === null) {
+        abertos.push({
+          slot: "subclasse", em: bloco.nivel, kind: bloco.eixo,
+          escolhe: 1, opcoes: bloco.opcoes,
+          rotulo: `${bloco.classe} / ${pyStr(bloco.eixo)}`,
+        });
+      }
+    }
+
+    const faltam = this.boosts_direito - this.boosts_declarados;
+    if (faltam > 0) {
+      abertos.push({
+        slot: "boosts_livres", em: "criacao", kind: "ability",
+        escolhe: faltam, fontes: this.boosts_pendentes,
+        rotulo: `boosts de atributo (${faltam} a escolher)`,
+      });
+    }
+
+    for (const slot of ["ancestralidade", "heranca", "background"] as const) {
+      const atributo = { ancestralidade: this.ancestria, heranca: this.heranca,
+                         background: this.background }[slot];
+      if (atributo === null) {
+        abertos.push({
+          slot, em: "criacao",
+          kind: { ancestralidade: "ancestry", heranca: "heritage",
+                  background: "background" }[slot],
+          escolhe: 1, rotulo: slot,
+        });
+      }
+    }
+
+    return ordenarPor(abertos, (s) => [ehInt(s.em) ? s.em : 0, s.slot]);
+  }
+
+  /**
+   * Elegibilidade de SLOT -- que é coisa diferente de requisito.
+   *
+   * O slot FILTRA por tipo; `requires` só ORDENA (princípio zero). Um feat sem
+   * trait `archetype` não é candidato ao slot gratuito -- isso não é bloquear
+   * escolha, é a definição do slot. Já um feat de arquétipo cujo requisito o
+   * personagem não atende APARECE, marcado.
+   */
+  private _aceita_no_slot(slot: string, r: Registro): boolean {
+    const traits = new Set(listaDe(r["traits"]).map((t) => String(t).toLowerCase()));
+    if (slot === "free_archetype") return traits.has("archetype");
+    if (slot === "skill_feat") return traits.has("skill");
+    if (slot === "general_feat") return traits.has("general");
+    if (slot === "ancestry_feat") {
+      const nomes = new Set<string>();
+      nomes.add(verdadeiro((this.ancestria ?? {})["name"])
+        ? String((this.ancestria as Registro)["name"]).toLowerCase() : "");
+      nomes.add(verdadeiro((this.heranca ?? {})["name"])
+        ? String((this.heranca as Registro)["name"]).toLowerCase() : "");
+      nomes.delete("");
+      for (const n of nomes) if (traits.has(n)) return true;
+      return false;
+    }
+    if (slot === "class_feat") {
+      // feat de classe do personagem. Um feat pode servir a várias classes, e
+      // basta pertencer a UMA das que ele tem.
+      for (const c of this.ordem_de_classe) {
+        const n = this.base.get(c)["name"];
+        const chave = verdadeiro(n) ? String(n).toLowerCase() : "";
+        if (traits.has(chave)) return true;
+      }
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * O que cabe NESTE slot, ordenado -- nunca filtrado por requisito.
+   *
+   * `disponiveis(kind=...)` devolve os 6.273 feats da base; uma tela de escolha
+   * não pode receber isso. Aqui o conjunto de entrada é recortado pela
+   * elegibilidade do slot, e o `requires` continua só ordenando.
+   */
+  candidatos(slot: string, em: number | null = null,
+             limite: number | null = null): Candidato[] {
+    if (slot === "boosts_livres") {
+      return ATRIBUTOS.map((a) => ({
+        id: a, nome: a.toUpperCase(), level: null,
+        atende: true, motivos: [], ja_pego: false,
+      }));
+    }
+
+    let registros: Array<Registro | null>;
+    if (slot === "subclasse") {
+      // `opcoes` e a CONTAGEM; os ids estao em `opcoes_ids`. Ate 2026-07-28 as
+      // duas implementacoes liam `opcoes` aqui e levantavam TypeError ao
+      // iterar um int -- so nao explodia porque nenhuma ficha de exemplo
+      // exercitava este slot, e foi o porte que trouxe o caso a tona.
+      const ids: string[] = [];
+      for (const b of this.slots_de_subclasse) {
+        if (em === null || b.nivel === em) {
+          ids.push(...b.opcoes_ids);
+        }
+      }
+      registros = ids.map((i) => this.base.opcional(i));
+    } else if (slot === "skill_increase") {
+      registros = [...this.base.por_id.values()].filter((r) => r.kind === "skill");
+    } else if (slot === "nivel_de_classe") {
+      registros = [...this.base.por_id.values()].filter((r) => r.kind === "class");
+    } else {
+      registros = [...this.base.por_id.values()]
+        .filter((r) => r.kind === "feat" && this._aceita_no_slot(slot, r));
+    }
+
+    const ja = this._ids_de_feat_escolhidos();
+    const saida: Candidato[] = [];
+    for (const r of registros) {
+      if (r === null) continue;
+      let [atende, motivos] = this.avaliar(r["requires"]);
+      const veto = this._veto_dedicacao_da_propria_classe(r);
+      if (veto !== null) {
+        atende = false;
+        motivos = [...motivos, veto];
+      }
+      if (em !== null && ehInt(r["level"]) && r["level"] > em) {
+        atende = false;
+        motivos = [...motivos,
+                   `feat de nivel ${r["level"]} num slot de nivel ${em}`];
+      }
+      saida.push({
+        id: r.id, nome: nome(r), level: ehInt(r["level"]) ? r["level"] : null,
+        atende, motivos, ja_pego: ja.has(r.id),
+      });
+    }
+    const ordenado = ordenarPor(saida, (x) => [
+      !x.atende, x.ja_pego, x.level ?? 0, x.nome ?? "",
+    ]);
+    return limite ? ordenado.slice(0, limite) : ordenado;
+  }
+
+  /**
+   * O que combina com o personagem -- a pergunta central do construtor.
+   *
+   * `requires` ORDENA a lista; não a filtra. O que está fora aparece marcado,
+   * nunca escondido.
+   */
+  disponiveis(kind = "feat", limite: number | null = null): Candidato[] {
+    const saida: Candidato[] = [];
+    for (const r of this.base.por_id.values()) {
+      if (r.kind !== kind) continue;
+      let [atende, motivos] = this.avaliar(r["requires"]);
+      const extra = this._veto_dedicacao_da_propria_classe(r);
+      if (extra !== null) {
+        atende = false;
+        motivos = [...motivos, extra];
+      }
+      saida.push({
+        id: r.id, nome: nome(r), level: ehInt(r["level"]) ? r["level"] : null,
+        atende, motivos, ja_pego: false,
+      });
+    }
+    const ordenado = ordenarPor(saida, (x) => [!x.atende, x.level ?? 0, x.nome ?? ""]);
+    return limite ? ordenado.slice(0, limite) : ordenado;
+  }
+
+  /**
+   * nome normalizado -> id da classe, para os 27 arquétipos de multiclasse.
+   * O cache vive na BASE, não no personagem -- ver o comentário em `base.ts`.
+   */
+  private _classes_multiclasse(): Map<string, string> {
+    return this.base.multiclasse();
+  }
+
+  /**
+   * Regra 23: dedicação de multiclasse da própria classe.
+   *
+   * RAW (Advanced Player's Guide, "Multiclass Archetypes"): *"You can't select
+   * a multiclass archetype's dedication feat if you are a member of the class
+   * of the same name."* Nada na base modelava isso -- um Mago 20 puro recebia
+   * `atende: True` para Wizard Dedication.
+   *
+   * DECISÃO DO IGOR (2026-07-27): a exclusão vale sempre que o personagem tem
+   * QUALQUER nível da classe, e é MÚTUA -- ver `_veto_classe_de_dedicacao_ja_pega`.
+   *
+   * O que a exclusão tira é a ESCOLHA DA TRADIÇÃO, não os slots -- então a
+   * regra 21 não é violada. E resolve uma incoerência real: com as duas rotas
+   * na mesma classe, a mesma magia sairia em DOIS ranks na mesma ficha, o do
+   * slot de classe elevado pela regra 17 e o do slot de arquétipo, que pela
+   * regra 18 roda RAW puro.
+   *
+   * Princípio zero continua valendo: isto marca `fora do requisito`, com o
+   * motivo escrito. Nunca esconde nem impede.
+   */
+  private _veto_dedicacao_da_propria_classe(feat: Registro): string | null {
+    const n = normSlug(verdadeiro(feat["name"]) ? feat["name"] : "");
+    if (!n.endsWith("-dedication")) return null;
+    const cid = this._classes_multiclasse().get(n.slice(0, -"-dedication".length));
+    if (cid === undefined) return null;
+    const nc = this.nivel_de(cid);
+    if (nc === 0) return null;
+    return `regra 23: o personagem ja tem ${nc} nivel(is) de `
+           + `${pyStr(nome(this.base.get(cid)))}; as duas rotas se excluem`;
+  }
+
+  // -- princípio zero: sinaliza, nunca bloqueia ---------------------------
+
+  /**
+   * `requires` sugere, NUNCA bloqueia (princípio zero da spec).
+   *
+   * Regra 12: o requisito de nível de um class feat é checado contra o nível
+   * DAQUELA CLASSE. Regra 13: feat de arquétipo, contra o nível de personagem.
+   */
+  private _checar_requisitos(): void {
+    for (const e of this._todas_escolhas()) {
+      const wb_id = e["pega"];
+      if (!ehStr(wb_id) || !wb_id.startsWith("wb:feat/")) continue;
+      const feat = this.base.opcional(wb_id);
+      if (feat === null) {
+        this.fora_do_requisito.push({ feat: wb_id, motivo: "id ausente da base" });
+        continue;
+      }
+      // O predicado já carrega o gate de nível derivado, então a checagem
+      // manual de nível que existia aqui virou caso particular de avaliar o
+      // predicado inteiro -- e agora `proficiency`, `has`, `ability` e
+      // `subclass` também são verificados.
+      // o requisito de um feat é avaliado contra o estado SEM o efeito dele
+      // mesmo -- ver `_rank_sem`
+      this._avaliando = wb_id;
+      let [atende, motivos] = this.avaliar(feat["requires"]);
+      this._avaliando = null;
+      for (const veto of [this._veto_dedicacao_da_propria_classe(feat),
+                          this._exige_a_dedicacao_do_arquetipo(feat, motivos)]) {
+        if (veto !== null) {
+          atende = false;
+          motivos = [...motivos, veto];
+        }
+      }
+      if (!atende) {
+        this.fora_do_requisito.push({
+          feat: nomeOu(feat, wb_id),
+          motivo: motivos.join("; ") || "predicado nao atendido",
+        });
+      }
+    }
+    this._veto_classe_de_dedicacao_ja_pega();
+    this._nova_dedicacao_exige_dois_feats();
+  }
+
+  // -- as duas regras do trait `dedication` (RAW) -------------------------
+
+  /**
+   * Escolhidos MAIS concedidos. `gray-corsair-training` concede
+   * `pirate-dedication`: sem contar o concedido, um feat Pirate na mesma ficha
+   * era acusado de não ter a dedicação (falso positivo) e uma segunda dedicação
+   * passava batido (falso negativo).
+   */
+  private _ids_de_feat_escolhidos(): Set<string> {
+    const ids = new Set<string>();
+    for (const e of this._todas_escolhas()) {
+      if (ehStr(e["pega"]) && e["pega"].startsWith("wb:feat/")) ids.add(e["pega"]);
+    }
+    for (const c of this.concedidos) if (c.id.startsWith("wb:feat/")) ids.add(c.id);
+    return ids;
+  }
+
+  /**
+   * RAW do trait `archetype`: um feat de arquétipo exige a Dedication daquele
+   * arquétipo.
+   *
+   * A base não escreve isso no `requires` -- 181 feats de arquétipo trazem só
+   * `character_level >= N` --, e por isso Barbarian Resiliency entrava numa
+   * ficha sem Barbarian Dedication em silêncio. O vínculo não precisa de lista:
+   * `feat["archetype"]` aponta o arquétipo e a dedicação dele é achável por
+   * trait.
+   */
+  private _exige_a_dedicacao_do_arquetipo(feat: Registro, motivos: string[]): string | null {
+    const traits = listaDe(feat["traits"]);
+    if (!traits.includes("archetype") || traits.includes("dedication")) return null;
+    const arq = feat["archetype"];
+    if (!verdadeiro(arq)) return null;
+    const ded = this.base.dedicacao_do_arquetipo(arq);
+    if (ded === null || this._ids_de_feat_escolhidos().has(ded)) return null;
+    const n = nomeOu(this.base.get(ded), ded);
+    // se o `requires` já reprovou por causa da MESMA dedicação, não repetir
+    if (motivos.some((m) => m.includes(n))) return null;
+    const reg = this.base.opcional(arq);
+    return `feat do arquetipo ${reg !== null ? nomeOu(reg, String(arq)) : pyStr(arq)}`
+           + ` exige ${n} (RAW do trait archetype), que a ficha nao tem`;
+  }
+
+  /**
+   * RAW do trait `dedication`, conferido no texto da própria base (76 dedicações
+   * repetem a cláusula): "You can't select another dedication feat until you've
+   * gained two other feats from the <X> archetype".
+   *
+   * A contagem é NO TEMPO: vale o que o personagem tinha até o nível em que a
+   * nova dedicação entrou, não o que ele tem no fim da ficha.
+   */
+  private _nova_dedicacao_exige_dois_feats(): void {
+    let picks: Dict[] = this._todas_escolhas()
+      .filter((e) => ehStr(e["pega"]) && e["pega"].startsWith("wb:feat/"));
+    // `criacao` vem antes de qualquer nível numerado
+    picks = ordenarPor(picks, (e) => [ehInt(e["em"]) ? e["em"] : 0]);
+    // feat de arquétipo CONCEDIDO conta na cota tanto quanto o escolhido --
+    // entra no nível da escolha que o originou, que é quando ele apareceu
+    const nivel_da_raiz = new Map<unknown, unknown>();
+    for (const e of picks) nivel_da_raiz.set(e["pega"], obter(e, "em"));
+    for (const c of this.concedidos) {
+      if (c.id.startsWith("wb:feat/")) {
+        picks.push({ pega: c.id, em: nivel_da_raiz.get(c.raiz) ?? null });
+      }
+    }
+    picks = ordenarPor(picks, (e) => [ehInt(e["em"]) ? e["em"] : 0]);
+
+    const contagem = new Map<string, number>();   // arquétipo -> feats não-dedicação
+    const dedicados: string[] = [];               // arquétipos já dedicados, em ordem
+    for (const e of picks) {
+      const feat = this.base.opcional(e["pega"]);
+      if (feat === null) continue;
+      const traits = listaDe(feat["traits"]);
+      const arq = feat["archetype"];
+      if (traits.includes("dedication") && verdadeiro(arq)) {
+        const faltando = dedicados.filter((a) => (contagem.get(a) ?? 0) < 2);
+        if (faltando.length > 0) {
+          const nomes = faltando
+            .map((a) => nomeOu(this.base.opcional(a), a)).join(", ");
+          this.fora_do_requisito.push({
+            feat: nomeOu(feat, String(e["pega"])),
+            motivo: `nova dedicacao no nivel ${pyStr(obter(e, "em"))} sem os 2 feats `
+                    + `exigidos de: ${nomes} (RAW do trait dedication)`,
+          });
+        }
+        dedicados.push(String(arq));
+      } else if (verdadeiro(arq)) {
+        somar(contagem, String(arq), 1);
+      }
+    }
+  }
+
+  /**
+   * Regra 23, o outro sentido: nível de classe X com dedicação de X.
+   *
+   * A exclusão é MÚTUA. O primeiro sentido (pegar a dedicação tendo a classe) é
+   * barrado em `_veto_dedicacao_da_propria_classe`; este barra a ordem inversa,
+   * que produz exatamente a mesma ficha e passaria batido se só um lado fosse
+   * checado.
+   */
+  private _veto_classe_de_dedicacao_ja_pega(): void {
+    const pegos = new Set<string>();
+    for (const e of this._todas_escolhas()) {
+      if (ehStr(e["pega"]) && e["pega"].startsWith("wb:feat/")) {
+        pegos.add(normSlug(nomeOu(this.base.opcional(e["pega"]), "")));
+      }
+    }
+    for (const [n, cid] of this._classes_multiclasse()) {
+      const nc = this.nivel_de(cid);
+      if (nc && pegos.has(`${n}-dedication`)) {
+        const nome_da_classe = pyStr(nome(this.base.get(cid)));
+        this.fora_do_requisito.push({
+          feat: `${nome_da_classe} (nivel de classe)`,
+          motivo: `regra 23: o personagem tem ${nc} nivel(is) de ${nome_da_classe} `
+                  + `E a dedicacao da mesma classe. As duas rotas se excluem`,
+        });
+      }
+    }
+  }
+
+  /** A classe de um feat sai do trait, não de lista escrita à mão. */
+  classe_do_feat(feat: Registro): string | null {
+    const traits = new Set(listaDe(feat["traits"]).map((t) => String(t).toLowerCase()));
+    for (const cid of this.ordem_de_classe) {
+      const n = this.base.get(cid)["name"];
+      if (traits.has(verdadeiro(n) ? String(n).toLowerCase() : "")) return cid;
+    }
+    return null;
+  }
+
+  // -- cadeia de grant_feat/grant_item: aplica o estático, sinaliza o resto -
+
+  /**
+   * Percorre `grant_feat`/`grant_item` de tudo que o personagem tem (feats
+   * escolhidos + features de classe/subclasse), com guarda de profundidade e
+   * visitados.
+   *
+   * O que a cadeia entrega com ALVO ESTÁTICO é aplicado: no PF2e isso não é
+   * escolha nenhuma, é efeito automático (Barbarian Dedication dá Rage, ponto
+   * final). O princípio zero fala de `requires` -- sugerir em vez de bloquear a
+   * ESCOLHA do jogador --, não de esconder o efeito de uma escolha já feita.
+   * Alvo DINÂMICO (`{item|flags...}`) é que depende de escolha ainda não feita:
+   * esse continua só sinalizado, e o app precisa distinguir "pendente" de
+   * "ausente".
+   *
+   * Antes desta passada, uma dedicação entrava na ficha como linha e não
+   * entregava nada -- medido: 52 HP contra 56 (`battle-harbinger`), `society`
+   * untrained (`shieldmarshal`), Rage sumido (`barbarian`).
+   */
+  private _grants_em_cadeia(): void {
+    // o que o personagem já tem por escolha própria não pode ser concedido de
+    // novo: senão Toughness pego à mão + Toughness da dedicação somaria HP duas
+    // vezes.
+    this._ja_tenho = new Set();
+    for (const f of this.features) if (verdadeiro(f.id)) this._ja_tenho.add(f.id as string);
+    for (const [wb_id] of this._feats_escolhidos()) this._ja_tenho.add(wb_id);
+
+    const origens: Array<[string, unknown[]]> = [];
+    for (const [wb_id, feat] of this._feats_escolhidos()) {
+      origens.push([wb_id, listaDe(feat["grants"])]);
+    }
+    // snapshot: a recursão percorre os grants do próprio alvo concedido, então
+    // features novas não precisam ser revisitadas por este laço
+    for (const f of [...this.features]) {
+      if (verdadeiro(f.id)) origens.push([f.id as string, f.grants]);
+    }
+    // ancestria, herança e background TAMBÉM concedem -- são 496 registros com
+    // `grant_feat` que ficavam inertes porque a cadeia só olhava feat e feature
+    // (`shielded-fortune` -> Toughness, `ambitious-human` -> Fleet)
+    for (const reg of [this.ancestria, this.heranca, this.background]) {
+      if (reg !== null && verdadeiro(reg.id)) origens.push([reg.id, listaDe(reg["grants"])]);
+    }
+    for (const [origem_id, grants] of origens) {
+      this._resolver_cadeia_de_grants(origem_id, grants, new Set([origem_id]));
+    }
+  }
+
+  /**
+   * Quem ORIGINOU este item na ficha. Para o que o jogador escolheu, é ele
+   * mesmo; para o que veio de cadeia, é a escolha lá no começo dela.
+   */
+  private _raiz_de(wb_id: string): string {
+    return this._raizes.get(wb_id) ?? wb_id;
+  }
+
+  /**
+   * Põe na ficha o que a cadeia concedeu. Class-feature vira linha de feature
+   * (e por isso entra em `_proficiencias`, em `_termo_has` e na visão); feat
+   * vira feat efetivo, que é o que `_hp` e `_proficiencias` percorrem.
+   */
+  private _aplicar_concessao(origem_id: string, alvo: string, alvo_reg: Registro): void {
+    const origem_nome = nomeOu(this.base.opcional(origem_id), origem_id);
+    const raiz = this._raiz_de(origem_id);
+    this._raizes.set(alvo, raiz);
+    const registro: RegistroConcedido = {
+      id: alvo,
+      nome: nomeOu(alvo_reg, alvo),
+      classe: null,
+      origem: origem_nome,
+      nivel_de_classe: null,
+      grants: listaDe(alvo_reg["grants"]),
+      na_base: true,
+      concedido_por: origem_id,
+      raiz,
+    };
+    this.concedidos.push(registro);
+    if (alvo.startsWith("wb:class-feature/")) this.features.push(registro);
+  }
+
+  /**
+   * Feats escolhidos MAIS os concedidos pela cadeia, sem repetir.
+   *
+   * É a lista que vale para efeito: o jogo não distingue o Toughness que você
+   * pegou do Toughness que a dedicação te deu.
+   */
+  private *_feats_efetivos(): Generator<[string, Registro, string | null]> {
+    const vistos = new Set<string>();
+    for (const [wb_id, feat] of this._feats_escolhidos()) {
+      if (!vistos.has(wb_id)) {
+        vistos.add(wb_id);
+        yield [wb_id, feat, null];
+      }
+    }
+    for (const c of this.concedidos) {
+      if (c.id.startsWith("wb:feat/") && !vistos.has(c.id)) {
+        vistos.add(c.id);
+        yield [c.id, this.base.get(c.id), c.origem];
+      }
+    }
+  }
+
+  /**
+   * Um passo da cadeia. `visitados` é compartilhado entre as chamadas
+   * recursivas de uma mesma origem -- é o que poda auto-referência (A concede A
+   * mesma) sem gerar aviso: o alvo já está em `visitados` desde o primeiro
+   * passo, então é tratado como "já tenho", não como perda.
+   */
+  private _resolver_cadeia_de_grants(origem_id: string, grants: unknown[],
+                                     visitados: Set<string>, profundidade = 0): void {
+    if (profundidade > MAX_PROFUNDIDADE_GRANTS) {
+      this.avisos.push(
+        `${origem_id}: cadeia de grants cortada em profundidade `
+        + `${MAX_PROFUNDIDADE_GRANTS} (possivel ciclo ou dado malformado)`);
+      return;
+    }
+    for (const g of listaDe(grants)) {
+      if (!ehDict(g)) continue;
+      if (Object.hasOwn(g, "grant_feat")) {
+        const bruto = g["grant_feat"];
+        const alvos = ehLista(bruto) ? bruto : [bruto];
+        for (const alvo of alvos) {
+          if (!ehStr(alvo) || !alvo.startsWith("wb:")) {
+            // 476 alvos da base são nome cru ou dict serializado em vez de id
+            // -- TODOS de background (medido 2026-07-27). Não é "ausente da
+            // base", é referência não resolvida pelo pipeline, e o aviso
+            // precisa dizer isso.
+            this.avisos.push(
+              `${origem_id}: grant_feat com alvo nao resolvido pelo pipeline `
+              + `(${pyStr(alvo).slice(0, 60)}) -- nao aplicado`);
+            continue;
+          }
+          if (alvo.includes("{")) {
+            this.avisos.push(
+              `${origem_id}: grant_feat depende de escolha do jogador (${alvo}) `
+              + `-- nao resolvivel automaticamente`);
+            continue;
+          }
+          if (visitados.has(alvo)) continue;   // já concedido nesta cadeia
+          const alvo_reg = this.base.opcional(alvo);
+          if (alvo_reg === null) {
+            this.avisos.push(
+              `${origem_id}: grant_feat aponta pra id ausente da base: ${alvo}`);
+            continue;
+          }
+          visitados.add(alvo);
+          if (!this._ja_tenho.has(alvo)) {
+            this._ja_tenho.add(alvo);
+            this._aplicar_concessao(origem_id, alvo, alvo_reg);
+          }
+          this._resolver_cadeia_de_grants(
+            alvo, listaDe(alvo_reg["grants"]), visitados, profundidade + 1);
+        }
+      }
+      if (Object.hasOwn(g, "grant_item")) {
+        const gi = g["grant_item"];
+        const uuid = ehDict(gi) ? gi["uuid"] : gi;
+        if (ehStr(uuid) && uuid.includes("{")) {
+          // uuid dinâmico: só a escolha do jogador fecha isto. NÃO é "alvo não
+          // encontrado" -- é "pendente", e o app tem que distinguir os dois.
+          this.avisos.push(
+            `${origem_id}: grant_item depende de escolha do jogador (uuid `
+            + `dinamico \`${uuid}\`) -- pendente, nao e alvo ausente`);
+        }
+      }
+    }
+  }
+
+  // -- saída --------------------------------------------------------------
+
+  /** A visão calculada. Cache, nunca fonte de verdade. */
+  visao(): Visao {
+    const classes: Record<string, number> = {};
+    for (const [c, n] of this.niveis_por_classe) classes[nomeOu(this.base.get(c), c)] = n;
+    const proficiencias: Record<string, Rank> = objetoDe(this.proficiencias);
+    const slots: Record<string, number[]> = objetoDe(this.slots);
+    return {
+      nivel: this.nivel,
+      classes,
+      ancestralidade: nome(this.ancestria),
+      heranca: nome(this.heranca),
+      background: nome(this.background),
+      atributos: this.atributos,
+      modificadores: this.modificadores,
+      hp: this.hp,
+      proficiencias,
+      pericias_livres: this.pericias_livres,
+      aumentos_de_pericia: {
+        niveis: this.aumentos_de_pericia, gastos: this.aumentos_detalhe,
+      },
+      boosts: {
+        direito: this.boosts_direito, declarados: this.boosts_declarados,
+        fontes: this.boosts_pendentes,
+      },
+      // a terceira pergunta do construtor: o que falta escolher
+      slots_abertos: this.slots_abertos(),
+      slots,
+      conjuracao: this.conjuracao,
+      atores: this.atores,
+      escolhas_de_feat: this.escolhas_de_feat,
+      focus_pool: this.focus_pool,
+      ac: this.ac,
+      ataques: this.ataques,
+      features: this.features,
+      // o que a cadeia de grants entregou sem o jogador escolher. Fica em lista
+      // própria (e não misturado em `escolhas`) porque a origem importa: a
+      // ficha precisa poder dizer "Streetwise veio da dedicação", e o documento
+      // continua com só o que foi escolhido.
+      concedidos: this.concedidos.map((c): Concedido => ({
+        id: c.id, nome: c.nome, por: c.origem, por_id: c.concedido_por,
+      })),
+      subclasses: this.slots_de_subclasse,
+      fora_do_requisito: this.fora_do_requisito,
+      avisos: this.avisos,
+    };
+  }
+}

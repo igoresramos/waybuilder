@@ -4,7 +4,10 @@
     "target": "es2023",
     "lib": ["ES2023", "DOM"],
     "module": "esnext",
-    "types": ["vite/client"],
+    // `node` entra por causa de `src/motor/motor.test.ts`, que le o gabarito
+    // de `motor/fixtures/*.json` do disco -- o teste compara o porte TS com o
+    // motor Python, e o payload da base nao cabe num import
+    "types": ["vite/client", "node"],
     "allowArbitraryExtensions": true,
     "skipLibCheck": true,
 

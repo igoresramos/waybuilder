@@ -1071,7 +1071,32 @@
     "escolhido": "wb:arcane-school/evocation",
     "nivel": 1,
     "nome": "Evocation",
-    "opcoes": 23
+    "opcoes": 23,
+    "opcoes_ids": [
+     "wb:arcane-school/abjuration",
+     "wb:arcane-school/conjuration",
+     "wb:arcane-school/divination",
+     "wb:arcane-school/enchantment",
+     "wb:arcane-school/evocation",
+     "wb:arcane-school/illusion",
+     "wb:arcane-school/necromancy",
+     "wb:arcane-school/transmutation",
+     "wb:arcane-school/universalist",
+     "wb:class-feature/red-mantis-magic-school",
+     "wb:class-feature/school-of-ars-grammatica",
+     "wb:class-feature/school-of-battle-magic",
+     "wb:class-feature/school-of-civic-wizardry",
+     "wb:class-feature/school-of-gates",
+     "wb:class-feature/school-of-kalistrade",
+     "wb:class-feature/school-of-magical-technologies",
+     "wb:class-feature/school-of-mentalism",
+     "wb:class-feature/school-of-protean-form",
+     "wb:class-feature/school-of-rooted-wisdom",
+     "wb:class-feature/school-of-thassilonian-rune-magic",
+     "wb:class-feature/school-of-the-boundary",
+     "wb:class-feature/school-of-the-reclamation",
+     "wb:class-feature/school-of-unified-magical-theory"
+    ]
    },
    {
     "classe": "Wizard",
@@ -1079,7 +1104,15 @@
     "escolhido": "wb:class-feature/spell-blending",
     "nivel": 1,
     "nome": "Spell Blending",
-    "opcoes": 6
+    "opcoes": 6,
+    "opcoes_ids": [
+     "wb:arcane-thesis/metamagical-experimentation",
+     "wb:class-feature/experimental-spellshaping",
+     "wb:class-feature/improved-familiar-attunement",
+     "wb:class-feature/spell-blending",
+     "wb:class-feature/spell-substitution",
+     "wb:class-feature/staff-nexus"
+    ]
    },
    {
     "classe": "Wizard",
@@ -1087,7 +1120,23 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 14
+    "opcoes": 14,
+    "opcoes_ids": [
+     "wb:class-feature/cascade-bearers",
+     "wb:class-feature/emerald-boughs",
+     "wb:class-feature/envy",
+     "wb:class-feature/gluttony",
+     "wb:class-feature/greed",
+     "wb:class-feature/lust",
+     "wb:class-feature/pride",
+     "wb:class-feature/rain-scribes",
+     "wb:class-feature/runelord",
+     "wb:class-feature/sloth",
+     "wb:class-feature/tempest-sun-mages",
+     "wb:class-feature/uzunjati",
+     "wb:class-feature/war-magic",
+     "wb:class-feature/wrath"
+    ]
    }
   ]
  }

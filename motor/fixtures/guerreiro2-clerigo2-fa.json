@@ -1172,7 +1172,12 @@
     "escolhido": "wb:class-feature/warpriest",
     "nivel": 1,
     "nome": "Warpriest",
-    "opcoes": 3
+    "opcoes": 3,
+    "opcoes_ids": [
+     "wb:class-feature/battle-creed",
+     "wb:class-feature/cloistered-cleric",
+     "wb:class-feature/warpriest"
+    ]
    },
    {
     "classe": "Cleric",
@@ -1180,7 +1185,14 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 5
+    "opcoes": 5,
+    "opcoes_ids": [
+     "wb:class-feature/anathema-cleric",
+     "wb:class-feature/deity-cleric",
+     "wb:class-feature/first-doctrine-cloistered-cleric",
+     "wb:class-feature/first-doctrine-warpriest",
+     "wb:class-feature/initial-creed"
+    ]
    }
   ]
  }

@@ -1179,7 +1179,29 @@
     "escolhido": null,
     "nivel": 2,
     "nome": null,
-    "opcoes": 20
+    "opcoes": 20,
+    "opcoes_ids": [
+     "wb:class-feature/lesson-of-bargains",
+     "wb:class-feature/lesson-of-calamity",
+     "wb:class-feature/lesson-of-death",
+     "wb:class-feature/lesson-of-decay",
+     "wb:class-feature/lesson-of-dreams",
+     "wb:class-feature/lesson-of-favors",
+     "wb:class-feature/lesson-of-life",
+     "wb:class-feature/lesson-of-memory",
+     "wb:class-feature/lesson-of-mischief",
+     "wb:class-feature/lesson-of-protection",
+     "wb:class-feature/lesson-of-renewal",
+     "wb:class-feature/lesson-of-shadow",
+     "wb:class-feature/lesson-of-snow",
+     "wb:class-feature/lesson-of-the-flock",
+     "wb:class-feature/lesson-of-the-frozen-queen",
+     "wb:class-feature/lesson-of-the-shark",
+     "wb:class-feature/lesson-of-vengeance",
+     "wb:class-feature/lesson-of-vows",
+     "wb:lesson/lesson-of-the-elements",
+     "wb:lesson/lesson-of-the-elements-legacy"
+    ]
    },
    {
     "classe": "Witch",
@@ -1187,7 +1209,13 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 4
+    "opcoes": 4,
+    "opcoes_ids": [
+     "wb:class-feature/hex-spells",
+     "wb:class-feature/patron-theme",
+     "wb:class-feature/seneschal",
+     "wb:class-feature/witch-lessons"
+    ]
    },
    {
     "classe": "Witch",
@@ -1195,7 +1223,33 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 24
+    "opcoes": 24,
+    "opcoes_ids": [
+     "wb:class-feature/baba-yaga",
+     "wb:class-feature/choir-politic",
+     "wb:class-feature/cobyslarni",
+     "wb:class-feature/devourer-of-decay",
+     "wb:class-feature/faiths-flamekeeper",
+     "wb:class-feature/mosquito-witch",
+     "wb:class-feature/paradox-of-opposites",
+     "wb:class-feature/ripple-in-the-deep",
+     "wb:class-feature/silence-in-snow",
+     "wb:class-feature/spinner-of-threads",
+     "wb:class-feature/starless-shadow",
+     "wb:class-feature/the-inscribed-one",
+     "wb:class-feature/the-resentment",
+     "wb:class-feature/the-unseen-broker",
+     "wb:class-feature/whisper-of-wings",
+     "wb:class-feature/wilding-steward",
+     "wb:patron/curse",
+     "wb:patron/fate",
+     "wb:patron/fervor",
+     "wb:patron/night",
+     "wb:patron/pacts",
+     "wb:patron/rune",
+     "wb:patron/wild",
+     "wb:patron/winter"
+    ]
    }
   ]
  }

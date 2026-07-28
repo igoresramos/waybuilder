@@ -80,7 +80,7 @@ export default function App() {
     null;
   const cru = (rs: Registro[]) =>
     rs.map((r) => ({
-      id: r.id, nome: r.name, level: r.level ?? null,
+      id: r.id, nome: r.name ?? null, level: r.level ?? null,
       atende: true, motivos: [] as string[], ja_pego: false,
     }));
 
@@ -132,7 +132,7 @@ export default function App() {
       <div className="resumo">
         <span>nivel {nivel}</span>
         <span>{v.hp} HP</span>
-        <span>CA {v.ac}</span>
+        <span>CA {v.ac.total}</span>
         <span className={v.slots_abertos.length ? "pend" : "ok"}>
           {v.slots_abertos.length} pendencia(s)
         </span>

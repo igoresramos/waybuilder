@@ -13,15 +13,17 @@ import type { Visao } from "../motor/tipos";
 
 interface Props {
   v: Visao;
-  origemProficiencia?: Record<string, string[]>;
-  hpDetalhe?: Array<{ origem: string; hp: number; nota?: string }>;
+  // o motor guarda estes derivados em `Map`, para preservar a ordem de
+  // insercao que o dict do Python tem (ver `motor/personagem.ts`)
+  origemProficiencia?: ReadonlyMap<string, string[]>;
+  hpDetalhe?: ReadonlyArray<{ origem: string | null; hp: number; nota?: string }>;
 }
 
 const NOME_ATRIBUTO: Record<string, string> = {
   str: "FOR", dex: "DES", con: "CON", int: "INT", wis: "SAB", cha: "CAR",
 };
 
-export function Ficha({ v, origemProficiencia = {}, hpDetalhe = [] }: Props) {
+export function Ficha({ v, origemProficiencia = new Map(), hpDetalhe = [] }: Props) {
   const classes = Object.entries(v.classes)
     .map(([nome, n]) => `${nome} ${n}`)
     .join(" / ");
@@ -44,7 +46,7 @@ export function Ficha({ v, origemProficiencia = {}, hpDetalhe = [] }: Props) {
             <span>HP</span>
           </div>
           <div className="vital">
-            <strong>{v.ac}</strong>
+            <strong>{v.ac.total}</strong>
             <span>CA</span>
           </div>
         </div>
@@ -89,7 +91,7 @@ export function Ficha({ v, origemProficiencia = {}, hpDetalhe = [] }: Props) {
                 <span className={`rank r-${rank}`}>{rank}</span>
                 {/* de onde veio -- e o que permite conferir em vez de confiar */}
                 <span className="origem">
-                  {(origemProficiencia[chave] ?? []).join(", ")}
+                  {(origemProficiencia.get(chave) ?? []).join(", ")}
                 </span>
               </li>
             ))}

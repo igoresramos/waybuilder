@@ -1194,7 +1194,25 @@
     "escolhido": "wb:instinct/fury",
     "nivel": 1,
     "nome": "Fury",
-    "opcoes": 16
+    "opcoes": 16,
+    "opcoes_ids": [
+     "wb:class-feature/bloodrager",
+     "wb:instinct/animal",
+     "wb:instinct/animal-legacy",
+     "wb:instinct/decay",
+     "wb:instinct/dragon",
+     "wb:instinct/dragon-legacy",
+     "wb:instinct/elemental",
+     "wb:instinct/fury",
+     "wb:instinct/fury-legacy",
+     "wb:instinct/giant",
+     "wb:instinct/giant-legacy",
+     "wb:instinct/ligneous",
+     "wb:instinct/spirit",
+     "wb:instinct/spirit-legacy",
+     "wb:instinct/superstition",
+     "wb:instinct/superstition-legacy"
+    ]
    },
    {
     "classe": "Barbarian",
@@ -1202,7 +1220,18 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 9
+    "opcoes": 9,
+    "opcoes_ids": [
+     "wb:class-feature/animal-instinct",
+     "wb:class-feature/decay-instinct",
+     "wb:class-feature/dragon-instinct",
+     "wb:class-feature/elemental-instinct",
+     "wb:class-feature/fury-instinct",
+     "wb:class-feature/giant-instinct",
+     "wb:class-feature/ligneous-instinct",
+     "wb:class-feature/spirit-instinct",
+     "wb:class-feature/superstition-instinct"
+    ]
    }
   ]
  }

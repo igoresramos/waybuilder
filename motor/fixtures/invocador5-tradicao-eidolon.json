@@ -1198,7 +1198,23 @@
     "escolhido": "wb:class-feature/angel-eidolon",
     "nivel": 1,
     "nome": "Angel Eidolon",
-    "opcoes": 14
+    "opcoes": 14,
+    "opcoes_ids": [
+     "wb:class-feature/angel-eidolon",
+     "wb:class-feature/anger-phantom-eidolon",
+     "wb:class-feature/beast-eidolon",
+     "wb:class-feature/construct-eidolon",
+     "wb:class-feature/demon-eidolon",
+     "wb:class-feature/devotion-phantom-eidolon",
+     "wb:class-feature/dragon-eidolon",
+     "wb:class-feature/elemental-eidolon",
+     "wb:class-feature/fey-eidolon",
+     "wb:class-feature/plant-eidolon",
+     "wb:class-feature/psychopomp-eidolon",
+     "wb:class-feature/spell-repertoire-summoner",
+     "wb:class-feature/swarm-eidolon",
+     "wb:class-feature/undead-eidolon"
+    ]
    }
   ]
  }

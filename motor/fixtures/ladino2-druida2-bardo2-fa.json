@@ -1422,7 +1422,15 @@
     "escolhido": "wb:class-feature/thief",
     "nivel": 1,
     "nome": "Thief",
-    "opcoes": 6
+    "opcoes": 6,
+    "opcoes_ids": [
+     "wb:class-feature/avenger",
+     "wb:class-feature/eldritch-trickster",
+     "wb:class-feature/mastermind",
+     "wb:class-feature/ruffian",
+     "wb:class-feature/scoundrel",
+     "wb:class-feature/thief"
+    ]
    },
    {
     "classe": "Druid",
@@ -1430,7 +1438,18 @@
     "escolhido": "wb:class-feature/animal-order",
     "nivel": 1,
     "nome": "Animal Order",
-    "opcoes": 9
+    "opcoes": 9,
+    "opcoes_ids": [
+     "wb:class-feature/animal-order",
+     "wb:class-feature/cultivation-order",
+     "wb:class-feature/flame-order",
+     "wb:class-feature/leaf-order",
+     "wb:class-feature/spore-order",
+     "wb:class-feature/stone-order",
+     "wb:class-feature/storm-order",
+     "wb:class-feature/untamed-order",
+     "wb:class-feature/wave-order"
+    ]
    },
    {
     "classe": "Bard",
@@ -1438,7 +1457,14 @@
     "escolhido": "wb:class-feature/enigma",
     "nivel": 1,
     "nome": "Enigma",
-    "opcoes": 5
+    "opcoes": 5,
+    "opcoes_ids": [
+     "wb:class-feature/enigma",
+     "wb:class-feature/maestro",
+     "wb:class-feature/polymath",
+     "wb:class-feature/warrior",
+     "wb:class-feature/zoophonia"
+    ]
    }
   ]
  }

@@ -1182,7 +1182,28 @@
     "escolhido": "wb:class-feature/bloodline-diabolic",
     "nivel": 1,
     "nome": "Bloodline: Diabolic",
-    "opcoes": 19
+    "opcoes": 19,
+    "opcoes_ids": [
+     "wb:class-feature/bloodline-aberrant",
+     "wb:class-feature/bloodline-aesir",
+     "wb:class-feature/bloodline-angelic",
+     "wb:class-feature/bloodline-demonic",
+     "wb:class-feature/bloodline-diabolic",
+     "wb:class-feature/bloodline-draconic",
+     "wb:class-feature/bloodline-elemental",
+     "wb:class-feature/bloodline-fey",
+     "wb:class-feature/bloodline-genie",
+     "wb:class-feature/bloodline-hag",
+     "wb:class-feature/bloodline-harrow",
+     "wb:class-feature/bloodline-imperial",
+     "wb:class-feature/bloodline-nymph",
+     "wb:class-feature/bloodline-phoenix",
+     "wb:class-feature/bloodline-psychopomp",
+     "wb:class-feature/bloodline-shadow",
+     "wb:class-feature/bloodline-undead",
+     "wb:class-feature/bloodline-wyrmblessed",
+     "wb:class-feature/spell-repertoire-sorcerer"
+    ]
    }
   ]
  }

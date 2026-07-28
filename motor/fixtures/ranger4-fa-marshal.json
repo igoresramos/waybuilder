@@ -1077,7 +1077,13 @@
     "escolhido": "wb:class-feature/precision",
     "nivel": 1,
     "nome": "Precision",
-    "opcoes": 4
+    "opcoes": 4,
+    "opcoes_ids": [
+     "wb:class-feature/flurry",
+     "wb:class-feature/outwit",
+     "wb:class-feature/precision",
+     "wb:hunters-edge/vindication"
+    ]
    },
    {
     "classe": "Ranger",
@@ -1085,7 +1091,11 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 2
+    "opcoes": 2,
+    "opcoes_ids": [
+     "wb:class-feature/vindicator",
+     "wb:class-feature/warden-spells"
+    ]
    }
   ]
  }
