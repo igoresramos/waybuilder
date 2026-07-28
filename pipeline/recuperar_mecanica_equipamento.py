@@ -171,6 +171,69 @@ def do_aon():
     return saida
 
 
+# `Base Armor Chain Mail`, `Base Shield Steel Shield` -- o cabecalho do item
+# magico DIZ de quem ele herda. Nenhuma das tres fontes poe isso em campo,
+# porque no PF2e a armadura magica herda a base e o livro nao repete os numeros.
+BASE_DE = re.compile(r"\bBase (?:Armor|Shield|Weapon)\s+(.+?)(?=\s+(?:---|Source|Price|Usage|Bulk|Base )|$)")
+
+
+def prosa_por_kind(kind: str) -> dict:
+    caminho = f"{BASE}/text/{kind}.json"
+    if not os.path.exists(caminho):
+        return {}
+    with open(caminho, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def herdar_da_base(base, curados, sobraram):
+    """Segunda passada: item magico herda o bloco da armadura/escudo base.
+
+    Ex.: `Celestial Armor` traz `Base Armor Chain Mail` no texto -- e uma chain
+    mail magica, e usa os numeros dela. Sem isto, equipar Celestial Armor dava
+    CA de personagem pelado, num item de 2.500 gp.
+    """
+    por_nome = {}
+    for r in base:
+        if r.get("kind") in CRITICO and r.get(CRITICO[r["kind"]]) is not None:
+            por_nome[(r["kind"], norm(r.get("name")))] = r
+
+    textos = {k: prosa_por_kind(k) for k in ("armor", "shield", "weapon")}
+    herdados, restam = [], []
+    for rid, nome, kind in sobraram:
+        reg = next((x for x in base if x["id"] == rid), None)
+        if reg is None:
+            continue
+        texto = textos.get(kind, {}).get(reg.get("text") or "", "")
+        m = BASE_DE.search(texto or "")
+        if not m:
+            restam.append((rid, nome, kind))
+            continue
+        alvo = None
+        for c in chaves(m.group(1).strip()):
+            alvo = por_nome.get((kind, c))
+            if alvo:
+                break
+        if alvo is None:
+            restam.append((rid, nome, kind))
+            continue
+        campos = []
+        for campo, valor in alvo.items():
+            if campo in ("id", "name", "kind", "text", "prov", "xref", "source",
+                         "traits", "rarity", "level", "grants", "requires",
+                         "aliases", "historico", "legado_de", "runes",
+                         "mecanica_recuperada", "herdado_de"):
+                continue
+            if reg.get(campo) in (None, "", {}):
+                reg[campo] = valor
+                campos.append(campo)
+        if campos:
+            reg["herdado_de"] = alvo["id"]
+            herdados.append((rid, nome, kind, alvo["name"], campos))
+        else:
+            restam.append((rid, nome, kind))
+    return herdados, restam
+
+
 def main() -> int:
     with open(f"{BASE}/index.json", encoding="utf-8") as fh:
         base = json.load(fh)
@@ -210,6 +273,19 @@ def main() -> int:
         else:
             sobraram.append((r["id"], r.get("name"), kind))
 
+    # `Unarmored` nao e armadura, e a AUSENCIA dela -- e por isso nao tem
+    # numero em fonte nenhuma. Declarar o zero explicito e melhor que deixar
+    # nulo: o motor para de precisar de caso especial e a ficha mostra 0.
+    for r in base:
+        if r.get("kind") == "armor" and norm(r.get("name")) == "unarmored":
+            r.setdefault("ac_bonus", 0)
+            r.setdefault("armor_category", "unarmored")
+            sobraram = [x for x in sobraram if x[0] != r["id"]]
+            curados.append((r["id"], r.get("name"), "armor", "definicao",
+                            ["ac_bonus", "armor_category"]))
+
+    herdados, sobraram = herdar_da_base(base, curados, sobraram)
+
     with open(f"{BASE}/index.json", "w", encoding="utf-8") as fh:
         json.dump(base, fh, ensure_ascii=False)
 
@@ -219,8 +295,15 @@ def main() -> int:
         "escreve `Leather Armor` onde o AoN escreve `Leather`, e as armas "
         "universais (`Fist`, `Shield Bash`) nao existem como arquivo no Foundry, "
         "so no dump do AoN.", "",
-        f"- registros curados: **{len(curados)}**",
+        f"- registros curados por fonte: **{len(curados)}**",
+        f"- herdados do item base (`Base Armor X` no texto): **{len(herdados)}**",
         f"- ainda sem o campo critico: **{len(sobraram)}**", "",
+        "## Herdados", "",
+        "| id | nome | kind | herda de | campos |", "|---|---|---|---|---|",
+    ] + [
+        f"| `{i}` | {n} | {k} | {alvo} | {', '.join(c)} |"
+        for i, n, k, alvo, c in sorted(herdados)[:60]
+    ] + ["",
         "## Curados", "", "| id | nome | kind | fonte | campos |", "|---|---|---|---|---|",
     ]
     for i, n, k, o, campos in sorted(curados)[:80]:
@@ -238,7 +321,8 @@ def main() -> int:
               encoding="utf-8") as fh:
         fh.write("\n".join(linhas) + "\n")
 
-    print(f"curados: {len(curados)} | ainda sem: {len(sobraram)}")
+    print(f"curados: {len(curados)} | herdados: {len(herdados)} "
+          f"| ainda sem: {len(sobraram)}")
     print(f"-> {BASE}/relatorio_mecanica_equipamento.md")
     return 0
 

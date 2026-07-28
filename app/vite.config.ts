@@ -26,6 +26,15 @@ export default defineConfig({
         // viver em arquivo separado. Ela entra no cache quando o jogador abre
         // um registro, pela regra de runtime abaixo.
         globIgnores: ["**/base/text/**"],
+        // NUNCA responder um pedido de dado com a pagina.
+        //
+        // O `navigateFallback` do plugin manda o `index.html` quando uma rota
+        // nao esta no precache. Isso e certo para navegacao e VENENO para
+        // `/base/`: o `fetch` recebe HTML, o `JSON.parse` estoura com
+        // `Unexpected token '<', "<!doctype "...` e a tela diz "nao carregou a
+        // base" -- um erro que nao aponta para lugar nenhum. Aconteceu com um
+        // service worker de build anterior ainda registrado no navegador.
+        navigateFallbackDenylist: [/^\/base\//],
         // o indice do nucleo passa de 2 MB cru, e o default do Workbox e 2 MiB:
         // sem isto o arquivo MAIS importante ficaria de fora, em silencio, e o
         // app abriria offline sem base nenhuma

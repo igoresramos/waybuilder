@@ -227,16 +227,6 @@ function Modal({
                   {reg.level != null && <span className="nv">{reg.level}</span>}
                 </div>
                 <Traits base={base} reg={reg} />
-                {/* O PRE-REQUISITO em prosa, como o Pathbuilder imprime:
-                    "Prerequisites trained in Diplomacy". Vem da base em
-                    `requires_texto`; quando falta, o gate ainda existe em
-                    `requires` (o trait de ancestralidade de Natural Ambition,
-                    por exemplo) e aparece no aviso logo abaixo. */}
-                {typeof reg.requires_texto === "string" && (
-                  <p className="prereq">
-                    <b>Pre-requisitos</b> {limparMarcacao(reg.requires_texto)}
-                  </p>
-                )}
                 {marcado && !marcado.atende && (
                   <p className="fora-aviso">
                     fora do requisito: {marcado.motivos.join("; ")}
@@ -245,7 +235,9 @@ function Modal({
                   </p>
                 )}
                 {texto
-                  ? <Prosa texto={texto} nome={reg.name} />
+                  ? <Prosa texto={texto} nome={reg.name}
+                          prerequisito={typeof reg.requires_texto === "string"
+                            ? limparMarcacao(reg.requires_texto) : null} />
                   : <p className="vazio">sem texto para este registro</p>}
               </>
             )}

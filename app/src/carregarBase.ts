@@ -31,12 +31,38 @@ interface Manifesto {
   por_kind?: Record<string, { registros: number; gzip_bytes: number }>;
 }
 
-async function fatia(kind: string, raiz: string): Promise<Registro[]> {
-  const r = await fetch(`${raiz}/por-kind/${kind}.json`);
-  if (!r.ok) {
-    throw new Error(`nao carregou o kind \`${kind}\` (HTTP ${r.status})`);
+/**
+ * Busca um JSON e falha DIZENDO O QUE ACONTECEU.
+ *
+ * Sem isto, um recurso ausente vira `Unexpected token '<', "<!doctype "...` --
+ * porque o servidor (ou o service worker, com `navigateFallback`) responde a
+ * pagina no lugar do dado, e o `JSON.parse` estoura sem apontar para nada. Foi
+ * exatamente o erro que apareceu com um service worker de build anterior ainda
+ * registrado; a mensagem nao dizia sequer QUAL arquivo faltou.
+ */
+async function buscarJson<T>(url: string, oque: string): Promise<T> {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`${oque}: HTTP ${r.status} em ${url}`);
+
+  const bruto = await r.text();
+  if (bruto.trimStart().startsWith("<")) {
+    throw new Error(
+      `${oque}: o servidor devolveu HTML em vez de JSON (${url}). `
+      + "Costuma ser service worker de build antigo: abra as ferramentas do "
+      + "navegador, desregistre o service worker e recarregue. "
+      + "Se persistir, rode `./sincronizar-base.sh` em `app/`.",
+    );
   }
-  return (await r.json()) as Registro[];
+  try {
+    return JSON.parse(bruto) as T;
+  } catch {
+    throw new Error(`${oque}: JSON invalido em ${url}`);
+  }
+}
+
+async function fatia(kind: string, raiz: string): Promise<Registro[]> {
+  return buscarJson<Registro[]>(`${raiz}/por-kind/${kind}.json`,
+                                `kind \`${kind}\``);
 }
 
 /**
@@ -47,9 +73,8 @@ async function fatia(kind: string, raiz: string): Promise<Registro[]> {
 export async function carregarNucleo(
   raiz = `${import.meta.env.BASE_URL}base`,
 ): Promise<BaseCarregada> {
-  const r = await fetch(`${raiz}/_manifesto.json`);
-  if (!r.ok) throw new Error(`nao carregou o manifesto (HTTP ${r.status})`);
-  const manifesto = (await r.json()) as Manifesto;
+  const manifesto = await buscarJson<Manifesto>(
+    `${raiz}/_manifesto.json`, "manifesto da base");
   const kinds = Object.keys(manifesto.por_kind ?? {});
   if (!kinds.length) throw new Error("manifesto sem `por_kind`");
 

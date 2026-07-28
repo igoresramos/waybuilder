@@ -30,20 +30,37 @@ function Bloco({ s }: { s: Secao }) {
   );
 }
 
-export function Prosa({ texto, nome }: { texto: string; nome?: string }) {
+export function Prosa({
+  texto, nome, prerequisito,
+}: {
+  texto: string;
+  nome?: string;
+  /** `requires_texto` da base; so entra se o corpo NAO trouxer o campo */
+  prerequisito?: string | null;
+}) {
   const [verSabor, setVerSabor] = useState(false);
   const p = analisarProsa(texto, nome);
 
+  // O pre-requisito chega por dois caminhos -- o campo `requires_texto` da base
+  // e o proprio texto, que repete "Prerequisites ...". Mostrar os dois imprimia
+  // a mesma linha duas vezes. O corpo tem precedencia: e o que a fonte
+  // publicou; `requires_texto` cobre os registros em que ele nao aparece.
+  const jaTemNoCorpo = p.campos.some((c) => c.rotulo === "Prerequisites");
+  const campos = jaTemNoCorpo || !prerequisito
+    ? p.campos
+    : [{ rotulo: "Prerequisites", texto: prerequisito, tipo: "regra" as const },
+       ...p.campos];
+
   // nada a separar: melhor o texto cru do que uma casca vazia em volta dele
-  if (p.cru && !p.campos.length) {
+  if (p.cru && !campos.length) {
     return <div className="prosa">{limparMarcacao(texto)}</div>;
   }
 
   return (
     <div className="prosa">
-      {p.campos.length > 0 && (
+      {campos.length > 0 && (
         <div className="campos-de-regra">
-          {p.campos.map((c, i) => (
+          {campos.map((c, i) => (
             <div key={i} className="campo">
               <b>{c.rotulo}</b>
               <span>{limparMarcacao(c.texto)}</span>

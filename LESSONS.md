@@ -804,3 +804,45 @@ varrer tambem `subclasses[].opcoes`, e nao so `requires`. Resultado: `cause`
 
 Metodo que se confirma: **antes de declarar que falta conteudo, procure o
 conteudo sob o nome novo.** Ja falhei nisto duas vezes no mesmo dia.
+
+### Item magico herda a base, e o livro diz isso na prosa
+Sobravam 11 armaduras e 7 escudos sem numero -- `Celestial Armor`, `Demon
+Armor`, `Sturdy Shield`, `Mithral Shield`. Procurei nas TRES fontes: o Foundry
+nao tem esses itens, o Pf2eTools so traz `bulk` e `category`, o AoN idem. Parecia
+lacuna sem saida.
+
+Nao era. No PF2e a armadura magica **herda a estatistica da base**, e o livro nao
+repete os numeros -- mas DECLARA a base, no cabecalho do proprio texto:
+
+    Celestial Armor ... Bulk 1 Base Armor Chain Mail --- This suit of +2 ...
+    Sturdy Shield   ... Bulk 1 Base Shield Steel Shield --- With a superior ...
+
+E campo estruturado morando na prosa. Extrair `Base (Armor|Shield|Weapon) X` e
+herdar o bloco do item base resolveu 10 dos 18. `Celestial Armor` agora e
+`ac_bonus 4, dex_cap 1, check_penalty -2`, herdado de `chain-mail`.
+
+`Unarmored` era caso a parte e ficou explicito: nao e armadura, e a AUSENCIA
+dela, entao `ac_bonus: 0` declarado vale mais que nulo -- o motor para de
+precisar de caso especial.
+
+Saldo: armadura 14 -> 5, escudo 7 -> 5, arma 110 -> 54. O que sobra nao declara
+base em fonte nenhuma (`Elven Chain` e `Mithral Shield` falam de MATERIAL, nao de
+item base) ou sao bombas alquimicas, cujo dano e do efeito e nao da arma.
+
+### Service worker devolvendo a pagina no lugar do dado
+O Igor viu `Unexpected token '<', "<!doctype "...` e a tela dizendo "nao
+carregou a base". O servidor estava certo -- `curl` devolvia 200 em todos os 54
+kinds, e o headless limpo carregava. Era **service worker de build anterior**
+ainda registrado: o `vite-plugin-pwa` poe `navigateFallback: index.html`, e um
+recurso fora do precache volta como HTML.
+
+Dois consertos, e o segundo importa mais que o primeiro:
+1. `navigateFallbackDenylist: [/^\\/base\\//]` -- pedido de dado nunca recebe
+   pagina;
+2. `buscarJson()` detecta resposta que comeca com `<` e diz **o que fazer**
+   (desregistrar o service worker), citando a URL. O `JSON.parse` cru nao
+   dizia nem qual arquivo falhou.
+
+Licao de metodo: o erro do usuario nao reproduzia no meu ambiente porque meu
+headless nao tinha service worker. **Reproduzir com o estado do usuario, nao com
+o meu**, e o que separou "funciona aqui" de achar a causa.
