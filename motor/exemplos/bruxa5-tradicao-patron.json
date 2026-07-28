@@ -1,0 +1,31 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {
+    "versao": "2026-07-28",
+    "pin_foundry": "87f9e502"
+  },
+  "identidade": {
+    "nome": "Validacao -- Bruxa 5 pura",
+    "jogador": "auditoria",
+    "notas": "Ficha de VALIDACAO (2026-07-28, tarefa de auditoria spell/ritual/conjuracao). Bruxa (Witch) pura nivel 5, pra medir o mesmo defeito de tradicao ja confirmado no Feiticeiro: `wb:class/witch.spellcasting.tradition` e a string nao resolvida 'variavel (definida pela escolha de patron; nao ha tradicao fixa na class-feature)', e nenhum `wb:patron/*` tem `grants` estruturado (todos vazios) -- o motor nao tem de onde puxar a tradicao real. Resultado: `_conjuracao()` devolve essa string crua em vez de uma tradicao valida. NAO EDITAR o motor a partir desta ficha -- e so instrumento de medicao."
+  },
+  "escolhas": [
+    { "em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human" },
+    { "em": "criacao", "slot": "background", "pega": "wb:background/hermit" },
+    { "em": 1, "slot": "nivel_de_classe", "pega": "wb:class/witch" },
+    { "em": 1, "slot": "boosts_livres", "pega": ["int", "wis", "int", "con"] },
+    { "em": 2, "slot": "nivel_de_classe", "pega": "wb:class/witch" },
+    { "em": 3, "slot": "nivel_de_classe", "pega": "wb:class/witch" },
+    { "em": 4, "slot": "nivel_de_classe", "pega": "wb:class/witch" },
+    { "em": 5, "slot": "nivel_de_classe", "pega": "wb:class/witch" },
+    { "em": 5, "slot": "boosts_livres", "pega": ["int", "con", "wis", "cha"] }
+  ],
+  "atores": [],
+  "inventario": [],
+  "manual": {
+    "nota": "tudo aqui e escrito pelo jogador e nunca sobrescrito pelo motor",
+    "hp_bonus": 0,
+    "proficiencias_forcadas": {},
+    "itens_caseiros": []
+  }
+}

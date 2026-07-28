@@ -1,0 +1,32 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {
+    "versao": "2026-07-28",
+    "pin_foundry": "87f9e502"
+  },
+  "identidade": {
+    "nome": "Validacao -- Invocador 5 puro",
+    "jogador": "auditoria",
+    "notas": "Ficha de VALIDACAO (2026-07-28, tarefa de auditoria spell/ritual/conjuracao). Summoner (Invocador) puro nivel 5, terceira classe do trio afetado pelo defeito de tradicao (Feiticeiro/bloodline, Bruxa/patron, Invocador/eidolon). `wb:class/summoner.spellcasting.tradition` e a string nao resolvida 'variavel (definida pela escolha de eidolon; nao ha tradicao fixa na class-feature)', e nenhum `wb:eidolon/*` (13 registros) tem `grants` estruturado. NAO EDITAR o motor a partir desta ficha -- e so instrumento de medicao."
+  },
+  "escolhas": [
+    { "em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human" },
+    { "em": "criacao", "slot": "background", "pega": "wb:background/hermit" },
+    { "em": 1, "slot": "nivel_de_classe", "pega": "wb:class/summoner" },
+    { "em": 1, "slot": "subclasse", "pega": "wb:class-feature/angel-eidolon" },
+    { "em": 1, "slot": "boosts_livres", "pega": ["cha", "con", "cha", "wis"] },
+    { "em": 2, "slot": "nivel_de_classe", "pega": "wb:class/summoner" },
+    { "em": 3, "slot": "nivel_de_classe", "pega": "wb:class/summoner" },
+    { "em": 4, "slot": "nivel_de_classe", "pega": "wb:class/summoner" },
+    { "em": 5, "slot": "nivel_de_classe", "pega": "wb:class/summoner" },
+    { "em": 5, "slot": "boosts_livres", "pega": ["cha", "con", "wis", "dex"] }
+  ],
+  "atores": [],
+  "inventario": [],
+  "manual": {
+    "nota": "tudo aqui e escrito pelo jogador e nunca sobrescrito pelo motor",
+    "hp_bonus": 0,
+    "proficiencias_forcadas": {},
+    "itens_caseiros": []
+  }
+}
