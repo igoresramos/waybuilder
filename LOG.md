@@ -6,7 +6,56 @@ project: waybuilder
 
 ## 2026-07-27
 
-### Sessao | 22:30-00:10 | os quatro defeitos do motor, fechados | igor + claude-code
+### Sessao | 21:35-22:15 | quatro frentes de validacao em paralelo | igor + claude-code
+
+"Validar validar e validar." Quatro agentes, cada um numa frente independente, com
+ownership de arquivo declarado. Antes deles, uma varredura propria passou as **226
+dedicacoes** pelo motor: zero excecoes, 105 entregam algo, HP mexe em 5 e sempre
+exatamente `+nivel` (Toughness), nenhuma proficiencia master/legendary indevida.
+
+**A varredura pegou um erro de metodo meu antes de qualquer agente:** a primeira
+medicao usou a ficha do Guerreiro que ja tinha `additional-lore` e `double-slice`
+escolhidos, entao `_ja_tenho` bloqueava justamente as concessoes que se queria
+medir -- 30 dedicacoes apareceram falsamente como mudas. Com ficha neutra, caem
+para 16. Ficha de referencia contaminada mede a ficha, nao o motor.
+
+**A adversarial (Opus, 6.881 derivacoes) achou defeito real no que eu tinha
+acabado de commitar**, e os consertos entraram no mesmo dia:
+
+- **Regressao critica.** `Personagem({}, Base())` estourava `StopIteration`: o
+  `next` que escolhe o teto de rank nao tinha default e a tupla parava em nivel 1.
+  Nivel 0 e o ESTADO INICIAL do construtor, nao caso exotico. Mais tres pontos que
+  explodiam com documento malformado. Fuzz agora: **1440/1440** sem excecao.
+- **Requisito circular.** Ao aplicar grants de feat, um feat que concede o que
+  exige passou a satisfazer o proprio requisito (`acrobat-dedication` exige
+  acrobatics trained e concede acrobatics; a ficha saia limpa onde antes
+  sinalizava -- 25 termos auto-satisfeitos entre os 6.273 feats com `requires`).
+  Consertado rastreando de quem veio cada proficiencia e a RAIZ de cada concessao.
+- **Regras de arquetipo cegas** para o que foi concedido, e a cadeia nunca partia
+  de ancestria/heranca/background -- 69 alvos validos inertes.
+
+**Um defeito que nenhum agente pegou, e o teste novo pegou:** a ficha dependia da
+ORDEM das escolhas no JSON. `ordem_de_classe` era montada na ordem do array, entao
+reordenar mudava `primeira_classe` e com ela a regra 8. A adversarial rodou 321
+embaralhamentos e passou limpo, porque **so ficha multiclasse com classes entrando
+em niveis diferentes expoe** -- e foi uma das fichas que o agente de fichas criou
+que revelou. O corpus cresceu no meio da validacao e mudou o resultado dela.
+
+**Achados de DADO, que e onde estava o estrago maior:** 122 feats com o gate de
+nivel travado na primeira classe em ordem alfabetica (`Reach Spell` sai
+`class_level: {bard}`, entao pelo motor um Mago nao pode pega-lo); o eixo
+`outras-opcoes` como balaio em 25 das 27 classes; 476 alvos de `grant_feat` sem
+resolver, todos de background; e atributo sem higiene nenhuma -- ficha sem boost
+declarado sai com tudo 10, HP menor e ZERO avisos.
+
+Fichas de exemplo foram de 9 para **17**, cobrindo multiclasse de tres classes,
+nivel 10 e classes incomuns (Kineticist, Exemplar, Feiticeiro). Testes do motor:
+**63** (eram 28 no inicio do dia). Itens novos no TODO: 69 a 75.
+
+Correcao de registro: a entrada anterior desta sessao foi gravada com horario
+"22:30-00:10", que era estimativa errada -- os commits mostram 21:04-22:13.
+
+### Sessao | 21:05-21:35 | os quatro defeitos do motor, fechados | igor + claude-code
 
 A rodada anterior tinha diagnosticado, com numero, quatro defeitos do motor e
 deixado teste `expectedFailure` para cada um. Esta sessao fechou os quatro. O

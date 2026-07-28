@@ -5,7 +5,7 @@ status: planning
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 10.2
+hours: 9.7
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -108,7 +108,21 @@ hidden: false
 > class-feature concedidos) --, o gasto de slot e confrontado com o slot, as
 > duas regras RAW do trait `dedication` sao checadas e o aumento de pericia por
 > nivel existe. Alvo dinamico continua sinalizado como pendente, que e a
-> distincao que o app precisa. **42 testes** no motor, 88 no pipeline.
+> distincao que o app precisa. **63 testes** no motor, 88 no pipeline.
+>
+> **Validado em quatro frentes paralelas (2026-07-27).** As 226 dedicacoes passam
+> pelo motor sem uma excecao; 1.440 documentos malformados derivam sem explodir;
+> embaralhar as escolhas nao muda a ficha. O review adversarial achou -- e o mesmo
+> dia consertou -- uma regressao com personagem de nivel 0 (o estado inicial do
+> construtor), o requisito circular criado ao aplicar grants, e a dependencia de
+> ordem em `ordem_de_classe`.
+>
+> **O gargalo mudou de lugar: agora e DADO, nao motor.** Os quatro achados que
+> mais custam sao de base -- 122 feats com gate de nivel travado numa classe so
+> (`Reach Spell` inalcancavel para Mago), o eixo `outras-opcoes` como balaio em 25
+> das 27 classes, 476 alvos de `grant_feat` sem resolver em background, e a
+> ausencia de higiene de atributo (ficha sem boost declarado sai com tudo 10 e
+> nenhum aviso). Itens 69 a 75.
 >
 > **(historico)** Fatia vertical 1 fechada: `motor/`
 > implementa 11 das 22 regras e imprime `Guerreiro 3 / Mago 2` completo, com 24

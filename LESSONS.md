@@ -18,6 +18,41 @@ project: waybuilder
 
 ## Aprendizados
 
+### Aplicar o efeito de uma escolha cria requisito circular
+No dia em que o motor passou a APLICAR o que um feat concede, ele passou a
+avaliar o `requires` desse feat contra um estado que ja inclui o efeito dele.
+`acrobat-dedication` exige acrobatics trained e concede acrobatics: o feat
+passou a satisfazer o proprio requisito, e a ficha saia limpa exatamente onde
+antes sinalizava. Foram 25 termos auto-satisfeitos entre os 6.273 feats com
+`requires` -- e nenhum teste existente reprovou, porque todos verificavam que o
+efeito FOI aplicado, e nenhum verificava contra o que o requisito e medido.
+
+A correcao nao e caso especial: e o predicado ser avaliado contra o estado SEM o
+efeito do proprio item. Isso obriga a guardar, para cada valor derivado, DE QUEM
+ele veio -- e, quando ha cadeia (A concede B que concede C), a RAIZ dela, nao o
+elo imediato. Quem aplica efeito precisa de proveniencia, nao so de valor.
+
+### O corpus de teste cresce e muda o resultado da validacao
+Um review adversarial rodou 321 embaralhamentos das escolhas e concluiu que a
+ordem do documento nao afetava a ficha. Estava certo -- para o corpus daquele
+momento. Enquanto ele rodava, outro agente criou fichas MULTICLASSE, e o mesmo
+teste passou a falhar na hora: `ordem_de_classe` era montada na ordem do array,
+entao reordenar mudava qual e "a primeira classe" e com ela a regra 8. Com
+classe unica o defeito e invisivel.
+
+Licao: "testei N casos e nao achou" vale pelo corpus, nao pelo N. Ao validar
+invariante, perguntar primeiro qual e a forma de entrada que poderia quebra-lo
+-- e se ela existe no corpus.
+
+### Ficha de referencia contaminada mede a ficha, nao o motor
+A primeira varredura das 226 dedicacoes usou como base uma ficha que ja tinha
+`additional-lore` e `double-slice` escolhidos. Como o motor (corretamente) nao
+concede o que o personagem ja tem, 30 dedicacoes apareceram como "nao entregam
+nada". Com uma ficha neutra -- sem nenhum feat escolhido -- o numero caiu para
+16, e a conclusao mudou de "muitas dedicacoes estao quebradas" para "quase todas
+funcionam". O baseline de uma medicao precisa ser escolhido contra o que se quer
+medir, nao ser a ficha que estava aberta.
+
 ### Consumir o dado descobre em uma tarde o que auditar nao acha em duas sessoes
 Duas auditorias amplas leram a base campo a campo e nao viram que
 `wb:class/wizard` declarava 49 features de nivel 1, entre elas as 23 escolas de
