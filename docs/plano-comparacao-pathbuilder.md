@@ -206,3 +206,64 @@ dedicacoes e o motor de classes -- nas duas primeiras.
 - **Exaustao dos 6.273 feats via browser.** Semanas de coleta e risco real de
   bloqueio, para achar o que o cruzamento offline de catalogo acha de graca.
 - **Pets contra paywall.**
+
+---
+
+## 10. Validacao por amostra (2026-07-28, executada)
+
+O Igor pediu amostra de cada frente antes de aprovar a campanha. Feita. O
+resultado **mudou o plano de novo**, e para melhor.
+
+### Achado que barateia metade das frentes
+
+O dump do AoN esta **inteiro no disco** (`dados_brutos/aon_*.json`): 8.460 feats,
+2.461 magias, 614 armas, 436 herancas, 405 companheiros, 717 divindades.
+
+Como o AoN e o **juiz** (secao 0) e nao o Pathbuilder, as frentes de CATALOGO
+nao precisam de browser nenhum. Escrito `pipeline/comparar_com_aon.py`: cruza a
+base contra o dump, offline, em segundos, re-executavel, sem Cloudflare e sem
+coleta serial.
+
+Primeira execucao, 13 frentes:
+
+| frente | nossa | AoN | faltam | so nosso | nivel≠ | rar≠ |
+|---|---|---|---|---|---|---|
+| feat | 6247 | 6294 | **163** | 116 | **21** | 6 |
+| magia | 1638 | 1796 | **158** | 0 | 0 | 5 |
+| arma | 1029 | 327 | 16 | 718 | 6 | 2 |
+| heranca | 334 | 342 | 12 | 4 | 0 | 0 |
+| ritual | 151 | 155 | 10 | 6 | 0 | 0 |
+| arquetipo | 243 | 247 | 4 | 0 | 0 | 0 |
+| divindade | 487 | 484 | 3 | 6 | 0 | 0 |
+| ancestralidade | 50 | 52 | 2 | 0 | 0 | 0 |
+| familiar | 208 | 172 | 2 | 38 | 0 | 0 |
+| companheiro | 113 | 96 | 0 | 17 | 0 | 0 |
+| background | 521 | 496 | 0 | 25 | 0 | 0 |
+| armadura | 216 | 38 | 0 | 178 | 0 | 0 |
+| escudo | 125 | 16 | 0 | 109 | 0 | 0 |
+
+~370 itens ausentes e 27 niveis divergentes, numa execucao offline.
+
+O "so nosso" alto em equipamento (718 armas, 178 armaduras) e esperado: o dump de
+equipamento do AoN e parcial e o nosso veio do Foundry. **Nao e erro** -- e por
+isso que a taxonomia separa B-SOBRA-NOVA.
+
+Pegadinha achada e corrigida na hora: filtrar por `type` zerava quatro frentes em
+silencio -- o dump de equipamento marca tudo como `Item` (ja separado por
+arquivo) e o de magias nao traz `type` nenhum.
+
+### Frente 1 (dedicacoes) -- viavel, e cara como previsto
+
+O Pathbuilder mostra o detalhe da dedicacao (nome, nivel, traits, prosa) e a
+ficha muda ao aceitar. Confirmado com `Archer Dedication`. Mas colher **o que**
+mudou exige um extrator que compare o ESTADO da ficha antes e depois -- ler o
+icone de proficiencia linha a linha, nao so o texto. E o item de maior valor do
+plano e continua sendo o mais caro; a estimativa de 1-2 sessoes de coleta mais
+2-3 de modelagem se mantem.
+
+### Consequencia para a ordem
+
+A ordem da secao 3 continua valendo para o que depende do Pathbuilder. Mas as
+frentes 4, 5 e 6 (ancestralidades, magias, equipamento) **saem da fila do
+browser** e viram triagem offline paralelizavel -- que ja foi lancada em quatro
+agentes simultaneos, um por grupo de kinds.

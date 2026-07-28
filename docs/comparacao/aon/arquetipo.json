@@ -1,0 +1,18 @@
+{
+ "frente": "arquetipo",
+ "kinds": [
+  "archetype"
+ ],
+ "fonte_aon": "aon_archetypes.json",
+ "nossos": 243,
+ "aon": 247,
+ "faltam_em_nos": [
+  "Artillerst",
+  "Drow Shootist",
+  "Firework Technican",
+  "Hellknight Armiger"
+ ],
+ "so_nosso": [],
+ "nivel_divergente": [],
+ "raridade_divergente": []
+}

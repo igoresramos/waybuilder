@@ -1,0 +1,39 @@
+{
+ "frente": "background",
+ "kinds": [
+  "background"
+ ],
+ "fonte_aon": "aon_backgrounds.json",
+ "nossos": 521,
+ "aon": 496,
+ "faltam_em_nos": [],
+ "so_nosso": [
+  "Archival Assistant",
+  "Art 'Collector'",
+  "Azlanti Researcher",
+  "Battle's Spark",
+  "Blooded by the Dead",
+  "Boundless Wonder",
+  "Clockwork Wonder",
+  "Curse-Marked",
+  "Envoy's Alliance",
+  "Friend of a Friend",
+  "Grand Archive",
+  "Historical Reenactor",
+  "Horizon Hunters",
+  "Immortal Influence",
+  "Once Possessed",
+  "Post Guard of All Trades",
+  "Radiant Oath",
+  "Reclaimer Investigator",
+  "Refugee (Fall of Plaguestone)",
+  "Refugee (PC2)",
+  "Trusted Rival",
+  "Unfettered Exploration",
+  "Verdant Wheel",
+  "Vigilant Seal",
+  "Wish for Riches"
+ ],
+ "nivel_divergente": [],
+ "raridade_divergente": []
+}

@@ -1,0 +1,31 @@
+{
+ "frente": "heranca",
+ "kinds": [
+  "heritage"
+ ],
+ "fonte_aon": "aon_heritages.json",
+ "nossos": 334,
+ "aon": 342,
+ "faltam_em_nos": [
+  "Ant Gnoll",
+  "Cavern Kobold",
+  "Great Gnoll",
+  "Poisonhide Grippli",
+  "Skilled Heritage",
+  "Snaptongue Grippli",
+  "Spellscale Kobold",
+  "Stickytoe Grippli",
+  "Sweetbreath Gnoll",
+  "Versatile Heritage",
+  "Windweb Grippli",
+  "Witch Gnoll"
+ ],
+ "so_nosso": [
+  "Ambitious Human",
+  "Battle-Trained Human (BB)",
+  "Naari",
+  "Warden Human (BB)"
+ ],
+ "nivel_divergente": [],
+ "raridade_divergente": []
+}

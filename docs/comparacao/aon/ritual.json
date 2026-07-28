@@ -1,0 +1,31 @@
+{
+ "frente": "ritual",
+ "kinds": [
+  "ritual"
+ ],
+ "fonte_aon": "aon_rituals.json",
+ "nossos": 151,
+ "aon": 155,
+ "faltam_em_nos": [
+  "Abyssal Pact",
+  "Commune with Nature",
+  "Heroes' Feast",
+  "Infernal Pact",
+  "Legend Lore",
+  "Planar Ally",
+  "Planar Binding",
+  "Simulacrum",
+  "Unseen Custodians",
+  "Word of Recall"
+ ],
+ "so_nosso": [
+  "Anima Invocation (Modified)",
+  "Aspirational State",
+  "Create Mycoguardian",
+  "Destroy Mindscape",
+  "Rite of Cleansing Flame",
+  "Unfettered Mark"
+ ],
+ "nivel_divergente": [],
+ "raridade_divergente": []
+}

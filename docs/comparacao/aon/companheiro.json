@@ -1,0 +1,31 @@
+{
+ "frente": "companheiro",
+ "kinds": [
+  "animal-companion"
+ ],
+ "fonte_aon": "aon_companheiros.json",
+ "nossos": 113,
+ "aon": 96,
+ "faltam_em_nos": [],
+ "so_nosso": [
+  "Ambusher",
+  "Bully",
+  "Daredevil",
+  "Deep Diver",
+  "Fiery Leopard",
+  "Genie-Touched",
+  "Indomitable",
+  "Nimble",
+  "Racer",
+  "Savage",
+  "Shade",
+  "Steadfast Strider",
+  "Tracker",
+  "Unseen",
+  "Wildfire Scorcher",
+  "Wind Chaser",
+  "Wrecker"
+ ],
+ "nivel_divergente": [],
+ "raridade_divergente": []
+}

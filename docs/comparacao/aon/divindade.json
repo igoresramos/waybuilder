@@ -1,0 +1,24 @@
+{
+ "frente": "divindade",
+ "kinds": [
+  "deity"
+ ],
+ "fonte_aon": "aon_deities.json",
+ "nossos": 487,
+ "aon": 484,
+ "faltam_em_nos": [
+  "Dwarven Pantheon",
+  "Elven Pantheon",
+  "The Prismatic Ray"
+ ],
+ "so_nosso": [
+  "Alocer",
+  "Atheists and Free Agents",
+  "Chinostes",
+  "Lissala (The Order of Virtue)",
+  "Norns",
+  "The Curtain Call"
+ ],
+ "nivel_divergente": [],
+ "raridade_divergente": []
+}
