@@ -295,3 +295,40 @@ cria duas regras divergentes em silencio -- ja aconteceu, e foram 20 testes
 vermelhos de uma vez que avisaram.
 
 Mudou a base? `pipeline/build.sh`, depois `app/sincronizar-base.sh`.
+
+---
+
+## 14. Estado em 2026-07-28, fim da sessao
+
+### Consertos de dado desta sessao (todos no pipeline)
+| conserto | passo no build.sh | resultado |
+|---|---|---|
+| gate de arquetipo derivado da regra do livro | `derivar_gate_arquetipo.py` (4h2) | 407 feats |
+| aliases do remaster em `requires` e `subclasses` | `aplicar_aliases_em_requires.py` (4h3) | portao 3: 26 -> 0; `cause` 13/13, `patron` 24/24 |
+| mecanica de equipamento nao casada | `recuperar_mecanica_equipamento.py` (4h4) | arma 110->54, armadura 14->5, escudo 7->5 |
+| raridade e Fighter Dedication | `correcoes_curadas.json` | 7 correcoes |
+
+### Consertos de app
+- prosa separada em regra/sabor (`prosa.ts` + `Prosa.tsx`)
+- marcacao `{@tag}` limpa, com aninhamento (`marcacao.ts`)
+- trait com caixa correta, inclusive parametrizado (`nomeDeTrait.ts`)
+- funil do picker (`Funil.tsx`) e lista virtualizada (`ListaVirtual.tsx`)
+- inventario (`Equipamento.tsx`) -- a porta que faltava para arma e armadura
+- gate de heranca por ancestralidade, no motor
+- `navigateFallbackDenylist` para `/base/` e `buscarJson()` com erro que explica
+
+### Divida conhecida, com dono
+| item | onde | por que nao foi feito |
+|---|---|---|
+| 61 dedicacoes sem mecanica | `docs/auditoria-arquetipos.md` | nao existe em fonte estruturada; exige colheita no Pathbuilder |
+| spellcasting de dedicacao de conjurador | idem | idem |
+| 54 armas sem dano | `base/relatorio_mecanica_equipamento.md` | 41 sao bombas (dano e do efeito), 36 sao modos de arma de combinacao |
+| 5 armaduras / 5 escudos | idem | declaram MATERIAL, nao item base (`Elven Chain`, `Mithral Shield`) |
+| 5 feats candidatos, 23 familias com `xref` suspeito | `docs/comparacao/triagem-feat.md` | precisa revisao item a item |
+| 2 orfas sem alias | `base/relatorio_aliases_requires.md` | `wb:heritage/versatile` e `you-have-a-versatile` sao ruido de parse |
+
+### Ponto de retomada
+`docs/plano-comparacao-pathbuilder.md`, secao 3, **frente 1**: colheita da
+mecanica das dedicacoes. Exige extrator que compare o ESTADO da ficha no
+Pathbuilder antes e depois de aceitar a dedicacao (ler icone de proficiencia
+linha a linha, nao so texto). E a unica frente que so o Pathbuilder resolve.
