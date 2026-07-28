@@ -37,7 +37,13 @@ ID = re.compile(r"wb:[a-z-]+/[a-z0-9-]+")
 
 
 def mapa_de_alias(base) -> dict:
-    """alias -> id canonico, do que a propria base declara."""
+    """alias -> id canonico, do que a propria base declara.
+
+    `historico[].id_legado` e o vinculo mais forte: a fusao escreve ali o id
+    exato que ela aposentou. E o que resolve as causas do Campeao
+    (`wb:cause/paladin` -> `wb:cause/justice`) e os patronos da Bruxa
+    (`wb:patron/curse` -> `wb:patron/the-resentment`) sem tabela escrita a mao.
+    """
     alias = {}
     for r in base:
         for a in r.get("aliases") or []:
@@ -71,9 +77,17 @@ def main() -> int:
     ids = {r["id"] for r in base}
     alias = mapa_de_alias(base)
 
+    # `requires` E `subclasses[].opcoes`. A segunda foi esquecida na primeira
+    # versao, e era onde doia mais: as 6 causas do Campeao e os 8 patronos da
+    # Bruxa apontavam para ids aposentados, e as duas classes abriam o slot de
+    # sub-escolha com ZERO opcao -- parecia conteudo faltando na base, quando o
+    # conteudo estava la com o nome novo.
+    def referencias(r):
+        return json.dumps([r.get("requires") or {}, r.get("subclasses") or []])
+
     orfas = {}
     for r in base:
-        for m in ID.findall(json.dumps(r.get("requires") or {})):
+        for m in ID.findall(referencias(r)):
             if m not in ids:
                 orfas.setdefault(m, []).append(r["id"])
 
@@ -82,19 +96,23 @@ def main() -> int:
 
     tocados = 0
     for r in base:
-        req = r.get("requires")
-        if not req:
-            continue
-        novo = trocar(req, de_para)
-        if novo != req:
-            r["requires"] = novo
+        mudou = False
+        for campo in ("requires", "subclasses"):
+            atual = r.get(campo)
+            if not atual:
+                continue
+            novo = trocar(atual, de_para)
+            if novo != atual:
+                r[campo] = novo
+                mudou = True
+        if mudou:
             tocados += 1
 
     with open(f"{BASE}/index.json", "w", encoding="utf-8") as fh:
         json.dump(base, fh, ensure_ascii=False)
 
     linhas = [
-        "# Aliases aplicados em `requires`", "",
+        "# Aliases aplicados em referencias", "",
         "A fusao renomeia o registro e guarda o nome antigo em `aliases`, mas "
         "nao reescreve quem citava o id aposentado.", "",
         f"- ids orfaos encontrados: **{len(orfas)}**",

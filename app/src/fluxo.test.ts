@@ -269,16 +269,14 @@ describe("equipamento entra na conta", () => {
  * tyrant, desecrator, antipaladin) e os OITO patronos da Bruxa -- ou seja, as
  * duas classes hoje nao tem sub-escolha nenhuma para oferecer.
  */
-const ORFAS_CONHECIDAS = [
-  "wb:instinct/animal-legacy", "wb:instinct/dragon-legacy",
-  "wb:instinct/fury-legacy", "wb:instinct/giant-legacy",
-  "wb:instinct/spirit-legacy", "wb:instinct/superstition-legacy",
-  "wb:cause/antipaladin", "wb:cause/desecrator", "wb:cause/liberator",
-  "wb:cause/paladin", "wb:cause/redeemer", "wb:cause/tyrant",
-  "wb:mystery/ash-legacy", "wb:lesson/lesson-of-the-elements-legacy",
-  "wb:patron/curse", "wb:patron/fate", "wb:patron/fervor", "wb:patron/night",
-  "wb:patron/pacts", "wb:patron/rune", "wb:patron/wild", "wb:patron/winter",
-  "wb:arcane-thesis/metamagical-experimentation",
+const ORFAS_CONHECIDAS: string[] = [
+  // Vazia desde 2026-07-28. Eram 23 -- as 6 causas do Campeao, os 8 patronos
+  // da Bruxa e 8 `-legacy` -- e nenhuma era conteudo faltando: a fusao do
+  // remaster aposentou os ids e nao reescreveu quem os citava. O vinculo estava
+  // no proprio dado, em `historico[].id_legado`.
+  //
+  // Mantida como lista, e nao como `toEqual([])` solto, porque a intencao e o
+  // ratchet: se uma orfa nova aparecer, o teste falha e diz QUAL.
 ];
 
 describe("o payload leva tudo que a base referencia", () => {

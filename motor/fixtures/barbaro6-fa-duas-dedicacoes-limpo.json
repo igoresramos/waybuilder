@@ -1198,20 +1198,20 @@
     "opcoes_ids": [
      "wb:class-feature/bloodrager",
      "wb:instinct/animal",
-     "wb:instinct/animal-legacy",
+     "wb:instinct/animal",
      "wb:instinct/decay",
      "wb:instinct/dragon",
-     "wb:instinct/dragon-legacy",
+     "wb:instinct/dragon",
      "wb:instinct/elemental",
      "wb:instinct/fury",
-     "wb:instinct/fury-legacy",
+     "wb:instinct/fury",
      "wb:instinct/giant",
-     "wb:instinct/giant-legacy",
+     "wb:instinct/giant",
      "wb:instinct/ligneous",
      "wb:instinct/spirit",
-     "wb:instinct/spirit-legacy",
+     "wb:instinct/spirit",
      "wb:instinct/superstition",
-     "wb:instinct/superstition-legacy"
+     "wb:instinct/superstition"
     ]
    },
    {

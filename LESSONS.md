@@ -746,3 +746,61 @@ curadoria, uma a uma.
 
 Mudar dado quebrou a paridade de novo -- 3 fichas do gabarito. O ciclo e sempre:
 mudou base ou regra -> `teste_motor.py` (95) -> `gerar_fixtures.py` -> vitest.
+
+### O comparador mentia mais que a base
+Escrevi `comparar_com_aon.py` para cruzar a base contra o dump do AoN e ele
+acusou **~370 ausencias**. Os quatro agentes de triagem devolveram o mesmo
+veredito, cada um pelo seu lado: **quase nada era ausencia real.** Dois defeitos
+meus, os dois de identidade:
+
+1. **Homonimo colidia.** 647 dos 2.461 nomes de magia se repetem (reimpressao em
+   Adventure Path). Um `dict[norm(nome)]` deixava o ultimo processado vencer em
+   silencio, e a comparacao de campo atribuia id errado.
+2. **Nao seguia o rename.** 800 docs do dump trazem `remaster_id` apontando para
+   o sucessor, e a nossa base guarda o caminho inverso em
+   `aliases`/`historico`/`legado_de`. Comparar so por nome acusava ausencia onde
+   houve troca de nome.
+
+Depois de casar pelos dois lados: **magia 158 -> 0, feat 163 -> 5, heranca
+12 -> 0, ritual 10 -> 0, arquetipo/divindade/ancestralidade -> 0**.
+
+A licao vale alem deste script, e a wiki ja tinha a frase: *identidade pede chave
+explicita, nao similaridade de texto*. **Ferramenta de auditoria precisa ser
+auditada antes de se acreditar nela** -- eu quase abri 370 itens de trabalho
+inexistente, e o que salvou foi mandar quatro agentes conferirem item a item em
+vez de confiar no numero agregado.
+
+### O que a comparacao realmente achou: campo mecanico vazio
+O valor nao estava em "falta conteudo", estava em "o conteudo esta la e nao
+funciona":
+
+- **110 de 1.041 armas sem `damage`**, entre elas `Fist` e `Shield Bash` -- que
+  toda ficha usa;
+- **14 de 216 armaduras sem `ac_bonus`**, entre elas `Leather`, `Hide` e
+  `Studded Leather`. Equipar couro nao mudava numero nenhum.
+
+E de novo **nao era falta de fonte, era falha de matching**, com duas causas
+confirmadas no disco: o Foundry escreve `Leather Armor` onde o AoN escreve
+`Leather`, e `Fist`/`Shield Bash` nao existem como arquivo no Foundry (so no
+dump do AoN). Recuperados 63 registros.
+
+Pegadinha dentro do conserto, que eu mesmo criei e precisei reverter: indexar a
+fonte so por nome fazia `Hide` (armadura) casar com o primeiro item cujo nome
+colapsasse em "hide" na ordem arbitraria do `glob` -- entrou `ac_bonus: 2` onde
+a fonte diz 3. **A chave tem de incluir o TIPO.** Reverti do backup e refiz;
+guardar `index.json` antes de todo passo destrutivo pagou-se na primeira vez.
+
+### Campeao e Bruxa: o conteudo estava la o tempo todo
+Eu havia reportado ao Igor que as 6 causas do Campeao e os 8 patronos da Bruxa
+"nao existem na base". **Errado, e a correcao mudou o custo do conserto de caro
+para trivial.** `kind:cause` tem 7 entradas e `kind:patron` tem 17, com texto
+oficial. O que quebrou foi a REFERENCIA: as classes citavam os ids que a fusao
+aposentou (`wb:cause/paladin` -> `wb:cause/justice`).
+
+E o vinculo estava no proprio dado, em `historico[].id_legado` -- nao precisou
+tabela escrita a mao nem extracao nova. Bastou estender o passo de aliases para
+varrer tambem `subclasses[].opcoes`, e nao so `requires`. Resultado: `cause`
+13/13, `patron` 24/24, `lesson` 20/20, `instinct` 16/16.
+
+Metodo que se confirma: **antes de declarar que falta conteudo, procure o
+conteudo sob o nome novo.** Ja falhei nisto duas vezes no mesmo dia.

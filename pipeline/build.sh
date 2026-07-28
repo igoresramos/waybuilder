@@ -68,6 +68,12 @@ echo "== 4h3. aplicar aliases do remaster dentro de requires =="
 # reescreve quem citava o id aposentado
 python3 aplicar_aliases_em_requires.py
 
+echo "== 4h4. recuperar mecanica de equipamento nao casada =="
+# nao e falta de fonte, e falha de matching: o Foundry escreve `Leather Armor`
+# onde o AoN escreve `Leather`, e `Fist`/`Shield Bash` so existem no dump do
+# AoN. Sem este passo, equipar couro nao mudava a CA.
+python3 recuperar_mecanica_equipamento.py
+
 echo "== 4i. aplicar correcoes curadas =="
 # o que exigiu leitura da prosa oficial porque as tres fontes estao vazias no
 # ponto. Cada entrada declara o valor que ESPERA achar: se a fonte consertar o

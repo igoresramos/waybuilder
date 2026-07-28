@@ -69,6 +69,54 @@
       ],
       "fonte": "Player Core, Fighter Dedication: 'You become trained in simple weapons and martial weapons. You become trained in your choice of Acrobatics or Athletics...'",
       "por_que": "O Foundry declara UM rule element de proficiencia para esta dedicacao -- `system.proficiencies.attacks.simple.rank = 1` -- e nao escreve o martial em lugar nenhum (conferido em `foundry/packs/pf2e/feats/archetype/fighter/fighter-dedication.json`, os 6 rules). Nao e falha do extrator: a fonte esta incompleta no ponto. O texto oficial da as DUAS proficiencias, e sem martial a dedicacao de Guerreiro fica pior que o RAW justo no projeto cuja regra da casa existe para ser comparada com o RAW."
+    },
+    {
+      "id": "wb:feat/play-to-the-crowd",
+      "campo": "rarity",
+      "valor_atual": "uncommon",
+      "valor": "common",
+      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+    },
+    {
+      "id": "wb:feat/death-from-above",
+      "campo": "rarity",
+      "valor_atual": "common",
+      "valor": "uncommon",
+      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+    },
+    {
+      "id": "wb:spell/object-reading",
+      "campo": "rarity",
+      "valor_atual": "uncommon",
+      "valor": "common",
+      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+    },
+    {
+      "id": "wb:spell/pillar-of-water",
+      "campo": "rarity",
+      "valor_atual": "uncommon",
+      "valor": "common",
+      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+    },
+    {
+      "id": "wb:spell/imprint-message",
+      "campo": "rarity",
+      "valor_atual": "uncommon",
+      "valor": "common",
+      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+    },
+    {
+      "id": "wb:spell/tireless-worker",
+      "campo": "rarity",
+      "valor_atual": "common",
+      "valor": "uncommon",
+      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
     }
   ]
 }

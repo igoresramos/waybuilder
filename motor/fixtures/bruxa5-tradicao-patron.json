@@ -1200,7 +1200,7 @@
      "wb:class-feature/lesson-of-vengeance",
      "wb:class-feature/lesson-of-vows",
      "wb:lesson/lesson-of-the-elements",
-     "wb:lesson/lesson-of-the-elements-legacy"
+     "wb:lesson/lesson-of-the-elements"
     ]
    },
    {
@@ -1241,14 +1241,14 @@
      "wb:class-feature/the-unseen-broker",
      "wb:class-feature/whisper-of-wings",
      "wb:class-feature/wilding-steward",
-     "wb:patron/curse",
-     "wb:patron/fate",
-     "wb:patron/fervor",
-     "wb:patron/night",
-     "wb:patron/pacts",
-     "wb:patron/rune",
-     "wb:patron/wild",
-     "wb:patron/winter"
+     "wb:patron/the-resentment",
+     "wb:patron/spinner-of-threads",
+     "wb:patron/faiths-flamekeeper",
+     "wb:patron/starless-shadow",
+     "wb:patron/the-unseen-broker-patron-29",
+     "wb:patron/the-inscribed-one",
+     "wb:patron/wilding-steward",
+     "wb:patron/silence-in-snow"
     ]
    }
   ]
