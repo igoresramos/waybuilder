@@ -1,0 +1,14 @@
+{
+  "_doc": "Correcoes de campo que exigiram LEITURA DA PROSA oficial porque as tres fontes estruturadas estao vazias ou erradas no ponto. Mora em dados_derivados/ (versionado) e nao em dados_brutos/ (dump reproduzivel por pin, fora do git) exatamente por isso: cada entrada aqui e julgamento humano, e perder isso significa refazer a leitura. Aplicado por pipeline/aplicar_curadoria.py, que RECUSA aplicar quando o valor da base ja e diferente do declarado em `valor_atual` -- assim, no dia em que a fonte consertar o dado, o build falha alto em vez de sobrescrever em silencio um valor que passou a estar certo.",
+  "correcoes": [
+    {
+      "id": "wb:class/psychic",
+      "campo": "key_ability",
+      "valor_atual": [],
+      "valor": ["int", "cha"],
+      "fonte": "prosa da propria classe (base/text/class.json, wb:text/class/psychic): 'Key Attribute: Intelligence or Charisma. At 1st level, your class gives you an attribute boost to Intelligence or Charisma, as determined by your choice of subconscious mind.'",
+      "por_que": "O Foundry declara `system.keyAbility.value: []` para o Psychic -- nao e falha do extrator, e lacuna da fonte: o VTT modela a chave pela subclasse (subconscious mind) em vez de pelo campo da classe. Era a UNICA das 27 classes sem key_ability, e a consequencia foi medida em teste de carga: das 285 fichas geradas, as 6 unicas que violaram a regra 8 (boost de habilidade-chave so da primeira classe) eram todas de Psychic entrando como primeira classe -- a regra nao tinha de onde tirar qual atributo boostar. As outras 26 classes seguem vindo da fonte, sem curadoria.",
+      "curado_em": "2026-07-27"
+    }
+  ]
+}

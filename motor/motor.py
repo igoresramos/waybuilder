@@ -93,6 +93,51 @@ class Base:
             registros = json.load(fh)
         self.por_id = {r["id"]: r for r in registros}
         self._dedicacao_de: dict | None = None
+        self._multiclasse: dict | None = None
+        self._por_alias: dict | None = None
+
+    def resolver(self, wb_id: str) -> str:
+        """Id canonico de uma referencia, seguindo `aliases`.
+
+        A base guarda o nome PRE-REMASTER como alias: `wb:feat/stunning-fist`
+        e o mesmo feat que `wb:feat/stunning-blows`, `wild-shape` virou
+        `untamed-form`, `divine-ally` virou `devout-blessing`. Sao 348 ids
+        alternativos.
+
+        O portao 3 do pipeline sempre aceitou essas referencias -- ele resolve
+        por alias antes de reclamar --, mas o motor comparava id cru e por isso
+        24 `requires` de feats de classes centrais nunca eram satisfeitos, por
+        mais que o personagem tivesse o feat. Portao e motor precisam concordar
+        sobre o que e "a mesma coisa"; enquanto discordavam, o portao verde
+        escondia o defeito em vez de denunciar.
+        """
+        if self._por_alias is None:
+            self._por_alias = {}
+            for r in self.por_id.values():
+                kind = r.get("kind")
+                for a in (r.get("aliases") or []):
+                    if kind and a:
+                        self._por_alias[f"wb:{kind}/{norm_slug(a)}"] = r["id"]
+        if wb_id in self.por_id:
+            return wb_id
+        return self._por_alias.get(wb_id, wb_id)
+
+    def multiclasse(self) -> dict[str, str]:
+        """nome normalizado -> id da classe, para os arquetipos de multiclasse.
+
+        Derivado: arquetipo cujo nome e nome de classe. Sem lista escrita a
+        mao, que ja errou tres vezes neste projeto. Calculado UMA vez por base
+        -- ver o comentario em `Personagem._classes_multiclasse`.
+        """
+        if self._multiclasse is None:
+            classes = {norm_slug(r["name"]): r["id"] for r in self.por_id.values()
+                       if r.get("kind") == "class" and r.get("name")}
+            self._multiclasse = {
+                norm_slug(r["name"]): classes[norm_slug(r["name"])]
+                for r in self.por_id.values()
+                if r.get("kind") == "archetype" and r.get("name")
+                and norm_slug(r["name"]) in classes}
+        return self._multiclasse
 
     def dedicacao_do_arquetipo(self, arquetipo_id: str) -> str | None:
         """O feat de dedicacao de um arquetipo, achado pelo dado -- nunca por
@@ -1551,9 +1596,13 @@ class Personagem:
         for reg in (self.ancestria, self.heranca, self.background):
             if reg:
                 tudo.add(reg["id"])
-        if valor in tudo:
+        # comparar pelo id CANONICO dos dois lados: `requires` de 24 feats cita
+        # o nome pre-remaster (`stunning-fist` pelo `stunning-blows`), e sem
+        # resolver o alias o requisito nunca era satisfeito
+        canonico = self.base.resolver(valor)
+        if canonico in {self.base.resolver(t) for t in tudo}:
             return True, ""
-        nome = (self.base.opcional(valor) or {}).get("name", valor)
+        nome = (self.base.opcional(canonico) or {}).get("name", valor)
         return False, f"exige ter {nome}"
 
     def _termo_subclass(self, valor) -> tuple[bool, str]:
@@ -1738,15 +1787,14 @@ class Personagem:
         """nome normalizado -> id da classe, para os 27 arquetipos de
         multiclasse. Derivado: arquetipo cujo nome e nome de classe. Nao ha
         lista escrita a mao, que ja errou tres vezes neste projeto."""
-        if getattr(self, "_mc_cache", None) is None:
-            classes = {norm_slug(r["name"]): r["id"]
-                       for r in self.base.por_id.values()
-                       if r.get("kind") == "class" and r.get("name")}
-            self._mc_cache = {norm_slug(r["name"]): classes[norm_slug(r["name"])]
-                              for r in self.base.por_id.values()
-                              if r.get("kind") == "archetype" and r.get("name")
-                              and norm_slug(r["name"]) in classes}
-        return self._mc_cache
+        # O cache vive na BASE, nao no personagem: o resultado depende so do
+        # catalogo, e a base e compartilhada por todas as fichas. Com cache de
+        # instancia, cada `Personagem` novo varria os 19.705 registros -- o
+        # profile de um teste de carga com 285 fichas mostrou ~90% do tempo
+        # total de derivacao aqui dentro. Era o unico ponto medido cujo custo
+        # escalava com o tamanho da BASE em vez do tamanho da FICHA, que e
+        # exatamente o que nao pode acontecer num app client-side.
+        return self.base.multiclasse()
 
     def _veto_dedicacao_da_propria_classe(self, feat: dict) -> str | None:
         """Regra 23: dedicacao de multiclasse da propria classe.

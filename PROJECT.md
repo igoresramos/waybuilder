@@ -5,7 +5,7 @@ status: planning
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 9.7
+hours: 11.2
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -108,7 +108,25 @@ hidden: false
 > class-feature concedidos) --, o gasto de slot e confrontado com o slot, as
 > duas regras RAW do trait `dedication` sao checadas e o aumento de pericia por
 > nivel existe. Alvo dinamico continua sinalizado como pendente, que e a
-> distincao que o app precisa. **63 testes** no motor, 88 no pipeline.
+> distincao que o app precisa.
+>
+> **E responde a pergunta que a TELA faz (2026-07-27).** `slots_abertos()` diz o
+> que falta escolher (feat, subclasse, aumento de pericia, boost de atributo) e
+> `candidatos(slot, em)` diz o que cabe em cada slot -- recortando pelo tipo que
+> o slot aceita, com o requisito so ordenando e marcando. Era a lacuna que
+> impedia comecar o front: `disponiveis("feat")` devolvia os 6.273 feats da base.
+>
+> **O payload do app e um artefato proprio.** O indice de build carrega
+> proveniencia, xref e conflitos, que o construtor nunca le. `emitir_app.py`
+> corta: 1,04 MB gzip no indice completo e **0,49 MB no nucleo que monta ficha**
+> -- abaixo do alvo de 0,53 do projeto. As 20 fichas de exemplo derivam
+> IDENTICAS nos dois indices.
+>
+> Derivacao de ficha de nivel 20: **0,30 ms**. Teste de carga de 285 fichas
+> (27 classes x 5 niveis + 50 combinacoes de multiclasse): zero excecoes,
+> determinismo e invariantes limpos.
+>
+> **95 testes** no motor, **97** no pipeline.
 >
 > **Validado em quatro frentes paralelas (2026-07-27).** As 226 dedicacoes passam
 > pelo motor sem uma excecao; 1.440 documentos malformados derivam sem explodir;

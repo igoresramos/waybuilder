@@ -6,6 +6,76 @@ project: waybuilder
 
 ## 2026-07-27
 
+### Sessao | 22:20-23:50 | os 5 itens que faltavam para o app, e a validacao por dominio | igor + claude-code
+
+Igor autorizou trabalho autonomo ("manda bala, faz tudo que tu puder, valida
+tudo") e foi dormir. Licenciamento saiu do escopo: o app e para ele e os amigos,
+nao vai ser publicado.
+
+**Os cinco itens que separavam o projeto de comecar o front, todos fechados.**
+
+- **Item 71 -- gate travado numa classe.** `derivar_gate_nivel.py` fazia
+  `sorted(traits & classes)[0]` e emitia gate de UMA classe. `Reach Spell`
+  (7 classes conjuradoras) saia como `class_level: {bard}`: pelo motor, um Mago
+  nao podia pega-lo. Agora emite `any`. Na base re-emitida, 125 feats saem como
+  "classe (varias)" e 8 como "ancestria (varias)".
+- **Item 69 -- eixo `outras-opcoes` como balaio.** Duas causas: o `min(nivel)`
+  colapsava niveis diferentes num so (dai o Campeao pedindo escolha no NIVEL 0)
+  e uma "escolha" com UMA opcao virava eixo. Agora chaveia por (eixo, nivel) e
+  devolve a progressao o que tem opcao unica -- 31 devolvidas em 19 classes.
+  Guerreiro e Monge nao pedem mais escolha nenhuma; `Warrior of Legend` voltou
+  a ser progressao, que e o que sempre foi.
+- **Item 74 -- atributo sem higiene.** Ficha sem boost declarado derivava com
+  tudo 10, HP menor e ZERO avisos.
+- **Item 65 -- a terceira pergunta do construtor.** O motor sabia dizer "o que
+  eu tenho" e "o que esta errado", nunca "o que posso escolher agora, neste
+  slot" -- `disponiveis("feat")` devolve os 6.273 feats da base. Entraram
+  `slots_abertos()` e `candidatos(slot, em)`, com a distincao que virou spec:
+  o slot FILTRA por tipo, o requisito ORDENA e marca.
+- **Item 4 -- payload.** O artefato de build e o do app passaram a ser coisas
+  diferentes. Indice completo de 2,15 para **1,04 MB gzip**, e o nucleo que
+  monta ficha em **0,49 MB** -- abaixo do alvo de 0,53 do projeto.
+
+**Erro meu, achado e corrigido na mesma sessao:** a primeira versao do orcamento
+de atributo esquecia os **4 boosts livres da criacao**, e por isso o aviso saia
+INVERTIDO -- acusava "6 declarados de 5" numa ficha cujo direito e 9. Fui
+conferir na fonte oficial (AoN, Step 6: Finish Attribute Modifiers) antes de
+mexer, em vez de escrever de memoria.
+
+**Quatro agentes de validacao por dominio**, como o Igor pediu. O que eles
+acharam, com os numeros conferidos por mim depois:
+
+- **Spell e ritual: cobertura COMPLETA contra o AoN** -- 0 ausentes nos dois,
+  `level` em 100% dos 1.655 spells, ritual com `level`/`acoes`/`primary_check`
+  em 100% dos 151.
+- **Runa de potencia FUNCIONA** (ataque +10 -> +11, AC 21 -> 22 verificado em
+  ficha). Runa de propriedade nao existe -- e `striking` corta o dano pela
+  metade em qualquer personagem acima do nivel 4 (item 77).
+- **Tradicao de conjuracao nao resolve** para Feiticeiro, Invocador e Bruxa: as
+  48 subclasses que a determinam tem `grants: []` em 100% dos casos. DC e slots
+  seguem corretos (item 78).
+- **Teste de carga: 285 fichas, ZERO excecoes**, determinismo e invariantes
+  limpos. As 6 unicas violacoes eram todas Psychic -- a unica classe sem
+  `key_ability`, e por culpa da FONTE (o Foundry declara `[]`).
+
+**O achado que mais valeu, e que nenhuma das quatro frentes tinha como alvo:**
+o motor nao resolvia **alias**, e o portao 3 resolvia. A base guarda o nome
+pre-remaster como alias (`stunning-fist` = `stunning-blows`, `wild-shape` =
+`untamed-form`) -- 348 ids alternativos. O portao passava verde reportando zero
+orfaos, enquanto 24 `requires` de feats de classes centrais nunca eram
+satisfeitos no motor. **Portao verde escondendo defeito e pior que portao
+ausente**, porque da a impressao de que o ponto foi verificado.
+
+**Desempenho:** derivacao de ficha de nivel 20 caiu de 5,76 ms para **0,30 ms**
+(19x). O profile mostrou 90% do tempo em `_classes_multiclasse`, que varria os
+19.705 registros a cada `Personagem` novo -- cache de instancia onde o
+resultado depende so do catalogo. Era o unico ponto cujo custo escalava com o
+tamanho da BASE em vez do tamanho da FICHA.
+
+Base re-emitida do zero duas vezes, **nove portoes verdes** nas duas.
+Testes: **95 no motor** (eram 28 no inicio do dia) e **97 no pipeline**.
+Itens novos: 76 a 83.
+
 ### Sessao | 21:35-22:15 | quatro frentes de validacao em paralelo | igor + claude-code
 
 "Validar validar e validar." Quatro agentes, cada um numa frente independente, com

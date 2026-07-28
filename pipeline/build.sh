@@ -57,6 +57,12 @@ python3 unificar_efeitos.py
 echo "== 4h. converter rule elements declarativos =="
 python3 converter_rule_elements.py
 
+echo "== 4i. aplicar correcoes curadas =="
+# o que exigiu leitura da prosa oficial porque as tres fontes estao vazias no
+# ponto. Cada entrada declara o valor que ESPERA achar: se a fonte consertar o
+# dado, este passo falha alto em vez de sobrescrever em silencio.
+python3 aplicar_curadoria.py
+
 echo "== 5. emitir prosa =="
 python3 emitir_textos.py
 

@@ -187,3 +187,63 @@ class TestSemDuplaContagem(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestAliasPreRemaster(unittest.TestCase):
+    """O motor e o portao 3 tem de concordar sobre o que e "a mesma coisa".
+
+    A base guarda o nome PRE-REMASTER como alias: `stunning-fist` e o mesmo
+    feat que `stunning-blows`, `wild-shape` virou `untamed-form`,
+    `divine-ally` virou `devout-blessing`. Sao 348 ids alternativos.
+
+    O portao 3 sempre resolveu alias antes de reclamar, e por isso passava
+    verde. O motor comparava id cru -- entao 24 `requires` de feats de classes
+    centrais nunca eram satisfeitos, por mais que o personagem tivesse o feat.
+    Portao verde escondendo defeito e pior que portao ausente: da a impressao
+    de que o ponto foi verificado.
+    """
+
+    def test_o_dado_sustenta_o_caso(self):
+        self.assertIsNone(BASE.opcional("wb:feat/stunning-fist"))
+        self.assertIsNotNone(BASE.opcional("wb:feat/stunning-blows"))
+        self.assertIn("Stunning Fist",
+                      BASE.get("wb:feat/stunning-blows").get("aliases") or [])
+
+    def test_resolver_segue_o_alias(self):
+        self.assertEqual(BASE.resolver("wb:feat/stunning-fist"),
+                         "wb:feat/stunning-blows")
+        self.assertEqual(BASE.resolver("wb:feat/wild-shape"),
+                         "wb:feat/untamed-form")
+
+    def test_id_que_existe_nao_e_desviado(self):
+        """A resolucao so age sobre o que NAO existe -- senao um id valido
+        poderia ser sequestrado por um alias homonimo de outro registro."""
+        for wb_id in ("wb:feat/toughness", "wb:class/fighter",
+                      "wb:feat/stunning-blows"):
+            self.assertEqual(BASE.resolver(wb_id), wb_id)
+
+    def test_id_desconhecido_volta_igual(self):
+        self.assertEqual(BASE.resolver("wb:feat/nao-existe-nem-como-alias"),
+                         "wb:feat/nao-existe-nem-como-alias")
+
+    def test_requisito_citando_o_nome_antigo_e_satisfeito(self):
+        """O caso que motivou tudo: `requires` cita o nome pre-remaster e o
+        personagem tem o feat com o nome novo."""
+        alvo = "wb:feat/vitality-manipulating-stance"
+        reg = BASE.opcional(alvo)
+        if reg is None:
+            self.skipTest(f"{alvo} ausente da base neste pin")
+        self.assertIn("stunning-fist", json.dumps(reg.get("requires") or {}))
+
+        escolhas = [
+            {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+            {"em": "criacao", "slot": "background", "pega": "wb:background/warrior"},
+        ]
+        escolhas += [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/monk"}
+                     for n in range(1, 21)]
+        escolhas += [{"em": 1, "slot": "class_feat", "pega": "wb:feat/stunning-blows"},
+                     {"em": 20, "slot": "class_feat", "pega": alvo}]
+        p = wb_motor.Personagem({"escolhas": escolhas}, BASE)
+        pendentes = [m for m in motivos(p)
+                     if reg.get("name") in m and "Stunning" in m]
+        self.assertEqual(pendentes, [], f"ainda exige o nome antigo: {pendentes}")
