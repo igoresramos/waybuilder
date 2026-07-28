@@ -1,11 +1,11 @@
 ---
 project: waybuilder
 category: pessoal
-status: planning
+status: active
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 11.2
+hours: 17.5
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -127,6 +127,17 @@ hidden: false
 > determinismo e invariantes limpos.
 >
 > **95 testes** no motor, **97** no pipeline.
+>
+> **O APP EXISTE (2026-07-28).** Vite + React, PWA offline, sem backend. Monta
+> um personagem do zero, nivel a nivel, com Free Archetype. O motor foi portado
+> para TypeScript e as 20 fichas de exemplo derivam IDENTICAS nas duas
+> implementacoes -- o Python fica como oraculo. Carga: 76 KB de app + 511 KB do
+> nucleo; a prosa entra sob demanda.
+>
+> Layout em DUAS COLUNAS -- build a esquerda, ficha viva a direita --, refeito a
+> partir do Pathbuilder que o Igor usa, depois de a primeira versao (tres abas
+> separadas) nao servir. O picker e um modal com filtros e o texto completo do
+> item. **77 testes** no app.
 >
 > **Validado em quatro frentes paralelas (2026-07-27).** As 226 dedicacoes passam
 > pelo motor sem uma excecao; 1.440 documentos malformados derivam sem explodir;

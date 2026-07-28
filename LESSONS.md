@@ -18,6 +18,26 @@ project: waybuilder
 
 ## Aprendizados
 
+### Se o usuario ja usa uma ferramenta equivalente, olhe ELA antes de desenhar
+O app foi entregue com tres abas separadas -- criacao, progressao, ficha. O Igor
+abriu e disse "ta bem diferente do que eu esperava", e mandou o HTML exportado do
+Pathbuilder 2e, que ele **usa todo dia**. A estrutura real era outra: duas
+colunas, build a esquerda e ficha viva a direita, tudo na mesma tela.
+
+O erro nao foi de implementacao -- os 77 testes passavam. Foi de leitura do
+problema: com abas, o jogador escolhe um feat e precisa trocar de tela para ver o
+numero mudar, e num construtor o retorno imediato E o produto.
+
+Um unico HTML exportado carregava mais requisito do que a spec que escrevi:
+layout, que atributo mostrar (modificador, nao score), o que a pericia exibe
+(total rolavel, nao o rank), e que o picker precisa do TEXTO do item porque
+ninguem escolhe um feat pelo nome. Custou uma reescrita que 15 minutos de leitura
+teriam evitado.
+
+Regra: antes de desenhar tela para um dominio onde ja existe ferramenta
+estabelecida que o usuario usa, pedir um export, um print, qualquer coisa. Nao
+para copiar -- para saber quais decisoes ja estao tomadas na cabeca dele.
+
 ### Aplicar o efeito de uma escolha cria requisito circular
 No dia em que o motor passou a APLICAR o que um feat concede, ele passou a
 avaliar o `requires` desse feat contra um estado que ja inclui o efeito dele.

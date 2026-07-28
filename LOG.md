@@ -4,6 +4,44 @@ project: waybuilder
 
 # LOG -- Waybuilder
 
+## 2026-07-28
+
+### Sessao | 00:20-07:45 | o app nasceu, e a referencia do Igor o reescreveu | igor + claude-code
+
+**O motor foi portado para TypeScript e roda no navegador.** O gabarito sao as
+20 fichas derivadas pelo Python (visao inteira, campos internos, listas de
+candidatos): o TS roda os MESMOS documentos e compara campo a campo. **20 de 20
+identicas, zero divergencia.** O Python continua como oraculo -- validar_iconics,
+teste de carga e os nove portoes rodam nele.
+
+**O porte achou um defeito que 95 testes nao acharam:** `candidatos("subclasse")`
+iterava a CONTAGEM de opcoes como se fosse a lista, e levantava TypeError. Nunca
+explodiu porque nenhuma ficha de exemplo exercitava aquele slot -- e a tela
+exercita. E o terceiro caso do mesmo padrao no projeto: **consumir o dado acha o
+que auditar nao acha**.
+
+**A licao cara da sessao foi de PRODUTO, nao de codigo.** Montei o app com tres
+abas separadas (criacao / progressao / ficha). O Igor abriu e disse "ta bem
+diferente do que eu esperava", e mandou o HTML exportado do Pathbuilder 2e --
+que ele **ja usa**. A estrutura real e outra: duas colunas, build a esquerda e
+ficha viva a direita, tudo na mesma tela. Com abas, o jogador escolhe um feat e
+tem de trocar de tela para ver o numero mudar -- num construtor, o retorno
+imediato e o ponto todo.
+
+Reescrito a partir da referencia. Junto vieram dois erros meus que o print
+deixou obvios: atributo e MODIFICADOR (`DEX +3`, nao `16`) e pericia mostra o
+TOTAL rolavel (`+8`), com o rank como etiqueta -- ninguem rola "expert" na mesa.
+E o picker virou MODAL com filtros, lista e o **texto completo** do item:
+ninguem escolhe um feat pelo nome.
+
+Carga: 76 KB gzip de app + 511 KB do nucleo. PWA com service worker; a prosa
+(6,3 MB) fica fora do pre-cache e entra sob demanda.
+
+Testes: 95 no motor Python, 97 no pipeline, **77 no app** (67 de porte + 10 de
+fluxo, que monta um Guerreiro 4 do zero pelo mesmo caminho da tela).
+
+Referencia do Pathbuilder guardada em `docs/referencia/`.
+
 ## 2026-07-27
 
 ### Sessao | 22:20-23:50 | os 5 itens que faltavam para o app, e a validacao por dominio | igor + claude-code
