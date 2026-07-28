@@ -5,11 +5,8 @@
  ],
  "fonte_aon": "aon_ancestries.json",
  "nossos": 50,
- "aon": 52,
- "faltam_em_nos": [
-  "Gnoll",
-  "Grippli"
- ],
+ "aon": 50,
+ "faltam_em_nos": [],
  "so_nosso": [],
  "nivel_divergente": [],
  "raridade_divergente": []

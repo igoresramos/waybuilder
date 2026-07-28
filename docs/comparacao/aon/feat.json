@@ -5,171 +5,13 @@
  ],
  "fonte_aon": "aon_feats.json",
  "nossos": 6247,
- "aon": 6294,
+ "aon": 6104,
  "faltam_em_nos": [
-  "Aasimar's Mercy",
-  "Abundant Step",
-  "Alchemical Savant",
-  "Align Armament",
-  "Align Ki",
-  "Anchoring Aura",
-  "Angelic Magic",
-  "Archon Magic",
-  "Armiger's Mobility",
-  "Arrow Snatching",
-  "Arrow of Death",
-  "Attack of Opportunity",
-  "Bespell Weapon",
-  "Blessed Blood (Aasimar)",
-  "Bone Rider",
-  "Buckler Expertise",
-  "Call Bonded Item",
-  "Celestial Eyes",
-  "Celestial Lore",
-  "Celestial Resistance",
-  "Celestial Wings",
-  "Celestial Word",
-  "Channeled Succor",
-  "Combat Reflexes",
-  "Connections",
-  "Courageous Opportunity",
-  "Criminal Connections",
-  "Critical Debilitations",
-  "Crystalline Cloud",
-  "Crystalline Dust",
   "Dad Joke",
-  "Daemon Magic",
-  "Deflect Arrow",
-  "Demon Magic",
-  "Devil Magic",
-  "Disrupt Ki",
-  "Divine Ally",
-  "Diviner Sense",
-  "Dragonslayer Oath",
-  "Drow Shootist Dedication",
-  "Dueling Parry (Swashbuckler)",
-  "Efficient Alchemy (Alchemist)",
-  "Empyreal Blessing",
-  "Enchanting Arrow",
-  "Esoteric Oath",
-  "Eternal Wings (Aasimar)",
-  "Evasiveness (Swashbuckler)",
-  "Expanded Luck",
-  "Expert Disassembler",
-  "Extend Armament Alignment",
-  "Exude Abyssal Corruption",
-  "Eyes of the Night",
-  "Favored Enemy",
-  "Feral Mutagen",
-  "Fiend's Door",
-  "Fiendish Eyes",
-  "Fiendish Lore",
-  "Fiendish Resistance",
-  "Fiendish Wings",
-  "Fiendish Word",
-  "Fiendsbane Oath",
-  "Firearm Expert",
-  "Flicker",
-  "Forge-Blessd Shot",
-  "Form Lock (Wrestler)",
-  "Form of the Fiend",
   "GGGHhhjjjJJK",
-  "Ganzi Gaze",
-  "Glib Mutagen",
-  "Gnoll Lore",
-  "Gnoll Weapon Familiarity",
-  "Grippli Weapon Familiarity",
-  "Harbinger's Caw",
-  "Healing Touch",
-  "Hellknight Armiger Dedication",
-  "Hellknight Order Cross-Training",
-  "Hellknight Signifer Dedication",
-  "Holy Castigation",
-  "Impose Order (Aphorite)",
-  "Improved Knockdown",
-  "Inspirational Performance",
-  "Inspire Competence",
-  "Inspire Defense",
-  "Inspire Heroics",
-  "Intercorporate",
-  "Internal Cohesion",
-  "Ki Blast",
-  "Ki Center",
-  "Ki Rush",
-  "Ki Strike",
-  "Knockdown",
-  "Laughing Gnoll",
-  "Leech-Clipper",
-  "Lemma of Vision",
-  "Light from Darkness",
-  "Lightslayer Oath",
-  "Magic Arrow",
-  "Malicious Bane",
-  "Master Spotter (Investigator)",
-  "Metamagic Channel",
-  "Metamagic Mastery",
-  "Nocturnal Sense",
-  "Opportunist",
-  "Phase Arrow",
-  "Pirate Weapon Training",
-  "Point-Blank Shot",
-  "Power Attack",
-  "Precious Arrow",
-  "Quick Contacts",
-  "Quick Stow (Ratfolk)",
-  "Radiant Blade Master",
-  "Radiant Blade Spirit",
-  "Radiant Infusion",
-  "Ranged Reprisal",
-  "Ratfolk Growth",
-  "Razor Claws",
-  "Relentless Wings",
-  "Scattering Shot",
-  "Scroll Savant",
-  "Second Ally",
-  "Second Chance Spell",
-  "Seeker Arrow",
-  "Sense Chaos",
-  "Sense Evil",
-  "Sense Good",
-  "Shared Luck (Catfolk)",
-  "Sharp Fangs",
-  "Shining Oath",
-  "Skill Mastery (Investigator)",
-  "Skillful Tail (Ganzi)",
-  "Smashing Tail",
-  "Smite Evil",
-  "Smite Good",
-  "Snap Out of It! (Marshal)",
-  "Sneak Savant",
-  "Solar Rejuvenation (Leshy)",
-  "Spell Penetration",
-  "Spirit Strikes",
-  "Spring Attack",
-  "Stance Savant (Fighter)",
-  "Stance Savant (Monk)",
-  "Startling Appearance (Vigilante)",
-  "Stonecunning",
-  "Stunning Fist",
-  "Subtle Delivery",
-  "Summon Celestial Kin",
-  "Summon Fiendish Kin",
-  "Tail Whip",
-  "Temporary Potions",
-  "Thousand Faces",
-  "Timeless Body",
-  "Tree Climber (Elf)",
-  "Turn Undead",
-  "Vanth's Weapon Familiarity",
-  "Vengeful Hatred",
-  "Vengeful Oath",
-  "Vigorous Inspiration",
-  "Wholeness of Body",
-  "Wild Shape",
   "Wombat Bastion",
   "Wombat Burrow",
-  "Wombat Style",
-  "Woodland Stride"
+  "Wombat Style"
  ],
  "so_nosso": [
   "Animal Companion (Ranger)",
@@ -197,12 +39,19 @@
   "Death from Above (Eternal Legend)",
   "Decree of Banishment",
   "Dedication to the Five",
+  "Deepest Wellspring",
   "Devil Allies",
   "Disillusionment",
+  "Domain Wellspring",
   "Draconic Scent (Dragon Disciple)",
   "Dueling Dance",
   "Dueling Parry",
+  "Dwarven Weapon Cunning",
+  "Eclectic Sword Training",
+  "Elastic Mutagen",
+  "Eldritch Nails",
   "Elemental Familiar (Elementalist)",
+  "Elven Weapon Elegance",
   "Emboldened with Glorious Purpose",
   "Empathic Envoy",
   "Eternal Wings (Nephilim)",
@@ -212,9 +61,19 @@
   "Fear No Law, Fear No One",
   "Festering Wounds",
   "Flash of Omnipotence",
+  "Genius Mutagen",
   "Ghostly Grasp",
+  "Gnome Weapon Innovator",
+  "Goblin Weapon Frenzy",
+  "Green Empathy",
   "Guarded Advance",
+  "Guardian's Deflection (Swashbuckler)",
+  "Halfling Weapon Trickster",
   "Harsh Judgement",
+  "Hatchling Flight",
+  "Hex Wellspring",
+  "Implausible Purchase (Investigator)",
+  "Improved Familiar (Familiar Master)",
   "Improved Twin Riposte",
   "Incredible Companion",
   "Incredible Familiar (Animist)",
@@ -222,6 +81,7 @@
   "Innate Magical Intuition",
   "Inner Fire (Monk)",
   "Inner Fire (Naari)",
+  "Invincible Mutagen",
   "Invulnerable Juggernaut",
   "Irrepressible (Halfling)",
   "Irrepressible (Nephilim)",
@@ -230,6 +90,7 @@
   "Know It All (Eldritch Researcher)",
   "Knowledge is Power (Wizard)",
   "Larger than Life",
+  "Living Hair",
   "Locate Lawbreakers",
   "Lotus Above the Wind",
   "Luring Chomp",
@@ -238,18 +99,26 @@
   "Many Guises (Vigilante)",
   "Master Summoning Spellcasting",
   "Mature Animal Companion",
+  "Medusa's Wrath",
+  "Mindblank Mutagen",
   "Necromantic Resistance (Undead Slayer)",
   "No Hands, No Problem",
   "Opportune Trickster",
   "Orator's Filibuster",
+  "Orc Weapon Carnage",
   "Pass Vengeful Judgment",
   "Phalanx Formation",
   "Play to the Crowd (Dandy)",
   "Powerful Alchemy",
+  "Predictive Purchase (Investigator)",
+  "Primal Wellspring",
   "Quick Recovery",
+  "Quivering Palm",
   "Rallying Charge (Knight Vigilant)",
   "Rallying Charge (Marshal)",
+  "Reckless Abandon",
   "Recycled Cogwheels",
+  "Red Herring",
   "Remember Their Names",
   "Repulse the Wicked",
   "Reveal Beasts",
@@ -258,6 +127,7 @@
   "Riptide (Undersea Privateer)",
   "Roll with It",
   "Roll with it (Kingmaker)",
+  "Safeguarded Spell",
   "Seek Injustice",
   "Shackles of Law",
   "Shared Luck",
@@ -274,6 +144,7 @@
   "Stance Savant",
   "Stone Blood (Stonebound)",
   "Sturdy Bindings",
+  "Tengu Weapon Expertise",
   "The Harder They Fall",
   "The Harder They Fall (Kingmaker)",
   "Trailblazing Stride",
@@ -285,46 +156,133 @@
   "Vengeful Remnant",
   "Vermillion Threads",
   "Vindicator's Judgment",
+  "Vision of Weakness",
   "Voice of Elements",
+  "Warden's Wellspring",
   "Watch Your Back (Golden Legionnaire)",
-  "Whispers of Warning"
+  "Whispers of Warning",
+  "Wild Empathy"
  ],
  "nivel_divergente": [
   {
-   "nome": "Guardian's Deflection",
-   "aon": 4,
+   "nome": "Riptide",
+   "aon": 9,
+   "nosso": 8,
+   "id": "wb:feat/riptide-archetype"
+  },
+  {
+   "nome": "Many Guises",
+   "aon": 9,
+   "nosso": 8,
+   "id": "wb:feat/many-guises-archetype"
+  },
+  {
+   "nome": "Draconic Scent",
+   "aon": 5,
+   "nosso": 4,
+   "id": "wb:feat/draconic-scent-archetype"
+  },
+  {
+   "nome": "Voice of the Elements",
+   "aon": 5,
+   "nosso": 2,
+   "id": "wb:feat/voice-of-the-elements-kineticist"
+  },
+  {
+   "nome": "Daywalker",
+   "aon": 13,
    "nosso": 6,
-   "id": "wb:feat/guardians-deflection"
+   "id": "wb:feat/daywalker-archetype"
   },
   {
-   "nome": "Reckless Abandon",
-   "aon": 16,
-   "nosso": 17,
-   "id": "wb:feat/reckless-abandon"
-  },
-  {
-   "nome": "Twin Psyche",
-   "aon": 20,
-   "nosso": 18,
-   "id": "wb:feat/twin-psyche"
-  },
-  {
-   "nome": "Soaring Form",
+   "nome": "Trample",
    "aon": 17,
-   "nosso": 9,
-   "id": "wb:feat/soaring-form"
-  },
-  {
-   "nome": "Specialized Companion",
-   "aon": 18,
-   "nosso": 14,
-   "id": "wb:feat/specialized-companion"
-  },
-  {
-   "nome": "Sixth Pillar Mastery",
-   "aon": 14,
    "nosso": 16,
-   "id": "wb:feat/sixth-pillar-mastery-nv16"
+   "id": "wb:feat/trample"
+  },
+  {
+   "nome": "Grave Sight",
+   "aon": 10,
+   "nosso": 1,
+   "id": "wb:feat/gravesight"
+  },
+  {
+   "nome": "Blade of Law",
+   "aon": 10,
+   "nosso": 12,
+   "id": "wb:feat/blade-of-law"
+  },
+  {
+   "nome": "Devoted Focus",
+   "aon": 12,
+   "nosso": 10,
+   "id": "wb:feat/devoted-focus"
+  },
+  {
+   "nome": "Play to the Crowd",
+   "aon": 12,
+   "nosso": 4,
+   "id": "wb:feat/play-to-the-crowd"
+  },
+  {
+   "nome": "Touch Focus",
+   "aon": 16,
+   "nosso": 14,
+   "id": "wb:feat/touch-focus-nv14"
+  },
+  {
+   "nome": "Uplifting Winds",
+   "aon": 16,
+   "nosso": 12,
+   "id": "wb:feat/uplifting-winds"
+  },
+  {
+   "nome": "Implausible Purchase",
+   "aon": 16,
+   "nosso": 18,
+   "id": "wb:feat/implausible-purchase"
+  },
+  {
+   "nome": "Death from Above",
+   "aon": 16,
+   "nosso": 8,
+   "id": "wb:feat/death-from-above"
+  },
+  {
+   "nome": "Rallying Charge",
+   "aon": 16,
+   "nosso": 6,
+   "id": "wb:feat/rallying-charge-visual"
+  },
+  {
+   "nome": "Breath of the Dragon",
+   "aon": 8,
+   "nosso": 1,
+   "id": "wb:feat/breath-of-the-dragon-dragonblood-feat-5730"
+  },
+  {
+   "nome": "Jellyfish Stance",
+   "aon": 8,
+   "nosso": 6,
+   "id": "wb:feat/jellyfish-stance-nv6"
+  },
+  {
+   "nome": "Knowledge is Power",
+   "aon": 8,
+   "nosso": 6,
+   "id": "wb:feat/knowledge-is-power"
+  },
+  {
+   "nome": "Feathered Flechettes",
+   "aon": 8,
+   "nosso": 6,
+   "id": "wb:feat/feathered-flechettes"
+  },
+  {
+   "nome": "Watch Your Back",
+   "aon": 6,
+   "nosso": 14,
+   "id": "wb:feat/watch-your-back-archetype"
   },
   {
    "nome": "Predictive Purchase",
@@ -339,120 +297,29 @@
    "id": "wb:feat/improved-familiar"
   },
   {
-   "nome": "Shield Salvation",
-   "aon": 12,
-   "nosso": 10,
-   "id": "wb:feat/shield-salvation"
+   "nome": "Even the Odds",
+   "aon": 14,
+   "nosso": 4,
+   "id": "wb:feat/even-the-odds"
   },
   {
-   "nome": "Fuse Stance",
-   "aon": 20,
-   "nosso": 16,
-   "id": "wb:feat/fuse-stance"
+   "nome": "Specialized Companion",
+   "aon": 18,
+   "nosso": 14,
+   "id": "wb:feat/specialized-companion"
   },
   {
-   "nome": "Feathered Flechettes",
-   "aon": 8,
-   "nosso": 6,
-   "id": "wb:feat/feathered-flechettes"
-  },
-  {
-   "nome": "Implausible Purchase",
-   "aon": 16,
-   "nosso": 18,
-   "id": "wb:feat/implausible-purchase"
-  },
-  {
-   "nome": "Divine Health",
+   "nome": "Guardian's Deflection",
    "aon": 4,
-   "nosso": 2,
-   "id": "wb:feat/divine-health"
-  },
-  {
-   "nome": "Devoted Focus",
-   "aon": 12,
-   "nosso": 10,
-   "id": "wb:feat/devoted-focus"
-  },
-  {
-   "nome": "Uplifting Winds",
-   "aon": 16,
-   "nosso": 12,
-   "id": "wb:feat/uplifting-winds"
-  },
-  {
-   "nome": "Whirlwind Toss",
-   "aon": 20,
-   "nosso": 18,
-   "id": "wb:feat/whirlwind-toss"
-  },
-  {
-   "nome": "Scrutinizing Gaze",
-   "aon": 17,
-   "nosso": 13,
-   "id": "wb:feat/scrutinizing-gaze"
-  },
-  {
-   "nome": "Know-It-All",
-   "aon": 8,
-   "nosso": 10,
-   "id": "wb:feat/know-it-all-archetype"
-  },
-  {
-   "nome": "Hellknight Dedication",
-   "aon": 6,
-   "nosso": 2,
-   "id": "wb:feat/hellknight-dedication"
+   "nosso": 6,
+   "id": "wb:feat/guardians-deflection"
   },
   {
    "nome": "Animal Soul Siblings",
    "aon": 1,
    "nosso": 5,
    "id": "wb:feat/animal-soul-siblings"
-  },
-  {
-   "nome": "Trample",
-   "aon": 17,
-   "nosso": 16,
-   "id": "wb:feat/trample"
   }
  ],
- "raridade_divergente": [
-  {
-   "nome": "Unstoppable Juggernaut",
-   "aon": "common",
-   "nosso": "uncommon",
-   "id": "wb:feat/unstoppable-juggernaut-uncommon"
-  },
-  {
-   "nome": "Play to the Crowd",
-   "aon": "common",
-   "nosso": "uncommon",
-   "id": "wb:feat/play-to-the-crowd"
-  },
-  {
-   "nome": "Whirlwind Toss",
-   "aon": "uncommon",
-   "nosso": "common",
-   "id": "wb:feat/whirlwind-toss"
-  },
-  {
-   "nome": "Ultimate Flexibility",
-   "aon": "common",
-   "nosso": "uncommon",
-   "id": "wb:feat/ultimate-flexibility-uncommon"
-  },
-  {
-   "nome": "Death from Above",
-   "aon": "uncommon",
-   "nosso": "common",
-   "id": "wb:feat/death-from-above"
-  },
-  {
-   "nome": "Spell Mastery",
-   "aon": "common",
-   "nosso": "uncommon",
-   "id": "wb:feat/spell-mastery-uncommon"
-  }
- ]
+ "raridade_divergente": []
 }

@@ -5,7 +5,7 @@
  ],
  "fonte_aon": "aon_equipment_weapon.json",
  "nossos": 1029,
- "aon": 327,
+ "aon": 323,
  "faltam_em_nos": [
   "8-Round Magazine",
   "Arrows",
@@ -14,12 +14,9 @@
   "Blowgun Darts",
   "Bolts",
   "Fishing Lure",
-  "Khakkara",
-  "Kursarigama",
   "Repeating Crossbow Magazine",
   "Repeating Hand Crossbow Magazine",
   "Repeating Heavy Crossbow Magazine",
-  "Rungu",
   "Sling Bullets",
   "Sun Shot",
   "Wooden Taws"
@@ -377,6 +374,7 @@
   "Mikazuki",
   "Mindlance",
   "Mindrender Baton",
+  "Mithral Tree",
   "Monarch",
   "Morning Glow",
   "Mountebank's Passage",
@@ -746,28 +744,10 @@
  ],
  "nivel_divergente": [
   {
-   "nome": "Composite Longbow",
-   "aon": 0,
-   "nosso": 1,
-   "id": "wb:weapon/composite-longbow"
-  },
-  {
    "nome": "Repeating Hand Crossbow",
    "aon": 0,
    "nosso": 1,
    "id": "wb:weapon/repeating-hand-crossbow-nv1"
-  },
-  {
-   "nome": "Backpack Catapult",
-   "aon": 0,
-   "nosso": 1,
-   "id": "wb:weapon/backpack-catapult"
-  },
-  {
-   "nome": "Repeating Crossbow",
-   "aon": 0,
-   "nosso": 1,
-   "id": "wb:weapon/repeating-crossbow"
   },
   {
    "nome": "Flying Talon",
@@ -776,10 +756,10 @@
    "id": "wb:weapon/flying-talon"
   },
   {
-   "nome": "Composite Shortbow",
+   "nome": "Aldori Dueling Sword",
    "aon": 0,
    "nosso": 1,
-   "id": "wb:weapon/composite-shortbow"
+   "id": "wb:weapon/aldori-dueling-sword-nv1"
   }
  ],
  "raridade_divergente": [
@@ -788,12 +768,6 @@
    "aon": "uncommon",
    "nosso": "common",
    "id": "wb:weapon/bola-nv0-weapon-331"
-  },
-  {
-   "nome": "Throwing Knife",
-   "aon": "common",
-   "nosso": "uncommon",
-   "id": "wb:weapon/throwing-knife-uncommon"
   }
  ]
 }

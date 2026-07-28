@@ -5,21 +5,8 @@
  ],
  "fonte_aon": "aon_heritages.json",
  "nossos": 334,
- "aon": 342,
- "faltam_em_nos": [
-  "Ant Gnoll",
-  "Cavern Kobold",
-  "Great Gnoll",
-  "Poisonhide Grippli",
-  "Skilled Heritage",
-  "Snaptongue Grippli",
-  "Spellscale Kobold",
-  "Stickytoe Grippli",
-  "Sweetbreath Gnoll",
-  "Versatile Heritage",
-  "Windweb Grippli",
-  "Witch Gnoll"
- ],
+ "aon": 330,
+ "faltam_em_nos": [],
  "so_nosso": [
   "Ambitious Human",
   "Battle-Trained Human (BB)",
