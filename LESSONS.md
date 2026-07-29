@@ -1004,3 +1004,22 @@ minutos -- `o nome deles existe na minha fonte?` -- e a diferenca entre
 confirmar e supor e a diferenca entre uma tabela de traducao e um estrago no
 dado. Vale especialmente quando o outro lado e um app, e nao um livro: app tem
 motivo proprio (licenca, tela, versao) para se afastar da fonte.
+
+## Codigo morto nao e so peso -- ele mente sobre o que o app faz
+
+Escrevi numa spec que "a ficha ja tem o bloco de Conjuracao e itera
+`visao().conjuracao`". Tinha lido isso em `src/telas/Ficha.tsx`. O arquivo esta
+la, compila, tem o bloco -- e **nao e importado por ninguem**. A ficha viva e
+outra, e ela nao mostrava conjuracao nenhuma: nem a de arquetipo (que eu estava
+implementando), nem a de CLASSE, que o motor calcula desde o primeiro dia e o
+porte TS reproduz campo a campo.
+
+Ou seja: um conjurador montado no app nunca viu um slot de magia, e nem os 124
+testes do oraculo nem os 113 do porte podiam pegar isso -- os dois medem o
+motor, e o motor estava certo.
+
+**Como aplicar:** antes de afirmar "a tela ja faz X", conferir quem IMPORTA o
+arquivo, nao se o arquivo existe (`grep -rn "<Componente"` resolve em segundos).
+E, para o projeto: `Picker.tsx` e `Ficha.tsx` seguem orfaos -- mencionados, nao
+deletados, porque remover e decisao do Igor. Enquanto existirem, valem como
+armadilha para a proxima leitura.

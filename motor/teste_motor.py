@@ -9,6 +9,7 @@ diferenca entre a houserule e o PF2e oficial e justamente onde os dois numeros
 
 Uso: python3 teste_motor.py
 """
+import json
 import os
 import sys
 import math
@@ -694,6 +695,79 @@ checar(guerreiro6.avaliar(aldori.get("requires"))[0],
        f"{guerreiro6.avaliar(aldori.get('requires'))[1]}")
 checar(not mago6.avaliar(aldori.get("requires"))[0],
        "ja o Mago 6, untrained em avancada, continua fora -- a ponte nao afrouxa")
+
+# -- requisito parcial: emitir o que deu, escrever o que nao deu ------------
+# Spec: specs/2026-07-29-requisito-parcial.md. O parser era tudo-ou-nada, entao
+# "Trained in Occultism; you have been in a psychic duel" perdia as DUAS coisas
+# por causa da segunda -- e o gate de nivel preenchia o vazio, disfarcando a
+# perda de "dado pobre".
+print("\nrequisito parcial -- o mecanico avalia, o narrativo fica por escrito")
+psychic = BASE.opcional("wb:feat/psychic-duelist-dedication")
+checar("occultism" in json.dumps(psychic.get("requires")),
+       "Psychic Duelist Dedication passou a exigir Occultism no predicado",
+       f"{psychic.get('requires')}")
+checar(psychic.get("requires_residuo") == ["you have been in a psychic duel"],
+       "e a clausula que so a mesa resolve ficou em `requires_residuo`",
+       f"{psychic.get('requires_residuo')}")
+
+# o residuo NAO entra na avaliacao: se entrasse, viraria bloqueio silencioso
+p_alto = personagem(niveis((WIZARD, 6)) + BOOSTS
+                    + [{"em": 1, "slot": "skill_increase", "pega": "wb:skill/occultism"}])
+atende, motivos = p_alto.avaliar(psychic.get("requires"))
+checar(not any("psychic duel" in m for m in motivos),
+       "o motor nunca avalia o residuo -- ele nao vira motivo de reprovacao",
+       f"{motivos}")
+
+com_residuo = sum(1 for r in BASE.por_id.values() if r.get("requires_residuo"))
+checar(com_residuo > 500,
+       f"e a base inteira carrega o residuo em {com_residuo} registros, "
+       "visivel em vez de descartado")
+
+# -- spellcasting de arquetipo ---------------------------------------------
+# Spec: specs/2026-07-29-spellcasting-de-arquetipo.md. 13 dedicacoes prometiam
+# conjuracao na prosa e a ficha nao mostrava nada. O rank vem do FEAT que o
+# personagem pegou, nao do nivel dele: a tabela RANK_DEDICACAO descreve a rota
+# completa (e e o piso da regra 21), mas quem so tem Basic para no rank 3.
+print("\nspellcasting de arquetipo -- a rota que a dedicacao abre")
+DED_MAGO = {"em": 2, "slot": "free_archetype", "pega": "wb:feat/wizard-dedication"}
+BASIC = {"em": 4, "slot": "free_archetype", "pega": "wb:feat/basic-wizard-spellcasting"}
+
+f8 = personagem(niveis((FIGHTER, 8)) + BOOSTS + [DED_MAGO, BASIC])
+arq = [c for c in f8.conjuracao if c.get("de_arquetipo")]
+checar(len(arq) == 1, "a dedicacao com Basic Spellcasting cria UMA entrada de conjuracao",
+       f"{len(arq)}")
+if arq:
+    c = arq[0]
+    checar(c["tradicao"] == "arcane" and c["tipo"] == "prepared",
+           "com a tradicao lida da propria classe citada na prosa",
+           f"{c['tradicao']}/{c['tipo']}")
+    checar(c["slots"] == {"1": 1, "2": 1, "3": 1},
+           "um slot de cada rank ate o teto do degrau Basic (3)", f"{c['slots']}")
+    checar(c["elevacao"] == 0 and c["rank_efetivo"] == c["max_rank_do_slot"],
+           "e SEM elevacao: pela regra 18 o arquetipo roda RAW puro",
+           f"elevacao={c['elevacao']}")
+    checar(c["dc"]["dc"] == 10 + f8.nivel + RANK_BONUS["trained"],
+           "DC pela regra 3: 10 + nivel de PERSONAGEM + trained", f"{c['dc']}")
+
+so_ded = personagem(niveis((FIGHTER, 8)) + BOOSTS + [DED_MAGO])
+arq2 = [c for c in so_ded.conjuracao if c.get("de_arquetipo")]
+checar(arq2 and arq2[0]["slots"] == {},
+       "a dedicacao SOZINHA nao da slot nenhum -- so os truques",
+       f"{arq2[0]['slots'] if arq2 else 'sem entrada'}")
+
+f20 = personagem(niveis((FIGHTER, 20)) + BOOSTS + [DED_MAGO, BASIC])
+arq3 = [c for c in f20.conjuracao if c.get("de_arquetipo")]
+checar(arq3 and arq3[0]["max_rank_do_slot"] == 3,
+       "e no nivel 20, so com Basic, o teto continua 3 -- o rank vem do FEAT",
+       f"{arq3[0]['max_rank_do_slot'] if arq3 else '-'}")
+
+# tradicao que depende de outra escolha: avisa em vez de arbitrar
+bruxo = personagem(niveis((FIGHTER, 8)) + BOOSTS + [
+    {"em": 2, "slot": "free_archetype", "pega": "wb:feat/witch-dedication"},
+    {"em": 4, "slot": "free_archetype", "pega": "wb:feat/basic-witch-spellcasting"}])
+checar(any("tradicao vem da escolha" in a for a in bruxo.avisos),
+       "Witch Dedication sem patron escolhido AVISA em vez de inventar tradicao",
+       f"{[a for a in bruxo.avisos if 'tradicao' in a]}")
 
 print("\n" + "=" * 58)
 if FALHAS:

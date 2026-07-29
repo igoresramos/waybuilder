@@ -4,11 +4,11 @@ A linguagem sabia falar de classe e de personagem, nao da camada do
 meio. `has` e generico demais: nao distingue "escolheu esta doutrina"
 de "pegou este feat".
 
-- `has` convertidos: **196**
+- `has` convertidos: **206**
 
 ## Por eixo
 
-- `outras-opcoes`: 119
+- `outras-opcoes`: 129
 - `muse`: 30
 - `hybrid-study`: 13
 - `way`: 11

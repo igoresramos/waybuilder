@@ -108,13 +108,19 @@ def _traits(r):
 
 
 ABAS = {
+    # trait da classe E sem `archetype`: os 11 feats de mascara do Wizard
+    # (Pathfinder #174) carregam `wizard` junto com `archetype`, e o Pathbuilder
+    # os poe na aba de arquetipo. Sem o `and not`, eles apareciam como sobra
+    # nossa na aba de classe -- recorte diferente, nao defeito.
     "Class Feats": lambda base, p, r: bool(
         _traits(r) & {str(base.get(c).get("name") or "").lower()
-                      for c in p.ordem_de_classe}),
+                      for c in p.ordem_de_classe}) and "archetype" not in _traits(r),
     "Dedication Feats": lambda base, p, r: "dedication" in _traits(r),
     "Skill Feats": lambda base, p, r: "skill" in _traits(r),
     "General Feats": lambda base, p, r: "general" in _traits(r) and "skill" not in _traits(r),
-    "All Feats": lambda base, p, r: True,
+    # `All Feats` fica de FORA do placar: ela nao recorta nada do lado deles, e
+    # do nosso o slot de class feat aceita todo feat de arquetipo (RAW), entao a
+    # comparacao virava 2.253 contra 341 -- ruido pelo desenho, nao achado.
 }
 
 

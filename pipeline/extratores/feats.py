@@ -332,11 +332,15 @@ LIXO_PREFIXO = re.compile(
 
 
 class ResultadoPredicado:
-    __slots__ = ("pred", "falhas")
+    __slots__ = ("pred", "falhas", "residuo")
 
-    def __init__(self, pred=None, falhas=None):
+    def __init__(self, pred=None, falhas=None, residuo=None):
         self.pred = pred
         self.falhas = falhas or []
+        # o que NAO virou predicado, em prosa. Vai para `requires_texto` e a
+        # tela mostra como "requisito de mesa" -- ver
+        # specs/2026-07-29-requisito-parcial.md
+        self.residuo = residuo or []
 
 
 class Parser:
@@ -357,6 +361,32 @@ class Parser:
         if pred is None:
             return ResultadoPredicado(None, self.falhas)
         return ResultadoPredicado(self._simplificar(pred), [])
+
+    def parse_parcial(self, clausulas):
+        """Cada clausula por si, e o que nao parsear vira TEXTO.
+
+        O parser inteiro e tudo-ou-nada por dentro (`_combinar` devolve None se
+        uma parte falhar), e por isso "Trained in Occultism; you have been in a
+        psychic duel" perdia as DUAS coisas por causa da segunda -- o `requires`
+        saia vazio e o gate de nivel preenchia, disfarcando a perda de "dado
+        pobre". Medido: 635 frases rejeitadas inteiras, 274 delas com ao menos
+        um atomo aproveitavel.
+
+        Nao e afrouxar o parser: e o principio zero aplicado ao pre-requisito.
+        A clausula mecanica ORDENA a lista; a narrativa ("member of the Gray
+        Gardeners") so a mesa resolve, e o lugar dela e na tela, nao no lixo.
+        """
+        preds, residuo = [], []
+        for c in clausulas:
+            c = str(c or "").strip().rstrip(".")
+            if not c:
+                continue
+            r = self.parse(c)
+            (preds.append(r.pred) if r.pred is not None else residuo.append(c))
+        if not preds:
+            return ResultadoPredicado(None, self.falhas, residuo)
+        pred = preds[0] if len(preds) == 1 else {"all": preds}
+        return ResultadoPredicado(self._simplificar(pred), [], residuo)
 
     # -- combinadores ------------------------------------------------------
     @staticmethod
@@ -1137,6 +1167,9 @@ def extrair():
         "com_prereq": 0,
         "prereq_ok": 0,
         "prereq_falha": 0,
+        # parseou SO EM PARTE: emitiu predicado e sobrou prosa
+        "prereq_parcial": 0,
+        "com_requires_residuo": 0,
         "prereq_por_fonte": Counter(),
         "falhas_por_padrao": Counter(),
         "falhas_exemplos": {},
@@ -1267,21 +1300,49 @@ def extrair():
             bruto_pre, fonte_pre = f["prereq"], "foundry"
 
         requires = None
+        # `requires_texto` (que ja existia) guarda a prosa INTEIRA; o residuo e
+        # so o pedaco que nao virou predicado, e por isso tem campo proprio
+        requires_residuo = []
         requires_ok = True
         if bruto_pre:
             est["com_prereq"] += 1
             est["prereq_por_fonte"][fonte_pre] += 1
             res = parser.parse(bruto_pre)
+            if res.pred is None:
+                # Segunda tentativa, CLAUSULA A CLAUSULA -- e aqui a fonte pode
+                # TROCAR. A precedencia normal e pf2etools > aon > foundry, mas
+                # so o Foundry entrega o pre-requisito ja separado em itens, e
+                # quebrar string por `;` erra em "Cel Rau, Straveika,
+                # Svetocher, or another lineage", que e UMA clausula com
+                # virgulas dentro. Quando a fonte escolhida nao parseia inteira
+                # e o Foundry tem a lista, ela ganha -- e o `prov` diz isso.
+                # Medido: usando so a fonte escolhida recupera 140; deixando o
+                # Foundry entrar, 274.
+                lista = (f or {}).get("prereq_lista")
+                if lista:
+                    res = parser.parse_parcial(lista)
+                    if res.pred is not None or res.residuo:
+                        fonte_pre = "foundry"
+                else:
+                    res = parser.parse_parcial(re.split(r";", bruto_pre))
             if res.pred is not None:
                 requires = res.pred
                 prov["requires"] = fonte_pre
                 est["prereq_ok"] += 1
+                if res.residuo:
+                    est["prereq_parcial"] += 1
             else:
                 requires_ok = False
                 est["prereq_falha"] += 1
                 for pad in (res.falhas or ["<sem atomo>"]):
                     est["falhas_por_padrao"][pad] += 1
                     est["falhas_exemplos"].setdefault(pad, bruto_pre)
+            # o que nao virou predicado vai por ESCRITO -- a tela mostra como
+            # requisito de mesa, e o motor nunca avalia
+            if res.residuo:
+                requires_residuo = res.residuo
+                prov["requires_residuo"] = fonte_pre
+                est["com_requires_residuo"] += 1
 
         # ---- grants -----------------------------------------------------
         grants = []
@@ -1330,6 +1391,8 @@ def extrair():
         }
         if bruto_pre:
             reg["requires_texto"] = bruto_pre
+        if requires_residuo:
+            reg["requires_residuo"] = requires_residuo
         if arq:
             reg["archetype"] = "wb:archetype/" + arq
         # Feat que nao casou com o Foundry ficava sem `feat_category` (378
@@ -1437,15 +1500,26 @@ def extrair():
             prov["source"] = "foundry"
         completar_licenca(source, prov)
         requires = None
+        requires_residuo = []
         bruto_pre = r["prereq"] if r else None
         if bruto_pre:
             est["com_prereq"] += 1
             est["prereq_por_fonte"]["aon(arquetipo)"] += 1
             res = parser.parse(bruto_pre)
+            if res.pred is None:
+                # mesma segunda tentativa dos feats; o AoN so tem a string, sem
+                # a lista atomica que o Foundry da
+                res = parser.parse_parcial(re.split(r";", bruto_pre))
+            if res.residuo:
+                requires_residuo = res.residuo
+                prov["requires_residuo"] = "aon"
+                est["com_requires_residuo"] += 1
             if res.pred is not None:
                 requires = res.pred
                 prov["requires"] = "aon"
                 est["prereq_ok"] += 1
+                if res.residuo:
+                    est["prereq_parcial"] += 1
             else:
                 est["prereq_falha"] += 1
                 for pad in (res.falhas or ["<sem atomo>"]):
@@ -1475,6 +1549,8 @@ def extrair():
         }
         if bruto_pre:
             reg["requires_texto"] = bruto_pre
+        if requires_residuo:
+            reg["requires_residuo"] = requires_residuo
         if r:
             reg["xref"]["aon"] = r["id"]
             if r["remaster_id"]:
@@ -1526,6 +1602,9 @@ def main():
     print("com pre-requisito .... %d" % tot)
     print("predicado parseado ... %d (%.1f%%)" % (ok, 100.0 * ok / tot if tot else 0))
     print("predicado falhou ..... %d" % est["prereq_falha"])
+    print("parseado SO EM PARTE .. %d (o resto foi para `requires_residuo`)"
+          % est["prereq_parcial"])
+    print("com requires_residuo .. %d" % est["com_requires_residuo"])
     print("grants_completos true/false ... %d / %d" % (
         est["grants_completos_true"], est["grants_completos_false"]))
     print("requires_parseado true/false .. %d / %d" % (

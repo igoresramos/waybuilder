@@ -991,7 +991,115 @@ export class Personagem implements ContextoDePredicado {
         dc: this._dc_de_conjuracao(classe, nivel_classe, sc),
       });
     }
+    this._conjuracao_de_arquetipo();
   }
+
+  /**
+   * A rota de conjuração que a dedicação abre -- até 2026-07-29, invisível.
+   *
+   * 13 dedicações prometem conjuração na prosa e a ficha não mostrava nada.
+   * Sob Free Archetype (regra 2, sempre ligada) essa é a rota mais comum de um
+   * personagem não-conjurador.
+   *
+   * O rank vem do FEAT que o personagem pegou, não do nível dele: a tabela
+   * `RANK_DEDICACAO` descreve a rota completa e serve de piso para a regra 21,
+   * mas na ficha real quem só tem Basic para no rank 3 mesmo no nível 20.
+   * Spec: specs/2026-07-29-spellcasting-de-arquetipo.md.
+   */
+  private _conjuracao_de_arquetipo(): void {
+    for (const [origem_id, reg] of this._feats_efetivos()) {
+      for (const g of listaDe(reg["grants"])) {
+        if (!ehDict(g) || !("grant_spellcasting" in g)) continue;
+        const gs = dictDe(g["grant_spellcasting"]);
+        const degraus = dictDe(gs["degraus"]);
+        let teto = 0;
+        for (const [degrau, fid] of Object.entries(degraus)) {
+          if (this._tem_feat(ehStr(fid) ? fid : null)) {
+            teto = Math.max(teto, Personagem.TETO_DO_DEGRAU[degrau] ?? 0);
+          }
+        }
+        // a tabela oficial, limitada pelo degrau que ele realmente tem
+        const rank = Math.min(this.rank_de_dedicacao(), teto);
+        let tradicao = ehStr(gs["tradicao"]) ? gs["tradicao"] : null;
+        if (tradicao === "escolha") tradicao = this._tradicao_por_escolha(reg, gs);
+        const slots: Record<string, number> = {};
+        for (let r = 1; r <= rank; r++) slots[String(r)] = 1;
+        const cadeia = ehStr(gs["cadeia"]) ? this.base.opcional(gs["cadeia"]) : null;
+        this.conjuracao.push({
+          classe: nome(cadeia) ?? nomeOu(reg, ""),
+          de_arquetipo: true,
+          origem: origem_id,
+          nivel_de_classe: null,
+          tradicao,
+          tipo: ehStr(gs["tipo"]) ? gs["tipo"] : null,
+          slots,
+          truques: Object.hasOwn(gs, "truques") ? inteiro(gs["truques"]) : 2,
+          max_rank_do_slot: rank,
+          // regra 18: arquétipo roda RAW puro, então NÃO eleva
+          rank_efetivo: rank,
+          elevacao: 0,
+          rank_de_invocacao: rank,
+          dc: this._dc_de_arquetipo(),
+        });
+      }
+    }
+  }
+
+  private _tem_feat(feat_id: string | null): boolean {
+    if (!feat_id) return false;
+    const alvo = this.base.resolver(feat_id);
+    for (const [i] of this._feats_efetivos()) {
+      if (this.base.resolver(i) === alvo) return true;
+    }
+    return false;
+  }
+
+  /**
+   * Sorcerer usa a tradição do bloodline; a Bruxa, a do patron.
+   *
+   * Sem a escolha feita não dá para saber, e ARBITRAR aqui poria uma tradição
+   * errada na ficha em silêncio -- mesmo tratamento do grau do companheiro:
+   * avisa e devolve `null`.
+   */
+  private _tradicao_por_escolha(reg: Dict, gs: Dict): string | null {
+    const eixo = ehStr(gs["de"]) ? gs["de"] : null;
+    for (const e of this._todas_escolhas()) {
+      if (e["slot"] !== "subclasse") continue;
+      const pega = e["pega"];
+      const escolhido = dictDe(ehStr(pega) ? this.base.opcional(pega) : null);
+      const trad = dictDe(escolhido["spellcasting"])["tradition"] ?? escolhido["tradition"];
+      if (ehStr(trad) && ["arcane", "divine", "occult", "primal"].includes(trad)) {
+        return trad;
+      }
+    }
+    this.avisos.push(
+      `${nomeOu(reg, "")}: a tradicao vem da escolha de ${eixo ?? "subclasse"}, `
+      + `que ainda nao foi feita -- slots sem tradicao ate resolver`);
+    return null;
+  }
+
+  /**
+   * Regra 3, como todo o resto: nível de PERSONAGEM + rank.
+   *
+   * A dedicação concede `trained` na tradição e não sobe sozinha -- quem sobe é
+   * a cadeia, quando a prosa diz. Até haver dado disso, trained.
+   */
+  private _dc_de_arquetipo(): Conjuracao["dc"] {
+    const rank: Rank = "trained";
+    return {
+      rank,
+      dc: 10 + this.nivel + RANK_BONUS[rank],
+      ataque: this.nivel + RANK_BONUS[rank],
+      nota: "conjuracao de arquetipo: trained pela dedicacao",
+    };
+  }
+
+  // teto de rank por degrau da cadeia, RAW ("Spellcasting Archetypes"): Basic
+  // vai até rank 3, Expert até 6, Master até 8. Só a dedicação, sem nenhum
+  // degrau, dá cantrip e nada de slot.
+  static readonly TETO_DO_DEGRAU: Record<string, number> = {
+    basic: 3, expert: 6, master: 8,
+  };
 
   // -- regra 17b: teto para o que cria criatura ---------------------------
 

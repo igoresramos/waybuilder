@@ -2,8 +2,8 @@
 
 Regra do livro que nenhuma fonte escreve em `requires`: um feat de arquetipo exige a dedicacao daquele arquetipo.
 
-- feats de arquetipo com gate JA presente: **1381**
-- gate derivado agora: **407**
+- feats de arquetipo com gate JA presente: **1494**
+- gate derivado agora: **294**
 - sem dedicacao identificavel (intocados): **137**
 
 ## Intocados

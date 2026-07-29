@@ -193,9 +193,7 @@
    "wb:feat/barbarian-dedication",
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
-   "wb:feat/bright-lion-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/captain-dedication",
    "wb:feat/cathartic-mage-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
@@ -209,7 +207,9 @@
    "wb:feat/curse-maelstrom-dedication",
    "wb:feat/demolition-charge",
    "wb:feat/demolitionist-dedication",
-   "wb:feat/devoted-guardian"
+   "wb:feat/devoted-guardian",
+   "wb:feat/divine-health",
+   "wb:feat/dragon-disciple-dedication"
   ],
   "class_feat@4": [
    "wb:feat/agile-shield-grip",
@@ -235,9 +235,7 @@
    "wb:feat/barbarian-dedication",
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
-   "wb:feat/bright-lion-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/captain-dedication",
    "wb:feat/cathartic-mage-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
@@ -251,7 +249,9 @@
    "wb:feat/curse-maelstrom-dedication",
    "wb:feat/demolition-charge",
    "wb:feat/demolitionist-dedication",
-   "wb:feat/devoted-guardian"
+   "wb:feat/devoted-guardian",
+   "wb:feat/divine-health",
+   "wb:feat/dragon-disciple-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -303,9 +303,7 @@
    "wb:feat/barbarian-dedication",
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
-   "wb:feat/bright-lion-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/captain-dedication",
    "wb:feat/cathartic-mage-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
@@ -325,17 +323,19 @@
    "wb:feat/familiar-master-dedication",
    "wb:feat/firework-technician-dedication",
    "wb:feat/first-frost",
-   "wb:feat/geomancer-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghost-eater-dedication",
    "wb:feat/ghost-hunter-dedication",
    "wb:feat/ghoul-dedication",
    "wb:feat/guardian-dedication",
-   "wb:feat/hallowed-necromancer-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/kineticist-dedication"
+   "wb:feat/kineticist-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/living-monolith-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
@@ -345,9 +345,7 @@
    "wb:feat/barbarian-dedication",
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
-   "wb:feat/bright-lion-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/captain-dedication",
    "wb:feat/cathartic-mage-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
@@ -367,17 +365,19 @@
    "wb:feat/familiar-master-dedication",
    "wb:feat/firework-technician-dedication",
    "wb:feat/first-frost",
-   "wb:feat/geomancer-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghost-eater-dedication",
    "wb:feat/ghost-hunter-dedication",
    "wb:feat/ghoul-dedication",
    "wb:feat/guardian-dedication",
-   "wb:feat/hallowed-necromancer-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/kineticist-dedication"
+   "wb:feat/kineticist-dedication",
+   "wb:feat/lastwall-sentry-dedication",
+   "wb:feat/lepidstadt-surgeon-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/living-monolith-dedication"
   ],
   "general_feat@1": [
    "wb:feat/acupuncturist",
@@ -407,7 +407,6 @@
    "wb:feat/quick-identification",
    "wb:feat/quick-repair",
    "wb:feat/recognize-spell",
-   "wb:feat/reveal-true-name",
    "wb:feat/ride",
    "wb:feat/risky-surgery",
    "wb:feat/seasoned",
@@ -419,7 +418,8 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/additional-lore"
+   "wb:feat/additional-lore",
+   "wb:feat/adopted-ancestry"
   ],
   "general_feat@2": [
    "wb:feat/acupuncturist",
@@ -449,7 +449,6 @@
    "wb:feat/quick-identification",
    "wb:feat/quick-repair",
    "wb:feat/recognize-spell",
-   "wb:feat/reveal-true-name",
    "wb:feat/ride",
    "wb:feat/risky-surgery",
    "wb:feat/seasoned",
@@ -461,7 +460,8 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge"
+   "wb:feat/automatic-knowledge",
+   "wb:feat/tattoo-artist"
   ],
   "general_feat@4": [
    "wb:feat/acupuncturist",
@@ -491,7 +491,6 @@
    "wb:feat/quick-identification",
    "wb:feat/quick-repair",
    "wb:feat/recognize-spell",
-   "wb:feat/reveal-true-name",
    "wb:feat/ride",
    "wb:feat/risky-surgery",
    "wb:feat/seasoned",
@@ -503,7 +502,8 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge"
+   "wb:feat/automatic-knowledge",
+   "wb:feat/tattoo-artist"
   ],
   "skill_feat@1": [
    "wb:feat/acupuncturist",
@@ -519,7 +519,6 @@
    "wb:feat/quick-identification",
    "wb:feat/quick-repair",
    "wb:feat/recognize-spell",
-   "wb:feat/reveal-true-name",
    "wb:feat/risky-surgery",
    "wb:feat/seasoned",
    "wb:feat/snare-crafting",
@@ -545,7 +544,8 @@
    "wb:feat/courtly-graces",
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
-   "wb:feat/dirty-trick"
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional"
   ],
   "skill_feat@2": [
    "wb:feat/acupuncturist",
@@ -561,7 +561,6 @@
    "wb:feat/quick-identification",
    "wb:feat/quick-repair",
    "wb:feat/recognize-spell",
-   "wb:feat/reveal-true-name",
    "wb:feat/risky-surgery",
    "wb:feat/seasoned",
    "wb:feat/snare-crafting",
@@ -570,11 +569,6 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
    "wb:feat/automatic-knowledge",
-   "wb:feat/exhort-the-faithful",
-   "wb:feat/godless-healing",
-   "wb:feat/mortal-healing",
-   "wb:feat/pei-zing-adept",
-   "wb:feat/sanctify-water",
    "wb:feat/tattoo-artist",
    "wb:feat/vasodilation",
    "wb:feat/additional-lore",
@@ -587,7 +581,13 @@
    "wb:feat/bargain-hunter",
    "wb:feat/bon-mot",
    "wb:feat/cat-fall",
-   "wb:feat/charlatan"
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crystal-healing"
   ],
   "skill_feat@4": [
    "wb:feat/acupuncturist",
@@ -603,7 +603,6 @@
    "wb:feat/quick-identification",
    "wb:feat/quick-repair",
    "wb:feat/recognize-spell",
-   "wb:feat/reveal-true-name",
    "wb:feat/risky-surgery",
    "wb:feat/seasoned",
    "wb:feat/snare-crafting",
@@ -612,11 +611,6 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
    "wb:feat/automatic-knowledge",
-   "wb:feat/exhort-the-faithful",
-   "wb:feat/godless-healing",
-   "wb:feat/mortal-healing",
-   "wb:feat/pei-zing-adept",
-   "wb:feat/sanctify-water",
    "wb:feat/tattoo-artist",
    "wb:feat/vasodilation",
    "wb:feat/ambush-tactics",
@@ -629,7 +623,13 @@
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
    "wb:feat/armor-assist",
-   "wb:feat/bargain-hunter"
+   "wb:feat/bargain-hunter",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain"
   ]
  },
  "extras": {

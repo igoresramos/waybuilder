@@ -2,9 +2,9 @@
 
 A fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao reescreve quem citava o id aposentado.
 
-- ids orfaos encontrados: **49**
-- resolvidos por alias: **47**
-- registros com `requires` reescrito: **45**
+- ids orfaos encontrados: **50**
+- resolvidos por alias: **48**
+- registros com `requires` reescrito: **47**
 - registros com opcao repetida removida: **3**
 - sem alias (intocados): **2**
 
@@ -30,7 +30,7 @@ A fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao reescre
 | `wb:feat/fiendsbane-oath` | `wb:feat/oath-of-the-slayer` | 1 |
 | `wb:feat/gnoll-weapon-familiarity` | `wb:feat/kholo-weapon-familiarity` | 1 |
 | `wb:feat/grippli-weapon-familiarity` | `wb:feat/tripkee-weapon-familiarity` | 2 |
-| `wb:feat/hellknight-armiger-dedication` | `wb:feat/hellknight-dedication` | 5 |
+| `wb:feat/hellknight-armiger-dedication` | `wb:feat/hellknight-dedication` | 6 |
 | `wb:feat/hellknight-signifer-dedication` | `wb:feat/hellknight-signifer-preferment` | 4 |
 | `wb:feat/ki-strike` | `wb:feat/qi-spells` | 1 |
 | `wb:feat/sharp-fangs` | `wb:feat/iruxi-armaments` | 1 |
@@ -39,6 +39,7 @@ A fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao reescre
 | `wb:feat/stunning-fist` | `wb:feat/stunning-blows` | 2 |
 | `wb:feat/tail-whip` | `wb:feat/iruxi-armaments` | 1 |
 | `wb:feat/vanths-weapon-familiarity` | `wb:feat/duskwalker-weapon-familiarity` | 2 |
+| `wb:feat/vengeful-oath` | `wb:feat/oath-of-the-avenger` | 1 |
 | `wb:feat/wholeness-of-body` | `wb:feat/harmonize-self` | 1 |
 | `wb:feat/wild-shape` | `wb:feat/untamed-form` | 1 |
 | `wb:heritage/sweetbreath-gnoll` | `wb:heritage/sweetbreath-kholo` | 1 |

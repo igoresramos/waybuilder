@@ -115,6 +115,14 @@
    "slots_abertos": 3
   },
   {
+   "ficha": "guerreiro8-fa-conjuracao-de-arquetipo",
+   "nivel": 8,
+   "hp": 104,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 18
+  },
+  {
    "ficha": "invocador5-tradicao-eidolon",
    "nivel": 5,
    "hp": 68,

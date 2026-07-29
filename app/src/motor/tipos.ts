@@ -205,7 +205,12 @@ export interface SlotDeSubclasse {
 
 export interface Conjuracao {
   classe: string;
-  nivel_de_classe: number;
+  /** `null` na conjuração de arquétipo: ela não vem de nível de classe */
+  nivel_de_classe: number | null;
+  /** veio de uma dedicação, não de níveis -- e por isso NÃO eleva (regra 18) */
+  de_arquetipo?: boolean;
+  /** o feat que abriu a rota */
+  origem?: string;
   tradicao: string | null;
   tipo: string | null;
   truques: number | null;

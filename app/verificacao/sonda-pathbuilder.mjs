@@ -156,14 +156,22 @@ await pagina.waitForTimeout(2500);
 // Class/All), `General Feat` abre so `All Feats`, e `Skill Feat` tem as suas.
 // Lista fixa fazia a colheita voltar vazia sem dizer por que -- entao as abas
 // sao DESCOBERTAS, tirando as nove do menu da ficha, que nao sao do modal.
+//
+// A busca tem de ficar PRESA ao `.modal:visible` -- em Wizard/Cleric o menu da
+// ficha ganha uma aba extra com o NOME DA CLASSE (ex.: "Wizard"), que nao cabe
+// na barra e fica no DOM com largura/altura zero (confirmado com getBoundingClientRect,
+// dentroDeModal: false). Um `.section-menu` sem escopo pega essa aba fantasma,
+// ela nao esta na lista fixa `MENU_DA_FICHA`, e o clique fica 30s tentando um
+// elemento que nunca fica visivel -- TimeoutError, so em classe com essa aba
+// extra (Fighter/Rogue nao tem, por isso passavam).
 const MENU_DA_FICHA = new Set(["Weapons", "Defense", "Gear", "Spells", "Pets",
                                "Details", "Feats", "Actions", "Rituals"]);
-const ABAS = (await pagina.locator(".section-menu").allTextContents())
+const ABAS = (await pagina.locator(".modal:visible .section-menu").allTextContents())
   .map((t) => t.trim()).filter((t) => t && !MENU_DA_FICHA.has(t));
 console.log("abas do modal:", JSON.stringify(ABAS));
 const porAba = {};
 for (const aba of ABAS) {
-  const botao = pagina.locator(".section-menu", { hasText: aba }).first();
+  const botao = pagina.locator(".modal:visible .section-menu", { hasText: aba }).first();
   if (await botao.count() === 0) { console.log(`  (aba ausente: ${aba})`); continue; }
   await botao.click();
   await pagina.waitForTimeout(1200);

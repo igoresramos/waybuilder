@@ -169,3 +169,39 @@ pericia treinada, num personagem de comparacao que ainda nao escolheu pericia.
 O Pathbuilder trata "pode vir a ter" como disponivel; nos avaliamos o estado
 atual e MARCAMOS em vez de esconder. Os dois comportamentos sao defensaveis, e o
 nosso e o que o principio zero pede.
+
+## Terceira rodada -- Wizard, Cleric e Rogue (2026-07-29)
+
+A sonda travava em Wizard e Cleric por um motivo que nao era do slot: ao trocar
+para essas classes, a barra de menu da FICHA ganha uma aba com o nome da propria
+classe, que nao cabe na largura e fica no DOM com tamanho zero. A descoberta de
+abas varria `.section-menu` sem escopo e clicava nessa aba fantasma. Escopada
+para `.modal:visible .section-menu`.
+
+Com as tres classes colhidas, dois ajustes derrubaram o ruido de **5.846 para
+44 pontos**:
+
+1. **Mais quatro pares de nome proprio removido**, o mesmo padrao ja conhecido,
+   agora fora das dedicacoes: `Helt's Spelldance` -> `Spelldance`,
+   `Devrin's Dazzling Diversion` -> `Dazzling Diversion`,
+   `Stella's Stab and Snag` -> `Stab and Snag`,
+   `Fane's Fourberie` -> `Card Sharp's Fourberie`. A tabela vai a 26 pares.
+2. **A aba `All Feats` saiu do placar** -- ela nao recorta nada do lado deles, e
+   do nosso o slot de class feat aceita todo feat de arquetipo (RAW), entao a
+   comparacao virava 2.253 contra 341. Ruido por desenho, nao achado. E a aba
+   `Class Feats` passou a excluir quem tem trait `archetype`: os 11 feats de
+   mascara do Wizard (Pathfinder #174) carregam `wizard` junto com `archetype`,
+   e o Pathbuilder os poe na aba de arquetipo.
+
+Placar depois disso:
+
+| classe | Class Feats | Dedication Feats |
+|---|---|---|
+| Rogue 2 | **zero divergencia** | 22 (a familia conhecida) + 3 de fonte |
+| Wizard 2 | 1 | 15 + 3 de fonte |
+| Cleric 2 | 3 | 14 + 3 de fonte |
+
+Os `3 de fonte` sao sempre os mesmos tres: `Chelaxian Scion`, `Knight Vigilant`,
+`Venture-Gossip` -- fontes que o Pathbuilder nao indexa. A familia restante e a
+mesma ja descrita: dedicacoes que exigem pericia treinada, num personagem de
+comparacao que ainda nao escolheu pericia.

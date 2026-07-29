@@ -8,14 +8,7 @@
     "so_no_waybuilder": [
       "Stance Savant"
     ],
-    "divergencia_de_disponibilidade": [
-      {
-        "nome": "Disarming Stance",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      }
-    ]
+    "divergencia_de_disponibilidade": []
   },
   {
     "slot": "Fighter 6 / class_feat [Dedication Feats]",
@@ -36,18 +29,6 @@
         "motivos": []
       },
       {
-        "nome": "Beast Gunner Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Bellflower Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Bounty Hunter Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -56,25 +37,7 @@
         ]
       },
       {
-        "nome": "Bright Lion Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Captain Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Cathartic Mage Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Corpse Tender Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -111,19 +74,7 @@
         "motivos": []
       },
       {
-        "nome": "Firebrand Braggart Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Five-breath Vanguard Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Geomancer Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -138,61 +89,7 @@
         ]
       },
       {
-        "nome": "Halcyon Speaker Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Hallowed Necromancer Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Knight Reclaimant Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Knight Vigilant Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Lepidstadt Surgeon Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Lion Blade Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Living Monolith Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Magaambyan Attendant Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Magic Warrior Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Magus Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -212,43 +109,7 @@
         "motivos": []
       },
       {
-        "nome": "Nidalese Horselord Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Pactbinder Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Pactbound Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Pistol Phenom Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Psychic Duelist Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Rose Warden Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Scion of Domora Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -265,12 +126,6 @@
         ]
       },
       {
-        "nome": "Scrollmaster Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Seneschal Witch Dedication",
         "waybuilder": true,
         "pathbuilder": false,
@@ -278,18 +133,6 @@
       },
       {
         "nome": "Shadowcaster Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Sniping Duo Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Soul Warden Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -307,25 +150,15 @@
         "motivos": []
       },
       {
-        "nome": "Staff Acrobat Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "nome": "Tattooed Historian Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige CON >= 12; tem 10"
+        ]
       },
       {
         "nome": "Time Mage Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Trapsmith Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Twilight Speaker Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -2270,18 +2103,6 @@
         "motivos": []
       },
       {
-        "nome": "Beast Gunner Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Bellflower Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Bounty Hunter Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -2290,30 +2111,12 @@
         ]
       },
       {
-        "nome": "Bright Lion Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Captain Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Cathartic Mage Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
       },
       {
-        "nome": "Corpse Tender Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Crossbow Infiltrator Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -2328,12 +2131,6 @@
         "motivos": [
           "exige stealth >= trained; tem untrained"
         ]
-      },
-      {
-        "nome": "Disarming Stance",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
       },
       {
         "nome": "Exemplar Dedication",
@@ -2351,19 +2148,7 @@
         "motivos": []
       },
       {
-        "nome": "Firebrand Braggart Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Five-breath Vanguard Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Geomancer Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -2378,61 +2163,7 @@
         ]
       },
       {
-        "nome": "Halcyon Speaker Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Hallowed Necromancer Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Knight Reclaimant Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Knight Vigilant Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Lepidstadt Surgeon Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Lion Blade Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Living Monolith Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Magaambyan Attendant Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Magic Warrior Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Magus Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -2452,43 +2183,7 @@
         "motivos": []
       },
       {
-        "nome": "Nidalese Horselord Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Pactbinder Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Pactbound Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Pistol Phenom Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Psychic Duelist Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Rose Warden Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Scion of Domora Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -2505,12 +2200,6 @@
         ]
       },
       {
-        "nome": "Scrollmaster Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Seneschal Witch Dedication",
         "waybuilder": true,
         "pathbuilder": false,
@@ -2518,18 +2207,6 @@
       },
       {
         "nome": "Shadowcaster Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Sniping Duo Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Soul Warden Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -2547,25 +2224,15 @@
         "motivos": []
       },
       {
-        "nome": "Staff Acrobat Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "nome": "Tattooed Historian Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige CON >= 12; tem 10"
+        ]
       },
       {
         "nome": "Time Mage Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Trapsmith Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Twilight Speaker Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []

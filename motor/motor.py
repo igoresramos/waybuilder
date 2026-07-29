@@ -914,6 +914,96 @@ class Personagem:
                 "rank_de_invocacao": self.cap_invocacao(nivel_classe),  # regra 17b
                 "dc": self._dc_de_conjuracao(classe, nivel_classe, sc),
             })
+        self._conjuracao_de_arquetipo()
+
+    # teto de rank por degrau da cadeia, RAW ("Spellcasting Archetypes"):
+    # Basic vai ate rank 3, Expert ate 6, Master ate 8. So a dedicacao, sem
+    # nenhum degrau, da cantrip e nada de slot.
+    TETO_DO_DEGRAU = {"basic": 3, "expert": 6, "master": 8}
+
+    def _conjuracao_de_arquetipo(self) -> None:
+        """A rota de conjuracao que a dedicacao abre -- ate 2026-07-29, invisivel.
+
+        13 dedicacoes prometem conjuracao na prosa e a ficha nao mostrava nada.
+        Sob Free Archetype (regra 2, sempre ligada) essa e a rota mais comum de
+        um personagem nao-conjurador.
+
+        O rank vem do FEAT que o personagem pegou, nao do nivel dele: a tabela
+        `RANK_DEDICACAO` descreve a rota completa e serve de piso para a regra
+        21, mas na ficha real quem so tem Basic para no rank 3 mesmo no nivel
+        20. Spec: specs/2026-07-29-spellcasting-de-arquetipo.md.
+        """
+        for origem_id, reg, _ in self._feats_efetivos():
+            for g in (reg.get("grants") or []):
+                if not isinstance(g, dict) or "grant_spellcasting" not in g:
+                    continue
+                gs = g["grant_spellcasting"] or {}
+                degraus = gs.get("degraus") or {}
+                tidos = [d for d, fid in degraus.items() if self._tem_feat(fid)]
+                teto = max((self.TETO_DO_DEGRAU.get(d, 0) for d in tidos), default=0)
+                # a tabela oficial, limitada pelo degrau que ele realmente tem
+                rank = min(self.rank_de_dedicacao(), teto)
+                tradicao = gs.get("tradicao")
+                if tradicao == "escolha":
+                    tradicao = self._tradicao_por_escolha(reg, gs)
+                self.conjuracao.append({
+                    "classe": (self.base.opcional(gs.get("cadeia") or "") or {})
+                              .get("name") or reg.get("name"),
+                    "de_arquetipo": True,
+                    "origem": origem_id,
+                    "nivel_de_classe": None,
+                    "tradicao": tradicao,
+                    "tipo": gs.get("tipo"),
+                    # RAW: um slot de cada rank ate o teto vigente
+                    "slots": {str(r): 1 for r in range(1, rank + 1)},
+                    "truques": gs.get("truques", 2),
+                    "max_rank_do_slot": rank,
+                    # regra 18: arquetipo roda RAW puro, entao NAO eleva
+                    "rank_efetivo": rank,
+                    "elevacao": 0,
+                    "rank_de_invocacao": rank,
+                    "dc": self._dc_de_arquetipo(),
+                })
+
+    def _tem_feat(self, feat_id: str | None) -> bool:
+        if not feat_id:
+            return False
+        alvo = self.base.resolver(feat_id)
+        return any(self.base.resolver(i) == alvo
+                   for i, _, _ in self._feats_efetivos())
+
+    def _tradicao_por_escolha(self, reg: dict, gs: dict) -> str | None:
+        """Sorcerer usa a tradicao do bloodline; a Bruxa, a do patron.
+
+        Sem a escolha feita nao da para saber, e ARBITRAR aqui poria uma
+        tradicao errada na ficha em silencio -- mesmo tratamento do grau do
+        companheiro: avisa e devolve `None`.
+        """
+        eixo = gs.get("de")
+        for e in self.doc.get("escolhas", []):
+            if e.get("slot") != "subclasse":
+                continue
+            escolhido = self.base.opcional(e.get("pega") or "") or {}
+            trad = ((escolhido.get("spellcasting") or {}).get("tradition")
+                    or escolhido.get("tradition"))
+            if trad in ("arcane", "divine", "occult", "primal"):
+                return trad
+        self.avisos.append(
+            f"{reg.get('name')}: a tradicao vem da escolha de "
+            f"{eixo or 'subclasse'}, que ainda nao foi feita -- slots sem "
+            f"tradicao ate resolver")
+        return None
+
+    def _dc_de_arquetipo(self) -> dict:
+        """Regra 3, como todo o resto: nivel de PERSONAGEM + rank.
+
+        A dedicacao concede `trained` na tradicao e nao sobe sozinha -- quem
+        sobe e a cadeia, quando a prosa diz. Ate haver dado disso, trained.
+        """
+        rank = "trained"
+        return {"rank": rank, "dc": 10 + self.nivel + RANK_BONUS[rank],
+                "ataque": self.nivel + RANK_BONUS[rank],
+                "nota": "conjuracao de arquetipo: trained pela dedicacao"}
 
     # -- regra 17b: teto para o que cria criatura ---------------------------
 

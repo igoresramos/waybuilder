@@ -117,6 +117,12 @@ echo "== 7f. quem concede companheiro animal =="
 # (5) e depois da fusao (7).
 python3 derivar_concessao_de_ator.py
 
+echo "== 7g. quem concede conjuracao de arquetipo =="
+# 13 dedicacoes prometem conjuracao na prosa e nao entregavam nada na ficha.
+# A tabela de slots ja vive no motor (`RANK_DEDICACAO`, verbatim da regra); este
+# passo diz QUEM esta na rota e por qual cadeia Basic/Expert/Master.
+python3 derivar_spellcasting_arquetipo.py
+
 echo "== 8. portoes, fase final =="
 python3 portoes.py --fase final
 

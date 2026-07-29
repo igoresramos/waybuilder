@@ -6,6 +6,55 @@ project: waybuilder
 
 ## 2026-07-29
 
+### Sessao | 15:10-17:00 | dois defeitos que a comparacao apontou, fechados | igor + claude-code
+
+Igor: *"quero que vc faca tudo, mas planeja legal, tais sempre atualizando a
+spec ne?"* -- e, no meio, *"quero q vc tenha mais autonomia e tal, use agentes
+sempre que possivel e eficiente"*. As duas frentes sairam com spec antes do
+codigo, e a medicao de cada uma foi para um agente em paralelo.
+
+**Requisito parcial (item 86, spec `2026-07-29-requisito-parcial.md`).** A
+premissa mudou na medicao: **158 dos 178** alvos ja tem o pre-requisito
+estruturado no Foundry, em itens atomicos. Nao era falta de fonte, era o parser
+sendo tudo-ou-nada -- `_combinar` devolvia `None` se qualquer clausula falhasse,
+entao "Trained in Occultism; you have been in a psychic duel" perdia as DUAS
+coisas por causa da segunda, e o gate de nivel preenchia o vazio, disfarcando a
+perda de "dado pobre".
+
+Agora o parser emite o que deu e o resto vai por escrito em `requires_residuo`
+-- que o motor **nunca** avalia e a tela mostra como *requisito de mesa*. E o
+principio zero aplicado ao pre-requisito.
+
+| | antes | depois |
+|---|---:|---:|
+| predicado parseado | 3.609 (84,7%) | **3.889 (91,3%)** |
+| frase rejeitada inteira | 652 | **372** |
+| residuo por escrito | 0 | **593** |
+| divergencia com o Pathbuilder (Fighter 6, dedicacao) | 52 | **23** |
+
+**Spellcasting de arquetipo (spec `2026-07-29-spellcasting-de-arquetipo.md`).**
+13 dedicacoes prometiam conjuracao e a ficha nao mostrava nada. O levantamento
+poupou metade do trabalho: **a tabela de slots ja estava no motor**
+(`RANK_DEDICACAO`, verbatim da regra, usada como piso da regra 21 desde 27/07).
+Faltava saber QUEM esta na rota -- passo 7g -- e que o rank vem do **feat** que
+o personagem pegou, nao do nivel dele: quem so tem Basic para no rank 3 mesmo no
+nivel 20.
+
+E ai apareceu o defeito maior, que a spec assumia resolvido: **a conjuracao
+NUNCA aparecia na tela, nem a de classe**. O bloco existia so em
+`src/telas/Ficha.tsx`, que nao e usado por ninguem -- o motor calculava desde
+sempre e o jogador nunca via. A ficha ganhou a aba **Magia**, com a elevacao da
+regra 17 na de classe e a marca "nao eleva" na de arquetipo.
+
+Antes disso, tres coisas menores: o legado ficou **achavel** (a busca do modal
+passou a olhar `aliases`, entao `Power Attack` acha `Vicious Swing`), a sonda
+foi consertada para Wizard e Cleric (uma aba fantasma com o nome da classe, fora
+do modal, engolia o clique), e a comparacao caiu de 5.846 para 44 pontos com
+mais quatro pares de nome proprio removido e o corte da aba `All Feats`.
+
+Verde: 9 portoes, **124 assercoes** no oraculo (eram 106), **113** no TS, e
+quatro verificacoes de navegador.
+
 ### Sessao | 13:40-15:10 | manter o legado, e a comparacao achando defeito de verdade | igor + claude-code
 
 **Decisao do Igor: manter todo o conteudo legado.** Medido antes de agir, e a

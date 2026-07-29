@@ -198,9 +198,9 @@
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
-   "wb:feat/corpse-tender-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
-   "wb:feat/cultivator-dedication"
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication"
   ],
   "class_feat@4": [
    "wb:feat/animal-companion",
@@ -240,9 +240,9 @@
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
-   "wb:feat/corpse-tender-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
-   "wb:feat/cultivator-dedication"
+   "wb:feat/cultivator-dedication",
+   "wb:feat/curse-maelstrom-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -307,7 +307,6 @@
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
-   "wb:feat/corpse-tender-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/cultivator-dedication",
    "wb:feat/curse-maelstrom-dedication",
@@ -326,7 +325,8 @@
    "wb:feat/game-hunter-dedication",
    "wb:feat/geomancer-dedication",
    "wb:feat/ghost-dedication",
-   "wb:feat/ghost-eater-dedication"
+   "wb:feat/ghost-eater-dedication",
+   "wb:feat/ghost-hunter-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
@@ -349,7 +349,6 @@
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
-   "wb:feat/corpse-tender-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/cultivator-dedication",
    "wb:feat/curse-maelstrom-dedication",
@@ -368,7 +367,8 @@
    "wb:feat/game-hunter-dedication",
    "wb:feat/geomancer-dedication",
    "wb:feat/ghost-dedication",
-   "wb:feat/ghost-eater-dedication"
+   "wb:feat/ghost-eater-dedication",
+   "wb:feat/ghost-hunter-dedication"
   ],
   "general_feat@1": [
    "wb:feat/all-of-the-animal",
@@ -405,12 +405,12 @@
    "wb:feat/oddity-identification",
    "wb:feat/pet",
    "wb:feat/pickpocket",
-   "wb:feat/pilgrims-token",
    "wb:feat/practical-magic",
-   "wb:feat/prepare-elemental-medicine",
    "wb:feat/pull-together",
    "wb:feat/quick-coercion",
-   "wb:feat/quick-identification"
+   "wb:feat/quick-identification",
+   "wb:feat/read-psychometric-resonance",
+   "wb:feat/recognize-spell"
   ],
   "general_feat@2": [
    "wb:feat/all-of-the-animal",
@@ -447,12 +447,12 @@
    "wb:feat/oddity-identification",
    "wb:feat/pet",
    "wb:feat/pickpocket",
-   "wb:feat/pilgrims-token",
    "wb:feat/practical-magic",
-   "wb:feat/prepare-elemental-medicine",
    "wb:feat/pull-together",
    "wb:feat/quick-coercion",
-   "wb:feat/quick-identification"
+   "wb:feat/quick-identification",
+   "wb:feat/read-psychometric-resonance",
+   "wb:feat/recognize-spell"
   ],
   "general_feat@4": [
    "wb:feat/all-of-the-animal",
@@ -489,12 +489,12 @@
    "wb:feat/oddity-identification",
    "wb:feat/pet",
    "wb:feat/pickpocket",
-   "wb:feat/pilgrims-token",
    "wb:feat/practical-magic",
-   "wb:feat/prepare-elemental-medicine",
    "wb:feat/pull-together",
    "wb:feat/quick-coercion",
-   "wb:feat/quick-identification"
+   "wb:feat/quick-identification",
+   "wb:feat/read-psychometric-resonance",
+   "wb:feat/recognize-spell"
   ],
   "skill_feat@1": [
    "wb:feat/all-of-the-animal",
@@ -518,8 +518,6 @@
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
    "wb:feat/pickpocket",
-   "wb:feat/pilgrims-token",
-   "wb:feat/prepare-elemental-medicine",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
@@ -536,7 +534,9 @@
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
    "wb:feat/virtuosic-performer",
-   "wb:feat/additional-lore"
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/dubious-knowledge"
   ],
   "skill_feat@2": [
    "wb:feat/all-of-the-animal",
@@ -560,8 +560,6 @@
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
    "wb:feat/pickpocket",
-   "wb:feat/pilgrims-token",
-   "wb:feat/prepare-elemental-medicine",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
@@ -578,7 +576,9 @@
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
    "wb:feat/virtuosic-performer",
-   "wb:feat/armored-stealth"
+   "wb:feat/armored-stealth",
+   "wb:feat/assured-identification",
+   "wb:feat/aura-sight"
   ],
   "skill_feat@4": [
    "wb:feat/all-of-the-animal",
@@ -602,8 +602,6 @@
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
    "wb:feat/pickpocket",
-   "wb:feat/pilgrims-token",
-   "wb:feat/prepare-elemental-medicine",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
@@ -620,7 +618,9 @@
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
    "wb:feat/virtuosic-performer",
-   "wb:feat/armored-stealth"
+   "wb:feat/armored-stealth",
+   "wb:feat/assured-identification",
+   "wb:feat/aura-sight"
   ]
  },
  "extras": {

@@ -360,6 +360,13 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
   padding: 6px 10px; font-size: .9em; color: var(--accent);
 }
 .fora-aviso em { color: var(--fraco); }
+/* Requisito que o motor NAO avalia -- em cinza, nao no accent: accent aqui
+   leria como reprovacao, e isto nao reprova nada, so informa. */
+.requisito-de-mesa {
+  background: rgba(255, 255, 255, .04); border-left: 2px solid var(--borda-forte);
+  padding: 6px 10px; font-size: .9em; color: var(--fraco); margin: 0 0 10px;
+}
+.requisito-de-mesa strong { color: var(--texto); font-weight: 600; }
 .prosa { white-space: pre-wrap; line-height: 1.5; }
 .fonte { color: var(--fraco); font-size: .9em; font-style: italic; margin-top: 12px; }
 

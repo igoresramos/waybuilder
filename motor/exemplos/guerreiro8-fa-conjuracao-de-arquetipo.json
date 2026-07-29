@@ -1,0 +1,41 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {
+    "versao": "2026-07-29",
+    "pin_foundry": "87f9e502"
+  },
+  "identidade": {
+    "nome": "Vasco Meia-Magia",
+    "jogador": "Igor",
+    "notas": "Ficha da spec specs/2026-07-29-spellcasting-de-arquetipo.md. Guerreiro 8 puro que entra na conjuracao pela rota GRATUITA do Free Archetype: Wizard Dedication no slot de arquetipo do nivel 2 e Basic Wizard Spellcasting no do nivel 4. O que ela trava: (a) a entrada de conjuracao de arquetipo existe, com tradicao arcana lida da propria classe citada na prosa ('cast spells like a wizard'); (b) os slots param no rank 3, teto do degrau Basic, e nao no que o nivel 8 daria; (c) `elevacao` e ZERO -- pela regra 18 o arquetipo roda RAW puro, sem a elevacao da regra 17 que a conjuracao de CLASSE recebe; (d) o DC segue a regra 3, com o nivel de personagem. Antes de 2026-07-29 esta ficha derivava sem conjuracao nenhuma: a dedicacao entrava como linha e nao entregava nada."
+  },
+  "escolhas": [
+    { "em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human" },
+    { "em": "criacao", "slot": "heranca", "pega": "wb:heritage/versatile-human" },
+    { "em": "criacao", "slot": "background", "pega": "wb:background/nomad" },
+    { "em": 1, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "int"] },
+    { "em": 1, "slot": "class_feat", "pega": "wb:feat/sudden-charge" },
+    { "em": 2, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 2, "slot": "free_archetype", "pega": "wb:feat/wizard-dedication" },
+    { "em": 3, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 4, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 4, "slot": "free_archetype", "pega": "wb:feat/basic-wizard-spellcasting" },
+    { "em": 5, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 5, "slot": "boosts_livres", "pega": ["str", "dex", "con", "int"] },
+    { "em": 6, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 7, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 8, "slot": "nivel_de_classe", "pega": "wb:class/fighter" }
+  ],
+  "atores": [],
+  "inventario": [
+    { "item": "wb:weapon/longsword", "qtd": 1, "equipado": true, "potencia": 0 },
+    { "item": "wb:armor/chain-mail", "qtd": 1, "equipado": true }
+  ],
+  "manual": {
+    "nota": "tudo aqui e escrito pelo jogador e nunca sobrescrito pelo motor",
+    "hp_bonus": 0,
+    "proficiencias_forcadas": {},
+    "itens_caseiros": []
+  }
+}

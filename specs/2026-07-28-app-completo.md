@@ -454,3 +454,36 @@ O que NAO muda: a fusao continua fundindo. Um par confirmado pelo `remaster_id`
 do AoN e o MESMO conteudo com dois nomes, e manter os dois como registros
 separados criaria duplicata na lista de escolha -- o defeito que o portao 7 e o
 `colapsar_opcoes_irmas.py` existem para evitar.
+
+### 2026-07-29 (tarde): dois defeitos que a comparacao apontou
+
+A comparacao com o Pathbuilder deixou de ser diagnostico e virou ferramenta:
+cada rodada agora aponta defeito com nome e contagem.
+
+| frente | spec | resultado |
+|---|---|---|
+| requisito parcial | `2026-07-29-requisito-parcial.md` | predicado parseado 84,7% -> **91,3%**; residuo por escrito em 593 registros; divergencia com o Pathbuilder 52 -> 23 |
+| spellcasting de arquetipo | `2026-07-29-spellcasting-de-arquetipo.md` | 13 dedicacoes passam a entregar slots; passo **7g** no pipeline |
+
+**A conjuracao nao aparecia na tela -- nenhuma delas.** Achado ao implementar a
+segunda: o bloco de Conjuracao existia so em `src/telas/Ficha.tsx`, que **nao e
+usado por ninguem**. O motor calculava desde sempre, o porte TS reproduzia campo
+a campo, e o jogador nunca via um slot de magia. A ficha ganhou a aba **Magia**,
+com a elevacao da regra 17 na conjuracao de classe e a marca "nao eleva" na de
+arquetipo.
+
+Isso e a terceira vez que **codigo morto esconde um buraco**: `Picker.tsx` e
+`Ficha.tsx` seguem sem uso, e foi ler o segundo que me fez escrever na spec que
+"a ficha ja tem o bloco de Conjuracao" -- premissa falsa, corrigida na propria
+spec.
+
+Dois termos novos no vocabulario de `grants`, ambos derivados da prosa com a
+mesma disciplina do 7e (ancora em "you", guarda de falso positivo, relatorio com
+a frase que justifica):
+
+- `grant_actor` (7f) -- 12 concessores de companheiro animal;
+- `grant_spellcasting` (7g) -- 13 dedicacoes conjuradoras, com a cadeia
+  Basic/Expert/Master e a tradicao lida da propria classe citada na prosa.
+
+E um campo novo: `requires_residuo`, a clausula de pre-requisito que o motor
+**nao** avalia e a tela mostra como *requisito de mesa*.

@@ -40,7 +40,11 @@ RECONSTRUIVEL = ("pipeline/dados_brutos/foundry",
 # Campos cujo preenchimento exige `prov`. `mechanized`, `kind` e `id` sao
 # derivados do proprio pipeline, nao vieram de fonte -- nao entram.
 CAMPOS_COM_PROV = ["name", "level", "traits", "rarity", "source",
-                   "requires", "grants", "text"]
+                   "requires", "grants", "text",
+                   # o que sobrou do parse de pre-requisito (spec
+                   # 2026-07-29-requisito-parcial): campo preenchido sem
+                   # procedencia e exatamente o que este portao existe para pegar
+                   "requires_residuo"]
 
 # Sufixos de variante legitima: -greater/-major/-true sao itens distintos por
 # design da Paizo, nao colisao de identidade. Falso positivo conhecido.

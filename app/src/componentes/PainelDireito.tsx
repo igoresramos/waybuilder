@@ -34,8 +34,8 @@ const SALVAGUARDAS = [
   ["fortitude", "Fortitude"], ["reflex", "Reflexos"], ["will", "Vontade"],
 ] as const;
 
-type Aba = "ataques" | "equipamento" | "feats" | "companheiro" | "concedido"
-  | "sinais";
+type Aba = "ataques" | "equipamento" | "feats" | "magia" | "companheiro"
+  | "concedido" | "sinais";
 
 const sinal = (n: number) => `${n >= 0 ? "+" : ""}${n}`;
 
@@ -199,6 +199,12 @@ export function PainelDireito({
               ["ataques", `Ataques (${v.ataques.length})`],
               ["equipamento", `Equipamento (${(d.inventario ?? []).length})`],
               ["feats", "Feats"],
+              // A conjuracao era calculada desde sempre e NUNCA aparecia: o
+              // bloco existia so em `telas/Ficha.tsx`, que nao e usado por
+              // ninguem. Some quando o personagem nao conjura.
+              ...(v.conjuracao.length
+                ? [["magia", `Magia (${v.conjuracao.length})`] as const]
+                : []),
               // a aba do bicho so existe quando ha bicho -- ela some inteira em
               // vez de ficar vazia, que e o que 90% das fichas veriam
               ...(v.atores.length
@@ -328,6 +334,53 @@ export function PainelDireito({
                   )}
                 </>
               )}
+            </div>
+          ))}
+
+          {aba === "magia" && v.conjuracao.map((c, i) => (
+            <div key={`${c.classe}-${i}`} className="cartao-ator">
+              <h4>
+                {c.classe}
+                <span className="origem">
+                  {c.tradicao ?? "tradicao a definir"}
+                  {c.tipo ? ` - ${c.tipo}` : ""}
+                  {c.de_arquetipo
+                    ? " - de arquetipo (nao eleva)"
+                    : c.nivel_de_classe != null ? ` - nivel de classe ${c.nivel_de_classe}` : ""}
+                </span>
+              </h4>
+              <ul className="lista-simples">
+                <li>
+                  <strong>{c.dc.dc}</strong>
+                  <span className="nome">DC</span>
+                  <span className="origem">
+                    ataque {sinal(c.dc.ataque)} - {c.dc.rank}
+                  </span>
+                </li>
+                <li>
+                  <strong>{c.truques ?? 0}</strong>
+                  <span className="nome">Truques</span>
+                  {/* a elevacao da regra 17 e o numero mais surpreendente da
+                      houserule: o slot vem da classe, a potencia do personagem */}
+                  <span className="origem">
+                    rank efetivo {c.rank_efetivo}
+                    {c.elevacao > 0 ? ` (+${c.elevacao} pela regra 17)` : ""}
+                  </span>
+                </li>
+                {Object.entries(c.slots)
+                  .sort(([a], [b]) => Number(a) - Number(b))
+                  .map(([rank, quantos]) => (
+                    <li key={rank}>
+                      <strong>{quantos}</strong>
+                      <span className="nome">slots de rank {rank}</span>
+                    </li>
+                  ))}
+                {!Object.keys(c.slots).length && (
+                  <li className="vazio">
+                    sem slot -- so os truques (falta o feat de Spellcasting)
+                  </li>
+                )}
+              </ul>
             </div>
           ))}
 

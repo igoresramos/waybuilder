@@ -256,6 +256,21 @@ function Modal({
                     <em>o requisito sugere e ordena -- da para escolher assim mesmo</em>
                   </p>
                 )}
+                {/* O que o parser NAO conseguiu avaliar (spec
+                    2026-07-29-requisito-parcial). Fica separado do "fora do
+                    requisito" de proposito: aquele o motor checou e reprovou,
+                    este ele nem checa. Sem mostrar, o jogador nao tem como
+                    saber que o feat pede algo que o app ignora. */}
+                {Array.isArray(reg.requires_residuo)
+                  && reg.requires_residuo.length > 0 && (
+                  <p className="requisito-de-mesa">
+                    <strong>requisito de mesa:</strong>{" "}
+                    {(reg.requires_residuo as string[])
+                      .map((r) => limparMarcacao(r)).join("; ")}
+                    <br />
+                    <em>o app nao checa isto -- quem decide e a mesa</em>
+                  </p>
+                )}
                 {texto
                   ? <Prosa texto={texto} nome={reg.name}
                           prerequisito={typeof reg.requires_texto === "string"
