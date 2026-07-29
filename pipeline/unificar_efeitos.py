@@ -125,6 +125,74 @@ def grants_de_heranca(r):
     return g
 
 
+# O pack do UUID do Foundry diz o kind, e e o que desempata nome homonimo:
+# `Quick Alchemy` existe como class-feature E como feat, `Rage` como
+# class-feature E como trait. Ver `resolver_grant_item`.
+PACK_PARA_KIND = {
+    "feats-srd": "feat",
+    "classfeatures": "class-feature",
+    "equipment-srd": "equipment",
+    "spells-srd": "spell",
+    "ancestryfeatures": "class-feature",
+    "heritages": "heritage",
+    "bestiary-ability-glossary-srd": None,
+    "actionspf2e": None,           # a base nao modela `action` como kind
+}
+
+
+def resolver_grant_item(base):
+    """`grant_item` aponta para o Foundry, nunca para a base -- 0 de 619.
+
+    O UUID termina com o NOME (`Compendium.pf2e.feats-srd.Item.Alchemical
+    Crafting`), nao com o `_id`, e por isso a ponte `xref.foundry`, que casa por
+    id, resolvia zero. O motor so aplica alvo que comeca com `wb:`, entao
+    nenhuma das 619 concessoes entregava nada -- mesmo defeito do item 70, com
+    outra roupa.
+
+    Resolve por nome normalizado, com o pack do UUID como desempate. Alvo que
+    nao resolve MANTEM o UUID original: o motor segue avisando e o numero
+    aparece no relatorio, em vez de virar um id inventado.
+
+    Spec: `specs/2026-07-29-grant-item-por-nome.md`
+    """
+    por_nome = collections.defaultdict(list)
+    for r in base:
+        if r.get("name"):
+            por_nome[norm(r["name"])].append(r)
+
+    contagem = collections.Counter()
+    for r in base:
+        for g in (r.get("grants") or []):
+            if not isinstance(g, dict) or "grant_item" not in g:
+                continue
+            gi = g["grant_item"]
+            uuid = gi.get("uuid") if isinstance(gi, dict) else gi
+            uuid = str(uuid or "")
+            if not uuid or "{" in uuid or uuid.startswith("wb:"):
+                contagem["dinamico ou ja resolvido"] += 1
+                continue
+            # `Compendium.pf2e.classfeatures.Item.Quick Alchemy`
+            #  0          1    2              3    4
+            # o pack e o TERCEIRO campo; `partes[1]` e sempre `pf2e` e nao
+            # desempata nada.
+            partes = uuid.split(".")
+            nome = partes[-1]
+            pack = partes[2] if len(partes) > 3 else None
+            candidatos = por_nome.get(norm(nome), [])
+            if len(candidatos) > 1 and pack in PACK_PARA_KIND:
+                alvo_kind = PACK_PARA_KIND[pack]
+                candidatos = [c for c in candidatos if c.get("kind") == alvo_kind]
+            if len(candidatos) == 1:
+                if isinstance(gi, dict):
+                    gi["wb"] = candidatos[0]["id"]
+                else:
+                    g["grant_item"] = {"uuid": uuid, "wb": candidatos[0]["id"]}
+                contagem["resolvido"] += 1
+            else:
+                contagem["nao resolvido" if not candidatos else "ambiguo"] += 1
+    return contagem
+
+
 CONVERSORES = {
     "ancestry": grants_de_ancestria,
     "background": grants_de_background,
@@ -173,6 +241,9 @@ def main():
 
     json.dump(base, open(f"{BASE}/index.json", "w"),
               ensure_ascii=False, separators=(",", ":"))
+
+    contagem_gi = resolver_grant_item(base)
+    print("grant_item:", dict(contagem_gi))
 
     com_grants = sum(1 for r in base if r.get("grants"))
     print(f"registros que ganharam grants: {sum(v for k, v in contagem.items() if ':' not in k)}")
