@@ -6,6 +6,39 @@ project: waybuilder
 
 ## 2026-07-29
 
+### Sessao | 17:00-18:00 | tres termos de predicado, e um "nao" que e resposta | igor + claude-code
+
+Fechando a fatia mecanica do residuo (item 87, spec
+`2026-07-29-termos-de-predicado.md`). A medicao foi para um agente; o criterio
+foi meu: **termo novo so onde a base ja responde.**
+
+- **`sense`** -- `grants.sense` existia em **81 registros e ninguem lia**, mesmo
+  padrao do companheiro. O campo tem tres formas na base (dict, string crua, e
+  booleano em `senses` de 37 ancestrias) e o termo aceita as tres, com
+  `low_light` normalizando para `low-light-vision`. De quebra, a ficha ganhou
+  `visao().sentidos` -- ela nao dizia o que o personagem enxerga.
+- **`focus_pool`** -- o motor ja calculava o pool (regra 22); faltava expor.
+- **`has_actor`** -- le a concessao de companheiro derivada hoje, e responde
+  "tem direito ao bicho", nao "ja escolheu a especie".
+
+Resultado: predicado parseado **3.889 -> 3.919 (92,0%)**, frases rejeitadas
+inteiras 372 -> 342.
+
+**O "nao" vale mais que os tres "sim".** Alinhamento -- `evil alignment` (7),
+`tenets of good` (4), `tenets of evil` (4), `any good alignment` (3) -- **nao
+vira termo**: o Remaster aboliu alinhamento de personagem, e na nossa base
+`alignment` so existe em `deity`. Modelar exigiria inventar estado de ficha para
+responder pergunta de edicao anterior. As 18 clausulas ficam visiveis em
+`requires_residuo`, como requisito de mesa -- que e onde uma regra aposentada
+deve morar.
+
+**A armadilha do porte, que custou 14 fichas.** O Python despacha termo por
+convencao (`getattr(self, f"_termo_{termo}")`); o TS, por `switch` explicito.
+Escrevi os seis metodos e esqueci as tres linhas do `switch` -- e ignorar um
+termo NAO reprova (principio zero), entao nada estourou: mudou so a ordem da
+lista de candidatos, e 14 fichas divergiram do gabarito com uma mensagem
+obscura. Nenhum teste de motor pegaria; o de paridade pegou.
+
 ### Sessao | 15:10-17:00 | dois defeitos que a comparacao apontou, fechados | igor + claude-code
 
 Igor: *"quero que vc faca tudo, mas planeja legal, tais sempre atualizando a

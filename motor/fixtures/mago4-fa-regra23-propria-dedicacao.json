@@ -1048,6 +1048,14 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "sentidos": [
+   {
+    "acuidade": null,
+    "alcance": null,
+    "origem": "Elf",
+    "tipo": "low_light"
+   }
+  ],
   "slots": {
    "ancestry": [
     1

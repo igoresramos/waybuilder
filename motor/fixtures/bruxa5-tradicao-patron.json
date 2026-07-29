@@ -988,6 +988,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "sentidos": [],
   "slots": {
    "ancestry": [
     1,

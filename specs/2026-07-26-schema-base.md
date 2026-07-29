@@ -246,7 +246,16 @@ E aqui que a houserule mora. Termo de nivel e **sempre explicito** -- nunca um
 
 Operadores: `all`, `any`, `not`, `>=`, `<=`, `==`.
 Termos: `class_level`, `character_level`, `ability`, `proficiency`, `has`,
-`trait`, `spellcasting_tradition`, `subclass`.
+`trait`, `spellcasting_tradition`, `subclass`, `sense`, `focus_pool`,
+`has_actor`.
+
+> Os tres ultimos entraram em 2026-07-29
+> (`specs/2026-07-29-termos-de-predicado.md`), cada um so porque a base ja
+> respondia: `sense` le `grants.sense` (81 registros que ninguem lia),
+> `focus_pool` le o pool que o motor ja calculava, e `has_actor` le a concessao
+> de companheiro. **Termo que precisaria de dado inventado nao entrou** --
+> alinhamento e tenets nao existem mais no Remaster, e as 18 clausulas que os
+> citam ficam visiveis em `requires_residuo`, como requisito de mesa.
 
 No PF2e oficial `class_level` e `character_level` sao sempre o mesmo numero.
 A base guarda os dois separados assim mesmo -- e o que permite o builder existir

@@ -335,7 +335,7 @@
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
-   "wb:feat/magic-warrior-dedication"
+   "wb:feat/martial-artist-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/aldori-duelist-dedication",
@@ -377,7 +377,7 @@
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
-   "wb:feat/magic-warrior-dedication"
+   "wb:feat/martial-artist-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",
@@ -1119,6 +1119,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "sentidos": [],
   "slots": {
    "ancestry": [
     1,

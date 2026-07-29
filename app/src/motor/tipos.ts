@@ -273,6 +273,9 @@ export interface Visao {
   slots_abertos: SlotAberto[];
   slots: Record<string, number[]>;
   conjuracao: Conjuracao[];
+  /** o que o personagem enxerga -- de `grants.sense`, que ninguém lia até 2026-07-29 */
+  sentidos: Array<{ tipo: string | null; acuidade: string | null;
+                    alcance: number | null; origem: string }>;
   atores: Ator[];
   concessoes_de_ator: ConcessaoDeAtor[];
   escolhas_de_feat: unknown;

@@ -1377,6 +1377,14 @@
    "weapon-base-alchemical-bomb": "trained",
    "will": "expert"
   },
+  "sentidos": [
+   {
+    "acuidade": null,
+    "alcance": null,
+    "origem": "Dwarf",
+    "tipo": "darkvision"
+   }
+  ],
   "slots": {
    "ancestry": [
     1,

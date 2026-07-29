@@ -1818,6 +1818,97 @@ class Personagem:
                 return False, f"exige a sub-escolha {nome}; tem {atual}"
         return True, ""
 
+    def _sentidos(self) -> dict:
+        """Todo `grants.sense` que a ficha carrega, por tipo.
+
+        81 registros da base concedem sentido e **ninguem lia** -- mesmo padrao
+        do companheiro: o dado existia, o consumidor nao. Isso deixava
+        `low-light vision` (11 ocorrencias) e `darkvision` sem como serem
+        respondidos no pre-requisito, e a ficha sem dizer o que o personagem
+        enxerga.
+        """
+        if getattr(self, "_cache_sentidos", None) is not None:
+            return self._cache_sentidos
+        achados: dict[str, dict] = {}
+        origens = [(i, self.base.opcional(i) or {}) for i, _, _ in self._feats_efetivos()]
+        origens += [(f["id"], self.base.opcional(f["id"]) or {})
+                    for f in self.features if f.get("id")]
+        for reg in (self.ancestria, self.heranca, self.background):
+            if reg and reg.get("id"):
+                origens.append((reg["id"], reg))
+        # `senses` no TOPO do registro, so em ancestria (37): `{"low_light": true}`.
+        # Sem isto, um Elfo (que declara so assim) nao atendia `low-light vision`.
+        for origem_id, reg in origens:
+            for chave, ligado in (reg.get("senses") or {}).items():
+                if ligado:
+                    achados.setdefault(self._slug_de_sentido(chave), {
+                        "tipo": chave, "acuidade": None, "alcance": None,
+                        "origem": reg.get("name") or origem_id})
+            for g in (reg.get("grants") or []):
+                if not isinstance(g, dict) or "sense" not in g:
+                    continue
+                # `sense` vem como dict (`{tipo, acuidade, alcance}`) na maioria
+                # e como STRING crua em parte dos registros -- as duas formas
+                # existem na base, e tratar so a primeira estourava na segunda
+                sense = g["sense"]
+                sense = sense if isinstance(sense, dict) else {"tipo": sense}
+                tipo = self._slug_de_sentido(sense.get("tipo") or "")
+                if not tipo:
+                    continue
+                achados.setdefault(tipo, {
+                    "tipo": sense.get("tipo"),
+                    "acuidade": sense.get("acuidade"),
+                    "alcance": sense.get("alcance"),
+                    "origem": (reg.get("name") or origem_id),
+                })
+        self._cache_sentidos = achados
+        return achados
+
+    # a fonte escreve `low_light` e o pre-requisito diz `low-light vision`:
+    # sem o alias, a mesma coisa vira duas chaves e o termo nunca casa
+    ALIAS_DE_SENTIDO = {"low-light": "low-light-vision",
+                        "lowlight": "low-light-vision",
+                        "low-light-vision": "low-light-vision"}
+
+    def _slug_de_sentido(self, bruto) -> str:
+        s = norm_slug(str(bruto or ""))
+        return self.ALIAS_DE_SENTIDO.get(s, s)
+
+    def _termo_sense(self, valor) -> tuple[bool, str]:
+        """`{"sense": "darkvision"}` -- o personagem enxerga assim?
+
+        Termo novo de 2026-07-29 (spec `2026-07-29-termos-de-predicado.md`).
+        Antes dele, `low-light vision` caia inteiro em `requires_residuo`.
+        """
+        alvo = self._slug_de_sentido(valor)
+        if alvo in self._sentidos():
+            return True, ""
+        return False, f"exige o sentido {valor}"
+
+    def _termo_focus_pool(self, valor) -> tuple[bool, str]:
+        """`{"focus_pool": {">=": 1}}` -- o personagem tem pontos de foco?
+
+        O motor ja calculava o pool (regra 22: unico, teto 3); faltava expor
+        como termo, e por isso `focus pool` (10 ocorrencias) e `ability to cast
+        focus spells` (6) caiam inteiros em `requires_residuo`.
+        """
+        for op, alvo in (valor or {}).items():
+            if not _comparar(self.focus_pool, op, alvo):
+                return False, (f"exige focus pool {op} {alvo}; "
+                               f"tem {self.focus_pool}")
+        return True, ""
+
+    def _termo_has_actor(self, valor) -> tuple[bool, str]:
+        """`{"has_actor": "companheiro"}` -- alguma coisa na ficha concede um?
+
+        A pergunta e sobre ter DIREITO ao bicho, nao sobre ja ter escolhido a
+        especie: o pre-requisito de `Mature Animal Companion` fala do primeiro.
+        """
+        tipo = str(valor or "").lower()
+        if any(c["tipo"] == tipo for c in self.concessoes_de_ator):
+            return True, ""
+        return False, f"exige ter {tipo}"
+
     def _termo_trait(self, valor) -> tuple[bool, str]:
         alvos = valor if isinstance(valor, list) else [valor]
         meus = set()
@@ -2415,6 +2506,7 @@ class Personagem:
             "slots_abertos": self.slots_abertos(),
             "slots": self.slots,
             "conjuracao": self.conjuracao,
+            "sentidos": list(self._sentidos().values()),
             "atores": self.atores,
             "concessoes_de_ator": self.concessoes_de_ator,
             "escolhas_de_feat": self.escolhas_de_feat,

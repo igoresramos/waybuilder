@@ -141,6 +141,7 @@ export class Personagem implements ContextoDePredicado {
   // atores e resto
   atores: Dict[] = [];
   concessoes_de_ator: ConcessaoDeAtor[] = [];
+  private _cache_sentidos: Map<string, Dict> | null = null;
   escolhas_de_feat: Dict[] = [];
   focus_pool = 0;
   ac: AC = {
@@ -1865,6 +1866,13 @@ export class Personagem implements ContextoDePredicado {
       case "has": return this._termo_has(valor);
       case "subclass": return this._termo_subclass(valor);
       case "trait": return this._termo_trait(valor);
+      // Termos de 2026-07-29 (spec `2026-07-29-termos-de-predicado.md`). O
+      // Python despacha por convencao (`getattr(self, f"_termo_{termo}")`) e
+      // aqui o switch e explicito -- esquecer uma linha faz o TS IGNORAR o
+      // termo em silencio, que foi como 14 fichas divergiram do gabarito.
+      case "sense": return this._termo_sense(valor);
+      case "focus_pool": return this._termo_focus_pool(valor);
+      case "has_actor": return this._termo_has_actor(valor);
       default: return null;
     }
   }
@@ -2008,6 +2016,107 @@ export class Personagem implements ContextoDePredicado {
       }
     }
     return [true, ""];
+  }
+
+  /**
+   * Todo `grants.sense` que a ficha carrega, por tipo.
+   *
+   * 81 registros da base concedem sentido e **ninguém lia** -- mesmo padrão do
+   * companheiro: o dado existia, o consumidor não. Isso deixava `low-light
+   * vision` sem como ser respondido no pré-requisito, e a ficha sem dizer o que
+   * o personagem enxerga.
+   */
+  private _sentidos(): Map<string, Dict> {
+    if (this._cache_sentidos !== null) return this._cache_sentidos;
+    const achados = new Map<string, Dict>();
+    const origens: Array<[string, Dict]> = [];
+    for (const [i] of this._feats_efetivos()) {
+      origens.push([i, dictDe(this.base.opcional(i))]);
+    }
+    for (const f of this.features) {
+      if (ehStr(f["id"])) origens.push([f["id"], dictDe(this.base.opcional(f["id"]))]);
+    }
+    for (const reg of [this.ancestria, this.heranca, this.background]) {
+      if (reg && ehStr(reg["id"])) origens.push([reg["id"], reg as Dict]);
+    }
+    for (const [origem_id, reg] of origens) {
+      // `senses` no TOPO do registro, só em ancestria (37): `{low_light: true}`.
+      // Sem isto, um Elfo (que declara só assim) não atendia `low-light vision`.
+      for (const [chave, ligado] of Object.entries(dictDe(reg["senses"]))) {
+        const slug = Personagem.slugDeSentido(chave);
+        if (ligado && slug && !achados.has(slug)) {
+          achados.set(slug, {
+            tipo: chave, acuidade: null, alcance: null,
+            origem: nomeOu(reg, origem_id),
+          });
+        }
+      }
+      for (const g of listaDe(reg["grants"])) {
+        if (!ehDict(g) || !("sense" in g)) continue;
+        // `sense` vem como dict na maioria e como STRING crua em parte dos
+        // registros -- as duas formas existem na base
+        const bruto = g["sense"];
+        const sense = ehDict(bruto) ? bruto : { tipo: bruto };
+        const tipo = Personagem.slugDeSentido(sense["tipo"]);
+        if (!tipo || achados.has(tipo)) continue;
+        achados.set(tipo, {
+          tipo: sense["tipo"] ?? null,
+          acuidade: sense["acuidade"] ?? null,
+          alcance: sense["alcance"] ?? null,
+          origem: nomeOu(reg, origem_id),
+        });
+      }
+    }
+    this._cache_sentidos = achados;
+    return achados;
+  }
+
+  // a fonte escreve `low_light` e o pré-requisito diz `low-light vision`: sem o
+  // alias, a mesma coisa vira duas chaves e o termo nunca casa
+  static readonly ALIAS_DE_SENTIDO: Record<string, string> = {
+    "low-light": "low-light-vision",
+    "lowlight": "low-light-vision",
+    "low-light-vision": "low-light-vision",
+  };
+
+  static slugDeSentido(bruto: unknown): string {
+    const s = normSlug(ehStr(bruto) ? bruto : String(bruto ?? ""));
+    return Personagem.ALIAS_DE_SENTIDO[s] ?? s;
+  }
+
+  /** `{"sense": "darkvision"}` -- o personagem enxerga assim? */
+  private _termo_sense(valor: unknown): ResultadoDeTermo {
+    const alvo = Personagem.slugDeSentido(valor);
+    if (this._sentidos().has(alvo)) return [true, ""];
+    return [false, `exige o sentido ${pyStr(valor)}`];
+  }
+
+  /**
+   * `{"focus_pool": {">=": 1}}` -- o personagem tem pontos de foco?
+   *
+   * O motor já calculava o pool (regra 22: único, teto 3); faltava expor como
+   * termo, e por isso `focus pool` e `ability to cast focus spells` caíam
+   * inteiros em `requires_residuo`.
+   */
+  private _termo_focus_pool(valor: unknown): ResultadoDeTermo {
+    for (const [op, alvo] of Object.entries(dictDe(valor))) {
+      if (!comparar(this.focus_pool, op, inteiro(alvo))) {
+        return [false, `exige focus pool ${op} ${pyStr(alvo)}; tem ${this.focus_pool}`];
+      }
+    }
+    return [true, ""];
+  }
+
+  /**
+   * `{"has_actor": "companheiro"}` -- alguma coisa na ficha concede um?
+   *
+   * A pergunta é sobre ter DIREITO ao bicho, não sobre já ter escolhido a
+   * espécie: o pré-requisito de `Mature Animal Companion` fala do primeiro.
+   */
+  private _termo_has_actor(valor: unknown): ResultadoDeTermo {
+    const tipo = String(valor ?? "").toLowerCase();
+    if (this.concessoes_de_ator.some((c) => c.tipo === tipo)) return [true, ""];
+    return [false, `exige ter ${tipo}`];
   }
 
   private _termo_trait(valor: unknown): ResultadoDeTermo {
@@ -2710,6 +2819,7 @@ export class Personagem implements ContextoDePredicado {
       slots_abertos: this.slots_abertos(),
       slots,
       conjuracao: this.conjuracao,
+      sentidos: [...this._sentidos().values()],
       atores: this.atores as unknown as Ator[],
       concessoes_de_ator: this.concessoes_de_ator,
       escolhas_de_feat: this.escolhas_de_feat,

@@ -769,6 +769,41 @@ checar(any("tradicao vem da escolha" in a for a in bruxo.avisos),
        "Witch Dedication sem patron escolhido AVISA em vez de inventar tradicao",
        f"{[a for a in bruxo.avisos if 'tradicao' in a]}")
 
+# -- termos novos de predicado ---------------------------------------------
+# Spec: specs/2026-07-29-termos-de-predicado.md. Sao os padroes do residuo que a
+# base JA respondia e nao tinham termo: sentido (81 registros com `grants.sense`
+# que ninguem lia), focus pool (o motor ja calculava) e companheiro (a concessao
+# derivada hoje).
+print("\ntermos novos -- sentido, focus pool, companheiro")
+ELFO = [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/elf"}]
+ANAO = [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/dwarf"}]
+
+checar(personagem(ELFO + niveis((FIGHTER, 1))).avaliar({"sense": "low-light vision"})[0],
+       "Elfo atende `low-light vision` -- e ele declara so no campo `senses` do topo")
+checar(personagem(ANAO + niveis((FIGHTER, 1))).avaliar({"sense": "darkvision"})[0],
+       "Anao atende `darkvision`")
+checar(not personagem(niveis((FIGHTER, 1))).avaliar({"sense": "darkvision"})[0],
+       "e quem nao tem sentido nenhum nao atende -- o termo nao afrouxa")
+
+bardo = personagem(niveis(("wb:class/bard", 1)))
+checar(bardo.avaliar({"focus_pool": {">=": 1}})[0],
+       "Bardo 1 atende `focus pool` (composition cantrip)", f"{bardo.focus_pool}")
+checar(not personagem(niveis((FIGHTER, 1))).avaliar({"focus_pool": {">=": 1}})[0],
+       "Guerreiro 1 nao atende")
+
+com_bicho = personagem(niveis((RANGER, 1))
+                       + [{"em": 1, "slot": "class_feat",
+                           "pega": "wb:feat/animal-companion-ranger"}])
+checar(com_bicho.avaliar({"has_actor": "companheiro"})[0],
+       "quem pegou Animal Companion atende `has_actor` ANTES de escolher a especie")
+checar(not personagem(niveis((FIGHTER, 1))).avaliar({"has_actor": "companheiro"})[0],
+       "e quem nao pegou, nao")
+
+# alinhamento NAO vira termo: o conceito nao existe no Remaster
+checar(personagem(niveis((FIGHTER, 1))).avaliar({"alignment": "evil"})[0],
+       "termo inexistente (`alignment`) nao reprova -- o motor nao arbitra o "
+       "que nao sabe, e a clausula fica visivel em `requires_residuo`")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

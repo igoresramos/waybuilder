@@ -130,13 +130,13 @@
   "class_feat@1": [
    "wb:feat/animal-companion-ranger",
    "wb:feat/crossbow-ace",
-   "wb:feat/heal-companion",
    "wb:feat/hunted-shot",
    "wb:feat/initiate-warden",
    "wb:feat/monster-hunter",
    "wb:feat/twin-takedown",
    "wb:feat/gravity-weapon",
    "wb:feat/animal-companion",
+   "wb:feat/heal-companion",
    "wb:feat/acrobat-dedication",
    "wb:feat/agent-of-all-holds",
    "wb:feat/alchemist-dedication",
@@ -172,7 +172,6 @@
   "class_feat@2": [
    "wb:feat/animal-companion-ranger",
    "wb:feat/crossbow-ace",
-   "wb:feat/heal-companion",
    "wb:feat/hunted-shot",
    "wb:feat/initiate-warden",
    "wb:feat/monster-hunter",
@@ -209,12 +208,12 @@
    "wb:feat/ghoul-dedication",
    "wb:feat/gunslinger-dedication",
    "wb:feat/harrower-dedication",
-   "wb:feat/hellbreaker-dedication"
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication"
   ],
   "class_feat@4": [
    "wb:feat/animal-companion-ranger",
    "wb:feat/crossbow-ace",
-   "wb:feat/heal-companion",
    "wb:feat/hunted-shot",
    "wb:feat/initiate-warden",
    "wb:feat/monster-hunter",
@@ -251,7 +250,8 @@
    "wb:feat/ghoul-dedication",
    "wb:feat/gunslinger-dedication",
    "wb:feat/harrower-dedication",
-   "wb:feat/hellbreaker-dedication"
+   "wb:feat/hellbreaker-dedication",
+   "wb:feat/hellknight-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -334,8 +334,8 @@
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
-   "wb:feat/magic-warrior-dedication",
-   "wb:feat/martial-artist-dedication"
+   "wb:feat/martial-artist-dedication",
+   "wb:feat/mind-smith-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
@@ -376,8 +376,8 @@
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
-   "wb:feat/magic-warrior-dedication",
-   "wb:feat/martial-artist-dedication"
+   "wb:feat/martial-artist-dedication",
+   "wb:feat/mind-smith-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",
@@ -1033,6 +1033,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "sentidos": [],
   "slots": {
    "ancestry": [
     1

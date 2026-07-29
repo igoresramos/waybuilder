@@ -343,6 +343,20 @@ class ResultadoPredicado:
         self.residuo = residuo or []
 
 
+# `focus pool`, `ability to cast focus spells` -- o motor ja calculava o pool
+# (regra 22) e faltava o termo. 16 ocorrencias somadas.
+FOCUS_RE = re.compile(r"^(?:a\s+)?focus pool$|^ability to cast focus spells$", re.I)
+
+# `an animal companion` -- responde pela CONCESSAO (`grant_actor`), nao pelo
+# ator escrito no documento: o pre-requisito fala de ter direito ao bicho.
+ATOR_RE = re.compile(r"^an? (animal companion|companion)$", re.I)
+
+SENTIDO_RE = re.compile(
+    r"^(?:the\s+)?(low-light vision|darkvision|greater darkvision|scent|"
+    r"tremorsense|echolocation|lifesense|wavesense|thoughtsense)"
+    r"(?:\s+ability)?$", re.I)
+
+
 class Parser:
     """Transforma a prosa de pre-requisito em predicado do schema."""
 
@@ -561,6 +575,20 @@ class Parser:
             j = so_marca(m.group(1))
             if j is not None and tags[j][0] == "spell":
                 return {"has": "wb:spell/" + slug(tags[j][1][0])}
+
+        # d1b) sentido -- "low-light vision", "darkvision"
+        #
+        # 81 registros da base concedem sentido em `grants.sense` e ninguem lia;
+        # com o termo `sense` no motor (2026-07-29), o pre-requisito passa a ter
+        # como ser respondido em vez de cair inteiro em `requires_residuo`.
+        m = SENTIDO_RE.match(t)
+        if m:
+            return {"sense": m.group(1).lower()}
+
+        if FOCUS_RE.match(t):
+            return {"focus_pool": {">=": 1}}
+        if ATOR_RE.match(t):
+            return {"has_actor": "companheiro"}
 
         # d2) "<X> heritage" / "<X> trait"
         m = HERANCA_RE.match(t)

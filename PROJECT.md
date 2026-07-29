@@ -5,7 +5,7 @@ status: active
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 27.0
+hours: 28.0
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -70,7 +70,7 @@ hidden: false
 
 ## Estado atual
 > **App de pe e verificado em quatro camadas** (2026-07-29): 9 portoes de
-> pipeline, 124 assercoes do oraculo Python, 113 testes do porte TS e a checagem
+> pipeline, 132 assercoes do oraculo Python, 113 testes do porte TS e a checagem
 > no navegador (`app/verificacao/`, dois scripts). A quarta entrou porque as
 > tres primeiras passaram verdes sobre uma base que oferecia a mesma causa do
 > Campeao duas vezes na tela.

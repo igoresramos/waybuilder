@@ -1023,3 +1023,22 @@ arquivo, nao se o arquivo existe (`grep -rn "<Componente"` resolve em segundos).
 E, para o projeto: `Picker.tsx` e `Ficha.tsx` seguem orfaos -- mencionados, nao
 deletados, porque remover e decisao do Igor. Enquanto existirem, valem como
 armadilha para a proxima leitura.
+
+## Convencao de um lado, switch do outro -- o porte esquece a terceira linha
+
+O motor Python despacha termo de predicado por convencao:
+`getattr(self, f"_termo_{termo}")`. Metodo novo ja fica ativo. O porte
+TypeScript despacha por `switch` explicito.
+
+Ao adicionar tres termos (`sense`, `focus_pool`, `has_actor`) escrevi os seis
+metodos -- e esqueci as tres linhas do `switch`. O TS passou a IGNORAR os termos,
+e ignorar nao reprova (principio zero: termo desconhecido nao arbitra), entao
+nada estourou: mudou so a ORDEM da lista de candidatos. Quatorze fichas
+divergiram do gabarito com uma mensagem obscura -- `candidatos.free_archetype@2[31]`,
+um feat no lugar de outro.
+
+**Como aplicar:** termo novo mexe em TRES lugares, nao dois -- o metodo no
+Python, o metodo no TS, e a linha do `switch`. E a terceira e a unica que nao
+falha sozinha: sem ela o codigo compila, roda e mente baixinho. Quem pegou foi o
+teste de paridade entre as duas implementacoes; nenhum teste de motor pegaria,
+porque cada lado estava coerente consigo mesmo.
