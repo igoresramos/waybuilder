@@ -26,8 +26,14 @@ if [ ! -d "$ORIGEM" ]; then
   exit 1
 fi
 
-rm -rf "$DESTINO"
+# Limpa o CONTEUDO, nunca o diretorio. `rm -rf "$DESTINO"` derruba o app com o
+# dev server de pe: o Vite serve `public/` por handle de diretorio, e ao ver o
+# inode sumir passa a responder `index.html` para todo pedido em `/base/` --
+# que chega no navegador como `Unexpected token '<', "<!doctype "...`, com o
+# arquivo intacto no disco. Some so ao reiniciar o servidor, o que faz o
+# defeito parecer cache do navegador. Nao e.
 mkdir -p "$DESTINO/por-kind" "$DESTINO/text"
+rm -f "$DESTINO"/por-kind/*.json "$DESTINO"/text/*.json "$DESTINO"/_manifesto.json
 
 cp "$ORIGEM"/por-kind/*.json "$DESTINO/por-kind/"
 cp "$ORIGEM/_manifesto.json" "$DESTINO/"

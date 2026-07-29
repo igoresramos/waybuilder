@@ -811,9 +811,9 @@
    ]
   },
   "avisos": [
-   "Witch: falta escolher `lesson` (20 opcoes)",
+   "Witch: falta escolher `lesson` (19 opcoes)",
    "Witch: falta escolher `outras-opcoes` (4 opcoes)",
-   "Witch: falta escolher `patron` (24 opcoes)",
+   "Witch: falta escolher `patron` (16 opcoes)",
    "wb:background/hermit: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Dubious Knowledge', 'foundry_uuid': 'Compendium.pf) -- nao aplicado",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Hermit (1), Hermit (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
@@ -1089,7 +1089,7 @@
     "em": 1,
     "escolhe": 1,
     "kind": "patron",
-    "opcoes": 24,
+    "opcoes": 16,
     "rotulo": "Witch / patron",
     "slot": "subclasse"
    },
@@ -1118,7 +1118,7 @@
     "em": 2,
     "escolhe": 1,
     "kind": "lesson",
-    "opcoes": 20,
+    "opcoes": 19,
     "rotulo": "Witch / lesson",
     "slot": "subclasse"
    },
@@ -1179,7 +1179,7 @@
     "escolhido": null,
     "nivel": 2,
     "nome": null,
-    "opcoes": 20,
+    "opcoes": 19,
     "opcoes_ids": [
      "wb:class-feature/lesson-of-bargains",
      "wb:class-feature/lesson-of-calamity",
@@ -1199,7 +1199,6 @@
      "wb:class-feature/lesson-of-the-shark",
      "wb:class-feature/lesson-of-vengeance",
      "wb:class-feature/lesson-of-vows",
-     "wb:lesson/lesson-of-the-elements",
      "wb:lesson/lesson-of-the-elements"
     ]
    },
@@ -1223,7 +1222,7 @@
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 24,
+    "opcoes": 16,
     "opcoes_ids": [
      "wb:class-feature/baba-yaga",
      "wb:class-feature/choir-politic",
@@ -1240,15 +1239,7 @@
      "wb:class-feature/the-resentment",
      "wb:class-feature/the-unseen-broker",
      "wb:class-feature/whisper-of-wings",
-     "wb:class-feature/wilding-steward",
-     "wb:patron/the-resentment",
-     "wb:patron/spinner-of-threads",
-     "wb:patron/faiths-flamekeeper",
-     "wb:patron/starless-shadow",
-     "wb:patron/the-unseen-broker-patron-29",
-     "wb:patron/the-inscribed-one",
-     "wb:patron/wilding-steward",
-     "wb:patron/silence-in-snow"
+     "wb:class-feature/wilding-steward"
     ]
    }
   ]

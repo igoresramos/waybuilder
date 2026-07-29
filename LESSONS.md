@@ -846,3 +846,69 @@ Dois consertos, e o segundo importa mais que o primeiro:
 Licao de metodo: o erro do usuario nao reproduzia no meu ambiente porque meu
 headless nao tinha service worker. **Reproduzir com o estado do usuario, nao com
 o meu**, e o que separou "funciona aqui" de achar a causa.
+
+### O passo que conserta tem que rodar depois do passo que quebra
+`aplicar_aliases_em_requires.py` existe para reescrever quem cita um id que o
+remaster aposentou. Ele estava no passo 4h3 -- **antes** da fusao legacy/remaster
+(passo 7), que e exatamente quem aposenta o id. Ao rodar, nao havia orfa
+nenhuma: `metamagical-experimentation` ainda existia. A fusao o absorvia em
+seguida e ninguem voltava para reescrever a referencia.
+
+Funcionou na sessao em que foi escrito porque rodei o script **a mao**, sobre uma
+base ja fundida. Integrado ao `build.sh` na posicao errada, regrediu em silencio.
+Quem pegou foi o teste de paridade com o oraculo Python, nao os portoes.
+
+Tres licoes, em ordem crescente de valor:
+
+1. **Ordem de pipeline e semantica, nao arrumacao.** Passo que conserta
+   referencia vai depois de quem mata o id. Mover de 4h3 para 7c: 26 -> 47 ids
+   resolvidos.
+
+2. **Portao cego ao proprio conserto e decoracao.** O portao 3 varria `requires`
+   e nunca `subclasses[].opcoes` -- o campo que o passo 7c conserta nao era
+   verificado por ninguem. Ampliado, acusou 16 orfas na hora. Ao escrever um
+   passo de conserto, checar se algum portao olha o campo que ele toca.
+
+3. **Consertar um defeito revela o que ele escondia.** Com os ids vivos de novo,
+   o Campeao passou a oferecer `Justice` DUAS VEZES: a mesma causa existe como
+   `wb:cause/justice` e como `wb:class-feature/justice`, e a fusao nao as pareia
+   porque compara dentro do kind. Enquanto uma das duas era orfa, o app
+   descartava e ninguem via. Dai `colapsar_opcoes_irmas.py`.
+
+E a licao de metodo: os **nove portoes ficaram verdes** sobre uma base que
+oferecia a mesma causa duas vezes na tela. Verificacao de dado nao substitui
+abrir o app. `app/verificacao/verificar-eixos.mjs` existe por isso.
+
+### `rm -rf` no `public/` derruba o dev server, e parece cache
+`sincronizar-base.sh` apagava `public/base` inteiro antes de copiar. Com o Vite
+de pe, o servidor perde o handle do diretorio e passa a responder `index.html`
+para todo pedido em `/base/` -- que chega no navegador como
+`Unexpected token '<', "<!doctype "...` **com o arquivo intacto no disco**.
+
+Sintoma cruel: `ls` mostra o JSON, `curl` devolve `text/html`, e o defeito so
+some ao reiniciar o servidor. Parece cache do navegador; nao e. Foi
+provavelmente parte do que o Igor viu em 2026-07-28, junto com o service worker.
+
+Conserto: limpar o CONTEUDO, nunca o diretorio.
+
+    mkdir -p "$DESTINO/por-kind" "$DESTINO/text"
+    rm -f "$DESTINO"/por-kind/*.json "$DESTINO"/text/*.json "$DESTINO"/_manifesto.json
+
+Provado nos dois sentidos: com o servidor de pe, sincronizar antes devolvia
+`200 text/html`; depois do conserto devolve `200 application/json`.
+
+### Verificador que passa sem ter verificado e pior que verificador que falha
+A primeira versao de `verificar-eixos.mjs` imprimiu "todos os eixos com uma
+opcao por nome" tendo encontrado ZERO eixos -- o clique de escolher a classe
+nao acontecia, a lista de eixos saia vazia, e o laco nao rodava nenhuma vez.
+Verde perfeito, cobertura nenhuma.
+
+Duas guardas entraram por causa disso:
+1. lista de eixos vazia **falha**, e imprime os slots que achou na tela;
+2. a varredura da lista virtualizada acumula em `Set` e mede repeticao DENTRO de
+   cada leitura. Acumular em array fazia o total crescer a cada rolada (o mesmo
+   item e relido), o laco nunca convergia, e o script travava em vez de mentir
+   -- que foi sorte, nao projeto.
+
+Vale para qualquer verificador: se ele pode chegar ao fim sem ter olhado nada,
+o caminho vazio tem que ser FALHA, nunca sucesso.

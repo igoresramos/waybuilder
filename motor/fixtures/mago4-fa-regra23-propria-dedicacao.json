@@ -1104,9 +1104,8 @@
     "escolhido": "wb:class-feature/spell-blending",
     "nivel": 1,
     "nome": "Spell Blending",
-    "opcoes": 6,
+    "opcoes": 5,
     "opcoes_ids": [
-     "wb:arcane-thesis/experimental-spellshaping",
      "wb:class-feature/experimental-spellshaping",
      "wb:class-feature/improved-familiar-attunement",
      "wb:class-feature/spell-blending",

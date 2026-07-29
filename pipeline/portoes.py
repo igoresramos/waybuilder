@@ -19,7 +19,7 @@ Uso:
 
 Saida: relatorio em base/relatorio_portoes.md, codigo 1 se algum portao falha.
 """
-import json, os, re, sys, glob, collections, subprocess, unicodedata
+import json, os, re, sys, glob, collections, itertools, subprocess, unicodedata
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
@@ -183,7 +183,14 @@ def portao_2_level(base, ctx):
 
 
 def portao_3_requires(base, ctx):
-    """Nenhum `requires` cita id `wb:` inexistente."""
+    """Nenhuma REFERENCIA cita id `wb:` inexistente.
+
+    `requires` E `subclasses[].opcoes`. A segunda entrou depois de o portao ter
+    passado com `0` sobre uma base que tinha o eixo `arcane-thesis` do Mago
+    apontando para um id que a fusao absorvera. O ponto cego era exatamente o
+    campo que `aplicar_aliases_em_requires.py` conserta: o portao nao vigiava o
+    conserto que existe para ele.
+    """
     ids = {r["id"] for r in base}
     alias = {}
     for r in base:
@@ -201,9 +208,23 @@ def portao_3_requires(base, ctx):
             for x in o:
                 yield from refs(x)
 
+    def ids_em(o):
+        """Toda string `wb:` de dentro de `subclasses` -- ali nao ha predicado,
+        so listas de opcao, e todo valor `wb:` e referencia a registro."""
+        if isinstance(o, str):
+            if o.startswith("wb:"):
+                yield o
+        elif isinstance(o, dict):
+            for v in o.values():
+                yield from ids_em(v)
+        elif isinstance(o, list):
+            for x in o:
+                yield from ids_em(x)
+
     orfaos = collections.Counter()
     for r in base:
-        for ref in refs(r.get("requires")):
+        for ref in itertools.chain(refs(r.get("requires")),
+                                   ids_em(r.get("subclasses"))):
             if ref.startswith("wb:") and ref not in ids and ref not in alias:
                 orfaos[ref] += 1
     return sum(orfaos.values()), [f"`{i}` citado {n}x" for i, n in orfaos.most_common(30)]

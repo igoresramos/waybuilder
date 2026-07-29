@@ -1534,21 +1534,15 @@
     "escolhido": "wb:class-feature/justice",
     "nivel": 1,
     "nome": "Justice",
-    "opcoes": 13,
+    "opcoes": 7,
     "opcoes_ids": [
-     "wb:cause/iniquity",
-     "wb:cause/desecration",
-     "wb:cause/liberation",
-     "wb:cause/justice",
-     "wb:cause/redemption",
-     "wb:cause/obedience",
-     "wb:class-feature/desecration",
-     "wb:class-feature/grandeur",
      "wb:class-feature/iniquity",
-     "wb:class-feature/justice",
+     "wb:class-feature/desecration",
      "wb:class-feature/liberation",
+     "wb:class-feature/justice",
+     "wb:class-feature/redemption",
      "wb:class-feature/obedience",
-     "wb:class-feature/redemption"
+     "wb:class-feature/grandeur"
     ]
    },
    {

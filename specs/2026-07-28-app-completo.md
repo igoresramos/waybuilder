@@ -271,9 +271,39 @@ faria `_termo_trait` satisfazer requisito com dado inventado. A tela mostra o
 | achado | conserto | onde |
 |---|---|---|
 | 407 feats de arquetipo sem exigir a dedicacao | derivado da regra do livro | `derivar_gate_arquetipo.py` |
-| 26 ids orfaos em `requires` (remaster renomeou) | aliases aplicados | `aplicar_aliases_em_requires.py` |
+| 47 ids orfaos em `requires`/`subclasses` (remaster renomeou) | aliases aplicados **depois da fusao** | `aplicar_aliases_em_requires.py` |
+| a mesma opcao em dois kinds (`wb:cause/justice` e `wb:class-feature/justice`) | fica quem tem mais sinal | `colapsar_opcoes_irmas.py` |
 | Fighter Dedication so treinava armas simples | curadoria (o Foundry tambem erra) | `correcoes_curadas.json` |
 | `grants_completos: true` sem mecanica declarada | passa a `None` | `comum.py` |
+
+### A ordem do `build.sh` e uma decisao, nao arrumacao
+Um passo que conserta REFERENCIA tem que rodar depois de quem MATA o id. Vale
+para `aplicar_aliases_em_requires.py`: ele nasceu no passo 4h3, antes da fusao,
+e ali nao havia orfa nenhuma para consertar -- quem aposenta o id e a fusao, no
+passo 7. A orfa nascia logo depois, sem ninguem para reescreve-la. Sintoma: o
+eixo `arcane-thesis` do Mago oferecia uma opcao apontando para o nada, e a base
+saiu assim com **os nove portoes verdes**.
+
+Corrigido movendo o passo para 7c (pos-fusao). Efeito medido: 26 -> 47 ids
+resolvidos.
+
+O caso deixou uma segunda licao, mais cara que a primeira: **o portao 3 era cego
+ao campo que existe para ser consertado**. Ele varria `requires` e nunca
+`subclasses[].opcoes`, entao a verificacao nao cobria o conserto. Ampliado, ele
+acusou 16 orfas na hora -- todas invisiveis ate ali. Portao que nao vigia o
+passo correspondente e decoracao.
+
+E uma terceira: consertar a orfa **revelou** a duplicata que ela escondia. Com o
+id morto vivo de novo, o Campeao passou a oferecer `Justice` duas vezes -- uma
+por `wb:cause/justice`, outra por `wb:class-feature/justice`, dois registros da
+mesma coisa em kinds diferentes, que a fusao nao pareia porque ela compara
+dentro do kind. Dai `colapsar_opcoes_irmas.py` (passo 7d): dentro de um eixo,
+nome repetido vira uma opcao so, e fica **quem tem mais sinal** -- tem `grants`,
+tem `traits`, tem prosa, e so em ultimo caso o kind `class-feature`. O criterio
+e por sinal e nao por kind de proposito: no dia em que a casca for a mais rica,
+ela ganha sozinha. O passo reescreve REFERENCIA e nao deleta registro -- os
+kinds dedicados nao sao citados em nenhum outro lugar da base (52 citacoes,
+todas em `subclasses`), entao o perdedor continua no acervo, buscavel.
 
 **Nao consertavel por extracao**, e registrado como divida: 61 das 226
 dedicacoes nao tem mecanica em fonte nenhuma (no Foundry, 45 de 192 tambem tem
@@ -282,10 +312,14 @@ Exige mecanizacao manual via curadoria.
 
 ## 13. Como verificar que esta certo
 ```bash
-cd app && npx tsc -b --noEmit && npx vitest run   # 107 testes
-cd ../motor && python3 teste_motor.py            # 95 testes, o oraculo
-cd ../pipeline && python3 portoes.py --fase final # 9 portoes
+cd app && npx tsc -b --noEmit && npx vitest run    # 107 testes
+cd ../motor && python3 teste_motor.py              # 97 assercoes, o oraculo
+cd ../pipeline && python3 portoes.py --fase final  # 9 portoes
+cd ../app && node verificacao/verificar-eixos.mjs  # na tela, com o app de pe
 ```
+O ultimo e o unico que roda no NAVEGADOR, e existe porque os outros tres
+passaram verdes sobre uma base que oferecia `Justice` duas vezes ao jogador.
+Verificacao de dado nao substitui olhar a tela.
 
 **O oraculo nao e opcional.** O Python e o gabarito: `gerar_fixtures.py` congela
 20 fichas e o TS compara campo a campo. Qualquer mudanca em `candidatos` ou
@@ -298,15 +332,25 @@ Mudou a base? `pipeline/build.sh`, depois `app/sincronizar-base.sh`.
 
 ---
 
-## 14. Estado em 2026-07-28, fim da sessao
+## 14. Estado em 2026-07-29
 
-### Consertos de dado desta sessao (todos no pipeline)
+### Consertos de dado (todos no pipeline)
 | conserto | passo no build.sh | resultado |
 |---|---|---|
 | gate de arquetipo derivado da regra do livro | `derivar_gate_arquetipo.py` (4h2) | 407 feats |
-| aliases do remaster em `requires` e `subclasses` | `aplicar_aliases_em_requires.py` (4h3) | portao 3: 26 -> 0; `cause` 13/13, `patron` 24/24 |
 | mecanica de equipamento nao casada | `recuperar_mecanica_equipamento.py` (4h4) | arma 110->54, armadura 14->5, escudo 7->5 |
+| aliases do remaster em `requires` e `subclasses` | `aplicar_aliases_em_requires.py` (**7c**, pos-fusao) | 47 ids resolvidos; portao 3: 16 -> 0 |
+| opcao publicada em dois kinds | `colapsar_opcoes_irmas.py` (7d) | 15 referencias em 3 classes |
 | raridade e Fighter Dedication | `correcoes_curadas.json` | 7 correcoes |
+
+### Consertos de verificacao
+- portao 3 passa a varrer `subclasses[].opcoes`, nao so `requires` -- era cego
+  justamente ao campo que o passo 7c conserta
+- `app/verificacao/verificar-eixos.mjs`: checagem no navegador, porque os nove
+  portoes ficaram verdes sobre uma base com opcao duplicada na tela
+- `sincronizar-base.sh` limpa o CONTEUDO de `public/base`, nunca o diretorio:
+  `rm -rf` derrubava o Vite em execucao, que passava a servir `index.html` no
+  lugar do JSON -- com o arquivo intacto no disco
 
 ### Consertos de app
 - prosa separada em regra/sabor (`prosa.ts` + `Prosa.tsx`)
@@ -316,19 +360,57 @@ Mudou a base? `pipeline/build.sh`, depois `app/sincronizar-base.sh`.
 - inventario (`Equipamento.tsx`) -- a porta que faltava para arma e armadura
 - gate de heranca por ancestralidade, no motor
 - `navigateFallbackDenylist` para `/base/` e `buscarJson()` com erro que explica
+- trocar a classe de um nivel **zera o que dependia dela** dali para a frente
+  (`class_feat`, `subclasse`, `free_archetype`) -- ancestralidade, antecedente e
+  pericia ficam. Sem isso um feat de Alquimista sobrevivia num Campeao
+- o eixo entra na chave da sub-escolha: as tres sub-escolhas do Campeao gravavam
+  em `(slot:"subclasse", em:1)` e uma sobrescrevia a outra. O motor nao mudou --
+  ele varre `_escolhas("subclasse")` inteiro e casa por `pega`
+- item concedido abre em leitura (`Detalhe.tsx`), com traits e prosa em partes
 
 ### Divida conhecida, com dono
 | item | onde | por que nao foi feito |
 |---|---|---|
-| 61 dedicacoes sem mecanica | `docs/auditoria-arquetipos.md` | nao existe em fonte estruturada; exige colheita no Pathbuilder |
-| spellcasting de dedicacao de conjurador | idem | idem |
+| 56 dedicacoes sem mecanica (eram 61) | `base/relatorio_mecanica_dedicacao.md` | **a premissa mudou** -- ver abaixo |
+| spellcasting de dedicacao de conjurador | idem | o motor nao tem modelo de spellcasting de arquetipo |
 | 54 armas sem dano | `base/relatorio_mecanica_equipamento.md` | 41 sao bombas (dano e do efeito), 36 sao modos de arma de combinacao |
 | 5 armaduras / 5 escudos | idem | declaram MATERIAL, nao item base (`Elven Chain`, `Mithral Shield`) |
 | 5 feats candidatos, 23 familias com `xref` suspeito | `docs/comparacao/triagem-feat.md` | precisa revisao item a item |
 | 2 orfas sem alias | `base/relatorio_aliases_requires.md` | `wb:heritage/versatile` e `you-have-a-versatile` sao ruido de parse |
 
+### As 61 dedicacoes: a premissa estava errada
+O plano dizia que so o Pathbuilder resolveria, porque a mecanica "nao existe em
+fonte estruturada". Medindo as 61 uma a uma, o buraco nao e de FONTE, e de
+MODELO -- e por isso o Pathbuilder tambem nao resolveria:
+
+| natureza do efeito | quantas | o motor sabe? |
+|---|---|---|
+| proficiencia / treino de pericia | 17 | sim -- `proficiency`, `skill_training` |
+| modificador numerico (dado de dano, penalidade) | 17 | nao |
+| companheiro (animal, eidolon, familiar, drake) | 16 | nao |
+| spellcasting de arquetipo | 14 | nao |
+| item/feat nomeado concedido | 9 | sim -- `grant_feat` |
+
+`derivar_mecanica_dedicacao.py` (passo 7e) colhe o que o motor sabe consumir,
+**da prosa oficial que ja temos**, e mecanizou 5. O numero e baixo de proposito:
+o passo so emite quando (a) o sujeito da frase e "you" e (b) o alvo resolve para
+um registro existente. As duas guardas nasceram de erro real --
+`Animal Trainer` diz "This trained animal is trained in Performance", e o
+cabecalho traz "Prerequisites Trained in Nature"; sem elas o jogador ganhava
+pericia que a regra nao deu. `Rose Warden` foi o caso mais claro: a versao sem
+guarda dava Stealth de graca, quando a regra e "expert in your choice of
+Deception **or** Stealth".
+
+Os 25 restantes viram **divida declarada** no relatorio, com o que a prosa
+promete, em vez de ficarem invisiveis.
+
+O que sobra depende de decisao de produto, nao de colheita: modelar companheiro
+e spellcasting de arquetipo no motor. Ate la, nem Pathbuilder nem prosa ajudam
+-- nao ha onde guardar a resposta.
+
 ### Ponto de retomada
-`docs/plano-comparacao-pathbuilder.md`, secao 3, **frente 1**: colheita da
-mecanica das dedicacoes. Exige extrator que compare o ESTADO da ficha no
-Pathbuilder antes e depois de aceitar a dedicacao (ler icone de proficiencia
-linha a linha, nao so texto). E a unica frente que so o Pathbuilder resolve.
+Comparacao pratica com o Pathbuilder (`docs/plano-comparacao-pathbuilder.md`,
+frentes 2 e 3): montar o mesmo personagem nos dois e comparar quais feats abrem
+por slot. O Pathbuilder vale como oraculo de COMPORTAMENTO -- a tese do Fable --
+e o export JSON dele (`build.proficiencies`, `build.specials`) da o estado da
+ficha em numero, sem precisar ler icone na tela.

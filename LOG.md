@@ -4,6 +4,50 @@ project: waybuilder
 
 # LOG -- Waybuilder
 
+## 2026-07-29
+
+### Sessao | 07:20-09:00 | a validacao que faltava achou o que os portoes nao viam | igor + claude-code
+
+**Rodar o pipeline inteiro era o passo pendente, e ele nao estava limpo.** Os
+nove portoes passaram verdes, mas o teste de paridade com o oraculo Python
+acusou o eixo `arcane-thesis` do Mago apontando para um id inexistente.
+
+Causa: `aplicar_aliases_em_requires.py` rodava no passo 4h3, **antes** da fusao
+legacy/remaster -- e quem aposenta o id e a fusao. Na sessao anterior o script
+tinha sido rodado a mao sobre base ja fundida, e por isso funcionou la e
+regrediu aqui. Movido para 7c: 26 -> 47 ids resolvidos.
+
+O caso rendeu tres consertos encadeados, cada um revelado pelo anterior:
+- **portao 3 era cego a `subclasses`** -- varria so `requires`, entao nao
+  vigiava o campo que o passo 7c conserta. Ampliado, acusou 16 orfas na hora
+- **consertar as orfas revelou duplicata**: a mesma causa do Campeao existe como
+  `wb:cause/justice` e `wb:class-feature/justice`, em kinds diferentes que a
+  fusao nao pareia. Enquanto uma era orfa o app a descartava em silencio; vivas,
+  o Campeao passou a oferecer `Justice` duas vezes. Dai `colapsar_opcoes_irmas.py`
+  (7d), que mantem quem tem mais sinal -- 15 referencias em 3 classes
+- **os nove portoes ficaram verdes sobre isso tudo**, o que motivou
+  `app/verificacao/verificar-eixos.mjs`: a checagem final e no navegador
+
+**A premissa das 61 dedicacoes sem mecanica estava errada.** O plano dizia que
+so o Pathbuilder resolveria. Medindo uma a uma, o buraco e de MODELO e nao de
+fonte: 17 sao proficiencia (o motor sabe), 9 concedem item nomeado (sabe), mas
+17 sao modificador numerico, 16 sao companheiro e 14 sao spellcasting de
+arquetipo -- e para esses tres o motor nao tem onde guardar a resposta, entao o
+Pathbuilder tambem nao ajudaria. `derivar_mecanica_dedicacao.py` (7e) colheu da
+prosa oficial o que o motor consome: 5 mecanizadas, 25 com divida declarada.
+Numero baixo de proposito -- o passo so emite quando o sujeito da frase e "you"
+e o alvo resolve na base. Sem essas guardas, `Rose Warden` dava Stealth de graca
+e `Animal Trainer` dava Performance ao jogador em vez de ao bicho.
+
+**Achado colateral, e provavelmente o mais util no dia a dia:**
+`sincronizar-base.sh` fazia `rm -rf public/base`. Com o Vite de pe, o servidor
+perde o diretorio e passa a responder `index.html` para todo pedido em `/base/`
+-- que chega como `Unexpected token '<', "<!doctype "...` **com o arquivo
+intacto no disco**. E parte do que o Igor viu ontem, e nao era cache.
+
+Verde no fim: 9 portoes, 97 do oraculo Python, 107 do TS, e os 11 eixos de
+sub-escolha conferidos no navegador sem repeticao.
+
 ## 2026-07-28
 
 ### Sessao | 00:20-07:45 | o app nasceu, e a referencia do Igor o reescreveu | igor + claude-code

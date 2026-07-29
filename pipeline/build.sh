@@ -63,11 +63,6 @@ echo "== 4h2. gate de arquetipo (regra do livro que a fonte deixa implicita) =="
 # para pegar feat avancado de arquetipo sem nunca ter pego a dedicacao.
 python3 derivar_gate_arquetipo.py
 
-echo "== 4h3. aplicar aliases do remaster dentro de requires =="
-# a fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao
-# reescreve quem citava o id aposentado
-python3 aplicar_aliases_em_requires.py
-
 echo "== 4h4. recuperar mecanica de equipamento nao casada =="
 # nao e falta de fonte, e falha de matching: o Foundry escreve `Leather Armor`
 # onde o AoN escreve `Leather`, e `Fist`/`Shield Bash` so existem no dump do
@@ -95,6 +90,26 @@ echo "== 7b. normalizar traits na base inteira =="
 # dentro do reconciliador, e registro de fonte unica nunca passava pela
 # normalizacao. Aqui a garantia vale para a base toda.
 python3 normalizar_traits.py
+
+echo "== 7c. aplicar aliases do remaster dentro de requires e subclasses =="
+# DEPOIS DA FUSAO, e nao antes. Quem aposenta o id e a fusao (passo 7): rodando
+# em 4h3 o script olhava uma base em que `metamagical-experimentation` ainda
+# existia, nao via orfa nenhuma, e a fusao criava a orfa em seguida -- sem
+# ninguem para voltar e reescrever quem citava o morto. O eixo `arcane-thesis`
+# do Mago saia com uma opcao apontando para o nada.
+python3 aplicar_aliases_em_requires.py
+
+echo "== 7d. uma opcao por nome em cada eixo de sub-escolha =="
+# a mesma causa do Campeao existe como `wb:cause/justice` e como
+# `wb:class-feature/justice`, em kinds diferentes -- a fusao nao os ve como
+# par. Com o 7c na ordem certa os dois viram opcao viva, e a tela oferecia
+# `Justice` duas vezes.
+python3 colapsar_opcoes_irmas.py
+
+echo "== 7e. mecanica de dedicacao derivada da prosa oficial =="
+# 61 dedicacoes chegam com `grants` vazio. Roda AQUI porque precisa da prosa
+# (passo 5) e nao deve enriquecer registro que a fusao vai absorver (passo 7).
+python3 derivar_mecanica_dedicacao.py
 
 echo "== 8. portoes, fase final =="
 python3 portoes.py --fase final

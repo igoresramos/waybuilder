@@ -70,6 +70,33 @@ def trocar(no, de_para: dict):
     return no
 
 
+def deduplicar(no):
+    """Tira o id repetido que a PROPRIA troca acabou de criar.
+
+    Em `subclasses[].opcoes` o legado e o sucessor conviviam como entradas
+    distintas -- `wb:instinct/animal-legacy` ao lado de `wb:class-feature/
+    animal`. Enquanto o legado era orfao, o app o descartava e ninguem via; ao
+    resolver o alias os dois viram o MESMO id, e a lista passa a oferecer
+    `Animal` duas vezes ao jogador. Medido: 23 pares em 6 classes -- os 6
+    instintos do Barbaro, as 6 causas do Campeao, os 8 patronos da Bruxa.
+
+    Ordem preservada: a primeira ocorrencia manda, porque e a ordem em que a
+    fonte lista as opcoes e e ela que o jogador ve na tela.
+    """
+    if isinstance(no, list):
+        vistos, saida = set(), []
+        for x in no:
+            if isinstance(x, str):
+                if x in vistos:
+                    continue
+                vistos.add(x)
+            saida.append(deduplicar(x))
+        return saida
+    if isinstance(no, dict):
+        return {k: deduplicar(v) for k, v in no.items()}
+    return no
+
+
 def main() -> int:
     with open(f"{BASE}/index.json", encoding="utf-8") as fh:
         base = json.load(fh)
@@ -95,6 +122,7 @@ def main() -> int:
     sem_saida = {o: q for o, q in orfas.items() if o not in de_para}
 
     tocados = 0
+    dedup = 0
     for r in base:
         mudou = False
         for campo in ("requires", "subclasses"):
@@ -104,6 +132,16 @@ def main() -> int:
             novo = trocar(atual, de_para)
             if novo != atual:
                 r[campo] = novo
+                mudou = True
+        # so em `subclasses`: ali toda lista e conjunto de opcoes, e repetir e
+        # sempre erro. Em `requires` a lista e predicado, e nao cabe a este
+        # passo decidir o que ela significa.
+        sub = r.get("subclasses")
+        if sub:
+            limpo = deduplicar(sub)
+            if limpo != sub:
+                r["subclasses"] = limpo
+                dedup += 1
                 mudou = True
         if mudou:
             tocados += 1
@@ -118,6 +156,7 @@ def main() -> int:
         f"- ids orfaos encontrados: **{len(orfas)}**",
         f"- resolvidos por alias: **{len(de_para)}**",
         f"- registros com `requires` reescrito: **{tocados}**",
+        f"- registros com opcao repetida removida: **{dedup}**",
         f"- sem alias (intocados): **{len(sem_saida)}**", "",
         "## Trocas", "", "| morto | canonico | citado por |", "|---|---|---|",
     ]
@@ -133,7 +172,8 @@ def main() -> int:
         fh.write("\n".join(linhas) + "\n")
 
     print(f"aliases em requires: {len(de_para)} ids trocados em {tocados} "
-          f"registros; {len(sem_saida)} sem alias")
+          f"registros; {dedup} com opcao repetida removida; "
+          f"{len(sem_saida)} sem alias")
     print(f"-> {BASE}/relatorio_aliases_requires.md")
     return 0
 

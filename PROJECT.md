@@ -5,7 +5,7 @@ status: active
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 17.5
+hours: 19.5
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -69,6 +69,12 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
+> **App de pe e verificado em quatro camadas** (2026-07-29): 9 portoes de
+> pipeline, 97 assercoes do oraculo Python, 107 testes do porte TS e a checagem
+> no navegador (`app/verificacao/verificar-eixos.mjs`). A quarta entrou porque as
+> tres primeiras passaram verdes sobre uma base que oferecia a mesma causa do
+> Campeao duas vezes na tela.
+>
 > Design fechado e **base canonica re-emitida**. As 22 regras de multiclasse, o
 > schema da base e o schema do documento de personagem estao escritos, revisados
 > adversarialmente e commitados.
@@ -126,7 +132,7 @@ hidden: false
 > (27 classes x 5 niveis + 50 combinacoes de multiclasse): zero excecoes,
 > determinismo e invariantes limpos.
 >
-> **95 testes** no motor, **97** no pipeline.
+> **97 assercoes** no oraculo Python, **107** no porte TS.
 >
 > **O APP EXISTE (2026-07-28).** Vite + React, PWA offline, sem backend. Monta
 > um personagem do zero, nivel a nivel, com Free Archetype. O motor foi portado
@@ -137,7 +143,7 @@ hidden: false
 > Layout em DUAS COLUNAS -- build a esquerda, ficha viva a direita --, refeito a
 > partir do Pathbuilder que o Igor usa, depois de a primeira versao (tres abas
 > separadas) nao servir. O picker e um modal com filtros e o texto completo do
-> item. **77 testes** no app.
+> item.
 >
 > **Validado em quatro frentes paralelas (2026-07-27).** As 226 dedicacoes passam
 > pelo motor sem uma excecao; 1.440 documentos malformados derivam sem explodir;
