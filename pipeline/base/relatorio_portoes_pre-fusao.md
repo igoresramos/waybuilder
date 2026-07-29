@@ -61,3 +61,7 @@ NAO SE APLICA nesta fase.
 
 NAO SE APLICA nesta fase.
 
+## Portao 10 -- cobertura de grants_completos
+
+NAO SE APLICA nesta fase.
+

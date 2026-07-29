@@ -696,6 +696,75 @@ def portao_9_censo(base, ctx):
     return len(novas), detalhe
 
 
+def portao_10_cobertura_de_grants(base, ctx):
+    """`grants_completos` e um booleano ou nao existe -- e nunca pela metade.
+
+    O campo existe para distinguir "esse registro nao tem mecanica" de "tinha e
+    o pipeline nao converteu". Sem ele `grants: []` significa as duas coisas.
+    E ninguem o vigiava: os 1.564 registros que motivaram o campo foram
+    corrigidos e 724 NOVOS apareceram, com perfil de kind completamente
+    diferente, sem nada reclamar.
+
+    E uma CATRACA, no mesmo desenho do portao 4: conta os registros SEM
+    resposta e reprova quando o numero SOBE. Exigir zero deixaria o build
+    vermelho ate cinco extratores aprenderem a emitir, e portao vermelho para de
+    ser lido -- que e o defeito que estes portoes existem para impedir. Mas o
+    numero aparece por kind em toda rodada: cobertura sem contrapartida de erro
+    e propaganda.
+
+    A primeira versao contava "kind emitindo pela metade" e estava MEDINDO A
+    COISA ERRADA: ao ensinar `aon_kinds.py` a emitir, kinds que tinham cobertura
+    ZERO viraram PARCIAIS e o portao acusou piora de 49 para 7.082 -- quando na
+    verdade mais registros passaram a responder. Catraca sobre o total resolve:
+    ela mede o que importa, que e ninguem parar de responder.
+
+    `None` NAO reprova, e a primeira versao deste portao errou nisso. O nulo e
+    o TERCEIRO estado por desenho (`comum.py::mecanizacao`): "a fonte nao
+    declarou mecanica nenhuma", que e diferente de "converti tudo". Marcar True
+    ali ja custou as 61 dedicacoes com `grants: []` e `grants_completos: true`
+    ao mesmo tempo. O defeito de verdade estava no `emitir_app.py`, que
+    descartava nulo junto com vazio e fazia o app perder o estado -- corrigido
+    la, com `TRI_ESTADO`.
+
+    Spec: `specs/2026-07-29-portao-de-cobertura-de-grants.md`
+    """
+    CAMPO = "grants_completos"
+    LINHA_DE_BASE = f"{BASE}/_cobertura_grants.json"
+
+    sem_resposta = collections.Counter()
+    com_resposta = collections.Counter()
+    for r in base:
+        (com_resposta if CAMPO in r else sem_resposta)[r.get("kind")] += 1
+
+    hoje = sum(sem_resposta.values())
+    try:
+        antes = json.load(open(LINHA_DE_BASE)).get("sem_resposta")
+    except (OSError, ValueError):
+        antes = None
+
+    detalhe = [f"registros SEM resposta de `{CAMPO}`: **{hoje}** de {len(base)} "
+               f"({hoje / max(len(base), 1):.1%})"]
+    if antes is not None:
+        detalhe.append(f"linha de base anterior: {antes}")
+    for k, n in sem_resposta.most_common(12):
+        detalhe.append(f"  - `{k}`: {n} de {n + com_resposta.get(k, 0)}")
+
+    if "--gravar-cobertura" in sys.argv:
+        json.dump({"sem_resposta": hoje}, open(LINHA_DE_BASE, "w"))
+        detalhe.append(f"linha de base GRAVADA em {hoje}")
+        return 0, detalhe
+
+    if antes is None:
+        detalhe.append("sem linha de base -- rode com `--gravar-cobertura` "
+                       "para fixar a de hoje. Nao reprova nesta rodada.")
+        return 0, detalhe
+    piorou = max(0, hoje - antes)
+    if piorou:
+        detalhe.insert(0, f"**PIOROU em {piorou} registros** -- alguem parou de "
+                          f"responder `{CAMPO}`")
+    return piorou, detalhe
+
+
 PORTOES = [
     (1, "prov por campo preenchido", portao_1_prov, ("pre-fusao", "final")),
     (2, "level divergente sem conflito", portao_2_level, ("pre-fusao", "final")),
@@ -706,6 +775,7 @@ PORTOES = [
     (7, "homonimo no mesmo kind", portao_7_homonimo, ("pre-fusao",)),
     (8, "artefato citado que sumiu do disco", portao_8_artefato_citado, ("final",)),
     (9, "kind ausente vs censo do AoN", portao_9_censo, ("final",)),
+    (10, "cobertura de grants_completos", portao_10_cobertura_de_grants, ("final",)),
 ]
 
 

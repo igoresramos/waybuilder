@@ -105,6 +105,15 @@ def converter(d, kind):
         # spec): o app exibe o texto e o jogador resolve na mesa. Nem reliquia
         # nem idioma tem efeito derivavel para o construtor calcular.
         "mechanized": False,
+        # A camada de mecanizacao da spec v2, que este caminho nao emitia -- e
+        # por isso 49 registros mono-fonte AoN ficavam sem resposta enquanto o
+        # resto do kind respondia, deixando a metrica de cobertura pela metade
+        # (portao 10). `None` e o valor certo, e nao `False`: o AoN nao declara
+        # rule element nenhum, entao nao houve PERDA de mecanica -- houve
+        # ausencia de declaracao, que e exatamente o terceiro estado que
+        # `comum.mecanizacao` definiu.
+        "grants_completos": None,
+        "requires_parseado": None,
         "text": f"wb:text/{kind}/{slug(nome)}",
         "xref": {"aon": str(d.get("id"))},
         "prov": {"name": "aon", "level": "aon", "traits": "aon", "rarity": "aon",

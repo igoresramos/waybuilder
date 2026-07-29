@@ -41,10 +41,20 @@ SAIDA = f"{BASE}/app"
 DESCARTAR = ("prov", "xref", "conflitos", "texto", "mechanized",
              "desmembrado_de", "aliases_traits", "antes")
 
+# Campos em que `None` E RESPOSTA, e nao vazio. `grants_completos` tem TRES
+# estados por desenho (`comum.py::mecanizacao`): true = converti tudo, false =
+# perdi mecanica, **null = a fonte nao declarou mecanica nenhuma**. O terceiro
+# obriga quem le a tratar o caso em vez de concluir que `grants: []` representa
+# o registro -- foi o que custou as 61 dedicacoes com grants vazio e
+# `completos: true`. O filtro de vazio abaixo apagava justamente o null, e o app
+# recebia 14.247 registros sem resposta em vez de 9.043.
+TRI_ESTADO = ("grants_completos", "requires_parseado")
+
 
 def compactar(r: dict) -> dict:
     saida = {k: v for k, v in r.items()
-             if k not in DESCARTAR and v not in (None, "", [], {})}
+             if k not in DESCARTAR
+             and (k in TRI_ESTADO or v not in (None, "", [], {}))}
     # `source` inteiro custa 1,34 MB e o app so precisa de atribuicao legivel.
     # Licenca fica: e exigencia da OGL/ORC, nao enfeite.
     s = r.get("source") or {}

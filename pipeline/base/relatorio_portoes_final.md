@@ -56,3 +56,18 @@ _Ausencias ja decididas (2 categorias) -- visiveis, nao bloqueiam:_
 - - `class-feature`: 219 de 721 vigentes do AoN nao estao na base -- Alchemist Feats, Ancestry And Background, Ancestry And Background, Ancestry And Background, Ancestry Feat, Ancestry Feats -- 214 dos 219 sao LINHA DE TABELA DE PROGRESSAO, nao conteudo ('Attribute Boosts', 'Initial Proficiencies', 'Skill Feats', 'Skill Increases', 'Ancestry and Background', 'General Feats', '<Classe> Feats'), que a base modela dentro de `class.progressao`. Os 5 restantes sao class-features de verdade e estao no TODO 55: Incredible Senses, Lightning Reflexes (2 docs), Premonition's Reflexes, Vigilant Senses
 - - `feat`: 5 de 6085 vigentes do AoN nao estao na base -- Dad Joke, GGGHhhjjjJJK, Wombat Bastion, Wombat Burrow, Wombat Style -- entradas de piada do proprio AoN (Dad Joke, GGGHhhjjjJJK, Wombat Bastion/Burrow/Style). Nao sao conteudo de jogo
 
+## Portao 10 -- cobertura de grants_completos
+
+**PASSOU** -- 0 ocorrencia(s).
+
+- registros SEM resposta de `grants_completos`: **8360** de 19706 (42.4%)
+- linha de base anterior: 8360
+-   - `equipment`: 6052 de 6122
+-   - `weapon`: 1030 de 1042
+-   - `class-feature`: 841 de 841
+-   - `armor`: 216 de 216
+-   - `shield`: 125 de 125
+-   - `tactic`: 37 de 37
+-   - `class-kit`: 32 de 32
+-   - `class`: 27 de 27
+
