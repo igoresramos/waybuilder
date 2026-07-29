@@ -247,7 +247,7 @@
   "trained in heavy armor as well as your order's favored weapon": 1,
   "you've trained with a champion of the challenge of sky": 1,
   "you speak at least n languages": 1,
-  "master in master in religion": 1,
+  "your deity’s divine skill": 1,
   "ability to cast _summon undead_": 1,
   "able to cast _animate dead_ with a spell slot": 1,
   "member of the wylderhearts": 1
@@ -484,7 +484,7 @@
   "trained in heavy armor as well as your order's favored weapon": "member of a Hellknight Order; trained in heavy armor as well as your order's favored weapon",
   "you've trained with a champion of the challenge of sky": "Student of Perfection Dedication, or you've trained with a champion of the Challenge of Sky and Heaven",
   "you speak at least n languages": "You speak at least 3 languages",
-  "master in master in religion": "Worshiper of a specific deity; Master in master in Religion or your deity’s divine skill",
+  "your deity’s divine skill": "Worshiper of a specific deity; Master in master in Religion or your deity’s divine skill",
   "ability to cast _summon undead_": "ability to cast spells from spell slots, ability to cast _summon undead_ ",
   "able to cast _animate dead_ with a spell slot": "able to cast _animate dead_ with a spell slot",
   "member of the wylderhearts": "member of the Wylderhearts"

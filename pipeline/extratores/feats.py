@@ -506,6 +506,14 @@ class Parser:
         itens = re.split(r",\s*|\s+or\s+|\s+and\s+", resto)
         itens = [re.sub(r"^(?:and|or|either)\s+", "", i.strip(), flags=re.I)
                  for i in itens]
+        # o rank se REPETE em cada item ("Trained in Hero-God Lore or Trained in
+        # Legendary Beast Lore") e so o primeiro era cortado -- o segundo virava
+        # `lore:trained-in-legendary-beast`, chave que nao casa com nada e que
+        # ainda por cima perde o rank. So corta quando o rank repetido e o MESMO
+        # da clausula; se for outro ("Trained in X or Expert in Y") a frase diz
+        # mais do que este atalho sabe, e desistir aqui deixa o parser geral
+        # assumir. Spec: `specs/2026-07-29-pericia-de-lore.md`
+        itens = [re.sub(rf"^{rank}\s+in\s+", "", i, flags=re.I) for i in itens]
         itens = [i for i in itens if i]
         if not itens:
             return None
