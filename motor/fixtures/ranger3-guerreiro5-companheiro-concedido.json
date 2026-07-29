@@ -963,6 +963,7 @@
   "avisos": [
    "Ranger: falta escolher `outras-opcoes` (2 opcoes)",
    "wb:background/nomad: grant_feat com alvo nao resolvido pelo pipeline (Assurance) -- nao aplicado",
+   "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4",
    "boosts de atributo: 4 declarado(s) de 13 a que o personagem tem direito -- faltam 9. Fontes: Human (1), Human (1), Nomad (1), Nomad (1), Ranger (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
   "background": "Nomad",
@@ -1322,6 +1323,25 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (9 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 4,
+    "fontes": [
+     {
+      "classe": "Ranger",
+      "delta": 4,
+      "orcamento": 4
+     },
+     {
+      "classe": "Fighter",
+      "delta": 0,
+      "orcamento": 3
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (4 a escolher)",
+    "slot": "pericias_livres"
    },
    {
     "em": 1,

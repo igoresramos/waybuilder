@@ -915,6 +915,7 @@
   },
   "avisos": [
    "wb:background/herbalist: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Natural Medicine', 'foundry_uuid': 'Compendium.pf2) -- nao aplicado",
+   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Leshy (1), Herbalist (1), Herbalist (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
   "background": "Herbalist",
@@ -1163,6 +1164,20 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (4 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 3,
+    "fontes": [
+     {
+      "classe": "Kineticist",
+      "delta": 3,
+      "orcamento": 3
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (3 a escolher)",
+    "slot": "pericias_livres"
    },
    {
     "em": 3,

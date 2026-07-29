@@ -118,6 +118,7 @@ export class Personagem implements ContextoDePredicado {
   aplicacoes_de_proficiencia: Map<string, Array<[unknown, string | null]>> = new Map();
   pericias_automaticas: Map<string, string> = new Map();
   pericias_livres = 0;
+  pericias_declaradas = 0;
   pericias_livres_detalhe: DetalheDePericiaLivre[] = [];
   aumentos_de_pericia: number[] = [];
   aumentos_detalhe: AumentoDePericia[] = [];
@@ -461,6 +462,7 @@ export class Personagem implements ContextoDePredicado {
 
     // regra 10: orçamento de perícia livre, por delta
     this._orcamento_de_pericia();
+    this._gastar_pericias_livres();
     // o aumento de perícia por nível -- que todo personagem faz e o motor não
     // implementava
     this._aumentos_de_pericia();
@@ -581,6 +583,53 @@ export class Personagem implements ContextoDePredicado {
 
     this.pericias_livres = concedidas;
     this.pericias_livres_detalhe = detalhe;
+  }
+
+  /**
+   * Aplica as perícias que o JOGADOR escolheu, e cobra o que falta.
+   *
+   * Até 2026-07-29 o orçamento era calculado (`pericias_livres: 3` aparecia na
+   * ficha) e **nunca gasto**: não existia escolha de `pericias_livres` em lugar
+   * nenhum do motor. Todo personagem saía sem nenhuma perícia treinada por
+   * escolha, nas 27 classes, que dão de 2 a 7.
+   *
+   * Spec: `specs/2026-07-29-pericias-livres.md`
+   */
+  private _gastar_pericias_livres(): void {
+    const escolhidas: string[] = [];
+    for (const e of this._escolhas("pericias_livres")) {
+      const em = obter(e, "em");
+      if (ehInt(em) && em > this.nivel) continue;   // escolha de nível futuro
+      const pegas = ehLista(e["pega"]) ? e["pega"] : [obter(e, "pega")];
+      for (const p of pegas) if (ehStr(p)) escolhidas.push(p);
+    }
+
+    for (const p of escolhidas) {
+      // regra 9: perícia que a classe já dá de graça. Aplicar não rebaixa (a
+      // regra 4 mantém o melhor rank), mas a escolha foi jogada fora -- e na
+      // mesa o mestre manda escolher outra. Avisa, não reprova.
+      const automatica = this.pericias_automaticas.get(p);
+      if (verdadeiro(automatica)) {
+        this.avisos.push(
+          `pericias livres: \`${p}\` ja vem da classe (${automatica}) `
+          + "-- escolha desperdicada");
+      }
+      this._aplicar_proficiencia(p, "trained", "escolha do jogador");
+    }
+
+    this.pericias_declaradas = escolhidas.length;
+    if (this.pericias_declaradas < this.pericias_livres) {
+      const faltam = this.pericias_livres - this.pericias_declaradas;
+      this.avisos.push(
+        `pericias livres: ${this.pericias_declaradas} declarada(s) de `
+        + `${this.pericias_livres} a que o personagem tem direito -- `
+        + `faltam ${faltam}`);
+    } else if (this.pericias_declaradas > this.pericias_livres) {
+      this.avisos.push(
+        `pericias livres: ${this.pericias_declaradas} declarada(s) para `
+        + `${this.pericias_livres} de direito -- sobra `
+        + `${this.pericias_declaradas - this.pericias_livres}`);
+    }
   }
 
   // -- regra 8: atributos -------------------------------------------------
@@ -2279,6 +2328,17 @@ export class Personagem implements ContextoDePredicado {
         slot: "boosts_livres", em: "criacao", kind: "ability",
         escolhe: faltam, fontes: this.boosts_pendentes,
         rotulo: `boosts de atributo (${faltam} a escolher)`,
+      });
+    }
+
+    // sem esta entrada a tela nunca oferece o picker de perícia, e o orçamento
+    // continua sendo um número que ninguém gasta
+    const faltam_pericias = this.pericias_livres - this.pericias_declaradas;
+    if (faltam_pericias > 0) {
+      abertos.push({
+        slot: "pericias_livres", em: "criacao", kind: "skill",
+        escolhe: faltam_pericias, fontes: this.pericias_livres_detalhe,
+        rotulo: `pericias treinadas (${faltam_pericias} a escolher)`,
       });
     }
 

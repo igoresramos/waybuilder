@@ -891,7 +891,8 @@
   },
   "avisos": [
    "Ranger: falta escolher `outras-opcoes` (2 opcoes)",
-   "wb:background/nomad: grant_feat com alvo nao resolvido pelo pipeline (Assurance) -- nao aplicado"
+   "wb:background/nomad: grant_feat com alvo nao resolvido pelo pipeline (Assurance) -- nao aplicado",
+   "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4"
   ],
   "background": "Nomad",
   "boosts": {
@@ -1056,6 +1057,20 @@
    ]
   },
   "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 4,
+    "fontes": [
+     {
+      "classe": "Ranger",
+      "delta": 4,
+      "orcamento": 4
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (4 a escolher)",
+    "slot": "pericias_livres"
+   },
    {
     "em": 1,
     "escolhe": 1,

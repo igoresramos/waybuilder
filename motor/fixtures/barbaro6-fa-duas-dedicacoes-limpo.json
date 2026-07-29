@@ -913,6 +913,7 @@
   "avisos": [
    "Barbarian: falta escolher `outras-opcoes` (9 opcoes)",
    "wb:background/gladiator: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Impressive Performance', 'foundry_uuid': 'Compendi) -- nao aplicado",
+   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Orc (1), Orc (1), Gladiator (1), Gladiator (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
   "background": "Gladiator",
@@ -1172,6 +1173,20 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (4 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 3,
+    "fontes": [
+     {
+      "classe": "Barbarian",
+      "delta": 3,
+      "orcamento": 3
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (3 a escolher)",
+    "slot": "pericias_livres"
    },
    {
     "em": 1,

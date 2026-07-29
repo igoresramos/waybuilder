@@ -884,6 +884,7 @@
   },
   "avisos": [
    "wb:background/warrior: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Intimidating Glare', 'foundry_uuid': 'Compendium.p) -- nao aplicado",
+   "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4",
    "boosts de atributo: 6 declarado(s) de 9 a que o personagem tem direito -- faltam 3. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4)"
   ],
   "background": "Warrior",
@@ -1143,6 +1144,25 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (3 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 4,
+    "fontes": [
+     {
+      "classe": "Fighter",
+      "delta": 3,
+      "orcamento": 3
+     },
+     {
+      "classe": "Fighter Dedication",
+      "delta": 1,
+      "orcamento": 1
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (4 a escolher)",
+    "slot": "pericias_livres"
    },
    {
     "em": 3,

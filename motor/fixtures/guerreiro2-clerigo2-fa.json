@@ -901,7 +901,8 @@
   },
   "avisos": [
    "Cleric: falta escolher `outras-opcoes` (5 opcoes)",
-   "wb:background/acolyte: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Student of the Canon', 'foundry_uuid': 'Compendium) -- nao aplicado"
+   "wb:background/acolyte: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Student of the Canon', 'foundry_uuid': 'Compendium) -- nao aplicado",
+   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3"
   ],
   "background": "Acolyte",
   "boosts": {
@@ -1151,6 +1152,25 @@
    ]
   },
   "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 3,
+    "fontes": [
+     {
+      "classe": "Fighter",
+      "delta": 3,
+      "orcamento": 3
+     },
+     {
+      "classe": "Cleric",
+      "delta": 0,
+      "orcamento": 2
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (3 a escolher)",
+    "slot": "pericias_livres"
+   },
    {
     "em": 1,
     "escolhe": 1,

@@ -805,6 +805,51 @@ checar(personagem(niveis((FIGHTER, 1))).avaliar({"alignment": "evil"})[0],
        "que nao sabe, e a clausula fica visivel em `requires_residuo`")
 
 # ---------------------------------------------------------------------------
+# Pericias livres: o motor CONTAVA o orcamento (`pericias_livres: 3`) e nao
+# tinha onde receber a escolha -- nenhum `_escolhas("pericias_livres")` existia.
+# Achado ao alinhar a bancada de comparacao com o Pathbuilder.
+# Spec: specs/2026-07-29-pericias-livres.md
+print("\npericias livres -- o orcamento que ninguem gastava")
+
+PERICIAS_G = ["acrobatics", "athletics", "stealth"]
+guerreiro_com = personagem(niveis((FIGHTER, 2)) + [
+    {"em": "criacao", "slot": "pericias_livres", "pega": PERICIAS_G}])
+checar(all(guerreiro_com.proficiencias.get(p) == "trained" for p in PERICIAS_G),
+       "Guerreiro 2 que declara 3 pericias sai com as 3 trained",
+       f"{[guerreiro_com.proficiencias.get(p) for p in PERICIAS_G]}")
+
+guerreiro_sem = personagem(niveis((FIGHTER, 2)))
+checar(any("pericias livres" in a for a in guerreiro_sem.avisos),
+       "sem declarar nada, a higiene cobra as 3 que faltam",
+       f"{guerreiro_sem.avisos}")
+
+guerreiro_demais = personagem(niveis((FIGHTER, 2)) + [
+    {"em": "criacao", "slot": "pericias_livres",
+     "pega": PERICIAS_G + ["thievery"]}])
+checar(any("pericias livres" in a and "sobra" in a.lower()
+           for a in guerreiro_demais.avisos),
+       "declarar 4 num orcamento de 3 avisa que sobrou 1",
+       f"{guerreiro_demais.avisos}")
+
+# regra 9: Athletics ja e automatica do Barbaro -- escolher de novo desperdica,
+# mas nao reprova nem rebaixa (principio zero vale para a escolha do jogador)
+barbaro = personagem(niveis(("wb:class/barbarian", 1)) + [
+    {"em": "criacao", "slot": "pericias_livres", "pega": ["athletics"]}])
+checar(barbaro.proficiencias.get("athletics") == "trained",
+       "escolher pericia que a classe ja deu nao rebaixa")
+checar(any("desperdic" in a.lower() for a in barbaro.avisos),
+       "e avisa o desperdicio", f"{barbaro.avisos}")
+
+abertos = {s["slot"]: s for s in guerreiro_sem.slots_abertos()}
+checar("pericias_livres" in abertos,
+       "slots_abertos lista `pericias_livres` -- sem isso a tela nao tem picker")
+checar(abertos.get("pericias_livres", {}).get("escolhe") == 3,
+       "e diz que faltam 3",
+       f"{abertos.get('pericias_livres', {}).get('escolhe')}")
+checar("pericias_livres" not in {s["slot"] for s in guerreiro_com.slots_abertos()},
+       "e para de listar quando o orcamento foi cumprido")
+
+# ---------------------------------------------------------------------------
 # `spellcasting_tradition` -- 99 clausulas em 27 arquetipos que nenhum dos dois
 # motores sabia ouvir. Sem o termo, o `any` de cathartic-mage passava a vacuo e
 # um Guerreiro 6 recebia seis dedicacoes de conjuracao.

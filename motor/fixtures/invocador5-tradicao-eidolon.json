@@ -818,6 +818,7 @@
   },
   "avisos": [
    "wb:background/hermit: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Dubious Knowledge', 'foundry_uuid': 'Compendium.pf) -- nao aplicado",
+   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Hermit (1), Hermit (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
   "background": "Hermit",
@@ -1114,6 +1115,20 @@
     "kind": "heritage",
     "rotulo": "heranca",
     "slot": "heranca"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 3,
+    "fontes": [
+     {
+      "classe": "Summoner",
+      "delta": 3,
+      "orcamento": 3
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (3 a escolher)",
+    "slot": "pericias_livres"
    },
    {
     "em": 1,

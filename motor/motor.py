@@ -428,6 +428,7 @@ class Personagem:
 
         # regra 10: orcamento de pericia livre, por delta
         self._orcamento_de_pericia()
+        self._gastar_pericias_livres(aplicar)
         # o aumento de pericia por nivel -- que todo personagem faz e o motor
         # nao implementava
         self._aumentos_de_pericia(aplicar)
@@ -536,6 +537,50 @@ class Personagem:
 
         self.pericias_livres = concedidas
         self.pericias_livres_detalhe = detalhe
+
+    def _gastar_pericias_livres(self, aplicar) -> None:
+        """Aplica as pericias que o JOGADOR escolheu, e cobra o que falta.
+
+        Ate 2026-07-29 o orcamento era calculado (`pericias_livres: 3` aparecia
+        na ficha) e **nunca gasto**: nao existia `_escolhas("pericias_livres")`
+        em lugar nenhum do motor. Todo personagem saia sem nenhuma pericia
+        treinada por escolha, nas 27 classes, que dao de 2 a 7.
+
+        Achado ao alinhar a bancada de comparacao com o Pathbuilder, cujo
+        personagem default sai com quatro pericias treinadas.
+
+        Spec: `specs/2026-07-29-pericias-livres.md`
+        """
+        escolhidas: list[str] = []
+        for e in self._escolhas("pericias_livres"):
+            if isinstance(e.get("em"), int) and e["em"] > self.nivel:
+                continue                      # escolha de nivel futuro nao conta
+            for p in (e.get("pega") or []):
+                if isinstance(p, str):
+                    escolhidas.append(p)
+
+        for p in escolhidas:
+            # regra 9: pericia que a classe ja da de graca. Aplicar nao rebaixa
+            # (a regra 4 mantem o melhor rank), mas a escolha foi jogada fora --
+            # e na mesa o mestre manda escolher outra. Avisa, nao reprova.
+            if p in self.pericias_automaticas:
+                self.avisos.append(
+                    f"pericias livres: `{p}` ja vem da classe "
+                    f"({self.pericias_automaticas[p]}) -- escolha desperdicada")
+            aplicar(p, "trained", "escolha do jogador")
+
+        self.pericias_declaradas = len(escolhidas)
+        if self.pericias_declaradas < self.pericias_livres:
+            faltam = self.pericias_livres - self.pericias_declaradas
+            self.avisos.append(
+                f"pericias livres: {self.pericias_declaradas} declarada(s) de "
+                f"{self.pericias_livres} a que o personagem tem direito -- "
+                f"faltam {faltam}")
+        elif self.pericias_declaradas > self.pericias_livres:
+            self.avisos.append(
+                f"pericias livres: {self.pericias_declaradas} declarada(s) para "
+                f"{self.pericias_livres} de direito -- sobra "
+                f"{self.pericias_declaradas - self.pericias_livres}")
 
     # -- regra 8: atributos -------------------------------------------------
 
@@ -2046,6 +2091,16 @@ class Personagem:
                 "slot": "boosts_livres", "em": "criacao", "kind": "ability",
                 "escolhe": faltam, "fontes": self.boosts_pendentes,
                 "rotulo": f"boosts de atributo ({faltam} a escolher)"})
+
+        # sem esta entrada a tela nunca oferece o picker de pericia, e o
+        # orcamento continua sendo um numero que ninguem gasta
+        faltam_pericias = self.pericias_livres - self.pericias_declaradas
+        if faltam_pericias > 0:
+            abertos.append({
+                "slot": "pericias_livres", "em": "criacao", "kind": "skill",
+                "escolhe": faltam_pericias,
+                "fontes": self.pericias_livres_detalhe,
+                "rotulo": f"pericias treinadas ({faltam_pericias} a escolher)"})
 
         # concessao de ator sem ator: o feat foi pego e a especie nao foi
         # escolhida. `_casadas` e preenchido em `_atores`, que ja rodou.

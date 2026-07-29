@@ -879,6 +879,7 @@
   },
   "avisos": [
    "wb:background/warrior: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Intimidating Glare', 'foundry_uuid': 'Compendium.p) -- nao aplicado",
+   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "boosts de atributo: 6 declarado(s) de 9 a que o personagem tem direito -- faltam 3. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4)",
    "slot free_archetype: Reactive Shield nao tem trait `archetype` -- o slot gratuito so aceita feat de arquetipo"
   ],
@@ -1130,6 +1131,20 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (3 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 3,
+    "fontes": [
+     {
+      "classe": "Fighter",
+      "delta": 3,
+      "orcamento": 3
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (3 a escolher)",
+    "slot": "pericias_livres"
    },
    {
     "em": 3,
