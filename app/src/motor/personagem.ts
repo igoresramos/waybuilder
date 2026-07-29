@@ -163,6 +163,8 @@ export class Personagem implements ContextoDePredicado {
   private _ja_tenho: Set<string> = new Set();
   /** estado opcional entre passos: o feat cujo requisito está sendo avaliado */
   private _avaliando: string | null = null;
+  // o nível da escolha sob análise -- ver o recorte temporal em `_termo_has`
+  private _avaliando_em: number | null = null;
 
   constructor(doc: Documento, base: Base) {
     this.doc = doc;
@@ -2067,8 +2069,22 @@ export class Personagem implements ContextoDePredicado {
     // `pega` nem sempre é um id: `boosts_livres` guarda uma LISTA de atributos.
     // Filtrar por str antes do set, senão estoura no primeiro personagem que
     // distribuiu boosts.
+    // RECORTE TEMPORAL: escolha feita DEPOIS da que está sendo avaliada não
+    // pode satisfazer o pré-requisito dela. Sem isto, pegar `Dueling Dance` no
+    // nível 2 e `Dueling Parry` no 12 -- ordem ilegal -- passava limpo, porque
+    // no fim das contas o personagem "tem" as duas. A ficha é histórico, não
+    // foto. Spec: `specs/2026-07-29-recorte-temporal-do-has.md`
+    const ate = this._avaliando_em;
+    const no_tempo = (e: Dict): boolean => {
+      if (!ehInt(ate)) return true;              // sem contexto, olha tudo
+      const em = obter(e, "em");
+      // `criacao` antecede todo nível; `em` não numérico não recorta
+      return !ehInt(em) || em <= ate;
+    };
     const tudo = new Set<unknown>();
-    for (const e of this._todas_escolhas()) if (ehStr(e["pega"])) tudo.add(e["pega"]);
+    for (const e of this._todas_escolhas()) {
+      if (ehStr(e["pega"]) && no_tempo(e)) tudo.add(e["pega"]);
+    }
     const excluir = this._avaliando;
     // `f.get("raiz")` do Python devolve None quando a chave FALTA -- e feature
     // de progressão de classe não tem `raiz`. Com `excluir` também None (todo
@@ -2619,8 +2635,13 @@ export class Personagem implements ContextoDePredicado {
       // o requisito de um feat é avaliado contra o estado SEM o efeito dele
       // mesmo -- ver `_rank_sem`
       this._avaliando = wb_id;
+      // o nível DESTA escolha: sem ele o `has` olha o documento inteiro e a
+      // ordem ilegal passa limpa -- ver `_termo_has`
+      const em_da_escolha = obter(e, "em");
+      this._avaliando_em = ehInt(em_da_escolha) ? em_da_escolha : null;
       let [atende, motivos] = this.avaliar(feat["requires"]);
       this._avaliando = null;
+      this._avaliando_em = null;
       for (const veto of [this._veto_dedicacao_da_propria_classe(feat),
                           this._exige_a_dedicacao_do_arquetipo(feat, motivos)]) {
         if (veto !== null) {

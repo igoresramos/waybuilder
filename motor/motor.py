@@ -1868,8 +1868,23 @@ class Personagem:
         # `pega` nem sempre e um id: `boosts_livres` guarda uma LISTA de
         # atributos. Filtrar por str antes do set, senao estoura no primeiro
         # personagem que distribuiu boosts.
+        # RECORTE TEMPORAL: escolha feita DEPOIS da que esta sendo avaliada nao
+        # pode satisfazer o pre-requisito dela. Sem isto, pegar `Dueling Dance`
+        # no nivel 2 e `Dueling Parry` no 12 -- ordem ilegal -- passava limpo,
+        # porque no fim das contas o personagem "tem" as duas. A ficha e
+        # historico, nao foto.
+        # Spec: `specs/2026-07-29-recorte-temporal-do-has.md`
+        ate = getattr(self, "_avaliando_em", None)
+
+        def no_tempo(e) -> bool:
+            if not isinstance(ate, int):
+                return True                    # sem contexto, olha tudo
+            em = e.get("em")
+            # `criacao` antecede todo nivel; `em` nao numerico nao recorta
+            return not isinstance(em, int) or em <= ate
+
         tudo = {e.get("pega") for e in self.doc.get("escolhas", [])
-                if isinstance(e.get("pega"), str)}
+                if isinstance(e.get("pega"), str) and no_tempo(e)}
         excluir = getattr(self, "_avaliando", None)
         tudo |= {f["id"] for f in self.features if f.get("raiz") != excluir}
         # o que a cadeia concedeu conta como "tenho": no jogo nao ha diferenca
@@ -2343,8 +2358,12 @@ class Personagem:
             # o requisito de um feat e avaliado contra o estado SEM o efeito
             # dele mesmo -- ver `_rank_sem`
             self._avaliando = wb_id
+            # o nivel DESTA escolha: sem ele o `has` olha o documento inteiro e
+            # a ordem ilegal passa limpa -- ver `_termo_has`
+            self._avaliando_em = e.get("em")
             atende, motivos = self.avaliar(feat.get("requires"))
             self._avaliando = None
+            self._avaliando_em = None
             for veto in (self._veto_dedicacao_da_propria_classe(feat),
                          self._exige_a_dedicacao_do_arquetipo(feat, motivos)):
                 if veto:

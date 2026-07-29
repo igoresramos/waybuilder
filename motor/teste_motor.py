@@ -805,6 +805,33 @@ checar(personagem(niveis((FIGHTER, 1))).avaliar({"alignment": "evil"})[0],
        "que nao sabe, e a clausula fica visivel em `requires_residuo`")
 
 # ---------------------------------------------------------------------------
+# `_termo_has` olhava o documento INTEIRO, sem perguntar QUANDO cada coisa foi
+# pega -- entao a ordem ilegal passava limpa. A ficha e historico, nao foto.
+# Spec: specs/2026-07-29-recorte-temporal-do-has.md
+print("\nrecorte temporal do `has`")
+
+def _duelista(em_parry, em_dance):
+    return personagem(niveis((FIGHTER, 12)) + [
+        {"em": em_parry, "slot": "class_feat", "pega": "wb:feat/dueling-parry-fighter"},
+        {"em": em_dance, "slot": "class_feat", "pega": "wb:feat/dueling-dance-fighter"}])
+
+legal = _duelista(2, 12)
+checar(not legal.fora_do_requisito,
+       "Dueling Parry no 2 e Dance no 12 -- ordem legal, ficha limpa",
+       f"{legal.fora_do_requisito}")
+
+ilegal = _duelista(12, 2)
+checar(any("Dueling Parry" in f["motivo"] for f in ilegal.fora_do_requisito),
+       "Parry no 12 e Dance no 2 -- ordem ILEGAL, agora acusada",
+       f"{ilegal.fora_do_requisito}")
+
+# o recorte nao pode inventar falso positivo fora de contexto
+checar(personagem(niveis((FIGHTER, 12)) + [
+    {"em": 2, "slot": "class_feat", "pega": "wb:feat/dueling-parry-fighter"}])
+    .avaliar({"has": "wb:feat/dueling-parry-fighter"})[0],
+    "`avaliar()` chamado de fora, sem contexto, responde como antes")
+
+# ---------------------------------------------------------------------------
 # Pericias livres: o motor CONTAVA o orcamento (`pericias_livres: 3`) e nao
 # tinha onde receber a escolha -- nenhum `_escolhas("pericias_livres")` existia.
 # Achado ao alinhar a bancada de comparacao com o Pathbuilder.
