@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <title>Pathbuilder 2e</title>
+
+    <meta http-equiv="Cache-control" content="no-cache">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+
+
+    <link href="assets/nouislider.min.css" rel="stylesheet">
+    <link href="assets/toggle.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/ldsring.css">
+
+    <link rel="stylesheet" href="assets/pathbuilder-min.css">
+    <link rel="stylesheet" href="assets/pathbuilder-lm-minv2.css">
+    <link rel="stylesheet" href="assets/pathbuilder-starbuilder-dmv1.css">
+    <link rel="stylesheet" href="assets/global.css" />
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AQvo27SxMRB0K26sxlghxxnws5oJcrusCrvAlqWq0QTwccSKbU5P15Ef6Jqyw546TowLz-AqGGaufj72"> </script>
+
+
+    <script type="text/javascript">
+
+        var colorMode = localStorage.getItem("colorMode");
+        if (colorMode==="light"){
+            document.documentElement.classList.add("light")
+            window.lightMode = true
+        } else if (colorMode==="starbuilderdark"){
+            document.documentElement.classList.add("starbuilderdark")
+            window.starbuilderdark = true
+        } else if (colorMode==="starbuilderlight"){
+            document.documentElement.classList.add("starbuilderlight")
+            window.starbuilderlight = true
+        }
+        
+
+        function storageCheck(){
+            try {
+                var test = "test";
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                    
+            } catch(e) {
+                    return false;
+            }
+            return true;
+        }
+        
+
+        function getFirebaseControls(onCompletion){
+            (async()=>{
+                const { firebase } = await import("./firebase.js");
+                onCompletion(firebase);
+            })();
+        }
+
+
+    </script>
+
+    <script src="assets/jwt.js"></script>
+    <script src="assets/longpress.js"></script>
+    <script src="https://apis.google.com/js/api.js?v=2"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
+
+
+
+</head>
+<body>
+
+<div id="mySidenav" class="sidenav" aria-hidden="true">
+<!--    <div class="sidenav-part sidenav-header">-->
+<!--        <h2 class="test">Pathbuilder 2e</h2>-->
+<!--        <p id="version"></p>-->
+<!--        <br>-->
+<!--    </div>-->
+    <div id="mode-controls"></div>
+    <div class="sidenav-part sidenav-body">
+        <p id="version"></p>
+        <div id="sidenav-remaster-toggle" style="margin-bottom: 1em;">
+            Remaster: On
+        </div>
+        <div id="mode-toggle-holder"></div>
+
+        <div class="menu-group-header" id="menu-header-signin">
+            Signin
+        </div>
+        <div class="menu-group">
+            <div class="sidenav-link" id="sidenav-upgrade">Login and Upgrade App</div>
+            <div class="sidenav-link hidden" id="sidenav-logout"></div>    
+        </div>
+
+    
+
+
+        <div class="menu-group-header lm-menu-group-header">
+            Character
+        </div>
+        <div class="menu-group">
+            <div class="sidenav-link" id="sidenav-remaster-convert">Convert to Remaster Rules</div>
+            <div class="sidenav-link" id="sidenav-options">Character Options</div>
+            <div class="sidenav-link" id="sidenav-new">New Character</div>
+            <div class="sidenav-link" id="sidenav-save">Save Character</div>
+            <div class="sidenav-link" id="sidenav-load">Open Character</div>
+        </div>
+        
+        <div class="menu-group-header">
+            Connect
+        </div>
+        <div class="menu-group">
+            <div class="sidenav-link" id="sidenav-connect">Connect to GM</div>
+            <div class="sidenav-link" id="sidenav-gm-mode">Launch GM Mode</div>
+        </div>
+
+        <div class="menu-group-header">
+            Export
+        </div>
+        <div class="menu-group">
+            <div class="sidenav-link" id="sidenav-pdf">Character Sheet PDF</div>
+            <div class="sidenav-link" id="sidenav-statblock">Stat Block PDF</div>
+            <div class="sidenav-link" id="sidenav-json">Export JSON</div>
+            <div class="sidenav-link" id="sidenav-share">Share Copy of Character</div>
+        </div>
+
+        <div class="menu-group-header">
+            Data
+        </div>
+        <div class="menu-group">
+            <div class="sidenav-link" id="sidenav-export">Backup/Restore</div>
+            <div class="sidenav-link" id="sidenav-campaign">Campaign Management</div>
+            <div class="sidenav-link" id="sidenav-feat-browser">Feat Browser</div>
+            <div class="sidenav-link" id="sidenav-remaster-info">Remaster Information</div>
+            
+        </div>
+
+        <div class="menu-group-header">
+            Custom
+        </div>
+        <div class="menu-group">
+            <div class="sidenav-link" id="sidenav-custom-pack">Custom Pack</div>
+            <div class="sidenav-link" id="sidenav-custom-ability">Custom Ability Increases</div>
+            <div class="sidenav-link" id="sidenav-custom-feat-choice">Custom Feat Choice</div>
+            <div class="sidenav-link" id="sidenav-custom-skill-increase">Custom Skill Increases</div>
+        </div>
+
+        <div class="menu-group-header">
+            Help
+        </div>
+        <div class="menu-group">
+            <div class="sidenav-link" id="sidenav-help">Help</div>
+            <div class="sidenav-link" id="sidenav-ogl">Licenses</div>
+            <div class="sidenav-link" id="sidenav-patch">Patch Notes</div>
+            <div class="sidenav-link" id="sidenav-error">Report Error</div>
+            
+        </div>
+   
+        <br><br>
+        <p id="para-books" class="small-text warning-text"></p>
+
+    </div>
+
+</div>
+
+
+<div id="dice-switch" class="dice-switch hidden"><img src="assets/icon_d20_orange.png" class="dice-switch-image dice-switch"/></div>
+
+<div class="dice-tray" aria-hidden="true">
+
+
+    <div class="dice-content">
+        <div class="dice-buttons">
+            <div id="dice-buttons-1"></div>
+            <div id="dice-buttons-0"></div>
+        </div>
+
+        <div id="dice-title" class="subtitle">Dice Tray</div>
+        <div id="dice-buttons-roll"></div>
+        <div id="dice-summary">Dice Tray</div>
+        <div id="canvas-container">
+            <div id="canvas"></div>
+            <div id="canvas-total"></div>
+        </div>
+        
+        <div id="dice-result">&nbsp;</div>
+        <div id="dice-history"></div>
+    </div>
+    
+</div>
+
+<div id="backdrop" class="backdrop"></div>
+<div id="dice-backdrop" class="backdrop"></div>
+
+
+<div class="top-bar hidden">
+    <div class="menu-bar">
+        <div id="menu">
+            <img src="assets/hamburger.png" class="hamburger">
+            <div class="menu-title button-text">Menu</div>
+        </div>
+        <div id="active-builds"></div>
+    </div>
+    
+</div>
+
+
+
+
+<div id="ring-holder">
+    <div id="div-loader" class="lds-ring"><span id="loading-text">Loading Data</span><div></div><div></div><div></div><div></div></div>
+</div>
+
+
+<div class="hidden" id="main-container">
+
+    <div id="divBuild" class="main-column-left">
+        
+        <div id="divTopButtons" class="rounded-rectangle build-section"></div>
+        <div id="divBuildLevels"></div>
+    </div>
+
+
+    <div class="main-column-right">
+
+        <div id="container-row-0">
+            <div id="container-row-0-col-0"></div>
+            <div id="section-conditions"></div>
+        </div>
+
+        <div id="container-row-2">
+            <div id="container-section-skills"></div>
+                <div id="tabbed-area"></div>
+            
+        </div>
+    </div>
+    
+</div>
+<div class="top-buttons-holder hidden">
+    <div class="top-buttons">
+        <div id="build-buttons"></div>
+        <div id="play-buttons"></div>
+    </div>
+</div>
+
+
+<div class="centered-div-holder" id="beta-text">
+    <div class="rounded-rectangle beta-info" style="text-align: center;">
+        <h3>Pathbuilder 2e Web</h3>
+        <p>Version 108</p>
+    </div>
+</div>
+
+<script>
+    const flagName = "gmModeID"
+        var gmModeID = localStorage.getItem(flagName);
+        localStorage.removeItem(flagName);
+        if (gmModeID==null){
+            gmModeID = sessionStorage.getItem(flagName);
+        }
+        if (gmModeID!=null){
+            var divLoadingInfo = document.getElementsByClassName("beta-info")[0]
+            divLoadingInfo.innerHTML= "Pathbuilder 2e GM Mode"
+            divLoadingInfo.style.textAlign="center"
+            divLoadingInfo.style.fontSize="1.5em"
+            sessionStorage.setItem(flagName, gmModeID)
+        }
+        window.addEventListener("beforeunload", function (e) {
+            localStorage.removeItem(flagName);
+            localStorage.removeItem("gmModeChar")
+        });
+</script>
+
+
+<div id="google-login"></div> 
+
+<div id="snackbar"></div>
+
+
+<script src="assets/wNumb.min.js"></script>
+<script src="assets/nouislider.min.js"></script>
+<script src="assets/dicecode-min2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="assets/Pathbuilder2eWebRemastered108b.js"></script>
+
+
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"711a4ca41de447709b198fe918c70947"}' crossorigin="anonymous"></script>
+</body>
+</html>

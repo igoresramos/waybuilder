@@ -288,5 +288,8 @@ items:
   - id: 15
     texto: "CONCLUIDO 2026-07-26: os capitulos de ambientacao dos Lost Omens sao flavor puro -- IGNORAR, por decisao do Igor. Verificado por amostragem: o conteudo mecanico daqueles capitulos ja esta na base. Nao criar kinds region/organization como container de texto. A mecanica que sobrou virou o item 22"
     prioridade: concluido
+  - id: 31
+    texto: "POR ULTIMO, decisao do Igor (2026-07-29): opcao de idioma ingles / pt-BR na interface. Depois de TODO o resto -- so faz sentido com o app fechado. Escopo a decidir quando chegar a vez: a UI (rotulos, botoes, mensagens do motor) e traduzivel; a PROSA das 19.706 entradas vem das fontes em ingles e nao tem versao pt-BR licenciada, entao o mais provavel e UI em pt-BR com conteudo de regra em ingles. Nome de trait e de entidade idem -- traduzir 'Reactive Strike' quebraria a busca do jogador que le AoN"
+    prioridade: baixa
 promoted: []
 ---

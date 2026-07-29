@@ -912,3 +912,26 @@ Duas guardas entraram por causa disso:
 
 Vale para qualquer verificador: se ele pode chegar ao fim sem ter olhado nada,
 o caminho vazio tem que ser FALHA, nunca sucesso.
+
+### Pathbuilder roda local, mas nao inicializa (parcial)
+So a PAGINA do Pathbuilder esta atras do Cloudflare (403 em headless). O CDN de
+assets responde 200 a `curl` sem verificacao nenhuma. Da para baixar o app
+inteiro -- inclusive `data131.txt`, 4,2 MB de dados do jogo que so aparece
+rastreando as requisicoes depois do "Accept" -- e servir local.
+
+Resultado: menu completo com ids estaveis (`sidenav-json`, `sidenav-new`,
+`sidenav-feat-browser`), IndexedDB criado, zero erro de JS. Mas a tela fica no
+spinner "Loading" para sempre.
+
+Duas hipoteses gastas, ambas FALSAS:
+- asset faltando -- resolvido com `page.route()` servindo o CDN do disco;
+- POST recusado pelo `python -m http.server` (`501`) -- `servir.py` passou a
+  responder `200 {}` e nao mudou nada.
+
+Receita e estado em `docs/2026-07-29_pathbuilder-local.md`. Quem retomar comeca
+pela suspeita de verificacao de origem dentro do bundle Kotlin/JS.
+
+Licao de orcamento, que vale mais que a tecnica: parei ao ver que a proxima
+pista exigia ler minificado. Frente com custo aberto e retorno incerto merece
+uma caixa de tempo -- e um registro do que ja foi descartado, para o proximo
+nao repetir as mesmas duas hipoteses.
