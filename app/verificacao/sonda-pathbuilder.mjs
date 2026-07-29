@@ -21,8 +21,10 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { abrirPathbuilder } from "./pathbuilder-comum.mjs";
 
-const NIVEL = Number(process.argv[2] ?? 1);
+const [CLASSE = "Fighter", NIVEL_TXT = "1", SLOT = "Class Feat"] = process.argv.slice(2);
+const NIVEL = Number(NIVEL_TXT);
 const SAIDA = "../docs/comparacao";
+const chave = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
 
 const { navegador, pagina } = await abrirPathbuilder();
 
@@ -110,7 +112,38 @@ async function opcoesDaLista() {
   return [...achados.values()];
 }
 
-const alvo = slotDoNivel("Class Feat", NIVEL);
+// A classe entra no bloco de IDENTIDADE (o `.build-section` de indice 0), nao
+// num nivel. Trocar exige subir o personagem antes? Nao: a arvore mostra os 20
+// niveis desde o inicio, e o Pathbuilder deixa abrir slot de nivel futuro.
+if (CLASSE !== "Fighter") {
+  const linha = pagina.locator(".build-section").nth(0)
+                      .locator('.div-button:has-text("Class")').first();
+  await linha.click({ timeout: 15_000 });
+  await pagina.waitForTimeout(1500);
+  console.log("abas do modal de classe:",
+              JSON.stringify(await pagina.locator(".section-menu").allTextContents()));
+  console.log("primeiros itens:",
+              JSON.stringify((await pagina.locator(".modal-content-listview .listview-title")
+                                .allTextContents()).slice(0, 8)));
+  await pagina.locator(".modal-content-listview .listview-title",
+                       { hasText: new RegExp(`^${CLASSE}$`) }).first().click();
+  await pagina.waitForTimeout(800);
+  await pagina.locator(".modal-button", { hasText: /^(Select|OK|Accept)$/ }).first()
+              .click({ timeout: 4000 }).catch(() => {});
+  await pagina.waitForTimeout(2500);
+}
+
+const alvo = slotDoNivel(SLOT, NIVEL);
+if (await alvo.count() === 0) {
+  // falha com o que EXISTE no bloco, e nao com stack trace: um Fighter 1 nao
+  // tem `Skill Feat` (so no nivel 2), e a mensagem tem de dizer isso
+  const tem = await pagina.locator(".build-section").nth(NIVEL)
+                          .locator(".grey-text").allTextContents();
+  console.log(`FALHA: nivel ${NIVEL} de ${CLASSE} nao tem slot "${SLOT}". `
+              + `Tem: ${tem.filter(Boolean).join(", ")}`);
+  await navegador.close();
+  process.exit(2);
+}
 await alvo.scrollIntoViewIfNeeded();
 await alvo.click({ timeout: 15_000 });
 await pagina.waitForTimeout(2500);
@@ -119,7 +152,15 @@ await pagina.waitForTimeout(2500);
 // feat de arquetipo no slot de class feat (RAW), e o Pathbuilder tambem -- so
 // que em outra aba. Sem percorrer as quatro, a diferenca aparecia como 2.135
 // feats "so no Waybuilder", que e ruido de recorte, nao defeito.
-const ABAS = ["Class Feats", "Dedication Feats", "Archetype Class Feats", "All Feats"];
+// As abas MUDAM por slot: `Class Feat` abre quatro (Class/Dedication/Archetype
+// Class/All), `General Feat` abre so `All Feats`, e `Skill Feat` tem as suas.
+// Lista fixa fazia a colheita voltar vazia sem dizer por que -- entao as abas
+// sao DESCOBERTAS, tirando as nove do menu da ficha, que nao sao do modal.
+const MENU_DA_FICHA = new Set(["Weapons", "Defense", "Gear", "Spells", "Pets",
+                               "Details", "Feats", "Actions", "Rituals"]);
+const ABAS = (await pagina.locator(".section-menu").allTextContents())
+  .map((t) => t.trim()).filter((t) => t && !MENU_DA_FICHA.has(t));
+console.log("abas do modal:", JSON.stringify(ABAS));
 const porAba = {};
 for (const aba of ABAS) {
   const botao = pagina.locator(".section-menu", { hasText: aba }).first();
@@ -136,13 +177,16 @@ for (const aba of ABAS) {
   console.log(`  ${aba.padEnd(22)} ${String(lista.length).padStart(5)} opcoes `
               + `(${atendem} disponiveis, ${lista.length - atendem} em vermelho)`);
 }
-const opcoes = porAba["All Feats"] ?? [];
+// `All Feats` e a lista completa do slot; sem ela (slots que nao a oferecem),
+// vale a uniao das abas
+const opcoes = porAba["All Feats"] ?? Object.values(porAba).flat();
 
 mkdirSync(SAIDA, { recursive: true });
-const arquivo = `${SAIDA}/pathbuilder-fighter-class_feat-nv${NIVEL}.json`;
+const arquivo = `${SAIDA}/pathbuilder-${chave(CLASSE)}-${chave(SLOT)}-nv${NIVEL}.json`;
 writeFileSync(arquivo, JSON.stringify(
-  { fonte: "pathbuilder 2e web 108, remaster on", classe: "Fighter", nivel: NIVEL,
-    slot: "class_feat", abas: porAba, opcoes }, null, 2));
+  { fonte: "pathbuilder 2e web 108, remaster on, legado ligado",
+    classe: CLASSE, nivel: NIVEL, slot: chave(SLOT), abas: porAba, opcoes },
+  null, 2));
 console.log(`-> ${arquivo}`);
 
 await pagina.screenshot({ path: "../docs/screenshots/2026-07-29_pathbuilder-slot.png" });

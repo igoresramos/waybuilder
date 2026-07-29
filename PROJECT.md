@@ -5,7 +5,7 @@ status: active
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 23.5
+hours: 25.0
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -70,10 +70,15 @@ hidden: false
 
 ## Estado atual
 > **App de pe e verificado em quatro camadas** (2026-07-29): 9 portoes de
-> pipeline, 109 assercoes do oraculo Python, 110 testes do porte TS e a checagem
+> pipeline, 112 assercoes do oraculo Python, 110 testes do porte TS e a checagem
 > no navegador (`app/verificacao/`, dois scripts). A quarta entrou porque as
 > tres primeiras passaram verdes sobre uma base que oferecia a mesma causa do
 > Campeao duas vezes na tela.
+>
+> **Decisao de 2026-07-29: manter todo o conteudo legado.** Medido: as tres
+> pilhas da triagem (971 removidos, 339 renomeados, 5.690 intocados) estao
+> todas na base, e a fusao legacy/remaster guarda o nome antigo em `aliases`. A
+> busca do app acha pelo nome antigo.
 >
 > **Companheiro concedido por feat funciona ponta a ponta** desde 2026-07-29:
 > pegar `Animal Companion` abre o slot da especie, e a ficha do bicho sai

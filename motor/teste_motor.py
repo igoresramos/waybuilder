@@ -677,6 +677,24 @@ checar(ataques["Blowgun"]["tipo_de_dano"] == "piercing",
 checar(ataques["Dagger"]["dano"] == "1d4+1",
        "e a arma com dado normal nao muda", f"deu {ataques['Dagger']['dano']!r}")
 
+# -- proficiencia de arma NOMEADA cai na categoria --------------------------
+# Achado comparando com o Pathbuilder (docs/2026-07-29_comparacao-pathbuilder.md):
+# 10 dedicacoes exigem treino numa arma especifica (`weapon:aldori-dueling-sword`)
+# e ninguem preenche essa chave -- a ficha guarda rank por CATEGORIA. O
+# Guerreiro, treinado em advanced desde o nivel 1, aparecia untrained nelas.
+print("\nproficiencia de arma nomeada -- cai na categoria da arma")
+guerreiro6 = personagem(niveis((FIGHTER, 6)) + BOOSTS)
+mago6 = personagem(niveis((WIZARD, 6)) + BOOSTS)
+aldori = BASE.opcional("wb:feat/aldori-duelist-dedication")
+checar(guerreiro6.proficiencias.get("advanced") == "trained",
+       "Guerreiro 6 e treinado em arma avancada (premissa do caso)",
+       f"deu {guerreiro6.proficiencias.get('advanced')}")
+checar(guerreiro6.avaliar(aldori.get("requires"))[0],
+       "e por isso atende Aldori Duelist Dedication, que exige a arma nomeada",
+       f"{guerreiro6.avaliar(aldori.get('requires'))[1]}")
+checar(not mago6.avaliar(aldori.get("requires"))[0],
+       "ja o Mago 6, untrained em avancada, continua fora -- a ponte nao afrouxa")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

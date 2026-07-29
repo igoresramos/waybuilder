@@ -29,6 +29,20 @@ import { limparMarcacao } from "../marcacao";
 import { Prosa } from "./Prosa";
 import { Funil, FUNIL_VAZIO, aplicarFunil, type EstadoDoFunil } from "./Funil";
 
+/**
+ * O nome ANTIGO que casa a busca, se houver.
+ *
+ * A Paizo renomeia no remaster (`Drow Shootist` -> `Crossbow Infiltrator`,
+ * `Power Attack` -> `Vicious Swing`) e a fusao do pipeline guarda o nome velho
+ * em `aliases`. Sem procurar ali, quem digita o nome que aprendeu na mesa nao
+ * acha nada -- e o conteudo esta na base o tempo todo.
+ */
+function aliasQueCasa(base: Base, id: string, q: string): string | null {
+  if (!q) return null;
+  const aliases = (base.opcional(id)?.aliases ?? []) as string[];
+  return aliases.find((a) => a.toLowerCase().includes(q)) ?? null;
+}
+
 export interface Filtro {
   id: string;
   rotulo: string;
@@ -161,7 +175,8 @@ function Modal({
     const q = busca.trim().toLowerCase();
     const f = filtros?.find((x) => x.id === filtro);
     const casa = candidatos.filter((c) => {
-      if (q && !(c.nome ?? "").toLowerCase().includes(q) && !c.id.includes(q)) {
+      if (q && !(c.nome ?? "").toLowerCase().includes(q) && !c.id.includes(q)
+          && !aliasQueCasa(base, c.id, q)) {
         return false;
       }
       if (!f) return true;
@@ -211,6 +226,13 @@ function Modal({
                         className={c.atende ? "" : "marcado"}
                         aria-pressed={sel === c.id}>
                   <span className="nome">{c.nome ?? c.id}</span>
+                  {/* achou pelo nome ANTIGO: sem dizer qual, o resultado parece
+                      nao ter o texto que se digitou */}
+                  {aliasQueCasa(base, c.id, busca.trim().toLowerCase()) && (
+                    <span className="alias">
+                      {aliasQueCasa(base, c.id, busca.trim().toLowerCase())}
+                    </span>
+                  )}
                   {c.ja_pego && <span className="ja">tem</span>}
                   {c.level != null && <span className="nv">{c.level}</span>}
                 </button>

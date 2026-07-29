@@ -4,85 +4,191 @@ Ausencia de `remaster_id` nao prova remocao. Os orfaos sao tres coisas:
 
 | categoria | registros | o que fazer |
 |---|---|---|
-| **A. renomeado** | 71 | fundir com o par remaster -- nao e perda |
-| **B. intocado** | 3071 | nada: o livro nunca teve sucessor, segue valido |
-| **C. REMOVIDO** | 231 | **a pilha de resgate** |
+| **A. renomeado** | 339 | fundir com o par remaster -- nao e perda |
+| **B. intocado** | 5690 | nada: o livro nunca teve sucessor, segue valido |
+| **C. REMOVIDO** | 971 | **a pilha de resgate** |
 
 ## C -- removido de proposito
 
 O livro de origem TEM sucessor remaster e este conteudo nao migrou.
 
-- `feat`: 140
-- `spell`: 53
-- `class-feature`: 34
+- `equipment`: 602
+- `feat`: 84
+- `weapon`: 60
+- `trait`: 50
+- `spell`: 49
+- `class-feature`: 40
+- `language`: 28
+- `relic`: 25
+- `armor`: 13
+- `arcane-school`: 9
+- `shield`: 6
 - `archetype`: 3
 - `background`: 1
+- `familiar-ability`: 1
 
 Por livro de origem:
 
-- Core Rulebook -> Player Core: 196
-- Dark Archives (Remastered) -> Dark Archives (Remastered): 6
-- Pathfinder Core Rulebook -> Player Core: 5
-- Guns & Gears (Remastered) -> Guns & Gears (Remastered): 5
-- Guns & Gears -> Guns & Gears (Remastered): 4
-- Dark Archive -> Dark Archives (Remastered): 4
-- Pathfinder Dark Archive -> Dark Archives (Remastered): 3
-- Gamemastery Guide -> GM Core: 3
-- Pathfinder Guns & Gears -> Guns & Gears (Remastered): 2
-- Treasure Vault -> Treasure Vault (Remastered): 2
-- Treasure Vault (Remastered) -> Treasure Vault (Remastered): 1
+- Core Rulebook -> Player Core: 451
+- Treasure Vault (Remastered) -> Treasure Vault (Remastered): 154
+- Treasure Vault -> Treasure Vault (Remastered): 120
+- Guns & Gears (Remastered) -> Guns & Gears (Remastered): 62
+- Gamemastery Guide -> GM Core: 53
+- Dark Archives (Remastered) -> Dark Archives (Remastered): 34
+- Guns & Gears -> Guns & Gears (Remastered): 31
+- Bestiary -> Monster Core: 25
+- Bestiary 3 -> Monster Core: 21
+- Bestiary 2 -> Monster Core: 12
+- Dark Archive -> Dark Archives (Remastered): 8
 
-### feat (140)
+### equipment (602)
 
-- **Alchemical Savant** (nv 1) -- Core Rulebook
+- **Black Powder** (nv 0+) -- Guns & Gears (Remastered)
+- **Bone** (nv 0+) -- Treasure Vault (Remastered)
+- **Stone** (nv 0+) -- Treasure Vault (Remastered)
+- **Alcohol** (nv 0) -- Gamemastery Guide
+- **Backpack Catapult Stones** (nv 0) -- Guns & Gears (Remastered)
+- **Basic Chair** (nv 0) -- Guns & Gears (Remastered)
+- **Black Powder (Dose or Round)** (nv 0) -- Guns & Gears (Remastered)
+- **Bloodeye Coffee** (nv 0) -- Gamemastery Guide
+- **Bone Object** (nv 0) -- Treasure Vault (Remastered)
+- **Bone Specimen** (nv 0) -- Treasure Vault (Remastered)
+- **Candle (10)** (nv 0) -- Core Rulebook
+- **Chalice Implement** (nv 0) -- Dark Archive
+- **Chalk (10)** (nv 0) -- Core Rulebook
+- **Coded Signal** (nv 0) -- Dark Archives (Remastered)
+- **Coded Signal (Monument)** (nv 0) -- Dark Archives (Remastered)
+- **Coded Signal (Permanent)** (nv 0) -- Dark Archives (Remastered)
+- **Coded Signal (Temporary)** (nv 0) -- Dark Archives (Remastered)
+- **Counterfeit Item** (nv 0) -- Dark Archives (Remastered)
+- **Counterfeit Item (High-Grade)** (nv 0) -- Dark Archives (Remastered)
+- **Counterfeit Item (Low-Grade)** (nv 0) -- Dark Archives (Remastered)
+- **Counterfeit Item (Medium-Grade)** (nv 0) -- Dark Archives (Remastered)
+- **Cutlery** (nv 0) -- Guns & Gears
+- **Darkwood Branch** (nv 0) -- Core Rulebook
+- **Darkwood Lumber** (nv 0) -- Core Rulebook
+- **Extra Ink and Paper** (nv 0) -- Core Rulebook
+- **False Witness** (nv 0) -- Dark Archives (Remastered)
+- **False Witness (Disreputable)** (nv 0) -- Dark Archives (Remastered)
+- **Flayleaf** (nv 0) -- Gamemastery Guide
+- **Hireling** (nv 0) -- Core Rulebook
+- **Hireling (Skilled)** (nv 0) -- Core Rulebook
+- **Hireling (Unskilled)** (nv 0) -- Core Rulebook
+- **Material Component Pouch** (nv 0) -- Core Rulebook
+- **Mithral Chunk** (nv 0) -- Core Rulebook
+- **Mithral Ingot** (nv 0) -- Core Rulebook
+- **Political Favor** (nv 0) -- Dark Archives (Remastered)
+- **Political Favor (Major)** (nv 0) -- Dark Archives (Remastered)
+- **Political Favor (Minor)** (nv 0) -- Dark Archives (Remastered)
+- **Political Favor (Moderate)** (nv 0) -- Dark Archives (Remastered)
+- **Rations (1 week)** (nv 0) -- Core Rulebook
+- **Repeating Magazine** (nv 0) -- Guns & Gears
+- **Replacement Cosmetics** (nv 0) -- Core Rulebook
+- **Replacement Picks** (nv 0) -- Core Rulebook
+- **Round** (nv 0) -- Guns & Gears
+- **Rounds (Fire Lance)** (nv 0) -- Guns & Gears
+- **Rounds (Harmona Gun)** (nv 0) -- Guns & Gears
+- **Rounds (Spike Launcher)** (nv 0) -- Guns & Gears
+- **Snare Kit** (nv 0) -- Core Rulebook
+- **Stone Object (Low-Grade)** (nv 0) -- Treasure Vault (Remastered)
+- **Virtuoso silver flute** (nv 0) -- Bestiary
+- **Waterproof Carrying Case** (nv 0) -- Guns & Gears (Remastered)
+- **Aeon Stone (Dull Gray)** (nv 1) -- Core Rulebook
+- **Bendy-Arm Mutagen** (nv 1) -- Treasure Vault (Remastered)
+- **Blast Boots** (nv 1) -- Guns & Gears (Remastered)
+- **Blood Sap** (nv 1) -- Gamemastery Guide
+- **Energy Mutagen** (nv 1) -- Treasure Vault (Remastered)
+- **Leaper's Elixir (Lesser)** (nv 1) -- Core Rulebook
+- **Ravenous** (nv 1) -- Gamemastery Guide
+- **Refined Pesh** (nv 1) -- Gamemastery Guide
+- **Staining** (nv 1) -- Gamemastery Guide
+- **Vaccine** (nv 1) -- Treasure Vault (Remastered)
+- **Black Smear Poison** (nv 2) -- Bestiary
+- **Brooch of Shielding** (nv 2) -- Core Rulebook
+- **Door Ram** (nv 2) -- Guns & Gears
+- **Feather Token (Holly Bush)** (nv 2) -- Core Rulebook
+- **Hand of the Mage** (nv 2) -- Core Rulebook
+- **Infiltrator's Elixir** (nv 2) -- Core Rulebook
+- **Stone of Weight** (nv 2) -- Gamemastery Guide
+- **Toad Tears** (nv 2) -- Bestiary 2
+- **Wondrous Figurine (Onyx Dog)** (nv 2) -- Core Rulebook
+- **Yellow Musk Poison** (nv 2) -- Bestiary 2
+- **Yellow Musk Vial** (nv 2) -- Bestiary 2
+- **2nd-Level Scroll** (nv 3) -- Core Rulebook
+- **Authorized** (nv 3) -- Treasure Vault (Remastered)
+- **Choker-Arm Mutagen (Moderate)** (nv 3) -- Treasure Vault
+- **Dreary** (nv 3) -- Gamemastery Guide
+- **Feather Token (Bird)** (nv 3) -- Core Rulebook
+- **Feather Token (Chest)** (nv 3) -- Core Rulebook
+- **Feather Token (Ladder) (Ammunition)** (nv 3) -- Core Rulebook
+- **Fortune's Favor** (nv 3) -- Treasure Vault (Remastered)
+- **Hat of the Magi** (nv 3) -- Core Rulebook
+- **Magic Wand (1st-Level Spell)** (nv 3) -- Core Rulebook
+- **Phistophilus Fiddle** (nv 3) -- Treasure Vault (Remastered)
+- **Portable Weapon Mount (Tripod, Shielded)** (nv 3) -- Guns & Gears (Remastered)
+- **Raucous** (nv 3) -- Gamemastery Guide
+- **Shiver** (nv 3) -- Gamemastery Guide
+- **Sleep Arrow** (nv 3) -- Core Rulebook
+- **Sleuth's Pipe** (nv 3) -- Treasure Vault (Remastered)
+- **Snare Kit (Specialist)** (nv 3) -- Core Rulebook
+- **Spiderfoot Brew** (nv 3) -- Treasure Vault (Remastered)
+- **Tanglefoot Bag (Moderate)** (nv 3) -- Core Rulebook
+- **Thunderstone (Moderate)** (nv 3) -- Core Rulebook
+- **Unifying Emblem** (nv 3) -- Treasure Vault (Remastered)
+- **Watch of Lost Ages** (nv 3) -- Treasure Vault (Remastered)
+- **Backbiting** (nv 4) -- Gamemastery Guide
+- **Drake Rifle** (nv 4) -- Guns & Gears (Remastered)
+- **Dreamtime Tea** (nv 4) -- Gamemastery Guide
+- **Fan of the Four Winds** (nv 4) -- Treasure Vault (Remastered)
+- **Feather Token (Fan)** (nv 4) -- Core Rulebook
+- **Feather Token (Holly Bush) (Ammunition)** (nv 4) -- Core Rulebook
+- **Hwacha** (nv 4) -- Guns & Gears
+- **Inventor's Chair** (nv 4) -- Treasure Vault (Remastered)
+- **Wand of Legerdemain (1st-Level Spell)** (nv 4) -- Treasure Vault
+- **Wand of Mental Purification (1st-Level Spell)** (nv 4) -- Treasure Vault
+- **Wand of Mercy (1st-Level Spell)** (nv 4) -- Treasure Vault
+- **Wand of Pernicious Poison (1st-Level Spell)** (nv 4) -- Treasure Vault
+- **Wand of Reaching (1st-Level Spell)** (nv 4) -- Treasure Vault
+- **Wand of Widening (1st-Level Spell)** (nv 4) -- Core Rulebook
+- **Warning Snare** (nv 4) -- Core Rulebook
+- **Zerk** (nv 4) -- Gamemastery Guide
+- **3rd-Level Scroll** (nv 5) -- Core Rulebook
+- **Ballista** (nv 5) -- Guns & Gears
+- **Bombard** (nv 5) -- Guns & Gears
+- **Boots of Elvenkind** (nv 5) -- Core Rulebook
+- **Cytillesh** (nv 5) -- Gamemastery Guide
+- **Dagger of Venom** (nv 5) -- Core Rulebook
+- **Degenerating** (nv 5) -- Gamemastery Guide
+- **Depth Charge (I)** (nv 5) -- Treasure Vault (Remastered)
+- **Elven Absinthe** (nv 5) -- Gamemastery Guide
+- **False Witness (Ordinary)** (nv 5) -- Dark Archives (Remastered)
+- **Feather Token (Chest) (Ammunition)** (nv 5) -- Core Rulebook
+- _... e mais 482_
+
+### feat (84)
+
 - **Burrow Elocutionist** (nv 1) -- Core Rulebook
 - **Dangerous Sorcery** (nv 1) -- Core Rulebook
 - **Dual-Weapon Reload (Gunslinger)** (nv 1) -- Guns & Gears (Remastered)
 - **Eschew Materials** (nv 1) -- Core Rulebook
 - **Hand of the Apprentice** (nv 1) -- Core Rulebook
-- **Holy Castigation** (nv 1) -- Core Rulebook
-- **Ki Rush** (nv 1) -- Core Rulebook
-- **Ki Strike** (nv 1) -- Core Rulebook
-- **Point-Blank Shot** (nv 1) -- Core Rulebook
-- **Power Attack** (nv 1) -- Core Rulebook
-- **Ranged Reprisal** (nv 1) -- Core Rulebook
-- **Stonecunning** (nv 1) -- Core Rulebook
-- **Vengeful Hatred** (nv 1) -- Core Rulebook
-- **Wild Shape** (nv 1) -- Core Rulebook
 - **Brawling Focus** (nv 2) -- Core Rulebook
-- **Connections** (nv 2) -- Core Rulebook
-- **Dragonslayer Oath** (nv 2) -- Core Rulebook
 - **Encouraging Words** (nv 2) -- Gamemastery Guide
-- **Fiendsbane Oath** (nv 2) -- Core Rulebook
-- **Inspire Competence** (nv 2) -- Core Rulebook
 - **Minor Magic** (nv 2) -- Core Rulebook
-- **Shining Oath** (nv 2) -- Core Rulebook
-- **Stunning Fist** (nv 2) -- Core Rulebook
-- **Turn Undead** (nv 2) -- Core Rulebook
 - **Unexpected Sharpshooter Dedication** (nv 2) -- Guns & Gears (Remastered)
-- **Vengeful Oath** (nv 2) -- Core Rulebook
 - **Wild Empathy** (nv 2) -- Core Rulebook
 - **Steel Your Resolve** (nv 3) -- Gamemastery Guide
 - **Battle Assessment** (nv 4) -- Core Rulebook
 - **Calculated Splash** (nv 4) -- Core Rulebook
 - **Command Undead** (nv 4) -- Core Rulebook
-- **Deflect Arrow** (nv 4) -- Core Rulebook
 - **Fast Movement** (nv 4) -- Core Rulebook
-- **Favored Enemy** (nv 4) -- Core Rulebook
-- **Healing Touch** (nv 4) -- Core Rulebook
 - **Improved Communal Healing** (nv 4) -- Core Rulebook
-- **Inspire Defense** (nv 4) -- Core Rulebook
-- **Knockdown** (nv 4) -- Core Rulebook
 - **Magical Trickster** (nv 4) -- Core Rulebook
 - **Necrotic Infusion** (nv 4) -- Core Rulebook
-- **Opportunist** (nv 4) -- Core Rulebook
 - **Quick Alchemy** (nv 4) -- Core Rulebook
 - **Silent Spell** (nv 4) -- Core Rulebook
 - **Snare Specialist** (nv 4) -- Core Rulebook
 - **Thaumaturgic Ritualist** (nv 4) -- Dark Archives (Remastered)
-- **Thousand Faces** (nv 4) -- Core Rulebook
-- **Wholeness of Body** (nv 4) -- Core Rulebook
-- **Woodland Stride** (nv 4) -- Core Rulebook
 - **Dwarven Weapon Cunning** (nv 5) -- Core Rulebook
 - **Elven Weapon Elegance** (nv 5) -- Core Rulebook
 - **Gnome Weapon Innovator** (nv 5) -- Core Rulebook
@@ -90,53 +196,32 @@ Por livro de origem:
 - **Halfling Weapon Trickster** (nv 5) -- Core Rulebook
 - **Orc Weapon Carnage** (nv 5) -- Core Rulebook
 - **Victorious Vigor** (nv 5) -- Core Rulebook
-- **Abundant Step** (nv 6) -- Core Rulebook
 - **Bear Hug (Ursine Avenger)** (nv 6) -- Treasure Vault (Remastered)
 - **Expert Alchemy** (nv 6) -- Core Rulebook
 - **Green Empathy** (nv 6) -- Core Rulebook
-- **Ki Blast** (nv 6) -- Core Rulebook
 - **Litany Against Wrath** (nv 6) -- Core Rulebook
 - **Quick Snares** (nv 6) -- Core Rulebook
-- **Smite Evil** (nv 6) -- Core Rulebook
-- **Spell Penetration** (nv 6) -- Core Rulebook
-- **Align Armament** (nv 8) -- Core Rulebook
 - **Animal Rage** (nv 8) -- Core Rulebook
-- **Arrow Snatching** (nv 8) -- Core Rulebook
-- **Channeled Succor** (nv 8) -- Core Rulebook
-- **Exude Abyssal Corruption** (nv 8) -- Dark Archive
-- **Feral Mutagen** (nv 8) -- Core Rulebook
-- **Inspirational Performance** (nv 8) -- Core Rulebook
-- **Inspire Heroics** (nv 8) -- Core Rulebook
 - **Mental Static** (nv 8) -- Dark Archives (Remastered)
 - **Powerful Snares** (nv 8) -- Core Rulebook
-- **Second Ally** (nv 8) -- Core Rulebook
-- **Sense Evil** (nv 8) -- Core Rulebook
 - **Unbelievable Luck** (nv 8) -- Guns & Gears (Remastered)
 - **Universal Versatility** (nv 8) -- Core Rulebook
 - **Two-Truths** (nv 9) -- Dark Archives (Remastered)
-- **Combat Reflexes** (nv 10) -- Core Rulebook
 - **Elastic Mutagen** (nv 10) -- Core Rulebook
 - **Improved Command Undead** (nv 10) -- Core Rulebook
-- **Improved Knockdown** (nv 10) -- Core Rulebook
 - **Litany Against Sloth** (nv 10) -- Core Rulebook
 - **Merciful Elixir** (nv 10) -- Core Rulebook
 - **Potent Poisoner** (nv 10) -- Core Rulebook
-- **Radiant Blade Spirit** (nv 10) -- Core Rulebook
-- **Scroll Savant** (nv 10) -- Core Rulebook
-- **Sneak Savant** (nv 10) -- Core Rulebook
 - **Torrential Backlash** (nv 10) -- Dark Archives (Remastered)
 - **Blade of Justice** (nv 12) -- Core Rulebook
 - **Chain Reaction** (nv 12) -- Guns & Gears (Remastered)
 - **Diamond Soul** (nv 12) -- Core Rulebook
-- **Firearm Expert** (nv 12) -- Guns & Gears
 - **Golem Dynamo** (nv 12) -- Guns & Gears (Remastered)
 - **Green Tongue** (nv 12) -- Core Rulebook
 - **Invincible Mutagen** (nv 12) -- Core Rulebook
 - **Lasting Doubt** (nv 12) -- Core Rulebook
 - **Liberating Stride** (nv 12) -- Core Rulebook
 - **Master Alchemy** (nv 12) -- Core Rulebook
-- **Spring Attack** (nv 12) -- Core Rulebook
-- **Stance Savant (Monk)** (nv 12) -- Core Rulebook
 - **Dwarven Weapon Expertise** (nv 13) -- Core Rulebook
 - **Elven Weapon Expertise** (nv 13) -- Core Rulebook
 - **Gnome Weapon Expertise** (nv 13) -- Core Rulebook
@@ -144,181 +229,410 @@ Por livro de origem:
 - **Halfling Weapon Expertise** (nv 13) -- Core Rulebook
 - **Orc Weapon Expertise** (nv 13) -- Core Rulebook
 - **Unconventional Expertise** (nv 13) -- Core Rulebook
-- **Anchoring Aura** (nv 14) -- Core Rulebook
 - **Aura of Vengeance** (nv 14) -- Core Rulebook
 - **Diverse Armor Expert** (nv 14) -- Core Rulebook
-- **Extend Armament Alignment** (nv 14) -- Core Rulebook
-- **Glib Mutagen** (nv 14) -- Core Rulebook
 - **Greater Merciful Elixir** (nv 14) -- Core Rulebook
 - **Litany of Righteousness** (nv 14) -- Core Rulebook
 - **Shatter Space** (nv 14) -- Dark Archives (Remastered)
-- **Stance Savant (Fighter)** (nv 14) -- Core Rulebook
 - **Targeting Shot** (nv 14) -- Core Rulebook
-- _... e mais 20_
+- **Tongue of Sun and Moon** (nv 14) -- Core Rulebook
+- **Wyrmbane Aura** (nv 14) -- Core Rulebook
+- **Advanced Runic Mind-Smithing** (nv 16) -- Dark Archives (Remastered)
+- **Enlightened Presence** (nv 16) -- Core Rulebook
+- **Genius Mutagen** (nv 16) -- Core Rulebook
+- **Quivering Palm** (nv 16) -- Core Rulebook
+- **Ubiquitous Snares** (nv 16) -- Core Rulebook
+- **Bloodline Wellspring** (nv 18) -- Core Rulebook
+- **Deepest Wellspring** (nv 18) -- Dark Archive
+- **Domain Wellspring** (nv 18) -- Core Rulebook
+- **Empty Body** (nv 18) -- Core Rulebook
+- **Meditative Wellspring** (nv 18) -- Core Rulebook
+- **Mindblank Mutagen** (nv 18) -- Core Rulebook
+- **Primal Wellspring** (nv 18) -- Core Rulebook
+- **Celestial Mount** (nv 20) -- Core Rulebook
+- **Perfect Mutagen** (nv 20) -- Core Rulebook
 
-### spell (53)
+### weapon (60)
 
-- **Abyssal Plague** -- Core Rulebook
-- **Air Walk** -- Core Rulebook
-- **Alter Reality** -- Core Rulebook
-- **Anathematic Reprisal** -- Core Rulebook
-- **Antimagic Field** -- Core Rulebook
-- **Chromatic Wall** -- Core Rulebook
-- **Circle of Protection** -- Core Rulebook
-- **Crusade** -- Core Rulebook
-- **Death Knell** -- Core Rulebook
-- **Death Ward** -- Core Rulebook
-- **Detect Alignment** -- Core Rulebook
-- **Dimensional Steps** -- Core Rulebook
-- **Discern Lies** -- Core Rulebook
-- **Divine Aura** -- Core Rulebook
-- **Divine Vessel** -- Core Rulebook
-- **Diviner's Sight** -- Core Rulebook
-- **Dragon Claws** -- Core Rulebook
-- **Elemental Tempest** -- Core Rulebook
-- **Enhance Victuals** -- Core Rulebook
-- **Ethereal Jaunt** -- Core Rulebook
-- **Extend Spell** -- Core Rulebook
-- **Glyph of Warding** -- Core Rulebook
-- **Life Siphon** -- Core Rulebook
-- **Litany Against Wrath** -- Core Rulebook
-- **Litany against Sloth** -- Core Rulebook
-- **Litany of Righteousness** -- Core Rulebook
-- **Miracle** -- Core Rulebook
-- **Mirror Image** -- Core Rulebook
-- **Misdirection** -- Core Rulebook
-- **Negate Aroma** -- Core Rulebook
-- **Physical Boost** -- Core Rulebook
-- **Power Word Blind** -- Core Rulebook
-- **Power Word Kill** -- Core Rulebook
-- **Power Word Stun** -- Core Rulebook
-- **Primal Phenomenon** -- Core Rulebook
-- **Prismatic Sphere** -- Core Rulebook
-- **Prismatic Spray** -- Core Rulebook
-- **Prismatic Wall** -- Core Rulebook
-- **Purple Worm Sting** -- Core Rulebook
-- **Restoration** -- Core Rulebook
-- **Reverse Gravity** -- Core Rulebook
-- **Secret Page** -- Core Rulebook
-- **Shadow Siphon** -- Core Rulebook
-- **Shillelagh** -- Core Rulebook
-- **Solid Fog** -- Core Rulebook
-- **Spell Immunity** -- Core Rulebook
-- **Stinking Cloud** -- Core Rulebook
-- **Stone to Flesh** -- Core Rulebook
-- **Telepathic Bond** -- Core Rulebook
-- **Touch of Corruption** -- Gamemastery Guide
-- **Undetectable Alignment** -- Core Rulebook
-- **Warped Terrain** -- Core Rulebook
-- **Wish** -- Core Rulebook
+- **Aklys** (nv 0) -- Bestiary
+- **Atlatl** (nv 0) -- Treasure Vault (Remastered)
+- **Bolts (Phalanx Piercer)** (nv 0) -- Treasure Vault (Remastered)
+- **Bow Staff (Melee)** (nv 0) -- Treasure Vault (Remastered)
+- **Bow Staff (Ranged)** (nv 0) -- Treasure Vault (Remastered)
+- **Cane Pistol (Melee)** (nv 0) -- Guns & Gears (Remastered)
+- **Cane Pistol (Ranged)** (nv 0) -- Guns & Gears (Remastered)
+- **Crescent Cross (Melee)** (nv 0) -- Treasure Vault (Remastered)
+- **Crescent Cross (Ranged)** (nv 0) -- Treasure Vault (Remastered)
+- **Dagger Pistol (Melee)** (nv 0) -- Guns & Gears (Remastered)
+- **Dagger Pistol (Ranged)** (nv 0) -- Guns & Gears (Remastered)
+- **Dragon-Mouth Pistol** (nv 0) -- Guns & Gears (Remastered)
+- **Firearm Ammunition (10 rounds)** (nv 0) -- Guns & Gears (Remastered)
+- **Firearm Ammunition (5 rounds)** (nv 0) -- Guns & Gears (Remastered)
+- **Lancer (Melee)** (nv 0) -- Treasure Vault (Remastered)
+- **Lancer (Ranged)** (nv 0) -- Treasure Vault (Remastered)
+- **Mace Multipistol (Melee)** (nv 0) -- Guns & Gears (Remastered)
+- **Mace Multipistol (Ranged)** (nv 0) -- Guns & Gears (Remastered)
+- **Magazine (Air Repeater)** (nv 0) -- Guns & Gears (Remastered)
+- **Magazine (Long Air Repeater)** (nv 0) -- Guns & Gears (Remastered)
+- **Mikazuki (Melee)** (nv 0) -- Treasure Vault (Remastered)
+- **Mikazuki (Ranged)** (nv 0) -- Treasure Vault (Remastered)
+- **Mithral Tree** (nv 0) -- Guns & Gears
+- **Piercing Wind (Melee)** (nv 0) -- Guns & Gears (Remastered)
+- **Piercing Wind (Ranged)** (nv 0) -- Guns & Gears (Remastered)
+- **Rapier Pistol (Melee)** (nv 0) -- Guns & Gears (Remastered)
+- **Rapier Pistol (Ranged)** (nv 0) -- Guns & Gears (Remastered)
+- **Spray Pellet** (nv 0) -- Treasure Vault (Remastered)
+- **Spraysling** (nv 0) -- Treasure Vault (Remastered)
+- **Taw Launcher** (nv 0) -- Treasure Vault (Remastered)
+- **Wrecker (Melee)** (nv 0) -- Treasure Vault (Remastered)
+- **Wrecker (Ranged)** (nv 0) -- Treasure Vault (Remastered)
+- **Axe Musket (Melee)** (nv 1) -- Guns & Gears (Remastered)
+- **Axe Musket (Ranged)** (nv 1) -- Guns & Gears (Remastered)
+- **Explosive Dogslicer (Melee)** (nv 1) -- Guns & Gears (Remastered)
+- **Explosive Dogslicer (Ranged)** (nv 1) -- Guns & Gears (Remastered)
+- **Gnome Amalgam Musket (Melee)** (nv 1) -- Guns & Gears (Remastered)
+- **Gnome Amalgam Musket (Ranged)** (nv 1) -- Guns & Gears (Remastered)
+- **Gun Sword (Melee)** (nv 1) -- Guns & Gears (Remastered)
+- **Gun Sword (Ranged)** (nv 1) -- Guns & Gears (Remastered)
+- **Hammer Gun (Melee)** (nv 1) -- Guns & Gears (Remastered)
+- **Hammer Gun (Ranged)** (nv 1) -- Guns & Gears (Remastered)
+- **Repeating Crossbow** (nv 1) -- Guns & Gears (Remastered)
+- **Three Peaked Tree (Melee)** (nv 1) -- Guns & Gears (Remastered)
+- **Three Peaked Tree (Ranged)** (nv 1) -- Guns & Gears (Remastered)
+- **Drake Rifle** (nv 4) -- Guns & Gears
+- **Dagger of Venom** (nv 5) -- Core Rulebook
+- **Sunken Pistol** (nv 8) -- Guns & Gears (Remastered)
+- **Immolation Clan Pistol** (nv 10) -- Guns & Gears (Remastered)
+- **Dwarven Thrower** (nv 13) -- Core Rulebook
+- **Holy Avenger** (nv 14) -- Core Rulebook
+- **Frost Brand** (nv 16) -- Core Rulebook
+- **Staff of Power** (nv 16) -- Core Rulebook
+- **Luck Blade** (nv 17) -- Core Rulebook
+- **Orichalcum Weapon** (nv 18) -- Core Rulebook
+- **Luck Blade (Wishing)** (nv 19) -- Core Rulebook
+- **Mattock of the Titans** (nv 19) -- Core Rulebook
+- **Staff of the Magi** (nv 20) -- Core Rulebook
+- **Axe of the Dwarven Lords** (nv 26) -- Gamemastery Guide
+- **Flame Tongue** (nv 13+) -- Core Rulebook
 
-### class-feature (34)
+### trait (50)
 
-- **Champion's Reaction** (nv 1) -- Core Rulebook
-- **Construct Innovation** (nv 1) -- Pathfinder Guns & Gears
-- **Focus Spells** (nv 1) -- Pathfinder Core Rulebook
-- **Infused Reagents** (nv 1) -- Pathfinder Core Rulebook
-- **Initiate Benefit (Chalice)** (nv 1) -- Pathfinder Dark Archive
-- **Ki Spells** (nv 1) -- Pathfinder Core Rulebook
-- **Iron Will** (nv 3) -- Core Rulebook
-- **Stubborn** (nv 3) -- Guns & Gears
-- **Second Implement** (nv 5) -- Dark Archive
-- **Evasion** (nv 7) -- Guns & Gears
-- **Perpetual Infusions** (nv 7) -- Core Rulebook
-- **Perpetual Infusions** (nv 7) -- Core Rulebook
-- **Perpetual Infusions** (nv 7) -- Core Rulebook
-- **Perpetual Infusions** (nv 7) -- Core Rulebook
-- **Perpetual Infusions** (nv 7) -- Core Rulebook
-- **Perpetual Potency** (nv 11) -- Core Rulebook
-- **Perpetual Potency** (nv 11) -- Core Rulebook
-- **Perpetual Potency** (nv 11) -- Core Rulebook
-- **Perpetual Potency** (nv 11) -- Core Rulebook
-- **Perpetual Potency** (nv 11) -- Core Rulebook
-- **Psychic Weapon Expertise** (nv 11) -- Pathfinder Dark Archive
-- **Alchemist Armor Expertise (Level 13)** (nv 13) -- Pathfinder Core Rulebook
-- **Improved Evasion** (nv 13) -- Core Rulebook
-- **Alchemical Alacrity** (nv 15) -- Core Rulebook
-- **Energy Barrier** (nv 15) -- Pathfinder Guns & Gears
-- **Heightened Senses** (nv 17) -- Core Rulebook
-- **Paragon Benefit (Chalice)** (nv 17) -- Pathfinder Dark Archive
-- **Perpetual Perfection** (nv 17) -- Core Rulebook
-- **Perpetual Perfection** (nv 17) -- Core Rulebook
-- **Perpetual Perfection** (nv 17) -- Core Rulebook
-- **Perpetual Perfection** (nv 17) -- Core Rulebook
-- **Perpetual Perfection** (nv 17) -- Core Rulebook
-- **Alchemist Armor Mastery (Level 19)** (nv 19) -- Pathfinder Core Rulebook
-- **Armor of Fury** (nv 19) -- Core Rulebook
+- **Abjuration** -- Core Rulebook
+- **Aftermath** -- Dark Archives (Remastered)
+- **Amp** -- Dark Archives (Remastered)
+- **Brutal** -- Bestiary
+- **Chaotic** -- Core Rulebook
+- **Charm** -- Bestiary
+- **Complex** -- Core Rulebook
+- **Conjuration** -- Core Rulebook
+- **Deviant** -- Dark Archives (Remastered)
+- **Div** -- Bestiary 3
+- **Divination** -- Core Rulebook
+- **Drow** -- Core Rulebook
+- **Drug** -- Gamemastery Guide
+- **Enchantment** -- Core Rulebook
+- **Esoterica** -- Dark Archives (Remastered)
+- **Evocation** -- Core Rulebook
+- **Ghoran** -- Bestiary 3
+- **Golem** -- Bestiary
+- **Good** -- Core Rulebook
+- **Ifrit** -- Bestiary 2
+- **Inevitable** -- Bestiary
+- **Kovintus** -- Bestiary 3
+- **Lawful** -- Core Rulebook
+- **Litany** -- Core Rulebook
+- **Mindshift** -- Dark Archives (Remastered)
+- **Morlock** -- Bestiary 2
+- **Mortic** -- Bestiary 3
+- **Necromancy** -- Core Rulebook
+- **Oath** -- Core Rulebook
+- **Open** -- Core Rulebook
+- **Paaridar** -- Bestiary 3
+- **Psyche** -- Dark Archives (Remastered)
+- **Psychic** -- Dark Archives (Remastered)
+- **Reflection** -- Dark Archives (Remastered)
+- **Reload** -- Core Rulebook
+- **Sea Devil** -- Bestiary
+- **Shabti** -- Bestiary 3
+- **Siktempora** -- Bestiary 3
+- **Skelm** -- Bestiary 3
+- **Skulk** -- Bestiary 2
+- **Spriggan** -- Bestiary 2
+- **Stamina** -- Gamemastery Guide
+- **Stheno** -- Bestiary 3
+- **Sylph** -- Bestiary 2
+- **Telepathy** -- Bestiary
+- **Thaumaturge** -- Dark Archives (Remastered)
+- **Transmutation** -- Core Rulebook
+- **Undine** -- Bestiary 2
+- **Universal Ancestry** -- Core Rulebook
+- **Varies** -- Core Rulebook
+
+### spell (49)
+
+- **Detect Alignment** (nv 1) -- Core Rulebook
+- **Diviner's Sight** (nv 1) -- Core Rulebook
+- **Dragon Claws** (nv 1) -- Core Rulebook
+- **Negate Aroma** (nv 1) -- Core Rulebook
+- **Physical Boost** (nv 1) -- Core Rulebook
+- **Shillelagh** (nv 1) -- Core Rulebook
+- **Touch of Corruption** (nv 1) -- Gamemastery Guide
+- **Warped Terrain** (nv 1) -- Core Rulebook
+- **Death Knell** (nv 2) -- Core Rulebook
+- **Enhance Victuals** (nv 2) -- Core Rulebook
+- **Mirror Image** (nv 2) -- Core Rulebook
+- **Misdirection** (nv 2) -- Core Rulebook
+- **Restoration** (nv 2) -- Core Rulebook
+- **Undetectable Alignment** (nv 2) -- Core Rulebook
+- **Circle of Protection** (nv 3) -- Core Rulebook
+- **Extend Spell** (nv 3) -- Core Rulebook
+- **Glyph of Warding** (nv 3) -- Core Rulebook
+- **Litany Against Wrath** (nv 3) -- Core Rulebook
+- **Secret Page** (nv 3) -- Core Rulebook
+- **Stinking Cloud** (nv 3) -- Core Rulebook
+- **Air Walk** (nv 4) -- Core Rulebook
+- **Anathematic Reprisal** (nv 4) -- Core Rulebook
+- **Dimensional Steps** (nv 4) -- Core Rulebook
+- **Discern Lies** (nv 4) -- Core Rulebook
+- **Elemental Tempest** (nv 4) -- Core Rulebook
+- **Life Siphon** (nv 4) -- Core Rulebook
+- **Solid Fog** (nv 4) -- Core Rulebook
+- **Spell Immunity** (nv 4) -- Core Rulebook
+- **Abyssal Plague** (nv 5) -- Core Rulebook
+- **Chromatic Wall** (nv 5) -- Core Rulebook
+- **Death Ward** (nv 5) -- Core Rulebook
+- **Litany against Sloth** (nv 5) -- Core Rulebook
+- **Shadow Siphon** (nv 5) -- Core Rulebook
+- **Telepathic Bond** (nv 5) -- Core Rulebook
+- **Purple Worm Sting** (nv 6) -- Core Rulebook
+- **Stone to Flesh** (nv 6) -- Core Rulebook
+- **Divine Vessel** (nv 7) -- Core Rulebook
+- **Ethereal Jaunt** (nv 7) -- Core Rulebook
+- **Litany of Righteousness** (nv 7) -- Core Rulebook
+- **Power Word Blind** (nv 7) -- Core Rulebook
+- **Prismatic Spray** (nv 7) -- Core Rulebook
+- **Reverse Gravity** (nv 7) -- Core Rulebook
+- **Antimagic Field** (nv 8) -- Core Rulebook
+- **Divine Aura** (nv 8) -- Core Rulebook
+- **Power Word Stun** (nv 8) -- Core Rulebook
+- **Prismatic Wall** (nv 8) -- Core Rulebook
+- **Crusade** (nv 9) -- Core Rulebook
+- **Power Word Kill** (nv 9) -- Core Rulebook
+- **Prismatic Sphere** (nv 9) -- Core Rulebook
+
+### class-feature (40)
+
+- **Ability Boosts** -- Core Rulebook
+- **Alchemical Alacrity** -- Core Rulebook
+- **Alchemist Armor Expertise (Level 13)** -- Core Rulebook
+- **Alchemist Armor Mastery (Level 19)** -- Core Rulebook
+- **Alertness** -- Core Rulebook
+- **Arcane Spellcasting (Magus)** -- Core Rulebook
+- **Armor of Fury** -- Core Rulebook
+- **Champion's Reaction** -- Core Rulebook
+- **Construct Innovation** -- Guns & Gears
+- **Energy Barrier** -- Guns & Gears
+- **Evasion** -- Guns & Gears
+- **Focus Spells** -- Core Rulebook
+- **Heightened Senses** -- Core Rulebook
+- **Improved Evasion** -- Core Rulebook
+- **Infused Reagents** -- Core Rulebook
+- **Initiate Benefit (Chalice)** -- Dark Archive
+- **Iron Will** -- Core Rulebook
+- **Ki Spells** -- Core Rulebook
+- **Paragon Benefit (Chalice)** -- Dark Archive
+- **Perpetual Infusions** -- Core Rulebook
+- **Perpetual Infusions (Bomber)** -- Core Rulebook
+- **Perpetual Infusions (Chirurgeon)** -- Core Rulebook
+- **Perpetual Infusions (Mutagenist)** -- Core Rulebook
+- **Perpetual Infusions (Toxicologist)** -- Core Rulebook
+- **Perpetual Perfection** -- Core Rulebook
+- **Perpetual Perfection (Bomber)** -- Core Rulebook
+- **Perpetual Perfection (Chirurgeon)** -- Core Rulebook
+- **Perpetual Perfection (Mutagenist)** -- Core Rulebook
+- **Perpetual Perfection (Toxicologist)** -- Core Rulebook
+- **Perpetual Potency** -- Core Rulebook
+- **Perpetual Potency (Bomber)** -- Core Rulebook
+- **Perpetual Potency (Chirurgeon)** -- Core Rulebook
+- **Perpetual Potency (Mutagenist)** -- Core Rulebook
+- **Perpetual Potency (Toxicologist)** -- Core Rulebook
+- **Psychic Weapon Expertise** -- Dark Archive
+- **Resolve** -- Core Rulebook
+- **Second Implement** -- Dark Archive
+- **Spell Repertoire (Psychic)** -- Dark Archive
+- **Spell Repertoire (Summoner)** -- Core Rulebook
+- **Stubborn** -- Guns & Gears
+
+### language (28)
+
+- **Adlet** -- Bestiary 3
+- **Alghollthu** -- Bestiary
+- **Amurrun** -- Bestiary
+- **Arboreal** -- Bestiary
+- **Boggard** -- Bestiary
+- **Caligni** -- Bestiary
+- **Cyclops** -- Bestiary
+- **D'ziriak** -- Bestiary 2
+- **Daemonic** -- Bestiary
+- **Destrachan** -- Bestiary 2
+- **Girtablilu** -- Bestiary 3
+- **Grioth** -- Bestiary 3
+- **Iruxi** -- Bestiary
+- **Jyoti** -- Bestiary 2
+- **Kovintal** -- Bestiary 3
+- **Mi-Go** -- Bestiary 3
+- **Munavri** -- Bestiary 3
+- **Protean** -- Bestiary
+- **Requian** -- Bestiary
+- **Samsaran** -- Bestiary 3
+- **Sasquatch** -- Bestiary 3
+- **Shae** -- Bestiary 3
+- **Sphinx** -- Bestiary
+- **Tengu** -- Bestiary
+- **Utopian** -- Bestiary
+- **Vanara** -- Bestiary 3
+- **Vishkanyan** -- Bestiary 3
+- **Yithian** -- Bestiary 3
+
+### relic (25)
+
+- **Against All Odds** -- Treasure Vault (Remastered)
+- **Artistic Perfection** -- Treasure Vault (Remastered)
+- **Beginner's Luck** -- Treasure Vault (Remastered)
+- **Borrow Time** -- Treasure Vault (Remastered)
+- **Charming** -- Treasure Vault (Remastered)
+- **Clean Luck** -- Treasure Vault (Remastered)
+- **Dominant Emotion** -- Treasure Vault (Remastered)
+- **Emotion Conduit** -- Treasure Vault (Remastered)
+- **Emotion Surge** -- Treasure Vault (Remastered)
+- **Enthralling** -- Treasure Vault (Remastered)
+- **Fascinating** -- Treasure Vault (Remastered)
+- **Fervent Spell** -- Treasure Vault (Remastered)
+- **Fervor** -- Treasure Vault (Remastered)
+- **Inspiring** -- Treasure Vault (Remastered)
+- **Intelligent Relic** -- Treasure Vault (Remastered)
+- **Muse** -- Treasure Vault (Remastered)
+- **Precognition** -- Treasure Vault (Remastered)
+- **Quickening Emotion** -- Treasure Vault (Remastered)
+- **Sands of the Hourglass** -- Treasure Vault (Remastered)
+- **Steal Luck** -- Treasure Vault (Remastered)
+- **Swap Luck** -- Treasure Vault (Remastered)
+- **Temporal Pulse** -- Treasure Vault (Remastered)
+- **Time Jump** -- Treasure Vault (Remastered)
+- **Time Reversal** -- Treasure Vault (Remastered)
+- **Whammy** -- Treasure Vault (Remastered)
+
+### armor (13)
+
+- **Buckle Armor** (nv 0) -- Treasure Vault (Remastered)
+- **Heavy Power Suit** (nv 0) -- Guns & Gears
+- **Clockwork Disguise** (nv 6) -- Guns & Gears (Remastered)
+- **Rhino Hide** (nv 9) -- Core Rulebook
+- **Remorhaz Armor** (nv 10) -- Treasure Vault
+- **Celestial Armor** (nv 13) -- Core Rulebook
+- **Demon Armor** (nv 13) -- Core Rulebook
+- **Mail of Luck** (nv 13) -- Core Rulebook
+- **Plate Armor of the Deep** (nv 15) -- Core Rulebook
+- **Robe of the Archmagi** (nv 15) -- Core Rulebook
+- **Robe of the Archmagi (Greater)** (nv 19) -- Core Rulebook
+- **Breastplate of Command** (nv 10+) -- Core Rulebook
+- **Elven Chain** (nv 13+) -- Core Rulebook
+
+### arcane-school (9)
+
+- **Abjuration** -- Core Rulebook
+- **Conjuration** -- Core Rulebook
+- **Divination** -- Core Rulebook
+- **Enchantment** -- Core Rulebook
+- **Evocation** -- Core Rulebook
+- **Illusion** -- Core Rulebook
+- **Necromancy** -- Core Rulebook
+- **Transmutation** -- Core Rulebook
+- **Universalist** -- Core Rulebook
+
+### shield (6)
+
+- **Arrow-Catching Shield** (nv 11) -- Core Rulebook
+- **Warding Escutcheon (Greater)** (nv 20) -- Treasure Vault (Remastered)
+- **Sturdy Shield** (nv 4+) -- Core Rulebook
+- **Dragonhide Shield** (nv 8+) -- Core Rulebook
+- **Mithral Shield** (nv 8+) -- Core Rulebook
+- **Orichalcum Shield** (nv 17+) -- Core Rulebook
 
 ### archetype (3)
 
-- **Gelid Shard** -- Treasure Vault
-- **Ursine Avenger Hood** -- Treasure Vault
-- **Unexpected Sharpshooter** (nv 2) -- Guns & Gears
+- **Gelid Shard** -- Treasure Vault (Remastered)
+- **Ursine Avenger Hood** -- Treasure Vault (Remastered)
+- **Unexpected Sharpshooter** (nv 2) -- Guns & Gears (Remastered)
 
 ### background (1)
 
 - **Child of the Twin Village** -- Dark Archive
 
+### familiar-ability (1)
+
+- **Lab Assistant** -- Core Rulebook
+
 ## A -- renomeado (amostra)
 
 - `wb:class-feature/greater-eidolon-specialization` **Greater Eidolon Specialization** -> **Greater Weapon Specialization** _(nome proximo)_
-- `wb:class-feature/spell-repertoire-psychic` **Spell Repertoire** -> **Spell Repertoire** _(nome identico)_
-- `wb:class-feature/spell-repertoire-summoner` **Spell Repertoire** -> **Spell Repertoire** _(nome identico)_
 - `wb:feat/armor-regiment-training` **Armor Regiment Training** -> **Armored Regiment Training** _(nome proximo)_
 - `wb:feat/automatic-psychic-action` **Automatic Psychic Action** -> **Autonomic Psychic Action** _(nome proximo)_
+- `wb:feat/breath-of-the-dragon` **Breath of the Dragon** -> **Breath of the Dragon** _(nome identico)_
 - `wb:feat/burning-spell` **Burning Spell** -> **Branding Spell** _(nome proximo)_
 - `wb:feat/call-the-worm` **Call the Worm** -> **Call the Swarm** _(nome proximo)_
 - `wb:feat/camoflage-coat` **Camoflage Coat** -> **Camouflage Coat** _(nome proximo)_
 - `wb:feat/captivator-dedication` **Captivator Dedication** -> **Cultivator Dedication** _(nome proximo)_
 - `wb:feat/certain-strategem` **Certain Strategem** -> **Certain Stratagem** _(nome proximo)_
 - `wb:feat/conrasu-weapon-familiarity` **Conrasu Weapon Familiarity** -> **Centaur Weapon Familiarity** _(nome proximo)_
-- `wb:feat/critical-debilitations` **Critical Debilitations** -> **Critical Debilitation** _(nome proximo)_
 - `wb:feat/decree-of-banisment` **Decree of Banisment** -> **Decree of Banishment** _(nome proximo)_
 - `wb:feat/denier-of-destruction` **Denier of Destruction** -> **Engine of Destruction** _(nome proximo)_
-- `wb:feat/disrupt-ki` **Disrupt Ki** -> **Disrupt Qi** _(nome proximo)_
 - `wb:feat/disruptive-stare` **Disruptive Stare** -> **Disruptive Stance** _(nome proximo)_
-- `wb:feat/divine-ally` **Divine Ally** -> **Divine Wall** _(nome proximo)_
 - `wb:feat/eldritch-researcher-dedication` **Eldritch Researcher Dedication** -> **Eldritch Archer Dedication** _(nome proximo)_
 - `wb:feat/embolded-with-glorious-purpose` **Embolded With Glorious Purpose** -> **Emboldened with Glorious Purpose** _(nome proximo)_
 - `wb:feat/empathetic-envoy` **Empathetic Envoy** -> **Empathic Envoy** _(nome proximo)_
 - `wb:feat/exemplar-resilency` **Exemplar Resilency** -> **Exemplar Resiliency** _(nome proximo)_
-- `wb:feat/expert-disassembler` **Expert Disassembler** -> **Expert Disassembly** _(nome proximo)_
 - `wb:feat/expert-spellcasting` **Expert Spellcasting** -> **Expert Bard Spellcasting** _(nome proximo)_
 - `wb:feat/fautless-defense` **Fautless Defense** -> **Faultless Defense** _(nome proximo)_
 - `wb:feat/flash-of-omipotence` **Flash of Omipotence** -> **Flash of Omnipotence** _(nome proximo)_
-- `wb:feat/forge-blessd-shot` **Forge-Blessd Shot** -> **Forge-Blessed Shot** _(nome proximo)_
 - `wb:feat/fracture-time-flow` **Fracture Time Flow** -> **Fracture Timeflow** _(nome proximo)_
 - `wb:feat/fully-flighted` **Fully Flighted** -> **Full Flight** _(nome proximo)_
 - `wb:feat/genie-weapon-familiarity` **Genie Weapon Familiarity** -> **Gnome Weapon Familiarity** _(nome proximo)_
 - `wb:feat/ghoran-weapon-familiarity` **Ghoran Weapon Familiarity** -> **Orc Weapon Familiarity** _(nome proximo)_
-- `wb:feat/gnoll-weapon-familiarity` **Gnoll Weapon Familiarity** -> **Gnome Weapon Familiarity** _(nome proximo)_
 - `wb:feat/grave-sight` **Grave Sight** -> **Gravesight** _(nome proximo)_
-- `wb:feat/harbingers-claw` **Harbinger's Claw** -> **Harbinger's Caw** _(nome proximo)_
 - `wb:feat/instructive-strike` **Instructive Strike** -> **Instinctive Strike** _(nome proximo)_
-- `wb:feat/ki-center` **Ki Center** -> **Qi Center** _(nome proximo)_
 - `wb:feat/lead-the-way` **Lead the Way** -> **Clear the Way** _(nome proximo)_
-- `wb:feat/leyline-conduit` **Leyline Conduit** -> **Ley Line Conduit** _(nome proximo)_
 - `wb:feat/lich-dedication` **Lich Dedication** -> **Witch Dedication** _(nome proximo)_
 - `wb:feat/link-focus` **Link Focus** -> **Linked Focus** _(nome proximo)_
 - `wb:feat/lurching-chomp` **Lurching Chomp** -> **Luring Chomp** _(nome proximo)_
+- `wb:feat/many-guises` **Many Guises** -> **Many Guises** _(nome identico)_
 - `wb:feat/master-spellcasting` **Master Spellcasting** -> **Master Bard Spellcasting** _(nome proximo)_
 - `wb:feat/no-hands-no-problems` **No Hands, No Problems** -> **No Hands, No Problem** _(nome proximo)_
-- `wb:feat/nocturnal-sense` **Nocturnal Sense** -> **Nocturnal Senses** _(nome proximo)_
 - `wb:feat/one-with-the-land` **One with the Land** -> **One with the Wild** _(nome proximo)_
 - `wb:feat/oppurtune-trickster` **Oppurtune Trickster** -> **Opportune Trickster** _(nome proximo)_
 - `wb:feat/orators-fillibuster` **Orator's Fillibuster** -> **Orator's Filibuster** _(nome proximo)_
 - `wb:feat/pass-vengeful-judgement` **Pass Vengeful Judgement** -> **Pass Vengeful Judgment** _(nome proximo)_
+- `wb:feat/rallying-charge` **Rallying Charge** -> **Rallying Charge** _(nome identico)_
 - `wb:feat/recycled-cogwheel` **Recycled Cogwheel** -> **Recycled Cogwheels** _(nome proximo)_
 - `wb:feat/remember-thy-names` **Remember thy Names** -> **Remember Their Names** _(nome proximo)_
 - `wb:feat/return-to-the-sea` **Return to the Sea** -> **Return to the Seed** _(nome proximo)_
-- `wb:feat/saberteeth` **Saberteeth** -> **Saber Teeth** _(nome proximo)_
+- `wb:feat/riptide` **Riptide** -> **Riptide** _(nome identico)_
 - `wb:feat/sacred-defense` **Sacred Defense** -> **Sacred Defender** _(nome proximo)_
 - `wb:feat/safeguarded-spell` **Safeguarded Spell** -> **Safeguard Spell** _(nome proximo)_
-- `wb:feat/scattering-shot` **Scattering Shot** -> **Scattering Shout** _(nome proximo)_
 - `wb:feat/see-the-unseen` **See the Unseen** -> **Sense the Unseen** _(nome proximo)_
 - `wb:feat/shield-wall` **Shield Wall** -> **Shield Wallop** _(nome proximo)_
 - `wb:feat/spell-trickster-dedication` **Spell Trickster Dedication** -> **Scroll Trickster Dedication** _(nome proximo)_
 - `wb:feat/sure-foot` **Sure Foot** -> **Sure-Footed** _(nome proximo)_
 - `wb:feat/vacate-vision` **Vacate Vision** -> **Acute Vision** _(nome proximo)_
 - `wb:feat/vengful-remnant` **Vengful Remnant** -> **Vengeful Remnant** _(nome proximo)_
-- _... e mais 11_
+- `wb:feat/vermilion-threads` **Vermilion Threads** -> **Vermillion Threads** _(nome proximo)_
+- `wb:feat/vindicators-judgement` **Vindicator's Judgement** -> **Vindicator's Judgment** _(nome proximo)_
+- `wb:feat/voice-of-elements` **Voice of Elements** -> **Voice of the Elements** _(nome proximo)_
+- `wb:feat/whisper-of-warning` **Whisper of Warning** -> **Whispers of Warning** _(nome proximo)_
+- `wb:feat/wild-strider` **Wild Strider** -> **Wild Stride** _(nome proximo)_
+- `wb:archetype/eldritch-researcher` **Eldritch Researcher** -> **Eldritch Archer** _(nome proximo)_
+- `wb:spell/dinosaur-fort` **Dinosaur Fort** -> **Dinosaur Form** _(nome proximo)_
+- `wb:spell/dread-aura` **Dread Aura** -> **Read Aura** _(nome proximo)_
+- `wb:heritage/pine-leshy` **Pine Leshy** -> **Vine Leshy** _(nome proximo)_
+- `wb:background/wish-for-riches` **Wish for Riches** -> **Wishes for Riches** _(nome proximo)_
+- _... e mais 279_

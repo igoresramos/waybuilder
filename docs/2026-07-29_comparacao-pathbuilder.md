@@ -121,3 +121,51 @@ implementador do mesmo RAW**, e o que importa e onde os dois discordam.
 2. Outros slots -- `skill_feat`, `general_feat`, `ancestry_feat`
 3. Niveis mais altos, onde o predicado tem mais o que errar
 4. Comparar tambem o RESULTADO (proficiencia em numero) via export JSON
+
+## Segunda rodada -- outros slots, outros niveis (2026-07-29)
+
+A sonda passou a aceitar **classe, nivel e slot** por argumento, e a descobrir
+as abas do modal em vez de usar lista fixa (elas mudam por slot: `Class Feat`
+abre quatro, `General Feat` abre uma, `Skill Feat` tem as suas). Colhidos:
+`Fighter 1/6 class_feat`, `Fighter 2 skill_feat`, `Fighter 3 general_feat`.
+
+A categoria mais valiosa apareceu so aqui: **discordam se atende**. Duas
+familias, e as duas sao reais.
+
+### Defeito nosso, ja corrigido: proficiencia de arma NOMEADA
+
+10 dedicacoes exigem treino numa arma especifica
+(`weapon:aldori-dueling-sword`, `weapon:butterfly-sword`), e **ninguem preenche
+essa chave** -- a ficha guarda rank por CATEGORIA. Um Guerreiro 6, treinado em
+arma avancada desde o nivel 1, aparecia untrained na Aldori Dueling Sword e a
+dedicacao saia como fora do requisito.
+
+Corrigido nos dois motores: `_rank_de_arma` resolve a chave nomeada pela
+`weapon_category` da arma na base, e o rank nomeado continua ganhando quando
+existe (feat que treina uma arma especifica e mais preciso que a categoria). Um
+Mago 6 continua barrado -- a ponte nao afrouxa. 3 assercoes novas.
+
+### Defeito nosso, medido e NAO corrigido: requisito perdido
+
+42 dedicacoes que nos liberamos e o Pathbuilder barra. A causa e a mesma em
+todas: o `requires` da nossa base tem **so o nivel**, e a prosa do
+pre-requisito diz mais.
+
+    Godless Healing    requires: {character_level >= 2}
+                       prosa:    "Trained in Medicine; Battle Medicine"
+    Automatic Knowledge requires: {character_level >= 2}
+                       prosa:    "expert in a skill with Recall Knowledge; Assurance"
+
+Medido na base inteira: **178 feats** com `requires` so de nivel e prosa citando
+pre-requisito. Nem todos sao parseaveis -- parte e narrativa ("member of the
+Gray Gardeners", "Exposure to the Well of Axuma"), e pelo principio zero essas
+sugerem em vez de bloquear. Mas a fatia mecanica e clara e vale um passo de
+pipeline. **Item 86 do TODO.**
+
+### Diferenca de modelo, nao defeito
+
+8 casos em que nos barramos e o Pathbuilder libera: dedicacoes que exigem
+pericia treinada, num personagem de comparacao que ainda nao escolheu pericia.
+O Pathbuilder trata "pode vir a ter" como disponivel; nos avaliamos o estado
+atual e MARCAMOS em vez de esconder. Os dois comportamentos sao defensaveis, e o
+nosso e o que o principio zero pede.

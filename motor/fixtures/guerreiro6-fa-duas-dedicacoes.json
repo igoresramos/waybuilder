@@ -179,6 +179,7 @@
    "wb:feat/snagging-strike",
    "wb:feat/sudden-charge",
    "wb:feat/vicious-swing",
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animist-dedication",
    "wb:feat/artillerist-dedication",
@@ -208,8 +209,7 @@
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/druid-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
-   "wb:feat/dueling-parry",
-   "wb:feat/dueling-parry-fighter"
+   "wb:feat/dueling-parry"
   ],
   "class_feat@4": [
    "wb:feat/agile-shield-grip",
@@ -221,6 +221,7 @@
    "wb:feat/snagging-strike",
    "wb:feat/sudden-charge",
    "wb:feat/vicious-swing",
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animist-dedication",
    "wb:feat/artillerist-dedication",
@@ -250,8 +251,7 @@
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/druid-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
-   "wb:feat/dueling-parry",
-   "wb:feat/dueling-parry-fighter"
+   "wb:feat/dueling-parry"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -296,6 +296,7 @@
    "wb:feat/dandy-dedication"
   ],
   "free_archetype@2": [
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animist-dedication",
    "wb:feat/artillerist-dedication",
@@ -334,10 +335,10 @@
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
    "wb:feat/juggler-dedication",
-   "wb:feat/kineticist-dedication",
-   "wb:feat/lastwall-sentry-dedication"
+   "wb:feat/kineticist-dedication"
   ],
   "free_archetype@4": [
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animist-dedication",
    "wb:feat/artillerist-dedication",
@@ -376,8 +377,7 @@
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
    "wb:feat/juggler-dedication",
-   "wb:feat/kineticist-dedication",
-   "wb:feat/lastwall-sentry-dedication"
+   "wb:feat/kineticist-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",

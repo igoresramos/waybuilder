@@ -1659,10 +1659,32 @@ class Personagem:
                 restante = melhor_rank(restante, rank)
         return restante
 
+    def _rank_de_arma(self, chave: str, excluir: str | None) -> str | None:
+        """`weapon:aldori-dueling-sword` cai na CATEGORIA da arma.
+
+        Ninguem preenche uma proficiencia por arma nomeada -- a ficha guarda
+        rank por categoria (simple/martial/advanced). Sem esta ponte, um
+        Guerreiro 6, que e TREINADO em advanced desde o nivel 1, aparecia
+        untrained na Aldori Dueling Sword e a `Aldori Duelist Dedication` saia
+        como fora do requisito. Achado comparando com o Pathbuilder, que libera
+        as duas -- e ali ele esta certo.
+
+        Rank NOMEADO ganha quando existe: feat que treina uma arma especifica
+        (`weapon_proficiency`) escreve a chave propria, e ela e mais precisa que
+        a categoria.
+        """
+        if not chave.startswith("weapon:"):
+            return None
+        if chave in self.proficiencias:
+            return None
+        arma = self.base.opcional("wb:weapon/" + chave.split(":", 1)[1])
+        categoria = (arma or {}).get("weapon_category")
+        return self._rank_sem(str(categoria), excluir) if categoria else None
+
     def _termo_proficiency(self, valor) -> tuple[bool, str]:
         excluir = getattr(self, "_avaliando", None)
         for chave, exigencia in (valor or {}).items():
-            tenho = self._rank_sem(chave, excluir)
+            tenho = self._rank_de_arma(chave, excluir) or self._rank_sem(chave, excluir)
             for op, alvo in (exigencia or {}).items():
                 ia = RANKS.index(tenho) if tenho in RANKS else 0
                 ib = RANKS.index(alvo) if alvo in RANKS else 0

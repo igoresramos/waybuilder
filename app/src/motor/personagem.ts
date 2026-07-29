@@ -1817,10 +1817,31 @@ export class Personagem implements ContextoDePredicado {
     return restante;
   }
 
+  /**
+   * `weapon:aldori-dueling-sword` cai na CATEGORIA da arma.
+   *
+   * Ninguém preenche uma proficiência por arma nomeada -- a ficha guarda rank
+   * por categoria (simple/martial/advanced). Sem esta ponte, um Guerreiro 6,
+   * que é TREINADO em advanced desde o nível 1, aparecia untrained na Aldori
+   * Dueling Sword e a `Aldori Duelist Dedication` saía como fora do requisito.
+   * Achado comparando com o Pathbuilder, que libera as duas -- e ali ele está
+   * certo.
+   *
+   * Rank NOMEADO ganha quando existe: feat que treina uma arma específica
+   * escreve a chave própria, e ela é mais precisa que a categoria.
+   */
+  private _rank_de_arma(chave: string, excluir: string | null): string | null {
+    if (!chave.startsWith("weapon:")) return null;
+    if (Object.hasOwn(this.proficiencias, chave)) return null;
+    const arma = this.base.opcional("wb:weapon/" + chave.slice("weapon:".length));
+    const categoria = arma?.["weapon_category"];
+    return ehStr(categoria) ? this._rank_sem(categoria, excluir) : null;
+  }
+
   private _termo_proficiency(valor: unknown): ResultadoDeTermo {
     const excluir = this._avaliando;
     for (const [chave, exigencia] of Object.entries(dictDe(valor))) {
-      const tenho = this._rank_sem(chave, excluir);
+      const tenho = this._rank_de_arma(chave, excluir) ?? this._rank_sem(chave, excluir);
       for (const [op, alvo] of Object.entries(dictDe(exigencia))) {
         const ia = indiceDeRank(tenho);
         const ib = indiceDeRank(alvo);

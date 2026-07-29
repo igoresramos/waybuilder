@@ -313,6 +313,12 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .modal-lista li.sel button { color: var(--accent); }
 .modal-lista .nome { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .modal-lista .ja { color: var(--ok); font-size: .8em; }
+/* o nome ANTIGO que casou a busca -- sem ele o resultado parece nao ter o
+   texto digitado */
+.modal-lista .alias {
+  color: var(--fraco); font-size: .78em; font-style: italic;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 12em;
+}
 /* inelegivel: cinza, na mesma lista, ainda clicavel */
 .modal-lista button.marcado { color: var(--fraco); }
 .modal-lista li.sel button.marcado { color: var(--accent); }

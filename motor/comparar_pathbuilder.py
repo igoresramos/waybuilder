@@ -32,9 +32,17 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
 from motor import Base, Personagem   # noqa: E402
 
-# a sonda so sabe montar o default do Pathbuilder: Human / Barkeep / Fighter
+# A sonda parte do default do Pathbuilder (Human / Barkeep) e troca so a classe,
+# entao o equivalente aqui e o mesmo trio. Cada classe nova precisa de uma linha
+# -- e de proposito: montar por nome adivinhado calaria a divergencia.
+ANCESTRIA, BACKGROUND = "wb:ancestry/human", "wb:background/barkeep"
 DEFAULT = {
-    "Fighter": ("wb:class/fighter", "wb:ancestry/human", "wb:background/barkeep"),
+    "Fighter": ("wb:class/fighter", ANCESTRIA, BACKGROUND),
+    "Wizard": ("wb:class/wizard", ANCESTRIA, BACKGROUND),
+    "Cleric": ("wb:class/cleric", ANCESTRIA, BACKGROUND),
+    "Ranger": ("wb:class/ranger", ANCESTRIA, BACKGROUND),
+    "Rogue": ("wb:class/rogue", ANCESTRIA, BACKGROUND),
+    "Barbarian": ("wb:class/barbarian", ANCESTRIA, BACKGROUND),
 }
 
 
@@ -95,12 +103,18 @@ def norm(nome: str) -> str:
 # e ai esta a diferenca de design, nao um defeito: pelo principio zero nos
 # mostramos esses feats marcados, e o Pathbuilder os esconde ate a dedicacao
 # existir. Por isso ela nao entra na comparacao com placar.
+def _traits(r):
+    return {str(t).lower() for t in (r.get("traits") or [])}
+
+
 ABAS = {
     "Class Feats": lambda base, p, r: bool(
-        {t.lower() for t in (r.get("traits") or [])}
-        & {str(base.get(c).get("name") or "").lower() for c in p.ordem_de_classe}),
-    "Dedication Feats": lambda base, p, r: "dedication" in
-        {t.lower() for t in (r.get("traits") or [])},
+        _traits(r) & {str(base.get(c).get("name") or "").lower()
+                      for c in p.ordem_de_classe}),
+    "Dedication Feats": lambda base, p, r: "dedication" in _traits(r),
+    "Skill Feats": lambda base, p, r: "skill" in _traits(r),
+    "General Feats": lambda base, p, r: "general" in _traits(r) and "skill" not in _traits(r),
+    "All Feats": lambda base, p, r: True,
 }
 
 
@@ -146,6 +160,11 @@ def comparar(base: Base, sonda: dict, aba: str | None = None) -> dict:
 
     divergem = []
     for k in nossos.keys() & deles.keys():
+        # `ja_pego` do nosso lado explica o "nao atende" do lado deles sem ser
+        # divergencia de regra: `Hobnobber` vem do background Barkeep, e o
+        # Pathbuilder marca em vermelho o que o personagem ja tem
+        if nossos[k]["ja_pego"] and not deles[k]["atende"]:
+            continue
         if nossos[k]["atende"] != deles[k]["atende"]:
             divergem.append({
                 "nome": nossos[k]["nome"],

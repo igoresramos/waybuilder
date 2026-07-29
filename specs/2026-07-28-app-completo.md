@@ -437,3 +437,20 @@ frentes 2 e 3): montar o mesmo personagem nos dois e comparar quais feats abrem
 por slot. O Pathbuilder vale como oraculo de COMPORTAMENTO -- a tese do Fable --
 e o export JSON dele (`build.proficiencies`, `build.specials`) da o estado da
 ficha em numero, sem precisar ler icone na tela.
+
+### 2026-07-29: legado -- decisao de produto
+
+**Manter tudo que for legado** (decisao do Igor). Nao e so "nao apagar": o
+conteudo tem de continuar ACHAVEL.
+
+| o que | estado |
+|---|---|
+| conteudo legado na base | 971 "removidos" + 339 renomeados + 5.690 intocados, **todos dentro** |
+| fusao legacy/remaster | nao perde: 346 dos 669 pares guardam o nome antigo em `aliases`, 323 sao nome identico |
+| busca do app | passou a olhar `aliases` -- `Power Attack` acha `Vicious Swing`, com o nome antigo na linha |
+| verificacao | `app/verificacao/verificar-busca-alias.mjs` |
+
+O que NAO muda: a fusao continua fundindo. Um par confirmado pelo `remaster_id`
+do AoN e o MESMO conteudo com dois nomes, e manter os dois como registros
+separados criaria duplicata na lista de escolha -- o defeito que o portao 7 e o
+`colapsar_opcoes_irmas.py` existem para evitar.

@@ -187,6 +187,7 @@
    "wb:feat/vicious-swing",
    "wb:feat/widen-spell",
    "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
@@ -208,8 +209,7 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/clockwork-reanimator-dedication",
    "wb:feat/combat-grab",
-   "wb:feat/commander-dedication",
-   "wb:feat/conceal-spell"
+   "wb:feat/commander-dedication"
   ],
   "class_feat@4": [
    "wb:feat/agile-shield-grip",
@@ -229,6 +229,7 @@
    "wb:feat/vicious-swing",
    "wb:feat/widen-spell",
    "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
@@ -250,8 +251,7 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/clockwork-reanimator-dedication",
    "wb:feat/combat-grab",
-   "wb:feat/commander-dedication",
-   "wb:feat/conceal-spell"
+   "wb:feat/commander-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -297,6 +297,7 @@
   ],
   "free_archetype@2": [
    "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
@@ -334,11 +335,11 @@
    "wb:feat/guardian-dedication",
    "wb:feat/gunslinger-dedication",
    "wb:feat/hallowed-necromancer-dedication",
-   "wb:feat/harrower-dedication",
-   "wb:feat/hellbreaker-dedication"
+   "wb:feat/harrower-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alchemist-dedication",
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
@@ -376,8 +377,7 @@
    "wb:feat/guardian-dedication",
    "wb:feat/gunslinger-dedication",
    "wb:feat/hallowed-necromancer-dedication",
-   "wb:feat/harrower-dedication",
-   "wb:feat/hellbreaker-dedication"
+   "wb:feat/harrower-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",

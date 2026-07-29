@@ -6,6 +6,44 @@ project: waybuilder
 
 ## 2026-07-29
 
+### Sessao | 13:40-15:10 | manter o legado, e a comparacao achando defeito de verdade | igor + claude-code
+
+**Decisao do Igor: manter todo o conteudo legado.** Medido antes de agir, e a
+base ja o mantinha -- as tres pilhas da triagem (971 removidos, 339 renomeados,
+5.690 intocados) estao **todas dentro dela**, zero fora. A fusao legacy/remaster
+tambem nao perde nada: dos 669 pares, 346 guardam o nome antigo em `aliases` e
+323 sao pares de nome identico.
+
+O que faltava era o legado ser ACHAVEL: a busca do modal olhava so `nome` e
+`id`, entao quem digitasse `Power Attack` -- o nome que se aprendeu na mesa --
+nao achava `Vicious Swing`, com o conteudo na base o tempo todo. Corrigido, com
+o nome antigo aparecendo na linha para o resultado nao parecer errado, e travado
+em `app/verificacao/verificar-busca-alias.mjs`.
+
+De quebra, `triagem_legado.py` voltou a rodar: quebrava num `sort` que compara
+`level` int com str, e o relatorio em disco era de 26/07.
+
+**A comparacao com o Pathbuilder virou ferramenta de achar defeito.** A sonda
+passou a aceitar classe, nivel e slot, e a descobrir as abas do modal (elas
+mudam por slot). Com `Fighter 6` e os slots de pericia e geral, apareceu a
+categoria que faltava: **discordam se atende**.
+
+- **Defeito nosso, corrigido:** 10 dedicacoes exigem treino em arma NOMEADA
+  (`weapon:aldori-dueling-sword`) e ninguem preenche essa chave -- a ficha
+  guarda rank por CATEGORIA. Um Guerreiro 6, treinado em avancada desde o nivel
+  1, aparecia untrained na Aldori Dueling Sword. `_rank_de_arma` faz a ponte nos
+  dois motores; o Mago 6 continua barrado.
+- **Defeito nosso, medido e nao corrigido:** 42 dedicacoes que liberamos e ele
+  barra, todas porque o nosso `requires` tem so o nivel enquanto a prosa diz
+  mais. Na base inteira sao **178 feats** -- item 86 do TODO.
+- **Diferenca de modelo:** 8 casos em que barramos e ele libera. Ele trata "pode
+  vir a ter a pericia" como disponivel; nos avaliamos o estado atual e MARCAMOS.
+  O nosso e o que o principio zero pede.
+
+Mais: dano fixo de `Blowgun`/`Dart Umbrella` (o AoN escreve `1 P` e o parser
+exigia `dN`), e os dois arquivos de dados do Pathbuilder fora do git com
+`baixar-assets.sh` no lugar. 112 assercoes no oraculo, 110 no TS.
+
 ### Sessao | 12:40-13:40 | os proximos passos, e a hipotese que a fonte derrubou | igor + claude-code
 
 Tres frentes curtas, e a do meio virou a licao do dia.

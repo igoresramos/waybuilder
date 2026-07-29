@@ -109,8 +109,12 @@ def main():
     linhas += [f"- {b} -> {SUCESSOR.get(next((s for s in SUCESSOR if s in norm(b)), ''), '?')}: {n}"
                for b, n in porlivro.most_common()] + [""]
     for kind in [k for k, _ in porkind.most_common()]:
+        # `level` vem como int na maioria e como str em alguns registros de
+        # equipamento ("1 (varies)"), e comparar os dois no sort levanta
+        # TypeError -- que so aparece quando a pilha C tem um desses
         itens = sorted([r for r, _ in C if r.get("kind") == kind],
-                       key=lambda r: (r.get("level") or 0, r.get("name") or ""))
+                       key=lambda r: (str(r.get("level") or 0).zfill(3),
+                                      r.get("name") or ""))
         linhas += [f"### {kind} ({len(itens)})", ""]
         for r in itens[:120]:
             lv = r.get("level")

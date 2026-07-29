@@ -188,6 +188,7 @@
    "wb:feat/twin-takedown",
    "wb:feat/vicious-swing",
    "wb:feat/aggressive-block",
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animal-empathy-ranger",
    "wb:feat/archer-dedication",
@@ -208,8 +209,7 @@
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
    "wb:feat/combat-grab",
-   "wb:feat/corpse-tender-dedication",
-   "wb:feat/curse-maelstrom-dedication"
+   "wb:feat/corpse-tender-dedication"
   ],
   "class_feat@4": [
    "wb:feat/agile-shield-grip",
@@ -230,6 +230,7 @@
    "wb:feat/twin-takedown",
    "wb:feat/vicious-swing",
    "wb:feat/aggressive-block",
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animal-empathy-ranger",
    "wb:feat/archer-dedication",
@@ -250,8 +251,7 @@
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
    "wb:feat/combat-grab",
-   "wb:feat/corpse-tender-dedication",
-   "wb:feat/curse-maelstrom-dedication"
+   "wb:feat/corpse-tender-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -296,6 +296,7 @@
    "wb:feat/dandy-dedication"
   ],
   "free_archetype@2": [
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
@@ -334,10 +335,10 @@
    "wb:feat/lion-blade-dedication",
    "wb:feat/living-monolith-dedication",
    "wb:feat/living-vessel-dedication",
-   "wb:feat/loremaster-dedication",
-   "wb:feat/magaambyan-attendant-dedication"
+   "wb:feat/loremaster-dedication"
   ],
   "free_archetype@4": [
+   "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
@@ -376,8 +377,7 @@
    "wb:feat/lion-blade-dedication",
    "wb:feat/living-monolith-dedication",
    "wb:feat/living-vessel-dedication",
-   "wb:feat/loremaster-dedication",
-   "wb:feat/magaambyan-attendant-dedication"
+   "wb:feat/loremaster-dedication"
   ],
   "general_feat@1": [
    "wb:feat/additional-lore",

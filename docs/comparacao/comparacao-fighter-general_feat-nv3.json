@@ -1,0 +1,318 @@
+[
+  {
+    "slot": "Fighter 3 / general_feat [Skill Feats]",
+    "waybuilder": 226,
+    "pathbuilder": 225,
+    "em_comum": 222,
+    "so_no_pathbuilder": [
+      "Aurochs-Headed",
+      "Card Sharp's Escape",
+      "Cognitive Crossover"
+    ],
+    "so_no_waybuilder": [
+      "Adventurous Outfitter",
+      "As on the Board, so on the Battlefield",
+      "Fane's Escape",
+      "Improvise Strategy",
+      "Kreighton's Cognitive Crossover",
+      "Seasoned Command",
+      "Tactical Acumen"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Automatic Knowledge",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Dubious Knowledge",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Encouraging Words",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Exhort the Faithful",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Experienced Professional",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige lore:* >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Godless Healing",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Hobnobber",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Mortal Healing",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Pei Zing Adept",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Pilgrim's Token",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Prepare Elemental Medicine",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Ravening's Desperation",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige lore:zevgavizeb >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Reveal True Name",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Sanctify Water",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Seasoned",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige lore:alcohol >= trained; tem untrained",
+          "exige lore:cooking >= trained; tem untrained",
+          "exige crafting >= trained; tem untrained"
+        ]
+      }
+    ]
+  },
+  {
+    "slot": "Fighter 3 / general_feat [General Feats]",
+    "waybuilder": 57,
+    "pathbuilder": 39,
+    "em_comum": 39,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [
+      "Additional Circus Trick",
+      "Civil Service",
+      "Cooperative Leadership",
+      "Crush Dissent",
+      "Endure Anarchy",
+      "Fame and Fortune",
+      "Fortified Fiefs",
+      "Free and Fair",
+      "Insider Trading",
+      "Inspiring Entertainment",
+      "Kingdom Assurance",
+      "Liquidate Resources",
+      "Muddle Through",
+      "Practical Magic",
+      "Pull Together",
+      "Quality of Life",
+      "Quick Recovery (Kingdom)",
+      "Skill Training (Kingdom)"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Different Worlds",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Steel Your Resolve",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      }
+    ]
+  },
+  {
+    "slot": "Fighter 3 / general_feat [All Feats]",
+    "waybuilder": 283,
+    "pathbuilder": 264,
+    "em_comum": 261,
+    "so_no_pathbuilder": [
+      "Aurochs-Headed",
+      "Card Sharp's Escape",
+      "Cognitive Crossover"
+    ],
+    "so_no_waybuilder": [
+      "Additional Circus Trick",
+      "Adventurous Outfitter",
+      "As on the Board, so on the Battlefield",
+      "Civil Service",
+      "Cooperative Leadership",
+      "Crush Dissent",
+      "Endure Anarchy",
+      "Fame and Fortune",
+      "Fane's Escape",
+      "Fortified Fiefs",
+      "Free and Fair",
+      "Improvise Strategy",
+      "Insider Trading",
+      "Inspiring Entertainment",
+      "Kingdom Assurance",
+      "Kreighton's Cognitive Crossover",
+      "Liquidate Resources",
+      "Muddle Through",
+      "Practical Magic",
+      "Pull Together",
+      "Quality of Life",
+      "Quick Recovery (Kingdom)",
+      "Seasoned Command",
+      "Tactical Acumen"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Automatic Knowledge",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Different Worlds",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Dubious Knowledge",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Encouraging Words",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Exhort the Faithful",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Experienced Professional",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige lore:* >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Godless Healing",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Hobnobber",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Mortal Healing",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Pei Zing Adept",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Pilgrim's Token",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Prepare Elemental Medicine",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Ravening's Desperation",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige lore:zevgavizeb >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Reveal True Name",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Sanctify Water",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Seasoned",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige lore:alcohol >= trained; tem untrained",
+          "exige lore:cooking >= trained; tem untrained",
+          "exige crafting >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Skill Training (Kingdom)",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Steel Your Resolve",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      }
+    ]
+  }
+]
