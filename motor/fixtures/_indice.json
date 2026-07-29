@@ -14,9 +14,9 @@
    "ficha": "barbaro6-fa-duas-dedicacoes-limpo",
    "nivel": 6,
    "hp": 100,
-   "avisos": 3,
+   "avisos": 4,
    "fora_do_requisito": 1,
-   "slots_abertos": 5
+   "slots_abertos": 6
   },
   {
    "ficha": "bruxa5-tradicao-patron",
@@ -30,9 +30,9 @@
    "ficha": "campeao6-alquimista4-fa-nivel10",
    "nivel": 10,
    "hp": 132,
-   "avisos": 5,
+   "avisos": 6,
    "fora_do_requisito": 1,
-   "slots_abertos": 9
+   "slots_abertos": 10
   },
   {
    "ficha": "feiticeiro5-fa-diabolico",
@@ -94,9 +94,9 @@
    "ficha": "guerreiro4-fa-dedicacao-propria-classe",
    "nivel": 4,
    "hp": 52,
-   "avisos": 2,
+   "avisos": 4,
    "fora_do_requisito": 2,
-   "slots_abertos": 4
+   "slots_abertos": 6
   },
   {
    "ficha": "guerreiro4-fa-lacuna-dedicacao",
@@ -110,9 +110,9 @@
    "ficha": "guerreiro6-fa-duas-dedicacoes",
    "nivel": 6,
    "hp": 80,
-   "avisos": 2,
+   "avisos": 3,
    "fora_do_requisito": 1,
-   "slots_abertos": 4
+   "slots_abertos": 5
   },
   {
    "ficha": "guerreiro8-fa-conjuracao-de-arquetipo",
@@ -142,17 +142,17 @@
    "ficha": "ladino2-druida2-bardo2-fa",
    "nivel": 6,
    "hp": 68,
-   "avisos": 3,
+   "avisos": 5,
    "fora_do_requisito": 0,
-   "slots_abertos": 2
+   "slots_abertos": 5
   },
   {
    "ficha": "ladino4-aumentos-de-pericia",
    "nivel": 4,
    "hp": 48,
-   "avisos": 3,
+   "avisos": 4,
    "fora_do_requisito": 0,
-   "slots_abertos": 2
+   "slots_abertos": 3
   },
   {
    "ficha": "mago4-fa-regra23-propria-dedicacao",
@@ -174,9 +174,9 @@
    "ficha": "ranger4-fa-marshal",
    "nivel": 4,
    "hp": 56,
-   "avisos": 2,
+   "avisos": 3,
    "fora_do_requisito": 1,
-   "slots_abertos": 3
+   "slots_abertos": 4
   }
  ]
 }

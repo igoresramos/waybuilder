@@ -774,6 +774,60 @@ def _rank_palavra(v):
     return None
 
 
+def _rotulo_de_opcao(o):
+    """`PF2E.Skill.Diplomacy` -> `Diplomacy`. Rotulo cru quando nao e chave i18n."""
+    r = str(o.get("label") or o.get("value") or "").strip()
+    return r.rsplit(".", 1)[-1] if r.startswith("PF2E.") else r
+
+
+def _aninhar_escolhas(regras, grants, origem):
+    """Poe cada consequencia DENTRO da opcao de que ela depende.
+
+    O Foundry escreve o vinculo de forma explicita: o `ChoiceSet` declara
+    `rollOption: "marshal-skill"` e cada consequencia traz
+    `predicate: ["marshal-skill:diplomacy-trained"]`. O extrator descartava os
+    dois, e por isso `Marshal Dedication` concedia Diplomacy E Intimidation,
+    trained E expert -- as quatro opcoes de uma escolha de uma.
+
+    Nao da para recuperar por posicao: dos 83 registros com `choice` e grants
+    irmaos, so em 23 o numero de irmaos bate com o de opcoes. O elo tem de vir
+    da fonte.
+
+    Spec: `specs/2026-07-29-choiceset.md`
+    """
+    escolhas = [r for r in (regras or [])
+                if isinstance(r, dict) and r.get("key") == "ChoiceSet"
+                and r.get("rollOption")]
+    if not escolhas:
+        return grants
+
+    consumidos = set()
+    for cs in escolhas:
+        ro = cs.get("rollOption")
+        # o grant que representa esta escolha, para receber as opcoes
+        alvo = next((g for g, o in zip(grants, origem)
+                     if o is cs and isinstance(g, dict) and "choice" in g), None)
+        if alvo is None or not isinstance(alvo["choice"].get("opcoes"), list):
+            continue
+        por_valor = {op["valor"]: op for op in alvo["choice"]["opcoes"]
+                     if isinstance(op, dict) and isinstance(op.get("valor"), str)}
+        for i, (g, o) in enumerate(zip(grants, origem)):
+            if o is cs or i in consumidos:
+                continue
+            for p in (o.get("predicate") or []) if isinstance(o, dict) else []:
+                if not isinstance(p, str) or not p.startswith(ro + ":"):
+                    continue
+                op = por_valor.get(p[len(ro) + 1:])
+                if op is not None:
+                    op.setdefault("grants", []).append(g)
+                    consumidos.add(i)
+                break
+
+    if not consumidos:
+        return grants
+    return [g for i, g in enumerate(grants) if i not in consumidos]
+
+
 def converter_grants(regras, contagem_ignoradas):
     """Traduz `system.rules` do Foundry para a linguagem de efeito.
 
@@ -782,8 +836,16 @@ def converter_grants(regras, contagem_ignoradas):
     `grants_completos`.
     """
     grants = []
+    # origem[i] = o rule element que produziu grants[i]. O preenchimento fecha a
+    # iteracao ANTERIOR no inicio da seguinte, de proposito: varios ramos deste
+    # laco terminam em `continue`, e qualquer contabilidade no fim do corpo
+    # ficaria fora de sincronia justamente nos ramos que mais emitem grant.
+    origem = []
+    anterior = None
     perdeu = False
     for r in regras or []:
+        origem += [anterior] * (len(grants) - len(origem))
+        anterior = r
         k = r.get("key")
         if k in RE_NEUTROS:
             contagem_ignoradas[k] += 1
@@ -881,9 +943,21 @@ def converter_grants(regras, contagem_ignoradas):
             grants.append({"grant_item": {"uuid": r.get("uuid")}})
         elif k == "ChoiceSet":
             esc = r.get("choices")
-            resumo = {"flag": r.get("flag")}
+            resumo = {"flag": r.get("rollOption") or r.get("flag")}
             if isinstance(esc, list):
-                resumo["opcoes"] = len(esc)
+                # a CONTAGEM era tudo que sobrava, e com ela o vinculo
+                # opcao -> consequencia sumia: o personagem recebia todas as
+                # opcoes. Ver `_aninhar_escolhas`.
+                # Spec: `specs/2026-07-29-choiceset.md`
+                # `value` nem sempre e escalar: parte dos ChoiceSet guarda um
+                # objeto ali (predicado, uuid). Sem esse filtro o valor vira
+                # chave de dict e estoura.
+                resumo["opcoes"] = [
+                    {"valor": str(o.get("value")), "rotulo": _rotulo_de_opcao(o)}
+                    for o in esc
+                    if isinstance(o, dict)
+                    and isinstance(o.get("value"), (str, int, float))
+                ] or len(esc)
             elif isinstance(esc, dict):
                 resumo["filtro"] = True
                 if esc.get("itemType"):
@@ -905,6 +979,9 @@ def converter_grants(regras, contagem_ignoradas):
         elif k == "MultipleAttackPenalty":
             grants.append({"map_modifier": r.get("value")})
 
+    origem += [anterior] * (len(grants) - len(origem))
+
+    grants = _aninhar_escolhas(regras, grants, origem)
     return grants, perdeu
 
 

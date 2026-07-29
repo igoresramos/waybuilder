@@ -191,7 +191,6 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
    "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/druid-dedication",
@@ -209,7 +208,8 @@
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/horizon-walker-dedication"
+   "wb:feat/horizon-walker-dedication",
+   "wb:feat/juggler-dedication"
   ],
   "class_feat@4": [
    "wb:feat/animal-companion-ranger",
@@ -233,7 +233,6 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
    "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/druid-dedication",
@@ -251,7 +250,8 @@
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/horizon-walker-dedication"
+   "wb:feat/horizon-walker-dedication",
+   "wb:feat/juggler-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -310,7 +310,6 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
    "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/druid-dedication",
@@ -335,7 +334,8 @@
    "wb:feat/loremaster-dedication",
    "wb:feat/martial-artist-dedication",
    "wb:feat/mind-smith-dedication",
-   "wb:feat/mummy-dedication"
+   "wb:feat/mummy-dedication",
+   "wb:feat/oozemorph-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
@@ -352,7 +352,6 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
    "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/druid-dedication",
@@ -377,14 +376,13 @@
    "wb:feat/loremaster-dedication",
    "wb:feat/martial-artist-dedication",
    "wb:feat/mind-smith-dedication",
-   "wb:feat/mummy-dedication"
+   "wb:feat/mummy-dedication",
+   "wb:feat/oozemorph-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",
    "wb:feat/all-of-the-animal",
    "wb:feat/armor-proficiency",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
@@ -398,19 +396,13 @@
    "wb:feat/feather-step",
    "wb:feat/forager",
    "wb:feat/fortified-fiefs",
-   "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
-   "wb:feat/intimidating-glare",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/pet",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
-   "wb:feat/quick-coercion",
    "wb:feat/ride",
    "wb:feat/shield-block",
    "wb:feat/skill-training-kingdom",
@@ -419,14 +411,20 @@
    "wb:feat/terrain-expertise",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/additional-lore"
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/fleet",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
    "wb:feat/all-of-the-animal",
    "wb:feat/armor-proficiency",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
@@ -440,19 +438,13 @@
    "wb:feat/feather-step",
    "wb:feat/forager",
    "wb:feat/fortified-fiefs",
-   "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
-   "wb:feat/intimidating-glare",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/pet",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
-   "wb:feat/quick-coercion",
    "wb:feat/ride",
    "wb:feat/shield-block",
    "wb:feat/skill-training-kingdom",
@@ -461,14 +453,20 @@
    "wb:feat/terrain-expertise",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge"
+   "wb:feat/automatic-knowledge",
+   "wb:feat/predict-weather",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/fleet",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
    "wb:feat/all-of-the-animal",
    "wb:feat/armor-proficiency",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
@@ -482,19 +480,13 @@
    "wb:feat/feather-step",
    "wb:feat/forager",
    "wb:feat/fortified-fiefs",
-   "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
-   "wb:feat/intimidating-glare",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/pet",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
-   "wb:feat/quick-coercion",
    "wb:feat/ride",
    "wb:feat/shield-block",
    "wb:feat/skill-training-kingdom",
@@ -503,21 +495,21 @@
    "wb:feat/terrain-expertise",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge"
+   "wb:feat/automatic-knowledge",
+   "wb:feat/predict-weather",
+   "wb:feat/additional-circus-trick",
+   "wb:feat/ancestral-paragon",
+   "wb:feat/endure-anarchy",
+   "wb:feat/folk-dowsing",
+   "wb:feat/improvised-repair",
+   "wb:feat/inspiring-entertainment",
+   "wb:feat/keen-follower"
   ],
   "skill_feat@1": [
    "wb:feat/all-of-the-animal",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-tracker",
    "wb:feat/forager",
-   "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
-   "wb:feat/intimidating-glare",
-   "wb:feat/no-cause-for-alarm",
-   "wb:feat/quick-coercion",
    "wb:feat/stifle-flames",
    "wb:feat/survey-wildlife",
    "wb:feat/terrain-expertise",
@@ -528,7 +520,99 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/arcane-sense",
    "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider",
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance",
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance"
+  ],
+  "skill_feat@2": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-tracker",
+   "wb:feat/forager",
+   "wb:feat/stifle-flames",
+   "wb:feat/survey-wildlife",
+   "wb:feat/terrain-expertise",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/predict-weather",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall",
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber",
+   "wb:feat/concealing-legerdemain",
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal",
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider",
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance",
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents",
+   "wb:feat/group-coercion",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler"
+  ],
+  "skill_feat@4": [
+   "wb:feat/all-of-the-animal",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-tracker",
+   "wb:feat/forager",
+   "wb:feat/stifle-flames",
+   "wb:feat/survey-wildlife",
+   "wb:feat/terrain-expertise",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/predict-weather",
+   "wb:feat/folk-dowsing",
+   "wb:feat/ambush-tactics",
+   "wb:feat/efficient-explorer",
+   "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/arcane-sense",
+   "wb:feat/armor-assist",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
    "wb:feat/charming-liar",
@@ -546,90 +630,6 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
    "wb:feat/forensic-acumen"
-  ],
-  "skill_feat@2": [
-   "wb:feat/all-of-the-animal",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
-   "wb:feat/dubious-knowledge",
-   "wb:feat/experienced-tracker",
-   "wb:feat/forager",
-   "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
-   "wb:feat/intimidating-glare",
-   "wb:feat/no-cause-for-alarm",
-   "wb:feat/quick-coercion",
-   "wb:feat/stifle-flames",
-   "wb:feat/survey-wildlife",
-   "wb:feat/terrain-expertise",
-   "wb:feat/automatic-knowledge",
-   "wb:feat/discreet-inquiry",
-   "wb:feat/encouraging-words",
-   "wb:feat/eyes-of-the-city",
-   "wb:feat/glad-hand",
-   "wb:feat/lasting-coercion",
-   "wb:feat/predict-weather",
-   "wb:feat/terrifying-resistance",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
-   "wb:feat/acrobatic-performer",
-   "wb:feat/acupuncturist",
-   "wb:feat/alchemical-crafting",
-   "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
-   "wb:feat/battle-medicine",
-   "wb:feat/cat-fall",
-   "wb:feat/charlatan",
-   "wb:feat/charming-liar",
-   "wb:feat/combat-climber",
-   "wb:feat/concealing-legerdemain",
-   "wb:feat/contract-negotiator",
-   "wb:feat/courtly-graces",
-   "wb:feat/crafters-appraisal",
-   "wb:feat/crystal-healing"
-  ],
-  "skill_feat@4": [
-   "wb:feat/all-of-the-animal",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
-   "wb:feat/dubious-knowledge",
-   "wb:feat/experienced-tracker",
-   "wb:feat/forager",
-   "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
-   "wb:feat/intimidating-glare",
-   "wb:feat/no-cause-for-alarm",
-   "wb:feat/quick-coercion",
-   "wb:feat/stifle-flames",
-   "wb:feat/survey-wildlife",
-   "wb:feat/terrain-expertise",
-   "wb:feat/automatic-knowledge",
-   "wb:feat/discreet-inquiry",
-   "wb:feat/encouraging-words",
-   "wb:feat/eyes-of-the-city",
-   "wb:feat/glad-hand",
-   "wb:feat/lasting-coercion",
-   "wb:feat/predict-weather",
-   "wb:feat/terrifying-resistance",
-   "wb:feat/aurochs-headed",
-   "wb:feat/folk-dowsing",
-   "wb:feat/ambush-tactics",
-   "wb:feat/efficient-explorer",
-   "wb:feat/kreightons-cognitive-crossover",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
-   "wb:feat/acrobatic-performer",
-   "wb:feat/acupuncturist",
-   "wb:feat/alchemical-crafting",
-   "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
-   "wb:feat/battle-medicine",
-   "wb:feat/cat-fall",
-   "wb:feat/charlatan",
-   "wb:feat/charming-liar",
-   "wb:feat/combat-climber"
   ]
  },
  "extras": {
@@ -790,17 +790,11 @@
    "advanced": [
     "Ranger"
    ],
-   "diplomacy": [
-    "Marshal Dedication"
-   ],
    "fortitude": [
     "Ranger"
    ],
    "heavy": [
     "Ranger"
-   ],
-   "intimidation": [
-    "Marshal Dedication"
    ],
    "light": [
     "Ranger"
@@ -891,7 +885,8 @@
   },
   "avisos": [
    "Ranger: falta escolher `outras-opcoes` (2 opcoes)",
-   "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4"
+   "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4",
+   "Marshal Dedication: falta escolher `marshal-skill` (Diplomacy, Diplomacy, Intimidation, Intimidation)"
   ],
   "background": "Nomad",
   "boosts": {
@@ -1023,10 +1018,8 @@
   "pericias_livres": 4,
   "proficiencias": {
    "advanced": "untrained",
-   "diplomacy": "expert",
    "fortitude": "expert",
    "heavy": "untrained",
-   "intimidation": "expert",
    "light": "trained",
    "martial": "trained",
    "medium": "trained",
@@ -1061,6 +1054,61 @@
    ]
   },
   "slots_abertos": [
+   {
+    "em": "criacao",
+    "escolhe": 1,
+    "flag": "marshal-skill",
+    "kind": "grant",
+    "opcoes": [
+     {
+      "grants": [
+       {
+        "proficiency": {
+         "diplomacy": "trained"
+        }
+       }
+      ],
+      "rotulo": "Diplomacy",
+      "valor": "diplomacy-trained"
+     },
+     {
+      "grants": [
+       {
+        "proficiency": {
+         "diplomacy": "expert"
+        }
+       }
+      ],
+      "rotulo": "Diplomacy",
+      "valor": "diplomacy-expert"
+     },
+     {
+      "grants": [
+       {
+        "proficiency": {
+         "intimidation": "trained"
+        }
+       }
+      ],
+      "rotulo": "Intimidation",
+      "valor": "imtimidation-trained"
+     },
+     {
+      "grants": [
+       {
+        "proficiency": {
+         "intimidation": "expert"
+        }
+       }
+      ],
+      "rotulo": "Intimidation",
+      "valor": "intimidation-expert"
+     }
+    ],
+    "origem": "wb:feat/marshal-dedication",
+    "rotulo": "Marshal Dedication / marshal-skill",
+    "slot": "escolha_de_grant"
+   },
    {
     "em": "criacao",
     "escolhe": 4,

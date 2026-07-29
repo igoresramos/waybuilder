@@ -429,6 +429,7 @@ class Personagem:
         # regra 10: orcamento de pericia livre, por delta
         self._orcamento_de_pericia()
         self._gastar_pericias_livres(aplicar)
+        self._escolhas_de_grant()
         # o aumento de pericia por nivel -- que todo personagem faz e o motor
         # nao implementava
         self._aumentos_de_pericia(aplicar)
@@ -581,6 +582,51 @@ class Personagem:
                 f"pericias livres: {self.pericias_declaradas} declarada(s) para "
                 f"{self.pericias_livres} de direito -- sobra "
                 f"{self.pericias_declaradas - self.pericias_livres}")
+
+    def _escolhas_de_grant(self) -> None:
+        """Escolha embutida em `grants` -- ex: Marshal Dedication, que da UMA
+        entre Diplomacy e Intimidation.
+
+        Ate 2026-07-29 o extrator guardava so a CONTAGEM de opcoes e soltava as
+        consequencias ao lado, entao o personagem recebia TODAS -- Diplomacy E
+        Intimidation, trained E expert. Agora as opcoes vem aninhadas com os
+        grants de cada uma (spec `2026-07-29-choiceset.md`).
+
+        ESTA FATIA SO MARCA. O que a opcao concede ainda NAO e aplicado, porque
+        `grants` e lido em 14 pontos do motor e a expansao tem de valer em todos
+        -- fatia propria. Marcar antes de aplicar e deliberado: sem isso a
+        escolha sumiria em silencio, que e pior que o defeito que ela substitui.
+        """
+        self.escolhas_de_grant: list[dict] = []
+        vistos = set()
+        fontes = [(f.get("id"), f.get("nome"), f.get("grants") or [])
+                  for f in self.features]
+        fontes += [(i, feat.get("name", i), feat.get("grants") or [])
+                   for i, feat, _ in self._feats_efetivos()]
+        for origem_id, nome, grants in fontes:
+            for g in grants:
+                if not isinstance(g, dict) or "choice" not in g:
+                    continue
+                opcoes = (g["choice"] or {}).get("opcoes")
+                if not isinstance(opcoes, list):
+                    continue        # forma resumida: nao ha o que escolher aqui
+                flag = (g["choice"] or {}).get("flag")
+                chave = f"{origem_id}:{flag}"
+                if chave in vistos:
+                    continue
+                vistos.add(chave)
+                escolhido = next(
+                    (e.get("pega") for e in self._escolhas("escolha_de_grant")
+                     if isinstance(e.get("pega"), str)
+                     and e["pega"].startswith(f"{flag}:")), None)
+                self.escolhas_de_grant.append({
+                    "origem": origem_id, "nome": nome, "flag": flag,
+                    "opcoes": opcoes, "escolhido": escolhido})
+                if escolhido is None:
+                    rotulos = ", ".join(
+                        str(o.get("rotulo") or o.get("valor")) for o in opcoes)
+                    self.avisos.append(
+                        f"{nome}: falta escolher `{flag}` ({rotulos})")
 
     # -- regra 8: atributos -------------------------------------------------
 
@@ -2106,6 +2152,14 @@ class Personagem:
                 "slot": "boosts_livres", "em": "criacao", "kind": "ability",
                 "escolhe": faltam, "fontes": self.boosts_pendentes,
                 "rotulo": f"boosts de atributo ({faltam} a escolher)"})
+
+        for e in getattr(self, "escolhas_de_grant", []):
+            if e["escolhido"] is None:
+                abertos.append({
+                    "slot": "escolha_de_grant", "em": "criacao", "kind": "grant",
+                    "escolhe": 1, "opcoes": e["opcoes"],
+                    "flag": e["flag"], "origem": e["origem"],
+                    "rotulo": f"{e['nome']} / {e['flag']}"})
 
         # sem esta entrada a tela nunca oferece o picker de pericia, e o
         # orcamento continua sendo um numero que ninguem gasta

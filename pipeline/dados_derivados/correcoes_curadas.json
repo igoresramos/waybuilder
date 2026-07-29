@@ -1,122 +1,268 @@
 {
-  "_doc": "Correcoes de campo que exigiram LEITURA DA PROSA oficial porque as tres fontes estruturadas estao vazias ou erradas no ponto. Mora em dados_derivados/ (versionado) e nao em dados_brutos/ (dump reproduzivel por pin, fora do git) exatamente por isso: cada entrada aqui e julgamento humano, e perder isso significa refazer a leitura. Aplicado por pipeline/aplicar_curadoria.py, que RECUSA aplicar quando o valor da base ja e diferente do declarado em `valor_atual` -- assim, no dia em que a fonte consertar o dado, o build falha alto em vez de sobrescrever em silencio um valor que passou a estar certo.",
-  "correcoes": [
+ "_doc": "Correcoes de campo que exigiram LEITURA DA PROSA oficial porque as tres fontes estruturadas estao vazias ou erradas no ponto. Mora em dados_derivados/ (versionado) e nao em dados_brutos/ (dump reproduzivel por pin, fora do git) exatamente por isso: cada entrada aqui e julgamento humano, e perder isso significa refazer a leitura. Aplicado por pipeline/aplicar_curadoria.py, que RECUSA aplicar quando o valor da base ja e diferente do declarado em `valor_atual` -- assim, no dia em que a fonte consertar o dado, o build falha alto em vez de sobrescrever em silencio um valor que passou a estar certo.",
+ "correcoes": [
+  {
+   "id": "wb:class/psychic",
+   "campo": "key_ability",
+   "valor_atual": [],
+   "valor": [
+    "int",
+    "cha"
+   ],
+   "fonte": "prosa da propria classe (base/text/class.json, wb:text/class/psychic): 'Key Attribute: Intelligence or Charisma. At 1st level, your class gives you an attribute boost to Intelligence or Charisma, as determined by your choice of subconscious mind.'",
+   "por_que": "O Foundry declara `system.keyAbility.value: []` para o Psychic -- nao e falha do extrator, e lacuna da fonte: o VTT modela a chave pela subclasse (subconscious mind) em vez de pelo campo da classe. Era a UNICA das 27 classes sem key_ability, e a consequencia foi medida em teste de carga: das 285 fichas geradas, as 6 unicas que violaram a regra 8 (boost de habilidade-chave so da primeira classe) eram todas de Psychic entrando como primeira classe -- a regra nao tinha de onde tirar qual atributo boostar. As outras 26 classes seguem vindo da fonte, sem curadoria.",
+   "curado_em": "2026-07-27"
+  },
+  {
+   "id": "wb:feat/fighter-dedication",
+   "campo": "grants",
+   "valor_atual": [
     {
-      "id": "wb:class/psychic",
-      "campo": "key_ability",
-      "valor_atual": [],
-      "valor": [
-        "int",
-        "cha"
-      ],
-      "fonte": "prosa da propria classe (base/text/class.json, wb:text/class/psychic): 'Key Attribute: Intelligence or Charisma. At 1st level, your class gives you an attribute boost to Intelligence or Charisma, as determined by your choice of subconscious mind.'",
-      "por_que": "O Foundry declara `system.keyAbility.value: []` para o Psychic -- nao e falha do extrator, e lacuna da fonte: o VTT modela a chave pela subclasse (subconscious mind) em vez de pelo campo da classe. Era a UNICA das 27 classes sem key_ability, e a consequencia foi medida em teste de carga: das 285 fichas geradas, as 6 unicas que violaram a regra 8 (boost de habilidade-chave so da primeira classe) eram todas de Psychic entrando como primeira classe -- a regra nao tinha de onde tirar qual atributo boostar. As outras 26 classes seguem vindo da fonte, sem curadoria.",
-      "curado_em": "2026-07-27"
+     "choice": {
+      "flag": "attribute",
+      "opcoes": [
+       {
+        "valor": "str",
+        "rotulo": "AbilityStr"
+       },
+       {
+        "valor": "dex",
+        "rotulo": "AbilityDex"
+       }
+      ]
+     }
     },
     {
-      "id": "wb:feat/fighter-dedication",
-      "campo": "grants",
-      "valor_atual": [
-        {
-          "choice": {
-            "flag": "attribute",
-            "opcoes": 2
-          }
-        },
-        {
-          "choice": {
-            "flag": "skill",
-            "opcoes": 2
-          }
-        },
-        {
-          "skill_training": {
-            "free": 1,
-            "rank": "trained"
-          }
-        },
-        {
-          "proficiency": {
-            "simple": "trained"
-          }
-        }
-      ],
-      "valor": [
-        {
-          "choice": {
-            "flag": "attribute",
-            "opcoes": 2
-          }
-        },
-        {
-          "choice": {
-            "flag": "skill",
-            "opcoes": 2
-          }
-        },
-        {
-          "skill_training": {
-            "free": 1,
-            "rank": "trained"
-          }
-        },
-        {
-          "proficiency": {
-            "simple": "trained",
-            "martial": "trained"
-          }
-        }
-      ],
-      "fonte": "Player Core, Fighter Dedication: 'You become trained in simple weapons and martial weapons. You become trained in your choice of Acrobatics or Athletics...'",
-      "por_que": "O Foundry declara UM rule element de proficiencia para esta dedicacao -- `system.proficiencies.attacks.simple.rank = 1` -- e nao escreve o martial em lugar nenhum (conferido em `foundry/packs/pf2e/feats/archetype/fighter/fighter-dedication.json`, os 6 rules). Nao e falha do extrator: a fonte esta incompleta no ponto. O texto oficial da as DUAS proficiencias, e sem martial a dedicacao de Guerreiro fica pior que o RAW justo no projeto cuja regra da casa existe para ser comparada com o RAW."
+     "choice": {
+      "flag": "skill",
+      "opcoes": [
+       {
+        "valor": "acrobatics",
+        "rotulo": "Acrobatics"
+       },
+       {
+        "valor": "athletics",
+        "rotulo": "Athletics"
+       }
+      ]
+     }
     },
     {
-      "id": "wb:feat/play-to-the-crowd",
-      "campo": "rarity",
-      "valor_atual": "uncommon",
-      "valor": "common",
-      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
-      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+     "skill_training": {
+      "free": 1,
+      "rank": "trained"
+     }
     },
     {
-      "id": "wb:feat/death-from-above",
-      "campo": "rarity",
-      "valor_atual": "common",
-      "valor": "uncommon",
-      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
-      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
-    },
-    {
-      "id": "wb:spell/object-reading",
-      "campo": "rarity",
-      "valor_atual": "uncommon",
-      "valor": "common",
-      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
-      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
-    },
-    {
-      "id": "wb:spell/pillar-of-water",
-      "campo": "rarity",
-      "valor_atual": "uncommon",
-      "valor": "common",
-      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
-      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
-    },
-    {
-      "id": "wb:spell/imprint-message",
-      "campo": "rarity",
-      "valor_atual": "uncommon",
-      "valor": "common",
-      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
-      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
-    },
-    {
-      "id": "wb:spell/tireless-worker",
-      "campo": "rarity",
-      "valor_atual": "common",
-      "valor": "uncommon",
-      "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
-      "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+     "proficiency": {
+      "simple": "trained"
+     }
     }
-  ]
+   ],
+   "valor": [
+    {
+     "choice": {
+      "flag": "attribute",
+      "opcoes": [
+       {
+        "valor": "str",
+        "rotulo": "AbilityStr"
+       },
+       {
+        "valor": "dex",
+        "rotulo": "AbilityDex"
+       }
+      ]
+     }
+    },
+    {
+     "choice": {
+      "flag": "skill",
+      "opcoes": [
+       {
+        "valor": "acrobatics",
+        "rotulo": "Acrobatics"
+       },
+       {
+        "valor": "athletics",
+        "rotulo": "Athletics"
+       }
+      ]
+     }
+    },
+    {
+     "skill_training": {
+      "free": 1,
+      "rank": "trained"
+     }
+    },
+    {
+     "proficiency": {
+      "simple": "trained",
+      "martial": "trained"
+     }
+    }
+   ],
+   "fonte": "Player Core, Fighter Dedication: 'You become trained in simple weapons and martial weapons. You become trained in your choice of Acrobatics or Athletics...'",
+   "por_que": "O Foundry declara UM rule element de proficiencia para esta dedicacao -- `system.proficiencies.attacks.simple.rank = 1` -- e nao escreve o martial em lugar nenhum (conferido em `foundry/packs/pf2e/feats/archetype/fighter/fighter-dedication.json`, os 6 rules). Nao e falha do extrator: a fonte esta incompleta no ponto. O texto oficial da as DUAS proficiencias, e sem martial a dedicacao de Guerreiro fica pior que o RAW justo no projeto cuja regra da casa existe para ser comparada com o RAW. || REALINHADO 2026-07-29: `choice.opcoes` deixou de ser contagem e virou lista de opcoes (spec 2026-07-29-choiceset.md), entao o `valor_atual` da curadoria nao casava mais e a guarda recusou a aplicacao -- corretamente. O conteudo da correcao nao mudou: segue sendo acrescentar `martial: trained`."
+  },
+  {
+   "id": "wb:feat/play-to-the-crowd",
+   "campo": "rarity",
+   "valor_atual": "uncommon",
+   "valor": "common",
+   "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+   "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+  },
+  {
+   "id": "wb:feat/death-from-above",
+   "campo": "rarity",
+   "valor_atual": "common",
+   "valor": "uncommon",
+   "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+   "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+  },
+  {
+   "id": "wb:spell/object-reading",
+   "campo": "rarity",
+   "valor_atual": "uncommon",
+   "valor": "common",
+   "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+   "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+  },
+  {
+   "id": "wb:spell/pillar-of-water",
+   "campo": "rarity",
+   "valor_atual": "uncommon",
+   "valor": "common",
+   "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+   "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+  },
+  {
+   "id": "wb:spell/imprint-message",
+   "campo": "rarity",
+   "valor_atual": "uncommon",
+   "valor": "common",
+   "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+   "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+  },
+  {
+   "id": "wb:spell/tireless-worker",
+   "campo": "rarity",
+   "valor_atual": "common",
+   "valor": "uncommon",
+   "fonte": "AoN e Foundry concordam entre si contra a base (triagem de 2026-07-28)",
+   "por_que": "Divergencia de raridade achada no cruzamento com o dump do AoN e confirmada na terceira fonte. Raridade nao e cosmetica: ela filtra o que aparece por padrao no picker, entao errar aqui esconde opcao legitima ou oferece o que a mesa nao liberou."
+  },
+  {
+   "id": "wb:feat/marshal-dedication",
+   "campo": "grants",
+   "valor_atual": [
+    {
+     "choice": {
+      "flag": "marshal-skill",
+      "opcoes": [
+       {
+        "valor": "diplomacy-trained",
+        "rotulo": "Diplomacy",
+        "grants": [
+         {
+          "proficiency": {
+           "diplomacy": "trained"
+          }
+         }
+        ]
+       },
+       {
+        "valor": "diplomacy-expert",
+        "rotulo": "Diplomacy",
+        "grants": [
+         {
+          "proficiency": {
+           "diplomacy": "expert"
+          }
+         }
+        ]
+       },
+       {
+        "valor": "imtimidation-trained",
+        "rotulo": "Intimidation"
+       },
+       {
+        "valor": "intimidation-expert",
+        "rotulo": "Intimidation",
+        "grants": [
+         {
+          "proficiency": {
+           "intimidation": "expert"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    },
+    {
+     "proficiency": {
+      "intimidation": "trained"
+     }
+    }
+   ],
+   "valor": [
+    {
+     "choice": {
+      "flag": "marshal-skill",
+      "opcoes": [
+       {
+        "valor": "diplomacy-trained",
+        "rotulo": "Diplomacy",
+        "grants": [
+         {
+          "proficiency": {
+           "diplomacy": "trained"
+          }
+         }
+        ]
+       },
+       {
+        "valor": "diplomacy-expert",
+        "rotulo": "Diplomacy",
+        "grants": [
+         {
+          "proficiency": {
+           "diplomacy": "expert"
+          }
+         }
+        ]
+       },
+       {
+        "valor": "imtimidation-trained",
+        "rotulo": "Intimidation",
+        "grants": [
+         {
+          "proficiency": {
+           "intimidation": "trained"
+          }
+         }
+        ]
+       },
+       {
+        "valor": "intimidation-expert",
+        "rotulo": "Intimidation",
+        "grants": [
+         {
+          "proficiency": {
+           "intimidation": "expert"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    }
+   ],
+   "fonte": "Player Core, Marshal Dedication: 'You become trained in your choice of Diplomacy or Intimidation; if you were already trained, you become expert instead.'",
+   "por_que": "ERRO DE DIGITACAO NA FONTE. No `marshal-dedication.json` do Foundry a opcao do ChoiceSet tem `value: \"imtimidation-trained\"` (com o `m` trocado) enquanto a consequencia correspondente traz `predicate: [\"marshal-skill:intimidation-trained\"]`, escrito certo. O elo opcao->consequencia e por igualdade exata de string, entao essa uma nao casou e a proficiencia ficou SOLTA na raiz -- ou seja, todo personagem com a dedicacao ganhava Intimidation trained de graca, sem escolher. Casar por aproximacao seria pior: transformaria um erro visivel num acerto por chute. A correcao move a consequencia para dentro da opcao a que ela pertence, sem mexer no valor com o typo (que continua sendo o que a fonte diz)."
+  }
+ ]
 }

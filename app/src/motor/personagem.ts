@@ -119,6 +119,10 @@ export class Personagem implements ContextoDePredicado {
   pericias_automaticas: Map<string, string> = new Map();
   pericias_livres = 0;
   pericias_declaradas = 0;
+  escolhas_de_grant: Array<{
+    origem: string; nome: string; flag: unknown;
+    opcoes: unknown[]; escolhido: string | null;
+  }> = [];
   pericias_livres_detalhe: DetalheDePericiaLivre[] = [];
   aumentos_de_pericia: number[] = [];
   aumentos_detalhe: AumentoDePericia[] = [];
@@ -465,6 +469,7 @@ export class Personagem implements ContextoDePredicado {
     // regra 10: orçamento de perícia livre, por delta
     this._orcamento_de_pericia();
     this._gastar_pericias_livres();
+    this._escolhas_de_grant();
     // o aumento de perícia por nível -- que todo personagem faz e o motor não
     // implementava
     this._aumentos_de_pericia();
@@ -631,6 +636,60 @@ export class Personagem implements ContextoDePredicado {
         `pericias livres: ${this.pericias_declaradas} declarada(s) para `
         + `${this.pericias_livres} de direito -- sobra `
         + `${this.pericias_declaradas - this.pericias_livres}`);
+    }
+  }
+
+  /**
+   * Escolha embutida em `grants` -- ex: Marshal Dedication, que dá UMA entre
+   * Diplomacy e Intimidation.
+   *
+   * Até 2026-07-29 o extrator guardava só a CONTAGEM de opções e soltava as
+   * consequências ao lado, então o personagem recebia TODAS. Agora as opções vêm
+   * aninhadas com os grants de cada uma (spec `2026-07-29-choiceset.md`).
+   *
+   * ESTA FATIA SÓ MARCA -- o que a opção concede ainda não é aplicado, porque
+   * `grants` é lido em 14 pontos do motor. Marcar antes de aplicar é
+   * deliberado: sem isso a escolha sumiria em silêncio.
+   */
+  private _escolhas_de_grant(): void {
+    this.escolhas_de_grant = [];
+    const vistos = new Set<string>();
+    const fontes: Array<[string, string, unknown[]]> = [];
+    for (const f of this.features) {
+      fontes.push([pyStr(f["id"]), pyStr(f["nome"]), listaDe(f["grants"])]);
+    }
+    for (const [i, feat] of this._feats_efetivos()) {
+      fontes.push([i, nomeOu(feat, i), listaDe(feat["grants"])]);
+    }
+    for (const [origem_id, nome, grants] of fontes) {
+      for (const g of grants) {
+        const dict = dictDe(g);
+        if (!("choice" in dict)) continue;
+        const escolha = dictDe(dict["choice"]);
+        const opcoes = escolha["opcoes"];
+        if (!ehLista(opcoes)) continue;   // forma resumida: nada a escolher
+        // o valor CRU vai para a saída (pode ser null, e o Python emite null);
+        // a versão em texto só serve para montar chave e mensagem, onde o
+        // Python interpola `None`. Trocar um pelo outro quebra a paridade.
+        const flag = escolha["flag"] ?? null;
+        const flagTexto = pyStr(flag);
+        const chave = `${origem_id}:${flagTexto}`;
+        if (vistos.has(chave)) continue;
+        vistos.add(chave);
+        let escolhido: string | null = null;
+        for (const e of this._escolhas("escolha_de_grant")) {
+          const pega = e["pega"];
+          if (ehStr(pega) && pega.startsWith(`${flagTexto}:`)) { escolhido = pega; break; }
+        }
+        this.escolhas_de_grant.push(
+          { origem: origem_id, nome, flag, opcoes, escolhido });
+        if (escolhido === null) {
+          const rotulos = opcoes
+            .map((o) => pyStr(dictDe(o)["rotulo"] ?? dictDe(o)["valor"]))
+            .join(", ");
+          this.avisos.push(`${nome}: falta escolher \`${flagTexto}\` (${rotulos})`);
+        }
+      }
     }
   }
 
@@ -2345,6 +2404,16 @@ export class Personagem implements ContextoDePredicado {
         escolhe: faltam, fontes: this.boosts_pendentes,
         rotulo: `boosts de atributo (${faltam} a escolher)`,
       });
+    }
+
+    for (const e of this.escolhas_de_grant) {
+      if (e.escolhido === null) {
+        abertos.push({
+          slot: "escolha_de_grant", em: "criacao", kind: "grant", escolhe: 1,
+          opcoes: e.opcoes, flag: e.flag, origem: e.origem,
+          rotulo: `${e.nome} / ${pyStr(e.flag)}`,
+        });
+      }
     }
 
     // sem esta entrada a tela nunca oferece o picker de perícia, e o orçamento

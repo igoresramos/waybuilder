@@ -884,6 +884,8 @@
   },
   "avisos": [
    "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4",
+   "Fighter Dedication: falta escolher `attribute` (AbilityStr, AbilityDex)",
+   "Fighter Dedication: falta escolher `skill` (Acrobatics, Athletics)",
    "boosts de atributo: 6 declarado(s) de 9 a que o personagem tem direito -- faltam 3. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4)"
   ],
   "background": "Warrior",
@@ -1149,6 +1151,44 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (3 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 1,
+    "flag": "attribute",
+    "kind": "grant",
+    "opcoes": [
+     {
+      "rotulo": "AbilityStr",
+      "valor": "str"
+     },
+     {
+      "rotulo": "AbilityDex",
+      "valor": "dex"
+     }
+    ],
+    "origem": "wb:feat/fighter-dedication",
+    "rotulo": "Fighter Dedication / attribute",
+    "slot": "escolha_de_grant"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 1,
+    "flag": "skill",
+    "kind": "grant",
+    "opcoes": [
+     {
+      "rotulo": "Acrobatics",
+      "valor": "acrobatics"
+     },
+     {
+      "rotulo": "Athletics",
+      "valor": "athletics"
+     }
+    ],
+    "origem": "wb:feat/fighter-dedication",
+    "rotulo": "Fighter Dedication / skill",
+    "slot": "escolha_de_grant"
    },
    {
     "em": "criacao",

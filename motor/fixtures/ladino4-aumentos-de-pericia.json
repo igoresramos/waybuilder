@@ -933,6 +933,7 @@
   "avisos": [
    "wb:feat/natural-ambition: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.naturalAmbition}`) -- pendente, nao e alvo ausente",
    "pericias livres: 0 declarada(s) de 7 a que o personagem tem direito -- faltam 7",
+   "Terrain Stalker: falta escolher `terrain-stalker` (Rubble, Snow, Underbrush)",
    "boosts de atributo: 6 declarado(s) de 8 a que o personagem tem direito -- faltam 2. Fontes: Human (1), Human (1), Scout (1), Scout (1), criacao (4 livres) (4)"
   ],
   "background": "Scout",
@@ -1146,6 +1147,29 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (2 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 1,
+    "flag": "terrain-stalker",
+    "kind": "grant",
+    "opcoes": [
+     {
+      "rotulo": "Rubble",
+      "valor": "rubble"
+     },
+     {
+      "rotulo": "Snow",
+      "valor": "snow"
+     },
+     {
+      "rotulo": "Underbrush",
+      "valor": "underbrush"
+     }
+    ],
+    "origem": "wb:feat/terrain-stalker",
+    "rotulo": "Terrain Stalker / terrain-stalker",
+    "slot": "escolha_de_grant"
    },
    {
     "em": "criacao",

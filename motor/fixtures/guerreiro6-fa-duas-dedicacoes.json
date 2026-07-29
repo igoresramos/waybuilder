@@ -198,7 +198,6 @@
    "wb:feat/cleric-dedication",
    "wb:feat/combat-grab",
    "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/devoted-guardian",
    "wb:feat/dragging-strike",
@@ -209,7 +208,8 @@
    "wb:feat/dueling-parry-fighter",
    "wb:feat/duelist-dedication",
    "wb:feat/edgewatch-detective-dedication",
-   "wb:feat/exemplar-dedication"
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication"
   ],
   "class_feat@4": [
    "wb:feat/agile-shield-grip",
@@ -240,7 +240,6 @@
    "wb:feat/cleric-dedication",
    "wb:feat/combat-grab",
    "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/devoted-guardian",
    "wb:feat/dragging-strike",
@@ -251,7 +250,8 @@
    "wb:feat/dueling-parry-fighter",
    "wb:feat/duelist-dedication",
    "wb:feat/edgewatch-detective-dedication",
-   "wb:feat/exemplar-dedication"
+   "wb:feat/exemplar-dedication",
+   "wb:feat/familiar-master-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -311,7 +311,6 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
    "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/druid-dedication",
@@ -335,7 +334,8 @@
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
    "wb:feat/martial-artist-dedication",
-   "wb:feat/mauler-dedication"
+   "wb:feat/mauler-dedication",
+   "wb:feat/mind-smith-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/aldori-duelist-dedication",
@@ -353,7 +353,6 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
    "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/druid-dedication",
@@ -377,14 +376,13 @@
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
    "wb:feat/martial-artist-dedication",
-   "wb:feat/mauler-dedication"
+   "wb:feat/mauler-dedication",
+   "wb:feat/mind-smith-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
@@ -396,13 +394,10 @@
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/pet",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
@@ -419,14 +414,17 @@
    "wb:feat/intimidating-glare",
    "wb:feat/shield-block",
    "wb:feat/acrobatic-performer",
-   "wb:feat/acupuncturist"
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
@@ -438,13 +436,10 @@
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/pet",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
@@ -454,21 +449,24 @@
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
    "wb:feat/automatic-knowledge",
-   "wb:feat/discreet-inquiry",
-   "wb:feat/encouraging-words",
-   "wb:feat/eyes-of-the-city",
-   "wb:feat/glad-hand",
-   "wb:feat/intimidating-prowess",
-   "wb:feat/lasting-coercion",
-   "wb:feat/terrifying-resistance",
-   "wb:feat/additional-lore"
+   "wb:feat/additional-lore",
+   "wb:feat/assurance",
+   "wb:feat/diehard",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/fleet",
+   "wb:feat/intimidating-glare",
+   "wb:feat/shield-block",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense",
+   "wb:feat/bargain-hunter"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
@@ -480,13 +478,10 @@
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/pet",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
@@ -496,24 +491,24 @@
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
    "wb:feat/automatic-knowledge",
-   "wb:feat/discreet-inquiry",
-   "wb:feat/encouraging-words",
-   "wb:feat/eyes-of-the-city",
-   "wb:feat/glad-hand",
-   "wb:feat/intimidating-prowess",
-   "wb:feat/lasting-coercion",
-   "wb:feat/terrifying-resistance",
-   "wb:feat/additional-circus-trick"
+   "wb:feat/additional-circus-trick",
+   "wb:feat/ancestral-paragon",
+   "wb:feat/endure-anarchy",
+   "wb:feat/improvised-repair",
+   "wb:feat/inspiring-entertainment",
+   "wb:feat/keen-follower",
+   "wb:feat/liquidate-resources",
+   "wb:feat/pick-up-the-pace",
+   "wb:feat/prescient-planner",
+   "wb:feat/quick-recovery-kingdom",
+   "wb:feat/robust-health",
+   "wb:feat/skitter",
+   "wb:feat/steel-your-resolve"
   ],
   "skill_feat@1": [
    "wb:feat/armor-assist",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/quick-coercion",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
@@ -524,7 +519,9 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
+   "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
    "wb:feat/charming-liar",
@@ -544,27 +541,18 @@
    "wb:feat/forager",
    "wb:feat/forensic-acumen",
    "wb:feat/glean-contents",
+   "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
-   "wb:feat/impressive-performance"
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance",
+   "wb:feat/improvise-tool"
   ],
   "skill_feat@2": [
    "wb:feat/armor-assist",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/quick-coercion",
    "wb:feat/automatic-knowledge",
-   "wb:feat/discreet-inquiry",
-   "wb:feat/encouraging-words",
-   "wb:feat/eyes-of-the-city",
-   "wb:feat/glad-hand",
-   "wb:feat/intimidating-prowess",
-   "wb:feat/lasting-coercion",
-   "wb:feat/terrifying-resistance",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/dubious-knowledge",
@@ -574,7 +562,9 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
+   "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
    "wb:feat/charming-liar",
@@ -587,26 +577,24 @@
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
    "wb:feat/experienced-smuggler",
-   "wb:feat/experienced-tracker"
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance",
+   "wb:feat/forager",
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents",
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber",
+   "wb:feat/impressive-performance"
   ],
   "skill_feat@4": [
    "wb:feat/armor-assist",
-   "wb:feat/bargain-hunter",
-   "wb:feat/bon-mot",
    "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
-   "wb:feat/group-impression",
-   "wb:feat/hobnobber",
-   "wb:feat/no-cause-for-alarm",
    "wb:feat/quick-coercion",
    "wb:feat/automatic-knowledge",
-   "wb:feat/discreet-inquiry",
-   "wb:feat/encouraging-words",
-   "wb:feat/eyes-of-the-city",
-   "wb:feat/glad-hand",
-   "wb:feat/intimidating-prowess",
-   "wb:feat/lasting-coercion",
-   "wb:feat/terrifying-resistance",
    "wb:feat/aurochs-headed",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
@@ -620,7 +608,9 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
+   "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
    "wb:feat/charming-liar",
@@ -629,7 +619,17 @@
    "wb:feat/contract-negotiator",
    "wb:feat/courtly-graces",
    "wb:feat/crafters-appraisal",
-   "wb:feat/crystal-healing"
+   "wb:feat/crystal-healing",
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider",
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance",
+   "wb:feat/forager",
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents"
   ]
  },
  "extras": {
@@ -829,9 +829,6 @@
    "advanced": [
     "Fighter"
    ],
-   "diplomacy": [
-    "Marshal Dedication"
-   ],
    "fortitude": [
     "Fighter"
    ],
@@ -839,7 +836,7 @@
     "Fighter"
    ],
    "intimidation": [
-    "Marshal Dedication"
+    "Warrior"
    ],
    "light": [
     "Fighter"
@@ -927,6 +924,7 @@
   },
   "avisos": [
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
+   "Marshal Dedication: falta escolher `marshal-skill` (Diplomacy, Diplomacy, Intimidation, Intimidation)",
    "boosts de atributo: 10 declarado(s) de 13 a que o personagem tem direito -- faltam 3. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
   "background": "Warrior",
@@ -1110,10 +1108,9 @@
   "pericias_livres": 3,
   "proficiencias": {
    "advanced": "trained",
-   "diplomacy": "expert",
    "fortitude": "expert",
    "heavy": "trained",
-   "intimidation": "expert",
+   "intimidation": "trained",
    "light": "trained",
    "lore:Warfare Lore": "trained",
    "martial": "expert",
@@ -1215,6 +1212,61 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (3 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 1,
+    "flag": "marshal-skill",
+    "kind": "grant",
+    "opcoes": [
+     {
+      "grants": [
+       {
+        "proficiency": {
+         "diplomacy": "trained"
+        }
+       }
+      ],
+      "rotulo": "Diplomacy",
+      "valor": "diplomacy-trained"
+     },
+     {
+      "grants": [
+       {
+        "proficiency": {
+         "diplomacy": "expert"
+        }
+       }
+      ],
+      "rotulo": "Diplomacy",
+      "valor": "diplomacy-expert"
+     },
+     {
+      "grants": [
+       {
+        "proficiency": {
+         "intimidation": "trained"
+        }
+       }
+      ],
+      "rotulo": "Intimidation",
+      "valor": "imtimidation-trained"
+     },
+     {
+      "grants": [
+       {
+        "proficiency": {
+         "intimidation": "expert"
+        }
+       }
+      ],
+      "rotulo": "Intimidation",
+      "valor": "intimidation-expert"
+     }
+    ],
+    "origem": "wb:feat/marshal-dedication",
+    "rotulo": "Marshal Dedication / marshal-skill",
+    "slot": "escolha_de_grant"
    },
    {
     "em": "criacao",
