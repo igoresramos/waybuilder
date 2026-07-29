@@ -805,6 +805,40 @@ checar(personagem(niveis((FIGHTER, 1))).avaliar({"alignment": "evil"})[0],
        "que nao sabe, e a clausula fica visivel em `requires_residuo`")
 
 # ---------------------------------------------------------------------------
+# ChoiceSet: `Marshal Dedication` da UMA entre Diplomacy e Intimidation, e a
+# base concedia as QUATRO opcoes (as duas pericias, trained E expert).
+# Spec: specs/2026-07-29-choiceset.md
+print("\nescolha embutida em grants (ChoiceSet)")
+
+def _marshal(escolha=None):
+    esc = niveis((FIGHTER, 2)) + [
+        {"em": 2, "slot": "free_archetype", "pega": "wb:feat/marshal-dedication"}]
+    if escolha:
+        esc.append({"em": 2, "slot": "escolha_de_grant", "pega": escolha})
+    return personagem(esc)
+
+sem = _marshal()
+checar(sem.proficiencias.get("intimidation") is None,
+       "sem escolher, a dedicacao NAO da Intimidation de graca",
+       f"{sem.proficiencias.get('intimidation')}")
+checar(any("falta escolher `marshal-skill`" in a for a in sem.avisos),
+       "e a ficha avisa que falta escolher", f"{sem.avisos[-2:]}")
+checar(any(s["slot"] == "escolha_de_grant" for s in sem.slots_abertos()),
+       "slots_abertos oferece a escolha -- sem isso a tela nao tem picker")
+
+com_int = _marshal("marshal-skill:imtimidation-trained")
+checar(com_int.proficiencias.get("intimidation") == "trained",
+       "escolhendo Intimidation, ela vem trained",
+       f"{com_int.proficiencias.get('intimidation')}")
+
+com_dip = _marshal("marshal-skill:diplomacy-expert")
+checar(com_dip.proficiencias.get("diplomacy") == "expert",
+       "escolhendo Diplomacy expert, ela sobe a expert",
+       f"{com_dip.proficiencias.get('diplomacy')}")
+checar(com_dip.proficiencias.get("intimidation") is None,
+       "e a opcao NAO escolhida continua fora")
+
+# ---------------------------------------------------------------------------
 # `_termo_has` olhava o documento INTEIRO, sem perguntar QUANDO cada coisa foi
 # pega -- entao a ordem ilegal passava limpa. A ficha e historico, nao foto.
 # Spec: specs/2026-07-29-recorte-temporal-do-has.md

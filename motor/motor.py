@@ -374,7 +374,7 @@ class Personagem:
 
         for cid in self.ordem_de_classe:
             classe = self.base.get(cid)
-            for g in classe.get("grants") or []:
+            for g in self._grants_de(classe):
                 if isinstance(g, dict) and "proficiency" in g:
                     for chave, rank in (g["proficiency"] or {}).items():
                         aplicar(chave, rank, classe.get("name", cid), cid)
@@ -383,7 +383,7 @@ class Personagem:
         # Expert Spellcaster, Reflex Expertise...). Sem isto a regra 7 entrega
         # a feature na lista e nao no numero.
         for f in self.features:
-            for g in f.get("grants") or []:
+            for g in self._grants_de(f):
                 if isinstance(g, dict) and "proficiency" in g:
                     for chave, rank in (g["proficiency"] or {}).items():
                         aplicar(chave, rank,
@@ -401,7 +401,7 @@ class Personagem:
             # a RAIZ da cadeia, nao o elo: se a dedicacao X concedeu o feat Y,
             # o que Y aplica tem de ser descontado ao avaliar o requisito de X
             raiz = self._raiz_de(wb_id)
-            for g in feat.get("grants") or []:
+            for g in self._grants_de(feat):
                 if not isinstance(g, dict):
                     continue
                 for chave, rank in (g.get("proficiency") or {}).items():
@@ -413,7 +413,7 @@ class Personagem:
         self.pericias_automaticas: dict[str, str] = {}
         for cid in self.ordem_de_classe:
             classe = self.base.get(cid)
-            for g in classe.get("grants") or []:
+            for g in self._grants_de(classe):
                 for pericia in ((g.get("skill_training") or {}).get("auto") or []):
                     self.pericias_automaticas[pericia] = classe.get("name", cid)
                     aplicar(pericia, "trained", classe.get("name", cid))
@@ -452,7 +452,7 @@ class Personagem:
         """
         niveis: set[int] = set()
         for cid, desde in self.entrada_da_classe.items():
-            for g in self.base.get(cid).get("grants") or []:
+            for g in self._grants_de(self.base.get(cid)):
                 if not isinstance(g, dict) or "skill_increase" not in g:
                     continue
                 for n in ((g["skill_increase"] or {}).get("levels") or []):
@@ -514,7 +514,7 @@ class Personagem:
         for cid in self.ordem_de_classe:
             classe = self.base.get(cid)
             livre = 0
-            for g in classe.get("grants") or []:
+            for g in self._grants_de(classe):
                 livre = max(livre, int((g.get("skill_training") or {}).get("free") or 0))
             # o INT tambem da pericias livres, mas isso e recurso de personagem
             delta = max(0, livre - concedidas)
@@ -527,7 +527,7 @@ class Personagem:
         # orcamento das CLASSES). Sao 37 feats, entre eles dedicacoes como
         # `battle-harbinger`, que da 1 pericia treinada a escolha.
         for wb_id, feat, por in self._feats_efetivos():
-            for g in feat.get("grants") or []:
+            for g in self._grants_de(feat):
                 if not isinstance(g, dict):
                     continue
                 livre = int((g.get("skill_training") or {}).get("free") or 0)
@@ -582,6 +582,44 @@ class Personagem:
                 f"pericias livres: {self.pericias_declaradas} declarada(s) para "
                 f"{self.pericias_livres} de direito -- sobra "
                 f"{self.pericias_declaradas - self.pericias_livres}")
+
+    def _grants_de(self, reg) -> list:
+        """Os grants de um registro, com a escolha do jogador ja resolvida.
+
+        Um `grants` pode conter `{"choice": {"flag": ..., "opcoes": [...]}}`, e
+        cada opcao carrega os grants que dependem DELA (spec
+        `2026-07-29-choiceset.md`). Antes disso as consequencias ficavam soltas
+        na raiz e o personagem recebia TODAS as opcoes -- Marshal Dedication
+        dava Diplomacy E Intimidation, trained E expert.
+
+        Aqui a opcao escolhida entra no fluxo como se fosse grant normal, e as
+        outras nao entram. O marcador `choice` PERMANECE na lista, porque e ele
+        que `slots_abertos` usa para oferecer o picker.
+
+        Sem escolha declarada, NENHUMA opcao e aplicada -- o motor nao arbitra a
+        escolha do jogador.
+        """
+        grants = (reg or {}).get("grants") or []
+        if not any(isinstance(g, dict) and "choice" in g for g in grants):
+            return grants
+        escolhidos = {e["pega"] for e in self._escolhas("escolha_de_grant")
+                      if isinstance(e.get("pega"), str)}
+        saida = []
+        for g in grants:
+            saida.append(g)
+            if not isinstance(g, dict) or "choice" not in g:
+                continue
+            escolha = g["choice"] or {}
+            opcoes = escolha.get("opcoes")
+            if not isinstance(opcoes, list):
+                continue
+            for o in opcoes:
+                if not isinstance(o, dict):
+                    continue
+                if f"{escolha.get('flag')}:{o.get('valor')}" in escolhidos:
+                    saida += [x for x in (o.get("grants") or [])
+                              if isinstance(x, dict)]
+        return saida
 
     def _escolhas_de_grant(self) -> None:
         """Escolha embutida em `grants` -- ex: Marshal Dedication, que da UMA
@@ -799,7 +837,7 @@ class Personagem:
             cid = self.classe_do_nivel[nivel]
             classe = self.base.get(cid)
             por_nivel = 0
-            for g in classe.get("grants") or []:
+            for g in self._grants_de(classe):
                 if isinstance(g, dict) and "hp_per_level" in g:
                     por_nivel = int(g["hp_per_level"])
             ganho = por_nivel + con
@@ -813,7 +851,7 @@ class Personagem:
         # HP fica exatamente `nivel` pontos abaixo do oficial, que foi como a
         # validacao contra os iconics da Paizo achou esta lacuna.
         for wb_id, feat, por in self._feats_efetivos():
-            for g in feat.get("grants") or []:
+            for g in self._grants_de(feat):
                 fm = g.get("flat_modifier") if isinstance(g, dict) else None
                 if not fm or fm.get("selector") != "hp":
                     continue
@@ -879,7 +917,7 @@ class Personagem:
         extras: dict[str, set[int]] = {k: set(v) for k, v in basica.items()}
         for cid, desde in self.entrada_da_classe.items():
             classe = self.base.get(cid)
-            for g in classe.get("grants") or []:
+            for g in self._grants_de(classe):
                 fs = g.get("feat_slot") if isinstance(g, dict) else None
                 if not fs or not fs.get("kind"):
                     continue
@@ -902,7 +940,7 @@ class Personagem:
             concede = any(
                 1 in ((g.get("feat_slot") or {}).get("levels") or [])
                 and (g.get("feat_slot") or {}).get("kind") == "class"
-                for g in (self.base.get(self.primeira_classe).get("grants") or [])
+                for g in self._grants_de(self.base.get(self.primeira_classe))
                 if isinstance(g, dict))
             if not concede:
                 self.slots["class"] = [n for n in self.slots["class"] if n != 1]
@@ -1025,7 +1063,7 @@ class Personagem:
         20. Spec: specs/2026-07-29-spellcasting-de-arquetipo.md.
         """
         for origem_id, reg, _ in self._feats_efetivos():
-            for g in (reg.get("grants") or []):
+            for g in self._grants_de(reg):
                 if not isinstance(g, dict) or "grant_spellcasting" not in g:
                     continue
                 gs = g["grant_spellcasting"] or {}
@@ -1383,7 +1421,7 @@ class Personagem:
                                           em_de.get(f["id"]))
 
     def _coletar_grant_actor(self, origem_id: str, reg: dict, em) -> None:
-        for g in (reg.get("grants") or []):
+        for g in self._grants_de(reg):
             if not isinstance(g, dict) or "grant_actor" not in g:
                 continue
             ga = g["grant_actor"] or {}
@@ -1987,7 +2025,7 @@ class Personagem:
                     achados.setdefault(self._slug_de_sentido(chave), {
                         "tipo": chave, "acuidade": None, "alcance": None,
                         "origem": reg.get("name") or origem_id})
-            for g in (reg.get("grants") or []):
+            for g in self._grants_de(reg):
                 if not isinstance(g, dict) or "sense" not in g:
                     continue
                 # `sense` vem como dict (`{tipo, acuidade, alcance}`) na maioria

@@ -396,7 +396,7 @@ export class Personagem implements ContextoDePredicado {
   private _proficiencias(): void {
     for (const cid of this.ordem_de_classe) {
       const classe = this.base.get(cid);
-      for (const g of listaDe(classe["grants"])) {
+      for (const g of this._grants_de(classe)) {
         if (ehDict(g) && Object.hasOwn(g, "proficiency")) {
           for (const [chave, rank] of Object.entries(dictDe(g["proficiency"]))) {
             this._aplicar_proficiencia(chave, rank, nomeOu(classe, cid), cid);
@@ -431,7 +431,7 @@ export class Personagem implements ContextoDePredicado {
       // a RAIZ da cadeia, não o elo: se a dedicação X concedeu o feat Y, o que
       // Y aplica tem de ser descontado ao avaliar o requisito de X
       const raiz = this._raiz_de(wb_id);
-      for (const g of listaDe(feat["grants"])) {
+      for (const g of this._grants_de(feat)) {
         if (!ehDict(g)) continue;
         for (const [chave, rank] of Object.entries(dictDe(g["proficiency"]))) {
           this._aplicar_proficiencia(chave, rank, rotulo, raiz);
@@ -445,7 +445,7 @@ export class Personagem implements ContextoDePredicado {
     // regra 9: perícia automática da classe é identidade, sempre concedida
     for (const cid of this.ordem_de_classe) {
       const classe = this.base.get(cid);
-      for (const g of listaDe(classe["grants"])) {
+      for (const g of this._grants_de(classe)) {
         for (const pericia of listaDe(dictDe(dictDe(g)["skill_training"])["auto"])) {
           this.pericias_automaticas.set(String(pericia), nomeOu(classe, cid));
           this._aplicar_proficiencia(String(pericia), "trained", nomeOu(classe, cid));
@@ -492,7 +492,7 @@ export class Personagem implements ContextoDePredicado {
   private _aumentos_de_pericia(): void {
     const niveis = new Set<number>();
     for (const [cid, desde] of this.entrada_da_classe) {
-      for (const g of listaDe(this.base.get(cid)["grants"])) {
+      for (const g of this._grants_de(this.base.get(cid))) {
         if (!ehDict(g) || !Object.hasOwn(g, "skill_increase")) continue;
         for (const n of listaDe(dictDe(g["skill_increase"])["levels"])) {
           const v = inteiro(n);
@@ -565,7 +565,7 @@ export class Personagem implements ContextoDePredicado {
     for (const cid of this.ordem_de_classe) {
       const classe = this.base.get(cid);
       let livre = 0;
-      for (const g of listaDe(classe["grants"])) {
+      for (const g of this._grants_de(classe)) {
         livre = Math.max(livre, inteiro(dictDe(dictDe(g)["skill_training"])["free"]));
       }
       // o INT também dá perícias livres, mas isso é recurso de personagem
@@ -578,7 +578,7 @@ export class Personagem implements ContextoDePredicado {
     // que existe só pra impedir o multiclasse de multiplicar o orçamento das
     // CLASSES). São 37 feats, entre eles dedicações como `battle-harbinger`.
     for (const [wb_id, feat] of this._feats_efetivos()) {
-      for (const g of listaDe(feat["grants"])) {
+      for (const g of this._grants_de(feat)) {
         if (!ehDict(g)) continue;
         const livre = inteiro(dictDe(g["skill_training"])["free"]);
         if (livre) {
@@ -651,6 +651,42 @@ export class Personagem implements ContextoDePredicado {
    * `grants` é lido em 14 pontos do motor. Marcar antes de aplicar é
    * deliberado: sem isso a escolha sumiria em silêncio.
    */
+  /**
+   * Os grants de um registro, com a escolha do jogador já resolvida.
+   *
+   * Um `grants` pode conter `{"choice": {"flag": ..., "opcoes": [...]}}`, e cada
+   * opção carrega os grants que dependem DELA (spec `2026-07-29-choiceset.md`).
+   * Antes disso as consequências ficavam soltas na raiz e o personagem recebia
+   * TODAS as opções -- Marshal Dedication dava Diplomacy E Intimidation.
+   *
+   * O marcador `choice` PERMANECE na lista, porque é ele que `slots_abertos`
+   * usa para oferecer o picker. Sem escolha declarada, NENHUMA opção é aplicada.
+   */
+  private _grants_de(reg: Dict | null | undefined): unknown[] {
+    const grants = listaDe(dictDe(reg)["grants"]);
+    if (!grants.some((g) => "choice" in dictDe(g))) return grants;
+    const escolhidos = new Set<string>();
+    for (const e of this._escolhas("escolha_de_grant")) {
+      if (ehStr(e["pega"])) escolhidos.add(e["pega"]);
+    }
+    const saida: unknown[] = [];
+    for (const g of grants) {
+      saida.push(g);
+      const dict = dictDe(g);
+      if (!("choice" in dict)) continue;
+      const escolha = dictDe(dict["choice"]);
+      const opcoes = escolha["opcoes"];
+      if (!ehLista(opcoes)) continue;
+      for (const o of opcoes) {
+        const op = dictDe(o);
+        if (escolhidos.has(`${pyStr(escolha["flag"])}:${pyStr(op["valor"])}`)) {
+          for (const x of listaDe(op["grants"])) saida.push(x);
+        }
+      }
+    }
+    return saida;
+  }
+
   private _escolhas_de_grant(): void {
     this.escolhas_de_grant = [];
     const vistos = new Set<string>();
@@ -876,7 +912,7 @@ export class Personagem implements ContextoDePredicado {
       const cid = this.classe_do_nivel.get(nivel) as string;
       const classe = this.base.get(cid);
       let por_nivel = 0;
-      for (const g of listaDe(classe["grants"])) {
+      for (const g of this._grants_de(classe)) {
         if (ehDict(g) && Object.hasOwn(g, "hp_per_level")) por_nivel = inteiro(g["hp_per_level"]);
       }
       const ganho = por_nivel + con;
@@ -892,7 +928,7 @@ export class Personagem implements ContextoDePredicado {
     // `nivel` pontos abaixo do oficial, que foi como a validação contra os
     // iconics da Paizo achou esta lacuna.
     for (const [wb_id, feat, por] of this._feats_efetivos()) {
-      for (const g of listaDe(feat["grants"])) {
+      for (const g of this._grants_de(feat)) {
         const fm = ehDict(g) ? g["flat_modifier"] : null;
         if (!verdadeiro(fm) || dictDe(fm)["selector"] !== "hp") continue;
         const valor = this._resolver_valor(dictDe(fm)["value"]);
@@ -962,7 +998,7 @@ export class Personagem implements ContextoDePredicado {
     for (const [k, v] of basica) extras.set(k, new Set(v));
     for (const [cid, desde] of this.entrada_da_classe) {
       const classe = this.base.get(cid);
-      for (const g of listaDe(classe["grants"])) {
+      for (const g of this._grants_de(classe)) {
         const fs = ehDict(g) ? g["feat_slot"] : null;
         if (!verdadeiro(fs) || !verdadeiro(dictDe(fs)["kind"])) continue;
         const chave = String(dictDe(fs)["kind"]);
@@ -986,7 +1022,7 @@ export class Personagem implements ContextoDePredicado {
     this.class_feat_nivel_1 = dos_class.includes(1);
     if (dos_class.includes(1) && this.primeira_classe !== null) {
       let concede = false;
-      for (const g of listaDe(this.base.get(this.primeira_classe)["grants"])) {
+      for (const g of this._grants_de(this.base.get(this.primeira_classe))) {
         if (!ehDict(g)) continue;
         const fs = dictDe(g["feat_slot"]);
         if (listaDe(fs["levels"]).some((n) => n === 1) && fs["kind"] === "class") {
@@ -1124,7 +1160,7 @@ export class Personagem implements ContextoDePredicado {
    */
   private _conjuracao_de_arquetipo(): void {
     for (const [origem_id, reg] of this._feats_efetivos()) {
-      for (const g of listaDe(reg["grants"])) {
+      for (const g of this._grants_de(reg)) {
         if (!ehDict(g) || !("grant_spellcasting" in g)) continue;
         const gs = dictDe(g["grant_spellcasting"]);
         const degraus = dictDe(gs["degraus"]);
@@ -1532,7 +1568,7 @@ export class Personagem implements ContextoDePredicado {
   }
 
   private _coletar_grant_actor(origem_id: string, reg: Dict, em: unknown): void {
-    for (const g of listaDe(reg["grants"])) {
+    for (const g of this._grants_de(reg)) {
       if (!ehDict(g) || !("grant_actor" in g)) continue;
       const ga = dictDe(g["grant_actor"]);
       this.concessoes_de_ator.push({
@@ -2220,7 +2256,7 @@ export class Personagem implements ContextoDePredicado {
           });
         }
       }
-      for (const g of listaDe(reg["grants"])) {
+      for (const g of this._grants_de(reg)) {
         if (!ehDict(g) || !("sense" in g)) continue;
         // `sense` vem como dict na maioria e como STRING crua em parte dos
         // registros -- as duas formas existem na base
