@@ -92,12 +92,6 @@
         ]
       },
       {
-        "nome": "Magic Warrior Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Mauler Dedication",
         "waybuilder": false,
         "pathbuilder": true,

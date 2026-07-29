@@ -148,12 +148,6 @@
         "motivos": []
       },
       {
-        "nome": "Exhort the Faithful",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Experienced Professional",
         "waybuilder": false,
         "pathbuilder": true,
@@ -162,37 +156,7 @@
         ]
       },
       {
-        "nome": "Godless Healing",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Hobnobber",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Mortal Healing",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Pei Zing Adept",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Pilgrim's Token",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Prepare Elemental Medicine",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
@@ -204,18 +168,6 @@
         "motivos": [
           "exige lore:zevgavizeb >= trained; tem untrained"
         ]
-      },
-      {
-        "nome": "Reveal True Name",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Sanctify Water",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
       },
       {
         "nome": "Seasoned",
