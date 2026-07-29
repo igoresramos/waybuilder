@@ -161,5 +161,9 @@ items:
   id: 92
   date: '2026-07-29'
   priority: media
+- desc: 'CHOICESET ACHATADO -- o personagem recebe TODAS as opcoes de toda escolha. Medido 2026-07-29: 248 registros (243 feat, 5 familiar-ability) tem o marcador `{''choice'': {''opcoes'': N}}` nos grants E as opcoes emitidas como IRMAS, concedidas todas. Exemplo: `marshal-dedication` grava `[{choice: {opcoes: 4}}, {proficiency: {diplomacy: trained}}, {proficiency: {diplomacy: expert}}, {proficiency: {intimidation: trained}}, {proficiency: {intimidation: expert}}]` -- em RAW se escolhe UMA das duas pericias e sobe nela, e o motor da as duas em expert. O pipeline ATE registra que houve escolha; o que falta e aninhar as opcoes sob o marcador em vez de solta-las ao lado, e o motor ganhar slot para o jogador escolher (mesmo desenho de `pericias_livres`, feito em 2026-07-29). NAO e a mesma causa do item 91 (que era achatamento de prosa em `_clausula_rank`) -- os dois apareciam no mesmo registro e por isso foram lidos como um so, errado. Este e ChoiceSet nao modelado, e por isso vai na frente do grosso do item 40: e o mesmo interpretador de rule element, mas com o dado ja meio caminho andado.'
+  id: 93
+  date: '2026-07-29'
+  priority: alta
 promoted: []
 ---

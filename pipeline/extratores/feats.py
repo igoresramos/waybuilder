@@ -484,6 +484,24 @@ class Parser:
             return None
         rank = m.group(1).lower()
         resto = m.group(2).strip()
+
+        # DUAS CAMADAS: "martial weapons and either Diplomacy or Intimidation".
+        # O conector unico la embaixo achata as duas e vira `any` de tres, o que
+        # libera a dedicacao para quem so tem Diplomacy (o Barkeep da de graca).
+        # Reconhecer a forma ANTES de decidir o conector.
+        # Spec: `specs/2026-07-29-aninhamento-de-clausula.md`
+        m_either = re.search(r"\s+and\s+either\s+(.+)$", resto, re.I)
+        if m_either:
+            cabeca = resto[:m_either.start()].strip()
+            cauda = _dividir_palavra(m_either.group(1).strip(), "or")
+            if cabeca and len(cauda) > 1:
+                esq = self._clausula_rank(f"{rank} in {cabeca}", tags)
+                dir_ = [self._pericia(i, tags) for i in cauda]
+                if esq is not None and all(d is not None for d in dir_):
+                    return {"all": [esq, {"any": [
+                        {"proficiency": {d: {">=": rank}}} for d in dir_]}]}
+            return None      # forma reconhecida e nao resolvida: nao achatar
+
         # a lista so vale se TODO item for pericia; senao a frase e outra coisa
         itens = re.split(r",\s*|\s+or\s+|\s+and\s+", resto)
         itens = [re.sub(r"^(?:and|or|either)\s+", "", i.strip(), flags=re.I)

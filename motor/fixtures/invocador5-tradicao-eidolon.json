@@ -331,11 +331,11 @@
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
    "wb:feat/magic-warrior-dedication",
-   "wb:feat/marshal-dedication",
    "wb:feat/martial-artist-dedication",
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
-   "wb:feat/oozemorph-dedication"
+   "wb:feat/oozemorph-dedication",
+   "wb:feat/oracle-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
@@ -373,11 +373,11 @@
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
    "wb:feat/magic-warrior-dedication",
-   "wb:feat/marshal-dedication",
    "wb:feat/martial-artist-dedication",
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
-   "wb:feat/oozemorph-dedication"
+   "wb:feat/oozemorph-dedication",
+   "wb:feat/oracle-dedication"
   ],
   "general_feat@1": [
    "wb:feat/additional-lore",

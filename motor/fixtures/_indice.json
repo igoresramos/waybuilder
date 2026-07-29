@@ -15,7 +15,7 @@
    "nivel": 6,
    "hp": 100,
    "avisos": 3,
-   "fora_do_requisito": 0,
+   "fora_do_requisito": 1,
    "slots_abertos": 5
   },
   {
@@ -175,7 +175,7 @@
    "nivel": 4,
    "hp": 56,
    "avisos": 2,
-   "fora_do_requisito": 0,
+   "fora_do_requisito": 1,
    "slots_abertos": 3
   }
  ]

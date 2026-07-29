@@ -1059,7 +1059,12 @@
    }
   ],
   "focus_pool": 0,
-  "fora_do_requisito": [],
+  "fora_do_requisito": [
+   {
+    "feat": "Marshal Dedication",
+    "motivo": "exige diplomacy >= trained; tem untrained; exige intimidation >= trained; tem untrained"
+   }
+  ],
   "heranca": "Battle-Ready Orc",
   "hp": 100,
   "modificadores": {

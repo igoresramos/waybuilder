@@ -327,7 +327,6 @@
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
-   "wb:feat/marshal-dedication",
    "wb:feat/martial-artist-dedication",
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
@@ -335,7 +334,8 @@
    "wb:feat/overwatch-dedication",
    "wb:feat/pactbinder-dedication",
    "wb:feat/pathfinder-agent-dedication",
-   "wb:feat/reanimator-dedication"
+   "wb:feat/reanimator-dedication",
+   "wb:feat/red-mantis-assassin-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/aldori-duelist-dedication",
@@ -369,7 +369,6 @@
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
-   "wb:feat/marshal-dedication",
    "wb:feat/martial-artist-dedication",
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
@@ -377,7 +376,8 @@
    "wb:feat/overwatch-dedication",
    "wb:feat/pactbinder-dedication",
    "wb:feat/pathfinder-agent-dedication",
-   "wb:feat/reanimator-dedication"
+   "wb:feat/reanimator-dedication",
+   "wb:feat/red-mantis-assassin-dedication"
   ],
   "general_feat@1": [
    "wb:feat/additional-lore",
