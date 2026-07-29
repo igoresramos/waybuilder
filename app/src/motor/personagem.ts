@@ -3050,6 +3050,28 @@ export class Personagem implements ContextoDePredicado {
       if (Object.hasOwn(g, "grant_item")) {
         const gi = g["grant_item"];
         const uuid = ehDict(gi) ? gi["uuid"] : gi;
+        // `wb` é o id que o pipeline resolveu a partir do NOME no fim do uuid
+        // (spec `2026-07-29-grant-item-por-nome.md`). Até 2026-07-29 o motor não
+        // aplicava grant_item NENHUM -- só avisava do uuid dinâmico --, então
+        // 619 concessões ficavam inertes.
+        const alvo = ehDict(gi) ? gi["wb"] : null;
+        if (ehStr(alvo) && alvo.startsWith("wb:")) {
+          if (visitados.has(alvo)) continue;
+          const alvo_reg = this.base.opcional(alvo);
+          if (alvo_reg === null) {
+            this.avisos.push(
+              `${origem_id}: grant_item aponta pra id ausente da base: ${alvo}`);
+            continue;
+          }
+          visitados.add(alvo);
+          if (!this._ja_tenho.has(alvo)) {
+            this._ja_tenho.add(alvo);
+            this._aplicar_concessao(origem_id, alvo, alvo_reg);
+          }
+          this._resolver_cadeia_de_grants(
+            alvo, this._grants_de(alvo_reg), visitados, profundidade + 1);
+          continue;
+        }
         if (ehStr(uuid) && uuid.includes("{")) {
           // uuid dinâmico: só a escolha do jogador fecha isto. NÃO é "alvo não
           // encontrado" -- é "pendente", e o app tem que distinguir os dois.

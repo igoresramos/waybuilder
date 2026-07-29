@@ -2717,6 +2717,28 @@ class Personagem:
             if "grant_item" in g:
                 gi = g["grant_item"]
                 uuid = gi.get("uuid") if isinstance(gi, dict) else gi
+                # `wb` e o id que o pipeline resolveu a partir do NOME no fim do
+                # uuid (spec `2026-07-29-grant-item-por-nome.md`). Ate 2026-07-29
+                # o motor nao aplicava grant_item NENHUM -- so avisava do uuid
+                # dinamico --, entao 619 concessoes ficavam inertes.
+                alvo = gi.get("wb") if isinstance(gi, dict) else None
+                if isinstance(alvo, str) and alvo.startswith("wb:"):
+                    if alvo in visitados:
+                        continue      # ja concedido nesta cadeia -- poda sem avisar
+                    alvo_reg = self.base.opcional(alvo)
+                    if alvo_reg is None:
+                        self.avisos.append(
+                            f"{origem_id}: grant_item aponta pra id ausente "
+                            f"da base: {alvo}")
+                        continue
+                    visitados.add(alvo)
+                    if alvo not in self._ja_tenho:
+                        self._ja_tenho.add(alvo)
+                        self._aplicar_concessao(origem_id, alvo, alvo_reg)
+                    self._resolver_cadeia_de_grants(
+                        alvo, self._grants_de(alvo_reg), visitados,
+                        profundidade + 1)
+                    continue
                 if isinstance(uuid, str) and "{" in uuid:
                     # uuid dinamico: so a escolha do jogador fecha isto. NAO e
                     # "alvo nao encontrado" -- e "pendente", e o app tem que

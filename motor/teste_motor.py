@@ -805,6 +805,23 @@ checar(personagem(niveis((FIGHTER, 1))).avaliar({"alignment": "evil"})[0],
        "que nao sabe, e a clausula fica visivel em `requires_residuo`")
 
 # ---------------------------------------------------------------------------
+# `grant_item` apontava para o Foundry e o motor nao aplicava NENHUM -- 619
+# concessoes inertes. O pipeline passou a resolver o nome do uuid para id `wb:`.
+# Spec: specs/2026-07-29-grant-item-por-nome.md
+print("\ngrant_item resolvido e aplicado")
+
+bh = personagem(niveis((FIGHTER, 4)) + [
+    {"em": 2, "slot": "free_archetype", "pega": "wb:feat/battle-harbinger-dedication"}])
+concedidos = {c["nome"] for c in bh.concedidos}
+checar("Toughness" in concedidos,
+       "Battle Harbinger Dedication concede Toughness por grant_item",
+       f"{sorted(concedidos)}")
+sem_bh = personagem(niveis((FIGHTER, 4)))
+checar(bh.hp > sem_bh.hp,
+       "e o HP sobe por causa dela -- o efeito chega na ficha",
+       f"com={bh.hp} sem={sem_bh.hp}")
+
+# ---------------------------------------------------------------------------
 # ChoiceSet: `Marshal Dedication` da UMA entre Diplomacy e Intimidation, e a
 # base concedia as QUATRO opcoes (as duas pericias, trained E expert).
 # Spec: specs/2026-07-29-choiceset.md
