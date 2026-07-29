@@ -1,3 +1,11 @@
+---
+spec: ui-pathbuilder
+project: waybuilder
+version: 1
+status: aprovada
+created: 2026-07-28
+---
+
 # Spec -- UI no padrao Pathbuilder
 
 Status: aprovada por instrucao direta do Igor em 2026-07-28 ("disseca o maximo

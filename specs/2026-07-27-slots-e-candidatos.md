@@ -1,8 +1,23 @@
+---
+spec: slots-e-candidatos
+project: waybuilder
+version: 1
+status: aprovada
+created: 2026-07-27
+aprovada_em: 2026-07-29
+todo: 65
+---
+
 # Spec -- slots abertos e candidatos por slot
 
-Status: proposta
-Data: 2026-07-27
-Itens do TODO: 65 (candidatos por slot), 74 (higiene de atributo)
+**Status corrigido em 2026-07-29:** estava como `proposta` embora o que ela
+descreve ja estivesse no ar desde o commit `f98b4b4e5`. `candidatos(slot, em)` e
+`slots_abertos()` substituiram o `disponiveis()` por kind, e `_orcamento_de_boost`
+fechou a higiene de atributo (item 74). Do item 65 sobra so `_termo_has` sem
+recorte temporal.
+
+Itens do TODO: 65 (candidatos por slot -- parcial), 74 (higiene de atributo --
+concluido)
 
 ## O problema
 

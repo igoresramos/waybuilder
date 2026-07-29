@@ -1,3 +1,12 @@
+---
+spec: app-completo
+project: waybuilder
+version: 1
+status: viva
+created: 2026-07-28
+todo: 43
+---
+
 # Spec -- o app do Waybuilder, inteiro
 
 Status: viva. Atualizada em 2026-07-28.

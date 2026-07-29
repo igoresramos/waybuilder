@@ -4,6 +4,7 @@ project: waybuilder
 version: 1
 status: aprovada
 created: 2026-07-29
+todo: 66
 ---
 
 # Spec -- spellcasting de arquetipo
