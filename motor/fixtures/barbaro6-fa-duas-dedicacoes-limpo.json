@@ -369,6 +369,7 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
@@ -394,8 +395,7 @@
    "wb:feat/toughness",
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
-   "wb:feat/weapon-proficiency",
-   "wb:feat/additional-lore"
+   "wb:feat/weapon-proficiency"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
@@ -411,6 +411,7 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
@@ -436,8 +437,7 @@
    "wb:feat/toughness",
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
-   "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge"
+   "wb:feat/weapon-proficiency"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -453,6 +453,7 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
@@ -478,8 +479,7 @@
    "wb:feat/toughness",
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
-   "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge"
+   "wb:feat/weapon-proficiency"
   ],
   "skill_feat@1": [
    "wb:feat/armor-assist",
@@ -487,6 +487,7 @@
    "wb:feat/bon-mot",
    "wb:feat/combat-climber",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/group-coercion",
    "wb:feat/group-impression",
@@ -518,7 +519,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider"
@@ -529,6 +529,7 @@
    "wb:feat/bon-mot",
    "wb:feat/combat-climber",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/group-coercion",
    "wb:feat/group-impression",
@@ -562,8 +563,7 @@
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
    "wb:feat/charming-liar",
-   "wb:feat/concealing-legerdemain",
-   "wb:feat/contract-negotiator"
+   "wb:feat/concealing-legerdemain"
   ],
   "skill_feat@4": [
    "wb:feat/armor-assist",
@@ -571,6 +571,7 @@
    "wb:feat/bon-mot",
    "wb:feat/combat-climber",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/group-coercion",
    "wb:feat/group-impression",
@@ -604,8 +605,7 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/battle-medicine",
-   "wb:feat/cat-fall"
+   "wb:feat/battle-medicine"
   ]
  },
  "extras": {

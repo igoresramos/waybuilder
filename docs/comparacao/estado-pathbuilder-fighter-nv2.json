@@ -1,0 +1,58 @@
+{
+  "fonte": "pathbuilder 2e web 108, remaster on, legado ligado",
+  "personagem": "Human / Barkeep / Fighter",
+  "nivel_alvo": 2,
+  "nivel_confirmado_na_tela": "2",
+  "atributos_modificador": {
+    "STR": "+3",
+    "DEX": "+1",
+    "CON": "+1",
+    "INT": "+0",
+    "WIS": "+0",
+    "CHA": "+0"
+  },
+  "pericias_treinadas_na_ficha": [
+    "+7Fortitude",
+    "+7Reflex",
+    "+4Will",
+    "17Fighter DC",
+    "+6Perception",
+    "+1Acrobatics",
+    "+3Athletics",
+    "+4Diplomacy",
+    "+4Lore: Alcohol",
+    "+1Stealth",
+    "+1Thievery"
+  ],
+  "pericias_todas_na_ficha": [
+    "+7Fortitude",
+    "+7Reflex",
+    "+4Will",
+    "17Fighter DC",
+    "+6Perception",
+    "+0Initiative",
+    "+1Acrobatics",
+    "+0Arcana",
+    "+3Athletics",
+    "+0Crafting",
+    "+0Deception",
+    "+4Diplomacy",
+    "+0Intimidation",
+    "+4Lore: Alcohol",
+    "+0Medicine",
+    "+0Nature",
+    "+0Occultism",
+    "+0Performance",
+    "+0Religion",
+    "+0Society",
+    "+1Stealth",
+    "+0Survival",
+    "+1Thievery"
+  ],
+  "pendencias": {
+    "bloco_nivel1_antes_de_subir_de_nivel": "Level 1\n4\nSet Abilities\n3\nSkill Training\n1\nClass Skill\nHeritage\nNot Selected\nAncestry Feat\nNot Selected\nClass Feat\nNot Selected\nReactive Strike\nFree Feat: Shield Block\nFree Feat: Hobnobber",
+    "bloco_nivel1_depois_de_subir_de_nivel": "Level 1\n4\nSet Abilities\n3\nSkill Training\n1\nClass Skill\nHeritage\nNot Selected\nAncestry Feat\nNot Selected\nClass Feat\nNot Selected\nReactive Strike\nFree Feat: Shield Block\nFree Feat: Hobnobber",
+    "bloco_nivel2_depois_de_subir_de_nivel": "Level 2\nClass Feat\nNot Selected\nSkill Feat\nNot Selected",
+    "texto_literal_modal_skill_training": "Remaining Skill Selections: 3"
+  }
+}

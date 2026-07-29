@@ -392,6 +392,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -418,8 +419,7 @@
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
    "wb:feat/additional-lore",
-   "wb:feat/assurance",
-   "wb:feat/diehard"
+   "wb:feat/assurance"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
@@ -434,6 +434,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -460,8 +461,7 @@
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
    "wb:feat/automatic-knowledge",
-   "wb:feat/tattoo-artist",
-   "wb:feat/additional-lore"
+   "wb:feat/tattoo-artist"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -476,6 +476,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -502,14 +503,14 @@
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
    "wb:feat/automatic-knowledge",
-   "wb:feat/tattoo-artist",
-   "wb:feat/additional-circus-trick"
+   "wb:feat/tattoo-artist"
   ],
   "skill_feat@1": [
    "wb:feat/alchemical-crafting",
    "wb:feat/arcane-sense",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/improvise-tool",
    "wb:feat/pilgrims-token",
    "wb:feat/prepare-elemental-medicine",
@@ -541,7 +542,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
@@ -552,6 +552,7 @@
    "wb:feat/arcane-sense",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/improvise-tool",
    "wb:feat/pilgrims-token",
    "wb:feat/prepare-elemental-medicine",
@@ -585,7 +586,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker"
   ],
@@ -594,6 +594,7 @@
    "wb:feat/arcane-sense",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/improvise-tool",
    "wb:feat/pilgrims-token",
    "wb:feat/prepare-elemental-medicine",
@@ -628,8 +629,7 @@
    "wb:feat/contract-negotiator",
    "wb:feat/courtly-graces",
    "wb:feat/crystal-healing",
-   "wb:feat/deceptive-worship",
-   "wb:feat/dirty-trick"
+   "wb:feat/deceptive-worship"
   ]
  },
  "extras": {

@@ -38,14 +38,6 @@
         "motivos": []
       },
       {
-        "nome": "Experienced Professional",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige lore:* >= trained; tem untrained"
-        ]
-      },
-      {
         "nome": "Hobnobber",
         "waybuilder": true,
         "pathbuilder": false,
@@ -57,16 +49,6 @@
         "pathbuilder": true,
         "motivos": [
           "exige lore:zevgavizeb >= trained; tem untrained"
-        ]
-      },
-      {
-        "nome": "Seasoned",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige lore:alcohol >= trained; tem untrained",
-          "exige lore:cooking >= trained; tem untrained",
-          "exige crafting >= trained; tem untrained"
         ]
       }
     ]

@@ -381,6 +381,7 @@
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
@@ -389,6 +390,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/eye-for-numbers",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -417,12 +419,11 @@
    "wb:feat/fleet",
    "wb:feat/shield-block",
    "wb:feat/streetwise",
-   "wb:feat/acrobatic-performer",
-   "wb:feat/acupuncturist",
-   "wb:feat/alchemical-crafting"
+   "wb:feat/acrobatic-performer"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
@@ -431,6 +432,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/eye-for-numbers",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -459,12 +461,11 @@
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/courtly-graces",
-   "wb:feat/diehard",
-   "wb:feat/fleet",
-   "wb:feat/shield-block"
+   "wb:feat/diehard"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
@@ -473,6 +474,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/eye-for-numbers",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -501,12 +503,12 @@
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
-   "wb:feat/improvised-repair",
-   "wb:feat/inspiring-entertainment",
-   "wb:feat/keen-follower"
+   "wb:feat/improvised-repair"
   ],
   "skill_feat@1": [
+   "wb:feat/armor-assist",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/eye-for-numbers",
    "wb:feat/glean-contents",
    "wb:feat/group-coercion",
@@ -524,7 +526,6 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -538,7 +539,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
@@ -548,7 +548,9 @@
    "wb:feat/group-impression"
   ],
   "skill_feat@2": [
+   "wb:feat/armor-assist",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/eye-for-numbers",
    "wb:feat/glean-contents",
    "wb:feat/group-coercion",
@@ -570,7 +572,6 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -584,13 +585,14 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider"
   ],
   "skill_feat@4": [
+   "wb:feat/armor-assist",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/eye-for-numbers",
    "wb:feat/glean-contents",
    "wb:feat/group-coercion",
@@ -616,7 +618,6 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -628,8 +629,7 @@
    "wb:feat/contract-negotiator",
    "wb:feat/crafters-appraisal",
    "wb:feat/crystal-healing",
-   "wb:feat/deceptive-worship",
-   "wb:feat/dirty-trick"
+   "wb:feat/deceptive-worship"
   ]
  },
  "extras": {

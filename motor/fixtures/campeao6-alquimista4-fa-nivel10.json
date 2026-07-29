@@ -381,6 +381,7 @@
   ],
   "general_feat@1": [
    "wb:feat/acupuncturist",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/battle-medicine",
    "wb:feat/civil-service",
@@ -389,6 +390,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/forensic-acumen",
    "wb:feat/fortified-fiefs",
@@ -417,12 +419,11 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
-   "wb:feat/weapon-proficiency",
-   "wb:feat/additional-lore",
-   "wb:feat/adopted-ancestry"
+   "wb:feat/weapon-proficiency"
   ],
   "general_feat@2": [
    "wb:feat/acupuncturist",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/battle-medicine",
    "wb:feat/civil-service",
@@ -431,6 +432,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/forensic-acumen",
    "wb:feat/fortified-fiefs",
@@ -459,12 +461,11 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
-   "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
-   "wb:feat/tattoo-artist"
+   "wb:feat/weapon-proficiency"
   ],
   "general_feat@4": [
    "wb:feat/acupuncturist",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/battle-medicine",
    "wb:feat/civil-service",
@@ -473,6 +474,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/forensic-acumen",
    "wb:feat/fortified-fiefs",
@@ -501,15 +503,15 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
-   "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
-   "wb:feat/tattoo-artist"
+   "wb:feat/weapon-proficiency"
   ],
   "skill_feat@1": [
    "wb:feat/acupuncturist",
+   "wb:feat/armor-assist",
    "wb:feat/battle-medicine",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/forensic-acumen",
    "wb:feat/improvise-tool",
    "wb:feat/inoculation",
@@ -532,7 +534,6 @@
    "wb:feat/acrobatic-performer",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/bon-mot",
    "wb:feat/cat-fall",
@@ -544,14 +545,15 @@
    "wb:feat/courtly-graces",
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
-   "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional"
+   "wb:feat/dirty-trick"
   ],
   "skill_feat@2": [
    "wb:feat/acupuncturist",
+   "wb:feat/armor-assist",
    "wb:feat/battle-medicine",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/forensic-acumen",
    "wb:feat/improvise-tool",
    "wb:feat/inoculation",
@@ -577,7 +579,6 @@
    "wb:feat/acrobatic-performer",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/bon-mot",
    "wb:feat/cat-fall",
@@ -586,14 +587,15 @@
    "wb:feat/combat-climber",
    "wb:feat/concealing-legerdemain",
    "wb:feat/contract-negotiator",
-   "wb:feat/courtly-graces",
-   "wb:feat/crystal-healing"
+   "wb:feat/courtly-graces"
   ],
   "skill_feat@4": [
    "wb:feat/acupuncturist",
+   "wb:feat/armor-assist",
    "wb:feat/battle-medicine",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/forensic-acumen",
    "wb:feat/improvise-tool",
    "wb:feat/inoculation",
@@ -622,14 +624,12 @@
    "wb:feat/acrobatic-performer",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/bon-mot",
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
    "wb:feat/charming-liar",
-   "wb:feat/combat-climber",
-   "wb:feat/concealing-legerdemain"
+   "wb:feat/combat-climber"
   ]
  },
  "extras": {

@@ -1771,10 +1771,47 @@ class Personagem:
         categoria = (arma or {}).get("weapon_category")
         return self._rank_sem(str(categoria), excluir) if categoria else None
 
+    def _slug_de_lore(self, bruto: str) -> str:
+        """`Alcohol Lore` e `alcohol` sao a mesma pericia.
+
+        O sufixo ` Lore` sai antes do slug porque e assim que o parser escreve
+        (`extratores/feats.py`), e o apostrofo some antes de hifenizar pelo
+        mesmo motivo -- `slug()` de la remove, `norm_slug()` daqui nao.
+        """
+        s = re.sub(r"\s+lore$", "", str(bruto or "").strip(), flags=re.I)
+        return norm_slug(s.replace("'", "").replace("’", ""))
+
+    def _rank_de_lore(self, chave: str, excluir: str | None) -> str | None:
+        """`lore:alcohol` cai na Lore da ficha chamada `Alcohol Lore`.
+
+        Duas convencoes para a mesma pericia: o predicado escreve o slug sem o
+        sufixo, a ficha guarda o nome humano com ele. Sem esta ponte, requisito
+        de Lore NOMEADA e insatisfazivel por construcao -- em 35 registros,
+        nenhum personagem atendia com nenhuma escolha. Achado comparando com o
+        Pathbuilder: um Barkeep, que tem Alcohol Lore em RAW, aparecia untrained
+        para o `Seasoned`.
+
+        `lore:*` le-se "alguma Lore" e devolve o MELHOR rank da ficha, porque o
+        requisito pode pedir mais que trained (`Scrollmaster` pede expert).
+        """
+        if not chave.startswith("lore:"):
+            return None
+        pedido = chave.split(":", 1)[1]
+        melhor: str | None = None
+        for k in self.proficiencias:
+            if not k.startswith("lore:"):
+                continue
+            if pedido != "*" and self._slug_de_lore(k.split(":", 1)[1]) != pedido:
+                continue
+            melhor = melhor_rank(melhor, self._rank_sem(k, excluir))
+        return melhor
+
     def _termo_proficiency(self, valor) -> tuple[bool, str]:
         excluir = getattr(self, "_avaliando", None)
         for chave, exigencia in (valor or {}).items():
-            tenho = self._rank_de_arma(chave, excluir) or self._rank_sem(chave, excluir)
+            tenho = (self._rank_de_arma(chave, excluir)
+                     or self._rank_de_lore(chave, excluir)
+                     or self._rank_sem(chave, excluir))
             for op, alvo in (exigencia or {}).items():
                 ia = RANKS.index(tenho) if tenho in RANKS else 0
                 ib = RANKS.index(alvo) if alvo in RANKS else 0

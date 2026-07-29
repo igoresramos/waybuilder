@@ -390,6 +390,7 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
@@ -418,8 +419,7 @@
    "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
-   "wb:feat/bon-mot",
-   "wb:feat/cat-fall"
+   "wb:feat/bon-mot"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
@@ -432,6 +432,7 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
@@ -460,8 +461,7 @@
    "wb:feat/arcane-sense",
    "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
-   "wb:feat/battle-medicine",
-   "wb:feat/bon-mot"
+   "wb:feat/battle-medicine"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -474,6 +474,7 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
@@ -502,11 +503,11 @@
    "wb:feat/liquidate-resources",
    "wb:feat/pick-up-the-pace",
    "wb:feat/prescient-planner",
-   "wb:feat/quick-recovery-kingdom",
-   "wb:feat/robust-health"
+   "wb:feat/quick-recovery-kingdom"
   ],
   "skill_feat@1": [
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/impressive-performance",
    "wb:feat/virtuosic-performer",
@@ -532,7 +533,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
@@ -549,6 +549,7 @@
   ],
   "skill_feat@2": [
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/impressive-performance",
    "wb:feat/virtuosic-performer",
@@ -575,7 +576,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
@@ -591,6 +591,7 @@
   ],
   "skill_feat@4": [
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
    "wb:feat/impressive-performance",
    "wb:feat/virtuosic-performer",
@@ -620,7 +621,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",

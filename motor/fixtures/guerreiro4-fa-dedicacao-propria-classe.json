@@ -381,6 +381,7 @@
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
@@ -389,6 +390,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
@@ -415,14 +417,13 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
-   "wb:feat/bon-mot",
-   "wb:feat/cat-fall"
+   "wb:feat/bon-mot"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
@@ -431,6 +432,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
@@ -458,13 +460,12 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
-   "wb:feat/battle-medicine",
-   "wb:feat/bon-mot"
+   "wb:feat/battle-medicine"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
@@ -473,6 +474,7 @@
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
@@ -501,12 +503,12 @@
    "wb:feat/quick-recovery-kingdom",
    "wb:feat/robust-health",
    "wb:feat/steel-your-resolve",
-   "wb:feat/thorough-search",
-   "wb:feat/untrained-improvisation",
-   "wb:feat/ambush-tactics"
+   "wb:feat/thorough-search"
   ],
   "skill_feat@1": [
+   "wb:feat/armor-assist",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
    "wb:feat/intimidating-glare",
    "wb:feat/quick-coercion",
@@ -517,7 +519,6 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -532,7 +533,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
@@ -548,7 +548,9 @@
    "wb:feat/improvise-tool"
   ],
   "skill_feat@2": [
+   "wb:feat/armor-assist",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
    "wb:feat/intimidating-glare",
    "wb:feat/quick-coercion",
@@ -560,7 +562,6 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -575,7 +576,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
@@ -590,7 +590,9 @@
    "wb:feat/impressive-performance"
   ],
   "skill_feat@4": [
+   "wb:feat/armor-assist",
    "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
    "wb:feat/intimidating-glare",
    "wb:feat/quick-coercion",
@@ -606,7 +608,6 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -621,7 +622,6 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",

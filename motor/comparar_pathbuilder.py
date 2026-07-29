@@ -203,6 +203,12 @@ def main() -> int:
     for caminho in alvos:
         with open(caminho, encoding="utf-8") as fh:
             sonda = json.load(fh)
+        # o glob `pathbuilder-*.json` e um contrato frouxo: qualquer outro
+        # artefato colhido do mesmo app cai nele e estoura aqui com KeyError.
+        # Aconteceu com a sonda de ESTADO (atributos e pericias da ficha), que
+        # tem outro schema. Arquivo sem `classe` nao e sonda de slot -- pula.
+        if "classe" not in sonda:
+            continue
         if sonda["classe"] not in DEFAULT:
             print(f"pulado (classe sem equivalente montado): {sonda['classe']}")
             continue

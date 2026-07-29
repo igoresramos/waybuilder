@@ -1954,10 +1954,49 @@ export class Personagem implements ContextoDePredicado {
     return ehStr(categoria) ? this._rank_sem(categoria, excluir) : null;
   }
 
+  /**
+   * `Alcohol Lore` e `alcohol` são a mesma perícia.
+   *
+   * O sufixo ` Lore` sai antes do slug porque é assim que o parser escreve
+   * (`extratores/feats.py`), e o apóstrofo some antes de hifenizar pelo mesmo
+   * motivo -- o `slug()` de lá remove, o `normSlug()` daqui não.
+   */
+  private _slug_de_lore(bruto: unknown): string {
+    const s = String(verdadeiro(bruto) ? bruto : "").trim().replace(/\s+lore$/i, "");
+    return normSlug(s.replace(/['’]/g, ""));
+  }
+
+  /**
+   * `lore:alcohol` cai na Lore da ficha chamada `Alcohol Lore`.
+   *
+   * Duas convenções para a mesma perícia: o predicado escreve o slug sem o
+   * sufixo, a ficha guarda o nome humano com ele. Sem esta ponte, requisito de
+   * Lore NOMEADA é insatisfazível por construção -- em 35 registros, nenhum
+   * personagem atendia com nenhuma escolha. Achado comparando com o
+   * Pathbuilder: um Barkeep, que tem Alcohol Lore em RAW, aparecia untrained
+   * para o `Seasoned`.
+   *
+   * `lore:*` lê-se "alguma Lore" e devolve o MELHOR rank da ficha, porque o
+   * requisito pode pedir mais que trained (`Scrollmaster` pede expert).
+   */
+  private _rank_de_lore(chave: string, excluir: string | null): string | null {
+    if (!chave.startsWith("lore:")) return null;
+    const pedido = chave.slice("lore:".length);
+    let melhor: string | null = null;
+    for (const k of this.proficiencias.keys()) {
+      if (!k.startsWith("lore:")) continue;
+      if (pedido !== "*" && this._slug_de_lore(k.slice("lore:".length)) !== pedido) continue;
+      melhor = melhorRank(melhor, this._rank_sem(k, excluir));
+    }
+    return melhor;
+  }
+
   private _termo_proficiency(valor: unknown): ResultadoDeTermo {
     const excluir = this._avaliando;
     for (const [chave, exigencia] of Object.entries(dictDe(valor))) {
-      const tenho = this._rank_de_arma(chave, excluir) ?? this._rank_sem(chave, excluir);
+      const tenho = this._rank_de_arma(chave, excluir)
+        ?? this._rank_de_lore(chave, excluir)
+        ?? this._rank_sem(chave, excluir);
       for (const [op, alvo] of Object.entries(dictDe(exigencia))) {
         const ia = indiceDeRank(tenho);
         const ib = indiceDeRank(alvo);
