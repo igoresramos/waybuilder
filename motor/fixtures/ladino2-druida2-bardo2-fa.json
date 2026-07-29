@@ -123,6 +123,7 @@
    "wb:feat/animal-empathy",
    "wb:feat/animal-empathy-druid",
    "wb:feat/hymn-of-healing",
+   "wb:feat/plant-evidence",
    "wb:feat/reach-spell",
    "wb:feat/trap-finder",
    "wb:feat/tumble-behind",
@@ -141,7 +142,6 @@
    "wb:feat/lingering-composition",
    "wb:feat/martial-performance",
    "wb:feat/overextending-feint",
-   "wb:feat/plant-evidence",
    "wb:feat/shore-step",
    "wb:feat/steadying-stone",
    "wb:feat/storm-born",
@@ -165,6 +165,7 @@
    "wb:feat/animal-empathy",
    "wb:feat/animal-empathy-druid",
    "wb:feat/hymn-of-healing",
+   "wb:feat/plant-evidence",
    "wb:feat/reach-spell",
    "wb:feat/trap-finder",
    "wb:feat/tumble-behind",
@@ -199,14 +200,14 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
-   "wb:feat/cultivator-dedication",
-   "wb:feat/curse-maelstrom-dedication"
+   "wb:feat/cultivator-dedication"
   ],
   "class_feat@4": [
    "wb:feat/animal-companion",
    "wb:feat/animal-empathy",
    "wb:feat/animal-empathy-druid",
    "wb:feat/hymn-of-healing",
+   "wb:feat/plant-evidence",
    "wb:feat/reach-spell",
    "wb:feat/trap-finder",
    "wb:feat/tumble-behind",
@@ -241,8 +242,7 @@
    "wb:feat/clawdancer-dedication",
    "wb:feat/cleric-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
-   "wb:feat/cultivator-dedication",
-   "wb:feat/curse-maelstrom-dedication"
+   "wb:feat/cultivator-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -404,13 +404,13 @@
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
    "wb:feat/pet",
-   "wb:feat/pickpocket",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
-   "wb:feat/recognize-spell"
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name"
   ],
   "general_feat@2": [
    "wb:feat/all-of-the-animal",
@@ -446,13 +446,13 @@
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
    "wb:feat/pet",
-   "wb:feat/pickpocket",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
-   "wb:feat/recognize-spell"
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name"
   ],
   "general_feat@4": [
    "wb:feat/all-of-the-animal",
@@ -488,13 +488,13 @@
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
    "wb:feat/pet",
-   "wb:feat/pickpocket",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
-   "wb:feat/recognize-spell"
+   "wb:feat/recognize-spell",
+   "wb:feat/reveal-true-name"
   ],
   "skill_feat@1": [
    "wb:feat/all-of-the-animal",
@@ -517,7 +517,6 @@
    "wb:feat/natural-medicine",
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
-   "wb:feat/pickpocket",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
@@ -536,7 +535,8 @@
    "wb:feat/virtuosic-performer",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
-   "wb:feat/dubious-knowledge"
+   "wb:feat/dubious-knowledge",
+   "wb:feat/pickpocket"
   ],
   "skill_feat@2": [
    "wb:feat/all-of-the-animal",
@@ -559,7 +559,6 @@
    "wb:feat/natural-medicine",
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
-   "wb:feat/pickpocket",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
@@ -578,7 +577,8 @@
    "wb:feat/virtuosic-performer",
    "wb:feat/armored-stealth",
    "wb:feat/assured-identification",
-   "wb:feat/aura-sight"
+   "wb:feat/aura-sight",
+   "wb:feat/automatic-knowledge"
   ],
   "skill_feat@4": [
    "wb:feat/all-of-the-animal",
@@ -601,7 +601,6 @@
    "wb:feat/natural-medicine",
    "wb:feat/no-cause-for-alarm",
    "wb:feat/oddity-identification",
-   "wb:feat/pickpocket",
    "wb:feat/quick-coercion",
    "wb:feat/quick-identification",
    "wb:feat/read-psychometric-resonance",
@@ -620,7 +619,8 @@
    "wb:feat/virtuosic-performer",
    "wb:feat/armored-stealth",
    "wb:feat/assured-identification",
-   "wb:feat/aura-sight"
+   "wb:feat/aura-sight",
+   "wb:feat/automatic-knowledge"
   ]
  },
  "extras": {
@@ -1038,7 +1038,6 @@
    ]
   },
   "avisos": [
-   "wb:background/street-urchin: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Pickpocket', 'foundry_uuid': 'Compendium.pf2e.feat) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 7 a que o personagem tem direito -- faltam 7",
    "skill_increase: diplomacy iria a master, acima do teto expert do nivel 6",
    "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Gnome (1), Street Urchin (1), Street Urchin (1), criacao (4 livres) (4), nivel 5 (4)"
@@ -1099,6 +1098,12 @@
     "nome": "Shield Block",
     "por": "Shield Block",
     "por_id": "wb:class-feature/shield-block"
+   },
+   {
+    "id": "wb:feat/pickpocket",
+    "nome": "Pickpocket",
+    "por": "Street Urchin",
+    "por_id": "wb:background/street-urchin"
    }
   ],
   "concessoes_de_ator": [],

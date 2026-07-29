@@ -9,8 +9,8 @@ rank e sem `predicate`. O resto depende do interpretador do Foundry
 (`item:trait:finesse`, `self:effect:rage`, `@actor.flags`) e fica como
 prosa -- que pelo principio zero **nao e lacuna**.
 
-- registros que ganharam efeito: **484**
-- grants adicionados: **576**
+- registros que ganharam efeito: **464**
+- grants adicionados: **556**
 
 ## Nao convertidos
 

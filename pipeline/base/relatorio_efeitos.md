@@ -95,7 +95,7 @@ adiciona a projecao canonica, nao substitui.
  },
  {
   "grant_feat": [
-   "Assurance"
+   "wb:feat/assurance"
   ]
  }
 ]

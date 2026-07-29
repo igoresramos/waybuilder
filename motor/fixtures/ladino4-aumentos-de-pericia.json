@@ -399,7 +399,6 @@
    "wb:feat/experienced-tracker",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
-   "wb:feat/forager",
    "wb:feat/fortified-fiefs",
    "wb:feat/hefty-hauler",
    "wb:feat/incredible-initiative",
@@ -419,7 +418,8 @@
    "wb:feat/survey-wildlife",
    "wb:feat/terrain-expertise",
    "wb:feat/titan-wrestler",
-   "wb:feat/toughness"
+   "wb:feat/toughness",
+   "wb:feat/underwater-marauder"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
@@ -441,7 +441,6 @@
    "wb:feat/experienced-tracker",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
-   "wb:feat/forager",
    "wb:feat/fortified-fiefs",
    "wb:feat/hefty-hauler",
    "wb:feat/incredible-initiative",
@@ -461,7 +460,8 @@
    "wb:feat/survey-wildlife",
    "wb:feat/terrain-expertise",
    "wb:feat/titan-wrestler",
-   "wb:feat/toughness"
+   "wb:feat/toughness",
+   "wb:feat/underwater-marauder"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -483,7 +483,6 @@
    "wb:feat/experienced-tracker",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
-   "wb:feat/forager",
    "wb:feat/fortified-fiefs",
    "wb:feat/hefty-hauler",
    "wb:feat/incredible-initiative",
@@ -503,7 +502,8 @@
    "wb:feat/survey-wildlife",
    "wb:feat/terrain-expertise",
    "wb:feat/titan-wrestler",
-   "wb:feat/toughness"
+   "wb:feat/toughness",
+   "wb:feat/underwater-marauder"
   ],
   "skill_feat@1": [
    "wb:feat/all-of-the-animal",
@@ -514,7 +514,6 @@
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
-   "wb:feat/forager",
    "wb:feat/hefty-hauler",
    "wb:feat/quick-jump",
    "wb:feat/skill-training",
@@ -526,6 +525,7 @@
    "wb:feat/underwater-marauder",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/forager",
    "wb:feat/pickpocket",
    "wb:feat/terrain-stalker",
    "wb:feat/acrobatic-performer",
@@ -556,7 +556,6 @@
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
-   "wb:feat/forager",
    "wb:feat/hefty-hauler",
    "wb:feat/quick-jump",
    "wb:feat/skill-training",
@@ -575,6 +574,7 @@
    "wb:feat/wary-disarmament",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/forager",
    "wb:feat/pickpocket",
    "wb:feat/terrain-stalker",
    "wb:feat/acrobatic-performer",
@@ -598,7 +598,6 @@
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
-   "wb:feat/forager",
    "wb:feat/hefty-hauler",
    "wb:feat/quick-jump",
    "wb:feat/skill-training",
@@ -622,6 +621,7 @@
    "wb:feat/kreightons-cognitive-crossover",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/forager",
    "wb:feat/pickpocket",
    "wb:feat/terrain-stalker",
    "wb:feat/acrobatic-performer",
@@ -932,7 +932,6 @@
   },
   "avisos": [
    "wb:feat/natural-ambition: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.naturalAmbition}`) -- pendente, nao e alvo ausente",
-   "wb:background/scout: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Forager', 'foundry_uuid': 'Compendium.pf2e.feats-s) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 7 a que o personagem tem direito -- faltam 7",
    "boosts de atributo: 6 declarado(s) de 8 a que o personagem tem direito -- faltam 2. Fontes: Human (1), Human (1), Scout (1), Scout (1), criacao (4 livres) (4)"
   ],
@@ -984,7 +983,14 @@
   "classes": {
    "Rogue": 4
   },
-  "concedidos": [],
+  "concedidos": [
+   {
+    "id": "wb:feat/forager",
+    "nome": "Forager",
+    "por": "Scout",
+    "por_id": "wb:background/scout"
+   }
+  ],
   "concessoes_de_ator": [],
   "conjuracao": [],
   "escolhas_de_feat": [],

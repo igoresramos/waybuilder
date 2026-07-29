@@ -393,7 +393,6 @@
    "wb:feat/crush-dissent",
    "wb:feat/diehard",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/fast-recovery",
    "wb:feat/fleet",
    "wb:feat/fortified-fiefs",
@@ -417,6 +416,7 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
+   "wb:feat/dubious-knowledge",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting"
@@ -435,7 +435,6 @@
    "wb:feat/crush-dissent",
    "wb:feat/diehard",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/fast-recovery",
    "wb:feat/fleet",
    "wb:feat/fortified-fiefs",
@@ -461,7 +460,8 @@
    "wb:feat/weapon-proficiency",
    "wb:feat/automatic-knowledge",
    "wb:feat/encouraging-words",
-   "wb:feat/eyes-of-the-city"
+   "wb:feat/eyes-of-the-city",
+   "wb:feat/dubious-knowledge"
   ],
   "general_feat@4": [
    "wb:feat/additional-lore",
@@ -477,7 +477,6 @@
    "wb:feat/crush-dissent",
    "wb:feat/diehard",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/fast-recovery",
    "wb:feat/fleet",
    "wb:feat/fortified-fiefs",
@@ -503,14 +502,14 @@
    "wb:feat/weapon-proficiency",
    "wb:feat/automatic-knowledge",
    "wb:feat/encouraging-words",
-   "wb:feat/eyes-of-the-city"
+   "wb:feat/eyes-of-the-city",
+   "wb:feat/additional-circus-trick"
   ],
   "skill_feat@1": [
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/bargain-hunter",
    "wb:feat/bon-mot",
-   "wb:feat/dubious-knowledge",
    "wb:feat/group-impression",
    "wb:feat/hobnobber",
    "wb:feat/no-cause-for-alarm",
@@ -519,6 +518,7 @@
    "wb:feat/recognize-spell",
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
+   "wb:feat/dubious-knowledge",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -552,7 +552,6 @@
    "wb:feat/assurance",
    "wb:feat/bargain-hunter",
    "wb:feat/bon-mot",
-   "wb:feat/dubious-knowledge",
    "wb:feat/group-impression",
    "wb:feat/hobnobber",
    "wb:feat/no-cause-for-alarm",
@@ -564,6 +563,7 @@
    "wb:feat/automatic-knowledge",
    "wb:feat/encouraging-words",
    "wb:feat/eyes-of-the-city",
+   "wb:feat/dubious-knowledge",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -594,7 +594,6 @@
    "wb:feat/assurance",
    "wb:feat/bargain-hunter",
    "wb:feat/bon-mot",
-   "wb:feat/dubious-knowledge",
    "wb:feat/group-impression",
    "wb:feat/hobnobber",
    "wb:feat/no-cause-for-alarm",
@@ -610,6 +609,7 @@
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
+   "wb:feat/dubious-knowledge",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -817,7 +817,6 @@
    ]
   },
   "avisos": [
-   "wb:background/hermit: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Dubious Knowledge', 'foundry_uuid': 'Compendium.pf) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Hermit (1), Hermit (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
@@ -876,7 +875,14 @@
   "classes": {
    "Summoner": 5
   },
-  "concedidos": [],
+  "concedidos": [
+   {
+    "id": "wb:feat/dubious-knowledge",
+    "nome": "Dubious Knowledge",
+    "por": "Hermit",
+    "por_id": "wb:background/hermit"
+   }
+  ],
   "concessoes_de_ator": [],
   "conjuracao": [
    {

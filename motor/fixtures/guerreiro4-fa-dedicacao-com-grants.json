@@ -398,7 +398,6 @@
    "wb:feat/group-coercion",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
-   "wb:feat/intimidating-glare",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
    "wb:feat/multilingual",
@@ -417,6 +416,7 @@
    "wb:feat/courtly-graces",
    "wb:feat/diehard",
    "wb:feat/fleet",
+   "wb:feat/intimidating-glare",
    "wb:feat/shield-block",
    "wb:feat/streetwise",
    "wb:feat/acrobatic-performer"
@@ -440,7 +440,6 @@
    "wb:feat/group-coercion",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
-   "wb:feat/intimidating-glare",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
    "wb:feat/multilingual",
@@ -461,7 +460,8 @@
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/courtly-graces",
-   "wb:feat/diehard"
+   "wb:feat/diehard",
+   "wb:feat/fleet"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -482,7 +482,6 @@
    "wb:feat/group-coercion",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
-   "wb:feat/intimidating-glare",
    "wb:feat/kingdom-assurance",
    "wb:feat/muddle-through",
    "wb:feat/multilingual",
@@ -503,7 +502,8 @@
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
-   "wb:feat/improvised-repair"
+   "wb:feat/improvised-repair",
+   "wb:feat/inspiring-entertainment"
   ],
   "skill_feat@1": [
    "wb:feat/armor-assist",
@@ -512,7 +512,6 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/glean-contents",
    "wb:feat/group-coercion",
-   "wb:feat/intimidating-glare",
    "wb:feat/multilingual",
    "wb:feat/quick-coercion",
    "wb:feat/read-lips",
@@ -520,6 +519,7 @@
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/courtly-graces",
+   "wb:feat/intimidating-glare",
    "wb:feat/streetwise",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -554,7 +554,6 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/glean-contents",
    "wb:feat/group-coercion",
-   "wb:feat/intimidating-glare",
    "wb:feat/multilingual",
    "wb:feat/quick-coercion",
    "wb:feat/read-lips",
@@ -566,6 +565,7 @@
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/courtly-graces",
+   "wb:feat/intimidating-glare",
    "wb:feat/streetwise",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -596,7 +596,6 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/glean-contents",
    "wb:feat/group-coercion",
-   "wb:feat/intimidating-glare",
    "wb:feat/multilingual",
    "wb:feat/quick-coercion",
    "wb:feat/read-lips",
@@ -612,6 +611,7 @@
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/courtly-graces",
+   "wb:feat/intimidating-glare",
    "wb:feat/streetwise",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -881,7 +881,6 @@
    ]
   },
   "avisos": [
-   "wb:background/warrior: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Intimidating Glare', 'foundry_uuid': 'Compendium.p) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "boosts de atributo: 6 declarado(s) de 9 a que o personagem tem direito -- faltam 3. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4)"
   ],
@@ -973,6 +972,12 @@
     "nome": "Diehard",
     "por": "Warrior of Legend",
     "por_id": "wb:class-feature/warrior-of-legend"
+   },
+   {
+    "id": "wb:feat/intimidating-glare",
+    "nome": "Intimidating Glare",
+    "por": "Warrior",
+    "por_id": "wb:background/warrior"
    }
   ],
   "concessoes_de_ator": [],

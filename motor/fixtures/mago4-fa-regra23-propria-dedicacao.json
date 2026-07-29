@@ -390,7 +390,6 @@
    "wb:feat/crush-dissent",
    "wb:feat/diehard",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/express-rider",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -416,6 +415,7 @@
    "wb:feat/weapon-proficiency",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
    "wb:feat/fleet",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -432,7 +432,6 @@
    "wb:feat/crush-dissent",
    "wb:feat/diehard",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/express-rider",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -459,6 +458,7 @@
    "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
    "wb:feat/fleet",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist"
@@ -474,7 +474,6 @@
    "wb:feat/crush-dissent",
    "wb:feat/diehard",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/express-rider",
    "wb:feat/feather-step",
    "wb:feat/fortified-fiefs",
@@ -503,11 +502,11 @@
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
    "wb:feat/improvised-repair",
-   "wb:feat/inspiring-entertainment"
+   "wb:feat/inspiring-entertainment",
+   "wb:feat/keen-follower"
   ],
   "skill_feat@1": [
    "wb:feat/arcane-sense",
-   "wb:feat/dubious-knowledge",
    "wb:feat/express-rider",
    "wb:feat/natural-medicine",
    "wb:feat/quick-identification",
@@ -519,6 +518,7 @@
    "wb:feat/trick-magic-item",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -549,7 +549,6 @@
   ],
   "skill_feat@2": [
    "wb:feat/arcane-sense",
-   "wb:feat/dubious-knowledge",
    "wb:feat/express-rider",
    "wb:feat/natural-medicine",
    "wb:feat/quick-identification",
@@ -562,6 +561,7 @@
    "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -591,7 +591,6 @@
   ],
   "skill_feat@4": [
    "wb:feat/arcane-sense",
-   "wb:feat/dubious-knowledge",
    "wb:feat/express-rider",
    "wb:feat/natural-medicine",
    "wb:feat/quick-identification",
@@ -607,6 +606,7 @@
    "wb:feat/kreightons-cognitive-crossover",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -868,7 +868,6 @@
   "avisos": [
    "Wizard: falta escolher `outras-opcoes` (14 opcoes)",
    "wb:feat/basic-arcana: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.basicArcana}`) -- pendente, nao e alvo ausente",
-   "wb:background/hermit: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Dubious Knowledge', 'foundry_uuid': 'Compendium.pf) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 2 a que o personagem tem direito -- faltam 2"
   ],
   "background": "Hermit",
@@ -912,7 +911,14 @@
   "classes": {
    "Wizard": 4
   },
-  "concedidos": [],
+  "concedidos": [
+   {
+    "id": "wb:feat/dubious-knowledge",
+    "nome": "Dubious Knowledge",
+    "por": "Hermit",
+    "por_id": "wb:background/hermit"
+   }
+  ],
   "concessoes_de_ator": [],
   "conjuracao": [
    {

@@ -38,12 +38,6 @@
         "motivos": []
       },
       {
-        "nome": "Hobnobber",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Ravening's Desperation",
         "waybuilder": false,
         "pathbuilder": true,

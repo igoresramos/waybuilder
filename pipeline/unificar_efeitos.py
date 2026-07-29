@@ -21,7 +21,7 @@ substitui: quem le `r["hp"]` continua funcionando, e nada se perde.
 Entrada: pipeline/base/index.json
 Saida:   index.json reescrito + base/relatorio_efeitos.md
 """
-import json, os, sys, collections
+import ast, collections, json, os, re, sys, unicodedata
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 BASE = f"{AQUI}/base"
@@ -58,7 +58,39 @@ def grants_de_ancestria(r):
     return g
 
 
-def grants_de_background(r):
+def norm(s):
+    """Mesma normalizacao de `resolver_referencias.py` -- nao inventar terceira."""
+    s = unicodedata.normalize("NFKD", str(s or ""))
+    s = "".join(c for c in s if not unicodedata.combining(c)).lower()
+    s = s.replace("'", "").replace("\u2019", "")
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]+", " ", s)).strip()
+
+
+def nome_do_alvo(x):
+    """O alvo de `grant_feat` chega em tres formas; devolve o NOME de cada uma.
+
+    Ate 2026-07-29 a linha era `[str(x) for x in lista]`, e `str()` sobre um
+    dict devolve o `repr` -- por isso 400 dos 926 alvos da base eram a string
+    `"{'name': 'Hobnobber', 'foundry_uuid': '...'}"`. O dado para resolver
+    estava DENTRO do valor o tempo todo.
+
+    Spec: `specs/2026-07-29-grant-feat-de-background.md`
+    """
+    if isinstance(x, dict):
+        return x.get("name")
+    if isinstance(x, str):
+        if x.startswith("wb:"):
+            return None                       # ja e id, nao ha o que resolver
+        if x.startswith("{"):
+            try:
+                return (ast.literal_eval(x) or {}).get("name")
+            except (ValueError, SyntaxError):
+                return None
+        return x
+    return None
+
+
+def grants_de_background(r, indice_feat=None):
     g = []
     for b in (r.get("boosts") or []):
         if isinstance(b, dict) and "ability_boost" in b:
@@ -73,7 +105,16 @@ def grants_de_background(r):
     concedidos = r.get("feats_granted") or r.get("feat")
     if concedidos:
         lista = concedidos if isinstance(concedidos, list) else [concedidos]
-        g.append({"grant_feat": [str(x) for x in lista]})
+        alvos = []
+        for x in lista:
+            if isinstance(x, str) and x.startswith("wb:"):
+                alvos.append(x)
+                continue
+            resolvido = (indice_feat or {}).get(norm(nome_do_alvo(x)))
+            # nao resolveu: mantem o original para o motor seguir avisando, e o
+            # relatorio do build conta -- o numero fica visivel em vez de mudo
+            alvos.append(resolvido or str(x))
+        g.append({"grant_feat": alvos})
     return g
 
 
@@ -97,11 +138,19 @@ def main():
     tipos = collections.Counter()
     exemplos = {}
 
+    # nome normalizado -> id do feat. Montado aqui porque e o unico ponto do
+    # pipeline que tem a base inteira em maos na hora de escrever o grant.
+    indice_feat = {}
+    for r in base:
+        if r.get("kind") == "feat" and r.get("name"):
+            indice_feat.setdefault(norm(r["name"]), r["id"])
+
     for r in base:
         conversor = CONVERSORES.get(r.get("kind"))
         if conversor is None:
             continue
-        derivados = conversor(r)
+        derivados = (conversor(r, indice_feat)
+                     if conversor is grants_de_background else conversor(r))
         if not derivados:
             contagem[f"{r['kind']}: sem efeito derivavel"] += 1
             continue

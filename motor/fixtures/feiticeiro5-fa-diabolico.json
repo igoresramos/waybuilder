@@ -204,12 +204,12 @@
    "wb:feat/folklorist-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
+   "wb:feat/gladiator-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
    "wb:feat/kineticist-dedication",
-   "wb:feat/kitharodian-actor-dedication",
-   "wb:feat/linguist-dedication"
+   "wb:feat/kitharodian-actor-dedication"
   ],
   "class_feat@4": [
    "wb:feat/ancestral-blood-magic",
@@ -246,12 +246,12 @@
    "wb:feat/folklorist-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
+   "wb:feat/gladiator-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
    "wb:feat/kineticist-dedication",
-   "wb:feat/kitharodian-actor-dedication",
-   "wb:feat/linguist-dedication"
+   "wb:feat/kitharodian-actor-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -316,6 +316,7 @@
    "wb:feat/folklorist-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
+   "wb:feat/gladiator-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
@@ -334,8 +335,7 @@
    "wb:feat/pactbinder-dedication",
    "wb:feat/pathfinder-agent-dedication",
    "wb:feat/psychic-dedication",
-   "wb:feat/reanimator-dedication",
-   "wb:feat/red-mantis-assassin-dedication"
+   "wb:feat/reanimator-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
@@ -358,6 +358,7 @@
    "wb:feat/folklorist-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
+   "wb:feat/gladiator-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
@@ -376,8 +377,7 @@
    "wb:feat/pactbinder-dedication",
    "wb:feat/pathfinder-agent-dedication",
    "wb:feat/psychic-dedication",
-   "wb:feat/reanimator-dedication",
-   "wb:feat/red-mantis-assassin-dedication"
+   "wb:feat/reanimator-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",
@@ -394,7 +394,6 @@
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
-   "wb:feat/impressive-performance",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
@@ -411,6 +410,7 @@
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/fleet",
+   "wb:feat/impressive-performance",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -436,7 +436,6 @@
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
-   "wb:feat/impressive-performance",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
@@ -454,6 +453,7 @@
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/fleet",
+   "wb:feat/impressive-performance",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -478,7 +478,6 @@
    "wb:feat/fascinating-performance",
    "wb:feat/fast-recovery",
    "wb:feat/fortified-fiefs",
-   "wb:feat/impressive-performance",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
@@ -503,16 +502,17 @@
    "wb:feat/liquidate-resources",
    "wb:feat/pick-up-the-pace",
    "wb:feat/prescient-planner",
-   "wb:feat/quick-recovery-kingdom"
+   "wb:feat/quick-recovery-kingdom",
+   "wb:feat/robust-health"
   ],
   "skill_feat@1": [
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
-   "wb:feat/impressive-performance",
    "wb:feat/virtuosic-performer",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/impressive-performance",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -551,11 +551,11 @@
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
-   "wb:feat/impressive-performance",
    "wb:feat/virtuosic-performer",
    "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/impressive-performance",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -593,7 +593,6 @@
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/fascinating-performance",
-   "wb:feat/impressive-performance",
    "wb:feat/virtuosic-performer",
    "wb:feat/automatic-knowledge",
    "wb:feat/ambush-tactics",
@@ -601,6 +600,7 @@
    "wb:feat/kreightons-cognitive-crossover",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/impressive-performance",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
@@ -890,7 +890,6 @@
    ]
   },
   "avisos": [
-   "wb:background/gladiator: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Impressive Performance', 'foundry_uuid': 'Compendi) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 2 a que o personagem tem direito -- faltam 2",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Gladiator (1), Gladiator (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
@@ -955,6 +954,12 @@
     "nome": "Untrained Improvisation",
     "por": "Clever Improviser",
     "por_id": "wb:feat/clever-improviser"
+   },
+   {
+    "id": "wb:feat/impressive-performance",
+    "nome": "Impressive Performance",
+    "por": "Gladiator",
+    "por_id": "wb:background/gladiator"
    }
   ],
   "concessoes_de_ator": [],

@@ -176,6 +176,7 @@
    "wb:feat/furious-finish",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
+   "wb:feat/gladiator-dedication",
    "wb:feat/guardian-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
@@ -184,8 +185,7 @@
    "wb:feat/kineticist-dedication",
    "wb:feat/kitharodian-actor-dedication",
    "wb:feat/linguist-dedication",
-   "wb:feat/lion-blade-dedication",
-   "wb:feat/living-vessel-dedication"
+   "wb:feat/lion-blade-dedication"
   ],
   "class_feat@4": [
    "wb:feat/acute-vision",
@@ -218,6 +218,7 @@
    "wb:feat/furious-finish",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
+   "wb:feat/gladiator-dedication",
    "wb:feat/guardian-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
@@ -226,8 +227,7 @@
    "wb:feat/kineticist-dedication",
    "wb:feat/kitharodian-actor-dedication",
    "wb:feat/linguist-dedication",
-   "wb:feat/lion-blade-dedication",
-   "wb:feat/living-vessel-dedication"
+   "wb:feat/lion-blade-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -294,6 +294,7 @@
    "wb:feat/folklorist-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
+   "wb:feat/gladiator-dedication",
    "wb:feat/guardian-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
@@ -310,8 +311,7 @@
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
    "wb:feat/oozemorph-dedication",
-   "wb:feat/overwatch-dedication",
-   "wb:feat/pactbinder-dedication"
+   "wb:feat/overwatch-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
@@ -336,6 +336,7 @@
    "wb:feat/folklorist-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
+   "wb:feat/gladiator-dedication",
    "wb:feat/guardian-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
@@ -352,8 +353,7 @@
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
    "wb:feat/oozemorph-dedication",
-   "wb:feat/overwatch-dedication",
-   "wb:feat/pactbinder-dedication"
+   "wb:feat/overwatch-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",
@@ -377,7 +377,6 @@
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
    "wb:feat/hobnobber",
-   "wb:feat/impressive-performance",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
@@ -395,7 +394,8 @@
    "wb:feat/toughness",
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
-   "wb:feat/weapon-proficiency"
+   "wb:feat/weapon-proficiency",
+   "wb:feat/additional-lore"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
@@ -419,7 +419,6 @@
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
    "wb:feat/hobnobber",
-   "wb:feat/impressive-performance",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
@@ -437,7 +436,8 @@
    "wb:feat/toughness",
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
-   "wb:feat/weapon-proficiency"
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -461,7 +461,6 @@
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
    "wb:feat/hobnobber",
-   "wb:feat/impressive-performance",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
@@ -479,7 +478,8 @@
    "wb:feat/toughness",
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
-   "wb:feat/weapon-proficiency"
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge"
   ],
   "skill_feat@1": [
    "wb:feat/armor-assist",
@@ -493,7 +493,6 @@
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
    "wb:feat/hobnobber",
-   "wb:feat/impressive-performance",
    "wb:feat/no-cause-for-alarm",
    "wb:feat/quick-coercion",
    "wb:feat/quick-jump",
@@ -502,6 +501,7 @@
    "wb:feat/virtuosic-performer",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/impressive-performance",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -535,7 +535,6 @@
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
    "wb:feat/hobnobber",
-   "wb:feat/impressive-performance",
    "wb:feat/no-cause-for-alarm",
    "wb:feat/quick-coercion",
    "wb:feat/quick-jump",
@@ -553,6 +552,7 @@
    "wb:feat/terrifying-resistance",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/impressive-performance",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -577,7 +577,6 @@
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
    "wb:feat/hobnobber",
-   "wb:feat/impressive-performance",
    "wb:feat/no-cause-for-alarm",
    "wb:feat/quick-coercion",
    "wb:feat/quick-jump",
@@ -599,6 +598,7 @@
    "wb:feat/kreightons-cognitive-crossover",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
+   "wb:feat/impressive-performance",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -912,7 +912,6 @@
   },
   "avisos": [
    "Barbarian: falta escolher `outras-opcoes` (9 opcoes)",
-   "wb:background/gladiator: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Impressive Performance', 'foundry_uuid': 'Compendi) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Orc (1), Orc (1), Gladiator (1), Gladiator (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
@@ -977,6 +976,12 @@
     "nome": "Intimidating Glare",
     "por": "Battle-Ready Orc",
     "por_id": "wb:heritage/battle-ready-orc"
+   },
+   {
+    "id": "wb:feat/impressive-performance",
+    "nome": "Impressive Performance",
+    "por": "Gladiator",
+    "por_id": "wb:background/gladiator"
    }
   ],
   "concessoes_de_ator": [],

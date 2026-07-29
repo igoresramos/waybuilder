@@ -891,7 +891,6 @@
   },
   "avisos": [
    "Ranger: falta escolher `outras-opcoes` (2 opcoes)",
-   "wb:background/nomad: grant_feat com alvo nao resolvido pelo pipeline (Assurance) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4"
   ],
   "background": "Nomad",

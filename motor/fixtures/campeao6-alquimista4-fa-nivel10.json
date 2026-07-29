@@ -383,7 +383,6 @@
    "wb:feat/acupuncturist",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
-   "wb:feat/battle-medicine",
    "wb:feat/civil-service",
    "wb:feat/cooperative-leadership",
    "wb:feat/crafters-appraisal",
@@ -419,13 +418,13 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
-   "wb:feat/weapon-proficiency"
+   "wb:feat/weapon-proficiency",
+   "wb:feat/additional-lore"
   ],
   "general_feat@2": [
    "wb:feat/acupuncturist",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
-   "wb:feat/battle-medicine",
    "wb:feat/civil-service",
    "wb:feat/cooperative-leadership",
    "wb:feat/crafters-appraisal",
@@ -461,13 +460,13 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
-   "wb:feat/weapon-proficiency"
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge"
   ],
   "general_feat@4": [
    "wb:feat/acupuncturist",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
-   "wb:feat/battle-medicine",
    "wb:feat/civil-service",
    "wb:feat/cooperative-leadership",
    "wb:feat/crafters-appraisal",
@@ -503,12 +502,12 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
-   "wb:feat/weapon-proficiency"
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge"
   ],
   "skill_feat@1": [
    "wb:feat/acupuncturist",
    "wb:feat/armor-assist",
-   "wb:feat/battle-medicine",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
@@ -531,6 +530,7 @@
    "wb:feat/additional-lore",
    "wb:feat/alchemical-crafting",
    "wb:feat/assurance",
+   "wb:feat/battle-medicine",
    "wb:feat/acrobatic-performer",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
@@ -550,7 +550,6 @@
   "skill_feat@2": [
    "wb:feat/acupuncturist",
    "wb:feat/armor-assist",
-   "wb:feat/battle-medicine",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
@@ -571,11 +570,13 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
    "wb:feat/automatic-knowledge",
+   "wb:feat/godless-healing",
    "wb:feat/tattoo-artist",
    "wb:feat/vasodilation",
    "wb:feat/additional-lore",
    "wb:feat/alchemical-crafting",
    "wb:feat/assurance",
+   "wb:feat/battle-medicine",
    "wb:feat/acrobatic-performer",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
@@ -586,13 +587,11 @@
    "wb:feat/charming-liar",
    "wb:feat/combat-climber",
    "wb:feat/concealing-legerdemain",
-   "wb:feat/contract-negotiator",
-   "wb:feat/courtly-graces"
+   "wb:feat/contract-negotiator"
   ],
   "skill_feat@4": [
    "wb:feat/acupuncturist",
    "wb:feat/armor-assist",
-   "wb:feat/battle-medicine",
    "wb:feat/crafters-appraisal",
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
@@ -613,6 +612,7 @@
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
    "wb:feat/automatic-knowledge",
+   "wb:feat/godless-healing",
    "wb:feat/tattoo-artist",
    "wb:feat/vasodilation",
    "wb:feat/ambush-tactics",
@@ -621,6 +621,7 @@
    "wb:feat/additional-lore",
    "wb:feat/alchemical-crafting",
    "wb:feat/assurance",
+   "wb:feat/battle-medicine",
    "wb:feat/acrobatic-performer",
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
@@ -628,8 +629,7 @@
    "wb:feat/bon-mot",
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
-   "wb:feat/charming-liar",
-   "wb:feat/combat-climber"
+   "wb:feat/charming-liar"
   ]
  },
  "extras": {
@@ -1034,7 +1034,6 @@
    "Champion: falta escolher `outras-opcoes` (2 opcoes)",
    "Champion: falta escolher `outras-opcoes` (3 opcoes)",
    "Alchemist: falta escolher `outras-opcoes` (5 opcoes)",
-   "wb:background/field-medic: grant_feat com alvo nao resolvido pelo pipeline ({'name': 'Battle Medicine', 'foundry_uuid': 'Compendium.pf2e) -- nao aplicado",
    "pericias livres: 0 declarada(s) de 5 a que o personagem tem direito -- faltam 5",
    "boosts de atributo: 7 declarado(s) de 16 a que o personagem tem direito -- faltam 9. Fontes: Dwarf (1), Field Medic (1), Field Medic (1), Champion (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4), nivel 10 (4)"
   ],
@@ -1158,6 +1157,12 @@
     "nome": "Quick Alchemy",
     "por": "Alchemy",
     "por_id": "wb:class-feature/alchemy"
+   },
+   {
+    "id": "wb:feat/battle-medicine",
+    "nome": "Battle Medicine",
+    "por": "Field Medic",
+    "por_id": "wb:background/field-medic"
    }
   ],
   "concessoes_de_ator": [],
