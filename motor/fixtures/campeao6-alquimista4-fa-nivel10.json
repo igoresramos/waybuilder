@@ -1005,7 +1005,10 @@
     "categoria": "martial",
     "dano": "1d8+2",
     "detalhe": "nivel 10 + prof 12 (trained) + FOR +2",
+    "potencia": 0,
     "rank": "trained",
+    "runas_de_propriedade": [],
+    "striking": 0,
     "tipo_de_dano": "bludgeoning",
     "traits": [
      "shove"

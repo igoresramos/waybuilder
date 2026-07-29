@@ -870,7 +870,10 @@
     "categoria": "martial",
     "dano": "1d12+4",
     "detalhe": "nivel 6 + prof 10 (expert) + FOR +4",
+    "potencia": 0,
     "rank": "expert",
+    "runas_de_propriedade": [],
+    "striking": 0,
     "tipo_de_dano": "slashing",
     "traits": [
      "sweep"
@@ -883,7 +886,10 @@
     "categoria": "simple",
     "dano": "1d8",
     "detalhe": "nivel 6 + prof 10 (expert) + DEX +1",
+    "potencia": 0,
     "rank": "expert",
+    "runas_de_propriedade": [],
+    "striking": 0,
     "tipo_de_dano": "piercing",
     "traits": []
    }

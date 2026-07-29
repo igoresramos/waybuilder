@@ -842,7 +842,10 @@
     "categoria": "simple",
     "dano": "1d4",
     "detalhe": "nivel 4 + prof 6 (trained) + FOR +0",
+    "potencia": 0,
     "rank": "trained",
+    "runas_de_propriedade": [],
+    "striking": 0,
     "tipo_de_dano": "bludgeoning",
     "traits": [
      "monk",

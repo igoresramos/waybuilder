@@ -974,7 +974,10 @@
     "categoria": "martial",
     "dano": "1d6-1",
     "detalhe": "nivel 6 + prof 8 (trained) + DEX +3",
+    "potencia": 0,
     "rank": "trained",
+    "runas_de_propriedade": [],
+    "striking": 0,
     "tipo_de_dano": "piercing",
     "traits": [
      "deadly-d8",

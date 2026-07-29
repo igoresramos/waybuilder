@@ -858,7 +858,10 @@
     "categoria": "martial",
     "dano": "1d8+2",
     "detalhe": "nivel 4 + prof 8 (expert) + FOR +2",
+    "potencia": 0,
     "rank": "expert",
+    "runas_de_propriedade": [],
+    "striking": 0,
     "tipo_de_dano": "slashing",
     "traits": [
      "versatile-p"

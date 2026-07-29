@@ -1884,7 +1884,9 @@ export class Personagem implements ContextoDePredicado {
       const cap = arm["dex_cap"];
       dex_usada = ehInt(cap) ? Math.min(dex, cap) : dex;
       item_bonus = inteiro(arm["ac_bonus"]);
-      potencia = inteiro(armaduras[0].entrada["potencia"]);
+      // mesma regra da arma: runa do registro OU da entrada do inventário
+      potencia = Math.max(inteiro(armaduras[0].entrada["potencia"]),
+                          inteiro(dictDe(arm["runes"])["potency"]));
       nome_arm = nome(arm);
       penalidade = obter(arm, "check_penalty");
       forca = obter(arm, "strength");
@@ -1949,10 +1951,24 @@ export class Personagem implements ContextoDePredicado {
         usa_dex = true;
       }
 
-      const potencia = inteiro(entrada["potencia"]);
+      // RUNAS: vêm de dois lugares e os dois contam -- as embutidas no item
+      // mágico da base (974 armas têm `runes`) e as que o jogador gravou na
+      // entrada do inventário. Até 2026-07-29 só a segunda era lida, e
+      // `striking` era ignorado sempre: `+1 striking longsword` saía 1d8.
+      const runas = dictDe(arma["runes"]);
+      const potencia = Math.max(inteiro(entrada["potencia"]),
+                                inteiro(runas["potency"]));
+      const striking = Math.max(inteiro(entrada["striking"]),
+                                inteiro(runas["striking"]));
+      const propriedade = ordenarTextos([...new Set([
+        ...listaDe(runas["property"]).map((p) => pyStr(p)),
+        ...listaDe(entrada["property"]).map((p) => pyStr(p)),
+      ])]);
       const dano = dictDe(arma["damage"]);
       const mod_dano = distancia ? 0 : forca;
-      const base_do_dano = `${pyStr(Object.hasOwn(dano, "dados") ? dano["dados"] : 1)}`
+      // cada grau de striking soma UM dado do mesmo tamanho
+      const dados = inteiro(Object.hasOwn(dano, "dados") ? dano["dados"] : 1) + striking;
+      const base_do_dano = `${dados}`
                            + `${pyStr(Object.hasOwn(dano, "dado") ? dano["dado"] : "")}`;
 
       this.ataques.push({
@@ -1965,6 +1981,9 @@ export class Personagem implements ContextoDePredicado {
         atributo_do_ataque: usa_dex ? "dex" : "str",
         dano: mod_dano ? `${base_do_dano}${comSinal(mod_dano)}` : base_do_dano,
         tipo_de_dano: (verdadeiro(dano["tipo"]) ? dano["tipo"] : dano["type"] ?? null) as string | null,
+        potencia,
+        striking,
+        runas_de_propriedade: propriedade,
         traits: ordenarTextos(traits),
         detalhe: `nivel ${this.nivel} + prof ${prof} (${rank}) + `
                  + `${usa_dex ? "DEX" : "FOR"} ${comSinal(atributo)}`,

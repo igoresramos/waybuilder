@@ -881,7 +881,10 @@
     "categoria": "martial",
     "dano": "1d8+2",
     "detalhe": "nivel 5 + prof 9 (expert) + FOR +2",
+    "potencia": 0,
     "rank": "expert",
+    "runas_de_propriedade": [],
+    "striking": 0,
     "tipo_de_dano": "slashing",
     "traits": [
      "versatile-p"
@@ -894,7 +897,10 @@
     "categoria": "martial",
     "dano": "1d6",
     "detalhe": "nivel 5 + prof 9 (expert) + DEX +2",
+    "potencia": 0,
     "rank": "expert",
+    "runas_de_propriedade": [],
+    "striking": 0,
     "tipo_de_dano": "piercing",
     "traits": [
      "deadly-d10"

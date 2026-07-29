@@ -1699,7 +1699,12 @@ class Personagem:
             cap = arm.get("dex_cap")
             dex_usada = min(dex, cap) if isinstance(cap, int) else dex
             item_bonus = int(arm.get("ac_bonus") or 0)
-            potencia = int(armaduras[0]["entrada"].get("potencia") or 0)
+            # mesma regra da arma: a runa vem do registro (armadura magica da
+            # base, 202 tem `runes`) OU da entrada do inventario (o jogador
+            # gravou numa armadura comum). Antes so a segunda era lida.
+            runas_arm = arm.get("runes") or {}
+            potencia = max(int(armaduras[0]["entrada"].get("potencia") or 0),
+                           int(runas_arm.get("potency") or 0))
             nome = arm.get("name")
             penalidade = arm.get("check_penalty")
             forca = arm.get("strength")
@@ -1754,8 +1759,24 @@ class Personagem:
             if distancia:
                 atributo, usa_dex = destreza, True
 
-            potencia = int(entrada.get("potencia") or 0)
+            # RUNAS: vem de dois lugares e os dois contam. O registro da base
+            # traz as runas EMBUTIDAS no item magico (974 armas tem
+            # `runes: {potency, striking, property}`), e a entrada do inventario
+            # traz o que o jogador gravou numa arma comum. Ate 2026-07-29 o
+            # motor lia so `entrada.potencia` -- entao equipar uma arma magica
+            # da base nao somava nada, e `striking` era ignorado em qualquer
+            # caso: um `+1 striking longsword` saia com 1d8 no lugar de 2d8.
+            runas = arma.get("runes") or {}
+            potencia = max(int(entrada.get("potencia") or 0),
+                           int(runas.get("potency") or 0))
+            striking = max(int(entrada.get("striking") or 0),
+                           int(runas.get("striking") or 0))
+            propriedade = sorted({str(p) for p in (runas.get("property") or [])}
+                                 | {str(p) for p in (entrada.get("property") or [])})
+
             dano = arma.get("damage") or {}
+            # cada grau de striking soma UM dado do mesmo tamanho
+            dados = int(dano.get("dados", 1) or 1) + striking
             mod_dano = 0 if distancia else forca
 
             self.ataques.append({
@@ -1765,10 +1786,13 @@ class Personagem:
                 "ataque": self.nivel + RANK_BONUS[rank] + atributo + potencia
                           if rank != "untrained" else atributo + potencia,
                 "atributo_do_ataque": "dex" if usa_dex else "str",
-                "dano": f"{dano.get('dados', 1)}{dano.get('dado', '')}"
+                "dano": f"{dados}{dano.get('dado', '')}"
                         f"{mod_dano:+d}" if mod_dano else
-                        f"{dano.get('dados', 1)}{dano.get('dado', '')}",
+                        f"{dados}{dano.get('dado', '')}",
                 "tipo_de_dano": dano.get("tipo") or dano.get("type"),
+                "potencia": potencia,
+                "striking": striking,
+                "runas_de_propriedade": propriedade,
                 "traits": sorted(traits),
                 "detalhe": f"nivel {self.nivel} + prof {prof} ({rank}) + "
                            f"{'DEX' if usa_dex else 'FOR'} {atributo:+d}",

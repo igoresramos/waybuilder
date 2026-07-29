@@ -858,9 +858,12 @@
     "ataque": 11,
     "atributo_do_ataque": "str",
     "categoria": "martial",
-    "dano": "1d8+2",
+    "dano": "2d8+2",
     "detalhe": "nivel 4 + prof 8 (expert) + FOR +2",
+    "potencia": 1,
     "rank": "expert",
+    "runas_de_propriedade": [],
+    "striking": 1,
     "tipo_de_dano": "slashing",
     "traits": [
      "versatile-p"
