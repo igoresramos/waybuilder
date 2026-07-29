@@ -1020,9 +1020,10 @@ motor, e o motor estava certo.
 
 **Como aplicar:** antes de afirmar "a tela ja faz X", conferir quem IMPORTA o
 arquivo, nao se o arquivo existe (`grep -rn "<Componente"` resolve em segundos).
-E, para o projeto: `Picker.tsx` e `Ficha.tsx` seguem orfaos -- mencionados, nao
-deletados, porque remover e decisao do Igor. Enquanto existirem, valem como
-armadilha para a proxima leitura.
+
+`Picker.tsx` e `Ficha.tsx` foram REMOVIDOS em 2026-07-29, com a autorizacao do
+Igor e depois de conferir importador por importador -- 315 linhas que existiam
+so para enganar a proxima leitura.
 
 ## Convencao de um lado, switch do outro -- o porte esquece a terceira linha
 
@@ -1042,3 +1043,21 @@ Python, o metodo no TS, e a linha do `switch`. E a terceira e a unica que nao
 falha sozinha: sem ela o codigo compila, roda e mente baixinho. Quem pegou foi o
 teste de paridade entre as duas implementacoes; nenhum teste de motor pegaria,
 porque cada lado estava coerente consigo mesmo.
+
+## `npx tsc --noEmit` nao e o build -- ele nao viu dois erros meus
+
+Rodei `npx tsc --noEmit` a cada mudanca do porte e ele passou limpo o dia
+inteiro. Ao remover codigo morto, rodei `npm run build` (`tsc -b && vite build`)
+por precaucao e apareceram **dois erros de tipo introduzidos por mim naquele
+mesmo dia**: um `em` alargado para `string | number` onde o contrato pedia
+`number | "criacao" | null`, e um `Dict[]` devolvido onde a `Visao` declara uma
+lista tipada.
+
+A diferenca: `tsc --noEmit` sem argumento usa o tsconfig da raiz; `tsc -b`
+percorre as REFERENCIAS do projeto, e e nele que o app de verdade e checado.
+
+**Como aplicar:** neste projeto a checagem que vale antes de dar por pronto e
+`npm run build`, nao `npx tsc --noEmit`. O segundo serve para o ciclo rapido de
+edicao; o primeiro e o que diz se o app compila. E o mesmo padrao de "verde
+sobre uma medicao que nao mede o que interessa" que ja apareceu nos portoes e no
+verificar-eixos: a checagem barata passa, e a que importa nao foi rodada.

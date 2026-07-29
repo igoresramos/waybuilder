@@ -200,8 +200,9 @@ export function PainelDireito({
               ["equipamento", `Equipamento (${(d.inventario ?? []).length})`],
               ["feats", "Feats"],
               // A conjuracao era calculada desde sempre e NUNCA aparecia: o
-              // bloco existia so em `telas/Ficha.tsx`, que nao e usado por
-              // ninguem. Some quando o personagem nao conjura.
+              // unico bloco que a mostrava vivia numa tela que ninguem
+              // importava (removida em 2026-07-29). Some quando o personagem
+              // nao conjura.
               ...(v.conjuracao.length
                 ? [["magia", `Magia (${v.conjuracao.length})`] as const]
                 : []),

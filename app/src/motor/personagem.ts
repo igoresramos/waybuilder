@@ -2203,7 +2203,9 @@ export class Personagem implements ContextoDePredicado {
     for (const c of this.concessoes_de_ator) {
       if (c.preenchida) continue;
       abertos.push({
-        slot: c.tipo, em: (c.em ?? "criacao") as number | string,
+        // `em` do slot e `number | "criacao" | null`: a concessao guarda o
+        // nivel como `unknown` (vem do documento), entao estreita aqui
+        slot: c.tipo, em: ehInt(c.em) ? c.em : "criacao",
         kind: c.escolhe, escolhe: 1, origem: c.origem, opcoes_ids: c.opcoes,
         rotulo: `${c.tipo} -- ${c.origem_nome}`,
       });
@@ -2819,7 +2821,7 @@ export class Personagem implements ContextoDePredicado {
       slots_abertos: this.slots_abertos(),
       slots,
       conjuracao: this.conjuracao,
-      sentidos: [...this._sentidos().values()],
+      sentidos: [...this._sentidos().values()] as Visao["sentidos"],
       atores: this.atores as unknown as Ator[],
       concessoes_de_ator: this.concessoes_de_ator,
       escolhas_de_feat: this.escolhas_de_feat,
