@@ -121,6 +121,10 @@ def do_foundry():
 
 
 DADO = re.compile(r"(\d*)\s*(d\d+)", re.I)
+# Dano FIXO, sem dado: o AoN escreve `1 P` para Blowgun e Dart Umbrella, e e
+# RAW -- as duas causam 1 ponto, nao 1dX. Exigir `dN` deixava as duas sem
+# `damage` e portanto fora da aba de Ataques, com o dado inteiro no disco.
+FIXO = re.compile(r"^\s*(\d+)\s*(?![dD]\d)")
 TIPO_CURTO = {"b": "bludgeoning", "p": "piercing", "s": "slashing"}
 
 
@@ -143,12 +147,21 @@ def do_aon():
             s = d.get("_source", d)
             bloco = {}
             if tipo == "weapon":
-                m = DADO.search(str(s.get("damage") or ""))
+                bruto = str(s.get("damage") or "")
+                m = DADO.search(bruto)
                 tipos = s.get("damage_type") or []
                 if m and tipos:
                     bloco["damage"] = {
                         "dados": int(m.group(1) or 1),
                         "dado": m.group(2).lower(),
+                        "tipo": str(tipos[0]).lower(),
+                    }
+                elif tipos and FIXO.match(bruto):
+                    # sem a chave `dado`, e nao com `dado: None`: os dois motores
+                    # fazem `dano.get("dado", "")` / `Object.hasOwn`, entao a
+                    # chave presente com None imprimiria "None" na ficha
+                    bloco["damage"] = {
+                        "dados": int(FIXO.match(bruto).group(1)),
                         "tipo": str(tipos[0]).lower(),
                     }
                 if s.get("weapon_category"):

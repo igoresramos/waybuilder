@@ -10,17 +10,17 @@ ele OFERECE num slot e comparar com o que o Waybuilder oferece.
 ## O que a sonda colhe
 
 O modal de escolha de feat tem QUATRO abas, e comparar so a primeira mente. Num
-Fighter 1:
+Fighter 1, com o conteudo legado ligado:
 
 | aba | opcoes | disponiveis | em vermelho |
 |---|---:|---:|---:|
-| Class Feats | 116 | 10 | 106 |
-| Dedication Feats | 221 | 0 | 221 |
+| Class Feats | 117 | 10 | 107 |
+| Dedication Feats | 225 | 0 | 225 |
 | Archetype Class Feats | 0 | 0 | 0 |
-| All Feats | 337 | 10 | 327 |
+| All Feats | 342 | 10 | 332 |
 
 **O Pathbuilder tambem MOSTRA o que o personagem nao pode pegar**, em vermelho,
-em vez de esconder -- 106 de 116 na aba de classe. E a mesma decisao do
+em vez de esconder -- 107 de 117 na aba de classe. E a mesma decisao do
 principio zero do Waybuilder, tomada de forma independente por outro
 implementador. Vale como confirmacao externa do desenho.
 
@@ -32,49 +32,81 @@ por isso a aba nao entra no placar.
 
 | aba | waybuilder | pathbuilder | em comum |
 |---|---:|---:|---:|
-| Class Feats | 118 | 116 | 115 |
-| Dedication Feats | 226 | 220 | 198 |
+| Class Feats | 125 | 117 | 117 |
+| Dedication Feats | 226 | 224 | 224 |
 
-### Class Feats -- 4 nomes a olhar
+**Quatro pontos** sobraram de 65 da primeira rodada, e **nenhum e buraco
+nosso**: tudo que o Pathbuilder oferece, o Waybuilder tambem oferece. Os 61 que
+sairam nao eram defeito -- eram quatro recortes diferentes, e cada um custou
+uma investigacao:
 
-- **so no Pathbuilder**: `Flip`
-- **so no Waybuilder**: `Farabellus Flip`, `Dragging Strike`, `Stance Savant`
+### 1. O Pathbuilder renomeia o que a Paizo NAO renomeou
 
-`Farabellus Flip` -> `Flip` e renomeacao do remaster (a Paizo tirou o nome
-proprio). Os outros dois precisam de conferencia item a item.
+A primeira leitura foi que o remaster tinha encurtado os nomes e a nossa base
+servia o legado. **Estava errado, e a verificacao derrubou:**
 
-### Dedication Feats -- o padrao e renomeacao do remaster
+- a ponte `remaster_id` do AoN nao registra **nenhum** desses pares;
+- os nomes curtos (`Heavenseeker Dedication`, `Sword Duelist Dedication`,
+  `Viking Guard Dedication`...) **nao existem em nenhum dos 43.686 docs** do
+  dump do AoN;
+- os nossos (`Jalmeri Heavenseeker`, `Aldori Duelist`, `Ulfen Guard`...) existem
+  todos.
 
-Sete pares 1:1, todos com a mesma forma: **o remaster encurtou o nome tirando o
-lugar ou a organizacao**, e a nossa base ainda serve o nome legado.
+O padrao e sempre o mesmo: sai o nome proprio de Golarion -- lugar,
+organizacao, pessoa -- e entra um generico. `Razmiran Priest` ->
+`Priest of the Living God`; `Magaambyan Attendant` -> `Collegiate Attendant`;
+`Farabellus Flip` -> `Flip`. Quase certamente licenciamento: nome de setting e
+Product Identity.
 
-| Waybuilder (legado) | Pathbuilder (remaster) |
+**Consequencia: a nossa base nao tem o que corrigir aqui.** Ela esta de acordo
+com a fonte. O que existe e uma tabela de traducao, em
+`docs/comparacao/equivalencias-pathbuilder.json`, com 22 pares -- dado, nao
+codigo.
+
+### 2. "Allow outdated CRB and APG?" nasce Off
+
+Com a opcao desligada o Pathbuilder esconde todo o conteudo pre-remaster, que a
+nossa base inclui. Era o que fazia `Dragging Strike`, `Dragon Disciple`,
+`Horizon Walker`, `Loremaster` e `Shadowdancer` (todos APG) aparecerem como
+buraco nosso. A sonda agora liga o interruptor -- que e um
+`<label class="switch">` com o checkbox dentro, e nao o texto do rotulo.
+
+### 3. Renomeacao de verdade -- a que a Paizo fez
+
+`Drow Shootist Dedication` aparecia como falta nossa. Nao e: a Paizo renomeou
+para **`Crossbow Infiltrator Dedication`** no remaster, a fusao do pipeline
+registrou isso em `aliases`, e o Pathbuilder e que ainda oferece o nome antigo
+(com o conteudo legado ligado). O comparador passou a casar tambem por `aliases`.
+
+Junto veio outra armadilha de contagem: com alias, um registro entra na tabela
+com varias chaves. Contar CHAVES faz quem casou pelo alias aparecer como sobra
+pelo nome canonico; e guardar so o primeiro registro de cada chave faz o
+DESMEMBRADO (`Dueling Dance (Fighter)`, criado por colisao de identidade) virar
+sobra quando o irmao dele ja casou. A conta e: um candidato casa se QUALQUER
+chave sua aparece do outro lado.
+
+### 4. Ruido de grafia
+
+Sufixo de desambiguacao que NOS acrescentamos ao desmembrar colisao de
+identidade (`Guardian's Deflection (Fighter)`), apostrofo tipografico e caixa
+(`Needle In The God's Eyes` x `Needle in the Gods' Eyes`). Tratado em `norm()`.
+
+## Os quatro pontos que sobraram
+
+Todos do MESMO lado -- registros que temos e o Pathbuilder nao oferece:
+
+| ponto | leitura |
 |---|---|
-| Nantambu Chime-Ringer Dedication | Chime-Ringer Dedication |
-| Edgewatch Detective Dedication | Detective Dedication |
-| Jalmeri Heavenseeker Dedication | Heavenseeker Dedication |
-| Nidalese Horselord Dedication | Horselord Dedication |
-| Turpin Rowe Lumberjack Dedication | Lumberjack Dedication |
-| Lastwall Sentry Dedication | Sentry Dedication |
-| Oatia Skysage Dedication | Skysage Dedication |
+| `Stance Savant` | CRB nivel 14, **nao existe no dump do AoN** -- removido no remaster, e a nossa base o carrega do Foundry legado. O unico a decidir: fica ou sai |
+| `Chelaxian Scion Dedication` | Pathfinder #223: Hell's Destiny, uncommon -- AP recente |
+| `Knight Vigilant` | Character Guide, uncommon |
+| `Venture-Gossip Dedication` | Paizo Blog -- fonte que o Pathbuilder pode nao indexar |
 
-Sobram 15 so do Pathbuilder e 21 so nossos que a heuristica de sufixo nao
-pareou, mas o padrao continua visivel a olho -- `Rivethun Emissary` x
-`Spirit Emissary`, `Razmiran Priest` x `Priest of the Living God`,
-`Prophet of Kalistrade` x `Prophet of Trade`, `Aldori Duelist` x
-`Sword Duelist`, `Ulfen Guard` x `Viking Guard`, `Alkenstar Agent` x
-`City Agent`, `Pathfinder Agent` x `Guild Agent`, `Verduran Shadow` x
-`Forest Shadow`, `Lepidstadt Surgeon` x `Lightning Surgeon`,
-`Magaambyan Attendant` x `Collegiate Attendant`, `Kitharodian Actor` x
-`College Actor`, `Scion of Domora` x `Scion of the God Caller`.
+**Nenhum e defeito de motor e nenhum e falta de dado nosso.** Um e sobra de dado
+legado; tres sao recorte de fonte do outro lado.
 
-Isto liga direto ao item do TODO sobre **69 registros servindo conteudo
-pre-remaster sem contrapartida**: a comparacao acabou de dar nome a uma dezena
-deles, e o Pathbuilder serve como lista de destino.
-
-Quatro nossos parecem nao ter contrapartida com "Remaster: On":
-`Dragon Disciple`, `Horizon Walker`, `Loremaster`, `Shadowdancer` -- coerente
-com terem sido removidos, nao renomeados. Conferir antes de agir.
+Vale dizer o que isso NAO prova: a comparacao cobre um slot, de uma classe, num
+nivel. Ela ficou limpa; os proximos alvos e que vao dizer se continua.
 
 ## O que o comparador NAO decide
 
@@ -82,18 +114,6 @@ Ele levanta pontos, nao arbitra. `so no Waybuilder` pode ser acerto nosso: a
 houserule muda o que cabe num slot, e o Pathbuilder nao a implementa. A fonte
 de regra continua sendo o livro; o Pathbuilder vale como **segundo
 implementador do mesmo RAW**, e o que importa e onde os dois discordam.
-
-## Ruido de nome, ja tratado
-
-A primeira rodada acusou 65 pontos; 11 eram diferenca de grafia, nao de regra:
-
-- sufixo de desambiguacao que NOS acrescentamos ao desmembrar colisao de
-  identidade (`Guardian's Deflection (Fighter)`);
-- apostrofo tipografico e caixa (`Needle In The God's Eyes` x
-  `Needle in the Gods' Eyes`).
-
-`norm()` em `comparar_pathbuilder.py` cobre os tres casos. Sem isso o relatorio
-enche de falso positivo e esconde o achado real.
 
 ## Proximos alvos
 

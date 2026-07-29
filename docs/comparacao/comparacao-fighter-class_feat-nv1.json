@@ -1,15 +1,11 @@
 [
   {
     "slot": "Fighter 1 / class_feat [Class Feats]",
-    "waybuilder": 118,
-    "pathbuilder": 116,
-    "em_comum": 115,
-    "so_no_pathbuilder": [
-      "Flip"
-    ],
+    "waybuilder": 125,
+    "pathbuilder": 117,
+    "em_comum": 117,
+    "so_no_pathbuilder": [],
     "so_no_waybuilder": [
-      "Dragging Strike",
-      "Farabellus Flip",
       "Stance Savant"
     ],
     "divergencia_de_disponibilidade": []
@@ -17,61 +13,13 @@
   {
     "slot": "Fighter 1 / class_feat [Dedication Feats]",
     "waybuilder": 226,
-    "pathbuilder": 220,
-    "em_comum": 198,
-    "so_no_pathbuilder": [
-      "Chime-Ringer Dedication",
-      "City Agent Dedication",
-      "College Actor Dedication",
-      "Collegiate Attendant Dedication",
-      "Detective Dedication",
-      "Drow Shootist Dedication",
-      "Forest Shadow Dedication",
-      "Guild Agent Dedication",
-      "Heavenseeker Dedication",
-      "Horselord Dedication",
-      "Lightning Surgeon Dedication",
-      "Lumberjack Dedication",
-      "Priest of the Living God Dedication",
-      "Prophet of Trade Dedication",
-      "Scion of the God Caller Dedication",
-      "Sentry Dedication",
-      "Skysage Dedication",
-      "Spirit Emissary Dedication",
-      "Spirit Invoker Dedication",
-      "Spirit Involutionist Dedication",
-      "Sword Duelist Dedication",
-      "Viking Guard Dedication"
-    ],
+    "pathbuilder": 224,
+    "em_comum": 224,
+    "so_no_pathbuilder": [],
     "so_no_waybuilder": [
-      "Aldori Duelist Dedication",
-      "Alkenstar Agent Dedication",
       "Chelaxian Scion Dedication",
-      "Dragon Disciple Dedication",
-      "Edgewatch Detective Dedication",
-      "Horizon Walker Dedication",
-      "Jalmeri Heavenseeker Dedication",
-      "Kitharodian Actor Dedication",
       "Knight Vigilant",
-      "Lastwall Sentry Dedication",
-      "Lepidstadt Surgeon Dedication",
-      "Loremaster Dedication",
-      "Magaambyan Attendant Dedication",
-      "Nantambu Chime-Ringer Dedication",
-      "Nidalese Horselord Dedication",
-      "Oatia Skysage Dedication",
-      "Pathfinder Agent Dedication",
-      "Prophet of Kalistrade Dedication",
-      "Razmiran Priest Dedication",
-      "Rivethun Emissary Dedication",
-      "Rivethun Invoker Dedication",
-      "Rivethun Involutionist Dedication",
-      "Scion of Domora Dedication",
-      "Shadowdancer Dedication",
-      "Turpin Rowe Lumberjack Dedication",
-      "Ulfen Guard Dedication",
-      "Venture-Gossip Dedication",
-      "Verduran Shadow Dedication"
+      "Venture-Gossip Dedication"
     ],
     "divergencia_de_disponibilidade": []
   }

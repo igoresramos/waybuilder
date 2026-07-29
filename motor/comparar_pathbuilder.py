@@ -49,6 +49,22 @@ def personagem_equivalente(base: Base, classe: str, nivel: int) -> Personagem:
     return Personagem({"esquema": "waybuilder/personagem@1", "escolhas": escolhas}, base)
 
 
+# O Pathbuilder renomeia o que a Paizo nao renomeou -- sai o nome proprio de
+# Golarion, entra um generico (`Jalmeri Heavenseeker` -> `Heavenseeker`). Nao e
+# remaster: a ponte `remaster_id` do AoN nao registra nenhum desses pares, e os
+# nomes deles nao existem em nenhum dos 43.686 docs do dump. Sem esta traducao
+# a comparacao acusa 20 falsos positivos e esconde o que importa.
+def carregar_equivalencias() -> dict:
+    caminho = os.path.join(AQUI, "..", "docs", "comparacao",
+                           "equivalencias-pathbuilder.json")
+    if not os.path.exists(caminho):
+        return {}
+    with open(caminho, encoding="utf-8") as fh:
+        dados = json.load(fh)
+    # o nome DELES passa a valer pelo nosso
+    return {norm(deles): norm(nosso) for nosso, deles in dados.get("pares", [])}
+
+
 def norm(nome: str) -> str:
     """Nome comparavel entre os dois apps.
 
@@ -94,12 +110,39 @@ def comparar(base: Base, sonda: dict, aba: str | None = None) -> dict:
     if aba:
         cabe = ABAS[aba]
         todos = [c for c in todos if cabe(base, p, base.opcional(c["id"]) or {})]
-    nossos = {norm(c["nome"]): c for c in todos}
-    deles = {norm(o["nome"]): o for o in (sonda.get("abas", {}).get(aba)
-                                          if aba else sonda["opcoes"])}
+    equiv = carregar_equivalencias()
+    # ALIAS tambem casa. A fusao legacy/remaster guarda o nome antigo em
+    # `aliases` (`Drow Shootist Dedication` -> `Crossbow Infiltrator
+    # Dedication`, renomeado pela Paizo), e sem isso o comparador acusa como
+    # buraco nosso um registro que temos com o nome NOVO -- que e o certo.
+    nossos, chaves_de = {}, {}
+    for c in todos:
+        reg = base.opcional(c["id"]) or {}
+        chaves = {norm(c["nome"])} | {norm(a) for a in (reg.get("aliases") or [])}
+        chaves_de[c["id"]] = chaves
+        for chave in chaves:
+            nossos.setdefault(chave, c)
+    deles = {}
+    for o in (sonda.get("abas", {}).get(aba) if aba else sonda["opcoes"]):
+        chave = norm(o["nome"])
+        deles[equiv.get(chave, chave)] = o
 
+    # Um candidato casa se QUALQUER chave sua (nome canonico ou alias) aparece
+    # do outro lado. Duas armadilhas ja cometidas aqui:
+    #   - contar chaves em vez de registros faz quem casou pelo alias aparecer
+    #     como sobra pelo nome canonico;
+    #   - guardar so o primeiro registro de cada chave faz o DESMEMBRADO
+    #     (`Dueling Dance (Fighter)`, criado por colisao de identidade) virar
+    #     sobra, quando o irmao dele ja casou pelo mesmo nome.
+    casadas = nossos.keys() & deles.keys()
+    vistos, so_nossos = set(), []
+    for c in todos:
+        if chaves_de[c["id"]] & casadas or c["nome"] in vistos:
+            continue
+        vistos.add(c["nome"])
+        so_nossos.append(c["nome"])
+    so_nossos.sort()
     so_deles = sorted(deles[k]["nome"] for k in deles.keys() - nossos.keys())
-    so_nossos = sorted(nossos[k]["nome"] for k in nossos.keys() - deles.keys())
 
     divergem = []
     for k in nossos.keys() & deles.keys():
@@ -115,8 +158,8 @@ def comparar(base: Base, sonda: dict, aba: str | None = None) -> dict:
     return {
         "slot": f"{sonda['classe']} {sonda['nivel']} / {sonda['slot']}"
                 + (f" [{aba}]" if aba else ""),
-        "waybuilder": len(nossos), "pathbuilder": len(deles),
-        "em_comum": len(nossos.keys() & deles.keys()),
+        "waybuilder": len(todos), "pathbuilder": len(deles),
+        "em_comum": len(casadas),
         "so_no_pathbuilder": so_deles,
         "so_no_waybuilder": so_nossos,
         "divergencia_de_disponibilidade": divergem,

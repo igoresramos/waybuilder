@@ -13,3 +13,12 @@ pipeline/base/app/*
 app/node_modules/
 app/dist/
 app/public/base/
+
+# Dados do Pathbuilder na copia local de referencia: 7,6 MB que trocam de nome
+# a cada versao do app (`data131` -> `data_remastered71` -> ...), entao cada
+# versao somaria alguns MB PERMANENTES no historico. Reconstruivel com
+# `docs/referencia-pathbuilder/app-local/baixar-assets.sh`, mesmo criterio de
+# `dados_brutos/`. O resto dos assets continua versionado -- e pequeno e e o
+# que faz a copia abrir.
+docs/referencia-pathbuilder/app-local/assets/data131.txt
+docs/referencia-pathbuilder/app-local/assets/data_remastered71.txt

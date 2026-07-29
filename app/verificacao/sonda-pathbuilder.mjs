@@ -29,6 +29,22 @@ const { navegador, pagina } = await abrirPathbuilder();
 // tela inicial -> criacao -> construtor (Human / Barkeep / Fighter 1, o default)
 await pagina.locator("img[src*='character_new']").first().click({ timeout: 10_000 });
 await pagina.waitForTimeout(2500);
+// "Allow outdated CRB and APG?" nasce Off, e ai o Pathbuilder esconde todo o
+// conteudo legado -- que a NOSSA base inclui. Sem ligar, a comparacao acusa
+// como buraco o que e so recorte diferente: `Dragging Strike` (APG),
+// `Dragon Disciple`, `Horizon Walker`, `Loremaster`, `Shadowdancer` (todos APG).
+//
+// O interruptor e um `<label class="switch">` com um checkbox DENTRO -- clicar
+// no texto do rotulo (que fica num `<span>` irmao) nao alterna nada.
+await pagina.evaluate(() => {
+  for (const c of document.querySelectorAll(".checkbox-container")) {
+    if (/outdated/i.test(c.textContent || "")) c.querySelector("label.switch")?.click();
+  }
+});
+await pagina.waitForTimeout(600);
+console.log("toggles:", (await pagina.locator("#root").innerText())
+  .replace(/\n+/g, " | ").match(/Allow outdated[^|]*\|[^|]*/)?.[0]?.trim());
+
 await pagina.locator(".modal-button", { hasText: "Get Started" }).first().click();
 await pagina.waitForTimeout(3500);
 // o modal fica no DOM depois de fechado e INTERCEPTA o clique -- some com Escape

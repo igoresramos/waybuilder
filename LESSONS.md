@@ -981,3 +981,26 @@ costuma comparar contra uma constante legivel (hostname, versao, chave de
 storage). Grepar por essas constantes e barato e responde antes de qualquer
 teoria sobre rede. Ler minificado assusta mais do que custa quando se procura
 uma string, e nao um fluxo.
+
+## Semelhanca de nome nao e evidencia -- pergunte a fonte
+
+Escrevi num relatorio que o remaster tinha encurtado os nomes de 12 dedicacoes
+e que a nossa base servia o legado. O padrao era limpo demais para ser
+coincidencia: `Nantambu Chime-Ringer` -> `Chime-Ringer`,
+`Jalmeri Heavenseeker` -> `Heavenseeker`, `Turpin Rowe Lumberjack` ->
+`Lumberjack`. Parecia obvio.
+
+Ao ir corrigir, a fonte disse o contrario: a ponte `remaster_id` do AoN nao
+registra nenhum desses pares, e os nomes curtos nao existem em nenhum dos
+43.686 docs do dump. Quem renomeia e o **Pathbuilder**, tirando nome proprio de
+Golarion -- Product Identity, quase certamente licenciamento.
+
+Se eu tivesse "corrigido" a base, teria trocado 22 nomes CERTOS por nomes que
+nenhuma fonte oficial usa, num passo do pipeline, em silencio.
+
+**Como aplicar:** quando dois conjuntos divergem e o padrao "explica" a
+divergencia, a explicacao e HIPOTESE ate a fonte confirmar. O teste custa
+minutos -- `o nome deles existe na minha fonte?` -- e a diferenca entre
+confirmar e supor e a diferenca entre uma tabela de traducao e um estrago no
+dado. Vale especialmente quando o outro lado e um app, e nao um livro: app tem
+motivo proprio (licenca, tela, versao) para se afastar da fonte.

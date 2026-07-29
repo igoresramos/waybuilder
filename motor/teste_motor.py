@@ -655,6 +655,28 @@ checar(any("concedido_por" in x for x in p5.avisos),
        "ator cuja origem sumiu da ficha vira aviso, nao silencio",
        f"{p5.avisos}")
 
+# -- dano FIXO, sem dado ----------------------------------------------------
+# Blowgun e Dart Umbrella causam 1 ponto, nao 1dX -- e RAW. O extrator exigia
+# `dN` no texto do AoN e deixava as duas sem `damage`, entao elas nem apareciam
+# na aba de Ataques com o dado inteiro em disco. A representacao OMITE a chave
+# `dado` em vez de grava-la como None: os dois motores fazem
+# `dano.get("dado", "")`, e a chave presente com None imprimiria "None".
+print("\ndano fixo -- arma sem dado de dano")
+# STR explicito: com FOR +0 o dano da adaga sairia "1d4" e o teste passaria sem
+# provar que o modificador continua entrando
+p = personagem(niveis((FIGHTER, 1))
+               + [{"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "wis"]}],
+               inventario=[{"item": "wb:weapon/blowgun", "qtd": 1, "equipado": True},
+                           {"item": "wb:weapon/dagger", "qtd": 1, "equipado": True}])
+ataques = {a["arma"]: a for a in p.visao()["ataques"]}
+checar(ataques["Blowgun"]["dano"] == "1",
+       "Blowgun sai com dano 1, sem dado e sem 'None' na string",
+       f"deu {ataques['Blowgun']['dano']!r}")
+checar(ataques["Blowgun"]["tipo_de_dano"] == "piercing",
+       "e com o tipo de dano preservado")
+checar(ataques["Dagger"]["dano"] == "1d4+1",
+       "e a arma com dado normal nao muda", f"deu {ataques['Dagger']['dano']!r}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

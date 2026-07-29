@@ -6,6 +6,49 @@ project: waybuilder
 
 ## 2026-07-29
 
+### Sessao | 12:40-13:40 | os proximos passos, e a hipotese que a fonte derrubou | igor + claude-code
+
+Tres frentes curtas, e a do meio virou a licao do dia.
+
+**Assets do Pathbuilder fora do git.** O autocommit ja tinha versionado os
+3,4 MB de `data_remastered71.txt`. Cada versao nova do app troca o nome do
+arquivo (`data131` -> `data_remastered71` -> ...), entao versionar somaria
+alguns MB PERMANENTES por versao num repo que ja passou por reescrita por peso.
+Os dois arquivos de dados sairam do rastreamento (`git rm --cached`, ficam no
+disco) e ganharam `baixar-assets.sh`. Mesmo criterio de `dados_brutos/`:
+reconstruivel por receita fica fora. O historico nao foi reescrito.
+
+**Dano fixo (TODO 85).** `Blowgun` e `Dart Umbrella` causam **1 ponto**, sem
+dado -- e RAW. O extrator exigia `dN` no texto do AoN e deixava as duas sem
+`damage`, fora da aba de Ataques, com o dado inteiro em disco. Nenhuma mudanca
+de motor foi precisa: a representacao OMITE a chave `dado` em vez de grava-la
+como `None`, porque os dois motores fazem `dano.get("dado", "")` e a chave
+presente com None imprimiria "None" na ficha. 3 assercoes novas (106 -> 109).
+
+**A hipotese que a fonte derrubou.** O relatorio da sessao anterior dizia que o
+remaster tinha encurtado nomes de dedicacao e que a nossa base servia o legado.
+Fui corrigir e a verificacao disse o contrario:
+
+- a ponte `remaster_id` do AoN nao registra **nenhum** desses pares;
+- `Heavenseeker Dedication`, `Sword Duelist Dedication`, `Viking Guard
+  Dedication` e companhia **nao existem em nenhum dos 43.686 docs** do dump;
+- `Jalmeri Heavenseeker`, `Aldori Duelist`, `Ulfen Guard` existem todos.
+
+Quem renomeia e o **Pathbuilder**, removendo nome proprio de Golarion -- Product
+Identity. A nossa base esta certa e nao tinha o que corrigir. Virou tabela de
+traducao (`docs/comparacao/equivalencias-pathbuilder.json`, 22 pares) em vez de
+mudanca de dado.
+
+Com isso mais a opcao "Allow outdated CRB and APG?" (nascia Off, escondendo todo
+o conteudo pre-remaster que a nossa base inclui), a comparacao caiu de **65
+pontos para 5**, e os 5 sao reais:
+
+| ponto | leitura |
+|---|---|
+| `Drow Shootist Dedication` | existe no AoN e **falta na nossa base** -- o unico acionavel |
+| `Stance Savant` | CRB nv14, nao existe no dump do AoN: removido no remaster e carregado do Foundry legado |
+| `Chelaxian Scion`, `Knight Vigilant`, `Venture-Gossip` | fonte que o Pathbuilder pode nao indexar (AP recente, Character Guide, Paizo Blog) |
+
 ### Sessao | 11:45-12:40 | o Pathbuilder rodando local, e a primeira comparacao | igor + claude-code
 
 **A frente travada destravou por um `grep`.** O app local ficava no spinner
@@ -36,10 +79,8 @@ Dois achados:
 - **O Pathbuilder tambem MOSTRA o que nao se pode pegar**, em vermelho (106 de
   116 na aba de classe). Principio zero confirmado por um segundo implementador,
   de forma independente.
-- **12+ dedicacoes servidas com nome LEGADO** onde o remaster encurtou:
-  `Nantambu Chime-Ringer` x `Chime-Ringer`, `Jalmeri Heavenseeker` x
-  `Heavenseeker`, `Turpin Rowe Lumberjack` x `Lumberjack`... Isso da NOME a uma
-  parte dos 69 registros pre-remaster sem contrapartida -- item 84 do TODO.
+- 22 dedicacoes com nome diferente dos dois lados. **A primeira leitura foi
+  errada e a verificacao derrubou** -- ver a sessao seguinte.
 
 Ferramentas que ficam: `app/verificacao/pathbuilder-comum.mjs` (abre o app),
 `sonda-pathbuilder.mjs` (colhe as quatro abas do modal) e

@@ -2,9 +2,9 @@
 
 Nao era falta de fonte -- era falha de matching. Duas causas: o Foundry escreve `Leather Armor` onde o AoN escreve `Leather`, e as armas universais (`Fist`, `Shield Bash`) nao existem como arquivo no Foundry, so no dump do AoN.
 
-- registros curados por fonte: **67**
+- registros curados por fonte: **69**
 - herdados do item base (`Base Armor X` no texto): **0**
-- ainda sem o campo critico: **67**
+- ainda sem o campo critico: **65**
 
 ## Herdados
 
@@ -25,6 +25,7 @@ Nao era falta de fonte -- era falha de matching. Duas causas: o Foundry escreve 
 | `wb:weapon/axe-musket-ranged` | Axe Musket (Ranged) | weapon | aon | damage, weapon_category |
 | `wb:weapon/black-powder-knuckle-dusters-melee` | Black Powder Knuckle Dusters (Melee) | weapon | aon | damage, weapon_category |
 | `wb:weapon/black-powder-knuckle-dusters-ranged` | Black Powder Knuckle Dusters (Ranged) | weapon | aon | damage, weapon_category |
+| `wb:weapon/blowgun` | Blowgun | weapon | aon | damage |
 | `wb:weapon/bola-nv0` | Bola | weapon | foundry | damage, weapon_category, group |
 | `wb:weapon/bola-nv0-weapon-123` | Bola | weapon | foundry | damage, weapon_category, group |
 | `wb:weapon/bola-nv0-weapon-331` | Bola | weapon | foundry | damage, weapon_category, group |
@@ -39,6 +40,7 @@ Nao era falta de fonte -- era falha de matching. Duas causas: o Foundry escreve 
 | `wb:weapon/crescent-cross-ranged` | Crescent Cross (Ranged) | weapon | aon | damage, weapon_category |
 | `wb:weapon/dagger-pistol-melee` | Dagger Pistol (Melee) | weapon | aon | damage, weapon_category |
 | `wb:weapon/dagger-pistol-ranged` | Dagger Pistol (Ranged) | weapon | aon | damage, weapon_category |
+| `wb:weapon/dart-umbrella` | Dart Umbrella | weapon | aon | damage |
 | `wb:weapon/dwarven-waraxe` | Dwarven Waraxe | weapon | foundry | damage, weapon_category, group |
 | `wb:weapon/explosive-dogslicer-melee` | Explosive Dogslicer (Melee) | weapon | aon | damage, weapon_category |
 | `wb:weapon/explosive-dogslicer-ranged` | Explosive Dogslicer (Ranged) | weapon | aon | damage, weapon_category |
@@ -117,9 +119,7 @@ Nao era falta de fonte -- era falha de matching. Duas causas: o Foundry escreve 
 | `wb:weapon/blood-bomb-lesser` | Blood Bomb (Lesser) | weapon |
 | `wb:weapon/blood-bomb-major` | Blood Bomb (Major) | weapon |
 | `wb:weapon/blood-bomb-moderate` | Blood Bomb (Moderate) | weapon |
-| `wb:weapon/blowgun` | Blowgun | weapon |
 | `wb:weapon/dagger-of-venom` | Dagger of Venom | weapon |
-| `wb:weapon/dart-umbrella` | Dart Umbrella | weapon |
 | `wb:weapon/drake-rifle` | Drake Rifle | weapon |
 | `wb:weapon/flame-tongue` | Flame Tongue | weapon |
 | `wb:weapon/glue-bomb-greater` | Glue Bomb (Greater) | weapon |

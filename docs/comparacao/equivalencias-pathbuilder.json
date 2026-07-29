@@ -1,0 +1,30 @@
+{
+  "nota": "O Pathbuilder renomeia o que a Paizo NAO renomeou. Verificado contra o dump do AoN em 2026-07-29: o nome da esquerda existe la, o da direita nao existe em nenhum dos 43.686 docs. O padrao e sempre o mesmo -- sai o nome proprio de Golarion (lugar, organizacao, pessoa) e entra um generico. Nao e remaster: a ponte `remaster_id` do AoN nao registra nenhum desses pares. E, quase certamente, licenciamento: nome de setting e Product Identity, e o Pathbuilder publica sem eles.",
+  "consequencia": "A nossa base NAO tem o que corrigir aqui -- ela esta de acordo com a fonte. O que existe e uma tabela de traducao para a comparacao nao acusar 20 falsos positivos.",
+  "verificado_em": "2026-07-29",
+  "fonte_da_verificacao": "pipeline/dados_brutos/aon_*.json",
+  "pares": [
+    ["Nantambu Chime-Ringer Dedication", "Chime-Ringer Dedication"],
+    ["Edgewatch Detective Dedication", "Detective Dedication"],
+    ["Jalmeri Heavenseeker Dedication", "Heavenseeker Dedication"],
+    ["Nidalese Horselord Dedication", "Horselord Dedication"],
+    ["Turpin Rowe Lumberjack Dedication", "Lumberjack Dedication"],
+    ["Lastwall Sentry Dedication", "Sentry Dedication"],
+    ["Oatia Skysage Dedication", "Skysage Dedication"],
+    ["Aldori Duelist Dedication", "Sword Duelist Dedication"],
+    ["Ulfen Guard Dedication", "Viking Guard Dedication"],
+    ["Razmiran Priest Dedication", "Priest of the Living God Dedication"],
+    ["Magaambyan Attendant Dedication", "Collegiate Attendant Dedication"],
+    ["Pathfinder Agent Dedication", "Guild Agent Dedication"],
+    ["Alkenstar Agent Dedication", "City Agent Dedication"],
+    ["Verduran Shadow Dedication", "Forest Shadow Dedication"],
+    ["Lepidstadt Surgeon Dedication", "Lightning Surgeon Dedication"],
+    ["Kitharodian Actor Dedication", "College Actor Dedication"],
+    ["Rivethun Emissary Dedication", "Spirit Emissary Dedication"],
+    ["Rivethun Invoker Dedication", "Spirit Invoker Dedication"],
+    ["Rivethun Involutionist Dedication", "Spirit Involutionist Dedication"],
+    ["Scion of Domora Dedication", "Scion of the God Caller Dedication"],
+    ["Prophet of Kalistrade Dedication", "Prophet of Trade Dedication"],
+    ["Farabellus Flip", "Flip"]
+  ]
+}

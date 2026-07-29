@@ -201,6 +201,11 @@
         "atende": false
       },
       {
+        "nome": "Dragging Strike",
+        "nivel": "2",
+        "atende": false
+      },
+      {
         "nome": "Dual-Handed Assault",
         "nivel": "4",
         "atende": false
@@ -833,6 +838,11 @@
         "atende": false
       },
       {
+        "nome": "Dragon Disciple Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
         "nome": "Drake Rider Dedication",
         "nivel": "2",
         "atende": false
@@ -1053,6 +1063,11 @@
         "atende": false
       },
       {
+        "nome": "Horizon Walker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
         "nome": "Horselord Dedication",
         "nivel": "2",
         "atende": false
@@ -1119,6 +1134,11 @@
       },
       {
         "nome": "Living Vessel Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Loremaster Dedication",
         "nivel": "2",
         "atende": false
       },
@@ -1365,6 +1385,11 @@
       {
         "nome": "Shadowcaster Dedication",
         "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Shadowdancer Dedication",
+        "nivel": "8",
         "atende": false
       },
       {
@@ -2136,6 +2161,16 @@
         "atende": false
       },
       {
+        "nome": "Dragging Strike",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Dragon Disciple Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
         "nome": "Drake Rider Dedication",
         "nivel": "2",
         "atende": false
@@ -2446,6 +2481,11 @@
         "atende": false
       },
       {
+        "nome": "Horizon Walker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
         "nome": "Horselord Dedication",
         "nivel": "2",
         "atende": false
@@ -2572,6 +2612,11 @@
       },
       {
         "nome": "Living Vessel Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Loremaster Dedication",
         "nivel": "2",
         "atende": false
       },
@@ -2948,6 +2993,11 @@
       {
         "nome": "Shadowcaster Dedication",
         "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Shadowdancer Dedication",
+        "nivel": "8",
         "atende": false
       },
       {
@@ -3824,6 +3874,16 @@
       "atende": false
     },
     {
+      "nome": "Dragging Strike",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Dragon Disciple Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
       "nome": "Drake Rider Dedication",
       "nivel": "2",
       "atende": false
@@ -4134,6 +4194,11 @@
       "atende": false
     },
     {
+      "nome": "Horizon Walker Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
       "nome": "Horselord Dedication",
       "nivel": "2",
       "atende": false
@@ -4260,6 +4325,11 @@
     },
     {
       "nome": "Living Vessel Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Loremaster Dedication",
       "nivel": "2",
       "atende": false
     },
@@ -4636,6 +4706,11 @@
     {
       "nome": "Shadowcaster Dedication",
       "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Shadowdancer Dedication",
+      "nivel": "8",
       "atende": false
     },
     {
