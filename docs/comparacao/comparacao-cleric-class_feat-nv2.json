@@ -81,23 +81,6 @@
         ]
       },
       {
-        "nome": "Exemplar Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige STR >= 14; tem 10",
-          "exige DEX >= 14; tem 10"
-        ]
-      },
-      {
-        "nome": "Mauler Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige STR >= 14; tem 10"
-        ]
-      },
-      {
         "nome": "Red Mantis Assassin Dedication",
         "waybuilder": true,
         "pathbuilder": false,
@@ -108,14 +91,6 @@
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
-      },
-      {
-        "nome": "Tattooed Historian Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige CON >= 12; tem 10"
-        ]
       },
       {
         "nome": "Ulfen Guard Dedication",

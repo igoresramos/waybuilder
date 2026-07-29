@@ -58,29 +58,12 @@
         ]
       },
       {
-        "nome": "Exemplar Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige STR >= 14; tem 10",
-          "exige DEX >= 14; tem 10"
-        ]
-      },
-      {
         "nome": "Ghost Hunter Dedication",
         "waybuilder": false,
         "pathbuilder": true,
         "motivos": [
           "exige occultism >= trained; tem untrained",
           "exige religion >= trained; tem untrained"
-        ]
-      },
-      {
-        "nome": "Mauler Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige STR >= 14; tem 10"
         ]
       },
       {
@@ -94,14 +77,6 @@
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
-      },
-      {
-        "nome": "Tattooed Historian Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige CON >= 12; tem 10"
-        ]
       },
       {
         "nome": "Ulfen Guard Dedication",

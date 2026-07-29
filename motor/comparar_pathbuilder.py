@@ -46,14 +46,47 @@ DEFAULT = {
 }
 
 
+# O Pathbuilder nao nasce com os atributos zerados: ele ja atribui parte dos
+# boosts sozinho, e deixa o resto pendente. Comparar o nosso personagem (tudo
+# 10) com o dele fabricava divergencia -- 17 pontos de `exige STR >= 14; tem 10`
+# que nao eram defeito de motor nenhum, eram bancada torta.
+#
+# MEDIDO com `app/verificacao/sonda-estado-pathbuilder.mjs`, um arquivo por
+# combinacao em `docs/comparacao/estado-pathbuilder-<classe>-nv<N>.json`. Cada
+# boost e +2, entao 3 boosts em STR dao 16 (modificador +3).
+#
+# A habilidade-chave NAO entra na lista quando ela tem opcao unica (INT do Mago,
+# WIS do Clerigo, DEX do Ladino): nesse caso o motor ja aplica sozinho, e
+# declarar de novo dobrava o valor. A do Guerreiro e escolha entre `str` e `dex`,
+# entao ela precisa ser declarada.
+BOOSTS_DO_PATHBUILDER = {
+    "Fighter": ["str", "str", "str", "dex", "con"],   # STR 16, DEX 12, CON 12
+    "Wizard":  ["str", "str", "dex", "con"],          # + INT 12 da chave
+    "Cleric":  ["str", "str", "dex", "con"],          # + WIS 12 da chave
+    "Rogue":   ["str", "str", "dex", "con"],          # + DEX 14 da chave
+}
+
+
 def personagem_equivalente(base: Base, classe: str, nivel: int) -> Personagem:
     cid, ancestria, background = DEFAULT[classe]
     escolhas = [
         {"em": "criacao", "slot": "ancestralidade", "pega": ancestria},
         {"em": "criacao", "slot": "background", "pega": background},
     ]
+    boosts = BOOSTS_DO_PATHBUILDER.get(classe)
+    if boosts:
+        escolhas.append({"em": "criacao", "slot": "boosts_livres", "pega": boosts})
     for n in range(1, nivel + 1):
         escolhas.append({"em": n, "slot": "nivel_de_classe", "pega": cid})
+    # PERICIA NAO ENTRA, e isso e achado e nao esquecimento: a primeira medicao
+    # disse que o Pathbuilder nascia com Acrobatics, Athletics, Stealth e
+    # Thievery treinadas, e ERA BUG DA SONDA -- ela chamava de "treinada" toda
+    # linha com bonus != 0, e em PF2e pericia sem treino ainda soma o
+    # modificador do atributo. O icone de proficiencia e o breakdown da ficha
+    # (`Prof 0`) provam que estao untrained. Do lado dele TODA escolha de pericia
+    # continua pendente, igual ao nosso. Logo a familia de divergencia por
+    # pericia NAO e bancada: e a diferenca de modelo declarada -- ele conta
+    # escolha pendente como alcancavel, nos avaliamos o estado atual e MARCAMOS.
     return Personagem({"esquema": "waybuilder/personagem@1", "escolhas": escolhas}, base)
 
 

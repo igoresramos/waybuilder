@@ -43,24 +43,6 @@
         ]
       },
       {
-        "nome": "Exemplar Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige STR >= 14; tem 10",
-          "exige DEX >= 14; tem 12"
-        ]
-      },
-      {
-        "nome": "Fighter Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige STR >= 14; tem 10",
-          "exige DEX >= 14; tem 12"
-        ]
-      },
-      {
         "nome": "Ghost Hunter Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -70,51 +52,10 @@
         ]
       },
       {
-        "nome": "Gunslinger Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige DEX >= 14; tem 12"
-        ]
-      },
-      {
-        "nome": "Juggler Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige DEX >= 14; tem 12"
-        ]
-      },
-      {
-        "nome": "Mauler Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige STR >= 14; tem 10"
-        ]
-      },
-      {
-        "nome": "Monk Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige STR >= 14; tem 10",
-          "exige DEX >= 14; tem 12"
-        ]
-      },
-      {
         "nome": "Pactbinder Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
-      },
-      {
-        "nome": "Ranger Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige DEX >= 14; tem 12"
-        ]
       },
       {
         "nome": "Red Mantis Assassin Dedication",
@@ -138,14 +79,6 @@
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
-      },
-      {
-        "nome": "Tattooed Historian Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige CON >= 12; tem 10"
-        ]
       },
       {
         "nome": "Ulfen Guard Dedication",
