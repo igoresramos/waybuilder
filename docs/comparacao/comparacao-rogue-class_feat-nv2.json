@@ -43,12 +43,6 @@
         ]
       },
       {
-        "nome": "Cathartic Mage Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Exemplar Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -146,18 +140,6 @@
         "motivos": []
       },
       {
-        "nome": "Shadowcaster Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Soulforger Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Tattooed Historian Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -167,12 +149,6 @@
       },
       {
         "nome": "Ulfen Guard Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "War Mage Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []

@@ -1935,6 +1935,48 @@ class Personagem:
                                f"tem {self.focus_pool}")
         return True, ""
 
+    # as quatro do Remaster. Serve para separar tradicao RESOLVIDA de prosa:
+    # Sorcerer, Summoner e Witch guardam a frase "variavel (definida pela
+    # escolha de ...)" no lugar do valor -- item 78.
+    TRADICOES = ("arcane", "divine", "occult", "primal")
+
+    def _termo_spellcasting_tradition(self, valor) -> tuple[bool, str]:
+        """`{"spellcasting_tradition": "arcane"}` -- conjura dessa tradicao?
+
+        99 clausulas em 27 arquetipos, e ate 2026-07-29 nenhum dos dois motores
+        tinha o metodo. Termo sem handler nao reprova (principio zero), entao o
+        `any` de `cathartic-mage-dedication` passava a vacuo e um Guerreiro 6
+        recebia seis dedicacoes de conjuracao. Achado comparando com o
+        Pathbuilder, que barra as seis -- e ali ele esta certo.
+
+        Le `self.conjuracao`, que ja inclui a de CLASSE e a de ARQUETIPO: um
+        Guerreiro com Cleric Dedication + Basic Cleric Spellcasting conjura
+        divine de verdade e atende.
+
+        Spec: `specs/2026-07-29-termo-spellcasting-tradition.md`
+        """
+        alvo = norm_slug(str(valor or ""))
+        if not self.conjuracao:
+            return False, f"exige conjurar {valor}; o personagem nao conjura"
+        indefinida = False
+        for c in self.conjuracao:
+            bruta = c.get("tradicao")
+            if not bruta:
+                continue
+            if norm_slug(str(bruta)) == alvo:
+                return True, ""
+            if norm_slug(str(bruta)) not in self.TRADICOES:
+                indefinida = True
+        if indefinida:
+            # principio zero: a tradicao esta em prosa (item 78) -- o motor nao
+            # sabe qual e e nao reprova sobre o que nao sabe. A ficha JA mostra
+            # a string, entao a marca existe e nao precisa virar aviso aqui:
+            # `candidatos()` avalia milhares de feats por slot e o log afogaria.
+            return True, ""
+        tem = ", ".join(sorted({str(c.get("tradicao")) for c in self.conjuracao
+                                if c.get("tradicao")})) or "nenhuma"
+        return False, f"exige conjurar {valor}; tem {tem}"
+
     def _termo_has_actor(self, valor) -> tuple[bool, str]:
         """`{"has_actor": "companheiro"}` -- alguma coisa na ficha concede um?
 

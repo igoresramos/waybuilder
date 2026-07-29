@@ -158,7 +158,6 @@
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/cathartic-mage-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
    "wb:feat/chronoskimmer-dedication",
@@ -185,7 +184,8 @@
    "wb:feat/kineticist-dedication",
    "wb:feat/kitharodian-actor-dedication",
    "wb:feat/linguist-dedication",
-   "wb:feat/lion-blade-dedication"
+   "wb:feat/lion-blade-dedication",
+   "wb:feat/living-vessel-dedication"
   ],
   "class_feat@4": [
    "wb:feat/acute-vision",
@@ -200,7 +200,6 @@
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/cathartic-mage-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
    "wb:feat/chronoskimmer-dedication",
@@ -227,7 +226,8 @@
    "wb:feat/kineticist-dedication",
    "wb:feat/kitharodian-actor-dedication",
    "wb:feat/linguist-dedication",
-   "wb:feat/lion-blade-dedication"
+   "wb:feat/lion-blade-dedication",
+   "wb:feat/living-vessel-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -277,7 +277,6 @@
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/cathartic-mage-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
    "wb:feat/chronoskimmer-dedication",
@@ -311,7 +310,8 @@
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
    "wb:feat/oozemorph-dedication",
-   "wb:feat/overwatch-dedication"
+   "wb:feat/overwatch-dedication",
+   "wb:feat/pactbinder-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
@@ -319,7 +319,6 @@
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/cathartic-mage-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
    "wb:feat/chronoskimmer-dedication",
@@ -353,7 +352,8 @@
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
    "wb:feat/oozemorph-dedication",
-   "wb:feat/overwatch-dedication"
+   "wb:feat/overwatch-dedication",
+   "wb:feat/pactbinder-dedication"
   ],
   "general_feat@1": [
    "wb:feat/adopted-ancestry",

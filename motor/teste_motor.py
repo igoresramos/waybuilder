@@ -804,6 +804,47 @@ checar(personagem(niveis((FIGHTER, 1))).avaliar({"alignment": "evil"})[0],
        "termo inexistente (`alignment`) nao reprova -- o motor nao arbitra o "
        "que nao sabe, e a clausula fica visivel em `requires_residuo`")
 
+# ---------------------------------------------------------------------------
+# `spellcasting_tradition` -- 99 clausulas em 27 arquetipos que nenhum dos dois
+# motores sabia ouvir. Sem o termo, o `any` de cathartic-mage passava a vacuo e
+# um Guerreiro 6 recebia seis dedicacoes de conjuracao.
+# Spec: specs/2026-07-29-termo-spellcasting-tradition.md
+print("\ntermo `spellcasting_tradition`")
+
+clerigo2 = personagem(niveis((CLERIC, 2)))
+checar(clerigo2.avaliar({"spellcasting_tradition": "divine"})[0],
+       "Clerigo 2 conjura divine")
+checar(not clerigo2.avaliar({"spellcasting_tradition": "arcane"})[0],
+       "e NAO conjura arcane")
+
+guerreiro6 = personagem(niveis((FIGHTER, 6)))
+checar(not any(guerreiro6.avaliar({"spellcasting_tradition": t})[0]
+               for t in ("arcane", "divine", "occult", "primal")),
+       "Guerreiro 6 nao atende NENHUMA tradicao -- e o ganho inteiro da spec")
+
+# conjuracao de arquetipo conta: o personagem conjura de verdade
+fa_clerigo = personagem(niveis((FIGHTER, 6)) + [
+    {"em": 2, "slot": "free_archetype", "pega": "wb:feat/cleric-dedication"},
+    {"em": 4, "slot": "free_archetype", "pega": "wb:feat/basic-cleric-spellcasting"}])
+checar(fa_clerigo.avaliar({"spellcasting_tradition": "divine"})[0],
+       "Guerreiro com Cleric Dedication + Basic Spellcasting atende divine")
+
+# principio zero: Feiticeiro guarda PROSA no lugar da tradicao (item 78), entao
+# o motor nao sabe qual e -- e nao reprova sobre o que nao sabe
+feiticeiro = personagem(niveis(("wb:class/sorcerer", 5)))
+checar(all(feiticeiro.avaliar({"spellcasting_tradition": t})[0]
+           for t in ("arcane", "divine", "occult", "primal")),
+       "Feiticeiro atende as quatro -- tradicao em prosa nao reprova (item 78)")
+
+# a prova que a comparacao com o Pathbuilder apontou. Pelo principio zero o feat
+# CONTINUA na lista -- o que muda e que agora vem MARCADO, com o motivo.
+cathartic = next(c for c in guerreiro6.candidatos("class_feat", em=6)
+                 if c["id"] == "wb:feat/cathartic-mage-dedication")
+checar(not cathartic["atende"],
+       "Cathartic Mage Dedication vem MARCADA para um Guerreiro 6")
+checar(any("nao conjura" in m for m in cathartic["motivos"]),
+       "e o motivo diz que ele nao conjura, nao so que falta CHA")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

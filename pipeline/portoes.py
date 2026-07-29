@@ -37,6 +37,11 @@ RECONSTRUIVEL = ("pipeline/dados_brutos/foundry",
                  "pipeline/dados_brutos/aon",
                  "pipeline/dados_brutos/pf2etools")
 
+# Onde um caminho capturado a partir de `motor/` pode estar de verdade. O porte
+# TypeScript vive em `app/src/motor/`, entao prosa que cita o arquivo completo
+# chega ao portao como sufixo -- ver `existe()`.
+RAIZES_DE_CODIGO = ("app/src",)
+
 # Campos cujo preenchimento exige `prov`. `mechanized`, `kind` e `id` sao
 # derivados do proprio pipeline, nao vieram de fonte -- nao entram.
 CAMPOS_COM_PROV = ["name", "level", "traits", "rarity", "source",
@@ -463,6 +468,12 @@ def portao_8_artefato_citado(base, ctx):
 
     citados = collections.defaultdict(set)
     for rel in versionados:
+        # O relatorio DESTE portao lista os caminhos que faltam -- e na rodada
+        # seguinte essa lista era lida como citacao nova. A falha se
+        # auto-sustentava: uma vez vermelho, vermelho para sempre, mesmo depois
+        # de o documento culpado ser corrigido. Portao nao le a propria saida.
+        if "relatorio_portoes" in rel:
+            continue
         try:
             txt = open(os.path.join(RAIZ, rel), encoding="utf-8",
                        errors="ignore").read()
@@ -487,13 +498,21 @@ def portao_8_artefato_citado(base, ctx):
         """Existe a partir da raiz -- ou da pasta de quem cita.
 
         Um caminho num arquivo de config e relativo AO CONFIG, nao a raiz do
-        repo: `app/tsconfig.app.json` cita `motor/motor.test.ts` querendo dizer
+        repo: `app/tsconfig.app.json` cita `src/motor/motor.test.ts` querendo dizer
         `app/src/motor/motor.test.ts`. Checar so contra a raiz acusava perda de
         um arquivo que esta no disco, e portao que falha sempre para de ser
         lido -- que e justamente o que este portao existe para impedir.
+
+        Mesma razao para as RAIZES_DE_CODIGO: o padrao captura o caminho a
+        partir de `motor/`, entao prosa que cita `app/src/motor/personagem.ts`
+        -- o porte TypeScript, que existe -- chegava aqui como
+        `motor/personagem.ts` e era acusado de sumido.
         """
         if os.path.exists(os.path.join(RAIZ, caminho)):
             return True
+        for prefixo in RAIZES_DE_CODIGO:
+            if os.path.exists(os.path.join(RAIZ, prefixo, caminho)):
+                return True
         for citante in citantes:
             pasta = os.path.dirname(citante)
             for tentativa in (caminho, os.path.join("src", caminho)):

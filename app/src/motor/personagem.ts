@@ -62,6 +62,11 @@ type Dict = Record<string, unknown>;
  */
 const MAX_PROFUNDIDADE_GRANTS = 8;
 
+// as quatro do Remaster. Serve para separar tradição RESOLVIDA de prosa:
+// Sorcerer, Summoner e Witch guardam a frase "variavel (definida pela escolha
+// de ...)" no lugar do valor -- item 78.
+const TRADICOES: string[] = ["arcane", "divine", "occult", "primal"];
+
 /** Linha da lista de features, como o Python monta o dict. */
 interface Feature extends LinhaDeFeature {
   grants: unknown[];
@@ -1873,6 +1878,7 @@ export class Personagem implements ContextoDePredicado {
       case "sense": return this._termo_sense(valor);
       case "focus_pool": return this._termo_focus_pool(valor);
       case "has_actor": return this._termo_has_actor(valor);
+      case "spellcasting_tradition": return this._termo_spellcasting_tradition(valor);
       default: return null;
     }
   }
@@ -2144,6 +2150,45 @@ export class Personagem implements ContextoDePredicado {
       }
     }
     return [true, ""];
+  }
+
+  /**
+   * `{"spellcasting_tradition": "arcane"}` -- conjura dessa tradição?
+   *
+   * 99 cláusulas em 27 arquétipos, e até 2026-07-29 nenhum dos dois motores
+   * tinha o método. Termo sem handler não reprova (princípio zero), então o
+   * `any` de `cathartic-mage-dedication` passava a vácuo e um Guerreiro 6
+   * recebia seis dedicações de conjuração. Achado comparando com o Pathbuilder,
+   * que barra as seis -- e ali ele está certo.
+   *
+   * Lê `this.conjuracao`, que já inclui a de CLASSE e a de ARQUETIPO.
+   *
+   * Spec: `specs/2026-07-29-termo-spellcasting-tradition.md`
+   */
+  private _termo_spellcasting_tradition(valor: unknown): ResultadoDeTermo {
+    const alvo = normSlug(valor);
+    if (!this.conjuracao.length) {
+      return [false, `exige conjurar ${pyStr(valor)}; o personagem nao conjura`];
+    }
+    let indefinida = false;
+    for (const c of this.conjuracao) {
+      const bruta = dictDe(c)["tradicao"];
+      if (!verdadeiro(bruta)) continue;
+      if (normSlug(bruta) === alvo) return [true, ""];
+      if (!TRADICOES.includes(normSlug(bruta))) indefinida = true;
+    }
+    if (indefinida) {
+      // princípio zero: a tradição está em prosa (item 78) -- o motor não sabe
+      // qual é e não reprova sobre o que não sabe. A ficha JÁ mostra a string,
+      // então a marca existe e não vira aviso aqui: `candidatos()` avalia
+      // milhares de feats por slot e o log afogaria.
+      return [true, ""];
+    }
+    const tem = ordenarTextos([...new Set(this.conjuracao
+      .map((c) => dictDe(c)["tradicao"])
+      .filter((t) => verdadeiro(t))
+      .map((t) => pyStr(t)))]).join(", ") || "nenhuma";
+    return [false, `exige conjurar ${pyStr(valor)}; tem ${tem}`];
   }
 
   /**

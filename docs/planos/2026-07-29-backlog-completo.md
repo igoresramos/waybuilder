@@ -34,7 +34,7 @@ Valem para TODA tarefa deste plano, sem repetir em cada uma:
   motor/gerar_fixtures.py`) e o diff dos fixtures e LIDO antes de commitar: se o
   diff sair de onde a mudanca justifica, e defeito, nao e ruido.
 - **Artefato nasce dentro do projeto.** Nada em `/tmp`, `~`, `Downloads`.
-  Relatorio em `docs/`, spec em `specs/`, prototipo em `docs/prototypes/`.
+  Relatorio em `docs/`, spec em `specs/`, comparacao em `docs/comparacao/`.
 - **Agentes em paralelo que ESCREVEM usam `git worktree`.** Dois agentes no
   mesmo checkout fragmentam arquivo -- ja aconteceu duas vezes. Agente de
   MEDICAO (so leitura) pode rodar no checkout normal, varios ao mesmo tempo.
@@ -185,7 +185,7 @@ Guerreiro e Ladino. Os dois motores erram IGUAL, entao o teste de paridade e
 cego: so um teste de comportamento pega.
 
 **Arquivos:**
-- Criar: `specs/2026-07-30-termo-spellcasting-tradition.md`
+- Criar: `specs/2026-07-29-termo-spellcasting-tradition.md`
 - Modificar: `motor/motor.py` (metodo `_termo_spellcasting_tradition`),
   `app/src/motor/personagem.ts` (metodo + **linha do switch**),
   `motor/teste_motor.py`
@@ -231,7 +231,7 @@ background. O motor avisa e nao aplica -- entao nenhum background entrega o feat
 que promete.
 
 **Arquivos:**
-- Criar: `specs/2026-07-30-grant-feat-de-background.md`
+- Criar: spec **grant-feat-de-background** (a criar em `specs/`)
 - Modificar: `pipeline/unificar_efeitos.py:76`
 - Rodar: `pipeline/resolver_referencias.py` (ja sabe resolver `name` +
   `foundry_uuid`)
@@ -253,7 +253,7 @@ ILEGAL devolve `True` igual a legal.
 virou `candidatos(slot, em)` + `slots_abertos()`.
 
 **Arquivos:**
-- Criar: `specs/2026-07-30-recorte-temporal-do-has.md`
+- Criar: spec **recorte-temporal-do-has** (a criar em `specs/`)
 - Modificar: `motor/motor.py:1822` (`_termo_has`),
   `app/src/motor/personagem.ts`, `motor/teste_motor.py`
 
@@ -323,7 +323,7 @@ defeito irmao no `grants` (da Diplomacy **e** Intimidation expert quando o RAW e
 ou-ou, item 75b) -- os dois saem juntos.
 
 **Arquivos:**
-- Criar: `specs/2026-07-30-aninhamento-de-clausula.md`
+- Criar: spec **aninhamento-de-clausula** (a criar em `specs/`)
 - Modificar: `pipeline/extratores/feats.py:481-504` (`_clausula_rank`)
 
 - [ ] Teste do parser: "trained in martial weapons and either Diplomacy or
