@@ -85,24 +85,36 @@ achei quatro itens velhos hoje sem procurar.
       ou IMPRECISO eu confiro pessoalmente antes de fechar -- foi assim que
       peguei que a "premissa das 61 dedicacoes" estava errada.
 
-**Ja apurado (fatia escopo/decisao, 2026-07-29), a conferir e fechar:**
+**FEITO em 2026-07-29.** A auditoria completa esta em
+`docs/2026-07-29_auditoria-todo.md`, com prova por item. Resultado:
 
-| id | veredito | evidencia |
-|---|---|---|
-| 7, 8 | JA RESOLVIDO | `docs/simulacoes/2026-07-27_balanceamento.md` responde os dois, e ja usa a politica de acao SIMETRICA que corrige o vies do Fable |
-| 9 | JA RESOLVIDO | o app existe: Vite+React PWA offline, picker modal reusado, o JSON e a ficha |
-| 16 | OBSOLETO | o app nao vai ser publicado (decisao de 27/07) -- licenciamento saiu do escopo |
-| 23 | OBSOLETO | `Triggerbrand Salvo` esta na base (falso alarme); os wayfinders do PFS Guide sao limite de fonte declarado |
-| 35 | JA RESOLVIDO | os 3 registros tem `source` e `license` hoje, resolvidos de carona no re-dump do pf2etools |
-| 44 | JA RESOLVIDO | a tabela de conjuracao saiu do campo `markdown` do AoN, sem depender dos PDFs |
-| 18 | PARCIAL | `Life-Saving Yowl` era premissa errada (existe como `Caterwaul`). Sobra defeito ESTRUTURAL: heritage so e enumerado pelo Foundry, nunca pelo AoN -- por isso `Cavern Kobold` e `Spellscale Kobold` faltam |
-| 47 | PARCIAL | (b) caiu hoje; (a) e (c) sao decisao sua -- ver contrato de autonomia |
-| 68 | PARCIAL | vies 1 corrigido; falta o oraculo de EM QUE NIVEL cada aumento de pericia foi gasto |
-| 10, 13, 19, 22, 42, 73, 79 | VALIDO | seguem de pe, nenhuma sessao posterior tocou |
+| | itens |
+|---|---:|
+| abertos antes | 54 |
+| **fechados** | **15** (3, 7, 8, 9, 16, 23, 35, 36, 37, 44, 54, 56, 66, 71, 74) |
+| fundidos | 2 (41 -> 78, 33 -> 55) |
+| **abertos depois** | **37** |
 
-O item 18 muda de natureza: deixa de ser "3 ausencias pontuais" e vira
-**"heritage nao e enumerado pelo AoN"**, que e causa e nao sintoma. Reescrever
-com esse titulo antes de trabalhar.
+Sete itens mentiam o numero. Os que mudam trabalho:
+
+- **40** dizia "175 de 176 sub-escolhas sem efeito"; sao **114 de 418 ja
+  aplicadas** (27%). O mecanismo parou de ser o problema -- a extracao continua.
+- **52** dizia 812 campos com `prov` ruim; sao **13**.
+- **69** dizia 25 de 27 classes com o balaio; sao **16 de 27**.
+- **78**: patron e eidolon ja tem `grants`, mas nenhum carrega tradicao -- o
+  defeito central persiste com outro contorno.
+- **60** precisa de re-medicao com a metodologia original: as categorias de hoje
+  nao mapeiam 1:1 com as do item.
+
+Dois itens mudaram de natureza e precisam de titulo novo antes de virar
+trabalho:
+
+- **18** deixa de ser "3 ausencias pontuais" e vira **"heritage so e enumerado
+  pelo Foundry, nunca pelo AoN"** -- causa, nao sintoma.
+- **59** ficou maior: os gaps originais cairam e outros nasceram (724 com
+  `grants_completos == False`), mas o achado grave e que **14.247 registros (72%
+  da base) nao emitem o campo** -- equipment, weapon e class-feature inteiros --
+  e **nenhum portao cobra**. Vira tarefa de portao antes de tarefa de conteudo.
 
 ### Tarefa 0.2: fechar, fundir e reescrever os itens
 
@@ -192,22 +204,16 @@ cego: so um teste de comportamento pega.
       (`Cathartic Mage`, `Necrologist`, `Shadowcaster`, `Soulforger`,
       `Time Mage`, `War Mage`) sairam da divergencia.
 
-### Tarefa 1.2: higiene de boost + bancada (itens 74 e 90, fundidos)
+### Tarefa 1.2: alinhar a bancada de comparacao (item 90)
 
-Ficha sem boost declarado sai com tudo 10 e **nenhum aviso**. O motor aplica o
-que o jogador declara mas nunca confronta DIREITO com DECLARADO. A bancada de
-comparacao com o Pathbuilder sofre exatamente disso: monta um personagem com 9
-boosts nao atribuidos e compara com um que tem STR 16.
+**Encolheu na auditoria.** O item 74 esta RESOLVIDO -- a ficha sem boost
+declarado JA avisa ("0 declarado(s) de 9 a que o personagem tem direito", com as
+fontes). Sobra so a bancada, que monta um personagem com 9 boosts nao atribuidos
+e o compara com um que tem STR 16.
 
 **Arquivos:**
-- Criar: `specs/2026-07-30-higiene-de-boost.md`
-- Modificar: `motor/motor.py` (`_higiene_de_boost`, espelhando
-  `_higiene_de_slot`), `app/src/motor/personagem.ts`,
-  `motor/comparar_pathbuilder.py`
+- Modificar: `motor/comparar_pathbuilder.py`
 
-- [ ] Teste: ficha de Guerreiro 1 sem `boosts_livres` declarado produz aviso
-      dizendo quantos boosts faltam escolher, por origem.
-- [ ] Implementar nos dois motores.
 - [ ] Espelhar no `personagem_equivalente` a atribuicao real do Pathbuilder
       (medida em `docs/comparacao/estado-pathbuilder-fighter-nv2.json`: STR 16,
       DEX 12, CON 12, e Acrobatics/Athletics/Stealth/Thievery treinadas).
@@ -237,26 +243,29 @@ que promete.
       **nao** aparece mais como candidato no slot de skill feat.
 - [ ] Confirmar na comparacao que `Hobnobber` saiu da divergencia.
 
-### Tarefa 1.4: gate de nivel na primeira classe alfabetica (item 71)
+### Tarefa 1.4: `_termo_has` sem recorte temporal (item 65)
 
-122 feats travados na classe errada.
+Pegar `Quick Shot` no nivel 2 satisfaz requisito de um feat de nivel 1 -- o termo
+soma `escolhas` inteiras sem olhar `em`. Reproduzido na auditoria: a ordem
+ILEGAL devolve `True` igual a legal.
 
-- [ ] Reproduzir com ficha montada antes de mexer.
-- [ ] Spec, conserto nos dois motores, fixtures, comparacao.
+**Encolheu na auditoria:** a outra metade do item (o `disponiveis()` por kind) ja
+virou `candidatos(slot, em)` + `slots_abertos()`.
 
-### Tarefa 1.5: `_termo_has` sem recorte temporal (item 65)
+**Arquivos:**
+- Criar: `specs/2026-07-30-recorte-temporal-do-has.md`
+- Modificar: `motor/motor.py:1822` (`_termo_has`),
+  `app/src/motor/personagem.ts`, `motor/teste_motor.py`
 
-Pegar `Quick Shot` no nivel 2 satisfaz requisito de um feat de nivel 1 -- o
-termo avalia o documento inteiro, sem olhar QUANDO.
+- [ ] Teste do caso reproduzido: `Archer Dedication` no nivel 4 exigindo
+      `Quick Shot`, com o `Quick Shot` pego no nivel 2 -> legal; pego DEPOIS ->
+      nao satisfaz.
+- [ ] Rodar e ver falhar. Implementar nos dois motores. Rodar e ver passar.
+- [ ] Regenerar fixtures e ler o diff.
 
-- [ ] Reproduzir, spec, conserto nos dois motores, fixtures.
-
-### Tarefa 1.6: conjuracao por dedicacao na ficha (item 66)
-
-`_conjuracao` itera so `ordem_de_classe`. Conferir contra o que a spec de
-spellcasting de arquetipo (2026-07-29) ja entregou -- pode ter caido junto.
-
-- [ ] Medir primeiro. Se ja caiu, fechar o item com a evidencia.
+**Sairam desta fase pela auditoria:** item 71 (gate de nivel -- ja usa `any`
+sobre todos os traits, 123 feats) e item 66 (conjuracao por dedicacao -- entrou
+hoje as 16:06).
 
 **Verde da fase:** quatro camadas + comparacao com o Pathbuilder re-rodada, com
 o total de divergencia medido antes e depois.
@@ -269,23 +278,60 @@ o total de divergencia medido antes e depois.
 Nenhum destes muda regra: mudam o que a base ENTREGA. Todos exigem reemissao
 (`WB_REEXTRAIR=1` quando mexer em extrator).
 
-### Tarefa 2.1: revalidar os numeros antes de trabalhar
+### Tarefa 2.0: o portao que falta (item 59, parte nova)
 
-- [ ] Os itens 59 (1.564 registros que perderam mecanica), 60 (679 concessoes de
-      `GrantItem`), 52 (684 campos com `prov` desconhecida) e 56 (69 registros
+O achado mais grave da auditoria e de VISIBILIDADE, nao de conteudo: **14.247
+registros (72% da base) nao emitem `grants_completos`** -- equipment 6.122, feat
+3.849, weapon 1.042, class-feature 841 --, e **nenhum portao cobra**. Os 1.564
+originais foram consertados e 724 novos apareceram sem ninguem ver.
+
+Isto vem ANTES de qualquer conserto de conteudo desta fase: sem o portao, o
+proximo conserto some do radar do mesmo jeito.
+
+**Arquivos:**
+- Modificar: `pipeline/portoes.py` (portao 10), os extratores que nao emitem
+
+- [ ] Portao novo: falha quando um kind que DEVERIA declarar `grants_completos`
+      nao declara, e reporta a cobertura por kind.
+- [ ] Fazer os kinds faltantes emitirem o campo.
+- [ ] Registrar a cobertura de hoje como linha de base, para o portao 4
+      (cobertura caindo vs build anterior) passar a vigiar tambem isto.
+
+### Tarefa 2.1: revalidar os numeros que a auditoria nao fechou
+
+- [ ] Item **60** (concessoes de `GrantItem`): a auditoria mediu 491 hoje contra
+      679 do item, mas as categorias nao mapeiam 1:1 (condicao caiu 156 -> 17,
+      UUID subiu 163 -> 184). **Re-medir com a metodologia original** antes de
+      decidir se fecha ou trabalha.
+- [ ] Itens 59 (1.564 registros que perderam mecanica), 52 (684 campos com
+      `prov` desconhecida) e 56 (69 registros
       pre-remaster) foram medidos em 27/07 e varias sessoes de conserto passaram
       por cima. Re-medir CADA UM antes de abrir trabalho. O relatorio da auditoria
       da Fase 0 ja traz esse numero -- aqui e so confirmar o que sobrou.
 
-### Tarefa 2.2: achatamento de "X and either Y or Z" (item 91)
+### Tarefa 2.2: achatamento de "X and either Y or Z" (itens 91 e 75b)
 
-`Marshal Dedication` virou `any[martial, diplomacy, intimidation]` onde o RAW e
-`all[martial, any[diplomacy, intimidation]]`.
+**A auditoria ja respondeu a pergunta:** e falha estrutural de desenho, mas caso
+UNICO hoje. `pipeline/extratores/feats.py::_clausula_rank` escolhe **um conector
+para o grupo inteiro** (`conector = "any" if " or " in resto else "all"`), sem
+posicao estrutural e sem aninhamento. Varredura nos 19.706 registros: 4
+candidatos, **1 defeito real** -- nos outros 3, um alvo e feat e nao pericia,
+entao a funcao devolve `None` e o parser geral produz o aninhamento certo.
 
-- [ ] **Primeiro medir se e sistematico.** Varrer a prosa dos pre-requisitos
-      procurando o padrao "and either ... or"; se forem muitos, o conserto e no
-      parser e vale para o conjunto. Se for so o Marshal, e curadoria.
-- [ ] Spec com o numero. Conserto. Reemitir. Comparacao.
+Consertar por ser desenho errado, sem esperar fila. O MESMO registro tem o
+defeito irmao no `grants` (da Diplomacy **e** Intimidation expert quando o RAW e
+ou-ou, item 75b) -- os dois saem juntos.
+
+**Arquivos:**
+- Criar: `specs/2026-07-30-aninhamento-de-clausula.md`
+- Modificar: `pipeline/extratores/feats.py:481-504` (`_clausula_rank`)
+
+- [ ] Teste do parser: "trained in martial weapons and either Diplomacy or
+      Intimidation" produz `all[proficiency martial, any[diplomacy,
+      intimidation]]`.
+- [ ] Conferir que os outros 3 candidatos NAO regridem.
+- [ ] Reemitir. Provar que `Marshal Dedication` deixa de liberar para um Clerigo
+      que so tem Diplomacy, e que o `grants` parou de dar as duas pericias.
 
 ### Tarefa 2.3: lore com rank vazado (resto do item 88)
 
@@ -295,17 +341,28 @@ expert`. Erram a chave E o rank.
 - [ ] Conserto em `pipeline/extratores/feats.py`, reemitir, provar que
       `demon-hunter` passou a pedir `lore:demon >= expert`.
 
-### Tarefa 2.4: kinds ausentes e ausencias pontuais (itens 54, 55, 18, 23, 27)
+### Tarefa 2.4: heritage nao e enumerado pelo AoN (item 18, reescrito)
 
-- [ ] `tactic` (37 tacticas do Commander) e o outro kind do item 54: extrair,
-      reconciliar, portao 9 verde.
-- [ ] Ausencias pontuais de `pipeline/censo_ausencias.json`, uma a uma, cada
-      uma com a fonte citada.
+**Mudou de natureza na auditoria.** Nao sao "3 ausencias pontuais":
+`Life-Saving Yowl` era premissa errada (existe como `Caterwaul`). A causa e que
+**heritage so e enumerado a partir do Foundry**, nunca do AoN -- por isso
+`Cavern Kobold` e `Spellscale Kobold` faltam.
+
+- [ ] Enumerar heritage tambem pelo AoN, como ja se faz nos outros kinds.
+- [ ] Portao 9 (censo por categoria) passa a cobrir heritage.
+- [ ] Os 4 class-features que o portao 9 ainda acusa (`Incredible Senses`,
+      `Vigilant Senses`, `Lightning Reflexes`, `Premonition's Reflexes`) --
+      item 55, mesma passada.
+
+**Saiu desta fase:** item 54 (`tactic` = 37 e `class-kit` = 32, conferidos) e
+item 23 (falso alarme).
 
 ### Tarefa 2.5: eixo `outras-opcoes` e um balaio (item 69)
 
-25 das 27 classes tem um. E o que fez um Guerreiro 4 sair com `Warrior of
-Legend`.
+**16 de 27** classes ainda tem um (eram 25 -- Fighter e Monk, os piores
+exemplos, ja foram corrigidos por `aplicar_subclasses.py`). O caso que sobra e o
+Alchemist, que mistura `Advanced Alchemy` (progressao) com `Advanced Vials`
+(sub-escolha de verdade).
 
 - [ ] Medir o que caiu no balaio por classe, propor o recorte na spec, aplicar.
 
@@ -316,11 +373,16 @@ antes/depois.
 
 ## Fase 3 -- subclasse nao altera nada (o maior custo do projeto)
 
-Item 40, e a propria spec o chama assim. 175 das 176 opcoes de sub-escolha nao
-mudam numero nenhum na ficha. O dado existe: 584 das 841 class-features do
-Foundry tem Rule Elements, e `converter_rule_elements.py` converteu so os 99
-declarativos. Falta o grosso: 1.784 FlatModifier, 1.495 ItemAlteration, 1.113
-GrantItem, 1.077 RollOption, 563 ChoiceSet, 337 Resistance.
+Item 40, e a propria spec o chama assim -- mas a auditoria **corrigiu o numero e
+o diagnostico**. O item dizia "175 das 176 sub-escolhas sem efeito"; hoje sao
+**114 de 418 (27%) com `grants` que o motor JA aplica**. O mecanismo de
+aplicacao deixou de ser o gargalo: `_proficiencias` e `_grants_em_cadeia` leem
+`self.features`, que inclui a subclasse escolhida.
+
+**O que trava e a EXTRACAO** -- 304 opcoes com `grants: []`, porque
+`converter_rule_elements.py` so converteu os 99 declarativos. Falta o grosso:
+1.784 FlatModifier, 1.495 ItemAlteration, 1.113 GrantItem, 1.077 RollOption, 563
+ChoiceSet, 337 Resistance.
 
 **Esta fase e um projeto dentro do projeto.** Ela nao cabe numa passada e nao
 deve ser tratada como se coubesse. O plano aqui e deliberadamente incremental:
