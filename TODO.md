@@ -61,10 +61,6 @@ items:
   id: 13
   date: '2026-07-29'
   priority: media
-- desc: 'REESCRITO 2026-07-29 (auditoria) -- mudou de natureza. NAO sao ''3 ausencias pontuais'': `Life-Saving Yowl` era premissa errada, existe na base como `Caterwaul`. A CAUSA, que e o item de verdade: HERITAGE SO E ENUMERADO A PARTIR DO FOUNDRY, NUNCA DO AON -- e por isso `Cavern Kobold` e `Spellscale Kobold` faltam. Enquanto a enumeracao nao olhar o AoN, qualquer heritage que exista so la continua invisivel, e o portao 9 nao cobre heritage. Conserto: enumerar heritage tambem pelo AoN, como ja se faz nos outros kinds, e estender o portao 9. || TEXTO ORIGINAL: Tres ausencias pontuais confirmadas contra o PDF: ''Life-Saving Yowl'' (feat de Catfolk nivel 17, Player Core 2) nao existe na base; ''Cavern Kobold'' e ''Spellscale Kobold'' (Ancestry Guide) sao herancas legacy sem alias. Reconferir depois do item 24 -- podem ser vitimas da fusao por prosa'
-  id: 18
-  date: '2026-07-29'
-  priority: media
 - desc: 'A mecanica de filiacao EXISTE mas nao esta estruturada: 305 registros (155 equipment, 134 feat, 13 weapon, 3 armor) tem linha ''Access'' no texto citando organizacao/regiao/etnia como condicao de raridade uncommon, com requires:null. Mais 68 feats/archetypes com requires_texto tipo ''member of X''. Nenhuma chave do predicado sabe falar de filiacao. Solucao: ~20-25 stubs leves (id+nome, sem prosa) + termo novo no predicado. Principio zero: sugere, nunca bloqueia'
   id: 22
   date: '2026-07-29'
