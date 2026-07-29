@@ -589,6 +589,72 @@ checar(outra["atende"],
        "e o Mago 20 puro continua podendo pegar Cleric Dedication",
        f"motivos={outra['motivos']}")
 
+# -- companheiro CONCEDIDO por feat -----------------------------------------
+# Spec: specs/2026-07-29-companheiro-concedido.md. Antes disto, pegar
+# `Animal Companion` no nivel 1 nao mudava nada na ficha: o ator so entrava por
+# `doc["atores"]` escrito a mao, e nao havia slot nem aviso.
+print("\ncompanheiro concedido -- o feat abre o slot da especie")
+
+AC_RANGER = "wb:feat/animal-companion-ranger"
+esc = niveis((RANGER, 1)) + [{"em": 1, "slot": "class_feat", "pega": AC_RANGER}]
+p = personagem(esc)
+checar(len(p.concessoes_de_ator) == 1
+       and p.concessoes_de_ator[0]["classe"] == RANGER,
+       "o feat vira concessao, e a classe sai do NIVEL em que foi pego",
+       f"{p.concessoes_de_ator}")
+aberto = [s for s in p.slots_abertos() if s["slot"] == "companheiro"]
+checar(len(aberto) == 1 and aberto[0]["em"] == 1
+       and aberto[0]["kind"] == "animal-companion",
+       "concessao sem ator abre slot de companheiro no nivel do feat",
+       f"{aberto}")
+
+cands = p.candidatos("companheiro", 1)
+checar(len(cands) == 96,
+       "candidatos sao as 96 ESPECIES; as 17 sem stat block (Ambusher, Nimble, "
+       "Savage...) sao especializacao e nao cabem no slot", f"deu {len(cands)}")
+
+# `opcoes` do concessor ORDENA, nao filtra -- principio zero aplicado a especie
+p_rr = personagem(niveis((FIGHTER, 2))
+                  + [{"em": 2, "slot": "general_feat", "pega": "wb:feat/rough-rider"}])
+c_rr = p_rr.candidatos("companheiro", 2)
+checar(c_rr[0]["nome"] == "Wolf" and c_rr[0]["sugerida"] is True
+       and len(c_rr) == 96,
+       "Rough Rider ('you gain a wolf') poe o Wolf na frente sem sumir com o resto",
+       f"primeiro={c_rr[0]['nome']} total={len(c_rr)}")
+
+# escolhida a especie, o slot fecha e a ficha sai igual a do ator escrito a mao
+ATOR = [{"tipo": "companheiro", "nome": "Princesa", "concedido_por": AC_RANGER,
+         "em": 1, "escolhas": [{"slot": "animal",
+                                "pega": "wb:animal-companion/wolf"}]}]
+p2 = personagem(esc, atores=ATOR)
+checar(not [s for s in p2.slots_abertos() if s["slot"] == "companheiro"],
+       "escolhida a especie, o slot fecha")
+a = p2.atores[0]
+checar(a["especie"] == "Wolf" and a["classe"] == "Ranger" and a["nivel"] == 1,
+       "e a ficha do companheiro sai completa, ancorada na classe da concessao",
+       f"{a.get('especie')} {a.get('classe')} {a.get('nivel')}")
+
+# regra 17b com a classe CERTA: o cap segue a classe que concedeu, nao a maior
+esc_mc = niveis((RANGER, 3), (FIGHTER, 5)) + [
+    {"em": 1, "slot": "class_feat", "pega": AC_RANGER}]
+p3 = personagem(esc_mc, atores=ATOR)
+checar(p3.atores[0]["nivel"] == 5 and p3.atores[0]["nota"] is None,
+       "Ranger 3 / Fighter 5: cap = min(3+2, 8) = 5, sem chute",
+       f"nivel={p3.atores[0]['nivel']} nota={p3.atores[0]['nota']}")
+
+# compatibilidade: ator escrito a mao, sem `concedido_por`, continua valendo
+p4 = personagem(esc_mc, atores=[{k: v for k, v in ATOR[0].items()
+                                 if k not in ("concedido_por", "em")}])
+checar(p4.atores[0]["nivel"] == 7 and p4.atores[0]["nota"] is not None,
+       "sem `concedido_por` o motor segue chutando a maior classe -- e AVISANDO",
+       f"nivel={p4.atores[0]['nivel']}")
+
+# feat removido depois deixa o ator orfao: avisa, nao apaga a decisao
+p5 = personagem(niveis((FIGHTER, 1)), atores=ATOR)
+checar(any("concedido_por" in x for x in p5.avisos),
+       "ator cuja origem sumiu da ficha vira aviso, nao silencio",
+       f"{p5.avisos}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

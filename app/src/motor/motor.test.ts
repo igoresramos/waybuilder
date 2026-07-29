@@ -178,8 +178,8 @@ const fichas = readdirSync(EXEMPLOS)
   .sort();
 
 describe("porte contra o gabarito do Python", () => {
-  it("acha as 20 fichas de exemplo", () => {
-    expect(fichas.length).toBe(20);
+  it("acha as 21 fichas de exemplo", () => {
+    expect(fichas.length).toBe(21);
   });
 
   for (const ficha of fichas) {

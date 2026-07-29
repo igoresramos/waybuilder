@@ -75,6 +75,66 @@ export interface SlotAberto {
    * guarda em `slots_de_subclasse` e repassa aqui. */
   opcoes?: number;
   fontes?: FonteDeBoost[];
+  /** quem abriu o slot -- hoje só o concessor de ator (`grant_actor`) */
+  origem?: string;
+  /** ids que o concessor SUGERE. Ordenam a lista, não a filtram. */
+  opcoes_ids?: string[];
+}
+
+/**
+ * Companheiro, familiar ou eidolon com a ficha derivada. Os campos de stat só
+ * existem para `tipo: "companheiro"` -- familiar e eidolon entram na lista sem
+ * ficha, porque o modelo deles ainda não existe (ver a dívida na spec
+ * `2026-07-29-companheiro-concedido`).
+ */
+export interface Ator {
+  tipo: string;
+  nome: string;
+  concedido_por: string | null;
+  em?: number | "criacao" | null;
+  classe: string | null;
+  nivel_de_classe: number;
+  /** cap da regra 17b, ancorado na classe que CONCEDEU */
+  nivel: number;
+  nota: string | null;
+  especie?: string;
+  maturidade?: string;
+  especializado?: boolean;
+  grau_pendente?: boolean;
+  tamanho?: string;
+  /** `{land: 40, max: 40}` -- por modo de deslocamento, em pes */
+  velocidade?: Record<string, number>;
+  sentidos?: string;
+  atributos?: Record<string, number>;
+  hp?: number;
+  hp_detalhe?: string;
+  ac?: number;
+  proficiencias?: Record<string, Rank>;
+  saves?: Record<string, number>;
+  percepcao?: number;
+  ataques?: Array<{
+    nome?: string; ataque: number; dano: string;
+    tipo?: string | null; traits?: string[]; agil?: boolean;
+  }>;
+  support?: string | null;
+  manobra_avancada?: string | null;
+  /** espécie não encontrada na base -- a ficha não pôde ser montada */
+  aviso?: string;
+}
+
+/** Um `grant_actor` ativo na ficha: o feat que concede o companheiro, o nível
+ * em que foi pego (e portanto a classe que ancora o cap da regra 17b) e se a
+ * espécie já foi escolhida. */
+export interface ConcessaoDeAtor {
+  origem: string;
+  origem_nome: string;
+  em: unknown;
+  tipo: string;
+  escolhe: string;
+  opcoes: string[];
+  classe: string | null;
+  preenchida: boolean;
+  escolhido: string | null;
 }
 
 export interface FonteDeBoost {
@@ -100,6 +160,8 @@ export interface Candidato {
   atende: boolean;
   motivos: string[];
   ja_pego: boolean;
+  /** o concessor cita esta opção pelo nome (Rough Rider -> Wolf). Só ordena. */
+  sugerida?: boolean;
 }
 
 export interface LinhaDeFeature {
@@ -206,7 +268,8 @@ export interface Visao {
   slots_abertos: SlotAberto[];
   slots: Record<string, number[]>;
   conjuracao: Conjuracao[];
-  atores: unknown[];
+  atores: Ator[];
+  concessoes_de_ator: ConcessaoDeAtor[];
   escolhas_de_feat: unknown;
   focus_pool: number;
   ac: AC;

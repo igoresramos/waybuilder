@@ -1,0 +1,48 @@
+{
+  "esquema": "waybuilder/personagem@1",
+  "base": {
+    "versao": "2026-07-29",
+    "pin_foundry": "87f9e502"
+  },
+  "identidade": {
+    "nome": "Barda das Trilhas",
+    "jogador": "Igor",
+    "notas": "Ficha da spec specs/2026-07-29-companheiro-concedido.md. Exercita os DOIS lados do `grant_actor`: (a) Animal Companion (Ranger) pego no nivel 1 e ja resolvido -- o ator declara `concedido_por` e `em`, e por isso o cap da regra 17b sai do RANGER (min(3+2,8) = 5) e nao do Guerreiro, que e a classe de maior nivel; (b) Beastmaster Dedication no Free Archetype do nivel 2 concedendo um SEGUNDO companheiro que ainda nao teve especie escolhida -- ele aparece em `slots_abertos` como slot `companheiro`. Antes desta spec nenhum dos dois existia: o feat nao concedia nada e o ator so entrava a mao."
+  },
+  "escolhas": [
+    { "em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human" },
+    { "em": "criacao", "slot": "heranca", "pega": "wb:heritage/versatile-human" },
+    { "em": "criacao", "slot": "background", "pega": "wb:background/nomad" },
+    { "em": 1, "slot": "nivel_de_classe", "pega": "wb:class/ranger" },
+    { "em": 1, "slot": "subclasse", "pega": "wb:class-feature/precision" },
+    { "em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "wis"] },
+    { "em": 1, "slot": "class_feat", "pega": "wb:feat/animal-companion-ranger" },
+    { "em": 2, "slot": "nivel_de_classe", "pega": "wb:class/ranger" },
+    { "em": 2, "slot": "free_archetype", "pega": "wb:feat/beastmaster-dedication" },
+    { "em": 3, "slot": "nivel_de_classe", "pega": "wb:class/ranger" },
+    { "em": 4, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 5, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 6, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 7, "slot": "nivel_de_classe", "pega": "wb:class/fighter" },
+    { "em": 8, "slot": "nivel_de_classe", "pega": "wb:class/fighter" }
+  ],
+  "atores": [
+    {
+      "tipo": "companheiro",
+      "nome": "Presa",
+      "concedido_por": "wb:feat/animal-companion-ranger",
+      "em": 1,
+      "escolhas": [{ "slot": "animal", "pega": "wb:animal-companion/wolf" }]
+    }
+  ],
+  "inventario": [
+    { "item": "wb:weapon/composite-shortbow", "qtd": 1, "equipado": true, "potencia": 0 },
+    { "item": "wb:armor/leather-armor", "qtd": 1, "equipado": true }
+  ],
+  "manual": {
+    "nota": "tudo aqui e escrito pelo jogador e nunca sobrescrito pelo motor",
+    "hp_bonus": 0,
+    "proficiencias_forcadas": {},
+    "itens_caseiros": []
+  }
+}

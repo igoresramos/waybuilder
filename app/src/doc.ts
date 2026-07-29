@@ -289,6 +289,68 @@ export function subclasseEm(
   return typeof e?.pega === "string" ? e.pega : null;
 }
 
+// -- ator concedido por feat -------------------------------------------------
+//
+// O companheiro NAO vive em `escolhas`: ele e um ator, com nome, especie e
+// escolhas proprias (o grau nimble/savage mora dentro dele). O que a tela faz
+// aqui e casar o ator com a CONCESSAO que o abriu -- `concedido_por` + `em` --,
+// que e o par que o motor procura em `_casar_ator_com_concessao`.
+
+type Ator = {
+  tipo: string;
+  nome?: string;
+  concedido_por?: string;
+  em?: number | "criacao";
+  escolhas?: Array<{ slot: string; pega: string | string[] }>;
+  [campo: string]: unknown;
+};
+
+const mesmoAtor = (a: Ator, origem: string, em: number | "criacao") =>
+  a.concedido_por === origem && (a.em ?? em) === em;
+
+/** Escolhe a especie do ator daquela concessao, criando o ator se preciso. */
+export function escolherAtor(
+  doc: Documento,
+  origem: string,
+  em: number | "criacao",
+  tipo: string,
+  especie: string,
+): Documento {
+  const atores = ((doc.atores ?? []) as Ator[]).map((a) => ({ ...a }));
+  const achado = atores.find((a) => mesmoAtor(a, origem, em));
+  const escolha = { slot: "animal", pega: especie };
+  if (achado) {
+    achado.escolhas = [
+      ...(achado.escolhas ?? []).filter((e) => e.slot !== "animal"),
+      escolha,
+    ];
+  } else {
+    atores.push({ tipo, nome: "", concedido_por: origem, em, escolhas: [escolha] });
+  }
+  return { ...doc, atores };
+}
+
+/** Nome que o jogador da ao bicho -- a unica parte que nao e derivada. */
+export function renomearAtor(
+  doc: Documento, origem: string, em: number | "criacao", nome: string,
+): Documento {
+  return {
+    ...doc,
+    atores: ((doc.atores ?? []) as Ator[]).map(
+      (a) => (mesmoAtor(a, origem, em) ? { ...a, nome } : a)),
+  };
+}
+
+/** Limpar o slot descarta o ator daquela concessao -- inclusive o nome. */
+export function limparAtor(
+  doc: Documento, origem: string, em: number | "criacao",
+): Documento {
+  return {
+    ...doc,
+    atores: ((doc.atores ?? []) as Ator[]).filter((a) => !mesmoAtor(a, origem, em)),
+  };
+}
+
 /**
  * Escolhas que so fazem sentido por causa da classe daquele nivel.
  *

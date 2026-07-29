@@ -197,6 +197,23 @@ export default function App() {
                         setD(doc.limparSubclasse(d, n, b.eixo ?? null))} />
               ))}
 
+              {/* Companheiro concedido por feat. O slot nasce do `grant_actor`
+                  do proprio feat pego neste nivel -- ate 2026-07-29 pegar
+                  `Animal Companion` nao abria nada e o bicho so entrava
+                  editando o JSON a mao. A escolha vai para `doc.atores`, e nao
+                  para `escolhas`: o ator tem nome e escolhas proprias. */}
+              {n <= nivel && v.concessoes_de_ator
+                .filter((c) => c.em === n)
+                .map((c) => (
+                  <Slot base={base} key={`ator-${c.origem}-${n}`}
+                        rotulo={`${c.tipo} -- ${c.origem_nome}`} tipo="companheiro"
+                        candidatos={p.candidatos(c.tipo, n)}
+                        escolhido={c.escolhido}
+                        aoEscolher={(x) =>
+                          setD(doc.escolherAtor(d, c.origem, n, c.tipo, x))}
+                        aoLimpar={() => setD(doc.limparAtor(d, c.origem, n))} />
+                ))}
+
               {/* o que este nivel CONCEDEU -- nao e escolha, e consequencia */}
               {n <= nivel && (() => {
                 const dadas = v.features.filter((f) => f.nivel_de_classe === n);

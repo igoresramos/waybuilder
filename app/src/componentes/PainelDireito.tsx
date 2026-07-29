@@ -34,7 +34,8 @@ const SALVAGUARDAS = [
   ["fortitude", "Fortitude"], ["reflex", "Reflexos"], ["will", "Vontade"],
 ] as const;
 
-type Aba = "ataques" | "equipamento" | "feats" | "concedido" | "sinais";
+type Aba = "ataques" | "equipamento" | "feats" | "companheiro" | "concedido"
+  | "sinais";
 
 const sinal = (n: number) => `${n >= 0 ? "+" : ""}${n}`;
 
@@ -198,6 +199,11 @@ export function PainelDireito({
               ["ataques", `Ataques (${v.ataques.length})`],
               ["equipamento", `Equipamento (${(d.inventario ?? []).length})`],
               ["feats", "Feats"],
+              // a aba do bicho so existe quando ha bicho -- ela some inteira em
+              // vez de ficar vazia, que e o que 90% das fichas veriam
+              ...(v.atores.length
+                ? [["companheiro", `Companheiro (${v.atores.length})`] as const]
+                : []),
               ["concedido", `Concedido (${v.concedidos.length})`],
               ["sinais", `Sinais (${v.fora_do_requisito.length + v.avisos.length})`],
             ] as const).map(([id, rotulo]) => (
@@ -240,6 +246,90 @@ export function PainelDireito({
               {!v.features.length && <li className="vazio">nada ainda</li>}
             </ul>
           )}
+
+          {/* Os numeros ja vem prontos do motor (`_ficha_de_companheiro`), que
+              deriva do stat block da especie mais o avanco young/mature/nimble/
+              savage e o cap da regra 17b. A tela nao calcula nada aqui -- e a
+              mesma regra do resto da ficha. */}
+          {aba === "companheiro" && v.atores.map((a, i) => (
+            <div key={`${a.concedido_por ?? a.nome}-${i}`} className="cartao-ator">
+              <h4>
+                {a.nome || a.especie || a.tipo}
+                {a.especie && a.nome ? ` - ${a.especie}` : ""}
+                <span className="origem">
+                  nivel {a.nivel}
+                  {a.classe ? ` (${a.classe} ${a.nivel_de_classe})` : ""}
+                  {a.maturidade ? ` - ${a.maturidade}` : ""}
+                  {a.especializado ? " especializado" : ""}
+                </span>
+              </h4>
+              {a.aviso && <p className="nota">{a.aviso}</p>}
+              {a.nota && <p className="nota">{a.nota}</p>}
+              {a.hp != null && (
+                <>
+                  <div className="linha-atributos">
+                    {ATRIBUTOS.map((x) => (
+                      <div key={x} className="atributo">
+                        <span className="rotulo">{x.toUpperCase()}</span>
+                        <strong>{sinal(a.atributos?.[x] ?? 0)}</strong>
+                      </div>
+                    ))}
+                  </div>
+                  <ul className="lista-simples">
+                    <li title={a.hp_detalhe}>
+                      <strong>{a.hp}</strong>
+                      <span className="nome">HP</span>
+                      {/* `velocidade` vem por modo (`{land: 40, fly: 25}`) --
+                          `max` e derivado e nao se mostra duas vezes */}
+                      <span className="origem">
+                        {[a.tamanho, ...Object.entries(a.velocidade ?? {})
+                          .filter(([modo]) => modo !== "max")
+                          .map(([modo, pes]) => `${modo} ${pes} ft`)]
+                          .filter(Boolean).join(" - ")}
+                      </span>
+                    </li>
+                    <li>
+                      <strong>{a.ac}</strong>
+                      <span className="nome">CA</span>
+                      <span className="origem">
+                        Percepcao {sinal(a.percepcao ?? 0)}
+                      </span>
+                    </li>
+                    {a.sentidos && (
+                      <li>
+                        <span className="nome">Sentidos</span>
+                        <span className="origem" title={a.sentidos}>
+                          {a.sentidos.replace(/\s+/g, " ").trim()}
+                        </span>
+                      </li>
+                    )}
+                    <li>
+                      <span className="nome">Salvaguardas</span>
+                      <span className="origem">
+                        {SALVAGUARDAS.map(([chave, nome]) =>
+                          `${nome} ${sinal(a.saves?.[chave] ?? 0)}`).join("  -  ")}
+                      </span>
+                    </li>
+                    {(a.ataques ?? []).map((atk, j) => (
+                      <li key={`atk${j}`}>
+                        <strong>{sinal(atk.ataque)}</strong>
+                        <span className="nome">{atk.nome}</span>
+                        <span className="dado">{atk.dano} {atk.tipo}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {a.support && (
+                    <p className="nota"><strong>Support:</strong> {a.support}</p>
+                  )}
+                  {a.manobra_avancada && (
+                    <p className="nota">
+                      <strong>Manobra avancada:</strong> {a.manobra_avancada}
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
+          ))}
 
           {aba === "concedido" && (
             <ul className="lista-simples">

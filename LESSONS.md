@@ -928,10 +928,56 @@ Duas hipoteses gastas, ambas FALSAS:
 - POST recusado pelo `python -m http.server` (`501`) -- `servir.py` passou a
   responder `200 {}` e nao mudou nada.
 
-Receita e estado em `docs/2026-07-29_pathbuilder-local.md`. Quem retomar comeca
-pela suspeita de verificacao de origem dentro do bundle Kotlin/JS.
+**RESOLVIDO na mesma sessao, e a suspeita estava certa:** o bundle tem
+`"www.pathbuilder2e.com" == window.location.hostname` e, fora desse host, para
+para pedir permissao de storage -- sem timeout, entao a tela fica em "Loading"
+sem erro nenhum. Achado com um `grep -o "location\.[a-zA-Z]*"` no minificado,
+que custou dois minutos; as duas hipoteses anteriores custaram uma sessao.
+
+A saida foi elegante e vale de padrao: **navegar para a URL real e servir tudo
+do disco por `page.route()`**. O hostname passa a bater sem tocar em
+`/etc/hosts` e sem que um byte saia da maquina -- o Cloudflare nunca e
+contatado. Receita completa em `docs/2026-07-29_pathbuilder-local.md`.
 
 Licao de orcamento, que vale mais que a tecnica: parei ao ver que a proxima
 pista exigia ler minificado. Frente com custo aberto e retorno incerto merece
 uma caixa de tempo -- e um registro do que ja foi descartado, para o proximo
 nao repetir as mesmas duas hipoteses.
+
+## "Falta modelar X" pode ser "falta ligar X" -- medir antes de escrever motor
+
+O plano dizia que companheiro exigia modelo novo no motor. Antes de escrever
+uma linha, li o motor: `cap_ator`, `_maturidade_do_companheiro`,
+`_resolver_grau_incredible` e `_ficha_de_companheiro` ja estavam la, nas DUAS
+implementacoes, com teste. O que faltava era uma ponta antes -- nenhum feat da
+base declarava conceder companheiro, entao o ator so entrava por
+`doc["atores"]` escrito a mao.
+
+O trabalho real foi um termo de dado (`grant_actor`), um casamento por
+`concedido_por` + `em` e um slot na tela. Nada de matematica nova.
+
+**Como aplicar:** ao pegar um item de divida escrito por mim mesmo em sessao
+anterior, reler o codigo antes de aceitar o diagnostico. Divida herdada
+descreve o sintoma da epoca, nao o estado de hoje -- foi a SEGUNDA premissa
+minha derrubada por medicao em duas sessoes seguidas (a primeira: "so o
+Pathbuilder resolve as 61 dedicacoes").
+
+E o efeito colateral que so aparece ligando as pontas: com a concessao, o motor
+passou a saber em que NIVEL o feat foi pego, e dai a classe. O cap da regra 17b
+deixou de ser chutado na classe de maior nivel -- num `Ranger 3 / Fighter 5` o
+companheiro do Ranger dava 7 e agora da 5. O conserto nao estava no plano;
+apareceu porque o dado novo carregava a resposta.
+
+
+## No minificado, procure a CONSTANTE, nao a logica
+
+Duas sessoes gastas em hipoteses de infraestrutura (asset faltando, POST
+recusado) para um app que travava por checar o proprio hostname. O que resolveu
+foi grepar o bundle por `location.` -- cinco ocorrencias, uma delas a resposta.
+
+**Como aplicar:** app de terceiro que trava sem erro, sem requisicao pendente e
+sem timeout esta esperando uma CONDICAO, e condicao em codigo minificado
+costuma comparar contra uma constante legivel (hostname, versao, chave de
+storage). Grepar por essas constantes e barato e responde antes de qualquer
+teoria sobre rede. Ler minificado assusta mais do que custa quando se procura
+uma string, e nao um fluxo.

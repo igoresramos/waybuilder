@@ -111,6 +111,12 @@ echo "== 7e. mecanica de dedicacao derivada da prosa oficial =="
 # (passo 5) e nao deve enriquecer registro que a fusao vai absorver (passo 7).
 python3 derivar_mecanica_dedicacao.py
 
+echo "== 7f. quem concede companheiro animal =="
+# Sem isto, nenhum feat da base diz "eu concedo um companheiro" e o ator so
+# entra por `doc[\"atores\"]` escrito a mao. Mesma janela do 7e: depois da prosa
+# (5) e depois da fusao (7).
+python3 derivar_concessao_de_ator.py
+
 echo "== 8. portoes, fase final =="
 python3 portoes.py --fase final
 

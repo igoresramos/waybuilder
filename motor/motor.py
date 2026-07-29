@@ -1172,6 +1172,74 @@ class Personagem:
                 f"`grau_avancado` no `escolhas` do ator)")
         return escolhido, entrada
 
+    def _concessoes_de_ator(self) -> None:
+        """Quem, nesta ficha, CONCEDE um ator -- e em que nivel.
+
+        Sem isto o companheiro so entrava por `doc["atores"]` escrito a mao:
+        pegar `Animal Companion` no nivel 1 nao mudava nada na ficha e nao
+        gerava aviso. O termo `grant_actor` vem do passo 7f do pipeline
+        (`derivar_concessao_de_ator.py`), derivado da prosa oficial.
+
+        A `classe` sai do NIVEL em que o feat foi pego, e nao de casar nome de
+        classe com o id do feat -- `wb:feat/animal-companion` nao carrega a
+        classe no nome, e o cap da regra 17b depende dela.
+        """
+        self.concessoes_de_ator: list[dict] = []
+        em_de = {}
+        for e in self.doc.get("escolhas", []):
+            pega = e.get("pega")
+            if isinstance(pega, str) and isinstance(e.get("em"), int):
+                em_de.setdefault(pega, e["em"])
+
+        vistos = set()
+        for origem_id, reg, _ in self._feats_efetivos():
+            vistos.add(origem_id)
+            self._coletar_grant_actor(origem_id, reg, em_de.get(origem_id))
+        for f in self.features:
+            if f.get("id") and f["id"] not in vistos:
+                vistos.add(f["id"])
+                self._coletar_grant_actor(f["id"], self.base.opcional(f["id"]) or f,
+                                          em_de.get(f["id"]))
+
+    def _coletar_grant_actor(self, origem_id: str, reg: dict, em) -> None:
+        for g in (reg.get("grants") or []):
+            if not isinstance(g, dict) or "grant_actor" not in g:
+                continue
+            ga = g["grant_actor"] or {}
+            self.concessoes_de_ator.append({
+                "origem": origem_id,
+                "origem_nome": reg.get("name") or origem_id,
+                "em": em,
+                "tipo": ga.get("tipo") or "companheiro",
+                "escolhe": ga.get("escolhe") or "animal-companion",
+                "opcoes": list(ga.get("opcoes") or []),
+                "classe": self.classe_do_nivel.get(em) if isinstance(em, int) else None,
+                "preenchida": False,
+                "escolhido": None,
+            })
+
+    def _casar_ator_com_concessao(self, ator: dict) -> dict | None:
+        """`concedido_por` + `em`. O `em` desempata quando o mesmo feat concede
+        duas vezes (Mammoth Lord da um segundo companheiro) e e opcional: ator
+        antigo, sem `em`, casa com a primeira concessao daquela origem."""
+        origem = ator.get("concedido_por")
+        if not origem:
+            return None
+        candidatas = [c for c in self.concessoes_de_ator
+                      if c["origem"] == origem and id(c) not in self._casadas]
+        if ator.get("em") is not None:
+            exatas = [c for c in candidatas if c["em"] == ator["em"]]
+            candidatas = exatas or candidatas
+        if not candidatas:
+            return None
+        escolhida = candidatas[0]
+        self._casadas.add(id(escolhida))
+        escolhida["preenchida"] = True
+        escolhida["escolhido"] = next(
+            (e.get("pega") for e in (ator.get("escolhas") or [])
+             if e.get("slot") == "animal"), None)
+        return escolhida
+
     def _atores(self) -> None:
         """Ficha do companheiro, familiar e eidolon.
 
@@ -1179,15 +1247,24 @@ class Personagem:
         calculate their modifiers and DCs just as you do", entao bonus =
         nivel + rank + atributo, exatamente como o personagem.
         """
+        self._concessoes_de_ator()
         self.atores = []
         self.escolhas_de_feat: list[dict] = []
+        self._casadas: set[int] = set()
         for a in self.doc.get("atores") or []:
-            cid, nota = self._classe_do_ator(a)
+            concessao = self._casar_ator_com_concessao(a)
+            if a.get("concedido_por") and concessao is None:
+                self.avisos.append(
+                    f"ator {a.get('nome') or ''}: `concedido_por` aponta para "
+                    f"{a['concedido_por']}, que nao esta na ficha ou nao concede "
+                    f"ator -- o feat pode ter sido removido depois")
+            cid, nota = self._classe_do_ator(a, concessao)
             nivel_classe = self.nivel_de(cid) if cid else self.nivel
             ator = {
                 "tipo": a.get("tipo"),
                 "nome": a.get("nome") or "",
                 "concedido_por": a.get("concedido_por"),
+                "em": a.get("em"),
                 "classe": (self.base.opcional(cid) or {}).get("name") if cid else None,
                 "nivel_de_classe": nivel_classe,
                 "nivel": self.cap_ator(nivel_classe),
@@ -1301,12 +1378,19 @@ class Personagem:
             "manobra_avancada": st.get("advanced_maneuver") if grau in ("nimble", "savage") else None,
         }
 
-    def _classe_do_ator(self, ator: dict) -> tuple[str | None, str | None]:
-        """De qual classe veio o ator. `classe` explicito ganha; senao tenta o
-        `concedido_por`; senao assume a classe de maior nivel e AVISA -- chutar
-        em silencio daria o cap errado sem ninguem perceber."""
+    def _classe_do_ator(self, ator: dict,
+                        concessao: dict | None = None) -> tuple[str | None, str | None]:
+        """De qual classe veio o ator. `classe` explicito ganha; depois a
+        CONCESSAO que criou o ator; depois o `concedido_por` por nome; senao
+        assume a classe de maior nivel e AVISA -- chutar em silencio daria o
+        cap errado sem ninguem perceber."""
         if ator.get("classe"):
             return ator["classe"], None
+        # a concessao sabe em que NIVEL o feat foi pego, e o nivel diz a classe.
+        # E o unico caminho que acerta num `wb:feat/animal-companion`, cujo id
+        # nao carrega classe nenhuma.
+        if concessao and concessao.get("classe"):
+            return concessao["classe"], None
         origem = ator.get("concedido_por")
         if origem:
             for cid in self.ordem_de_classe:
@@ -1681,6 +1765,20 @@ class Personagem:
                 "escolhe": faltam, "fontes": self.boosts_pendentes,
                 "rotulo": f"boosts de atributo ({faltam} a escolher)"})
 
+        # concessao de ator sem ator: o feat foi pego e a especie nao foi
+        # escolhida. `_casadas` e preenchido em `_atores`, que ja rodou.
+        for c in self.concessoes_de_ator:
+            if c["preenchida"]:
+                continue
+            abertos.append({
+                "slot": c["tipo"], "em": c.get("em") or "criacao",
+                "kind": c["escolhe"], "escolhe": 1, "origem": c["origem"],
+                # `opcoes_ids`, e nao `opcoes`: no slot de subclasse `opcoes` e
+                # a CONTAGEM, e o mesmo nome com dois tipos ja quebrou este
+                # campo uma vez (TypeError ao iterar um int)
+                "opcoes_ids": c["opcoes"],
+                "rotulo": f"{c['tipo']} -- {c['origem_nome']}"})
+
         for slot in ("ancestralidade", "heranca", "background"):
             atributo = {"ancestralidade": self.ancestria, "heranca": self.heranca,
                         "background": self.background}[slot]
@@ -1747,6 +1845,34 @@ class Personagem:
             return [{"id": a, "nome": a.upper(), "level": None,
                      "atende": True, "motivos": [], "ja_pego": False}
                     for a in ATRIBUTOS]
+
+        if slot == "companheiro":
+            # As `opcoes` do concessor ORDENAM, nao filtram: Drake Rider diz
+            # "riding drake, riding dragonet, or another animal companion", e
+            # mesmo o Rough Rider, que fixa o lobo, nao some com o resto -- e o
+            # principio zero aplicado a especie.
+            preferidas = [o for c in self.concessoes_de_ator
+                          if c["tipo"] == "companheiro"
+                          and (em is None or c.get("em") == em)
+                          for o in c["opcoes"]]
+            kinds = {c["escolhe"] for c in self.concessoes_de_ator
+                     if c["tipo"] == "companheiro"} or {"animal-companion"}
+            # `stats` separa ESPECIE de ESPECIALIZACAO: dos 113 registros do
+            # kind, 17 sao Ambusher, Nimble, Savage, Wrecker e companhia --
+            # graus e especializacoes que nao tem stat block e nao cabem neste
+            # slot. Elegibilidade de slot, nao requisito: nao ha o que ordenar.
+            registros = [r for r in self.base.por_id.values()
+                         if r.get("kind") in kinds and r.get("stats")]
+            saida = []
+            for r in registros:
+                atende, motivos = self.avaliar(r.get("requires"))
+                saida.append({"id": r["id"], "nome": r.get("name"),
+                              "level": r.get("level"), "atende": atende,
+                              "motivos": motivos, "ja_pego": False,
+                              "sugerida": r["id"] in preferidas})
+            saida.sort(key=lambda x: (not x["sugerida"], not x["atende"],
+                                      x["nome"] or ""))
+            return saida[:limite] if limite else saida
 
         if slot == "subclasse":
             ids = [o for b in self.slots_de_subclasse
@@ -2178,6 +2304,7 @@ class Personagem:
             "slots": self.slots,
             "conjuracao": self.conjuracao,
             "atores": self.atores,
+            "concessoes_de_ator": self.concessoes_de_ator,
             "escolhas_de_feat": self.escolhas_de_feat,
             "focus_pool": self.focus_pool,
             "ac": self.ac,

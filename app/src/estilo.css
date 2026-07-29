@@ -251,6 +251,14 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .cartao-mini { background: var(--card); border-radius: var(--r); padding: var(--u) 10px; }
 .cartao-mini .titulo { color: var(--fraco); font-size: .9em; margin-bottom: 4px; }
 
+/* o companheiro: um cartao por bicho, com a mesma faixa de atributos do topo
+   da ficha -- ele calcula os modificadores exatamente como o personagem */
+.cartao-ator { background: var(--card); border-radius: var(--r); padding: var(--u) 10px; }
+.cartao-ator + .cartao-ator { margin-top: var(--u); }
+.cartao-ator h4 { display: flex; gap: 9px; align-items: baseline; margin: 0 0 6px; }
+.cartao-ator h4 .origem { color: var(--fraco); font-size: .8em; font-weight: 400; }
+.cartao-ator .linha-atributos { margin-bottom: 6px; }
+
 @media (max-width: 1100px) {
   .colunas { grid-template-columns: 1fr; }
   .coluna-build { height: auto; overflow: visible; }

@@ -5,7 +5,7 @@ status: active
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 19.5
+hours: 22.5
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -70,10 +70,15 @@ hidden: false
 
 ## Estado atual
 > **App de pe e verificado em quatro camadas** (2026-07-29): 9 portoes de
-> pipeline, 97 assercoes do oraculo Python, 107 testes do porte TS e a checagem
-> no navegador (`app/verificacao/verificar-eixos.mjs`). A quarta entrou porque as
+> pipeline, 106 assercoes do oraculo Python, 110 testes do porte TS e a checagem
+> no navegador (`app/verificacao/`, dois scripts). A quarta entrou porque as
 > tres primeiras passaram verdes sobre uma base que oferecia a mesma causa do
 > Campeao duas vezes na tela.
+>
+> **Companheiro concedido por feat funciona ponta a ponta** desde 2026-07-29:
+> pegar `Animal Companion` abre o slot da especie, e a ficha do bicho sai
+> derivada (spec `2026-07-29-companheiro-concedido.md`). Familiar, eidolon e
+> companheiro construct/undead seguem como divida declarada em relatorio.
 >
 > Design fechado e **base canonica re-emitida**. As 22 regras de multiclasse, o
 > schema da base e o schema do documento de personagem estao escritos, revisados

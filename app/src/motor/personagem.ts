@@ -34,9 +34,9 @@ import type { Base } from "./base.ts";
 import type { ContextoDePredicado, ResultadoDeTermo } from "./predicado.ts";
 import { avaliar as avaliarPredicado, comparar } from "./predicado.ts";
 import type {
-  AC, Ataque, AumentoDePericia, Candidato, Concedido, Conjuracao, Documento,
-  ForaDoRequisito, LinhaDeFeature, FonteDeBoost, Rank, Registro, SlotAberto,
-  SlotDeSubclasse, Visao,
+  AC, Ataque, Ator, AumentoDePericia, Candidato, Concedido, ConcessaoDeAtor,
+  Conjuracao, Documento, ForaDoRequisito, LinhaDeFeature, FonteDeBoost, Rank,
+  Registro, SlotAberto, SlotDeSubclasse, Visao,
 } from "./tipos.ts";
 import { ATRIBUTOS, RANKS } from "./tipos.ts";
 import {
@@ -140,6 +140,7 @@ export class Personagem implements ContextoDePredicado {
 
   // atores e resto
   atores: Dict[] = [];
+  concessoes_de_ator: ConcessaoDeAtor[] = [];
   escolhas_de_feat: Dict[] = [];
   focus_pool = 0;
   ac: AC = {
@@ -1273,15 +1274,98 @@ export class Personagem implements ContextoDePredicado {
    * their modifiers and DCs just as you do", então bônus = nível + rank +
    * atributo, exatamente como o personagem.
    */
+  /**
+   * Quem, nesta ficha, CONCEDE um ator -- e em que nível.
+   *
+   * Sem isto o companheiro só entrava por `doc["atores"]` escrito à mão: pegar
+   * `Animal Companion` no nível 1 não mudava nada na ficha e não gerava aviso.
+   * O termo `grant_actor` vem do passo 7f do pipeline, derivado da prosa.
+   *
+   * A `classe` sai do NÍVEL em que o feat foi pego, e não de casar nome de
+   * classe com o id do feat -- `wb:feat/animal-companion` não carrega a classe
+   * no nome, e o cap da regra 17b depende dela.
+   */
+  private _concessoes_de_ator(): void {
+    const em_de = new Map<string, unknown>();
+    for (const e of this._todas_escolhas()) {
+      const pega = e["pega"];
+      if (ehStr(pega) && ehInt(e["em"]) && !em_de.has(pega)) em_de.set(pega, e["em"]);
+    }
+
+    const vistos = new Set<string>();
+    for (const [origem_id, reg] of this._feats_efetivos()) {
+      vistos.add(origem_id);
+      this._coletar_grant_actor(origem_id, reg, em_de.get(origem_id) ?? null);
+    }
+    for (const f of this.features) {
+      const fid = f["id"];
+      if (ehStr(fid) && !vistos.has(fid)) {
+        vistos.add(fid);
+        this._coletar_grant_actor(fid, dictDe(this.base.opcional(fid) ?? f),
+                                  em_de.get(fid) ?? null);
+      }
+    }
+  }
+
+  private _coletar_grant_actor(origem_id: string, reg: Dict, em: unknown): void {
+    for (const g of listaDe(reg["grants"])) {
+      if (!ehDict(g) || !("grant_actor" in g)) continue;
+      const ga = dictDe(g["grant_actor"]);
+      this.concessoes_de_ator.push({
+        origem: origem_id,
+        origem_nome: nomeOu(reg, origem_id),
+        em,
+        tipo: ehStr(ga["tipo"]) ? ga["tipo"] : "companheiro",
+        escolhe: ehStr(ga["escolhe"]) ? ga["escolhe"] : "animal-companion",
+        opcoes: listaDe(ga["opcoes"]).filter(ehStr),
+        classe: ehInt(em) ? (this.classe_do_nivel.get(em) ?? null) : null,
+        preenchida: false,
+        escolhido: null,
+      });
+    }
+  }
+
+  /**
+   * `concedido_por` + `em`. O `em` desempata quando o mesmo feat concede duas
+   * vezes (Mammoth Lord dá um segundo companheiro) e é opcional: ator antigo,
+   * sem `em`, casa com a primeira concessão daquela origem.
+   */
+  private _casar_ator_com_concessao(ator: Dict): ConcessaoDeAtor | null {
+    const origem = ator["concedido_por"];
+    if (!verdadeiro(origem)) return null;
+    let candidatas = this.concessoes_de_ator.filter(
+      (c) => c.origem === String(origem) && !c.preenchida);
+    if (ator["em"] !== undefined && ator["em"] !== null) {
+      const exatas = candidatas.filter((c) => c.em === ator["em"]);
+      if (exatas.length > 0) candidatas = exatas;
+    }
+    if (candidatas.length === 0) return null;
+    const escolhida = candidatas[0];
+    escolhida.preenchida = true;
+    const pega = listaDe(ator["escolhas"]).filter(ehDict)
+      .find((e) => e["slot"] === "animal")?.["pega"];
+    escolhida.escolhido = ehStr(pega) ? pega : null;
+    return escolhida;
+  }
+
   private _atores(): void {
+    this._concessoes_de_ator();
     for (const bruto of listaDe((this.doc as unknown as Dict)["atores"])) {
       const a = dictDe(bruto);
-      const [cid, nota] = this._classe_do_ator(a);
+      const concessao = this._casar_ator_com_concessao(a);
+      if (verdadeiro(a["concedido_por"]) && concessao === null) {
+        this.avisos.push(
+          `ator ${verdadeiro(a["nome"]) ? pyStr(a["nome"]) : ""}: `
+          + `\`concedido_por\` aponta para ${String(a["concedido_por"])}, que nao `
+          + `esta na ficha ou nao concede ator -- o feat pode ter sido removido depois`);
+      }
+      const [cid, nota] = this._classe_do_ator(a, concessao);
       const nivel_classe = cid !== null ? this.nivel_de(cid) : this.nivel;
       const ator: Dict = {
         tipo: obter(a, "tipo"),
         nome: verdadeiro(a["nome"]) ? a["nome"] : "",
         concedido_por: obter(a, "concedido_por"),
+        em: obter(a, "em"),
         classe: cid !== null ? nome(this.base.opcional(cid)) : null,
         nivel_de_classe: nivel_classe,
         nivel: this.cap_ator(nivel_classe),
@@ -1416,8 +1500,14 @@ export class Personagem implements ContextoDePredicado {
    * `concedido_por`; senão assume a classe de maior nível e AVISA -- chutar em
    * silêncio daria o cap errado sem ninguém perceber.
    */
-  private _classe_do_ator(ator: Dict): [string | null, string | null] {
+  private _classe_do_ator(ator: Dict,
+                          concessao: ConcessaoDeAtor | null = null,
+  ): [string | null, string | null] {
     if (verdadeiro(ator["classe"])) return [String(ator["classe"]), null];
+    // a concessão sabe em que NÍVEL o feat foi pego, e o nível diz a classe. É
+    // o único caminho que acerta num `wb:feat/animal-companion`, cujo id não
+    // carrega classe nenhuma.
+    if (concessao !== null && concessao.classe !== null) return [concessao.classe, null];
     const origem = ator["concedido_por"];
     if (verdadeiro(origem)) {
       for (const cid of this.ordem_de_classe) {
@@ -1870,6 +1960,17 @@ export class Personagem implements ContextoDePredicado {
       });
     }
 
+    // concessão de ator sem ator: o feat foi pego e a espécie não foi
+    // escolhida. `preenchida` é marcado em `_atores`, que já rodou.
+    for (const c of this.concessoes_de_ator) {
+      if (c.preenchida) continue;
+      abertos.push({
+        slot: c.tipo, em: (c.em ?? "criacao") as number | string,
+        kind: c.escolhe, escolhe: 1, origem: c.origem, opcoes_ids: c.opcoes,
+        rotulo: `${c.tipo} -- ${c.origem_nome}`,
+      });
+    }
+
     for (const slot of ["ancestralidade", "heranca", "background"] as const) {
       const atributo = { ancestralidade: this.ancestria, heranca: this.heranca,
                          background: this.background }[slot];
@@ -1947,6 +2048,35 @@ export class Personagem implements ContextoDePredicado {
         id: a, nome: a.toUpperCase(), level: null,
         atende: true, motivos: [], ja_pego: false,
       }));
+    }
+
+    if (slot === "companheiro") {
+      // As `opcoes` do concessor ORDENAM, não filtram: Drake Rider diz "riding
+      // drake, riding dragonet, or another animal companion", e mesmo o Rough
+      // Rider, que fixa o lobo, não some com o resto -- princípio zero aplicado
+      // à espécie.
+      const preferidas = new Set<string>();
+      const kinds = new Set<string>();
+      for (const c of this.concessoes_de_ator) {
+        if (c.tipo !== "companheiro") continue;
+        kinds.add(c.escolhe);
+        if (em === null || c.em === em) for (const o of c.opcoes) preferidas.add(o);
+      }
+      if (kinds.size === 0) kinds.add("animal-companion");
+      // `stats` separa ESPÉCIE de ESPECIALIZAÇÃO: dos 113 registros do kind, 17
+      // são Ambusher, Nimble, Savage e companhia -- graus que não têm stat
+      // block e não cabem neste slot. Elegibilidade de slot, não requisito.
+      const especies = [...this.base.por_id.values()]
+        .filter((r) => kinds.has(String(r.kind)) && verdadeiro(r["stats"]));
+      const escolha: Candidato[] = especies.map((r) => {
+        const [atende, motivos] = this.avaliar(r["requires"]);
+        return {
+          id: r.id, nome: nome(r), level: ehInt(r["level"]) ? r["level"] : null,
+          atende, motivos, ja_pego: false, sugerida: preferidas.has(r.id),
+        };
+      });
+      const ord = ordenarPor(escolha, (x) => [!x.sugerida, !x.atende, x.nome ?? ""]);
+      return limite ? ord.slice(0, limite) : ord;
     }
 
     let registros: Array<Registro | null>;
@@ -2451,7 +2581,8 @@ export class Personagem implements ContextoDePredicado {
       slots_abertos: this.slots_abertos(),
       slots,
       conjuracao: this.conjuracao,
-      atores: this.atores,
+      atores: this.atores as unknown as Ator[],
+      concessoes_de_ator: this.concessoes_de_ator,
       escolhas_de_feat: this.escolhas_de_feat,
       focus_pool: this.focus_pool,
       ac: this.ac,

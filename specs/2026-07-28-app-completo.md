@@ -372,6 +372,7 @@ Mudou a base? `pipeline/build.sh`, depois `app/sincronizar-base.sh`.
 | item | onde | por que nao foi feito |
 |---|---|---|
 | 56 dedicacoes sem mecanica (eram 61) | `base/relatorio_mecanica_dedicacao.md` | **a premissa mudou** -- ver abaixo |
+| familiar, eidolon e companheiro construct/undead | `base/relatorio_concessao_de_ator.md` | o companheiro ANIMAL foi fechado em 2026-07-29; os outros tres tem stat block proprio (ou nenhum) |
 | spellcasting de dedicacao de conjurador | idem | o motor nao tem modelo de spellcasting de arquetipo |
 | 54 armas sem dano | `base/relatorio_mecanica_equipamento.md` | 41 sao bombas (dano e do efeito), 36 sao modos de arma de combinacao |
 | 5 armaduras / 5 escudos | idem | declaram MATERIAL, nao item base (`Elven Chain`, `Mithral Shield`) |
@@ -407,6 +408,28 @@ promete, em vez de ficarem invisiveis.
 O que sobra depende de decisao de produto, nao de colheita: modelar companheiro
 e spellcasting de arquetipo no motor. Ate la, nem Pathbuilder nem prosa ajudam
 -- nao ha onde guardar a resposta.
+
+### 2026-07-29: companheiro concedido -- a segunda premissa errada
+"Falta modelar companheiro no motor" tambem era falso. O motor implementa
+companheiro INTEIRO nas duas linguagens (cap da regra 17b, maturidade
+young/mature/nimble/savage, Specialized, HP, AC, ataques, support). O que
+faltava era a ponta anterior: **nenhum registro da base dizia "eu concedo um
+companheiro"**, entao o ator so entrava por `doc["atores"]` escrito a mao e
+pegar `Animal Companion` no nivel 1 nao mudava nada -- sem slot, sem aviso.
+
+Fechado pela spec `specs/2026-07-29-companheiro-concedido.md`:
+
+| camada | o que entrou |
+|---|---|
+| dado | termo `grant_actor`, derivado da prosa em `derivar_concessao_de_ator.py` (passo **7f**) -- 12 concessores, 4 de divida (construct/undead), 1 vetado (Dragon Grip da ACESSO a especie, nao companheiro) |
+| motor | `_concessoes_de_ator`, casamento por `concedido_por` + `em`, slot `companheiro` em `slots_abertos`, `candidatos("companheiro")` com as 96 especies (as 17 sem stat block sao especializacao) |
+| regra 17b | o cap passa a sair da classe que CONCEDEU. Num `Ranger 3 / Fighter 5` o companheiro do Ranger dava 7 e agora da 5 |
+| app | o slot nasce no nivel do feat, a escolha grava em `doc.atores`, e a ficha ganha a aba do bicho |
+| prova | 9 assercoes novas no Python, fixture `ranger3-guerreiro5-companheiro-concedido` comparada campo a campo pelo TS, e `app/verificacao/verificar-companheiro.mjs` no navegador |
+
+Segue na divida, agora **declarada em relatorio**: companheiro construct (3
+feats) e undead (1), familiar (29 feats + Witch + 18 lessons + 16 patrons),
+eidolon (Summoner + 63 feats) e `access` a especie.
 
 ### Ponto de retomada
 Comparacao pratica com o Pathbuilder (`docs/plano-comparacao-pathbuilder.md`,

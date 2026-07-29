@@ -6,6 +6,78 @@ project: waybuilder
 
 ## 2026-07-29
 
+### Sessao | 11:45-12:40 | o Pathbuilder rodando local, e a primeira comparacao | igor + claude-code
+
+**A frente travada destravou por um `grep`.** O app local ficava no spinner
+"Loading" para sempre, e duas hipoteses ja tinham sido gastas (asset faltando,
+POST recusado). A causa estava no proprio bundle, visivel em
+`grep -o "location\.[a-zA-Z]*"`:
+
+    "www.pathbuilder2e.com" == window.location.hostname ? ... : pede permissao e ESPERA
+
+O app so monta em `pathbuilder2e.com`. **A saida nao foi mexer em `/etc/hosts`**:
+navega-se para a URL REAL e o Playwright serve tudo do disco por
+`page.route()` -- o hostname passa a bater sem que um byte saia da maquina, e o
+Cloudflare nunca e contatado. Tres detalhes custaram uma rodada cada: a rota
+registrada por ultimo ganha (o catch-all engolia a navegacao), o app redireciona
+`www` para o apex (glob com `www.` deixava a segunda requisicao vazar), e o
+dialogo de permissao de storage so aparece depois desse redirect. Faltava ainda
+`data_remastered71.txt` (3,4 MB) no disco -- e o que o app pede com "Remaster: On".
+
+Com ele de pe, a primeira comparacao real. Num Fighter 1, slot de Class Feat:
+
+| | waybuilder | pathbuilder | em comum |
+|---|---:|---:|---:|
+| Class Feats | 118 | 116 | 115 |
+| Dedication Feats | 226 | 220 | 198 |
+
+Dois achados:
+
+- **O Pathbuilder tambem MOSTRA o que nao se pode pegar**, em vermelho (106 de
+  116 na aba de classe). Principio zero confirmado por um segundo implementador,
+  de forma independente.
+- **12+ dedicacoes servidas com nome LEGADO** onde o remaster encurtou:
+  `Nantambu Chime-Ringer` x `Chime-Ringer`, `Jalmeri Heavenseeker` x
+  `Heavenseeker`, `Turpin Rowe Lumberjack` x `Lumberjack`... Isso da NOME a uma
+  parte dos 69 registros pre-remaster sem contrapartida -- item 84 do TODO.
+
+Ferramentas que ficam: `app/verificacao/pathbuilder-comum.mjs` (abre o app),
+`sonda-pathbuilder.mjs` (colhe as quatro abas do modal) e
+`motor/comparar_pathbuilder.py` (compara aba a aba, com normalizacao de nome --
+sem ela 11 dos 65 pontos eram grafia, nao regra).
+
+### Sessao | 11:00-11:45 | o companheiro que o motor sabia montar e ninguem podia pegar | igor + claude-code
+
+**A premissa "falta modelar companheiro" era falsa.** O motor implementava
+companheiro inteiro nas duas linguagens desde 2026-07-27 -- cap da regra 17b,
+maturidade, Specialized, HP, AC, ataques. O buraco estava uma ponta antes:
+nenhum registro da base dizia *"eu concedo um companheiro"*, entao o ator so
+existia se alguem editasse `doc["atores"]` a mao. Pegar `Animal Companion` no
+nivel 1 nao mudava nada na ficha e nao gerava aviso.
+
+Fechado nas quatro camadas, com spec antes do codigo
+(`specs/2026-07-29-companheiro-concedido.md`):
+
+- **dado** -- termo novo `grant_actor`, derivado da prosa oficial em
+  `derivar_concessao_de_ator.py` (passo **7f**). 12 concessores; 4 de divida
+  (construct/undead, que nao tem stat block na base); 1 vetado (`Dragon Grip`
+  da ACESSO a especie Riding Drake, nao um companheiro). A ancora em "you
+  gain" derruba de 23 para 12 -- `Captain Dedication` e `Necrologist` citam
+  companheiro para PROIBI-LO, e outros cinco falam do bicho que voce ja tem
+- **motor** -- `_concessoes_de_ator` casa por `concedido_por` + `em`, abre slot
+  `companheiro` e serve 96 especies (as outras 17 do kind sao especializacao,
+  sem stat block, e nao cabem no slot)
+- **regra 17b** -- o cap passa a sair da classe que CONCEDEU, e nao da de maior
+  nivel: num `Ranger 3 / Fighter 5` o companheiro do Ranger dava 7 e agora da 5
+- **app** -- slot no nivel do feat, escolha gravada em `doc.atores`, aba do bicho
+  na ficha com atributos, HP, CA, sentidos, salvaguardas, ataques e support
+
+Prova nas quatro camadas: 9 assercoes novas no Python (97 -> 106), fixture
+`ranger3-guerreiro5-companheiro-concedido` comparada campo a campo pelo TS (110
+testes), 9 portoes verdes no build completo, e
+`app/verificacao/verificar-companheiro.mjs` no navegador, com screenshot em
+`docs/screenshots/`.
+
 ### Sessao | 07:20-09:00 | a validacao que faltava achou o que os portoes nao viam | igor + claude-code
 
 **Rodar o pipeline inteiro era o passo pendente, e ele nao estava limpo.** Os
