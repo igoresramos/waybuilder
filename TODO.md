@@ -157,5 +157,9 @@ items:
   id: 93
   date: '2026-07-29'
   priority: alta
+- desc: 'FEAT QUE ABRE SLOT DE FEAT -- levantado pelo Igor em 2026-07-29, MAPEADO e nao resolvido. `Natural Ambition` (ancestria humana) da um class feat de nivel 1 EXTRA; `General Training` da um general feat; `Ancestral Paragon`, um ancestry feat. Hoje o motor nao abre slot nenhum por causa deles -- `_slots_de_feat` deriva os slots so da progressao de classe e da regra 2 (Free Archetype), entao o feat e pego e nao entrega nada, e o jogador nao tem onde escolher o feat prometido. MAPEADO por varredura da prosa: 11 registros, sendo 3 de ancestry, 1 de class, 2 de general, 5 de skill. Lista: advanced-general-training (general); ancestral-paragon (ancestry, 1st-level); general-training (general, 1st-level); hag-claws (ancestry); inscribed-with-elders-deeds (ancestry, 5th-level); magical-knowledge (skill); mortal-possibility (skill); natural-ambition (class, 1st-level); rogue-dedication (skill); skill-mastery (skill); skill-mastery-rogue (skill). CUIDADO NA VARREDURA, ja custou uma medicao errada: ''gain a class FEATURE that grants...'' casa com ''class feat'' por prefixo -- o padrao precisa de `feat\b(?!ure)`, senao os 20 `*-weapon-expertise` entram como falso positivo. O conserto natural e o mesmo desenho de `pericias_livres` e `escolha_de_grant`, feitos hoje: o feat declara o slot que abre, `slots_abertos` oferece, e a higiene cobra enquanto nao for escolhido. O slot precisa carregar o TIPO (class/skill/general/ancestry) e o NIVEL maximo do feat (`Natural Ambition` da um de nivel 1, nao um de qualquer nivel).'
+  id: 94
+  date: '2026-07-29'
+  priority: alta
 promoted: []
 ---
