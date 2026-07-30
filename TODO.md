@@ -13,6 +13,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -43,19 +44,16 @@ items:
   id: 43
   date: '2026-07-29'
   priority: alta
-- desc: 'COBERTURA DE EFEITO POR SUBCLASSE -- levantamento completo, 8 eixos seguem zerados e a causa
-    NAO e falha de extracao. Com efeito: muse 5/5, patron 16/24, oracle mystery 10/12, thaumaturge
-    implement 8/10, gunslinger way 5/6, rogue racket 5/6, magus hybrid-study 2/8, swashbuckler style
-    2/6, wizard arcane-thesis 1/6, cleric doctrine 1/3. ZERADOS: barbarian instinct (16 opcoes, 27
-    feats dependem), champion cause (13, 9 feats), wizard arcane-school (23), witch lesson (20),
-    psychic conscious-mind (6) e subconscious-mind (4), ranger hunters-edge (4, 14 feats), alchemist
-    research-field (4). Medido: das 90 opcoes desses eixos, 62 NAO TEM rule element no Foundry (sao
-    catalogo do AoN, o Foundry nao modela) e as 28 restantes usam ItemAlteration (60), DamageAlteration
-    (12), DamageDice (7) -- mecanica de dano e de ataque. A prosa tambem nao ajuda: so 8 de 77 tem
-    padrao regular. CONCLUSAO: o que falta e majoritariamente MECANICA DE COMBATE, que o principio
-    zero poe fora de escopo (o app nao roda mecanica). O que importa para montar ficha -- proficiencia,
-    pericia, feat e spell concedidos -- ja foi convertido. Decidir se vale um interpretador parcial
-    so para dano de rage e afins'
+- desc: 'PARCIALMENTE RESOLVIDO 2026-07-30. O eixo `instinct` do Barbaro saiu da lista de ZERADOS
+    pelo lado que importa: escolher instinto agora LIBERA os feats de instinto (commit 7884391ca,
+    spec instinto-com-dois-ids) -- antes nenhum dos 25 liberava, porque o requires citava `wb:class-feature/animal-instinct`
+    e a tela oferecia `wb:instinct/animal`. ATENCAO A PREMISSA: a conclusao original deste item (''o
+    que falta e mecanica de combate, que o principio zero poe fora de escopo'') repousa numa leitura
+    que o IGOR DERRUBOU em 2026-07-27: ''eu tinha lido o principio zero como mecanica de combate
+    fica de fora e ESTAVA ERRADO. O app e para construir o personagem inteiro... TODOS os numeros
+    na ficha.'' O que sobra (dano de rage, DamageDice, DamageAlteration) e mecanica CONDICIONAL,
+    que e outra familia -- essa sim ja recusada COM numero duas vezes (ItemAlteration e RollOption
+    em 30/07, `strike-damage` em 30/07). Reavaliar sob o escopo corrigido antes de fechar.'
   id: 42
   date: '2026-07-29'
   priority: media
@@ -113,33 +111,16 @@ items:
   id: 68
   date: '2026-07-29'
   priority: media
-- desc: 'MEDIDO DE NOVO 2026-07-29, com a anatomia do balaio. 16 de 27 classes tem o eixo `outras-opcoes`,
-    somando 265 opcoes. Piores: Inventor 52, Alchemist 33, Thaumaturge 30, Cleric 18, Exemplar 18.
-    O balaio mistura TRES coisas de naturezas diferentes, e por isso nao sai com uma regra so: (a)
-    PROGRESSAO concedida a todos -- o bloco de nivel 1 do Alchemist tem `advanced-alchemy`, `formula-book`,
-    `infused-reagents`, `quick-alchemy` e `versatile-vials`, que todo Alquimista recebe, nao escolhe;
-    idem `anathema-cleric`/`deity-cleric`/`initial-creed` no Clerigo. (b) VARIANTE DETERMINADA por
-    uma sub-escolha ja feita -- `field-discovery-bomber/chirurgeon/mutagenist/toxicologist` e a mesma
-    feature especializada pelo research field ja escolhido, e `first-doctrine-cloistered-cleric`
-    vs `-warpriest` pela doutrina. (c) escolha paralela de verdade. TESTADA a regra ''sufixo bate
-    com opcao de outro eixo da mesma classe'' para separar (b): pega 70 das 265, entao NAO domina
-    -- 195 sobram. Nao implementei heuristica parcial: erraria nos 11 eixos que hoje funcionam. O
-    caminho provavel e (a) primeiro, que e o maior e o mais objetivo: opcao que a classe concede
-    a TODOS nao e opcao. || CORRIGIDO 2026-07-29 (auditoria): eram 25 de 27 classes com o eixo-balaio;
-    hoje sao 16 de 27. aplicar_subclasses.py ja tem o fix por (eixo, nivel) mais a regra ''1 candidato
-    = progressao'', e Fighter e Monk -- os piores exemplos citados -- estao corrigidos. O caso que
-    sobra e o Alchemist, que mistura Advanced Alchemy (progressao) com Advanced Vials (sub-escolha
-    de verdade). || TEXTO ORIGINAL: EIXO `outras-opcoes` E UM BALAIO -- 25 das 27 classes tem um.
-    Achado 2026-07-27 ao investigar por que um Guerreiro 4 saia com `Warrior of Legend`: o Fighter
-    nao tem subclasse no remaster, mas `aplicar_subclasses.py` cria um eixo generico e joga ali tudo
-    que sobrou. O resultado mistura opcao de subclasse de verdade com feature de progressao normal:
-    monk nivel 15 com `Greater Weapon Specialization` como se fosse escolha, champion no nivel ZERO,
-    alchemist com `Advanced Alchemy` ao lado de `Advanced Vials (Bomber)`. Efeitos: (a) toda ficha
-    dessas classes ganha um aviso falso `falta escolher outras-opcoes`; (b) feature de progressao
-    so aparece se for `escolhida`; (c) desde o item 62 essas features tambem CONCEDEM (Warrior of
-    Legend da Diehard), entao o erro de dado agora vira numero na ficha. Consertar no pipeline: separar
-    eixo real de resto-da-progressao. Os 2 eixos legitimos por classe (racket, instinct, muse...)
-    estao corretos e nao entram nisto'
+- desc: 'RE-MEDIDO 2026-07-30, e a hipotese (a) do item NAO se confirma: ZERO das 265 opcoes de `outras-opcoes`
+    esta tambem na `progressao` da classe -- nao ha sobreposicao a limpar. O balaio se REPETE POR
+    NIVEL (o Alquimista tem 6 blocos `outras-opcoes`, um por degrau), e o bloco de nivel 1 dele mistura
+    tres coisas: feature que a CADEIA de grants ja concede (`formula-book` e `versatile-vials` aparecem
+    em `p.features` de um Alquimista 1 sem ele escolher nada), gemeo legado/remaster (`infused-reagents`
+    virou `versatile-vials`) e variante por sub-escolha (`field-discovery-bomber` etc). A regra do
+    sufixo pegou 9 pares no eixo `instinct` (item 42, resolvido) e nao ajuda aqui. SEGUE SENDO CURADORIA
+    CASO A CASO, e o proprio item ja decidira nao implementar heuristica parcial para nao quebrar
+    os 11 eixos que funcionam. Proximo passo objetivo: para cada opcao do balaio, checar se a cadeia
+    de grants ja a concede -- se concede, nao e escolha.'
   id: 69
   date: '2026-07-29'
   priority: media
