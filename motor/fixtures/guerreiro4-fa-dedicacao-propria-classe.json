@@ -893,10 +893,10 @@
    ]
   },
   "avisos": [
+   "boosts de atributo: 6 declarado(s) de 9 a que o personagem tem direito -- faltam 3. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4)",
    "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4",
    "Fighter Dedication: falta escolher `attribute` (AbilityStr, AbilityDex)",
-   "Fighter Dedication: falta escolher `skill` (Acrobatics, Athletics)",
-   "boosts de atributo: 6 declarado(s) de 9 a que o personagem tem direito -- faltam 3. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4)"
+   "Fighter Dedication: falta escolher `skill` (Acrobatics, Athletics)"
   ],
   "background": "Warrior",
   "boosts": {

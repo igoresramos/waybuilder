@@ -816,8 +816,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Wizard",
-    "delta": 2,
-    "orcamento": 2
+    "delta": 6,
+    "orcamento": 6
    }
   ]
  },
@@ -872,7 +872,7 @@
   "avisos": [
    "Wizard: falta escolher `outras-opcoes` (14 opcoes)",
    "wb:feat/basic-arcana: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.basicArcana}`) -- pendente, nao e alvo ausente",
-   "pericias livres: 0 declarada(s) de 2 a que o personagem tem direito -- faltam 2"
+   "pericias livres: 0 declarada(s) de 6 a que o personagem tem direito -- faltam 6"
   ],
   "background": "Hermit",
   "boosts": {
@@ -1206,7 +1206,7 @@
     "total": 2
    }
   ],
-  "pericias_livres": 2,
+  "pericias_livres": 6,
   "proficiencias": {
    "advanced": "untrained",
    "arcana": "trained",
@@ -1305,16 +1305,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 2,
+    "escolhe": 6,
     "fontes": [
      {
       "classe": "Wizard",
-      "delta": 2,
-      "orcamento": 2
+      "delta": 6,
+      "orcamento": 6
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (2 a escolher)",
+    "rotulo": "pericias treinadas (6 a escolher)",
     "slot": "pericias_livres"
    },
    {

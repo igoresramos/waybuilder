@@ -1477,6 +1477,46 @@ checar([a for a in sem_licenca.avisos if "fontes de" in a],
 checar(len(sem_licenca.atores) == len(autorizado.atores),
        "e o aviso NAO bloqueia -- a ficha continua igual")
 
+# -- INT no orcamento de pericia (spec int-no-orcamento-de-pericia) ---------
+# "Trained in a number of additional skills equal to 3 plus your Intelligence
+# modifier" -- a prosa de cada classe. `_proficiencias` rodava ANTES de
+# `_atributos`, entao nao havia INT para somar.
+print("\n-- INT no orcamento de pericia --")
+
+def mago(boosts, extra=()):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+         {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+         {"em": 1, "slot": "boosts_livres", "pega": list(boosts)}] + list(extra))
+
+neutro = mago(["str", "dex", "con", "wis"])
+alto = mago(["int", "int", "int", "int"])
+checar(alto.pericias_livres > neutro.pericias_livres,
+       "INT alto da MAIS pericias livres que INT neutro",
+       f"{neutro.pericias_livres} -> {alto.pericias_livres}")
+checar(alto.pericias_livres - neutro.pericias_livres
+       == alto.modificadores["int"] - neutro.modificadores["int"],
+       "e a diferenca e exatamente a diferenca do modificador",
+       f"{alto.pericias_livres - neutro.pericias_livres}")
+checar(all(d["orcamento"] >= 0 for d in alto.pericias_livres_detalhe),
+       "o orcamento nunca fica negativo")
+
+# o INT entra UMA vez por personagem, nao uma por classe
+multi = personagem(
+    [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+     {"em": 1, "slot": "boosts_livres", "pega": ["int", "int", "int", "int"]}]
+    + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/wizard"}
+       for n in range(1, 4)]
+    + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/rogue"}
+       for n in range(4, 7)])
+mod_int = multi.modificadores["int"]
+com_int = [d for d in multi.pericias_livres_detalhe if d["orcamento"] > 0]
+checar(sum(1 for d in multi.pericias_livres_detalhe
+           if d["classe"] == "Wizard") == 1
+       and multi.pericias_livres < neutro.pericias_livres + 2 * mod_int,
+       "e o multiclasse NAO soma o INT duas vezes",
+       f"{multi.pericias_livres} com mod {mod_int}: {multi.pericias_livres_detalhe}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

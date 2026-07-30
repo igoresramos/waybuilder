@@ -217,8 +217,12 @@ export class Personagem implements ContextoDePredicado {
     // de features e feat na lista de feats efetivos, e as duas coisas são lidas
     // na derivação de proficiência, HP e requisito.
     this._grants_em_cadeia();
-    this._proficiencias();
+    // `_atributos` ANTES de `_proficiencias`: o orçamento de perícia é "N plus
+    // your Intelligence modifier", e com a ordem antiga o INT ainda não existia
+    // quando a conta era feita. Medido nos dois sentidos -- não há ciclo.
+    // Spec: `specs/2026-07-30-int-no-orcamento-de-pericia.md`
     this._atributos();
+    this._proficiencias();
     this._hp();
     this._slots_de_feat();
     this._conjuracao();
@@ -594,7 +598,12 @@ export class Personagem implements ContextoDePredicado {
       for (const g of this._grants_de(classe)) {
         livre = Math.max(livre, inteiro(dictDe(dictDe(g)["skill_training"])["free"]));
       }
-      // o INT também dá perícias livres, mas isso é recurso de personagem
+      // "a number of additional skills equal to N plus your Intelligence
+      // modifier" -- a prosa de cada classe. O INT entra UMA vez por
+      // personagem: somar em cada classe daria a um Mago 3/Ladino 3 o dobro.
+      if (cid === this.primeira_classe) {
+        livre = Math.max(0, livre + (this.modificadores["int"] ?? 0));
+      }
       const delta = Math.max(0, livre - concedidas);
       concedidas += delta;
       detalhe.push({ classe: nomeOu(classe, cid), orcamento: livre, delta });

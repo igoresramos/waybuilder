@@ -14,9 +14,9 @@
    "ficha": "_teste-validacao-bonus-de-pericia",
    "nivel": 5,
    "hp": 68,
-   "avisos": 1,
+   "avisos": 2,
    "fora_do_requisito": 0,
-   "slots_abertos": 13
+   "slots_abertos": 14
   },
   {
    "ficha": "_teste-validacao-familiar-concedido",

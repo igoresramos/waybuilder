@@ -753,8 +753,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Fighter",
-    "delta": 3,
-    "orcamento": 3
+    "delta": 4,
+    "orcamento": 4
    }
   ]
  },
@@ -788,9 +788,9 @@
   },
   "avisos": [
    "wb:feat/rogue-dedication: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.skillFeat}`) -- pendente, nao e alvo ausente",
-   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
-   "Rogue Dedication: falta escolher `rogueDedication` (Stealth, Thievery)",
-   "boosts de atributo: 4 declarado(s) de 8 a que o personagem tem direito -- faltam 4. Fontes: Elf (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4)"
+   "boosts de atributo: 4 declarado(s) de 8 a que o personagem tem direito -- faltam 4. Fontes: Elf (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4)",
+   "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4",
+   "Rogue Dedication: falta escolher `rogueDedication` (Stealth, Thievery)"
   ],
   "background": "Warrior",
   "boosts": {
@@ -1114,7 +1114,7 @@
     "total": 2
    }
   ],
-  "pericias_livres": 3,
+  "pericias_livres": 4,
   "proficiencias": {
    "advanced": "trained",
    "fortitude": "expert",
@@ -1273,16 +1273,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 3,
+    "escolhe": 4,
     "fontes": [
      {
       "classe": "Fighter",
-      "delta": 3,
-      "orcamento": 3
+      "delta": 4,
+      "orcamento": 4
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (3 a escolher)",
+    "rotulo": "pericias treinadas (4 a escolher)",
     "slot": "pericias_livres"
    },
    {

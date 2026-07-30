@@ -802,8 +802,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Magus",
-    "delta": 2,
-    "orcamento": 2
+    "delta": 4,
+    "orcamento": 4
    }
   ]
  },
@@ -840,8 +840,8 @@
   },
   "avisos": [
    "Magus: falta escolher `hybrid-study` (8 opcoes)",
-   "pericias livres: 0 declarada(s) de 2 a que o personagem tem direito -- faltam 2",
-   "boosts de atributo: 8 declarado(s) de 13 a que o personagem tem direito -- faltam 5. Fontes: Human (1), Human (1), Acolyte (1), Acolyte (1), Magus (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)"
+   "boosts de atributo: 8 declarado(s) de 13 a que o personagem tem direito -- faltam 5. Fontes: Human (1), Human (1), Acolyte (1), Acolyte (1), Magus (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)",
+   "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4"
   ],
   "background": "Acolyte",
   "boosts": {
@@ -1212,7 +1212,7 @@
     "total": 2
    }
   ],
-  "pericias_livres": 2,
+  "pericias_livres": 4,
   "proficiencias": {
    "advanced": "untrained",
    "arcana": "trained",
@@ -1373,16 +1373,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 2,
+    "escolhe": 4,
     "fontes": [
      {
       "classe": "Magus",
-      "delta": 2,
-      "orcamento": 2
+      "delta": 4,
+      "orcamento": 4
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (2 a escolher)",
+    "rotulo": "pericias treinadas (4 a escolher)",
     "slot": "pericias_livres"
    },
    {

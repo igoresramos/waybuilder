@@ -812,8 +812,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Wizard",
-    "delta": 2,
-    "orcamento": 2
+    "delta": 5,
+    "orcamento": 5
    }
   ]
  },
@@ -887,8 +887,8 @@
    "Wizard: falta escolher `arcane-school` (23 opcoes)",
    "Wizard: falta escolher `arcane-thesis` (5 opcoes)",
    "Wizard: falta escolher `outras-opcoes` (14 opcoes)",
-   "pericias livres: 0 declarada(s) de 2 a que o personagem tem direito -- faltam 2",
-   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Scholar (1), Scholar (1), criacao (4 livres) (4), nivel 5 (4)"
+   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Scholar (1), Scholar (1), criacao (4 livres) (4), nivel 5 (4)",
+   "pericias livres: 0 declarada(s) de 5 a que o personagem tem direito -- faltam 5"
   ],
   "background": "Scholar",
   "boosts": {
@@ -1229,7 +1229,7 @@
     "total": 2
    }
   ],
-  "pericias_livres": 2,
+  "pericias_livres": 5,
   "proficiencias": {
    "advanced": "untrained",
    "arcana": "trained",
@@ -1384,16 +1384,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 2,
+    "escolhe": 5,
     "fontes": [
      {
       "classe": "Wizard",
-      "delta": 2,
-      "orcamento": 2
+      "delta": 5,
+      "orcamento": 5
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (2 a escolher)",
+    "rotulo": "pericias treinadas (5 a escolher)",
     "slot": "pericias_livres"
    },
    {

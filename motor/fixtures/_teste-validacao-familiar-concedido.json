@@ -759,8 +759,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Witch",
-    "delta": 3,
-    "orcamento": 3
+    "delta": 5,
+    "orcamento": 5
    }
   ]
  },
@@ -810,8 +810,8 @@
    "Witch: falta escolher `lesson` (19 opcoes)",
    "Witch: falta escolher `outras-opcoes` (4 opcoes)",
    "Witch: falta escolher `patron` (16 opcoes)",
-   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "boosts de atributo: 4 declarado(s) de 8 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Scholar (1), Scholar (1), criacao (4 livres) (4)",
+   "pericias livres: 0 declarada(s) de 5 a que o personagem tem direito -- faltam 5",
    "Witch: a tradicao vem da escolha de subclasse, que ainda nao foi feita -- slots sem tradicao ate resolver"
   ],
   "background": "Scholar",
@@ -1148,7 +1148,7 @@
     "total": 1
    }
   ],
-  "pericias_livres": 3,
+  "pericias_livres": 5,
   "proficiencias": {
    "advanced": "untrained",
    "fortitude": "trained",
@@ -1275,16 +1275,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 3,
+    "escolhe": 5,
     "fontes": [
      {
       "classe": "Witch",
-      "delta": 3,
-      "orcamento": 3
+      "delta": 5,
+      "orcamento": 5
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (3 a escolher)",
+    "rotulo": "pericias treinadas (5 a escolher)",
     "slot": "pericias_livres"
    },
    {

@@ -1044,11 +1044,11 @@
    ]
   },
   "avisos": [
+   "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Gnome (1), Street Urchin (1), Street Urchin (1), criacao (4 livres) (4), nivel 5 (4)",
    "pericias livres: 0 declarada(s) de 7 a que o personagem tem direito -- faltam 7",
    "Marshal Dedication: falta escolher `marshal-skill` (Diplomacy, Diplomacy, Intimidation, Intimidation)",
    "Canny Acumen: falta escolher `cannyAcumen` (SavesFortitude, SavesReflex, SavesWill, PerceptionLabel)",
-   "Armor Proficiency: falta escolher `None` (LightShort, MediumShort, HeavyShort)",
-   "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Gnome (1), Street Urchin (1), Street Urchin (1), criacao (4 livres) (4), nivel 5 (4)"
+   "Armor Proficiency: falta escolher `None` (LightShort, MediumShort, HeavyShort)"
   ],
   "background": "Street Urchin",
   "boosts": {

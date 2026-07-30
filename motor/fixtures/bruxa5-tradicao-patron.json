@@ -778,8 +778,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Witch",
-    "delta": 3,
-    "orcamento": 3
+    "delta": 7,
+    "orcamento": 7
    }
   ]
  },
@@ -817,8 +817,8 @@
   "avisos": [
    "Witch: falta escolher `lesson` (19 opcoes)",
    "Witch: falta escolher `outras-opcoes` (4 opcoes)",
-   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
-   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Hermit (1), Hermit (1), criacao (4 livres) (4), nivel 5 (4)"
+   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Hermit (1), Hermit (1), criacao (4 livres) (4), nivel 5 (4)",
+   "pericias livres: 0 declarada(s) de 7 a que o personagem tem direito -- faltam 7"
   ],
   "background": "Hermit",
   "boosts": {
@@ -1181,7 +1181,7 @@
     "total": 0
    }
   ],
-  "pericias_livres": 3,
+  "pericias_livres": 7,
   "proficiencias": {
    "advanced": "untrained",
    "fortitude": "expert",
@@ -1335,16 +1335,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 3,
+    "escolhe": 7,
     "fontes": [
      {
       "classe": "Witch",
-      "delta": 3,
-      "orcamento": 3
+      "delta": 7,
+      "orcamento": 7
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (3 a escolher)",
+    "rotulo": "pericias treinadas (7 a escolher)",
     "slot": "pericias_livres"
    },
    {

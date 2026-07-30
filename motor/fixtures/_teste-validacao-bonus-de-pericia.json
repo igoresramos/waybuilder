@@ -742,8 +742,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Fighter",
-    "delta": 3,
-    "orcamento": 3
+    "delta": 4,
+    "orcamento": 4
    }
   ]
  },
@@ -779,7 +779,8 @@
    ]
   },
   "avisos": [
-   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Kholo (1), Hermit (1), Hermit (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)"
+   "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Kholo (1), Hermit (1), Hermit (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)",
+   "pericias livres: 3 declarada(s) de 4 a que o personagem tem direito -- faltam 1"
   ],
   "background": "Hermit",
   "boosts": {
@@ -1118,7 +1119,7 @@
     "total": 2
    }
   ],
-  "pericias_livres": 3,
+  "pericias_livres": 4,
   "proficiencias": {
    "advanced": "trained",
    "athletics": "trained",
@@ -1266,6 +1267,20 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (4 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 1,
+    "fontes": [
+     {
+      "classe": "Fighter",
+      "delta": 4,
+      "orcamento": 4
+     }
+    ],
+    "kind": "skill",
+    "rotulo": "pericias treinadas (1 a escolher)",
+    "slot": "pericias_livres"
    },
    {
     "em": 1,

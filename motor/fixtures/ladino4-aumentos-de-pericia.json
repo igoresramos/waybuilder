@@ -861,8 +861,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Rogue",
-    "delta": 7,
-    "orcamento": 7
+    "delta": 8,
+    "orcamento": 8
    }
   ]
  },
@@ -942,9 +942,9 @@
   },
   "avisos": [
    "wb:feat/natural-ambition: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.naturalAmbition}`) -- pendente, nao e alvo ausente",
-   "pericias livres: 0 declarada(s) de 7 a que o personagem tem direito -- faltam 7",
-   "Terrain Stalker: falta escolher `terrain-stalker` (Rubble, Snow, Underbrush)",
-   "boosts de atributo: 6 declarado(s) de 8 a que o personagem tem direito -- faltam 2. Fontes: Human (1), Human (1), Scout (1), Scout (1), criacao (4 livres) (4)"
+   "boosts de atributo: 6 declarado(s) de 8 a que o personagem tem direito -- faltam 2. Fontes: Human (1), Human (1), Scout (1), Scout (1), criacao (4 livres) (4)",
+   "pericias livres: 0 declarada(s) de 8 a que o personagem tem direito -- faltam 8",
+   "Terrain Stalker: falta escolher `terrain-stalker` (Rubble, Snow, Underbrush)"
   ],
   "background": "Scout",
   "boosts": {
@@ -1231,7 +1231,7 @@
     "total": 11
    }
   ],
-  "pericias_livres": 7,
+  "pericias_livres": 8,
   "proficiencias": {
    "advanced": "untrained",
    "athletics": "trained",
@@ -1398,16 +1398,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 7,
+    "escolhe": 8,
     "fontes": [
      {
       "classe": "Rogue",
-      "delta": 7,
-      "orcamento": 7
+      "delta": 8,
+      "orcamento": 8
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (7 a escolher)",
+    "rotulo": "pericias treinadas (8 a escolher)",
     "slot": "pericias_livres"
    },
    {

@@ -773,8 +773,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Rogue",
-    "delta": 7,
-    "orcamento": 7
+    "delta": 8,
+    "orcamento": 8
    }
   ]
  },
@@ -828,8 +828,8 @@
   },
   "avisos": [
    "Rogue: falta escolher `racket` (6 opcoes)",
-   "pericias livres: 0 declarada(s) de 7 a que o personagem tem direito -- faltam 7",
-   "boosts de atributo: 4 declarado(s) de 8 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), criacao (4 livres) (4)"
+   "boosts de atributo: 4 declarado(s) de 8 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), criacao (4 livres) (4)",
+   "pericias livres: 0 declarada(s) de 8 a que o personagem tem direito -- faltam 8"
   ],
   "background": "Warrior",
   "boosts": {
@@ -1118,7 +1118,7 @@
     "total": 2
    }
   ],
-  "pericias_livres": 7,
+  "pericias_livres": 8,
   "proficiencias": {
    "advanced": "untrained",
    "fortitude": "trained",
@@ -1297,16 +1297,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 7,
+    "escolhe": 8,
     "fontes": [
      {
       "classe": "Rogue",
-      "delta": 7,
-      "orcamento": 7
+      "delta": 8,
+      "orcamento": 8
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (7 a escolher)",
+    "rotulo": "pericias treinadas (8 a escolher)",
     "slot": "pericias_livres"
    },
    {

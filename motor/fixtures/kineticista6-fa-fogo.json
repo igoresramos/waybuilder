@@ -863,8 +863,8 @@
   "pericias_livres_detalhe": [
    {
     "classe": "Kineticist",
-    "delta": 3,
-    "orcamento": 3
+    "delta": 2,
+    "orcamento": 2
    }
   ]
  },
@@ -918,8 +918,8 @@
    ]
   },
   "avisos": [
-   "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
-   "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Leshy (1), Herbalist (1), Herbalist (1), criacao (4 livres) (4), nivel 5 (4)"
+   "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Leshy (1), Herbalist (1), Herbalist (1), criacao (4 livres) (4), nivel 5 (4)",
+   "pericias livres: 0 declarada(s) de 2 a que o personagem tem direito -- faltam 2"
   ],
   "background": "Herbalist",
   "boosts": {
@@ -1249,7 +1249,7 @@
     "total": 2
    }
   ],
-  "pericias_livres": 3,
+  "pericias_livres": 2,
   "proficiencias": {
    "advanced": "untrained",
    "fortitude": "expert",
@@ -1393,16 +1393,16 @@
    },
    {
     "em": "criacao",
-    "escolhe": 3,
+    "escolhe": 2,
     "fontes": [
      {
       "classe": "Kineticist",
-      "delta": 3,
-      "orcamento": 3
+      "delta": 2,
+      "orcamento": 2
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (3 a escolher)",
+    "rotulo": "pericias treinadas (2 a escolher)",
     "slot": "pericias_livres"
    },
    {

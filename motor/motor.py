@@ -203,8 +203,15 @@ class Personagem:
         # lista de features e feat na lista de feats efetivos, e as duas coisas
         # sao lidas na derivacao de proficiencia, HP e requisito.
         self._grants_em_cadeia()
-        self._proficiencias()
+        # `_atributos` ANTES de `_proficiencias`: o orcamento de pericia e
+        # "N plus your Intelligence modifier", e com a ordem antiga o INT ainda
+        # nao existia quando a conta era feita -- um Mago de INT 18 tinha
+        # direito a 6 pericias e o motor oferecia 2. Medido nos dois sentidos:
+        # `_atributos` nao le nada que `_proficiencias` produz, e
+        # `_proficiencias` nao le `atributos` nem `modificadores`.
+        # Spec: `specs/2026-07-30-int-no-orcamento-de-pericia.md`
         self._atributos()
+        self._proficiencias()
         self._hp()
         self._slots_de_feat()
         self._conjuracao()
@@ -534,7 +541,14 @@ class Personagem:
             livre = 0
             for g in self._grants_de(classe):
                 livre = max(livre, int((g.get("skill_training") or {}).get("free") or 0))
-            # o INT tambem da pericias livres, mas isso e recurso de personagem
+            # "a number of additional skills equal to N plus your Intelligence
+            # modifier" -- a prosa de cada classe. O INT entra UMA vez por
+            # personagem e nao uma por classe: somar em cada uma daria a um Mago
+            # 3/Ladino 3 o dobro. Entra na primeira, que e quem concede as
+            # pericias iniciais. Modificador negativo REDUZ (a prosa nao tem
+            # piso); o piso e do total, em zero, que e aritmetica.
+            if cid == self.primeira_classe:
+                livre = max(0, livre + int(self.modificadores.get("int", 0)))
             delta = max(0, livre - concedidas)
             concedidas += delta
             detalhe.append({"classe": classe.get("name", cid),
