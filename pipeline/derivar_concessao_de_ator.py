@@ -84,6 +84,18 @@ FEATURE_DE_ATOR = {
 }
 
 
+# A fonte declara as PROPRIAS excecoes a regra de um ator por vez: "Contrary to
+# the usual rules for animal companions, this feat can grant you a SECOND animal
+# companion" (Beastmaster). Sao 6 dos 30 concessores -- Beastmaster, Drake
+# Rider, Faithful Steed, Mammoth Lord, Emissary Familiar e Familiar (Witch).
+# Sem esta marca, uma regra geral de exclusao reprovaria os seis, e com ela a
+# regra vale por padrao e cede onde o livro manda.
+# Spec: `specs/2026-07-30-segundo-ator.md`
+P_ADICIONAL = re.compile(
+    r"\b(?:second|additional|another|more than one)\s+"
+    r"(?:young\s+)?(?:animal companion|familiar|eidolon)\b", re.I)
+
+
 def corpo(texto: str) -> str:
     """So o que vem depois do separador -- antes dele mora o PREREQUISITO."""
     return texto.split("---", 1)[1] if "---" in texto else texto
@@ -155,8 +167,10 @@ def main() -> int:
                 outro_tipo = ("eidolon", "eidolon")
         if outro_tipo:
             tipo, escolhe = outro_tipo
-            r.setdefault("grants", []).append(
-                {"grant_actor": {"tipo": tipo, "escolhe": escolhe}})
+            ga = {"tipo": tipo, "escolhe": escolhe}
+            if P_ADICIONAL.search(texto):
+                ga["adicional"] = True
+            r.setdefault("grants", []).append({"grant_actor": ga})
             prov = r.setdefault("prov", {})
             prov["grants.grant_actor"] = f"derivado:prosa-{tipo}"
             prov.setdefault("grants", f"derivado:prosa-{tipo}")
@@ -184,6 +198,8 @@ def main() -> int:
         g = {"tipo": "companheiro", "escolhe": "animal-companion"}
         if opcoes:
             g["opcoes"] = opcoes
+        if P_ADICIONAL.search(texto):
+            g["adicional"] = True
 
         tinha = bool(r.get("grants") or [])
         r.setdefault("grants", []).append({"grant_actor": g})
