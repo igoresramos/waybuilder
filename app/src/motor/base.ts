@@ -115,8 +115,19 @@ export class Base {
     return r;
   }
 
+  /**
+   * Como `get`, mas devolve `null` em vez de erro -- e SEGUINDO aliases.
+   *
+   * Sem o alias, ficha salva que cite um id que a fusão aposentou perde o item
+   * em SILÊNCIO: `wb:equipment/cloak-of-elvenkind-greater` virou
+   * `cloak-of-illusions-greater` e o inventário parava de achar. Isso
+   * contradiz a promessa do motor: "mudança de regra re-deriva em vez de
+   * invalidar ficha salva". Spec: `specs/2026-07-30-grau-legado-nao-fundido.md`
+   */
   opcional(wb_id: unknown): Registro | null {
     if (!ehStr(wb_id)) return null;
-    return this.por_id.get(wb_id) ?? null;
+    const direto = this.por_id.get(wb_id);
+    if (direto !== undefined) return direto;
+    return this.por_id.get(this.resolver(wb_id) as string) ?? null;
   }
 }

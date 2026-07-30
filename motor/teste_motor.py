@@ -1264,8 +1264,16 @@ checar(stealth(com_itens([CAPA])) - stealth(com_itens([])) == 2,
        f"{stealth(com_itens([]))} -> {stealth(com_itens([CAPA]))}")
 checar(next(l for l in com_itens([CAPA]).pericias
             if l["chave"] == "stealth")["bonus"][0]["origem"]
-       == "Cloak of Elvenkind (Greater)",
+       == "Cloak of Illusions (Greater)",
        "e a origem sai nomeada na linha da pericia")
+# CAPA e o id LEGADO de proposito: o Remaster renomeou Cloak of Elvenkind para
+# Cloak of Illusions, e a ficha salva de um jogador continua citando o antigo.
+# `Base.opcional` segue `aliases` justamente para isso -- sem ele o item some do
+# inventario em silencio.
+checar(BASE.opcional(CAPA) is not None
+       and BASE.opcional(CAPA)["id"] == "wb:equipment/cloak-of-illusions-greater",
+       "ficha salva com id APOSENTADO ainda acha o item, pelo alias",
+       f"{BASE.opcional(CAPA)}")
 
 guardado = personagem(
     [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]

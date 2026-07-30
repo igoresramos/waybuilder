@@ -114,6 +114,12 @@ echo "== 7c. aplicar aliases do remaster dentro de requires e subclasses =="
 # do Mago saia com uma opcao apontando para o nada.
 python3 aplicar_aliases_em_requires.py
 
+echo "== 7c2. grau legado que a fusao principal nao alcanca =="
+# O AoN declara `remaster_id` so no doc BASE, entao `Cloak of Elvenkind
+# (Greater)` ficava de pe ao lado de `Cloak of Illusions (Greater)` -- mesmo
+# item, nivel 12, duas vezes. Depende dos aliases que a fusao (7) escreveu.
+python3 fundir_graus_legados.py
+
 echo "== 7d. uma opcao por nome em cada eixo de sub-escolha =="
 # a mesma causa do Campeao existe como `wb:cause/justice` e como
 # `wb:class-feature/justice`, em kinds diferentes -- a fusao nao os ve como

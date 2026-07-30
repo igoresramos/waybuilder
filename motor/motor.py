@@ -164,7 +164,21 @@ class Base:
         return r
 
     def opcional(self, wb_id: str) -> dict | None:
-        return self.por_id.get(wb_id)
+        """Como `get`, mas devolve `None` em vez de erro -- e SEGUINDO aliases.
+
+        Sem o alias, ficha salva que cite um id que a fusao aposentou perde o
+        item em SILENCIO: `wb:equipment/cloak-of-elvenkind-greater` virou
+        `cloak-of-illusions-greater` e o inventario simplesmente parava de
+        achar. Isso contradiz a promessa escrita no `Personagem`: "mudanca de
+        regra re-deriva em vez de invalidar ficha salva".
+
+        `resolver()` ja existia para isso e nao era usado aqui.
+        Spec: `specs/2026-07-30-grau-legado-nao-fundido.md`
+        """
+        direto = self.por_id.get(wb_id)
+        if direto is not None:
+            return direto
+        return self.por_id.get(self.resolver(wb_id))
 
 
 class Personagem:
