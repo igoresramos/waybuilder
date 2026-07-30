@@ -5,6 +5,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -84,38 +85,6 @@ items:
   id: 46
   date: '2026-07-29'
   priority: media
-- desc: 'PARCIAL, re-medido 2026-07-29 (auditoria). (1) spell.level IMPLEMENTADO: 1.655 de 1.655,
-    Fireball = 3 -- essa parte esta fechada. (2) PENDENTE: os 66 registros sem `traits` saem com
-    a CHAVE OMITIDA, e a decisao de 27/07 dizia que deveriam sair como lista vazia. (5) e o item
-    59, nao duplicar aqui. || TEXTO ORIGINAL: DECIDIDO 2026-07-27 medindo as fontes, nao por opiniao.
-    (1) SPELL PASSA A EMITIR `level`: as TRES fontes usam `level` e NENHUMA usa `rank` -- AoN 2.461/2.461,
-    Foundry 1.802/1.802 (`system.level.value`), pf2etools 2.055/2.055; Fireball e `level: 3` nas
-    tres. `rank` e a palavra da PROSA remaster, nenhuma fonte de dados adotou como campo. A base
-    esta sozinha contra as tres. Emitir `level` e manter `rank` como espelho. (2) `traits` AUSENTE
-    VIRA `[]`: sao 66 registros (39 class-feature, 27 class) e as fontes concordam que nao ha trait
-    -- Foundry 0 de 66, AoN 2 de 66. E ausencia real, nao desconhecimento, entao `[]` e a representacao
-    certa; os 2 do AoN sao falha de extracao a corrigir junto. (3) `source` POR SUBCAMPO: DESCARTADO.
-    O Foundry nao publica pagina (0 de 28.788 docs; o bloco `publication` so tem license/remaster/title)
-    e dos 1.518 registros sem `source.page` 1.441 nem tem xref.aon. A fusao por subcampo recuperaria
-    QUATRO paginas -- nao paga mexer no reconciliador. (4) VOCABULARIO DE `prov`: manter o atual
-    e documentar as formas, nao trocar; e convencao interna, nenhuma fonte opina, e sao 17.488 ocorrencias
-    na convencao viva. (5) `mechanized`: ver item 59, que e o achado de verdade. Texto original:
-    DECISAO DE SCHEMA PENDENTE (Igor decide): adotar ou nao a spec v2, que nasceu na linha paralela
-    de 2026-07-27 e nao entrou aqui. Sao 5 pontos, todos com teste ja escrito e marcado expectedFailure
-    em pipeline/testes/ -- cada um vira verde sozinho no dia em que for adotado, e o unittest acusa
-    ''unexpected success'' pedindo a retirada do marcador. (1) `mechanized` (hoje em 19.738 registros,
-    e igual a bool(grants) em 100% deles) daria lugar a `grants_completos` + `requires_parseado`,
-    com null = nao se aplica -- mexe no motor; (2) spell teria `level` espelhando `rank` (hoje 1.638
-    de 1.649 spells tem level null; nao quebra o motor, que nao indexa magia por level); (3) `traits`
-    ausente sairia como [] em vez de null (66 registros); (4) vocabulario fechado de `prov` (`<fonte>`
-    ou `<fonte>~inferido:<regra>`) contra o atual, que usa `inferida:livro`, `derivado:gate-de-nivel`,
-    `aon+foundry` -- 17.488 ocorrencias na convencao atual; (5) `source` fundido por SUBCAMPO em
-    vez de disputado inteiro, para nao perder a pagina que so uma fonte tem (1.518 registros sem
-    source.page). Nada disso e bug: e schema. Enquanto nao houver decisao, a v1 e a lei e a suite
-    fica verde'
-  id: 53
-  date: '2026-07-29'
-  priority: media
 - desc: 'RE-MEDIDO 2026-07-29, e o item mudou de gravidade: e COSMETICO, nao numero errado. Contra
     o dump do AoN, 65 class-features nao existem na base por nome (nem como alias -- conferido, licao
     do item 18). Das 65, 35 sao LINHAS DE TABELA DE PROGRESSAO (''ability boost'', ''ancestry feat'',
@@ -180,16 +149,16 @@ items:
   id: 69
   date: '2026-07-29'
   priority: media
-- desc: 'PENDENCIAS MENORES DO REVIEW ADVERSARIAL DE 2026-07-27 (as graves ja foram consertadas no
-    mesmo dia). (a) ESCOLHA DE NIVEL FUTURO tem tres tratamentos no mesmo motor: `_atributos` trata
-    planejamento como caso normal e ignora, enquanto `_higiene_de_slot` e `_aumentos_de_pericia`
-    tratam como erro; alem disso a contagem `len(usados) > len(niveis)` nao filtra por nivel, entao
-    quem planeja o nivel 8 numa ficha de nivel 4 leva aviso. Decidir a semantica: ou o documento
-    so descreve o presente, ou o motor recorta por nivel em TODA checagem. (b) `em: "criacao"` (string)
-    desliga a checagem de nivel da higiene de slot -- e correto para ancestria/background, mas silencia
-    feat posto em `criacao` por engano. (c) `_subclasse_de` e sensivel a ordem do array de escolhas
-    e alimenta `_dc_de_conjuracao` -- pre-existente, so muda texto, mas e a ultima dependencia de
-    ordem que sobrou depois do conserto de `ordem_de_classe`. Relatorio completo em docs/2026-07-27_review-adversarial-grants.md'
+- desc: 'PARTE (a) CONCLUIDA 2026-07-30 (commit 884d14b51, spec specs/2026-07-30-escolha-de-nivel-futuro.md).
+    Eram tres semanticas no mesmo motor, e a divergencia chegava ao NUMERO: `_atributos` nao aplicava
+    o boost futuro mas `_aumentos_de_pericia` APLICAVA o aumento futuro -- um Guerreiro 4 ficava
+    trained numa pericia por um aumento do nivel 8. Agora o motor recorta por nivel na checagem E
+    na aplicacao, e o recortado fica contado em `escolhas_de_nivel_futuro`. SOBRAM (b) e o resto:
+    (b) `em: "criacao"` (string) desliga a checagem de nivel da higiene de slot -- e correto para
+    ancestria/background, mas silencia feat posto em `criacao` por engano. (c) `_subclasse_de` e
+    sensivel a ordem do array de escolhas e alimenta `_dc_de_conjuracao` -- pre-existente, so muda
+    texto, mas e a ultima dependencia de ordem que sobrou depois do conserto de `ordem_de_classe`.
+    Relatorio completo em docs/2026-07-27_review-adversarial-grants.md'
   id: 73
   date: '2026-07-29'
   priority: media
