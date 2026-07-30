@@ -1031,3 +1031,13 @@ pontos a menos em todo ataque marcial. O item supunha que precisaria raspar a
 tabela HTML do AoN; nao precisava, a prosa por classe responde. E metade do
 trabalho ja estava feita (Bard, Inventor, Ranger e Swashbuckler ja tinham
 variante correta).
+
+**Fila de media, primeira leva.** Item 92: o INT nao entrava no orcamento de
+pericia porque `_proficiencias` rodava antes de `_atributos` -- Mago 4 foi de 2
+para 6 pericias, e 28 dos 29 fixtures mudaram. Item 72(2): 47 valores de
+`proficiency` eram expressao do VTT e viravam `untrained` em silencio; um
+Azarketi Guerreiro 13 saia untrained nas armas que o feat eleva a master.
+`untrained` errado e pior que ausencia, porque afirma. E item 47(c), que estava
+marcado como decisao do Igor e nao era: o Beastmaster diz por escrito "this feat
+can grant you a second animal companion", entao bloquear seria reprovar o que o
+livro autoriza. 6 dos 30 concessores trazem a excecao na prosa.

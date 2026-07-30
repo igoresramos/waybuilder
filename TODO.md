@@ -4,6 +4,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -177,34 +178,6 @@ items:
     eixo real de resto-da-progressao. Os 2 eixos legitimos por classe (racket, instinct, muse...)
     estao corretos e nao entram nisto'
   id: 69
-  date: '2026-07-29'
-  priority: media
-- desc: 'PARTE (1) CONCLUIDA 2026-07-30 (spec specs/2026-07-30-bonus-de-pericia-e-salva.md). SOBRA
-    A PARTE (2), a `proficiency` com expressao. ACHADO QUE MUDOU O ITEM: o total de pericia NAO EXISTIA
-    no motor -- era calculado em `PainelDireito.tsx:94` (`nivel + RANK_BONUS[rank] + mod`), a mesma
-    conta em tres lugares do componente. Numero que nasce em React nao tem oraculo, nao tem paridade
-    e nao tem onde receber `flat_modifier`; era essa a causa real de os bonus nunca chegarem na ficha,
-    e nao a falta de codigo de aplicacao. Entao a ordem foi: primeiro `visao.pericias` e `visao.salvas`
-    no motor (com rank, atributo, bonus e detalhe, mesma forma do `ac`), depois os bonus. O diff
-    dos 24 fixtures saiu com 4.850 insercoes e ZERO delecoes -- prova de que o numero nao mudou de
-    valor, so de lugar. A regra de tipo do PF2e entrou junto: mesmo tipo nao empilha (vale o maior),
-    tipos diferentes somam, untyped empilha com tudo. Sem ela tres itens de +1 de circunstancia dariam
-    +3 onde o RAW da +1. Selector que o motor nao modela e CONTADO em `bonus_ignorados`, nao descartado
-    calado. `nomeDeLore` tambem migrou da tela (`Lore: Azlant`, e nao `Azlant Lore`). Ficam de fora,
-    declarados na spec: os 1.247 condicionais (dependem de contexto de acao), os 51 dinamicos, os
-    41 `value` que sao formula do VTT, e `initiative`, que o motor nao tem. || FALTA A PARTE (2),
-    texto original: flat_modifier NAO-HP E PROFICIENCY COM EXPRESSAO -- escopo medido 2026-07-27,
-    decisao pendente. (1) 1.709 ocorrencias de `flat_modifier` em 1.485 registros (equipment 806,
-    feat 591, weapon 146, heritage 98) e o motor so aplica selector `hp`. Classificacao: 80% seriam
-    numero de ficha, 16% mecanica de combate (fora do escopo), 4% duvidoso. MAS 1.247 das 1.709 (73%)
-    sao `condicional: true` -- bonus estreito do tipo ''+2 em Atletismo so para Empurrar'' --, entao
-    aplicar o grupo inteiro INFLARIA a ficha parada. So o incondicional e seguro destrava 15 feats
-    e 1 dedicacao: custo quase zero (mesma logica ja usada para hp), retorno pequeno. (2) 57 ocorrencias
-    de `proficiency` cujo valor nao e rank literal e sim expressao do Foundry, em 17 feats -- e sao
-    DOIS padroes so: espelhar o rank de desarmado (7 registros) e o padrao de dedicacao de armadura
-    (6, entre eles `sentinel-dedication`). Um primitivo declarativo de proficiencia ESPELHADA resolve
-    15 dos 17 sem avaliar expressao. Numeros conferidos de forma independente. Relatorio em docs/2026-07-27_escopo-flat-modifier.md'
-  id: 72
   date: '2026-07-29'
   priority: media
 - desc: 'PENDENCIAS MENORES DO REVIEW ADVERSARIAL DE 2026-07-27 (as graves ja foram consertadas no
