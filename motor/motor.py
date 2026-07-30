@@ -182,6 +182,8 @@ class Personagem:
         # e `candidatos()` avalia milhares de feats por slot -- varrer classes,
         # features e feats a cada chamada custaria caro por nada.
         self._remaps_cache: list | None = None
+        self._bonus_memo: dict | None = None
+        self.bonus_ignorados: dict = {}
         self._derivar()
 
     # -- escolhas -----------------------------------------------------------
@@ -1815,7 +1817,21 @@ class Personagem:
 
         rank = self.proficiencias.get(categoria, "untrained")
         prof = (self.nivel + RANK_BONUS[rank]) if rank != "untrained" else 0
-        total = 10 + dex_usada + prof + item_bonus + potencia
+
+        # o `item_bonus` da armadura E um bonus de item, e os 6 grants
+        # incondicionais de `ac` da base tambem sao (Bands of Force, Assassin's
+        # Bracers). Somar um sobre o outro daria +2 a quem veste Couro e Bands
+        # of Force, onde o RAW da +1 -- bonus do mesmo tipo nao empilham. Por
+        # isso a armadura entra como CONTENDOR, e nao como parcela.
+        # A runa de potencia soma ao bonus da armadura ANTES da disputa: pelo
+        # RAW ela aumenta o bonus de item, nao e um segundo bonus de item.
+        contendores = []
+        if item_bonus or potencia:
+            contendores.append(("item", item_bonus + potencia, nome))
+        extras = self._bonus_incondicionais().get("ac", [])
+        contendores += list(extras)
+        bonus_de_item = self._melhor_por_tipo(contendores)
+        total = 10 + dex_usada + prof + bonus_de_item
 
         # a penalidade de armadura so vale se a FOR nao alcanca o minimo
         aplica_penalidade = (isinstance(forca, int)
@@ -1827,7 +1843,11 @@ class Personagem:
             "categoria": categoria,
             "rank": rank,
             "detalhe": f"10 + DEX {dex_usada:+d} + prof {prof} "
-                       f"({rank}, nivel {self.nivel}) + item {item_bonus + potencia}",
+                       f"({rank}, nivel {self.nivel}) + item {bonus_de_item}",
+            # de onde veio cada contendor, para a ficha poder explicar por que
+            # dois itens de +1 nao viraram +2
+            "bonus": [{"tipo": t, "valor": v, "origem": o}
+                      for t, v, o in contendores],
             "dex_perdida": max(0, dex - dex_usada),
             "check_penalty": penalidade if aplica_penalidade else 0,
             "escudo": ({"nome": escudos[0]["registro"].get("name"),
@@ -3029,7 +3049,20 @@ class Personagem:
 
         `value` nao-inteiro (41 formulas do VTT e 1 nulo) e ignorado: avaliar
         formula do Foundry e o interpretador inteiro, outro item.
+
+        MEMOIZADO, e nao por desempenho. A ultima linha atribui
+        `self.bonus_ignorados` em vez de acumular, e ha tres chamadores em
+        ordem: `_defesa`, `_pericias_e_salvas` e `_velocidade`. Os dois do meio
+        GRAVAM as chaves `selector nao modelado: X` depois de chamar, e o
+        terceiro reatribuia e apagava as duas -- nenhum personagem tinha uma
+        unica chave dessas. O contador que existe para tornar a perda silenciosa
+        impossivel estava ele proprio silenciado, e foi assim que o bonus de
+        `ac` sumiu sem aparecer nem como ignorado.
+
+        Spec: `specs/2026-07-30-bonus-de-item-equipado.md`
         """
+        if self._bonus_memo is not None:
+            return self._bonus_memo
         fora = Counter()
         por_selector: dict[str, list] = defaultdict(list)
         fontes = [(self.base.get(c).get("name", c), self.base.get(c))
@@ -3040,6 +3073,19 @@ class Personagem:
         fontes += [(f.get("nome"), f) for f in self.features]
         fontes += [(feat.get("name", i), feat)
                    for i, feat, _ in self._feats_efetivos()]
+        # o inventario equipado, que faltava: sao 293 grants incondicionais e
+        # aplicaveis em `equipment` (261), `armor` (11), `shield` (11) e
+        # `weapon` (10) -- religion 26, intimidation 25, diplomacy 22,
+        # athletics 20, e o `ac` 6. Todos em selectors que o motor ja soma. A
+        # resistencia vinda de item chegou na ficha porque `_resistencias` monta
+        # esta mesma lista COM o inventario; aqui a linha nao existia, e por
+        # isso vestir um item de +1 em Furtividade nao mudava Furtividade.
+        # `equipado` e a condicao: espada na mochila nao ajuda ninguem.
+        for entrada in (self.doc.get("inventario") or []):
+            if entrada.get("equipado"):
+                reg = self.base.opcional(str(entrada.get("item") or ""))
+                if reg:
+                    fontes.append((reg.get("name"), reg))
         for nome, reg in fontes:
             for g in self._grants_de(reg):
                 if not isinstance(g, dict):
@@ -3062,6 +3108,7 @@ class Personagem:
                         continue
                     por_selector[chave].append((fm.get("type"), valor, nome))
         self.bonus_ignorados = dict(fora)
+        self._bonus_memo = por_selector
         return por_selector
 
     def _pericias_e_salvas(self) -> None:
@@ -3140,6 +3187,13 @@ class Personagem:
         # `skill-check` generico, `strike-damage`) o motor nao modela. Contar e
         # o que impede a perda silenciosa -- foi ela que deixou 462 bonus fora
         # da ficha sem ninguem ver.
+        #
+        # ATE 30/07 ESTE COMENTARIO MENTIA sobre o `ac`: `_hp` de fato lia
+        # `flat_modifier`, mas `_defesa` terminava em
+        # `10 + dex + prof + item_bonus + potencia` e nao lia nada. O bonus era
+        # coletado, excluido do contador por esta linha, e sumia sem aparecer
+        # nem como ignorado -- a pior forma da perda, porque o proprio mecanismo
+        # anti-perda a autorizava. Agora `_defesa` disputa de verdade.
         OUTRO_PASSO = {"hp", "ac"}
         for sel, lista in bonus.items():
             if sel in consumidos or sel in OUTRO_PASSO:

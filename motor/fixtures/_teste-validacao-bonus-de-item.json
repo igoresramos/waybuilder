@@ -9,6 +9,7 @@
    "wb:feat/dragon-spit",
    "wb:feat/general-training",
    "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
    "wb:feat/keep-up-appearances",
    "wb:feat/know-oneself",
    "wb:feat/natural-ambition",
@@ -18,7 +19,6 @@
    "wb:feat/unconventional-weaponry",
    "wb:feat/viking-shieldbearer",
    "wb:feat/witch-warden",
-   "wb:feat/haughty-obstinacy",
    "wb:feat/adapted-cantrip",
    "wb:feat/tupilaq-carver",
    "wb:feat/adaptive-adept",
@@ -51,6 +51,7 @@
    "wb:feat/dragon-spit",
    "wb:feat/general-training",
    "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
    "wb:feat/keep-up-appearances",
    "wb:feat/know-oneself",
    "wb:feat/natural-ambition",
@@ -60,7 +61,6 @@
    "wb:feat/unconventional-weaponry",
    "wb:feat/viking-shieldbearer",
    "wb:feat/witch-warden",
-   "wb:feat/haughty-obstinacy",
    "wb:feat/adapted-cantrip",
    "wb:feat/tupilaq-carver",
    "wb:feat/adaptive-adept",
@@ -93,6 +93,7 @@
    "wb:feat/dragon-spit",
    "wb:feat/general-training",
    "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
    "wb:feat/keep-up-appearances",
    "wb:feat/know-oneself",
    "wb:feat/natural-ambition",
@@ -102,7 +103,6 @@
    "wb:feat/unconventional-weaponry",
    "wb:feat/viking-shieldbearer",
    "wb:feat/witch-warden",
-   "wb:feat/haughty-obstinacy",
    "wb:feat/adapted-cantrip",
    "wb:feat/tupilaq-carver",
    "wb:feat/adaptive-adept",
@@ -128,22 +128,20 @@
    "wb:feat/stubborn-persistence"
   ],
   "class_feat@1": [
-   "wb:feat/animal-companion-ranger",
-   "wb:feat/crossbow-ace",
-   "wb:feat/hunted-shot",
-   "wb:feat/initiate-warden",
-   "wb:feat/monster-hunter",
-   "wb:feat/twin-takedown",
-   "wb:feat/gravity-weapon",
-   "wb:feat/animal-companion",
-   "wb:feat/heal-companion",
+   "wb:feat/nimble-dodge",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/youre-next",
+   "wb:feat/overextending-feint",
+   "wb:feat/plant-evidence",
    "wb:feat/acrobat-dedication",
    "wb:feat/agent-of-all-holds",
    "wb:feat/alchemist-dedication",
    "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/alter-ego-dedication",
-   "wb:feat/animal-empathy-ranger",
    "wb:feat/animal-trainer-dedication",
    "wb:feat/animist-dedication",
    "wb:feat/archaeologist-dedication",
@@ -161,97 +159,99 @@
    "wb:feat/bloodrager-dedication",
    "wb:feat/bounty-hunter-dedication",
    "wb:feat/bright-lion-dedication",
+   "wb:feat/brutal-beating",
    "wb:feat/bullet-dancer-dedication",
    "wb:feat/campfire-chronicler-dedication",
    "wb:feat/captain-dedication",
    "wb:feat/cathartic-mage-dedication",
    "wb:feat/cavalier-dedication",
    "wb:feat/celebrity-dedication",
-   "wb:feat/champion-dedication"
+   "wb:feat/champion-dedication",
+   "wb:feat/chelaxian-scion-dedication"
   ],
   "class_feat@2": [
-   "wb:feat/animal-companion-ranger",
-   "wb:feat/crossbow-ace",
-   "wb:feat/hunted-shot",
-   "wb:feat/initiate-warden",
-   "wb:feat/monster-hunter",
-   "wb:feat/twin-takedown",
+   "wb:feat/nimble-dodge",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/youre-next",
    "wb:feat/alkenstar-agent-dedication",
-   "wb:feat/animal-empathy-ranger",
-   "wb:feat/animist-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
-   "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
-   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
    "wb:feat/campfire-chronicler-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
-   "wb:feat/cleric-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/curse-maelstrom-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
-   "wb:feat/druid-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/duelist-dedication",
-   "wb:feat/edgewatch-detective-dedication",
    "wb:feat/exemplar-dedication",
    "wb:feat/familiar-master-dedication",
-   "wb:feat/favored-terrain",
+   "wb:feat/fanes-fourberie",
    "wb:feat/first-frost",
-   "wb:feat/game-hunter-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
    "wb:feat/gunslinger-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/horizon-walker-dedication",
-   "wb:feat/juggler-dedication"
+   "wb:feat/juggler-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/living-vessel-dedication",
+   "wb:feat/loremaster-dedication",
+   "wb:feat/marshal-dedication",
+   "wb:feat/martial-artist-dedication",
+   "wb:feat/mind-smith-dedication",
+   "wb:feat/minor-magic"
   ],
   "class_feat@4": [
-   "wb:feat/animal-companion-ranger",
-   "wb:feat/crossbow-ace",
-   "wb:feat/hunted-shot",
-   "wb:feat/initiate-warden",
-   "wb:feat/monster-hunter",
-   "wb:feat/twin-takedown",
+   "wb:feat/nimble-dodge",
+   "wb:feat/trap-finder",
+   "wb:feat/tumble-behind",
+   "wb:feat/tumble-behind-rogue",
+   "wb:feat/twin-feint",
+   "wb:feat/youre-next",
    "wb:feat/alkenstar-agent-dedication",
-   "wb:feat/animal-empathy-ranger",
-   "wb:feat/animist-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
-   "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
-   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
    "wb:feat/campfire-chronicler-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
-   "wb:feat/cleric-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/curse-maelstrom-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
-   "wb:feat/druid-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/duelist-dedication",
-   "wb:feat/edgewatch-detective-dedication",
    "wb:feat/exemplar-dedication",
    "wb:feat/familiar-master-dedication",
-   "wb:feat/favored-terrain",
+   "wb:feat/fanes-fourberie",
    "wb:feat/first-frost",
-   "wb:feat/game-hunter-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
    "wb:feat/gunslinger-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/horizon-walker-dedication",
-   "wb:feat/juggler-dedication"
+   "wb:feat/juggler-dedication",
+   "wb:feat/linguist-dedication",
+   "wb:feat/living-vessel-dedication",
+   "wb:feat/loremaster-dedication",
+   "wb:feat/marshal-dedication",
+   "wb:feat/martial-artist-dedication",
+   "wb:feat/mind-smith-dedication",
+   "wb:feat/minor-magic"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -297,134 +297,94 @@
   ],
   "free_archetype@2": [
    "wb:feat/alkenstar-agent-dedication",
-   "wb:feat/animist-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
-   "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
-   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
    "wb:feat/campfire-chronicler-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
-   "wb:feat/cleric-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/curse-maelstrom-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
-   "wb:feat/druid-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/duelist-dedication",
-   "wb:feat/edgewatch-detective-dedication",
    "wb:feat/exemplar-dedication",
    "wb:feat/familiar-master-dedication",
    "wb:feat/first-frost",
-   "wb:feat/game-hunter-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
    "wb:feat/gunslinger-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/horizon-walker-dedication",
    "wb:feat/juggler-dedication",
-   "wb:feat/kineticist-dedication",
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
+   "wb:feat/marshal-dedication",
    "wb:feat/martial-artist-dedication",
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
-   "wb:feat/oozemorph-dedication"
+   "wb:feat/oozemorph-dedication",
+   "wb:feat/overwatch-dedication",
+   "wb:feat/pactbinder-dedication",
+   "wb:feat/pathfinder-agent-dedication",
+   "wb:feat/pirate-dedication",
+   "wb:feat/ranger-dedication",
+   "wb:feat/reanimator-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alkenstar-agent-dedication",
-   "wb:feat/animist-dedication",
    "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
-   "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
-   "wb:feat/bounty-hunter-dedication",
+   "wb:feat/bright-lion-dedication",
    "wb:feat/campfire-chronicler-dedication",
    "wb:feat/celebrity-dedication",
    "wb:feat/chelaxian-scion-dedication",
    "wb:feat/chronoskimmer-dedication",
    "wb:feat/clawdancer-dedication",
-   "wb:feat/cleric-dedication",
+   "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/curse-maelstrom-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
-   "wb:feat/druid-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/duelist-dedication",
-   "wb:feat/edgewatch-detective-dedication",
    "wb:feat/exemplar-dedication",
    "wb:feat/familiar-master-dedication",
    "wb:feat/first-frost",
-   "wb:feat/game-hunter-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
    "wb:feat/gunslinger-dedication",
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/horizon-walker-dedication",
    "wb:feat/juggler-dedication",
-   "wb:feat/kineticist-dedication",
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
+   "wb:feat/marshal-dedication",
    "wb:feat/martial-artist-dedication",
    "wb:feat/mind-smith-dedication",
    "wb:feat/mummy-dedication",
-   "wb:feat/oozemorph-dedication"
+   "wb:feat/oozemorph-dedication",
+   "wb:feat/overwatch-dedication",
+   "wb:feat/pactbinder-dedication",
+   "wb:feat/pathfinder-agent-dedication",
+   "wb:feat/pirate-dedication",
+   "wb:feat/ranger-dedication",
+   "wb:feat/reanimator-dedication"
   ],
   "general_feat@1": [
-   "wb:feat/adopted-ancestry",
-   "wb:feat/all-of-the-animal",
-   "wb:feat/armor-proficiency",
-   "wb:feat/breath-control",
-   "wb:feat/canny-acumen",
-   "wb:feat/civil-service",
-   "wb:feat/cooperative-leadership",
-   "wb:feat/crush-dissent",
-   "wb:feat/diehard",
-   "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
-   "wb:feat/experienced-tracker",
-   "wb:feat/fast-recovery",
-   "wb:feat/feather-step",
-   "wb:feat/forager",
-   "wb:feat/fortified-fiefs",
-   "wb:feat/incredible-initiative",
-   "wb:feat/insider-trading",
-   "wb:feat/kingdom-assurance",
-   "wb:feat/muddle-through",
-   "wb:feat/pet",
-   "wb:feat/practical-magic",
-   "wb:feat/pull-together",
-   "wb:feat/ride",
-   "wb:feat/shield-block",
-   "wb:feat/skill-training-kingdom",
-   "wb:feat/stifle-flames",
-   "wb:feat/survey-wildlife",
-   "wb:feat/terrain-expertise",
-   "wb:feat/toughness",
-   "wb:feat/weapon-proficiency",
    "wb:feat/additional-lore",
-   "wb:feat/assurance",
-   "wb:feat/fleet",
-   "wb:feat/acrobatic-performer",
-   "wb:feat/acupuncturist",
-   "wb:feat/alchemical-crafting",
-   "wb:feat/arcane-sense",
+   "wb:feat/adopted-ancestry",
    "wb:feat/armor-assist",
-   "wb:feat/bargain-hunter"
-  ],
-  "general_feat@2": [
-   "wb:feat/adopted-ancestry",
-   "wb:feat/all-of-the-animal",
    "wb:feat/armor-proficiency",
+   "wb:feat/assurance",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
@@ -433,11 +393,12 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
-   "wb:feat/experienced-tracker",
-   "wb:feat/fast-recovery",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
    "wb:feat/feather-step",
-   "wb:feat/forager",
+   "wb:feat/fleet",
    "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
@@ -445,28 +406,27 @@
    "wb:feat/pet",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
    "wb:feat/ride",
    "wb:feat/shield-block",
+   "wb:feat/skill-training",
    "wb:feat/skill-training-kingdom",
-   "wb:feat/stifle-flames",
-   "wb:feat/survey-wildlife",
-   "wb:feat/terrain-expertise",
+   "wb:feat/terrain-stalker",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
-   "wb:feat/predict-weather",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
-   "wb:feat/fleet",
+   "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense"
   ],
-  "general_feat@4": [
+  "general_feat@2": [
+   "wb:feat/additional-lore",
    "wb:feat/adopted-ancestry",
-   "wb:feat/all-of-the-animal",
+   "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
+   "wb:feat/assurance",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
@@ -475,11 +435,12 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dubious-knowledge",
-   "wb:feat/experienced-tracker",
-   "wb:feat/fast-recovery",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
    "wb:feat/feather-step",
-   "wb:feat/forager",
+   "wb:feat/fleet",
    "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
    "wb:feat/incredible-initiative",
    "wb:feat/insider-trading",
    "wb:feat/kingdom-assurance",
@@ -487,39 +448,80 @@
    "wb:feat/pet",
    "wb:feat/practical-magic",
    "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
    "wb:feat/ride",
    "wb:feat/shield-block",
+   "wb:feat/skill-training",
    "wb:feat/skill-training-kingdom",
-   "wb:feat/stifle-flames",
-   "wb:feat/survey-wildlife",
-   "wb:feat/terrain-expertise",
+   "wb:feat/terrain-stalker",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
    "wb:feat/automatic-knowledge",
-   "wb:feat/predict-weather",
+   "wb:feat/intimidating-glare",
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal"
+  ],
+  "general_feat@4": [
+   "wb:feat/additional-lore",
+   "wb:feat/adopted-ancestry",
+   "wb:feat/armor-assist",
+   "wb:feat/armor-proficiency",
+   "wb:feat/assurance",
+   "wb:feat/breath-control",
+   "wb:feat/canny-acumen",
+   "wb:feat/civil-service",
+   "wb:feat/cooperative-leadership",
+   "wb:feat/crush-dissent",
+   "wb:feat/diehard",
+   "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/feather-step",
+   "wb:feat/fleet",
+   "wb:feat/fortified-fiefs",
+   "wb:feat/group-coercion",
+   "wb:feat/incredible-initiative",
+   "wb:feat/insider-trading",
+   "wb:feat/kingdom-assurance",
+   "wb:feat/muddle-through",
+   "wb:feat/pet",
+   "wb:feat/practical-magic",
+   "wb:feat/pull-together",
+   "wb:feat/quick-coercion",
+   "wb:feat/ride",
+   "wb:feat/shield-block",
+   "wb:feat/skill-training",
+   "wb:feat/skill-training-kingdom",
+   "wb:feat/terrain-stalker",
+   "wb:feat/toughness",
+   "wb:feat/weapon-proficiency",
+   "wb:feat/automatic-knowledge",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
-   "wb:feat/folk-dowsing",
    "wb:feat/improvised-repair",
-   "wb:feat/inspiring-entertainment",
-   "wb:feat/keen-follower"
+   "wb:feat/inspiring-entertainment"
   ],
   "skill_feat@1": [
-   "wb:feat/all-of-the-animal",
-   "wb:feat/dubious-knowledge",
-   "wb:feat/experienced-tracker",
-   "wb:feat/forager",
-   "wb:feat/stifle-flames",
-   "wb:feat/survey-wildlife",
-   "wb:feat/terrain-expertise",
    "wb:feat/additional-lore",
+   "wb:feat/armor-assist",
    "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/group-coercion",
+   "wb:feat/quick-coercion",
+   "wb:feat/skill-training",
+   "wb:feat/terrain-stalker",
+   "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -534,36 +536,35 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
-   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
+   "wb:feat/forager",
    "wb:feat/forensic-acumen",
    "wb:feat/glean-contents",
-   "wb:feat/group-coercion",
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
-   "wb:feat/hobnobber",
-   "wb:feat/impressive-performance"
+   "wb:feat/hobnobber"
   ],
   "skill_feat@2": [
-   "wb:feat/all-of-the-animal",
-   "wb:feat/dubious-knowledge",
-   "wb:feat/experienced-tracker",
-   "wb:feat/forager",
-   "wb:feat/stifle-flames",
-   "wb:feat/survey-wildlife",
-   "wb:feat/terrain-expertise",
-   "wb:feat/automatic-knowledge",
-   "wb:feat/predict-weather",
    "wb:feat/additional-lore",
+   "wb:feat/armor-assist",
    "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/group-coercion",
+   "wb:feat/quick-coercion",
+   "wb:feat/skill-training",
+   "wb:feat/terrain-stalker",
+   "wb:feat/automatic-knowledge",
+   "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -578,38 +579,38 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
-   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
+   "wb:feat/forager",
    "wb:feat/forensic-acumen",
    "wb:feat/glean-contents",
-   "wb:feat/group-coercion",
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler"
   ],
   "skill_feat@4": [
-   "wb:feat/all-of-the-animal",
+   "wb:feat/additional-lore",
+   "wb:feat/armor-assist",
+   "wb:feat/assurance",
    "wb:feat/dubious-knowledge",
-   "wb:feat/experienced-tracker",
-   "wb:feat/forager",
-   "wb:feat/stifle-flames",
-   "wb:feat/survey-wildlife",
-   "wb:feat/terrain-expertise",
+   "wb:feat/experienced-professional",
+   "wb:feat/experienced-smuggler",
+   "wb:feat/group-coercion",
+   "wb:feat/quick-coercion",
+   "wb:feat/skill-training",
+   "wb:feat/terrain-stalker",
    "wb:feat/automatic-knowledge",
-   "wb:feat/predict-weather",
-   "wb:feat/folk-dowsing",
+   "wb:feat/aurochs-headed",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
+   "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
+   "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
-   "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
@@ -624,18 +625,17 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-professional",
-   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
-   "wb:feat/forensic-acumen"
+   "wb:feat/forager"
   ]
  },
  "extras": {
   "aumentos_detalhe": [],
-  "boosts_declarados": 9,
-  "boosts_direito": 9,
+  "boosts_declarados": 4,
+  "boosts_direito": 8,
   "boosts_pendentes": [
    {
     "em": "criacao",
@@ -655,27 +655,17 @@
     "em": "criacao",
     "opcoes": [
      "con",
-     "wis"
+     "str"
     ],
-    "origem": "Nomad",
+    "origem": "Warrior",
     "origem_id": null,
     "quantidade": 1
    },
    {
     "em": "criacao",
     "opcoes": null,
-    "origem": "Nomad",
+    "origem": "Warrior",
     "origem_id": null,
-    "quantidade": 1
-   },
-   {
-    "em": 1,
-    "opcoes": [
-     "dex",
-     "str"
-    ],
-    "origem": "Ranger (habilidade-chave)",
-    "origem_id": "wb:class/ranger",
     "quantidade": 1
    },
    {
@@ -688,71 +678,15 @@
   ],
   "class_feat_nivel_1": true,
   "classe_do_nivel": {
-   "1": "wb:class/ranger",
-   "2": "wb:class/ranger",
-   "3": "wb:class/ranger",
-   "4": "wb:class/ranger"
+   "1": "wb:class/rogue",
+   "2": "wb:class/rogue",
+   "3": "wb:class/rogue",
+   "4": "wb:class/rogue"
   },
   "entrada_da_classe": {
-   "wb:class/ranger": 1
+   "wb:class/rogue": 1
   },
-  "gastos": {
-   "ancestry_feat": [
-    {
-     "em": 1,
-     "pega": "wb:feat/haughty-obstinacy",
-     "slot": "ancestry_feat"
-    }
-   ],
-   "class_feat": [
-    {
-     "em": 1,
-     "pega": "wb:feat/gravity-weapon",
-     "slot": "class_feat"
-    },
-    {
-     "em": 2,
-     "pega": "wb:feat/hunters-aim",
-     "slot": "class_feat"
-    },
-    {
-     "em": 4,
-     "pega": "wb:feat/far-shot",
-     "slot": "class_feat"
-    }
-   ],
-   "free_archetype": [
-    {
-     "em": 2,
-     "pega": "wb:feat/marshal-dedication",
-     "slot": "free_archetype"
-    },
-    {
-     "em": 4,
-     "pega": "wb:feat/steel-yourself",
-     "slot": "free_archetype"
-    }
-   ],
-   "general_feat": [
-    {
-     "em": 3,
-     "pega": "wb:feat/fleet",
-     "slot": "general_feat"
-    }
-   ],
-   "skill_feat": [
-    {
-     "em": 2,
-     "pega": "wb:feat/assurance",
-     "slot": "skill_feat"
-    },
-    {
-     "em": 4,
-     "pega": "wb:feat/additional-lore",
-     "slot": "skill_feat"
-    }
-   ]
-  },
+  "gastos": {},
   "hp_detalhe": [
    {
     "hp": 8,
@@ -760,148 +694,147 @@
     "origem": "Human"
    },
    {
-    "hp": 12,
-    "nota": "10 da classe + 2 de CON",
-    "origem": "nivel 1 (Ranger)"
+    "hp": 9,
+    "nota": "8 da classe + 1 de CON",
+    "origem": "nivel 1 (Rogue)"
    },
    {
-    "hp": 12,
-    "nota": "10 da classe + 2 de CON",
-    "origem": "nivel 2 (Ranger)"
+    "hp": 9,
+    "nota": "8 da classe + 1 de CON",
+    "origem": "nivel 2 (Rogue)"
    },
    {
-    "hp": 12,
-    "nota": "10 da classe + 2 de CON",
-    "origem": "nivel 3 (Ranger)"
+    "hp": 9,
+    "nota": "8 da classe + 1 de CON",
+    "origem": "nivel 3 (Rogue)"
    },
    {
-    "hp": 12,
-    "nota": "10 da classe + 2 de CON",
-    "origem": "nivel 4 (Ranger)"
+    "hp": 9,
+    "nota": "8 da classe + 1 de CON",
+    "origem": "nivel 4 (Rogue)"
    }
   ],
   "niveis_por_classe": {
-   "wb:class/ranger": 4
+   "wb:class/rogue": 4
   },
   "ordem_de_classe": [
-   "wb:class/ranger"
+   "wb:class/rogue"
   ],
   "origem_proficiencia": {
    "advanced": [
-    "Ranger"
+    "Rogue"
    ],
    "fortitude": [
-    "Ranger"
+    "Rogue"
    ],
    "heavy": [
-    "Ranger"
+    "Rogue"
+   ],
+   "intimidation": [
+    "Warrior"
    ],
    "light": [
-    "Ranger"
+    "Rogue"
+   ],
+   "lore:Warfare Lore": [
+    "Warrior"
    ],
    "martial": [
-    "Ranger"
+    "Rogue"
    ],
    "medium": [
-    "Ranger"
+    "Rogue"
    ],
    "perception": [
-    "Ranger"
+    "Rogue"
    ],
    "reflex": [
-    "Ranger"
+    "Rogue"
    ],
    "simple": [
-    "Ranger"
+    "Rogue"
    ],
-   "survival": [
-    "Ranger",
-    "Nomad"
+   "stealth": [
+    "Rogue"
    ],
    "unarmed": [
-    "Ranger"
+    "Rogue"
    ],
    "unarmored": [
-    "Ranger"
+    "Rogue"
    ],
    "will": [
-    "Will Expertise (Ranger)"
+    "Rogue"
    ]
   },
   "pericias_automaticas": {
-   "survival": "Ranger"
+   "stealth": "Rogue"
   },
   "pericias_livres_detalhe": [
    {
-    "classe": "Ranger",
-    "delta": 4,
-    "orcamento": 4
+    "classe": "Rogue",
+    "delta": 7,
+    "orcamento": 7
    }
   ]
  },
- "ficha": "ranger4-fa-marshal",
+ "ficha": "_teste-validacao-bonus-de-item",
  "visao": {
   "ac": {
-   "armadura": "Leather Armor",
+   "armadura": "Leather",
    "bonus": [
     {
-     "origem": "Leather Armor",
+     "origem": "Leather",
      "tipo": "item",
      "valor": 1
+    },
+    {
+     "origem": "Assassin's Bracers (Type I)",
+     "tipo": "item",
+     "valor": 1
+    },
+    {
+     "origem": "Bands of Force (Major)",
+     "tipo": "item",
+     "valor": 3
     }
    ],
    "categoria": "light",
    "check_penalty": 0,
-   "detalhe": "10 + DEX +3 + prof 6 (trained, nivel 4) + item 1",
+   "detalhe": "10 + DEX +2 + prof 6 (trained, nivel 4) + item 3",
    "dex_perdida": 0,
    "escudo": null,
    "rank": "trained",
-   "total": 20
+   "total": 21
   },
   "ancestralidade": "Human",
-  "ataques": [
-   {
-    "arma": "Composite Shortbow",
-    "ataque": 9,
-    "atributo_do_ataque": "dex",
-    "categoria": "martial",
-    "dano": "1d6",
-    "detalhe": "nivel 4 + prof 6 (trained) + DEX +3",
-    "potencia": 0,
-    "rank": "trained",
-    "runas_de_propriedade": [],
-    "striking": 0,
-    "tipo_de_dano": "piercing",
-    "traits": [
-     "deadly-d10",
-     "propulsive"
-    ]
-   }
-  ],
+  "ataques": [],
   "atores": [],
   "atributos": {
-   "cha": 10,
-   "con": 14,
-   "dex": 16,
-   "int": 10,
-   "str": 12,
-   "wis": 16
+   "cha": 12,
+   "con": 12,
+   "dex": 14,
+   "int": 12,
+   "str": 10,
+   "wis": 10
   },
   "aumentos_de_pericia": {
    "gastos": [],
    "niveis": [
-    3
+    2,
+    3,
+    4
    ]
   },
   "avisos": [
-   "Ranger: falta escolher `outras-opcoes` (2 opcoes)",
-   "pericias livres: 0 declarada(s) de 4 a que o personagem tem direito -- faltam 4",
-   "Marshal Dedication: falta escolher `marshal-skill` (Diplomacy, Diplomacy, Intimidation, Intimidation)"
+   "Rogue: falta escolher `racket` (6 opcoes)",
+   "pericias livres: 0 declarada(s) de 7 a que o personagem tem direito -- faltam 7",
+   "boosts de atributo: 4 declarado(s) de 8 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), criacao (4 livres) (4)"
   ],
-  "background": "Nomad",
+  "background": "Warrior",
   "boosts": {
-   "declarados": 9,
-   "direito": 9,
+   "declarados": 4,
+   "direito": 8,
    "fontes": [
     {
      "em": "criacao",
@@ -921,27 +854,17 @@
      "em": "criacao",
      "opcoes": [
       "con",
-      "wis"
+      "str"
      ],
-     "origem": "Nomad",
+     "origem": "Warrior",
      "origem_id": null,
      "quantidade": 1
     },
     {
      "em": "criacao",
      "opcoes": null,
-     "origem": "Nomad",
+     "origem": "Warrior",
      "origem_id": null,
-     "quantidade": 1
-    },
-    {
-     "em": 1,
-     "opcoes": [
-      "dex",
-      "str"
-     ],
-     "origem": "Ranger (habilidade-chave)",
-     "origem_id": "wb:class/ranger",
      "quantidade": 1
     },
     {
@@ -954,77 +877,66 @@
    ]
   },
   "classes": {
-   "Ranger": 4
+   "Rogue": 4
   },
-  "concedidos": [],
+  "concedidos": [
+   {
+    "id": "wb:feat/intimidating-glare",
+    "nome": "Intimidating Glare",
+    "por": "Warrior",
+    "por_id": "wb:background/warrior"
+   }
+  ],
   "concessoes_de_ator": [],
   "conjuracao": [],
   "escolhas_de_feat": [],
   "features": [
    {
-    "classe": "Ranger",
-    "grants": [
-     {
-      "grant_feat": [
-       "wb:class-feature/hunt-prey"
-      ]
-     }
-    ],
-    "id": "wb:class-feature/hunt-prey",
-    "na_base": true,
-    "nivel_de_classe": 1,
-    "nome": "Hunt Prey"
-   },
-   {
-    "classe": "Ranger",
+    "classe": "Rogue",
     "grants": [],
-    "id": "wb:class-feature/hunters-edge",
+    "id": "wb:class-feature/rogues-racket",
     "na_base": true,
     "nivel_de_classe": 1,
-    "nome": "Hunter's Edge"
+    "nome": "Rogue's Racket"
    },
    {
-    "classe": "Ranger",
-    "grants": [
-     {
-      "proficiency": {
-       "will": "expert"
-      }
-     }
-    ],
-    "id": "wb:class-feature/will-expertise",
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/sneak-attack",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Sneak Attack"
+   },
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/surprise-attack",
+    "na_base": true,
+    "nivel_de_classe": 1,
+    "nome": "Surprise Attack"
+   },
+   {
+    "classe": "Rogue",
+    "grants": [],
+    "id": "wb:class-feature/deny-advantage",
     "na_base": true,
     "nivel_de_classe": 3,
-    "nome": "Will Expertise"
-   },
-   {
-    "classe": "Ranger",
-    "eixo": "hunters-edge",
-    "grants": [],
-    "id": "wb:class-feature/precision",
-    "na_base": true,
-    "nivel_de_classe": 1,
-    "nome": "Precision"
+    "nome": "Deny Advantage"
    }
   ],
   "focus_pool": 0,
-  "fora_do_requisito": [
-   {
-    "feat": "Marshal Dedication",
-    "motivo": "exige diplomacy >= trained; tem untrained; exige intimidation >= trained; tem untrained"
-   }
-  ],
+  "fora_do_requisito": [],
   "fraquezas": [],
   "heranca": "Versatile Human",
-  "hp": 56,
+  "hp": 44,
   "imunidades": [],
   "modificadores": {
-   "cha": 0,
-   "con": 2,
-   "dex": 3,
-   "int": 0,
-   "str": 1,
-   "wis": 3
+   "cha": 1,
+   "con": 1,
+   "dex": 2,
+   "int": 1,
+   "str": 0,
+   "wis": 0
   },
   "nivel": 4,
   "pericias": [
@@ -1032,175 +944,194 @@
     "atributo": "dex",
     "bonus_total": 0,
     "chave": "acrobatics",
-    "detalhe": "0 (untrained) + DEX +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + DEX +2",
+    "mod_atributo": 2,
     "nome": "Acrobatics",
     "rank": "untrained",
-    "total": 3
+    "total": 2
    },
    {
     "atributo": "int",
     "bonus_total": 0,
     "chave": "arcana",
-    "detalhe": "0 (untrained) + INT +0",
-    "mod_atributo": 0,
+    "detalhe": "0 (untrained) + INT +1",
+    "mod_atributo": 1,
     "nome": "Arcana",
     "rank": "untrained",
-    "total": 0
+    "total": 1
    },
    {
     "atributo": "str",
     "bonus_total": 0,
     "chave": "athletics",
-    "detalhe": "0 (untrained) + STR +1",
-    "mod_atributo": 1,
+    "detalhe": "0 (untrained) + STR +0",
+    "mod_atributo": 0,
     "nome": "Athletics",
     "rank": "untrained",
-    "total": 1
+    "total": 0
    },
    {
     "atributo": "int",
     "bonus_total": 0,
     "chave": "crafting",
-    "detalhe": "0 (untrained) + INT +0",
-    "mod_atributo": 0,
+    "detalhe": "0 (untrained) + INT +1",
+    "mod_atributo": 1,
     "nome": "Crafting",
     "rank": "untrained",
-    "total": 0
+    "total": 1
    },
    {
     "atributo": "cha",
     "bonus_total": 0,
     "chave": "deception",
-    "detalhe": "0 (untrained) + CHA +0",
-    "mod_atributo": 0,
+    "detalhe": "0 (untrained) + CHA +1",
+    "mod_atributo": 1,
     "nome": "Deception",
     "rank": "untrained",
-    "total": 0
+    "total": 1
    },
    {
     "atributo": "cha",
     "bonus_total": 0,
     "chave": "diplomacy",
-    "detalhe": "0 (untrained) + CHA +0",
-    "mod_atributo": 0,
+    "detalhe": "0 (untrained) + CHA +1",
+    "mod_atributo": 1,
     "nome": "Diplomacy",
     "rank": "untrained",
-    "total": 0
+    "total": 1
    },
    {
     "atributo": "cha",
     "bonus_total": 0,
     "chave": "intimidation",
-    "detalhe": "0 (untrained) + CHA +0",
-    "mod_atributo": 0,
+    "detalhe": "nivel 4 + prof 2 (trained) + CHA +1",
+    "mod_atributo": 1,
     "nome": "Intimidation",
-    "rank": "untrained",
-    "total": 0
+    "rank": "trained",
+    "total": 7
+   },
+   {
+    "atributo": "int",
+    "bonus_total": 0,
+    "chave": "lore:Warfare Lore",
+    "detalhe": "nivel 4 + prof 2 (trained) + INT +1",
+    "mod_atributo": 1,
+    "nome": "Lore: Warfare",
+    "rank": "trained",
+    "total": 7
    },
    {
     "atributo": "wis",
     "bonus_total": 0,
     "chave": "medicine",
-    "detalhe": "0 (untrained) + WIS +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + WIS +0",
+    "mod_atributo": 0,
     "nome": "Medicine",
     "rank": "untrained",
-    "total": 3
+    "total": 0
    },
    {
     "atributo": "wis",
     "bonus_total": 0,
     "chave": "nature",
-    "detalhe": "0 (untrained) + WIS +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + WIS +0",
+    "mod_atributo": 0,
     "nome": "Nature",
     "rank": "untrained",
-    "total": 3
+    "total": 0
    },
    {
     "atributo": "int",
     "bonus_total": 0,
     "chave": "occultism",
-    "detalhe": "0 (untrained) + INT +0",
-    "mod_atributo": 0,
+    "detalhe": "0 (untrained) + INT +1",
+    "mod_atributo": 1,
     "nome": "Occultism",
     "rank": "untrained",
-    "total": 0
+    "total": 1
    },
    {
     "atributo": "cha",
     "bonus_total": 0,
     "chave": "performance",
-    "detalhe": "0 (untrained) + CHA +0",
-    "mod_atributo": 0,
+    "detalhe": "0 (untrained) + CHA +1",
+    "mod_atributo": 1,
     "nome": "Performance",
     "rank": "untrained",
-    "total": 0
+    "total": 1
    },
    {
     "atributo": "wis",
     "bonus_total": 0,
     "chave": "religion",
-    "detalhe": "0 (untrained) + WIS +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + WIS +0",
+    "mod_atributo": 0,
     "nome": "Religion",
     "rank": "untrained",
-    "total": 3
+    "total": 0
    },
    {
     "atributo": "int",
     "bonus_total": 0,
     "chave": "society",
-    "detalhe": "0 (untrained) + INT +0",
-    "mod_atributo": 0,
+    "detalhe": "0 (untrained) + INT +1",
+    "mod_atributo": 1,
     "nome": "Society",
+    "rank": "untrained",
+    "total": 1
+   },
+   {
+    "atributo": "dex",
+    "bonus": [
+     {
+      "origem": "Cloak of Elvenkind (Greater)",
+      "tipo": "item",
+      "valor": 2
+     }
+    ],
+    "bonus_total": 2,
+    "chave": "stealth",
+    "detalhe": "nivel 4 + prof 2 (trained) + DEX +2 + bonus +2",
+    "mod_atributo": 2,
+    "nome": "Stealth",
+    "rank": "trained",
+    "total": 10
+   },
+   {
+    "atributo": "wis",
+    "bonus_total": 0,
+    "chave": "survival",
+    "detalhe": "0 (untrained) + WIS +0",
+    "mod_atributo": 0,
+    "nome": "Survival",
     "rank": "untrained",
     "total": 0
    },
    {
     "atributo": "dex",
     "bonus_total": 0,
-    "chave": "stealth",
-    "detalhe": "0 (untrained) + DEX +3",
-    "mod_atributo": 3,
-    "nome": "Stealth",
-    "rank": "untrained",
-    "total": 3
-   },
-   {
-    "atributo": "wis",
-    "bonus_total": 0,
-    "chave": "survival",
-    "detalhe": "nivel 4 + prof 2 (trained) + WIS +3",
-    "mod_atributo": 3,
-    "nome": "Survival",
-    "rank": "trained",
-    "total": 9
-   },
-   {
-    "atributo": "dex",
-    "bonus_total": 0,
     "chave": "thievery",
-    "detalhe": "0 (untrained) + DEX +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + DEX +2",
+    "mod_atributo": 2,
     "nome": "Thievery",
     "rank": "untrained",
-    "total": 3
+    "total": 2
    }
   ],
-  "pericias_livres": 4,
+  "pericias_livres": 7,
   "proficiencias": {
    "advanced": "untrained",
-   "fortitude": "expert",
+   "fortitude": "trained",
    "heavy": "untrained",
+   "intimidation": "trained",
    "light": "trained",
+   "lore:Warfare Lore": "trained",
    "martial": "trained",
-   "medium": "trained",
+   "medium": "untrained",
    "perception": "expert",
    "reflex": "expert",
    "simple": "trained",
-   "survival": "trained",
+   "stealth": "trained",
    "unarmed": "trained",
    "unarmored": "trained",
    "will": "expert"
@@ -1209,40 +1140,76 @@
   "salvas": {
    "fortitude": {
     "atributo": "con",
-    "bonus_total": 0,
+    "bonus": [
+     {
+      "origem": "Assassin's Bracers (Type I)",
+      "tipo": "item",
+      "valor": 1
+     },
+     {
+      "origem": "Bands of Force (Major)",
+      "tipo": "item",
+      "valor": 3
+     }
+    ],
+    "bonus_total": 3,
     "chave": "fortitude",
-    "detalhe": "nivel 4 + prof 4 (expert) + CON +2",
-    "mod_atributo": 2,
+    "detalhe": "nivel 4 + prof 2 (trained) + CON +1 + bonus +3",
+    "mod_atributo": 1,
     "nome": "fortitude",
-    "rank": "expert",
+    "rank": "trained",
     "total": 10
    },
    "perception": {
     "atributo": "wis",
     "bonus_total": 0,
     "chave": "perception",
-    "detalhe": "nivel 4 + prof 4 (expert) + WIS +3",
-    "mod_atributo": 3,
+    "detalhe": "nivel 4 + prof 4 (expert) + WIS +0",
+    "mod_atributo": 0,
     "nome": "perception",
     "rank": "expert",
-    "total": 11
+    "total": 8
    },
    "reflex": {
     "atributo": "dex",
-    "bonus_total": 0,
+    "bonus": [
+     {
+      "origem": "Assassin's Bracers (Type I)",
+      "tipo": "item",
+      "valor": 1
+     },
+     {
+      "origem": "Bands of Force (Major)",
+      "tipo": "item",
+      "valor": 3
+     }
+    ],
+    "bonus_total": 3,
     "chave": "reflex",
-    "detalhe": "nivel 4 + prof 4 (expert) + DEX +3",
-    "mod_atributo": 3,
+    "detalhe": "nivel 4 + prof 4 (expert) + DEX +2 + bonus +3",
+    "mod_atributo": 2,
     "nome": "reflex",
     "rank": "expert",
-    "total": 11
+    "total": 13
    },
    "will": {
     "atributo": "wis",
-    "bonus_total": 0,
+    "bonus": [
+     {
+      "origem": "Assassin's Bracers (Type I)",
+      "tipo": "item",
+      "valor": 1
+     },
+     {
+      "origem": "Bands of Force (Major)",
+      "tipo": "item",
+      "valor": 3
+     }
+    ],
+    "bonus_total": 3,
     "chave": "will",
-    "detalhe": "nivel 4 + prof 4 (expert) + WIS +3",
-    "mod_atributo": 3,
+    "detalhe": "nivel 4 + prof 4 (expert) + WIS +0 + bonus +3",
+    "mod_atributo": 0,
     "nome": "will",
     "rank": "expert",
     "total": 11
@@ -1266,87 +1233,144 @@
     3
    ],
    "skill": [
+    1,
     2,
+    3,
     4
    ]
   },
   "slots_abertos": [
    {
     "em": "criacao",
-    "escolhe": 1,
-    "flag": "marshal-skill",
-    "kind": "grant",
-    "opcoes": [
-     {
-      "grants": [
-       {
-        "proficiency": {
-         "diplomacy": "trained"
-        }
-       }
-      ],
-      "rotulo": "Diplomacy",
-      "valor": "diplomacy-trained"
-     },
-     {
-      "grants": [
-       {
-        "proficiency": {
-         "diplomacy": "expert"
-        }
-       }
-      ],
-      "rotulo": "Diplomacy",
-      "valor": "diplomacy-expert"
-     },
-     {
-      "grants": [
-       {
-        "proficiency": {
-         "intimidation": "trained"
-        }
-       }
-      ],
-      "rotulo": "Intimidation",
-      "valor": "imtimidation-trained"
-     },
-     {
-      "grants": [
-       {
-        "proficiency": {
-         "intimidation": "expert"
-        }
-       }
-      ],
-      "rotulo": "Intimidation",
-      "valor": "intimidation-expert"
-     }
-    ],
-    "origem": "wb:feat/marshal-dedication",
-    "rotulo": "Marshal Dedication / marshal-skill",
-    "slot": "escolha_de_grant"
-   },
-   {
-    "em": "criacao",
     "escolhe": 4,
     "fontes": [
      {
-      "classe": "Ranger",
-      "delta": 4,
-      "orcamento": 4
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Human",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Human",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": [
+       "con",
+       "str"
+      ],
+      "origem": "Warrior",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "Warrior",
+      "origem_id": null,
+      "quantidade": 1
+     },
+     {
+      "em": "criacao",
+      "opcoes": null,
+      "origem": "criacao (4 livres)",
+      "origem_id": null,
+      "quantidade": 4
+     }
+    ],
+    "kind": "ability",
+    "rotulo": "boosts de atributo (4 a escolher)",
+    "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 7,
+    "fontes": [
+     {
+      "classe": "Rogue",
+      "delta": 7,
+      "orcamento": 7
      }
     ],
     "kind": "skill",
-    "rotulo": "pericias treinadas (4 a escolher)",
+    "rotulo": "pericias treinadas (7 a escolher)",
     "slot": "pericias_livres"
    },
    {
     "em": 1,
     "escolhe": 1,
-    "kind": "outras-opcoes",
-    "opcoes": 2,
-    "rotulo": "Ranger / outras-opcoes",
+    "kind": "feat",
+    "rotulo": "ancestry feat (nivel 1)",
+    "slot": "ancestry_feat"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "class feat (nivel 1)",
+    "slot": "class_feat"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "skill feat (nivel 1)",
+    "slot": "skill_feat"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "racket",
+    "opcoes": 6,
+    "rotulo": "Rogue / racket",
     "slot": "subclasse"
+   },
+   {
+    "em": 2,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "class feat (nivel 2)",
+    "slot": "class_feat"
+   },
+   {
+    "em": 2,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "free archetype (nivel 2)",
+    "slot": "free_archetype"
+   },
+   {
+    "em": 2,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "skill feat (nivel 2)",
+    "slot": "skill_feat"
+   },
+   {
+    "em": 2,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 2)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "general feat (nivel 3)",
+    "slot": "general_feat"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "skill feat (nivel 3)",
+    "slot": "skill_feat"
    },
    {
     "em": 3,
@@ -1354,38 +1378,56 @@
     "kind": "skill",
     "rotulo": "aumento de pericia (nivel 3)",
     "slot": "skill_increase"
+   },
+   {
+    "em": 4,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "class feat (nivel 4)",
+    "slot": "class_feat"
+   },
+   {
+    "em": 4,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "free archetype (nivel 4)",
+    "slot": "free_archetype"
+   },
+   {
+    "em": 4,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "skill feat (nivel 4)",
+    "slot": "skill_feat"
+   },
+   {
+    "em": 4,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 4)",
+    "slot": "skill_increase"
    }
   ],
   "subclasses": [
    {
-    "classe": "Ranger",
-    "eixo": "hunters-edge",
-    "escolhido": "wb:class-feature/precision",
-    "nivel": 1,
-    "nome": "Precision",
-    "opcoes": 4,
-    "opcoes_ids": [
-     "wb:class-feature/flurry",
-     "wb:class-feature/outwit",
-     "wb:class-feature/precision",
-     "wb:hunters-edge/vindication"
-    ]
-   },
-   {
-    "classe": "Ranger",
-    "eixo": "outras-opcoes",
+    "classe": "Rogue",
+    "eixo": "racket",
     "escolhido": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 2,
+    "opcoes": 6,
     "opcoes_ids": [
-     "wb:class-feature/vindicator",
-     "wb:class-feature/warden-spells"
+     "wb:class-feature/avenger",
+     "wb:class-feature/eldritch-trickster",
+     "wb:class-feature/mastermind",
+     "wb:class-feature/ruffian",
+     "wb:class-feature/scoundrel",
+     "wb:class-feature/thief"
     ]
    }
   ],
   "velocidade": {
-   "land": 30
+   "land": 25
   },
   "velocidade_detalhe": [
    {
@@ -1393,12 +1435,6 @@
      "land": 25
     },
     "origem": "Human"
-   },
-   {
-    "efeito": {
-     "land-speed": 5
-    },
-    "origem": "Fleet"
    }
   ]
  }

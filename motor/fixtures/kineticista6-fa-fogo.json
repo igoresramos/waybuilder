@@ -872,6 +872,7 @@
  "visao": {
   "ac": {
    "armadura": "Explorer's Clothing",
+   "bonus": [],
    "categoria": "unarmored",
    "check_penalty": 0,
    "detalhe": "10 + DEX +2 + prof 8 (trained, nivel 6) + item 0",

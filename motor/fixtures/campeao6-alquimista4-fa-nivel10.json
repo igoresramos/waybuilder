@@ -985,6 +985,13 @@
  "visao": {
   "ac": {
    "armadura": "Breastplate",
+   "bonus": [
+    {
+     "origem": "Breastplate",
+     "tipo": "item",
+     "valor": 4
+    }
+   ],
    "categoria": "medium",
    "check_penalty": 0,
    "detalhe": "10 + DEX +1 + prof 12 (trained, nivel 10) + item 4",

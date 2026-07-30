@@ -1243,6 +1243,63 @@ checar(martyr and martyr["atende"],
        "e `Martyr` (exige Divine Font) sai como ATENDE em candidatos()",
        f"{martyr}")
 
+# -- bonus vindo de item equipado (spec bonus-de-item-equipado) -------------
+# Ate 30/07 `_bonus_incondicionais` nao lia o inventario: 293 grants
+# incondicionais de equipment/armor/shield/weapon nunca chegavam a ficha.
+print("\n-- bonus de item equipado --")
+
+def com_itens(itens):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+        + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/rogue"}
+           for n in range(1, 5)],
+        inventario=[{"item": i, "equipado": True} for i in itens])
+
+CAPA = "wb:equipment/cloak-of-elvenkind-greater"   # +2 item em Stealth
+def stealth(p):
+    return next(l["total"] for l in p.pericias if l["chave"] == "stealth")
+
+checar(stealth(com_itens([CAPA])) - stealth(com_itens([])) == 2,
+       "item equipado soma na pericia (+2 de Stealth da capa)",
+       f"{stealth(com_itens([]))} -> {stealth(com_itens([CAPA]))}")
+checar(next(l for l in com_itens([CAPA]).pericias
+            if l["chave"] == "stealth")["bonus"][0]["origem"]
+       == "Cloak of Elvenkind (Greater)",
+       "e a origem sai nomeada na linha da pericia")
+
+guardado = personagem(
+    [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+    + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/rogue"}
+       for n in range(1, 5)],
+    inventario=[{"item": CAPA, "equipado": False}])
+checar(stealth(guardado) == stealth(com_itens([])),
+       "item na mochila NAO soma -- `equipado` e a condicao")
+
+# a regra do livro: bonus do mesmo tipo nao empilham, vale o maior. O
+# `item_bonus` da armadura e um bonus de ITEM e por isso DISPUTA com os grants
+# em vez de somar por fora.
+COURO = "wb:armor/leather"                             # +1 item
+BRACADEIRA = "wb:equipment/assassins-bracers-type-i"   # +1 item
+BANDAS = "wb:equipment/bands-of-force-major"           # +3 item
+base_ca = com_itens([COURO]).ac["total"]
+checar(com_itens([COURO, BRACADEIRA]).ac["total"] == base_ca,
+       "duas fontes de +1 de item na CA dao +1, nao +2",
+       f"{base_ca} -> {com_itens([COURO, BRACADEIRA]).ac['total']}")
+checar(com_itens([COURO, BRACADEIRA, BANDAS]).ac["total"] == base_ca + 2,
+       "e com +1, +1 e +3 vale o maior: +3 (nao a soma 5)",
+       f"{com_itens([COURO, BRACADEIRA, BANDAS]).ac['total']}")
+checar(com_itens([COURO, BRACADEIRA, BANDAS]).ac["detalhe"].endswith("item 3"),
+       "o `detalhe` da CA mostra o bonus que VENCEU, nao o da armadura")
+
+# o contador anti-perda-silenciosa: `_velocidade` era o ultimo a chamar
+# `_bonus_incondicionais` e reatribuia `bonus_ignorados`, apagando o que
+# `_pericias_e_salvas` e `_resistencias` tinham gravado.
+ESTANDARTE = "wb:equipment/standard-of-the-primeval-howl"   # tem `initiative`
+checar(any("nao modelado" in k
+           for k in com_itens([ESTANDARTE]).bonus_ignorados),
+       "selector fora do modelo sobrevive em `bonus_ignorados`",
+       f"{com_itens([ESTANDARTE]).bonus_ignorados}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

@@ -821,6 +821,7 @@
  "visao": {
   "ac": {
    "armadura": "sem armadura",
+   "bonus": [],
    "categoria": "unarmored",
    "check_penalty": 0,
    "detalhe": "10 + DEX +2 + prof 10 (trained, nivel 8) + item 0",

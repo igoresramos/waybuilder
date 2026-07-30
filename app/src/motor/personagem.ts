@@ -132,6 +132,9 @@ export class Personagem implements ContextoDePredicado {
   /** cache de `_remaps_de_arma`: `candidatos()` avalia milhares de feats por
    * slot, e varrer classes/features/feats a cada arma citada custaria caro. */
   private _remaps_cache: Array<[unknown, unknown]> | null = null;
+  // memoizado porque a ultima linha ATRIBUI `bonus_ignorados` em vez de
+  // acumular, e o terceiro chamador apagava o que os dois anteriores gravaram.
+  private _bonusMemo: Map<string, BonusAplicado[]> | null = null;
   pericias: LinhaDePericia[] = [];
   salvas: Record<string, LinhaDePericia> = {};
   bonus_ignorados: Record<string, number> = {};
@@ -172,7 +175,7 @@ export class Personagem implements ContextoDePredicado {
   focus_pool = 0;
   ac: AC = {
     total: 0, armadura: null, categoria: "unarmored", rank: "untrained",
-    detalhe: "", dex_perdida: 0, check_penalty: 0, escudo: null,
+    detalhe: "", dex_perdida: 0, check_penalty: 0, escudo: null, bonus: [],
   };
   ataques: Ataque[] = [];
   fora_do_requisito: ForaDoRequisito[] = [];
@@ -2016,7 +2019,20 @@ export class Personagem implements ContextoDePredicado {
 
     const rank = this.proficiencias.get(categoria) ?? "untrained";
     const prof = rank !== "untrained" ? this.nivel + RANK_BONUS[rank] : 0;
-    const total = 10 + dex_usada + prof + item_bonus + potencia;
+
+    // o `item_bonus` da armadura E um bonus de item, e os 6 grants
+    // incondicionais de `ac` da base tambem (Bands of Force, Assassin's
+    // Bracers). Somar um sobre o outro daria +2 a quem veste Couro e Bands of
+    // Force, onde o RAW da +1 -- mesmo tipo nao empilha. Por isso a armadura
+    // entra como CONTENDOR. A runa de potencia soma ao bonus da armadura ANTES
+    // da disputa: pelo RAW ela aumenta o bonus de item, nao e um segundo.
+    const contendores: BonusAplicado[] = [];
+    if (item_bonus || potencia) {
+      contendores.push({ tipo: "item", valor: item_bonus + potencia, origem: nome_arm ?? "" });
+    }
+    contendores.push(...(this._bonus_incondicionais().get("ac") ?? []));
+    const bonus_de_item = this._melhor_por_tipo(contendores);
+    const total = 10 + dex_usada + prof + bonus_de_item;
 
     // a penalidade de armadura só vale se a FOR não alcança o mínimo
     const aplica_penalidade = ehInt(forca) && (this.atributos["str"] ?? 10) < forca;
@@ -2027,7 +2043,10 @@ export class Personagem implements ContextoDePredicado {
       categoria,
       rank,
       detalhe: `10 + DEX ${comSinal(dex_usada)} + prof ${prof} `
-               + `(${rank}, nivel ${this.nivel}) + item ${item_bonus + potencia}`,
+               + `(${rank}, nivel ${this.nivel}) + item ${bonus_de_item}`,
+      // de onde veio cada contendor, para a ficha poder explicar por que dois
+      // itens de +1 nao viraram +2
+      bonus: contendores.map((c) => ({ tipo: c.tipo, valor: c.valor, origem: c.origem })),
       dex_perdida: Math.max(0, dex - dex_usada),
       check_penalty: aplica_penalidade ? (penalidade as number) : 0,
       escudo: escudos.length > 0
@@ -3363,6 +3382,7 @@ export class Personagem implements ContextoDePredicado {
    * para Empurrar") e dependem de contexto de ação que a ficha não tem.
    */
   private _bonus_incondicionais(): Map<string, BonusAplicado[]> {
+    if (this._bonusMemo !== null) return this._bonusMemo;
     const fora: Record<string, number> = {};
     const porSelector = new Map<string, BonusAplicado[]>();
     const fontes: Array<[string, Dict]> = [];
@@ -3375,6 +3395,15 @@ export class Personagem implements ContextoDePredicado {
     }
     for (const f of this.features) fontes.push([pyStr(f["nome"]), dictDe(f)]);
     for (const [i, feat] of this._feats_efetivos()) fontes.push([nomeOu(feat, i), feat]);
+    // o inventario equipado, que faltava: 293 grants incondicionais e
+    // aplicaveis em equipment/armor/shield/weapon, em selectors que o motor ja
+    // soma. Ver `specs/2026-07-30-bonus-de-item-equipado.md`.
+    for (const entrada of listaDe(this.doc["inventario"])) {
+      const e = dictDe(entrada);
+      if (!verdadeiro(e["equipado"])) continue;
+      const reg = this.base.opcional(pyStr(e["item"]));
+      if (reg) fontes.push([pyStr(nome(reg)), dictDe(reg)]);
+    }
     for (const [rotulo, reg] of fontes) {
       for (const g of this._grants_de(reg)) {
         const fm = dictDe(g)["flat_modifier"];
@@ -3391,6 +3420,7 @@ export class Personagem implements ContextoDePredicado {
       }
     }
     this.bonus_ignorados = fora;
+    this._bonusMemo = porSelector;
     return porSelector;
   }
 

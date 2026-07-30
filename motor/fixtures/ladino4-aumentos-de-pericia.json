@@ -870,6 +870,13 @@
  "visao": {
   "ac": {
    "armadura": "Leather Armor",
+   "bonus": [
+    {
+     "origem": "Leather Armor",
+     "tipo": "item",
+     "valor": 1
+    }
+   ],
    "categoria": "light",
    "check_penalty": 0,
    "detalhe": "10 + DEX +3 + prof 6 (trained, nivel 4) + item 1",

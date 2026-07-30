@@ -3,6 +3,14 @@
  "pin_base": "ok",
  "fichas": [
   {
+   "ficha": "_teste-validacao-bonus-de-item",
+   "nivel": 4,
+   "hp": 44,
+   "avisos": 3,
+   "fora_do_requisito": 0,
+   "slots_abertos": 17
+  },
+  {
    "ficha": "_teste-validacao-bonus-de-pericia",
    "nivel": 5,
    "hp": 68,

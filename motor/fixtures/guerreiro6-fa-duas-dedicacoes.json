@@ -882,6 +882,13 @@
  "visao": {
   "ac": {
    "armadura": "Chain Mail",
+   "bonus": [
+    {
+     "origem": "Chain Mail",
+     "tipo": "item",
+     "valor": 4
+    }
+   ],
    "categoria": "medium",
    "check_penalty": 0,
    "detalhe": "10 + DEX +1 + prof 8 (trained, nivel 6) + item 4",

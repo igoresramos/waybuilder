@@ -292,6 +292,10 @@ export interface AC {
   dex_perdida: number;
   check_penalty: number;
   escudo: { nome: string | null; ac: number } | null;
+  /** contendores do bonus de ITEM da CA -- a armadura e os grants de item
+   *  equipados disputam entre si, e vale o maior. Ver
+   *  `specs/2026-07-30-bonus-de-item-equipado.md`. */
+  bonus: BonusAplicado[];
 }
 
 export interface Ataque {

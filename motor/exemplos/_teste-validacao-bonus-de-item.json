@@ -1,0 +1,25 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {"versao": "2026-07-30", "pin_foundry": "87f9e502"},
+ "identidade": {
+  "nome": "TESTE BONUS DE ITEM -- Ladino 4 com tres itens de bonus de item",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao da spec specs/2026-07-30-bonus-de-item-equipado.md. Ate 30/07 `_bonus_incondicionais` nao lia o inventario, e os 293 grants incondicionais de item nunca chegavam a ficha. Prova as duas metades: (1) PERICIA -- o Cloak of Elvenkind (Greater) da +2 de item em Stealth, com origem nomeada; (2) CA -- Couro (+1 item), Assassin's Bracers I (+1 item) e Bands of Force Major (+3 item) equipados ao mesmo tempo dao +3, nao +5. Bonus do mesmo tipo nao empilham, vale o maior, e o `item_bonus` da armadura DISPUTA em vez de somar por fora. O numero 3 falsifica de uma vez a soma ingenua (5), o comportamento antigo de ignorar os grants (1) e o de pegar o primeiro (1). Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/versatile-human"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/warrior"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/rogue"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/rogue"},
+  {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/rogue"},
+  {"em": 4, "slot": "nivel_de_classe", "pega": "wb:class/rogue"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["dex", "con", "int", "cha"]}
+ ],
+ "inventario": [
+  {"item": "wb:armor/leather", "equipado": true},
+  {"item": "wb:equipment/assassins-bracers-type-i", "equipado": true},
+  {"item": "wb:equipment/bands-of-force-major", "equipado": true},
+  {"item": "wb:equipment/cloak-of-elvenkind-greater", "equipado": true}
+ ]
+}
