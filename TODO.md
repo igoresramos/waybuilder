@@ -7,6 +7,8 @@
 
 
 
+
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -37,19 +39,6 @@ items:
   id: 43
   date: '2026-07-29'
   priority: alta
-- desc: 'A regra de precedencia grants->foundry e letra morta: grants nunca gera conflito real no
-    dataset, o merge adota silenciosamente o lado nao-vazio. Ou exercitar ou remover da spec'
-  id: 13
-  date: '2026-07-29'
-  priority: media
-- desc: 'A mecanica de filiacao EXISTE mas nao esta estruturada: 305 registros (155 equipment, 134
-    feat, 13 weapon, 3 armor) tem linha ''Access'' no texto citando organizacao/regiao/etnia como
-    condicao de raridade uncommon, com requires:null. Mais 68 feats/archetypes com requires_texto
-    tipo ''member of X''. Nenhuma chave do predicado sabe falar de filiacao. Solucao: ~20-25 stubs
-    leves (id+nome, sem prosa) + termo novo no predicado. Principio zero: sugere, nunca bloqueia'
-  id: 22
-  date: '2026-07-29'
-  priority: media
 - desc: 'COBERTURA DE EFEITO POR SUBCLASSE -- levantamento completo, 8 eixos seguem zerados e a causa
     NAO e falha de extracao. Com efeito: muse 5/5, patron 16/24, oracle mystery 10/12, thaumaturge
     implement 8/10, gunslinger way 5/6, rogue racket 5/6, magus hybrid-study 2/8, swashbuckler style
@@ -347,6 +336,15 @@ items:
     X|Fonte}` grudada que o parser nao separou (1% do residuo)'
   id: 87
   date: '2026-07-29'
+  priority: baixa
+- desc: 'PASSO DOIS DO ITEM 22: estruturar `acesso` em filiacoes. Hoje e texto verbatim em 728 registros,
+    e as formas se repetem (102 armas de fogo, 102 gadgets, 80 Pathfinder Society, 73 Knights of
+    Lastwall, 72 Absalom/New Thassilon, 55 Firebrands, 28 Tian Xia, 27 Hermea) -- da para cobrir
+    a maioria com ~15 stubs. SO FAZ SENTIDO depois que houver consumidor: hoje nada no motor pergunta
+    ''de que organizacao voce e''. Junto vem a decisao de UI: a ficha deveria mostrar o `acesso`
+    do item incomum.'
+  id: 96
+  date: '2026-07-30'
   priority: baixa
 promoted: []
 ---
