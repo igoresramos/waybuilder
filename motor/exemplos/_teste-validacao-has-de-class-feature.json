@@ -1,0 +1,79 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {
+  "versao": "2026-07-30",
+  "pin_foundry": "87f9e502"
+ },
+ "identidade": {
+  "nome": "TESTE HAS -- Magus 6 e os feats que exigem Spellstrike",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao do `has` sobre class-feature. A guarda de auto-satisfacao de `_termo_has` descartava toda feature vinda da PROGRESSAO da classe (raiz None) sempre que `_avaliando` tambem fosse None -- o que e SEMPRE em `candidatos()`. `Spellstrike` e o alvo mais citado da base (21 clausulas), entao um Magus e o caso mais denso. Achado pela 3a rodada de comparacao com o Pathbuilder. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {
+   "em": "criacao",
+   "slot": "ancestralidade",
+   "pega": "wb:ancestry/human"
+  },
+  {
+   "em": "criacao",
+   "slot": "heranca",
+   "pega": "wb:heritage/versatile-human"
+  },
+  {
+   "em": "criacao",
+   "slot": "background",
+   "pega": "wb:background/acolyte"
+  },
+  {
+   "em": 1,
+   "slot": "nivel_de_classe",
+   "pega": "wb:class/magus"
+  },
+  {
+   "em": 2,
+   "slot": "nivel_de_classe",
+   "pega": "wb:class/magus"
+  },
+  {
+   "em": 3,
+   "slot": "nivel_de_classe",
+   "pega": "wb:class/magus"
+  },
+  {
+   "em": 4,
+   "slot": "nivel_de_classe",
+   "pega": "wb:class/magus"
+  },
+  {
+   "em": 5,
+   "slot": "nivel_de_classe",
+   "pega": "wb:class/magus"
+  },
+  {
+   "em": 6,
+   "slot": "nivel_de_classe",
+   "pega": "wb:class/magus"
+  },
+  {
+   "em": 1,
+   "slot": "boosts_livres",
+   "pega": [
+    "int",
+    "str",
+    "con",
+    "dex"
+   ]
+  },
+  {
+   "em": 5,
+   "slot": "boosts_livres",
+   "pega": [
+    "int",
+    "str",
+    "con",
+    "dex"
+   ]
+  }
+ ]
+}

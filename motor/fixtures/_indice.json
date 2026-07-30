@@ -11,6 +11,14 @@
    "slots_abertos": 13
   },
   {
+   "ficha": "_teste-validacao-has-de-class-feature",
+   "nivel": 6,
+   "hp": 68,
+   "avisos": 3,
+   "fora_do_requisito": 0,
+   "slots_abertos": 17
+  },
+  {
    "ficha": "_teste-validacao-remap-de-arma",
    "nivel": 8,
    "hp": 72,

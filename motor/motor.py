@@ -2191,12 +2191,23 @@ class Personagem:
 
         tudo = {e.get("pega") for e in self.doc.get("escolhas", [])
                 if isinstance(e.get("pega"), str) and no_tempo(e)}
+        # `excluir is None or ...`, e nao so a comparacao: feature vinda da
+        # PROGRESSAO da classe nao tem `raiz` (e None), e `_avaliando` tambem e
+        # None fora de `_checar_requisitos` -- entao `None != None` dava False e
+        # a feature era DESCARTADA. Em `candidatos()`, que e a pergunta central
+        # do app, `_avaliando` nunca e setado: toda class-feature ficava
+        # invisivel para o `has`. Sao 139 clausulas em 135 registros
+        # (`spellstrike` 21, `arcane-cascade` 12, `ki-spells` 12), ou seja um
+        # Magus nunca podia pegar feat de Spellstrike. Achado pela comparacao
+        # com o Pathbuilder (Cleric 20 / `Martyr`).
         excluir = getattr(self, "_avaliando", None)
-        tudo |= {f["id"] for f in self.features if f.get("raiz") != excluir}
+        tudo |= {f["id"] for f in self.features
+                 if excluir is None or f.get("raiz") != excluir}
         # o que a cadeia concedeu conta como "tenho": no jogo nao ha diferenca
         # entre o Streetwise que voce pegou e o que a dedicacao te deu. Mas o
         # que o PROPRIO feat concedeu nao pode satisfazer o requisito dele.
-        tudo |= {c["id"] for c in self.concedidos if c["raiz"] != excluir}
+        tudo |= {c["id"] for c in self.concedidos
+                 if excluir is None or c["raiz"] != excluir}
         tudo |= {c for c in self.ordem_de_classe}
         for reg in (self.ancestria, self.heranca, self.background):
             if reg:

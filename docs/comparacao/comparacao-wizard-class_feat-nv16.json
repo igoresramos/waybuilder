@@ -1,0 +1,195 @@
+[
+  {
+    "slot": "Wizard 16 / class_feat [Class Feats]",
+    "waybuilder": 61,
+    "pathbuilder": 59,
+    "em_comum": 59,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Advanced School Spell",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige ter Arcane School"
+        ]
+      },
+      {
+        "nome": "Bond Conservation",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige ter Arcane Bond"
+        ]
+      },
+      {
+        "nome": "Bonded Focus",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige ter Arcane Bond"
+        ]
+      },
+      {
+        "nome": "Call Wizardly Tools",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige ter Arcane Bond"
+        ]
+      },
+      {
+        "nome": "Enhanced Familiar",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Linked Focus",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige ter Arcane Bond"
+        ]
+      },
+      {
+        "nome": "Necromancer's Visage",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Scroll Adept",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige crafting >= expert; tem untrained"
+        ]
+      },
+      {
+        "nome": "Sepulchral Sublimation",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Superior Bond",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige ter Arcane Bond"
+        ]
+      },
+      {
+        "nome": "Undying Conviction",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      }
+    ]
+  },
+  {
+    "slot": "Wizard 16 / class_feat [Dedication Feats]",
+    "waybuilder": 226,
+    "pathbuilder": 224,
+    "em_comum": 224,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [
+      "Chelaxian Scion Dedication",
+      "Knight Vigilant",
+      "Venture-Gossip Dedication"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Alkenstar Agent Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Bounty Hunter Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige survival >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige stealth >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige stealth >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Eldritch Archer Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Familiar Sage Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Five-breath Vanguard Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Ghost Hunter Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige occultism >= trained; tem untrained",
+          "exige religion >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Red Mantis Assassin Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Seneschal Witch Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Twilight Talon Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige deception >= expert; tem untrained"
+        ]
+      },
+      {
+        "nome": "Ulfen Guard Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "War Mage Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      }
+    ]
+  }
+]

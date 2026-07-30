@@ -1218,6 +1218,31 @@ checar(p_vel._compor_velocidade({"land": 25}, [],
 checar("velocidade_detalhe" in personagem(humano).visao(),
        "e o detalhe nomeia as parcelas")
 
+print("\n`has` de class-feature -- a guarda de auto-satisfacao comia a feature")
+# Achado pela 3a rodada de comparacao com o Pathbuilder (Cleric 20 / Martyr).
+# `_termo_has` monta o conjunto "o que eu tenho" com
+# `{f["id"] for f in self.features if f.get("raiz") != excluir}`. A guarda existe
+# para o feat nao satisfazer o proprio requisito. Mas feature vinda da
+# PROGRESSAO DA CLASSE nao tem `raiz` (e None), e `_avaliando` tambem e None
+# fora de `_checar_requisitos` -- entao `None != None` e False e a feature era
+# DESCARTADA. Em `candidatos()`, que e a pergunta central do app, `_avaliando`
+# NUNCA e setado: toda class-feature ficava invisivel para o `has`.
+# Medido: 139 clausulas em 135 registros (spellstrike 21, arcane-cascade 12,
+# ki-spells 12, debilitating-strike 8).
+clerigo20 = personagem(
+    [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+    + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/cleric"} for n in range(1, 21)])
+checar(any(f.get("id") == "wb:class-feature/divine-font" for f in clerigo20.features),
+       "o Clerigo 20 TEM a feature Divine Font (premissa)")
+checar(clerigo20.avaliar({"has": "wb:class-feature/divine-font"})[0],
+       "e o `has` enxerga a feature da progressao",
+       f"{clerigo20.avaliar({'has': 'wb:class-feature/divine-font'})}")
+martyr = next((c for c in clerigo20.candidatos("class_feat", em=20)
+               if c["id"] == "wb:feat/martyr"), None)
+checar(martyr and martyr["atende"],
+       "e `Martyr` (exige Divine Font) sai como ATENDE em candidatos()",
+       f"{martyr}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

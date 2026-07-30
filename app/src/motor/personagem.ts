@@ -2418,12 +2418,20 @@ export class Personagem implements ContextoDePredicado {
     // `.get`. É o que faz `Call Wizardly Tools` sair como fora-do-requisito
     // ("exige ter Arcane Bond") num Mago que TEM Arcane Bond.
     for (const f of this.features) {
-      if (obter(f as unknown as Dict, "raiz") !== excluir) tudo.add(f.id);
+      // `excluir === null ||`, e não só a comparação: feature vinda da
+      // PROGRESSÃO da classe não tem `raiz` (é null), e `_avaliando` também é
+      // null fora de `_checar_requisitos` -- então `null !== null` dava false e
+      // a feature era DESCARTADA. Em `candidatos()`, a pergunta central do app,
+      // `_avaliando` nunca é setado: toda class-feature ficava invisível para o
+      // `has`. 139 cláusulas em 135 registros.
+      if (excluir === null || obter(f as unknown as Dict, "raiz") !== excluir) tudo.add(f.id);
     }
     // o que a cadeia concedeu conta como "tenho": no jogo não há diferença
     // entre o Streetwise que você pegou e o que a dedicação te deu. Mas o que o
     // PRÓPRIO feat concedeu não pode satisfazer o requisito dele.
-    for (const c of this.concedidos) if (c.raiz !== excluir) tudo.add(c.id);
+    for (const c of this.concedidos) {
+      if (excluir === null || c.raiz !== excluir) tudo.add(c.id);
+    }
     for (const c of this.ordem_de_classe) tudo.add(c);
     for (const reg of [this.ancestria, this.heranca, this.background]) {
       if (reg !== null) tudo.add(reg.id);
