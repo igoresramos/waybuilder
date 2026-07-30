@@ -132,6 +132,13 @@ echo "== 7c2. grau legado que a fusao principal nao alcanca =="
 # item, nivel 12, duas vezes. Depende dos aliases que a fusao (7) escreveu.
 python3 fundir_graus_legados.py
 
+echo "== 7c3. nome antigo como alias, fora de magia =="
+# Achado na 4a rodada do Pathbuilder: `Desperate Wrath` nao carregava `Reckless
+# Abandon`, entao quem digitasse o nome antigo achava so o feat goblin homonimo.
+# Em magia isso saiu em 30/07; fora dela continuava aberto. Roda DEPOIS da fusao,
+# que e quem escreve os aliases do par declarado.
+python3 derivar_alias_legado.py
+
 echo "== 7d. uma opcao por nome em cada eixo de sub-escolha =="
 # a mesma causa do Campeao existe como `wb:cause/justice` e como
 # `wb:class-feature/justice`, em kinds diferentes -- a fusao nao os ve como

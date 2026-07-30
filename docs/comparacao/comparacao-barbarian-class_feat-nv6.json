@@ -1,0 +1,175 @@
+[
+  {
+    "slot": "Barbarian 6 / class_feat [Class Feats]",
+    "waybuilder": 98,
+    "pathbuilder": 99,
+    "em_comum": 98,
+    "so_no_pathbuilder": [
+      "Reckless Abandon"
+    ],
+    "so_no_waybuilder": [],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Nocturnal Senses",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige o sentido low-light vision",
+          "exige o sentido scent"
+        ]
+      },
+      {
+        "nome": "Raging Athlete",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige athletics >= expert; tem trained"
+        ]
+      },
+      {
+        "nome": "Supernatural Senses",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige ter Acute Scent",
+          "exige o sentido scent"
+        ]
+      }
+    ]
+  },
+  {
+    "slot": "Barbarian 6 / class_feat [Dedication Feats]",
+    "waybuilder": 226,
+    "pathbuilder": 224,
+    "em_comum": 224,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [
+      "Chelaxian Scion Dedication",
+      "Knight Vigilant",
+      "Venture-Gossip Dedication"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Aldori Duelist Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige weapon:aldori-dueling-sword >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Alkenstar Agent Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Bounty Hunter Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige survival >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige stealth >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige stealth >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Exemplar Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige STR >= 14; tem 12",
+          "exige DEX >= 14; tem 10"
+        ]
+      },
+      {
+        "nome": "Five-breath Vanguard Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Ghost Hunter Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige occultism >= trained; tem untrained",
+          "exige religion >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Mauler Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige STR >= 14; tem 12"
+        ]
+      },
+      {
+        "nome": "Pactbinder Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Red Mantis Assassin Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Scroll Trickster Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige arcana >= trained; tem untrained",
+          "exige nature >= trained; tem untrained",
+          "exige occultism >= trained; tem untrained",
+          "exige religion >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Seneschal Witch Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Tattooed Historian Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige CON >= 12; tem 10"
+        ]
+      },
+      {
+        "nome": "Twilight Talon Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige deception >= expert; tem untrained"
+        ]
+      },
+      {
+        "nome": "Ulfen Guard Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      }
+    ]
+  }
+]

@@ -194,3 +194,47 @@ Resultado: **nenhum defeito nosso.** Tudo cai nas duas familias ja declaradas.
 Esta leva vale menos pelo que achou e mais pelo que NAO achou: depois dos tres
 consertos das levas anteriores, duas classes novas e um slot novo passaram sem
 defeito.
+
+---
+
+## 8. Quarta rodada: Barbaro 6 / class_feat -- terreno do conserto de hoje
+
+Escolhido de proposito: o eixo `instinct` do Barbaro acabou de mudar (spec
+`instinto-com-dois-ids`), e a sonda e o oraculo de comportamento que confirma.
+
+| aba | so no PB | so no WB | discordam |
+|---|---:|---:|---:|
+| Class Feats (98 x 99) | 1 | 0 | 3 |
+| Dedication Feats (226 x 224) | 0 | 3 | 16 |
+
+**Nenhum defeito nosso.** Tudo cai nas familias ja declaradas:
+
+- **`Raging Athlete`** exige `athletics >= expert` e temos `trained`: a familia da
+  escolha de pericia pendente do lado dele.
+- **`Exemplar Dedication`, `Mauler Dedication`** exigem STR >= 14 e o nosso tem
+  12 -- os boosts do PB nao batem com os nossos, e o proprio comparador avisa que
+  chutar boost fabrica divergencia.
+- **`Aldori Duelist Dedication`** exige treino na espada de duelo Aldori, que um
+  Barbaro nao tem. Nos estamos certos e ele e permissivo.
+- **`Alkenstar Agent`, `Five-breath Vanguard`, `Pactbinder`** (`wb=True
+  pb=False`): principio zero -- pre-requisito narrativo em `requires_residuo`.
+- **`Nocturnal Senses`/`Supernatural Senses`** dependem de sentido/feat que o
+  personagem da bancada nao tem.
+
+### O achado, e ele nao estava na aba
+
+**`Reckless Abandon` so no Pathbuilder.** Investigado: o feat do Barbaro foi
+RENOMEADO para `Desperate Wrath` no Remaster (`feat-173` -> `feat-5868`), e nos
+temos o novo. Recorte de edicao, como `Lightning Snares` na rodada 3.
+
+Mas ao conferir apareceu outra coisa: **`Desperate Wrath` nao tinha o nome antigo
+como alias**, e existe um feat GOBLIN homonimo de nivel 17. Quem digitasse
+`Reckless Abandon` achava o goblin -- silenciosamente errado.
+
+Em 30/07 esse buraco foi fechado para MAGIA (159 renomeacoes). Fora de magia
+continuava aberto: **335 renomeacoes**, em equipment 217, weapon 57, feat 31,
+heritage 12, ritual 9, armor 7 e ancestry 2. `Gnoll -> Kholo`,
+`Grippli -> Tripkee`, `Choker-Arm Mutagen -> Bendy-Arm Mutagen`.
+
+A rodada valeu menos pela aba e mais pelo que a investigacao de UM item
+divergente destravou. Spec `2026-07-30-alias-legado-fora-de-magia.md`.
