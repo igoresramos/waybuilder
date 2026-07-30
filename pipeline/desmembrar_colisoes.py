@@ -140,6 +140,15 @@ def aplicar_curadoria(base, aon, ids, relatorio):
     return novos, tratados
 
 
+def _conjunto_de_fontes(doc) -> frozenset:
+    """As fontes do doc como CONJUNTO. O AoN publica a mesma lista em ordens
+    diferentes nos docs duplicados, entao ordem nao pode participar."""
+    s = doc.get("source") or doc.get("source_raw") or []
+    if isinstance(s, str):
+        s = [s]
+    return frozenset(str(x).strip() for x in s)
+
+
 def sufixo_de(doc, irmaos):
     """Sufixo que separa este doc dos irmaos: trait exclusivo, senao o nivel."""
     meus = {str(t).lower() for t in (doc.get("trait") or [])}
@@ -198,6 +207,23 @@ def main():
                        for g in grupos}
         if len(assinaturas) < 2:
             continue                      # mesma entidade em duas edicoes
+
+        # ...e a assinatura NAO BASTA para dizer isso. Para `Object Reading` o
+        # AoN tem `spell-2012` (traits de acao) e `spell-553` (trait
+        # `uncommon`), que sao o MESMO feitico com o mesmo conjunto de fontes em
+        # ordem diferente -- e sem declarar o par. A assinatura acusava
+        # diferenca e nascia um irmao fantasma, sem tradicao e sem par no
+        # Foundry.
+        #
+        # Conjunto, e nao lista: a ordem varia entre os docs do AoN. Alcanca 102
+        # dos 131 desmembramentos, e NENHUM dos 102 e citado por registro algum
+        # da base -- o canonico existe completo e ninguem depende do irmao.
+        # Spec: `specs/2026-07-30-colisao-por-fonte-repetida.md`
+        if len({_conjunto_de_fontes(g[0]) for g in grupos}) < 2:
+            relatorio.append(f"- `{r['id']}`: {len(grupos)} grupos com o MESMO "
+                             f"conjunto de fontes -- mesma entidade, nao "
+                             f"desmembrada")
+            continue
 
         casado = str((r.get("xref") or {}).get("aon") or "")
         representantes = [g[0] for g in grupos]

@@ -1,7 +1,7 @@
 # Condicao de acesso, lida do campo `access` do AoN
 
 - docs do AoN com `access`: **1010**
-- registros da base que ganharam `acesso`: **732**
+- registros da base que ganharam `acesso`: **730**
 
 Filiacao SUGERE, nunca bloqueia: o campo informa e nao entra em `requires`. Quem joga numa mesa de Golarion pode ser da Pathfinder Society, e o construtor nao tem como saber.
 
@@ -9,9 +9,9 @@ Filiacao SUGERE, nunca bloqueia: o campo informa e nao entra em `requires`. Quem
 
 | kind | registros |
 |---|---:|
-| equipment | 309 |
+| equipment | 308 |
 | feat | 253 |
-| weapon | 89 |
+| weapon | 88 |
 | archetype | 47 |
 | armor | 10 |
 | animal-companion | 10 |
@@ -23,7 +23,7 @@ Filiacao SUGERE, nunca bloqueia: o campo informa e nao entra em `requires`. Quem
 
 | inicio do texto | registros |
 |---|---:|
-| Member of the Pathfinder Society. | 71 |
+| Member of the Pathfinder Society. | 70 |
 | Due to the use of technology, all gadgets are uncommon or ra | 50 |
 | The following regions have access to firearms: Alkenstar, Do | 47 |
 | Second-mark members of the Firebrands have access to this it | 41 |

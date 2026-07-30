@@ -2,7 +2,7 @@
 
 Nao era falta de fonte -- era falha de matching. Duas causas: o Foundry escreve `Leather Armor` onde o AoN escreve `Leather`, e as armas universais (`Fist`, `Shield Bash`) nao existem como arquivo no Foundry, so no dump do AoN.
 
-- registros curados por fonte: **69**
+- registros curados por fonte: **66**
 - herdados do item base (`Base Armor X` no texto): **0**
 - ainda sem o campo critico: **65**
 
@@ -20,7 +20,6 @@ Nao era falta de fonte -- era falha de matching. Duas causas: o Foundry escreve 
 | `wb:armor/studded-leather` | Studded Leather | armor | foundry | ac_bonus, dex_cap, check_penalty, speed_penalty, strength, armor_category, group |
 | `wb:armor/unarmored` | Unarmored | armor | definicao | ac_bonus, armor_category |
 | `wb:weapon/alchemical-bomb` | Alchemical Bomb | weapon | aon | weapon_category |
-| `wb:weapon/aldori-dueling-sword-nv1` | Aldori Dueling Sword | weapon | foundry | damage, weapon_category, group |
 | `wb:weapon/axe-musket-melee` | Axe Musket (Melee) | weapon | aon | damage, weapon_category |
 | `wb:weapon/axe-musket-ranged` | Axe Musket (Ranged) | weapon | aon | damage, weapon_category |
 | `wb:weapon/black-powder-knuckle-dusters-melee` | Black Powder Knuckle Dusters (Melee) | weapon | aon | damage, weapon_category |
@@ -58,7 +57,6 @@ Nao era falta de fonte -- era falha de matching. Duas causas: o Foundry escreve 
 | `wb:weapon/kursarigama` | Kursarigama | weapon | aon | damage, weapon_category |
 | `wb:weapon/lancer-melee` | Lancer (Melee) | weapon | aon | damage, weapon_category |
 | `wb:weapon/lancer-ranged` | Lancer (Ranged) | weapon | aon | damage, weapon_category |
-| `wb:weapon/leiomano-deadly` | Leiomano | weapon | foundry | damage, weapon_category, group |
 | `wb:weapon/mace-multipistol-melee` | Mace Multipistol (Melee) | weapon | aon | damage, weapon_category |
 | `wb:weapon/mace-multipistol-ranged` | Mace Multipistol (Ranged) | weapon | aon | damage, weapon_category |
 | `wb:weapon/magazine-air-repeater` | Magazine (Air Repeater) | weapon | aon | weapon_category |
@@ -79,7 +77,6 @@ Nao era falta de fonte -- era falha de matching. Duas causas: o Foundry escreve 
 | `wb:weapon/tekko-kagi-trip` | Tekko-kagi | weapon | foundry | damage, weapon_category, group |
 | `wb:weapon/three-peaked-tree-melee` | Three Peaked Tree (Melee) | weapon | aon | damage, weapon_category |
 | `wb:weapon/three-peaked-tree-ranged` | Three Peaked Tree (Ranged) | weapon | aon | damage, weapon_category |
-| `wb:weapon/throwing-knife-uncommon` | Throwing Knife | weapon | foundry | damage, weapon_category, group |
 | `wb:weapon/triggerbrand-melee` | Triggerbrand (Melee) | weapon | aon | damage, weapon_category |
 | `wb:weapon/triggerbrand-ranged` | Triggerbrand (Ranged) | weapon | aon | damage, weapon_category |
 | `wb:weapon/wrecker-melee` | Wrecker (Melee) | weapon | aon | damage, weapon_category |

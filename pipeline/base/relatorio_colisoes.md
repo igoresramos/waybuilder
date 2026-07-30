@@ -4,7 +4,7 @@
 entidade orfa -- presente no censo do AoN, ausente da base porque o
 casamento por nome escolheu outra -- vira registro proprio.
 
-- irmaos criados: **121**
+- irmaos criados: **24**
 
 ## Casos
 
@@ -24,173 +24,112 @@ casamento por nome escolheu outra -- vira registro proprio.
 - `wb:feat/current-spell` (casou `feat-4344`) ganhou irmao `wb:feat/current-spell-druid` de `feat-4728` -- nv6, traits ['Concentrate', 'Druid', 'Metamagic', 'Spellshape']
 - `wb:feat/daywalker` (casou `feat-2352`) ganhou irmao `wb:feat/daywalker-archetype` de `feat-3549` -- nv6, traits ['Abjuration', 'Archetype', 'Divine']
 - `wb:feat/draconic-scent` (casou `feat-5737`) ganhou irmao `wb:feat/draconic-scent-archetype` de `feat-1942` -- nv4, traits ['Archetype']
-- `wb:feat/jellyfish-stance` realinhado com `feat-4077`: nivel 8 -> 8, traits ['monk', 'stance'] -> ['monk', 'stance', 'uncommon']
-- `wb:feat/jellyfish-stance` (casou `feat-4077`) ganhou irmao `wb:feat/jellyfish-stance-nv6` de `feat-2729` -- nv6, traits ['Monk', 'Stance', 'Uncommon']
+- `wb:feat/jellyfish-stance`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:feat/know-it-all` realinhado com `feat-4607`: nivel 8 -> 8, traits ['archetype', 'bard', 'thaumaturge'] -> ['bard', 'thaumaturge']
 - `wb:feat/know-it-all` (casou `feat-4607`) ganhou irmao `wb:feat/know-it-all-archetype` de `feat-2664` -- nv10, traits ['Archetype']
 - `wb:feat/many-guises` realinhado com `feat-6883`: nivel 8 -> 9, traits ['kitsune'] -> ['kitsune']
 - `wb:feat/many-guises` (casou `feat-6883`) ganhou irmao `wb:feat/many-guises-archetype` de `feat-6432` -- nv8, traits ['Archetype']
 - `wb:feat/master-of-many-styles` (casou `feat-4850`) ganhou irmao `wb:feat/master-of-many-styles-nv16` de `feat-480` -- nv16, traits ['Monk']
-- `wb:feat/rain-of-embers-stance` realinhado com `feat-2269`: nivel 1 -> 1, traits ['fire', 'monk', 'stance'] -> ['fire', 'monk', 'rare', 'stance']
-- `wb:feat/rain-of-embers-stance` (casou `feat-2269`) ganhou irmao `wb:feat/rain-of-embers-stance-nv1` de `feat-936` -- nv1, traits ['Monk', 'Rare', 'Stance']
+- `wb:feat/rain-of-embers-stance`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:feat/rallying-charge` (casou `feat-7750`) ganhou irmao `wb:feat/rallying-charge-visual` de `feat-6357` -- nv6, traits ['Archetype', 'Visual']
 - `wb:feat/riptide` (casou `feat-2679`) ganhou irmao `wb:feat/riptide-archetype` de `feat-8923` -- nv8, traits ['Archetype', 'Attack', 'Manipulate']
-- `wb:feat/sixth-pillar-mastery` (casou `feat-4078`) ganhou irmao `wb:feat/sixth-pillar-mastery-nv16` de `feat-2742` -- nv16, traits ['Archetype']
-- `wb:feat/spell-mastery` (casou `feat-5055`) ganhou irmao `wb:feat/spell-mastery-uncommon` de `feat-1169` -- nv20, traits ['Uncommon', 'Wizard']
-- `wb:feat/touch-focus` (casou `feat-4079`) ganhou irmao `wb:feat/touch-focus-nv14` de `feat-2743` -- nv14, traits ['Archetype', 'Manipulate', 'Metamagic', 'Spellshape']
-- `wb:feat/tusks` (casou `feat-4519`) ganhou irmao `wb:feat/tusks-dromaar` de `feat-963` -- nv1, traits ['Dromaar', 'Half-Orc']
-- `wb:feat/ultimate-flexibility` (casou `feat-4858`) ganhou irmao `wb:feat/ultimate-flexibility-uncommon` de `feat-1171` -- nv20, traits ['Fighter', 'Uncommon']
-- `wb:feat/unstoppable-juggernaut` (casou `feat-5880`) ganhou irmao `wb:feat/unstoppable-juggernaut-uncommon` de `feat-1167` -- nv20, traits ['Barbarian', 'Uncommon']
+- `wb:feat/sixth-pillar-mastery`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:feat/spell-mastery`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:feat/touch-focus`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:feat/tusks`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:feat/ultimate-flexibility`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:feat/unstoppable-juggernaut`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:feat/voice-of-the-elements` (casou `feat-8082`) ganhou irmao `wb:feat/voice-of-the-elements-kineticist` de `feat-4188` -- nv2, traits ['Kineticist']
 - `wb:feat/watch-your-back` (casou `feat-4948`) ganhou irmao `wb:feat/watch-your-back-archetype` de `feat-8845` -- nv14, traits ['Archetype', 'Auditory', 'Linguistic', 'Mental']
-- `wb:archetype/bright-lion` realinhado com `archetype-129`: nivel 2 -> 2, traits [] -> ['uncommon']
-- `wb:archetype/bright-lion` (casou `archetype-129`) ganhou irmao `wb:archetype/bright-lion-archetype-83` de `archetype-83` -- nvNone, traits []
-- `wb:spell/object-reading` realinhado com `spell-2012`: nivel 1 -> 1, traits ['concentrate', 'manipulate', 'uncommon'] -> ['concentrate', 'manipulate']
-- `wb:spell/object-reading` (casou `spell-2012`) ganhou irmao `wb:spell/object-reading-uncommon` de `spell-553` -- nv1, traits ['Divination', 'Uncommon']
-- `wb:spell/pillar-of-water` realinhado com `spell-1394`: nivel 3 -> 3, traits ['concentrate', 'manipulate', 'uncommon', 'water'] -> ['concentrate', 'manipulate', 'water']
-- `wb:spell/pillar-of-water` (casou `spell-1394`) ganhou irmao `wb:spell/pillar-of-water-uncommon` de `spell-646` -- nv3, traits ['Evocation', 'Uncommon', 'Water']
-- `wb:spell/powerful-inhalation` (casou `spell-1305`) ganhou irmao `wb:spell/powerful-inhalation-evocation` de `spell-1054` -- nv3, traits ['Air', 'Druid', 'Evocation', 'Focus', 'Uncommon']
-- `wb:spell/practice-makes-perfect` (casou `spell-2417`) ganhou irmao `wb:spell/practice-makes-perfect-divination` de `spell-559` -- nv1, traits ['Cleric', 'Divination', 'Focus', 'Uncommon']
-- `wb:spell/pulverizing-cascade` (casou `spell-1311`) ganhou irmao `wb:spell/pulverizing-cascade-evocation` de `spell-1055` -- nv3, traits ['Druid', 'Evocation', 'Focus', 'Uncommon', 'Water']
-- `wb:spell/rising-surf` (casou `spell-1310`) ganhou irmao `wb:spell/rising-surf-conjuration` de `spell-1056` -- nv1, traits ['Conjuration', 'Druid', 'Focus', 'Move', 'Uncommon', 'Water']
-- `wb:spell/stone-lance` (casou `spell-1307`) ganhou irmao `wb:spell/stone-lance-evocation` de `spell-1057` -- nv3, traits ['Attack', 'Druid', 'Earth', 'Evocation', 'Focus', 'Uncommon']
-- `wb:spell/tireless-worker` (casou `spell-2418`) ganhou irmao `wb:spell/tireless-worker-necromancy` de `spell-560` -- nv4, traits ['Focus', 'Healing', 'Necromancy']
-- `wb:spell/updraft` (casou `spell-1304`) ganhou irmao `wb:spell/updraft-evocation` de `spell-1058` -- nv1, traits ['Air', 'Druid', 'Evocation', 'Focus', 'Uncommon']
-- `wb:spell/verdant-sprout` realinhado com `spell-1413`: nivel 1 -> 1, traits ['concentrate', 'manipulate', 'plant', 'uncommon', 'wood'] -> ['concentrate', 'manipulate', 'plant', 'wood']
-- `wb:spell/verdant-sprout` (casou `spell-1413`) ganhou irmao `wb:spell/verdant-sprout-uncommon` de `spell-641` -- nv1, traits ['Conjuration', 'Plant', 'Uncommon']
-- `wb:spell/wildfire` (casou `spell-1308`) ganhou irmao `wb:spell/wildfire-conjuration` de `spell-1059` -- nv1, traits ['Conjuration', 'Druid', 'Fire', 'Focus', 'Uncommon']
-- `wb:spell/chilling-spray` (casou `spell-1975`) ganhou irmao `wb:spell/chilling-spray-evocation` de `spell-571` -- nv1, traits ['Cold', 'Evocation']
-- `wb:spell/combustion` (casou `spell-1309`) ganhou irmao `wb:spell/combustion-evocation` de `spell-1052` -- nv3, traits ['Druid', 'Evocation', 'Fire', 'Focus', 'Uncommon']
-- `wb:spell/crushing-ground` (casou `spell-1306`) ganhou irmao `wb:spell/crushing-ground-transmutation` de `spell-1053` -- nv1, traits ['Druid', 'Earth', 'Focus', 'Transmutation', 'Uncommon']
-- `wb:spell/fearful-feast` (casou `spell-2376`) ganhou irmao `wb:spell/fearful-feast-necromancy` de `spell-843` -- nv4, traits ['Fear', 'Focus', 'Mental', 'Necromancy', 'Uncommon']
-- `wb:spell/ill-omen` (casou `spell-1566`) ganhou irmao `wb:spell/ill-omen-divination` de `spell-578` -- nv1, traits ['Curse', 'Divination', 'Misfortune']
-- `wb:spell/imprint-message` realinhado com `spell-2003`: nivel 1 -> 1, traits ['concentrate', 'manipulate', 'uncommon'] -> ['concentrate', 'manipulate']
-- `wb:spell/imprint-message` (casou `spell-2003`) ganhou irmao `wb:spell/imprint-message-uncommon` de `spell-551` -- nv1, traits ['Divination', 'Uncommon']
-- `wb:equipment/acid-flask` realinhado com `equipment-3286`: nivel 1+ -> 1, traits ['acid', 'alchemical', 'bomb', 'consumable', 'splash'] -> ['acid', 'alchemical', 'bomb', 'consumable', 'splash']
-- `wb:equipment/acid-flask` (casou `equipment-3286`) ganhou irmao `wb:equipment/acid-flask-nv0` de `equipment-2875` -- nv0, traits ['Acid', 'Alchemical', 'Bomb', 'Consumable', 'Splash']
-- `wb:equipment/alchemist-goggles` (casou `equipment-3431`) ganhou irmao `wb:equipment/alchemist-goggles-transmutation` de `equipment-408` -- nv0, traits ['Invested', 'Magical', 'Transmutation']
-- `wb:equipment/alchemist-goggles` (casou `equipment-3431`) ganhou irmao `wb:equipment/alchemist-goggles-nv4` de `equipment-3431-3299` -- nv4, traits ['Invested', 'Magical']
-- `wb:equipment/alchemists-fire` realinhado com `equipment-3287`: nivel 1+ -> 1, traits ['alchemical', 'bomb', 'consumable', 'fire', 'splash'] -> ['alchemical', 'bomb', 'consumable', 'fire', 'splash']
-- `wb:equipment/alchemists-fire` (casou `equipment-3287`) ganhou irmao `wb:equipment/alchemists-fire-nv0` de `equipment-2876` -- nv0, traits ['Alchemical', 'Bomb', 'Consumable', 'Fire', 'Splash']
-- `wb:equipment/antidote` realinhado com `equipment-3296`: nivel 1+ -> 1, traits ['alchemical', 'consumable', 'elixir', 'healing'] -> ['alchemical', 'consumable', 'elixir', 'healing']
-- `wb:equipment/antidote` (casou `equipment-3296`) ganhou irmao `wb:equipment/antidote-nv0` de `equipment-2879` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Healing']
-- `wb:equipment/antiplague` realinhado com `equipment-3297`: nivel 1+ -> 1, traits ['alchemical', 'consumable', 'elixir', 'healing'] -> ['alchemical', 'consumable', 'elixir', 'healing']
-- `wb:equipment/antiplague` (casou `equipment-3297`) ganhou irmao `wb:equipment/antiplague-nv0` de `equipment-2880` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Healing']
-- `wb:equipment/bellflower-toolbelt` realinhado com `equipment-2308`: nivel 6 -> 6, traits ['invested', 'magical'] -> ['invested', 'magical', 'rare']
-- `wb:equipment/bellflower-toolbelt` (casou `equipment-2308`) ganhou irmao `wb:equipment/bellflower-toolbelt-transmutation` de `equipment-505` -- nv6, traits ['Invested', 'Magical', 'Rare', 'Transmutation']
-- `wb:equipment/bombers-eye-elixir` realinhado com `equipment-3298`: nivel 4+ -> 4, traits ['alchemical', 'consumable', 'elixir'] -> ['alchemical', 'consumable', 'elixir']
-- `wb:equipment/bombers-eye-elixir` (casou `equipment-3298`) ganhou irmao `wb:equipment/bombers-eye-elixir-nv0` de `equipment-2881` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir']
-- `wb:equipment/bravos-brew` realinhado com `equipment-3300`: nivel 2+ -> 2, traits ['alchemical', 'consumable', 'elixir', 'mental'] -> ['alchemical', 'consumable', 'elixir', 'mental']
-- `wb:equipment/bravos-brew` (casou `equipment-3300`) ganhou irmao `wb:equipment/bravos-brew-nv0` de `equipment-2882` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Mental']
-- `wb:equipment/candlecap` (casou `equipment-2332`) ganhou irmao `wb:equipment/candlecap-evocation` de `equipment-1503` -- nv1, traits ['Evocation', 'Invested', 'Magical', 'Unique']
-- `wb:equipment/cheetahs-elixir` realinhado com `equipment-3302`: nivel 1+ -> 1, traits ['alchemical', 'consumable', 'elixir'] -> ['alchemical', 'consumable', 'elixir']
-- `wb:equipment/cheetahs-elixir` (casou `equipment-3302`) ganhou irmao `wb:equipment/cheetahs-elixir-nv0` de `equipment-2884` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir']
-- `wb:equipment/corpseward-pendant` realinhado com `equipment-2341`: nivel 5 -> 5, traits ['invested', 'magical'] -> ['invested', 'magical', 'uncommon']
-- `wb:equipment/corpseward-pendant` (casou `equipment-2341`) ganhou irmao `wb:equipment/corpseward-pendant-abjuration` de `equipment-806` -- nv5, traits ['Abjuration', 'Invested', 'Magical', 'Uncommon']
-- `wb:equipment/crown-of-the-companion` realinhado com `equipment-2334`: nivel 6 -> 6, traits ['healing', 'invested', 'magical', 'vitality'] -> ['healing', 'invested', 'magical', 'uncommon', 'vitality']
-- `wb:equipment/crown-of-the-companion` (casou `equipment-2334`) ganhou irmao `wb:equipment/crown-of-the-companion-necromancy` de `equipment-1086` -- nv6, traits ['Healing', 'Invested', 'Magical', 'Necromancy', 'Positive', 'Uncommon', 'Vitality']
-- `wb:equipment/cursed-dreamstone` realinhado com `equipment-507-589`: nivel 9 -> 9, traits ['cursed', 'magical'] -> ['magical', 'uncommon']
-- `wb:equipment/cursed-dreamstone` (casou `equipment-507-589`) ganhou irmao `wb:equipment/cursed-dreamstone-rare` de `equipment-641` -- nv9, traits ['Cursed', 'Enchantment', 'Magical', 'Rare']
-- `wb:equipment/darkvision-elixir` realinhado com `equipment-3305`: nivel 2+ -> 2, traits ['alchemical', 'consumable', 'elixir'] -> ['alchemical', 'consumable', 'elixir']
-- `wb:equipment/darkvision-elixir` (casou `equipment-3305`) ganhou irmao `wb:equipment/darkvision-elixir-nv0` de `equipment-2885` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir']
+- `wb:archetype/bright-lion`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/object-reading`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/pillar-of-water`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/powerful-inhalation`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/practice-makes-perfect`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/pulverizing-cascade`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/rising-surf`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/stone-lance`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/tireless-worker`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/updraft`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/verdant-sprout`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/wildfire`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/chilling-spray`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/combustion`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/crushing-ground`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/fearful-feast`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/ill-omen`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:spell/imprint-message`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/acid-flask`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/alchemist-goggles`: 3 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/alchemists-fire`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/antidote`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/antiplague`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/bellflower-toolbelt`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/bombers-eye-elixir`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/bravos-brew`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/candlecap`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/cheetahs-elixir`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/corpseward-pendant`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/crown-of-the-companion`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/cursed-dreamstone`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/darkvision-elixir`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:equipment/dragon-pearl` realinhado com `equipment-3482`: nivel 10 -> 10, traits ['alchemical', 'consumable', 'processed'] -> ['alchemical', 'consumable', 'rare']
 - `wb:equipment/dragon-pearl` (casou `equipment-3482`) ganhou irmao `wb:equipment/dragon-pearl-uncommon` de `equipment-4011` -- nv16, traits ['Invested', 'Magical', 'Uncommon']
-- `wb:equipment/dragon-rune-bracelet` (casou `equipment-2322`) ganhou irmao `wb:equipment/dragon-rune-bracelet-uncommon` de `equipment-1442` -- nv11, traits ['Enchantment', 'Focused', 'Invested', 'Magical', 'Uncommon']
-- `wb:equipment/dread-ampoule` realinhado com `equipment-3292`: nivel 1+ -> 1, traits ['alchemical', 'bomb', 'consumable', 'emotion', 'fear', 'mental', 'poison', 'splash'] -> ['alchemical', 'bomb', 'consumable', 'emotion', 'fear', 'mental', 'poison', 'splash']
-- `wb:equipment/dread-ampoule` (casou `equipment-3292`) ganhou irmao `wb:equipment/dread-ampoule-nv0` de `equipment-2877` -- nv0, traits ['Alchemical', 'Bomb', 'Consumable', 'Emotion', 'Fear', 'Mental', 'Poison', 'Splash']
-- `wb:equipment/eagle-eye-elixir` realinhado com `equipment-3306`: nivel 1+ -> 1, traits ['alchemical', 'consumable', 'elixir'] -> ['alchemical', 'consumable', 'elixir']
-- `wb:equipment/eagle-eye-elixir` (casou `equipment-3306`) ganhou irmao `wb:equipment/eagle-eye-elixir-nv0` de `equipment-2886` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir']
-- `wb:equipment/elixir-of-life` realinhado com `equipment-3308`: nivel 1+ -> 1, traits ['alchemical', 'consumable', 'elixir', 'healing'] -> ['alchemical', 'consumable', 'elixir', 'healing']
-- `wb:equipment/elixir-of-life` (casou `equipment-3308`) ganhou irmao `wb:equipment/elixir-of-life-nv0` de `equipment-2887` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Healing']
-- `wb:equipment/energy-mutagen` realinhado com `equipment-1962`: nivel 1+ -> 1, traits ['alchemical', 'consumable', 'elixir', 'mutagen', 'polymorph'] -> ['alchemical', 'consumable', 'elixir', 'mutagen', 'polymorph']
-- `wb:equipment/energy-mutagen` (casou `equipment-1962`) ganhou irmao `wb:equipment/energy-mutagen-uncommon` de `equipment-474` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Mutagen', 'Polymorph', 'Uncommon']
-- `wb:equipment/ethersight-ring` realinhado com `equipment-2342`: nivel 7 -> 7, traits ['invested', 'magical', 'revelation'] -> ['invested', 'magical', 'revelation', 'uncommon']
-- `wb:equipment/ethersight-ring` (casou `equipment-2342`) ganhou irmao `wb:equipment/ethersight-ring-divination` de `equipment-814` -- nv7, traits ['Divination', 'Invested', 'Magical', 'Revelation', 'Uncommon']
-- `wb:equipment/everyneed-pack` realinhado com `equipment-2306`: nivel 3 -> 3, traits ['invested', 'magical'] -> ['invested', 'magical', 'uncommon']
-- `wb:equipment/everyneed-pack` (casou `equipment-2306`) ganhou irmao `wb:equipment/everyneed-pack-conjuration` de `equipment-856` -- nv0, traits ['Conjuration', 'Invested', 'Magical', 'Uncommon']
-- `wb:equipment/furnace-of-endings` realinhado com `equipment-2552`: nivel 5 -> 2, traits ['fire', 'invested', 'magical'] -> ['fire', 'invested', 'magical', 'uncommon']
-- `wb:equipment/furnace-of-endings` (casou `equipment-2552`) ganhou irmao `wb:equipment/furnace-of-endings-nv5` de `equipment-2552-2299` -- nv5, traits ['Fire', 'Invested', 'Magical', 'Transmutation', 'Uncommon']
-- `wb:equipment/glow-rod` realinhado com `equipment-3355`: nivel 1 -> 1, traits ['alchemical', 'consumable', 'light'] -> ['alchemical', 'consumable']
-- `wb:equipment/glow-rod` (casou `equipment-3355`) ganhou irmao `wb:equipment/glow-rod-light` de `equipment-2910` -- nv1, traits ['Alchemical', 'Consumable', 'Light']
-- `wb:equipment/glue-bomb` (casou `equipment-3295`) ganhou irmao `wb:equipment/glue-bomb-nv0` de `equipment-2878` -- nv0, traits ['Alchemical', 'Bomb', 'Consumable']
-- `wb:equipment/goz-mask` (casou `equipment-2348`) ganhou irmao `wb:equipment/goz-mask-uncommon` de `equipment-960` -- nv0, traits ['Invested', 'Magical', 'Transmutation', 'Uncommon']
-- `wb:equipment/grinning-pugwampi` realinhado com `equipment-2107`: nivel 14 -> 14, traits ['consumable', 'magical', 'misfortune', 'talisman'] -> ['consumable', 'magical', 'misfortune', 'talisman', 'uncommon']
-- `wb:equipment/grinning-pugwampi` (casou `equipment-2107`) ganhou irmao `wb:equipment/grinning-pugwampi-enchantment` de `equipment-544` -- nv14, traits ['Consumable', 'Enchantment', 'Magical', 'Misfortune', 'Talisman', 'Uncommon']
-- `wb:equipment/headbands-of-translocation` realinhado com `equipment-2336`: nivel 16 -> 16, traits ['invested', 'magical', 'teleportation'] -> ['invested', 'magical', 'teleportation', 'uncommon']
-- `wb:equipment/headbands-of-translocation` (casou `equipment-2336`) ganhou irmao `wb:equipment/headbands-of-translocation-conjuration` de `equipment-949` -- nv16, traits ['Conjuration', 'Invested', 'Magical', 'Teleportation', 'Uncommon']
-- `wb:equipment/herd-mask` realinhado com `equipment-2349`: nivel 6 -> 6, traits ['invested', 'magical', 'teleportation'] -> ['invested', 'magical', 'teleportation', 'uncommon']
-- `wb:equipment/herd-mask` (casou `equipment-2349`) ganhou irmao `wb:equipment/herd-mask-conjuration` de `equipment-961` -- nv6, traits ['Conjuration', 'Invested', 'Magical', 'Teleportation', 'Uncommon']
-- `wb:equipment/hunters-arrowhead` realinhado com `equipment-2343`: nivel 4 -> 4, traits ['invested', 'magical'] -> ['invested', 'magical', 'rare']
-- `wb:equipment/hunters-arrowhead` (casou `equipment-2343`) ganhou irmao `wb:equipment/hunters-arrowhead-enchantment` de `equipment-483` -- nv4, traits ['Enchantment', 'Invested', 'Magical', 'Rare']
-- `wb:equipment/inspiring-spotlight` realinhado com `equipment-3531`: nivel 9 -> 9, traits ['light', 'magical'] -> ['light', 'magical', 'rare']
-- `wb:equipment/inspiring-spotlight` (casou `equipment-3531`) ganhou irmao `wb:equipment/inspiring-spotlight-uncommon` de `equipment-585` -- nv9, traits ['Enchantment', 'Light', 'Magical', 'Uncommon']
-- `wb:equipment/irritating-seedpod` realinhado com `equipment-3735`: nivel 7 -> 3, traits ['catalyst', 'consumable', 'magical'] -> ['catalyst', 'consumable', 'magical', 'uncommon']
-- `wb:equipment/irritating-seedpod` (casou `equipment-3735`) ganhou irmao `wb:equipment/irritating-seedpod-nv7` de `equipment-3735-3517` -- nv7, traits ['Catalyst', 'Consumable', 'Magical', 'Uncommon']
-- `wb:equipment/lethargy-poison` realinhado com `equipment-3340`: nivel 2 -> 2, traits ['alchemical', 'consumable', 'incapacitation', 'injury', 'poison', 'sleep'] -> ['alchemical', 'consumable', 'incapacitation', 'injury', 'poison', 'sleep', 'uncommon']
-- `wb:equipment/lethargy-poison` (casou `equipment-3340`) ganhou irmao `wb:equipment/lethargy-poison-nv2` de `equipment-2902` -- nv2, traits ['Alchemical', 'Consumable', 'Incapacitation', 'Injury', 'Poison', 'Sleep']
-- `wb:equipment/mask-of-mercy` (casou `equipment-2350`) ganhou irmao `wb:equipment/mask-of-mercy-uncommon` de `equipment-963` -- nv4, traits ['Fortune', 'Invested', 'Magical', 'Necromancy', 'Uncommon']
-- `wb:equipment/mask-of-the-cursed-eye` realinhado com `equipment-2351`: nivel 8 -> 8, traits ['invested', 'magical'] -> ['invested', 'magical', 'uncommon']
-- `wb:equipment/mask-of-the-cursed-eye` (casou `equipment-2351`) ganhou irmao `wb:equipment/mask-of-the-cursed-eye-necromancy` de `equipment-962` -- nv8, traits ['Invested', 'Magical', 'Necromancy', 'Uncommon']
-- `wb:equipment/matchstick` realinhado com `equipment-3356`: nivel 1 -> 1, traits ['alchemical', 'consumable', 'fire'] -> ['alchemical', 'consumable']
-- `wb:equipment/matchstick` (casou `equipment-3356`) ganhou irmao `wb:equipment/matchstick-fire` de `equipment-2911` -- nv1, traits ['Alchemical', 'Consumable', 'Fire']
-- `wb:equipment/mistform-elixir` realinhado com `equipment-3310`: nivel 4+ -> 4, traits ['alchemical', 'consumable', 'elixir', 'illusion', 'visual'] -> ['alchemical', 'consumable', 'elixir', 'illusion', 'visual']
-- `wb:equipment/mistform-elixir` (casou `equipment-3310`) ganhou irmao `wb:equipment/mistform-elixir-nv0` de `equipment-2888` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Illusion', 'Visual']
-- `wb:equipment/orb-of-dragonkind` realinhado com `equipment-616`: nivel 25 -> 20, traits ['arcane', 'artifact'] -> ['arcane', 'artifact', 'unique']
-- `wb:equipment/orb-of-dragonkind` (casou `equipment-616`) ganhou irmao `wb:equipment/orb-of-dragonkind-nv0` de `equipment-561` -- nv0, traits []
-- `wb:equipment/orb-of-dragonkind` (casou `equipment-616`) ganhou irmao `wb:equipment/orb-of-dragonkind-nv25` de `equipment-616-638` -- nv25, traits ['Arcane', 'Artifact', 'Enchantment', 'Unique']
-- `wb:equipment/pacifying` (casou `equipment-1870`) ganhou irmao `wb:equipment/pacifying-uncommon` de `equipment-801` -- nv5, traits ['Enchantment', 'Magical', 'Uncommon']
-- `wb:equipment/pactmasters-grace` (casou `equipment-2344`) ganhou irmao `wb:equipment/pactmasters-grace-divination` de `equipment-548` -- nv14, traits ['Divination', 'Invested', 'Magical', 'Uncommon']
-- `wb:equipment/peachwood` realinhado com `equipment-3470`: nivel 8+ -> 8, traits ['precious'] -> ['precious', 'uncommon']
-- `wb:equipment/peachwood` (casou `equipment-3470`) ganhou irmao `wb:equipment/peachwood-nv0` de `equipment-1541` -- nv0, traits ['Precious', 'Uncommon']
-- `wb:equipment/peachwood-talisman` realinhado com `equipment-3471`: nivel 6 -> 6, traits ['consumable', 'magical', 'talisman'] -> ['consumable', 'magical', 'talisman', 'uncommon']
-- `wb:equipment/peachwood-talisman` (casou `equipment-3471`) ganhou irmao `wb:equipment/peachwood-talisman-abjuration` de `equipment-1542` -- nv6, traits ['Abjuration', 'Consumable', 'Magical', 'Talisman', 'Uncommon']
-- `wb:equipment/peachwood-weapon` realinhado com `equipment-3472`: nivel 12+ -> 12, traits ['uncommon'] -> ['uncommon']
-- `wb:equipment/peachwood-weapon` (casou `equipment-3472`) ganhou irmao `wb:equipment/peachwood-weapon-nv0` de `equipment-1543` -- nv0, traits ['Uncommon']
-- `wb:equipment/rhinoceros-mask` realinhado com `equipment-2352`: nivel 4 -> 4, traits ['invested', 'magical'] -> ['invested', 'magical', 'uncommon']
-- `wb:equipment/rhinoceros-mask` (casou `equipment-2352`) ganhou irmao `wb:equipment/rhinoceros-mask-transmutation` de `equipment-965` -- nv0, traits ['Invested', 'Magical', 'Transmutation', 'Uncommon']
-- `wb:equipment/ring-of-discretion` (casou `equipment-2345`) ganhou irmao `wb:equipment/ring-of-discretion-uncommon` de `equipment-804` -- nv1, traits ['Illusion', 'Invested', 'Magical', 'Uncommon', 'Visual']
-- `wb:equipment/sea-touch-elixir` realinhado com `equipment-3311`: nivel 5+ -> 5, traits ['alchemical', 'consumable', 'elixir', 'polymorph'] -> ['alchemical', 'consumable', 'elixir', 'polymorph']
-- `wb:equipment/sea-touch-elixir` (casou `equipment-3311`) ganhou irmao `wb:equipment/sea-touch-elixir-nv0` de `equipment-2889` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Polymorph']
-- `wb:equipment/shapespeak-mask` (casou `equipment-2353`) ganhou irmao `wb:equipment/shapespeak-mask-uncommon` de `equipment-966` -- nv4, traits ['Invested', 'Magical', 'Transmutation', 'Uncommon']
+- `wb:equipment/dragon-rune-bracelet`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/dread-ampoule`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/eagle-eye-elixir`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/elixir-of-life`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/energy-mutagen`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/ethersight-ring`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/everyneed-pack`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/furnace-of-endings`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/glow-rod`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/glue-bomb`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/goz-mask`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/grinning-pugwampi`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/headbands-of-translocation`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/herd-mask`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/hunters-arrowhead`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/inspiring-spotlight`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/irritating-seedpod`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/lethargy-poison`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/mask-of-mercy`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/mask-of-the-cursed-eye`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/matchstick`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/mistform-elixir`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/orb-of-dragonkind`: 3 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/pacifying`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/pactmasters-grace`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/peachwood`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/peachwood-talisman`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/peachwood-weapon`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/rhinoceros-mask`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/ring-of-discretion`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/sea-touch-elixir`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/shapespeak-mask`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:equipment/silver-ingot` realinhado com `equipment-2920-2782`: nivel 0 -> 2, traits ['precious'] -> ['precious']
 - `wb:equipment/silver-ingot` (casou `equipment-2920-2782`) ganhou irmao `wb:equipment/silver-ingot-nv0` de `equipment-1781` -- nv0, traits []
-- `wb:equipment/skinsaw-mask` realinhado com `equipment-2354`: nivel 3 -> 3, traits ['divine', 'invested', 'unholy'] -> ['divine', 'invested', 'uncommon', 'unholy']
-- `wb:equipment/skinsaw-mask` (casou `equipment-2354`) ganhou irmao `wb:equipment/skinsaw-mask-divination` de `equipment-817` -- nv3, traits ['Divination', 'Divine', 'Evil', 'Invested', 'Magical', 'Uncommon']
-- `wb:equipment/skittering-mask` (casou `equipment-2355`) ganhou irmao `wb:equipment/skittering-mask-uncommon` de `equipment-967` -- nv0, traits ['Invested', 'Magical', 'Transmutation', 'Uncommon']
-- `wb:equipment/smoke-ball` (casou `equipment-3360`) ganhou irmao `wb:equipment/smoke-ball-nv0` de `equipment-2913` -- nv0, traits ['Alchemical', 'Consumable']
-- `wb:equipment/spiderfoot-brew` realinhado com `equipment-1966`: nivel 3+ -> 3, traits ['alchemical', 'consumable', 'elixir', 'morph'] -> ['alchemical', 'consumable', 'elixir', 'morph']
-- `wb:equipment/spiderfoot-brew` (casou `equipment-1966`) ganhou irmao `wb:equipment/spiderfoot-brew-uncommon` de `equipment-1461` -- nv17, traits ['Alchemical', 'Consumable', 'Elixir', 'Polymorph', 'Uncommon']
-- `wb:equipment/spiritsight-ring` realinhado com `equipment-2346`: nivel 6 -> 6, traits ['invested', 'magical'] -> ['invested', 'magical', 'uncommon']
-- `wb:equipment/spiritsight-ring` (casou `equipment-2346`) ganhou irmao `wb:equipment/spiritsight-ring-enchantment` de `equipment-1526` -- nv6, traits ['Enchantment', 'Invested', 'Magical', 'Uncommon']
-- `wb:equipment/stone-body-mutagen` realinhado com `equipment-1967`: nivel 5+ -> 5, traits ['alchemical', 'consumable', 'elixir', 'mutagen', 'polymorph'] -> ['alchemical', 'consumable', 'elixir', 'mutagen', 'polymorph']
-- `wb:equipment/stone-body-mutagen` (casou `equipment-1967`) ganhou irmao `wb:equipment/stone-body-mutagen-uncommon` de `equipment-475` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Mutagen', 'Polymorph', 'Uncommon']
-- `wb:equipment/stormbreaker-fulu` realinhado com `equipment-984`: nivel 16 -> 16, traits ['consumable', 'fulu', 'magical', 'talisman'] -> ['consumable', 'fulu', 'magical', 'talisman', 'uncommon']
-- `wb:equipment/stormbreaker-fulu` (casou `equipment-984`) ganhou irmao `wb:equipment/stormbreaker-fulu-nv16` de `equipment-951` -- nv16, traits ['Abjuration', 'Consumable', 'Fulu', 'Magical', 'Uncommon']
-- `wb:equipment/stupor-poison` realinhado com `equipment-2016`: nivel 7 -> 7, traits ['alchemical', 'consumable', 'incapacitation', 'injury', 'poison', 'sleep'] -> ['alchemical', 'consumable', 'incapacitation', 'injury', 'poison', 'sleep', 'uncommon']
-- `wb:equipment/stupor-poison` (casou `equipment-2016`) ganhou irmao `wb:equipment/stupor-poison-nv4` de `equipment-939` -- nv4, traits ['Alchemical', 'Consumable', 'Incapacitation', 'Injury', 'Poison', 'Sleep', 'Uncommon']
-- `wb:equipment/sure-step-crampons` (casou `equipment-2312`) ganhou irmao `wb:equipment/sure-step-crampons-uncommon` de `equipment-1527` -- nv6, traits ['Invested', 'Magical', 'Transmutation', 'Uncommon']
-- `wb:equipment/swarmeaters-clasp` (casou `equipment-2347`) ganhou irmao `wb:equipment/swarmeaters-clasp-uncommon` de `equipment-818` -- nv8, traits ['Abjuration', 'Invested', 'Magical', 'Uncommon']
-- `wb:equipment/talisman-cord` realinhado com `equipment-883`: nivel 10 -> 4, traits ['invested', 'magical'] -> ['invested', 'magical', 'uncommon']
-- `wb:equipment/talisman-cord` (casou `equipment-883`) ganhou irmao `wb:equipment/talisman-cord-nv10` de `equipment-883-866` -- nv10, traits ['Abjuration', 'Invested', 'Magical', 'Uncommon']
-- `wb:equipment/the-brass-dwarf` realinhado com `equipment-2476`: nivel 20 -> 20, traits ['artifact', 'harrow-court', 'invested', 'magical'] -> ['artifact', 'harrow-court', 'invested', 'magical', 'unique']
-- `wb:equipment/the-brass-dwarf` (casou `equipment-2476`) ganhou irmao `wb:equipment/the-brass-dwarf-nv20` de `equipment-2493` -- nv20, traits []
-- `wb:equipment/the-empty-throne` realinhado com `equipment-2478`: nivel 20 -> 20, traits ['artifact', 'harrow-court', 'invested', 'magical'] -> ['artifact', 'harrow-court', 'invested', 'magical', 'unique']
-- `wb:equipment/the-empty-throne` (casou `equipment-2478`) ganhou irmao `wb:equipment/the-empty-throne-nv20` de `equipment-2494` -- nv20, traits []
-- `wb:equipment/the-paladin` realinhado com `equipment-2485`: nivel 20 -> 20, traits ['artifact', 'harrow-court', 'invested', 'magical'] -> ['artifact', 'harrow-court', 'invested', 'magical', 'unique']
-- `wb:equipment/the-paladin` (casou `equipment-2485`) ganhou irmao `wb:equipment/the-paladin-nv20` de `equipment-2495` -- nv20, traits []
-- `wb:equipment/the-rabbit-prince` realinhado com `equipment-2487`: nivel 20 -> 20, traits ['artifact', 'harrow-court', 'invested', 'magical'] -> ['artifact', 'harrow-court', 'invested', 'magical', 'unique']
-- `wb:equipment/the-rabbit-prince` (casou `equipment-2487`) ganhou irmao `wb:equipment/the-rabbit-prince-nv20` de `equipment-2496` -- nv20, traits []
-- `wb:equipment/tlil-mask` realinhado com `equipment-2356`: nivel 5 -> 5, traits ['invested', 'magical'] -> ['invested', 'magical', 'uncommon']
-- `wb:equipment/tlil-mask` (casou `equipment-2356`) ganhou irmao `wb:equipment/tlil-mask-transmutation` de `equipment-968` -- nv0, traits ['Invested', 'Magical', 'Transmutation', 'Uncommon']
-- `wb:equipment/vaccine` realinhado com `equipment-1969`: nivel 1+ -> 1, traits ['alchemical', 'consumable', 'elixir', 'healing'] -> ['alchemical', 'consumable', 'elixir', 'healing']
-- `wb:equipment/vaccine` (casou `equipment-1969`) ganhou irmao `wb:equipment/vaccine-rare` de `equipment-773` -- nv0, traits ['Alchemical', 'Consumable', 'Elixir', 'Rare']
-- `wb:equipment/vaultbreakers-harness` (casou `equipment-2307`) ganhou irmao `wb:equipment/vaultbreakers-harness-uncommon` de `equipment-819` -- nv6, traits ['Invested', 'Magical', 'Transmutation', 'Uncommon']
-- `wb:equipment/wand-of-noisome-acid` realinhado com `equipment-2284`: nivel 6+ -> 6, traits ['acid', 'magical', 'wand'] -> ['acid', 'magical', 'wand']
-- `wb:equipment/wand-of-noisome-acid` (casou `equipment-2284`) ganhou irmao `wb:equipment/wand-of-noisome-acid-uncommon` de `equipment-794` -- nv6, traits ['Acid', 'Evocation', 'Magical', 'Uncommon', 'Wand']
-- `wb:equipment/wand-of-teeming-ghosts` realinhado com `equipment-2292`: nivel 6+ -> 6, traits ['magical', 'wand'] -> ['magical', 'uncommon', 'wand']
-- `wb:equipment/wand-of-teeming-ghosts` (casou `equipment-2292`) ganhou irmao `wb:equipment/wand-of-teeming-ghosts-necromancy` de `equipment-795` -- nv6, traits ['Magical', 'Necromancy', 'Uncommon', 'Wand']
-- `wb:weapon/aldori-dueling-sword` realinhado com `weapon-535`: nivel 1 -> 0, traits ['finesse', 'versatile-p'] -> ['finesse', 'uncommon', 'versatile']
-- `wb:weapon/aldori-dueling-sword` (casou `weapon-535`) ganhou irmao `wb:weapon/aldori-dueling-sword-nv1` de `weapon-88` -- nv1, traits ['Finesse', 'Uncommon', 'Versatile']
+- `wb:equipment/skinsaw-mask`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/skittering-mask`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/smoke-ball`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/spiderfoot-brew`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/spiritsight-ring`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/stone-body-mutagen`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/stormbreaker-fulu`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/stupor-poison`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/sure-step-crampons`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/swarmeaters-clasp`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/talisman-cord`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/the-brass-dwarf`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/the-empty-throne`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/the-paladin`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/the-rabbit-prince`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/tlil-mask`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/vaccine`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/vaultbreakers-harness`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/wand-of-noisome-acid`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:equipment/wand-of-teeming-ghosts`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
+- `wb:weapon/aldori-dueling-sword`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:weapon/bola` (casou `weapon-433`) ganhou irmao `wb:weapon/bola-nv0` de `weapon-92` -- nv0, traits ['Nonlethal', 'Ranged Trip', 'Thrown', 'Uncommon']
 - `wb:weapon/bola` (casou `weapon-433`) ganhou irmao `wb:weapon/bola-nv0-weapon-123` de `weapon-123` -- nv0, traits ['Nonlethal', 'Ranged Trip', 'Thrown', 'Uncommon']
 - `wb:weapon/bola` (casou `weapon-433`) ganhou irmao `wb:weapon/bola-nv0-weapon-331` de `weapon-331` -- nv0, traits ['Nonlethal', 'Ranged Trip', 'Thrown']
@@ -200,13 +139,11 @@ casamento por nome escolheu outra -- vira registro proprio.
 - `wb:weapon/chakri` (casou `weapon-270`) ganhou irmao `wb:weapon/chakri-recovery` de `weapon-333` -- nv0, traits ['Recovery', 'Thrown', 'Uncommon']
 - `wb:weapon/jiu-huan-dao` realinhado com `weapon-288`: nivel 0 -> 0, traits ['sweep'] -> ['sweep', 'uncommon']
 - `wb:weapon/jiu-huan-dao` (casou `weapon-288`) ganhou irmao `wb:weapon/jiu-huan-dao-disarm` de `weapon-99` -- nv0, traits ['Disarm', 'Uncommon']
-- `wb:weapon/leiomano` realinhado com `weapon-292`: nivel 0 -> 0, traits ['fatal-d10', 'versatile-s'] -> ['fatal', 'uncommon', 'versatile']
-- `wb:weapon/leiomano` (casou `weapon-292`) ganhou irmao `wb:weapon/leiomano-deadly` de `weapon-166` -- nv0, traits ['Deadly', 'Uncommon', 'Versatile']
+- `wb:weapon/leiomano`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:weapon/repeating-hand-crossbow` realinhado com `weapon-539`: nivel 1 -> 0, traits ['repeating'] -> ['repeating', 'uncommon']
 - `wb:weapon/repeating-hand-crossbow` (casou `weapon-539`) ganhou irmao `wb:weapon/repeating-hand-crossbow-nv0` de `weapon-160` -- nv0, traits ['Repeating', 'Uncommon']
 - `wb:weapon/repeating-hand-crossbow` (casou `weapon-539`) ganhou irmao `wb:weapon/repeating-hand-crossbow-nv1` de `weapon-177` -- nv1, traits ['Repeating', 'Uncommon']
 - `wb:weapon/tekko-kagi` realinhado com `weapon-304`: nivel 0 -> 0, traits ['agile', 'disarm', 'finesse', 'free-hand', 'monk', 'parry'] -> ['agile', 'disarm', 'finesse', 'free-hand', 'monk', 'parry', 'uncommon']
 - `wb:weapon/tekko-kagi` (casou `weapon-304`) ganhou irmao `wb:weapon/tekko-kagi-trip` de `weapon-101` -- nv0, traits ['Agile', 'Disarm', 'Finesse', 'Parry', 'Trip', 'Uncommon']
-- `wb:weapon/throwing-knife` realinhado com `weapon-243`: nivel 0 -> 0, traits ['agile', 'finesse', 'thrown-20'] -> ['agile', 'finesse', 'thrown']
-- `wb:weapon/throwing-knife` (casou `weapon-243`) ganhou irmao `wb:weapon/throwing-knife-uncommon` de `weapon-113` -- nv0, traits ['Agile', 'Finesse', 'Thrown', 'Twin', 'Uncommon']
+- `wb:weapon/throwing-knife`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:deity/maat` (casou `deity-518`) ganhou irmao `wb:deity/maat-ln` de `deity-55` -- nvNone, traits ['LN']

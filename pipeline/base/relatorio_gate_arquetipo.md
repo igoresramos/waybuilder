@@ -4,7 +4,7 @@ Regra do livro que nenhuma fonte escreve em `requires`: um feat de arquetipo exi
 
 - feats de arquetipo com gate JA presente: **1494**
 - gate derivado agora: **294**
-- sem dedicacao identificavel (intocados): **137**
+- sem dedicacao identificavel (intocados): **135**
 
 ## Intocados
 
@@ -70,4 +70,4 @@ Regra do livro que nenhuma fonte escreve em `requires`: um feat de arquetipo exi
 | `wb:feat/hellknight-order-cross-training` | sem campo `archetype` |
 | `wb:feat/high-quality-scrounger` | sem campo `archetype` |
 | `wb:feat/hungry-blade` | arquetipo wb:archetype/splinter-of-finality sem dedicacao unica |
-| ... | mais 77 |
+| ... | mais 75 |

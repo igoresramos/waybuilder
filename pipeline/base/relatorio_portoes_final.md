@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **19704**
+- registros avaliados: **19607**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -22,8 +22,14 @@
 
 ## Portao 4 -- cobertura caindo vs build anterior
 
-**PASSOU** -- 0 ocorrencia(s).
+**FALHOU** -- 6 ocorrencia(s).
 
+- `feat`: 6273 -> 6265
+- `archetype`: 244 -> 243
+- `spell`: 1655 -> 1638
+- `equipment`: 6122 -> 6054
+- `weapon`: 1042 -> 1039
+- **total**: 19698 -> 19607
 
 ## Portao 5 -- license ausente
 
@@ -64,6 +70,7 @@ _Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
 
 **PASSOU** -- 0 ocorrencia(s).
 
-- registros SEM resposta de `grants_completos`: **0** de 19704 (0.0%)
+- registros SEM resposta de `grants_completos`: **0** de 19607 (0.0%)
 - linha de base anterior: 0
+- linha de base GRAVADA em 0
 

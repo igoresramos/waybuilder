@@ -1,6 +1,6 @@
 # Normalizacao de `traits` no fim do build
 
-- conflitos de traits resolvidos: **57** de 57 (em 0 deles o valor emitido mudou; nos outros as fontes ja concordavam e so o registro de conflito sobrava)
+- conflitos de traits resolvidos: **15** de 15 (em 0 deles o valor emitido mudou; nos outros as fontes ja concordavam e so o registro de conflito sobrava)
 - registros com `traits` normalizados: **905**
 - conflitos de traits restantes: **0**
 

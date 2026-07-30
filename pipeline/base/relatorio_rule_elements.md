@@ -14,18 +14,18 @@ prosa -- que pelo principio zero **nao e lacuna**.
 
 ## Nao convertidos
 
-- FlatModifier: precisa do interpretador: 1817
+- FlatModifier: precisa do interpretador: 1823
 - ItemAlteration: precisa do interpretador: 1497
-- RollOption: precisa do interpretador: 1088
+- RollOption: precisa do interpretador: 1091
 - ActiveEffectLike sem path de rank: 634
 - ChoiceSet: precisa do interpretador: 623
 - Note: precisa do interpretador: 543
-- Resistance: precisa do interpretador: 340
+- Resistance: precisa do interpretador: 341
 - GrantItem com predicate: 293
 - GrantItem sem alvo na base: 290
 - ActiveEffectLike com predicate: 269
 - DamageDice: precisa do interpretador: 255
-- AdjustDegreeOfSuccess: precisa do interpretador: 239
+- AdjustDegreeOfSuccess: precisa do interpretador: 240
 - AdjustModifier: precisa do interpretador: 228
 - Strike: precisa do interpretador: 201
 - GrantItem com UUID dinamico (escolha do jogador): 184
