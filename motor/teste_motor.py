@@ -1300,6 +1300,61 @@ checar(any("nao modelado" in k
        "selector fora do modelo sobrevive em `bonus_ignorados`",
        f"{com_itens([ESTANDARTE]).bonus_ignorados}")
 
+# -- slot de feat concedido (spec slot-de-feat-concedido) -------------------
+print("\n-- slot concedido por feat/heranca --")
+
+BASE_ELFO = [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/elf"},
+             {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+             {"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "cha"]}]
+HERANCA = {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/ancient-elf"}
+
+sem_elf = personagem(BASE_ELFO)
+com_elf = personagem(BASE_ELFO + [HERANCA])
+checar(not sem_elf.slots_concedidos and len(com_elf.slots_concedidos) == 1,
+       "`Ancient Elf` abre um slot que sem ele nao existe",
+       f"{len(sem_elf.slots_concedidos)} -> {len(com_elf.slots_concedidos)}")
+abertos_conc = [s for s in com_elf.slots_abertos() if s["slot"] == "feat_concedido"]
+checar(len(abertos_conc) == 1 and abertos_conc[0]["flag"] == "ancientElf",
+       "e ele aparece em slots_abertos() identificado pela flag do ChoiceSet",
+       f"{abertos_conc}")
+
+cands = com_elf.candidatos("feat_concedido", em="criacao")
+checar(len(cands) == 27 and all("dedication" in (c["nome"] or "").lower()
+                                for c in cands),
+       "o filtro da fonte recorta o slot nas 27 dedicacoes multiclasse",
+       f"{len(cands)}")
+checar(not any(c["nome"] == "Fleet" for c in cands),
+       "e feat geral NAO entra num slot que so aceita dedicacao")
+
+# a prosa e explicita: "even though you don't meet its level prerequisite. You
+# must still meet its OTHER prerequisites."
+atende = [c["nome"] for c in cands if c["atende"]]
+checar(atende, "dedicacao de nivel 2 ATENDE num personagem de nivel 1",
+       "o pre-requisito de nivel e dispensado pela prosa do Ancient Elf")
+alquimista = next(c for c in cands if c["nome"] == "Alchemist Dedication")
+checar(not alquimista["atende"]
+       and any("INT" in m for m in alquimista["motivos"])
+       and not any("nivel" in m for m in alquimista["motivos"]),
+       "mas o pre-requisito de ATRIBUTO continua valendo",
+       f"{alquimista['motivos']}")
+
+preenchido = personagem(BASE_ELFO + [HERANCA, {
+    "em": "criacao", "slot": "feat_concedido", "flag": "ancientElf",
+    "pega": "wb:feat/rogue-dedication"}])
+flags_abertas = [s["flag"] for s in preenchido.slots_abertos()
+                 if s["slot"] == "feat_concedido"]
+checar("ancientElf" not in flags_abertas,
+       "e o slot fecha quando e preenchido", f"{flags_abertas}")
+# e o feat escolhido pode abrir o SEU: `Rogue Dedication` concede um feat de
+# pericia de nivel ate o do personagem. A cadeia funciona.
+checar("skillFeat" in flags_abertas,
+       "e a cadeia continua: a dedicacao escolhida abre o slot DELA")
+pericia = preenchido.candidatos("feat_concedido", flag="skillFeat")
+checar(pericia and all("skill" in (BASE.get(c["id"]).get("traits") or [])
+                       for c in pericia),
+       "cujo filtro so deixa passar feat de pericia",
+       f"{len(pericia)} candidatos")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

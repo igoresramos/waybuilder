@@ -298,6 +298,19 @@ export interface AC {
   bonus: BonusAplicado[];
 }
 
+/** slot de feat que um feat ou heranca CONCEDEU (ChoiceSet do Foundry com
+ *  `itemType: "feat"`). Ver `specs/2026-07-30-slot-de-feat-concedido.md`. */
+export interface SlotConcedido {
+  origem: string;
+  origem_id: string;
+  /** nivel em que o concessor entrou, ou `criacao` */
+  em: number | "criacao";
+  /** `rollOption` do ChoiceSet -- e ele que da identidade ao slot */
+  flag: string | null;
+  /** o filtro verbatim da fonte: lista de atomos e operadores */
+  filtro: unknown;
+}
+
 export interface Ataque {
   arma: string | null;
   categoria: string;

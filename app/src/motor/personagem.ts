@@ -38,7 +38,7 @@ import type {
   Conjuracao, Documento, ForaDoRequisito, LinhaDeFeature, FonteDeBoost, Rank,
   BonusAplicado, DetalheDePericiaLivre, LinhaDePericia,
   LinhaDeResistencia, OpcaoDeGrant,
-  Registro, SlotAberto, SlotDeSubclasse, Visao,
+  Registro, SlotAberto, SlotConcedido, SlotDeSubclasse, Visao,
 } from "./tipos.ts";
 import { ATRIBUTOS, RANKS } from "./tipos.ts";
 import {
@@ -135,6 +135,10 @@ export class Personagem implements ContextoDePredicado {
   // memoizado porque a ultima linha ATRIBUI `bonus_ignorados` em vez de
   // acumular, e o terceiro chamador apagava o que os dois anteriores gravaram.
   private _bonusMemo: Map<string, BonusAplicado[]> | null = null;
+  /** atomo de filtro de slot concedido que o avaliador nao conhece. Contado e
+   *  nao silenciado, pela mesma razao de `bonus_ignorados`. */
+  filtro_ignorado: Record<string, number> = {};
+  slots_concedidos: SlotConcedido[] = [];
   pericias: LinhaDePericia[] = [];
   salvas: Record<string, LinhaDePericia> = {};
   bonus_ignorados: Record<string, number> = {};
@@ -1127,6 +1131,35 @@ export class Personagem implements ContextoDePredicado {
       if (!concede) {
         this.slots.set("class", dos_class.filter((n) => n !== 1));
         this.class_feat_nivel_1 = false;
+      }
+    }
+
+    // Ha feat e heranca que CONCEDEM outro feat: `Ancient Elf` da a dedicacao
+    // multiclasse, `Versatile Human` da um feat geral. E um slot novo, nao uma
+    // cadencia, e o Foundry o escreve como ChoiceSet com `itemType: "feat"` e
+    // um filtro. Sem este passo o jogador escolhia e nao era perguntado nada.
+    // A familia vizinha ("when you gain an ancestry feat, you can choose...")
+    // nao entra: ela alarga o pool de um slot existente, e trata-la como slot
+    // daria feat de graca. A separacao vem da fonte, nao de heuristica.
+    // Spec: `specs/2026-07-30-slot-de-feat-concedido.md`
+    this.slots_concedidos = [];
+    const fontesConc: Array<[Registro | Dict | null, number | "criacao"]> = [
+      [this.heranca, "criacao"], [this.ancestria, "criacao"],
+      [this.background, "criacao"],
+    ];
+    for (const [i, feat] of this._feats_efetivos()) {
+      fontesConc.push([feat, this._nivel_do_feat(i)]);
+    }
+    for (const [reg, emQue] of fontesConc) {
+      if (!reg) continue;
+      for (const g of this._grants_de(dictDe(reg))) {
+        const ch = dictDe(g)["choice"];
+        if (!ehDict(ch) || ch["tipo"] !== "feat") continue;
+        this.slots_concedidos.push({
+          origem: pyStr(nome(dictDe(reg))), origem_id: pyStr(dictDe(reg)["id"]),
+          em: emQue, flag: ch["flag"] === undefined ? null : pyStr(ch["flag"]),
+          filtro: ch["filtro"],
+        });
       }
     }
 
@@ -2686,6 +2719,21 @@ export class Personagem implements ContextoDePredicado {
       });
     }
 
+    // o slot que um feat ou heranca CONCEDEU. Identidade pela `flag` do
+    // ChoiceSet e nao pelo nivel: dois concessores podem cair no mesmo nivel.
+    const usadosConc = new Set<unknown>();
+    for (const e of this._todas_escolhas()) {
+      if (obter(e, "slot") === "feat_concedido") usadosConc.add(obter(e, "flag"));
+    }
+    for (const bloco of this.slots_concedidos) {
+      if (usadosConc.has(bloco.flag)) continue;
+      abertos.push({
+        slot: "feat_concedido", em: bloco.em, kind: "feat", escolhe: 1,
+        flag: bloco.flag,
+        rotulo: `feat concedido por ${bloco.origem}`,
+      });
+    }
+
     for (const bloco of this.slots_de_subclasse) {
       if (bloco.escolhido === null) {
         abertos.push({
@@ -2763,6 +2811,120 @@ export class Personagem implements ContextoDePredicado {
    * escolha, é a definição do slot. Já um feat de arquétipo cujo requisito o
    * personagem não atende APARECE, marcado.
    */
+  /** `item:X:Y` -> onde X vive no nosso registro. Medido nos 101 ChoiceSet com
+   *  `itemType: "feat"`: trait 291, level 94, category 56, rarity 8. */
+  private static CAMPO_DO_ATOMO: Record<string, string> = {
+    trait: "traits", level: "level", category: "feat_category", rarity: "rarity",
+  };
+
+  /**
+   * O mesmo `requires` sem a clausula de nivel de personagem.
+   *
+   * A prosa do `Ancient Elf` e explicita: "You gain the multiclass dedication
+   * feat for that class, **even though you don't meet its level prerequisite**.
+   * You must still meet its **other** prerequisites." O slot concedido dispensa
+   * o nivel e mantem todo o resto.
+   */
+  private _sem_gate_de_nivel(requires: unknown): unknown {
+    if (!ehDict(requires)) return requires;
+    if ("character_level" in requires) return null;
+    const saida: Dict = {};
+    for (const [chave, valor] of Object.entries(requires)) {
+      if ((chave === "all" || chave === "any" || chave === "none") && Array.isArray(valor)) {
+        const limpo = valor.map((v) => this._sem_gate_de_nivel(v)).filter((c) => c !== null);
+        if (limpo.length > 0) saida[chave] = limpo;
+      } else {
+        saida[chave] = valor;
+      }
+    }
+    return Object.keys(saida).length > 0 ? saida : null;
+  }
+
+  /** Um atomo do filtro contra um registro. `null` = nao sei avaliar -- e
+   *  `null` nao e `false`: 153 atomos carregam referencia dinamica, e tratar o
+   *  que nao se avalia como reprovacao esvaziaria o slot em silencio. */
+  private _atomo_de_filtro(reg: Registro, atomo: string): boolean | null {
+    if (atomo.includes("{")) return null;
+    const partes = atomo.split(":");
+    if (partes.length < 3 || partes[0] !== "item") return null;
+    const campo = Personagem.CAMPO_DO_ATOMO[partes[1]];
+    if (campo === undefined) return null;
+    const alvo = partes.slice(2).join(":");
+    const valor = (reg as Dict)[campo];
+    if (campo === "traits") return listaDe(valor).map((t) => pyStr(t)).includes(alvo);
+    if (campo === "level") return ehInt(valor) && String(valor) === alvo;
+    return pyStr(valor ?? "") === alvo;
+  }
+
+  /**
+   * O filtro RECORTA o slot, como `_aceita_no_slot` -- nao ordena.
+   *
+   * Gramatica medida na fonte: lista no topo e AND; `or` 28, `and` 16, `not`
+   * 37, `nor` 2, `xor` 8, `lte` 59. Atomo desconhecido NAO reprova: conta em
+   * `filtro_ignorado` e vale como satisfeito.
+   */
+  private _casa_filtro(reg: Registro, filtro: unknown): boolean {
+    if (filtro === null || filtro === undefined || filtro === true) return true;
+    if (ehStr(filtro)) {
+      const r = this._atomo_de_filtro(reg, filtro);
+      if (r === null) {
+        this.filtro_ignorado[filtro] = (this.filtro_ignorado[filtro] ?? 0) + 1;
+        return true;
+      }
+      return r;
+    }
+    if (Array.isArray(filtro)) return filtro.every((f) => this._casa_filtro(reg, f));
+    if (!ehDict(filtro)) return true;
+    for (const [op, arg] of Object.entries(filtro)) {
+      const itens = Array.isArray(arg) ? arg : [arg];
+      if (op === "or") {
+        if (!itens.some((i) => this._casa_filtro(reg, i))) return false;
+      } else if (op === "and") {
+        if (!itens.every((i) => this._casa_filtro(reg, i))) return false;
+      } else if (op === "not") {
+        if (itens.every((i) => this._casa_filtro(reg, i))) return false;
+      } else if (op === "nor") {
+        if (itens.some((i) => this._casa_filtro(reg, i))) return false;
+      } else if (op === "xor") {
+        if (itens.filter((i) => this._casa_filtro(reg, i)).length !== 1) return false;
+      } else if (op === "lte" || op === "lt" || op === "gte" || op === "gt") {
+        if (itens.length !== 2 || !pyStr(itens[0]).endsWith(":level")) {
+          this.filtro_ignorado[op] = (this.filtro_ignorado[op] ?? 0) + 1;
+          continue;
+        }
+        const nivel = (reg as Dict)["level"];
+        // o lado direito e inteiro em 32 dos 34 e `self:level` em um --
+        // `Rogue Dedication` concede "um feat de pericia de nivel ate o seu".
+        // Tratar a referencia como nao-inteiro reprovava TODOS os feats de
+        // pericia e esvaziava o slot em silencio.
+        const teto = itens[1] === "self:level" ? this.nivel : itens[1];
+        if (!ehInt(teto)) {
+          const k = pyStr(itens[1]);
+          this.filtro_ignorado[k] = (this.filtro_ignorado[k] ?? 0) + 1;
+          continue;
+        }
+        if (!ehInt(nivel)) return false;
+        const ok = op === "lte" ? nivel <= teto : op === "lt" ? nivel < teto
+                 : op === "gte" ? nivel >= teto : nivel > teto;
+        if (!ok) return false;
+      } else {
+        this.filtro_ignorado[op] = (this.filtro_ignorado[op] ?? 0) + 1;
+      }
+    }
+    return true;
+  }
+
+  /** Em que nivel o feat entrou. `criacao` quando veio pela cadeia. */
+  private _nivel_do_feat(wbId: string): number | "criacao" {
+    for (const e of listaDe(this.doc["escolhas"])) {
+      const d = dictDe(e);
+      if (d["pega"] === wbId || d["valor"] === wbId) {
+        return (d["em"] ?? "criacao") as number | "criacao";
+      }
+    }
+    return "criacao";
+  }
+
   private _aceita_no_slot(slot: string, r: Registro): boolean {
     const traits = new Set(listaDe(r["traits"]).map((t) => String(t).toLowerCase()));
     if (slot === "free_archetype") return traits.has("archetype");
@@ -2809,8 +2971,8 @@ export class Personagem implements ContextoDePredicado {
    * não pode receber isso. Aqui o conjunto de entrada é recortado pela
    * elegibilidade do slot, e o `requires` continua só ordenando.
    */
-  candidatos(slot: string, em: number | null = null,
-             limite: number | null = null): Candidato[] {
+  candidatos(slot: string, em: number | string | null = null,
+             limite: number | null = null, flag: string | null = null): Candidato[] {
     if (slot === "boosts_livres") {
       return ATRIBUTOS.map((a) => ({
         id: a, nome: a.toUpperCase(), level: null,
@@ -2864,6 +3026,15 @@ export class Personagem implements ContextoDePredicado {
       registros = [...this.base.por_id.values()].filter((r) => r.kind === "skill");
     } else if (slot === "nivel_de_classe") {
       registros = [...this.base.por_id.values()].filter((r) => r.kind === "class");
+    } else if (slot === "feat_concedido") {
+      // o filtro do ChoiceSet RECORTA, como qualquer elegibilidade de slot. Um
+      // slot de `Ancient Elf` que aceitasse feat qualquer seria pior que nao
+      // existir: entregaria escolha ilegal com cara de legal.
+      let blocos = this.slots_concedidos.filter((b) => em === null || b.em === em);
+      if (flag !== null) blocos = blocos.filter((b) => b.flag === flag);
+      registros = blocos.length === 0 ? [] :
+        [...this.base.por_id.values()].filter((r) =>
+          r.kind === "feat" && blocos.some((b) => this._casa_filtro(r, b.filtro)));
     } else if (slot === "heranca") {
       // Heranca pertence a uma ancestralidade -- nao existe Anao Elfico. O
       // vinculo esta em `ancestry` (309 das 334 herancas o declaram).
@@ -2893,13 +3064,20 @@ export class Personagem implements ContextoDePredicado {
     const saida: Candidato[] = [];
     for (const r of registros) {
       if (r === null) continue;
-      let [atende, motivos] = this.avaliar(r["requires"]);
+      const exigencia = slot === "feat_concedido"
+        ? this._sem_gate_de_nivel(r["requires"]) : r["requires"];
+      let [atende, motivos] = this.avaliar(exigencia);
       const veto = this._veto_dedicacao_da_propria_classe(r);
       if (veto !== null) {
         atende = false;
         motivos = [...motivos, veto];
       }
-      if (em !== null && ehInt(r["level"]) && r["level"] > em) {
+      // `em` e int nos slots de cadencia e a string `criacao` no que nasce na
+      // criacao. Slot concedido nao tem teto proprio: o filtro da fonte ja diz
+      // quais niveis aceita, e o `Ancient Elf` dispensa o nivel por escrito.
+      const teto = slot === "feat_concedido" ? null
+                 : (em === "criacao" ? 1 : em);
+      if (ehInt(teto) && ehInt(r["level"]) && r["level"] > teto) {
         atende = false;
         motivos = [...motivos,
                    `feat de nivel ${r["level"]} num slot de nivel ${em}`];

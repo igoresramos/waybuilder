@@ -1297,6 +1297,14 @@
   "slots_abertos": [
    {
     "em": "criacao",
+    "escolhe": 1,
+    "flag": "ancientElf",
+    "kind": "feat",
+    "rotulo": "feat concedido por Ancient Elf",
+    "slot": "feat_concedido"
+   },
+   {
+    "em": "criacao",
     "escolhe": 2,
     "fontes": [
      {
@@ -1323,6 +1331,14 @@
     "kind": "skill",
     "rotulo": "aumento de pericia (nivel 3)",
     "slot": "skill_increase"
+   },
+   {
+    "em": 4,
+    "escolhe": 1,
+    "flag": "basicArcana",
+    "kind": "feat",
+    "rotulo": "feat concedido por Basic Arcana",
+    "slot": "feat_concedido"
    }
   ],
   "subclasses": [

@@ -1390,6 +1390,14 @@
    },
    {
     "em": "criacao",
+    "escolhe": 1,
+    "flag": "versatileHeritage",
+    "kind": "feat",
+    "rotulo": "feat concedido por Versatile Human",
+    "slot": "feat_concedido"
+   },
+   {
+    "em": "criacao",
     "escolhe": 7,
     "fontes": [
      {
@@ -1401,6 +1409,14 @@
     "kind": "skill",
     "rotulo": "pericias treinadas (7 a escolher)",
     "slot": "pericias_livres"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "flag": "naturalAmbition",
+    "kind": "feat",
+    "rotulo": "feat concedido por Natural Ambition",
+    "slot": "feat_concedido"
    }
   ],
   "subclasses": [

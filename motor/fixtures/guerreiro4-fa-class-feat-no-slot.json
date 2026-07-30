@@ -1366,6 +1366,14 @@
    },
    {
     "em": "criacao",
+    "escolhe": 1,
+    "flag": "versatileHeritage",
+    "kind": "feat",
+    "rotulo": "feat concedido por Versatile Human",
+    "slot": "feat_concedido"
+   },
+   {
+    "em": "criacao",
     "escolhe": 3,
     "fontes": [
      {

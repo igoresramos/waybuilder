@@ -8,7 +8,7 @@
    "hp": 44,
    "avisos": 3,
    "fora_do_requisito": 0,
-   "slots_abertos": 17
+   "slots_abertos": 18
   },
   {
    "ficha": "_teste-validacao-bonus-de-pericia",
@@ -24,7 +24,7 @@
    "hp": 68,
    "avisos": 3,
    "fora_do_requisito": 0,
-   "slots_abertos": 17
+   "slots_abertos": 18
   },
   {
    "ficha": "_teste-validacao-remap-de-arma",
@@ -32,7 +32,7 @@
    "hp": 72,
    "avisos": 5,
    "fora_do_requisito": 0,
-   "slots_abertos": 23
+   "slots_abertos": 24
   },
   {
    "ficha": "_teste-validacao-resistencia",
@@ -40,7 +40,7 @@
    "hp": 104,
    "avisos": 2,
    "fora_do_requisito": 1,
-   "slots_abertos": 21
+   "slots_abertos": 22
   },
   {
    "ficha": "_teste-validacao-runas-arma-1-striking",
@@ -48,7 +48,15 @@
    "hp": 52,
    "avisos": 2,
    "fora_do_requisito": 0,
-   "slots_abertos": 3
+   "slots_abertos": 4
+  },
+  {
+   "ficha": "_teste-validacao-slot-concedido",
+   "nivel": 1,
+   "hp": 16,
+   "avisos": 4,
+   "fora_do_requisito": 1,
+   "slots_abertos": 6
   },
   {
    "ficha": "barbaro6-fa-duas-dedicacoes-limpo",
@@ -88,7 +96,7 @@
    "hp": 48,
    "avisos": 2,
    "fora_do_requisito": 0,
-   "slots_abertos": 3
+   "slots_abertos": 4
   },
   {
    "ficha": "guerreiro3-mago2",
@@ -104,7 +112,7 @@
    "hp": 52,
    "avisos": 2,
    "fora_do_requisito": 0,
-   "slots_abertos": 3
+   "slots_abertos": 4
   },
   {
    "ficha": "guerreiro4-fa-avancado-sem-dedicacao",
@@ -112,7 +120,7 @@
    "hp": 52,
    "avisos": 2,
    "fora_do_requisito": 1,
-   "slots_abertos": 4
+   "slots_abertos": 5
   },
   {
    "ficha": "guerreiro4-fa-class-feat-no-slot",
@@ -120,7 +128,7 @@
    "hp": 52,
    "avisos": 3,
    "fora_do_requisito": 0,
-   "slots_abertos": 4
+   "slots_abertos": 5
   },
   {
    "ficha": "guerreiro4-fa-dedicacao-com-grants",
@@ -128,7 +136,7 @@
    "hp": 52,
    "avisos": 2,
    "fora_do_requisito": 0,
-   "slots_abertos": 4
+   "slots_abertos": 5
   },
   {
    "ficha": "guerreiro4-fa-dedicacao-propria-classe",
@@ -136,7 +144,7 @@
    "hp": 52,
    "avisos": 4,
    "fora_do_requisito": 2,
-   "slots_abertos": 6
+   "slots_abertos": 7
   },
   {
    "ficha": "guerreiro4-fa-lacuna-dedicacao",
@@ -144,7 +152,7 @@
    "hp": 52,
    "avisos": 2,
    "fora_do_requisito": 1,
-   "slots_abertos": 4
+   "slots_abertos": 5
   },
   {
    "ficha": "guerreiro6-fa-duas-dedicacoes",
@@ -152,7 +160,7 @@
    "hp": 80,
    "avisos": 3,
    "fora_do_requisito": 1,
-   "slots_abertos": 5
+   "slots_abertos": 6
   },
   {
    "ficha": "guerreiro8-fa-conjuracao-de-arquetipo",
@@ -160,7 +168,7 @@
    "hp": 104,
    "avisos": 2,
    "fora_do_requisito": 0,
-   "slots_abertos": 19
+   "slots_abertos": 20
   },
   {
    "ficha": "invocador5-tradicao-eidolon",
@@ -192,7 +200,7 @@
    "hp": 48,
    "avisos": 4,
    "fora_do_requisito": 0,
-   "slots_abertos": 3
+   "slots_abertos": 5
   },
   {
    "ficha": "mago4-fa-regra23-propria-dedicacao",
@@ -200,7 +208,7 @@
    "hp": 34,
    "avisos": 3,
    "fora_do_requisito": 2,
-   "slots_abertos": 3
+   "slots_abertos": 5
   },
   {
    "ficha": "ranger3-guerreiro5-companheiro-concedido",
@@ -208,7 +216,7 @@
    "hp": 96,
    "avisos": 3,
    "fora_do_requisito": 1,
-   "slots_abertos": 22
+   "slots_abertos": 23
   },
   {
    "ficha": "ranger4-fa-marshal",
@@ -216,7 +224,7 @@
    "hp": 56,
    "avisos": 3,
    "fora_do_requisito": 1,
-   "slots_abertos": 4
+   "slots_abertos": 5
   }
  ]
 }

@@ -1,0 +1,18 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {"versao": "2026-07-30", "pin_foundry": "87f9e502"},
+ "identidade": {
+  "nome": "TESTE SLOT CONCEDIDO -- Elfo Ancient Elf, Guerreiro 1",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao da spec specs/2026-07-30-slot-de-feat-concedido.md (item 94, levantado pelo Igor). `Ancient Elf` diz na prosa oficial: 'Choose a class other than your own. You gain the multiclass dedication feat for that class, even though you don't meet its level prerequisite. You must still meet its other prerequisites.' Ate 30/07 o app nao perguntava nada -- o slot nao existia. Prova quatro coisas: (1) a heranca ABRE um slot que sem ela nao existe; (2) o filtro do ChoiceSet da fonte ('item:category:class', 'item:trait:dedication', 'item:trait:multiclass') recorta o slot nas 27 dedicacoes multiclasse, e feat geral nao entra; (3) a dispensa de nivel e literal -- dedicacao de nivel 2 atende num personagem de nivel 1, e o pre-requisito de ATRIBUTO continua reprovando; (4) a cadeia continua, porque a `Rogue Dedication` escolhida abre o slot DELA (um feat de pericia de nivel ate o do personagem, `{lte: [item:level, self:level]}`) -- e foi esse `self:level` que revelou que tratar referencia como nao-inteiro esvaziava o slot em silencio. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/elf"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/ancient-elf"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/warrior"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "cha"]},
+  {"em": "criacao", "slot": "feat_concedido", "flag": "ancientElf",
+   "pega": "wb:feat/rogue-dedication"}
+ ]
+}

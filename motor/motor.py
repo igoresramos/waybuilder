@@ -184,6 +184,10 @@ class Personagem:
         self._remaps_cache: list | None = None
         self._bonus_memo: dict | None = None
         self.bonus_ignorados: dict = {}
+        # atomo de filtro de slot concedido que o avaliador nao conhece. Contado
+        # e nao silenciado, pela mesma razao de `bonus_ignorados`.
+        self.filtro_ignorado: dict = {}
+        self.slots_concedidos: list = []
         self._derivar()
 
     # -- escolhas -----------------------------------------------------------
@@ -1014,6 +1018,36 @@ class Personagem:
                         extras[chave].add(n)
 
         self.slots = {k: sorted(v) for k, v in extras.items()}
+
+        # Regra do livro que nao vive em `feat_slot`: ha feat e heranca que
+        # CONCEDEM outro feat. `Ancient Elf` diz "You gain the multiclass
+        # dedication feat for that class" -- e um slot novo, nao uma cadencia.
+        # O Foundry escreve isso como ChoiceSet com `itemType: "feat"` e um
+        # filtro; sao 101 na fonte. Sem este passo o jogador escolhia
+        # `Ancient Elf` e nao era perguntado nada.
+        #
+        # A familia vizinha ("when you gain an ancestry feat, you can choose
+        # from aiuvarin feats") NAO entra aqui: ela alarga o pool de um slot que
+        # ja existe, e trata-la como slot daria feat de graca. O Foundry nao
+        # escreve ChoiceSet nela, entao a separacao vem da fonte e nao de
+        # heuristica de prosa.
+        # Spec: `specs/2026-07-30-slot-de-feat-concedido.md`
+        self.slots_concedidos = []
+        fontes = [(self.heranca, "criacao"), (self.ancestria, "criacao"),
+                  (self.background, "criacao")]
+        fontes += [(f, self._nivel_do_feat(i)) for i, f, _ in self._feats_efetivos()]
+        for reg, em in fontes:
+            if not reg:
+                continue
+            for g in self._grants_de(reg):
+                ch = g.get("choice") if isinstance(g, dict) else None
+                if not isinstance(ch, dict) or ch.get("tipo") != "feat":
+                    continue
+                self.slots_concedidos.append({
+                    "origem": reg.get("name"), "origem_id": reg.get("id"),
+                    "em": em, "flag": ch.get("flag"),
+                    "filtro": ch.get("filtro"),
+                })
         # regra 2: Free Archetype sempre ligado -- slot em todo nivel par
         self.slots["free_archetype"] = [n for n in range(1, self.nivel + 1) if n % 2 == 0]
 
@@ -2435,6 +2469,19 @@ class Personagem:
                 "slot": "skill_increase", "em": nivel, "kind": "skill",
                 "escolhe": 1, "rotulo": f"aumento de pericia (nivel {nivel})"})
 
+        # o slot que um feat ou heranca CONCEDEU. Identidade pela `flag` do
+        # ChoiceSet e nao pelo nivel: `Ancient Elf` e um `basic-arcana` podem
+        # cair no mesmo nivel, e dois slots com a mesma chave viravam um so.
+        usados_conc = {e.get("flag") for e in self.doc.get("escolhas", [])
+                       if e.get("slot") == "feat_concedido"}
+        for bloco in self.slots_concedidos:
+            if bloco.get("flag") in usados_conc:
+                continue
+            abertos.append({
+                "slot": "feat_concedido", "em": bloco.get("em"), "kind": "feat",
+                "escolhe": 1, "flag": bloco.get("flag"),
+                "rotulo": f"feat concedido por {bloco.get('origem')}"})
+
         for bloco in self.slots_de_subclasse:
             if bloco.get("escolhido") is None:
                 abertos.append({
@@ -2496,6 +2543,134 @@ class Personagem:
                                     s["slot"]))
         return abertos
 
+    # -- o filtro do slot concedido (ChoiceSet do Foundry) -------------------
+
+    # `item:X:Y` -> onde X vive no nosso registro. Medido nos 101 ChoiceSet com
+    # `itemType: "feat"`: trait 291, level 94, category 56, rarity 8.
+    CAMPO_DO_ATOMO = {"trait": "traits", "level": "level",
+                      "category": "feat_category", "rarity": "rarity"}
+
+    def _sem_gate_de_nivel(self, requires):
+        """O mesmo `requires` sem a clausula de nivel de personagem.
+
+        A prosa do `Ancient Elf` e explicita e e ela que manda: "You gain the
+        multiclass dedication feat for that class, **even though you don't meet
+        its level prerequisite**. You must still meet its **other**
+        prerequisites." Entao o slot concedido dispensa o nivel e mantem todo o
+        resto -- CHA >= 14 continua valendo.
+
+        Vale para os outros concessores sem risco: `Basic Arcana` e companhia
+        ja trazem o teto de nivel dentro do proprio filtro
+        (`{"lte": ["item:level", 2]}`), e quem os pega esta acima desse nivel de
+        qualquer jeito. Aqui a clausula sai por decisao da fonte, nao por
+        conveniencia.
+        """
+        if not isinstance(requires, dict):
+            return requires
+        if "character_level" in requires:
+            return None
+        saida = {}
+        for chave, valor in requires.items():
+            if chave in ("all", "any", "none") and isinstance(valor, list):
+                limpo = [c for c in (self._sem_gate_de_nivel(v) for v in valor)
+                         if c is not None]
+                if limpo:
+                    saida[chave] = limpo
+            else:
+                saida[chave] = valor
+        return saida or None
+
+    def _atomo_de_filtro(self, reg: dict, atomo: str):
+        """Um atomo do filtro contra um registro. `None` = nao sei avaliar.
+
+        `None` nao e `False`: 153 dos atomos carregam referencia dinamica
+        (`item:trait:{actor|system.details.ancestry.trait}`), e tratar o que nao
+        se avalia como reprovacao esvaziaria o slot em silencio -- o oposto do
+        principio zero.
+        """
+        if "{" in atomo:
+            return None
+        partes = atomo.split(":")
+        if len(partes) < 3 or partes[0] != "item":
+            return None
+        campo = self.CAMPO_DO_ATOMO.get(partes[1])
+        if campo is None:
+            return None
+        alvo = ":".join(partes[2:])
+        valor = reg.get(campo)
+        if campo == "traits":
+            return alvo in (valor or [])
+        if campo == "level":
+            return isinstance(valor, int) and str(valor) == alvo
+        return str(valor or "") == alvo
+
+    def _casa_filtro(self, reg: dict, filtro) -> bool:
+        """O filtro RECORTA o slot, como `_aceita_no_slot` -- nao ordena.
+
+        Gramatica medida na fonte: lista no topo e AND; operadores `or` 28,
+        `and` 16, `not` 37, `nor` 2, `xor` 8, e `lte` 59 (`{"lte": ["item:level",
+        2]}`, que le "de nivel 2 ou menos").
+
+        Atomo desconhecido NAO reprova: conta em `self.filtro_ignorado` e vale
+        como satisfeito, para o slot estreitar pelo que se sabe em vez de
+        esvaziar pelo que nao se sabe.
+        """
+        if filtro is None or filtro is True:
+            return True
+        if isinstance(filtro, str):
+            r = self._atomo_de_filtro(reg, filtro)
+            if r is None:
+                self.filtro_ignorado[filtro] = self.filtro_ignorado.get(filtro, 0) + 1
+                return True
+            return r
+        if isinstance(filtro, list):
+            return all(self._casa_filtro(reg, f) for f in filtro)
+        if not isinstance(filtro, dict):
+            return True
+        for op, arg in filtro.items():
+            itens = arg if isinstance(arg, list) else [arg]
+            if op == "or":
+                if not any(self._casa_filtro(reg, i) for i in itens):
+                    return False
+            elif op == "and":
+                if not all(self._casa_filtro(reg, i) for i in itens):
+                    return False
+            elif op == "not":
+                if all(self._casa_filtro(reg, i) for i in itens):
+                    return False
+            elif op == "nor":
+                if any(self._casa_filtro(reg, i) for i in itens):
+                    return False
+            elif op == "xor":
+                if sum(1 for i in itens if self._casa_filtro(reg, i)) != 1:
+                    return False
+            elif op in ("lte", "lt", "gte", "gt"):
+                # `{"lte": ["item:level", 2]}` -- campo de um lado, numero do
+                # outro. So `item:level` aparece assim nos 101 medidos.
+                if len(itens) != 2 or not str(itens[0]).endswith(":level"):
+                    self.filtro_ignorado[op] = self.filtro_ignorado.get(op, 0) + 1
+                    continue
+                nivel = reg.get("level")
+                # o lado direito e inteiro em 32 dos 34, e `self:level` em um --
+                # `Rogue Dedication` concede "um feat de pericia de nivel ate o
+                # seu". Tratar a referencia como nao-inteiro reprovava TODOS os
+                # feats de pericia e esvaziava o slot em silencio, que e o
+                # oposto do que o principio zero manda.
+                teto_f = self.nivel if itens[1] == "self:level" else itens[1]
+                if not isinstance(teto_f, int):
+                    self.filtro_ignorado[str(itens[1])] = (
+                        self.filtro_ignorado.get(str(itens[1]), 0) + 1)
+                    continue
+                if not isinstance(nivel, int):
+                    return False
+                itens = [itens[0], teto_f]
+                if not {"lte": nivel <= itens[1], "lt": nivel < itens[1],
+                        "gte": nivel >= itens[1], "gt": nivel > itens[1]}[op]:
+                    return False
+            else:
+                self.filtro_ignorado[op] = self.filtro_ignorado.get(op, 0) + 1
+        return True
+
     def _aceita_no_slot(self, slot: str, r: dict) -> bool:
         """Elegibilidade de SLOT -- que e coisa diferente de requisito.
 
@@ -2537,7 +2712,7 @@ class Personagem:
         return True
 
     def candidatos(self, slot: str, em: int | None = None,
-                   limite: int | None = None) -> list[dict]:
+                   limite: int | None = None, flag: str | None = None) -> list[dict]:
         """O que cabe NESTE slot, ordenado -- nunca filtrado por requisito.
 
         `disponiveis(kind=...)` devolve os 6.273 feats da base; uma tela de
@@ -2588,6 +2763,18 @@ class Personagem:
         elif slot == "nivel_de_classe":
             registros = [r for r in self.base.por_id.values()
                          if r.get("kind") == "class"]
+        elif slot == "feat_concedido":
+            # o filtro do ChoiceSet RECORTA, como qualquer elegibilidade de
+            # slot. Um slot de `Ancient Elf` que aceitasse feat qualquer seria
+            # pior que nao existir: entregaria escolha ilegal com cara de legal.
+            blocos = [b for b in self.slots_concedidos
+                      if em is None or b.get("em") == em]
+            if flag is not None:
+                blocos = [b for b in blocos if b.get("flag") == flag]
+            registros = [r for r in self.base.por_id.values()
+                         if r.get("kind") == "feat"
+                         and any(self._casa_filtro(r, b.get("filtro"))
+                                 for b in blocos)] if blocos else []
         else:
             registros = [r for r in self.base.por_id.values()
                          if r.get("kind") == "feat" and self._aceita_no_slot(slot, r)]
@@ -2597,11 +2784,20 @@ class Personagem:
         for r in registros:
             if r is None:
                 continue
-            atende, motivos = self.avaliar(r.get("requires"))
+            exigencia = (self._sem_gate_de_nivel(r.get("requires"))
+                         if slot == "feat_concedido" else r.get("requires"))
+            atende, motivos = self.avaliar(exigencia)
             veto = self._veto_dedicacao_da_propria_classe(r)
             if veto:
                 atende, motivos = False, motivos + [veto]
-            if em is not None and isinstance(r.get("level"), int) and r["level"] > em:
+            # `em` e int nos slots de cadencia e a string `criacao` no que
+            # nasce na criacao do personagem (heranca, background). Comparar os
+            # dois estourava; na criacao o teto de nivel e 1.
+            # slot concedido nao tem teto de nivel proprio: o filtro da fonte ja
+            # diz quais niveis ele aceita, e o `Ancient Elf` dispensa o
+            # pre-requisito de nivel por escrito.
+            teto = None if slot == "feat_concedido" else (1 if em == "criacao" else em)
+            if isinstance(teto, int) and isinstance(r.get("level"), int) and r["level"] > teto:
                 atende = False
                 motivos = motivos + [f"feat de nivel {r['level']} num slot de nivel {em}"]
             saida.append({"id": r["id"], "nome": r.get("name"),
@@ -2909,6 +3105,14 @@ class Personagem:
         self.concedidos.append(registro)
         if alvo.startswith("wb:class-feature/"):
             self.features.append(registro)
+
+    def _nivel_do_feat(self, wb_id: str):
+        """Em que nivel o feat entrou. `criacao` quando veio pela cadeia (ele
+        chega junto com quem o concedeu, e nao por escolha do jogador)."""
+        for e in self.doc.get("escolhas", []):
+            if e.get("pega") == wb_id or e.get("valor") == wb_id:
+                return e.get("em", "criacao")
+        return "criacao"
 
     def _feats_efetivos(self):
         """Feats escolhidos MAIS os concedidos pela cadeia, sem repetir.
