@@ -1481,6 +1481,17 @@
      "wb:class-feature/wilding-steward"
     ]
    }
+  ],
+  "velocidade": {
+   "land": 25
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Human"
+   }
   ]
  }
 }

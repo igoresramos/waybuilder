@@ -140,6 +140,16 @@ export function PainelDireito({
               <strong>{v.focus_pool}</strong>
               <span className="nome">Pontos de foco</span>
             </div>
+            {/* Velocidade por modo. A ficha do companheiro ja mostrava; a do
+                personagem nao tinha o numero -- spec `2026-07-30-velocidade.md`. */}
+            {Object.entries(v.velocidade).map(([modo, pes]) => (
+              <div className="save" key={modo}>
+                <strong>{pes}</strong>
+                <span className="nome">
+                  {modo === "land" ? "Velocidade" : `Velocidade (${modo})`}
+                </span>
+              </div>
+            ))}
           </div>
 
           <div className="cartao-mini">

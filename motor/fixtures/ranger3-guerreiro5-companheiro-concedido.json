@@ -1723,6 +1723,17 @@
      "wb:class-feature/warden-spells"
     ]
    }
+  ],
+  "velocidade": {
+   "land": 25
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Human"
+   }
   ]
  }
 }

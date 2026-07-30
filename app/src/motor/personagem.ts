@@ -138,6 +138,8 @@ export class Personagem implements ContextoDePredicado {
   resistencias: LinhaDeResistencia[] = [];
   fraquezas: LinhaDeResistencia[] = [];
   imunidades: LinhaDeResistencia[] = [];
+  velocidade: Record<string, number> = {};
+  velocidade_detalhe: Dict[] = [];
   aumentos_de_pericia: number[] = [];
   aumentos_detalhe: AumentoDePericia[] = [];
 
@@ -219,6 +221,7 @@ export class Personagem implements ContextoDePredicado {
     this._ataques();
     this._pericias_e_salvas();
     this._resistencias();
+    this._velocidade();
     this._checar_requisitos();
   }
 
@@ -3542,6 +3545,114 @@ export class Personagem implements ContextoDePredicado {
     this.imunidades = ordenarPor(this.imunidades, (x) => [x.tipo]);
   }
 
+
+  // -- velocidade ------------------------------------------------------------
+
+  /**
+   * `speed` sem sufixo é o que o Foundry usa quando só há um modo -- 11
+   * ocorrências, todas de deslocamento terrestre.
+   */
+  private static readonly SELECTOR_DE_MODO: Record<string, string> = {
+    "land-speed": "land", speed: "land", "fly-speed": "fly",
+    "swim-speed": "swim", "climb-speed": "climb", "burrow-speed": "burrow",
+  };
+
+  /**
+   * base da ancestria -> modo concedido -> bônus -> penalidade de armadura.
+   *
+   * Modo concedido NÃO soma: dois feats que dão `fly 25` e `fly 30` dão 30.
+   * `all-speeds` aplica só nos modos que EXISTEM -- criar modo a partir de
+   * bônus daria voo a quem não voa.
+   *
+   * Spec: `specs/2026-07-30-velocidade.md`
+   */
+  private _compor_velocidade(
+    base: Record<string, number>, concedidos: Array<[string, number]>,
+    bonus: Map<string, BonusAplicado[]>, penalidade: number,
+  ): Record<string, number> {
+    const vel: Record<string, number> = { ...base };
+    for (const [modo, valor] of concedidos) {
+      vel[modo] = Math.max(vel[modo] ?? 0, valor);
+    }
+    for (const [selector, lista] of bonus) {
+      const modo = Personagem.SELECTOR_DE_MODO[selector];
+      const alvos = selector === "all-speeds" ? Object.keys(vel) : (modo ? [modo] : []);
+      for (const alvo of alvos) {
+        if (alvo in vel) vel[alvo] += this._melhor_por_tipo(lista);
+      }
+    }
+    if (penalidade) {
+      for (const modo of Object.keys(vel)) vel[modo] = Math.max(0, vel[modo] + penalidade);
+    }
+    return vel;
+  }
+
+  /** A ficha do COMPANHEIRO já mostrava velocidade; a do personagem, não. */
+  private _velocidade(): void {
+    const base: Record<string, number> = {};
+    const detalhe: Array<Dict> = [];
+    if (this.ancestria) {
+      for (const g of this._grants_de(dictDe(this.ancestria))) {
+        const sp = dictDe(g)["speed"];
+        if (ehDict(sp) && !("tipo" in sp)) {
+          for (const [modo, valor] of Object.entries(sp)) base[modo] = inteiro(valor);
+          detalhe.push({ origem: nome(this.ancestria), efeito: { ...base } });
+        }
+      }
+    }
+    let inicial = base;
+    if (!Object.keys(base).length) {
+      inicial = { land: 25 };
+      this.avisos.push("sem ancestria escolhida: velocidade base assumida em 25 pes");
+    }
+
+    const concedidos: Array<[string, number]> = [];
+    const fontes: Array<[string, Dict]> = [];
+    for (const f of this.features) fontes.push([pyStr(f["nome"]), dictDe(f)]);
+    for (const [i, feat] of this._feats_efetivos()) fontes.push([nomeOu(feat, i), feat]);
+    for (const [rotulo, reg] of fontes) {
+      for (const g of this._grants_de(reg)) {
+        const sp = dictDe(g)["speed"];
+        if (ehDict(sp) && "tipo" in sp) {
+          const valor = this._resolver_valor(sp["valor"]);
+          if (valor === null) continue;
+          concedidos.push([pyStr(sp["tipo"]), valor]);
+          detalhe.push({ origem: rotulo, efeito: { [pyStr(sp["tipo"])]: valor } });
+        }
+      }
+    }
+
+    const todos = this._bonus_incondicionais();
+    const bonus = new Map<string, BonusAplicado[]>();
+    for (const [sel, lista] of todos) {
+      if (sel in Personagem.SELECTOR_DE_MODO || sel === "all-speeds") {
+        bonus.set(sel, lista);
+        for (const b of lista) detalhe.push({ origem: b.origem, efeito: { [sel]: b.valor } });
+      }
+    }
+
+    // RAW: a penalidade cai 5 (mínimo 0) quando a FOR atende o requisito da
+    // armadura. Ignorar a segunda metade poria um Guerreiro de FOR alta 5 pés
+    // mais lento do que ele é.
+    let penalidade = 0;
+    for (const entrada of listaDe(this.doc["inventario"])) {
+      const e = dictDe(entrada);
+      if (!verdadeiro(e["equipado"])) continue;
+      const arm = dictDe(this.base.opcional(pyStr(e["item"])));
+      if (arm["kind"] !== "armor" || !verdadeiro(arm["speed_penalty"])) continue;
+      let bruta = inteiro(arm["speed_penalty"]);
+      const exigida = arm["strength"];
+      if (ehInt(exigida) && (this.modificadores["str"] ?? 0) >= exigida) {
+        bruta = Math.min(0, bruta + 5);
+      }
+      penalidade += bruta;
+      if (bruta) detalhe.push({ origem: nome(arm), efeito: { penalidade: bruta } });
+    }
+
+    this.velocidade = this._compor_velocidade(inicial, concedidos, bonus, penalidade);
+    this.velocidade_detalhe = detalhe;
+  }
+
   /** A visão calculada. Cache, nunca fonte de verdade. */
   visao(): Visao {
     const classes: Record<string, number> = {};
@@ -3578,6 +3689,8 @@ export class Personagem implements ContextoDePredicado {
       escolhas_de_feat: this.escolhas_de_feat,
       focus_pool: this.focus_pool,
       ac: this.ac,
+      velocidade: this.velocidade,
+      velocidade_detalhe: this.velocidade_detalhe,
       resistencias: this.resistencias,
       fraquezas: this.fraquezas,
       imunidades: this.imunidades,

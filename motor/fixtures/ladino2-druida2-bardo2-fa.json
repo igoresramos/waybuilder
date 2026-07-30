@@ -1817,6 +1817,23 @@
      "wb:class-feature/zoophonia"
     ]
    }
+  ],
+  "velocidade": {
+   "land": 30
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Gnome"
+   },
+   {
+    "efeito": {
+     "land-speed": 5
+    },
+    "origem": "Fleet"
+   }
   ]
  }
 }

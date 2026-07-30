@@ -1351,6 +1351,17 @@
     "slot": "skill_increase"
    }
   ],
-  "subclasses": []
+  "subclasses": [],
+  "velocidade": {
+   "land": 25
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Kholo"
+   }
+  ]
  }
 }

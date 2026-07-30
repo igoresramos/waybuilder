@@ -346,6 +346,9 @@ export interface Visao {
   escolhas_de_feat: unknown;
   focus_pool: number;
   ac: AC;
+  /** por modo: `{land: 25, fly: 30}`. Spec `2026-07-30-velocidade.md` */
+  velocidade: Record<string, number>;
+  velocidade_detalhe: Array<Record<string, unknown>>;
   resistencias: LinhaDeResistencia[];
   fraquezas: LinhaDeResistencia[];
   imunidades: LinhaDeResistencia[];

@@ -1164,6 +1164,60 @@ checar(len(r8._melhor_resistencia([{"tipo": "fire", "valor": 5, "origem": "a"},
                                    {"tipo": "cold", "valor": 5, "origem": "b"}])) == 2,
        "e tipos diferentes convivem")
 
+print("\nvelocidade -- a ficha do personagem nao tinha, a do companheiro tinha")
+# Spec: specs/2026-07-30-velocidade.md. 50 de 50 ancestrias declaram `speed`,
+# 109 de 216 armaduras tem `speed_penalty`, e nada disso chegava na ficha.
+def _vel(escolhas, **extra):
+    return personagem(escolhas, **extra).visao()["velocidade"]
+
+humano = niveis((FIGHTER, 5)) + BOOSTS + [
+    {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+checar(_vel(humano) == {"land": 25}, "humano sem armadura: 25 pes",
+       f"{_vel(humano)}")
+anao = niveis((FIGHTER, 5)) + BOOSTS + [
+    {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/dwarf"}]
+elfo = niveis((FIGHTER, 5)) + BOOSTS + [
+    {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/elf"}]
+checar(_vel(anao)["land"] == 20 and _vel(elfo)["land"] == 30,
+       "anao 20 e elfo 30 -- vem da ancestria, nao de um default",
+       f"anao={_vel(anao)} elfo={_vel(elfo)}")
+
+# cota de malha: speed_penalty -5, exige FOR +3. Com FOR menor, penaliza; com
+# FOR suficiente, a penalidade cai 5 (RAW), o que aqui a zera.
+COTA = [{"item": "wb:armor/chain-mail", "equipado": True}]
+fraco = personagem(niveis((FIGHTER, 5)) + [
+    {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+    {"em": 1, "slot": "boosts_livres", "pega": ["dex", "con", "wis", "int"]}],
+    inventario=COTA)
+forte = personagem(niveis((FIGHTER, 5)) + [
+    {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+    {"em": 1, "slot": "boosts_livres", "pega": ["str", "str", "con", "wis"]},
+    {"em": 5, "slot": "boosts_livres", "pega": ["str", "con", "wis", "dex"]}],
+    inventario=COTA)
+checar(fraco.visao()["velocidade"]["land"] == 20,
+       "com cota de malha e FOR insuficiente: 25 - 5 = 20",
+       f"FOR {fraco.modificadores.get('str')} -> {fraco.visao()['velocidade']}")
+checar(forte.modificadores.get("str", 0) >= 3
+       and forte.visao()["velocidade"]["land"] == 25,
+       "e com FOR suficiente a penalidade cai 5 (RAW) -- volta a 25",
+       f"FOR {forte.modificadores.get('str')} -> {forte.visao()['velocidade']}")
+
+# a regra de composicao dos modos
+p_vel = personagem(humano)
+checar(p_vel._compor_velocidade({"land": 25}, [("fly", 25), ("fly", 30)], {}, 0)
+       == {"land": 25, "fly": 30},
+       "dois feats que dao fly 25 e fly 30 dao 30 -- o MAIOR vence, nao soma")
+checar(p_vel._compor_velocidade({"land": 25}, [],
+                                {"all-speeds": [("status", 5, "x")]}, 0)
+       == {"land": 30},
+       "all-speeds soma no modo que existe e NAO cria modo novo")
+checar(p_vel._compor_velocidade({"land": 25}, [],
+                                {"land-speed": [("status", 5, "a"), ("status", 5, "b")]}, 0)
+       == {"land": 30},
+       "dois bonus de +5 de status dao +5, nao +10")
+checar("velocidade_detalhe" in personagem(humano).visao(),
+       "e o detalhe nomeia as parcelas")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

@@ -1446,6 +1446,17 @@
      "wb:class-feature/undead-eidolon"
     ]
    }
+  ],
+  "velocidade": {
+   "land": 25
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Human"
+   }
   ]
  }
 }

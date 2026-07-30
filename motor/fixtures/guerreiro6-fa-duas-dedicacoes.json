@@ -1517,6 +1517,23 @@
     "slot": "skill_increase"
    }
   ],
-  "subclasses": []
+  "subclasses": [],
+  "velocidade": {
+   "land": 30
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Human"
+   },
+   {
+    "efeito": {
+     "land-speed": 5
+    },
+    "origem": "Fleet"
+   }
+  ]
  }
 }

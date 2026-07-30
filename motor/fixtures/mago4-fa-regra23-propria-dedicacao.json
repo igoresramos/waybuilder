@@ -1397,6 +1397,23 @@
      "wb:class-feature/wrath"
     ]
    }
+  ],
+  "velocidade": {
+   "land": 35
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 30
+    },
+    "origem": "Elf"
+   },
+   {
+    "efeito": {
+     "land-speed": 5
+    },
+    "origem": "Fleet"
+   }
   ]
  }
 }

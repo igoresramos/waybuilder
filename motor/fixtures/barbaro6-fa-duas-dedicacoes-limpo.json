@@ -1532,6 +1532,23 @@
      "wb:class-feature/superstition-instinct"
     ]
    }
+  ],
+  "velocidade": {
+   "land": 30
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Orc"
+   },
+   {
+    "efeito": {
+     "land-speed": 5
+    },
+    "origem": "Fleet"
+   }
   ]
  }
 }

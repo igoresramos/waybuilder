@@ -1559,6 +1559,23 @@
     "slot": "skill_feat"
    }
   ],
-  "subclasses": []
+  "subclasses": [],
+  "velocidade": {
+   "land": 20
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Human"
+   },
+   {
+    "efeito": {
+     "penalidade": -5
+    },
+    "origem": "Chain Mail"
+   }
+  ]
  }
 }

@@ -1383,6 +1383,29 @@
     "slot": "skill_increase"
    }
   ],
-  "subclasses": []
+  "subclasses": [],
+  "velocidade": {
+   "land": 25
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 25
+    },
+    "origem": "Human"
+   },
+   {
+    "efeito": {
+     "land-speed": 5
+    },
+    "origem": "Fleet"
+   },
+   {
+    "efeito": {
+     "penalidade": -5
+    },
+    "origem": "Chain Mail"
+   }
+  ]
  }
 }

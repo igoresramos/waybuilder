@@ -208,6 +208,7 @@ class Personagem:
         self._ataques()
         self._pericias_e_salvas()
         self._resistencias()
+        self._velocidade()
         self._checar_requisitos()
 
     # -- regra 1: estrutura -------------------------------------------------
@@ -3216,6 +3217,99 @@ class Personagem:
             self.imunidades.append(linha)
         self.imunidades.sort(key=lambda x: x["tipo"])
 
+
+    # -- velocidade ----------------------------------------------------------
+
+    # `speed` sem sufixo e o que o Foundry usa quando so ha um modo -- 11
+    # ocorrencias, todas de deslocamento terrestre.
+    SELECTOR_DE_MODO = {"land-speed": "land", "speed": "land",
+                        "fly-speed": "fly", "swim-speed": "swim",
+                        "climb-speed": "climb", "burrow-speed": "burrow"}
+
+    def _compor_velocidade(self, base: dict, concedidos: list,
+                           bonus: dict, penalidade: int) -> dict:
+        """base da ancestria -> modo concedido -> bonus -> penalidade de armadura.
+
+        Modo concedido NAO soma: dois feats que dao `fly 25` e `fly 30` dao 30.
+        `all-speeds` aplica so nos modos que EXISTEM -- criar modo a partir de
+        bonus daria voo a quem nao voa.
+
+        Spec: `specs/2026-07-30-velocidade.md`
+        """
+        vel = dict(base)
+        for modo, valor in concedidos:
+            vel[modo] = max(int(vel.get(modo, 0)), int(valor))
+        for selector, lista in bonus.items():
+            modo = self.SELECTOR_DE_MODO.get(selector)
+            alvos = list(vel) if selector == "all-speeds" else ([modo] if modo else [])
+            for alvo in alvos:
+                if alvo in vel:
+                    vel[alvo] += self._melhor_por_tipo(lista)
+        if penalidade:
+            for modo in vel:
+                vel[modo] = max(0, vel[modo] + penalidade)
+        return vel
+
+    def _velocidade(self) -> None:
+        """A ficha do COMPANHEIRO ja mostrava velocidade; a do personagem, nao."""
+        base, detalhe = {}, []
+        if self.ancestria:
+            for g in self._grants_de(self.ancestria):
+                sp = g.get("speed") if isinstance(g, dict) else None
+                if isinstance(sp, dict) and "tipo" not in sp:
+                    for modo, valor in sp.items():
+                        base[str(modo)] = int(valor)
+                    detalhe.append({"origem": self.ancestria.get("name"),
+                                    "efeito": dict(base)})
+        if not base:
+            base = {"land": 25}
+            self.avisos.append(
+                "sem ancestria escolhida: velocidade base assumida em 25 pes")
+
+        concedidos = []
+        fontes = [(f.get("nome"), f) for f in self.features]
+        fontes += [(feat.get("name", i), feat)
+                   for i, feat, _ in self._feats_efetivos()]
+        for nome, reg in fontes:
+            for g in self._grants_de(reg):
+                sp = g.get("speed") if isinstance(g, dict) else None
+                if isinstance(sp, dict) and "tipo" in sp:
+                    valor = self._resolver_valor(sp.get("valor"))
+                    if valor is None:
+                        continue
+                    concedidos.append((str(sp.get("tipo")), valor))
+                    detalhe.append({"origem": nome,
+                                    "efeito": {str(sp.get("tipo")): valor}})
+
+        bonus_todos = self._bonus_incondicionais()
+        bonus = {sel: lista for sel, lista in bonus_todos.items()
+                 if sel in self.SELECTOR_DE_MODO or sel == "all-speeds"}
+        for sel, lista in bonus.items():
+            for _tipo, valor, origem in lista:
+                detalhe.append({"origem": origem, "efeito": {sel: valor}})
+
+        # RAW: a penalidade cai 5 (minimo 0) quando a FOR atende o requisito da
+        # armadura. Ignorar a segunda metade poria um Guerreiro de FOR alta 5
+        # pes mais lento do que ele e.
+        penalidade = 0
+        for entrada in (self.doc.get("inventario") or []):
+            if not entrada.get("equipado"):
+                continue
+            arm = self.base.opcional(str(entrada.get("item") or "")) or {}
+            if arm.get("kind") != "armor" or not arm.get("speed_penalty"):
+                continue
+            bruta = int(arm["speed_penalty"])
+            exigida = arm.get("strength")
+            if isinstance(exigida, int) and self.modificadores.get("str", 0) >= exigida:
+                bruta = min(0, bruta + 5)
+            penalidade += bruta
+            if bruta:
+                detalhe.append({"origem": arm.get("name"),
+                                "efeito": {"penalidade": bruta}})
+
+        self.velocidade = self._compor_velocidade(base, concedidos, bonus, penalidade)
+        self.velocidade_detalhe = detalhe
+
     def visao(self) -> dict:
         """A visao calculada. Cache, nunca fonte de verdade."""
         return {
@@ -3247,6 +3341,8 @@ class Personagem:
             "escolhas_de_feat": self.escolhas_de_feat,
             "focus_pool": self.focus_pool,
             "ac": self.ac,
+            "velocidade": self.velocidade,
+            "velocidade_detalhe": self.velocidade_detalhe,
             "resistencias": self.resistencias,
             "fraquezas": self.fraquezas,
             "imunidades": self.imunidades,

@@ -1620,6 +1620,29 @@
      "wb:class-feature/wrath"
     ]
    }
+  ],
+  "velocidade": {
+   "land": 20
+  },
+  "velocidade_detalhe": [
+   {
+    "efeito": {
+     "land": 20
+    },
+    "origem": "Dwarf"
+   },
+   {
+    "efeito": {
+     "land-speed": 5
+    },
+    "origem": "Fleet"
+   },
+   {
+    "efeito": {
+     "penalidade": -5
+    },
+    "origem": "Chain Mail"
+   }
   ]
  }
 }
