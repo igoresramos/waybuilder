@@ -49,6 +49,21 @@ CAMPOS_POR_KIND = {
     "background": ("skill", "feat", "attribute"),
 }
 
+# O dom de reliquia se organiza por ASPECTO (o tema) e GRAU, e e o grau que
+# define quando ele entra. O AoN publica os dois: `aspect` em 233 de 233 docs, e
+# o grau dentro de `type`. Sem o bloco a base tinha 122 reliquias que o
+# construtor nao conseguia ordenar.
+#
+# A derivacao e a mesma de `extratores/relicos_idiomas.py`, que a fazia certo
+# desde sempre e cuja saida nunca entrou em `reconciliar.ENTRADA`. Portar as
+# linhas para ca deixa UMA fonte para o kind, em vez de duas em merge.
+# Spec: specs/2026-07-30-aspecto-e-grau-de-reliquia.md
+GRAU_DE_RELIQUIA = {
+    "Relic Minor Gift": "minor",
+    "Relic Major Gift": "major",
+    "Relic Grand Gift": "grand",
+}
+
 # A tradicao de conjuracao do Feiticeiro, da Bruxa e do Invocador nao esta na
 # classe: vem da subclasse. E o AoN publica isso como CAMPO, nao como prosa --
 # `tradition: ["Occult"]` --, entao nao ha o que inferir. Sem esta emissao o
@@ -151,6 +166,18 @@ def converter(d, kind):
         if valor not in (None, "", []):
             reg[campo] = valor
             reg["prov"][campo] = "aon"
+
+    if kind == "relic":
+        bloco = {"aspect": [str(a).lower() for a in (d.get("aspect") or [])],
+                 "grade": GRAU_DE_RELIQUIA.get(str(d.get("type") or ""))}
+        for extra in ("element", "school"):
+            v = d.get(extra)
+            v = ([str(x).lower() for x in v] if isinstance(v, list)
+                 else (str(v).lower() if v else None))
+            if v:
+                bloco[extra] = v
+        reg["relic"] = bloco
+        reg["prov"]["relic"] = "aon"
     return reg
 
 

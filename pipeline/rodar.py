@@ -24,9 +24,16 @@ import time
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PY = sys.executable
 
+# `relicos_idiomas.py` saiu daqui em 30/07: a saida dele NUNCA esteve em
+# `reconciliar.ENTRADA`, entao rodava sem ninguem consumir. O unico dado que so
+# ele tinha -- `relic.aspect` e `relic.grade` -- foi portado para
+# `aon_kinds.py`, que ja cobre mais registros do mesmo kind (122 de 122 relic
+# contra 51, 121 de 123 language contra 95). O arquivo continua no disco: ele e
+# o registro escrito de como o grau se deriva do `type` do AoN.
+# Spec: specs/2026-07-30-aspecto-e-grau-de-reliquia.md
 EXTRATORES = ["classes.py", "feats.py", "magias.py", "ancestrias.py",
               "equipamento.py", "companheiros.py", "referencia.py",
-              "rituais.py", "relicos_idiomas.py"]
+              "rituais.py"]
 DEPOIS = ["reconciliar.py", "emitir_textos.py", "fundir_renomeados.py", "portoes.py"]
 
 
