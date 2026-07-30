@@ -1143,3 +1143,23 @@ tipico de payload velho, nao de porte errado.
 Quarta ocorrencia do mesmo padrao no mesmo dia (taticas_kits fora do laco,
 magias.py no-op, saida/ancestrias.json de 27/07): artefato derivado que
 sobrevive a mudanca da fonte porque ninguem o reescreveu.
+
+## Fundir registro quebra ficha salva se o lookup nao seguir alias (2026-07-30)
+
+`Base.resolver()` segue `aliases` desde 27/07 e existe justamente porque o
+Remaster renomeia em massa. Mas `Base.opcional()` era `por_id.get()` cru, e e
+ELE que o inventario, os atores e as escolhas usam.
+
+Efeito: no dia em que a fusao aposenta um id, toda ficha salva que o cite perde
+aquele item **em silencio** -- sem aviso, sem slot aberto, sem nada. O numero
+simplesmente muda. Isso contradiz a promessa escrita no proprio `Personagem`:
+"mudanca de regra re-deriva em vez de invalidar ficha salva".
+
+Foi encontrado por acidente: fundi `cloak-of-elvenkind-greater` no canonico e o
+fixture de validacao, que citava o id antigo, estourou com `KeyError: 'bonus'`.
+Se o fixture nao existisse, a perda teria passado.
+
+Regra: **todo caminho de lookup que recebe id vindo do DOCUMENTO do jogador tem
+de resolver alias.** `por_id.get()` cru so vale para id que o proprio pipeline
+acabou de produzir. E ao aposentar id em massa, o teste a rodar antes do commit
+e "uma ficha que cita o id antigo continua igual?".
