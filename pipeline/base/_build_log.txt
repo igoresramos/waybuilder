@@ -15,11 +15,11 @@ suspeitas de par nao unido (mesmo kind+nome normalizado): 360
 license inferida a partir do livro: 2849
 artefatos organizacionais descartados: 1 -> ['wb:archetype/shared-archetype-feats']
 mechanized derivado de grants: 17209 registros corrigidos
-  entradas de prov sem valor removidas: 9882
+  entradas de prov sem valor removidas: 9397
 
 portoes: todos passaram
 kinds: {'class': 27, 'class-feature': 841, 'feat': 6412, 'archetype': 247, 'spell': 1642, 'ancestry': 50, 'heritage': 346, 'background': 637, 'armor': 216, 'equipment': 6164, 'shield': 125, 'weapon': 1038, 'animal-companion': 113, 'familiar-ability': 171, 'familiar-specific': 39, 'eidolon': 13, 'apparition': 14, 'trait': 561, 'skill': 33, 'domain': 64, 'deity': 490, 'ritual': 151, 'relic': 219, 'language': 155, 'arcane-school': 23, 'arcane-thesis': 10, 'bloodline': 28, 'cause': 13, 'conscious-mind': 12, 'doctrine': 5, 'druidic-order': 13, 'element': 6, 'hellknight-order': 14, 'hunters-edge': 7, 'hybrid-study': 8, 'ikon': 21, 'implement': 19, 'innovation': 7, 'instinct': 16, 'lesson': 31, 'methodology': 9, 'muse': 9, 'mystery': 22, 'patron': 27, 'racket': 10, 'research-field': 8, 'style': 11, 'subconscious-mind': 8, 'way': 11, 'draconic-exemplar': 44, 'mythic-calling': 15, 'deviant-ability-classification': 10, 'tactic': 37, 'class-kit': 32}
--> base/index.json  (18.3 MB)
+-> base/index.json  (18.4 MB)
 == 3. auditar divergencia entre fontes ==
 registros que ganharam conflito nesta passada: 386
 divergencias encontradas por campo: {'source.book': 312, 'name': 51, 'rarity': 35}
@@ -257,15 +257,15 @@ fase final: 19706 registros  (indices: aon=43686, foundry=28689)
 -> base/relatorio_portoes_final.md   (todos passaram)
 == 9. emitir o payload do app ==
 registros: 19706  em 54 kinds
-indice de build:   1.66 MB gzip
-indice do app:     1.07 MB gzip   (36% menor)
+indice de build:   1.68 MB gzip
+indice do app:     1.08 MB gzip   (35% menor)
 prosa (separada): 17.91 MB em disco, carregada sob demanda
 
 maiores fatias (gzip):
   feat                 415 KB   6273 registros
   equipment            222 KB   6122 registros
+  spell                 93 KB   1655 registros
   deity                 88 KB    488 registros
-  spell                 85 KB   1655 registros
   weapon                52 KB   1042 registros
   ritual                52 KB    151 registros
   background            40 KB    524 registros

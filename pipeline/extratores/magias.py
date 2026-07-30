@@ -476,16 +476,53 @@ def extrair() -> list[dict]:
         # --- campos mecanicos / estruturais (foundry vence) ---
         acoes = fsys["time"]["value"] if fsys else None
         prov["acoes"] = "foundry" if acoes is not None else None
+
+        # FALLBACK PARA O AoN nos tres campos que so liam o Foundry. Magia sem
+        # par no Foundry saia sem alcance, sem area e sem duracao mesmo com o
+        # AoN preenchido -- eram 539 e 556 de 1.655. Nao ha precedencia a
+        # decidir: o Foundry preenche ou nao preenche, e nunca discordam.
+        # Spec: `specs/2026-07-30-alvo-e-salvaguarda-de-magia.md`
         alcance = fsys["range"]["value"] if fsys else None
+        # string VAZIA conta como ausente: o Foundry grava `""` em 515 magias, e
+        # `is None` deixava o fallback sem disparar em todas elas.
+        alcance = alcance or None
         prov["alcance"] = "foundry" if alcance is not None else None
+        if alcance is None and aon.get("range_raw"):
+            alcance = str(aon["range_raw"])
+            prov["alcance"] = "aon"
+
         area = None
         if fsys and fsys.get("area"):
             area = {"tipo": fsys["area"].get("type"), "valor": fsys["area"].get("value")}
             prov["area"] = "foundry"
+        elif aon.get("area_raw"):
+            # texto cru: o Foundry ja entrega `{tipo, valor}` e o AoN entrega
+            # `"20-foot burst"`. Converter aqui poria dois formatos no mesmo
+            # campo -- pior que texto honesto. O consumidor distingue pelo tipo.
+            area = str(aon["area_raw"])
+            prov["area"] = "aon"
+
         duracao = None
         if fsys and fsys.get("duration") and (fsys["duration"].get("value") or fsys["duration"].get("sustained")):
             duracao = {"valor": fsys["duration"].get("value") or None, "sustentada": fsys["duration"].get("sustained", False)}
             prov["duracao"] = "foundry"
+        elif aon.get("duration_raw"):
+            duracao = {"valor": str(aon["duration_raw"]), "sustentada": False}
+            prov["duracao"] = "aon"
+
+        # ALVO e SALVAGUARDA nao existiam como campo -- zero de 1.655 --, e nao
+        # era lacuna de fonte: o AoN tem `target` em 1.234 e `saving_throw` em
+        # 894, em texto simples. Uma carta de magia sem "Targets" e sem "Saving
+        # Throw" nao serve para jogar.
+        # Fica o ROTULO do AoN (`Fortitude`) e nao o slug do Foundry
+        # (`fortitude`): o campo e para LER na ficha, e nenhuma regra do
+        # construtor pergunta qual a salva de uma magia.
+        alvos = str(aon["target"]) if aon.get("target") else None
+        if alvos:
+            prov["alvos"] = "aon"
+        salvaguarda = str(aon["saving_throw"]) if aon.get("saving_throw") else None
+        if salvaguarda:
+            prov["salvaguarda"] = "aon"
 
         # --- campos criticos ---
         damage = fsys.get("damage") if fsys else None
@@ -584,6 +621,8 @@ def extrair() -> list[dict]:
             "alcance": alcance,
             "area": area,
             "duracao": duracao,
+            "alvos": alvos,
+            "salvaguarda": salvaguarda,
             "heightened": heightened,
             "heightened_so_prosa": heightened_only_prosa,
             "defesa": defesa,
