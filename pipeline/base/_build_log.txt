@@ -217,7 +217,7 @@ pares declarados pelo AoN: 1061
   vetados por campo estruturado divergente: 392
   desempatados por prosa (sucessor multiplo): 77
 base: 20375 -> 19706 registros (669 absorvidos)
-registros com alias: 300
+registros com alias: 452
 -> base/relatorio_fusao.md
 == 7b. normalizar traits na base inteira ==
 conflitos de traits resolvidos: 57 de 57 (0 mudaram o valor emitido)
@@ -265,7 +265,7 @@ maiores fatias (gzip):
   feat                 415 KB   6273 registros
   equipment            222 KB   6122 registros
   deity                 88 KB    488 registros
-  spell                 83 KB   1655 registros
+  spell                 85 KB   1655 registros
   weapon                52 KB   1042 registros
   ritual                52 KB    151 registros
   background            40 KB    524 registros

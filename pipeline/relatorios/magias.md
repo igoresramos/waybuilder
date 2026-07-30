@@ -179,7 +179,7 @@ Cura nunca rola contra nada no PF2e RAW -- listado por completude, nao e anomali
 
 ## Cross-reference / cobertura de fontes
 
-- Com xref pf2etools: **1446** / 1667
+- Com xref pf2etools: **1450** / 1667
 - Casadas com foundry: **1651** / 1667
 
 ## Portoes de qualidade (spec schema-base) -- status

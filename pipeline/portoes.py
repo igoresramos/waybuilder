@@ -230,13 +230,68 @@ def portao_3_requires(base, ctx):
             for x in o:
                 yield from ids_em(x)
 
+    # VARREDURA COMPLETA, e nao mais uma lista de campos escrita a mao. A lista
+    # ja tinha falhado duas vezes -- `subclasses` entrou depois de o portao
+    # passar com 0 sobre uma base quebrada, e `favored_weapon` passou com 509
+    # referencias ORFAS sem ninguem ver (item 83e). Campo novo com referencia
+    # nasce vigiado por construcao; nao ha terceira vez.
+    #
+    # Fora da varredura, e cada um por um motivo: `id` e o proprio registro;
+    # `text` aponta para prosa e nao para registro; `xref` guarda UUID do
+    # Foundry; `prov`/`conflitos`/`historico` sao metadado de build; `aliases`
+    # e o nome ANTIGO, que por definicao nao resolve.
+    IGNORAR = {"id", "text", "xref", "prov", "conflitos", "aliases", "historico"}
+
+    def todas_as_refs(o):
+        if isinstance(o, dict) and "nao_modelavel" in o:
+            # NAO e referencia: e o marcador que `resolver_referencias.py` poe
+            # quando o parser virou FRASE em id ("You have a versatile
+            # heritage."). O valor guarda o id falso so como rotulo opaco, e o
+            # motor ignora o termo inteiro. Cobrar aqui seria cobrar duas vezes
+            # a mesma coisa que aquele passo ja declarou.
+            for k, v in o.items():
+                if k != "nao_modelavel":
+                    yield from todas_as_refs(v)
+            return
+        if isinstance(o, str):
+            # `?nao-resolvido` e auto-declaracao honesta do extrator: ele ja
+            # diz que nao resolveu. Contar como orfa seria cobrar duas vezes.
+            if o.startswith("wb:") and not o.startswith("wb:text/") \
+                    and "?nao-resolvido" not in o:
+                yield o
+        elif isinstance(o, dict):
+            for v in o.values():
+                yield from todas_as_refs(v)
+        elif isinstance(o, list):
+            for x in o:
+                yield from todas_as_refs(x)
+
     orfaos = collections.Counter()
+    onde = collections.Counter()
     for r in base:
-        for ref in itertools.chain(refs(r.get("requires")),
-                                   ids_em(r.get("subclasses"))):
-            if ref.startswith("wb:") and ref not in ids and ref not in alias:
-                orfaos[ref] += 1
-    return sum(orfaos.values()), [f"`{i}` citado {n}x" for i, n in orfaos.most_common(30)]
+        for campo, valor in r.items():
+            if campo in IGNORAR:
+                continue
+            for ref in todas_as_refs(valor):
+                if ref not in ids and ref not in alias:
+                    orfaos[ref] += 1
+                    onde[campo] += 1
+    detalhe = [f"por campo: {dict(onde.most_common())}"] if onde else []
+    detalhe += [f"`{i}` citado {n}x" for i, n in orfaos.most_common(30)]
+
+    # TOLERANCIA DE 1, com nome e motivo -- e nao um numero solto.
+    # `wb:deity/malthus` cita `Light Crossbow` como arma favorecida, e o AoN NAO
+    # TEM arma com esse nome: as duas entradas dele (Core Rulebook e Player
+    # Core) se chamam `Crossbow`. E inconsistencia entre duas tabelas da PROPRIA
+    # fonte, e inventar o mapeamento seria pior que deixar contado -- ja custou
+    # caro neste projeto casar por nome achando que sabia (o Draconic legado).
+    # Se a fonte consertar, a tolerancia sobra e o portao continua verde; se
+    # aparecer orfa NOVA, ele reprova, que e o trabalho dele.
+    TOLERADAS = {"wb:weapon/light-crossbow"}
+    total = sum(n for i, n in orfaos.items() if i not in TOLERADAS)
+    if total != sum(orfaos.values()):
+        detalhe.append(f"toleradas (inconsistencia da fonte): {sorted(TOLERADAS)}")
+    return total, detalhe
 
 
 def portao_4_cobertura(base, ctx):

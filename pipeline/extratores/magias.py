@@ -24,6 +24,7 @@ import glob
 import json
 import os
 import re
+import unicodedata
 import sys
 from html.parser import HTMLParser
 
@@ -42,7 +43,13 @@ import comum  # noqa: E402
 # --------------------------------------------------------------------------
 
 def slugify(name: str) -> str:
-    s = name.lower().strip()
+    # NFKD antes do corte: sem isto o acento vira caractere invalido e a letra
+    # some junto -- `Deja Vu` (com acento) saia como `wb:spell/d-j-vu`, e
+    # qualquer referencia pelo nome limpo ficava orfa. Era 1 registro de 1.655,
+    # mas o defeito e da funcao e nao do registro: a proxima magia acentuada
+    # cairia igual. Mesma normalizacao que `aon_kinds.slug` ja usava.
+    s = unicodedata.normalize("NFKD", str(name or ""))
+    s = "".join(c for c in s if not unicodedata.combining(c)).lower().strip()
     s = s.replace("'", "").replace("’", "")
     s = re.sub(r"[^a-z0-9]+", "-", s)
     s = re.sub(r"-+", "-", s).strip("-")
@@ -358,6 +365,11 @@ def extrair() -> list[dict]:
 
     aon_docs = load_aon_spells()
     aon_canonical, aon_legacy_of = dedupe_aon_legacy_remaster(aon_docs)
+    # indice completo para os ALIASES: `aon_legacy_of` guarda UM legado por
+    # canonico (o ultimo a escrever), e `Cleanse Affliction` tem TRES
+    # antecessores (Neutralize Poison, Remove Disease, Remove Curse). O
+    # `legacy_id` do proprio doc canonico e a lista inteira.
+    aon_por_id = {str(d.get("id")): d for d in aon_docs if d.get("id")}
 
     pf2etools_by_name = load_pf2etools_spells()
 
@@ -544,6 +556,19 @@ def extrair() -> list[dict]:
             requires_saiu=False,
         )
 
+        # O Remaster renomeou 159 magias e a base guardava so o nome NOVO --
+        # `Magic Missile` nao achava `Force Barrage` nem na busca do app nem no
+        # `cleric_spell` das divindades. O AoN declara o par; era o extrator que
+        # jogava o nome antigo fora.
+        # Spec: `specs/2026-07-30-alias-de-magia-renomeada.md`
+        aliases = []
+        for lid in (aon.get("legacy_id") or []):
+            leg = aon_por_id.get(str(lid))
+            nome_leg = (leg or {}).get("name")
+            if nome_leg and norm_name(nome_leg) != norm_name(registro_name) \
+                    and nome_leg not in aliases:
+                aliases.append(nome_leg)
+
         registro = {
             "id": wb_id,
             "kind": "spell",
@@ -570,6 +595,9 @@ def extrair() -> list[dict]:
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }
+        if aliases:
+            registro["aliases"] = aliases
+            registro["prov"]["aliases"] = "aon"
         if conflitos:
             registro["conflitos"] = conflitos
 

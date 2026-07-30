@@ -25799,7 +25799,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "edict": "Create without reservation, help others unlock their true potential, observe the mysteries of life",
   "anathema": "Fail to study a new creature if safely able, force a creature to live in the wrong body, reject creatures or information due to bigoted or rigid beliefs",
@@ -25879,7 +25879,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/crossbow"
+   "wb:weapon/crossbow"
   ],
   "sanctification": [
    "holy",
@@ -25964,7 +25964,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "unholy"
@@ -26044,7 +26044,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "unholy"
@@ -26118,7 +26118,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy"
@@ -26194,7 +26194,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sawtooth-saber"
+   "wb:weapon/sawtooth-saber"
   ],
   "sanctification": [
    "unholy"
@@ -26270,8 +26270,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/claw",
-   "wb:equipment/kukri"
+   "claw",
+   "wb:weapon/kukri"
   ],
   "sanctification": [
    "holy"
@@ -26342,7 +26342,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "holy"
@@ -26412,7 +26412,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/falcata"
+   "wb:weapon/falcata"
   ],
   "edict": "Make items, treat items well, prepare for many possibilities",
   "anathema": "Destroy an intelligent item ",
@@ -26479,7 +26479,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/flail"
+   "wb:weapon/flail"
   ],
   "sanctification": [
    "holy"
@@ -26554,7 +26554,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/macuahuitl"
+   "wb:weapon/macuahuitl"
   ],
   "sanctification": [
    "unholy"
@@ -26629,7 +26629,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "unholy"
@@ -26703,7 +26703,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -26776,7 +26776,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shield-boss"
+   "wb:weapon/shield-boss"
   ],
   "sanctification": [
    "holy"
@@ -26853,7 +26853,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/war-flail"
+   "wb:weapon/war-flail"
   ],
   "sanctification": [
    "holy"
@@ -26928,7 +26928,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -27007,7 +27007,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "edict": "Constantly pursue new knowledge; hold secrets close to the chest; prioritize discovery, invention, and innovation through fusion of magic and technology",
   "anathema": "Share knowledge too freely, throw something away that could be repurposed, take credit for another’s invention or idea",
@@ -27074,7 +27074,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/machete"
+   "wb:weapon/machete"
   ],
   "sanctification": [
    "holy"
@@ -27147,7 +27147,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/kukri"
+   "wb:weapon/kukri"
   ],
   "sanctification": [
    "unholy"
@@ -27220,7 +27220,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -27295,8 +27295,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/fist",
-   "wb:equipment/spear"
+   "wb:weapon/fist",
+   "wb:weapon/spear"
   ],
   "edict": "Commit acts of brutal violence, test yourself against nature, make animals more dangerous",
   "anathema": "Cower from fights, allow yourself to be resurrected instead of reincarnated",
@@ -27369,7 +27369,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "sanctification": [
    "holy"
@@ -27445,7 +27445,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-gauntlet"
+   "wb:weapon/spiked-gauntlet"
   ],
   "sanctification": [
    "unholy"
@@ -27517,7 +27517,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bo-staff"
+   "wb:weapon/bo-staff"
   ],
   "sanctification": [
    "holy"
@@ -27593,7 +27593,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/flail"
+   "wb:weapon/flail"
   ],
   "sanctification": [
    "holy"
@@ -27668,7 +27668,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "sanctification": [
    "unholy"
@@ -27738,7 +27738,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -27812,7 +27812,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "sanctification": [
    "unholy"
@@ -27886,8 +27886,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaws",
-   "wb:equipment/staff"
+   "jaws",
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -27967,7 +27967,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "holy",
@@ -28046,7 +28046,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -28119,7 +28119,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "unholy"
@@ -28195,7 +28195,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "holy"
@@ -28272,7 +28272,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy"
@@ -28345,7 +28345,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/flail"
+   "wb:weapon/flail"
   ],
   "sanctification": [
    "holy"
@@ -28420,7 +28420,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -28495,7 +28495,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bladed-scarf"
+   "wb:weapon/bladed-scarf"
   ],
   "sanctification": [
    "holy"
@@ -28572,7 +28572,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greatsword"
+   "wb:weapon/greatsword"
   ],
   "sanctification": [
    "holy"
@@ -28645,7 +28645,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "unholy"
@@ -28758,7 +28758,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/katar"
+   "wb:weapon/katar"
   ],
   "sanctification": [
    "holy"
@@ -28830,8 +28830,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/nails",
-   "wb:equipment/sickle"
+   "nails",
+   "wb:weapon/sickle"
   ],
   "edict": "push the boundaries of known magic, seek like-minded community, commit to truth",
   "anathema": "compromise yourself for the sake of fitting in, enforce gender norms or stereotypes, withhold magical knowledge for personal gain",
@@ -28902,7 +28902,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "edict": "Mentor the next generation, study and learn from failure, heed the insights of dreams and sleepless visions",
   "anathema": "Disturb the weary from rest, allow harm to come to children, create undead",
@@ -28977,7 +28977,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/morningstar"
+   "wb:weapon/morningstar"
   ],
   "sanctification": [
    "unholy"
@@ -29052,7 +29052,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "edict": "Gather a court of devotees, create discordant piping or babbling",
   "anathema": "None",
@@ -29126,7 +29126,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "unholy"
@@ -29200,7 +29200,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/katana"
+   "wb:weapon/katana"
   ],
   "sanctification": [
    "holy"
@@ -29273,7 +29273,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greatclub"
+   "wb:weapon/greatclub"
   ],
   "edict": "Grow as large as you can, shelter those smaller and weaker than you, tend large animals and megafauna",
   "anathema": "Accidentally injure others with your size, topple a massive natural monument, use magic to assume a form smaller than you are",
@@ -29345,7 +29345,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/glaive"
+   "wb:weapon/glaive"
   ],
   "sanctification": [
    "unholy"
@@ -29420,7 +29420,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "unholy"
@@ -29492,7 +29492,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/club"
+   "wb:weapon/club"
   ],
   "edict": "Aid travelers and those who return from the dead, tend to roadside graves, find missing objects or people",
   "anathema": "Celebrate specific calendar dates over others, avoid travel or change, freeze time for an object or creature",
@@ -29562,8 +29562,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/claw",
-   "wb:equipment/tekko-kagi"
+   "claw",
+   "wb:weapon/tekko-kagi"
   ],
   "sanctification": [
    "holy"
@@ -29634,7 +29634,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/maul"
+   "wb:weapon/maul"
   ],
   "sanctification": [
    "holy"
@@ -29709,7 +29709,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/ranseur"
+   "wb:weapon/ranseur"
   ],
   "sanctification": [
    "unholy"
@@ -29782,7 +29782,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -29859,7 +29859,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/mambele"
+   "wb:weapon/mambele"
   ],
   "sanctification": [
    "holy"
@@ -29939,7 +29939,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "holy",
@@ -30015,7 +30015,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "holy"
@@ -30088,7 +30088,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/war-flail"
+   "wb:weapon/war-flail"
   ],
   "sanctification": [
    "unholy"
@@ -30161,7 +30161,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/starknife"
+   "wb:weapon/starknife"
   ],
   "sanctification": [
    "holy"
@@ -30235,7 +30235,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "edict": "encourage natural growth even in urban areas, expertly craft wooden furniture and other items, fight against blight",
   "anathema": "exploit natural resources such as timber, use herbs and fungi to make deadly poisons",
@@ -30303,7 +30303,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/ranseur"
+   "wb:weapon/ranseur"
   ],
   "edict": "Spread Bokrug’s faith into the waking world, offer blood sacrifices to Bokrug",
   "anathema": "None",
@@ -30375,7 +30375,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "holy"
@@ -30451,7 +30451,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "edict": "respect creatures capable of natural flight, revel in the glory of flight, stop to feel breezes across your body when possible",
   "anathema": "pollute the air with excessive smoke or chemicals, suffocate a living creature",
@@ -30526,7 +30526,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "sanctification": [
    "holy",
@@ -30600,8 +30600,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/tail",
-   "wb:equipment/starknife"
+   "tail",
+   "wb:weapon/starknife"
   ],
   "edict": "pursue knowledge even in the most unusual places, seek to understand that which cannot be explained, show kindness to those who are weaker than the rest",
   "anathema": "underestimate an enemy or an ally, treat those weaker than you unkindly",
@@ -30676,7 +30676,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "holy",
@@ -30756,7 +30756,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/javelin"
+   "wb:weapon/javelin"
   ],
   "sanctification": [
    "unholy"
@@ -30838,7 +30838,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/polytool"
+   "wb:weapon/polytool"
   ],
   "sanctification": [
    "holy",
@@ -30915,7 +30915,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "holy"
@@ -30997,7 +30997,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "holy"
@@ -31070,7 +31070,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "edict": "Attend the dying and hear their last words, uncover what is hidden or lost, destroy undead",
   "anathema": "Create undead, destroy or corrupt a soul, forget what you have lost",
@@ -31142,7 +31142,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "holy"
@@ -31218,7 +31218,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "unholy"
@@ -31294,7 +31294,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy",
@@ -31371,7 +31371,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/falchion"
+   "wb:weapon/falchion"
   ],
   "sanctification": [
    "unholy"
@@ -31444,7 +31444,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "unholy"
@@ -31515,7 +31515,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/war-flail"
+   "wb:weapon/war-flail"
   ],
   "sanctification": [
    "unholy"
@@ -31588,7 +31588,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "unholy"
@@ -31658,7 +31658,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -31725,7 +31725,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -31800,7 +31800,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/starknife"
+   "wb:weapon/starknife"
   ],
   "sanctification": [
    "holy"
@@ -31875,7 +31875,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy"
@@ -31948,7 +31948,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/flintlock-musket"
+   "wb:weapon/flintlock-musket"
   ],
   "sanctification": [
    "unholy"
@@ -32018,7 +32018,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/frying-pan"
+   "wb:weapon/frying-pan"
   ],
   "edict": "Make yourself known, make fun of the unsuspecting",
   "anathema": "React poorly or offensively to mischief, silence loud noises",
@@ -32080,7 +32080,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -32152,7 +32152,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/flyssa"
+   "wb:weapon/flyssa"
   ],
   "sanctification": [
    "holy"
@@ -32223,7 +32223,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/hatchet"
+   "wb:weapon/hatchet"
   ],
   "sanctification": [
    "unholy"
@@ -32297,7 +32297,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -32374,7 +32374,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/starknife"
+   "wb:weapon/starknife"
   ],
   "sanctification": [
    "holy"
@@ -32449,7 +32449,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "edict": "Work in shadows, hide your nature and motives, plot betrayals or revenge for betrayals",
   "anathema": "Ask for forgiveness, create permanent or long-lasting sources of light",
@@ -32517,7 +32517,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "edict": "Create art inspired by dreams, destroy magical seals that contain destructive forces, influence the dreams of other",
   "anathema": "None",
@@ -32588,7 +32588,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/scimitar"
+   "wb:weapon/scimitar"
   ],
   "sanctification": [
    "unholy"
@@ -32668,7 +32668,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scimitar"
+   "wb:weapon/scimitar"
   ],
   "sanctification": [
    "unholy"
@@ -32741,7 +32741,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "unholy"
@@ -32816,7 +32816,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "unholy"
@@ -32889,8 +32889,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/jaws",
-   "wb:equipment/whip"
+   "jaws",
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "unholy"
@@ -32966,7 +32966,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/flail"
+   "wb:weapon/flail"
   ],
   "sanctification": [
    "holy"
@@ -33046,7 +33046,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greatpick"
+   "wb:weapon/greatpick"
   ],
   "sanctification": [
    "holy"
@@ -33119,7 +33119,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-mace"
+   "wb:weapon/light-mace"
   ],
   "sanctification": [
    "holy"
@@ -33191,7 +33191,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "edict": "Respect the cycle of souls, heal the sick and injured, experience a hangover after drinking",
   "anathema": "Create undead, waste medicines instead of using them, harm an innocent insect",
@@ -33262,7 +33262,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "sanctification": [
    "holy"
@@ -33336,7 +33336,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/machete"
+   "wb:weapon/machete"
   ],
   "sanctification": [
    "holy"
@@ -33414,7 +33414,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scimitar"
+   "wb:weapon/scimitar"
   ],
   "sanctification": [
    "holy",
@@ -33491,7 +33491,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/starknife"
+   "wb:weapon/starknife"
   ],
   "sanctification": [
    "holy"
@@ -33577,7 +33577,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/temple-sword"
+   "wb:weapon/temple-sword"
   ],
   "sanctification": [
    "unholy"
@@ -33656,7 +33656,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scimitar"
+   "wb:weapon/scimitar"
   ],
   "sanctification": [
    "unholy"
@@ -33731,7 +33731,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "unholy"
@@ -33800,8 +33800,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/claw",
-   "wb:equipment/war-gavel"
+   "claw",
+   "wb:weapon/war-gavel"
   ],
   "edict": "Protect the weak, pass your knowledge on to future generations, defend Sarkoris",
   "anathema": "Ally with demons, harm a member of the Farheavens Clan except in delivering fair justice",
@@ -33876,7 +33876,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/kukri"
+   "wb:weapon/kukri"
   ],
   "sanctification": [
    "unholy"
@@ -33946,7 +33946,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shield-spikes"
+   "wb:weapon/shield-spikes"
   ],
   "edict": "Create and maintain clear physical boundaries, repair planar tears, banish summoned creatures",
   "anathema": "Merge a creature with another, cause a planar rift, strand a creature in a different plane than it belongs",
@@ -34020,7 +34020,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-pick"
+   "wb:weapon/light-pick"
   ],
   "edict": "Help reclaim just debts, seek appropriate vengeance against transgressions",
   "anathema": "Allow a slight to go unrecognized, avoid repaying a debt, force others into debts you know are unpayable",
@@ -34090,8 +34090,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/jaw",
-   "wb:equipment/pick"
+   "jaw",
+   "wb:weapon/pick"
   ],
   "edict": "Embody a lion's hunting strategies, savor meat, be chased or eaten by Drokalion",
   "anathema": "Back down from a fair challenge, cower to avoid harm, ruin Drokalion's hunt",
@@ -34164,7 +34164,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "sanctification": [
    "unholy"
@@ -34244,7 +34244,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "holy"
@@ -34326,7 +34326,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "unholy"
@@ -34398,7 +34398,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "holy"
@@ -34472,8 +34472,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longbow",
-   "wb:equipment/shortbow"
+   "wb:weapon/longbow",
+   "wb:weapon/shortbow"
   ],
   "sanctification": [
    "holy"
@@ -34552,7 +34552,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/wish-knife"
+   "wb:weapon/wish-knife"
   ],
   "sanctification": [
    "holy"
@@ -34628,7 +34628,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/frying-pan"
+   "wb:weapon/frying-pan"
   ],
   "sanctification": [
    "holy"
@@ -34699,7 +34699,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/spiked-chain"
+   "wb:weapon/spiked-chain"
   ],
   "sanctification": [
    "unholy"
@@ -34774,7 +34774,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "holy"
@@ -34852,7 +34852,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/light-mace"
+   "wb:weapon/light-mace"
   ],
   "edict": "Manipulate dangerous beings and opportunities to your benefit, thrive in hostile conditions, divine the future",
   "anathema": "Despoil nature, kill a natural plant or animal that has managed to thrive outside of its intended environment",
@@ -34924,7 +34924,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -35000,7 +35000,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sword-cane"
+   "wb:weapon/sword-cane"
   ],
   "edict": "honor the rites of the Order while pushing for change, provide succor to scholars and truth-seekers, pursue the wisdom of ancient forgotten texts such as  The Lost Gospels of Tabris ",
   "anathema": "destroy rare or ancient lore, dismiss or remain ignorant to the newly found texts, reveal the Order’s secrets to those outside the organization",
@@ -35069,8 +35069,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/claws",
-   "wb:equipment/tekko-kagi"
+   "claws",
+   "wb:weapon/tekko-kagi"
   ],
   "edict": "pursue fundamental truths, compare your experience to that of others, investigate new solutions",
   "anathema": "become stagnant or passive in your thinking, abandon magic, sequester useful discoveries or valuable information",
@@ -35141,7 +35141,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy",
@@ -35212,7 +35212,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -35285,7 +35285,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/glaive"
+   "wb:weapon/glaive"
   ],
   "edict": "embody the best aspects of those who risked their souls to seek divinity, respect and remember the sacrifice of others, seek out and aid those on the verge of divinity",
   "anathema": "allow the deceased to be forgotten, dismiss another’s beliefs no matter how strange they might seem, fail to aid others once you have promised to do so",
@@ -35358,7 +35358,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "holy"
@@ -35433,7 +35433,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy",
@@ -35510,7 +35510,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/pick"
+   "wb:weapon/pick"
   ],
   "edict": "Accept the inevitable, clear what remains of that which has fallen to ruin, usher the past into obscurity",
   "anathema": "Preserve knowledge that has outlived its time, restore an object or structure that has been reclaimed by the elements",
@@ -35583,7 +35583,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -35659,7 +35659,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -35737,7 +35737,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shears"
+   "wb:weapon/shears"
   ],
   "sanctification": [
    "holy",
@@ -35810,7 +35810,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/fighting-fan"
+   "wb:weapon/fighting-fan"
   ],
   "sanctification": [
    "holy"
@@ -35885,7 +35885,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/naginata"
+   "wb:weapon/naginata"
   ],
   "sanctification": [
    "unholy"
@@ -35959,7 +35959,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "unholy"
@@ -36032,8 +36032,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaws",
-   "wb:equipment/light-hammer"
+   "jaws",
+   "wb:weapon/light-hammer"
   ],
   "sanctification": [
    "holy"
@@ -36107,8 +36107,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaws",
-   "wb:equipment/spear"
+   "jaws",
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "unholy"
@@ -36183,7 +36183,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "edict": "Preserve primal areas, destroy blighted fey and agents of  Cyth-V’sug , protect those who placate you with offerings",
   "anathema": "Parley or make a deal with fiends, forgive those who deceive you, harm an innocent child",
@@ -36251,8 +36251,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longbow",
-   "wb:equipment/shortbow"
+   "wb:weapon/longbow",
+   "wb:weapon/shortbow"
   ],
   "sanctification": [
    "unholy"
@@ -36326,7 +36326,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bladed-gauntlet"
+   "wb:weapon/bladed-gauntlet"
   ],
   "sanctification": [
    "holy",
@@ -36404,7 +36404,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/war-flail"
+   "wb:weapon/war-flail"
   ],
   "sanctification": [
    "unholy"
@@ -36480,7 +36480,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "unholy"
@@ -36592,7 +36592,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "unholy"
@@ -36664,7 +36664,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "holy"
@@ -36738,7 +36738,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greatsword"
+   "wb:weapon/greatsword"
   ],
   "sanctification": [
    "holy",
@@ -36811,7 +36811,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "edict": "cherish, protect, and respect nature in all its forms",
   "anathema": "bring civilization to intrude on the wild, create undead, despoil areas of natural beauty",
@@ -36891,7 +36891,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bola"
+   "wb:weapon/bola"
   ],
   "sanctification": [
    "holy"
@@ -36962,7 +36962,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shield-boss"
+   "wb:weapon/shield-boss"
   ],
   "edict": "Honor those whose essential work is overlooked, preserve areas of natural wilderness, relish your well‑deserved rest",
   "anathema": "Harm a sleeping creature, harm plant life except in the pursuit of saving greater plant life\r\n",
@@ -37032,7 +37032,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "unholy"
@@ -37102,7 +37102,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "unholy"
@@ -37173,7 +37173,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -37264,8 +37264,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle",
-   "wb:equipment/claw"
+   "wb:weapon/sickle",
+   "claw"
   ],
   "sanctification": [
    "holy"
@@ -37334,7 +37334,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/club"
+   "wb:weapon/club"
   ],
   "edict": "Discover or create new forms of plant life, foster the growth and well-being of flora, preserve areas of natural wilderness",
   "anathema": "Allow flagrant abuse of plant life to go unpunished, damage natural environments, harm plant life except in the pursuit of saving greater plant life\r\n",
@@ -37406,7 +37406,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/war-flail"
+   "wb:weapon/war-flail"
   ],
   "sanctification": [
    "unholy"
@@ -37484,7 +37484,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortbow"
+   "wb:weapon/shortbow"
   ],
   "sanctification": [
    "holy"
@@ -37558,7 +37558,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "sanctification": [
    "holy"
@@ -37635,7 +37635,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shield-boss"
+   "wb:weapon/shield-boss"
   ],
   "sanctification": [
    "holy"
@@ -37708,7 +37708,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -37785,7 +37785,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/battle-axe"
+   "wb:weapon/battle-axe"
   ],
   "sanctification": [
    "unholy"
@@ -37860,7 +37860,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longspear"
+   "wb:weapon/longspear"
   ],
   "sanctification": [
    "unholy"
@@ -37932,7 +37932,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/flail"
+   "wb:weapon/flail"
   ],
   "sanctification": [
    "unholy"
@@ -38002,7 +38002,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greatclub"
+   "wb:weapon/greatclub"
   ],
   "sanctification": [
    "unholy"
@@ -38077,7 +38077,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/club"
+   "wb:weapon/club"
   ],
   "sanctification": [
    "holy"
@@ -38153,7 +38153,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "holy"
@@ -38225,7 +38225,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "edict": "Spread Hastur’s Yellow Sign, hide the true nature of your worship, promulgate the play The King in Yellow",
   "anathema": "None",
@@ -38295,7 +38295,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bola"
+   "wb:weapon/bola"
   ],
   "sanctification": [
    "unholy"
@@ -38370,7 +38370,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "holy"
@@ -38446,7 +38446,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "holy"
@@ -38529,7 +38529,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jiu-huan-dao"
+   "wb:weapon/jiu-huan-dao"
   ],
   "sanctification": [
    "unholy"
@@ -38607,7 +38607,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/khopesh"
+   "wb:weapon/khopesh"
   ],
   "sanctification": [
    "holy"
@@ -38680,7 +38680,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "unholy"
@@ -38750,7 +38750,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "unholy"
@@ -38821,8 +38821,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/tail",
-   "wb:equipment/war-flail"
+   "tail",
+   "wb:weapon/war-flail"
   ],
   "sanctification": [
    "unholy"
@@ -38893,7 +38893,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortbow"
+   "wb:weapon/shortbow"
   ],
   "sanctification": [
    "unholy"
@@ -38966,8 +38966,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/claw",
-   "wb:equipment/fist"
+   "claw",
+   "wb:weapon/fist"
   ],
   "edict": "Achieve and revel in formlessness, surrender to uncertainty, take risks",
   "anathema": "Close off paths of action through slavish adherence to plans and commitments, become ruled by consequence",
@@ -39039,7 +39039,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/war-flail"
+   "wb:weapon/war-flail"
   ],
   "edict": "Pursue your own goals, bring things to their proper ending, split things in half or otherwise create pairs",
   "anathema": "Offend Imbrex",
@@ -39109,7 +39109,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "sanctification": [
    "holy"
@@ -39181,7 +39181,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/hatchet"
+   "wb:weapon/hatchet"
   ],
   "sanctification": [
    "holy"
@@ -39256,7 +39256,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shield-boss"
+   "wb:weapon/shield-boss"
   ],
   "edict": "Search for omens in the natural world, push the boundaries of mathematics, study past disasters",
   "anathema": "Withhold your understanding of a portent, prevent the destruction of things that cannot be saved",
@@ -39327,7 +39327,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/alchemical-bomb"
+   "wb:weapon/alchemical-bomb"
   ],
   "edict": "Create using heat or fire, sacrifice yourself to achieve your goals, destroy objects when their purpose is done, rescue creatures from doomed planets",
   "anathema": "Douse ashes with water instead of letting them burn out, bury a body instead of cremating it, curse the sun",
@@ -39400,7 +39400,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "holy"
@@ -39478,7 +39478,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dart"
+   "wb:weapon/dart"
   ],
   "sanctification": [
    "holy"
@@ -39556,7 +39556,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/fist"
+   "wb:weapon/fist"
   ],
   "sanctification": [
    "holy",
@@ -39635,7 +39635,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -39715,7 +39715,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "unholy"
@@ -39788,7 +39788,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/meteor-hammer"
+   "wb:weapon/meteor-hammer"
   ],
   "sanctification": [
    "holy"
@@ -39865,7 +39865,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "sanctification": [
    "holy"
@@ -39941,7 +39941,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "holy"
@@ -40014,8 +40014,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/claw",
-   "wb:equipment/scimitar"
+   "claw",
+   "wb:weapon/scimitar"
   ],
   "sanctification": [
    "unholy"
@@ -40090,7 +40090,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sansetsukon"
+   "wb:weapon/sansetsukon"
   ],
   "edict": "take up dares and challenges in good faith, persist with creativity and tenacity, own up to your failures as a way to improve oneself",
   "anathema": "give up without trying, dismiss or mock someone’s effort, take success for granted, discount the power of beginner’s luck or luck in general",
@@ -40157,7 +40157,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "edict": "Work together, push each other to greater heights, respect the animals you hunt",
   "anathema": "Abandon or betray your people, refuse to learn from your mistakes, isolate yourself",
@@ -40227,8 +40227,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/jaw",
-   "wb:equipment/flail"
+   "jaw",
+   "wb:weapon/flail"
   ],
   "sanctification": [
    "unholy"
@@ -40301,7 +40301,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "holy"
@@ -40378,7 +40378,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dueling-pistol"
+   "wb:weapon/dueling-pistol"
   ],
   "sanctification": [
    "holy"
@@ -40454,8 +40454,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaw",
-   "wb:equipment/dagger"
+   "jaw",
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy",
@@ -40533,7 +40533,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/machete"
+   "wb:weapon/machete"
   ],
   "sanctification": [
    "holy"
@@ -40604,7 +40604,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "sanctification": [
    "holy"
@@ -40681,7 +40681,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "holy"
@@ -40758,7 +40758,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "unholy"
@@ -40828,7 +40828,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/halberd"
+   "wb:weapon/halberd"
   ],
   "sanctification": [
    "holy"
@@ -40902,7 +40902,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "edict": "Clean cluttered spaces, embrace moments of silence",
   "anathema": "Attempt to preserve something indefinitely, perform an act of wanton and significant destruction",
@@ -40980,7 +40980,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "holy"
@@ -41056,7 +41056,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sling"
+   "wb:weapon/sling"
   ],
   "sanctification": [
    "holy"
@@ -41129,7 +41129,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -41204,7 +41204,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -41285,7 +41285,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "edict": "Seek those who break oaths and enforce just restitution, uphold your promises",
   "anathema": "Lie, dishonor yourself or your family, shirk your duties, break an oath",
@@ -41360,7 +41360,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/fist"
+   "wb:weapon/fist"
   ],
   "sanctification": [
    "holy"
@@ -41431,7 +41431,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "unholy"
@@ -41501,7 +41501,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/kusarigama"
+   "wb:weapon/kusarigama"
   ],
   "sanctification": [
    "unholy"
@@ -41577,7 +41577,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/javelin"
+   "wb:weapon/javelin"
   ],
   "sanctification": [
    "holy"
@@ -41647,7 +41647,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/spiked-chain"
+   "wb:weapon/spiked-chain"
   ],
   "edict": "Equip the weak to defend themselves, preserve areas of natural wilderness, confront those who trespass and despoil, embrace scars",
   "anathema": "Allow flagrant abuse of plant life to go unpunished, prune a plant's natural defenses, fully heal wounds inflicted by plants\r\n",
@@ -41721,7 +41721,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/fighting-fan"
+   "wb:weapon/fighting-fan"
   ],
   "sanctification": [
    "holy"
@@ -41800,7 +41800,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "unholy"
@@ -41871,7 +41871,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -41946,7 +41946,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaw"
+   "jaw"
   ],
   "sanctification": [
    "unholy"
@@ -42020,7 +42020,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/crossbow"
+   "wb:weapon/crossbow"
   ],
   "sanctification": [
    "unholy"
@@ -42092,7 +42092,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sling"
+   "wb:weapon/sling"
   ],
   "sanctification": [
    "holy"
@@ -42173,7 +42173,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/falchion"
+   "wb:weapon/falchion"
   ],
   "sanctification": [
    "unholy"
@@ -42249,7 +42249,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -42324,7 +42324,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/alchemical-bomb"
+   "wb:weapon/alchemical-bomb"
   ],
   "edict": "Discover new alloys and concoctions, have multiple concurrent plans, innovate use of metals",
   "anathema": "Allow your creation to fall into malicious hands, destroy an alchemical formula",
@@ -42440,7 +42440,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scimitar"
+   "wb:weapon/scimitar"
   ],
   "edict": "carry a light source at all times, express your wrath through smoke and flame, warm those who are cold",
   "anathema": "cover or extinguish a flame without reason, languish in the darkness for no reason",
@@ -42508,7 +42508,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dancers-spear"
+   "wb:weapon/dancers-spear"
   ],
   "edict": "Uphold the laws of the physical and magical world, arrange things with orderly patterns or logic, make use of music during your work",
   "anathema": "break a rule of physics or magic, create discordant music, intentionally disrupt a non-detrimental pattern",
@@ -42581,7 +42581,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/hatchet"
+   "wb:weapon/hatchet"
   ],
   "sanctification": [
    "holy"
@@ -42654,7 +42654,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "holy",
@@ -42729,7 +42729,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy"
@@ -42803,7 +42803,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "unholy"
@@ -42880,7 +42880,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longspear"
+   "wb:weapon/longspear"
   ],
   "sanctification": [
    "holy",
@@ -42960,7 +42960,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-chain"
+   "wb:weapon/spiked-chain"
   ],
   "sanctification": [
    "holy",
@@ -43031,7 +43031,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -43104,7 +43104,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "holy"
@@ -43184,7 +43184,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy"
@@ -43257,7 +43257,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/starknife"
+   "wb:weapon/starknife"
   ],
   "sanctification": [
    "holy"
@@ -43333,7 +43333,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "edict": "Use magic to read the future and understand fate",
   "anathema": "Lie, share your magic readings without payment (no matter how trivial)",
@@ -43407,7 +43407,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "holy"
@@ -43485,7 +43485,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bola"
+   "wb:weapon/bola"
   ],
   "sanctification": [
    "unholy"
@@ -43558,7 +43558,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scimitar"
+   "wb:weapon/scimitar"
   ],
   "sanctification": [
    "holy"
@@ -43632,7 +43632,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-crossbow"
+   "wb:weapon/light-crossbow"
   ],
   "sanctification": [
    "unholy"
@@ -43708,7 +43708,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "unholy"
@@ -43784,7 +43784,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-gauntlet"
+   "wb:weapon/spiked-gauntlet"
   ],
   "sanctification": [
    "holy"
@@ -43857,7 +43857,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "holy"
@@ -43934,7 +43934,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shield-boss"
+   "wb:weapon/shield-boss"
   ],
   "sanctification": [
    "holy"
@@ -44005,7 +44005,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/starknife"
+   "wb:weapon/starknife"
   ],
   "sanctification": [
    "holy"
@@ -44081,7 +44081,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "unholy"
@@ -44154,7 +44154,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/katar"
+   "wb:weapon/katar"
   ],
   "sanctification": [
    "unholy"
@@ -44225,7 +44225,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greatpick"
+   "wb:weapon/greatpick"
   ],
   "edict": "Cause tectonic disasters, destroy objects and creatures using fire",
   "anathema": "None",
@@ -44298,7 +44298,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/morningstar"
+   "wb:weapon/morningstar"
   ],
   "sanctification": [
    "holy"
@@ -44370,7 +44370,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "unholy"
@@ -44447,7 +44447,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "unholy"
@@ -44520,7 +44520,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/fist"
+   "wb:weapon/fist"
   ],
   "edict": "Ensure balance between opposing forces, mediate disagreements",
   "anathema": "Allow your personal motivations to determine a major decision",
@@ -44591,7 +44591,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "edict": "Recycle rot and waste into useful creations, eat the flesh of your own people, kill without mercy if it benefits your community, help to raise children",
   "anathema": "Poison insects or scavengers, waste food or good materials, allow rot to poison an area, create undead",
@@ -44664,7 +44664,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greatsword"
+   "wb:weapon/greatsword"
   ],
   "edict": "Destroy undead, honor fallen soldiers, hear the confessions of the dying, put malcontent spirits to rest",
   "anathema": "Create undead, deny your emotions, shame others for emotional outbursts",
@@ -44731,7 +44731,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/fist"
+   "wb:weapon/fist"
   ],
   "sanctification": [
    "holy",
@@ -44802,7 +44802,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/naginata"
+   "wb:weapon/naginata"
   ],
   "sanctification": [
    "unholy"
@@ -44874,7 +44874,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "holy"
@@ -44946,7 +44946,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "edict": "Comfort and encourage lovers, help the suffering escape their circumstances in life or in death",
   "anathema": "Dismiss or mock a creature’s grief, separate lovers, torture a creature",
@@ -45020,8 +45020,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaw",
-   "wb:equipment/urumi"
+   "jaw",
+   "wb:weapon/urumi"
   ],
   "sanctification": [
    "holy",
@@ -45102,7 +45102,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "unholy"
@@ -45176,7 +45176,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "edict": "Help others through painful changes, offer harsh punishments to the penitent, seek and allow redemption",
   "anathema": "Torture an unwilling creature, take joy in suffering",
@@ -45246,7 +45246,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/hatchet"
+   "wb:weapon/hatchet"
   ],
   "edict": "Divine the future, transform the bodies of willing creatures, rebel against organized structures",
   "anathema": "Refuse to speak to a keketar, eschew a challenge by turning down a promotion or an advancement",
@@ -45320,7 +45320,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortbow"
+   "wb:weapon/shortbow"
   ],
   "sanctification": [
    "holy"
@@ -45393,7 +45393,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-mace"
+   "wb:weapon/light-mace"
   ],
   "sanctification": [
    "holy"
@@ -45466,7 +45466,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-chain"
+   "wb:weapon/spiked-chain"
   ],
   "sanctification": [
    "unholy"
@@ -45537,7 +45537,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/ranseur"
+   "wb:weapon/ranseur"
   ],
   "sanctification": [
    "holy"
@@ -45614,7 +45614,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy",
@@ -45697,7 +45697,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/gauntlet"
+   "wb:weapon/gauntlet"
   ],
   "edict": "Travel, hide your identity and your motives",
   "anathema": "Sleep in the same place twice in a row, wear seasonal decorations out of season",
@@ -45766,7 +45766,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/flail"
+   "wb:weapon/flail"
   ],
   "edict": "Create undead, feast upon carnivores that have recently feasted upon others",
   "anathema": "None",
@@ -45836,7 +45836,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sword-cane"
+   "wb:weapon/sword-cane"
   ],
   "sanctification": [
    "unholy"
@@ -45915,7 +45915,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "edict": "learn the rules and strategies of games of chance played wherever you travel, take risks and savor the consequences whether good or ill, use stealth and guile over violence when dealing with the fallout from your risk-taking",
   "anathema": "break the established rules or terms of a wager, use violence to avoid the consequences of a wager",
@@ -45992,7 +45992,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -46068,7 +46068,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "unholy"
@@ -46145,7 +46145,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "sanctification": [
    "unholy"
@@ -46218,7 +46218,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "unholy"
@@ -46290,7 +46290,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/kukri"
+   "wb:weapon/kukri"
   ],
   "edict": "Create darkness, encourage authorities to bring the apocalypse",
   "anathema": "None",
@@ -46359,7 +46359,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "edict": "Sow discord among allies, misuse positions of authority by steering events toward apocalyptic ends",
   "anathema": "None",
@@ -46433,7 +46433,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/katar"
+   "wb:weapon/katar"
   ],
   "edict": "Indoctrinate the desperate and needy, influence institutions of power to hasten the end of the world",
   "anathema": "None",
@@ -46507,7 +46507,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bo-staff"
+   "wb:weapon/bo-staff"
   ],
   "edict": "Innovate destructive alchemy or magic, instigate conflict between your enemies, share dangerous secrets",
   "anathema": "None",
@@ -46582,7 +46582,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/lance"
+   "wb:weapon/lance"
   ],
   "sanctification": [
    "unholy"
@@ -46655,7 +46655,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -46728,7 +46728,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "unholy"
@@ -46801,7 +46801,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "edict": "face unfamiliar challenges, travel to new places and seek new experiences, pursue dangerous or forbidden relationships",
   "anathema": "abandon a sworn lover, constantly pursue safe choices, shun change",
@@ -46874,7 +46874,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/halberd"
+   "wb:weapon/halberd"
   ],
   "sanctification": [
    "holy"
@@ -46944,7 +46944,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "sanctification": [
    "unholy"
@@ -47016,7 +47016,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/chakram"
+   "wb:weapon/chakram"
   ],
   "edict": "Mediate conflicts, respect each element equally, experience travel as often as possible",
   "anathema": "Act before weighing both sides, solve problems with aggression before negotiating, play favorites in negotiation",
@@ -47079,7 +47079,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "unholy"
@@ -47153,7 +47153,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "edict": "Surpass your peers in your chosen field at any cost, travel using subterranean waterways, use blood and toxic metals in alchemy",
   "anathema": "None",
@@ -47224,7 +47224,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/flail"
+   "wb:weapon/flail"
   ],
   "sanctification": [
    "holy"
@@ -47300,8 +47300,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaws",
-   "wb:equipment/mace"
+   "jaws",
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "holy",
@@ -47373,7 +47373,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "holy"
@@ -47451,7 +47451,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "unholy"
@@ -47526,7 +47526,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "holy"
@@ -47599,7 +47599,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/morningstar"
+   "wb:weapon/morningstar"
   ],
   "sanctification": [
    "unholy"
@@ -47672,7 +47672,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "unholy"
@@ -47748,7 +47748,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "edict": "strive to understand ancient prophecies, destroy undead, lay bodies to rest",
   "anathema": "create undead, desecrate a corpse, take from the dead in bad faith",
@@ -47819,7 +47819,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/ranseur"
+   "wb:weapon/ranseur"
   ],
   "edict": "Guide others between places of safety, maintain travel infrastructure, unite contentious parties to achieve greater goals",
   "anathema": "Deny directions to the lost, extinguish a lighthouse or similar beacon, bring destruction upon Iblydos",
@@ -47887,7 +47887,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortbow"
+   "wb:weapon/shortbow"
   ],
   "sanctification": [
    "holy"
@@ -47959,7 +47959,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "edict": "Allow atheists to hold their beliefs, challenge what is presupposed, forge a lasting legacy, live authentically, take pride in your work",
   "anathema": "Allow your accomplishments to go unattributed, destroy another artist’s legacy, misattribute or obscure the authorship of a work of art",
@@ -48029,7 +48029,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/blowgun"
+   "wb:weapon/blowgun"
   ],
   "sanctification": [
    "holy"
@@ -48104,7 +48104,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "edict": "Seek new knowledge, use your knowledge and skill to improve the world around you, protect knowledge from becoming lost",
   "anathema": "Choose to use old knowledge or tools after they have been improved upon, destroy knowledge, refuse to answer a query for which you know the answer",
@@ -48223,7 +48223,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -48297,7 +48297,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/sling"
+   "wb:weapon/sling"
   ],
   "sanctification": [
    "holy"
@@ -48379,7 +48379,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "holy"
@@ -48455,7 +48455,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy"
@@ -48532,7 +48532,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "holy"
@@ -48604,7 +48604,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "edict": "Draw spirals, seek primordial secrets, use poison, always carry water",
   "anathema": "Suffer a linnorm’s death curse, destroy a fossil",
@@ -48682,7 +48682,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bastard-sword"
+   "wb:weapon/bastard-sword"
   ],
   "sanctification": [
    "holy"
@@ -48757,7 +48757,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "holy"
@@ -48830,7 +48830,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "holy"
@@ -48904,7 +48904,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "holy",
@@ -48981,7 +48981,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaw"
+   "jaw"
   ],
   "sanctification": [
    "holy",
@@ -49053,7 +49053,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "unholy"
@@ -49123,7 +49123,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/morningstar"
+   "wb:weapon/morningstar"
   ],
   "sanctification": [
    "unholy"
@@ -49198,7 +49198,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/falchion"
+   "wb:weapon/falchion"
   ],
   "sanctification": [
    "holy"
@@ -49269,7 +49269,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "edict": "Create statues of Rhan-Tegoth, sacrifice living sentient creatures",
   "anathema": "None",
@@ -49339,7 +49339,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "edict": "Clear obstacles to progress, spend part of each day in motion",
   "anathema": "Dam a river or stream, hold a creature against its will",
@@ -49410,7 +49410,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "edict": "maintain balance and understanding between the mortal and spirit world, internally cultivate yourself, serve your community",
   "anathema": "continually place mortal matters above spiritual ones, mislead a petitioner and fail to set it right, willingly misrepresent the will of spiritual entities",
@@ -49476,7 +49476,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/hand-cannon"
+   "wb:weapon/hand-cannon"
   ],
   "edict": "Seek new horizons, protect travelers on the road, learn something new each day",
   "anathema": "Willingly stay in one place for longer than your duty requires, accost travelers",
@@ -49549,7 +49549,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "sanctification": [
    "unholy"
@@ -49622,7 +49622,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -49692,7 +49692,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/falchion"
+   "wb:weapon/falchion"
   ],
   "sanctification": [
    "unholy"
@@ -49768,7 +49768,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/pick"
+   "wb:weapon/pick"
   ],
   "sanctification": [
    "holy"
@@ -49843,7 +49843,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/guisarme"
+   "wb:weapon/guisarme"
   ],
   "edict": "Help creatures grow and find purpose, offer second chances to failures, study different perspectives on ethics",
   "anathema": "Manipulate or remove a creature’s emotions with magic, spread nihilism or hopelessness",
@@ -49971,7 +49971,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scimitar"
+   "wb:weapon/scimitar"
   ],
   "sanctification": [
    "holy"
@@ -50057,8 +50057,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaws",
-   "wb:equipment/sling"
+   "jaws",
+   "wb:weapon/sling"
   ],
   "sanctification": [
    "holy",
@@ -50133,7 +50133,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/meteor-hammer"
+   "wb:weapon/meteor-hammer"
   ],
   "sanctification": [
    "unholy"
@@ -50208,7 +50208,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "holy"
@@ -50289,8 +50289,8 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/claw",
-   "wb:equipment/battle-axe"
+   "claw",
+   "wb:weapon/battle-axe"
   ],
   "sanctification": [
    "holy"
@@ -50364,7 +50364,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "holy"
@@ -50434,7 +50434,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/blowgun"
+   "wb:weapon/blowgun"
   ],
   "sanctification": [
    "holy"
@@ -50509,7 +50509,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy",
@@ -50583,7 +50583,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -50655,7 +50655,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "edict": "craft with metal, either allow a piece of metal to rust away or continually keep it polished, learn the highest secrets of alchemy",
   "anathema": "destroy metallic objects quickly instead of letting them rust away, purposefully transform a precious metal into a base metal",
@@ -50726,7 +50726,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sap"
+   "wb:weapon/sap"
   ],
   "sanctification": [
    "unholy"
@@ -50799,7 +50799,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -50874,7 +50874,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "holy"
@@ -50949,7 +50949,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/glaive"
+   "wb:weapon/glaive"
   ],
   "sanctification": [
    "holy"
@@ -51030,7 +51030,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/war-flail"
+   "wb:weapon/war-flail"
   ],
   "sanctification": [
    "unholy"
@@ -51106,7 +51106,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/katana"
+   "wb:weapon/katana"
   ],
   "sanctification": [
    "holy"
@@ -51220,7 +51220,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/club"
+   "wb:weapon/club"
   ],
   "sanctification": [
    "holy"
@@ -51295,7 +51295,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/light-mace"
+   "wb:weapon/light-mace"
   ],
   "edict": "Learn from the past, leave hourglasses in unusual places, give random gifts, create ephemeral things",
   "anathema": "Willingly tread where time does not pass",
@@ -51365,7 +51365,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "unholy"
@@ -51438,7 +51438,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/war-razor"
+   "wb:weapon/war-razor"
   ],
   "sanctification": [
    "unholy"
@@ -51508,7 +51508,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "unholy"
@@ -51581,7 +51581,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "unholy"
@@ -51656,7 +51656,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bladed-scarf"
+   "wb:weapon/bladed-scarf"
   ],
   "edict": "show the beauty in illusions, pursue the nature of truth, respect the need for secrets",
   "anathema": "let a creature permanently labor under the falsehood of your illusions, reveal a secret you have sworn to keep",
@@ -51727,7 +51727,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "holy"
@@ -51799,7 +51799,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "holy"
@@ -51873,7 +51873,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "holy"
@@ -51951,7 +51951,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greatsword"
+   "wb:weapon/greatsword"
   ],
   "sanctification": [
    "holy"
@@ -52025,7 +52025,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/falchion"
+   "wb:weapon/falchion"
   ],
   "sanctification": [
    "holy",
@@ -52102,7 +52102,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/pick"
+   "wb:weapon/pick"
   ],
   "sanctification": [
    "holy"
@@ -52177,7 +52177,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bastard-sword"
+   "wb:weapon/bastard-sword"
   ],
   "sanctification": [
    "holy"
@@ -52258,8 +52258,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longbow",
-   "wb:equipment/shortbow"
+   "wb:weapon/longbow",
+   "wb:weapon/shortbow"
   ],
   "sanctification": [
    "holy"
@@ -52333,8 +52333,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/kris",
-   "wb:equipment/arquebus"
+   "wb:weapon/kris",
+   "wb:weapon/arquebus"
   ],
   "sanctification": [
    "holy",
@@ -52409,7 +52409,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "edict": "Embrace change, pursue freedom, present opposing perspectives, seek out new skills and experiences",
   "anathema": "Adhere to a single fate, honor an oath you are not expected to break, sow compromise among opposing groups",
@@ -52481,7 +52481,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/ranseur"
+   "wb:weapon/ranseur"
   ],
   "edict": "Act as a responsible steward of your environment, provide shelter and succor for women and children in need",
   "anathema": "Harm a pregnant mother or innocent child, including animals",
@@ -52557,7 +52557,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "holy"
@@ -52633,7 +52633,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/main-gauche"
+   "wb:weapon/main-gauche"
   ],
   "sanctification": [
    "holy"
@@ -52712,7 +52712,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bo-staff"
+   "wb:weapon/bo-staff"
   ],
   "sanctification": [
    "holy",
@@ -52785,7 +52785,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "edict": "Seek out undiscovered marvels on and beneath the sea, preserve historical knowledge and artifacts, protect oceanic sites from exploitation",
   "anathema": "Avoid deep explorations, create false maps and records, disrespect sacred sites, and mislead navigators.",
@@ -52858,7 +52858,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/tekko-kagi"
+   "wb:weapon/tekko-kagi"
   ],
   "sanctification": [
    "holy",
@@ -52932,7 +52932,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greatsword"
+   "wb:weapon/greatsword"
   ],
   "sanctification": [
    "unholy"
@@ -53004,7 +53004,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/morningstar"
+   "wb:weapon/morningstar"
   ],
   "sanctification": [
    "holy",
@@ -53080,7 +53080,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/kukri"
+   "wb:weapon/kukri"
   ],
   "sanctification": [
    "holy"
@@ -53153,7 +53153,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "holy"
@@ -53226,7 +53226,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bola"
+   "wb:weapon/bola"
   ],
   "edict": "Aid natural migrations, chart the stars and tides, observe and calculate patterns, build orreries",
   "anathema": "Use a net, waste a fish, block out the stars with unnatural light",
@@ -53293,7 +53293,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/earthbreaker"
+   "wb:weapon/earthbreaker"
   ],
   "edict": "Sow new life in desolate places, foster the growth and well-being of flora, patiently mentor disciples, climb to high places",
   "anathema": "Abandon an endeavor before making a stubborn attempt, harm fragile ecosystems except in the pursuit of saving greater plant life, demean those who attempt difficult tasks\r\n",
@@ -53363,7 +53363,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/chakram"
+   "wb:weapon/chakram"
   ],
   "edict": "Embrace old age, grow or tend poisonous plants, learn from your experiences, respect the wisdom of the elderly, use poisons",
   "anathema": "Cling to the past, needlessly kill venomous creatures, poison someone you didn’t intend to",
@@ -53430,7 +53430,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "unholy"
@@ -53503,7 +53503,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -53579,7 +53579,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "holy",
@@ -53654,7 +53654,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/crossbow"
+   "wb:weapon/crossbow"
   ],
   "sanctification": [
    "holy"
@@ -53733,7 +53733,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/maul"
+   "wb:weapon/maul"
   ],
   "sanctification": [
    "unholy"
@@ -53807,7 +53807,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-gauntlet"
+   "wb:weapon/spiked-gauntlet"
   ],
   "sanctification": [
    "holy"
@@ -53884,7 +53884,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/starknife"
+   "wb:weapon/starknife"
   ],
   "sanctification": [
    "holy"
@@ -53966,7 +53966,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -54049,7 +54049,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sword-cane"
+   "wb:weapon/sword-cane"
   ],
   "sanctification": [
    "holy"
@@ -54129,7 +54129,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/morningstar"
+   "wb:weapon/morningstar"
   ],
   "sanctification": [
    "holy",
@@ -54209,7 +54209,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "edict": "Frolic in vegetation, manipulate people, use what you kill, prey on the weak",
   "anathema": "Hold a secret for too long, discriminate against sex workers or use their trade to harm them",
@@ -54283,7 +54283,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "holy"
@@ -54363,7 +54363,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/glaive"
+   "wb:weapon/glaive"
   ],
   "sanctification": [
    "holy"
@@ -54437,7 +54437,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "edict": "Play pranks, seek new jokes, leave lit lanterns in unusual places",
   "anathema": "Be completely honest, ruin or explain a good joke",
@@ -54513,7 +54513,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -54592,7 +54592,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "edict": "Aid the depressed, wear somber clothing, maintain neutrality, ruminate on the past",
   "anathema": "Abandon someone who has no family, take public credit for your good deeds",
@@ -54663,7 +54663,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/flail"
+   "wb:weapon/flail"
   ],
   "sanctification": [
    "holy"
@@ -54740,7 +54740,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "edict": "Aid and be of service to friends and allies, fulfill your duties, seek vengeance",
   "anathema": "Break an oath, cower from combat, damage or destroy a soul, show mercy to those who betray you",
@@ -54810,7 +54810,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/gnome-flickmace"
+   "wb:weapon/gnome-flickmace"
   ],
   "edict": "disrupt the status quo, never given reasons for your actions, play elaborate tricks on the unsuspecting",
   "anathema": "fall into a set routine, fix something that you have broken",
@@ -54880,7 +54880,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/starknife"
+   "wb:weapon/starknife"
   ],
   "sanctification": [
    "holy"
@@ -54961,7 +54961,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/war-razor"
+   "wb:weapon/war-razor"
   ],
   "sanctification": [
    "holy",
@@ -55046,7 +55046,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "holy"
@@ -55124,7 +55124,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/lance"
+   "wb:weapon/lance"
   ],
   "sanctification": [
    "holy",
@@ -55200,7 +55200,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/bladed-scarf"
+   "wb:weapon/bladed-scarf"
   ],
   "sanctification": [
    "holy"
@@ -55279,8 +55279,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/claws",
-   "wb:equipment/shield-boss"
+   "claws",
+   "wb:weapon/shield-boss"
   ],
   "edict": "establish and protect your personal territory, punish trespassers, safeguard lawful visitors",
   "anathema": "abandon a guard post, cede territory to an invader",
@@ -55349,7 +55349,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -55425,7 +55425,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortsword"
+   "wb:weapon/shortsword"
   ],
   "sanctification": [
    "holy"
@@ -55499,7 +55499,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "holy"
@@ -55570,7 +55570,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "sanctification": [
    "unholy"
@@ -55643,7 +55643,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greatclub"
+   "wb:weapon/greatclub"
   ],
   "sanctification": [
    "unholy"
@@ -55717,7 +55717,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "unholy"
@@ -55787,7 +55787,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "edict": "Only ever hunt birds for food, aggressively oppose those who do not have your best interest at heart, protect your children at all cost",
   "anathema": "Harm birds for sport or via negligence, bow down to your oppressor, show mercy to anyone who wronged your child",
@@ -55862,7 +55862,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/morningstar"
+   "wb:weapon/morningstar"
   ],
   "sanctification": [
    "holy"
@@ -55936,7 +55936,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/arbalest"
+   "wb:weapon/arbalest"
   ],
   "sanctification": [
    "holy"
@@ -56012,7 +56012,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "holy"
@@ -56096,7 +56096,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "holy"
@@ -56174,7 +56174,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/pick"
+   "wb:weapon/pick"
   ],
   "edict": "appreciate the beauty of all stones, safely mine for ore, walk barefoot across soil or stones when possible",
   "anathema": "purposefully cause a cave-in, shatter a precious gem",
@@ -56247,7 +56247,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "sanctification": [
    "unholy"
@@ -56320,7 +56320,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/spiked-gauntlet"
+   "wb:weapon/spiked-gauntlet"
   ],
   "sanctification": [
    "unholy"
@@ -56392,7 +56392,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/halberd"
+   "wb:weapon/halberd"
   ],
   "sanctification": [
    "unholy"
@@ -56469,7 +56469,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/warhammer"
+   "wb:weapon/warhammer"
   ],
   "sanctification": [
    "holy"
@@ -56547,7 +56547,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "holy"
@@ -56625,8 +56625,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/claws",
-   "wb:equipment/staff"
+   "claws",
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy",
@@ -56704,7 +56704,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/tekko-kagi"
+   "wb:weapon/tekko-kagi"
   ],
   "sanctification": [
    "holy"
@@ -56779,7 +56779,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/hand-crossbow"
+   "wb:weapon/hand-crossbow"
   ],
   "edict": "Discover and unravel the hidden truths, motivate others to fight and question each other, keep secrets close to the chest",
   "anathema": "Blindly accept what you’re told, share the All-Truth, support or promote unjustified hierarchy",
@@ -56852,7 +56852,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "sanctification": [
    "unholy"
@@ -56920,7 +56920,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shield-boss"
+   "wb:weapon/shield-boss"
   ],
   "sanctification": [
    "holy"
@@ -56988,7 +56988,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/spiked-gauntlet"
+   "wb:weapon/spiked-gauntlet"
   ],
   "sanctification": [
    "unholy"
@@ -57063,7 +57063,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -57146,7 +57146,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "sanctification": [
    "unholy"
@@ -57223,7 +57223,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scimitar"
+   "wb:weapon/scimitar"
   ],
   "sanctification": [
    "holy"
@@ -57294,7 +57294,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dueling-pistol"
+   "wb:weapon/dueling-pistol"
   ],
   "sanctification": [
    "unholy"
@@ -57370,7 +57370,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/maul"
+   "wb:weapon/maul"
   ],
   "sanctification": [
    "holy"
@@ -57448,7 +57448,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/club"
+   "wb:weapon/club"
   ],
   "sanctification": [
    "holy"
@@ -57525,7 +57525,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/war-flail"
+   "wb:weapon/war-flail"
   ],
   "edict": "Learn and share and stories of the dead, chronicle languages and cultural traditions, protect knowledge",
   "anathema": "Allow intent to sway your judgment of an action, disrespect the traditions of those around you",
@@ -57594,7 +57594,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/kukri"
+   "wb:weapon/kukri"
   ],
   "sanctification": [
    "holy"
@@ -57671,7 +57671,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "unholy"
@@ -57740,7 +57740,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greataxe"
+   "wb:weapon/greataxe"
   ],
   "edict": "Use tactics rather than relying solely on brute force or overwhelming numbers, use siege engines for combat whenever possible, seek out new technology",
   "anathema": "Pursue technology for non-combat purposes, use machinery and other advanced technology outside of combat, keep advanced weaponry or battle tactics a secret from orcs",
@@ -57811,7 +57811,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shortbow"
+   "wb:weapon/shortbow"
   ],
   "edict": "Create and erect grave markers, lay bodies to rest, protect graveyards and sacred grounds from despoilment and supernatural threats",
   "anathema": "Treat grave sites irreverently, allow others to despoil the dead or rob a grave, create undead, desecrate a corpse",
@@ -57881,7 +57881,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-chain"
+   "wb:weapon/spiked-chain"
   ],
   "sanctification": [
    "unholy"
@@ -57951,7 +57951,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "unholy"
@@ -58026,7 +58026,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "edict": "Patiently plant your seeds, plan for orderly beauty, watch over your sproutlings",
   "anathema": "Abandon your post, neglect your crops, purposely pervert nature",
@@ -58099,7 +58099,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "sanctification": [
    "unholy"
@@ -58173,7 +58173,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -58250,7 +58250,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "holy"
@@ -58323,7 +58323,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "edict": "Aid the depressed, comfort the grieving, experience and act on intense emotions",
   "anathema": "Attempt to regulate others’ emotions, dismiss or mock a creature’s suffering, surrender without a fight",
@@ -58393,7 +58393,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-chain"
+   "wb:weapon/spiked-chain"
   ],
   "sanctification": [
    "unholy"
@@ -58466,7 +58466,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/longspear"
+   "wb:weapon/longspear"
   ],
   "sanctification": [
    "holy"
@@ -58541,7 +58541,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -58614,7 +58614,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/light-mace"
+   "wb:weapon/light-mace"
   ],
   "sanctification": [
    "holy"
@@ -58690,7 +58690,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "unholy"
@@ -58765,7 +58765,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -58843,7 +58843,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/trident"
+   "wb:weapon/trident"
   ],
   "edict": "allow the currents of life take you where they may, travel the expansive seas, wash away dust and dirt with seawater",
   "anathema": "allow a creature to drown when you could save them, toss detritus into the oceans",
@@ -58913,7 +58913,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/javelin"
+   "wb:weapon/javelin"
   ],
   "edict": "meditate on the cycle of nature, teach others to be prepared for storms and other natural hazards, wield the elements as weapons",
   "anathema": "destroy nature without an immediate need, pass up an opportunity to watch storms and other natural phenomena",
@@ -58982,7 +58982,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/polytool"
+   "wb:weapon/polytool"
   ],
   "edict": "devise solutions to problems through the creative use of items rather than magic or brute strength, encourage tinkering and experimentation, refuse to abandon a project at the first sign of failure",
   "anathema": "deprive others of their innovations unduly, stifle imagination",
@@ -59097,7 +59097,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/mace"
+   "wb:weapon/mace"
   ],
   "sanctification": [
    "holy"
@@ -59167,7 +59167,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/barricade-buster"
+   "wb:weapon/barricade-buster"
   ],
   "edict": "Create the weapons you intend to wield with your own two hands, innovate efficient ways to defeat your enemies",
   "anathema": "Wield a weapon forged by another except in direst circumstance, yield ground to an enemy while victory is still possible",
@@ -59238,7 +59238,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "edict": "Spread fungal growths, subtly infect others with knowledge of Xhamen-Dor",
   "anathema": "None",
@@ -59308,7 +59308,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/macuahuitl"
+   "wb:weapon/macuahuitl"
   ],
   "sanctification": [
    "unholy"
@@ -59381,7 +59381,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/ranseur"
+   "wb:weapon/ranseur"
   ],
   "sanctification": [
    "unholy"
@@ -59454,7 +59454,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dart"
+   "wb:weapon/dart"
   ],
   "sanctification": [
    "unholy"
@@ -59529,7 +59529,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/shuriken"
+   "wb:weapon/shuriken"
   ],
   "sanctification": [
    "holy",
@@ -59607,7 +59607,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/halberd"
+   "wb:weapon/halberd"
   ],
   "sanctification": [
    "unholy"
@@ -59681,7 +59681,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greatclub"
+   "wb:weapon/greatclub"
   ],
   "sanctification": [
    "holy"
@@ -59759,8 +59759,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/jaw",
-   "wb:equipment/greatclub"
+   "jaw",
+   "wb:weapon/greatclub"
   ],
   "edict": "Create using words, chronicle languages and prevent them from dying, help language evolve",
   "anathema": "Ban or discourage a language, explain a secret language or slang to outsiders, destroy literary works",
@@ -59830,7 +59830,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "unholy"
@@ -59901,7 +59901,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/staff"
+   "wb:weapon/staff"
   ],
   "sanctification": [
    "holy"
@@ -59975,7 +59975,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-chain"
+   "wb:weapon/spiked-chain"
   ],
   "sanctification": [
    "unholy"
@@ -60048,8 +60048,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/fang",
-   "wb:equipment/katar"
+   "fang",
+   "wb:weapon/katar"
   ],
   "edict": "Feast in the autumn, perform seasonal rituals, protect your home from trespassers",
   "anathema": "None",
@@ -60119,7 +60119,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longbow"
+   "wb:weapon/longbow"
   ],
   "sanctification": [
    "holy"
@@ -60192,8 +60192,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/claws",
-   "wb:equipment/khakkhara"
+   "claws",
+   "wb:weapon/khakkhara"
   ],
   "sanctification": [
    "holy"
@@ -60269,7 +60269,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/longsword"
+   "wb:weapon/longsword"
   ],
   "sanctification": [
    "unholy"
@@ -60343,7 +60343,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "edict": "Gather knowledge of gates through space and time, curse or mutate unborn children",
   "anathema": "None",
@@ -60416,7 +60416,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ],
   "sanctification": [
    "holy"
@@ -60486,7 +60486,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/macuahuitl"
+   "wb:weapon/macuahuitl"
   ],
   "sanctification": [
    "unholy"
@@ -60557,7 +60557,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy"
@@ -60633,7 +60633,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dogslicer"
+   "wb:weapon/dogslicer"
   ],
   "sanctification": [
    "unholy"
@@ -60703,7 +60703,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/chakri"
+   "wb:weapon/chakri"
   ],
   "edict": "Inflict poetic justice upon those who wrong you, assist others' personal transformations, learn esoteric secrets that others might value",
   "anathema": "Become complacent with your current self, offer aid to a stranger without exacting some price (even if the cost isn't obvious)",
@@ -60777,7 +60777,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/ranseur"
+   "wb:weapon/ranseur"
   ],
   "sanctification": [
    "unholy"
@@ -60850,7 +60850,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/spiked-gauntlet"
+   "wb:weapon/spiked-gauntlet"
   ],
   "sanctification": [
    "unholy"
@@ -60920,7 +60920,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/scythe"
+   "wb:weapon/scythe"
   ],
   "edict": "foster natural cycles of decay and regrowth, eradicate invasive creatures, treat unnatural diseases",
   "anathema": "ignore mistreatment of the environment, delay natural death, cause imbalance in an ecosystem",
@@ -60989,7 +60989,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spear"
+   "wb:weapon/spear"
   ],
   "sanctification": [
    "unholy"
@@ -61062,7 +61062,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/greatsword"
+   "wb:weapon/greatsword"
   ],
   "sanctification": [
    "holy",
@@ -61133,7 +61133,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/sickle"
+   "wb:weapon/sickle"
   ],
   "sanctification": [
    "unholy"
@@ -61209,7 +61209,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/heavy-crossbow"
+   "wb:weapon/heavy-crossbow"
   ],
   "sanctification": [
    "holy"
@@ -61284,7 +61284,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/spiked-chain"
+   "wb:weapon/spiked-chain"
   ],
   "sanctification": [
    "unholy"
@@ -61354,7 +61354,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/bola"
+   "wb:weapon/bola"
   ],
   "edict": "Fight today so you can rest tomorrow, work smart instead of hard, slack off and get away with it",
   "anathema": "Launch yourself thoughtlessly into work or combat",
@@ -61427,7 +61427,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "unholy"
@@ -61500,7 +61500,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/greatsword"
+   "wb:weapon/greatsword"
   ],
   "sanctification": [
    "unholy"
@@ -61576,7 +61576,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/pick"
+   "wb:weapon/pick"
   ],
   "sanctification": [
    "unholy"
@@ -61638,7 +61638,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shortbow"
+   "wb:weapon/shortbow"
   ],
   "sanctification": [
    "unholy"
@@ -61718,7 +61718,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/dagger"
+   "wb:weapon/dagger"
   ],
   "sanctification": [
    "holy",
@@ -61775,8 +61775,8 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/claw",
-   "wb:equipment/fist"
+   "claw",
+   "wb:weapon/fist"
   ]
  },
  {
@@ -61829,7 +61829,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/whip"
+   "wb:weapon/whip"
   ],
   "sanctification": [
    "holy",
@@ -61884,7 +61884,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/shears"
+   "wb:weapon/shears"
   ],
   "sanctification": [
    "holy",
@@ -61939,7 +61939,7 @@
    "alternate": []
   },
   "favored_weapon": [
-   "wb:equipment/rapier"
+   "wb:weapon/rapier"
   ],
   "sanctification": [
    "holy"
@@ -61995,7 +61995,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/light-hammer"
+   "wb:weapon/light-hammer"
   ]
  },
  {
@@ -62046,7 +62046,7 @@
    ]
   },
   "favored_weapon": [
-   "wb:equipment/sword-cane"
+   "wb:weapon/sword-cane"
   ]
  }
 ]

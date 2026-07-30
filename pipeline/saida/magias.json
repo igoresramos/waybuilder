@@ -534,8 +534,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Acid Arrow"
+    ]
   },
   {
     "id": "wb:spell/acid-storm",
@@ -3464,8 +3468,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Sanctified Ground"
+    ]
   },
   {
     "id": "wb:spell/ant-haul",
@@ -4260,8 +4268,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Polar Ray"
+    ]
   },
   {
     "id": "wb:spell/armor-of-bones",
@@ -7821,8 +7833,12 @@
       "alcance": "foundry",
       "defesa": "foundry:trait-attack",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Scorching Ray"
+    ]
   },
   {
     "id": "wb:spell/blazing-dive",
@@ -8185,8 +8201,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Blade Barrier"
+    ]
   },
   {
     "id": "wb:spell/blessing-of-defiance",
@@ -10043,7 +10063,8 @@
     "requires_parseado": null,
     "xref": {
       "aon": "spell-1908",
-      "foundry": "Compendium.pf2e.spells-spells.Item.11pQoPJpSH2jp7h6"
+      "foundry": "Compendium.pf2e.spells-spells.Item.11pQoPJpSH2jp7h6",
+      "pf2etools": "bonewall-bulwark_wtd4"
     },
     "prov": {
       "name": "aon",
@@ -11270,8 +11291,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Burning Hands"
+    ]
   },
   {
     "id": "wb:spell/bridge-of-vines",
@@ -12616,8 +12641,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Calm Emotions"
+    ]
   },
   {
     "id": "wb:spell/camel-spit",
@@ -13016,7 +13045,8 @@
     "requires_parseado": null,
     "xref": {
       "aon": "spell-1909",
-      "foundry": "Compendium.pf2e.spells-spells.Item.24JgGrYx7ixgP4kn"
+      "foundry": "Compendium.pf2e.spells-spells.Item.24JgGrYx7ixgP4kn",
+      "pf2etools": "carrion-mire_wtd4"
     },
     "prov": {
       "name": "aon",
@@ -13092,8 +13122,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Floating Disk"
+    ]
   },
   {
     "id": "wb:spell/cascade-countermeasure",
@@ -13584,8 +13618,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Acid Splash"
+    ]
   },
   {
     "id": "wb:spell/cauterize-wounds",
@@ -14530,8 +14568,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Charming Words"
+    ]
   },
   {
     "id": "wb:spell/charming-touch",
@@ -14806,8 +14848,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Force Cage"
+    ]
   },
   {
     "id": "wb:spell/lift-natures-caul",
@@ -14936,8 +14982,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Dancing Lights"
+    ]
   },
   {
     "id": "wb:spell/light-of-revelation",
@@ -15303,8 +15353,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Rope Trick"
+    ]
   },
   {
     "id": "wb:spell/lingering-composition",
@@ -15467,7 +15521,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/litany-against-sloth",
     "texto": "Litany against Sloth Single Action Source Core Rulebook pg. 388 Cast verbal Range 30 feet Target 1 creature that isn't holy Saving Throw Will Duration 1 round --- Your litany rails against the sin of sloth, interfering with the target's ability to react. The target must attempt a Will save. A particularly slothful creature, such as a Sloth Demon, uses the outcome one degree of success worse than the result of its saving throw. The target becomes temporarily immune to all of your litanies for 1 minute. Critical Success The target is unaffected. Success The target can't use reactions. Failure The target can't use reactions and is slowed 1. Critical Failure The target can't use reactions and is slowed 2.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-396",
@@ -15516,7 +15570,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/litany-against-wrath",
     "texto": "Litany Against Wrath Single Action Source Core Rulebook pg. 388 Cast verbal Range 30 feet Target 1 creature that isn't holy Saving Throw Will Duration 1 round --- Your litany rails against the sin of wrath, punishing the target for attacking good creatures. The target must attempt a Will save. A particularly wrathful creature, such as a wrath demon, uses the outcome one degree of success worse than the result of its saving throw. The target then becomes temporarily immune to all of your litanies for 1 minute. Critical Success The target is unaffected. Success The first time the target uses an action that deals damage to at least one creature that isn't unholy, the target takes 3d6 spirit damage. Failure Each time the target uses an action that deals damage to at least one creature that isn't unholy, the target takes 3d6 spirit damage. Critical Failure The target is enfeebled 2. Each time it uses an action that deals damage to at least one creature that isn't unholy, the target takes 3d6 spirit damage. --- Heightened (+1) The damage increases by 1d6.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-397",
@@ -15565,7 +15619,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/litany-of-depravity",
     "texto": "Litany of Depravity Single Action Source Advanced Player's Guide pg. 228 Cast verbal Range 30 feet Target 1 creature that isn't unholy Duration 1 round --- Your litany calls into question the morals your foe claims to hold dear. The target gains weakness 7 to unholy, then becomes temporarily immune to all your litanies for 1 minute. --- Heightened (+1) The weakness increases by 1.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-734",
@@ -15614,7 +15668,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/litany-of-righteousness",
     "texto": "Litany of Righteousness Single Action Source Core Rulebook pg. 388 Cast verbal Range 30 feet Target 1 creature that isn't holy Duration 1 round --- Your litany denounces an evildoer, rendering it susceptible to the powers of good. The target gains weakness 7 to holy. The target then becomes temporarily immune to all of your litanies for 1 minute. --- Heightened (+1) The weakness increases by 1.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-398",
@@ -15664,7 +15718,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/litany-of-self-interest",
     "texto": "Litany of Self-Interest Single Action Source Advanced Player's Guide pg. 229 Cast verbal Range 30 feet Target 1 creature Saving Throw Will Duration 1 round --- You give a speech that fills your target with a drive to improve themself to the exclusion of assisting others. A creature that wants to gain the benefit of this spell and doesn't care about its limitations can voluntarily fail the save. The target then becomes temporarily immune to all your litanies for 1 minute. Success The target is unaffected. Failure The target gains a +2 status bonus to attack rolls, Perception checks, saving throws, and skill checks. The target can't Aid other creatures, consider any creature an ally, or use spells or abilities that directly benefit another creature (as determined by the GM), even if they also benefit the target. Other creatures allied with the spell's target can still consider the target an ally and affect it accordingly. --- Heightened (8th) The status bonus increases to +3.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-735",
@@ -16913,8 +16967,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Passwall"
+    ]
   },
   {
     "id": "wb:spell/magic-stone",
@@ -17817,8 +17875,15 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Alter Reality",
+      "Miracle",
+      "Primal Phenomenon",
+      "Wish"
+    ]
   },
   {
     "id": "wb:spell/manifestation-of-spirits",
@@ -18732,8 +18797,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Phantom Steed"
+    ]
   },
   {
     "id": "wb:spell/mask-of-terror",
@@ -19491,8 +19560,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Shapechange"
+    ]
   },
   {
     "id": "wb:spell/migration",
@@ -19550,8 +19623,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Wind Walk"
+    ]
   },
   {
     "id": "wb:spell/mimic-spell",
@@ -20107,8 +20184,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Hallucinatory Terrain"
+    ]
   },
   {
     "id": "wb:spell/mirecloak",
@@ -20425,7 +20506,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/misdirection",
     "texto": "Misdirection Source Core Rulebook pg. 352 Traditions Arcane, Occult Cast 1 minute (somatic, verbal) Range 30 feet Target 2 creatures or objects Duration until the next time you make your daily preparations --- You reshape the magic aura of one creature or object to resemble that of another. You designate one target as the primary target and the other as the secondary target. Effects that would detect auras on the primary target instead detect the same types of auras from the secondary target. A creature reading the aura can attempt to disbelieve the illusion. You can Dismiss the spell from up to a mile away.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-198",
@@ -20651,8 +20732,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Obscuring Mist"
+    ]
   },
   {
     "id": "wb:spell/misty-memory",
@@ -21486,8 +21571,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Stoneskin"
+    ]
   },
   {
     "id": "wb:spell/movanic-glimmer",
@@ -22201,8 +22290,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Mage Armor"
+    ]
   },
   {
     "id": "wb:spell/mystic-beacon",
@@ -22459,8 +22552,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Tree Stride"
+    ]
   },
   {
     "id": "wb:spell/natures-reprisal",
@@ -23277,8 +23374,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Feeblemind"
+    ]
   },
   {
     "id": "wb:spell/nightmare",
@@ -23433,8 +23534,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
+      "text": "aon",
+      "aliases": "aon"
     },
+    "aliases": [
+      "Sound Burst"
+    ],
     "conflitos": [
       {
         "campo": "tradicoes",
@@ -24047,8 +24152,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Barkskin"
+    ]
   },
   {
     "id": "wb:spell/oathkeepers-insignia",
@@ -24506,8 +24615,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Tree Shape"
+    ]
   },
   {
     "id": "wb:spell/one-with-stone",
@@ -24567,8 +24680,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Meld into Stone"
+    ]
   },
   {
     "id": "wb:spell/one-with-the-land",
@@ -25006,7 +25123,8 @@
     "requires_parseado": null,
     "xref": {
       "aon": "spell-1911",
-      "foundry": "Compendium.pf2e.spells-spells.Item.Cbwhd4m7qrRoRjot"
+      "foundry": "Compendium.pf2e.spells-spells.Item.Cbwhd4m7qrRoRjot",
+      "pf2etools": "osseous-cage_wtd4"
     },
     "prov": {
       "name": "aon",
@@ -26508,8 +26626,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Private Sanctum"
+    ]
   },
   {
     "id": "wb:spell/peaceful-rest",
@@ -26575,8 +26697,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Gentle Repose"
+    ]
   },
   {
     "id": "wb:spell/penumbral-disguise",
@@ -26964,8 +27090,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Perfected Form"
+    ]
   },
   {
     "id": "wb:spell/perfected-mind",
@@ -27852,8 +27982,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Flesh to Stone"
+    ]
   },
   {
     "id": "wb:spell/phantasmagoria",
@@ -27926,8 +28060,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Weird"
+    ]
   },
   {
     "id": "wb:spell/phantasmal-calamity",
@@ -28078,8 +28216,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Unseen Servant"
+    ]
   },
   {
     "id": "wb:spell/phantasmal-protagonist",
@@ -29105,8 +29247,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Discern Location"
+    ]
   },
   {
     "id": "wb:spell/planar-palace",
@@ -29166,8 +29312,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Magnificent Mansion"
+    ]
   },
   {
     "id": "wb:spell/planar-seal",
@@ -29231,8 +29381,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Dimensional Lock"
+    ]
   },
   {
     "id": "wb:spell/planar-tether",
@@ -29294,8 +29448,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Dimensional Anchor"
+    ]
   },
   {
     "id": "wb:spell/plant-form",
@@ -31533,8 +31691,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Protective Ward"
+    ]
   },
   {
     "id": "wb:spell/protector-tree",
@@ -31936,8 +32098,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Pulse of the City"
+    ]
   },
   {
     "id": "wb:spell/pulverizing-cascade",
@@ -33043,8 +33209,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Ki Blast"
+    ]
   },
   {
     "id": "wb:spell/qi-form",
@@ -33101,8 +33271,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Ki Form"
+    ]
   },
   {
     "id": "wb:spell/qi-rush",
@@ -33154,8 +33328,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Ki Rush"
+    ]
   },
   {
     "id": "wb:spell/quandary",
@@ -33215,8 +33393,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Maze"
+    ]
   },
   {
     "id": "wb:spell/quench",
@@ -34085,8 +34267,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Inspire Defense"
+    ]
   },
   {
     "id": "wb:spell/rallying-banner",
@@ -36968,8 +37154,13 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Glitterdust",
+      "Faerie Fire"
+    ]
   },
   {
     "id": "wb:spell/revel-in-retribution",
@@ -37290,8 +37481,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Modify Memory"
+    ]
   },
   {
     "id": "wb:spell/rewrite-possibility",
@@ -37589,8 +37784,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Zone of Truth"
+    ]
   },
   {
     "id": "wb:spell/rip-the-spirit",
@@ -37970,8 +38169,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Roar of the Wyrm"
+    ]
   },
   {
     "id": "wb:spell/roaring-applause",
@@ -38462,8 +38665,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Vigilant Eye"
+    ]
   },
   {
     "id": "wb:spell/runic-body",
@@ -38523,8 +38730,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Magic Fang"
+    ]
   },
   {
     "id": "wb:spell/runic-impression",
@@ -38640,8 +38851,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Magic Weapon"
+    ]
   },
   {
     "id": "wb:spell/rust-cloud",
@@ -38909,8 +39124,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Righteous Might"
+    ]
   },
   {
     "id": "wb:spell/sacred-nimbus",
@@ -40232,8 +40451,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Prying Eye"
+    ]
   },
   {
     "id": "wb:spell/scramble-body",
@@ -40289,8 +40512,12 @@
       "alcance": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Call of the Grave"
+    ]
   },
   {
     "id": "wb:spell/scroungers-glee",
@@ -40932,8 +41159,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "See Invisibility"
+    ]
   },
   {
     "id": "wb:spell/seize-identity",
@@ -41094,8 +41325,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Bind Soul"
+    ]
   },
   {
     "id": "wb:spell/sending",
@@ -42453,8 +42688,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Shield Other"
+    ]
   },
   {
     "id": "wb:spell/share-lore",
@@ -42641,8 +42880,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Invisibility Sphere"
+    ]
   },
   {
     "id": "wb:spell/shared-nightmare",
@@ -44388,8 +44631,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Abundant Step"
+    ]
   },
   {
     "id": "wb:spell/shroud-of-flame",
@@ -45531,8 +45778,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Black Tentacles"
+    ]
   },
   {
     "id": "wb:spell/slough-skin",
@@ -47008,8 +47259,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Restore Senses"
+    ]
   },
   {
     "id": "wb:spell/sparkleskin",
@@ -47271,8 +47526,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Stone Tell"
+    ]
   },
   {
     "id": "wb:spell/speaking-sky",
@@ -47551,8 +47810,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Spell Turning"
+    ]
   },
   {
     "id": "wb:spell/spellmasters-ward",
@@ -48735,8 +48998,12 @@
       "defesa": "foundry:trait-attack",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Spiritual Weapon"
+    ]
   },
   {
     "id": "wb:spell/spiritual-attunement",
@@ -51399,8 +51666,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Touch of Idiocy"
+    ]
   },
   {
     "id": "wb:spell/subconscious-suggestion",
@@ -53691,8 +53962,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Animate Dead"
+    ]
   },
   {
     "id": "wb:spell/summon-warden-of-the-wild",
@@ -54171,8 +54446,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Remove Paralysis"
+    ]
   },
   {
     "id": "wb:spell/sure-strike",
@@ -54230,8 +54509,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "True Strike"
+    ]
   },
   {
     "id": "wb:spell/suspended-retribution",
@@ -55283,8 +55566,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Longstrider"
+    ]
   },
   {
     "id": "wb:spell/take-its-course",
@@ -55644,8 +55931,12 @@
       "alcance": "foundry",
       "defesa": "foundry:trait-attack",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Tanglefoot"
+    ]
   },
   {
     "id": "wb:spell/tanglecurse",
@@ -56118,8 +56409,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Mage Hand"
+    ]
   },
   {
     "id": "wb:spell/telekinetic-haul",
@@ -58646,8 +58941,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Shocking Grasp"
+    ]
   },
   {
     "id": "wb:spell/tidal-surge",
@@ -59614,7 +59913,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/touch-of-corruption",
     "texto": "Touch of Corruption Single Action Source Gamemastery Guide pg. 247 Cast somatic Range touch Target 1 willing undead creature or 1 living creature --- You infuse the target with negative energy. If the target is living, this deals 1d6 negative damage (basic Fortitude save); on a failed save, the target also takes a –2 status penalty to AC for 1 round. If the target is a willing undead creature, the target instead regains 6 Hit Points, and if you are the undead target, you also gain a +2 status bonus to damage rolls for 1 round. --- Heightened (+1) Increase the damage dealt to a living creature by 1d6 or increase the Hit Points regained by undead by 6.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-654",
@@ -59689,8 +59988,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Quivering Palm"
+    ]
   },
   {
     "id": "wb:spell/touch-of-obedience",
@@ -59863,8 +60166,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Touch of Corruption"
+    ]
   },
   {
     "id": "wb:spell/touch-of-undeath",
@@ -60045,8 +60352,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Cloudkill"
+    ]
   },
   {
     "id": "wb:spell/trade-death-for-life",
@@ -60368,8 +60679,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Comprehend Language"
+    ]
   },
   {
     "id": "wb:spell/translocate",
@@ -60430,8 +60745,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Dimension Door"
+    ]
   },
   {
     "id": "wb:spell/transmute-rock-and-mud",
@@ -60724,8 +61043,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Fire Seeds"
+    ]
   },
   {
     "id": "wb:spell/tremor-signs",
@@ -61344,8 +61667,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "True Seeing"
+    ]
   },
   {
     "id": "wb:spell/truespeech",
@@ -61405,8 +61732,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Tongues"
+    ]
   },
   {
     "id": "wb:spell/turbulent-tide",
@@ -61738,8 +62069,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Shadow Walk"
+    ]
   },
   {
     "id": "wb:spell/umbral-mindtheft",
@@ -62727,7 +63062,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/undetectable-alignment",
     "texto": "Undetectable Alignment Source Core Rulebook pg. 379 Traditions Divine, Occult Cast 1 minute (material, somatic, verbal) Range touch Target 1 creature or object Duration until the next time you make your daily preparations --- You shroud a creature or object in wards that hide its alignment. The target appears to be neutral to all effects that would detect its alignment.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-348",
@@ -63042,8 +63377,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Freedom of Movement"
+    ]
   },
   {
     "id": "wb:spell/unfettered-pack",
@@ -63974,8 +64313,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Wild Shape"
+    ]
   },
   {
     "id": "wb:spell/untamed-shift",
@@ -64033,8 +64376,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Wild Morph"
+    ]
   },
   {
     "id": "wb:spell/untwisting-iron-augmentation",
@@ -64654,8 +65001,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Inspire Competence"
+    ]
   },
   {
     "id": "wb:spell/utter-destruction",
@@ -65072,8 +65423,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Vampiric Touch"
+    ]
   },
   {
     "id": "wb:spell/vampiric-maiden",
@@ -65237,8 +65592,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Pass Without Trace"
+    ]
   },
   {
     "id": "wb:spell/vapor-form",
@@ -65299,8 +65658,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Gaseous Form"
+    ]
   },
   {
     "id": "wb:spell/variable-gravity",
@@ -65612,8 +65975,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Nondetection"
+    ]
   },
   {
     "id": "wb:spell/veil-of-spirits",
@@ -66404,7 +66771,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/vindicators-judgement",
     "texto": "Vindicator's Judgement Single Action Source War of Immortals pg. 65 Range 60 feet Target your hunted prey Saving Throw Fortitude Duration 1 minute --- You pronounce a terrible judgment upon your quarry that causes all of your attacks and divine spells to strike with deadly efficacy. The target takes extra damage from your attacks, depending on the result of its Fortitude save. The spell ends immediately if the target is no longer your hunted prey. Critical Success The target is unaffected. Success The target has weakness 5 to the next Strike you make against it or damaging divine spell you cast that includes it as a target before the end of your next turn. Failure The target has weakness 5 to all Strikes you make against it or damaging divine spells you cast that includes it as a target for the duration of the spell. Critical Failure As failure, but the target is off-guard against the first Strike or divine spell attack you make against it each round for the duration of the spell. --- Heightened (7th) The weakness is 10. Heightened (9th) The weakness is 15.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-2149"
@@ -66670,8 +67037,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Phantasmal Killer"
+    ]
   },
   {
     "id": "wb:spell/vision-of-weakness",
@@ -66942,8 +67313,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Positive Luminance"
+    ]
   },
   {
     "id": "wb:spell/vitality-lash",
@@ -67031,8 +67406,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Disrupt Undead"
+    ]
   },
   {
     "id": "wb:spell/vitrifying-blast",
@@ -67275,8 +67654,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Chill Touch"
+    ]
   },
   {
     "id": "wb:spell/volcanic-eruption",
@@ -67633,8 +68016,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Wail of the Banshee"
+    ]
   },
   {
     "id": "wb:spell/waking-dream",
@@ -69619,8 +70006,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Crushing Despair"
+    ]
   },
   {
     "id": "wb:spell/weaken-earth",
@@ -70637,8 +71028,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Forced Quiet"
+    ]
   },
   {
     "id": "wb:spell/whispers-of-a-dead-goddess",
@@ -70769,8 +71164,12 @@
       "area": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:unknown-type",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Enervation"
+    ]
   },
   {
     "id": "wb:spell/wild-winds-stance",
@@ -71482,7 +71881,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/wish",
     "texto": "Wish Three Actions Source Core Rulebook pg. 385 Tradition Arcane Cast material, somatic, verbal --- You state a wish, making your greatest desire come true. A wish spell can produce any one of the following effects. Duplicate any spell from the arcane list of 9th level or lower to which you have access. Duplicate any spell from another spell list of 7th level or lower. It must be common or you must have access. Produce any effect whose power level is in line with the above effects. Reverse certain effects that refer to the wish spell. The GM might allow you to try using wish to produce greater effects than these, but doing so might be dangerous or the spell might have only a partial effect.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-377",
@@ -72325,8 +72724,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Storm of Vengeance"
+    ]
   },
   {
     "id": "wb:spell/wronged-monks-wrath",
@@ -73674,8 +74077,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Abyssal Wrath"
+    ]
   },
   {
     "id": "wb:spell/cinder-gaze",
@@ -74337,8 +74744,14 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Neutralize Poison",
+      "Remove Disease",
+      "Remove Curse"
+    ]
   },
   {
     "id": "wb:spell/cleanse-air",
@@ -74477,8 +74890,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Purify Food and Drink"
+    ]
   },
   {
     "id": "wb:spell/cleansing-flames",
@@ -74589,8 +75006,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Remove Fear"
+    ]
   },
   {
     "id": "wb:spell/clinging-ice",
@@ -75260,8 +75681,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Hyperfocus"
+    ]
   },
   {
     "id": "wb:spell/clownish-curse",
@@ -76318,8 +76743,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Scintillating Pattern"
+    ]
   },
   {
     "id": "wb:spell/confusing-cry",
@@ -77000,8 +77429,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Resilient Sphere"
+    ]
   },
   {
     "id": "wb:spell/contingency",
@@ -77474,8 +77907,12 @@
       "defesa": "foundry:none",
       "heightened": "foundry:none",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Goodberry"
+    ]
   },
   {
     "id": "wb:spell/corrosive-body",
@@ -77887,8 +78324,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Inspire Courage"
+    ]
   },
   {
     "id": "wb:spell/cozy-cabin",
@@ -78277,8 +78718,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Splash of Art"
+    ]
   },
   {
     "id": "wb:spell/crescent-scepter",
@@ -79412,8 +79857,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Baleful Polymorph"
+    ]
   },
   {
     "id": "wb:spell/cutting-eye",
@@ -80214,8 +80663,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Darkened Eyes"
+    ]
   },
   {
     "id": "wb:spell/darklight",
@@ -81087,7 +81540,8 @@
     "requires_parseado": null,
     "xref": {
       "aon": "spell-1910",
-      "foundry": "Compendium.pf2e.spells-spells.Item.ik0bjmAJse9PSECL"
+      "foundry": "Compendium.pf2e.spells-spells.Item.ik0bjmAJse9PSECL",
+      "pf2etools": "deathless-march_wtd4"
     },
     "prov": {
       "name": "aon",
@@ -82182,8 +82636,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Horrid Wilting"
+    ]
   },
   {
     "id": "wb:spell/desperate-repair",
@@ -82335,7 +82793,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/detect-alignment",
     "texto": "Detect Alignment Two Actions Source Core Rulebook pg. 328 Traditions Divine, Occult Cast somatic, verbal Area 30-foot emanation --- Your eyes glow as you sense aligned auras. Choose chaotic, evil, good, or lawful. You detect auras of that alignment. You receive no information beyond presence or absence. You can choose not to detect creatures or effects you're aware have that alignment. Only creatures of 6th level or higher—unless divine spellcasters, undead, or beings from the Outer Sphere—have alignment auras. --- Heightened (2nd) You learn each aura's location and strength. Alignment Aura The strength of an alignment aura depends on the level of the creature, item, or spell. The auras of undead, clerics and other divine spellcasters with a patron deity, and creatures from the Outer Sphere are one step stronger than normal (faint instead of none, for example). ## Alignment Aura Creature or Item Level Spell or Effect Level Aura Strength 0-5 — None 6-10 0-3 Faint 11-15 4-7 Moderate 16-20 8-9 Powerful 21+ 10 Overwhelming",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-65",
@@ -82733,8 +83191,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Disjunction"
+    ]
   },
   {
     "id": "wb:spell/devil-form",
@@ -84059,7 +84521,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/discomfiting-whisper",
     "texto": "Discomfiting Whisper Single Action Source War of Immortals pg. 18 Area 5-foot emanation Saving Throw Will Duration sustained up to 1 minute --- You are surrounded by an aura of spiteful murmurings that incite bad luck and punish failure. Each creature that starts their turn within the area of this spell must succeed at a Will save or roll twice on their first attack roll that round and take the lower result. If an attack roll modified in this way results in a failure, the creature that rolled the failed attack takes 1d6 void damage. --- Heightened (+2) The void damage dealt on a failure increases by 1d6.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-2139"
@@ -84131,8 +84593,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Magic Aura"
+    ]
   },
   {
     "id": "wb:spell/disintegrate",
@@ -84398,8 +84864,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Globe of Invulnerability"
+    ]
   },
   {
     "id": "wb:spell/disperse-into-air",
@@ -85233,8 +85703,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Flame Strike"
+    ]
   },
   {
     "id": "wb:spell/divine-inspiration",
@@ -85770,8 +86244,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Color Spray"
+    ]
   },
   {
     "id": "wb:spell/dominate",
@@ -86282,7 +86760,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/dragon-claws",
     "texto": "Dragon Claws Single Action Source Core Rulebook pg. 403 Bloodlines Draconic, Wyrmblessed Cast verbal Duration 1 minute --- Vicious claws grow from your fingers. They are finesse unarmed attacks that deal 1d4 slashing damage and 1d6 extra damage of a type determined by the dragon in your bloodline. ## Dragon Claws Dragon Type Damage Type Black, brine , or copper Acid Blue, bronze, cloud , or sky Electricity Brass, gold, magma , red, or underworld Fire Crystal or forest Piercing Green Poison Sea Bludgeoning Silver or white Cold Sovereign Mental Umbral Negative Source Mwangi Expanse pg. 76 Your scales from blood magic glow with faint energy, giving you resistance 5 to the same damage type. --- Heightened (5th) The extra damage increases to 2d6, and the resistance increases to 10. Heightened (9th) The extra damage increases to 3d6, and the resistance increases to 15.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-500",
@@ -86873,7 +87351,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/dread-aura",
     "texto": "Dread Aura Two Actions Source Core Rulebook pg. 406 Cast somatic, verbal Area 30-foot-radius emanation Duration sustained up to 1 minute --- You emit an aura of terror. Foes in the area are frightened 1 and unable to reduce the condition.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-526",
@@ -87565,7 +88043,7 @@
     }
   },
   {
-    "id": "wb:spell/d-j-vu",
+    "id": "wb:spell/deja-vu",
     "kind": "spell",
     "name": "Déjà Vu",
     "rank": 1,
@@ -87602,7 +88080,7 @@
       "basico": false
     },
     "escalonamento_de_dano": null,
-    "text": "wb:text/spell/d-j-vu",
+    "text": "wb:text/spell/deja-vu",
     "texto": "Déjà Vu Two Actions Source Player Core 2 pg. 244 Traditions Arcane, Occult Deities Bergelmir, Brixori, Yhidothrus Patron Theme Cobyslarni Range 100 feet Target 1 creature Defense Will Duration 2 rounds --- You loop a thought process in the target's mind, forcing it to repeat a moment's worth of actions. The target must attempt a Will save. If the target fails, whatever actions the target uses on its next turn, it must repeat on its following turn. The actions must be repeated in the same order and as close to the same specifics as possible. For example, if the target makes an attack, it must repeat the attack against the same creature, if possible, and if the target moves, it must move the same distance and direction, if possible, on its next turn. If the target can't repeat an action, such as Casting a Spell that has been exhausted or needing to target a creature that has died, it can act as it chooses for that action but becomes stupefied 1 until the end of its turn.",
     "grants_completos": true,
     "requires_parseado": null,
@@ -87610,7 +88088,7 @@
       "aon": "spell-1986",
       "aon_legacy": "spell-684",
       "foundry": "Compendium.pf2e.spells-spells.Item.rerNA6YZsdxuJYt3",
-      "pf2etools": "d-j-vu_apg"
+      "pf2etools": "deja-vu_apg"
     },
     "prov": {
       "name": "aon",
@@ -88559,7 +89037,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/efficient-apport",
     "texto": "Efficient Apport Single Action Source Secrets of Magic pg. 241 Cast somatic Range 60 feet Target 1 unattended object of light Bulk or less --- Walking over to an item to pick it up is so much effort. Whether it's your spellbook, a reagent, or a glass of wine, it's simply more efficient to call it to your hand. You teleport the target into your open hand. If you don't have a hand free, it falls to the ground at your feet. --- Heightened (3rd) You can target an unattended object with a Bulk of 1 or less Heightened (5th) The range increases to 120 feet, and you can target an unattended object with a Bulk of 1 or less. Heightened (7th) The range increases to 120 feet, and you can target an unattended object with a Bulk of 2 or less.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-1062",
@@ -90121,8 +90599,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Magic Mouth"
+    ]
   },
   {
     "id": "wb:spell/embodiment-of-battle",
@@ -90233,8 +90715,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Empty Body"
+    ]
   },
   {
     "id": "wb:spell/embrace-the-pit",
@@ -90771,8 +91257,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Ray of Enfeeblement"
+    ]
   },
   {
     "id": "wb:spell/engrave-memory",
@@ -91220,8 +91710,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Entangle"
+    ]
   },
   {
     "id": "wb:spell/enthrall",
@@ -91734,8 +92228,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Endure Elements"
+    ]
   },
   {
     "id": "wb:spell/ephemeral-hazards",
@@ -92476,8 +92974,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Continual Flame"
+    ]
   },
   {
     "id": "wb:spell/evil-eye",
@@ -92810,8 +93312,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Finger of Death"
+    ]
   },
   {
     "id": "wb:spell/expeditious-excavation",
@@ -93775,8 +94281,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Meteor Swarm"
+    ]
   },
   {
     "id": "wb:spell/fallow-field",
@@ -94027,8 +94537,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "False Life"
+    ]
   },
   {
     "id": "wb:spell/falsify-heat",
@@ -95922,8 +96436,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Ghost Sound"
+    ]
   },
   {
     "id": "wb:spell/filter-air",
@@ -97381,8 +97899,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Blink"
+    ]
   },
   {
     "id": "wb:spell/floating-flame",
@@ -97476,8 +97998,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Flaming Sphere"
+    ]
   },
   {
     "id": "wb:spell/flourishing-flora",
@@ -98309,8 +98835,12 @@
       "defesa": "foundry:none",
       "heightened": "foundry:none",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Magic Missile"
+    ]
   },
   {
     "id": "wb:spell/force-bolt",
@@ -98984,8 +99514,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Augment Summoning"
+    ]
   },
   {
     "id": "wb:spell/fortissimo-composition",
@@ -99040,8 +99574,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Inspire Heroics"
+    ]
   },
   {
     "id": "wb:spell/foul-miasma",
@@ -99157,8 +99695,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Time Stop"
+    ]
   },
   {
     "id": "wb:spell/freezing-rain",
@@ -99836,8 +100378,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Ray of Frost"
+    ]
   },
   {
     "id": "wb:spell/frozen-fog",
@@ -100681,8 +101227,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Spider Climb"
+    ]
   },
   {
     "id": "wb:spell/genies-veil",
@@ -100887,8 +101437,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Feather Fall"
+    ]
   },
   {
     "id": "wb:spell/geyser",
@@ -101052,8 +101606,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Spectral Hand"
+    ]
   },
   {
     "id": "wb:spell/ghostly-shift",
@@ -102253,8 +102811,12 @@
       "defesa": "foundry:trait-attack",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Glutton's Jaw"
+    ]
   },
   {
     "id": "wb:spell/gluttonous-growth",
@@ -102381,7 +102943,7 @@
     "escalonamento_de_dano": null,
     "text": "wb:text/spell/glyph-of-warding",
     "texto": "Glyph of Warding Source Core Rulebook pg. 341 Traditions Arcane, Divine, Occult, Primal Cast 10 minutes (material, somatic, verbal) Range touch Target 1 container or a 10-foot-by-10-foot area Duration unlimited --- You craft a trap by binding a hostile spell into a symbol. While Casting this Spell, you also Cast a Spell of a lower spell level to store in the glyph. The stored spell must take 3 actions or fewer to cast, have a hostile effect, and target one creature or have an area. You can set a password, a trigger, or both for the glyph. Any creature that moves, opens, or touches the target container or enters the target area that doesn't speak the password or that matches the trigger activates the glyph, releasing the harmful spell within. Once a spell is stored in the glyph, the glyph gains all the traits of that spell. If the stored spell targets one or more creatures, it targets the creature that set off the glyph. If it has an area, that area is centered on the creature that set off the glyph. Glyph of warding 's duration ends when the glyph is triggered. The glyph counts as a magical trap, using your spell DC for both the Perception check to notice it and the Thievery check to disable it; both checks require the creature attempting them to be trained in order to succeed. You can Dismiss glyph of warding . The maximum number of glyphs of warding you can have active at a time is equal to your spellcasting ability modifier.",
-    "grants_completos": true,
+    "grants_completos": null,
     "requires_parseado": null,
     "xref": {
       "aon": "spell-138",
@@ -104339,8 +104901,12 @@
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Wholeness of Body"
+    ]
   },
   {
     "id": "wb:spell/haste",
@@ -106027,8 +106593,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Mind Blank"
+    ]
   },
   {
     "id": "wb:spell/hidebound",
@@ -106545,8 +107115,12 @@
       "defesa": "foundry:trait-attack",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Searing Light"
+    ]
   },
   {
     "id": "wb:spell/home-among-mulberry-leaves",
@@ -106655,8 +107229,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Glibness"
+    ]
   },
   {
     "id": "wb:spell/horde-of-underlings",
@@ -107101,8 +107679,12 @@
       "defesa": "foundry:defense.save",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Cone of Cold"
+    ]
   },
   {
     "id": "wb:spell/humanoid-form",
@@ -107905,8 +108487,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Hypnotic Pattern"
+    ]
   },
   {
     "id": "wb:spell/ibexs-harvest",
@@ -108163,8 +108749,12 @@
       "alcance": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Blind Ambition"
+    ]
   },
   {
     "id": "wb:spell/ignite-fireworks",
@@ -108361,8 +108951,12 @@
       "defesa": "foundry:trait-attack",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Produce Flame"
+    ]
   },
   {
     "id": "wb:spell/ill-omen",
@@ -108679,8 +109273,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Veil"
+    ]
   },
   {
     "id": "wb:spell/illusory-object",
@@ -108929,8 +109527,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Secret Chest"
+    ]
   },
   {
     "id": "wb:spell/imaginary-weapon",
@@ -110835,8 +111437,12 @@
       "duracao": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.fixed",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Disrupting Weapons"
+    ]
   },
   {
     "id": "wb:spell/inkshot",
@@ -111090,8 +111696,12 @@
       "defesa": "foundry:none",
       "heightened": "foundry:heightening.interval",
       "escalonamento_de_dano": "foundry",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Ki Strike"
+    ]
   },
   {
     "id": "wb:spell/inscrutable-mask",
@@ -111733,8 +112343,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Plane Shift"
+    ]
   },
   {
     "id": "wb:spell/interposing-earth",
@@ -113472,8 +114086,12 @@
       "alcance": "foundry",
       "defesa": "foundry:none",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Know Direction"
+    ]
   },
   {
     "id": "wb:spell/lament",
@@ -113774,8 +114392,12 @@
       "duracao": "foundry",
       "defesa": "foundry:defense.save",
       "heightened": "foundry:none",
-      "text": "aon"
-    }
+      "text": "aon",
+      "aliases": "aon"
+    },
+    "aliases": [
+      "Hideous Laughter"
+    ]
   },
   {
     "id": "wb:spell/lay-on-hands",

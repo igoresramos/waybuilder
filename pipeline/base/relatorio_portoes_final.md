@@ -16,6 +16,9 @@
 
 **PASSOU** -- 0 ocorrencia(s).
 
+- por campo: {'favored_weapon': 1}
+- `wb:weapon/light-crossbow` citado 1x
+- toleradas (inconsistencia da fonte): ['wb:weapon/light-crossbow']
 
 ## Portao 4 -- cobertura caindo vs build anterior
 

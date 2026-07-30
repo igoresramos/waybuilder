@@ -9,7 +9,7 @@ divergente veta a fusao.
 - vetados por divergencia estrutural: **392**
 - desempatados por prosa: **77**
 - base: 20375 -> **19706** registros
-- registros com alias: **300**
+- registros com alias: **452**
 
 ## Vetados -- par declarado, conteudo divergente
 

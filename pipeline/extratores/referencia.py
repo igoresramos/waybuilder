@@ -107,6 +107,13 @@ def _packs_foundry() -> str | None:
 _NAO_ALNUM = re.compile(r"[^a-z0-9]+")
 
 
+# Ataque natural que a divindade "favorece" e que NAO existe como arma na base
+# -- sao 28 referencias em 22 divindades. Nao sao lacuna de extracao: um deus
+# com garras favorece a garra, e garra e ataque desarmado.
+NAO_SAO_ARMAS = {"claw", "claws", "jaw", "jaws", "tail", "fang", "fangs", "nails",
+                 "horn", "horns", "hoof", "hooves", "beak", "talon", "talons"}
+
+
 def slug(texto: str) -> str:
     t = unicodedata.normalize("NFKD", texto or "")
     t = "".join(c for c in t if not unicodedata.combining(c))
@@ -364,7 +371,18 @@ def extrair_deities_foundry_only(foundry_deities, aon_deity_names, domain_slugs,
             reg["prov"]["domains"] = "foundry"
         arma = s.get("weapons") or []
         if arma:
-            reg["favored_weapon"] = [f"wb:equipment/{slug(a)}" for a in arma]
+            # `wb:weapon/`, e nao `wb:equipment/`: eram 509 referencias ORFAS
+            # -- nenhuma resolvia -- e nenhum portao cobrava, porque o portao 3
+            # so varre `requires`. Com o prefixo certo, 480 resolvem.
+            # As outras 29 sao ataque NATURAL (claw, jaws, tail, fang, nails),
+            # que nao e arma na base: essas saem como NOME simples, sem `wb:`,
+            # para nao afirmar um id que nao existe. Quem le distingue pelo
+            # prefixo. Ver item 83(e).
+            alvos = []
+            for a in arma:
+                sl = slug(a)
+                alvos.append(f"wb:weapon/{sl}" if sl not in NAO_SAO_ARMAS else sl)
+            reg["favored_weapon"] = alvos
             reg["prov"]["favored_weapon"] = "foundry"
         sanct = (s.get("sanctification") or {}).get("what") or []
         if sanct:
@@ -616,7 +634,12 @@ def extrair_deities(hits, licencas, licencas_deity, est, domain_slugs):
 
         arma = h.get("favored_weapon") or []
         if arma:
-            reg["favored_weapon"] = [f"wb:equipment/{slug(a)}" for a in arma]
+            # mesmo conserto do caminho do Foundry (linha ~380), e este e o
+            # que VENCE na precedencia -- por isso a correcao la sozinha nao
+            # mudou nada. Ver item 83(e).
+            reg["favored_weapon"] = [
+                f"wb:weapon/{slug(a)}" if slug(a) not in NAO_SAO_ARMAS else slug(a)
+                for a in arma]
             reg["prov"]["favored_weapon"] = "aon"
             com_weapon += 1
 

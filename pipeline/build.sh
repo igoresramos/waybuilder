@@ -23,7 +23,12 @@ if [ "${WB_REEXTRAIR:-0}" = "1" ]; then
   # `aon_kinds.converter()`, entao mudanca de schema la chega aqui de carona --
   # e ficar fora do laco fazia a saida em disco envelhecer em silencio (a de
   # 27/07 sobreviveu a spec de `grants_completos`, de 29/07).
-  for e in classes feats magias ancestrias equipamento companheiros referencia rituais aon_kinds taticas_kits; do
+  # `magias` roda por `_gerar_saida_magias.py`, e nao por `magias.py`: o
+  # segundo so devolve a lista e IMPRIME a contagem -- o `__main__` dele nao
+  # escreve arquivo nenhum. Chamar `magias.py` aqui era um no-op silencioso, e
+  # por isso `saida/magias.json` ficou parado em 27/07 atravessando todos os
+  # builds desde entao. Mesma classe do `taticas_kits`, que estava FORA do laco.
+  for e in classes feats _gerar_saida_magias ancestrias equipamento companheiros referencia rituais aon_kinds taticas_kits; do
     echo "-- $e"
     python3 "extratores/$e.py"
   done
