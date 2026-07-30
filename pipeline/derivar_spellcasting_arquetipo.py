@@ -191,6 +191,12 @@ def main() -> int:
         prov["grants.grant_spellcasting"] = "derivado:prosa-spellcasting"
         if not tinha:
             prov["grants"] = "derivado:prosa-spellcasting"
+        # TERCEIRA ocorrencia do mesmo esquecimento (7e, 7f e aqui): todo passo
+        # que enriquece `grants` depois do reconciliador precisa refazer
+        # `mechanized`, que a spec v1 define como `bool(grants)` e que so era
+        # derivado no passo 2. Quem guarda a invariante e
+        # `test_mechanized_e_derivado_de_grants` -- foi ele que achou as tres.
+        r["mechanized"] = True
         concedem.append((r, frase, g))
 
     with open(f"{BASE}/index.json", "w", encoding="utf-8") as fh:

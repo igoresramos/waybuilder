@@ -160,9 +160,16 @@ class TestMecanizacao(unittest.TestCase):
         self.assertIsNone(g)
         self.assertIsNone(r)
 
-    def test_sem_mecanica_a_converter_e_sucesso(self):
+    def test_sem_mecanica_a_converter_responde_null(self):
+        # Este teste ja afirmou `assertTrue` -- e ficou vermelho quando
+        # `mecanizacao()` passou a devolver `None` aqui, de proposito. O motivo
+        # esta na propria funcao: `true` faz o consumidor concluir que os
+        # `grants` vazios REPRESENTAM o registro, quando o que houve foi a fonte
+        # nao declarar mecanica nenhuma. Custou as 61 dedicacoes com `grants:
+        # []` e `grants_completos: true` ao mesmo tempo. O teste e que estava
+        # velho, guardando o contrato que a correcao revogou.
         g, _ = comum.mecanizacao("feat", False, False, False, False)
-        self.assertTrue(g)
+        self.assertIsNone(g)
 
     def test_perda_de_rule_element_e_false(self):
         g, _ = comum.mecanizacao("feat", True, True, False, False)

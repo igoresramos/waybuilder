@@ -327,7 +327,14 @@ def main():
     # de fonte nenhuma. O que sobra e divida de verdade: campo preenchido cuja
     # fonte se perdeu.
     # `text` NAO entra: o portao 1 exige prov para ele (a fonte da prosa).
-    DERIVADOS = ("mechanized", "kind", "id")
+    # `grants_completos` e `requires_parseado` entram pela mesma porta que
+    # `mechanized`: sao calculados por `comum.mecanizacao()` a partir do que o
+    # extrator conseguiu converter, nao lidos de fonte nenhuma. Sem isto, um
+    # registro fundido a partir de duas entradas do AoN (`know-it-all`) sai com
+    # `prov.grants_completos = "desconhecida"` -- afirmando nao saber a origem
+    # de um valor que o proprio pipeline produziu.
+    DERIVADOS = ("mechanized", "kind", "id",
+                 "grants_completos", "requires_parseado")
     prov_vazio = 0
     for r in base:
         p = r.get("prov")

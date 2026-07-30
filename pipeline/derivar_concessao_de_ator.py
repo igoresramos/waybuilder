@@ -137,6 +137,11 @@ def main() -> int:
         prov["grants.grant_actor"] = "derivado:prosa-companheiro"
         if not tinha:
             prov["grants"] = "derivado:prosa-companheiro"
+        # `mechanized == bool(grants)` e invariante da v1, e o reconciliador
+        # (que a deriva) roda MUITO antes deste passo. Sem esta linha os 17
+        # feats de companheiro saem com `grants` cheio e `mechanized: false` --
+        # a mesma correcao que `unificar_efeitos.py` ja faz ao concluir.
+        r["mechanized"] = True
         concedem.append((r, frase, opcoes))
 
     with open(f"{BASE}/index.json", "w", encoding="utf-8") as fh:

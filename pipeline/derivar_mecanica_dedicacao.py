@@ -174,6 +174,12 @@ def main() -> int:
         if limpo:
             r["grants"] = limpo
             r.setdefault("prov", {})["grants"] = "derivado:prosa-dedicacao"
+            # mesma razao do passo 7f: `mechanized == bool(grants)` e derivado
+            # pelo reconciliador, que rodou muito antes deste enriquecimento.
+            # Sem isto, 7 dedicacoes saem com `grants` cheio e `mechanized:
+            # false` -- o campo vira declaracao solta, que e o que o teste de
+            # invariante existe para pegar.
+            r["mechanized"] = True
             derivadas.append((r, provas, condicionais))
         else:
             marcas = list(condicionais)
