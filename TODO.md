@@ -137,12 +137,6 @@ items:
   id: 10
   date: '2026-07-29'
   priority: baixa
-- desc: 'Cobertura medida em 5 dos 26 livros: Player Core, Player Core 2, War of Immortals e Ancestry
-    Guide (1.377 nomes, 99,8% fora rituals) mais Treasure Vault (898 nomes, 100%). Os outros 21 livros
-    nao foram testados'
-  id: 19
-  date: '2026-07-29'
-  priority: baixa
 - desc: 'POR ULTIMO, decisao do Igor (2026-07-29): opcao de idioma ingles / pt-BR na interface. Depois
     de TODO o resto -- so faz sentido com o app fechado. Escopo a decidir quando chegar a vez: a UI (rotulos,
     botoes, mensagens do motor) e traduzivel; a PROSA das 19.706 entradas vem das fontes em ingles e nao
@@ -150,18 +144,6 @@ items:
     Nome de trait e de entidade idem -- traduzir ''Reactive Strike'' quebraria a busca do jogador que
     le AoN'
   id: 31
-  date: '2026-07-29'
-  priority: baixa
-- desc: 'PARCIAL, re-medido 2026-07-29 (auditoria). CAIU: licenca inferida sem marca zerou (2.494 hoje,
-    todas marcadas); feat_category ausente 256 -> 172 (o valor bruto ''classfeature'' zerou). NAO MUDOU:
-    prov.class inferido (414 de 841). PIOROU: source.page ausente 1.506 -> 1.598, cresceu com a base.
-    E `traits` ausente segue em 66 registros (39 class-feature + 27 class), mas hoje sai como CHAVE OMITIDA,
-    nao null nem [] -- ver item 53. || TEXTO ORIGINAL: Residuos menores da auditoria: wb:archetype/shared-archetype-feats
-    e diretorio de organizacao do Foundry virado arquetipo em 14 feats; 1.440 licencas inferidas por heuristica
-    sem marca no registro emitido; prov.class ''inferido de traits'' em 409 das 817 class-features; 152
-    pontos de prov marcados ''desconhecida''; 65 traits:null contra 3.036 []; 256 feats sem feat_category
-    (3 com valor bruto ''classfeature''); 1.506 sem source.page'
-  id: 34
   date: '2026-07-29'
   priority: baixa
 - desc: 'ARMAS SEM DANO -- PARCIALMENTE RESOLVIDO 2026-07-29. Eram 57 armas sem `damage`, mas 41 sao bombas
@@ -196,34 +178,39 @@ items:
   id: 96
   date: '2026-07-30'
   priority: baixa
-- desc: 'CLASS-FEATURES INALCANCAVEIS E KINDS COM GRANTS 100% VAZIO -- medido 2026-07-30, saiu do item
-    83. (a) 48 das 847 class-features nao sao citadas em LUGAR NENHUM da base (nem progressao, nem subclasses,
-    nem grants, nem requires). Destas, 26 tem irmao com o MESMO SLUG em outro kind (ikon 14, equipment
-    7, mythic-calling 5) -- mesmo caso que `colapsar_opcoes_irmas.py` ja trata para o eixo de subclasse,
-    e provavelmente extensivel. As outras 22 sao orfas de verdade: `focus-spells`, `elemental-school`,
-    `air-gate`/`earth-gate`/`fire-gate`, `echoes-of-the-scrolls|spells|swords`, `*-deviant-classification`,
-    `advanced-vials-toxicologist`. (b) quatro kinds com 100% de grants vazio: ikon (21), mythic-calling
-    (15), deviant-ability-classification (10), element (6). NAO E NUMERO ERRADO NA FICHA: `focus-spells`
-    como registro e redundante porque o pool de foco ja vem pela maquinaria de conjuracao. E higiene de
-    base, e exige curadoria registro a registro -- decidir, para cada um, se deveria ser alcancavel e
-    por qual caminho. Comecar pelos 26 com irmao, que tem regra.'
+- desc: 'RE-MEDIDO 2026-07-30 por agente, e o achado e MAIOR que o item. Confirmadas as 48 class-features
+    inalcancaveis. Mas os 26 pares com irmao de mesmo slug nao sao o problema: TODOS os 21 registros do
+    kind `ikon` e TODOS os 15 do kind `mythic-calling` sao inalcancaveis, com ou sem par. Ou seja, o compendio
+    `pf2e.classfeatures` do Foundry mistura Ikons e Mythic Callings com class-features de verdade, e o
+    extrator rotulou tudo como class-feature. Padrao unico nos 33 pares: mesmo nome (a menos de capitalizacao),
+    mesmo livro, `class: []` em 100%, xref do Foundry SO do lado class-feature. FUNDIR NAO RESOLVE ALCANCABILIDADE
+    -- so tira a duplicidade. O que resolve e a CAUSA: o Exemplar concede `divine-spark-and-ikons` no
+    nivel 1 e a prosa oficial diz "Select three ikons", mas a classe nao tem eixo de ikon nenhum. O AoN
+    tem exatamente 21 docs de ikon, entao nao ha lacuna de conteudo -- ha lacuna de ESCOLHA. BLOQUEIO
+    MEDIDO: o eixo precisa de `escolhe: 3` e hoje os 52 blocos da base usam `escolhe: 1`; o motor le UMA
+    escolha por bloco (`next((o for o in opcoes if o in escolhidas), None)`) e ignora o campo. Fazer `escolhe:
+    N` funcionar mexe em _subclasses, slots_abertos, _termo_subclass e no porte TS -- justamente o trecho
+    que ja produziu regressao pega pela paridade. Os 22 sem irmao sao outra coisa: 6 gates do Kineticist
+    + elemental-school + advanced-vials-toxicologist sao gap de progressao real; 7 deviant-classification
+    tem primo por NOME em `deviant-ability-classification` (kind que tem duplicidade propria nao resolvida);
+    3 echoes-of-* e 4 genericos (focus-spells, iron-will, improved-evasion, martial-weapon-mastery) sao
+    stubs orfaos.'
   id: 97
   date: '2026-07-30'
   priority: baixa
 - id: 98
   date: '2026-07-30'
-  priority: media
-  desc: 'A FICHA NAO TEM DIVINDADE -- medido 2026-07-30, saiu do item 87. A base tem 488 divindades e
-    61 dominios, todos estruturados (`divine_font` com ["heal"], ["harm"] ou os dois; `domains.primary`/`alternate`
-    apontando para `wb:domain/*`), e ZERO consumidores: `deity` nao aparece uma vez em motor/motor.py.
-    Efeito medido no residuo de pre-requisito: 37 clausulas falam de deity/worship, 19 de font e 3 de
-    dominio -- ~55 clausulas presas na mesma ausencia. Hoje qualquer Clerigo atende (ou nao) feats de
-    fonte por igual: `Healing Hands` (exige healing font) e oferecido a quem escolheu harm. A escolha
-    existe no jogo desde o nivel 1 (Divine Font) e o eixo `doctrine` do Clerigo NAO a cobre -- ele so
-    tem cloistered/warpriest/battle-creed. ESCOPO A DECIDIR: (a) slot de divindade nas classes que tem
-    `wb:class-feature/deity-<classe>` (hoje cleric e champion); (b) sub-escolha da fonte, com as opcoes
-    filtradas pelo `divine_font` da divindade escolhida; (c) termos de predicado `deity_font` e talvez
-    `domain`; (d) a ficha mostrar divindade, fonte e dominios. Mesmo padrao do item 96: dado estruturado
-    esperando consumidor -- so que aqui o consumidor ja tem 55 clausulas pedindo.'
+  priority: baixa
+  desc: 'PARTE PRINCIPAL FECHADA 2026-07-30 (commit 69d2df0f5, spec divindade-na-ficha). Entrou: eixo
+    `deity` derivado de quem cita `class-feature/deity-*` (Clerigo e Campeao, 488 opcoes), quatro termos
+    nos dois motores (deity, has_deity, deity_font, domain), os padroes de parser e a linha da divindade
+    na ficha com dominio e arma resolvidos por nome. Residuo de divindade: 54 -> 25 clausulas. SOBRA,
+    em ordem de valor: (a) a SUB-ESCOLHA da fonte para as 137 divindades que permitem heal e harm -- hoje
+    o motor nao reprova nenhuma das duas (principio zero), e resolver exige um eixo cujas opcoes dependam
+    da escolha anterior, que nenhum eixo da base tem; (b) arma favorita / pericia divina / santificacao
+    como termo (6 clausulas, o dado ja esta em favored_weapon e sanctification); (c) divindade OPCIONAL
+    para quem nao e Clerigo nem Campeao -- `you follow a deity` (4 clausulas) hoje so responde false para
+    as outras classes, e um Monge que segue divindade e legitimo em PF2e; (d) alinhamento segue RECUSADO
+    -- conceito que o Remaster aboliu.'
 promoted: []
 ---

@@ -1073,3 +1073,49 @@ como alias -- e existe um feat goblin homonimo, entao quem digitasse o nome
 antigo achava o goblin. O buraco estava fechado so para magia; fora dela sairam
 335 renomeacoes, com tres guardas que a medicao exigiu (a regra crua pegava 1.606
 e a maioria era lixo, incluindo `panache` ganhando o alias "Swashbuckler").
+
+## 2026-07-30 -- limpeza da fila de BOs (itens 19, 34, 38, 52, 61, 87, 98)
+
+Sessao pedida como "resolve os BOs que tem na TODO antes". Fila: 18 -> 14.
+
+**87 (parte)** -- `a familiar` virou termo. Quando o item foi escrito nao havia
+paralelo do `grant_actor` para familiar; no dia seguinte a spec
+`familiares-e-eidolons-concedidos` derivou 16 registros, e `has_actor` ja lia
+isso. Faltava `ATOR_RE` aceitar o bicho: 6 clausulas. Recusada com numero a
+quebra de clausula por virgula (70 tem virgula e quase toda e lista dentro de um
+conceito unico; `, and` sao 8 e so 1 quebraria limpo).
+
+**38 e 52** -- os dois ultimos residuos da auditoria. `prov: "desconhecida"` era
+um nao-resposta que o portao 1 deixa passar (ele cobra que `prov` EXISTA); a
+correcao usa `_origem` como reserva, o mesmo que a fusao de `traits` ja fazia
+oito linhas acima. E sobrava 1 grafia de livro fora do canonico, resolvida por
+verificacao dentro do proprio mapa (a serie Age of Ashes ocupa #145-150, e o
+subtitulo bate) -- nunca por chute, que e a regra do item.
+
+**61 -- o item estava ERRADO.** Ele concluia "extrator redundante" comparando
+REGISTROS. Medido por CAMPO, `relicos_idiomas.py` carregava `relic.aspect` e
+`relic.grade` para 122 reliquias que a base nao tinha -- e o grau e o que define
+quando o dom entra. O AoN publica `aspect` em 233 de 233 docs. Setima vez do
+mesmo padrao. Portadas as linhas para `aon_kinds.py` (uma fonte, sem merge) e o
+dedicado saiu do runner sem ser apagado.
+
+**34** -- 164 feats sem `feat_category`. Duas causas, e a segunda e a
+interessante: 8 nascem DEPOIS do extrator, em `desmembrar_colisoes.py`, entao
+`rallying-charge` saia `class` e `rallying-charge-visual` saia null com o MESMO
+trait. Por isso o passo novo roda tarde e sobre a base inteira. Os outros dois
+residuos do item foram medidos e NAO sao defeito (declarados na spec).
+
+**19** -- medido por agente: o dump tem 243 livros, nao 26. 234 estao em 100%, e
+as unicas ausencias sao 6 entradas de piada (Fools Aplenty, 1o de abril) e
+class-features que o censo do portao 9 ja declara. Item fechado pela medicao.
+
+**98 (novo, e o maior)** -- a ficha nao tinha DIVINDADE. 488 divindades e 61
+dominios estruturados na base, `deity` sem aparecer uma vez em `motor.py`, e 54
+clausulas de residuo presas nisso. `Healing Hands` era oferecido a Clerigo de
+fonte harm. Entrou o eixo, quatro termos nos dois motores, os padroes de parser
+e a linha na ficha. Residuo de divindade: 54 -> 25.
+
+Tambem corrigido: os scripts de verificacao escreviam em `"../docs/..."` e, ao
+rodar da raiz do projeto, criavam artefato FORA dele -- `caminhos.mjs` agora
+ancora em `import.meta.url`. E uma licao nova no LESSONS: mexer em extrator sem
+`WB_REEXTRAIR=1` da build verde sobre dado velho.
