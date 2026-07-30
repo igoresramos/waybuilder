@@ -159,7 +159,15 @@ def fundir(grupo):
             atual = base.get(k)
             if atual is None or atual == "" or atual == []:
                 base[k] = v
-                prov[k] = (outro.get("prov") or {}).get(k, "desconhecida")
+                # `_origem` como reserva, do mesmo jeito que `traits` faz oito
+                # linhas acima: o registro doador SEMPRE sabe de que fonte veio,
+                # mesmo quando nao tem `prov` para este campo em particular.
+                # Sem isso o campo herdado saia com "desconhecida", que e um
+                # nao-resposta que o portao 1 deixa passar (ele cobra que `prov`
+                # EXISTA). Item 52 -- eram 684 campos, e os 12 que sobraram
+                # (11 `legado_de` + 1 `area_of_concern`) sao todos deste ramo.
+                prov[k] = ((outro.get("prov") or {}).get(k)
+                           or outro.get("_origem") or "desconhecida")
             elif v not in (None, "", []) and json.dumps(atual, sort_keys=True, default=str) != \
                                              json.dumps(v, sort_keys=True, default=str):
                 ordem = PRECEDENCIA.get(k, PADRAO)

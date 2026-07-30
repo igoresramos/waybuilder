@@ -101,6 +101,20 @@ def main():
     fora_do_aon = {k: preferida(c) for k, c in resto.items()}
     mapa.update(fora_do_aon)
 
+    # A mesma obra com nome de COLECAO em vez de numero de volume. O pf2etools
+    # escreve "Age of Ashes #6: Broken Promises"; o AoN escreve "Pathfinder
+    # #150: Broken Promises". A normalizacao nao junta as duas porque as chaves
+    # nao se parecem, e a obra saia com duas grafias.
+    #
+    # A equivalencia NAO e chute: o proprio mapa do AoN ja traz `145 hellknight
+    # hill` (volume 1 de Age of Ashes) e `150 broken promises`, entao a serie
+    # ocupa #145-#150 e o volume 6 e o #150 -- com o subtitulo batendo palavra
+    # por palavra. Regra do item 38: mapa verificado, nunca chute.
+    SINONIMOS_VERIFICADOS = {"age of ashes 6 broken promises": "150 broken promises"}
+    for apelido, canonico in SINONIMOS_VERIFICADOS.items():
+        if canonico in mapa:
+            mapa[apelido] = mapa[canonico]
+
     json.dump({
         "_prov": "grafia mais frequente no dump do AoN; `source` vem do aon por "
                  "precedencia da spec (specs/2026-07-26-schema-base.md). Obra que "
