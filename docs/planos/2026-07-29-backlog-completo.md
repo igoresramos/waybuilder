@@ -291,11 +291,34 @@ proximo conserto some do radar do mesmo jeito.
 **Arquivos:**
 - Modificar: `pipeline/portoes.py` (portao 10), os extratores que nao emitem
 
-- [ ] Portao novo: falha quando um kind que DEVERIA declarar `grants_completos`
+- [x] Portao novo: falha quando um kind que DEVERIA declarar `grants_completos`
       nao declara, e reporta a cobertura por kind.
-- [ ] Fazer os kinds faltantes emitirem o campo.
-- [ ] Registrar a cobertura de hoje como linha de base, para o portao 4
+- [x] Fazer os kinds faltantes emitirem o campo.
+- [x] Registrar a cobertura de hoje como linha de base, para o portao 4
       (cobertura caindo vs build anterior) passar a vigiar tambem isto.
+
+**FEITO.** Portao 10 em 2026-07-29 (spec
+`2026-07-29-portao-de-cobertura-de-grants.md`); os extratores em 2026-07-30
+(spec `2026-07-30-cobertura-de-grants-completos.md`, commit `40bd16725`).
+
+O numero real era **8.360, nao 14.247** -- a diferenca e que 5.887 registros
+respondiam `null`, e `null` E resposta (o terceiro estado: "a fonte nao declarou
+mecanica"). Eram oito kinds inteiros de tres extratores, e nenhum precisava de
+dado novo: os tres ja computavam a resposta e a jogavam fora dentro do
+`mechanized` da v1. `taticas_kits.py` nem estava no laco do `build.sh`.
+
+Resultado: **8.360 -> 0**, com 1.359 `true`, 738 `false` e 6.345 `null`. O
+portao 10 deixou de ser o instrumento principal -- `test_portoes.py` agora exige
+cobertura total como assercao dura.
+
+**O achado que muda a Fase 3:** `class-feature` reporta **608 `false`, 72% do
+kind**. E o item 40 medido, com marca em cada registro, em vez de estimado em
+prosa.
+
+Na mesma rodada cairam dois vermelhos pre-existentes na suite do pipeline
+(commit `7e967b8e8`): `mechanized` solto em 26 registros (tres passos de
+enriquecimento appendam em `grants` depois de quem deriva o campo) e
+`prov.grants_completos = "desconhecida"` num registro fundido. Ver LESSONS.md.
 
 ### Tarefa 2.1: revalidar os numeros que a auditoria nao fechou
 
