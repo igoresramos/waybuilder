@@ -965,3 +965,38 @@ correcao de spec e um extrator novo.
 - README.md criado como ponto de retomada para sessoes futuras
 - Encerrada com 3 extratores ainda rodando (equipamento, companheiros,
   referencia) -- base deve chegar a ~21k registros
+
+## 2026-07-30 (continuacao) -- fatia 3 fechada e o slot concedido, fatia A
+
+**Item 43 (sobra da Fase 3).** O item pedia `ac` e `strike-damage`. Medindo na
+base canonica: `ac` tinha 34 grants e ZERO incondicionais -- nada a fazer.
+Contando selector escrito em LISTA apareceram 6, e ao ir aplicar os 6 veio o
+numero real: `_bonus_incondicionais` **nao lia o inventario**. Sao 293 grants
+incondicionais aplicaveis em item equipado, em selectors que o motor ja somava.
+Vestir um item de +1 em Furtividade nao mudava Furtividade.
+
+A CA passou a DISPUTAR em vez de somar: o `item_bonus` da armadura tambem e
+bonus de item, e Couro (+1) com Bands of Force (+1) da +1, nao +2.
+
+Segundo defeito, achado ao implementar: o contador anti-perda-silenciosa **nunca
+contou**. `_velocidade` era o ultimo dos tres chamadores de
+`_bonus_incondicionais` e reatribuia `bonus_ignorados`, apagando o que
+`_pericias_e_salvas` e `_resistencias` gravaram. Foi assim que o `ac` sumiu sem
+aparecer nem como ignorado, protegido por um comentario que afirmava que
+`_defesa` cuidava dele.
+
+Dano e ataque **recusados com numero** e declarados: 6 ocorrencias em 6
+seletores diferentes, mais 34 dinamicos e 3 formulas.
+
+**Item 94 (`Ancient Elf`), fatia A.** A prosa serviu so para separar as duas
+familias -- abre slot vs alarga o pool --, e tratar a segunda como a primeira da
+feat de graca. A implementacao nao usa prosa: usa o ChoiceSet do Foundry, que so
+existe na primeira. Sao 101 na fonte, cada um com o filtro do que o slot aceita,
+e o extrator escrevia `filtro=True`.
+
+Tres achados que so apareceram porque o extrator voltou a rodar: `ancestrias.py`
+estava parado em 27/07 (terceira ocorrencia do padrao no mesmo dia); nunca migrou
+para o schema v2, e a saida velha em disco mascarava isso; e 20 herancas legadas
+sairam por recorte da fonte fixada, decisao registrada em `censo_ausencias.json`.
+
+Quatro camadas verdes em cada commit. Dois commits, ambos no origin.
