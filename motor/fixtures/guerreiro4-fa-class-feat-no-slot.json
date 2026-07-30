@@ -1032,8 +1032,10 @@
   ],
   "focus_pool": 0,
   "fora_do_requisito": [],
+  "fraquezas": [],
   "heranca": "Versatile Human",
   "hp": 52,
+  "imunidades": [],
   "modificadores": {
    "cha": 0,
    "con": 1,
@@ -1232,6 +1234,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "resistencias": [],
   "salvas": {
    "fortitude": {
     "atributo": "con",

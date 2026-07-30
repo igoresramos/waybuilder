@@ -1355,8 +1355,10 @@
     "motivo": "exige athletics >= trained; tem untrained"
    }
   ],
+  "fraquezas": [],
   "heranca": "Ancient-Blooded Dwarf",
   "hp": 132,
+  "imunidades": [],
   "modificadores": {
    "cha": -1,
    "con": 3,
@@ -1559,6 +1561,18 @@
    "weapon-base-alchemical-bomb": "trained",
    "will": "expert"
   },
+  "resistencias": [
+   {
+    "origem": "Blast Resistance",
+    "tipo": "fire",
+    "valor": 3
+   },
+   {
+    "origem": "Blast Resistance",
+    "tipo": "sonic",
+    "valor": 3
+   }
+  ],
   "salvas": {
    "fortitude": {
     "atributo": "con",

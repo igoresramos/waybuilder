@@ -207,6 +207,7 @@ class Personagem:
         self._defesa()
         self._ataques()
         self._pericias_e_salvas()
+        self._resistencias()
         self._checar_requisitos()
 
     # -- regra 1: estrutura -------------------------------------------------
@@ -882,21 +883,90 @@ class Personagem:
                 if feat is not None:
                     yield wb_id, feat
 
+    # A gramatica INTEIRA que a base usa em `value`, medida nos 233 `resistance`
+    # e nos 1.709 `flat_modifier`: inteiro, as duas variaveis abaixo, `+`, `/`,
+    # `floor()` e `max()`. Nao ha multiplicacao, nao ha subtracao e o unico
+    # aninhamento e `max(1, floor(...))`. Isto e um mini-avaliador dessa
+    # gramatica, e nao um interpretador do Foundry.
+    # Spec: `specs/2026-07-30-resistencia-e-formula.md`
+    _FORMULA_OK = re.compile(r"^(?:floor|max|[\d\s+/(),])*$")
+
     def _resolver_valor(self, expressao):
         """Resolve a expressao do Foundry no valor deste personagem.
 
         Regra 19: em texto de regra impresso, "your level" significa **nivel de
         personagem** -- e `@actor.level` e exatamente isso.
+
+        Devolve `None` para o que estiver FORA da gramatica. Antes devolvia
+        zero, e zero e uma resposta: um `resistance` de `@actor.abilities.str.mod`
+        saia como "resistencia 0" em vez de "nao sei calcular". Quem chama
+        decide o que fazer com o nulo -- o HP, por exemplo, nao soma.
         """
+        if isinstance(expressao, bool):
+            return None
         if isinstance(expressao, (int, float)):
             return int(expressao)
         texto = str(expressao or "").strip()
-        if texto in ("@actor.level", "@actor.details.level.value"):
-            return self.nivel
+        if not texto:
+            return None
+        texto = texto.replace("@actor.details.level.value", str(self.nivel))
+        texto = texto.replace("@actor.level", str(self.nivel))
+        if "@armor.system.runes.potency" in texto:
+            texto = texto.replace("@armor.system.runes.potency",
+                                  str(self._potencia_de_armadura()))
+        return self._avaliar_formula(texto)
+
+    def _potencia_de_armadura(self) -> int:
+        """A runa de potencia da armadura EQUIPADA, ou 0 sem armadura.
+
+        Mesma leitura do `_defesa`: a runa vem do registro (202 armaduras da
+        base tem `runes`) ou da entrada do inventario.
+        """
+        for entrada in (self.doc.get("inventario") or []):
+            if not entrada.get("equipado"):
+                continue
+            reg = self.base.opcional(str(entrada.get("item") or "")) or {}
+            if reg.get("kind") != "armor":
+                continue
+            return max(int(entrada.get("potencia") or 0),
+                       int((reg.get("runes") or {}).get("potency") or 0))
+        return 0
+
+    def _avaliar_formula(self, texto: str):
+        """`floor()`, `max()`, `+` e `/` inteira. Fora disso, `None`."""
+        if not self._FORMULA_OK.match(texto):
+            return None
         try:
-            return int(texto)
-        except ValueError:
-            return 0
+            return self._reduzir(texto)
+        except (ValueError, ZeroDivisionError, IndexError):
+            return None
+
+    def _reduzir(self, texto: str):
+        texto = texto.strip()
+        # reduz a funcao mais INTERNA primeiro, para `max(1, floor(x/2))` sair
+        m = re.search(r"(floor|max)\(([^()]*)\)", texto)
+        while m:
+            args = [self._reduzir(a) for a in m.group(2).split(",")]
+            if any(a is None for a in args):
+                return None
+            valor = args[0] if m.group(1) == "floor" else max(args)
+            texto = texto[:m.start()] + str(valor) + texto[m.end():]
+            m = re.search(r"(floor|max)\(([^()]*)\)", texto)
+        if "(" in texto or ")" in texto:
+            return None
+        total = 0
+        for parcela in texto.split("+"):
+            parcela = parcela.strip()
+            if not parcela:
+                return None
+            # divisao INTEIRA para baixo, que e o que `floor(a/b)` significa --
+            # e o unico uso de `/` na base esta sempre dentro de um `floor`
+            partes = [int(x.strip()) for x in parcela.split("/")]
+            valor = partes[0]
+            for d in partes[1:]:
+                valor //= d
+            total += valor
+        return total
 
     # -- regras 12 e 14: slots de feat --------------------------------------
 
@@ -3064,6 +3134,88 @@ class Personagem:
                 continue
             self.bonus_ignorados[f"selector nao modelado: {sel}"] = len(lista)
 
+
+    # -- resistencia, fraqueza e imunidade -----------------------------------
+
+    def _melhor_resistencia(self, lista: list) -> list:
+        """Duas fontes do MESMO tipo nao somam -- vale a maior (regra do livro).
+
+        Mesma forma do `_melhor_por_tipo` dos bonus, mas aqui o resultado e a
+        LISTA de linhas sobreviventes, porque a ficha mostra a origem.
+        """
+        melhor: dict[str, dict] = {}
+        for linha in lista:
+            t = str(linha.get("tipo"))
+            if t not in melhor or int(linha.get("valor") or 0) > int(melhor[t].get("valor") or 0):
+                melhor[t] = linha
+        return sorted(melhor.values(), key=lambda x: str(x.get("tipo")))
+
+    def _somar_resistencia(self, crus, chave, tipo, bruto, nome) -> None:
+        """Uma linha por TIPO. Separado porque `tipo` pode ser lista."""
+        def ignorar(motivo: str) -> None:
+            k = f"{chave} {motivo}"
+            self.bonus_ignorados[k] = self.bonus_ignorados.get(k, 0) + 1
+
+        if "{" in tipo:
+            return ignorar("de tipo dinamico")
+        if tipo == "custom":
+            return ignorar("custom")
+        if chave == "immunity":
+            crus[chave].append({"tipo": tipo, "origem": nome})
+            return
+        valor = self._resolver_valor((bruto or {}).get("valor"))
+        if valor is None:
+            return ignorar("com formula fora da gramatica")
+        crus[chave].append({"tipo": tipo, "valor": valor, "origem": nome})
+
+    def _resistencias(self) -> None:
+        """233 `resistance`, 14 `immunity` e 11 `weakness` que a ficha ignorava.
+
+        Fatia 3.2 do plano. Spec:
+        `specs/2026-07-30-resistencia-e-formula.md`
+        """
+        crus = {"resistance": [], "weakness": [], "immunity": []}
+        fontes = [(self.base.get(c).get("name", c), self.base.get(c))
+                  for c in self.ordem_de_classe]
+        for reg in (self.ancestria, self.heranca, self.background):
+            if reg:
+                fontes.append((reg.get("name"), reg))
+        fontes += [(f.get("nome"), f) for f in self.features]
+        fontes += [(feat.get("name", i), feat)
+                   for i, feat, _ in self._feats_efetivos()]
+        for entrada in (self.doc.get("inventario") or []):
+            if entrada.get("equipado"):
+                reg = self.base.opcional(str(entrada.get("item") or ""))
+                if reg:
+                    fontes.append((reg.get("name"), reg))
+        for nome, reg in fontes:
+            for g in self._grants_de(reg):
+                if not isinstance(g, dict):
+                    continue
+                for chave in ("resistance", "weakness", "immunity"):
+                    bruto = g.get(chave)
+                    if bruto is None:
+                        continue
+                    # `tipo` e LISTA em 19 dos 258 (`Blast Resistance` protege
+                    # de fire E sonic). Uma resistencia a N tipos sao N linhas;
+                    # `str()` cego escrevia `"['fire', 'sonic']"` na ficha, e
+                    # foi o diff do fixture que pegou.
+                    alvo = bruto if chave == "immunity" else (bruto or {}).get("tipo")
+                    tipos = [str(x) for x in alvo] if isinstance(alvo, list) else [str(alvo)]
+                    for tipo in tipos:
+                        self._somar_resistencia(crus, chave, tipo, bruto, nome)
+                    continue
+        self.resistencias = self._melhor_resistencia(crus["resistance"])
+        self.fraquezas = self._melhor_resistencia(crus["weakness"])
+        # imunidade nao tem valor: basta uma por tipo
+        vistas, self.imunidades = set(), []
+        for linha in crus["immunity"]:
+            if linha["tipo"] in vistas:
+                continue
+            vistas.add(linha["tipo"])
+            self.imunidades.append(linha)
+        self.imunidades.sort(key=lambda x: x["tipo"])
+
     def visao(self) -> dict:
         """A visao calculada. Cache, nunca fonte de verdade."""
         return {
@@ -3095,6 +3247,9 @@ class Personagem:
             "escolhas_de_feat": self.escolhas_de_feat,
             "focus_pool": self.focus_pool,
             "ac": self.ac,
+            "resistencias": self.resistencias,
+            "fraquezas": self.fraquezas,
+            "imunidades": self.imunidades,
             "ataques": self.ataques,
             "features": self.features,
             # o que a cadeia de grants entregou sem o jogador escolher. Fica em

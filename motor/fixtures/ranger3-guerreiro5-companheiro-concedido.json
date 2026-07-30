@@ -1204,8 +1204,10 @@
     "motivo": "exige nature >= trained; tem untrained"
    }
   ],
+  "fraquezas": [],
   "heranca": "Versatile Human",
   "hp": 96,
+  "imunidades": [],
   "modificadores": {
    "cha": 0,
    "con": 1,
@@ -1393,6 +1395,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "resistencias": [],
   "salvas": {
    "fortitude": {
     "atributo": "con",

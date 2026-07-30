@@ -3,11 +3,13 @@
  "candidatos": {
   "ancestry_feat@1": [
    "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
    "wb:feat/courteous-comeback",
    "wb:feat/devils-advocate",
    "wb:feat/dragon-spit",
    "wb:feat/general-training",
    "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
    "wb:feat/keep-up-appearances",
    "wb:feat/know-oneself",
    "wb:feat/natural-ambition",
@@ -18,8 +20,6 @@
    "wb:feat/unconventional-weaponry",
    "wb:feat/viking-shieldbearer",
    "wb:feat/witch-warden",
-   "wb:feat/cooperative-nature",
-   "wb:feat/haughty-obstinacy",
    "wb:feat/adapted-cantrip",
    "wb:feat/adaptive-adept",
    "wb:feat/clever-improviser",
@@ -45,11 +45,13 @@
   ],
   "ancestry_feat@2": [
    "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
    "wb:feat/courteous-comeback",
    "wb:feat/devils-advocate",
    "wb:feat/dragon-spit",
    "wb:feat/general-training",
    "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
    "wb:feat/keep-up-appearances",
    "wb:feat/know-oneself",
    "wb:feat/natural-ambition",
@@ -60,8 +62,6 @@
    "wb:feat/unconventional-weaponry",
    "wb:feat/viking-shieldbearer",
    "wb:feat/witch-warden",
-   "wb:feat/cooperative-nature",
-   "wb:feat/haughty-obstinacy",
    "wb:feat/adapted-cantrip",
    "wb:feat/adaptive-adept",
    "wb:feat/clever-improviser",
@@ -87,11 +87,13 @@
   ],
   "ancestry_feat@4": [
    "wb:feat/arcane-tattoos",
+   "wb:feat/cooperative-nature",
    "wb:feat/courteous-comeback",
    "wb:feat/devils-advocate",
    "wb:feat/dragon-spit",
    "wb:feat/general-training",
    "wb:feat/gloomseer",
+   "wb:feat/haughty-obstinacy",
    "wb:feat/keep-up-appearances",
    "wb:feat/know-oneself",
    "wb:feat/natural-ambition",
@@ -102,8 +104,6 @@
    "wb:feat/unconventional-weaponry",
    "wb:feat/viking-shieldbearer",
    "wb:feat/witch-warden",
-   "wb:feat/cooperative-nature",
-   "wb:feat/haughty-obstinacy",
    "wb:feat/adapted-cantrip",
    "wb:feat/adaptive-adept",
    "wb:feat/clever-improviser",
@@ -130,6 +130,7 @@
   "class_feat@1": [
    "wb:feat/agile-shield-grip",
    "wb:feat/combat-assessment",
+   "wb:feat/double-slice",
    "wb:feat/everstand-stance",
    "wb:feat/exacting-strike",
    "wb:feat/point-blank-stance",
@@ -137,9 +138,9 @@
    "wb:feat/snagging-strike",
    "wb:feat/sudden-charge",
    "wb:feat/vicious-swing",
-   "wb:feat/double-slice",
    "wb:feat/acrobat-dedication",
    "wb:feat/agent-of-all-holds",
+   "wb:feat/aggressive-block",
    "wb:feat/alchemist-dedication",
    "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
@@ -147,6 +148,7 @@
    "wb:feat/animal-trainer-dedication",
    "wb:feat/animist-dedication",
    "wb:feat/archaeologist-dedication",
+   "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
    "wb:feat/assassin-dedication",
    "wb:feat/assisting-shot",
@@ -165,13 +167,12 @@
    "wb:feat/brutish-shove",
    "wb:feat/bullet-dancer-dedication",
    "wb:feat/campfire-chronicler-dedication",
-   "wb:feat/captain-dedication",
-   "wb:feat/cathartic-mage-dedication",
-   "wb:feat/cavalier-dedication"
+   "wb:feat/captain-dedication"
   ],
   "class_feat@2": [
    "wb:feat/agile-shield-grip",
    "wb:feat/combat-assessment",
+   "wb:feat/double-slice",
    "wb:feat/everstand-stance",
    "wb:feat/exacting-strike",
    "wb:feat/point-blank-stance",
@@ -179,9 +180,11 @@
    "wb:feat/snagging-strike",
    "wb:feat/sudden-charge",
    "wb:feat/vicious-swing",
+   "wb:feat/aggressive-block",
    "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
    "wb:feat/assisting-shot",
    "wb:feat/barbarian-dedication",
@@ -206,14 +209,12 @@
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/dueling-parry",
    "wb:feat/dueling-parry-fighter",
-   "wb:feat/duelist-dedication",
-   "wb:feat/edgewatch-detective-dedication",
-   "wb:feat/exemplar-dedication",
-   "wb:feat/familiar-master-dedication"
+   "wb:feat/duelist-dedication"
   ],
   "class_feat@4": [
    "wb:feat/agile-shield-grip",
    "wb:feat/combat-assessment",
+   "wb:feat/double-slice",
    "wb:feat/everstand-stance",
    "wb:feat/exacting-strike",
    "wb:feat/point-blank-stance",
@@ -221,9 +222,11 @@
    "wb:feat/snagging-strike",
    "wb:feat/sudden-charge",
    "wb:feat/vicious-swing",
+   "wb:feat/aggressive-block",
    "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
    "wb:feat/assisting-shot",
    "wb:feat/barbarian-dedication",
@@ -248,10 +251,7 @@
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/dueling-parry",
    "wb:feat/dueling-parry-fighter",
-   "wb:feat/duelist-dedication",
-   "wb:feat/edgewatch-detective-dedication",
-   "wb:feat/exemplar-dedication",
-   "wb:feat/familiar-master-dedication"
+   "wb:feat/duelist-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -263,6 +263,7 @@
    "wb:feat/animal-trainer-dedication",
    "wb:feat/animist-dedication",
    "wb:feat/archaeologist-dedication",
+   "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
    "wb:feat/assassin-dedication",
    "wb:feat/avenger-dedication",
@@ -292,13 +293,13 @@
    "wb:feat/corpse-tender-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/cultivator-dedication",
-   "wb:feat/curse-maelstrom-dedication",
-   "wb:feat/dandy-dedication"
+   "wb:feat/curse-maelstrom-dedication"
   ],
   "free_archetype@2": [
    "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
    "wb:feat/barbarian-dedication",
    "wb:feat/bastion-dedication",
@@ -333,14 +334,14 @@
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
-   "wb:feat/martial-artist-dedication",
-   "wb:feat/mauler-dedication",
-   "wb:feat/mind-smith-dedication"
+   "wb:feat/marshal-dedication",
+   "wb:feat/martial-artist-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/aldori-duelist-dedication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animist-dedication",
+   "wb:feat/archer-dedication",
    "wb:feat/artillerist-dedication",
    "wb:feat/barbarian-dedication",
    "wb:feat/bastion-dedication",
@@ -375,23 +376,26 @@
    "wb:feat/linguist-dedication",
    "wb:feat/living-vessel-dedication",
    "wb:feat/loremaster-dedication",
-   "wb:feat/martial-artist-dedication",
-   "wb:feat/mauler-dedication",
-   "wb:feat/mind-smith-dedication"
+   "wb:feat/marshal-dedication",
+   "wb:feat/martial-artist-dedication"
   ],
   "general_feat@1": [
+   "wb:feat/additional-lore",
    "wb:feat/adopted-ancestry",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
+   "wb:feat/assurance",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
    "wb:feat/cooperative-leadership",
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
+   "wb:feat/fleet",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
    "wb:feat/incredible-initiative",
@@ -406,11 +410,7 @@
    "wb:feat/skill-training-kingdom",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
    "wb:feat/diehard",
-   "wb:feat/dubious-knowledge",
-   "wb:feat/fleet",
    "wb:feat/intimidating-glare",
    "wb:feat/shield-block",
    "wb:feat/acrobatic-performer",
@@ -422,18 +422,22 @@
    "wb:feat/battle-medicine"
   ],
   "general_feat@2": [
+   "wb:feat/additional-lore",
    "wb:feat/adopted-ancestry",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
+   "wb:feat/assurance",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
    "wb:feat/cooperative-leadership",
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
+   "wb:feat/fleet",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
    "wb:feat/incredible-initiative",
@@ -449,11 +453,7 @@
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
    "wb:feat/automatic-knowledge",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
    "wb:feat/diehard",
-   "wb:feat/dubious-knowledge",
-   "wb:feat/fleet",
    "wb:feat/intimidating-glare",
    "wb:feat/shield-block",
    "wb:feat/acrobatic-performer",
@@ -464,18 +464,22 @@
    "wb:feat/bargain-hunter"
   ],
   "general_feat@4": [
+   "wb:feat/additional-lore",
    "wb:feat/adopted-ancestry",
    "wb:feat/armor-assist",
    "wb:feat/armor-proficiency",
+   "wb:feat/assurance",
    "wb:feat/breath-control",
    "wb:feat/canny-acumen",
    "wb:feat/civil-service",
    "wb:feat/cooperative-leadership",
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/fast-recovery",
    "wb:feat/feather-step",
+   "wb:feat/fleet",
    "wb:feat/fortified-fiefs",
    "wb:feat/group-coercion",
    "wb:feat/incredible-initiative",
@@ -499,20 +503,16 @@
    "wb:feat/keen-follower",
    "wb:feat/liquidate-resources",
    "wb:feat/pick-up-the-pace",
-   "wb:feat/prescient-planner",
-   "wb:feat/quick-recovery-kingdom",
-   "wb:feat/robust-health",
-   "wb:feat/skitter",
-   "wb:feat/steel-your-resolve"
+   "wb:feat/prescient-planner"
   ],
   "skill_feat@1": [
+   "wb:feat/additional-lore",
    "wb:feat/armor-assist",
+   "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
    "wb:feat/quick-coercion",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
-   "wb:feat/dubious-knowledge",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -548,14 +548,14 @@
    "wb:feat/improvise-tool"
   ],
   "skill_feat@2": [
+   "wb:feat/additional-lore",
    "wb:feat/armor-assist",
+   "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
    "wb:feat/quick-coercion",
    "wb:feat/automatic-knowledge",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
-   "wb:feat/dubious-knowledge",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -590,7 +590,10 @@
    "wb:feat/impressive-performance"
   ],
   "skill_feat@4": [
+   "wb:feat/additional-lore",
    "wb:feat/armor-assist",
+   "wb:feat/assurance",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
    "wb:feat/quick-coercion",
@@ -599,9 +602,6 @@
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
-   "wb:feat/additional-lore",
-   "wb:feat/assurance",
-   "wb:feat/dubious-knowledge",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -634,7 +634,7 @@
  },
  "extras": {
   "aumentos_detalhe": [],
-  "boosts_declarados": 10,
+  "boosts_declarados": 8,
   "boosts_direito": 13,
   "boosts_pendentes": [
    {
@@ -700,85 +700,19 @@
    "3": "wb:class/fighter",
    "4": "wb:class/fighter",
    "5": "wb:class/fighter",
-   "6": "wb:class/fighter"
+   "6": "wb:class/fighter",
+   "7": "wb:class/fighter",
+   "8": "wb:class/fighter"
   },
   "entrada_da_classe": {
    "wb:class/fighter": 1
   },
   "gastos": {
-   "ancestry_feat": [
-    {
-     "em": 1,
-     "pega": "wb:feat/haughty-obstinacy",
-     "slot": "ancestry_feat"
-    },
-    {
-     "em": 5,
-     "pega": "wb:feat/cooperative-nature",
-     "slot": "ancestry_feat"
-    }
-   ],
    "class_feat": [
     {
-     "em": 1,
-     "pega": "wb:feat/double-slice",
+     "em": 8,
+     "pega": "wb:feat/armored-resistance",
      "slot": "class_feat"
-    },
-    {
-     "em": 2,
-     "pega": "wb:feat/aggressive-block",
-     "slot": "class_feat"
-    },
-    {
-     "em": 4,
-     "pega": "wb:feat/dual-handed-assault",
-     "slot": "class_feat"
-    },
-    {
-     "em": 6,
-     "pega": "wb:feat/dazing-blow",
-     "slot": "class_feat"
-    }
-   ],
-   "free_archetype": [
-    {
-     "em": 2,
-     "pega": "wb:feat/archer-dedication",
-     "slot": "free_archetype"
-    },
-    {
-     "em": 4,
-     "pega": "wb:feat/marshal-dedication",
-     "slot": "free_archetype"
-    },
-    {
-     "em": 6,
-     "pega": "wb:feat/quick-shot",
-     "slot": "free_archetype"
-    }
-   ],
-   "general_feat": [
-    {
-     "em": 3,
-     "pega": "wb:feat/fleet",
-     "slot": "general_feat"
-    }
-   ],
-   "skill_feat": [
-    {
-     "em": 2,
-     "pega": "wb:feat/assurance",
-     "slot": "skill_feat"
-    },
-    {
-     "em": 4,
-     "pega": "wb:feat/additional-lore",
-     "slot": "skill_feat"
-    },
-    {
-     "em": 6,
-     "pega": "wb:feat/dubious-knowledge",
-     "slot": "skill_feat"
     }
    ]
   },
@@ -817,10 +751,20 @@
     "hp": 12,
     "nota": "10 da classe + 2 de CON",
     "origem": "nivel 6 (Fighter)"
+   },
+   {
+    "hp": 12,
+    "nota": "10 da classe + 2 de CON",
+    "origem": "nivel 7 (Fighter)"
+   },
+   {
+    "hp": 12,
+    "nota": "10 da classe + 2 de CON",
+    "origem": "nivel 8 (Fighter)"
    }
   ],
   "niveis_por_classe": {
-   "wb:class/fighter": 6
+   "wb:class/fighter": 8
   },
   "ordem_de_classe": [
    "wb:class/fighter"
@@ -851,7 +795,7 @@
     "Fighter"
    ],
    "perception": [
-    "Fighter"
+    "Battlefield Surveyor (Fighter)"
    ],
    "reflex": [
     "Fighter"
@@ -878,61 +822,44 @@
    }
   ]
  },
- "ficha": "guerreiro6-fa-duas-dedicacoes",
+ "ficha": "_teste-validacao-resistencia",
  "visao": {
   "ac": {
    "armadura": "Chain Mail",
    "categoria": "medium",
    "check_penalty": 0,
-   "detalhe": "10 + DEX +1 + prof 8 (trained, nivel 6) + item 4",
-   "dex_perdida": 2,
+   "detalhe": "10 + DEX +1 + prof 10 (trained, nivel 8) + item 5",
+   "dex_perdida": 1,
    "escudo": null,
    "rank": "trained",
-   "total": 23
+   "total": 26
   },
   "ancestralidade": "Human",
-  "ataques": [
-   {
-    "arma": "Longsword",
-    "ataque": 13,
-    "atributo_do_ataque": "str",
-    "categoria": "martial",
-    "dano": "1d8+3",
-    "detalhe": "nivel 6 + prof 10 (expert) + FOR +3",
-    "potencia": 0,
-    "rank": "expert",
-    "runas_de_propriedade": [],
-    "striking": 0,
-    "tipo_de_dano": "slashing",
-    "traits": [
-     "versatile-p"
-    ]
-   }
-  ],
+  "ataques": [],
   "atores": [],
   "atributos": {
    "cha": 10,
    "con": 14,
-   "dex": 16,
+   "dex": 14,
    "int": 10,
-   "str": 16,
+   "str": 14,
    "wis": 14
   },
   "aumentos_de_pericia": {
    "gastos": [],
    "niveis": [
     3,
-    5
+    5,
+    7
    ]
   },
   "avisos": [
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
-   "Marshal Dedication: falta escolher `marshal-skill` (Diplomacy, Diplomacy, Intimidation, Intimidation)",
-   "boosts de atributo: 10 declarado(s) de 13 a que o personagem tem direito -- faltam 3. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)"
+   "boosts de atributo: 8 declarado(s) de 13 a que o personagem tem direito -- faltam 5. Fontes: Human (1), Human (1), Warrior (1), Warrior (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)"
   ],
   "background": "Warrior",
   "boosts": {
-   "declarados": 10,
+   "declarados": 8,
    "direito": 13,
    "fontes": [
     {
@@ -993,7 +920,7 @@
    ]
   },
   "classes": {
-   "Fighter": 6
+   "Fighter": 8
   },
   "concedidos": [
    {
@@ -1088,38 +1015,60 @@
     "na_base": true,
     "nivel_de_classe": 5,
     "nome": "Fighter Weapon Mastery"
+   },
+   {
+    "classe": "Fighter",
+    "grants": [
+     {
+      "proficiency": {
+       "perception": "master"
+      }
+     }
+    ],
+    "id": "wb:class-feature/battlefield-surveyor",
+    "na_base": true,
+    "nivel_de_classe": 7,
+    "nome": "Battlefield Surveyor"
+   },
+   {
+    "classe": "Fighter",
+    "grants": [],
+    "id": "wb:class-feature/weapon-specialization",
+    "na_base": true,
+    "nivel_de_classe": 7,
+    "nome": "Weapon Specialization"
    }
   ],
   "focus_pool": 0,
   "fora_do_requisito": [
    {
-    "feat": "Marshal Dedication",
-    "motivo": "nova dedicacao no nivel 4 sem os 2 feats exigidos de: Archer (RAW do trait dedication)"
+    "feat": "Armored Resistance",
+    "motivo": "exige ter Guardian's Intercept; exige ter Guardian Dedication"
    }
   ],
   "fraquezas": [],
   "heranca": "Versatile Human",
-  "hp": 80,
+  "hp": 104,
   "imunidades": [],
   "modificadores": {
    "cha": 0,
    "con": 2,
-   "dex": 3,
+   "dex": 2,
    "int": 0,
-   "str": 3,
+   "str": 2,
    "wis": 2
   },
-  "nivel": 6,
+  "nivel": 8,
   "pericias": [
    {
     "atributo": "dex",
     "bonus_total": 0,
     "chave": "acrobatics",
-    "detalhe": "0 (untrained) + DEX +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + DEX +2",
+    "mod_atributo": 2,
     "nome": "Acrobatics",
     "rank": "untrained",
-    "total": 3
+    "total": 2
    },
    {
     "atributo": "int",
@@ -1135,11 +1084,11 @@
     "atributo": "str",
     "bonus_total": 0,
     "chave": "athletics",
-    "detalhe": "0 (untrained) + STR +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + STR +2",
+    "mod_atributo": 2,
     "nome": "Athletics",
     "rank": "untrained",
-    "total": 3
+    "total": 2
    },
    {
     "atributo": "int",
@@ -1175,21 +1124,21 @@
     "atributo": "cha",
     "bonus_total": 0,
     "chave": "intimidation",
-    "detalhe": "nivel 6 + prof 2 (trained) + CHA +0",
+    "detalhe": "nivel 8 + prof 2 (trained) + CHA +0",
     "mod_atributo": 0,
     "nome": "Intimidation",
     "rank": "trained",
-    "total": 8
+    "total": 10
    },
    {
     "atributo": "int",
     "bonus_total": 0,
     "chave": "lore:Warfare Lore",
-    "detalhe": "nivel 6 + prof 2 (trained) + INT +0",
+    "detalhe": "nivel 8 + prof 2 (trained) + INT +0",
     "mod_atributo": 0,
     "nome": "Lore: Warfare",
     "rank": "trained",
-    "total": 8
+    "total": 10
    },
    {
     "atributo": "wis",
@@ -1255,11 +1204,11 @@
     "atributo": "dex",
     "bonus_total": 0,
     "chave": "stealth",
-    "detalhe": "0 (untrained) + DEX +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + DEX +2",
+    "mod_atributo": 2,
     "nome": "Stealth",
     "rank": "untrained",
-    "total": 3
+    "total": 2
    },
    {
     "atributo": "wis",
@@ -1275,11 +1224,11 @@
     "atributo": "dex",
     "bonus_total": 0,
     "chave": "thievery",
-    "detalhe": "0 (untrained) + DEX +3",
-    "mod_atributo": 3,
+    "detalhe": "0 (untrained) + DEX +2",
+    "mod_atributo": 2,
     "nome": "Thievery",
     "rank": "untrained",
-    "total": 3
+    "total": 2
    }
   ],
   "pericias_livres": 3,
@@ -1292,54 +1241,60 @@
    "lore:Warfare Lore": "trained",
    "martial": "expert",
    "medium": "trained",
-   "perception": "expert",
+   "perception": "master",
    "reflex": "expert",
    "simple": "expert",
    "unarmed": "expert",
    "unarmored": "trained",
    "will": "expert"
   },
-  "resistencias": [],
+  "resistencias": [
+   {
+    "origem": "Armored Resistance",
+    "tipo": "physical",
+    "valor": 4
+   }
+  ],
   "salvas": {
    "fortitude": {
     "atributo": "con",
     "bonus_total": 0,
     "chave": "fortitude",
-    "detalhe": "nivel 6 + prof 4 (expert) + CON +2",
+    "detalhe": "nivel 8 + prof 4 (expert) + CON +2",
     "mod_atributo": 2,
     "nome": "fortitude",
     "rank": "expert",
-    "total": 12
+    "total": 14
    },
    "perception": {
     "atributo": "wis",
     "bonus_total": 0,
     "chave": "perception",
-    "detalhe": "nivel 6 + prof 4 (expert) + WIS +2",
+    "detalhe": "nivel 8 + prof 6 (master) + WIS +2",
     "mod_atributo": 2,
     "nome": "perception",
-    "rank": "expert",
-    "total": 12
+    "rank": "master",
+    "total": 16
    },
    "reflex": {
     "atributo": "dex",
     "bonus_total": 0,
     "chave": "reflex",
-    "detalhe": "nivel 6 + prof 4 (expert) + DEX +3",
-    "mod_atributo": 3,
+    "detalhe": "nivel 8 + prof 4 (expert) + DEX +2",
+    "mod_atributo": 2,
     "nome": "reflex",
     "rank": "expert",
-    "total": 13
+    "total": 14
    },
    "will": {
     "atributo": "wis",
     "bonus_total": 0,
     "chave": "will",
-    "detalhe": "nivel 6 + prof 4 (expert) + WIS +2",
+    "detalhe": "nivel 8 + prof 4 (expert) + WIS +2",
     "mod_atributo": 2,
     "nome": "will",
     "rank": "expert",
-    "total": 12
+    "total": 14
    }
   },
   "sentidos": [],
@@ -1352,26 +1307,30 @@
     1,
     2,
     4,
-    6
+    6,
+    8
    ],
    "free_archetype": [
     2,
     4,
-    6
+    6,
+    8
    ],
    "general": [
-    3
+    3,
+    7
    ],
    "skill": [
     2,
     4,
-    6
+    6,
+    8
    ]
   },
   "slots_abertos": [
    {
     "em": "criacao",
-    "escolhe": 3,
+    "escolhe": 5,
     "fontes": [
      {
       "em": "criacao",
@@ -1430,63 +1389,8 @@
      }
     ],
     "kind": "ability",
-    "rotulo": "boosts de atributo (3 a escolher)",
+    "rotulo": "boosts de atributo (5 a escolher)",
     "slot": "boosts_livres"
-   },
-   {
-    "em": "criacao",
-    "escolhe": 1,
-    "flag": "marshal-skill",
-    "kind": "grant",
-    "opcoes": [
-     {
-      "grants": [
-       {
-        "proficiency": {
-         "diplomacy": "trained"
-        }
-       }
-      ],
-      "rotulo": "Diplomacy",
-      "valor": "diplomacy-trained"
-     },
-     {
-      "grants": [
-       {
-        "proficiency": {
-         "diplomacy": "expert"
-        }
-       }
-      ],
-      "rotulo": "Diplomacy",
-      "valor": "diplomacy-expert"
-     },
-     {
-      "grants": [
-       {
-        "proficiency": {
-         "intimidation": "trained"
-        }
-       }
-      ],
-      "rotulo": "Intimidation",
-      "valor": "imtimidation-trained"
-     },
-     {
-      "grants": [
-       {
-        "proficiency": {
-         "intimidation": "expert"
-        }
-       }
-      ],
-      "rotulo": "Intimidation",
-      "valor": "intimidation-expert"
-     }
-    ],
-    "origem": "wb:feat/marshal-dedication",
-    "rotulo": "Marshal Dedication / marshal-skill",
-    "slot": "escolha_de_grant"
    },
    {
     "em": "criacao",
@@ -1503,6 +1407,48 @@
     "slot": "pericias_livres"
    },
    {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "ancestry feat (nivel 1)",
+    "slot": "ancestry_feat"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "class feat (nivel 1)",
+    "slot": "class_feat"
+   },
+   {
+    "em": 2,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "class feat (nivel 2)",
+    "slot": "class_feat"
+   },
+   {
+    "em": 2,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "free archetype (nivel 2)",
+    "slot": "free_archetype"
+   },
+   {
+    "em": 2,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "skill feat (nivel 2)",
+    "slot": "skill_feat"
+   },
+   {
+    "em": 3,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "general feat (nivel 3)",
+    "slot": "general_feat"
+   },
+   {
     "em": 3,
     "escolhe": 1,
     "kind": "skill",
@@ -1510,11 +1456,88 @@
     "slot": "skill_increase"
    },
    {
+    "em": 4,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "class feat (nivel 4)",
+    "slot": "class_feat"
+   },
+   {
+    "em": 4,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "free archetype (nivel 4)",
+    "slot": "free_archetype"
+   },
+   {
+    "em": 4,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "skill feat (nivel 4)",
+    "slot": "skill_feat"
+   },
+   {
+    "em": 5,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "ancestry feat (nivel 5)",
+    "slot": "ancestry_feat"
+   },
+   {
     "em": 5,
     "escolhe": 1,
     "kind": "skill",
     "rotulo": "aumento de pericia (nivel 5)",
     "slot": "skill_increase"
+   },
+   {
+    "em": 6,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "class feat (nivel 6)",
+    "slot": "class_feat"
+   },
+   {
+    "em": 6,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "free archetype (nivel 6)",
+    "slot": "free_archetype"
+   },
+   {
+    "em": 6,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "skill feat (nivel 6)",
+    "slot": "skill_feat"
+   },
+   {
+    "em": 7,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "general feat (nivel 7)",
+    "slot": "general_feat"
+   },
+   {
+    "em": 7,
+    "escolhe": 1,
+    "kind": "skill",
+    "rotulo": "aumento de pericia (nivel 7)",
+    "slot": "skill_increase"
+   },
+   {
+    "em": 8,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "free archetype (nivel 8)",
+    "slot": "free_archetype"
+   },
+   {
+    "em": 8,
+    "escolhe": 1,
+    "kind": "feat",
+    "rotulo": "skill feat (nivel 8)",
+    "slot": "skill_feat"
    }
   ],
   "subclasses": []

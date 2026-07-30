@@ -1156,8 +1156,10 @@
     "motivo": "exige nivel de personagem >= 9; tem 5"
    }
   ],
+  "fraquezas": [],
   "heranca": "Ancient-Blooded Dwarf",
   "hp": 67,
+  "imunidades": [],
   "modificadores": {
    "cha": -1,
    "con": 3,
@@ -1358,6 +1360,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "resistencias": [],
   "salvas": {
    "fortitude": {
     "atributo": "con",

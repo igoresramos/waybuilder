@@ -9,7 +9,24 @@
 # Os 55 itens concluidos vivem em docs/2026-07-29_todo-concluidos.md.
 project: waybuilder
 items:
-- desc: 'CORRIGIDO 2026-07-29 (auditoria): o numero do item estava errado. Nao sao ''175 das 176 sub-escolhas sem efeito'' -- sao 114 de 418 (27%) que JA tem `grants` e que o motor JA aplica, porque `_proficiencias` e `_grants_em_cadeia` leem `self.features`, que inclui a subclasse escolhida. O MECANISMO DE APLICACAO DEIXOU DE SER O PROBLEMA. O que trava sao as 304 opcoes com `grants: []`, e isso e EXTRACAO: converter_rule_elements.py so converteu os 99 declarativos (ActiveEffectLike com path de rank, sem predicate). Falta o grosso -- 1.784 FlatModifier, 1.495 ItemAlteration, 1.113 GrantItem, 1.077 RollOption, 563 ChoiceSet, 337 Resistance. || TEXTO ORIGINAL: SUBCLASSE NAO ALTERA NADA (parcialmente resolvido). Levantado pelo Igor a partir do caso Cloistered/Warpriest: das 176 opcoes de sub-escolha (bloodline 18, patron 24, mystery 12, instinct 16, racket 6, doctrine 3, muse 5, arcane-school 23, cause 13, implement 10...), **175 nao tinham efeito estruturado** -- escolher subclasse nao mudava numero nenhum na ficha. O dado existe: 584 das 841 class-features do Foundry tem Rule Elements. converter_rule_elements.py converteu os 99 declarativos (ActiveEffectLike com path de rank, sem predicate). FALTA o grosso, que depende de reimplementar o interpretador do Foundry: 1.784 FlatModifier, 1.495 ItemAlteration, 1.113 GrantItem, 1.077 RollOption, 563 ChoiceSet, 337 Resistance. E o item que a spec chama de ''maior custo do projeto'''
+- desc: 'FATIA 3.2 (Resistance) CONCLUIDA 2026-07-30, spec specs/2026-07-30-resistencia-e-formula.md.
+    A ficha nao tinha resistencia, fraqueza nem imunidade -- 233 + 11 + 14 grants
+    que o motor ignorava, vindos de feat (125), equipment (59), armor (21), weapon
+    (12), shield (9). Agora `visao.resistencias`, `.fraquezas` e `.imunidades`,
+    com origem nomeada e a regra do livro de nao-empilhamento (duas fontes do
+    mesmo tipo: vale a maior, nao a soma). SAIU JUNTO um defeito mais antigo:
+    `_resolver_valor` resolvia so inteiro e `@actor.level`, e QUALQUER outra
+    expressao virava ZERO EM SILENCIO -- 68 das 233 resistencias sao formula.
+    Virou um mini-avaliador da gramatica medida (inteiro, `@actor.level`,
+    `@armor.system.runes.potency`, `+`, `/`, `floor()`, `max()`), e o que estiver
+    fora devolve None em vez de zero: zero e uma resposta, None diz "nao sei".
+    DEFEITO MEU PEGO PELO DIFF DO FIXTURE: `tipo` e LISTA em 19 dos 258 (Blast
+    Resistance protege fire E sonic) e eu convertia para texto cego, escrevendo
+    "[''fire'', ''sonic'']" na ficha do campeao6. Uma resistencia a N tipos sao N
+    linhas. FICA ANOTADO PARA A PROXIMA FATIA: 18 `flat_modifier` de `land-speed`
+    ficam contados como nao modelados -- a velocidade existe na ficha do
+    companheiro mas nao como numero do personagem.
+    || TEXTO ORIGINAL: CORRIGIDO 2026-07-29 (auditoria): o numero do item estava errado. Nao sao ''175 das 176 sub-escolhas sem efeito'' -- sao 114 de 418 (27%) que JA tem `grants` e que o motor JA aplica, porque `_proficiencias` e `_grants_em_cadeia` leem `self.features`, que inclui a subclasse escolhida. O MECANISMO DE APLICACAO DEIXOU DE SER O PROBLEMA. O que trava sao as 304 opcoes com `grants: []`, e isso e EXTRACAO: converter_rule_elements.py so converteu os 99 declarativos (ActiveEffectLike com path de rank, sem predicate). Falta o grosso -- 1.784 FlatModifier, 1.495 ItemAlteration, 1.113 GrantItem, 1.077 RollOption, 563 ChoiceSet, 337 Resistance. || TEXTO ORIGINAL: SUBCLASSE NAO ALTERA NADA (parcialmente resolvido). Levantado pelo Igor a partir do caso Cloistered/Warpriest: das 176 opcoes de sub-escolha (bloodline 18, patron 24, mystery 12, instinct 16, racket 6, doctrine 3, muse 5, arcane-school 23, cause 13, implement 10...), **175 nao tinham efeito estruturado** -- escolher subclasse nao mudava numero nenhum na ficha. O dado existe: 584 das 841 class-features do Foundry tem Rule Elements. converter_rule_elements.py converteu os 99 declarativos (ActiveEffectLike com path de rank, sem predicate). FALTA o grosso, que depende de reimplementar o interpretador do Foundry: 1.784 FlatModifier, 1.495 ItemAlteration, 1.113 GrantItem, 1.077 RollOption, 563 ChoiceSet, 337 Resistance. E o item que a spec chama de ''maior custo do projeto'''
   id: 40
   date: '2026-07-29'
   priority: alta

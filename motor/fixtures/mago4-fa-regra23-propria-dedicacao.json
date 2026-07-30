@@ -1030,8 +1030,10 @@
     "motivo": "regra 23: o personagem tem 4 nivel(is) de Wizard E a dedicacao da mesma classe. As duas rotas se excluem"
    }
   ],
+  "fraquezas": [],
   "heranca": "Ancient Elf",
   "hp": 34,
+  "imunidades": [],
   "modificadores": {
    "cha": 0,
    "con": 1,
@@ -1220,6 +1222,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "resistencias": [],
   "salvas": {
    "fortitude": {
     "atributo": "con",

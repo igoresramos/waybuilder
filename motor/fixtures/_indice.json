@@ -19,6 +19,14 @@
    "slots_abertos": 23
   },
   {
+   "ficha": "_teste-validacao-resistencia",
+   "nivel": 8,
+   "hp": 104,
+   "avisos": 2,
+   "fora_do_requisito": 1,
+   "slots_abertos": 21
+  },
+  {
    "ficha": "_teste-validacao-runas-arma-1-striking",
    "nivel": 4,
    "hp": 52,

@@ -1,0 +1,28 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {"versao": "2026-07-30", "pin_foundry": "87f9e502"},
+ "identidade": {
+  "nome": "TESTE RESISTENCIA -- Guerreiro 8 com Armored Resistance",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao de resistencia e do mini-avaliador de formula (spec specs/2026-07-30-resistencia-e-formula.md, fatia 3.2 do item 40). `Armored Resistance` concede `resistance physical floor(@actor.level / 2)` -- num personagem 8, resistencia 4. Prova as duas metades de uma vez: a lista nova na ficha e a formula que antes virava zero em silencio. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/versatile-human"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/warrior"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 4, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 5, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 6, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 7, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 8, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "wis"]},
+  {"em": 5, "slot": "boosts_livres", "pega": ["str", "dex", "con", "wis"]},
+  {"em": 8, "slot": "class_feat", "pega": "wb:feat/armored-resistance"}
+ ],
+ "inventario": [
+  {"item": "wb:armor/chain-mail", "equipado": true, "potencia": 1}
+ ]
+}

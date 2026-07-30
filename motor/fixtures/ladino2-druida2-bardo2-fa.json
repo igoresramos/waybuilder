@@ -1312,8 +1312,10 @@
   ],
   "focus_pool": 2,
   "fora_do_requisito": [],
+  "fraquezas": [],
   "heranca": "Fey-touched Gnome",
   "hp": 68,
+  "imunidades": [],
   "modificadores": {
    "cha": 2,
    "con": 2,
@@ -1507,6 +1509,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "resistencias": [],
   "salvas": {
    "fortitude": {
     "atributo": "con",

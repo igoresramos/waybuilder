@@ -1007,8 +1007,10 @@
     "motivo": "exige diplomacy >= trained; tem untrained; exige intimidation >= trained; tem untrained"
    }
   ],
+  "fraquezas": [],
   "heranca": "Versatile Human",
   "hp": 56,
+  "imunidades": [],
   "modificadores": {
    "cha": 0,
    "con": 2,
@@ -1196,6 +1198,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "resistencias": [],
   "salvas": {
    "fortitude": {
     "atributo": "con",

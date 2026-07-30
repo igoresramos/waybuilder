@@ -74,6 +74,14 @@ export interface OpcaoDeGrant {
   grants?: unknown[];
 }
 
+/** Uma resistência, fraqueza ou imunidade na ficha. `valor` não existe em
+ * imunidade. Spec `2026-07-30-resistencia-e-formula.md`. */
+export interface LinhaDeResistencia {
+  tipo: string;
+  valor?: number;
+  origem: string;
+}
+
 /** Um bônus somado a um total, com o tipo que decide se ele empilha. */
 export interface BonusAplicado {
   tipo: unknown;
@@ -338,6 +346,9 @@ export interface Visao {
   escolhas_de_feat: unknown;
   focus_pool: number;
   ac: AC;
+  resistencias: LinhaDeResistencia[];
+  fraquezas: LinhaDeResistencia[];
+  imunidades: LinhaDeResistencia[];
   ataques: Ataque[];
   features: LinhaDeFeature[];
   concedidos: Concedido[];

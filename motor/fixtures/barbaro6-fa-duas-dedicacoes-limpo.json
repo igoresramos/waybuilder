@@ -1066,8 +1066,10 @@
     "motivo": "exige diplomacy >= trained; tem untrained; exige intimidation >= trained; tem untrained"
    }
   ],
+  "fraquezas": [],
   "heranca": "Battle-Ready Orc",
   "hp": 100,
+  "imunidades": [],
   "modificadores": {
    "cha": 0,
    "con": 3,
@@ -1267,6 +1269,7 @@
    "unarmored": "trained",
    "will": "expert"
   },
+  "resistencias": [],
   "salvas": {
    "fortitude": {
     "atributo": "con",

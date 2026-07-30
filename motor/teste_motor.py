@@ -1121,6 +1121,49 @@ checar(g5._melhor_por_tipo([(None, 1, "a"), (None, 1, "b")]) == 2,
        "bonus sem tipo (untyped) empilha com tudo, inclusive consigo -- RAW")
 
 
+print("\nresistencia, fraqueza, imunidade -- e o mini-avaliador de formula")
+# Spec: specs/2026-07-30-resistencia-e-formula.md (fatia 3.2 do plano, item 40).
+# `_resolver_valor` resolvia inteiro e `@actor.level`, e QUALQUER outra
+# expressao virava zero em silencio -- 68 das 233 resistencias sao formula.
+r8 = personagem(niveis((FIGHTER, 8)) + BOOSTS)
+r1 = personagem(niveis((FIGHTER, 1)))
+checar(r8._resolver_valor("floor(@actor.level/2)") == 4,
+       "floor(@actor.level/2) num personagem 8 da 4",
+       f"{r8._resolver_valor('floor(@actor.level/2)')}")
+checar(r8._resolver_valor("floor(@actor.level / 2)") == 4,
+       "e a mesma formula com espacos tambem")
+checar(r1._resolver_valor("max(1,floor(@actor.level/2))") == 1,
+       "max(1,floor(...)) num personagem 1 da 1, e nao 0",
+       f"{r1._resolver_valor('max(1,floor(@actor.level/2))')}")
+checar(r8._resolver_valor("3 + floor(@actor.level/2)") == 7,
+       "soma com floor tambem resolve")
+checar(r8._resolver_valor("@actor.abilities.str.mod") is None,
+       "expressao FORA da gramatica devolve None -- o motor nao chuta zero",
+       f"{r8._resolver_valor('@actor.abilities.str.mod')}")
+checar(r8._resolver_valor("2 + @armor.system.runes.potency") == 2,
+       "sem armadura a runa vale 0, entao 2 + potencia = 2")
+com_armadura = personagem(niveis((FIGHTER, 8)) + BOOSTS,
+                          inventario=[{"item": "wb:armor/chain-mail",
+                                       "equipado": True, "potencia": 1}])
+checar(com_armadura._resolver_valor("2 + @armor.system.runes.potency") == 3,
+       "com armadura +1, da 3",
+       f"{com_armadura._resolver_valor('2 + @armor.system.runes.potency')}")
+
+# a ficha ganha as tres listas
+v8 = r8.visao()
+checar(all(k in v8 for k in ("resistencias", "fraquezas", "imunidades")),
+       "a visao passa a ter resistencias, fraquezas e imunidades",
+       f"{[k for k in ('resistencias','fraquezas','imunidades') if k not in v8]}")
+
+# duas fontes do MESMO tipo nao somam -- vale a maior (regra do livro)
+checar(r8._melhor_resistencia([{"tipo": "fire", "valor": 5, "origem": "a"},
+                               {"tipo": "fire", "valor": 10, "origem": "b"}])
+       == [{"tipo": "fire", "valor": 10, "origem": "b"}],
+       "duas resistencias a fogo, 5 e 10, dao 10 -- nao 15")
+checar(len(r8._melhor_resistencia([{"tipo": "fire", "valor": 5, "origem": "a"},
+                                   {"tipo": "cold", "valor": 5, "origem": "b"}])) == 2,
+       "e tipos diferentes convivem")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

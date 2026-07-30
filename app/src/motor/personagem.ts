@@ -36,7 +36,8 @@ import { avaliar as avaliarPredicado, comparar } from "./predicado.ts";
 import type {
   AC, Ataque, Ator, AumentoDePericia, Candidato, Concedido, ConcessaoDeAtor,
   Conjuracao, Documento, ForaDoRequisito, LinhaDeFeature, FonteDeBoost, Rank,
-  BonusAplicado, DetalheDePericiaLivre, LinhaDePericia, OpcaoDeGrant,
+  BonusAplicado, DetalheDePericiaLivre, LinhaDePericia,
+  LinhaDeResistencia, OpcaoDeGrant,
   Registro, SlotAberto, SlotDeSubclasse, Visao,
 } from "./tipos.ts";
 import { ATRIBUTOS, RANKS } from "./tipos.ts";
@@ -134,6 +135,9 @@ export class Personagem implements ContextoDePredicado {
   pericias: LinhaDePericia[] = [];
   salvas: Record<string, LinhaDePericia> = {};
   bonus_ignorados: Record<string, number> = {};
+  resistencias: LinhaDeResistencia[] = [];
+  fraquezas: LinhaDeResistencia[] = [];
+  imunidades: LinhaDeResistencia[] = [];
   aumentos_de_pericia: number[] = [];
   aumentos_detalhe: AumentoDePericia[] = [];
 
@@ -214,6 +218,7 @@ export class Personagem implements ContextoDePredicado {
     this._defesa();
     this._ataques();
     this._pericias_e_salvas();
+    this._resistencias();
     this._checar_requisitos();
   }
 
@@ -983,12 +988,74 @@ export class Personagem implements ContextoDePredicado {
    * Regra 19: em texto de regra impresso, "your level" significa **nível de
    * personagem** -- e `@actor.level` é exatamente isso.
    */
-  private _resolver_valor(expressao: unknown): number {
+  /**
+   * Resolve a expressão do Foundry no valor deste personagem.
+   *
+   * Devolve `null` para o que estiver FORA da gramática. Antes devolvia zero, e
+   * zero é uma resposta: um `resistance` de `@actor.abilities.str.mod` saía como
+   * "resistência 0" em vez de "não sei calcular".
+   *
+   * A gramática INTEIRA que a base usa: inteiro, `@actor.level`,
+   * `@armor.system.runes.potency`, `+`, `/`, `floor()` e `max()`. Sem
+   * multiplicação, sem subtração, e o único aninhamento é `max(1, floor(...))`.
+   *
+   * Spec: `specs/2026-07-30-resistencia-e-formula.md`
+   */
+  private _resolver_valor(expressao: unknown): number | null {
+    if (typeof expressao === "boolean") return null;
     if (typeof expressao === "number") return Math.trunc(expressao);
-    const texto = (verdadeiro(expressao) ? String(expressao) : "").trim();
-    if (texto === "@actor.level" || texto === "@actor.details.level.value") return this.nivel;
-    if (/^[+-]?\d+$/.test(texto)) return Number.parseInt(texto, 10);
+    let texto = (verdadeiro(expressao) ? String(expressao) : "").trim();
+    if (!texto) return null;
+    texto = texto.replaceAll("@actor.details.level.value", String(this.nivel));
+    texto = texto.replaceAll("@actor.level", String(this.nivel));
+    if (texto.includes("@armor.system.runes.potency")) {
+      texto = texto.replaceAll("@armor.system.runes.potency",
+        String(this._potencia_de_armadura()));
+    }
+    if (!/^(?:floor|max|[\d\s+/(),])*$/.test(texto)) return null;
+    return this._reduzir(texto);
+  }
+
+  /** A runa de potência da armadura EQUIPADA, ou 0 sem armadura. */
+  private _potencia_de_armadura(): number {
+    for (const entrada of listaDe(this.doc["inventario"])) {
+      const e = dictDe(entrada);
+      if (!verdadeiro(e["equipado"])) continue;
+      const reg = dictDe(this.base.opcional(pyStr(e["item"])));
+      if (reg["kind"] !== "armor") continue;
+      return Math.max(inteiro(e["potencia"]), inteiro(dictDe(reg["runes"])["potency"]));
+    }
     return 0;
+  }
+
+  private _reduzir(bruto: string): number | null {
+    let texto = bruto.trim();
+    // reduz a função mais INTERNA primeiro, para `max(1, floor(x/2))` sair
+    let m = /(floor|max)\(([^()]*)\)/.exec(texto);
+    while (m) {
+      const args = m[2].split(",").map((a) => this._reduzir(a));
+      if (args.some((a) => a === null)) return null;
+      const nums = args as number[];
+      const valor = m[1] === "floor" ? nums[0] : Math.max(...nums);
+      texto = texto.slice(0, m.index) + String(valor) + texto.slice(m.index + m[0].length);
+      m = /(floor|max)\(([^()]*)\)/.exec(texto);
+    }
+    if (texto.includes("(") || texto.includes(")")) return null;
+    let total = 0;
+    for (const parcela of texto.split("+")) {
+      const limpa = parcela.trim();
+      if (!limpa) return null;
+      const partes = limpa.split("/").map((x) => Number.parseInt(x.trim(), 10));
+      if (partes.some((x) => Number.isNaN(x))) return null;
+      // divisão INTEIRA para baixo, que é o que `floor(a/b)` significa
+      let valor = partes[0];
+      for (const d of partes.slice(1)) {
+        if (d === 0) return null;
+        valor = Math.floor(valor / d);
+      }
+      total += valor;
+    }
+    return total;
   }
 
   // -- regras 12 e 14: slots de feat --------------------------------------
@@ -3392,6 +3459,89 @@ export class Personagem implements ContextoDePredicado {
     }
   }
 
+
+  // -- resistência, fraqueza e imunidade ------------------------------------
+
+  /**
+   * Duas fontes do MESMO tipo não somam -- vale a maior (regra do livro).
+   * Mesma forma do `_melhor_por_tipo` dos bônus, mas devolvendo as LINHAS,
+   * porque a ficha mostra a origem.
+   */
+  private _melhor_resistencia(lista: LinhaDeResistencia[]): LinhaDeResistencia[] {
+    const melhor = new Map<string, LinhaDeResistencia>();
+    for (const linha of lista) {
+      const t = String(linha.tipo);
+      const atual = melhor.get(t);
+      if (!atual || (linha.valor ?? 0) > (atual.valor ?? 0)) melhor.set(t, linha);
+    }
+    return ordenarPor([...melhor.values()], (x) => [String(x.tipo)]);
+  }
+
+  /**
+   * 233 `resistance`, 14 `immunity` e 11 `weakness` que a ficha ignorava.
+   * Spec: `specs/2026-07-30-resistencia-e-formula.md`
+   */
+  private _resistencias(): void {
+    const crus: Record<string, LinhaDeResistencia[]> = {
+      resistance: [], weakness: [], immunity: [],
+    };
+    const conta = (chave: string) => {
+      this.bonus_ignorados[chave] = (this.bonus_ignorados[chave] ?? 0) + 1;
+    };
+    const fontes: Array<[string, Dict]> = [];
+    for (const cid of this.ordem_de_classe) {
+      const c = dictDe(this.base.get(cid));
+      fontes.push([nomeOu(c, cid), c]);
+    }
+    for (const reg of [this.ancestria, this.heranca, this.background]) {
+      if (reg) fontes.push([pyStr(nome(reg)), dictDe(reg)]);
+    }
+    for (const f of this.features) fontes.push([pyStr(f["nome"]), dictDe(f)]);
+    for (const [i, feat] of this._feats_efetivos()) fontes.push([nomeOu(feat, i), feat]);
+    for (const entrada of listaDe(this.doc["inventario"])) {
+      const e = dictDe(entrada);
+      if (!verdadeiro(e["equipado"])) continue;
+      const reg = this.base.opcional(pyStr(e["item"]));
+      if (reg) fontes.push([pyStr(nome(reg)), dictDe(reg)]);
+    }
+    for (const [rotulo, reg] of fontes) {
+      for (const g of this._grants_de(reg)) {
+        const d = dictDe(g);
+        for (const chave of ["resistance", "weakness", "immunity"]) {
+          const bruto = d[chave];
+          if (bruto === undefined || bruto === null) continue;
+          // `tipo` é LISTA em 19 dos 258 (`Blast Resistance` protege de fire E
+          // sonic). Uma resistência a N tipos são N linhas; converter direto
+          // para texto escrevia `"['fire', 'sonic']"` na ficha.
+          const alvo = chave === "immunity" ? bruto : dictDe(bruto)["tipo"];
+          const tipos = Array.isArray(alvo) ? alvo.map((x) => pyStr(x)) : [pyStr(alvo)];
+          for (const tipo of tipos) {
+            if (tipo.includes("{")) { conta(`${chave} de tipo dinamico`); continue; }
+            if (tipo === "custom") { conta(`${chave} custom`); continue; }
+            if (chave === "immunity") {
+              crus[chave].push({ tipo, origem: rotulo });
+              continue;
+            }
+            const valor = this._resolver_valor(dictDe(bruto)["valor"]);
+            if (valor === null) { conta(`${chave} com formula fora da gramatica`); continue; }
+            crus[chave].push({ tipo, valor, origem: rotulo });
+          }
+        }
+      }
+    }
+    this.resistencias = this._melhor_resistencia(crus["resistance"]);
+    this.fraquezas = this._melhor_resistencia(crus["weakness"]);
+    // imunidade não tem valor: basta uma por tipo
+    const vistas = new Set<string>();
+    this.imunidades = [];
+    for (const linha of crus["immunity"]) {
+      if (vistas.has(linha.tipo)) continue;
+      vistas.add(linha.tipo);
+      this.imunidades.push(linha);
+    }
+    this.imunidades = ordenarPor(this.imunidades, (x) => [x.tipo]);
+  }
+
   /** A visão calculada. Cache, nunca fonte de verdade. */
   visao(): Visao {
     const classes: Record<string, number> = {};
@@ -3428,6 +3578,9 @@ export class Personagem implements ContextoDePredicado {
       escolhas_de_feat: this.escolhas_de_feat,
       focus_pool: this.focus_pool,
       ac: this.ac,
+      resistencias: this.resistencias,
+      fraquezas: this.fraquezas,
+      imunidades: this.imunidades,
       ataques: this.ataques,
       features: this.features,
       // o que a cadeia de grants entregou sem o jogador escolher. Fica em lista
