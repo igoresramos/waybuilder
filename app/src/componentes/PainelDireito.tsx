@@ -140,6 +140,28 @@ export function PainelDireito({
               <strong>{v.focus_pool}</strong>
               <span className="nome">Pontos de foco</span>
             </div>
+            {/* A divindade escolhida. Sem esta linha a escolha nao muda nada
+                VISIVEL, que era metade do defeito do item 98 -- a base tinha
+                488 divindades estruturadas e nenhum consumidor.
+                Spec: `specs/2026-07-30-divindade-na-ficha.md`. */}
+            {v.divindade && (
+              <div className="save deidade">
+                <span className="nome">{v.divindade.nome}</span>
+                <span className="origem">
+                  {[
+                    v.divindade.fonte_divina.length
+                      ? `fonte ${v.divindade.fonte_divina.join("/")}`
+                      : null,
+                    v.divindade.arma_favorita.length
+                      ? v.divindade.arma_favorita.map((a) => a.nome).join(", ")
+                      : null,
+                    v.divindade.dominios.length
+                      ? v.divindade.dominios.map((d) => d.nome).join(", ")
+                      : null,
+                  ].filter(Boolean).join("  -  ")}
+                </span>
+              </div>
+            )}
             {/* Velocidade por modo. A ficha do companheiro ja mostrava; a do
                 personagem nao tinha o numero -- spec `2026-07-30-velocidade.md`. */}
             {Object.entries(v.velocidade).map(([modo, pes]) => (

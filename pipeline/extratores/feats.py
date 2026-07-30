@@ -268,6 +268,11 @@ class Indices:
         self.arquetipo = {}      # chave -> slug
         self.tracos = set()
         self.ancestralidades = set()
+        # `chave(nome) -> slug`, para "worshipper of Lamashtu" e "deity who
+        # grants the cold domain". Vem do dump do AoN, nao da base: o extrator
+        # roda ANTES da base existir.
+        self.divindade = {}
+        self.dominio = {}
 
     def resolver(self, nome: str):
         k = chave(nome)
@@ -387,6 +392,41 @@ ATOR_RE = re.compile(
     r"(animal companion|companion|familiar|eidolon)$", re.I)
 TIPO_DO_ATOR = {"animal companion": "companheiro", "companion": "companheiro",
                 "familiar": "familiar", "eidolon": "eidolon"}
+
+# --------------------------------------------------------------------------
+# Divindade -- 38 clausulas de `requires_residuo` presas na mesma ausencia.
+# Cada expressao aqui saiu de LER as clausulas reais, nao de imaginar formas.
+# Spec: specs/2026-07-30-divindade-na-ficha.md
+# --------------------------------------------------------------------------
+
+# "you follow a deity", "worship a deity" -- generico, sem nome
+SEGUE_DIVINDADE_RE = re.compile(
+    r"^(?:you\s+)?(?:follow|worship|have)\s+(?:a|an)\s+"
+    r"(?:patron\s+)?deity$", re.I)
+# "can't have a patron deity"
+SEM_DIVINDADE_RE = re.compile(
+    r"^(?:you\s+)?(?:can'?t|cannot|don'?t)\s+have\s+(?:a|an)\s+"
+    r"(?:patron\s+)?deity$", re.I)
+# "worshipper of Lamashtu", "you worship Milani", "deity is Achaekek"
+DIVINDADE_NOME_RE = re.compile(
+    r"^(?:you\s+)?(?:worshipp?er\s+of|worshipp?s?\s+of|worships?|"
+    r"deity\s+is|follow(?:er\s+of)?)\s+(.+)$", re.I)
+# "not a worshipper of Walkena"
+NAO_ADORA_RE = re.compile(
+    r"^not\s+a\s+worshipp?er\s+of\s+(.+)$", re.I)
+# "healing font", "harmful font", "deity who grants heal divine font",
+# "worship a deity with a divine font that grants heal", "negative font"
+FONTE_RE = re.compile(
+    r"^(?:(?:you\s+)?worship\s+)?(?:a\s+)?(?:deity\s+(?:who|that|with a?)\s+"
+    r"(?:grants|divine font that grants)\s+)?"
+    r"(healing|harmful|heal|harm|positive|negative)\s+"
+    r"(?:divine\s+)?font$", re.I)
+FONTE_CANONICA = {"healing": "heal", "heal": "heal", "positive": "heal",
+                  "harmful": "harm", "harm": "harm", "negative": "harm"}
+# "deity who grants the cold, fire, nature, or travel domain" -- a lista de
+# dominios e quebrada antes de chegar aqui, entao o atomo ve um nome so.
+DOMINIO_RE = re.compile(
+    r"^(?:a\s+)?(?:deity\s+who\s+grants\s+)?(?:the\s+)?(.+?)\s+domain$", re.I)
 
 SENTIDO_RE = re.compile(
     r"^(?:the\s+)?(low-light vision|darkvision|greater darkvision|scent|"
@@ -676,6 +716,36 @@ class Parser:
         m = ATOR_RE.match(t)
         if m:
             return {"has_actor": TIPO_DO_ATOR[m.group(1).lower()]}
+
+        # d1c) divindade. A ordem importa: a FONTE vem antes do nome, porque
+        # "healing font" casaria como nome de divindade se testado depois.
+        m = FONTE_RE.match(t)
+        if m:
+            return {"deity_font": FONTE_CANONICA[m.group(1).lower()]}
+        if SEM_DIVINDADE_RE.match(t):
+            return {"has_deity": False}
+        if SEGUE_DIVINDADE_RE.match(t):
+            return {"has_deity": True}
+        m = NAO_ADORA_RE.match(t)
+        if m:
+            alvo = self.idx.divindade.get(chave(expandir(m.group(1), tags)))
+            if alvo:
+                return {"not": {"deity": "wb:deity/" + alvo}}
+        m = DIVINDADE_NOME_RE.match(t)
+        if m:
+            bruto = expandir(m.group(1), tags).strip()
+            # "worshipper of a specific deity" e instrucao de mesa, nao nome
+            alvos = [self.idx.divindade.get(chave(x))
+                     for x in _dividir_palavra(bruto, "or")]
+            alvos = [a for a in alvos if a]
+            if alvos and len(alvos) == len(_dividir_palavra(bruto, "or")):
+                ids = ["wb:deity/" + a for a in alvos]
+                return {"deity": ids[0] if len(ids) == 1 else ids}
+        m = DOMINIO_RE.match(t)
+        if m:
+            alvo = self.idx.dominio.get(chave(expandir(m.group(1), tags)))
+            if alvo:
+                return {"domain": "wb:domain/" + alvo}
 
         # d2) "<X> heritage" / "<X> trait"
         m = HERANCA_RE.match(t)
@@ -1286,6 +1356,13 @@ def extrair():
             if os.path.isdir(os.path.join(raiz_arq, d)):
                 dirs_arq.add(d)
                 idx.arquetipo.setdefault(chave(d.replace("-", " ")), d)
+
+    for arquivo, destino in (("aon_dump/deity.json", idx.divindade),
+                            ("aon_dump/domain.json", idx.dominio)):
+        for d in carregar_aon(arquivo):
+            nome = str((d or {}).get("name") or "").strip()
+            if nome and chave(nome):
+                destino.setdefault(chave(nome), slug(nome))
 
     for r in foundry:
         for t in r["traits"]:

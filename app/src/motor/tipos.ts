@@ -340,6 +340,23 @@ export interface AumentoDePericia {
 }
 
 /** A visao calculada. Cache, nunca fonte de verdade. */
+/**
+ * A divindade na ficha. `dominios` e `arma_favorita` guardam id NA BASE, e a
+ * tela mostra nome -- por isso o par `{id, nome}` em vez do id cru.
+ * Spec: specs/2026-07-30-divindade-na-ficha.md
+ */
+export interface VisaoDeDivindade {
+  id: string;
+  nome: string;
+  /** `heal`, `harm`, ou as duas (137 das 479 divindades permitem escolher) */
+  fonte_divina: string[];
+  atributo_divino: string[];
+  dominios: Array<{ id: string; nome: string }>;
+  dominios_alternativos: Array<{ id: string; nome: string }>;
+  arma_favorita: Array<{ id: string; nome: string }>;
+  santificacao: string | null;
+}
+
 export interface Visao {
   nivel: number;
   classes: Record<string, number>;
@@ -365,6 +382,8 @@ export interface Visao {
   concessoes_de_ator: ConcessaoDeAtor[];
   escolhas_de_feat: unknown;
   focus_pool: number;
+  /** a divindade escolhida, com dominio e arma favorita ja resolvidos por nome */
+  divindade: VisaoDeDivindade | null;
   ac: AC;
   /** por modo: `{land: 25, fly: 30}`. Spec `2026-07-30-velocidade.md` */
   velocidade: Record<string, number>;

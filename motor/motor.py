@@ -2615,6 +2615,112 @@ class Personagem:
             return True, ""
         return False, f"exige ter {tipo}"
 
+    # -- divindade ----------------------------------------------------------
+    #
+    # A base tinha 488 divindades com `divine_font`, `domains`, `favored_weapon`
+    # e `divine_attribute` estruturados e NENHUM consumidor -- `deity` nao
+    # aparecia uma vez aqui. Sao 38 clausulas de `requires_residuo` presas na
+    # mesma ausencia. Spec: specs/2026-07-30-divindade-na-ficha.md
+
+    def divindade(self) -> dict | None:
+        """O registro da divindade escolhida, ou `None`.
+
+        A escolha entra pelo eixo `deity`, que so existe nas classes que a
+        exigem -- entao um Guerreiro responde `None` sem que isso seja falha.
+        """
+        for bloco in self.slots_de_subclasse:
+            if bloco.get("eixo") == "deity" and bloco.get("escolhido"):
+                return self.base.opcional(bloco["escolhido"])
+        return None
+
+    def _divindade_da_ficha(self) -> dict | None:
+        """O que a ficha mostra da divindade escolhida.
+
+        Nome resolvido dos dominios e da arma favorita, porque `domains` e
+        `favored_weapon` guardam id e a tela mostra nome.
+        """
+        d = self.divindade()
+        if d is None:
+            return None
+        def nomes(ids):
+            return [{"id": i, "nome": (self.base.opcional(i) or {}).get("name", i)}
+                    for i in (ids or [])]
+        dominios = d.get("domains") or {}
+        return {
+            "id": d["id"],
+            "nome": d.get("name"),
+            "fonte_divina": [str(f).lower() for f in (d.get("divine_font") or [])],
+            "atributo_divino": [str(a).lower() for a in (d.get("divine_attribute") or [])],
+            "dominios": nomes(dominios.get("primary")),
+            "dominios_alternativos": nomes(dominios.get("alternate")),
+            "arma_favorita": nomes(d.get("favored_weapon")),
+            "santificacao": d.get("sanctification"),
+        }
+
+    def _termo_has_deity(self, valor) -> tuple[bool, str]:
+        """`{"has_deity": true}` -- "you follow a deity" / "can't have one"."""
+        quer = bool(valor)
+        tem = self.divindade() is not None
+        if tem == quer:
+            return True, ""
+        return False, ("exige seguir uma divindade" if quer
+                       else "exige NAO seguir divindade")
+
+    def _termo_deity(self, valor) -> tuple[bool, str]:
+        """`{"deity": "wb:deity/lamashtu"}` -- adora esta (ou uma da lista)?"""
+        alvos = valor if isinstance(valor, list) else [valor]
+        alvos = {self.base.resolver(str(a)) for a in alvos}
+        d = self.divindade()
+        if d and self.base.resolver(d["id"]) in alvos:
+            return True, ""
+        nomes = ", ".join(sorted((self.base.opcional(a) or {}).get("name", str(a))
+                                 for a in alvos))
+        return False, (f"exige adorar {nomes}; "
+                       f"tem {(d or {}).get('name', 'nenhuma divindade')}")
+
+    def _termo_deity_font(self, valor) -> tuple[bool, str]:
+        """`{"deity_font": "heal"}` -- a divindade concede esta fonte divina?
+
+        A SUB-ESCOLHA da fonte nao esta modelada, e para 137 das 479 divindades
+        com fonte declarada as duas sao permitidas. Nessas o motor NAO reprova:
+        ele nao sabe qual o jogador pegou, e recusar seria afirmar o que nao se
+        sabe. Para as 342 que so permitem uma, a resposta e certa.
+        """
+        alvo = str(valor or "").lower()
+        d = self.divindade()
+        if d is None:
+            return False, f"exige fonte divina {alvo}; nao segue divindade"
+        fontes = [str(f).lower() for f in (d.get("divine_font") or [])]
+        if alvo in fontes:
+            return True, ""
+        if not fontes:
+            # principio zero: a fonte nao esta declarada na divindade
+            return True, ""
+        return False, (f"exige fonte divina {alvo}; {d.get('name')} concede "
+                       f"{', '.join(fontes)}")
+
+    def _termo_domain(self, valor) -> tuple[bool, str]:
+        """`{"domain": "wb:domain/death"}` -- a divindade concede o dominio?
+
+        Vale primary e alternate: as duas listas sao dominios que a divindade
+        oferece, e o pre-requisito fala do que ela concede, nao do que o
+        Clerigo ja gastou.
+        """
+        alvos = valor if isinstance(valor, list) else [valor]
+        alvos = {self.base.resolver(str(a)) for a in alvos}
+        d = self.divindade()
+        if d is None:
+            return False, "exige dominio de divindade; nao segue divindade"
+        dominios = d.get("domains") or {}
+        meus = {self.base.resolver(str(x))
+                for chave in ("primary", "alternate")
+                for x in (dominios.get(chave) or [])}
+        if alvos & meus:
+            return True, ""
+        nomes = ", ".join(sorted((self.base.opcional(a) or {}).get("name", str(a))
+                                 for a in alvos))
+        return False, f"exige dominio {nomes}; {d.get('name')} nao o concede"
+
     def _termo_trait(self, valor) -> tuple[bool, str]:
         alvos = valor if isinstance(valor, list) else [valor]
         meus = set()
@@ -3805,6 +3911,9 @@ class Personagem:
             "concessoes_de_ator": self.concessoes_de_ator,
             "escolhas_de_feat": self.escolhas_de_feat,
             "focus_pool": self.focus_pool,
+            # sem isto a escolha de divindade nao muda nada VISIVEL, que e
+            # metade do defeito do item 98
+            "divindade": self._divindade_da_ficha(),
             "ac": self.ac,
             "velocidade": self.velocidade,
             "velocidade_detalhe": self.velocidade_detalhe,

@@ -86,9 +86,9 @@
    "ficha": "campeao6-alquimista4-fa-nivel10",
    "nivel": 10,
    "hp": 132,
-   "avisos": 6,
+   "avisos": 7,
    "fora_do_requisito": 1,
-   "slots_abertos": 10
+   "slots_abertos": 11
   },
   {
    "ficha": "feiticeiro5-fa-diabolico",
@@ -102,9 +102,9 @@
    "ficha": "guerreiro2-clerigo2-fa",
    "nivel": 4,
    "hp": 48,
-   "avisos": 2,
+   "avisos": 3,
    "fora_do_requisito": 0,
-   "slots_abertos": 4
+   "slots_abertos": 5
   },
   {
    "ficha": "guerreiro3-mago2",

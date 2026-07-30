@@ -1670,6 +1670,65 @@ sem_escolha = personagem(
 checar(not atende(sem_escolha, PELE),
        "e quem NAO escolheu instinto nao atende requisito de instinto")
 
+# --------------------------------------------------------------------------
+# Divindade -- 488 registros estruturados que nenhum consumidor lia.
+# Spec: specs/2026-07-30-divindade-na-ficha.md
+# --------------------------------------------------------------------------
+print("\n-- divindade na ficha --")
+
+def clerigo(deity=None):
+    esc = ([{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+            {"em": "criacao", "slot": "background", "pega": "wb:background/warrior"}]
+           + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/cleric"}
+              for n in range(1, 4)]
+           + [{"em": 1, "slot": "subclasse",
+               "pega": "wb:class-feature/cloistered-cleric"}])
+    if deity:
+        esc.append({"em": 1, "slot": "subclasse", "pega": deity})
+    return personagem(esc)
+
+def julga(p, fid):
+    return p.avaliar((BASE.opcional(fid) or {}).get("requires"))[0]
+
+sem_deus = clerigo()
+checar(any("falta escolher `deity`" in a for a in sem_deus.avisos),
+       "Clerigo sem divindade acusa o slot aberto")
+checar(sem_deus.visao()["divindade"] is None,
+       "e a ficha nao inventa divindade nenhuma")
+
+# Pharasma so concede `heal`: a resposta e CERTA nos dois sentidos
+pharasma = clerigo("wb:deity/pharasma")
+checar(pharasma.visao()["divindade"]["nome"] == "Pharasma",
+       "escolhida a divindade, a ficha mostra qual")
+checar(pharasma.visao()["divindade"]["fonte_divina"] == ["heal"],
+       "com a fonte divina que ela concede")
+checar(julga(pharasma, "wb:feat/healing-hands"),
+       "Healing Hands atende com divindade de fonte `heal`")
+checar(not julga(pharasma, "wb:feat/harming-hands"),
+       "e Harming Hands NAO atende -- Pharasma nao concede `harm`")
+checar(not julga(pharasma, "wb:feat/chosen-of-lamashtu"),
+       "feat de divindade nomeada reprova quem adora outra")
+checar("Death" in [d["nome"] for d in pharasma.visao()["divindade"]["dominios"]],
+       "e os dominios saem resolvidos por nome, nao por id")
+
+# Aakriti permite as DUAS: a sub-escolha nao esta modelada, entao o motor nao
+# reprova nenhuma das duas -- principio zero, e nao afrouxamento.
+aakriti = clerigo("wb:deity/aakriti")
+checar(julga(aakriti, "wb:feat/healing-hands")
+       and julga(aakriti, "wb:feat/harming-hands"),
+       "divindade que permite as duas fontes nao reprova nenhum dos dois feats")
+
+checar(julga(clerigo("wb:deity/lamashtu"), "wb:feat/false-faith") is False,
+       "e a divindade nomeada errada segue reprovando (False Faith exige Droskar)")
+
+# `has_deity` nos dois sentidos
+guerreiro = personagem(
+    [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+    + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/fighter"}
+       for n in range(1, 8)])
+checar(not julga(guerreiro, "wb:feat/battle-prayer"),
+       "quem nao segue divindade nao atende `you follow a deity`")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

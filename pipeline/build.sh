@@ -169,6 +169,11 @@ echo "== 7e. mecanica de dedicacao derivada da prosa oficial =="
 # (passo 5) e nao deve enriquecer registro que a fusao vai absorver (passo 7).
 python3 derivar_mecanica_dedicacao.py
 
+echo "== 7e1. eixo de divindade nas classes que a exigem =="
+# Depois da fusao e dos aliases: as opcoes sao os ids CANONICOS das 488
+# divindades, e emitir antes pegaria id que a fusao ainda ia aposentar.
+python3 derivar_escolha_de_divindade.py
+
 echo "== 7e2. categoria de feat que sobrou vazia =="
 # Roda TARDE de proposito: 8 dos 164 feats sem categoria nascem em
 # `desmembrar_colisoes.py`, depois do extrator, e so um passo sobre a base

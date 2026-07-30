@@ -335,7 +335,7 @@
    "wb:feat/pactbinder-dedication",
    "wb:feat/pathfinder-agent-dedication",
    "wb:feat/reanimator-dedication",
-   "wb:feat/red-mantis-assassin-dedication"
+   "wb:feat/sanguimancer-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/aldori-duelist-dedication",
@@ -377,7 +377,7 @@
    "wb:feat/pactbinder-dedication",
    "wb:feat/pathfinder-agent-dedication",
    "wb:feat/reanimator-dedication",
-   "wb:feat/red-mantis-assassin-dedication"
+   "wb:feat/sanguimancer-dedication"
   ],
   "general_feat@1": [
    "wb:feat/additional-lore",
@@ -1094,6 +1094,7 @@
    }
   ],
   "conjuracao": [],
+  "divindade": null,
   "escolhas_de_feat": [],
   "features": [
    {

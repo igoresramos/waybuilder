@@ -39,6 +39,7 @@ import type {
   BonusAplicado, DetalheDePericiaLivre, LinhaDePericia,
   LinhaDeResistencia, OpcaoDeGrant,
   Registro, SlotAberto, SlotConcedido, SlotDeSubclasse, Visao,
+  VisaoDeDivindade,
 } from "./tipos.ts";
 import { ATRIBUTOS, RANKS } from "./tipos.ts";
 import {
@@ -2351,6 +2352,10 @@ export class Personagem implements ContextoDePredicado {
       case "sense": return this._termo_sense(valor);
       case "focus_pool": return this._termo_focus_pool(valor);
       case "has_actor": return this._termo_has_actor(valor);
+      case "has_deity": return this._termo_has_deity(valor);
+      case "deity": return this._termo_deity(valor);
+      case "deity_font": return this._termo_deity_font(valor);
+      case "domain": return this._termo_domain(valor);
       case "spellcasting_tradition": return this._termo_spellcasting_tradition(valor);
       default: return null;
     }
@@ -2802,6 +2807,105 @@ export class Personagem implements ContextoDePredicado {
     const tipo = String(valor ?? "").toLowerCase();
     if (this.concessoes_de_ator.some((c) => c.tipo === tipo)) return [true, ""];
     return [false, `exige ter ${tipo}`];
+  }
+
+  // -- divindade ----------------------------------------------------------
+  // Espelha `_termo_has_deity`/`_termo_deity`/`_termo_deity_font`/`_termo_domain`
+  // do Python. Spec: specs/2026-07-30-divindade-na-ficha.md
+
+  /** O registro da divindade escolhida, ou `null`. */
+  divindade(): Registro | null {
+    for (const bloco of this.slots_de_subclasse) {
+      if (bloco.eixo === "deity" && bloco.escolhido) {
+        return this.base.opcional(bloco.escolhido);
+      }
+    }
+    return null;
+  }
+
+  /** O que a ficha mostra da divindade: nome resolvido de dominio e arma. */
+  private _divindade_da_ficha(): VisaoDeDivindade | null {
+    const d = this.divindade();
+    if (d === null) return null;
+    const nomes = (ids: unknown): { id: string; nome: string }[] =>
+      (ehLista(ids) ? ids : []).map((i) => ({
+        id: String(i),
+        nome: nomeOu(this.base.opcional(String(i)), String(i)),
+      }));
+    const dominios = dictDe(d["domains"]);
+    const minusculas = (v: unknown) =>
+      (ehLista(v) ? v : []).map((x) => String(x).toLowerCase());
+    return {
+      id: String(d["id"]),
+      nome: nomeOu(d, ""),
+      fonte_divina: minusculas(d["divine_font"]),
+      atributo_divino: minusculas(d["divine_attribute"]),
+      dominios: nomes(dominios["primary"]),
+      dominios_alternativos: nomes(dominios["alternate"]),
+      arma_favorita: nomes(d["favored_weapon"]),
+      santificacao: (d["sanctification"] ?? null) as string | null,
+    };
+  }
+
+  private _termo_has_deity(valor: unknown): ResultadoDeTermo {
+    const quer = Boolean(valor);
+    const tem = this.divindade() !== null;
+    if (tem === quer) return [true, ""];
+    return [false, quer ? "exige seguir uma divindade"
+                        : "exige NAO seguir divindade"];
+  }
+
+  private _termo_deity(valor: unknown): ResultadoDeTermo {
+    const crus = ehLista(valor) ? valor : [valor];
+    const alvos = new Set(crus.map((a) => this.base.resolver(String(a)) as string));
+    const d = this.divindade();
+    if (d && alvos.has(this.base.resolver(String(d["id"])) as string)) return [true, ""];
+    const nomes = [...alvos]
+      .map((a) => nomeOu(this.base.opcional(String(a)), String(a)))
+      .sort().join(", ");
+    return [false, `exige adorar ${nomes}; `
+                   + `tem ${d ? nomeOu(d, "") : "nenhuma divindade"}`];
+  }
+
+  /**
+   * A SUB-ESCOLHA da fonte nao esta modelada, e 137 das 479 divindades com
+   * fonte declarada permitem as duas. Nessas o motor NAO reprova -- principio
+   * zero: ele nao sabe qual o jogador pegou.
+   */
+  private _termo_deity_font(valor: unknown): ResultadoDeTermo {
+    const alvo = String(valor ?? "").toLowerCase();
+    const d = this.divindade();
+    if (d === null) {
+      return [false, `exige fonte divina ${alvo}; nao segue divindade`];
+    }
+    const cru = d["divine_font"];
+    const fontes = (ehLista(cru) ? cru : []).map((f) => String(f).toLowerCase());
+    if (fontes.includes(alvo)) return [true, ""];
+    if (fontes.length === 0) return [true, ""];
+    return [false, `exige fonte divina ${alvo}; ${nomeOu(d, "")} concede `
+                   + `${fontes.join(", ")}`];
+  }
+
+  private _termo_domain(valor: unknown): ResultadoDeTermo {
+    const crus = ehLista(valor) ? valor : [valor];
+    const alvos = new Set(crus.map((a) => this.base.resolver(String(a)) as string));
+    const d = this.divindade();
+    if (d === null) {
+      return [false, "exige dominio de divindade; nao segue divindade"];
+    }
+    const dominios = dictDe(d["domains"]);
+    const meus = new Set<string>();
+    for (const chave of ["primary", "alternate"]) {
+      const lista = dominios[chave];
+      for (const x of (ehLista(lista) ? lista : [])) {
+        meus.add(this.base.resolver(String(x)) as string);
+      }
+    }
+    for (const a of alvos) if (meus.has(a)) return [true, ""];
+    const nomes = [...alvos]
+      .map((a) => nomeOu(this.base.opcional(String(a)), String(a)))
+      .sort().join(", ");
+    return [false, `exige dominio ${nomes}; ${nomeOu(d, "")} nao o concede`];
   }
 
   private _termo_trait(valor: unknown): ResultadoDeTermo {
@@ -4054,6 +4158,9 @@ export class Personagem implements ContextoDePredicado {
       concessoes_de_ator: this.concessoes_de_ator,
       escolhas_de_feat: this.escolhas_de_feat,
       focus_pool: this.focus_pool,
+      // sem isto a escolha de divindade nao muda nada VISIVEL, que e metade
+      // do defeito do item 98
+      divindade: this._divindade_da_ficha(),
       ac: this.ac,
       velocidade: this.velocidade,
       velocidade_detalhe: this.velocidade_detalhe,

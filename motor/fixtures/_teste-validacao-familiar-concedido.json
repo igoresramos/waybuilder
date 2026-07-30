@@ -334,8 +334,8 @@
    "wb:feat/pathfinder-agent-dedication",
    "wb:feat/psychic-dedication",
    "wb:feat/reanimator-dedication",
-   "wb:feat/red-mantis-assassin-dedication",
-   "wb:feat/sanguimancer-dedication"
+   "wb:feat/sanguimancer-dedication",
+   "wb:feat/seneschal-witch-dedication"
   ],
   "free_archetype@4": [
    "wb:feat/alchemist-dedication",
@@ -376,8 +376,8 @@
    "wb:feat/pathfinder-agent-dedication",
    "wb:feat/psychic-dedication",
    "wb:feat/reanimator-dedication",
-   "wb:feat/red-mantis-assassin-dedication",
-   "wb:feat/sanguimancer-dedication"
+   "wb:feat/sanguimancer-dedication",
+   "wb:feat/seneschal-witch-dedication"
   ],
   "general_feat@1": [
    "wb:feat/additional-lore",
@@ -913,6 +913,7 @@
     "truques": 5
    }
   ],
+  "divindade": null,
   "escolhas_de_feat": [],
   "features": [
    {

@@ -4,7 +4,7 @@ A fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao reescre
 
 - ids orfaos encontrados: **48**
 - resolvidos por alias: **46**
-- registros com `requires` reescrito: **46**
+- registros com `requires` reescrito: **47**
 - registros com opcao repetida removida: **3**
 - sem alias (intocados): **2**
 
@@ -32,7 +32,7 @@ A fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao reescre
 | `wb:feat/grippli-weapon-familiarity` | `wb:feat/tripkee-weapon-familiarity` | 2 |
 | `wb:feat/hellknight-armiger-dedication` | `wb:feat/hellknight-dedication` | 6 |
 | `wb:feat/hellknight-signifer-dedication` | `wb:feat/hellknight-signifer-preferment` | 5 |
-| `wb:feat/ki-strike` | `wb:feat/qi-spells` | 1 |
+| `wb:feat/ki-strike` | `wb:feat/qi-spells` | 2 |
 | `wb:feat/sharp-fangs` | `wb:feat/iruxi-armaments` | 1 |
 | `wb:feat/shining-oath` | `wb:feat/oath-of-the-slayer` | 1 |
 | `wb:feat/skillful-tail-ganzi` | `wb:feat/skillful-tail` | 2 |

@@ -129,7 +129,6 @@
   ],
   "class_feat@1": [
    "wb:feat/ancestral-blood-magic",
-   "wb:feat/blessed-blood-sorcerer",
    "wb:feat/blood-rising",
    "wb:feat/counterspell-spontaneous",
    "wb:feat/dangerous-sorcery",
@@ -137,6 +136,7 @@
    "wb:feat/reach-spell",
    "wb:feat/tap-into-blood",
    "wb:feat/widen-spell",
+   "wb:feat/blessed-blood-sorcerer",
    "wb:feat/acrobat-dedication",
    "wb:feat/agent-of-all-holds",
    "wb:feat/alchemist-dedication",
@@ -171,7 +171,6 @@
   ],
   "class_feat@2": [
    "wb:feat/ancestral-blood-magic",
-   "wb:feat/blessed-blood-sorcerer",
    "wb:feat/blood-rising",
    "wb:feat/counterspell-spontaneous",
    "wb:feat/dangerous-sorcery",
@@ -209,11 +208,11 @@
    "wb:feat/hellknight-dedication",
    "wb:feat/kineticist-dedication",
    "wb:feat/kitharodian-actor-dedication",
-   "wb:feat/linguist-dedication"
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication"
   ],
   "class_feat@4": [
    "wb:feat/ancestral-blood-magic",
-   "wb:feat/blessed-blood-sorcerer",
    "wb:feat/blood-rising",
    "wb:feat/counterspell-spontaneous",
    "wb:feat/dangerous-sorcery",
@@ -251,7 +250,8 @@
    "wb:feat/hellknight-dedication",
    "wb:feat/kineticist-dedication",
    "wb:feat/kitharodian-actor-dedication",
-   "wb:feat/linguist-dedication"
+   "wb:feat/linguist-dedication",
+   "wb:feat/lion-blade-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
@@ -991,6 +991,7 @@
     "truques": 5
    }
   ],
+  "divindade": null,
   "escolhas_de_feat": [],
   "features": [
    {
