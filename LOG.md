@@ -4,6 +4,72 @@ project: waybuilder
 
 # LOG -- Waybuilder
 
+## 2026-07-30
+
+### Sessao | 11:00-13:30 | seis itens, e a comparacao achando o que a leitura nao acha | igor + claude-code
+
+Sessao autonoma, sem parada. A ordem foi a do plano
+(`docs/planos/2026-07-29-backlog-completo.md`), e o padrao do dia se repetiu
+tanto que virou o resumo: **a coisa que estava errada quase nunca era a que o
+item dizia.**
+
+- **Item 59** -- 8.360 registros (42% da base) nao emitiam `grants_completos`.
+  Oito kinds de tres extratores, e nenhum precisava de dado novo: os tres ja
+  computavam a resposta e a jogavam fora dentro do `mechanized` da v1.
+  `taticas_kits.py` nem estava no laco do `build.sh` -- a saida em disco era de
+  27/07 e envelheceu em silencio. **O numero que importa nao e o total: e
+  `class-feature` com 608 `false`, 72% do kind**, que agora diz com marca no
+  registro o que o item 40 vinha dizendo em prosa.
+- **Item 78** -- a tradicao de conjuracao. Dois achados que nao estavam no item:
+  a fonte tem o dado ESTRUTURADO (`tradition: ["Occult"]`, 27/28 bloodline,
+  27/27 patron, 13/13 eidolon), e **o registro que o jogador PEGA nao e o que
+  tem a tradicao** -- o eixo oferece a `class-feature`, que sai com
+  `xref.aon: None`. Dois catalogos paralelos, entao entrou um passo que leva o
+  campo para a opcao viva, com trava pela classe dona (`psychopomp` existe como
+  bloodline E como eidolon). Casar por NOME dava `arcane` ao Draconic -- a
+  tradicao da versao LEGADA.
+- **Itens 75a/75b + 95** -- `weapon_proficiency` nunca foi lido: `grep` dava um
+  hit, dentro de um docstring. 91 ocorrencias, 28 formas gramaticais. E
+  `weapon:*` era LETRA MORTA: um Guerreiro expert em tres categorias respondia
+  untrained, e cinco feats eram inalcancaveis por qualquer personagem.
+- **Item 72 (parte 1)** -- o total de pericia NAO EXISTIA no motor: era
+  calculado em `PainelDireito.tsx:94`. Numero que nasce em React nao tem
+  oraculo, nao tem paridade e nao tem onde receber `flat_modifier`. Era essa a
+  causa de os 462 bonus incondicionais nunca chegarem na ficha.
+- **Fatia 3.2 + velocidade** -- resistencia/fraqueza/imunidade (258 grants que a
+  ficha ignorava) e Velocidade, que a ficha do COMPANHEIRO tinha e a do
+  personagem nao. Junto saiu um defeito velho: `_resolver_valor` devolvia ZERO
+  para qualquer expressao que nao fosse inteiro ou `@actor.level` -- 68 das 233
+  resistencias sao formula. Virou mini-avaliador da gramatica medida, e o que
+  esta fora devolve `None`, nao zero.
+- **Fatias 3.3 e 3.6 medidas e decididas FORA** -- ItemAlteration e 86,5%
+  cosmetico (`other-tags`, `description`, `name`, `traits`); RollOption nao
+  produz numero, produz estado de rolagem, e o app nao rola dado.
+- **Item 84, 3a rodada** -- e aqui a comparacao pagou o investimento. Terreno
+  novo (ancestry feat, niveis 12/16/20, skill feat fora do Guerreiro) e achou o
+  **defeito mais grave do dia**: `has` de class-feature era SEMPRE falso em
+  `candidatos()`, porque a guarda de auto-satisfacao comparava `None != None`.
+  139 clausulas em 135 registros -- um Magus nunca podia pegar feat de
+  Spellstrike. Nenhuma leitura de codigo tinha achado isso em tres sessoes.
+
+**O que eu errei, e o que pegou:**
+
+- Reconstrui a opcao de ChoiceSet como `{rotulo, valor}` porque medi as chaves
+  que eu ESPERAVA; 56 das 570 tambem tem `grants`. Quem pegou foi o teste de
+  paridade.
+- Converti `tipo` de resistencia com `str()` cego e escrevi `"['fire',
+  'sonic']"` na ficha do campeao. Quem pegou foi o diff do fixture -- os 122
+  testes passavam com o defeito dentro.
+- Usei `git stash` para saber se um vermelho era pre-existente e o `pop` travou
+  num `.pyc` TRACKED; depois usei `push -f` no master para consertar um commit
+  meu de 30 segundos antes. As duas viraram licao; a segunda nao devia ter
+  acontecido.
+- `npm run build` estava QUEBRADO no HEAD desde ontem, com tres erros de tipo
+  que `npx tsc --noEmit` nao pega. A licao ja estava escrita e eu repeti.
+
+Quatro camadas verdes ao fim de cada commit. TODO: 31 -> 28 abertos (3 fechados,
+4 parcialmente). 12 commits, todos empurrados.
+
 ## 2026-07-29
 
 ### Sessao | 17:00-18:00 | tres termos de predicado, e um "nao" que e resposta | igor + claude-code
