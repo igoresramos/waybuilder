@@ -1061,3 +1061,41 @@ percorre as REFERENCIAS do projeto, e e nele que o app de verdade e checado.
 edicao; o primeiro e o que diz se o app compila. E o mesmo padrao de "verde
 sobre uma medicao que nao mede o que interessa" que ja apareceu nos portoes e no
 verificar-eixos: a checagem barata passa, e a que importa nao foi rodada.
+
+## Passo que ENRIQUECE roda depois de quem DERIVA -- e a invariante fica velha
+
+`mechanized == bool(grants)` e derivado uma vez, no reconciliador (passo 2 do
+build). Tres passos posteriores -- `derivar_mecanica_dedicacao` (7e),
+`derivar_concessao_de_ator` (7f) e `derivar_spellcasting_arquetipo` (7g) --
+APPENDAM em `grants` e nenhum refazia a conta. Resultado: 26 registros com
+`grants` cheio e `mechanized: false`.
+
+Nao foi um esquecimento, foram TRES, escritos em dias diferentes. Isso descarta
+"falta de atencao" como causa: o desenho e que convida ao erro, porque o campo
+derivado mora a sete passos de distancia de quem o invalida.
+
+**Como aplicar:** quando um campo e derivado de outro, todo passo que escreve na
+origem precisa refazer o destino -- e a unica coisa que garante isso e um teste
+de invariante sobre o artefato final, nao a disciplina de quem escreve o passo.
+Aqui quem achou os tres foi `test_mechanized_e_derivado_de_grants`, rodando
+sobre `base/index.json`. Antes de adicionar um passo novo ao `build.sh`, olhar
+que invariantes o artefato ja carrega.
+
+## `git stash` para testar o HEAD e uma armadilha neste repo
+
+Quis saber se dois testes vermelhos eram meus ou pre-existentes e fiz `git stash`
+para rodar a suite no HEAD limpo. O `stash pop` falhou duas vezes: primeiro por
+um `.pyc` TRACKED (ha 3 em `pipeline/__pycache__/`), depois pelo `.claude.json`
+da raiz, que o hook de auto-save reescreve o tempo todo. O trabalho ficou preso
+no stash com a arvore revertida.
+
+Recuperado com `git checkout stash@{0} -- <caminho do projeto>`, que traz so os
+caminhos que interessam e ignora os arquivos em disputa. Mas esse comando deixa
+tudo STAGED, e o commit seguinte engoliu dois consertos independentes numa
+mensagem so -- corrigido com `git reset --soft HEAD~1` + `git reset`.
+
+**Como aplicar:** para saber se um vermelho e pre-existente, `git stash` nao e o
+caminho neste repo (Tartarus tem auto-save escrevendo na raiz). Use
+`git worktree add` num diretorio temporario, ou rode a suite contra
+`git show HEAD:<arquivo>`. E depois de qualquer `git checkout <ref> -- <path>`,
+conferir o INDICE antes de commitar: ele nao esta vazio.
