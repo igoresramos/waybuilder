@@ -1069,6 +1069,7 @@
   ],
   "concessoes_de_ator": [
    {
+    "adicional": false,
     "classe": "wb:class/ranger",
     "em": 1,
     "escolhe": "animal-companion",
@@ -1080,6 +1081,7 @@
     "tipo": "companheiro"
    },
    {
+    "adicional": true,
     "classe": "wb:class/ranger",
     "em": 2,
     "escolhe": "animal-companion",

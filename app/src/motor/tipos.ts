@@ -192,6 +192,9 @@ export interface ConcessaoDeAtor {
   classe: string | null;
   preenchida: boolean;
   escolhido: string | null;
+  /** a prosa do proprio registro declara conceder um ator ADICIONAL (6 dos 30
+   *  concessores). Ver `specs/2026-07-30-segundo-ator.md`. */
+  adicional: boolean;
 }
 
 export interface FonteDeBoost {

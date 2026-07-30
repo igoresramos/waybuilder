@@ -228,8 +228,13 @@ def main() -> int:
         if any("grant_actor" in g for g in (reg.get("grants") or [])
                if isinstance(g, dict)):
             continue
-        reg.setdefault("grants", []).append(
-            {"grant_actor": {"tipo": tipo, "escolhe": escolhe}})
+        # a prosa vale AQUI tambem: `Familiar (Witch)` chega pela progressao,
+        # que nao passa por regex, mas o texto dele diz "additional familiar" --
+        # o mesmo dado nao pode responder diferente conforme a rota.
+        ga = {"tipo": tipo, "escolhe": escolhe}
+        if P_ADICIONAL.search(corpo(prosa.get(reg.get("text") or "", ""))):
+            ga["adicional"] = True
+        reg.setdefault("grants", []).append({"grant_actor": ga})
         prov = reg.setdefault("prov", {})
         prov["grants.grant_actor"] = f"derivado:progressao-{tipo}"
         prov.setdefault("grants", f"derivado:progressao-{tipo}")

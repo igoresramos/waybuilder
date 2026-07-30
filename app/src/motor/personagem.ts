@@ -1730,6 +1730,11 @@ export class Personagem implements ContextoDePredicado {
         opcoes: listaDe(ga["opcoes"]).filter(ehStr),
         classe: ehInt(em) ? (this.classe_do_nivel.get(em) ?? null) : null,
         preenchida: false,
+        // a fonte declara as PROPRIAS excecoes a regra de um ator por vez:
+        // "Contrary to the usual rules for animal companions, this feat can
+        // grant you a SECOND animal companion". 6 dos 30 concessores.
+        // Spec: `specs/2026-07-30-segundo-ator.md`
+        adicional: verdadeiro(ga["adicional"]),
         escolhido: null,
       });
     }
@@ -1740,6 +1745,30 @@ export class Personagem implements ContextoDePredicado {
    * vezes (Mammoth Lord dá um segundo companheiro) e é opcional: ator antigo,
    * sem `em`, casa com a primeira concessão daquela origem.
    */
+  /**
+   * Mais de um ator do mesmo tipo sem nenhuma fonte que autorize.
+   *
+   * AVISO e nao bloqueio: bloquear apagaria escolha ja feita pelo jogador, e
+   * este projeto marca em vez de sumir. A regra geral esta na fonte
+   * (`Familiars`, AoN: "You can have only one familiar at a time").
+   */
+  private _avisar_ator_duplicado(): void {
+    const porTipo = new Map<string, ConcessaoDeAtor[]>();
+    for (const c of this.concessoes_de_ator) {
+      const lista = porTipo.get(c.tipo) ?? [];
+      lista.push(c);
+      porTipo.set(c.tipo, lista);
+    }
+    for (const tipo of [...porTipo.keys()].sort()) {
+      const lista = porTipo.get(tipo) ?? [];
+      if (lista.length < 2 || lista.some((c) => c.adicional)) continue;
+      const origens = lista.map((c) => c.origem_nome || "?").sort().join(", ");
+      this.avisos.push(
+        `${lista.length} fontes de ${tipo} na ficha (${origens}) e nenhuma `
+        + `delas declara conceder um adicional -- pelo livro vale um por vez`);
+    }
+  }
+
   private _casar_ator_com_concessao(ator: Dict): ConcessaoDeAtor | null {
     const origem = ator["concedido_por"];
     if (!verdadeiro(origem)) return null;
@@ -1760,6 +1789,7 @@ export class Personagem implements ContextoDePredicado {
 
   private _atores(): void {
     this._concessoes_de_ator();
+    this._avisar_ator_duplicado();
     for (const bruto of listaDe((this.doc as unknown as Dict)["atores"])) {
       const a = dictDe(bruto);
       const concessao = this._casar_ator_com_concessao(a);

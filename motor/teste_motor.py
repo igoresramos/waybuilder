@@ -1441,6 +1441,42 @@ checar(atq.get("rank") == "expert",
        "e o ataque com espada longa do Campeao 5 sai em expert",
        f"{atq.get('rank')} / {atq.get('ataque')}")
 
+# -- segundo ator: a fonte declara as proprias excecoes (spec segundo-ator) --
+# O item 47(c) estava marcado como decisao do Igor. Nao e: o Beastmaster diz
+# "Contrary to the usual rules for animal companions, this feat can grant you a
+# SECOND animal companion". Bloquear seria reprovar o que o livro autoriza.
+print("\n-- segundo ator --")
+
+def com_feats(cls, ate, feats):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+        + [{"em": n, "slot": "nivel_de_classe", "pega": cls}
+           for n in range(1, ate + 1)]
+        + [{"em": n, "slot": "class_feat", "pega": f} for n, f in feats])
+
+MARCADOS = {"Beastmaster Dedication", "Drake Rider Dedication",
+            "Emissary Familiar", "Faithful Steed", "Familiar (Witch)",
+            "Mammoth Lord Dedication"}
+marcados = {r.get("name") for r in BASE.por_id.values()
+            for g in (r.get("grants") or []) if isinstance(g, dict)
+            and (g.get("grant_actor") or {}).get("adicional")}
+checar(marcados == MARCADOS,
+       "os 6 concessores que declaram ator ADICIONAL saem marcados",
+       f"{sorted(marcados)}")
+
+autorizado = com_feats("wb:class/ranger", 4, [
+    (1, "wb:feat/animal-companion"), (2, "wb:feat/beastmaster-dedication")])
+checar(not [a for a in autorizado.avisos if "fontes de" in a],
+       "Ranger com companheiro + Beastmaster NAO gera aviso -- o livro autoriza",
+       f"{autorizado.avisos}")
+
+sem_licenca = com_feats("wb:class/ranger", 4, [
+    (1, "wb:feat/animal-companion"), (2, "wb:feat/cavalier-dedication")])
+checar([a for a in sem_licenca.avisos if "fontes de" in a],
+       "mas duas fontes sem autorizacao geram aviso nomeando as duas")
+checar(len(sem_licenca.atores) == len(autorizado.atores),
+       "e o aviso NAO bloqueia -- a ficha continua igual")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

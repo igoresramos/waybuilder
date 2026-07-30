@@ -1572,7 +1572,34 @@ class Personagem:
                 "classe": self.classe_do_nivel.get(em) if isinstance(em, int) else None,
                 "preenchida": False,
                 "escolhido": None,
+                # a fonte declara as PROPRIAS excecoes a regra de um ator por
+                # vez: "Contrary to the usual rules for animal companions, this
+                # feat can grant you a SECOND animal companion". Sao 6 dos 30
+                # concessores, e sem esta marca uma regra geral de exclusao
+                # reprovaria justo o que o livro autoriza por escrito.
+                # Spec: `specs/2026-07-30-segundo-ator.md`
+                "adicional": bool(ga.get("adicional")),
             })
+
+    def _avisar_ator_duplicado(self) -> None:
+        """Mais de um ator do mesmo tipo sem nenhuma fonte que autorize.
+
+        AVISO e nao bloqueio: bloquear apagaria escolha ja feita pelo jogador, e
+        este projeto marca em vez de sumir -- a mesma postura de
+        `fora_do_requisito`. A regra geral esta na fonte (`Familiars`, AoN: "You
+        can have only one familiar at a time"); a excecao tambem.
+        """
+        por_tipo: dict[str, list] = defaultdict(list)
+        for c in self.concessoes_de_ator:
+            por_tipo[str(c.get("tipo"))].append(c)
+        for tipo, lista in sorted(por_tipo.items()):
+            if len(lista) < 2 or any(c.get("adicional") for c in lista):
+                continue
+            origens = ", ".join(sorted(c.get("origem_nome") or "?" for c in lista))
+            self.avisos.append(
+                f"{len(lista)} fontes de {tipo} na ficha ({origens}) e nenhuma "
+                f"delas declara conceder um adicional -- pelo livro vale um por "
+                f"vez")
 
     def _casar_ator_com_concessao(self, ator: dict) -> dict | None:
         """`concedido_por` + `em`. O `em` desempata quando o mesmo feat concede
@@ -1604,6 +1631,7 @@ class Personagem:
         nivel + rank + atributo, exatamente como o personagem.
         """
         self._concessoes_de_ator()
+        self._avisar_ator_duplicado()
         self.atores = []
         self.escolhas_de_feat: list[dict] = []
         self._casadas: set[int] = set()

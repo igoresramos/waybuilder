@@ -891,6 +891,7 @@
   ],
   "concessoes_de_ator": [
    {
+    "adicional": true,
     "classe": null,
     "em": null,
     "escolhe": "familiar-specific",
@@ -938,6 +939,7 @@
      },
      {
       "grant_actor": {
+       "adicional": true,
        "escolhe": "familiar-specific",
        "tipo": "familiar"
       }

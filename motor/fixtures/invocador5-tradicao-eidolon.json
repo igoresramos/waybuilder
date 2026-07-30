@@ -886,6 +886,7 @@
   ],
   "concessoes_de_ator": [
    {
+    "adicional": false,
     "classe": null,
     "em": null,
     "escolhe": "eidolon",
