@@ -2724,23 +2724,29 @@ class Personagem:
                      "atende": True, "motivos": [], "ja_pego": False}
                     for a in ATRIBUTOS]
 
-        if slot == "companheiro":
+        if slot in ("companheiro", "familiar", "eidolon"):
             # As `opcoes` do concessor ORDENAM, nao filtram: Drake Rider diz
             # "riding drake, riding dragonet, or another animal companion", e
             # mesmo o Rough Rider, que fixa o lobo, nao some com o resto -- e o
             # principio zero aplicado a especie.
             preferidas = [o for c in self.concessoes_de_ator
-                          if c["tipo"] == "companheiro"
+                          if c["tipo"] == slot
                           and (em is None or c.get("em") == em)
                           for o in c["opcoes"]]
             kinds = {c["escolhe"] for c in self.concessoes_de_ator
-                     if c["tipo"] == "companheiro"} or {"animal-companion"}
+                     if c["tipo"] == slot} or {"animal-companion"}
             # `stats` separa ESPECIE de ESPECIALIZACAO: dos 113 registros do
             # kind, 17 sao Ambusher, Nimble, Savage, Wrecker e companhia --
             # graus e especializacoes que nao tem stat block e nao cabem neste
             # slot. Elegibilidade de slot, nao requisito: nao ha o que ordenar.
+            # `stats` so discrimina no companheiro: la ele separa ESPECIE de
+            # especializacao (17 dos 113 sao Ambusher, Nimble, Savage...). Os 39
+            # `familiar-specific` nao tem `stats` -- a fonte nao publica numero
+            # para eles --, entao exigir o campo esvaziaria a lista inteira.
+            # Spec: `specs/2026-07-30-familiar-e-eidolon-concedidos.md`
             registros = [r for r in self.base.por_id.values()
-                         if r.get("kind") in kinds and r.get("stats")]
+                         if r.get("kind") in kinds
+                         and (slot != "companheiro" or r.get("stats"))]
             saida = []
             for r in registros:
                 atende, motivos = self.avaliar(r.get("requires"))

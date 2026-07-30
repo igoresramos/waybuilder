@@ -60,6 +60,30 @@ P_OUTRO_ATOR = re.compile(
     r"\b(construct companion|undead companion)\b", re.I)
 
 
+# Familiar e eidolon. O ARTIGO INDEFINIDO e o que separa conceder de mencionar:
+# as 18 `lesson` e as 16 `patron` dizem "You gain the X hex, and your familiar
+# learns Y", que pressupoe o familiar em vez de dar um. Sem o artigo o padrao
+# traz 68 registros e a maioria e ruido; com ele, 15 e todos legitimos.
+P_FAMILIAR = re.compile(
+    r"\byou\s+(?:also\s+)?(?:gain|get|acquire)\s+(?:the\s+service\s+of\s+)?"
+    r"an?\s+(?:[a-z\- ]{0,30}\s)?familiar\b", re.I)
+
+# "You gain an eidolon". Derruba os dois falsos positivos, que dizem "You gain
+# an EVOLUTION FEAT for your eidolon" -- concedem feat, nao ator.
+P_EIDOLON = re.compile(
+    r"\byou\s+(?:also\s+)?(?:gain|get|acquire)\s+an?\s+"
+    r"(?:[a-z\- ]{0,30}\s)?eidolon\b", re.I)
+
+# A rota da CLASSE nao passa por prosa. Bruxa e Invocador nao dizem "you gain a
+# familiar" em lugar nenhum: concedem uma class-feature que se chama Familiar e
+# Eidolon, e a progressao ja esta estruturada. Dado estruturado tem precedencia
+# sobre prosa no resto do pipeline, e aqui tambem.
+FEATURE_DE_ATOR = {
+    "wb:class-feature/familiar-witch": ("familiar", "familiar-specific"),
+    "wb:class-feature/eidolon": ("eidolon", "eidolon"),
+}
+
+
 def corpo(texto: str) -> str:
     """So o que vem depois do separador -- antes dele mora o PREREQUISITO."""
     return texto.split("---", 1)[1] if "---" in texto else texto
@@ -89,6 +113,7 @@ def main() -> int:
         for nome, ident in sorted(especies.items(), key=lambda kv: -len(kv[0]))]
 
     concedem, divida, proibem, acesso = [], [], [], []
+    outros = []   # familiar e eidolon, que tem relatorio proprio
     for r in base:
         if r.get("kind") not in ("feat", "class-feature"):
             continue
@@ -104,6 +129,38 @@ def main() -> int:
         outro = P_OUTRO_ATOR.search(texto)
         if outro:
             divida.append((r, outro.group(1).lower()))
+            continue
+
+        # familiar e eidolon antes do companheiro: sao padroes disjuntos, e
+        # ordem so importa para nao pagar o regex maior a toa.
+        # Spec: `specs/2026-07-30-familiar-e-eidolon-concedidos.md`
+        # o preenchedor entre o artigo e o substantivo aceita adjetivo
+        # ("a tiny crocodile as a familiar"), mas nao pode engolir OUTRO
+        # substantivo: "You gain an evolution FEAT for YOUR eidolon" concede
+        # feat, nao ator, e casava porque "evolution feat for your " cabia no
+        # preenchedor. `feat` e `your` dentro do trecho reprovam o casamento.
+        def _concessao(pad):
+            m = pad.search(texto)
+            if not m:
+                return None
+            return None if re.search(r"\b(feat|your)\b", m.group(0), re.I) else m
+
+        outro_tipo, m_outro = None, None
+        m_outro = _concessao(P_FAMILIAR)
+        if m_outro:
+            outro_tipo = ("familiar", "familiar-specific")
+        else:
+            m_outro = _concessao(P_EIDOLON)
+            if m_outro:
+                outro_tipo = ("eidolon", "eidolon")
+        if outro_tipo:
+            tipo, escolhe = outro_tipo
+            r.setdefault("grants", []).append(
+                {"grant_actor": {"tipo": tipo, "escolhe": escolhe}})
+            prov = r.setdefault("prov", {})
+            prov["grants.grant_actor"] = f"derivado:prosa-{tipo}"
+            prov.setdefault("grants", f"derivado:prosa-{tipo}")
+            outros.append((r, tipo, m_outro))
             continue
 
         m = P_CONCEDE.search(texto)
@@ -144,6 +201,24 @@ def main() -> int:
         r["mechanized"] = True
         concedem.append((r, frase, opcoes))
 
+    # ROTA DA CLASSE, estruturada: a class-feature Familiar/Eidolon nao tem
+    # prosa de concessao, mas esta na `progressao` da classe. Marca a propria
+    # feature, e nao a classe: e ela que o motor poe em `self.features`.
+    por_id = {r["id"]: r for r in base}
+    for fid, (tipo, escolhe) in FEATURE_DE_ATOR.items():
+        reg = por_id.get(fid)
+        if reg is None:
+            continue
+        if any("grant_actor" in g for g in (reg.get("grants") or [])
+               if isinstance(g, dict)):
+            continue
+        reg.setdefault("grants", []).append(
+            {"grant_actor": {"tipo": tipo, "escolhe": escolhe}})
+        prov = reg.setdefault("prov", {})
+        prov["grants.grant_actor"] = f"derivado:progressao-{tipo}"
+        prov.setdefault("grants", f"derivado:progressao-{tipo}")
+        outros.append((reg, tipo, None))
+
     with open(f"{BASE}/index.json", "w", encoding="utf-8") as fh:
         json.dump(base, fh, ensure_ascii=False)
 
@@ -162,6 +237,16 @@ def main() -> int:
         rel.append(f"| {r.get('name')} | {frase[:90]} | "
                    f"{', '.join(opcoes) if opcoes else 'livre'} |")
 
+    rel += ["", "## Familiar e eidolon", "",
+            "Mesma ancora, artigo INDEFINIDO: e ele que separa quem GANHA um "
+            "familiar de quem fala do que ja tem (as 18 `lesson` e as 16 "
+            "`patron` dizem \"and your familiar learns\"). A rota da classe "
+            "sai da `progressao`, nao da prosa.", "",
+            "| registro | tipo | frase ou rota |", "|---|---|---|"]
+    for r, tipo, m in sorted(outros, key=lambda x: (x[1], x[0].get("name") or "")):
+        just = " ".join(m.group(0).split())[:70] if m else "progressao da classe"
+        rel.append(f"| {r.get('name')} | {tipo} | {just} |")
+
     rel += ["", "## Divida -- companheiro sem stat block na base", "",
             "| registro | tipo |", "|---|---|"]
     for r, tipo in sorted(divida, key=lambda x: x[0].get("name") or ""):
@@ -178,6 +263,9 @@ def main() -> int:
     with open(f"{BASE}/relatorio_concessao_de_ator.md", "w", encoding="utf-8") as fh:
         fh.write("\n".join(rel) + "\n")
 
+    n_fam = sum(1 for _, t, _ in outros if t == "familiar")
+    print(f"concessao de ator: {n_fam} concedem familiar, "
+          f"{len(outros) - n_fam} concedem eidolon")
     print(f"concessao de ator: {len(concedem)} concedem companheiro animal, "
           f"{len(divida)} divida, {len(proibem) + len(acesso)} vetados")
     print(f"-> {BASE}/relatorio_concessao_de_ator.md")

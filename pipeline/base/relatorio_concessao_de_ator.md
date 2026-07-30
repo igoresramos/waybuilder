@@ -23,6 +23,31 @@ Cada linha traz a FRASE que justifica. Divergencia entre a frase e o `grant_acto
 | Rough Rider | you gain a wolf as an animal companion | wb:animal-companion/wolf |
 | Spirit Companion | You gain the service of a young animal companion | livre |
 
+## Familiar e eidolon
+
+Mesma ancora, artigo INDEFINIDO: e ele que separa quem GANHA um familiar de quem fala do que ja tem (as 18 `lesson` e as 16 `patron` dizem "and your familiar learns"). A rota da classe sai da `progressao`, nao da prosa.
+
+| registro | tipo | frase ou rota |
+|---|---|---|
+| Eidolon | eidolon | progressao da classe |
+| Summoner Dedication | eidolon | You gain an eidolon |
+| Alchemical Familiar | familiar | You gain a familiar |
+| Animal Accomplice | familiar | You gain a familiar |
+| Crocodile's Twin | familiar | You gain a tiny crocodile as a familiar |
+| Draconic Familiar | familiar | You gain a familiar |
+| Elemental Familiar (Kineticist) | familiar | You gain an elemental familiar |
+| Emissary Familiar | familiar | You gain a familiar |
+| Familiar | familiar | You gain a familiar |
+| Familiar (Witch) | familiar | progressao da classe |
+| Familiar Master Dedication | familiar | You gain a familiar |
+| Hyena Familiar | familiar | You gain a Tiny hyena as a familiar |
+| Leshy Familiar | familiar | You gain a familiar |
+| Marine Ally | familiar | You gain a familiar |
+| Minuscule Mentee | familiar | You gain a poppet familiar |
+| Rat Familiar | familiar | You gain a familiar |
+| Star Orb | familiar | You gain a familiar |
+| Witch Dedication | familiar | you gain a familiar |
+
 ## Divida -- companheiro sem stat block na base
 
 | registro | tipo |

@@ -1355,6 +1355,56 @@ checar(pericia and all("skill" in (BASE.get(c["id"]).get("traits") or [])
        "cujo filtro so deixa passar feat de pericia",
        f"{len(pericia)} candidatos")
 
+# -- familiar e eidolon concedidos (spec familiar-e-eidolon-concedidos) -----
+# `derivar_concessao_de_ator.py` so casava "animal companion": 0 registros
+# concediam familiar e 0 concediam eidolon. A Bruxa nivel 1, cuja PRIMEIRA
+# feature de classe se chama `Familiar (Witch)`, nao tinha familiar nenhum.
+print("\n-- familiar e eidolon concedidos --")
+
+def de_classe(cid, **extra):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+        + [{"em": 1, "slot": "nivel_de_classe", "pega": cid}], **extra)
+
+bruxa = de_classe("wb:class/witch")
+invocador = de_classe("wb:class/summoner")
+guerreiro = de_classe("wb:class/fighter")
+checar([c for c in bruxa.concessoes_de_ator if c["tipo"] == "familiar"],
+       "a Bruxa 1 concede familiar pela progressao da classe",
+       f"{bruxa.concessoes_de_ator}")
+checar([c for c in invocador.concessoes_de_ator if c["tipo"] == "eidolon"],
+       "e o Invocador 1 concede eidolon")
+checar(not guerreiro.concessoes_de_ator,
+       "e o Guerreiro nao concede ator nenhum")
+
+checar([s for s in bruxa.slots_abertos() if s["slot"] == "familiar"],
+       "o slot de familiar aparece por preencher")
+checar(len(bruxa.candidatos("familiar")) == 38,
+       "e candidatos() devolve as especies de familiar, nao os 6.273 feats",
+       f"{len(bruxa.candidatos('familiar'))}")
+checar(len(invocador.candidatos("eidolon")) == 13,
+       "idem para eidolon", f"{len(invocador.candidatos('eidolon'))}")
+
+com_fam = de_classe("wb:class/witch", atores=[
+    {"tipo": "familiar", "nome": "Pipefox",
+     "concedido_por": "wb:class-feature/familiar-witch"}])
+ator = com_fam.atores[0] if com_fam.atores else {}
+checar(ator.get("tipo") == "familiar" and ator.get("classe") == "Witch",
+       "e o familiar escolhido entra na ficha ancorado na classe que concedeu",
+       f"{ator}")
+
+# o artigo INDEFINIDO e o que separa conceder de mencionar
+BASE_FEAT = "wb:feat/animal-accomplice"
+checar(any("grant_actor" in g for g in (BASE.get(BASE_FEAT).get("grants") or [])
+           if isinstance(g, dict)),
+       "`Animal Accomplice` (\"You gain a familiar\") concede")
+for mudo in ("wb:lesson/lesson-of-calamity", "wb:patron/faiths-flamekeeper",
+             "wb:class-feature/evolution-feat"):
+    reg = BASE.opcional(mudo) or {}
+    checar(not any("grant_actor" in g for g in (reg.get("grants") or [])
+                   if isinstance(g, dict)),
+           f"e `{reg.get('name')}` NAO concede -- fala do ator que voce ja tem")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")
