@@ -43,6 +43,8 @@ DEFAULT = {
     "Ranger": ("wb:class/ranger", ANCESTRIA, BACKGROUND),
     "Rogue": ("wb:class/rogue", ANCESTRIA, BACKGROUND),
     "Barbarian": ("wb:class/barbarian", ANCESTRIA, BACKGROUND),
+    "Bard": ("wb:class/bard", ANCESTRIA, BACKGROUND),
+    "Monk": ("wb:class/monk", ANCESTRIA, BACKGROUND),
 }
 
 
@@ -64,6 +66,10 @@ BOOSTS_DO_PATHBUILDER = {
     "Wizard":  ["str", "str", "dex", "con"],          # + INT 12 da chave
     "Cleric":  ["str", "str", "dex", "con"],          # + WIS 12 da chave
     "Rogue":   ["str", "str", "dex", "con"],          # + DEX 14 da chave
+    # medidos com `sonda-estado-pathbuilder.mjs` em 2026-07-30, nao chutados:
+    # Bard sai STR +2 DEX +1 CON +1 CHA +1, Monk sai STR +3 DEX +1 CON +1.
+    "Bard":    ["str", "str", "dex", "con"],          # + CHA 12 da chave
+    "Monk":    ["str", "str", "str", "dex", "con"],   # STR 16, sem chave extra
 }
 
 

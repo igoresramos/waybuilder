@@ -168,3 +168,29 @@ A tabela foi a **35 pares**.
 
 - Slot de `general_feat` fora do Guerreiro.
 - O quantificador "uma pericia que tenha a acao X", se aparecer mais vezes.
+
+---
+
+## 7. Terceira leva: Bard 7 / general_feat e Monk 10 -- ZERO defeitos nossos
+
+Duas classes que nem estavam na bancada (`DEFAULT` do comparador so tinha
+Fighter, Wizard, Cleric, Ranger, Rogue e Barbarian). Os boosts das duas foram
+**medidos** com `sonda-estado-pathbuilder.mjs`, nao chutados -- o proprio
+comparador ja avisava que chutar fabrica divergencia: Bard sai `STR +2 DEX +1
+CON +1 CHA +1`, Monk sai `STR +3 DEX +1 CON +1`.
+
+Resultado: **nenhum defeito nosso.** Tudo cai nas duas familias ja declaradas.
+
+- **17 feats do Kingmaker AP** (trait `kingdom`) so nossos -- subsistema de reino
+  que o Pathbuilder nao carrega. Recorte de fonte, como os 5 de Hell's Destiny.
+- **`Advanced Qi Spells`** (`wb=False pb=True`): exige `has: wb:feat/qi-spells`,
+  e o Monk 10 da bancada nao pegou esse feat. Ele conta a escolha PENDENTE como
+  alcancavel; nos avaliamos o estado atual. Mesma familia da pericia.
+- **`Sacred Ki`** (`wb=True pb=False`): exige "Ki Strike, you follow a deity",
+  as duas em `requires_residuo`. Principio zero.
+- **`Aurochs-Headed`**: feat de trait `skill` que ele lista tambem na aba de
+  General Feats. Recorte de aba dele, 1 ponto.
+
+Esta leva vale menos pelo que achou e mais pelo que NAO achou: depois dos tres
+consertos das levas anteriores, duas classes novas e um slot novo passaram sem
+defeito.
