@@ -1,7 +1,7 @@
 {
-  "nota": "O Pathbuilder renomeia o que a Paizo NAO renomeou. Verificado contra o dump do AoN em 2026-07-29: o nome da esquerda existe la, o da direita nao existe em nenhum dos 43.686 docs. O padrao e sempre o mesmo -- sai o nome proprio de Golarion (lugar, organizacao, pessoa) e entra um generico. Nao e remaster: a ponte `remaster_id` do AoN nao registra nenhum desses pares. E, quase certamente, licenciamento: nome de setting e Product Identity, e o Pathbuilder publica sem eles. Confirmado tambem fora das dedicacoes: feats de classe com nome de pessoa (`Helt's Spelldance` -> `Spelldance`, `Stella's Stab and Snag` -> `Stab and Snag`) seguem a mesma regra.",
+  "nota": "O Pathbuilder renomeia o que a Paizo NAO renomeou. Verificado contra o dump do AoN em 2026-07-29: o nome da esquerda existe la, o da direita nao existe em nenhum dos 43.686 docs. O padrao e sempre o mesmo -- sai o nome proprio de Golarion (lugar, organizacao, pessoa) e entra um generico. Nao e remaster: a ponte `remaster_id` do AoN nao registra nenhum desses pares. E, quase certamente, licenciamento: nome de setting e Product Identity, e o Pathbuilder publica sem eles. Confirmado tambem fora das dedicacoes: feats de classe com nome de pessoa (`Helt's Spelldance` -> `Spelldance`, `Stella's Stab and Snag` -> `Stab and Snag`) seguem a mesma regra. | 2026-07-30, rodada de ancestry feat (Fighter 1): mais 7 pares, todos do mesmo padrao -- sai o nome proprio de Golarion (Shory, Saoc, Irriseni, Quah, Tupilaq) e entra o generico. Os 7 da esquerda existem na nossa base; os 7 da direita nao existem em nenhum dos 43.686 docs do dump do AoN.",
   "consequencia": "A nossa base NAO tem o que corrigir aqui -- ela esta de acordo com a fonte. O que existe e uma tabela de traducao para a comparacao nao acusar 20 falsos positivos.",
-  "verificado_em": "2026-07-29",
+  "verificado_em": "2026-07-30",
   "fonte_da_verificacao": "pipeline/dados_brutos/aon_*.json",
   "pares": [
     [
@@ -107,6 +107,34 @@
     [
       "Fane's Fourberie",
       "Card Sharp's Fourberie"
+    ],
+    [
+      "Shory Aerialist",
+      "Aerialist"
+    ],
+    [
+      "Shory Aeromancer",
+      "Aeromancer"
+    ],
+    [
+      "Saoc Astrology",
+      "Astrology"
+    ],
+    [
+      "Tupilaq Carver",
+      "Construct Carver"
+    ],
+    [
+      "Heir of the Saoc",
+      "Heir of the Astrologers"
+    ],
+    [
+      "Irriseni Ice-Witch",
+      "Ice-Witch"
+    ],
+    [
+      "Quah Bond",
+      "Tribal Bond"
     ]
   ]
 }

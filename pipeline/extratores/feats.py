@@ -311,10 +311,31 @@ TRADICAO_RE = re.compile(
     r"^(?:the\s+)?ability to cast (arcane|divine|occult|primal) spells"
     r"(?:\s+from spell slots)?$", re.I)
 
+# Familia que so passou a ter resposta com o item 78 (a subclasse resolve a
+# tradicao): "divine spells", "bloodline that grants divine spells". Antes de a
+# bloodline carregar `tradition`, casar isto teria produzido reprovacao errada
+# num Feiticeiro -- o motor nao sabia a tradicao dele.
+# Medido: 7 clausulas de `requires_residuo` em 6 registros.
+TRADICAO_CURTA_RE = re.compile(
+    r"^(?:a\s+)?(?:bloodline that grants\s+)?(arcane|divine|occult|primal)\s+spells$",
+    re.I)
+
+# "You have a spellcasting class feature with the divine or primal tradition"
+TRADICAO_FEATURE_RE = re.compile(
+    r"^(?:you have\s+)?a?\s*spellcasting (?:class feature|feature|benefit)\s+"
+    r"with the\s+(arcane|divine|occult|primal)"
+    r"(?:\s+or\s+(arcane|divine|occult|primal))?\s+tradition$", re.I)
+
+# `you're` entra junto com `you are`: a contracao aparece na prosa oficial e a
+# ausencia dela mandava `familiar-sage-dedication` inteiro para o residuo.
+# E `using spell slots` e a terceira grafia de `from spell slots` -- as tres
+# dizem a mesma coisa. Medido: 4 das 6 clausulas de residuo que falam de
+# conjuracao generica passam a ser respondidas.
 QUALQUER_CONJURACAO_RE = re.compile(
-    r"^(?:you (?:have|are)\s+|able to cast\s+|ability to cast\s+)?"
-    r"(?:a\s+)?(?:spellcasting class feature|spells from spell slots|"
-    r"able to cast spells|ability to cast spells)$", re.I)
+    r"^(?:you (?:have|are|'re)\s+|you're\s+|able to cast\s+|ability to cast\s+)?"
+    r"(?:a\s+)?(?:spellcasting class feature|spells (?:from|using) spell slots|"
+    r"able to cast spells(?:\s+(?:from|using) spell slots)?|"
+    r"ability to cast spells(?:\s+(?:from|using) (?:spell )?slots)?)$", re.I)
 
 CAST_SPELL_RE = re.compile(
     r"^(?:the\s+)?(?:ability|able) to cast (\x01\d+\x02)"
@@ -450,6 +471,20 @@ class Parser:
         r = self._clausula_rank(texto, tags)
         if r is not None:
             return r
+
+        # 2b. frase INTEIRA que contem "or" por dentro e nao pode ser rasgada
+        #     pelo passo 5. "spellcasting class feature with the divine or
+        #     primal tradition" virava "...with the divine" + "primal
+        #     tradition", e nenhum dos dois casa com nada -- a clausula inteira
+        #     caia em `requires_residuo`. Mesma classe do defeito do item 91: o
+        #     divisor roda antes do parser de atomo e nao sabe o que esta
+        #     cortando. Aqui a frase e reconhecida ANTES do corte.
+        m = TRADICAO_FEATURE_RE.match(texto.strip())
+        if m:
+            trads = [g.lower() for g in m.groups() if g]
+            if len(trads) == 1:
+                return {"spellcasting_tradition": trads[0]}
+            return {"any": [{"spellcasting_tradition": x} for x in trads]}
 
         # 3. virgulas
         partes, conector = _dividir_virgulas(texto)
@@ -592,6 +627,15 @@ class Parser:
 
         # d) tradicao de conjuracao
         m = TRADICAO_RE.match(t)
+        if m:
+            return {"spellcasting_tradition": m.group(1).lower()}
+        m = TRADICAO_FEATURE_RE.match(t)
+        if m:
+            trads = [g.lower() for g in m.groups() if g]
+            if len(trads) == 1:
+                return {"spellcasting_tradition": trads[0]}
+            return {"any": [{"spellcasting_tradition": x} for x in trads]}
+        m = TRADICAO_CURTA_RE.match(t)
         if m:
             return {"spellcasting_tradition": m.group(1).lower()}
         if QUALQUER_CONJURACAO_RE.match(t):

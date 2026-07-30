@@ -1,0 +1,237 @@
+[
+  {
+    "slot": "Ranger 4 / class_feat [Class Feats]",
+    "waybuilder": 116,
+    "pathbuilder": 113,
+    "em_comum": 112,
+    "so_no_pathbuilder": [
+      "Lightning Snares"
+    ],
+    "so_no_waybuilder": [
+      "Wild Empathy"
+    ],
+    "divergencia_de_disponibilidade": []
+  },
+  {
+    "slot": "Ranger 4 / class_feat [Dedication Feats]",
+    "waybuilder": 226,
+    "pathbuilder": 224,
+    "em_comum": 224,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [
+      "Chelaxian Scion Dedication",
+      "Knight Vigilant",
+      "Venture-Gossip Dedication"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Aldori Duelist Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige weapon:aldori-dueling-sword >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Alkenstar Agent Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Animal Trainer Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige nature >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Beastmaster Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige nature >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Cavalier Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige nature >= trained; tem untrained",
+          "exige society >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige stealth >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige stealth >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Draconic Acolyte Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige arcana >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Exemplar Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige STR >= 14; tem 10",
+          "exige DEX >= 14; tem 10"
+        ]
+      },
+      {
+        "nome": "Familiar Sage Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Ghost Hunter Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige occultism >= trained; tem untrained",
+          "exige religion >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Jalmeri Heavenseeker Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige unarmed >= expert; tem trained"
+        ]
+      },
+      {
+        "nome": "Magaambyan Attendant Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige arcana >= trained; tem untrained",
+          "exige nature >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Mauler Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige STR >= 14; tem 10"
+        ]
+      },
+      {
+        "nome": "Ostilli Host Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige arcana >= trained; tem untrained",
+          "exige nature >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Pactbound Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige nature >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Red Mantis Assassin Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Scroll Trickster Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige arcana >= trained; tem untrained",
+          "exige nature >= trained; tem untrained",
+          "exige occultism >= trained; tem untrained",
+          "exige religion >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Seneschal Witch Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Snarecrafter Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige crafting >= trained; tem untrained",
+          "exige ter Snare Crafting"
+        ]
+      },
+      {
+        "nome": "Swarmkeeper Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige nature >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Tattooed Historian Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige CON >= 12; tem 10"
+        ]
+      },
+      {
+        "nome": "Twilight Talon Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige deception >= expert; tem untrained"
+        ]
+      },
+      {
+        "nome": "Ulfen Guard Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Wild Mimic Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige nature >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Worm Caller Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige nature >= trained; tem untrained",
+          "exige lore:cave-worm >= trained; tem untrained"
+        ]
+      }
+    ]
+  }
+]

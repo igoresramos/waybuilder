@@ -1,0 +1,30 @@
+[
+  {
+    "slot": "Fighter 1 / ancestry_feat",
+    "waybuilder": 42,
+    "pathbuilder": 60,
+    "em_comum": 42,
+    "so_no_pathbuilder": [
+      "Cannibalize Magic",
+      "Drain Emotion",
+      "Earned Glory",
+      "Eldritch Calm",
+      "Elf Atavism",
+      "Fey Ascension",
+      "Fey Influence",
+      "Fey Transcendence",
+      "Glamour",
+      "Inspire Imitation",
+      "Monstrous Peacemaker",
+      "Orc Sight",
+      "Overlooked Mastermind",
+      "Pinch Time",
+      "Reincarnation Feat",
+      "Round Ears",
+      "Sociable",
+      "Supernatural Charm"
+    ],
+    "so_no_waybuilder": [],
+    "divergencia_de_disponibilidade": []
+  }
+]

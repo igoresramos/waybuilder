@@ -1,0 +1,612 @@
+{
+  "fonte": "pathbuilder 2e web 108, remaster on, legado ligado",
+  "classe": "Fighter",
+  "nivel": 1,
+  "slot": "ancestry_feat",
+  "abas": {
+    "Ancestry Feats": [
+      {
+        "nome": "Arcane Tattoos",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Astrology",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Cooperative Nature",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Courteous Comeback",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Devil's Advocate",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Dragon Spit",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "General Training",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Gloomseer",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Haughty Obstinacy",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Keep Up Appearances",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Know Oneself",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Natural Ambition",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Natural Skill",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Reincarnation Feat",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Tribal Bond",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Unconventional Weaponry",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Viking Shieldbearer",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Witch Warden",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Adapted Cantrip",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Adaptive Adept",
+        "nivel": "5",
+        "atende": false
+      },
+      {
+        "nome": "Advanced General Training",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Aerialist",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Aeromancer",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Bounce Back",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Cannibalize Magic",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Clever Improviser",
+        "nivel": "5",
+        "atende": false
+      },
+      {
+        "nome": "Construct Carver",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Cooperative Soul",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Darkseer",
+        "nivel": "5",
+        "atende": false
+      },
+      {
+        "nome": "Dragon Prince",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Drain Emotion",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Earned Glory",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Eldritch Calm",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Elf Atavism",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Fey Ascension",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Fey Influence",
+        "nivel": "5",
+        "atende": false
+      },
+      {
+        "nome": "Fey Transcendence",
+        "nivel": "17",
+        "atende": false
+      },
+      {
+        "nome": "Glamour",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Group Aid",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Hardy Traveler",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Heir of the Astrologers",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Heroic Presence",
+        "nivel": "17",
+        "atende": false
+      },
+      {
+        "nome": "Ice-Witch",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Incredible Improvisation",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Inspire Imitation",
+        "nivel": "5",
+        "atende": false
+      },
+      {
+        "nome": "Monstrous Peacemaker",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Multitalented",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Orc Sight",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Ornate Tattoo",
+        "nivel": "5",
+        "atende": false
+      },
+      {
+        "nome": "Overlooked Mastermind",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Pinch Time",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Round Ears",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Sense Allies",
+        "nivel": "5",
+        "atende": false
+      },
+      {
+        "nome": "Shadow Pact",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Sociable",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Stubborn Persistence",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Supernatural Charm",
+        "nivel": "5",
+        "atende": false
+      },
+      {
+        "nome": "Unconventional Expertise",
+        "nivel": "13",
+        "atende": false
+      },
+      {
+        "nome": "Virtue-Forged Tattoos",
+        "nivel": "9",
+        "atende": false
+      },
+      {
+        "nome": "Wavetouched Paragon",
+        "nivel": "1",
+        "atende": false
+      }
+    ]
+  },
+  "opcoes": [
+    {
+      "nome": "Arcane Tattoos",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Astrology",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Cooperative Nature",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Courteous Comeback",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Devil's Advocate",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Dragon Spit",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "General Training",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Gloomseer",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Haughty Obstinacy",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Keep Up Appearances",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Know Oneself",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Natural Ambition",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Natural Skill",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Reincarnation Feat",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Tribal Bond",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Unconventional Weaponry",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Viking Shieldbearer",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Witch Warden",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Adapted Cantrip",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Adaptive Adept",
+      "nivel": "5",
+      "atende": false
+    },
+    {
+      "nome": "Advanced General Training",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Aerialist",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Aeromancer",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Bounce Back",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Cannibalize Magic",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Clever Improviser",
+      "nivel": "5",
+      "atende": false
+    },
+    {
+      "nome": "Construct Carver",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Cooperative Soul",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Darkseer",
+      "nivel": "5",
+      "atende": false
+    },
+    {
+      "nome": "Dragon Prince",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Drain Emotion",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Earned Glory",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Eldritch Calm",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Elf Atavism",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Fey Ascension",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Fey Influence",
+      "nivel": "5",
+      "atende": false
+    },
+    {
+      "nome": "Fey Transcendence",
+      "nivel": "17",
+      "atende": false
+    },
+    {
+      "nome": "Glamour",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Group Aid",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Hardy Traveler",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Heir of the Astrologers",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Heroic Presence",
+      "nivel": "17",
+      "atende": false
+    },
+    {
+      "nome": "Ice-Witch",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Incredible Improvisation",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Inspire Imitation",
+      "nivel": "5",
+      "atende": false
+    },
+    {
+      "nome": "Monstrous Peacemaker",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Multitalented",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Orc Sight",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Ornate Tattoo",
+      "nivel": "5",
+      "atende": false
+    },
+    {
+      "nome": "Overlooked Mastermind",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Pinch Time",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Round Ears",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Sense Allies",
+      "nivel": "5",
+      "atende": false
+    },
+    {
+      "nome": "Shadow Pact",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Sociable",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Stubborn Persistence",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Supernatural Charm",
+      "nivel": "5",
+      "atende": false
+    },
+    {
+      "nome": "Unconventional Expertise",
+      "nivel": "13",
+      "atende": false
+    },
+    {
+      "nome": "Virtue-Forged Tattoos",
+      "nivel": "9",
+      "atende": false
+    },
+    {
+      "nome": "Wavetouched Paragon",
+      "nivel": "1",
+      "atende": false
+    }
+  ]
+}
