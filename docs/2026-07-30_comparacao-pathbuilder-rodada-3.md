@@ -85,11 +85,24 @@ As 5 no sentido contrario (`wb=True pb=False`) sao principio zero funcionando:
 `Venture-Gossip Dedication` (Paizo Blog). Ja identificados na 1a rodada: sao
 obras que o Pathbuilder nao carrega. Nao e defeito de nenhum dos dois.
 
-`Lightning Snares` (so no PB) e `Wild Empathy` (so no WB) no Ranger 4 ficam para
-a proxima rodada -- 1 ponto cada, e nao foram investigados aqui.
+`Lightning Snares` e `Wild Empathy` foram investigados na mesma rodada, e os
+dois sao **recorte de edicao**, nao defeito de ninguem:
+
+- **`Lightning Snares`** existe DUAS vezes no AoN: `feat-527` (Core Rulebook,
+  trait `Ranger`, arquetipo Snarecrafter) e `feat-6418` (Player Core 2, trait
+  `Archetype`, mesmo arquetipo). O remaster o RECLASSIFICOU de feat de classe do
+  Ranger para feat de arquetipo puro. A nossa base carrega a versao remaster,
+  entao ele nao entra na aba de Class Feats -- e certo. O Pathbuilder mostra a
+  classificacao LEGADA porque a sonda liga "Allow outdated CRB and APG" de
+  proposito (sem isso ele esconde metade do conteudo).
+- **`Wild Empathy`** tem UMA entrada no AoN (`feat-499`, nivel 2, trait
+  `Ranger`, arquetipos Beastmaster e Mammoth Lord). Pela fonte e feat de Ranger,
+  e e assim que a nossa base o classifica. O Pathbuilder o trata como feat de
+  arquetipo e nao o oferece na aba de classe. A fonte esta do nosso lado.
+
+Nenhum dos dois vira trabalho.
 
 ## O que fica para a proxima
 
-- `Lightning Snares` e `Wild Empathy` no Ranger 4.
 - Niveis 16 e 20, que a rodada nao alcancou.
 - Slot de `skill_feat` e `general_feat` em classe que nao seja Guerreiro.
