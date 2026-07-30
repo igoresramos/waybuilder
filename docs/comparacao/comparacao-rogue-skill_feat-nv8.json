@@ -3,29 +3,18 @@
     "slot": "Rogue 8 / skill_feat [Skill Feats]",
     "waybuilder": 227,
     "pathbuilder": 225,
-    "em_comum": 223,
-    "so_no_pathbuilder": [
-      "Card Sharp's Escape",
-      "Cognitive Crossover"
-    ],
+    "em_comum": 225,
+    "so_no_pathbuilder": [],
     "so_no_waybuilder": [
       "Adventurous Outfitter",
       "As on the Board, so on the Battlefield",
-      "Fane's Escape",
       "Improvise Strategy",
-      "Kreighton's Cognitive Crossover",
       "Seasoned Command",
       "Tactical Acumen"
     ],
     "divergencia_de_disponibilidade": [
       {
         "nome": "Automatic Knowledge",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Doublespeak",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []

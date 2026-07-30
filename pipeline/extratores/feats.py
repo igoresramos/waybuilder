@@ -293,7 +293,12 @@ class Indices:
 
 RANK_RE = re.compile(
     r"^(?:you (?:must )?(?:are|be)\s+|must be\s+|be\s+|being\s+)?"
-    r"(untrained|trained|expert|master|legendary)\s+(?:proficiency\s+)?in\s+(.+)$", re.I)
+    # `at` junto com `in`: a prosa oficial usa as duas preposicoes ("master at
+    # Deception" em `doublespeak`). Uma palavra, e a clausula deixa de cair
+    # inteira em `requires_residuo` -- achado na comparacao com o Pathbuilder,
+    # que barrava o feat corretamente enquanto nos o liberavamos.
+    r"(untrained|trained|expert|master|legendary)\s+(?:proficiency\s+)?(?:in|at)\s+(.+)$",
+    re.I)
 
 ATRIB_VAL_RE = re.compile(
     r"^(strength|dexterity|constitution|intelligence|wisdom|charisma)\s+(\d+)$", re.I)

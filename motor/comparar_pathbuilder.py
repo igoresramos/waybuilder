@@ -149,8 +149,17 @@ ABAS = {
         _traits(r) & {str(base.get(c).get("name") or "").lower()
                       for c in p.ordem_de_classe}) and "archetype" not in _traits(r),
     "Dedication Feats": lambda base, p, r: "dedication" in _traits(r),
-    "Skill Feats": lambda base, p, r: "skill" in _traits(r),
-    "General Feats": lambda base, p, r: "general" in _traits(r) and "skill" not in _traits(r),
+    # `and not archetype` pela MESMA razao da aba de classe, e o esquecimento
+    # aqui custou 118 falsos positivos numa rodada de Rogue 8: 24 feats de
+    # Player Core 2 carregam `archetype` E `skill` juntos (Linguist, Dandy,
+    # Acrobat...), e o Pathbuilder os poe na aba de Arquetipo. Nos os
+    # oferecemos no slot de pericia -- e isso esta CERTO pelo RAW, desde que
+    # haja a dedicacao --, mas nao e o recorte da aba dele.
+    "Skill Feats": lambda base, p, r: (
+        "skill" in _traits(r) and "archetype" not in _traits(r)),
+    "General Feats": lambda base, p, r: (
+        "general" in _traits(r) and "skill" not in _traits(r)
+        and "archetype" not in _traits(r)),
     # `All Feats` fica de FORA do placar: ela nao recorta nada do lado deles, e
     # do nosso o slot de class feat aceita todo feat de arquetipo (RAW), entao a
     # comparacao virava 2.253 contra 341 -- ruido pelo desenho, nao achado.

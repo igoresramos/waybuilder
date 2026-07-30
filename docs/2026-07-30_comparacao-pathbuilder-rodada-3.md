@@ -102,7 +102,69 @@ dois sao **recorte de edicao**, nao defeito de ninguem:
 
 Nenhum dos dois vira trabalho.
 
+---
+
+## 6. Segunda leva da rodada: Wizard 16, Cleric 20, Rogue 8 / skill_feat
+
+Rodada em terreno ainda mais novo -- nivel 16 e 20, e o slot de `skill_feat`
+fora do Guerreiro. Deu **o defeito mais grave do dia**, e dois consertos de
+parser.
+
+### DEFEITO NOSSO, grave: `has` de class-feature era SEMPRE falso
+
+O Clerigo 20 nao podia pegar `Martyr`, que exige `Divine Font` -- e ele tem
+Divine Font desde o nivel 1.
+
+`_termo_has` monta "o que eu tenho" com
+`{f["id"] for f in self.features if f.get("raiz") != excluir}`. A guarda existe
+para o feat nao satisfazer o proprio requisito. Mas feature vinda da PROGRESSAO
+da classe nao tem `raiz` (e `None`), e `_avaliando` so e setado dentro de
+`_checar_requisitos` -- em `candidatos()` ele **nunca** e setado. Entao
+`None != None` dava `False` e toda class-feature era descartada.
+
+Nao era caso de borda: era o caminho normal do app.
+
+**139 clausulas `has` em 135 registros**: `spellstrike` 21, `arcane-cascade` 12,
+`ki-spells` 12, `debilitating-strike` 8. Um Magus nunca podia pegar feat de
+Spellstrike; um Monge, feat de Ki.
+
+### DEFEITO DO COMPARADOR: 118 falsos positivos no skill feat
+
+A aba "Class Feats" ja tinha a guarda `and "archetype" not in traits` -- os 11
+feats de mascara do Wizard carregam `wizard` E `archetype` juntos. A aba "Skill
+Feats" nao tinha. Resultado: 24 feats de Player Core 2 que carregam `archetype`
+E `skill` (Linguist, Dandy, Acrobat, Vigilante...) apareciam como sobra nossa.
+
+Nos os oferecemos no slot de pericia, e isso esta CERTO pelo RAW -- desde que
+haja a dedicacao. Mas nao e o recorte da aba dele. **118 -> 7.**
+
+### `master at Deception`
+
+Uma preposicao. `RANK_RE` aceitava `in` e nao `at`, e `Doublespeak` caia inteiro
+no residuo. Uma palavra na alternancia, e o Pathbuilder e nos passamos a
+concordar. Residuo 598 -> 597.
+
+### 2 pares novos de renomeacao (PFS Guide)
+
+`Kreighton's Cognitive Crossover` -> `Cognitive Crossover` e `Fane's Escape` ->
+`Card Sharp's Escape`. Kreighton e Fane sao personagens da Pathfinder Society.
+A tabela foi a **35 pares**.
+
+### O que sobrou, e nao e defeito
+
+- **5 feats de Pathfinder #223: Hell's Destiny** so nossos -- AP que ele nao
+  carrega.
+- **`Automatic Knowledge` e `Dubious Knowledge`**: "expert in a skill with the
+  Recall Knowledge action". E um QUANTIFICADOR ("alguma pericia que tenha tal
+  acao") que o predicado nao sabe expressar. Fica no residuo; nos mostramos
+  marcado e ele barra.
+- **`Ravening's Desperation`**: exige `lore:zevgavizeb`, e a familia ja
+  declarada de pericia pendente.
+- **As dedicacoes `wb=True pb=False`** (Alkenstar Agent, Artillerist, Eldritch
+  Archer, Marshal, Five-breath Vanguard): principio zero -- pre-requisito
+  narrativo em `requires_residuo` nao bloqueia aqui e bloqueia la.
+
 ## O que fica para a proxima
 
-- Niveis 16 e 20, que a rodada nao alcancou.
-- Slot de `skill_feat` e `general_feat` em classe que nao seja Guerreiro.
+- Slot de `general_feat` fora do Guerreiro.
+- O quantificador "uma pericia que tenha a acao X", se aparecer mais vezes.
