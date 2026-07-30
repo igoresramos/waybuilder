@@ -1000,3 +1000,20 @@ para o schema v2, e a saida velha em disco mascarava isso; e 20 herancas legadas
 sairam por recorte da fonte fixada, decisao registrada em `censo_ausencias.json`.
 
 Quatro camadas verdes em cada commit. Dois commits, ambos no origin.
+
+**Item 94 fechado (fatia B).** O slot concedido agora nasce, filtra e dispensa o
+nivel. `Ancient Elf` abre um slot com as 27 dedicacoes multiclasse e feat geral
+nao entra; a dispensa de nivel vem da prosa ("even though you don't meet its
+level prerequisite... You must still meet its OTHER prerequisites"), entao
+dedicacao de nivel 2 atende num personagem 1 e CHA >= 14 continua reprovando.
+
+O efeito maior nao foi o `Ancient Elf`: **17 das 28 fichas ganharam um slot por
+`Versatile Human`**, que pelo RAW da um feat geral extra de nivel 1 e o app nunca
+ofereceu.
+
+Dois defeitos meus pegos pelo teste -- `{"lte": ["item:level", "self:level"]}`
+zerando em silencio o slot da `Rogue Dedication`, e o `em` de criacao (string)
+comparado com nivel (int). E um de outra especie, que virou licao: `build.sh`
+aborta nos portoes e o passo 9 nao roda, entao `base/app/` -- que os testes de
+paridade consomem -- fica do build anterior. A divergencia parecia erro de
+ordenacao e era payload velho. Quarta ocorrencia no dia do mesmo padrao.

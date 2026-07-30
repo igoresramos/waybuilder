@@ -1,5 +1,6 @@
 ---
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -527,21 +528,5 @@ items:
   id: 92
   date: '2026-07-29'
   priority: media
-- desc: 'FATIA A CONCLUIDA 2026-07-30 (commit 13c347200, spec specs/2026-07-30-slot-de-feat-concedido.md).
-    A base guarda QUAL feat o slot aceita: 101 ChoiceSet com itemType=feat na fonte, e o extrator
-    escrevia `filtro=True` jogando a consulta fora. `Ancient Elf` responde [''item:category:class'',''item:trait:dedication'',''item:trait:multiclass''].
-    Heranca ganhou conversao de ChoiceSet (antes so FlatModifier). SAIU JUNTO: ancestrias.py estava
-    parado em 27/07 e nunca migrou pro schema v2 (portao 10: 401 -> 0), e 20 herancas legadas sairam
-    por recorte da fonte fixada (decisao em censo_ausencias.json). FATIA B PENDENTE, e e o que entrega
-    na tela: (1) `_slots_de_feat` (motor.py:974) so varre `entrada_da_classe` -- precisa varrer os
-    feats efetivos e injetar um slot por `choice` tipo=feat; (2) `candidatos()` desse slot tem que
-    HONRAR o filtro, senao entrega escolha ilegal com cara de legal. Gramatica medida: lte 59, not
-    37, or 28, and 16, xor 8, nor 2; atomos item:trait 291, item:level 94, item:category 56, parent:granter
-    12, item:rarity 8. 153 atomos tem referencia dinamica {actor|...}; 35 dos 101 filtros sao string
-    estatica pura. O motor ja tem avaliador com or/and/not em predicado.py -- e vocabulario novo,
-    nao interpretador novo. Atomo desconhecido NAO reprova (principio zero).'
-  id: 94
-  date: '2026-07-30'
-  priority: alta
 promoted: []
 ---
