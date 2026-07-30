@@ -84,6 +84,12 @@ echo "== 4h5. condicao de acesso (filiacao) lida do AoN =="
 # O AoN publica `access` como campo -- e leitura, nao prosa.
 python3 aplicar_acesso.py
 
+echo "== 4h6. ranks de elevacao da magia, lidos do AoN =="
+# `heightened` vazio significava "nao eleva" E "nao sei" ao mesmo tempo. O AoN
+# publica `heighten_level` nos 2.461 docs: das 1.125 vazias, 664 estao certas e
+# 461 sao lacuna de verdade.
+python3 aplicar_ranks_de_magia.py
+
 echo "== 4i. aplicar correcoes curadas =="
 # o que exigiu leitura da prosa oficial porque as tres fontes estao vazias no
 # ponto. Cada entrada declara o valor que ESPERA achar: se a fonte consertar o
