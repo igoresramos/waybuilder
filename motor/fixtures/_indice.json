@@ -19,6 +19,14 @@
    "slots_abertos": 13
   },
   {
+   "ficha": "_teste-validacao-familiar-concedido",
+   "nivel": 3,
+   "hp": 29,
+   "avisos": 6,
+   "fora_do_requisito": 0,
+   "slots_abertos": 11
+  },
+  {
    "ficha": "_teste-validacao-has-de-class-feature",
    "nivel": 6,
    "hp": 68,
@@ -72,7 +80,7 @@
    "hp": 48,
    "avisos": 4,
    "fora_do_requisito": 0,
-   "slots_abertos": 16
+   "slots_abertos": 17
   },
   {
    "ficha": "campeao6-alquimista4-fa-nivel10",
@@ -176,7 +184,7 @@
    "hp": 68,
    "avisos": 2,
    "fora_do_requisito": 0,
-   "slots_abertos": 14
+   "slots_abertos": 15
   },
   {
    "ficha": "kineticista6-fa-fogo",

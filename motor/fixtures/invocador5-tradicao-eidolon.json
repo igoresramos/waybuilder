@@ -884,7 +884,19 @@
     "por_id": "wb:background/hermit"
    }
   ],
-  "concessoes_de_ator": [],
+  "concessoes_de_ator": [
+   {
+    "classe": null,
+    "em": null,
+    "escolhe": "eidolon",
+    "escolhido": null,
+    "opcoes": [],
+    "origem": "wb:class-feature/eidolon",
+    "origem_nome": "Eidolon",
+    "preenchida": false,
+    "tipo": "eidolon"
+   }
+  ],
   "conjuracao": [
    {
     "classe": "Summoner",
@@ -912,7 +924,14 @@
   "features": [
    {
     "classe": "Summoner",
-    "grants": [],
+    "grants": [
+     {
+      "grant_actor": {
+       "escolhe": "eidolon",
+       "tipo": "eidolon"
+      }
+     }
+    ],
     "id": "wb:class-feature/eidolon",
     "na_base": true,
     "nivel_de_classe": 1,
@@ -1322,6 +1341,15 @@
     "kind": "ability",
     "rotulo": "boosts de atributo (4 a escolher)",
     "slot": "boosts_livres"
+   },
+   {
+    "em": "criacao",
+    "escolhe": 1,
+    "kind": "eidolon",
+    "opcoes_ids": [],
+    "origem": "wb:class-feature/eidolon",
+    "rotulo": "eidolon -- Eidolon",
+    "slot": "eidolon"
    },
    {
     "em": "criacao",

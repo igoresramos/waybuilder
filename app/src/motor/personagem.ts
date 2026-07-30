@@ -2980,7 +2980,7 @@ export class Personagem implements ContextoDePredicado {
       }));
     }
 
-    if (slot === "companheiro") {
+    if (slot === "companheiro" || slot === "familiar" || slot === "eidolon") {
       // As `opcoes` do concessor ORDENAM, não filtram: Drake Rider diz "riding
       // drake, riding dragonet, or another animal companion", e mesmo o Rough
       // Rider, que fixa o lobo, não some com o resto -- princípio zero aplicado
@@ -2988,7 +2988,7 @@ export class Personagem implements ContextoDePredicado {
       const preferidas = new Set<string>();
       const kinds = new Set<string>();
       for (const c of this.concessoes_de_ator) {
-        if (c.tipo !== "companheiro") continue;
+        if (c.tipo !== slot) continue;
         kinds.add(c.escolhe);
         if (em === null || c.em === em) for (const o of c.opcoes) preferidas.add(o);
       }
@@ -2996,8 +2996,13 @@ export class Personagem implements ContextoDePredicado {
       // `stats` separa ESPÉCIE de ESPECIALIZAÇÃO: dos 113 registros do kind, 17
       // são Ambusher, Nimble, Savage e companhia -- graus que não têm stat
       // block e não cabem neste slot. Elegibilidade de slot, não requisito.
+      //
+      // Só vale no companheiro: os 39 `familiar-specific` não têm `stats` --
+      // a fonte não publica número para eles --, e exigir o campo esvaziaria a
+      // lista. Spec `specs/2026-07-30-familiar-e-eidolon-concedidos.md`.
       const especies = [...this.base.por_id.values()]
-        .filter((r) => kinds.has(String(r.kind)) && verdadeiro(r["stats"]));
+        .filter((r) => kinds.has(String(r.kind))
+                && (slot !== "companheiro" || verdadeiro(r["stats"])));
       const escolha: Candidato[] = especies.map((r) => {
         const [atende, motivos] = this.avaliar(r["requires"]);
         return {

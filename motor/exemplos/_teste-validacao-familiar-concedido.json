@@ -1,0 +1,22 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {"versao": "2026-07-30", "pin_foundry": "87f9e502"},
+ "identidade": {
+  "nome": "TESTE FAMILIAR CONCEDIDO -- Bruxa 3 com familiar escolhido",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao da spec specs/2026-07-30-familiar-e-eidolon-concedidos.md (sobra do item 43). `derivar_concessao_de_ator.py` so casava 'animal companion': 0 registros concediam familiar e 0 concediam eidolon, e uma Bruxa nivel 1 -- cuja PRIMEIRA feature de classe se chama `Familiar (Witch)` -- nao tinha familiar nenhum na ficha. Agora sao 16 concedendo familiar e 2 concedendo eidolon. A rota da Bruxa nao passa por prosa: sai da `progressao` da classe, porque ela nao diz 'you gain a familiar' em lugar nenhum. O stat block do familiar segue AUSENTE de proposito: `familiar-specific` nao tem um unico campo numerico e a pagina de regras do AoN so traz o conceito -- derivar sem a regra na mao seria inventar. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/skilled-human"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/scholar"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/witch"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/witch"},
+  {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/witch"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["int", "dex", "con", "wis"]}
+ ],
+ "atores": [
+  {"tipo": "familiar", "nome": "Pipefox",
+   "concedido_por": "wb:class-feature/familiar-witch"}
+ ]
+}
