@@ -49,6 +49,17 @@ CAMPOS_POR_KIND = {
     "background": ("skill", "feat", "attribute"),
 }
 
+# A tradicao de conjuracao do Feiticeiro, da Bruxa e do Invocador nao esta na
+# classe: vem da subclasse. E o AoN publica isso como CAMPO, nao como prosa --
+# `tradition: ["Occult"]` --, entao nao ha o que inferir. Sem esta emissao o
+# motor recebia a frase "variavel (definida pela escolha de bloodline...)" como
+# se fosse o valor, e ela ia crua para a ficha.
+# `draconic-exemplar` entra porque o Draconic remaster nao declara tradicao
+# propria: ela vem do exemplar escolhido. O eixo ainda nao esta ligado em classe
+# nenhuma, entao hoje nao resolve -- mas o dado fica pronto.
+# Spec: specs/2026-07-30-tradicao-por-subclasse.md
+KINDS_COM_TRADICAO = {"bloodline", "patron", "eidolon", "draconic-exemplar"}
+
 # Data de publicacao do Player Core no AoN -- mesmo corte usado pelo extrator
 # de ancestrias, para nao ter dois criterios de "e remaster?" na mesma base.
 REMASTER_CUTOFF = "2023-11-15"
@@ -122,6 +133,16 @@ def converter(d, kind):
     if d.get("remaster_id") or d.get("legacy_id"):
         reg["xref"]["aon_ponte"] = [str(x) for x in
                                     (d.get("remaster_id") or d.get("legacy_id") or [])]
+
+    # a tradicao vem do PROPRIO documento que originou o registro, e nunca de
+    # busca por nome: `Draconic` existe duas vezes no dump (a legada com
+    # `Arcane`, a remaster com `None`) e a base carrega a remaster. Casar por
+    # nome atribuiria a tradicao da versao aposentada a versao vigente.
+    if kind in KINDS_COM_TRADICAO:
+        trad = d.get("tradition") or []
+        if trad:
+            reg["tradition"] = str(trad[0]).lower()
+            reg["prov"]["tradition"] = "aon"
 
     # campos proprios do kind: sem eles o registro novo sairia mais pobre que os
     # que ja estavam na base, e o merge nao teria de onde completar

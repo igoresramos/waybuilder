@@ -230,6 +230,9 @@ aliases em requires: 48 ids trocados em 48 registros; 3 com opcao repetida remov
 == 7d. uma opcao por nome em cada eixo de sub-escolha ==
 opcoes irmas: 15 referencias colapsadas em 3 classes
 -> /home/igor0/Tartarus/Projetos/pessoal/waybuilder/pipeline/base/relatorio_opcoes_irmas.md
+== 7d2. tradicao de conjuracao da subclasse para a opcao viva ==
+tradicao levada para a opcao viva: 47 pares (1 sem tradicao na fonte)
+-> /home/igor0/Tartarus/Projetos/pessoal/waybuilder/pipeline/base/relatorio_tradicao_de_subclasse.md
 == 7e. mecanica de dedicacao derivada da prosa oficial ==
 mecanica de dedicacao: 5 derivadas da prosa, 25 divida declarada, 31 sem padrao (de 61)
 -> /home/igor0/Tartarus/Projetos/pessoal/waybuilder/pipeline/base/relatorio_mecanica_dedicacao.md

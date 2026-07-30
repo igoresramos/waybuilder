@@ -64,6 +64,24 @@ export interface Documento {
   manual?: Record<string, unknown>;
 }
 
+/** Uma opção de `ChoiceSet` (spec `2026-07-29-choiceset.md`). `valor` é o que a
+ * consequência cita no `predicate`; `rotulo` é o que a tela mostra; `grants` são
+ * as consequências já aninhadas nesta opção -- 56 das 570 opções da base as
+ * têm, e é por elas que escolher a opção muda número na ficha. */
+export interface OpcaoDeGrant {
+  rotulo: string;
+  valor: string;
+  grants?: unknown[];
+}
+
+/** O detalhe por classe do orçamento de perícias livres (spec
+ * `2026-07-29-pericias-livres.md`): quanto a classe deu, quanto sobrou. */
+export interface DetalheDePericiaLivre {
+  classe: string;
+  orcamento: number;
+  delta: number;
+}
+
 /** Um slot por preencher. E o roteiro do jogador -- a lista guia a tela. */
 export interface SlotAberto {
   slot: string;
@@ -71,10 +89,19 @@ export interface SlotAberto {
   kind: string | null;
   escolhe: number;
   rotulo: string;
-  /** CONTAGEM de opções do eixo de subclasse, não a lista -- é o que o motor
-   * guarda em `slots_de_subclasse` e repassa aqui. */
-  opcoes?: number;
-  fontes?: FonteDeBoost[];
+  /** Duas leituras na MESMA chave, e é assim que o oráculo Python emite:
+   * CONTAGEM de opções no eixo de `subclasse` (o motor guarda em
+   * `slots_de_subclasse` e repassa), e as OPÇÕES do ChoiceSet na
+   * `escolha_de_grant` -- `{rotulo, valor}`, onde `valor` é o caminho do
+   * Foundry que a opção preenche, não um id da base. O tipo descreve o dado;
+   * separar as duas exigiria mexer no gabarito, que é outra decisão. */
+  opcoes?: number | OpcaoDeGrant[];
+  /** `FonteDeBoost` em `boosts_livres`; `{classe, orcamento, delta}` em
+   * `pericias_livres`. Mesma situação da chave acima. */
+  fontes?: FonteDeBoost[] | DetalheDePericiaLivre[];
+  /** o rótulo do ChoiceSet que a opção escolhida preenche (`escolha_de_grant`);
+   * `null` quando a fonte não nomeia a escolha. */
+  flag?: string | null;
   /** quem abriu o slot -- hoje só o concessor de ator (`grant_actor`) */
   origem?: string;
   /** ids que o concessor SUGERE. Ordenam a lista, não a filtram. */
@@ -245,6 +272,12 @@ export interface Ataque {
   atributo_do_ataque: "str" | "dex";
   dano: string;
   tipo_de_dano: string | null;
+  /** runas do item equipado: potência soma no ataque, striking soma DADOS de
+   * dano, e as de propriedade só aparecem (o motor não roda o efeito delas).
+   * O oráculo Python já emitia os três e o tipo não tinha sido atualizado. */
+  potencia: number;
+  striking: number;
+  runas_de_propriedade: string[];
   traits: string[];
   detalhe: string;
 }

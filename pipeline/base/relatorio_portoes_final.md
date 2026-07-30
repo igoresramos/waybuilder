@@ -61,6 +61,5 @@ _Ausencias ja decididas (2 categorias) -- visiveis, nao bloqueiam:_
 **PASSOU** -- 0 ocorrencia(s).
 
 - registros SEM resposta de `grants_completos`: **0** de 19706 (0.0%)
-- linha de base anterior: 8360
-- linha de base GRAVADA em 0
+- linha de base anterior: 0
 

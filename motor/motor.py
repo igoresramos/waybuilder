@@ -1030,10 +1030,19 @@ class Personagem:
                 continue
             rank_efetivo = math.ceil(self.nivel / 2)          # regra 17
             max_rank_cru = int(tabela.get("max_rank") or 0)   # regra 16
+            # Feiticeiro, Bruxa e Invocador nao tem tradicao fixa: a classe traz
+            # uma FRASE ("variavel (definida pela escolha de bloodline...)") e
+            # quem responde e a subclasse. Sem esta resolucao a frase ia crua
+            # para a ficha, no campo que decide quais magias ele pode aprender.
+            # Spec: `specs/2026-07-30-tradicao-por-subclasse.md`
+            tradicao = sc.get("tradition")
+            if tradicao not in ("arcane", "divine", "occult", "primal"):
+                tradicao = self._tradicao_por_escolha(
+                    classe, {"de": "subclasse"}, classe.get("name", cid))
             self.conjuracao.append({
                 "classe": classe.get("name", cid),
                 "nivel_de_classe": nivel_classe,
-                "tradicao": sc.get("tradition"),
+                "tradicao": tradicao,
                 "tipo": sc.get("type"),
                 "slots": tabela.get("ranks") or {},
                 "truques": tabela.get("cantrips"),
@@ -1101,18 +1110,29 @@ class Personagem:
         return any(self.base.resolver(i) == alvo
                    for i, _, _ in self._feats_efetivos())
 
-    def _tradicao_por_escolha(self, reg: dict, gs: dict) -> str | None:
+    def _tradicao_por_escolha(self, reg: dict, gs: dict,
+                              classe: str | None = None) -> str | None:
         """Sorcerer usa a tradicao do bloodline; a Bruxa, a do patron.
 
         Sem a escolha feita nao da para saber, e ARBITRAR aqui poria uma
         tradicao errada na ficha em silencio -- mesmo tratamento do grau do
         companheiro: avisa e devolve `None`.
+
+        `classe` e o NOME da classe cuja conjuracao esta sendo resolvida, e sem
+        ele um Feiticeiro 5 / Bruxa 3 sai com a mesma tradicao nas duas linhas:
+        a varredura devolvia a primeira escolha de subclasse que tivesse
+        tradicao, qualquer que fosse a classe dona. A rota de arquetipo nao
+        passa o filtro porque ali a escolha e unica por cadeia.
+
+        Spec: `specs/2026-07-30-tradicao-por-subclasse.md`
         """
         eixo = gs.get("de")
         for e in self.doc.get("escolhas", []):
             if e.get("slot") != "subclasse":
                 continue
             escolhido = self.base.opcional(e.get("pega") or "") or {}
+            if classe and classe not in (escolhido.get("class") or [classe]):
+                continue
             trad = ((escolhido.get("spellcasting") or {}).get("tradition")
                     or escolhido.get("tradition"))
             if trad in ("arcane", "divine", "occult", "primal"):
@@ -2130,6 +2150,12 @@ class Personagem:
         for c in self.conjuracao:
             bruta = c.get("tradicao")
             if not bruta:
+                # `None` e "varia com a subclasse e ela nao foi escolhida", e
+                # NAO "nao tem tradicao" -- desde que `_conjuracao` passou a
+                # resolver (item 78), a frase em prosa virou nulo. Tratar como
+                # ausencia faria o Feiticeiro sem bloodline ser REPROVADO, que
+                # e o oposto do principio zero: o motor nao sabe qual e.
+                indefinida = True
                 continue
             if norm_slug(str(bruta)) == alvo:
                 return True, ""

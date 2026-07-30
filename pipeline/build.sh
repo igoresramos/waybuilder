@@ -110,6 +110,12 @@ echo "== 7d. uma opcao por nome em cada eixo de sub-escolha =="
 # `Justice` duas vezes.
 python3 colapsar_opcoes_irmas.py
 
+echo "== 7d2. tradicao de conjuracao da subclasse para a opcao viva =="
+# O AoN publica `tradition` como campo no kind dedicado (`wb:bloodline/genie`),
+# mas quem o jogador escolhe e a class-feature irma. Roda DEPOIS do 7d, que e
+# quem decide qual dos dois irmaos e a opcao viva.
+python3 derivar_tradicao_de_subclasse.py
+
 echo "== 7e. mecanica de dedicacao derivada da prosa oficial =="
 # 61 dedicacoes chegam com `grants` vazio. Roda AQUI porque precisa da prosa
 # (passo 5) e nao deve enriquecer registro que a fusao vai absorver (passo 7).

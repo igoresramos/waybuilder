@@ -18,7 +18,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/badger",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-68"
@@ -96,7 +96,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/hyena",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-10"
@@ -164,7 +164,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/riding-tarantula",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-100"
@@ -243,7 +243,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/roc",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-101"
@@ -318,7 +318,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/umbrella-mushroom",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-102"
@@ -384,7 +384,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/durian-crab",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-108"
@@ -454,7 +454,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/hermit-krait",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-109"
@@ -525,7 +525,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/vulture",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-11"
@@ -595,7 +595,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/sundaflora",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-110"
@@ -669,7 +669,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/tikar-urchinpad",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-111"
@@ -739,7 +739,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/yzobu",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-112"
@@ -812,7 +812,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/war-pig",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-113"
@@ -886,7 +886,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/wyvern",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-114"
@@ -957,7 +957,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/chetamog",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-115"
@@ -1031,7 +1031,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/bacallia",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-116"
@@ -1097,7 +1097,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/keulia",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-117"
@@ -1164,7 +1164,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/cragstone-bear",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-118"
@@ -1239,7 +1239,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/giant-rock-tuatara",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-119"
@@ -1310,7 +1310,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/cave-gecko",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-12"
@@ -1381,7 +1381,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/gray-bladeling",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-120"
@@ -1451,7 +1451,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/severed-head",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-121"
@@ -1519,7 +1519,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/riding-dragonet",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-122"
@@ -1597,7 +1597,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/isgeri-boarhound",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-123"
@@ -1665,7 +1665,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/oozeform-chair",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-55"
@@ -1736,7 +1736,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/rootball-chair",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-56"
@@ -1809,7 +1809,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/thruneosaurus-rex",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-126"
@@ -1879,7 +1879,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/cephalopod",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-127"
@@ -1956,7 +1956,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/iridescent-salamander",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-128"
@@ -2024,7 +2024,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/pufferfish",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-129"
@@ -2093,7 +2093,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/monitor-lizard",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-13"
@@ -2158,7 +2158,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/silt-frog",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-130"
@@ -2232,7 +2232,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/cave-pterosaur",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-14"
@@ -2310,7 +2310,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/ape",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-66"
@@ -2380,7 +2380,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/arboreal-sapling",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-67"
@@ -2448,7 +2448,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/bat",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-69"
@@ -2529,7 +2529,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/boar",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-72"
@@ -2597,7 +2597,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/bear",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-70"
@@ -2673,7 +2673,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/crocodile",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-74"
@@ -2751,7 +2751,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/riding-drake",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-77"
@@ -2824,7 +2824,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/scorpion",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-78"
@@ -2901,7 +2901,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/shark",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-79"
@@ -2970,7 +2970,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/shadow-hound",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-24"
@@ -3038,7 +3038,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/beetle",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-25"
@@ -3111,7 +3111,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/capybara",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-26"
@@ -3180,7 +3180,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/moth",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-27"
@@ -3249,7 +3249,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/pangolin",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-28"
@@ -3322,7 +3322,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/terror-bird",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-29"
@@ -3395,7 +3395,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/bird",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-71"
@@ -3476,7 +3476,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/legchair",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-30"
@@ -3546,7 +3546,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/ulgrem-lurann",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-33"
@@ -3618,7 +3618,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/elephant",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-34"
@@ -3689,7 +3689,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/rhinoceros",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-35"
@@ -3755,7 +3755,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/triceratops",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-36"
@@ -3826,7 +3826,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/tyrannosaurus",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-37"
@@ -3898,7 +3898,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/ghost",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-38"
@@ -3967,7 +3967,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/cat",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-73"
@@ -4048,7 +4048,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/vampiric-animal",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-41"
@@ -4118,7 +4118,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/skeletal-mount",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-43"
@@ -4186,7 +4186,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/skeletal-servant",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-44"
@@ -4259,7 +4259,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/zombie",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-45"
@@ -4324,7 +4324,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/skeletal-bird-of-prey",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-48"
@@ -4402,7 +4402,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/skeletal-constrictor",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-49"
@@ -4470,7 +4470,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/dromaeosaur",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-75"
@@ -4552,7 +4552,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/undead-hand",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-50"
@@ -4622,7 +4622,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/zombie-carrion-bird",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-51"
@@ -4688,7 +4688,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/zombie-mount",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-52"
@@ -4752,7 +4752,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/water-wraith",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-54"
@@ -4826,7 +4826,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/augdunar",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-57"
@@ -4891,7 +4891,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/draft-lizard",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-58"
@@ -4964,7 +4964,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/goat",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-59"
@@ -5033,7 +5033,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/horse",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-76"
@@ -5106,7 +5106,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/air-elemental",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-60"
@@ -5176,7 +5176,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/earth-elemental",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-61"
@@ -5244,7 +5244,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/fire-elemental",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-62"
@@ -5315,7 +5315,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/metal-elemental",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-63"
@@ -5382,7 +5382,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/water-elemental",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-64"
@@ -5451,7 +5451,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/wood-elemental",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-65"
@@ -5517,7 +5517,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/snake",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-80"
@@ -5590,7 +5590,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/wolf",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-83"
@@ -5661,7 +5661,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/antelope",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-84"
@@ -5738,7 +5738,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/elk",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-85"
@@ -5811,7 +5811,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/flying-squirrel",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-86"
@@ -5889,7 +5889,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/giraffe",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-87"
@@ -5966,7 +5966,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/kangaroo",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-88"
@@ -6034,7 +6034,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/mole",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-89"
@@ -6108,7 +6108,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/camel",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-9"
@@ -6173,7 +6173,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/mongoose",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-90"
@@ -6251,7 +6251,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/salamander",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-91"
@@ -6323,7 +6323,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/shotalashu",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-92"
@@ -6393,7 +6393,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/giant-eel",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-93"
@@ -6460,7 +6460,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/giant-frog",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-94"
@@ -6536,7 +6536,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/giant-wasp",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-95"
@@ -6605,7 +6605,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/griffon",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-96"
@@ -6680,7 +6680,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/hippocampus",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-97"
@@ -6746,7 +6746,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/hippogriff",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-98"
@@ -6820,7 +6820,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/orca",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-99"
@@ -6883,7 +6883,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/ambusher",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-13"
@@ -6915,7 +6915,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/wind-chaser",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-10"
@@ -6944,7 +6944,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/shade",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-12"
@@ -6973,7 +6973,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/bully",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-14"
@@ -7005,7 +7005,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/daredevil",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-15"
@@ -7037,7 +7037,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/racer",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-16"
@@ -7069,7 +7069,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/tracker",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-17"
@@ -7101,7 +7101,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/wrecker",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-18"
@@ -7133,7 +7133,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/deep-diver",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-7"
@@ -7162,7 +7162,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/steadfast-strider",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-8"
@@ -7191,7 +7191,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/wildfire-scorcher",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-specialization-9"
@@ -7220,7 +7220,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/savage",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-advanced-8"
@@ -7252,7 +7252,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/nimble",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-advanced-7"
@@ -7284,7 +7284,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/indomitable",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-advanced-3"
@@ -7315,7 +7315,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/genie-touched",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-advanced-4"
@@ -7347,7 +7347,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/unseen",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-advanced-9"
@@ -7382,7 +7382,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/animal-companion/fiery-leopard",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "animal-companion-unique-1"
@@ -7464,7 +7464,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/manual-dexterity",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-146",
@@ -7497,7 +7497,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/resonance",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-100"
@@ -7526,7 +7526,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/little-wish",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-101"
@@ -7555,7 +7555,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/elemental-diplomat",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-102"
@@ -7584,7 +7584,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/elemental-breath",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-103"
@@ -7613,7 +7613,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/scamp-elements",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-104"
@@ -7642,7 +7642,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/elemental-mobility",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-105"
@@ -7671,7 +7671,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/sorcerous-sweets",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-107"
@@ -7700,7 +7700,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/accompanist",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-108",
@@ -7952,7 +7952,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/focused-rejuvenation",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-113",
@@ -8022,7 +8022,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/independent",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-115",
@@ -8055,7 +8055,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/kinspeech",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-116",
@@ -8135,7 +8135,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/masters-form",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-118",
@@ -8168,7 +8168,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/partner-in-crime",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-119",
@@ -8201,7 +8201,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/speech",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-124",
@@ -8271,7 +8271,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/plant-form",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-121",
@@ -8407,7 +8407,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/spellcasting",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-125",
@@ -8440,7 +8440,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/toolbearer",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-126",
@@ -8473,7 +8473,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/touch-telepathy",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-127",
@@ -8506,7 +8506,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/valet",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-128",
@@ -8539,7 +8539,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/absorb-familiar",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-129",
@@ -8569,7 +8569,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/cantrip-connection",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-130",
@@ -8602,7 +8602,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-focus",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-131",
@@ -8635,7 +8635,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/innate-surge",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-132",
@@ -8668,7 +8668,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/lifelink",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-133",
@@ -8701,7 +8701,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/recall-familiar",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-134",
@@ -8734,7 +8734,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/restorative-familiar",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-135",
@@ -8767,7 +8767,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/share-senses",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-136",
@@ -8800,7 +8800,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/spell-battery",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-137",
@@ -8833,7 +8833,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/spell-delivery",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-138",
@@ -8866,7 +8866,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/extra-reagents",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-14"
@@ -9190,7 +9190,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/item-delivery",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-149",
@@ -9220,7 +9220,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/poison-reservoir",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-150",
@@ -9253,7 +9253,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/second-opinion",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-151",
@@ -9286,7 +9286,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/extra-alchemy",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-152",
@@ -9319,7 +9319,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/extra-vial",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-153",
@@ -9349,7 +9349,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/aeon-stone-reservoir",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-154"
@@ -9381,7 +9381,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/cant-walk",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-155"
@@ -9413,7 +9413,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/crystalline",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-156"
@@ -9445,7 +9445,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/euphoric-breath",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-157"
@@ -9474,7 +9474,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/porter",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-158"
@@ -9503,7 +9503,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/blood-link",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-159"
@@ -9532,7 +9532,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/imp-invisibility",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-160"
@@ -9564,7 +9564,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/fiendish-temptation",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-161"
@@ -9593,7 +9593,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/scholarly-linguist",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-162"
@@ -9622,7 +9622,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/flammable",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-163"
@@ -9654,7 +9654,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/magic-scent",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-164"
@@ -9686,7 +9686,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/ooze-defense",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-165"
@@ -9718,7 +9718,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/slime-rejuvenation",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-166"
@@ -9750,7 +9750,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/play-dead",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-167",
@@ -9788,7 +9788,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/versatile-form",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-168",
@@ -9826,7 +9826,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/kindling",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-169",
@@ -9867,7 +9867,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/dazzling-show",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-170",
@@ -9906,7 +9906,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/soul-bond",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-171",
@@ -9950,7 +9950,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/vina-song",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-172",
@@ -9993,7 +9993,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/stunning-flare",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-173",
@@ -10034,7 +10034,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/shadow-projection",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-174",
@@ -10073,7 +10073,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/flatten",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-175",
@@ -10111,7 +10111,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/mass-produced",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-176",
@@ -10149,7 +10149,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/seal-bearer",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-177",
@@ -10189,7 +10189,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/pot-of-tea",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-178",
@@ -10228,7 +10228,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/ink-spray",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-179"
@@ -10257,7 +10257,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/gibe",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-180"
@@ -10288,7 +10288,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/kick-up-dust",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-181",
@@ -10327,7 +10327,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/forage",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-184"
@@ -10356,7 +10356,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/sure-and-steady",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-185"
@@ -10385,7 +10385,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/stylus-claws",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-186"
@@ -10414,7 +10414,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/spiritual-recall",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-187"
@@ -10446,7 +10446,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/bound-to-mortal",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-188"
@@ -10478,7 +10478,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/alchemical-gut",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-90",
@@ -10511,7 +10511,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/breath-weapon",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-19"
@@ -10540,7 +10540,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/gold-scent",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-190"
@@ -10569,7 +10569,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/twinkle-tail",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-191"
@@ -10598,7 +10598,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/fascinating-flutter",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-192"
@@ -10627,7 +10627,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/fruity-ambrosia",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-193"
@@ -10656,7 +10656,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/infernal-temptation",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-21"
@@ -10685,7 +10685,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/constructed",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-43"
@@ -10714,7 +10714,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/alter-dweomer",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-47"
@@ -10743,7 +10743,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/detect-magic",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-48"
@@ -10772,7 +10772,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/darkeater",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-51",
@@ -10802,7 +10802,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/shadow-step",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-52",
@@ -10832,7 +10832,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/become-shadow",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-53"
@@ -10861,7 +10861,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/slink-in-shadows",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-54"
@@ -10890,7 +10890,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/steal-shadow",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-55"
@@ -10919,7 +10919,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/clockwork",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-56"
@@ -10948,7 +10948,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/electricity-vulnerability",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-58"
@@ -10977,7 +10977,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/steam-screen",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-59"
@@ -11006,7 +11006,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/toggle-standby-mode",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-60"
@@ -11035,7 +11035,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/ambassador",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-61",
@@ -11073,7 +11073,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/gills",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-62",
@@ -11163,7 +11163,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/snoop",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-66",
@@ -11201,7 +11201,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/threat-display",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-67",
@@ -11333,7 +11333,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/tattoo-transformation",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-72",
@@ -11371,7 +11371,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/haunting-melody",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-75"
@@ -11400,7 +11400,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/nosoi-resistance",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-76"
@@ -11429,7 +11429,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/divinatory-linguist",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-77"
@@ -11458,7 +11458,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/lend-a-hand",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-78"
@@ -11487,7 +11487,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/undead",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-79"
@@ -11516,7 +11516,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/invisibility",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-80"
@@ -11545,7 +11545,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/anchored-incorporeality",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-81"
@@ -11574,7 +11574,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/polong-possession",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-83"
@@ -11603,7 +11603,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/heads-will-roll",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-84"
@@ -11632,7 +11632,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/silver-infusion",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-86"
@@ -11661,7 +11661,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/tenacious-mind",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-87"
@@ -11690,7 +11690,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/created-magic",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-88"
@@ -11719,7 +11719,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/turn-of-fate",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-89"
@@ -11748,7 +11748,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/lab-assistant",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-9",
@@ -11778,7 +11778,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/jet",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-94",
@@ -11808,7 +11808,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/levitator",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-95",
@@ -11838,7 +11838,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/emote",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-96"
@@ -11867,7 +11867,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/crystal-scent",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-97"
@@ -11896,7 +11896,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/innate-element",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-ability-99"
@@ -11959,7 +11959,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/augury",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.mKmBgQmPmiLOlEvw"
@@ -12208,7 +12208,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/erudite",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.cy7bdQqVANipyljS"
@@ -12235,7 +12235,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-balanced-luck",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.6ZmgkMHUGGb1mDhr"
@@ -12261,7 +12261,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-bolstering-aid",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.HNoR0D2sKQaDNh5Z"
@@ -12287,7 +12287,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-enticing-negotiation",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.xXMPZXcwQgKRAu38"
@@ -12313,7 +12313,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-flowing-script",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.9ypX5ZMor6RMiFKv"
@@ -12339,7 +12339,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-freezing-rime",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.9xTjRt8LkZPB42Vi"
@@ -12365,7 +12365,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-insightful-observation",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.YptMhsztTS9dYGAY"
@@ -12391,7 +12391,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-keen-senses",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.onye3PN84lmca11D"
@@ -12417,7 +12417,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-nimble-flight",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.uFsWy6Ii1WxA0u0w"
@@ -12443,7 +12443,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-obscuring-snowfall",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.Fouq5RMNS8P1CDzx"
@@ -12469,7 +12469,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-ongoing-misery",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.mu9OL8v4rmr9311e"
@@ -12495,7 +12495,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-overwhelming-tides",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.xH7lvZkYYAAuxR62"
@@ -12521,7 +12521,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-paired-perplexity",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.bhpa7DVdMsaNfodz"
@@ -12547,7 +12547,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-parasitic-might",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.J5Wyh1EPmk848ivR"
@@ -12573,7 +12573,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-restored-spirit",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.ZCze1FY3Rmnvd6Dx"
@@ -12599,7 +12599,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-stalking-night",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.FeEts6s2ABVEi0H6"
@@ -12625,7 +12625,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/familiar-of-swarms-heart",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.t6nzeTpsTJDwAUFZ"
@@ -12651,7 +12651,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/grasping-tendrils",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.LUBS9csNNgRTui4p"
@@ -12680,7 +12680,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/lightning-armillary",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.zwWgHjcU0iZ6gUDY"
@@ -12709,7 +12709,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/lightning-needles",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.0R18Nd0CotPo9KD7"
@@ -12763,7 +12763,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/mask-freeze",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.C16JgmeJJG249WXz"
@@ -12826,7 +12826,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/path-of-the-tempest",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.O0XJIvMGK36yg9TJ"
@@ -12853,7 +12853,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/purify-air",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.43xB5UnexISlfRa5"
@@ -12880,7 +12880,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/radiant",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.3y6GGXQgyJ4Hq4Yt"
@@ -12943,7 +12943,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/spirit-touch",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.nrPl3Dz7fbnmas7T"
@@ -12970,7 +12970,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/synchronize-spirit",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.jPvjeX1CsUZQSszu"
@@ -12996,7 +12996,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-ability/verdant-burst",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "foundry": "Compendium.pf2e.familiar-abilities.Item.SKIS1xexaOvrecdV"
@@ -13025,7 +13025,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/faerie-dragon",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-1"
@@ -13070,7 +13070,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/elemental-wisp",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-26"
@@ -13115,7 +13115,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/nosoi",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-11"
@@ -13156,7 +13156,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/pipefox",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-38"
@@ -13200,7 +13200,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/crawling-hand",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-17"
@@ -13242,7 +13242,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/old-friend",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-18"
@@ -13282,7 +13282,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/polong",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-19"
@@ -13326,7 +13326,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/imp",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-37"
@@ -13373,7 +13373,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/talking-head",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-20"
@@ -13414,7 +13414,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/house-drake",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-21"
@@ -13456,7 +13456,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/ceru",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-22"
@@ -13498,7 +13498,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/spirit-guide",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-56"
@@ -13542,7 +13542,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/mood-cloud",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-24"
@@ -13581,7 +13581,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/cullitox-shardling",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-25"
@@ -13620,7 +13620,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/gennayn",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-27"
@@ -13660,7 +13660,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/elemental-scamp",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-28"
@@ -13701,7 +13701,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/spellslime",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-40"
@@ -13746,7 +13746,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/sweet-beasts-chocolate-mouse",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-30"
@@ -13785,7 +13785,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/sweet-beasts-gingerbread-sparrow",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-31"
@@ -13824,7 +13824,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/sweet-beasts-hard-candy-beetle",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-32"
@@ -13862,7 +13862,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/aeon-wyrd",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-34"
@@ -13905,7 +13905,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/fey-dragonet",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-35"
@@ -13949,7 +13949,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/homunculus",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-36"
@@ -13990,7 +13990,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/poppet",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-39"
@@ -14031,7 +14031,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/kinnars",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-46"
@@ -14074,7 +14074,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/lantern-wisp",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-47"
@@ -14115,7 +14115,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/makhluk-wayang",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-48"
@@ -14157,7 +14157,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/shikigami",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-49"
@@ -14202,7 +14202,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/calligraphy-wyrm",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-52"
@@ -14249,7 +14249,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/tapir-sage",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-50"
@@ -14291,7 +14291,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/mockingfey",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-53"
@@ -14330,7 +14330,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/dust-bunny",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-54"
@@ -14370,7 +14370,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/grindle-drake",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-55"
@@ -14410,7 +14410,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/golden-ermine",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-57"
@@ -14451,7 +14451,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/royal-gull",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-58"
@@ -14489,7 +14489,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/wildtwig",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-59"
@@ -14531,7 +14531,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/dweomercat-cub",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-6"
@@ -14572,7 +14572,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/shadow-familiar",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-8"
@@ -14617,7 +14617,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/familiar-specific/clockwork-familiar",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "familiar-specific-9"
@@ -14660,7 +14660,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/angel",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-1"
@@ -14670,8 +14670,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "divine",
   "stats": {
    "tradicao": [
     "Divine"
@@ -14722,7 +14724,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/psychopomp",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-10"
@@ -14732,8 +14734,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "divine",
   "stats": {
    "tradicao": [
     "Divine"
@@ -14791,7 +14795,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/undead",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-11"
@@ -14801,8 +14805,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "divine",
   "stats": {
    "tradicao": [
     "Divine"
@@ -14853,7 +14859,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/elemental",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-12"
@@ -14863,8 +14869,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "primal",
   "stats": {
    "tradicao": [
     "Primal"
@@ -14924,7 +14932,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/swarm",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-13"
@@ -14934,8 +14942,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "primal",
   "stats": {
    "tradicao": [
     "Primal"
@@ -14991,7 +15001,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/anger-phantom",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-2"
@@ -15001,8 +15011,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "occult",
   "stats": {
    "tradicao": [
     "Occult"
@@ -15052,7 +15064,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/beast",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-3"
@@ -15062,8 +15074,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "primal",
   "stats": {
    "tradicao": [
     "Primal"
@@ -15123,7 +15137,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/construct",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-4"
@@ -15133,8 +15147,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "arcane",
   "stats": {
    "tradicao": [
     "Arcane"
@@ -15178,7 +15194,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/demon",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-5"
@@ -15188,8 +15204,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "divine",
   "stats": {
    "tradicao": [
     "Divine"
@@ -15253,7 +15271,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/devotion-phantom",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-6"
@@ -15263,8 +15281,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "occult",
   "stats": {
    "tradicao": [
     "Occult"
@@ -15315,7 +15335,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/dragon",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-7"
@@ -15325,8 +15345,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "arcane",
   "stats": {
    "tradicao": [
     "Arcane"
@@ -15385,7 +15407,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/fey",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-8"
@@ -15395,8 +15417,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "primal",
   "stats": {
    "tradicao": [
     "Primal"
@@ -15446,7 +15470,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/eidolon/plant",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "eidolon-9"
@@ -15456,8 +15480,10 @@
    "traits": "aon",
    "rarity": "aon",
    "source": "aon(heuristica:remaster_id)",
-   "text": "aon"
+   "text": "aon",
+   "tradition": "aon"
   },
+  "tradition": "primal",
   "stats": {
    "tradicao": [
     "Primal"
@@ -15505,7 +15531,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/stalker-in-darkened-boughs",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-10"
@@ -15551,7 +15577,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/steward-of-stone-and-fire",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-11"
@@ -15597,7 +15623,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/vanguard-of-roaring-waters",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-12"
@@ -15643,7 +15669,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/witness-to-ancient-battles",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-13"
@@ -15689,7 +15715,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/shepherd-of-errant-winds",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-14"
@@ -15735,7 +15761,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/speaker-in-sibilance",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-15"
@@ -15781,7 +15807,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/lamentation-of-sinister-deals",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-16"
@@ -15827,7 +15853,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/crafter-in-the-vault",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-3"
@@ -15873,7 +15899,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/custodian-of-groves-and-gardens",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-4"
@@ -15919,7 +15945,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/echo-of-lost-moments",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-5"
@@ -15965,7 +15991,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/impostor-in-hidden-places",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-6"
@@ -16011,7 +16037,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/lurker-in-devouring-dark",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-7"
@@ -16057,7 +16083,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/monarch-of-the-fey-courts",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-8"
@@ -16103,7 +16129,7 @@
   "requires": null,
   "grants": [],
   "text": "wb:text/apparition/reveler-in-lost-glee",
-  "grants_completos": true,
+  "grants_completos": null,
   "requires_parseado": true,
   "xref": {
    "aon": "apparition-9"

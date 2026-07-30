@@ -46,10 +46,35 @@ items:
   id: 75
   date: '2026-07-29'
   priority: alta
-- desc: 'NUMERO CORRIGIDO 2026-07-29 (auditoria), e o item 41 foi fundido aqui. Nao sao ''48 subclasses com grants vazio'': hoje so bloodline do Feiticeiro esta 100% vazio (19/19); patron da Bruxa (0/16 vazios) e eidolon do Invocador (1/14) JA ganharam grants de pericia. Mas NENHUM desses grants carrega tradicao, entao o defeito central persiste com outro contorno: `_conjuracao()` nativo (motor.py:907) nunca resolve tradicao por subclasse -- testado com Bruxa de patron Baba Yaga escolhido, a tradicao continua sendo a string de prosa. O resolvedor `_tradicao_por_escolha` EXISTE, mas so esta ligado em `_conjuracao_de_arquetipo` (via dedicacao), nao na classe pura. DC e slots continuam corretos; o defeito e isolado ao campo de tradicao, que e o que filtra quais magias o personagem pode aprender. || TEXTO ORIGINAL: TRADICAO DE CONJURACAO NAO RESOLVE PARA FEITICEIRO, INVOCADOR E BRUXA -- medida a extensao completa em 2026-07-27. As 3 classes tem `spellcasting.tradition` como string de prosa nao resolvida, e as 48 subclasses que deveriam determinar a tradicao (18 bloodlines, 17 patrons, 13 eidolons) tem `grants: []` em 100% dos casos: nao ha de onde puxar a tradicao real em lugar nenhum da base. DC e slots continuam CORRETOS -- o defeito e isolado ao campo de tradicao, que e o que filtra quais magias o personagem pode aprender. Reproduzido em 3 fichas (feiticeiro5-fa-diabolico, bruxa5-tradicao-patron, invocador5-tradicao-eidolon). Relacionado ao item 41, que levantou o problema sem medir'
+- desc: 'CONCLUIDO 2026-07-30 (spec specs/2026-07-30-tradicao-por-subclasse.md).
+    47 das 48 subclasses agora entregam a tradicao na ficha. Dois achados mudaram
+    o desenho, e nenhum estava no item. (1) A FONTE TEM O DADO ESTRUTURADO: o
+    dump do AoN traz `tradition: ["Occult"]` como campo -- bloodline 27/28,
+    patron 27/27, eidolon 13/13, draconic-exemplar 44/44. Nao houve parse de
+    prosa. (2) O REGISTRO QUE O JOGADOR PEGA NAO E O QUE TEM A TRADICAO: o eixo
+    de subclasse oferece `wb:class-feature/bloodline-genie`, e essa class-feature
+    sai com `xref.aon: None` -- o dump de class-features tem `tradition` em ZERO
+    dos 1.254. Sao dois catalogos paralelos, entao foi preciso um passo novo
+    (`derivar_tradicao_de_subclasse.py`, 7d2) que leva o campo para a opcao viva,
+    casando por nome COM TRAVA PELA CLASSE DONA (sem ela `psychopomp`, que existe
+    como bloodline E como eidolon, casaria cruzado). 47 pares, 0 ambiguos, 0 sem
+    par. O eidolon nao vem do aon_kinds e sim do companheiros.py -- por isso os
+    13 ficaram de fora na primeira rodada. NO MOTOR: `_conjuracao()` passou a
+    chamar `_tradicao_por_escolha` quando a tradicao nao e uma das quatro
+    palavras, e o resolvedor ganhou FILTRO POR CLASSE -- sem ele um Feiticeiro 5
+    / Bruxa 3 saia com a mesma tradicao nas duas linhas, porque a varredura
+    devolvia a primeira escolha de subclasse com tradicao. Nos dois motores.
+    ARMADILHA REGISTRADA: casar por NOME dava `arcane` para o Draconic, que e a
+    tradicao da versao LEGADA -- a base carrega a REMASTER, cuja tradicao e
+    variavel (depende do draconic-exemplar). Casar por `xref.aon` resolve. O
+    Draconic segue sem tradicao de proposito: o eixo `draconic-exemplar` existe
+    na base (44 registros, ja com tradicao emitida) mas NAO esta ligado como
+    escolha em classe nenhuma -- o motor avisa em vez de arbitrar. Ligar o eixo
+    e uma linha, e vira item quando o 69/40 chegarem la.
+    || TEXTO ORIGINAL: NUMERO CORRIGIDO 2026-07-29 (auditoria), e o item 41 foi fundido aqui. Nao sao ''48 subclasses com grants vazio'': hoje so bloodline do Feiticeiro esta 100% vazio (19/19); patron da Bruxa (0/16 vazios) e eidolon do Invocador (1/14) JA ganharam grants de pericia. Mas NENHUM desses grants carrega tradicao, entao o defeito central persiste com outro contorno: `_conjuracao()` nativo (motor.py:907) nunca resolve tradicao por subclasse -- testado com Bruxa de patron Baba Yaga escolhido, a tradicao continua sendo a string de prosa. O resolvedor `_tradicao_por_escolha` EXISTE, mas so esta ligado em `_conjuracao_de_arquetipo` (via dedicacao), nao na classe pura. DC e slots continuam corretos; o defeito e isolado ao campo de tradicao, que e o que filtra quais magias o personagem pode aprender. || TEXTO ORIGINAL: TRADICAO DE CONJURACAO NAO RESOLVE PARA FEITICEIRO, INVOCADOR E BRUXA -- medida a extensao completa em 2026-07-27. As 3 classes tem `spellcasting.tradition` como string de prosa nao resolvida, e as 48 subclasses que deveriam determinar a tradicao (18 bloodlines, 17 patrons, 13 eidolons) tem `grants: []` em 100% dos casos: nao ha de onde puxar a tradicao real em lugar nenhum da base. DC e slots continuam CORRETOS -- o defeito e isolado ao campo de tradicao, que e o que filtra quais magias o personagem pode aprender. Reproduzido em 3 fichas (feiticeiro5-fa-diabolico, bruxa5-tradicao-patron, invocador5-tradicao-eidolon). Relacionado ao item 41, que levantou o problema sem medir'
   id: 78
-  date: '2026-07-29'
-  priority: alta
+  date: '2026-07-30'
+  priority: concluido
 - desc: 'A regra de precedencia grants->foundry e letra morta: grants nunca gera conflito real no dataset, o merge adota silenciosamente o lado nao-vazio. Ou exercitar ou remover da spec'
   id: 13
   date: '2026-07-29'

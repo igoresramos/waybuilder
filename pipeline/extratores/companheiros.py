@@ -357,6 +357,18 @@ def montar(doc, kind, est, subtype=None):
     }
     if subtype:
         reg["subtype"] = subtype
+    # O tipo de eidolon e quem define a tradicao de conjuracao do Invocador --
+    # a classe traz uma FRASE no lugar do valor. O AoN publica como campo
+    # (`tradition: ["Divine"]`), 13 de 13, entao nao ha o que inferir. Lido do
+    # PROPRIO documento, nunca por nome: no dump do AoN ha nome repetido entre
+    # a versao legada e a remaster, com tradicoes diferentes.
+    # Spec: specs/2026-07-30-tradicao-por-subclasse.md
+    if kind == "eidolon":
+        trad = doc.get("tradition") or []
+        if trad:
+            reg["tradition"] = str(trad[0]).lower()
+            prov["tradition"] = "aon"
+
     if doc.get("remaster_id"):
         reg["remaster_de"] = doc["remaster_id"]
     if doc.get("legacy_id"):

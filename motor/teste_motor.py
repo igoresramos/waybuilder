@@ -769,6 +769,63 @@ checar(any("tradicao vem da escolha" in a for a in bruxo.avisos),
        "Witch Dedication sem patron escolhido AVISA em vez de inventar tradicao",
        f"{[a for a in bruxo.avisos if 'tradicao' in a]}")
 
+# -- tradicao por subclasse, rota NATIVA (item 78) --------------------------
+# Spec: specs/2026-07-30-tradicao-por-subclasse.md. Ate agora `_conjuracao()`
+# copiava `spellcasting.tradition` cru, e nas tres classes sem tradicao fixa
+# isso e uma FRASE EM PORTUGUES -- o campo que filtra quais magias o personagem
+# pode aprender saia como prosa. O resolvedor ja existia; faltava liga-lo.
+SORC, WITCH = "wb:class/sorcerer", "wb:class/witch"
+
+feiticeiro_genie = personagem(niveis((SORC, 5)) + BOOSTS + [
+    {"em": 1, "slot": "subclasse", "pega": "wb:class-feature/bloodline-genie"}])
+nativa = [c for c in feiticeiro_genie.conjuracao if not c.get("de_arquetipo")]
+checar(nativa and nativa[0]["tradicao"] == "arcane",
+       "Feiticeiro de bloodline Genie conjura ARCANE, e nao a frase em prosa",
+       f"{nativa[0]['tradicao'] if nativa else 'sem conjuracao'}")
+
+bruxa_baba = personagem(niveis((WITCH, 5)) + BOOSTS + [
+    {"em": 1, "slot": "subclasse", "pega": "wb:class-feature/baba-yaga"}])
+n_bruxa = [c for c in bruxa_baba.conjuracao if not c.get("de_arquetipo")]
+checar(n_bruxa and n_bruxa[0]["tradicao"] == "occult",
+       "Bruxa de patron Baba Yaga conjura OCCULT",
+       f"{n_bruxa[0]['tradicao'] if n_bruxa else 'sem conjuracao'}")
+
+# o teste que so passa com o filtro por CLASSE: sem ele o resolvedor devolve a
+# primeira escolha de subclasse que tiver tradicao, e as duas linhas de
+# conjuracao saem iguais.
+multi = personagem(niveis((SORC, 5), (WITCH, 3)) + BOOSTS + [
+    {"em": 1, "slot": "subclasse", "pega": "wb:class-feature/bloodline-genie"},
+    {"em": 6, "slot": "subclasse", "pega": "wb:class-feature/baba-yaga"}])
+por_classe = {c["classe"]: c["tradicao"]
+              for c in multi.conjuracao if not c.get("de_arquetipo")}
+checar(por_classe.get("Sorcerer") == "arcane" and por_classe.get("Witch") == "occult",
+       "Feiticeiro 5 / Bruxa 3: cada linha com a SUA tradicao, nao a primeira",
+       f"{por_classe}")
+
+# Draconic no remaster depende de uma SEGUNDA escolha (o draconic-exemplar), que
+# nao esta ligado como eixo em classe nenhuma. Principio zero: avisa, nao chuta.
+# Casar por NOME daria `arcane`, que e a tradicao da versao LEGADA -- numero
+# errado com cara de certo.
+feiticeiro_draconic = personagem(niveis((SORC, 5)) + BOOSTS + [
+    {"em": 1, "slot": "subclasse", "pega": "wb:class-feature/bloodline-draconic"}])
+n_drac = [c for c in feiticeiro_draconic.conjuracao if not c.get("de_arquetipo")]
+checar(n_drac and n_drac[0]["tradicao"] is None,
+       "Draconic no remaster nao resolve -- devolve None em vez de chutar arcane",
+       f"{n_drac[0]['tradicao'] if n_drac else 'sem conjuracao'}")
+checar(any("tradicao vem da escolha" in a for a in feiticeiro_draconic.avisos),
+       "e o motivo aparece nos avisos",
+       f"{[a for a in feiticeiro_draconic.avisos if 'tradicao' in a]}")
+
+oraculo = personagem(niveis(("wb:class/oracle", 5)) + BOOSTS)
+n_ora = [c for c in oraculo.conjuracao if not c.get("de_arquetipo")]
+checar(n_ora and n_ora[0]["tradicao"] == "divine",
+       "Oraculo continua divine sem consultar escolha nenhuma",
+       f"{n_ora[0]['tradicao'] if n_ora else 'sem conjuracao'}")
+
+checar(feiticeiro_genie.avaliar({"spellcasting_tradition": "arcane"})[0]
+       and not feiticeiro_genie.avaliar({"spellcasting_tradition": "divine"})[0],
+       "e com a tradicao resolvida o predicado para de atender as quatro")
+
 # -- termos novos de predicado ---------------------------------------------
 # Spec: specs/2026-07-29-termos-de-predicado.md. Sao os padroes do residuo que a
 # base JA respondia e nao tinham termo: sentido (81 registros com `grants.sense`

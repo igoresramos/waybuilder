@@ -36,6 +36,7 @@ import { avaliar as avaliarPredicado, comparar } from "./predicado.ts";
 import type {
   AC, Ataque, Ator, AumentoDePericia, Candidato, Concedido, ConcessaoDeAtor,
   Conjuracao, Documento, ForaDoRequisito, LinhaDeFeature, FonteDeBoost, Rank,
+  DetalheDePericiaLivre, OpcaoDeGrant,
   Registro, SlotAberto, SlotDeSubclasse, Visao,
 } from "./tipos.ts";
 import { ATRIBUTOS, RANKS } from "./tipos.ts";
@@ -82,7 +83,6 @@ interface RegistroConcedido extends Feature {
 }
 
 interface DetalheDeHP { origem: string | null; hp: number; nota: string }
-interface DetalheDePericiaLivre { classe: string; orcamento: number; delta: number }
 
 function objetoDe<V>(m: Map<string, V>): Record<string, V> {
   const saida: Record<string, V> = {};
@@ -120,8 +120,8 @@ export class Personagem implements ContextoDePredicado {
   pericias_livres = 0;
   pericias_declaradas = 0;
   escolhas_de_grant: Array<{
-    origem: string; nome: string; flag: unknown;
-    opcoes: unknown[]; escolhido: string | null;
+    origem: string; nome: string; flag: string | null;
+    opcoes: OpcaoDeGrant[]; escolhido: string | null;
   }> = [];
   pericias_livres_detalhe: DetalheDePericiaLivre[] = [];
   aumentos_de_pericia: number[] = [];
@@ -702,12 +702,23 @@ export class Personagem implements ContextoDePredicado {
         const dict = dictDe(g);
         if (!("choice" in dict)) continue;
         const escolha = dictDe(dict["choice"]);
-        const opcoes = escolha["opcoes"];
-        if (!ehLista(opcoes)) continue;   // forma resumida: nada a escolher
+        const opcoesCruas = escolha["opcoes"];
+        if (!ehLista(opcoesCruas)) continue;   // forma resumida: nada a escolher
+        // Medido na base inteira: a opção tem `{rotulo, valor}` em texto nas
+        // 570, e 56 delas trazem TAMBÉM `grants` -- as consequências aninhadas,
+        // que são justamente o que faz escolher a opção mudar número na ficha.
+        // Reconstruir só rotulo/valor as apagava, e o gabarito do Python
+        // acusou em quatro fichas. `flag` é texto ou nulo (292 e 2).
+        const opcoes: OpcaoDeGrant[] = opcoesCruas.map((o) => {
+          const d = dictDe(o);
+          const op: OpcaoDeGrant = { rotulo: pyStr(d["rotulo"]), valor: pyStr(d["valor"]) };
+          if ("grants" in d) op.grants = listaDe(d["grants"]);
+          return op;
+        });
         // o valor CRU vai para a saída (pode ser null, e o Python emite null);
         // a versão em texto só serve para montar chave e mensagem, onde o
         // Python interpola `None`. Trocar um pelo outro quebra a paridade.
-        const flag = escolha["flag"] ?? null;
+        const flag = ehStr(escolha["flag"]) ? escolha["flag"] : null;
         const flagTexto = pyStr(flag);
         const chave = `${origem_id}:${flagTexto}`;
         if (vistos.has(chave)) continue;
@@ -1129,10 +1140,19 @@ export class Personagem implements ContextoDePredicado {
       const max_rank_cru = inteiro(t["max_rank"]);             // regra 16
       const ranks: Record<string, number> = {};
       for (const [k, v] of Object.entries(dictDe(t["ranks"]))) ranks[k] = inteiro(v);
+      // Feiticeiro, Bruxa e Invocador nao tem tradicao fixa: a classe traz uma
+      // FRASE ("variavel (definida pela escolha de bloodline...)") e quem
+      // responde e a subclasse. Sem esta resolucao a frase ia crua para a
+      // ficha, no campo que decide quais magias ele pode aprender.
+      // Spec: `specs/2026-07-30-tradicao-por-subclasse.md`
+      let tradicao = obter(sc, "tradition") as string | null;
+      if (!ehStr(tradicao) || !["arcane", "divine", "occult", "primal"].includes(tradicao)) {
+        tradicao = this._tradicao_por_escolha(classe, { de: "subclasse" }, nomeOu(classe, cid));
+      }
       this.conjuracao.push({
         classe: nomeOu(classe, cid),
         nivel_de_classe: nivel_classe,
-        tradicao: obter(sc, "tradition") as string | null,
+        tradicao,
         tipo: obter(sc, "type") as string | null,
         slots: ranks,
         truques: obter(t, "cantrips") as number | null,
@@ -1213,12 +1233,25 @@ export class Personagem implements ContextoDePredicado {
    * errada na ficha em silêncio -- mesmo tratamento do grau do companheiro:
    * avisa e devolve `null`.
    */
-  private _tradicao_por_escolha(reg: Dict, gs: Dict): string | null {
+  /**
+   * `classe` e o NOME da classe cuja conjuracao esta sendo resolvida, e sem ele
+   * um Feiticeiro 5 / Bruxa 3 sai com a mesma tradicao nas duas linhas: a
+   * varredura devolvia a primeira escolha de subclasse que tivesse tradicao,
+   * qualquer que fosse a classe dona. A rota de arquetipo nao passa o filtro
+   * porque ali a escolha e unica por cadeia.
+   *
+   * Spec: `specs/2026-07-30-tradicao-por-subclasse.md`
+   */
+  private _tradicao_por_escolha(reg: Dict, gs: Dict, classe: string | null = null): string | null {
     const eixo = ehStr(gs["de"]) ? gs["de"] : null;
     for (const e of this._todas_escolhas()) {
       if (e["slot"] !== "subclasse") continue;
       const pega = e["pega"];
       const escolhido = dictDe(ehStr(pega) ? this.base.opcional(pega) : null);
+      if (classe) {
+        const donas = escolhido["class"];
+        if (Array.isArray(donas) && !donas.includes(classe)) continue;
+      }
       const trad = dictDe(escolhido["spellcasting"])["tradition"] ?? escolhido["tradition"];
       if (ehStr(trad) && ["arcane", "divine", "occult", "primal"].includes(trad)) {
         return trad;
@@ -2352,7 +2385,14 @@ export class Personagem implements ContextoDePredicado {
     let indefinida = false;
     for (const c of this.conjuracao) {
       const bruta = dictDe(c)["tradicao"];
-      if (!verdadeiro(bruta)) continue;
+      if (!verdadeiro(bruta)) {
+        // `null` é "varia com a subclasse e ela não foi escolhida", e NÃO "não
+        // tem tradição" -- desde que `_conjuracao` passou a resolver (item 78),
+        // a frase em prosa virou nulo. Tratar como ausência faria o Feiticeiro
+        // sem bloodline ser REPROVADO, que é o oposto do princípio zero.
+        indefinida = true;
+        continue;
+      }
       if (normSlug(bruta) === alvo) return [true, ""];
       if (!TRADICOES.includes(normSlug(bruta))) indefinida = true;
     }

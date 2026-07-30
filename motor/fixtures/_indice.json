@@ -22,9 +22,9 @@
    "ficha": "bruxa5-tradicao-patron",
    "nivel": 5,
    "hp": 48,
-   "avisos": 5,
+   "avisos": 4,
    "fora_do_requisito": 0,
-   "slots_abertos": 17
+   "slots_abertos": 16
   },
   {
    "ficha": "campeao6-alquimista4-fa-nivel10",
