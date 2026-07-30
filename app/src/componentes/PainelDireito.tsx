@@ -16,16 +16,13 @@
  * rolavel (`+8`), com o rank como pastilha ao lado. Numa mesa ninguem rola
  * "expert" -- rola +8.
  */
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import type { Base } from "../motor/base";
 import type { Personagem } from "../motor/personagem";
 import type { Documento, Rank, Visao } from "../motor/tipos";
 import { IconeEscudo } from "./Icones";
 import { Equipamento } from "./Equipamento";
 
-const RANK_BONUS: Record<Rank, number> = {
-  untrained: 0, trained: 2, expert: 4, master: 6, legendary: 8,
-};
 const SIGLA: Record<Rank, string> = {
   untrained: "U", trained: "T", expert: "E", master: "M", legendary: "L",
 };
@@ -39,17 +36,6 @@ type Aba = "ataques" | "equipamento" | "feats" | "magia" | "companheiro"
 
 const sinal = (n: number) => `${n >= 0 ? "+" : ""}${n}`;
 
-/**
- * `lore:alcohol lore` -> `Lore: Alcohol`.
- *
- * A chave da proficiencia as vezes ja carrega o sufixo "lore" (vem assim da
- * fonte), e prefixar cegamente produzia `Lore: Alcohol Lore` na ficha.
- */
-function nomeDeLore(chave: string): string {
-  const bruto = chave.slice(5).replace(/\s*\blore\b\s*$/i, "").trim();
-  const titulo = bruto.replace(/\b\w/g, (c) => c.toUpperCase());
-  return `Lore: ${titulo}`;
-}
 
 export function PainelDireito({
   p, v, base, d, setD,
@@ -82,39 +68,15 @@ export function PainelDireito({
    * `Lore: Alcohol` que o background Barkeep concede) entram logo abaixo, por
    * `proficiencias`, que e de onde elas realmente vem.
    */
-  const pericias = useMemo(() => {
-    const linhas = [...base.por_id.values()]
-      .filter((r) => r.kind === "skill" && r.lore !== true && r.id !== "wb:skill/lore")
-      .map((r) => {
-        const chave = r.id.split("/").pop()!;
-        const rank = (v.proficiencias[chave] ?? "untrained") as Rank;
-        const attr = (Array.isArray(r.attribute) ? r.attribute[0] : "int") as string;
-        const mod = v.modificadores[attr] ?? 0;
-        // RAW: destreinada NAO soma o nivel, so o atributo
-        const total = rank === "untrained" ? mod : v.nivel + RANK_BONUS[rank] + mod;
-        return { chave, nome: r.name ?? chave, rank, attr, total };
-      });
-    // as Lore que o personagem tem entram junto, com a mesma conta
-    for (const [chave, rank] of Object.entries(v.proficiencias)) {
-      if (!chave.startsWith("lore:")) continue;
-      const mod = v.modificadores.int ?? 0;
-      linhas.push({
-        chave, nome: nomeDeLore(chave), rank: rank as Rank, attr: "int",
-        total: rank === "untrained" ? mod : v.nivel + RANK_BONUS[rank as Rank] + mod,
-      });
-    }
-    return linhas.sort((a, b) => a.nome.localeCompare(b.nome));
-  }, [base, v]);
+  // A conta (`nivel + RANK_BONUS[rank] + mod`) morava AQUI, em tres lugares
+  // deste arquivo. Numero que nasce no componente React nao tem oraculo, nao
+  // tem paridade com o Python e nao tem onde receber `flat_modifier` -- foi por
+  // isso que 462 bonus incondicionais da base nunca chegaram na ficha. Agora o
+  // motor calcula e a tela so LE.
+  // Spec: `specs/2026-07-30-bonus-de-pericia-e-salva.md`
+  const pericias = v.pericias;
 
-  const salva = (chave: string) => {
-    const rank = (v.proficiencias[chave] ?? "untrained") as Rank;
-    const attr = chave === "fortitude" ? "con" : chave === "reflex" ? "dex" : "wis";
-    const mod = v.modificadores[attr] ?? 0;
-    return {
-      rank,
-      total: rank === "untrained" ? mod : v.nivel + RANK_BONUS[rank] + mod,
-    };
-  };
+  const salva = (chave: string) => v.salvas[chave];
 
   const perc = salva("perception");
 

@@ -74,6 +74,28 @@ export interface OpcaoDeGrant {
   grants?: unknown[];
 }
 
+/** Um bônus somado a um total, com o tipo que decide se ele empilha. */
+export interface BonusAplicado {
+  tipo: unknown;
+  valor: number;
+  origem: string;
+}
+
+/** Uma linha de perícia ou salva com o total já calculado. Até 2026-07-30 esta
+ * conta vivia em `PainelDireito.tsx` -- sem oráculo, sem paridade e sem onde
+ * receber `flat_modifier`. Spec `2026-07-30-bonus-de-pericia-e-salva.md`. */
+export interface LinhaDePericia {
+  chave: string;
+  nome: string;
+  rank: Rank;
+  atributo: string;
+  mod_atributo: number;
+  bonus_total: number;
+  total: number;
+  detalhe: string;
+  bonus?: BonusAplicado[];
+}
+
 /** O detalhe por classe do orçamento de perícias livres (spec
  * `2026-07-29-pericias-livres.md`): quanto a classe deu, quanto sobrou. */
 export interface DetalheDePericiaLivre {
@@ -300,6 +322,8 @@ export interface Visao {
   modificadores: Record<string, number>;
   hp: number;
   proficiencias: Record<string, Rank>;
+  pericias: LinhaDePericia[];
+  salvas: Record<string, LinhaDePericia>;
   pericias_livres: number;
   aumentos_de_pericia: { niveis: number[]; gastos: AumentoDePericia[] };
   boosts: { direito: number; declarados: number; fontes: FonteDeBoost[] };

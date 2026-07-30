@@ -35,7 +35,7 @@ import json
 import math
 import os
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 PROJETO = os.path.dirname(AQUI)
@@ -206,6 +206,7 @@ class Personagem:
         self._focus()
         self._defesa()
         self._ataques()
+        self._pericias_e_salvas()
         self._checar_requisitos()
 
     # -- regra 1: estrutura -------------------------------------------------
@@ -2906,6 +2907,163 @@ class Personagem:
 
     # -- saida --------------------------------------------------------------
 
+
+    # -- bonus incondicional e o total de pericia/salva ----------------------
+
+    def _melhor_por_tipo(self, bonus) -> int:
+        """Soma respeitando a regra de tipo do PF2e.
+
+        Bonus do MESMO tipo nao empilham -- vale o maior. Tipos diferentes
+        somam. Bonus sem tipo (`untyped`) empilha com tudo, inclusive com outro
+        untyped, e por isso ele e somado inteiro em vez de disputar.
+
+        Sem isto, um personagem com tres itens de +1 de circunstancia sairia com
+        +3 onde o RAW da +1 -- e a ficha parada inflaria sozinha.
+
+        Spec: `specs/2026-07-30-bonus-de-pericia-e-salva.md`
+        """
+        melhor: dict[str, int] = {}
+        solto = 0
+        for tipo, valor, _origem in bonus:
+            if not tipo or str(tipo).lower() == "untyped":
+                solto += int(valor)
+                continue
+            chave = str(tipo).lower()
+            melhor[chave] = max(melhor.get(chave, 0), int(valor))
+        return solto + sum(melhor.values())
+
+    # selectors que o motor sabe onde somar. O resto e contado e ignorado:
+    # `initiative` e `perception-dc` nao existem como numero na ficha, e
+    # `skill-check` generico nao diz QUAL pericia.
+    SELETORES_DE_SALVA = {"fortitude", "reflex", "will", "saving-throw",
+                          "perception"}
+
+    def _bonus_incondicionais(self) -> dict:
+        """`flat_modifier` sem `condicional`, agrupado por selector.
+
+        Sao 462 de 1.709 -- os outros 1.247 sao condicionais ("+2 em Atletismo
+        so para Empurrar") e dependem de contexto de acao que a ficha nao tem.
+        Aplicar o grupo inteiro inflaria a ficha parada.
+
+        `value` nao-inteiro (41 formulas do VTT e 1 nulo) e ignorado: avaliar
+        formula do Foundry e o interpretador inteiro, outro item.
+        """
+        fora = Counter()
+        por_selector: dict[str, list] = defaultdict(list)
+        fontes = [(self.base.get(c).get("name", c), self.base.get(c))
+                  for c in self.ordem_de_classe]
+        for reg in (self.ancestria, self.heranca, self.background):
+            if reg:
+                fontes.append((reg.get("name"), reg))
+        fontes += [(f.get("nome"), f) for f in self.features]
+        fontes += [(feat.get("name", i), feat)
+                   for i, feat, _ in self._feats_efetivos()]
+        for nome, reg in fontes:
+            for g in self._grants_de(reg):
+                if not isinstance(g, dict):
+                    continue
+                fm = g.get("flat_modifier")
+                if not isinstance(fm, dict) or fm.get("condicional"):
+                    continue
+                valor = fm.get("value")
+                if not isinstance(valor, int) or isinstance(valor, bool):
+                    fora["valor nao inteiro"] += 1
+                    continue
+                bruto = fm.get("selector")
+                # lista de selectors e a mesma declaracao escrita compacta:
+                # `["ac", "saving-throw"]` aplica nos dois
+                alvos = bruto if isinstance(bruto, list) else [bruto]
+                for alvo in alvos:
+                    chave = str(alvo)
+                    if "{" in chave:
+                        fora["selector dinamico"] += 1
+                        continue
+                    por_selector[chave].append((fm.get("type"), valor, nome))
+        self.bonus_ignorados = dict(fora)
+        return por_selector
+
+    def _pericias_e_salvas(self) -> None:
+        """O total que a TELA calculava (`PainelDireito.tsx:94`).
+
+        Numero que nasce no componente React nao tem oraculo, nao tem paridade e
+        nao tem onde receber `flat_modifier`. AC e ataque ja moravam aqui; a
+        pericia e a salva ficaram para tras.
+
+        Nesta primeira passada o valor e IDENTICO ao que a tela mostrava --
+        muda o lugar, nao o numero -- exceto onde ha bonus incondicional.
+        """
+        bonus = self._bonus_incondicionais()
+        consumidos: set[str] = set()
+
+        def total(chave: str, atributo: str, extras: list) -> dict:
+            rank = self.proficiencias.get(chave, "untrained")
+            mod = self.modificadores.get(atributo, 0)
+            aplicados = []
+            for sel in extras:
+                aplicados += bonus.get(sel, [])
+                consumidos.add(sel)
+            extra = self._melhor_por_tipo(aplicados)
+            # RAW: destreinado NAO soma o nivel, so o atributo
+            base = (self.nivel + RANK_BONUS[rank]) if rank != "untrained" else 0
+            # `nome` sai daqui com o default, e a pericia sobrescreve: sem
+            # isto a salva ficava SEM a chave e o porte TS, que sempre a
+            # preenche, divergia do gabarito em 23 fichas.
+            linha = {"chave": chave, "nome": chave,
+                     "rank": rank, "atributo": atributo,
+                     "mod_atributo": mod, "bonus_total": extra,
+                     "total": base + mod + extra,
+                     "detalhe": (f"{'nivel ' + str(self.nivel) + ' + prof ' if rank != 'untrained' else ''}"
+                                 f"{RANK_BONUS[rank] if rank != 'untrained' else 0} ({rank})"
+                                 f" + {atributo.upper()} {mod:+d}"
+                                 + (f" + bonus {extra:+d}" if extra else ""))}
+            if aplicados:
+                linha["bonus"] = [{"tipo": t, "valor": v, "origem": o}
+                                  for t, v, o in aplicados]
+            return linha
+
+        self.pericias = []
+        for reg in self.base.por_id.values():
+            if reg.get("kind") != "skill" or reg.get("lore") or reg["id"] == "wb:skill/lore":
+                continue
+            chave = reg["id"].split("/")[-1]
+            attr = (reg.get("attribute") or ["int"])[0]
+            linha = total(chave, str(attr), [chave])
+            linha["nome"] = reg.get("name") or chave
+            self.pericias.append(linha)
+        # as Lore que o personagem TEM entram junto, com a mesma conta
+        for chave in self.proficiencias:
+            if not str(chave).startswith("lore:"):
+                continue
+            linha = total(str(chave), "int", [str(chave)])
+            # a chave as vezes ja carrega o sufixo "Lore" (vem assim da fonte),
+            # e prefixar cegamente produzia `Lore: Alcohol Lore` na ficha. A
+            # regra estava em `PainelDireito.tsx` e veio junto com a conta.
+            bruto = re.sub(r"\s*\blore\b\s*$", "", str(chave)[5:], flags=re.I).strip()
+            linha["nome"] = "Lore: " + bruto.title()
+            self.pericias.append(linha)
+        self.pericias.sort(key=lambda p: p["nome"])
+
+        # `saving-throw` vale para as tres salvas; `fortitude` so para a dela
+        ATRIBUTO_DA_SALVA = {"fortitude": "con", "reflex": "dex", "will": "wis",
+                             "perception": "wis"}
+        self.salvas = {}
+        for chave, attr in ATRIBUTO_DA_SALVA.items():
+            extras = [chave] if chave == "perception" else [chave, "saving-throw"]
+            self.salvas[chave] = total(chave, attr, extras)
+            consumidos.add(chave)
+        consumidos.add("saving-throw")
+
+        # o que sobrou nao e "ignorado" indistintamente: `hp` e `ac` tem passo
+        # proprio (`_hp`, `_defesa`), e o resto (`initiative`, `perception-dc`,
+        # `skill-check` generico, `strike-damage`) o motor nao modela. Contar e
+        # o que impede a perda silenciosa -- foi ela que deixou 462 bonus fora
+        # da ficha sem ninguem ver.
+        OUTRO_PASSO = {"hp", "ac"}
+        for sel, lista in bonus.items():
+            if sel in consumidos or sel in OUTRO_PASSO:
+                continue
+            self.bonus_ignorados[f"selector nao modelado: {sel}"] = len(lista)
+
     def visao(self) -> dict:
         """A visao calculada. Cache, nunca fonte de verdade."""
         return {
@@ -2919,6 +3077,8 @@ class Personagem:
             "modificadores": self.modificadores,
             "hp": self.hp,
             "proficiencias": self.proficiencias,
+            "pericias": self.pericias,
+            "salvas": self.salvas,
             "pericias_livres": self.pericias_livres,
             "aumentos_de_pericia": {"niveis": self.aumentos_de_pericia,
                                     "gastos": self.aumentos_detalhe},

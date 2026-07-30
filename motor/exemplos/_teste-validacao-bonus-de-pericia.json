@@ -1,0 +1,22 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {"versao": "2026-07-30", "pin_foundry": "87f9e502"},
+ "identidade": {
+  "nome": "TESTE BONUS -- Kholo Formiga com +1 de circunstancia em Deception",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao dos bonus incondicionais de pericia e salva (spec specs/2026-07-30-bonus-de-pericia-e-salva.md, item 72). A heranca `Ant Kholo` concede dois `flat_modifier` incondicionais: +1 de circunstancia em Deception, que o motor aplica, e +1 em `initiative`, que o motor NAO modela e conta como ignorado. Sem esta ficha nenhum fixture exercita a aplicacao de bonus, e o porte TypeScript nao teria contra o que se medir. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/kholo"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/ant-kholo"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/hermit"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 4, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 5, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["cha", "dex", "con", "wis"]},
+  {"em": 5, "slot": "boosts_livres", "pega": ["cha", "dex", "con", "str"]},
+  {"em": "criacao", "slot": "pericias_livres", "pega": ["deception", "athletics", "stealth"]}
+ ]
+}

@@ -1077,6 +1077,178 @@
    "wis": 1
   },
   "nivel": 5,
+  "pericias": [
+   {
+    "atributo": "dex",
+    "bonus_total": 0,
+    "chave": "acrobatics",
+    "detalhe": "0 (untrained) + DEX +1",
+    "mod_atributo": 1,
+    "nome": "Acrobatics",
+    "rank": "untrained",
+    "total": 1
+   },
+   {
+    "atributo": "int",
+    "bonus_total": 0,
+    "chave": "arcana",
+    "detalhe": "0 (untrained) + INT +0",
+    "mod_atributo": 0,
+    "nome": "Arcana",
+    "rank": "untrained",
+    "total": 0
+   },
+   {
+    "atributo": "str",
+    "bonus_total": 0,
+    "chave": "athletics",
+    "detalhe": "0 (untrained) + STR +0",
+    "mod_atributo": 0,
+    "nome": "Athletics",
+    "rank": "untrained",
+    "total": 0
+   },
+   {
+    "atributo": "int",
+    "bonus_total": 0,
+    "chave": "crafting",
+    "detalhe": "0 (untrained) + INT +0",
+    "mod_atributo": 0,
+    "nome": "Crafting",
+    "rank": "untrained",
+    "total": 0
+   },
+   {
+    "atributo": "cha",
+    "bonus_total": 0,
+    "chave": "deception",
+    "detalhe": "0 (untrained) + CHA +4",
+    "mod_atributo": 4,
+    "nome": "Deception",
+    "rank": "untrained",
+    "total": 4
+   },
+   {
+    "atributo": "cha",
+    "bonus_total": 0,
+    "chave": "diplomacy",
+    "detalhe": "0 (untrained) + CHA +4",
+    "mod_atributo": 4,
+    "nome": "Diplomacy",
+    "rank": "untrained",
+    "total": 4
+   },
+   {
+    "atributo": "cha",
+    "bonus_total": 0,
+    "chave": "intimidation",
+    "detalhe": "0 (untrained) + CHA +4",
+    "mod_atributo": 4,
+    "nome": "Intimidation",
+    "rank": "untrained",
+    "total": 4
+   },
+   {
+    "atributo": "int",
+    "bonus_total": 0,
+    "chave": "lore:Gladatorial Lore",
+    "detalhe": "nivel 5 + prof 2 (trained) + INT +0",
+    "mod_atributo": 0,
+    "nome": "Lore: Gladatorial",
+    "rank": "trained",
+    "total": 7
+   },
+   {
+    "atributo": "wis",
+    "bonus_total": 0,
+    "chave": "medicine",
+    "detalhe": "0 (untrained) + WIS +1",
+    "mod_atributo": 1,
+    "nome": "Medicine",
+    "rank": "untrained",
+    "total": 1
+   },
+   {
+    "atributo": "wis",
+    "bonus_total": 0,
+    "chave": "nature",
+    "detalhe": "0 (untrained) + WIS +1",
+    "mod_atributo": 1,
+    "nome": "Nature",
+    "rank": "untrained",
+    "total": 1
+   },
+   {
+    "atributo": "int",
+    "bonus_total": 0,
+    "chave": "occultism",
+    "detalhe": "0 (untrained) + INT +0",
+    "mod_atributo": 0,
+    "nome": "Occultism",
+    "rank": "untrained",
+    "total": 0
+   },
+   {
+    "atributo": "cha",
+    "bonus_total": 0,
+    "chave": "performance",
+    "detalhe": "nivel 5 + prof 2 (trained) + CHA +4",
+    "mod_atributo": 4,
+    "nome": "Performance",
+    "rank": "trained",
+    "total": 11
+   },
+   {
+    "atributo": "wis",
+    "bonus_total": 0,
+    "chave": "religion",
+    "detalhe": "0 (untrained) + WIS +1",
+    "mod_atributo": 1,
+    "nome": "Religion",
+    "rank": "untrained",
+    "total": 1
+   },
+   {
+    "atributo": "int",
+    "bonus_total": 0,
+    "chave": "society",
+    "detalhe": "0 (untrained) + INT +0",
+    "mod_atributo": 0,
+    "nome": "Society",
+    "rank": "untrained",
+    "total": 0
+   },
+   {
+    "atributo": "dex",
+    "bonus_total": 0,
+    "chave": "stealth",
+    "detalhe": "0 (untrained) + DEX +1",
+    "mod_atributo": 1,
+    "nome": "Stealth",
+    "rank": "untrained",
+    "total": 1
+   },
+   {
+    "atributo": "wis",
+    "bonus_total": 0,
+    "chave": "survival",
+    "detalhe": "0 (untrained) + WIS +1",
+    "mod_atributo": 1,
+    "nome": "Survival",
+    "rank": "untrained",
+    "total": 1
+   },
+   {
+    "atributo": "dex",
+    "bonus_total": 0,
+    "chave": "thievery",
+    "detalhe": "0 (untrained) + DEX +1",
+    "mod_atributo": 1,
+    "nome": "Thievery",
+    "rank": "untrained",
+    "total": 1
+   }
+  ],
   "pericias_livres": 2,
   "proficiencias": {
    "advanced": "untrained",
@@ -1093,6 +1265,48 @@
    "unarmed": "trained",
    "unarmored": "trained",
    "will": "expert"
+  },
+  "salvas": {
+   "fortitude": {
+    "atributo": "con",
+    "bonus_total": 0,
+    "chave": "fortitude",
+    "detalhe": "nivel 5 + prof 4 (expert) + CON +3",
+    "mod_atributo": 3,
+    "nome": "fortitude",
+    "rank": "expert",
+    "total": 12
+   },
+   "perception": {
+    "atributo": "wis",
+    "bonus_total": 0,
+    "chave": "perception",
+    "detalhe": "nivel 5 + prof 2 (trained) + WIS +1",
+    "mod_atributo": 1,
+    "nome": "perception",
+    "rank": "trained",
+    "total": 8
+   },
+   "reflex": {
+    "atributo": "dex",
+    "bonus_total": 0,
+    "chave": "reflex",
+    "detalhe": "nivel 5 + prof 2 (trained) + DEX +1",
+    "mod_atributo": 1,
+    "nome": "reflex",
+    "rank": "trained",
+    "total": 8
+   },
+   "will": {
+    "atributo": "wis",
+    "bonus_total": 0,
+    "chave": "will",
+    "detalhe": "nivel 5 + prof 4 (expert) + WIS +1",
+    "mod_atributo": 1,
+    "nome": "will",
+    "rank": "expert",
+    "total": 10
+   }
   },
   "sentidos": [],
   "slots": {

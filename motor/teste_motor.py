@@ -1066,6 +1066,61 @@ checar(not cathartic["atende"],
 checar(any("nao conjura" in m for m in cathartic["motivos"]),
        "e o motivo diz que ele nao conjura, nao so que falta CHA")
 
+print("\ntotal de pericia e salva -- saiu da tela e entrou no motor")
+# Spec: specs/2026-07-30-bonus-de-pericia-e-salva.md. O total era calculado em
+# `PainelDireito.tsx:94` -- sem oraculo, sem paridade e sem onde receber bonus.
+# com background e uma pericia livre declarada, para haver rank treinado --
+# um Guerreiro cru nao treina pericia nenhuma automaticamente
+g5 = personagem(niveis((FIGHTER, 5)) + BOOSTS + [
+    {"em": "criacao", "slot": "background", "pega": "wb:background/hermit"},
+    {"em": "criacao", "slot": "pericias_livres", "pega": ["athletics"]}])
+pericias = {p["chave"]: p for p in g5.visao()["pericias"]}
+checar(len(pericias) >= 16,
+       "a visao traz as 16 pericias (mais as Lore que o personagem tem)",
+       f"{len(pericias)}")
+errados = [p["chave"] for p in pericias.values()
+           if p["total"] != ((g5.nivel + RANK_BONUS[p["rank"]])
+                             if p["rank"] != "untrained" else 0)
+                            + p["mod_atributo"] + p["bonus_total"]]
+checar(not errados, "e todo total e nivel + rank + atributo + bonus", f"{errados[:3]}")
+treinada = next((p for p in pericias.values() if p["rank"] != "untrained"), None)
+checar(treinada and treinada["total"] == g5.nivel + RANK_BONUS[treinada["rank"]]
+       + treinada["mod_atributo"] + treinada["bonus_total"],
+       "e a treinada SOMA o nivel", f"{treinada}")
+crafting = pericias.get("crafting")
+checar(crafting and crafting["rank"] == "untrained"
+       and crafting["total"] == crafting["mod_atributo"],
+       "destreinada NAO soma o nivel -- so o atributo (RAW)", f"{crafting}")
+salvas = g5.visao()["salvas"]
+checar(set(salvas) >= {"fortitude", "reflex", "will", "perception"},
+       "e as salvas e a percepcao saem pela mesma conta", f"{sorted(salvas)}")
+
+# bonus incondicional entra; o condicional nao. Ant Kholo da +1 de circunstancia
+# em Deception (e +1 em iniciativa, que o motor nao modela e ignora).
+kholo = personagem(niveis((FIGHTER, 5)) + BOOSTS + [
+    {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/kholo"},
+    {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/ant-kholo"}])
+sem = personagem(niveis((FIGHTER, 5)) + BOOSTS + [
+    {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/kholo"}])
+d_com = {p["chave"]: p for p in kholo.visao()["pericias"]}["deception"]
+d_sem = {p["chave"]: p for p in sem.visao()["pericias"]}["deception"]
+checar(d_com["total"] == d_sem["total"] + 1,
+       "Ant Kholo soma +1 de circunstancia em Deception",
+       f"com={d_com['total']} sem={d_sem['total']}")
+checar(any("Ant Kholo" in str(b.get("origem")) for b in (d_com.get("bonus") or [])),
+       "e o detalhe nomeia a fonte", f"{d_com.get('bonus')}")
+
+# regra de tipo: mesmo tipo NAO empilha, tipos diferentes somam
+checar(g5._melhor_por_tipo([("circumstance", 1, "a"), ("circumstance", 1, "b")]) == 1,
+       "dois bonus de CIRCUNSTANCIA de +1 dao +1, nao +2")
+checar(g5._melhor_por_tipo([("circumstance", 1, "a"), ("item", 1, "b")]) == 2,
+       "circunstancia +1 e item +1 somam 2 -- tipos diferentes empilham")
+checar(g5._melhor_por_tipo([("circumstance", 1, "a"), ("circumstance", 2, "b")]) == 2,
+       "e entre dois do mesmo tipo vale o MAIOR")
+checar(g5._melhor_por_tipo([(None, 1, "a"), (None, 1, "b")]) == 2,
+       "bonus sem tipo (untyped) empilha com tudo, inclusive consigo -- RAW")
+
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")
@@ -1074,3 +1129,4 @@ if FALHAS:
     sys.exit(1)
 print("  todos os testes passaram")
 sys.exit(0)
+

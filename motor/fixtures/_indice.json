@@ -3,6 +3,14 @@
  "pin_base": "ok",
  "fichas": [
   {
+   "ficha": "_teste-validacao-bonus-de-pericia",
+   "nivel": 5,
+   "hp": 68,
+   "avisos": 1,
+   "fora_do_requisito": 0,
+   "slots_abertos": 13
+  },
+  {
    "ficha": "_teste-validacao-remap-de-arma",
    "nivel": 8,
    "hp": 72,

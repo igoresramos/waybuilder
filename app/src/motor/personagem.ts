@@ -36,7 +36,7 @@ import { avaliar as avaliarPredicado, comparar } from "./predicado.ts";
 import type {
   AC, Ataque, Ator, AumentoDePericia, Candidato, Concedido, ConcessaoDeAtor,
   Conjuracao, Documento, ForaDoRequisito, LinhaDeFeature, FonteDeBoost, Rank,
-  DetalheDePericiaLivre, OpcaoDeGrant,
+  BonusAplicado, DetalheDePericiaLivre, LinhaDePericia, OpcaoDeGrant,
   Registro, SlotAberto, SlotDeSubclasse, Visao,
 } from "./tipos.ts";
 import { ATRIBUTOS, RANKS } from "./tipos.ts";
@@ -131,6 +131,9 @@ export class Personagem implements ContextoDePredicado {
   /** cache de `_remaps_de_arma`: `candidatos()` avalia milhares de feats por
    * slot, e varrer classes/features/feats a cada arma citada custaria caro. */
   private _remaps_cache: Array<[unknown, unknown]> | null = null;
+  pericias: LinhaDePericia[] = [];
+  salvas: Record<string, LinhaDePericia> = {};
+  bonus_ignorados: Record<string, number> = {};
   aumentos_de_pericia: number[] = [];
   aumentos_detalhe: AumentoDePericia[] = [];
 
@@ -210,6 +213,7 @@ export class Personagem implements ContextoDePredicado {
     this._focus();
     this._defesa();
     this._ataques();
+    this._pericias_e_salvas();
     this._checar_requisitos();
   }
 
@@ -3247,6 +3251,147 @@ export class Personagem implements ContextoDePredicado {
 
   // -- saída --------------------------------------------------------------
 
+
+  // -- bônus incondicional e o total de perícia/salva ------------------------
+
+  /**
+   * Soma respeitando a regra de tipo do PF2e.
+   *
+   * Bônus do MESMO tipo não empilham -- vale o maior. Tipos diferentes somam.
+   * Bônus sem tipo (`untyped`) empilha com tudo, inclusive com outro untyped.
+   *
+   * Sem isto, um personagem com três itens de +1 de circunstância sairia com +3
+   * onde o RAW dá +1 -- e a ficha parada inflaria sozinha.
+   *
+   * Spec: `specs/2026-07-30-bonus-de-pericia-e-salva.md`
+   */
+  private _melhor_por_tipo(bonus: BonusAplicado[]): number {
+    const melhor = new Map<string, number>();
+    let solto = 0;
+    for (const b of bonus) {
+      const tipo = ehStr(b.tipo) ? b.tipo.toLowerCase() : "";
+      if (!tipo || tipo === "untyped") { solto += b.valor; continue; }
+      melhor.set(tipo, Math.max(melhor.get(tipo) ?? 0, b.valor));
+    }
+    let soma = solto;
+    for (const v of melhor.values()) soma += v;
+    return soma;
+  }
+
+  /**
+   * `flat_modifier` sem `condicional`, agrupado por selector.
+   *
+   * São 462 de 1.709 -- os outros 1.247 são condicionais ("+2 em Atletismo só
+   * para Empurrar") e dependem de contexto de ação que a ficha não tem.
+   */
+  private _bonus_incondicionais(): Map<string, BonusAplicado[]> {
+    const fora: Record<string, number> = {};
+    const porSelector = new Map<string, BonusAplicado[]>();
+    const fontes: Array<[string, Dict]> = [];
+    for (const cid of this.ordem_de_classe) {
+      const c = dictDe(this.base.get(cid));
+      fontes.push([nomeOu(c, cid), c]);
+    }
+    for (const reg of [this.ancestria, this.heranca, this.background]) {
+      if (reg) fontes.push([pyStr(nome(reg)), dictDe(reg)]);
+    }
+    for (const f of this.features) fontes.push([pyStr(f["nome"]), dictDe(f)]);
+    for (const [i, feat] of this._feats_efetivos()) fontes.push([nomeOu(feat, i), feat]);
+    for (const [rotulo, reg] of fontes) {
+      for (const g of this._grants_de(reg)) {
+        const fm = dictDe(g)["flat_modifier"];
+        if (!ehDict(fm) || verdadeiro(fm["condicional"])) continue;
+        const valor = fm["value"];
+        if (!ehInt(valor)) { fora["valor nao inteiro"] = (fora["valor nao inteiro"] ?? 0) + 1; continue; }
+        const bruto = fm["selector"];
+        const alvos = Array.isArray(bruto) ? bruto : [bruto];
+        for (const alvo of alvos) {
+          const chave = pyStr(alvo);
+          if (chave.includes("{")) { fora["selector dinamico"] = (fora["selector dinamico"] ?? 0) + 1; continue; }
+          empurrar(porSelector, chave, { tipo: fm["type"], valor, origem: rotulo });
+        }
+      }
+    }
+    this.bonus_ignorados = fora;
+    return porSelector;
+  }
+
+  /**
+   * O total que a TELA calculava (`PainelDireito.tsx:94`).
+   *
+   * Número que nasce no componente React não tem oráculo, não tem paridade e
+   * não tem onde receber `flat_modifier`. AC e ataque já moravam aqui; a
+   * perícia e a salva ficaram para trás.
+   */
+  private _pericias_e_salvas(): void {
+    const bonus = this._bonus_incondicionais();
+    const consumidos = new Set<string>();
+
+    const total = (chave: string, atributo: string, extras: string[]): LinhaDePericia => {
+      const rank = (this.proficiencias.get(chave) ?? "untrained") as Rank;
+      const mod = this.modificadores[atributo] ?? 0;
+      const aplicados: BonusAplicado[] = [];
+      for (const sel of extras) {
+        aplicados.push(...(bonus.get(sel) ?? []));
+        consumidos.add(sel);
+      }
+      const extra = this._melhor_por_tipo(aplicados);
+      // RAW: destreinado NÃO soma o nível, só o atributo
+      const base = rank !== "untrained" ? this.nivel + RANK_BONUS[rank] : 0;
+      const linha: LinhaDePericia = {
+        chave, nome: chave, rank, atributo,
+        mod_atributo: mod, bonus_total: extra, total: base + mod + extra,
+        detalhe: `${rank !== "untrained" ? `nivel ${this.nivel} + prof ` : ""}`
+          + `${rank !== "untrained" ? RANK_BONUS[rank] : 0} (${rank})`
+          + ` + ${atributo.toUpperCase()} ${comSinal(mod)}`
+          + (extra ? ` + bonus ${comSinal(extra)}` : ""),
+      };
+      if (aplicados.length) linha.bonus = aplicados;
+      return linha;
+    };
+
+    this.pericias = [];
+    for (const reg of this.base.por_id.values()) {
+      if (reg.kind !== "skill" || reg["lore"] === true || reg.id === "wb:skill/lore") continue;
+      const chave = reg.id.split("/").pop() ?? "";
+      const attr = pyStr(listaDe(reg["attribute"])[0] ?? "int");
+      const linha = total(chave, attr, [chave]);
+      linha.nome = reg.name ?? chave;
+      this.pericias.push(linha);
+    }
+    for (const chave of this.proficiencias.keys()) {
+      if (!chave.startsWith("lore:")) continue;
+      const linha = total(chave, "int", [chave]);
+      // a chave às vezes já carrega o sufixo "Lore" (vem assim da fonte), e
+      // prefixar cegamente produzia `Lore: Alcohol Lore` na ficha. A regra
+      // estava em `PainelDireito.tsx` e veio junto com a conta.
+      const bruto = chave.slice("lore:".length).replace(/\s*\blore\b\s*$/i, "").trim();
+      linha.nome = "Lore: " + bruto.replace(/\b\w/g, (c) => c.toUpperCase());
+      this.pericias.push(linha);
+    }
+    this.pericias.sort((a, b) => ordenarTextos([a.nome, b.nome])[0] === a.nome ? -1 : 1);
+
+    const ATRIBUTO_DA_SALVA: Record<string, string> = {
+      fortitude: "con", reflex: "dex", will: "wis", perception: "wis",
+    };
+    this.salvas = {};
+    for (const [chave, attr] of Object.entries(ATRIBUTO_DA_SALVA)) {
+      const extras = chave === "perception" ? [chave] : [chave, "saving-throw"];
+      this.salvas[chave] = total(chave, attr, extras);
+      consumidos.add(chave);
+    }
+    consumidos.add("saving-throw");
+
+    // o que sobrou não é "ignorado" indistintamente: `hp` e `ac` têm passo
+    // próprio, e o resto (`initiative`, `perception-dc`, `skill-check`
+    // genérico) o motor não modela. Contar é o que impede a perda silenciosa.
+    const OUTRO_PASSO = new Set(["hp", "ac"]);
+    for (const [sel, lista] of bonus) {
+      if (consumidos.has(sel) || OUTRO_PASSO.has(sel)) continue;
+      this.bonus_ignorados[`selector nao modelado: ${sel}`] = lista.length;
+    }
+  }
+
   /** A visão calculada. Cache, nunca fonte de verdade. */
   visao(): Visao {
     const classes: Record<string, number> = {};
@@ -3263,6 +3408,8 @@ export class Personagem implements ContextoDePredicado {
       modificadores: this.modificadores,
       hp: this.hp,
       proficiencias,
+      pericias: this.pericias,
+      salvas: this.salvas,
       pericias_livres: this.pericias_livres,
       aumentos_de_pericia: {
         niveis: this.aumentos_de_pericia, gastos: this.aumentos_detalhe,
