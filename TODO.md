@@ -2,6 +2,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -12,45 +13,6 @@
 # Os 55 itens concluidos vivem em docs/2026-07-29_todo-concluidos.md.
 project: waybuilder
 items:
-- desc: 'FATIA 3.2 (Resistance) CONCLUIDA 2026-07-30, spec specs/2026-07-30-resistencia-e-formula.md.
-    A ficha nao tinha resistencia, fraqueza nem imunidade -- 233 + 11 + 14 grants que o motor ignorava,
-    vindos de feat (125), equipment (59), armor (21), weapon (12), shield (9). Agora `visao.resistencias`,
-    `.fraquezas` e `.imunidades`, com origem nomeada e a regra do livro de nao-empilhamento (duas
-    fontes do mesmo tipo: vale a maior, nao a soma). SAIU JUNTO um defeito mais antigo: `_resolver_valor`
-    resolvia so inteiro e `@actor.level`, e QUALQUER outra expressao virava ZERO EM SILENCIO -- 68
-    das 233 resistencias sao formula. Virou um mini-avaliador da gramatica medida (inteiro, `@actor.level`,
-    `@armor.system.runes.potency`, `+`, `/`, `floor()`, `max()`), e o que estiver fora devolve None
-    em vez de zero: zero e uma resposta, None diz "nao sei". DEFEITO MEU PEGO PELO DIFF DO FIXTURE:
-    `tipo` e LISTA em 19 dos 258 (Blast Resistance protege fire E sonic) e eu convertia para texto
-    cego, escrevendo "[''fire'', ''sonic'']" na ficha do campeao6. Uma resistencia a N tipos sao
-    N linhas. RESOLVIDO NA MESMA SESSAO: os 18 `flat_modifier` de `land-speed` tinham para onde ir
-    depois que a ficha ganhou Velocidade (spec specs/2026-07-30-velocidade.md). FATIAS 3.3 E 3.6
-    MEDIDAS E DECIDIDAS FORA em 2026-07-30 (relatorio docs/2026-07-30_fatias-3-3-e-3-6.md): ItemAlteration
-    e 86,5% COSMETICO (other-tags 752, description 606, name 459, traits 410 dos 2.573) e so 93 ocorrencias
-    (3,6%) mexem em numero que a ficha ja mostra, dispersas em quatro propriedades com alvos diferentes
-    -- custo alto por ocorrencia. RollOption nao produz numero: 85% sao `toggleable` (interruptor
-    de rolagem) e 1.297 dos 1.579 nem tem `domain` -- sao etiqueta que outro rule element consulta.
-    O app nao rola dado, e aplicar como se estivessem ligados inflaria a ficha parada, o mesmo erro
-    que o `flat_modifier` condicional evita. SOBRA DA FASE 3: so a parte de COMBATE do 3.1 (`strike-damage`
-    e `ac`), que e o item 43. || TEXTO ORIGINAL: CORRIGIDO 2026-07-29 (auditoria): o numero do item
-    estava errado. Nao sao ''175 das 176 sub-escolhas sem efeito'' -- sao 114 de 418 (27%) que JA
-    tem `grants` e que o motor JA aplica, porque `_proficiencias` e `_grants_em_cadeia` leem `self.features`,
-    que inclui a subclasse escolhida. O MECANISMO DE APLICACAO DEIXOU DE SER O PROBLEMA. O que trava
-    sao as 304 opcoes com `grants: []`, e isso e EXTRACAO: converter_rule_elements.py so converteu
-    os 99 declarativos (ActiveEffectLike com path de rank, sem predicate). Falta o grosso -- 1.784
-    FlatModifier, 1.495 ItemAlteration, 1.113 GrantItem, 1.077 RollOption, 563 ChoiceSet, 337 Resistance.
-    || TEXTO ORIGINAL: SUBCLASSE NAO ALTERA NADA (parcialmente resolvido). Levantado pelo Igor a
-    partir do caso Cloistered/Warpriest: das 176 opcoes de sub-escolha (bloodline 18, patron 24,
-    mystery 12, instinct 16, racket 6, doctrine 3, muse 5, arcane-school 23, cause 13, implement
-    10...), **175 nao tinham efeito estruturado** -- escolher subclasse nao mudava numero nenhum
-    na ficha. O dado existe: 584 das 841 class-features do Foundry tem Rule Elements. converter_rule_elements.py
-    converteu os 99 declarativos (ActiveEffectLike com path de rank, sem predicate). FALTA o grosso,
-    que depende de reimplementar o interpretador do Foundry: 1.784 FlatModifier, 1.495 ItemAlteration,
-    1.113 GrantItem, 1.077 RollOption, 563 ChoiceSet, 337 Resistance. E o item que a spec chama de
-    ''maior custo do projeto'''
-  id: 40
-  date: '2026-07-29'
-  priority: alta
 - desc: 'SOBRA DA FASE 3 FECHADA 2026-07-30 (spec specs/2026-07-30-bonus-de-item-equipado.md). O
     item pedia `ac` e `strike-damage`; na base canonica `ac` tinha 34 grants e ZERO incondicionais.
     Contando selector em LISTA apareceram 6, e ao aplicar veio o numero real: `_bonus_incondicionais`
@@ -69,32 +31,6 @@ items:
     conceito. Em PF2e o familiar deriva os numeros do personagem -- derivar sem a regra na mao seria
     inventar. PROXIMO PASSO: conseguir a fonte das estatisticas.'
   id: 43
-  date: '2026-07-29'
-  priority: alta
-- desc: 'PARCIAL. (b) RESOLVIDO 2026-07-29: o cap de ator ancora na classe que concedeu, via `concedido_por`.
-    (a) e (c) seguem como DECISAO DO IGOR. (a) a regra 17b (teto de invocacao) vale tambem para magia
-    conjurada por slot de dedicacao de arquetipo? (c) a regra 23 (exclusao mutua) deve bloquear qualquer
-    arquetipo que duplique concessao ja dada por nivel de classe -- ex: Beastmaster Dedication num
-    Ranger que ja tem companheiro? DEFAULT ADOTADO no plano de 2026-07-29 enquanto o Igor nao decide:
-    (a) sim, e reversivel num if. || TEXTO ORIGINAL: AMBIGUIDADE A RESOLVER COM O IGOR (2026-07-27,
-    fim de sessao). Ele disse ''a regra que fizemos serve pra dedicacao tambem'' e a frase tem TRES
-    leituras, com implementacoes diferentes. Nao arbitrei. (a) REGRA 17b EM SLOT DE ARQUETIPO --
-    o teto de invocacao passaria a valer tambem para magia conjurada de slot de dedicacao. Hoje nao
-    vale: a regra 18 diz que Free Archetype roda RAW puro, entao o slot de arquetipo escapa. E a
-    pergunta que ficou aberta duas vezes nesta sessao, inclusive na simulacao, que achou a incoerencia
-    de a mesma magia sair em dois ranks na mesma ficha. Efeito: invocacao vinda de dedicacao pararia
-    no rank do proprio slot em vez de subir por heightened. (b) CAP DE ATOR VINDO DE DEDICACAO --
-    RESOLVIDO 2026-07-29 pela spec companheiro-concedido: o `grant_actor` guarda o NIVEL em que o
-    feat foi pego, e o nivel diz a classe, entao `_classe_do_ator` ancora na classe que concedeu
-    em vez de chutar a de maior nivel. Num Ranger 3 / Fighter 5 o companheiro do Ranger dava 7 e
-    agora da 5. Ator escrito a mao sem `concedido_por` mantem o comportamento antigo (chute + aviso).
-    (c) REGRA 23 PARA ARQUETIPO NAO-MULTICLASSE -- a exclusao mutua deixaria de ser so entre classe
-    e dedicacao da MESMA classe e passaria a valer para arquetipo comum que duplica concessao da
-    classe, ex: Beastmaster Dedication num Ranger que ja tem companheiro por nivel. Hoje isso e permitido
-    e o personagem fica com dois companheiros. Provavel que a resposta seja (a), porque foi a pergunta
-    que eu deixei explicitamente aberta duas vezes -- mas ''provavel'' nao basta para regra de jogo,
-    e (b) e um defeito de verdade independente da resposta'
-  id: 47
   date: '2026-07-29'
   priority: alta
 - desc: 'A regra de precedencia grants->foundry e letra morta: grants nunca gera conflito real no
