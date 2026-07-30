@@ -1017,3 +1017,17 @@ comparado com nivel (int). E um de outra especie, que virou licao: `build.sh`
 aborta nos portoes e o passo 9 nao roda, entao `base/app/` -- que os testes de
 paridade consomem -- fica do build anterior. A divergencia parecia erro de
 ordenacao e era payload velho. Quarta ocorrencia no dia do mesmo padrao.
+
+**Item 43 (atores) e item 75c fechados.** O familiar e o eidolon passaram a ser
+concedidos -- eram 0 registros e agora sao 16 e 2 --, e a Bruxa nivel 1 deixou de
+ficar sem o familiar que a primeira feature de classe dela promete. O stat block
+segue ausente **por falta de fonte**, medida e declarada: nenhum campo numerico
+em `familiar-specific`, so velocidade no `eidolon`, e a pagina de regras do AoN
+tem 796 caracteres so de conceito.
+
+E o Campeao 5 ficou expert em marcial. `weapon-expertise` era um registro para 14
+classes; seis delas saiam com `martial: trained` onde a prosa diz expert -- dois
+pontos a menos em todo ataque marcial. O item supunha que precisaria raspar a
+tabela HTML do AoN; nao precisava, a prosa por classe responde. E metade do
+trabalho ja estava feita (Bard, Inventor, Ranger e Swashbuckler ja tinham
+variante correta).
