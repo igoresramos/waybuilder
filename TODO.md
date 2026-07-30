@@ -11,6 +11,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -139,20 +140,6 @@ items:
     eixo real de resto-da-progressao. Os 2 eixos legitimos por classe (racket, instinct, muse...)
     estao corretos e nao entram nisto'
   id: 69
-  date: '2026-07-29'
-  priority: media
-- desc: '(a)(b)(c) RESOLVIDOS 2026-07-30 (spec alvo-e-salvaguarda-de-magia). (e) RESOLVIDO 2026-07-30
-    (commit d3e2448af, spec specs/2026-07-30-colisao-por-fonte-repetida.md) e era MAIOR que o item
-    dizia: nao eram 17 spells zumbi, eram 102 irmaos fantasmas em cinco kinds, criados porque o desmembrador
-    comparava `(level, traits)` em vez do CONJUNTO DE FONTES. Nenhum dos 102 era citado por ninguem
-    -- verificado antes de remover. SOBRAM: (d) `heightened` estruturado em 31%, sem flag para separar
-    ''sem elevacao'' de lacuna; (f) RESOLVIDO 2026-07-30 (commit 6604965ba, spec grau-legado-nao-fundido):
-    nao eram ''ausentes do AoN'' -- o Remaster os RENOMEOU (Cloak of Elvenkind -> Cloak of Illusions,
-    Hat of Disguise -> Masquerade Scarf) e a fusao pareou so o grau BASE, porque o AoN declara `remaster_id`
-    no doc base e nao nos de grau. 8 graus legados fundidos. Saiu junto um defeito maior: `Base.opcional`
-    nao seguia alias, entao ficha salva com id aposentado perdia o item em silencio. (g) o resto
-    do texto original.'
-  id: 79
   date: '2026-07-29'
   priority: media
 - desc: '(e) RESOLVIDO 2026-07-30, e ele era maior do que o item dizia. `deity.favored_weapon` tinha

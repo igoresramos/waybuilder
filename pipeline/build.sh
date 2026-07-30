@@ -84,6 +84,12 @@ echo "== 4h5. condicao de acesso (filiacao) lida do AoN =="
 # O AoN publica `access` como campo -- e leitura, nao prosa.
 python3 aplicar_acesso.py
 
+echo "== 4h5b. beneficio dos backgrounds que ficaram vazios =="
+# 10 backgrounds tinham boosts E skill_training vazios -- escolher `Refugee` nao
+# mudava numero nenhum. Nao existem no Foundry; entraram pelo AoN, que tem
+# `attribute` e `skill` em nove deles.
+python3 aplicar_beneficio_de_background.py
+
 echo "== 4h6. ranks de elevacao da magia, lidos do AoN =="
 # `heightened` vazio significava "nao eleva" E "nao sei" ao mesmo tempo. O AoN
 # publica `heighten_level` nos 2.461 docs: das 1.125 vazias, 664 estao certas e
