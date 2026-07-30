@@ -14,6 +14,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -124,47 +125,13 @@ items:
   id: 69
   date: '2026-07-29'
   priority: media
-- desc: '3a RODADA FECHADA 2026-07-30 (relatorio docs/2026-07-30_comparacao-pathbuilder-rodada-3.md).
-    Terreno novo: `ancestry_feat` (nunca comparado), Fighter 12 e Ranger 4. UM defeito nosso, e ele
-    foi consertado na mesma rodada: `_expr` divide em " or " ANTES de chamar `_atomo`, entao "spellcasting
-    class feature with the divine or primal tradition" virava "...with the divine" + "primal tradition"
-    e caia inteira em `requires_residuo` -- mesma classe do item 91. A causa NAO era falta de termo
-    (`spellcasting_tradition` existe desde 29/07). Consertado reconhecendo a frase antes do corte.
-    Junto sairam duas familias irmas que so passaram a ter resposta por causa do item 78 DE HOJE:
-    "divine spells" / "bloodline that grants arcane spells" (7 clausulas) e a contracao "you''re
-    able to cast spells" (4). Residuo 602 -> 598, e a divergencia do ancestry_feat foi a ZERO. O
-    RESTO NAO E DEFEITO: 7 pares novos de renomeacao do Pathbuilder (Shory/Saoc/Irriseni/Quah/Tupilaq
-    -> generico, tabela agora com 33 pares, verificados contra os 43.686 docs do AoN); 22 dos 25
-    "so no Pathbuilder" do ancestry_feat ele mesmo pinta de vermelho (ele lista as 60 de todas as
-    ancestrias, nos oferecemos as 42 da ancestria do personagem); 21 das 26 divergencias do Ranger
-    4 sao a familia JA DECLARADA de pericia pendente; e as 5 no sentido contrario sao principio zero
-    (pre-requisito narrativo tipo "member of the Ulfen Guard" nao bloqueia aqui e bloqueia la). FICA
-    PARA A SEGUNDA LEVA (Wizard 16, Cleric 20, Rogue 8/skill_feat) deu o DEFEITO MAIS GRAVE DO DIA:
-    `has` de class-feature era SEMPRE falso em `candidatos()`. A guarda de auto-satisfacao (`f.get("raiz")
-    != excluir`) descartava toda feature da PROGRESSAO da classe, porque `raiz` e None e `_avaliando`
-    tambem e None fora de `_checar_requisitos` -- e em `candidatos()` ele NUNCA e setado. 139 clausulas
-    em 135 registros: um Magus nunca podia pegar feat de Spellstrike (21), um Monge feat de Ki (12).
-    Consertado nos dois motores + ficha de validacao com Magus 6. Mais: guarda de `archetype` na
-    aba de skill feat do comparador (118 falsos positivos -> 7), `master at` alem de `master in`
-    no RANK_RE, e 2 pares novos de renomeacao (tabela em 35). `Lightning Snares` e `Wild Empathy`
-    fecharam como recorte de EDICAO (o remaster reclassificou o primeiro; a fonte da razao a nos
-    no segundo). FICA PARA A PROXIMA: general feat fora do Guerreiro, e o quantificador "uma pericia
-    que tenha a acao X". || TEXTO ORIGINAL: COMPARACAO COM O PATHBUILDER, 1a rodada FECHADA (2026-07-29).
-    De 65 pontos sobraram QUATRO, e NENHUM e buraco nosso -- tudo que o Pathbuilder oferece no slot
-    de class feat de um Fighter 1, o Waybuilder tambem oferece. Os 61 que sairam eram quatro recortes
-    distintos, cada um verificado contra a fonte: (1) o PATHBUILDER renomeia o que a Paizo nao renomeou,
-    tirando nome proprio de Golarion (Product Identity) -- a ponte remaster_id do AoN nao registra
-    os pares e os nomes curtos dele nao existem em nenhum dos 43.686 docs do dump. A nossa base esta
-    certa; virou tabela de traducao em docs/comparacao/equivalencias-pathbuilder.json (22 pares);
-    (2) a opcao ''Allow outdated CRB and APG?'' nasce Off e esconde todo o conteudo pre-remaster
-    que a nossa base inclui -- a sonda agora liga; (3) renomeacao de VERDADE (`Drow Shootist` ->
-    `Crossbow Infiltrator`, feita pela Paizo): o comparador passou a casar por `aliases`; (4) ruido
-    de grafia. OS QUATRO QUE SOBRARAM, todos do nosso lado: `Stance Savant` (CRB nv14, nao existe
-    no dump do AoN -- removido no remaster e carregado do Foundry legado, DECIDIR se fica), `Chelaxian
-    Scion Dedication` (AP #223), `Knight Vigilant` (Character Guide), `Venture-Gossip Dedication`
-    (Paizo Blog) -- os tres ultimos sao recorte de fonte do outro lado, nao defeito. Relatorio: docs/2026-07-29_comparacao-pathbuilder.md.
-    PROXIMO: outras classes, outros slots (skill/general/ancestry) e niveis altos, onde o predicado
-    tem mais o que errar'
+- desc: '4a RODADA FECHADA 2026-07-30 (Barbaro 6, secao 8 do relatorio docs/2026-07-30_comparacao-pathbuilder-rodada-3.md).
+    NENHUM defeito nosso na aba -- 98x99 em class feats, tudo nas familias ja declaradas. O valor
+    veio da investigacao do unico item so-dele (`Reckless Abandon`): revelou que o nome antigo nao
+    virava alias FORA de magia, e sairam 335 renomeacoes (commit 1ce0d2601, spec alias-legado-fora-de-magia).
+    PROXIMAS RODADAS: general_feat fora do Guerreiro e do Bardo; o quantificador ''uma pericia que
+    tenha a acao X'' (Automatic/Dubious Knowledge); e classes ainda nao comparadas -- Champion, Druid,
+    Sorcerer, Alchemist, Investigator (o DEFAULT do comparador tem 8).'
   id: 84
   date: '2026-07-29'
   priority: media

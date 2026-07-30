@@ -1065,3 +1065,11 @@ mesmo instinto existe como `wb:instinct/animal` (AoN) e
 diferentes pelo sufixo do eixo. Uma regressao minha na primeira versao -- gemeo
 ausente casando com escolha ausente -- foi pega pela paridade, com 28 fixtures
 mudando de candidato.
+
+**4a rodada Pathbuilder (Barbaro 6).** Nenhum defeito nosso na aba. O valor veio
+de investigar o unico item so-dele: `Reckless Abandon` virou `Desperate Wrath` no
+Remaster (recorte de edicao), mas `Desperate Wrath` nao carregava o nome antigo
+como alias -- e existe um feat goblin homonimo, entao quem digitasse o nome
+antigo achava o goblin. O buraco estava fechado so para magia; fora dela sairam
+335 renomeacoes, com tres guardas que a medicao exigiu (a regra crua pegava 1.606
+e a maioria era lixo, incluindo `panache` ganhando o alias "Swashbuckler").
