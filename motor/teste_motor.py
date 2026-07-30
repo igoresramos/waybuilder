@@ -1594,6 +1594,36 @@ checar(g8.proficiencias.get("athletics") == "trained"
        "o MESMO documento num personagem de nivel 8 aplica normalmente",
        f"{g8.proficiencias.get('athletics')} / {g8.escolhas_de_nivel_futuro}")
 
+# -- pendencias (b) e (c) do review adversarial ----------------------------
+print("\n-- pendencias do review --")
+
+engano = personagem(
+    [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+    + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/fighter"}
+       for n in range(1, 5)]
+    + [{"em": "criacao", "slot": "class_feat", "pega": "wb:feat/sudden-charge"}])
+checar([a for a in engano.avisos if "class_feat" in a and "nao e nivel" in a],
+       "(b) feat posto em `criacao` avisa -- a guarda dispensava calada",
+       f"{engano.avisos}")
+checar(not [a for a in engano.avisos if "ancestralidade" in a],
+       "e ancestria em `criacao` segue sem aviso, que e o certo")
+
+ESCOLA = "wb:arcane-school/abjuration"
+TESE = "wb:class-feature/experimental-spellshaping"
+def mago_sub(ordem):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+        + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/wizard"}
+           for n in range(1, 3)]
+        + [{"em": 1, "slot": "subclasse", "pega": o} for o in ordem])
+checar(mago_sub([ESCOLA, TESE])._subclasse_de("wb:class/wizard")
+       == mago_sub([TESE, ESCOLA])._subclasse_de("wb:class/wizard"),
+       "(c) `_subclasse_de` deixa de depender da ORDEM do documento",
+       f"{mago_sub([ESCOLA, TESE])._subclasse_de('wb:class/wizard')} vs "
+       f"{mago_sub([TESE, ESCOLA])._subclasse_de('wb:class/wizard')}")
+checar(mago_sub([TESE, ESCOLA])._subclasse_de("wb:class/wizard") == ESCOLA,
+       "e responde pelo PRIMEIRO eixo que a classe declara")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

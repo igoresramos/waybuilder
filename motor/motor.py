@@ -1213,7 +1213,19 @@ class Personagem:
 
             for e in usados:
                 em = e.get("em")
-                if isinstance(em, int) and em not in niveis:
+                # `em` nao-inteiro DESLIGAVA a checagem: um feat posto em
+                # `criacao` por engano passava calado. As cinco cadencias sao
+                # todas por NIVEL -- nenhuma delas nasce na criacao --, entao
+                # aqui a string e erro, e nao dispensa. (O slot
+                # `feat_concedido`, que pode nascer em `criacao`, nao e
+                # cadencia e nao passa por este laco.)
+                # Item 73(b) do review adversarial de 2026-07-27.
+                if not isinstance(em, int):
+                    self.avisos.append(
+                        f"slot {slot}: escolha com nivel {em!r}, que nao e "
+                        f"nivel -- este slot so existe por nivel ({niveis})")
+                    continue
+                if em not in niveis:
                     self.avisos.append(
                         f"slot {slot}: escolha no nivel {em}, que nao tem "
                         f"slot desse tipo (niveis validos: {niveis})")
@@ -2110,13 +2122,22 @@ class Personagem:
         return self.nivel + RANK_BONUS[rank]
 
     def _subclasse_de(self, classe_id: str) -> str | None:
-        """A sub-escolha que este personagem fez para a classe dada."""
+        """A sub-escolha que este personagem fez para a classe dada.
+
+        A ordem e a da FONTE, e nao a do documento. Uma classe tem VARIOS
+        eixos (o Mago tem `arcane-school`, `arcane-thesis` e `outras-opcoes`), e
+        percorrer as escolhas do jogador fazia a resposta depender de qual delas
+        vinha antes no array -- mesma ficha, resposta diferente. Era a ultima
+        dependencia de ordem que sobrou depois do conserto de `ordem_de_classe`.
+
+        Spec: `specs/2026-07-30-pendencias-do-review.md`
+        """
         classe = self.base.opcional(classe_id) or {}
-        opcoes = {o for bloco in (classe.get("subclasses") or [])
-                  for o in (bloco.get("opcoes") or [])}
-        for e in self._escolhas("subclasse"):
-            if e.get("pega") in opcoes:
-                return e["pega"]
+        escolhidas = {e.get("pega") for e in self._escolhas("subclasse")}
+        for bloco in (classe.get("subclasses") or []):
+            for o in (bloco.get("opcoes") or []):
+                if o in escolhidas:
+                    return o
         return None
 
     # -- avaliacao do predicado ---------------------------------------------

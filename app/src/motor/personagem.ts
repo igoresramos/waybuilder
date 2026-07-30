@@ -1299,7 +1299,15 @@ export class Personagem implements ContextoDePredicado {
 
       for (const e of usados) {
         const em = obter(e, "em");
-        if (ehInt(em) && !niveis.includes(em)) {
+        // `em` não-inteiro DESLIGAVA a checagem: um feat posto em `criacao` por
+        // engano passava calado. As cinco cadências são todas por nível.
+        if (!ehInt(em)) {
+          this.avisos.push(
+            `slot ${slot}: escolha com nivel ${pyRepr(em)}, que nao e nivel `
+            + `-- este slot so existe por nivel (${pyRepr(niveis)})`);
+          continue;
+        }
+        if (!niveis.includes(em)) {
           this.avisos.push(
             `slot ${slot}: escolha no nivel ${em}, que nao tem slot desse tipo `
             + `(niveis validos: ${pyRepr(niveis)})`);
@@ -2298,13 +2306,17 @@ export class Personagem implements ContextoDePredicado {
 
   /** A sub-escolha que este personagem fez para a classe dada. */
   private _subclasse_de(classe_id: string): string | null {
+    // A ordem é a da FONTE, e não a do documento. Uma classe tem VÁRIOS eixos
+    // (o Mago tem `arcane-school`, `arcane-thesis` e `outras-opcoes`), e
+    // percorrer as escolhas do jogador fazia a resposta depender de qual delas
+    // vinha antes no array. Spec: `specs/2026-07-30-pendencias-do-review.md`
     const classe = dictDe(this.base.opcional(classe_id));
-    const opcoes = new Set<unknown>();
+    const escolhidas = new Set<unknown>(
+      this._escolhas("subclasse").map((e) => e["pega"]));
     for (const b of listaDe(classe["subclasses"])) {
-      for (const o of listaDe(dictDe(b)["opcoes"])) opcoes.add(o);
-    }
-    for (const e of this._escolhas("subclasse")) {
-      if (opcoes.has(e["pega"])) return ehStr(e["pega"]) ? e["pega"] : null;
+      for (const o of listaDe(dictDe(b)["opcoes"])) {
+        if (escolhidas.has(o)) return ehStr(o) ? o : null;
+      }
     }
     return null;
   }
