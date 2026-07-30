@@ -1041,3 +1041,15 @@ Azarketi Guerreiro 13 saia untrained nas armas que o feat eleva a master.
 marcado como decisao do Igor e nao era: o Beastmaster diz por escrito "this feat
 can grant you a second animal companion", entao bloquear seria reprovar o que o
 livro autoriza. 6 dos 30 concessores trazem a excecao na prosa.
+
+**Segunda leva de media.** Item 13 fechado por medicao: `grants` nao arbitra
+entre fontes porque so tem um dono -- nem o AoN nem o pf2etools publicam o campo,
+e ele tem zero conflitos. Item 22: a filiacao ("Member of the Pathfinder
+Society", "Tian Xia origin") nao precisava de varredura de prosa; o AoN publica
+`access` como CAMPO em 1.010 docs, e 728 registros nossos ganharam `acesso`.
+Terceira vez hoje que um item descrito como lacuna de FONTE era lacuna de
+LEITURA. Item 79(e): os "17 spells zumbi" eram 102 irmaos fantasmas, criados
+porque o desmembrador comparava `(level, traits)` e nao o CONJUNTO DE FONTES --
+`spell-553` e `spell-2012` sao o mesmo feitico, com as mesmas fontes em ordem
+diferente. Nenhum dos 102 era citado por ninguem, o que foi verificado antes de
+remover.

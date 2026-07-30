@@ -9,6 +9,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -139,34 +140,13 @@ items:
   id: 69
   date: '2026-07-29'
   priority: media
-- desc: '(a)(b)(c) RESOLVIDOS 2026-07-30, spec specs/2026-07-30-alvo-e-salvaguarda-de-magia.md. O
-    item dizia (c) "campo alvos/targets nunca existiu em spell nem ritual (0% estrutural)" e tratava
-    como lacuna de FONTE. Nao era: o dump do AoN tem `target` em 1.234 e `saving_throw` em 894, em
-    texto simples. Era lacuna de LEITURA -- `magias.py` lia alcance/area/duracao SO do Foundry (`fsys`),
-    entao magia sem par la saia vazia mesmo com o AoN preenchido, e alvo/salva nem campo tinham.
-    Agora: `alvos` 0 -> 804, `salvaguarda` 0 -> 618, `alcance` 1.116 -> 1.139, `duracao` 1.099 ->
-    1.121, `area` 385 -> 412 (de 1.655). Texto cru, sem parse: o Foundry entrega area como `{tipo,valor}`
-    e o AoN como "20-foot burst", e converter poria dois formatos no mesmo campo. ARMADILHA: o Foundry
-    grava `""` (string vazia) em 515 magias, entao um fallback com `is None` nao dispara -- tem de
-    tratar vazio como ausente. Este item so pode ser medido depois de descobrir que `saida/magias.json`
-    estava PARADO em 27/07 (o build chamava `magias.py`, que nao escreve nada). || RESTO DO ITEM:
-    LACUNAS PONTUAIS DE SPELL/RITUAL/EQUIPAMENTO achadas na validacao por dominio de 2026-07-27.
-    BOA NOTICIA primeiro: cobertura de spell e ritual contra o AoN e COMPLETA (0 ausentes nos dois,
-    cruzando por nome normalizado no conjunto remaster), `level` em 100% dos 1.655 spells, e as 17
-    fichas batem com a formula RAW de AC/ataque/dano sem excecao. As lacunas: (a) 15 spells legacy
-    com `acoes` ausente apesar de a prosa trazer ''Cast 10 minutes'' -- buraco de extracao; (b) 23
-    spells com `alcance` ausente, mesmo padrao; (c) campo `alvos`/targets nunca existiu em spell
-    nem ritual (0% estrutural); (d) `heightened` estruturado cobre 31% dos spells e 42% nao tem nem
-    dado nem a flag `heightened_so_prosa`, entao nao da para separar ''sem elevacao'' de ''lacuna'';
-    (e) 17 spells zumbi (`desmembrado_de`) com rank/tradicoes ausentes, duplicatas orfas de fusao
-    -- o canonico existe completo com outro id; (f) 52 itens de equipment (0,6%) ausentes do AoN,
-    entre eles Cloak of Elvenkind, Bag of Holding e Hat of Disguise; (g) relic tem 122 canonicos
-    (os 219 incluem 97 duplicatas -legacy) e os niveis de gift sao 100% prosa -- nem o dump do AoN
-    usou o campo `type` (Minor/Major/Grand) que a fonte tem; o motor nem reconhece `kind=relic`;
-    (h) armaduras e escudos duplicados sem dado mecanico (`wb:armor/leather`, `hide`, `studded-leather`,
-    `unarmored` e 7 escudos de material precioso) coexistindo com a versao completa -- artefato de
-    extracao, perigoso se o front casar por nome curto; (i) dano com arma finesse usa STR em vez
-    de DEX para o Ladino com racket Thief; (j) bulk/carga nao existe no motor'
+- desc: '(a)(b)(c) RESOLVIDOS 2026-07-30 (spec alvo-e-salvaguarda-de-magia). (e) RESOLVIDO 2026-07-30
+    (commit d3e2448af, spec specs/2026-07-30-colisao-por-fonte-repetida.md) e era MAIOR que o item
+    dizia: nao eram 17 spells zumbi, eram 102 irmaos fantasmas em cinco kinds, criados porque o desmembrador
+    comparava `(level, traits)` em vez do CONJUNTO DE FONTES. Nenhum dos 102 era citado por ninguem
+    -- verificado antes de remover. SOBRAM: (d) `heightened` estruturado em 31%, sem flag para separar
+    ''sem elevacao'' de lacuna; (f) 52 itens de equipment ausentes do AoN (Cloak of Elvenkind, Bag
+    of Holding, Hat of Disguise); (g) o resto do texto original.'
   id: 79
   date: '2026-07-29'
   priority: media
