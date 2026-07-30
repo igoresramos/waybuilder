@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **19698**
+- registros avaliados: **19704**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -64,6 +64,6 @@ _Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
 
 **PASSOU** -- 0 ocorrencia(s).
 
-- registros SEM resposta de `grants_completos`: **0** de 19698 (0.0%)
+- registros SEM resposta de `grants_completos`: **0** de 19704 (0.0%)
 - linha de base anterior: 0
 

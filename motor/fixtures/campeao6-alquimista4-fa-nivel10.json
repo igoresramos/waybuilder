@@ -918,7 +918,7 @@
     "Field Medic"
    ],
    "martial": [
-    "Champion"
+    "Weapon Expertise (Champion)"
    ],
    "medicine": [
     "Field Medic"
@@ -1007,13 +1007,13 @@
   "ataques": [
    {
     "arma": "Warhammer",
-    "ataque": 14,
+    "ataque": 16,
     "atributo_do_ataque": "str",
     "categoria": "martial",
     "dano": "1d8+2",
-    "detalhe": "nivel 10 + prof 12 (trained) + FOR +2",
+    "detalhe": "nivel 10 + prof 14 (expert) + FOR +2",
     "potencia": 0,
-    "rank": "trained",
+    "rank": "expert",
     "runas_de_propriedade": [],
     "striking": 0,
     "tipo_de_dano": "bludgeoning",
@@ -1245,12 +1245,13 @@
     "grants": [
      {
       "proficiency": {
+       "martial": "expert",
        "simple": "expert",
        "unarmed": "expert"
       }
      }
     ],
-    "id": "wb:class-feature/weapon-expertise",
+    "id": "wb:class-feature/weapon-expertise-champion",
     "na_base": true,
     "nivel_de_classe": 5,
     "nome": "Weapon Expertise"
@@ -1556,7 +1557,7 @@
    "heavy": "trained",
    "light": "trained",
    "lore:Warfare Lore": "trained",
-   "martial": "trained",
+   "martial": "expert",
    "medicine": "trained",
    "medium": "trained",
    "perception": "trained",

@@ -1405,6 +1405,42 @@ for mudo in ("wb:lesson/lesson-of-calamity", "wb:patron/faiths-flamekeeper",
                    if isinstance(g, dict)),
            f"e `{reg.get('name')}` NAO concede -- fala do ator que voce ja tem")
 
+# -- weapon expertise por classe (spec weapon-expertise-por-classe) ---------
+# `wb:class-feature/weapon-expertise` era UM registro para 14 classes, com
+# `simple: expert` e `unarmed: expert`. Entre elas ha marciais, e o Campeao 5
+# saia com `martial: trained` -- dois pontos a menos em todo ataque.
+print("\n-- weapon expertise por classe --")
+
+def na_classe(cls, ate, **extra):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+        + [{"em": n, "slot": "nivel_de_classe", "pega": cls}
+           for n in range(1, ate + 1)]
+        + [{"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "wis"]}],
+        **extra)
+
+for cls in ("champion", "exemplar", "guardian", "investigator", "magus",
+            "thaumaturge"):
+    p = na_classe(f"wb:class/{cls}", 11)
+    checar(p.proficiencias.get("martial") == "expert",
+           f"{cls} 11 e EXPERT em marcial, como a prosa manda",
+           f"{p.proficiencias.get('martial')}")
+
+# o irmao so nasce para quem a prosa manda
+for cls in ("druid", "sorcerer"):
+    p = na_classe(f"wb:class/{cls}", 11)
+    checar(p.proficiencias.get("simple") == "expert"
+           and p.proficiencias.get("martial") == "untrained",
+           f"e {cls} 11 segue expert em simples e UNTRAINED em marcial",
+           f"{p.proficiencias.get('simple')}/{p.proficiencias.get('martial')}")
+
+campeao = na_classe("wb:class/champion", 5,
+                    inventario=[{"item": "wb:weapon/longsword", "equipado": True}])
+atq = campeao.ataques[0] if campeao.ataques else {}
+checar(atq.get("rank") == "expert",
+       "e o ataque com espada longa do Campeao 5 sai em expert",
+       f"{atq.get('rank')} / {atq.get('ataque')}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

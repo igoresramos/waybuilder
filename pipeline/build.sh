@@ -121,6 +121,12 @@ echo "== 7d2. tradicao de conjuracao da subclasse para a opcao viva =="
 # quem decide qual dos dois irmaos e a opcao viva.
 python3 derivar_tradicao_de_subclasse.py
 
+echo "== 7d3. weapon expertise desmembrada por classe =="
+# `wb:class-feature/weapon-expertise` e UM registro para 14 classes, e entre
+# elas ha marciais e nao-marciais. O Campeao 5 saia com `martial: trained` onde
+# o livro diz expert -- dois pontos a menos em todo ataque com arma marcial.
+python3 derivar_weapon_expertise.py
+
 echo "== 7e. mecanica de dedicacao derivada da prosa oficial =="
 # 61 dedicacoes chegam com `grants` vazio. Roda AQUI porque precisa da prosa
 # (passo 5) e nao deve enriquecer registro que a fusao vai absorver (passo 7).

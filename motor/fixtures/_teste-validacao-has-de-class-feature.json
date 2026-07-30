@@ -769,7 +769,7 @@
     "Acolyte"
    ],
    "martial": [
-    "Magus"
+    "Weapon Expertise (Magus)"
    ],
    "medium": [
     "Magus"
@@ -999,12 +999,13 @@
     "grants": [
      {
       "proficiency": {
+       "martial": "expert",
        "simple": "expert",
        "unarmed": "expert"
       }
      }
     ],
-    "id": "wb:class-feature/weapon-expertise",
+    "id": "wb:class-feature/weapon-expertise-magus",
     "na_base": true,
     "nivel_de_classe": 5,
     "nome": "Weapon Expertise"
@@ -1219,7 +1220,7 @@
    "heavy": "untrained",
    "light": "trained",
    "lore:Scribing Lore": "trained",
-   "martial": "trained",
+   "martial": "expert",
    "medium": "trained",
    "perception": "trained",
    "reflex": "expert",
