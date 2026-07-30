@@ -1517,6 +1517,51 @@ checar(sum(1 for d in multi.pericias_livres_detalhe
        "e o multiclasse NAO soma o INT duas vezes",
        f"{multi.pericias_livres} com mod {mod_int}: {multi.pericias_livres_detalhe}")
 
+# -- proficiencia por expressao (spec proficiencia-por-expressao) -----------
+# 47 dos 1.071 valores de `proficiency` sao expressao do VTT, e `melhor_rank` as
+# rebaixava a `untrained` em silencio. `untrained` errado e pior que ausencia:
+# e uma AFIRMACAO, e faz o jogador atacar com o numero errado.
+print("\n-- proficiencia por expressao --")
+
+def azarketi(ate):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/azarketi"}]
+        + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/fighter"}
+           for n in range(1, ate + 1)]
+        + [{"em": 13, "slot": "ancestry_feat",
+            "pega": "wb:feat/azarketi-weapon-expertise"}])
+
+a13 = azarketi(13)
+armas = {k: v for k, v in a13.proficiencias.items() if "weapon-base" in k}
+checar(armas and all(v == a13.proficiencias["unarmed"] for v in armas.values()),
+       "a arma da ancestria acompanha o rank de DESARMADO, e nao untrained",
+       f"{armas} vs unarmed={a13.proficiencias.get('unarmed')}")
+checar(a13.proficiencias["unarmed"] == "master",
+       "e num Guerreiro 13 esse rank e master", f"{a13.proficiencias['unarmed']}")
+
+# a expressao de DEFESA resolve pela chave de defesa
+anao = personagem(
+    [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/dwarf"}]
+    + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/fighter"}
+       for n in range(1, 10)]
+    + [{"em": 9, "slot": "ancestry_feat", "pega": "wb:feat/mountain-skin"}])
+checar(anao.proficiencias.get("heavy") == anao.proficiencias.get("light"),
+       "`Mountain Skin` iguala pesada a leve, lendo a chave de DEFESA",
+       f"{anao.proficiencias.get('heavy')} vs {anao.proficiencias.get('light')}")
+
+simples = personagem(
+    [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+     {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/fighter"}])
+checar(simples._rank_de_expressao(
+       "min(3,@actor.flags.system.reclaimantPlea.count)") is None,
+       "contador de estado de jogo devolve None -- ausencia, nao untrained")
+checar(simples.proficiencia_ignorada,
+       "e a ocorrencia fica CONTADA, nao descartada calada")
+checar(simples._rank_de_expressao(
+       "ternary(gte(@actor.level,19),3,ternary(gte(@actor.level,13),2,1))")
+       == "trained",
+       "e o `ternary` por nivel resolve pelo degrau certo")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

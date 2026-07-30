@@ -387,7 +387,19 @@ class Personagem:
         # concede a mesma pericia que exige satisfaz o proprio requisito.
         self.aplicacoes_de_proficiencia: dict[str, list[tuple]] = defaultdict(list)
 
+        self.proficiencia_ignorada: dict[str, int] = {}
+
         def aplicar(chave: str, rank: str, origem: str, origem_id=None) -> None:
+            if rank not in RANKS:
+                # 47 dos 1.071 valores de `proficiency` sao expressao do VTT, e
+                # `melhor_rank` as rebaixava a `untrained` em silencio -- um
+                # Azarketi Guerreiro 13 saia untrained nas armas que o feat
+                # existe para elevar a master. `untrained` errado e pior que
+                # ausencia, porque e uma AFIRMACAO.
+                # Spec: `specs/2026-07-30-proficiencia-por-expressao.md`
+                rank = self._rank_de_expressao(rank)
+                if rank is None:
+                    return
             anterior = self.proficiencias.get(chave)
             novo = melhor_rank(anterior, rank)
             self.proficiencias[chave] = novo
@@ -526,6 +538,66 @@ class Personagem:
                 aplicar(pericia, proximo, f"aumento de pericia (nivel {em})")
                 self.aumentos_detalhe.append(
                     {"nivel": em, "pericia": pericia, "de": atual, "para": proximo})
+
+    # `@actor.system.proficiencies.<grupo>.<chave>.rank` -> a nossa chave. O
+    # Foundry separa por grupo (attacks/defenses); nos temos a chave plana.
+    CHAVE_DO_VTT = {
+        "attacks.unarmed": "unarmed", "attacks.simple": "simple",
+        "attacks.martial": "martial", "attacks.advanced": "advanced",
+        "defenses.unarmored": "unarmored", "defenses.light": "light",
+        "defenses.medium": "medium", "defenses.heavy": "heavy",
+    }
+
+    def _rank_de_expressao(self, valor):
+        """Rank vindo de expressao do VTT, ou `None` quando nao da para saber.
+
+        `None` e deliberado e NAO e `untrained`: ausencia faz a tela perguntar,
+        `untrained` faz o jogador atacar com o numero errado. Mesma escolha do
+        `_resolver_valor` das resistencias, que devolve `None` em vez de zero.
+
+        A expressao le `self.proficiencias`, que esta sendo montada na mesma
+        passada. E correto porque `aplicar` roda em tres blocos nesta ordem --
+        classes, features, feats -- e os 13 registros com expressao sao todos
+        `feat`, lendo chaves que classe ou feature ja gravaram. Se um dia uma
+        CLASSE trouxer expressao, ela le chave vazia e isto devolve `None`:
+        degrada para ausencia, nunca para valor falso.
+
+        Spec: `specs/2026-07-30-proficiencia-por-expressao.md`
+        """
+        if isinstance(valor, int) and not isinstance(valor, bool):
+            return RANKS[valor] if 0 <= valor < len(RANKS) else None
+        if not isinstance(valor, str):
+            self.proficiencia_ignorada[str(valor)] = (
+                self.proficiencia_ignorada.get(str(valor), 0) + 1)
+            return None
+        texto = valor.strip()
+        if texto in RANKS:
+            return texto
+
+        m = re.fullmatch(r"@actor\.system\.proficiencies\.([\w.]+)\.rank", texto)
+        if m:
+            chave = self.CHAVE_DO_VTT.get(m.group(1))
+            return self.proficiencias.get(chave) if chave else None
+
+        m = re.fullmatch(r"max\((.+)\)", texto)
+        if m:
+            partes = [self._rank_de_expressao(x.strip())
+                      for x in m.group(1).split(",")]
+            vivos = [x for x in partes if x]
+            return melhor_rank_de(vivos) if vivos else None
+
+        # `ternary(gte(@actor.level,19),3,ternary(gte(@actor.level,13),2,1))`
+        m = re.fullmatch(r"ternary\(gte\(@actor\.level,(\d+)\),(.+?),(.+)\)", texto)
+        if m:
+            corte = int(m.group(1))
+            ramo = m.group(2) if self.nivel >= corte else m.group(3)
+            ramo = ramo.strip()
+            return self._rank_de_expressao(
+                int(ramo) if ramo.isdigit() else ramo)
+
+        self.proficiencia_ignorada[texto] = (
+            self.proficiencia_ignorada.get(texto, 0) + 1)
+        return None
 
     def _orcamento_de_pericia(self) -> None:
         """Regra 10: delta = max(0, orcamento(C) - livres_ja_concedidas).

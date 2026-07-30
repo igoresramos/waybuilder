@@ -120,6 +120,9 @@ export class Personagem implements ContextoDePredicado {
   // regras 3, 4, 5, 7, 9
   proficiencias: Map<string, Rank> = new Map();
   origem_proficiencia: Map<string, string[]> = new Map();
+  /** expressão de proficiência que o resolvedor não conhece. Contada, nunca
+   *  convertida em `untrained`. */
+  proficiencia_ignorada: Record<string, number> = {};
   aplicacoes_de_proficiencia: Map<string, Array<[unknown, string | null]>> = new Map();
   pericias_automaticas: Map<string, string> = new Map();
   pericias_livres = 0;
@@ -404,6 +407,16 @@ export class Personagem implements ContextoDePredicado {
    */
   private _aplicar_proficiencia(chave: string, rank: unknown, origem: string,
                                 origem_id: string | null = null): void {
+    if (!RANKS.includes(rank as Rank)) {
+      // 47 dos 1.071 valores de `proficiency` são expressão do VTT, e
+      // `melhorRank` as rebaixava a `untrained` em silêncio -- um Azarketi
+      // Guerreiro 13 saía untrained nas armas que o feat existe para elevar a
+      // master. `untrained` errado é pior que ausência: é uma AFIRMAÇÃO.
+      // Spec: `specs/2026-07-30-proficiencia-por-expressao.md`
+      const resolvido = this._rank_de_expressao(rank);
+      if (resolvido === null) return;
+      rank = resolvido;
+    }
     const anterior = this.proficiencias.get(chave);
     const novo = melhorRank(anterior, rank);
     this.proficiencias.set(chave, novo);
@@ -589,6 +602,57 @@ export class Personagem implements ContextoDePredicado {
    * impede o multiclasse de multiplicar orçamento de perícia. As automáticas da
    * regra 9 não entram na conta dos dois lados.
    */
+  /** `@actor.system.proficiencies.<grupo>.<chave>.rank` -> a nossa chave. */
+  private static CHAVE_DO_VTT: Record<string, string> = {
+    "attacks.unarmed": "unarmed", "attacks.simple": "simple",
+    "attacks.martial": "martial", "attacks.advanced": "advanced",
+    "defenses.unarmored": "unarmored", "defenses.light": "light",
+    "defenses.medium": "medium", "defenses.heavy": "heavy",
+  };
+
+  /**
+   * Rank vindo de expressão do VTT, ou `null` quando não dá para saber.
+   *
+   * `null` é deliberado e NÃO é `untrained`: ausência faz a tela perguntar,
+   * `untrained` faz o jogador atacar com o número errado. Mesma escolha do
+   * `_resolver_valor` das resistências, que devolve `null` em vez de zero.
+   *
+   * Spec: `specs/2026-07-30-proficiencia-por-expressao.md`
+   */
+  private _rank_de_expressao(valor: unknown): Rank | null {
+    if (ehInt(valor)) return (valor >= 0 && valor < RANKS.length) ? RANKS[valor] : null;
+    if (!ehStr(valor)) {
+      const k = pyStr(valor);
+      this.proficiencia_ignorada[k] = (this.proficiencia_ignorada[k] ?? 0) + 1;
+      return null;
+    }
+    const texto = valor.trim();
+    if (RANKS.includes(texto as Rank)) return texto as Rank;
+
+    let m = /^@actor\.system\.proficiencies\.([\w.]+)\.rank$/.exec(texto);
+    if (m) {
+      const chave = Personagem.CHAVE_DO_VTT[m[1]];
+      return chave ? (this.proficiencias.get(chave) ?? null) : null;
+    }
+
+    m = /^max\((.+)\)$/.exec(texto);
+    if (m) {
+      const vivos = m[1].split(",")
+        .map((x) => this._rank_de_expressao(x.trim()))
+        .filter((x): x is Rank => x !== null);
+      return vivos.length > 0 ? melhorRankDe(vivos) : null;
+    }
+
+    m = /^ternary\(gte\(@actor\.level,(\d+)\),(.+?),(.+)\)$/.exec(texto);
+    if (m) {
+      const ramo = (this.nivel >= Number(m[1]) ? m[2] : m[3]).trim();
+      return this._rank_de_expressao(/^\d+$/.test(ramo) ? Number(ramo) : ramo);
+    }
+
+    this.proficiencia_ignorada[texto] = (this.proficiencia_ignorada[texto] ?? 0) + 1;
+    return null;
+  }
+
   private _orcamento_de_pericia(): void {
     let concedidas = 0;
     const detalhe: DetalheDePericiaLivre[] = [];
