@@ -1099,3 +1099,24 @@ caminho neste repo (Tartarus tem auto-save escrevendo na raiz). Use
 `git worktree add` num diretorio temporario, ou rode a suite contra
 `git show HEAD:<arquivo>`. E depois de qualquer `git checkout <ref> -- <path>`,
 conferir o INDICE antes de commitar: ele nao esta vazio.
+
+## Medir as chaves que voce ESPERA nao e medir o dado
+
+Ao estreitar o tipo da opcao de `ChoiceSet` no TS, medi a base inteira -- e medi
+`rotulo` e `valor`, que eram as duas chaves que eu esperava. As duas eram texto
+em 570 de 570, entao reconstrui a opcao como `{rotulo, valor}` e dei por
+provado.
+
+56 das 570 opcoes tambem carregam `grants`: as consequencias aninhadas, que sao
+justamente o que faz escolher a opcao mudar numero na ficha. Reconstruir a opcao
+apagava esse campo. Quatro fichas divergiram do gabarito.
+
+A medicao certa era enumerar as COMBINACOES de chaves
+(`Counter(tuple(sorted(op)))`), nao conferir o tipo das que eu ja tinha em
+mente. A primeira responde "o que existe?"; a segunda so confirma a hipotese.
+
+**Como aplicar:** ao tipar ou reconstruir um objeto vindo do dado, enumerar o
+conjunto de chaves antes de escrever o tipo. E preferir REPASSAR o objeto a
+reconstrui-lo campo a campo -- reconstruir e o que perde o que voce nao sabia
+que existia. Quem pegou foi o teste de paridade contra o gabarito do Python;
+`npm run build` e os 113 testes passavam.
