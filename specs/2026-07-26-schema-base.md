@@ -130,6 +130,29 @@ Por campo, nao por registro:
 | `source`, `remaster` | **aon** | tem `remaster_id`/`legacy_id` para a ponte |
 | `traits` | **nenhuma -- ver abaixo** | e conjunto, nao valor escalar |
 
+### `grants` nao ARBITRA: ele so tem um dono (medido 2026-07-30, item 13)
+
+A linha de `grants` acima parecia uma regra de desempate e nunca foi uma. Medido
+na base inteira, a proveniencia dos registros que TEM `grants`:
+
+| origem | registros |
+|---|---:|
+| `foundry` | 2.499 |
+| `derivado:campos-do-kind` | 736 |
+| `foundry+foundry:rule-elements` | 273 |
+| `foundry:rule-elements` | 133 |
+| combinacoes das anteriores | 146 |
+| derivacoes nossas da prosa (companheiro, dedicacao, weapon expertise, spellcasting, eidolon) | 24 |
+| `curadoria:prosa-oficial` | 2 |
+
+**Nem o AoN nem o pf2etools publicam `grants`**, e o campo registra **zero
+conflitos** na base. Nao ha o que desempatar: ha uma fonte externa (o Foundry) e
+o resto e derivacao nossa, cada uma com `prov` proprio.
+
+A linha fica -- ela explica POR QUE o campo vem do Foundry --, mas com a
+correcao: e uma escolha de fonte, nao um criterio de precedencia. Exercitar a
+regra com um gate seria fabricar disputa que o dado nao tem.
+
 Quando a fonte vencedora nao tem o campo, cai para a proxima na ordem acima e
 `prov` registra de quem veio.
 
