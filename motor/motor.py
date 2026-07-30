@@ -184,6 +184,8 @@ class Personagem:
         self._remaps_cache: list | None = None
         self._bonus_memo: dict | None = None
         self.bonus_ignorados: dict = {}
+        # escolhas anotadas para um nivel que o personagem ainda nao tem
+        self.escolhas_de_nivel_futuro = 0
         # atomo de filtro de slot concedido que o avaliador nao conhece. Contado
         # e nao silenciado, pela mesma razao de `bonus_ignorados`.
         self.filtro_ignorado: dict = {}
@@ -501,7 +503,13 @@ class Personagem:
         # sem classe), e sem ele o `next` estoura StopIteration e o motor
         # inteiro morre antes de derivar qualquer coisa
         teto = next((r for n, r in self.TETO_DE_RANK if self.nivel >= n), "trained")
-        escolhas = sorted(self._escolhas("skill_increase"),
+        # o recorte vale para a CHECAGEM e para a APLICACAO. Medido: um
+        # Guerreiro 4 com aumento anotado para o nivel 8 ficava `trained` na
+        # pericia -- rank que ele nao tem. `_atributos` ja nao aplicava o boost
+        # futuro; aqui aplicava. Spec:
+        # `specs/2026-07-30-escolha-de-nivel-futuro.md`
+        escolhas = sorted((e for e in self._escolhas("skill_increase")
+                           if not self._e_plano(e.get("em"))),
                           key=lambda e: e["em"] if isinstance(e.get("em"), int) else 0)
 
         if len(escolhas) > len(self.aumentos_de_pericia):
@@ -1164,6 +1172,17 @@ class Personagem:
         "ancestry_feat": "ancestry", "free_archetype": "free_archetype",
     }
 
+    def _e_plano(self, em) -> bool:
+        """A escolha esta acima do nivel atual? Entao e plano, nao erro.
+
+        Contado em `escolhas_de_nivel_futuro`: silenciar por decisao e diferente
+        de silenciar por descuido, e so o contador distingue os dois depois.
+        """
+        if isinstance(em, int) and em > self.nivel:
+            self.escolhas_de_nivel_futuro += 1
+            return True
+        return False
+
     def _higiene_de_slot(self) -> None:
         """Confronta o que foi GASTO com o que existe de slot.
 
@@ -1177,7 +1196,15 @@ class Personagem:
         """
         for slot, cadencia in self.SLOT_PARA_CADENCIA.items():
             niveis = self.slots.get(cadencia) or []
-            usados = self.gastos.get(slot) or []
+            # escolha ACIMA do nivel atual e PLANO, nao erro: no nivel 8 o
+            # personagem vai ter o slot, e a lista `niveis` so enumera os que
+            # existem ate o nivel de hoje. Avisar sobre o futuro treina o
+            # jogador a ignorar aviso, que e o pior resultado possivel para um
+            # mecanismo de aviso. `_atributos` ja tratava assim; aqui e
+            # `_aumentos_de_pericia` tratavam como erro -- tres semanticas no
+            # mesmo motor. Spec: `specs/2026-07-30-escolha-de-nivel-futuro.md`
+            usados = [e for e in (self.gastos.get(slot) or [])
+                      if not self._e_plano(e.get("em"))]
 
             if len(usados) > len(niveis):
                 self.avisos.append(

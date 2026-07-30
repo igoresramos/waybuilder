@@ -1562,6 +1562,38 @@ checar(simples._rank_de_expressao(
        == "trained",
        "e o `ternary` por nivel resolve pelo degrau certo")
 
+# -- escolha de nivel futuro (spec escolha-de-nivel-futuro) -----------------
+# Tres semanticas no mesmo motor: `_atributos` tratava plano como caso normal,
+# `_higiene_de_slot` e `_aumentos_de_pericia` como erro. E a divergencia chegava
+# ao NUMERO: o aumento anotado para o nivel 8 era APLICADO num personagem 4.
+print("\n-- escolha de nivel futuro --")
+
+PLANO = [{"em": 8, "slot": "class_feat", "pega": "wb:feat/sudden-charge"},
+         {"em": 8, "slot": "skill_increase", "pega": "athletics"}]
+
+def guerreiro(ate, extra=()):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+        + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/fighter"}
+           for n in range(1, ate + 1)] + list(extra))
+
+g4 = guerreiro(4, PLANO)
+checar(not [a for a in g4.avisos if "nivel 8" in a],
+       "plano de nivel 8 numa ficha de nivel 4 NAO gera aviso",
+       f"{[a for a in g4.avisos if 'nivel 8' in a]}")
+checar(g4.proficiencias.get("athletics") is None,
+       "e o aumento anotado para o 8 NAO da rank ao personagem de nivel 4",
+       f"{g4.proficiencias.get('athletics')}")
+checar(g4.escolhas_de_nivel_futuro == 2,
+       "e as duas escolhas recortadas ficam CONTADAS",
+       f"{g4.escolhas_de_nivel_futuro}")
+
+g8 = guerreiro(8, PLANO)
+checar(g8.proficiencias.get("athletics") == "trained"
+       and g8.escolhas_de_nivel_futuro == 0,
+       "o MESMO documento num personagem de nivel 8 aplica normalmente",
+       f"{g8.proficiencias.get('athletics')} / {g8.escolhas_de_nivel_futuro}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

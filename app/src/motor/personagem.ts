@@ -123,6 +123,8 @@ export class Personagem implements ContextoDePredicado {
   /** expressão de proficiência que o resolvedor não conhece. Contada, nunca
    *  convertida em `untrained`. */
   proficiencia_ignorada: Record<string, number> = {};
+  /** escolhas anotadas para um nível que o personagem ainda não tem */
+  escolhas_de_nivel_futuro = 0;
   aplicacoes_de_proficiencia: Map<string, Array<[unknown, string | null]>> = new Map();
   pericias_automaticas: Map<string, string> = new Map();
   pericias_livres = 0;
@@ -550,8 +552,13 @@ export class Personagem implements ContextoDePredicado {
     // antes de derivar qualquer coisa
     const teto: Rank = Personagem.TETO_DE_RANK.find(
       ([n]) => this.nivel >= n)?.[1] ?? "trained";
-    const escolhas = ordenarPor(this._escolhas("skill_increase"),
-                                (e) => [ehInt(e["em"]) ? e["em"] : 0]);
+    // o recorte vale para a CHECAGEM e para a APLICAÇÃO: um Guerreiro 4 com
+    // aumento anotado para o nível 8 ficava `trained` na perícia -- rank que
+    // ele não tem. `_atributos` já não aplicava o boost futuro.
+    // Spec: `specs/2026-07-30-escolha-de-nivel-futuro.md`
+    const escolhas = ordenarPor(
+      this._escolhas("skill_increase").filter((e) => !this._e_plano(e["em"])),
+      (e) => [ehInt(e["em"]) ? e["em"] : 0]);
 
     if (escolhas.length > this.aumentos_de_pericia.length) {
       this.avisos.push(
@@ -1265,10 +1272,24 @@ export class Personagem implements ContextoDePredicado {
    * Princípio zero: isto SINALIZA, nunca recusa. A escolha continua no documento
    * e a ficha continua derivando.
    */
+  /** A escolha está acima do nível atual? Então é plano, não erro. Contado em
+   *  `escolhas_de_nivel_futuro`: silenciar por decisão é diferente de silenciar
+   *  por descuido, e só o contador distingue os dois depois. */
+  private _e_plano(em: unknown): boolean {
+    if (ehInt(em) && em > this.nivel) {
+      this.escolhas_de_nivel_futuro += 1;
+      return true;
+    }
+    return false;
+  }
+
   private _higiene_de_slot(): void {
     for (const [slot, cadencia] of Personagem.SLOT_PARA_CADENCIA) {
       const niveis = this.slots.get(cadencia) ?? [];
-      const usados = this.gastos.get(slot) ?? [];
+      // escolha ACIMA do nível atual é PLANO, não erro: no nível 8 o
+      // personagem vai ter o slot, e `niveis` só enumera os de hoje.
+      const usados = (this.gastos.get(slot) ?? [])
+        .filter((e) => !this._e_plano(obter(e, "em")));
 
       if (usados.length > niveis.length) {
         this.avisos.push(
