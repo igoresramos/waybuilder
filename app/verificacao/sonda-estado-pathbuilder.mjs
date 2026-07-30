@@ -32,10 +32,11 @@
  */
 import { writeFileSync, mkdirSync } from "node:fs";
 import { abrirPathbuilder } from "./pathbuilder-comum.mjs";
+import { docs } from "./caminhos.mjs";
 
 const [CLASSE = "Fighter", NIVEL_TXT = "2"] = process.argv.slice(2);
 const NIVEL = Number(NIVEL_TXT);
-const SAIDA = "../docs/comparacao";
+const SAIDA = docs("comparacao");
 const chave = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
 
 const { navegador, pagina } = await abrirPathbuilder({ verboso: false });
@@ -172,6 +173,6 @@ writeFileSync(arquivo, JSON.stringify(resultado, null, 2));
 console.log(JSON.stringify(resultado, null, 2));
 console.log(`\n-> ${arquivo}`);
 
-await pagina.screenshot({ path: `../docs/screenshots/2026-07-29_pathbuilder-estado-${chave(CLASSE)}-nv${NIVEL}.png`,
+await pagina.screenshot({ path: docs(`screenshots/2026-07-29_pathbuilder-estado-${chave(CLASSE)}-nv${NIVEL}.png`),
                          fullPage: true });
 await navegador.close();

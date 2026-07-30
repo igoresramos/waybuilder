@@ -15,8 +15,9 @@
  */
 import { chromium } from "playwright";
 import { readFileSync, existsSync } from "node:fs";
+import { docs } from "./caminhos.mjs";
 
-const LOCAL = "../docs/referencia-pathbuilder/app-local/";
+const LOCAL = docs("referencia-pathbuilder/app-local") + "/";
 const RAIZ = `${LOCAL}assets/`;
 const TIPO = { js: "application/javascript", css: "text/css", txt: "text/plain",
                png: "image/png", wav: "audio/wav", html: "text/html" };

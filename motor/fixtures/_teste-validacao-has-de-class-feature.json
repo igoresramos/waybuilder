@@ -198,7 +198,6 @@
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/duelist-dedication",
    "wb:feat/edgewatch-detective-dedication",
-   "wb:feat/enhanced-familiar",
    "wb:feat/exemplar-dedication",
    "wb:feat/expansive-spellstrike",
    "wb:feat/familiar-master-dedication",
@@ -209,7 +208,8 @@
    "wb:feat/ghost-eater-dedication",
    "wb:feat/ghost-hunter-dedication",
    "wb:feat/ghoul-dedication",
-   "wb:feat/guardian-dedication"
+   "wb:feat/guardian-dedication",
+   "wb:feat/gunslinger-dedication"
   ],
   "class_feat@4": [
    "wb:feat/arcane-fists",
@@ -240,7 +240,6 @@
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/duelist-dedication",
    "wb:feat/edgewatch-detective-dedication",
-   "wb:feat/enhanced-familiar",
    "wb:feat/exemplar-dedication",
    "wb:feat/expansive-spellstrike",
    "wb:feat/familiar-master-dedication",
@@ -251,7 +250,8 @@
    "wb:feat/ghost-eater-dedication",
    "wb:feat/ghost-hunter-dedication",
    "wb:feat/ghoul-dedication",
-   "wb:feat/guardian-dedication"
+   "wb:feat/guardian-dedication",
+   "wb:feat/gunslinger-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",

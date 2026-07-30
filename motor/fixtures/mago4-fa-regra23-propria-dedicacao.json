@@ -202,14 +202,14 @@
    "wb:feat/druid-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/edgewatch-detective-dedication",
-   "wb:feat/enhanced-familiar",
    "wb:feat/exemplar-dedication",
    "wb:feat/familiar-master-dedication",
    "wb:feat/first-frost",
    "wb:feat/geomancer-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
-   "wb:feat/gunslinger-dedication"
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/harrower-dedication"
   ],
   "class_feat@4": [
    "wb:feat/counterspell",
@@ -244,14 +244,14 @@
    "wb:feat/druid-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/edgewatch-detective-dedication",
-   "wb:feat/enhanced-familiar",
    "wb:feat/exemplar-dedication",
    "wb:feat/familiar-master-dedication",
    "wb:feat/first-frost",
    "wb:feat/geomancer-dedication",
    "wb:feat/ghost-dedication",
    "wb:feat/ghoul-dedication",
-   "wb:feat/gunslinger-dedication"
+   "wb:feat/gunslinger-dedication",
+   "wb:feat/harrower-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",

@@ -14,6 +14,7 @@
  *      (precisa do dev server: npx vite --port 5175)
  */
 import { chromium } from "playwright";
+import { docs } from "./caminhos.mjs";
 
 const URL = process.argv[2] ?? "http://localhost:5175/";
 const NIVEL1 = ".bloco.nivel";
@@ -97,7 +98,7 @@ if (await aba.count()) {
   console.log(`         ${texto.replace(/\s+/g, " ").slice(0, 170)}`);
 }
 
-await pagina.screenshot({ path: "../docs/screenshots/2026-07-29_magia.png" });
+await pagina.screenshot({ path: docs("screenshots/2026-07-29_magia.png") });
 console.log(`\nerros de console: ${erros.length ? erros.join(" | ") : "nenhum"}`);
 console.log(falhas ? `FALHOU -- ${falhas} verificacao(oes)`
                    : "conjuracao na ficha: ponta a ponta ok");

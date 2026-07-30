@@ -375,7 +375,18 @@ FOCUS_RE = re.compile(r"^(?:a\s+)?focus pool$|^ability to cast focus spells$", r
 
 # `an animal companion` -- responde pela CONCESSAO (`grant_actor`), nao pelo
 # ator escrito no documento: o pre-requisito fala de ter direito ao bicho.
-ATOR_RE = re.compile(r"^an? (animal companion|companion)$", re.I)
+#
+# `familiar` e `eidolon` entraram depois: quando o item 87 foi escrito nao
+# havia paralelo do `grant_actor` para eles, e no dia seguinte a spec
+# `familiares-e-eidolons-concedidos` derivou os 16 registros que concedem
+# familiar e os 2 que concedem eidolon. O termo `has_actor` ja lia isso; faltava
+# so a expressao aceitar o bicho. Medido: 6 clausulas de residuo.
+# Spec: specs/2026-07-30-pre-requisito-de-familiar.md
+ATOR_RE = re.compile(
+    r"^(?:you (?:have|possess)\s+)?an?\s+"
+    r"(animal companion|companion|familiar|eidolon)$", re.I)
+TIPO_DO_ATOR = {"animal companion": "companheiro", "companion": "companheiro",
+                "familiar": "familiar", "eidolon": "eidolon"}
 
 SENTIDO_RE = re.compile(
     r"^(?:the\s+)?(low-light vision|darkvision|greater darkvision|scent|"
@@ -662,8 +673,9 @@ class Parser:
 
         if FOCUS_RE.match(t):
             return {"focus_pool": {">=": 1}}
-        if ATOR_RE.match(t):
-            return {"has_actor": "companheiro"}
+        m = ATOR_RE.match(t)
+        if m:
+            return {"has_actor": TIPO_DO_ATOR[m.group(1).lower()]}
 
         # d2) "<X> heritage" / "<X> trait"
         m = HERANCA_RE.match(t)

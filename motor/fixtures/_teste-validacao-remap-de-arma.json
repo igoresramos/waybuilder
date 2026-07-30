@@ -199,7 +199,6 @@
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/edgewatch-detective-dedication",
    "wb:feat/energy-ablation",
-   "wb:feat/enhanced-familiar",
    "wb:feat/exemplar-dedication",
    "wb:feat/familiar-master-dedication",
    "wb:feat/first-frost",
@@ -209,7 +208,8 @@
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/inventor-dedication"
+   "wb:feat/inventor-dedication",
+   "wb:feat/investigator-dedication"
   ],
   "class_feat@4": [
    "wb:feat/counterspell",
@@ -241,7 +241,6 @@
    "wb:feat/dual-weapon-warrior-dedication",
    "wb:feat/edgewatch-detective-dedication",
    "wb:feat/energy-ablation",
-   "wb:feat/enhanced-familiar",
    "wb:feat/exemplar-dedication",
    "wb:feat/familiar-master-dedication",
    "wb:feat/first-frost",
@@ -251,7 +250,8 @@
    "wb:feat/harrower-dedication",
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
-   "wb:feat/inventor-dedication"
+   "wb:feat/inventor-dedication",
+   "wb:feat/investigator-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",

@@ -1163,3 +1163,20 @@ Regra: **todo caminho de lookup que recebe id vindo do DOCUMENTO do jogador tem
 de resolver alias.** `por_id.get()` cru so vale para id que o proprio pipeline
 acabou de produzir. E ao aposentar id em massa, o teste a rodar antes do commit
 e "uma ficha que cita o id antigo continua igual?".
+
+## Mexer em extrator sem `WB_REEXTRAIR=1` e um build verde sobre dado velho (2026-07-30)
+
+`build.sh` PULA a etapa 1 (extratores) por padrao: so roda com
+`WB_REEXTRAIR=1`. Faz sentido -- extrair das fontes e a parte cara --, mas cria
+uma armadilha de sentido unico: editar `extratores/*.py` e rodar `build.sh` da
+os 10 portoes VERDES, o oraculo verde e a paridade verde, e nada do que se
+editou entrou. A base foi remontada a partir de `saida/*.json` antigo.
+
+Aconteceu ao ampliar `ATOR_RE` para familiar: a base saiu identica, e a unica
+pista foi eu ter conferido o registro em vez de acreditar no "todos passaram".
+
+Regra: **mudou algo em `pipeline/extratores/`, o build e `WB_REEXTRAIR=1 bash
+pipeline/build.sh`.** E a prova nunca e o placar dos portoes -- e ler o REGISTRO
+que a mudanca deveria alterar. Mesma familia das saidas orfas ja registradas
+aqui (`taticas_kits` fora do laco, `magias.py` no-op): artefato derivado que
+sobrevive a mudanca da fonte porque ninguem o reescreveu.

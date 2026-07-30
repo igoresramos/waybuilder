@@ -24,8 +24,9 @@
  */
 import { chromium } from "playwright";
 import { readFileSync, existsSync } from "node:fs";
+import { docs } from "./caminhos.mjs";
 
-const LOCAL = "../docs/referencia-pathbuilder/app-local/";
+const LOCAL = docs("referencia-pathbuilder/app-local") + "/";
 const RAIZ = `${LOCAL}assets/`;
 const TIPO = { js: "application/javascript", css: "text/css", txt: "text/plain",
                png: "image/png", wav: "audio/wav", html: "text/html" };
@@ -102,6 +103,6 @@ for (let i = 0; i < 9; i++) {
 
 console.log("TELA:",
             (await pagina.locator("body").innerText()).slice(0, 600).replace(/\n+/g, " | "));
-await pagina.screenshot({ path: "../docs/screenshots/2026-07-29_pathbuilder-local.png" });
+await pagina.screenshot({ path: docs("screenshots/2026-07-29_pathbuilder-local.png") });
 await navegador.close();
 process.exit(carregou ? 0 : 1);

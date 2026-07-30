@@ -14,6 +14,7 @@
  *      (precisa do dev server de pe: npx vite --port 5175)
  */
 import { chromium } from "playwright";
+import { docs } from "./caminhos.mjs";
 
 const URL = process.argv[2] ?? "http://localhost:5175/";
 const NIVEL1 = ".bloco.nivel";
@@ -103,7 +104,7 @@ if (slot) {
 
 // a prova visual fica no projeto, nao em /tmp -- e o cartao do bicho e o unico
 // pedaco da tela que nenhum teste de motor consegue olhar
-await pagina.screenshot({ path: "../docs/screenshots/2026-07-29_companheiro.png",
+await pagina.screenshot({ path: docs("screenshots/2026-07-29_companheiro.png"),
                           fullPage: false });
 
 console.log(`\nerros de console: ${erros.length ? erros.join(" | ") : "nenhum"}`);

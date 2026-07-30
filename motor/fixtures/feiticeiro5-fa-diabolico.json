@@ -196,7 +196,6 @@
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
-   "wb:feat/enhanced-familiar",
    "wb:feat/entreat-with-forebears",
    "wb:feat/familiar-master-dedication",
    "wb:feat/fan-dancer-dedication",
@@ -209,7 +208,8 @@
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
    "wb:feat/kineticist-dedication",
-   "wb:feat/kitharodian-actor-dedication"
+   "wb:feat/kitharodian-actor-dedication",
+   "wb:feat/linguist-dedication"
   ],
   "class_feat@4": [
    "wb:feat/ancestral-blood-magic",
@@ -238,7 +238,6 @@
    "wb:feat/demolitionist-dedication",
    "wb:feat/dragon-disciple-dedication",
    "wb:feat/dual-weapon-warrior-dedication",
-   "wb:feat/enhanced-familiar",
    "wb:feat/entreat-with-forebears",
    "wb:feat/familiar-master-dedication",
    "wb:feat/fan-dancer-dedication",
@@ -251,7 +250,8 @@
    "wb:feat/hellbreaker-dedication",
    "wb:feat/hellknight-dedication",
    "wb:feat/kineticist-dedication",
-   "wb:feat/kitharodian-actor-dedication"
+   "wb:feat/kitharodian-actor-dedication",
+   "wb:feat/linguist-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",

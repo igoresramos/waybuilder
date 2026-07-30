@@ -20,10 +20,11 @@
  */
 import { writeFileSync, mkdirSync } from "node:fs";
 import { abrirPathbuilder } from "./pathbuilder-comum.mjs";
+import { docs } from "./caminhos.mjs";
 
 const [CLASSE = "Fighter", NIVEL_TXT = "1", SLOT = "Class Feat"] = process.argv.slice(2);
 const NIVEL = Number(NIVEL_TXT);
-const SAIDA = "../docs/comparacao";
+const SAIDA = docs("comparacao");
 const chave = (t) => t.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
 
 const { navegador, pagina } = await abrirPathbuilder();
@@ -197,5 +198,5 @@ writeFileSync(arquivo, JSON.stringify(
   null, 2));
 console.log(`-> ${arquivo}`);
 
-await pagina.screenshot({ path: "../docs/screenshots/2026-07-29_pathbuilder-slot.png" });
+await pagina.screenshot({ path: docs("screenshots/2026-07-29_pathbuilder-slot.png") });
 await navegador.close();
