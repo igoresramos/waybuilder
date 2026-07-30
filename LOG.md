@@ -1053,3 +1053,15 @@ porque o desmembrador comparava `(level, traits)` e nao o CONJUNTO DE FONTES --
 `spell-553` e `spell-2012` sao o mesmo feitico, com as mesmas fontes em ordem
 diferente. Nenhum dos 102 era citado por ninguem, o que foi verificado antes de
 remover.
+
+**Terceira leva de media.** Item 79 fechado por inteiro: (d) o AoN publica
+`heighten_level` nos 2.461 docs, e das 1.125 chaves vazias 668 eram FATO ("nao
+eleva") e 461 lacuna -- `ranks` responde as duas perguntas sem inventar flag.
+Item 83: os 10 backgrounds que nao davam nada nao existem no Foundry e o AoN
+tinha `attribute`/`skill` em nove deles. E do item 42 saiu o achado do dia: o
+Barbaro escolhia instinto e NENHUM dos 25 feats de instinto liberava, porque o
+mesmo instinto existe como `wb:instinct/animal` (AoN) e
+`wb:class-feature/animal-instinct` (Foundry), com xrefs disjuntos e nomes
+diferentes pelo sufixo do eixo. Uma regressao minha na primeira versao -- gemeo
+ausente casando com escolha ausente -- foi pega pela paridade, com 28 fixtures
+mudando de candidato.
