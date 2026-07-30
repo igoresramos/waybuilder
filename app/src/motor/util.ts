@@ -228,6 +228,15 @@ export function melhorRank(a: unknown, b: unknown): Rank {
   return RANKS[Math.max(ia, ib)];
 }
 
+/** O melhor de uma lista. Mesma regra 4, para quando as fontes são N. */
+export function melhorRankDe(ranks: unknown[]): Rank {
+  const lista: string[] = RANKS;
+  const indices = ranks
+    .map((r) => (ehStr(r) && lista.includes(r) ? lista.indexOf(r) : -1))
+    .filter((i) => i >= 0);
+  return RANKS[indices.length ? Math.max(...indices) : 0];
+}
+
 /** Índice do rank, com o mesmo fallback do Python (`0` para desconhecido). */
 export function indiceDeRank(r: unknown): number {
   const lista: string[] = RANKS;

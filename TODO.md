@@ -42,7 +42,31 @@ items:
   id: 59
   date: '2026-07-30'
   priority: concluido
-- desc: 'RE-MEDIDO 2026-07-29, e o item encolheu para UMA alegacao. (a) CAI: ''Archer Dedication nao move martial de untrained'' e comportamento CORRETO -- a prosa diz ''For the purposes of proficiency, treat any of these that are martial weapons as simple weapons, and any that are advanced weapons as martial weapons'', ou seja o feat REMAPEIA categoria, nao concede treino. O grant `weapon_proficiency` diz exatamente isso (`definicao: [item:category:martial, or[bow, crossbow]], igual_a: simple`). O motor ignorar isso custa PRECISAO DE ATAQUE com arma nomeada, nao rank de categoria: sao 89 ocorrencias, 87 delas com `igual_a: simple|martial|unarmed`. O lugar do conserto e `_rank_de_arma`, que ja faz a ponte arma->categoria. (b) JA RESOLVIDO 2026-07-29 pela spec de ChoiceSet: o Marshal dava Diplomacy E Intimidation porque as opcoes vinham soltas. (c) CONFIRMADO e e o que sobra: a class-feature COMPARTILHADA `wb:class-feature/weapon-expertise` concede so `simple: expert` e `unarmed: expert`, e 14 CLASSES apontam para ela -- Champion, Druid, Exemplar, Guardian, Investigator, Kineticist, Magus, Oracle, Psychic, Sorcerer, Swashbuckler, Thaumaturge, Witch, Wizard. Entre elas ha marciais (Campeao 5 e 7 sai com simple=expert e martial=trained) e nao-marciais (Druida, que esta certo). Uma feature so nao serve as duas progressoes. NAO da para derivar de ''expert no que a classe tinha no nivel 1'': o `attack_proficiency` do AoN so traz o nivel 1, e a variante `bard-weapon-expertise` da marcial expert sem o Bardo ser treinado em marcial. Exige a TABELA de progressao da classe (esta no `markdown` do AoN como HTML), mesmo caminho de `aplicar_conjuracao.py`.'
+- desc: 'PARTES (a) E (b) CONCLUIDAS 2026-07-30 (spec specs/2026-07-30-proficiencia-de-arma-nomeada.md).
+    SOBRA SO A PARTE (c). (a) O remap de `weapon_proficiency` foi implementado nos
+    dois motores: 91 ocorrencias em 54 registros que NUNCA eram lidas -- `grep
+    weapon_proficiency motor/motor.py` dava um unico hit, dentro de um docstring.
+    A gramatica de `definicao` nao sao 2 padroes e sim 28 formas estruturais, mas
+    quatro seletores (`base`, `category`, `trait`, `group`) mais `or`/`and`/`not`
+    cobrem 76 das 91 (83,5%); as 15 restantes sao 8 com placeholder dinamico do
+    VTT, 3 `slug`, 3 `usage`/`melee`, 1 `type`. DECISAO REGISTRADA: o remap SOMA,
+    nunca subtrai -- ler o RAW ao pe da letra faria um Guerreiro expert em marcial
+    CAIR para trained ao pegar Archer Dedication. E o remap chega ao BONUS DE
+    ATAQUE, nao so ao predicado: `_ataques` passou a resolver por `weapon:<slug>`
+    em vez da categoria crua, que era onde o numero do jogador ficava errado.
+    Provado em ficha (`_teste-validacao-remap-de-arma`): Mago 8 com Archer sai com
+    arco longo trained/ataque 12 e espada longa untrained/ataque 0.
+    (b) ACHADO NOVO, nao estava no item: `weapon:*` era LETRA MORTA. `wb:weapon/*`
+    nao resolve, a chave literal caia em `_rank_sem` e voltava untrained SEMPRE --
+    um Guerreiro expert em tres categorias respondia untrained. Cinco feats eram
+    inalcancaveis por QUALQUER personagem (advanced-firearm-familiarity,
+    cut-them-down-burn-them-out, diverse-weapon-expert, performance-weapon-expert,
+    reaper-of-repose). Agora responde o melhor rank entre as quatro categorias,
+    mesmo tratamento do `lore:*`. O item 95 saiu junto, como estava planejado.
+    DIVIDA ANOTADA: 4 ocorrencias com `igual_a: null`, 2 delas em
+    `armigers-protection`, cujo `definicao` cita `item:slug:hellknight-plate` --
+    e remap de ARMADURA carregado na chave de arma. Anomalia de dado.
+    || FALTA A PARTE (c), texto original abaixo: RE-MEDIDO 2026-07-29, e o item encolheu para UMA alegacao. (a) CAI: ''Archer Dedication nao move martial de untrained'' e comportamento CORRETO -- a prosa diz ''For the purposes of proficiency, treat any of these that are martial weapons as simple weapons, and any that are advanced weapons as martial weapons'', ou seja o feat REMAPEIA categoria, nao concede treino. O grant `weapon_proficiency` diz exatamente isso (`definicao: [item:category:martial, or[bow, crossbow]], igual_a: simple`). O motor ignorar isso custa PRECISAO DE ATAQUE com arma nomeada, nao rank de categoria: sao 89 ocorrencias, 87 delas com `igual_a: simple|martial|unarmed`. O lugar do conserto e `_rank_de_arma`, que ja faz a ponte arma->categoria. (b) JA RESOLVIDO 2026-07-29 pela spec de ChoiceSet: o Marshal dava Diplomacy E Intimidation porque as opcoes vinham soltas. (c) CONFIRMADO e e o que sobra: a class-feature COMPARTILHADA `wb:class-feature/weapon-expertise` concede so `simple: expert` e `unarmed: expert`, e 14 CLASSES apontam para ela -- Champion, Druid, Exemplar, Guardian, Investigator, Kineticist, Magus, Oracle, Psychic, Sorcerer, Swashbuckler, Thaumaturge, Witch, Wizard. Entre elas ha marciais (Campeao 5 e 7 sai com simple=expert e martial=trained) e nao-marciais (Druida, que esta certo). Uma feature so nao serve as duas progressoes. NAO da para derivar de ''expert no que a classe tinha no nivel 1'': o `attack_proficiency` do AoN so traz o nivel 1, e a variante `bard-weapon-expertise` da marcial expert sem o Bardo ser treinado em marcial. Exige a TABELA de progressao da classe (esta no `markdown` do AoN como HTML), mesmo caminho de `aplicar_conjuracao.py`.'
   id: 75
   date: '2026-07-29'
   priority: alta
@@ -171,9 +195,14 @@ items:
   id: 94
   date: '2026-07-29'
   priority: alta
-- desc: 'PARIDADE DORMENTE: `app/src/motor/personagem.ts` usa `Object.hasOwn(this.proficiencias, chave)` dentro de `_rank_de_arma`, e `this.proficiencias` e um `Map` -- `Object.hasOwn` sobre Map e SEMPRE false, entao a guarda ''rank de arma NOMEADA ganha da categoria'' nunca dispara no TS. No Python a guarda (`if chave in self.proficiencias`) funciona. Os dois motores divergem, e o teste de paridade NAO pega porque hoje ninguem preenche chave `weapon:` na ficha -- e defeito dormente. ELE ACORDA quando o item 75 for feito: a ponte de `weapon_proficiency` (89 ocorrencias, o remap de categoria do Archer Dedication) e exatamente o que passa a escrever chave `weapon:`. CONSERTAR JUNTO COM O 75, nao antes -- assim o teste de paridade prova o conserto em vez de passar por vacuo. Reportado ao Igor em 2026-07-29 e registrado aqui depois, porque a primeira vez ficou so na conversa.'
+- desc: 'CONCLUIDO 2026-07-30, junto com a parte (a) do item 75 como estava previsto
+    -- assim o teste de paridade prova o conserto em vez de passar por vacuo. A
+    guarda virou `this.proficiencias.has(chave)`. Confirmado na varredura: dos 13
+    `Object.hasOwn` do arquivo, era o UNICO sobre um `Map`; os outros 12 operam
+    sobre objeto JSON plano e estao certos.
+    || TEXTO ORIGINAL: PARIDADE DORMENTE: `app/src/motor/personagem.ts` usa `Object.hasOwn(this.proficiencias, chave)` dentro de `_rank_de_arma`, e `this.proficiencias` e um `Map` -- `Object.hasOwn` sobre Map e SEMPRE false, entao a guarda ''rank de arma NOMEADA ganha da categoria'' nunca dispara no TS. No Python a guarda (`if chave in self.proficiencias`) funciona. Os dois motores divergem, e o teste de paridade NAO pega porque hoje ninguem preenche chave `weapon:` na ficha -- e defeito dormente. ELE ACORDA quando o item 75 for feito: a ponte de `weapon_proficiency` (89 ocorrencias, o remap de categoria do Archer Dedication) e exatamente o que passa a escrever chave `weapon:`. CONSERTAR JUNTO COM O 75, nao antes -- assim o teste de paridade prova o conserto em vez de passar por vacuo. Reportado ao Igor em 2026-07-29 e registrado aqui depois, porque a primeira vez ficou so na conversa.'
   id: 95
-  date: '2026-07-29'
-  priority: media
+  date: '2026-07-30'
+  priority: concluido
 promoted: []
 ---

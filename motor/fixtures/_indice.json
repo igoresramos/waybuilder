@@ -3,6 +3,14 @@
  "pin_base": "ok",
  "fichas": [
   {
+   "ficha": "_teste-validacao-remap-de-arma",
+   "nivel": 8,
+   "hp": 72,
+   "avisos": 5,
+   "fora_do_requisito": 0,
+   "slots_abertos": 23
+  },
+  {
    "ficha": "_teste-validacao-runas-arma-1-striking",
    "nivel": 4,
    "hp": 52,

@@ -42,12 +42,16 @@ import type {
 import { ATRIBUTOS, RANKS } from "./tipos.ts";
 import {
   RANK_BONUS, comSinal, dictDe, ehDict, ehInt, ehLista, ehStr,
-  empurrar, indiceDeRank, inteiro, listaDe, melhorRank, nome, nomeOu,
+  empurrar, indiceDeRank, inteiro, listaDe, melhorRank, melhorRankDe, nome, nomeOu,
   normChave, normSlug, obter, ordenarNumeros, ordenarPor, ordenarTextos,
   pyIterar, pyRepr, pyStr, somar, verdadeiro,
 } from "./util.ts";
 
 type Dict = Record<string, unknown>;
+
+/** As quatro categorias que `weapon:*` varre. `unarmed` entra porque o RAW
+ * trata ataque desarmado como proficiência de arma. */
+const CATEGORIAS_DE_ARMA = ["simple", "martial", "advanced", "unarmed"];
 
 /**
  * Cinto de segurança contra dado malformado, NÃO contra o jogador. Medido em
@@ -124,6 +128,9 @@ export class Personagem implements ContextoDePredicado {
     opcoes: OpcaoDeGrant[]; escolhido: string | null;
   }> = [];
   pericias_livres_detalhe: DetalheDePericiaLivre[] = [];
+  /** cache de `_remaps_de_arma`: `candidatos()` avalia milhares de feats por
+   * slot, e varrer classes/features/feats a cada arma citada custaria caro. */
+  private _remaps_cache: Array<[unknown, unknown]> | null = null;
   aumentos_de_pericia: number[] = [];
   aumentos_detalhe: AumentoDePericia[] = [];
 
@@ -1970,7 +1977,13 @@ export class Personagem implements ContextoDePredicado {
       const traits = new Set(listaDe(arma["traits"]).map((t) => String(t).toLowerCase()));
       const categoria = verdadeiro(arma["weapon_category"])
         ? String(arma["weapon_category"]) : "simple";
-      const rank = this.proficiencias.get(categoria) ?? "untrained";
+      // pelo `weapon:<slug>`, e não pela categoria crua: é por aqui que o remap
+      // de `weapon_proficiency` chega ao BÔNUS DE ATAQUE. Sem isto o conserto
+      // do item 75 ficaria só no predicado, e o número na ficha continuaria
+      // errado. Spec: `specs/2026-07-30-proficiencia-de-arma-nomeada.md`
+      const slugDaArma = pyStr(arma["id"]).split("/").pop() ?? "";
+      const rank = (this._rank_de_arma(`weapon:${slugDaArma}`, null)
+        ?? this.proficiencias.get(categoria) ?? "untrained") as Rank;
       const prof = rank !== "untrained" ? this.nivel + RANK_BONUS[rank] : 0;
 
       const forca = this.modificadores["str"] ?? 0;
@@ -2152,10 +2165,100 @@ export class Personagem implements ContextoDePredicado {
    */
   private _rank_de_arma(chave: string, excluir: string | null): string | null {
     if (!chave.startsWith("weapon:")) return null;
-    if (Object.hasOwn(this.proficiencias, chave)) return null;
-    const arma = this.base.opcional("wb:weapon/" + chave.slice("weapon:".length));
-    const categoria = arma?.["weapon_category"];
-    return ehStr(categoria) ? this._rank_sem(categoria, excluir) : null;
+    // `.has()`, e não `Object.hasOwn`: `proficiencias` é um `Map`, e
+    // `Object.hasOwn` sobre Map é SEMPRE false -- a guarda nunca disparava, e
+    // no Python (`chave in self.proficiencias`) disparava. Divergência de
+    // paridade dormente, item 95, que só tinha caminho de teste depois deste
+    // item 75. Varrido o arquivo: dos 13 `Object.hasOwn`, era o único sobre Map.
+    if (this.proficiencias.has(chave)) return null;
+    const pedido = chave.slice("weapon:".length);
+
+    // `weapon:*` pergunta "você é expert em ALGUMA arma?", e era letra morta:
+    // `wb:weapon/*` não resolve e a chave literal voltava untrained SEMPRE,
+    // deixando cinco feats inalcançáveis. Mesmo tratamento do `lore:*`.
+    if (pedido === "*") {
+      return melhorRankDe(CATEGORIAS_DE_ARMA.map((c) => this._rank_sem(c, excluir)));
+    }
+
+    const arma = this.base.opcional("wb:weapon/" + pedido);
+    if (!arma) return null;
+    const ranks: string[] = [];
+    const categoria = arma["weapon_category"];
+    if (ehStr(categoria)) ranks.push(this._rank_sem(categoria, excluir));
+    // Feat de familiaridade não concede treino: REMAPEIA categoria. O melhor
+    // entre nativa e remapeada, nunca só a remapeada -- ler o RAW ao pé da
+    // letra faria um Guerreiro expert em marcial CAIR para trained ao pegar
+    // `Archer Dedication`.
+    // Spec: `specs/2026-07-30-proficiencia-de-arma-nomeada.md`
+    for (const [igual_a, definicao] of this._remaps_de_arma()) {
+      if (ehStr(igual_a) && this._arma_casa(arma, definicao)) {
+        ranks.push(this._rank_sem(igual_a, excluir));
+      }
+    }
+    return ranks.length ? melhorRankDe(ranks) : null;
+  }
+
+  /**
+   * Todos os `weapon_proficiency` ativos na ficha, como `[igual_a, definicao]`.
+   *
+   * 91 ocorrências em 54 registros, e até agora nenhuma era lida nos dois
+   * motores. Em cache porque `candidatos()` avalia milhares de feats por slot.
+   */
+  private _remaps_de_arma(): Array<[unknown, unknown]> {
+    if (this._remaps_cache !== null) return this._remaps_cache;
+    const saida: Array<[unknown, unknown]> = [];
+    const fontes: Dict[] = [];
+    for (const cid of this.ordem_de_classe) fontes.push(dictDe(this.base.get(cid)));
+    for (const f of this.features) fontes.push(dictDe(f));
+    for (const [, feat] of this._feats_efetivos()) fontes.push(feat);
+    for (const reg of fontes) {
+      for (const g of this._grants_de(reg)) {
+        const wp = dictDe(g)["weapon_proficiency"];
+        if (ehDict(wp)) saida.push([wp["igual_a"], wp["definicao"]]);
+      }
+    }
+    this._remaps_cache = saida;
+    return saida;
+  }
+
+  /**
+   * A arma satisfaz este `definicao`?
+   *
+   * Gramática medida: 28 formas estruturais, mas só quatro seletores importam
+   * -- `base`, `category`, `trait` e `group` cobrem 76 das 91 ocorrências
+   * inteiras. Seletor desconhecido, ou valor dinâmico (`{item|flags...}`), NÃO
+   * CASA -- e como o remap só ADICIONA rank, o princípio zero fica intacto por
+   * construção: o que o motor não entende nunca vira reprovação.
+   */
+  private _arma_casa(arma: Dict, no: unknown): boolean {
+    if (Array.isArray(no)) return no.every((x) => this._arma_casa(arma, x));
+    if (ehDict(no)) {
+      for (const op of ["or", "and", "not"] as const) {
+        if (!(op in no)) continue;
+        const alvo = no[op];
+        const itens = Array.isArray(alvo) ? alvo : [alvo];
+        if (op === "or") return itens.some((x) => this._arma_casa(arma, x));
+        if (op === "and") return itens.every((x) => this._arma_casa(arma, x));
+        return !this._arma_casa(arma, alvo);
+      }
+      return false;
+    }
+    if (!ehStr(no) || !no.startsWith("item:")) return false;
+    const corte = no.indexOf(":", "item:".length);
+    if (corte < 0) return false;                       // seletor sem valor
+    const seletor = no.slice("item:".length, corte);
+    const bruto = no.slice(corte + 1);
+    if (bruto.includes("{")) return false;             // placeholder do VTT
+    const valor = normSlug(bruto);
+    if (seletor === "category") return normSlug(arma["weapon_category"] ?? "") === valor;
+    if (seletor === "group") return normSlug(arma["group"] ?? "") === valor;
+    if (seletor === "trait") {
+      return listaDe(arma["traits"]).some((t) => normSlug(t) === valor);
+    }
+    if (seletor === "base") {
+      return normSlug(pyStr(arma["id"]).split("/").pop() ?? "") === valor;
+    }
+    return false;
   }
 
   /**

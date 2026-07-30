@@ -884,13 +884,13 @@
   "ataques": [
    {
     "arma": "Composite Shortbow",
-    "ataque": 2,
+    "ataque": 10,
     "atributo_do_ataque": "dex",
     "categoria": "martial",
     "dano": "1d6",
-    "detalhe": "nivel 6 + prof 0 (untrained) + DEX +2",
+    "detalhe": "nivel 6 + prof 8 (trained) + DEX +2",
     "potencia": 0,
-    "rank": "untrained",
+    "rank": "trained",
     "runas_de_propriedade": [],
     "striking": 0,
     "tipo_de_dano": "piercing",

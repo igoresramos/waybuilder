@@ -696,6 +696,47 @@ checar(guerreiro6.avaliar(aldori.get("requires"))[0],
 checar(not mago6.avaliar(aldori.get("requires"))[0],
        "ja o Mago 6, untrained em avancada, continua fora -- a ponte nao afrouxa")
 
+# -- remap de categoria e curinga de arma (itens 75 e 95) -------------------
+# Spec: specs/2026-07-30-proficiencia-de-arma-nomeada.md. Feat de familiaridade
+# NAO concede treino: remapeia categoria ("trate arco marcial como simples").
+# Sao 91 ocorrencias que o motor nunca leu -- `grep weapon_proficiency` dava um
+# hit, dentro de um docstring.
+ARCO = {"proficiency": {"weapon:longbow": {">=": "trained"}}}
+mago8 = personagem(niveis((WIZARD, 8)) + BOOSTS)
+mago8_archer = personagem(niveis((WIZARD, 8)) + BOOSTS + [
+    {"em": 2, "slot": "class_feat", "pega": "wb:feat/archer-dedication"}])
+checar(not mago8.avaliar(ARCO)[0],
+       "Mago 8 sem o feat nao e treinado em arco longo (premissa)")
+checar(mago8_archer.avaliar(ARCO)[0],
+       "com Archer Dedication o arco longo marcial passa a contar como simples",
+       f"{mago8_archer.avaliar(ARCO)[1]}")
+checar(not mago8_archer.avaliar({"proficiency": {"weapon:longsword": {">=": "trained"}}})[0],
+       "e o remap NAO vaza para toda arma marcial -- espada longa continua fora")
+
+# o remap SOMA, nunca subtrai: ler o RAW ao pe da letra faria o Guerreiro
+# expert em marcial cair para trained ao pegar o feat.
+guerreiro8 = personagem(niveis((FIGHTER, 8)) + BOOSTS)
+guerreiro8_archer = personagem(niveis((FIGHTER, 8)) + BOOSTS + [
+    {"em": 2, "slot": "class_feat", "pega": "wb:feat/archer-dedication"}])
+checar(guerreiro8_archer.avaliar({"proficiency": {"weapon:longbow": {">=": "expert"}}})[0],
+       "Guerreiro expert em marcial NAO e rebaixado pelo remap")
+
+# `weapon:*` era letra morta: 5 feats que nenhum personagem podia satisfazer.
+CURINGA = {"proficiency": {"weapon:*": {">=": "expert"}}}
+checar(guerreiro8.avaliar(CURINGA)[0],
+       "Guerreiro 8 (expert em marcial) atende `weapon:* >= expert`",
+       f"{guerreiro8.avaliar(CURINGA)[1]}")
+checar(not mago8.avaliar(CURINGA)[0],
+       "e o Mago 8 nao atende -- o curinga nao afrouxa")
+# `reaper-of-repose` exige master e o Guerreiro 8 e expert: ele CONTINUA fora,
+# e esta certo. O que muda e o motivo -- antes dizia "tem untrained" para quem
+# e expert em tres categorias, que e o defeito, nao a reprovacao.
+reaper = BASE.opcional("wb:feat/reaper-of-repose")
+motivos = guerreiro8.avaliar(reaper.get("requires"))[1]
+checar(any("weapon:* >= master; tem expert" in m for m in motivos),
+       "e `reaper-of-repose` passa a dizer o rank REAL no motivo, nao untrained",
+       f"{motivos}")
+
 # -- requisito parcial: emitir o que deu, escrever o que nao deu ------------
 # Spec: specs/2026-07-29-requisito-parcial.md. O parser era tudo-ou-nada, entao
 # "Trained in Occultism; you have been in a psychic duel" perdia as DUAS coisas

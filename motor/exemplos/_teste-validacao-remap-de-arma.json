@@ -1,0 +1,32 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {
+  "versao": "2026-07-30",
+  "pin_foundry": "87f9e502"
+ },
+ "identidade": {
+  "nome": "TESTE REMAP -- Mago com Archer Dedication e arco longo",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao do remap de categoria de arma (spec specs/2026-07-30-proficiencia-de-arma-nomeada.md, itens 75 e 95). O Mago e `simple: trained` e `martial: untrained`; o arco longo e MARCIAL. `Archer Dedication` nao concede treino -- ele remapeia (`item:category:martial` + `or[bow, crossbow]` -> `simple`), entao o ataque com o arco tem de sair com o rank de SIMPLES e nao untrained. Sem esta ficha o remap nao aparece em fixture nenhuma, e o porte TypeScript nao teria contra o que se medir. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/versatile-human"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/scholar"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+  {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+  {"em": 4, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+  {"em": 5, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+  {"em": 6, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+  {"em": 7, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+  {"em": 8, "slot": "nivel_de_classe", "pega": "wb:class/wizard"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["int", "dex", "con", "wis"]},
+  {"em": 5, "slot": "boosts_livres", "pega": ["int", "dex", "con", "wis"]},
+  {"em": 2, "slot": "class_feat", "pega": "wb:feat/archer-dedication"}
+ ],
+ "inventario": [
+  {"item": "wb:weapon/longbow", "equipado": true},
+  {"item": "wb:weapon/longsword", "equipado": true}
+ ]
+}

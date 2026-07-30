@@ -85,6 +85,11 @@ def melhor_rank(a: str | None, b: str | None) -> str:
     return RANKS[max(ia, ib)]
 
 
+def melhor_rank_de(ranks) -> str:
+    """O melhor de uma lista. Mesma regra 4, para quando as fontes sao N."""
+    return RANKS[max((RANKS.index(r) for r in ranks if r in RANKS), default=0)]
+
+
 class Base:
     """A base canonica, carregada uma vez."""
 
@@ -173,6 +178,10 @@ class Personagem:
         self.doc = doc
         self.base = base
         self.avisos: list[str] = []
+        # `_rank_de_arma` e chamado uma vez por arma citada em cada predicado,
+        # e `candidatos()` avalia milhares de feats por slot -- varrer classes,
+        # features e feats a cada chamada custaria caro por nada.
+        self._remaps_cache: list | None = None
         self._derivar()
 
     # -- escolhas -----------------------------------------------------------
@@ -1767,7 +1776,13 @@ class Personagem:
             entrada = equipado["entrada"]
             traits = {str(t).lower() for t in (arma.get("traits") or [])}
             categoria = arma.get("weapon_category") or "simple"
-            rank = self.proficiencias.get(categoria, "untrained")
+            # pelo `weapon:<slug>`, e nao pela categoria crua: e por aqui que o
+            # remap de `weapon_proficiency` chega ao BONUS DE ATAQUE. Sem isto o
+            # conserto do item 75 ficaria so no predicado, e o numero na ficha
+            # -- que e o que o jogador olha -- continuaria errado.
+            # Spec: `specs/2026-07-30-proficiencia-de-arma-nomeada.md`
+            rank = (self._rank_de_arma("weapon:" + arma["id"].split("/")[-1], None)
+                    or self.proficiencias.get(categoria, "untrained"))
             prof = (self.nivel + RANK_BONUS[rank]) if rank != "untrained" else 0
 
             forca = self.modificadores.get("str", 0)
@@ -1940,9 +1955,100 @@ class Personagem:
             return None
         if chave in self.proficiencias:
             return None
-        arma = self.base.opcional("wb:weapon/" + chave.split(":", 1)[1])
-        categoria = (arma or {}).get("weapon_category")
-        return self._rank_sem(str(categoria), excluir) if categoria else None
+        pedido = chave.split(":", 1)[1]
+
+        # `weapon:*` pergunta "voce e expert em ALGUMA arma?", e era letra
+        # morta: `wb:weapon/*` nao resolve, a chave literal caia em `_rank_sem`
+        # e voltava untrained SEMPRE. Cinco feats ficavam inalcancaveis
+        # (`reaper-of-repose`, `diverse-weapon-expert`...). Mesmo tratamento do
+        # `lore:*`, que ja responde o melhor rank.
+        if pedido == "*":
+            return melhor_rank_de(
+                [self._rank_sem(c, excluir) for c in self.CATEGORIAS_DE_ARMA])
+
+        arma = self.base.opcional("wb:weapon/" + pedido)
+        if not arma:
+            return None
+        ranks = []
+        categoria = arma.get("weapon_category")
+        if categoria:
+            ranks.append(self._rank_sem(str(categoria), excluir))
+        # Feat de familiaridade nao concede treino: REMAPEIA categoria ("trate
+        # arco marcial como simples"). O melhor entre nativa e remapeada, nunca
+        # so a remapeada -- ler o RAW ao pe da letra faria um Guerreiro expert
+        # em marcial CAIR para trained ao pegar `Archer Dedication`.
+        # Spec: `specs/2026-07-30-proficiencia-de-arma-nomeada.md`
+        for igual_a, definicao in self._remaps_de_arma():
+            if igual_a and self._arma_casa(arma, definicao):
+                ranks.append(self._rank_sem(str(igual_a), excluir))
+        return melhor_rank_de(ranks) if ranks else None
+
+    # as quatro categorias que `weapon:*` varre. `unarmed` entra porque o RAW
+    # trata ataque desarmado como proficiencia de arma.
+    CATEGORIAS_DE_ARMA = ("simple", "martial", "advanced", "unarmed")
+
+    def _remaps_de_arma(self) -> list[tuple]:
+        """Todos os `weapon_proficiency` ativos na ficha, como (igual_a, definicao).
+
+        91 ocorrencias em 54 registros, e ate agora nenhuma era lida: um `grep`
+        por `weapon_proficiency` no motor dava um unico hit, dentro de um
+        docstring.
+        """
+        if self._remaps_cache is not None:
+            return self._remaps_cache
+        saida = []
+        fontes = [self.base.get(cid) for cid in self.ordem_de_classe]
+        fontes += [f for f in self.features]
+        fontes += [feat for _, feat, _ in self._feats_efetivos()]
+        for reg in fontes:
+            for g in self._grants_de(reg):
+                if not isinstance(g, dict):
+                    continue
+                wp = g.get("weapon_proficiency")
+                if isinstance(wp, dict):
+                    saida.append((wp.get("igual_a"), wp.get("definicao")))
+        self._remaps_cache = saida
+        return saida
+
+    def _arma_casa(self, arma: dict, no) -> bool:
+        """A arma satisfaz este `definicao`?
+
+        Gramatica medida: 28 formas estruturais, mas so quatro seletores
+        importam -- `base`, `category`, `trait` e `group` cobrem 76 das 91
+        ocorrencias inteiras. Seletor que o motor nao conhece, ou valor
+        dinamico (`{item|flags...}`), NAO CASA -- e como o remap so ADICIONA
+        rank, o principio zero fica intacto por construcao: o que o motor nao
+        entende nunca vira reprovacao, so deixa de conceder.
+        """
+        if isinstance(no, list):
+            return all(self._arma_casa(arma, x) for x in no)
+        if isinstance(no, dict):
+            if "or" in no:
+                alvo = no["or"]
+                itens = alvo if isinstance(alvo, list) else [alvo]
+                return any(self._arma_casa(arma, x) for x in itens)
+            if "and" in no:
+                alvo = no["and"]
+                itens = alvo if isinstance(alvo, list) else [alvo]
+                return all(self._arma_casa(arma, x) for x in itens)
+            if "not" in no:
+                return not self._arma_casa(arma, no["not"])
+            return False
+        if not isinstance(no, str) or not no.startswith("item:"):
+            return False
+        partes = no.split(":", 2)
+        if len(partes) < 3 or "{" in partes[2]:
+            return False                      # sem valor, ou placeholder do VTT
+        seletor, valor = partes[1], norm_slug(partes[2])
+        if seletor == "category":
+            return norm_slug(str(arma.get("weapon_category") or "")) == valor
+        if seletor == "group":
+            return norm_slug(str(arma.get("group") or "")) == valor
+        if seletor == "trait":
+            return valor in {norm_slug(t) for t in (arma.get("traits") or [])}
+        if seletor == "base":
+            return norm_slug(arma.get("id", "").split("/")[-1]) == valor
+        return False
 
     def _slug_de_lore(self, bruto: str) -> str:
         """`Alcohol Lore` e `alcohol` sao a mesma pericia.
