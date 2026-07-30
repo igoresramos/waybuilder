@@ -211,8 +211,19 @@ items:
     divergencias do Ranger 4 sao a familia JA DECLARADA de pericia pendente; e as
     5 no sentido contrario sao principio zero (pre-requisito narrativo tipo
     "member of the Ulfen Guard" nao bloqueia aqui e bloqueia la). FICA PARA A
-    PROXIMA: `Lightning Snares` e `Wild Empathy` no Ranger 4, niveis 16 e 20, e
-    skill/general feat fora do Guerreiro.
+    SEGUNDA LEVA (Wizard 16, Cleric 20, Rogue 8/skill_feat) deu o DEFEITO MAIS
+    GRAVE DO DIA: `has` de class-feature era SEMPRE falso em `candidatos()`. A
+    guarda de auto-satisfacao (`f.get("raiz") != excluir`) descartava toda feature
+    da PROGRESSAO da classe, porque `raiz` e None e `_avaliando` tambem e None
+    fora de `_checar_requisitos` -- e em `candidatos()` ele NUNCA e setado. 139
+    clausulas em 135 registros: um Magus nunca podia pegar feat de Spellstrike
+    (21), um Monge feat de Ki (12). Consertado nos dois motores + ficha de
+    validacao com Magus 6. Mais: guarda de `archetype` na aba de skill feat do
+    comparador (118 falsos positivos -> 7), `master at` alem de `master in` no
+    RANK_RE, e 2 pares novos de renomeacao (tabela em 35). `Lightning Snares` e
+    `Wild Empathy` fecharam como recorte de EDICAO (o remaster reclassificou o
+    primeiro; a fonte da razao a nos no segundo). FICA PARA A PROXIMA: general
+    feat fora do Guerreiro, e o quantificador "uma pericia que tenha a acao X".
     || TEXTO ORIGINAL: COMPARACAO COM O PATHBUILDER, 1a rodada FECHADA (2026-07-29). De 65 pontos sobraram QUATRO, e NENHUM e buraco nosso -- tudo que o Pathbuilder oferece no slot de class feat de um Fighter 1, o Waybuilder tambem oferece. Os 61 que sairam eram quatro recortes distintos, cada um verificado contra a fonte: (1) o PATHBUILDER renomeia o que a Paizo nao renomeou, tirando nome proprio de Golarion (Product Identity) -- a ponte remaster_id do AoN nao registra os pares e os nomes curtos dele nao existem em nenhum dos 43.686 docs do dump. A nossa base esta certa; virou tabela de traducao em docs/comparacao/equivalencias-pathbuilder.json (22 pares); (2) a opcao ''Allow outdated CRB and APG?'' nasce Off e esconde todo o conteudo pre-remaster que a nossa base inclui -- a sonda agora liga; (3) renomeacao de VERDADE (`Drow Shootist` -> `Crossbow Infiltrator`, feita pela Paizo): o comparador passou a casar por `aliases`; (4) ruido de grafia. OS QUATRO QUE SOBRARAM, todos do nosso lado: `Stance Savant` (CRB nv14, nao existe no dump do AoN -- removido no remaster e carregado do Foundry legado, DECIDIR se fica), `Chelaxian Scion Dedication` (AP #223), `Knight Vigilant` (Character Guide), `Venture-Gossip Dedication` (Paizo Blog) -- os tres ultimos sao recorte de fonte do outro lado, nao defeito. Relatorio: docs/2026-07-29_comparacao-pathbuilder.md. PROXIMO: outras classes, outros slots (skill/general/ancestry) e niveis altos, onde o predicado tem mais o que errar'
   id: 84
   date: '2026-07-29'
