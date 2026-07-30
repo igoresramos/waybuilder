@@ -3,6 +3,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -417,17 +418,5 @@ items:
   id: 87
   date: '2026-07-29'
   priority: baixa
-- desc: 'MODIFICADOR DE INT NAO ENTRA NO ORCAMENTO DE PERICIA LIVRE. Declarado fora de escopo pela
-    spec specs/2026-07-29-pericias-livres.md, que implementou o slot `pericias_livres`. Em RAW o
-    personagem treina `livres + mod(INT)` pericias; o motor soma so as livres da classe (2 a 7, medido
-    nas 27). A causa e ordem de derivacao: `_proficiencias()` roda ANTES de `_atributos()` (motor.py:191-192),
-    entao o INT ainda nao existe quando `_orcamento_de_pericia` faz a conta. Consequencia: personagem
-    de INT alto tem direito a mais pericias do que o motor oferece, e a higiene cobra menos do que
-    deveria -- um Mago de INT 18 deveria ter 2+4=6 e o motor oferece 2. Conserto exige reordenar
-    a derivacao (ou calcular o INT antes das pericias), que e mudanca de risco e merece medicao propria:
-    conferir que nada em `_proficiencias` alimenta `_atributos`.'
-  id: 92
-  date: '2026-07-29'
-  priority: media
 promoted: []
 ---
