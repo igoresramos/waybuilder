@@ -2,9 +2,9 @@
 
 A fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao reescreve quem citava o id aposentado.
 
-- ids orfaos encontrados: **50**
-- resolvidos por alias: **48**
-- registros com `requires` reescrito: **48**
+- ids orfaos encontrados: **48**
+- resolvidos por alias: **46**
+- registros com `requires` reescrito: **46**
 - registros com opcao repetida removida: **3**
 - sem alias (intocados): **2**
 
@@ -42,8 +42,6 @@ A fusao renomeia o registro e guarda o nome antigo em `aliases`, mas nao reescre
 | `wb:feat/vengeful-oath` | `wb:feat/oath-of-the-avenger` | 1 |
 | `wb:feat/wholeness-of-body` | `wb:feat/harmonize-self` | 1 |
 | `wb:feat/wild-shape` | `wb:feat/untamed-form` | 1 |
-| `wb:heritage/sweetbreath-gnoll` | `wb:heritage/sweetbreath-kholo` | 1 |
-| `wb:heritage/witch-gnoll` | `wb:heritage/witch-kholo` | 1 |
 | `wb:instinct/animal-legacy` | `wb:instinct/animal` | 2 |
 | `wb:instinct/dragon-legacy` | `wb:instinct/dragon` | 2 |
 | `wb:instinct/fury-legacy` | `wb:instinct/fury` | 2 |

@@ -6,14 +6,14 @@ usava outro conjunto. Os campos originais permanecem -- isto
 adiciona a projecao canonica, nao substitui.
 
 - registros que ganharam `grants`: **985**
-- base com `grants`: **3768** de 20375 (18.5%)
+- base com `grants`: **3769** de 20355 (18.5%)
 
 ## Por kind
 
 - `background`: 626
 - `heritage`: 309
 - `ancestry`: 50
-- `heritage: sem efeito derivavel`: 37
+- `heritage: sem efeito derivavel`: 17
 - `background: sem efeito derivavel`: 11
 
 ## Exemplos

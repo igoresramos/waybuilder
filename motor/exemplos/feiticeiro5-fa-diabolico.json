@@ -11,7 +11,7 @@
   },
   "escolhas": [
     { "em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human" },
-    { "em": "criacao", "slot": "heranca", "pega": "wb:heritage/tiefling" },
+    { "em": "criacao", "slot": "heranca", "pega": "wb:heritage/nephilim" },
     { "em": "criacao", "slot": "background", "pega": "wb:background/gladiator" },
     { "em": 1, "slot": "nivel_de_classe", "pega": "wb:class/sorcerer" },
     { "em": 1, "slot": "subclasse", "pega": "wb:class-feature/bloodline-diabolic" },

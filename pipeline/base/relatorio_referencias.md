@@ -8,15 +8,17 @@ sobreviveu (o Remaster renomeou dos dois lados), quem liga e o
 
 - resolvidas por nome: **45**
 - resolvidas por curadoria (`aliases_referencias.json`): **10**
-- resolvidas pela ponte legado->remaster do AoN: **11**
+- resolvidas pela ponte legado->remaster do AoN: **13**
 - removidas por nao serem entidade: **3**
 - nao resolvidas: **1**
 
 ## Pela ponte do AoN (nome mudou dos dois lados)
 
 - `wb:spell/mage-hand` -> `wb:spell/telekinetic-hand`
+- `wb:heritage/sweetbreath-gnoll` -> `wb:heritage/sweetbreath-kholo`
 - `wb:spell/cloudkill` -> `wb:spell/toxic-cloud`
 - `wb:spell/floating-disk` -> `wb:spell/carryall`
+- `wb:heritage/witch-gnoll` -> `wb:heritage/witch-kholo`
 - `wb:spell/obscuring-mist` -> `wb:spell/mist`
 - `wb:spell/ki-strike` -> `wb:spell/inner-upheaval`
 - `wb:spell/vampiric-touch` -> `wb:spell/vampiric-feast`

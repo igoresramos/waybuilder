@@ -4,12 +4,12 @@ Chave: `remaster_id`/`legacy_id` do AoN. Prosa **nao** cria par --
 entra so para desempatar sucessor multiplo. Campo estruturado
 divergente veta a fusao.
 
-- pares declarados pelo AoN: **1061**
-- fundidos: **669**
+- pares declarados pelo AoN: **1049**
+- fundidos: **657**
 - vetados por divergencia estrutural: **392**
 - desempatados por prosa: **77**
-- base: 20375 -> **19706** registros
-- registros com alias: **452**
+- base: 20355 -> **19698** registros
+- registros com alias: **440**
 
 ## Vetados -- par declarado, conteudo divergente
 
@@ -556,18 +556,6 @@ fundir aqui apagaria dado.
 - **Armiger's Mobility** -> **Hellknight Mobility** _(feat)_
 - **Flicker** -> **Flickering Twirl** _(feat)_
 - **Alchemical Savant** -> **Alchemical Assessment** _(feat)_
-- **Ant Gnoll** -> **Ant Kholo** _(heritage)_
-- **Great Gnoll** -> **Great Kholo** _(heritage)_
-- **Sweetbreath Gnoll** -> **Sweetbreath Kholo** _(heritage)_
-- **Witch Gnoll** -> **Witch Kholo** _(heritage)_
-- **Poisonhide Grippli** -> **Poisonhide Tripkee** _(heritage)_
-- **Snaptongue Grippli** -> **Snaptongue Tripkee** _(heritage)_
-- **Stickytoe Grippli** -> **Stickytoe Tripkee** _(heritage)_
-- **Windweb Grippli** -> **Windweb Tripkee** _(heritage)_
-- **Skilled Heritage** -> **Skilled Human** _(heritage)_
-- **Versatile Heritage** -> **Versatile Human** _(heritage)_
-- **Cavern Kobold** -> **Cavernstalker Kobold** _(heritage)_
-- **Spellscale Kobold** -> **Spellhorn Kobold** _(heritage)_
 - **Flurry** -> **Flurry** _(hunters-edge)_
 - **Precision** -> **Precision** _(hunters-edge)_
 - **Outwit** -> **Outwit** _(hunters-edge)_

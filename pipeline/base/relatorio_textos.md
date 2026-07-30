@@ -1,9 +1,9 @@
 # Emissao de prosa
 
-- cobertura sobre a base: **20209/20375** (99.2%)
-- referencias resolvidas: 20209/20209
+- cobertura sobre a base: **20189/20355** (99.2%)
+- referencias resolvidas: 20189/20189
 - registros sem referencia de texto: 166
-- origem: {'aon': 18748, 'foundry': 1354, 'pf2etools': 46, 'aon:nome': 61}
+- origem: {'aon': 18728, 'foundry': 1354, 'pf2etools': 46, 'aon:nome': 61}
 - prosa total: 18.8 MB
 - sem prosa: 166
 

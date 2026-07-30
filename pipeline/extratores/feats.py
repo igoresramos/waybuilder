@@ -1016,7 +1016,17 @@ def converter_grants(regras, contagem_ignoradas):
                     and isinstance(o.get("value"), (str, int, float))
                 ] or len(esc)
             elif isinstance(esc, dict):
-                resumo["filtro"] = True
+                # o `filter` da fonte diz QUAIS itens o slot aceita, e virava um
+                # booleano aqui: a base sabia que existia uma escolha e nao
+                # sabia de que. `Ancient Elf` guarda
+                # `["item:category:class", "item:trait:dedication",
+                #   "item:trait:multiclass"]`, e sem isso o slot aceitaria
+                # qualquer feat -- pior que nao existir, porque entrega escolha
+                # ilegal com cara de legal.
+                # Guardado VERBATIM: traduzir na extracao foi o que apagou a
+                # informacao da primeira vez.
+                # Spec: `specs/2026-07-30-slot-de-feat-concedido.md`
+                resumo["filtro"] = esc.get("filter") if esc.get("filter") else True
                 if esc.get("itemType"):
                     resumo["tipo"] = esc["itemType"]
             elif isinstance(esc, str):

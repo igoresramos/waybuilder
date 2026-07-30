@@ -237,6 +237,16 @@
     "feat-8803",
     "feat-8804"
    ]
+  },
+  "heritage": {
+   "motivo": "As 3 sao herancas LEGADAS que o Remaster aposentou e que a fonte fixada do Foundry (pin 87f9e502) nao contem mais: Half-Elf virou Aiuvarin, Half-Orc virou Dromaar, e 'Three Kobolds in a Trench Coat' e piada de AP. O AoN ainda as lista como vigentes porque mantem o conteudo legado. Foram 20 registros de heranca legada que sairam da base em 2026-07-30, quando `extratores/ancestrias.py` voltou a ser rodado: a saida em disco estava parada em 27/07, de antes da fixacao da fonte, e carregava herancas que a fonte pinada nao produz. Terceira ocorrencia do mesmo padrao (taticas_kits fora do laco, magias.py no-op) e a que mais escondeu: a saida velha tambem mascarava que o extrator nunca migrou para o schema v2.",
+   "decisao": "Aceitar o recorte da fonte fixada. Repor a heranca legada exigiria uma segunda fonte so para conteudo aposentado, e o construtor e de personagem novo -- quem quiser Half-Elf escolhe Aiuvarin, que e o mesmo conteudo com o nome do Remaster. Se algum dia o importador do Pathbuilder precisar resolver o nome antigo, o caminho e `aliases`, nao ressuscitar o registro.",
+   "todo": 94,
+   "ids_aceitos": [
+    "heritage-26",
+    "heritage-27",
+    "heritage-433"
+   ]
   }
  }
 }

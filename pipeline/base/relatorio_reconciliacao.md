@@ -1,9 +1,9 @@
 # Relatorio de reconciliacao
 
-- registros de entrada: **20823**
+- registros de entrada: **20803**
 - colisoes de id fundidas: **568**
-- base final: **20254** registros
-- registros com divergencia registrada: **1631**
+- base final: **20234** registros
+- registros com divergencia registrada: **1436**
 - suspeitas de par nao unido: **360**
 
 ## Por kind
@@ -16,7 +16,7 @@
 - `background`: 637
 - `trait`: 561
 - `deity`: 490
-- `heritage`: 346
+- `heritage`: 326
 - `archetype`: 247
 - `relic`: 219
 - `armor`: 216
@@ -78,7 +78,7 @@ Mesmo kind e mesmo nome normalizado, ids diferentes.
 - **background** / _amnesiac_ -> `wb:background/amnesiac`, `wb:background/amnesiac-legacy`  (Advanced Player's Guide, Player Core 2)
 - **background** / _animal whisperer_ -> `wb:background/animal-whisperer`, `wb:background/animal-whisperer-legacy`  (Core Rulebook, Player Core)
 - **background** / _anti tech activist_ -> `wb:background/anti-tech-activist`, `wb:background/anti-tech-activist-legacy`  (Guns & Gears, Guns & Gears (Remastered))
-- **background** / _archdevil apostate_ -> `wb:background/archdevil-apostate`, `wb:background/archdevil-apostate-background-642`  (Hell's Destiny Player's Guide)
+- **background** / _archdevil apostate_ -> `wb:background/archdevil-apostate`, `wb:background/archdevil-apostate-background-642`  (Hell's Destiny Player's Guide, Hellbreakers Players Guide)
 - **background** / _artisan_ -> `wb:background/artisan`, `wb:background/artisan-legacy`  (Core Rulebook, Player Core)
 - **background** / _artist_ -> `wb:background/artist`, `wb:background/artist-legacy`  (Core Rulebook, Player Core)
 - **background** / _astrologer_ -> `wb:background/astrologer`, `wb:background/astrologer-legacy`  (Player Core 2, Secrets of Magic)
@@ -92,7 +92,7 @@ Mesmo kind e mesmo nome normalizado, ids diferentes.
 - **background** / _bounty hunter_ -> `wb:background/bounty-hunter`, `wb:background/bounty-hunter-legacy`  (Core Rulebook, Player Core)
 - **background** / _cannoneer_ -> `wb:background/cannoneer`, `wb:background/cannoneer-legacy`  (Guns & Gears, Guns & Gears (Remastered))
 - **background** / _charlatan_ -> `wb:background/charlatan`, `wb:background/charlatan-legacy`  (Core Rulebook, Player Core)
-- **background** / _child of the twin village_ -> `wb:background/child-of-the-twin-village`, `wb:background/child-of-the-twin-village-legacy`  (Dark Archive)
+- **background** / _child of the twin village_ -> `wb:background/child-of-the-twin-village`, `wb:background/child-of-the-twin-village-legacy`  (Dark Archive, Dark Archives (Remastered))
 - **background** / _circuit judge_ -> `wb:background/circuit-judge`, `wb:background/circuit-judge-legacy`  (Guns & Gears, Guns & Gears (Remastered))
 - **background** / _clockfighter_ -> `wb:background/clockfighter`, `wb:background/clockfighter-legacy`  (Guns & Gears, Guns & Gears (Remastered))
 - **background** / _clockwork researcher_ -> `wb:background/clockwork-researcher`, `wb:background/clockwork-researcher-legacy`  (Guns & Gears, Guns & Gears (Remastered))
@@ -107,7 +107,7 @@ Mesmo kind e mesmo nome normalizado, ids diferentes.
 - **background** / _detective_ -> `wb:background/detective`, `wb:background/detective-legacy`  (Core Rulebook, Player Core)
 - **background** / _discarded duplicate_ -> `wb:background/discarded-duplicate`, `wb:background/discarded-duplicate-legacy`  (Guns & Gears, Guns & Gears (Remastered))
 - **background** / _disciple of the gear_ -> `wb:background/disciple-of-the-gear`, `wb:background/disciple-of-the-gear-legacy`  (Guns & Gears, Guns & Gears (Remastered))
-- **background** / _dreams of vengeance_ -> `wb:background/dreams-of-vengeance`, `wb:background/dreams-of-vengeance-legacy`  (Gatewalkers Player's Guide)
+- **background** / _dreams of vengeance_ -> `wb:background/dreams-of-vengeance`, `wb:background/dreams-of-vengeance-legacy`  (Gatewalkers Player's Guide, Gatewalkers Player's Guide (Remastered))
 - **background** / _driver_ -> `wb:background/driver`, `wb:background/driver-background-451`, `wb:background/driver-legacy`  (Guns & Gears, Guns & Gears (Remastered), Player Core 2)
 - **background** / _emissary_ -> `wb:background/emissary`, `wb:background/emissary-legacy`  (Core Rulebook, Player Core)
 - **background** / _empty whispers_ -> `wb:background/empty-whispers`, `wb:background/empty-whispers-legacy`  (Dark Archive, Dark Archives (Remastered))

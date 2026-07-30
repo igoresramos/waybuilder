@@ -22,6 +22,7 @@ stdlib-only. Roda offline a partir de pipeline/dados_brutos/.
 import json
 import os
 import re
+import sys
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -30,6 +31,9 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 PIPELINE_DIR = HERE.parent
+
+sys.path.insert(0, str(PIPELINE_DIR))
+import comum  # noqa: E402
 DADOS_BRUTOS = PIPELINE_DIR / "dados_brutos"
 SAIDA_DIR = PIPELINE_DIR / "saida"
 RELATORIOS_DIR = PIPELINE_DIR / "relatorios"
@@ -80,6 +84,17 @@ def _load_json(path):
 
 def slug_from_filename(path):
     return Path(path).stem
+
+
+def _rotulo_de_opcao(o):
+    """`PF2E.Skill.Diplomacy` -> `Diplomacy`. Rotulo cru quando nao e chave i18n.
+
+    Mesma regra de `extratores/feats.py:834`. Reescrita em vez de importada:
+    sao tres linhas, e um extrator importar o helper privado do outro acopla
+    dois arquivos que hoje nao se conhecem.
+    """
+    r = str(o.get("label") or o.get("value") or "").strip()
+    return r.rsplit(".", 1)[-1] if r.startswith("PF2E.") else r
 
 
 def ability_short(name):
@@ -469,6 +484,10 @@ def extract_ancestries(foundry_ancestries, aon_idx, aon_norm_idx, p2t_idx, herit
         if p2t_candidates:
             xref["pf2etools"] = f"ancestries/ancestry-{slug}"
 
+        # v2: a ancestria nunca perde mecanica (hp/size/speed/boosts/languages/
+        # senses saem sempre estruturados) e nao tem pre-requisito.
+        # Spec: specs/2026-07-30-cobertura-de-grants-completos.md
+        _mec_ancestry = comum.mecanizacao("ancestry", True, False, False, True)
         record = {
             "id": f"wb:ancestry/{slug}",
             "kind": "ancestry",
@@ -485,7 +504,11 @@ def extract_ancestries(foundry_ancestries, aon_idx, aon_norm_idx, p2t_idx, herit
             "senses": senses,
             "heritages": heritages,
             "text": f"wb:text/ancestry/{slug}",
-            "mechanized": True,
+            # v2: `hp`, `size`, `speed`, `boosts`, `languages` e `senses` sao
+            # sempre estruturados aqui -- a ancestria nunca perde mecanica.
+            # Spec: specs/2026-07-30-cobertura-de-grants-completos.md
+            "grants_completos": _mec_ancestry[0],
+            "requires_parseado": _mec_ancestry[1],
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }
@@ -559,6 +582,34 @@ def extract_heritages(foundry_heritages, aon_idx, aon_norm_idx, relatorio):
                     "value": r.get("value"),
                 }})
                 mapped_keys.add(key)
+            elif key == "ChoiceSet":
+                # 35 herancas tem ChoiceSet, e sem ele `Ancient Elf` -- que
+                # concede a dedicacao multiclasse -- saia com `grants: []`. So
+                # esta chave entra aqui: o resto do buraco da heranca esta
+                # medido e declarado na spec (GrantItem 463, ActiveEffectLike
+                # 383, Sense 152, Resistance 112, ...) e e outro item.
+                # Nao ha `_aninhar_escolhas` a fazer como em feats.py:
+                # justamente por GrantItem nao ser convertido aqui, nao existe
+                # consequencia irma para amarrar a opcao.
+                # Spec: `specs/2026-07-30-slot-de-feat-concedido.md`
+                esc = r.get("choices")
+                resumo = {"flag": r.get("rollOption") or r.get("flag")}
+                if isinstance(esc, list):
+                    resumo["opcoes"] = [
+                        {"valor": str(o.get("value")),
+                         "rotulo": _rotulo_de_opcao(o)}
+                        for o in esc
+                        if isinstance(o, dict)
+                        and isinstance(o.get("value"), (str, int, float))
+                    ] or len(esc)
+                elif isinstance(esc, dict):
+                    resumo["filtro"] = esc.get("filter") or True
+                    if esc.get("itemType"):
+                        resumo["tipo"] = esc["itemType"]
+                elif isinstance(esc, str):
+                    resumo["referencia"] = esc
+                grants.append({"choice": resumo})
+                mapped_keys.add(key)
         rule_keys = [r.get("key") for r in rules]
         mechanized = (not rules) or all(k in mapped_keys for k in rule_keys)
         prov["grants"] = "foundry"
@@ -567,6 +618,11 @@ def extract_heritages(foundry_heritages, aon_idx, aon_norm_idx, relatorio):
         if aon_doc:
             xref["aon"] = aon_doc["id"]
 
+        # v2: `tinha_mecanica` e ter rule element na fonte; `perdeu` e sobrar
+        # chave que este extrator nao converte. Heranca sem rule element
+        # responde `null`, e nao `true`: ausencia de dado nao e completude.
+        _mec_heritage = comum.mecanizacao(
+            "heritage", bool(rules), bool(rules) and not mechanized, False, True)
         record = {
             "id": f"wb:heritage/{slug}",
             "kind": "heritage",
@@ -577,7 +633,8 @@ def extract_heritages(foundry_heritages, aon_idx, aon_norm_idx, relatorio):
             "source": source,
             "grants": grants,
             "text": f"wb:text/heritage/{slug}",
-            "mechanized": mechanized,
+            "grants_completos": _mec_heritage[0],
+            "requires_parseado": _mec_heritage[1],
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }
@@ -669,6 +726,8 @@ def extract_backgrounds(foundry_backgrounds, aon_idx, aon_norm_idx, p2t_idx, rel
         if p2t_candidates:
             xref["pf2etools"] = f"backgrounds/{slug}"
 
+        # v2: `boosts`, `skill_training` e `feats_granted` sao estruturados.
+        _mec_background = comum.mecanizacao("background", True, False, False, True)
         record = {
             "id": f"wb:background/{slug}",
             "kind": "background",
@@ -680,7 +739,9 @@ def extract_backgrounds(foundry_backgrounds, aon_idx, aon_norm_idx, p2t_idx, rel
             "skill_training": skill_training,
             "feats_granted": feats_granted,
             "text": f"wb:text/background/{slug}",
-            "mechanized": True,
+            # `boosts`, `skill_training` e `feats_granted` sao estruturados.
+            "grants_completos": _mec_background[0],
+            "requires_parseado": _mec_background[1],
             "xref": xref,
             "prov": {k: v for k, v in prov.items() if v is not None},
         }

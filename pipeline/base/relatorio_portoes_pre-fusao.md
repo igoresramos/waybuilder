@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `pre-fusao`
 
-- registros avaliados: **20375**
+- registros avaliados: **20355**
 
 ## Portao 1 -- prov por campo preenchido
 
