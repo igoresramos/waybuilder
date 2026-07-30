@@ -78,6 +78,12 @@ echo "== 4h4. recuperar mecanica de equipamento nao casada =="
 # AoN. Sem este passo, equipar couro nao mudava a CA.
 python3 recuperar_mecanica_equipamento.py
 
+echo "== 4h5. condicao de acesso (filiacao) lida do AoN =="
+# 728 registros so estao disponiveis para quem tem certa filiacao ("Member of
+# the Pathfinder Society", "Tian Xia origin") e a base nao carregava nada disso.
+# O AoN publica `access` como campo -- e leitura, nao prosa.
+python3 aplicar_acesso.py
+
 echo "== 4i. aplicar correcoes curadas =="
 # o que exigiu leitura da prosa oficial porque as tres fontes estao vazias no
 # ponto. Cada entrada declara o valor que ESPERA achar: se a fonte consertar o
