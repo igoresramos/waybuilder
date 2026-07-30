@@ -169,6 +169,12 @@ echo "== 7e. mecanica de dedicacao derivada da prosa oficial =="
 # (passo 5) e nao deve enriquecer registro que a fusao vai absorver (passo 7).
 python3 derivar_mecanica_dedicacao.py
 
+echo "== 7e2. categoria de feat que sobrou vazia =="
+# Roda TARDE de proposito: 8 dos 164 feats sem categoria nascem em
+# `desmembrar_colisoes.py`, depois do extrator, e so um passo sobre a base
+# inteira alcanca tanto esses quanto os que nao casaram com o AoN.
+python3 derivar_categoria_de_feat.py
+
 echo "== 7f. quem concede companheiro animal =="
 # Sem isto, nenhum feat da base diz "eu concedo um companheiro" e o ator so
 # entra por `doc[\"atores\"]` escrito a mao. Mesma janela do 7e: depois da prosa
