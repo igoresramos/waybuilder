@@ -67,8 +67,38 @@ item dizia.**
 - `npm run build` estava QUEBRADO no HEAD desde ontem, com tres erros de tipo
   que `npx tsc --noEmit` nao pega. A licao ja estava escrita e eu repeti.
 
-Quatro camadas verdes ao fim de cada commit. TODO: 31 -> 28 abertos (3 fechados,
-4 parcialmente). 12 commits, todos empurrados.
+**Segunda metade da sessao -- a linha que uma referencia orfa puxou:**
+
+Comecou no item 83(e), `deity.favored_weapon` com prefixo errado, e virou
+quatro achados encadeados:
+
+- as 509 referencias eram **todas orfas**, e nenhum portao cobrava;
+- entao o **portao 3 virou varredura completa** -- a lista de campos escrita a
+  mao ja tinha falhado duas vezes, e agora campo novo com referencia nasce
+  vigiado. A varredura achou 43 orfas na base inteira;
+- investigando as 43, descobri que **`saida/magias.json` estava parado em
+  27/07**: o `build.sh` chamava `magias.py`, cujo `__main__` so IMPRIME a
+  contagem. Todo build de tres dias rodou sobre magia velha. Segunda ocorrencia
+  do mesmo padrao no mesmo dia;
+- e com a magia fresca apareceu o achado de verdade: **o Remaster renomeou 159
+  magias e a base guardava so o nome novo**. `Magic Missile` nao achava `Force
+  Barrage` nem na busca nem nas divindades. A base tinha alias em UMA magia de
+  1.655; agora 153 carregam o nome antigo. Portao 3: 43 -> 0, com uma tolerada e
+  nomeada.
+
+Depois, item 79: **magia nao dizia em quem pega nem que salva pede**. O item
+tratava como lacuna de fonte ("0% estrutural"); o AoN tem `target` em 1.234 e
+`saving_throw` em 894. Era leitura, nao fonte. `alvos` 0 -> 804, `salvaguarda`
+0 -> 618.
+
+E o Igor mandou, no meio, mapear `Ancient Elf` -- heranca que libera dedicacao.
+Medindo, apareceu uma distincao que era facil confundir: `Ancient Elf` ABRE
+SLOT, mas `Aiuvarin` e `Dromaar` AMPLIAM O POOL ("quando ganhar um ancestry
+feat, pode escolher entre os aiuvarin"). Tratar as duas como slot daria feat de
+graca. Mapeado, nao resolvido.
+
+Quatro camadas verdes ao fim de cada commit. TODO: 31 -> 28 abertos, mais 6
+parcialmente fechados. 18 commits, todos empurrados.
 
 ## 2026-07-29
 
