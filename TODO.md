@@ -6,6 +6,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -147,19 +148,6 @@ items:
     eixo real de resto-da-progressao. Os 2 eixos legitimos por classe (racket, instinct, muse...)
     estao corretos e nao entram nisto'
   id: 69
-  date: '2026-07-29'
-  priority: media
-- desc: 'PARTE (a) CONCLUIDA 2026-07-30 (commit 884d14b51, spec specs/2026-07-30-escolha-de-nivel-futuro.md).
-    Eram tres semanticas no mesmo motor, e a divergencia chegava ao NUMERO: `_atributos` nao aplicava
-    o boost futuro mas `_aumentos_de_pericia` APLICAVA o aumento futuro -- um Guerreiro 4 ficava
-    trained numa pericia por um aumento do nivel 8. Agora o motor recorta por nivel na checagem E
-    na aplicacao, e o recortado fica contado em `escolhas_de_nivel_futuro`. SOBRAM (b) e o resto:
-    (b) `em: "criacao"` (string) desliga a checagem de nivel da higiene de slot -- e correto para
-    ancestria/background, mas silencia feat posto em `criacao` por engano. (c) `_subclasse_de` e
-    sensivel a ordem do array de escolhas e alimenta `_dc_de_conjuracao` -- pre-existente, so muda
-    texto, mas e a ultima dependencia de ordem que sobrou depois do conserto de `ordem_de_classe`.
-    Relatorio completo em docs/2026-07-27_review-adversarial-grants.md'
-  id: 73
   date: '2026-07-29'
   priority: media
 - desc: '(a)(b)(c) RESOLVIDOS 2026-07-30, spec specs/2026-07-30-alvo-e-salvaguarda-de-magia.md. O
