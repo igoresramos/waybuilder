@@ -139,6 +139,12 @@ echo "== 7d. uma opcao por nome em cada eixo de sub-escolha =="
 # `Justice` duas vezes.
 python3 colapsar_opcoes_irmas.py
 
+echo "== 7d1b. sub-escolha que existe com dois ids =="
+# O mesmo instinto entra pelo AoN (`wb:instinct/animal`) e pelo Foundry
+# (`wb:class-feature/animal-instinct`); os 25 feats de instinto citam o segundo
+# e a tela oferece o primeiro. Roda depois do 7d, que decide a opcao viva.
+python3 derivar_equivalencia_de_subescolha.py
+
 echo "== 7d2. tradicao de conjuracao da subclasse para a opcao viva =="
 # O AoN publica `tradition` como campo no kind dedicado (`wb:bloodline/genie`),
 # mas quem o jogador escolhe e a class-feature irma. Roda DEPOIS do 7d, que e

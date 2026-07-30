@@ -2455,7 +2455,21 @@ class Personagem:
         """A camada do meio: nem classe, nem personagem."""
         for slug, alvo in (valor or {}).items():
             escolhida = self._subclasse_de(f"wb:class/{slug}")
-            if escolhida != alvo:
+            # a sub-escolha pode existir com DOIS ids: `wb:instinct/animal`
+            # (AoN, nome "Animal") e `wb:class-feature/animal-instinct`
+            # (Foundry, nome "Animal Instinct"). Os 25 feats de instinto citam o
+            # segundo e a tela oferece o primeiro, entao comparar id cru
+            # reprovava sempre. Mesma licao que `_termo_has`, logo acima, ja
+            # aplicava para alias.
+            # Spec: `specs/2026-07-30-instinto-com-dois-ids.md`
+            gemeo = (self.base.opcional(alvo) or {}).get("equivale_a")
+            # `gemeo` so entra na comparacao se EXISTIR: sem esta guarda, um
+            # personagem que ainda nao escolheu subclasse (`escolhida` None)
+            # casava com o `equivale_a` ausente (tambem None) e passava a
+            # atender TODO requisito de sub-escolha. Pego pela paridade, que
+            # acusou 28 fixtures mudando de candidato.
+            gemeos = {alvo} | ({gemeo} if gemeo else set())
+            if not escolhida or escolhida not in gemeos:
                 nome = (self.base.opcional(alvo) or {}).get("name", alvo)
                 atual = (self.base.opcional(escolhida) or {}).get("name", "nenhuma") \
                     if escolhida else "nenhuma"

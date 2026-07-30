@@ -2638,7 +2638,16 @@ export class Personagem implements ContextoDePredicado {
   private _termo_subclass(valor: unknown): ResultadoDeTermo {
     for (const [slug, alvo] of Object.entries(dictDe(valor))) {
       const escolhida = this._subclasse_de(`wb:class/${slug}`);
-      if (escolhida !== alvo) {
+      // a sub-escolha pode existir com DOIS ids: `wb:instinct/animal` (AoN,
+      // "Animal") e `wb:class-feature/animal-instinct` (Foundry, "Animal
+      // Instinct"). Os 25 feats de instinto citam o segundo e a tela oferece o
+      // primeiro. Spec: `specs/2026-07-30-instinto-com-dois-ids.md`
+      // o gêmeo só entra na comparação se EXISTIR: sem esta guarda, um
+      // personagem que ainda não escolheu subclasse (`escolhida` nulo) casava
+      // com o `equivale_a` ausente e passava a atender TODO requisito.
+      const gemeo = dictDe(this.base.opcional(alvo))["equivale_a"];
+      const casa = escolhida === alvo || (verdadeiro(gemeo) && escolhida === gemeo);
+      if (!verdadeiro(escolhida) || !casa) {
         const nome_alvo = nomeOu(this.base.opcional(alvo), pyStr(alvo));
         const atual = verdadeiro(escolhida)
           ? nomeOu(this.base.opcional(escolhida), pyStr(escolhida)) : "nenhuma";

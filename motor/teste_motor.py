@@ -1632,6 +1632,44 @@ checar(mago_sub([ESCOLA, TESE])._subclasse_de("wb:class/wizard")
 checar(mago_sub([TESE, ESCOLA])._subclasse_de("wb:class/wizard") == ESCOLA,
        "e responde pelo PRIMEIRO eixo que a classe declara")
 
+# -- sub-escolha com dois ids (spec instinto-com-dois-ids) ------------------
+# O instinto existe como `wb:instinct/animal` (AoN, "Animal") e como
+# `wb:class-feature/animal-instinct` (Foundry, "Animal Instinct"). Os 25 feats
+# de instinto citam o segundo e a tela oferece o primeiro.
+print("\n-- sub-escolha com dois ids --")
+
+def barbaro(instinto):
+    return personagem(
+        [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+        + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/barbarian"}
+           for n in range(1, 7)]
+        + [{"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "wis"]},
+           {"em": 1, "slot": "subclasse", "pega": instinto}])
+
+def atende(p, fid):
+    c = next((x for x in p.candidatos("class_feat", em=6) if x["id"] == fid), None)
+    return bool(c and c["atende"])
+
+PELE = "wb:feat/animal-skin"   # exige SO `wb:class-feature/animal-instinct`
+checar(atende(barbaro("wb:instinct/animal"), PELE),
+       "escolher `Animal` (id do AoN) satisfaz feat que cita o id do Foundry")
+checar(atende(barbaro("wb:class-feature/animal-instinct"), PELE),
+       "e escolher o proprio id do Foundry tambem satisfaz")
+checar(not atende(barbaro("wb:instinct/giant"), PELE),
+       "mas `Giant` NAO satisfaz -- a equivalencia e por par, nao curinga")
+checar(BASE.opcional("wb:instinct/animal").get("equivale_a")
+       == "wb:class-feature/animal-instinct",
+       "e a equivalencia esta declarada na base, nos dois sentidos")
+# a guarda que faltou na primeira versao: sem subclasse escolhida, `escolhida` e
+# None e o `equivale_a` ausente tambem -- os dois "iguais" faziam TODO requisito
+# de sub-escolha passar a atender. Foi a paridade que acusou, com 28 fixtures.
+sem_escolha = personagem(
+    [{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"}]
+    + [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/barbarian"}
+       for n in range(1, 7)])
+checar(not atende(sem_escolha, PELE),
+       "e quem NAO escolheu instinto nao atende requisito de instinto")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")
