@@ -12,6 +12,7 @@
 
 
 
+
 # Criterio de prioridade (definido 2026-07-29):
 #   alta  = bloqueia outro item OU entrega numero/opcao errada na ficha do jogador
 #   media = buraco de conteudo
@@ -140,37 +141,6 @@ items:
     eixo real de resto-da-progressao. Os 2 eixos legitimos por classe (racket, instinct, muse...)
     estao corretos e nao entram nisto'
   id: 69
-  date: '2026-07-29'
-  priority: media
-- desc: '(e) RESOLVIDO 2026-07-30, e ele era maior do que o item dizia. `deity.favored_weapon` tinha
-    prefixo `wb:equipment/` em 509 referencias -- e as 509 eram ORFAS, nenhuma resolvia, e nenhum
-    portao cobrava porque o portao 3 so varria `requires` e `subclasses`. Com `wb:weapon/`, 480 resolvem;
-    28 sao ataque NATURAL (claw, jaws, tail) que nao e arma na base e agora sai como NOME simples,
-    sem `wb:`, para nao afirmar id que nao existe. O conserto teve de ser nos DOIS caminhos do extrator:
-    o do AoN e o que vence na precedencia, e mexer so no do Foundry nao mudou nada. PORTAO 3 VIROU
-    VARREDURA COMPLETA -- lista de campos escrita a mao ja tinha falhado duas vezes (subclasses,
-    favored_weapon), entao campo novo com referencia nasce vigiado. A varredura achou 43, e a triagem
-    levou a duas correcoes maiores (ver spec de alias de magia). Sobra 1 tolerada e nomeada: `wb:deity/malthus`
-    cita `Light Crossbow`, e o AoN nao tem arma com esse nome -- inconsistencia entre duas tabelas
-    da propria fonte, e inventar o mapeamento seria pior. || RESTO DO ITEM: PARCIAL, re-medido 2026-07-29
-    (auditoria). (a) RESOLVIDO: 0 ids `-legacy` em class.subclasses hoje (eram 46, limpos no commit
-    1fbfd7864). (b)(c)(d)(e) IDENTICOS: 10 backgrounds com boosts e skill_training vazios; Focus
-    Spells / Improved Evasion / Iron Will / Martial Weapon Mastery orfas de progressao; ikon(21)
-    / mythic-calling(15) / element(6) / deviant-ability-classification(10) com 100% grants vazio;
-    deity.favored_weapon com prefixo wb:equipment/ em exatamente 509 referencias. || TEXTO ORIGINAL:
-    REQUIRES E SUBCLASSES CITANDO SLUG PRE-REMASTER -- levantado pela validacao de feats/ancestrias
-    em 2026-07-27, PARCIALMENTE resolvido. A parte do motor esta fechada (item 80: `Base.resolver`
-    segue o alias). O que FICA: (a) 46 ids `-legacy` esquecidos no catalogo de `class.subclasses`
-    (barbarian, champion, oracle, witch) -- o jogador veria a opcao duplicada, legado e remaster
-    lado a lado; (b) 10 backgrounds com `boosts` e `skill_training` vazios apesar de o dado bruto
-    existir; (c) 4 class-features (`Focus Spells`, `Improved Evasion`, `Iron Will`, `Martial Weapon
-    Mastery`) que nao aparecem em nenhuma `progressao`; (d) os kinds `ikon`, `mythic-calling`, `element`
-    e `deviant-ability-classification` com `grants: []` em 100% dos registros, o que explica 37 das
-    50 class-features orfas; (e) `deity.favored_weapon` com prefixo errado (`wb:equipment/` em vez
-    de `wb:weapon/`) em 509 casos. Cobertura de raro/incomum medida e essencialmente completa: ancestry
-    50/50 com distribuicao identica ao AoN, background 0 faltando, heritage 5 (todas common), archetype
-    1 (uncommon), feat 32 de 6.085 (so 2 uncommon, 0 rare/unique)'
-  id: 83
   date: '2026-07-29'
   priority: media
 - desc: '3a RODADA FECHADA 2026-07-30 (relatorio docs/2026-07-30_comparacao-pathbuilder-rodada-3.md).
@@ -316,6 +286,21 @@ items:
     ''de que organizacao voce e''. Junto vem a decisao de UI: a ficha deveria mostrar o `acesso`
     do item incomum.'
   id: 96
+  date: '2026-07-30'
+  priority: baixa
+- desc: 'CLASS-FEATURES INALCANCAVEIS E KINDS COM GRANTS 100% VAZIO -- medido 2026-07-30, saiu do
+    item 83. (a) 48 das 847 class-features nao sao citadas em LUGAR NENHUM da base (nem progressao,
+    nem subclasses, nem grants, nem requires). Destas, 26 tem irmao com o MESMO SLUG em outro kind
+    (ikon 14, equipment 7, mythic-calling 5) -- mesmo caso que `colapsar_opcoes_irmas.py` ja trata
+    para o eixo de subclasse, e provavelmente extensivel. As outras 22 sao orfas de verdade: `focus-spells`,
+    `elemental-school`, `air-gate`/`earth-gate`/`fire-gate`, `echoes-of-the-scrolls|spells|swords`,
+    `*-deviant-classification`, `advanced-vials-toxicologist`. (b) quatro kinds com 100% de grants
+    vazio: ikon (21), mythic-calling (15), deviant-ability-classification (10), element (6). NAO
+    E NUMERO ERRADO NA FICHA: `focus-spells` como registro e redundante porque o pool de foco ja
+    vem pela maquinaria de conjuracao. E higiene de base, e exige curadoria registro a registro --
+    decidir, para cada um, se deveria ser alcancavel e por qual caminho. Comecar pelos 26 com irmao,
+    que tem regra.'
+  id: 97
   date: '2026-07-30'
   priority: baixa
 promoted: []
