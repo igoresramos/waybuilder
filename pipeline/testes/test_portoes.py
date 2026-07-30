@@ -95,6 +95,47 @@ class TestInvariantesDaBase(unittest.TestCase):
                  and r.get("grants_completos") is False]
         self.assertEqual(ruins[:5], [])
 
+    def test_todo_registro_responde_grants_completos(self):
+        # Assercao DURA, e nao catraca. O portao 10 e catraca porque servia
+        # para descer de 8.360 registros mudos sem deixar o build vermelho no
+        # caminho; chegando a zero, tolerancia so serviria para deixar um kind
+        # novo entrar mudo de novo. `null` CONTA como resposta -- e o terceiro
+        # estado da spec ("a fonte nao declarou mecanica"), nao ausencia.
+        # Spec: specs/2026-07-30-cobertura-de-grants-completos.md
+        import collections
+        mudos = collections.Counter(r.get("kind") for r in self.base
+                                    if "grants_completos" not in r)
+        self.assertEqual(dict(mudos), {},
+                         f"{sum(mudos.values())} registros sem o campo")
+
+    def test_tactic_e_class_kit_declaram_perda(self):
+        # Os dois kinds tem mecanica real que a linguagem de `grants` nao sabe
+        # expressar -- perda declarada, entao `false`. Herdar o `null` de
+        # `aon_kinds.converter()` diria "a fonte nao declarou", que e falso.
+        for kind, esperado in (("tactic", 37), ("class-kit", 32)):
+            regs = [r for r in self.base if r.get("kind") == kind]
+            self.assertEqual(len(regs), esperado, f"censo de {kind} mudou")
+            self.assertEqual([r["id"] for r in regs
+                              if r.get("grants_completos") is not False][:5], [])
+
+    def test_equipamento_sem_doc_do_foundry_responde_null(self):
+        # ausencia de fonte nao e perda: item que so existe no AoN nao tem rule
+        # element para converter, entao `false` seria acusar o pipeline de um
+        # erro que nao cometeu.
+        ruins = [r["id"] for r in self.base
+                 if r.get("kind") in ("equipment", "weapon", "armor", "shield")
+                 # `foundry_ambiguo` CONTA como doc do Foundry: o extrator
+                 # casou e converteu as rules normalmente, e so depois
+                 # `desmembrar_colisoes.py` renomeia a chave ao separar dois
+                 # registros que disputavam a mesma identidade. Sao 9 itens que,
+                 # sem esta linha, o teste acusaria de mentir sobre a fonte.
+                 and not (r.get("xref") or {}).get("foundry")
+                 and not (r.get("xref") or {}).get("foundry_ambiguo")
+                 # sentinela: chave AUSENTE nao vale como `null`, senao o teste
+                 # passa por vacuo justamente enquanto o campo nao existe
+                 and r.get("grants_completos", "<ausente>") is not None]
+        self.assertEqual(ruins[:5], [])
+
     def test_mechanized_e_derivado_de_grants(self):
         # enquanto `mechanized` existir, a spec v1 define `mechanized ==
         # bool(grants)`. Se um dia divergir, o campo virou declaracao solta.

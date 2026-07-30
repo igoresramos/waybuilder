@@ -60,14 +60,7 @@ _Ausencias ja decididas (2 categorias) -- visiveis, nao bloqueiam:_
 
 **PASSOU** -- 0 ocorrencia(s).
 
-- registros SEM resposta de `grants_completos`: **8360** de 19706 (42.4%)
+- registros SEM resposta de `grants_completos`: **0** de 19706 (0.0%)
 - linha de base anterior: 8360
--   - `equipment`: 6052 de 6122
--   - `weapon`: 1030 de 1042
--   - `class-feature`: 841 de 841
--   - `armor`: 216 de 216
--   - `shield`: 125 de 125
--   - `tactic`: 37 de 37
--   - `class-kit`: 32 de 32
--   - `class`: 27 de 27
+- linha de base GRAVADA em 0
 

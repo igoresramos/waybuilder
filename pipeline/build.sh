@@ -19,7 +19,11 @@ echo "== 0. fontes fixadas =="
 
 echo "== 1. extratores =="
 if [ "${WB_REEXTRAIR:-0}" = "1" ]; then
-  for e in classes feats magias ancestrias equipamento companheiros referencia rituais aon_kinds; do
+  # `taticas_kits` DEPOIS de `aon_kinds`: ele monta o envelope com
+  # `aon_kinds.converter()`, entao mudanca de schema la chega aqui de carona --
+  # e ficar fora do laco fazia a saida em disco envelhecer em silencio (a de
+  # 27/07 sobreviveu a spec de `grants_completos`, de 29/07).
+  for e in classes feats magias ancestrias equipamento companheiros referencia rituais aon_kinds taticas_kits; do
     echo "-- $e"
     python3 "extratores/$e.py"
   done

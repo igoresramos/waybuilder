@@ -220,6 +220,15 @@ def extrair_tactics(vigentes, foundry_idx, est):
         # nem para pacote inicial de itens.
         reg["mechanized"] = bool(reg.get("grants"))
 
+        # E `false`, nao o `null` que `aon_kinds.converter()` daria por
+        # heranca: `null` significa "a fonte nao declarou mecanica" e aqui a
+        # fonte DECLARA -- tatica ativa efeito num aliado, kit concede lista de
+        # itens iniciais. O que falta e vocabulario de `grants`, e isso e perda,
+        # que e exatamente o que `false` existe para marcar.
+        # Spec: specs/2026-07-30-cobertura-de-grants-completos.md
+        reg["grants_completos"], reg["requires_parseado"] = comum.mecanizacao(
+            reg["kind"], True, True, bool(reg.get("requires_texto")), False)
+
         # 4) prosa embutida (harmless -- emitir_textos.py reprocessa do
         # dados_brutos direto, nao le este campo; mesma convencao de
         # relicos_idiomas.py).
@@ -386,6 +395,15 @@ def extrair_class_kits(vigentes, est):
         # sempre vazio porque a spec nao tem vocabulario para efeito de tactic
         # nem para pacote inicial de itens.
         reg["mechanized"] = bool(reg.get("grants"))
+
+        # E `false`, nao o `null` que `aon_kinds.converter()` daria por
+        # heranca: `null` significa "a fonte nao declarou mecanica" e aqui a
+        # fonte DECLARA -- tatica ativa efeito num aliado, kit concede lista de
+        # itens iniciais. O que falta e vocabulario de `grants`, e isso e perda,
+        # que e exatamente o que `false` existe para marcar.
+        # Spec: specs/2026-07-30-cobertura-de-grants-completos.md
+        reg["grants_completos"], reg["requires_parseado"] = comum.mecanizacao(
+            reg["kind"], True, True, bool(reg.get("requires_texto")), False)
 
         reg["texto"] = _limpar_texto(aon.get("text"))
         reg["prov"]["text"] = "aon"

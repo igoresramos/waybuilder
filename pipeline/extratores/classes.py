@@ -51,6 +51,9 @@ PF2ETOOLS_CACHE = RAW_DIR / "pf2etools"
 SAIDA_DIR = PIPELINE_DIR / "saida"
 RELATORIOS_DIR = PIPELINE_DIR / "relatorios"
 
+sys.path.insert(0, str(PIPELINE_DIR))
+import comum  # noqa: E402
+
 FOUNDRY_PIN = "87f9e5028baaa10b70fdc766260b7886def17e04"
 # Clone local pinado no commit acima, dentro de dados_brutos/. Reconstruivel por
 # `pipeline/buscar_fontes.sh`; sobrescrivel por env var.
@@ -602,6 +605,14 @@ def construir_registro_classe(nome: str, cdata: dict, aon_cache_hits: dict) -> d
     if not mechanized:
         STATS["mechanized_false_motivos"][f"class:rules-nao-traduzidas({len(rules_extra)})"] += 1
 
+    # `tinha_mecanica=True` incondicional, e nao `bool(grants)`: `class` nasce
+    # de `montar_grants_classe()`, que le hp/perception/savingThrows/attacks --
+    # campos estruturados que TODA classe tem. Nunca ha ausencia de declaracao
+    # aqui, entao `null` mentiria. Spec:
+    # specs/2026-07-30-cobertura-de-grants-completos.md
+    grants_completos, requires_parseado = comum.mecanizacao(
+        "class", True, bool(rules_extra), False, True)
+
     registro = {
         "id": f"wb:class/{slug}",
         "kind": "class",
@@ -620,6 +631,8 @@ def construir_registro_classe(nome: str, cdata: dict, aon_cache_hits: dict) -> d
         "progressao": [],  # preenchido depois de processar as class-features, ver extrair()
         "text": f"wb:text/class/{slug}",
         "mechanized": mechanized,
+        "grants_completos": grants_completos,
+        "requires_parseado": requires_parseado,
         "xref": {
             "foundry": f"Compendium.pf2e.classes.Item.{cdata['_id']}",
             "aon": hit.get("_id") if hit else None,
@@ -693,8 +706,15 @@ def montar_indice_ownership(
 # Construcao do registro de CLASS-FEATURE
 # ---------------------------------------------------------------------------
 
-def montar_grants_feature(sys_: dict) -> tuple[list[dict], bool, list[str]]:
-    """Devolve (grants, mechanized, motivos_nao_mecanizado)."""
+def montar_grants_feature(sys_: dict) -> tuple[list[dict], bool, list[str], bool]:
+    """Devolve (grants, mechanized, motivos_nao_mecanizado, tinha_mecanica).
+
+    `tinha_mecanica` e o que separa "a fonte nao declarou nada" de "declarou e
+    eu nao converti" -- as duas viravam `grants: []` sem distincao. Sao 164
+    features cujo doc do Foundry nao tem `subfeatures` nem `rules`, contra 608
+    que tem e nao saem convertidas. Ver
+    specs/2026-07-30-cobertura-de-grants-completos.md.
+    """
     grants = []
     motivos = []
 
@@ -714,7 +734,7 @@ def montar_grants_feature(sys_: dict) -> tuple[list[dict], bool, list[str]]:
     if rules:
         motivos.append(f"rule-elements-nao-traduzidos:{len(rules)}")
 
-    return grants, mechanized, motivos
+    return grants, mechanized, motivos, bool(profs or subf_extra or rules)
 
 
 def registrar_prereq_nao_traduzido(sys_: dict, nome: str) -> None:
@@ -765,7 +785,9 @@ def construir_registro_feature(
 
     registrar_prereq_nao_traduzido(sys_, nome)
 
-    grants, mechanized, motivos = montar_grants_feature(sys_)
+    grants, mechanized, motivos, tinha_mecanica = montar_grants_feature(sys_)
+    grants_completos, requires_parseado = comum.mecanizacao(
+        "class-feature", tinha_mecanica, not mechanized, False, True)
     if mechanized:
         STATS["mechanized_true"] += 1
     else:
@@ -887,6 +909,8 @@ def construir_registro_feature(
         "grants": grants,
         "text": f"wb:text/class-feature/{slug}",
         "mechanized": mechanized,
+        "grants_completos": grants_completos,
+        "requires_parseado": requires_parseado,
         "xref": {
             "foundry": f"Compendium.pf2e.classfeatures.Item.{fdata['_id']}",
             "aon": hit_para_xref.get("_id") if hit_para_xref else None,

@@ -45,6 +45,9 @@ PIPELINE = os.path.dirname(AQUI)
 PROJETO = os.path.dirname(PIPELINE)
 BRUTOS = os.path.join(PIPELINE, "dados_brutos")
 
+sys.path.insert(0, PIPELINE)
+import comum  # noqa: E402
+
 FOUNDRY_COMMIT = "87f9e5028baaa10b70fdc766260b7886def17e04"
 
 _CANDIDATOS_FOUNDRY = [
@@ -722,6 +725,16 @@ def extrair():
         else:
             est["mechanized_false"] += 1
 
+        # `perdeu` ja respondia "havia rule element que eu nao sei converter" e
+        # morria aqui, dentro de `mechanized`. Os 7.423 registros deste extrator
+        # eram 37,7% da base sem responder `grants_completos` -- e a metrica de
+        # cobertura media so o resto.
+        # Item sem doc do Foundry sai `null`, nao `false`: ausencia de fonte nao
+        # e perda. Sao 1.867 dos 7.423, quase todos so do AoN.
+        # Spec: specs/2026-07-30-cobertura-de-grants-completos.md
+        grants_completos, requires_parseado = comum.mecanizacao(
+            kind, bool(f and f["rules"]), perdeu, False, True)
+
         reg = {
             "id": "wb:%s/%s" % (kind, sl),
             "kind": kind,
@@ -734,6 +747,8 @@ def extrair():
             "grants": grants,
             "text": ("wb:text/%s/%s" % (kind, sl)) if "text" in prov else None,
             "mechanized": mechanized,
+            "grants_completos": grants_completos,
+            "requires_parseado": requires_parseado,
             "xref": {},
             "prov": prov,
         }

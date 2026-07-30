@@ -18,6 +18,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/alley-oop",
     "xref": {
       "aon": "tactic-15",
@@ -58,6 +60,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/bloody-guillotine",
     "xref": {
       "aon": "tactic-27",
@@ -100,6 +104,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/buckle-cut-blitz",
     "xref": {
       "aon": "tactic-16",
@@ -141,6 +147,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/coordinating-maneuvers",
     "xref": {
       "aon": "tactic-7",
@@ -181,6 +189,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/corpse-crenellation",
     "xref": {
       "aon": "tactic-36",
@@ -223,6 +233,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/cry-havoc",
     "xref": {
       "aon": "tactic-28",
@@ -265,6 +277,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/defensive-retreat",
     "xref": {
       "aon": "tactic-1",
@@ -306,6 +320,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/demoralizing-charge",
     "xref": {
       "aon": "tactic-17",
@@ -346,6 +362,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/double-team",
     "xref": {
       "aon": "tactic-8",
@@ -388,6 +406,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": false,
     "text": "wb:text/tactic/end-it",
     "xref": {
       "aon": "tactic-9",
@@ -430,6 +450,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/executioners-volley",
     "xref": {
       "aon": "tactic-29",
@@ -472,6 +494,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/for-talmandor-for-freedom",
     "xref": {
       "aon": "tactic-37",
@@ -522,6 +546,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/gather-to-me",
     "xref": {
       "aon": "tactic-2",
@@ -563,6 +589,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/insta-ballista",
     "xref": {
       "aon": "tactic-30",
@@ -605,6 +633,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": false,
     "text": "wb:text/tactic/mirrored-wall",
     "xref": {
       "aon": "tactic-22",
@@ -648,6 +678,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/mountaineering-training",
     "xref": {
       "aon": "tactic-3",
@@ -688,6 +720,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/naval-training",
     "xref": {
       "aon": "tactic-4",
@@ -728,6 +762,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/passage-of-lines",
     "xref": {
       "aon": "tactic-5",
@@ -768,6 +804,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/pincer-attack",
     "xref": {
       "aon": "tactic-10",
@@ -808,6 +846,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/piranha-assault",
     "xref": {
       "aon": "tactic-23",
@@ -850,6 +890,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/pop-drop-and-lock",
     "xref": {
       "aon": "tactic-24",
@@ -892,6 +934,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/protective-screen",
     "xref": {
       "aon": "tactic-6",
@@ -933,6 +977,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/ready-aim-fire",
     "xref": {
       "aon": "tactic-25",
@@ -974,6 +1020,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/reload",
     "xref": {
       "aon": "tactic-11",
@@ -1014,6 +1062,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/roaring-charge",
     "xref": {
       "aon": "tactic-26",
@@ -1055,6 +1105,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/sanguine-revitalization",
     "xref": {
       "aon": "tactic-31",
@@ -1096,6 +1148,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/seek-and-destroy",
     "xref": {
       "aon": "tactic-34",
@@ -1137,6 +1191,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/shadows-in-the-moonlight",
     "xref": {
       "aon": "tactic-33",
@@ -1177,6 +1233,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/shields-up",
     "xref": {
       "aon": "tactic-12",
@@ -1217,6 +1275,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/slip-and-sizzle",
     "xref": {
       "aon": "tactic-18",
@@ -1258,6 +1318,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/strike-hard",
     "xref": {
       "aon": "tactic-13",
@@ -1299,6 +1361,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/stupefying-raid",
     "xref": {
       "aon": "tactic-19",
@@ -1339,6 +1403,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/tactical-takedown",
     "xref": {
       "aon": "tactic-14",
@@ -1379,6 +1445,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/take-the-high-ground",
     "xref": {
       "aon": "tactic-20",
@@ -1420,6 +1488,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/the-bigger-they-are",
     "xref": {
       "aon": "tactic-21",
@@ -1461,6 +1531,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/valkyries-charge",
     "xref": {
       "aon": "tactic-32",
@@ -1502,6 +1574,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/tactic/wait-for-it",
     "xref": {
       "aon": "tactic-35",
@@ -1539,6 +1613,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/alchemist-kit-legacy",
     "xref": {
       "aon": "class-kit-1"
@@ -1594,6 +1670,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/alchemist-kit",
     "xref": {
       "aon": "class-kit-25"
@@ -1647,6 +1725,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/barbarian-kit-legacy",
     "xref": {
       "aon": "class-kit-2"
@@ -1701,6 +1781,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/barbarian-kit",
     "xref": {
       "aon": "class-kit-26"
@@ -1755,6 +1837,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/bard-kit",
     "xref": {
       "aon": "class-kit-17"
@@ -1806,6 +1890,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/bard-kit-legacy",
     "xref": {
       "aon": "class-kit-3"
@@ -1858,6 +1944,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/champion-kit",
     "xref": {
       "aon": "class-kit-27"
@@ -1912,6 +2000,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/champion-kit-legacy",
     "xref": {
       "aon": "class-kit-4"
@@ -1966,6 +2056,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/cleric-kit",
     "xref": {
       "aon": "class-kit-18"
@@ -2017,6 +2109,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/cleric-kit-legacy",
     "xref": {
       "aon": "class-kit-5"
@@ -2066,6 +2160,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/druid-kit",
     "xref": {
       "aon": "class-kit-19"
@@ -2118,6 +2214,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/druid-kit-legacy",
     "xref": {
       "aon": "class-kit-6"
@@ -2170,6 +2268,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/fighter-kit",
     "xref": {
       "aon": "class-kit-20"
@@ -2223,6 +2323,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/fighter-kit-legacy",
     "xref": {
       "aon": "class-kit-7"
@@ -2276,6 +2378,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/investigator-kit-legacy",
     "xref": {
       "aon": "class-kit-13"
@@ -2332,6 +2436,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/investigator-kit",
     "xref": {
       "aon": "class-kit-28"
@@ -2387,6 +2493,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/monk-kit",
     "xref": {
       "aon": "class-kit-29"
@@ -2441,6 +2549,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/monk-kit-legacy",
     "xref": {
       "aon": "class-kit-8"
@@ -2493,6 +2603,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/oracle-kit-legacy",
     "xref": {
       "aon": "class-kit-14"
@@ -2546,6 +2658,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/oracle-kit",
     "xref": {
       "aon": "class-kit-30"
@@ -2598,6 +2712,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/ranger-kit",
     "xref": {
       "aon": "class-kit-21"
@@ -2650,6 +2766,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/ranger-kit-legacy",
     "xref": {
       "aon": "class-kit-9"
@@ -2703,6 +2821,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/rogue-kit-legacy",
     "xref": {
       "aon": "class-kit-10"
@@ -2755,6 +2875,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/rogue-kit",
     "xref": {
       "aon": "class-kit-22"
@@ -2806,6 +2928,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/sorcerer-kit-legacy",
     "xref": {
       "aon": "class-kit-11"
@@ -2855,6 +2979,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/sorcerer-kit",
     "xref": {
       "aon": "class-kit-31"
@@ -2907,6 +3033,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/swashbuckler-kit-legacy",
     "xref": {
       "aon": "class-kit-15"
@@ -2963,6 +3091,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/swashbuckler-kit",
     "xref": {
       "aon": "class-kit-32"
@@ -3018,6 +3148,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/witch-kit-legacy",
     "xref": {
       "aon": "class-kit-16"
@@ -3073,6 +3205,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/witch-kit",
     "xref": {
       "aon": "class-kit-23"
@@ -3126,6 +3260,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/wizard-kit-legacy",
     "xref": {
       "aon": "class-kit-12"
@@ -3176,6 +3312,8 @@
     "requires": null,
     "grants": [],
     "mechanized": false,
+    "grants_completos": false,
+    "requires_parseado": true,
     "text": "wb:text/class-kit/wizard-kit",
     "xref": {
       "aon": "class-kit-24"
