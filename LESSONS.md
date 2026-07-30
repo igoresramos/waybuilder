@@ -1120,3 +1120,26 @@ conjunto de chaves antes de escrever o tipo. E preferir REPASSAR o objeto a
 reconstrui-lo campo a campo -- reconstruir e o que perde o que voce nao sabia
 que existia. Quem pegou foi o teste de paridade contra o gabarito do Python;
 `npm run build` e os 113 testes passavam.
+
+## O payload do app envelhece calado quando o portao falha (2026-07-30)
+
+`build.sh` roda com `set -euo pipefail` e o passo 8 e `portoes.py --fase final`
+sem `|| true`. Portao vermelho **aborta o build**, e o passo 9 (`emitir_app.py`,
+que escreve `base/app/`) nunca roda. Isso esta certo -- nao se publica payload de
+uma base reprovada.
+
+O que nao esta obvio e a consequencia: `base/app/` fica com o conteudo do build
+ANTERIOR, e e ele que os 131 testes de paridade do TS consomem. Nesta sessao o
+porte de `slots_concedidos` ficou vazio no TS e igual no Python, e a divergencia
+apontava para um indice de `slots_abertos` -- o defeito parecia ser de ordenacao
+da lista. Nao era: o `Versatile Human` do payload nao tinha o `choice` porque o
+payload era de antes da mudanca no extrator.
+
+Regra: **depois de qualquer build que tenha abortado nos portoes, rodar
+`emitir_app.py` explicitamente antes de acreditar no resultado do vitest.**
+Divergencia Python/TS em que o Python "sabe" algo que o TS ignora e sintoma
+tipico de payload velho, nao de porte errado.
+
+Quarta ocorrencia do mesmo padrao no mesmo dia (taticas_kits fora do laco,
+magias.py no-op, saida/ancestrias.json de 27/07): artefato derivado que
+sobrevive a mudanca da fonte porque ninguem o reescreveu.
