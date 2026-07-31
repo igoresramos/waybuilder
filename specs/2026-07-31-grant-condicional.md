@@ -1,7 +1,7 @@
 ---
 spec: grant-condicional
 project: waybuilder
-version: 1
+version: 2
 status: proposta
 created: 2026-07-31
 todo: [69, 107]
@@ -9,233 +9,220 @@ todo: [69, 107]
 
 # Spec -- o grant que espera a escolha, e a condicao que nao alarga
 
+> **v2, depois do review adversarial** (`docs/2026-07-31_review-adversarial-grant-condicional.md`).
+> A v1 caiu em tres pontos, todos re-medidos e confirmados: o numero de pares
+> estava inflado por um erro meu de leitura da fonte, a secao das 206 estava
+> certa na conclusao e errada na justificativa, e a garantia de ordem nao
+> existia. O nucleo -- `grants[].se` com avaliacao estrita -- sobreviveu.
+
 ## Como isto comecou, e a premissa que caiu
 
-O item 107 declarou um bloqueio:
-
-> SOBRAM 33: nao tem gemeo concedido, e a mae que os concederia (`Cause`, do
-> Campeao) usa `GrantItem` com UUID DINAMICO
-> (`{item|flags.system.rulesSelections.cause}`) -- aponta para o que o jogador
-> escolheu, e o extrator pula os 163 casos assim, corretamente. Resolver pede
-> interpretar a escolha no build, outra familia.
-
-Medido contra a fonte, **"os casos assim" nao sao uma familia so**, e a maior
-delas nao precisa de nada. Varridos os packs de construcao do Foundry
-(`class-features`, `feats`, `classes`, `heritages`, `ancestries`,
-`backgrounds`, `deities`), sao **221** ocorrencias hoje, em duas formas:
+O item 107 dizia que os `GrantItem` com UUID dinamico pediam "interpretar a
+escolha no build". Medidos nos packs de construcao, sao **221**, em duas formas:
 
 | forma | n | o que diz |
 |---|---:|---|
-| `{item\|...rulesSelections.X}` com o `ChoiceSet` da flag `X` **no mesmo item** | 206 | "conceda o que foi escolhido NESTE eixo" |
+| `{item\|...rulesSelections.X}`, `ChoiceSet` da flag no MESMO item | 206 | "conceda o que foi escolhido neste eixo" |
 | `{actor\|flags.system.<classe>.<flag>}` | 15 | "conceda o que foi escolhido em OUTRO item" |
 
-Das 206: 165 com `ChoiceSet` de `filter`, 36 de lista literal, 4 sem `choices`
-e **1** orfa de verdade (`Runtsage`).
+### As 206 nao sao um bloco homogeneo -- correcao da v1
 
-### As 206 ja estao resolvidas, e por isso pular foi certo
+A v1 dizia "as 206 sao redundantes com o eixo, nao ha o que fazer". A conclusao
+para esta spec continua valendo -- **nenhuma delas se resolve com `se`** --, mas
+a justificativa era falsa por generalizar de um caso so (`Cause`). A particao
+medida:
 
-O proprio caso citado pelo item 107 e desta forma. `Cause`, do Campeao:
+| grupo | o que acontece |
+|---|---|
+| identidade tipo `Cause` | o eixo existe e a escolha ja e a posse. Nada a fazer |
+| redundantes com o slot do item 106 | o slot concedido ja pergunta ao jogador |
+| **class-features sem mecanismo nenhum** | impulso do Kineticist, `grantedIkon` do Exemplar, sub-escolha de divindade -- **ficam sem resposta**, e esta spec nao as resolve |
+| **9 backgrounds com escolha achatada** | **defeito ativo**, medido abaixo |
 
-```json
-{"key": "ChoiceSet", "flag": "cause",
- "choices": {"filter": ["item:tag:champion-cause", {"or": [...sanctification...]}]}}
-{"key": "GrantItem", "uuid": "{item|flags.system.rulesSelections.cause}"}
+O terceiro grupo passa a ser divida declarada, nao "resolvido". O quarto virou
+**item 112**, porque e bug na ficha de hoje e independe desta spec:
+
+```
+Beast Seeker         fonte 1-de-2  ->  base concede 2  (titan-wrestler + dirty-trick)
+Child of the Polis   fonte 1-de-2  ->  base concede 2
+Glory Hound          fonte 1-de-2  ->  base concede 2
+Obari Wanderer       fonte 1-de-2  ->  base concede 2
+Anti-Thrune Saboteur fonte 1-de-2  ->  base concede 1, escolhido arbitrariamente
+Child of Notoriety   fonte 1-de-2  ->  base concede 0
+Conservator          fonte 1-de-2  ->  base concede 0
+Dedicated Delver     fonte 1-de-2  ->  base concede 0
+Historical Reenactor fonte 1-de-2  ->  base concede 0
 ```
 
-O `GrantItem` concede **a propria opcao escolhida no ChoiceSet irmao**. Isso e
-identidade: no nosso modelo, escolher a opcao de um eixo JA e te-la. E o eixo
-existe -- `wb:class/champion` tem `subclasses[eixo=cause]` com as sete causas
-(`justice`, `liberation`, `redemption`, `obedience`, `iniquity`,
-`desecration`, `grandeur`).
+Um mesmo defeito, tres sintomas: feat a mais, feat arbitrario, feat perdido.
 
-> **Nao ha o que implementar aqui, e implementar seria pior.** Converter o
-> grant dinamico em concessao faria a ficha conceder de novo o que a escolha ja
-> deu. O extrator continua pulando as 206, agora com o motivo certo escrito:
-> nao e "referencia que nao sei resolver", e "redundante com o eixo".
+## Os pares: 44, e nao 79 -- correcao da v1
 
-## O defeito, medido: as 15 de escopo `actor`
+A v1 contou **79 pares** varrendo `ActiveEffectLike` com UUID no `value`, **sem
+olhar o `mode`**. Esse era o erro, e ele importa:
 
-Aqui a escolha vive em OUTRO item. A opcao escolhida escreve uma flag no ator,
-e a feature generica -- que ja esta na progressao da classe, no nivel certo --
-le a flag para saber QUAL variante conceder. `Cloistered Cleric`:
+| `mode` | n | o que significa |
+|---|---:|---|
+| `override` | 26 regras | escreve a flag: "a minha variante e esta" |
+| `add` | 35 regras | **acumula numa lista**: "eu acrescento esta OPCAO" |
+
+`add` nao e concessao, e **oferta**. O implemento do Taumaturgo:
 
 ```json
-{"key": "ActiveEffectLike", "mode": "override", "path": "flags.system.cleric",
- "value": {"firstDoctrine":  "Compendium.pf2e.classfeatures.Item.First Doctrine (Cloistered Cleric)",
-           "secondDoctrine": "...Second Doctrine (Cloistered Cleric)",
-           "...": "6 doutrinas"}}
+{"key": "ActiveEffectLike", "mode": "add",
+ "path": "flags.system.thaumaturge.adeptChoices",
+ "value": {"label": "{item|name}", "value": "...Adept Benefit (Amulet)"}}
 ```
 
-e `First Doctrine`, concedida pela progressao do Clerigo no nivel 1:
+Cada implemento ADICIONA uma opcao, e o Taumaturgo escolhe **um** implemento
+para receber o Adept Benefit. Tratar isso como grant condicional daria os dois
+Adept Benefits a um Taumaturgo com dois implementos -- numero errado na ficha,
+introduzido por mim.
 
-```json
-{"key": "GrantItem", "uuid": "{actor|flags.system.cleric.firstDoctrine}"}
-```
+Contados so os `override`, sem os `Spell Effect:` do wild shape: **44 pares**.
 
-> **Isto nao e "interpretar a escolha do jogador no build". E uma tabela.** A
-> opcao declara o mapa INTEIRO, estaticamente, na propria fonte. Nada aqui
-> depende de runtime: depende de ler os dois lados e cruzar.
-
-Cruzados os dois lados, saem **79 pares** `(opcao, item concedido)`. Descontados
-os 15 `Spell Effect:` do wild shape do Druida -- que sao efeito de VTT, nao
-construcao --, sobram **64 acionaveis**, de **31 opcoes**:
-
-| familia | pares | opcoes |
+| familia | pares | com `predicate` proprio |
 |---|---:|---:|
-| Taumaturgo (`initiateBenefit`, `adeptBenefit`, `paragonBenefit`) | 30 | 20 |
-| Clerigo (as 6 doutrinas x 2 subclasses) | 12 | 2 |
-| Alquimista (`fieldDiscovery`, `greaterFieldDiscovery`, `advancedVials`) | 12 | 4 |
-| Gunslinger (`initialDeed`, `slingersReload`) | 10 | 5 |
+| Clerigo (6 doutrinas x 2 subclasses) | 12 | 0 |
+| Alquimista (`fieldDiscovery`, `greaterFieldDiscovery`, `advancedVials`) | 12 | 0 |
+| Gunslinger (`initialDeed`, `slingersReload`) | 10 | 0 |
+| Taumaturgo (`initiateBenefit` apenas) | 10 | 10 |
 
-O Taumaturgo encadeia dois niveis: `Amulet` escreve Initiate **e** Adept, e
-`Adept Benefit (Amulet)` escreve Paragon. A cadeia de grants ja e recursiva,
-com guarda de profundidade e de visitados; isto so a exercita.
+### O que desta spec e realmente necessario
 
-## O que muda para o item 69, e por que ele estava certo
+Gunslinger e Taumaturgo tem **via primaria estatica**: a `Way of X` e o
+implemento concedem a propria variante por `GrantItem` direto -- com
+`predicate` (`class:gunslinger`, `feat:thaumaturge-dedication`), que a spec
+`2026-07-31-kind-action.md` passa a traduzir. Para eles o `se` cobre so os
+feats leitores (`Slinger's Readiness`, `Practiced Reloads`).
 
-O item 69, fatia 2, gateou 68 variantes por subclasse com `requires.subclass`:
-elas aparecem na lista, MARCADAS com o motivo (`exige a sub-escolha
-Chirurgeon; tem Bomber`). E o proprio item declarou o limite:
+**O nucleo desta spec sao Clerigo 12 + Alquimista 12**, que nao tem via
+primaria: a doutrina generica esta na progressao e o mapa vive na subclasse.
 
-> o modelo CERTO das 68 seria o dono CONCEDER a variante em vez de o jogador
-> escolhe-la marcada, e isso pede vocabulario novo de grant (`concede feature
-> no nivel N`) que nao existe
-
-**Os 64 pares sao esse vocabulario, ditado pela fonte.** E o vocabulario e
-menor do que o item previa: nao e "concede feature no nivel N", porque o nivel
-JA esta na progressao da classe (`First Doctrine` no 1, `Second` no 3). Falta
-so a condicao.
-
-Sobreposicao com as 68, medida so por familia e nao registro a registro:
-Taumaturgo bate (30 pares / 30 gateadas), Clerigo bate (12 / 12), Alquimista
-**nao** (12 pares / 23 gateadas). O Gunslinger nao aparece nas 68. Ou seja:
-esta spec cobre parte das 68 e acrescenta uma familia que elas nao tinham. O
-gate do item 69 **fica onde esta** para o que nao tiver par -- os dois modelos
-convivem, e a spec nao remove gate nenhum.
+O Adept/Paragon do Taumaturgo (`mode: add`) **sai desta spec** e vira spec
+propria: e slot de escolha sobre lista acumulada, familia do item 106.
 
 ## O vocabulario: `grants[].se`
 
-Um campo, opcional, em qualquer entrada de `grants`:
-
 ```json
-{
-  "id": "wb:class-feature/first-doctrine",
-  "grants": [
-    {"grant_feat": ["wb:class-feature/first-doctrine-cloistered-cleric"],
-     "se": {"has": "wb:class-feature/cloistered-cleric"}},
-    {"grant_feat": ["wb:class-feature/first-doctrine-warpriest"],
-     "se": {"has": "wb:class-feature/warpriest"}}
-  ]
-}
+{"grant_feat": ["wb:class-feature/first-doctrine-cloistered-cleric"],
+ "se": {"has": "wb:class-feature/cloistered-cleric"}}
 ```
 
-`se` guarda um predicado da MESMA gramatica de `requires` -- `all`/`any`/`not`
-e os termos existentes. Nao ha termo novo: `has` ja resolve alias e gemeo
-(spec `2026-07-31-gemeo-do-grant-item.md`) e ja tem recorte temporal (spec
-`2026-07-29-recorte-temporal-do-has.md`).
+`se` guarda predicado da mesma gramatica de `requires`. Ausencia de `se`
+significa incondicional, que e o que os grants de hoje sao.
 
-Ausencia de `se` significa incondicional -- e o que os grants de hoje sao.
+## A regra que faz isto ser seguro: avaliacao estrita
 
-## A regra que faz esta spec ser segura, e que inverte o default
+O avaliador tem default permissivo -- termo desconhecido nao reprova. Isso e
+certo em `requires`, que so marca; em `se` o mesmo default **concede**, e
+conceder as seis doutrinas de uma vez poe numero errado na ficha, calado.
 
-O avaliador tem, deliberadamente, um default permissivo:
+`se` roda em modo estrito, com tres regras:
 
-```python
-if metodo is None:
-    continue          # termo desconhecido nao reprova: nao arbitra
-```
+1. **termo desconhecido** devolve INDECIDIVEL, nao "satisfeito";
+2. **chave desconhecida no topo** (`{"and": [...]}` em vez de `all`) tambem
+   devolve INDECIDIVEL -- e o defeito exato do item 108, onde o predicado
+   inteiro virou no-op em silencio, e o unico jeito de ele nao voltar e
+   ser INDECIDIVEL em vez de vazio;
+3. **`not(INDECIDIVEL)` = INDECIDIVEL**, nunca `True`. Negacao nao promove
+   ignorancia a permissao -- e o mesmo achado do item 106, onde o default
+   permissivo se inverte sob `not`/`nor`.
 
-Isso e **certo em `requires`**, que so sugere e marca: atomo ignorado ALARGA a
-lista, e o principio zero manda nao esvaziar em silencio. Em **`se`** o mesmo
-default se inverte de sentido: um termo que o motor nao entende faria a ficha
-CONCEDER -- e conceder todas as variantes de uma vez poe numero errado na
-ficha, sem aviso. E a mesma armadilha que o item 108 pagou, com o envelope
-`{"and": [...]}` que virou no-op silencioso em dois passos.
+INDECIDIVEL **nao concede e vira pendencia com motivo**. So `False` explicito
+descarta em silencio, porque a variante da outra subclasse nao e pendencia: e
+escolha que foi para outro lado.
 
-**Regra: `se` que nao puder ser DECIDIDO nao concede, e marca pendente.** Nao e
-o mesmo que "nao concede": pendente e o estado que o motor ja distingue para
-alvo dinamico, e o app precisa dele para nao confundir com ausencia. Em
-concreto:
+### Portao de build, e nao susto em runtime
 
-1. o avaliador de `se` roda em modo estrito -- termo desconhecido devolve
-   INDECIDIVEL, nao "satisfeito";
-2. INDECIDIVEL nao concede e entra na lista de pendencias com o motivo;
-3. so `False` explicito descarta em silencio (a variante da outra subclasse
-   nao e pendencia: e escolha do jogador que foi para outro lado).
+O vocabulario aceito em `se` e uma lista fechada, verificada por **portao 11**:
+todo `se` da base tem de ser decidivel contra o vocabulario do motor. Assim um
+termo novo quebra o BUILD, com nome e registro, em vez de virar pendencia
+silenciosa na ficha do jogador. A avaliacao estrita e a rede; o portao e a
+barreira.
 
-## Ordem de avaliacao
+## Ordem de avaliacao: fila com ponto fixo -- correcao da v1
 
-`se` le estado que outra escolha produz, entao a ordem importa -- e o projeto ja
-foi mordido por dependencia de ordem duas vezes (`ordem_de_classe`, e o
-desempate de `fundir_renomeados` com prosa vazia).
+A v1 afirmava que avaliar `se` dentro de `_grants_em_cadeia` bastava, porque
+`self.features` ja estaria montado. **Falso para grant encadeado**: a cadeia
+percorre em passada unica sobre um snapshot, entao um `se` que depende do que
+outro `se` concede devolve `False` conforme a ordem -- e pela regra 3 acima,
+`False` some sem pendencia. O projeto ja foi mordido por ordem duas vezes.
 
-A condicao e avaliada **dentro** de `_grants_em_cadeia`, que ja roda depois de
-`self.features` estar montado (progressao + subclasse escolhida). Nenhuma
-reordenacao nova: as opcoes de subclasse entram como feature antes de a cadeia
-comecar. O que a spec exige e que isso vire **teste**, nao suposicao -- ver
-prova 5.
+Desenho:
+
+1. os grants com `se` nao sao resolvidos na passada; entram numa **fila**;
+2. depois da cadeia, a fila e reavaliada **ate ponto fixo**: cada volta que
+   concede alguma coisa habilita a proxima, e o laco para quando uma volta
+   inteira nao concede nada;
+3. **teto de voltas** igual a `MAX_PROFUNDIDADE_GRANTS`, e estouro e erro de
+   build, nao silencio;
+4. `INDECIDIVEL` sobrevivente ao ponto fixo vira pendencia -- so ai, nunca
+   antes, porque uma volta adiante poderia te-lo decidido.
+
+**Recorte temporal e raiz.** Na cadeia, `_avaliando_em` e `_avaliando` sao
+`None`, entao `has` nao recorta por nivel nem exclui a propria raiz. Para `se`
+isso e explicitado, e nao herdado por acidente:
+
+- **recorte temporal ligado**: a condicao e avaliada no nivel em que a
+  concessao acontece. A doutrina do nivel 3 nao pode ser habilitada por escolha
+  feita no 5;
+- **exclusao por raiz ligada**: o que o proprio grant concede nao pode
+  satisfazer a condicao dele. E a circularidade que o review adversarial de
+  27/07 ja achou uma vez, e que a wiki registra.
 
 ## O passo do pipeline
 
-`derivar_grant_condicional.py`, depois de `converter_rule_elements.py` e antes
-de `unificar_efeitos.py`:
+`derivar_grant_condicional.py`, depois de `converter_rule_elements.py`:
 
-1. varre os packs de construcao por `ActiveEffectLike` cujo `path` comece em
-   `flags.system.` e cujo `value` (string ou objeto) contenha UUID de
-   compendio -- sao os 79 pares;
-2. varre por `GrantItem` de escopo `actor` -- sao os 15 leitores -- e casa
-   flag com flag;
-3. para cada par casado, escreve em `grants` do LEITOR uma entrada com `se:
-   {has: <id da opcao>}` e alvo resolvido pelo pack (`PACK_PARA_KIND`, a mesma
-   regra do gemeo -- resolver so por nome e o defeito que a spec do gemeo
-   corrigiu);
-4. descarta `Spell Effect:` por prefixo, declarando a contagem no relatorio;
-5. alvo que nao resolve na base entra em `relatorio_grant_condicional.md` como
-   ausencia, com nome e pack -- nunca sumindo em silencio.
+1. varre `ActiveEffectLike` com `path` em `flags.system.`, **`mode: override`**
+   e UUID no `value` -- os 44 pares. `mode: add` e ignorado com contagem no
+   relatorio, apontando a spec de slot que o cobre;
+2. varre `GrantItem` de escopo `actor` e casa flag com flag;
+3. **a chave do par inclui a classe** (`cleric.firstDoctrine`), nunca so o
+   sufixo -- `firstDoctrine` de duas classes colidiria;
+4. escreve `se: {has: <id da opcao>}` no LEITOR, com alvo resolvido pelo pack
+   (`PACK_PARA_KIND`), nunca so por nome;
+5. par cujo alvo nao resolve entra no relatorio com nome e pack.
 
 ## Como se prova que funciona
 
-1. Um Clerigo 3 `Cloistered Cleric` tem `First Doctrine (Cloistered Cleric)` e
-   `Second Doctrine (Cloistered Cleric)` na ficha, e **nao** tem as do
-   Warpriest.
-2. Trocada a subclasse para `Warpriest`, a ficha inverte as seis.
-3. Um Taumaturgo 9 com implemento `Amulet` recebe Initiate, Adept e Paragon
-   Benefit (Amulet) nos niveis certos -- a cadeia de dois lances.
-4. Um Alquimista `Bomber` nao recebe `Field Discovery (Chirurgeon)`.
-5. **Determinismo:** embaralhar a ordem das escolhas no documento nao muda a
-   ficha -- o teste de invariante ja existe e passa a cobrir estes casos.
-6. **Estrito:** um `se` com termo inventado NAO concede, e aparece como
-   pendencia com motivo. Teste proprio, porque este e o unico ponto onde o
-   default do avaliador precisa ser o contrario do que ele e.
-7. Paridade Python/TS: as 20 fichas de exemplo derivam identicas nos dois
-   motores.
-8. Os 10 portoes passam.
-9. Verificacao no navegador (`app/verificacao/`): a ficha do Clerigo mostra a
-   doutrina certa. A terceira camada ja passou verde sobre base errada uma vez
-   -- por isso esta camada existe.
+1. Clerigo 3 `Cloistered Cleric` tem as duas primeiras doutrinas dele e nenhuma
+   do Warpriest; trocada a subclasse, as seis invertem.
+2. Alquimista `Bomber` nao recebe `Field Discovery (Chirurgeon)`.
+3. **Taumaturgo com DOIS implementos recebe UM Adept Benefit** -- o teste que
+   pega a regressao que a v1 teria introduzido. Aqui ele so prova que o
+   `mode: add` ficou de fora.
+4. **Ponto fixo:** um caso montado de `se` encadeado (A habilita B habilita C)
+   converge, e converge igual comecando de qualquer ordem.
+5. **Determinismo por ORIGEM:** embaralhar a ordem das ORIGENS da cadeia -- nao
+   so das escolhas no documento -- nao muda a ficha. A prova da v1 nao
+   exercitava isto.
+6. **Estrito:** `se` com termo inventado, com chave desconhecida no topo, e com
+   `not` de indecidivel, os tres NAO concedem e viram pendencia com motivo.
+7. **Portao 11** falha quando um `se` da base usa termo fora do vocabulario.
+8. **Recorte temporal:** escolha de nivel 5 nao habilita concessao de nivel 3.
+9. Paridade Python/TS nas 20 fichas; os 11 portoes; verificacao no navegador.
 
-## O que esta spec NAO resolve, e declara com numero
+## O que esta spec NAO resolve, e declara
 
-1. **As 206 de escopo `item` continuam puladas**, agora por redundancia com o
-   eixo, nao por ignorancia. Sobra `Runtsage`, 1 caso, sem `ChoiceSet` irmao --
-   nao investigado.
-2. **9 alvos nao existem na base**, e por isso 9 dos 64 pares vao morrer no
-   passo 5 acima: as deeds do Gunslinger (`Ten Paces`, `One Shot, One Kill`,
-   `Clear a Path`, `Living Fortification`, `Covered Reload`, `Raconteur's
-   Reload`, `Reloading Strike`, `Touch and Go`, `Spring the Trap`). Vivem no
-   pack `actionspf2e`, que **nenhum extrator le** -- nao ha kind `action`. O
-   Gunslinger entra nesta spec com 1 dos 10 pares funcionando; os outros 9 so
-   depois que o pack for extraido.
-3. **O Campeao nao e resolvido por esta spec**, e o item 107 aponta a familia
-   errada para ele. A rota `Cause -> causa escolhida` ja esta modelada (secao
-   1). O que prende ali e OUTRA coisa: `Justice` concede `Retributive Strike`
-   por `GrantItem` com **`predicate`** -- balde de 293 pulados, nao de UUID
-   dinamico -- e `Retributive Strike` / `Liberating Step` tambem nao existem na
-   base, pelo mesmo pack `actionspf2e` do ponto 2.
-4. **O gate do item 69 nao e removido.** As gateadas sem par continuam
-   aparecendo marcadas. Converter as demais pede medir registro a registro a
-   sobreposicao, que esta spec nao fez.
-5. **`GrantItem` com `predicate` (293) segue fora.** O predicado do Foundry
-   fala de estado de combate e flag de ator; avaliar isso e o interpretador,
-   que continua recusado. O `se` desta spec e NOSSO vocabulario, alimentado por
-   uma tabela estatica -- nao e o predicado deles.
+1. **As 206 de escopo `item`** nao se resolvem por `se`. As de identidade e as
+   de slot ja estao cobertas; as **class-features sem mecanismo nenhum**
+   (impulso do Kineticist, `grantedIkon`, sub-escolha de divindade) ficam como
+   divida declarada, com o numero a medir no item 106.
+2. **Os 9 backgrounds** viram o item 112. Bug ativo, independente desta spec.
+3. **O Adept/Paragon do Taumaturgo** (`mode: add`, 35 regras) sai para spec
+   propria de slot sobre lista acumulada.
+4. **O Gunslinger rende 0 de 10 hoje**, nao 1 de 10 como a v1 dizia: `Into the
+   Fray` casava por homonimo com um feat do arquetipo Viking. Depende da spec
+   `2026-07-31-kind-action.md`.
+5. **O Campeao nao vem por aqui.** A rota `Cause -> causa` ja e modelada; o que
+   prende sao `GrantItem` com `predicate` e as acoes ausentes -- as duas coisas
+   estao na spec do kind `action`, onde **26 dos 44 predicados** que apontam
+   para acoes se traduzem para `class_level`/`has`. A v1 dizia que `predicate`
+   estava inteiramente fora; certo para 18, errado para 26.
+6. **Ficha ja salva** nao muda de resultado por esta spec -- ela grava decisao,
+   nao resultado. Mas **motor velho com base nova ignoraria `se` e concederia
+   tudo**: o `_manifesto.json` passa a declarar a versao de vocabulario, e o app
+   recusa base que exija termo que ele nao conhece. Ja houve caso de service
+   worker servindo bundle velho.

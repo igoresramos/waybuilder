@@ -449,5 +449,20 @@ items:
   id: 111
   date: '2026-07-31'
   priority: alta
+- desc: 'ABERTO 2026-07-31 pelo review adversarial da spec do grant condicional. BUG ATIVO NA FICHA, e
+    nao divida de modelagem: 9 backgrounds tem `ChoiceSet` de escolha 1-de-2 na fonte (skill + feat
+    correspondente, `{"label": "Athletics", "value": {"feat": "Titan Wrestler", "skill": "athletics"}}`)
+    e a base NAO modela a escolha. Tres sintomas do mesmo defeito, medidos um a um: FEAT A MAIS -- 4
+    concedem OS DOIS (`beast-seeker` da `titan-wrestler` E `dirty-trick`, idem `child-of-the-polis`,
+    `glory-hound`, `obari-wanderer`); FEAT ARBITRARIO -- 1 concede so o primeiro sem o jogador escolher
+    (`anti-thrune-saboteur` -> `lengthy-diversion`); FEAT PERDIDO -- 4 concedem ZERO (`child-of-notoriety`,
+    `conservator`, `dedicated-delver`, `historical-reenactor`). O padrao na fonte e `GrantItem` com UUID
+    dinamico de SUB-CAMPO (`{item|flags.system.rulesSelections.choice.feat}`), que o extrator pula junto
+    com os outros dinamicos -- e como o `value` da opcao e um objeto, o alvo nao e a opcao escolhida e sim
+    um CAMPO dela. Familia do slot concedido generico (item 106), nao do grant condicional. O review
+    estimou 19; medicao propria contra fonte e base deu 9, dos quais 8 com sintoma visivel.'
+  id: 112
+  date: '2026-07-31'
+  priority: alta
 promoted: []
 ---
