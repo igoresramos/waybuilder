@@ -181,21 +181,20 @@ items:
   id: 31
   date: '2026-07-29'
   priority: baixa
-- desc: 'DESBLOQUEADO 2026-07-31, e a premissa estava ERRADA: NAO falta dump do AoN. As duas armas
-    existem no dump em disco, sob os nomes Tian Xia -- `Wind and Fire Wheel` e **Feng Huo Lun** (1d4 S,
-    advanced, knife) e `Nine-Ring Sword` e **Jiu Huan Dao** (1d8 S, martial, sword). O nome em ingles
-    aparece so na PROSA do AoN ("Also known as wind and fire wheels"), e por isso nenhuma busca por nome
-    achava. E a nossa base ja tem os dois registros COMPLETOS: `wb:weapon/feng-huo-lun` e
-    `wb:weapon/jiu-huan-dao`, com dano, categoria e grupo, vindos do Foundry. O defeito real e outro:
-    `wb:weapon/nine-ring-sword` e `wb:weapon/wind-and-fire-wheel` sao DUPLICATAS VAZIAS do mesmo par,
-    e o colapso de irmaos nao as pegou porque ele casa por NOME e os nomes nao se parecem -- o vinculo
-    so existe na prosa. CONSERTO: par curado de alias (`nine-ring-sword` -> `jiu-huan-dao`,
-    `wind-and-fire-wheel` -> `feng-huo-lun`), do mesmo tipo que `equivalencias-pathbuilder.json` ja
-    guarda para as renomeacoes Golarion->generico. Pequeno e sem dependencia externa. NOTA: ha tambem
-    `wb:weapon/jiu-huan-dao-disarm`, uma terceira variante com os mesmos numeros, que precisa ser
-    olhada no mesmo ato. || TEXTO ANTERIOR: eram 57 armas sem `damage`, 41 sao bombas alquimicas (dano
-    e do efeito), 6 sao municao e 5 herdam do item base. Blowgun e Dart Umbrella foram corrigidas em
-    2026-07-29 (padrao FIXO, dano `1 P` sem dado, travado por 3 assercoes).'
+- desc: 'FECHADO 2026-07-31 (spec specs/2026-07-31-par-curado-tian-xia.md). A premissa estava ERRADA:
+    nao faltava dump do AoN. As duas armas estavam no dump que ja existia, sob os nomes chineses, e a
+    base ja tinha os registros COMPLETOS -- `Nine-Ring Sword` e `Jiu Huan Dao` (1d8 S, martial, sword),
+    `Wind and Fire Wheel` e `Feng Huo Lun` (1d4 S, advanced, knife). O nome em ingles aparece so na PROSA
+    do AoN ("Also known as wind and fire wheels"), e por isso busca por nome nunca achava. Os dois
+    registros vazios vinham do pf2etools, unica fonte que manteve o nome ingles. NENHUM mecanismo
+    existente os juntava: `derivar_alias_legado` le `legacy_id` e o vinculo esta la (weapon-623 ->
+    weapon-288), mas o AoN renomeou os DOIS lados e a guarda de nome-igual pula, corretamente; o colapso
+    de irmaos casa por nome e os nomes nao se parecem. Par curado, dois. E `equivale_a` sozinho NAO
+    bastou: `resolver()` segue `aliases`, nao ele, entao a arma equipada pelo id antigo continuava saindo
+    com dano `1`. Fecha preenchendo o que FALTA a partir do gemeo, so campo ausente -- `disarm` do
+    registro antigo continua la. Agora as quatro rendem: 1d8 e 1d4. SOBRA DECLARADA:
+    `wb:weapon/jiu-huan-dao-disarm`, terceira variante (weapon-99, sem remaster_id nem legacy_id) -- sao
+    tres registros do AoN para a mesma arma; triagem de homonimo, outra familia.'
   id: 85
   date: '2026-07-31'
   priority: baixa

@@ -56,6 +56,64 @@ def docs_do_aon() -> dict:
     return saida
 
 
+# Pares que a fonte NAO liga sozinha, e por que cada um esta aqui.
+#
+# `legacy_id` do AoN so registra renomeacao DENTRO do AoN, e nos dois casos
+# abaixo o AoN renomeou os dois lados (weapon-623 "Jiu Huan Dao" ->
+# weapon-288 "Jiu Huan Dao"), entao a regra que exige nome diferente pula --
+# corretamente. O nome antigo em ingles sobrevive so no pf2etools, que nao tem
+# ponte de remaster nenhuma.
+#
+# Resultado sem isto: dois registros VAZIOS (`nine-ring-sword`,
+# `wind-and-fire-wheel`, sem dano, categoria nem grupo, so com xref de
+# pf2etools) ao lado dos completos vindos do Foundry. O colapso de irmaos nao
+# os junta porque casa por NOME, e os nomes nao se parecem.
+#
+# Cada par foi conferido no dump: mesmo livro-fonte na cadeia (Gods & Magic /
+# Fists of the Ruby Phoenix, OGL, `remaster: false`) apontando para o
+# equivalente do Tian Xia Character Guide (ORC, `remaster: true`).
+# Spec: specs/2026-07-31-par-curado-tian-xia.md
+PARES_CURADOS = [
+    ("wb:weapon/nine-ring-sword", "wb:weapon/jiu-huan-dao"),
+    ("wb:weapon/wind-and-fire-wheel", "wb:weapon/feng-huo-lun"),
+]
+
+
+def aplicar_curados(base: list) -> list:
+    """O registro vazio vira GEMEO do completo -- nunca se apaga.
+
+    `equivale_a` e o mesmo mecanismo dos gemeos de instinto: os dois ids
+    resolvem, e quem citar o nome antigo continua achando. Apagar tornaria o
+    id inalcancavel, que e a familia do item 97.
+    """
+    por_id = {r["id"]: r for r in base}
+    feitos = []
+    for vazio, completo in PARES_CURADOS:
+        a, b = por_id.get(vazio), por_id.get(completo)
+        if a is None or b is None:
+            continue
+        nome_antigo = str(a.get("name") or "").strip()
+        aliases = b.setdefault("aliases", [])
+        if nome_antigo and nome_antigo not in aliases:
+            aliases.append(nome_antigo)
+            b.setdefault("prov", {}).setdefault("aliases", "curado:par-tian-xia")
+        if not a.get("equivale_a"):
+            a["equivale_a"] = completo
+            a.setdefault("prov", {})["equivale_a"] = "curado:par-tian-xia"
+        # `equivale_a` sozinho NAO basta: `resolver()` segue `aliases`, nao ele,
+        # entao a arma equipada pelo id antigo continuava saindo sem dano na
+        # ficha. Preenche o que FALTA a partir do gemeo -- so campo ausente,
+        # nunca sobrescrita, para nao apagar o que a fonte antiga trouxe de
+        # proprio (`nine-ring-sword` tem `disarm` que o gemeo nao tem).
+        for campo in ("damage", "weapon_category", "group", "bulk", "hands",
+                      "range", "reload"):
+            if a.get(campo) in (None, "", [], {}) and b.get(campo) not in (None, "", [], {}):
+                a[campo] = b[campo]
+                a.setdefault("prov", {})[campo] = "curado:par-tian-xia"
+        feitos.append((vazio, completo, nome_antigo))
+    return feitos
+
+
 def main() -> int:
     with open(f"{BASE}/index.json", encoding="utf-8") as fh:
         base = json.load(fh)
@@ -101,10 +159,16 @@ def main() -> int:
             if len(exemplos) < 20:
                 exemplos.append((alvo.get("kind"), novo, velho))
 
+    curados = aplicar_curados(base)
+
     with open(f"{BASE}/index.json", "w", encoding="utf-8") as fh:
         json.dump(base, fh, ensure_ascii=False)
 
     rel = ["# Alias legado fora de magia", "",
+           f"- pares CURADOS aplicados: **{len(curados)}**",
+           *[f"  - `{v}` -> `{c}` (alias `{n}`)" for v, c, n in curados], "",]
+    rel += [""]
+    rel += ["", "# (derivados abaixo)", "",
            f"- aliases acrescentados: **{sum(postos.values())}**", "",
            "A regra crua pega 1.606 e a maioria e lixo. Tres guardas: categoria "
            "igual, nome legado nao e nome de classe, e um nome nao e prefixo do "
