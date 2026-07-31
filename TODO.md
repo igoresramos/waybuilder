@@ -25,22 +25,22 @@
 # Os 55 itens concluidos vivem em docs/2026-07-29_todo-concluidos.md.
 project: waybuilder
 items:
-- desc: 'SOBRA DA FASE 3 FECHADA 2026-07-30 (spec specs/2026-07-30-bonus-de-item-equipado.md). O item
-    pedia `ac` e `strike-damage`; na base canonica `ac` tinha 34 grants e ZERO incondicionais. Contando
-    selector em LISTA apareceram 6, e ao aplicar veio o numero real: `_bonus_incondicionais` NAO LIA O
-    INVENTARIO. Sao 293 grants incondicionais aplicaveis em equipment (261), armor (11), shield (11) e
-    weapon (10) -- religion 26, intimidation 25, diplomacy 22, athletics 20, e o ac 6 -- todos em selectors
-    que o motor ja somava. Item de +1 em Furtividade nao mudava Furtividade. A CA passou a DISPUTAR (`_melhor_por_tipo`)
-    porque o item_bonus da armadura tambem e bonus de item. SEGUNDO DEFEITO: o contador anti-perda nunca
-    contou -- `_velocidade` reatribuia `bonus_ignorados` e apagava o que os passos anteriores gravaram;
-    agora memoizado. DANO E ATAQUE RECUSADOS COM NUMERO: 6 ocorrencias em 6 seletores + 34 dinamicos +
-    3 formulas, mesmo criterio do ItemAlteration. ATORES RESOLVIDOS 2026-07-30 (commit 5afe8c06d, spec
-    specs/2026-07-30-familiar-e-eidolon-concedidos.md): 16 registros concedem familiar e 2 concedem eidolon
-    (eram 0 e 0); `candidatos()` deixou de devolver os 6.273 feats para o slot `familiar`. SOBRA SO O
-    STAT BLOCK, e ele depende de FONTE que nao temos: `familiar-specific` nao tem um unico campo numerico,
-    `eidolon` so tem velocidade, nao existe tabela de progressao, e a pagina de regras `Familiars` do
-    AoN tem 796 caracteres so de conceito. Em PF2e o familiar deriva os numeros do personagem -- derivar
-    sem a regra na mao seria inventar. PROXIMO PASSO: conseguir a fonte das estatisticas.'
+- desc: 'DESTRAVADO 2026-07-31 -- a fonte EXISTE em disco e foi verificada (docs/medicoes/2026-07-31_fonte-de-familiar-e-eidolon.md).
+    O item estava parado por "conseguir a fonte das estatisticas"; ela nunca faltou. E a DECIMA PRIMEIRA
+    lacuna de leitura, e a maior ate agora: nao e um campo, e um ARQUIVO INTEIRO. `pipeline/dados_brutos/aon_dump/rules.json`
+    tem 3.645 registros e NENHUM extrator o le (conferido por grep em pipeline/ e pipeline/extratores/).
+    FAMILIAR -- formula fechada, sem ambiguidade: `rules-162` diz "5 Hit Points for each of your levels";
+    `rules-161` (legado, Core Rulebook) diz que AC e saves sao iguais aos do mestre ANTES de circunstancia
+    e status, e que Perception/Acrobatics/Stealth = nivel + modificador de conjuracao; `rules-2122` (REMASTER,
+    Player Core pg. 212) ajusta para `3 + nivel`, com opcao de usar `mod de conjuracao + nivel` se for
+    maior -- e a versao remaster que vale, pela regra de sempre usar a mais recente; `rules-165` da Speed
+    25 ft (ou swim 25, escolha ao ganhar); nao faz Strikes e usa o nivel do mestre como modificador. EIDOLON
+    -- nao tem HP proprio, compartilha o pool do invocador; os arrays de atributo, cap de Dex e bonus
+    de item por tipo estao ESTRUTURADOS em `pipeline/dados_brutos/pf2etools_repo/data/companionsfamiliars.json`
+    (chave `eidolon`, 12 registros com campos `stats`/`skills`/`size`), faltando so o tipo "Swarm", que
+    esta em prosa. POR QUE O COMPANHEIRO ANIMAL JA FUNCIONA e estes dois nao: puro schema do AoN -- `animal-companion`
+    tem colunas numericas nativas, `eidolon` e `familiar-specific` nao tem, e o extrator `companheiros.py`
+    so le coluna, nunca prosa nem `rules.json`. NAO precisa de dump novo nem de PDF.'
   id: 43
   date: '2026-07-29'
   priority: alta
@@ -57,6 +57,18 @@ items:
   id: 101
   date: '2026-07-30'
   priority: baixa
+- desc: 'ACHADO AO DESTRAVAR O ITEM 43 (2026-07-31): `pipeline/dados_brutos/aon_dump/rules.json` tem
+    **3.645 registros** e **3,8 milhoes de caracteres** de prosa de REGRA, e NENHUM extrator o le -- conferido
+    por grep em `pipeline/*.py` e `pipeline/extratores/*.py`, zero ocorrencias. Nao e um campo esquecido,
+    e um ARQUIVO INTEIRO. Por livro: GM Core 799, Core Rulebook 785, Gamemastery Guide 590, Player Core
+    497, Kingmaker 139, Secrets of Magic 104, Treasure Vault 72+69. O item 43 mostrou que ali mora a formula
+    do familiar, que estava sendo tratada como fonte inexistente. A PERGUNTA A MEDIR antes de qualquer
+    spec: quantos OUTROS itens da fila (e quantas clausulas de `requires_residuo`) sao respondidos por
+    este arquivo? Varredura por termo dos itens abertos contra os 3.645 registros. Provavel que seja a
+    maior veia nao lida que sobrou -- as dez lacunas anteriores eram todas de CAMPO.'
+  id: 103
+  date: '2026-07-31'
+  priority: media
 - desc: 'RE-MEDIDO E VERIFICADO 2026-07-31 (docs/medicoes/2026-07-31_homonimos-e-duplicatas.md, com
     nota de correcao no topo). Tres defeitos independentes, achados na medicao do item 46. (1) HOMONIMO
     CLASSE x ARQUETIPO: **12** ocorrencias (3 em `requires`, 9 em `grants`) em 11 registros de origem,
