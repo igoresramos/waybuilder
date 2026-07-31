@@ -219,6 +219,12 @@ echo "== 7e2. categoria de feat que sobrou vazia =="
 # inteira alcanca tanto esses quanto os que nao casaram com o AoN.
 python3 derivar_categoria_de_feat.py
 
+echo "== 7e2a. arquetipo do feat, lido da dedicacao no requires =="
+# ANTES do gate de arquetipo nao da: `derivar_gate_arquetipo.py` roda no 4h2 e
+# depende de `archetype` ja estar preenchido. Aqui e tarde de proposito -- o que
+# se ganha e a lista do arquetipo e a procedencia, nao o gate.
+python3 derivar_arquetipo_do_feat.py
+
 echo "== 7e2b. tags do Foundry + eixos por query (Kineticist e Commander) =="
 # ORDEM OBRIGATORIA: a tag entra na base ANTES de virar eixo. `item:tag` era
 # ignorado pelo motor, e atomo ignorado conta como SATISFEITO -- o eixo sairia

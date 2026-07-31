@@ -72,22 +72,23 @@ items:
   id: 103
   date: '2026-07-31'
   priority: baixa
-- desc: 'RE-MEDIDO E VERIFICADO 2026-07-31 (docs/medicoes/2026-07-31_homonimos-e-duplicatas.md, com
-    nota de correcao no topo). Tres defeitos independentes, achados na medicao do item 46. (1) HOMONIMO
-    CLASSE x ARQUETIPO: **12** ocorrencias (3 em `requires`, 9 em `grants`) em 11 registros de origem,
-    onde o alvo e mesmo feat de ARQUETIPO tendo `class-feature` de mesmo nome ao lado -- `quick-alchemy`
-    6, `advanced-alchemy` 2, `champions-reaction` 2, `keen-recollection` 1, `surprise-attack` 1. CUIDADO
-    COM A CONTAGEM: uma medicao automatizada deu 40 porque contou todo `wb:feat/X` com `wb:class-feature/X`
-    homonimo, sem checar se o feat era de arquetipo; `shield-block` (general, 12x) e `reactive-strike`
-    (classe, 5x) NAO sao defeito -- feat e feature de mesmo nome ai e RAW correto, e o motor ja resolve
-    por alias (testado: Guerreiro 2 com a class-feature responde True a `has` do feat). (2) ATRIBUICAO
-    DE ARQUETIPO VAZIA: **73** feats com trait `archetype` e campo `archetype` vazio -- muito maior que
-    os 7 medidos antes, que so olhavam o recorte de multiclasse. Destes, 49 sao re-ancoraveis automaticamente
-    porque o `requires` cita uma dedicacao de arquetipo conhecido; 24 pedem curadoria. (3) **18** arquetipos
-    sem nenhum feat de dedicacao apontando para eles, e nenhum tem dedicacao de nome similar so nao atribuida.'
+- desc: 'PARTE FECHADA 2026-07-31 (passo `derivar_arquetipo_do_feat.py`). FEITO: **37** dos 73 feats
+    com trait `archetype` e campo vazio foram re-ancorados lendo a dedicacao no proprio `requires`. Nao
+    foram 49 como a medicao automatizada previa: 12 citam DUAS dedicacoes (`Skill Mastery` aceita Rogue
+    OU Investigator) e ancorar num dos dois seria escolher -- poe o feat na lista errada, que e pior que
+    deixa-lo sem lista. Sobram 36 sem ancora, que ficam como estao. O QUE SOBRA E MUDOU DE NATUREZA: os
+    12 homonimos classe x arquetipo foram investigados e NAO sao defeito de numero. Testado: um Alquimista
+    5 responde `True` a `has wb:feat/advanced-alchemy`, porque `wb:class-feature/alchemy` CONCEDE o feat
+    de arquetipo -- a cadeia funciona e `efficient-alchemy` atende corretamente. O que esta errado e QUAL
+    REGISTRO vai para a ficha: o do arquetipo (nivel 4, fonte de arquetipo) em vez do `class-feature`
+    de mesmo nome, que existe na base e fica INALCANCAVEL (`wb:class-feature/advanced-alchemy` e
+    `wb:class-feature/quick-alchemy` respondem `False` ao `has`). E cosmetico, familia do item 55, e o
+    lado inalcancavel e familia do item 97. O conserto certo e `equivale_a` entre o par, como foi feito
+    nos gemeos de instinto -- assim os dois ids resolvem; trocar o alvo do `grants` sozinho QUEBRARIA a
+    cadeia que hoje funciona.'
   id: 100
   date: '2026-07-30'
-  priority: media
+  priority: baixa
 - desc: 'RE-MEDIDO 2026-07-29, e o item mudou de gravidade: e COSMETICO, nao numero errado. Contra o dump
     do AoN, 65 class-features nao existem na base por nome (nem como alias -- conferido, licao do item
     18). Das 65, 35 sao LINHAS DE TABELA DE PROGRESSAO (''ability boost'', ''ancestry feat'', ''alchemist

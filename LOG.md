@@ -1398,3 +1398,25 @@ nao viraram.
 
 Quatro camadas verdes, e `verificar-eixos.mjs` passou pela primeira vez desde
 que o Ma'at apareceu.
+
+## 2026-07-31 (3a rodada) -- item 100, e um diagnostico que se inverteu
+
+37 dos 73 feats com trait `archetype` e campo vazio foram re-ancorados lendo a
+dedicacao no proprio `requires`. Nao foram os 49 previstos: 12 citam DUAS
+dedicacoes (`Skill Mastery` aceita Rogue OU Investigator), e ancorar num dos
+dois seria escolher -- poe o feat na lista errada, que e pior que deixa-lo sem
+lista nenhuma.
+
+A segunda metade do item mudou de natureza ao ser testada. Os 12 homonimos
+classe x arquetipo NAO sao defeito de numero: um Alquimista 5 responde `True` a
+`has wb:feat/advanced-alchemy`, porque `wb:class-feature/alchemy` CONCEDE o feat
+de arquetipo. A cadeia funciona, e `efficient-alchemy` atende certo.
+
+O que esta errado e QUAL REGISTRO chega a ficha -- o do arquetipo (nivel 4,
+fonte de arquetipo) em vez do `class-feature` de mesmo nome, que existe e fica
+INALCANCAVEL. E cosmetico (familia do 55) de um lado e inalcancavel (familia do
+97) do outro.
+
+E o conserto obvio seria errado: trocar o alvo do `grants` para o
+`class-feature` QUEBRARIA a cadeia que hoje funciona. O caminho e `equivale_a`
+entre o par, como nos gemeos de instinto.
