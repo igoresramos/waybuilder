@@ -411,7 +411,23 @@ items:
     existem -- e e ISSO que prende o Campeao, nao o UUID dinamico que o item 107 acusou. Bloqueia a parte
     Gunslinger/Campeao da spec `2026-07-31-grant-condicional.md`. Decidir junto: `action` vira kind
     proprio (o censo do AoN ja acusou `tactic` e `class-kit` assim) ou as acoes entram como
-    `class-feature`. O item 106 ja tinha esbarrado nisto de lado ("`action` nao e kind") sem abrir item.'
+    `class-feature`. O item 106 ja tinha esbarrado nisto de lado ("`action` nao e kind") sem abrir item.
+    || TERRENO MEDIDO 2026-07-31 (docs/medicoes/2026-07-31_terreno-pack-actions.md). O pack e
+    `packs/pf2e/actions/` em disco: **557 docs**, 100% com `publication`, sem campo de nivel. **317
+    (56,9%) sao de CONSTRUCAO** -- alvo de 353 referencias estaticas de `GrantItem` vindas de
+    class-features/feats/heritages/ancestries/backgrounds; as outras 240 sao vocabulario RAW de mesa
+    (Stride, exploracao, downtime) e ficam fora. Os 11 alvos existem nas tres fontes; Foundry como
+    primaria, igual a `tactic`. DECISAO: **kind proprio `action`** -- mesmo padrao de `tactic`/`class-kit`,
+    formato que `class-feature` nao cobre, e o motor JA tem gancho (`candidatos()` atende 4 blocos
+    `itemType=action` do item 106). Custo no payload 14-40 KB gzip contra nucleo de 0,529 MB: irrelevante.
+    Efeito colateral conhecido: `action` esta em `FORA_DE_ESCOPO` no portao 9 e sai de la junto.
+    || DOIS ACHADOS QUE CORRIGEM A MEDICAO ANTERIOR: (a) as 10 deeds do Gunslinger tem `GrantItem`
+    ESTATICO na propria `Way of X`, e nao dependem do mecanismo condicional -- so os 2 feats leitores
+    (`Slinger''s Readiness`, `Practiced Reloads`) dependem. Mas o grant estatico carrega
+    `predicate: [class:gunslinger]` e cai no balde dos 293 pulados, entao os dois caminhos estao
+    bloqueados, por motivos diferentes; (b) `Into the Fray` NAO existia na base -- `wb:feat/into-the-fray`
+    e outro registro, nv8 trait `archetype` do Player Core 2, e casou por COLISAO DE NOME. Minha medicao
+    de 31/07 contou como alcancavel: sao 10 alvos ausentes no Gunslinger, nao 9. Familia do portao 7.'
   id: 111
   date: '2026-07-31'
   priority: alta
