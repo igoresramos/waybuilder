@@ -2687,7 +2687,13 @@ class Personagem:
             return norm_slug(str(arma.get("group") or "")) == valor
         if seletor == "trait":
             return valor in {norm_slug(t) for t in (arma.get("traits") or [])}
-        if seletor == "base":
+        if seletor in ("base", "slug"):
+            # `slug` tem, na nossa representacao, a mesma semantica de `base`:
+            # o sufixo do id. Ele caia no `return False` e o unico remap que
+            # depende dele nunca aplicava -- `Sister of the Golden Erinys
+            # Dedication` trata `asp-coil` e `scourge` (as duas `martial`) como
+            # SIMPLES, e um Clerigo com a dedicacao lia untrained nas duas.
+            # Spec: `specs/2026-07-31-atomo-slug.md`
             return norm_slug(arma.get("id", "").split("/")[-1]) == valor
         return False
 

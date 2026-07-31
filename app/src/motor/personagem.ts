@@ -2890,7 +2890,13 @@ export class Personagem implements ContextoDePredicado {
     if (seletor === "trait") {
       return listaDe(arma["traits"]).some((t) => normSlug(t) === valor);
     }
-    if (seletor === "base") {
+    if (seletor === "base" || seletor === "slug") {
+      // `slug` tem, na nossa representação, a mesma semântica de `base`: o
+      // sufixo do id. Ele caía no `return false` e o único remap que depende
+      // dele nunca aplicava -- `Sister of the Golden Erinys Dedication` trata
+      // `asp-coil` e `scourge` (as duas `martial`) como SIMPLES, e um Clérigo
+      // com a dedicação lia untrained nas duas.
+      // Spec: `specs/2026-07-31-atomo-slug.md`
       return normSlug(pyStr(arma["id"]).split("/").pop() ?? "") === valor;
     }
     return false;

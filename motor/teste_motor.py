@@ -801,6 +801,34 @@ guerreiro8_archer = personagem(niveis((FIGHTER, 8)) + BOOSTS + [
 checar(guerreiro8_archer.avaliar({"proficiency": {"weapon:longbow": {">=": "expert"}}})[0],
        "Guerreiro expert em marcial NAO e rebaixado pelo remap")
 
+# -- o seletor `slug` do remap (item 105) -----------------------------------
+# Spec: specs/2026-07-31-atomo-slug.md. `_arma_casa` conhecia `base`, `category`,
+# `trait` e `group`; `slug` caia no `return False`. O unico remap que depende
+# dele -- `Sister of the Golden Erinys Dedication`, que trata `asp-coil` e
+# `scourge` (as duas `martial`) como SIMPLES -- nunca aplicava.
+ERINYS = {"em": 2, "slot": "class_feat",
+          "pega": "wb:feat/sister-of-the-golden-erinys-dedication"}
+ASP = {"proficiency": {"weapon:asp-coil": {">=": "trained"}}}
+SCOURGE = {"proficiency": {"weapon:scourge": {">=": "trained"}}}
+clerigo2 = personagem(niveis((CLERIC, 2)) + BOOSTS)
+clerigo2_erinys = personagem(niveis((CLERIC, 2)) + BOOSTS + [ERINYS])
+checar(not clerigo2.avaliar(ASP)[0],
+       "Clerigo 2 sem a dedicacao e untrained em asp-coil, que e marcial (premissa)")
+checar(clerigo2_erinys.avaliar(ASP)[0],
+       "com a dedicacao o `slug` casa e a asp-coil passa a contar como simples",
+       f"{clerigo2_erinys.avaliar(ASP)[1]}")
+checar(clerigo2_erinys.avaliar(SCOURGE)[0],
+       "e o scourge junto -- os dois slugs do mesmo `or`",
+       f"{clerigo2_erinys.avaliar(SCOURGE)[1]}")
+checar(not clerigo2_erinys.avaliar(
+           {"proficiency": {"weapon:longsword": {">=": "trained"}}})[0],
+       "o remap NAO vaza para toda arma marcial -- espada longa continua fora")
+# mesma licao do Archer: o remap SOMA. Um Guerreiro expert em marcial nao pode
+# cair para trained ao pegar a dedicacao.
+guerreiro8_erinys = personagem(niveis((FIGHTER, 8)) + BOOSTS + [ERINYS])
+checar(guerreiro8_erinys.avaliar({"proficiency": {"weapon:asp-coil": {">=": "expert"}}})[0],
+       "Guerreiro expert em marcial NAO e rebaixado pelo remap por slug")
+
 # `weapon:*` era letra morta: 5 feats que nenhum personagem podia satisfazer.
 CURINGA = {"proficiency": {"weapon:*": {">=": "expert"}}}
 checar(guerreiro8.avaliar(CURINGA)[0],
