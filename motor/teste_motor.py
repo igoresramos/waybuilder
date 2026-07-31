@@ -1475,6 +1475,39 @@ checar(pericia and all("skill" in (BASE.get(c["id"]).get("traits") or [])
        "cujo filtro so deixa passar feat de pericia",
        f"{len(pericia)} candidatos")
 
+# -- gate elemental do Kineticist (spec gate-elemental-do-kineticist) -------
+# Maior defeito unico da bancada: 24 das 314 divergencias contra o Pathbuilder
+# eram impulsos que oferecíamos e ele recusava, com ele certo. O `requires`
+# dizia so `class_level >= 1` e nada exigia o elemento.
+print("\n-- gate elemental do Kineticist --")
+KIN = "wb:class/kineticist"
+ar_fogo = personagem(niveis((KIN, 6)) + BOOSTS + [
+    {"em": 1, "slot": "subclasse", "eixo": "kinetic-gate",
+     "pega": "wb:class-feature/air-gate"},
+    {"em": 1, "slot": "subclasse", "eixo": "kinetic-gate",
+     "pega": "wb:class-feature/fire-gate"}])
+
+
+def _imp(nome):
+    r = next(x for x in BASE.por_id.values() if x.get("name") == nome)
+    return ar_fogo.avaliar(r.get("requires"))
+
+
+checar(_imp("Aerial Boomerang")[0] and _imp("Burning Jet")[0],
+       "Kineticist de Ar e Fogo atende os impulsos de ar e de fogo")
+checar(not _imp("Armor in Earth")[0] and not _imp("Flashforge")[0],
+       "e NAO atende os de terra e metal")
+checar("Earth Gate" in (_imp("Armor in Earth")[1] or [""])[0],
+       "com o motivo nomeando o gate que falta", f"{_imp('Armor in Earth')[1]}")
+# composite exige TODOS, e e isto que separa `all` de `any`
+checar(_imp("Ash Strider")[0],
+       "o composite `Ash Strider` (ar+fogo) passa -- ele tem os dois")
+checar(not _imp("Desert Wind")[0],
+       "e `Desert Wind` (ar+terra) NAO passa, porque falta Terra -- "
+       "composite e ALL, nao ANY", f"{_imp('Desert Wind')[1]}")
+checar(_imp("Command Elemental")[0],
+       "e os agnosticos, sem elemento no trait, seguem atendidos")
+
 # -- pericia com Recall Knowledge (spec pericia-de-recall-knowledge) --------
 # Tres feats se ofereciam a quem nao podia pega-los: a clausula real vivia em
 # `requires_residuo` e o `requires` guardava so o gate de nivel. Quem apontou

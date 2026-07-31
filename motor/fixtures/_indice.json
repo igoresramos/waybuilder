@@ -223,7 +223,7 @@
    "nivel": 6,
    "hp": 80,
    "avisos": 4,
-   "fora_do_requisito": 0,
+   "fora_do_requisito": 3,
    "slots_abertos": 6
   },
   {

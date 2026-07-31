@@ -334,5 +334,21 @@ items:
   id: 108
   date: '2026-07-31'
   priority: baixa
+- desc: 'FECHADO 2026-07-31 (spec specs/2026-07-31-gate-elemental-do-kineticist.md). Era o MAIOR defeito
+    unico da bancada: 24 das 314 divergencias contra o Pathbuilder eram impulsos do Kineticist que nos
+    oferecíamos e ele recusava, com ele certo. O `requires` de um impulso dizia so `class_level:
+    {kineticist: >= 1}` e NADA exigia o elemento -- um Kineticist de Ar e Fogo via os 116 impulsos,
+    inclusive os de Madeira e Metal. Agora cada impulso exige `has` do gate de cada elemento no seu trait:
+    111 gateados, 16 deles `composite`. A REGRA E DA FONTE, verbatim do dump do AoN: "You can gain an
+    impulse with the composite trait only if your kinetic elements include ALL the elements listed" --
+    entao `all`, nunca `any`, e `Desert Wind` (ar+terra) e recusado a quem so tem ar. Os 5 agnosticos
+    (`Command Elemental`, `Counter Element`, `Purify Element`, `Fearsome Familiar`, `Imperious Aura`)
+    ficam INTOCADOS, e e isso que prova que a regra nao gateia tudo. || O termo e `has` e nao `subclass`:
+    medido, `subclass` responde False ate para o gate escolhido, porque o eixo `kinetic-gate` e
+    `escolhe: 2` e o termo foi desenhado para eixo de escolha unica. || PROVA NA BANCADA: os 24 impulsos
+    SUMIRAM das divergencias; 582 -> 558 pontos, e as divergencias distintas caem de ~100 para 74.'
+  id: 109
+  date: '2026-07-31'
+  priority: baixa
 promoted: []
 ---

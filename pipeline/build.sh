@@ -248,6 +248,11 @@ echo "== 7d4. pericia com Recall Knowledge =="
 # apontou, em 12 sondas de skill_feat rodadas em paralelo.
 python3 derivar_pericia_de_recall.py
 
+echo "== 7d5. gate elemental do Kineticist =="
+# 24 das 314 divergencias da bancada eram impulsos oferecidos a quem nao
+# tinha o elemento. A regra e da fonte: composite exige TODOS os listados.
+python3 derivar_gate_elemental.py
+
 echo "== 7e3. estatisticas de familiar e eidolon =="
 # A DECIMA PRIMEIRA lacuna de leitura: `aon_dump/rules.json` tem 3.645 registros
 # e nenhum extrator o abria. Familiar e eidolon derivam do mestre -- o que
