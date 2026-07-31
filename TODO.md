@@ -181,17 +181,23 @@ items:
   id: 31
   date: '2026-07-29'
   priority: baixa
-- desc: 'ARMAS SEM DANO -- PARCIALMENTE RESOLVIDO 2026-07-29. Eram 57 armas sem `damage`, mas 41 sao bombas
-    alquimicas (o dano e do efeito, vazio esta certo), 6 sao municao/magazine/pellet e 5 sao arma magica
-    ou material que HERDA o dano do item base. Restavam QUATRO de verdade. Blowgun e Dart Umbrella FORAM
-    CORRIGIDAS: o AoN traz `damage: ''1 P''` (dano fixo 1, sem dado, que e RAW) e o parser de `recuperar_mecanica_equipamento.py`
-    exigia `dN`. Agora ha um segundo padrao (`FIXO`) e a representacao OMITE a chave `dado` em vez de
-    grava-la como None -- os dois motores fazem `dano.get(''dado'','''')`, e a chave presente com None
-    imprimiria ''None'' na ficha. Travado por 3 assercoes no oraculo. FALTAM DUAS: Nine-Ring Sword e Wind
-    and Fire Wheel (Tian Xia) nao tem fonte em disco nenhuma -- precisa de dump novo do AoN ou entrada
-    curada'
+- desc: 'DESBLOQUEADO 2026-07-31, e a premissa estava ERRADA: NAO falta dump do AoN. As duas armas
+    existem no dump em disco, sob os nomes Tian Xia -- `Wind and Fire Wheel` e **Feng Huo Lun** (1d4 S,
+    advanced, knife) e `Nine-Ring Sword` e **Jiu Huan Dao** (1d8 S, martial, sword). O nome em ingles
+    aparece so na PROSA do AoN ("Also known as wind and fire wheels"), e por isso nenhuma busca por nome
+    achava. E a nossa base ja tem os dois registros COMPLETOS: `wb:weapon/feng-huo-lun` e
+    `wb:weapon/jiu-huan-dao`, com dano, categoria e grupo, vindos do Foundry. O defeito real e outro:
+    `wb:weapon/nine-ring-sword` e `wb:weapon/wind-and-fire-wheel` sao DUPLICATAS VAZIAS do mesmo par,
+    e o colapso de irmaos nao as pegou porque ele casa por NOME e os nomes nao se parecem -- o vinculo
+    so existe na prosa. CONSERTO: par curado de alias (`nine-ring-sword` -> `jiu-huan-dao`,
+    `wind-and-fire-wheel` -> `feng-huo-lun`), do mesmo tipo que `equivalencias-pathbuilder.json` ja
+    guarda para as renomeacoes Golarion->generico. Pequeno e sem dependencia externa. NOTA: ha tambem
+    `wb:weapon/jiu-huan-dao-disarm`, uma terceira variante com os mesmos numeros, que precisa ser
+    olhada no mesmo ato. || TEXTO ANTERIOR: eram 57 armas sem `damage`, 41 sao bombas alquimicas (dano
+    e do efeito), 6 sao municao e 5 herdam do item base. Blowgun e Dart Umbrella foram corrigidas em
+    2026-07-29 (padrao FIXO, dano `1 P` sem dado, travado por 3 assercoes).'
   id: 85
-  date: '2026-07-29'
+  date: '2026-07-31'
   priority: baixa
 - desc: 'PASSO DOIS DO ITEM 22: estruturar `acesso` em filiacoes. Hoje e texto verbatim em 728 registros,
     e as formas se repetem (102 armas de fogo, 102 gadgets, 80 Pathfinder Society, 73 Knights of Lastwall,
