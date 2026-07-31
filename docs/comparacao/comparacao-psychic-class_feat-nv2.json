@@ -9,7 +9,17 @@
       "Automatic Psychic Action",
       "Deepest Wellspring"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "signature spell expansion",
+        "nossos": [
+          "Signature Spell Expansion",
+          "Signature Spell Expansion (Psychic)"
+        ],
+        "pathbuilder": "Signature Spell Expansion"
+      }
+    ]
   },
   {
     "slot": "Psychic 2 / class_feat [Dedication Feats]",
@@ -46,14 +56,6 @@
         ]
       },
       {
-        "nome": "Crossbow Infiltrator Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige stealth >= trained; tem untrained"
-        ]
-      },
-      {
         "nome": "Draconic Acolyte Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -79,6 +81,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

@@ -144,26 +144,28 @@ items:
   id: 69
   date: '2026-07-31'
   priority: media
-- desc: 'BLOQUEIO REAL ENCONTRADO 2026-07-31, e ele invalida parte da rodada 6: **o comparador so
-    conhece 13 classes**. `DEFAULT` e `BOOSTS_DO_PATHBUILDER` tem 13 e 11 entradas, e classe fora do mapa
-    e PULADA EM SILENCIO ("pulado (classe sem equivalente montado)"). As 14 restantes (Animist, Commander,
-    Exemplar, Guardian, Gunslinger, Inventor, Kineticist, Magus, Oracle, Psychic, Summoner, Swashbuckler,
-    Thaumaturge, Witch) tem sonda E tem arquivo de comparacao em disco -- mas o arquivo e de 07:12 de hoje
-    e nao e mais regerado, entao a checagem "toda sonda tem comparacao" passa e mente. A rodada 6 dizia
-    "27 classes cobertas, zero defeitos nossos": vale para 13. Barbarian e Ranger estao em DEFAULT mas
-    faltam em BOOSTS. || O ELO PERDIDO: os boosts DAS 14 JA FORAM MEDIDOS na rodada 6 -- ha 30+ arquivos
-    `docs/comparacao/estado-pathbuilder-<classe>-nv<N>.json`, colhidos entre 06:50 e 06:56. O que nunca
-    aconteceu foi ESTENDER as duas tabelas com esses numeros. Trabalho pequeno e mecanico, e destrava as
-    14 de uma vez. Medi mais cinco em 31/07 as 16:30 (Exemplar, Thaumaturge, Kineticist, Inventor,
-    Guardian), cinco sondas em PARALELO, para confirmar que o caminho funciona. || PROXIMO PASSO, em
-    ordem: (1) estender DEFAULT + BOOSTS lendo os arquivos de estado, nunca chutando; (2) reger as 14
-    comparacoes e triar; (3) so entao rodar sondas novas em paralelo -- antes disso elas produzem arquivo
-    que ninguem compara. || FEITO ANTES: comparador consertado (spec colisao-no-comparador), veredito por
-    grupo, colisoes declaradas, 12 duplicatas e 2 falsos positivos removidos. Rodada 36 (Alchemist nv8)
-    achou o item 107.'
+- desc: 'DESTRAVADO 2026-07-31: as 27 classes passam a ser COMPARADAS DE VERDADE. O comparador so
+    conhecia 13 (`DEFAULT` 13, `BOOSTS_DO_PATHBUILDER` 11) e PULAVA EM SILENCIO as outras 14 -- que tinham
+    sonda E tinham arquivo de comparacao em disco, de 07:12 do mesmo dia, nunca mais regerado. A checagem
+    "toda sonda tem comparacao" passava e mentia, e a rodada 6 dizia "27 classes cobertas, zero defeitos":
+    valia para 13. || O ELO PERDIDO estava em disco: a rodada 6 JA tinha medido os boosts das 14 (30
+    arquivos `estado-pathbuilder-*.json`), e ninguem estendeu as tabelas. Estendi DERIVANDO dos arquivos
+    medidos, nunca chutando: modificador na tela = numero de boosts, e a habilidade-chave so entra na
+    lista quando e ESCOLHA (Exemplar e Magus `dex|str`, Psychic `int|cha` declaram os cinco; as outras
+    tem chave unica e o motor aplica sozinho). Medi mais 7 em paralelo para fechar (Exemplar, Thaumaturge,
+    Kineticist, Inventor, Guardian, Barbarian, Ranger). DEFAULT 13->27, BOOSTS 11->25. || RESULTADO: zero
+    pulados, e os pontos a triar subiram de 344 para **497**. Os 153 novos: 79 divergencias, 56 so-nosso,
+    9 so-deles. TRIADOS POR FAMILIA, e NENHUMA e nova: 57 sao "nos aceitamos, eles nao" (dedicacoes --
+    balde de recorte de fonte, o mesmo das 13); 20 sao pre-requisito de PERICIA (survival/stealth/arcana/
+    occultism trained) -- a diferenca de modelo JA DECLARADA no proprio comparador, porque o Pathbuilder
+    conta escolha de pericia pendente como alcancavel e nos avaliamos o estado atual e MARCAMOS; 1 e o
+    gate do Kineticist (`Extended Kinesis` exige `Base Kinesis`), familia dos itens 97/99; 1 e
+    proficiencia de arma nomeada (Aldori). Concentracao: Kineticist 25, Witch 11, Summoner 10, Magus 9. ||
+    PROXIMO: triar os 57 do balde "so nosso" um a um (o unico que pode esconder defeito novo), e ai sim
+    rodar sondas novas em paralelo -- agora elas rendem, porque toda classe e comparada.'
   id: 84
   date: '2026-07-31'
-  priority: alta
+  priority: media
 - desc: 'Importador do Pathbuilder tem que AVISAR o que se perde. Confirmado com o Igor: o eidolon existe
     no app deles e nao sobrevive ao export. Perda silenciosa e o pior tipo'
   id: 10

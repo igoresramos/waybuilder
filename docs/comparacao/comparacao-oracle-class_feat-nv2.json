@@ -6,12 +6,15 @@
     "em_comum": 59,
     "so_no_pathbuilder": [],
     "so_no_waybuilder": [],
-    "divergencia_de_disponibilidade": [
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
       {
-        "nome": "Whispers of Weakness",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "chave": "vision of weakness",
+        "nossos": [
+          "Vision of Weakness",
+          "Whispers of Weakness"
+        ],
+        "pathbuilder": "Vision of Weakness"
       }
     ]
   },
@@ -39,14 +42,6 @@
         "pathbuilder": true,
         "motivos": [
           "exige survival >= trained; tem untrained"
-        ]
-      },
-      {
-        "nome": "Crossbow Infiltrator Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige stealth >= trained; tem untrained"
         ]
       },
       {
@@ -89,6 +84,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]
