@@ -1,0 +1,2263 @@
+{
+  "fonte": "pathbuilder 2e web 108, remaster on, legado ligado",
+  "classe": "Exemplar",
+  "nivel": 2,
+  "slot": "skill_feat",
+  "abas": {
+    "Skill Feats": [
+      {
+        "nome": "Additional Lore",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Assurance",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Bargain Hunter",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Bon Mot",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Dubious Knowledge",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Experienced Professional",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Eyes of the City",
+        "nivel": "2",
+        "atende": true
+      },
+      {
+        "nome": "Group Impression",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "No Cause for Alarm",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Pilgrim's Token",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Quick Identification",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Ravening's Desperation",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Recognize Spell",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Seasoned",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Student of the Canon",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Trick Magic Item",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Acrobatic Performer",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Acupuncturist",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Advanced First Aid",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Aerobatics Mastery",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Alchemical Crafting",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "All of the Animal",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Ambush Tactics",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Arcane Sense",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Armor Assist",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Armored Stealth",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Assured Identification",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Aura Sight",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Aurochs-Headed",
+        "nivel": "3",
+        "atende": false
+      },
+      {
+        "nome": "Automatic Knowledge",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Automatic Writing",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Backup Disguise",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Battle Cry",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Battle Medicine",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Battle Planner",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Battle Prayer",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Biographical Eye",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Bizarre Magic",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Bless Tonic",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Bless Toxin",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Bonded Animal",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Break Curse",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Calm and Centered",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Card Sharp's Escape",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Cat Fall",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Charlatan",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Charming Liar",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Chromotherapy",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Cloud Jump",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Cognitive Crossover",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Combat Climber",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Comforting Presence",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Communal Crafting",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Concealing Legerdemain",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Confabulator",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Connections",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Consult the Spirits",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Continual Recovery",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Contract Negotiator",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Cooperative Crafting",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Courtly Graces",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Craft Anything",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Crafter's Appraisal",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Criminal Connections",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Crystal Healing",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Deceptive Worship",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Dirty Trick",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Discreet Inquiry",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Distracting Performance",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Disturbing Knowledge",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Divine Guidance",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Doublespeak",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Efficient Explorer",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Encouraging Words",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Energy Fortification",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Entourage",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Environmental Grace",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Environmental Guide",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Evangelize",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Exhort the Faithful",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Experienced Smuggler",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Experienced Tracker",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Express Rider",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Eye for Numbers",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Eye of the Arclords",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Fascinating Performance",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Fleeing Diversion",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Foil Senses",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Folk Dowsing",
+        "nivel": "3",
+        "atende": false
+      },
+      {
+        "nome": "Forager",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Forensic Acumen",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Glad-Hand",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Glean Contents",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Go with the Flow",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Godless Healing",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Graft Technician",
+        "nivel": "3",
+        "atende": false
+      },
+      {
+        "nome": "Group Coercion",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Half-Truths",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Hefty Hauler",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Hobnobber",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Impeccable Crafting",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Impressive Performance",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Improvise Tool",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Inflame Crowd",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Influence Nature",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Inoculation",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Intimidating Glare",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Intimidating Prowess",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Inventor",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Juggle",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Kip Up",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Lasting Coercion",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Lead Climber",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Codebreaker",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Guide",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Linguist",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Medic",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Negotiation",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Performer",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Professional",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Sneak",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Survivalist",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Tattoo Artist",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Legendary Thief",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Lengthy Diversion",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Leverage Connections",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Lie to Me",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Magical Crafting",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Magical Shorthand",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Master of Apprentice",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Medical Researcher",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Monster Crafting",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Morphic Manipulation",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Mortal Healing",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Multilingual",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Myth Hunter",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Natural Medicine",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Nimble Crawl",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Oddity Identification",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Paragon Battle Medicine",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Pei Zing Adept",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Performer's Treatment",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pickpocket",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Planar Survival",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Powerful Leap",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Predict Weather",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Prepare Elemental Medicine",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Quick Climb",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Quick Coercion",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Quick Contacts",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Quick Disguise",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Quick Jump",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Quick Recognition",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Quick Repair",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Quick Setup",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Quick Squeeze",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Quick Swim",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Quick Unlock",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Quiet Allies",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Rapid Affixture",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Rapid Mantel",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Read Lips",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Read Psychometric Resonance",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Reveal Machinations",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Reveal True Name",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Risky Surgery",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Robust Recovery",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Rolling Landing",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Root Magic",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Sacred Defense",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Sanctify Water",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Say that Again!",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Scare to Death",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Schooled in Secrets",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Secret Speech",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Shadow Mark",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Shameless Request",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Sign Language",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Signature Crafting",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Skeptic's Defense",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Skill Training",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Slippery Prey",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Slippery Secrets",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Snare Crafting",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Sow Rumor",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Specialty Crafting",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Speaker",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Steady Balance",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Stifle Flames",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Stitch Flesh",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Streetwise",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Subtle Theft",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Survey Wildlife",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Swift Sneak",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Talent Envy",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Tame Animal",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Tattoo Artist",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Temperature Adjustment",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Terrain Expertise",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Terrain Stalker",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Terrified Retreat",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Terrifying Resistance",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "That's Not Natural!",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Titan Wrestler",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Too Angry to Die",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Train Animal",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Triumphant Boast",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Tumbling Teamwork",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Tumbling Theft",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Tweak Appearances",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Underground Network",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Underwater Marauder",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Unified Theory",
+        "nivel": "15",
+        "atende": false
+      },
+      {
+        "nome": "Unmistakable Lore",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Unusual Treatment",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vanish Into the Land",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Vasodilation",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vicious Critique",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Virtuosic Performer",
+        "nivel": "1",
+        "atende": false
+      },
+      {
+        "nome": "Wall Jump",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "Ward Medic",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wary Disarmament",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Water Sprint",
+        "nivel": "7",
+        "atende": false
+      },
+      {
+        "nome": "What's That Up Your Sleeve?",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wilderness Spotter",
+        "nivel": "2",
+        "atende": false
+      }
+    ],
+    "Archetype": []
+  },
+  "opcoes": [
+    {
+      "nome": "Additional Lore",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Assurance",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Bargain Hunter",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Bon Mot",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Dubious Knowledge",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Experienced Professional",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Eyes of the City",
+      "nivel": "2",
+      "atende": true
+    },
+    {
+      "nome": "Group Impression",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "No Cause for Alarm",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Pilgrim's Token",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Quick Identification",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Ravening's Desperation",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Recognize Spell",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Seasoned",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Student of the Canon",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Trick Magic Item",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Acrobatic Performer",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Acupuncturist",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Advanced First Aid",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Aerobatics Mastery",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Alchemical Crafting",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "All of the Animal",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Ambush Tactics",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Arcane Sense",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Armor Assist",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Armored Stealth",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Assured Identification",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Aura Sight",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Aurochs-Headed",
+      "nivel": "3",
+      "atende": false
+    },
+    {
+      "nome": "Automatic Knowledge",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Automatic Writing",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Backup Disguise",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Battle Cry",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Battle Medicine",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Battle Planner",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Battle Prayer",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Biographical Eye",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Bizarre Magic",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Bless Tonic",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Bless Toxin",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Bonded Animal",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Break Curse",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Calm and Centered",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Card Sharp's Escape",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Cat Fall",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Charlatan",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Charming Liar",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Chromotherapy",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Cloud Jump",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Cognitive Crossover",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Combat Climber",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Comforting Presence",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Communal Crafting",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Concealing Legerdemain",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Confabulator",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Connections",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Consult the Spirits",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Continual Recovery",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Contract Negotiator",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Cooperative Crafting",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Courtly Graces",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Craft Anything",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Crafter's Appraisal",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Criminal Connections",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Crystal Healing",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Deceptive Worship",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Dirty Trick",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Discreet Inquiry",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Distracting Performance",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Disturbing Knowledge",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Divine Guidance",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Doublespeak",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Efficient Explorer",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Encouraging Words",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Energy Fortification",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Entourage",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Environmental Grace",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Environmental Guide",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Evangelize",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Exhort the Faithful",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Experienced Smuggler",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Experienced Tracker",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Express Rider",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Eye for Numbers",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Eye of the Arclords",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Fascinating Performance",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Fleeing Diversion",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Foil Senses",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Folk Dowsing",
+      "nivel": "3",
+      "atende": false
+    },
+    {
+      "nome": "Forager",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Forensic Acumen",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Glad-Hand",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Glean Contents",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Go with the Flow",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Godless Healing",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Graft Technician",
+      "nivel": "3",
+      "atende": false
+    },
+    {
+      "nome": "Group Coercion",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Half-Truths",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Hefty Hauler",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Hobnobber",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Impeccable Crafting",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Impressive Performance",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Improvise Tool",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Inflame Crowd",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Influence Nature",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Inoculation",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Intimidating Glare",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Intimidating Prowess",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Inventor",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Juggle",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Kip Up",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Lasting Coercion",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Lead Climber",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Codebreaker",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Guide",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Linguist",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Medic",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Negotiation",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Performer",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Professional",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Sneak",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Survivalist",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Tattoo Artist",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Legendary Thief",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Lengthy Diversion",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Leverage Connections",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Lie to Me",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Magical Crafting",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Magical Shorthand",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Master of Apprentice",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Medical Researcher",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Monster Crafting",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Morphic Manipulation",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Mortal Healing",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Multilingual",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Myth Hunter",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Natural Medicine",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Nimble Crawl",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Oddity Identification",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Paragon Battle Medicine",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Pei Zing Adept",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Performer's Treatment",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Pickpocket",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Planar Survival",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Powerful Leap",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Predict Weather",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Prepare Elemental Medicine",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Quick Climb",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Quick Coercion",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Quick Contacts",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Quick Disguise",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Quick Jump",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Quick Recognition",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Quick Repair",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Quick Setup",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Quick Squeeze",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Quick Swim",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Quick Unlock",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Quiet Allies",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Rapid Affixture",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Rapid Mantel",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Read Lips",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Read Psychometric Resonance",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Reveal Machinations",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Reveal True Name",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Risky Surgery",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Robust Recovery",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Rolling Landing",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Root Magic",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Sacred Defense",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Sanctify Water",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Say that Again!",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Scare to Death",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Schooled in Secrets",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Secret Speech",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Shadow Mark",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Shameless Request",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Sign Language",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Signature Crafting",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Skeptic's Defense",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Skill Training",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Slippery Prey",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Slippery Secrets",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Snare Crafting",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Sow Rumor",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Specialty Crafting",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Spirit Speaker",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Steady Balance",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Stifle Flames",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Stitch Flesh",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Streetwise",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Subtle Theft",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Survey Wildlife",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Swift Sneak",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Talent Envy",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Tame Animal",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Tattoo Artist",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Temperature Adjustment",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Terrain Expertise",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Terrain Stalker",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Terrified Retreat",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Terrifying Resistance",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "That's Not Natural!",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Titan Wrestler",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Too Angry to Die",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Train Animal",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Triumphant Boast",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Tumbling Teamwork",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Tumbling Theft",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Tweak Appearances",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Underground Network",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Underwater Marauder",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Unified Theory",
+      "nivel": "15",
+      "atende": false
+    },
+    {
+      "nome": "Unmistakable Lore",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Unusual Treatment",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Vanish Into the Land",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Vasodilation",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Vicious Critique",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Virtuosic Performer",
+      "nivel": "1",
+      "atende": false
+    },
+    {
+      "nome": "Wall Jump",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "Ward Medic",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Wary Disarmament",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Water Sprint",
+      "nivel": "7",
+      "atende": false
+    },
+    {
+      "nome": "What's That Up Your Sleeve?",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Wilderness Spotter",
+      "nivel": "2",
+      "atende": false
+    }
+  ]
+}
