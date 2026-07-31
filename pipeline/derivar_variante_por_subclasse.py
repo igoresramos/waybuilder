@@ -75,7 +75,9 @@ def main() -> int:
                 atual = reg.get("requires")
                 if atual:
                     # nunca substitui o que ja existia
-                    reg["requires"] = {"and": [atual, termo]}
+                    # `all`, nao `and` -- chave desconhecida no topo do
+                    # predicado passa em silencio e o gate vira no-op
+                    reg["requires"] = {"all": [atual, termo]}
                 else:
                     reg["requires"] = termo
                 reg.setdefault("prov", {})["requires"] = "derivado:sufixo-de-subclasse"

@@ -455,13 +455,13 @@
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/dubious-knowledge",
    "wb:feat/fleet",
    "wb:feat/acrobatic-performer",
-   "wb:feat/acupuncturist"
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -497,13 +497,13 @@
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
    "wb:feat/improvised-repair",
    "wb:feat/inspiring-entertainment",
-   "wb:feat/keen-follower"
+   "wb:feat/keen-follower",
+   "wb:feat/liquidate-resources"
   ],
   "skill_feat@1": [
    "wb:feat/arcane-sense",
@@ -558,7 +558,6 @@
    "wb:feat/tame-animal",
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/dubious-knowledge",
@@ -587,7 +586,8 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
    "wb:feat/forager",
-   "wb:feat/forensic-acumen"
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents"
   ],
   "skill_feat@4": [
    "wb:feat/arcane-sense",
@@ -600,7 +600,6 @@
    "wb:feat/tame-animal",
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
@@ -629,7 +628,8 @@
    "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
-   "wb:feat/eye-for-numbers"
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance"
   ]
  },
  "extras": {

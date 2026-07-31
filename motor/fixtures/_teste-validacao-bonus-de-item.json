@@ -456,12 +456,12 @@
    "wb:feat/terrain-stalker",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
    "wb:feat/alchemical-crafting",
-   "wb:feat/all-of-the-animal"
+   "wb:feat/all-of-the-animal",
+   "wb:feat/arcane-sense"
   ],
   "general_feat@4": [
    "wb:feat/additional-lore",
@@ -498,12 +498,12 @@
    "wb:feat/terrain-stalker",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
    "wb:feat/improvised-repair",
-   "wb:feat/inspiring-entertainment"
+   "wb:feat/inspiring-entertainment",
+   "wb:feat/keen-follower"
   ],
   "skill_feat@1": [
    "wb:feat/additional-lore",
@@ -558,7 +558,6 @@
    "wb:feat/quick-coercion",
    "wb:feat/skill-training",
    "wb:feat/terrain-stalker",
-   "wb:feat/automatic-knowledge",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -587,7 +586,8 @@
    "wb:feat/forensic-acumen",
    "wb:feat/glean-contents",
    "wb:feat/group-impression",
-   "wb:feat/hefty-hauler"
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber"
   ],
   "skill_feat@4": [
    "wb:feat/additional-lore",
@@ -600,7 +600,6 @@
    "wb:feat/quick-coercion",
    "wb:feat/skill-training",
    "wb:feat/terrain-stalker",
-   "wb:feat/automatic-knowledge",
    "wb:feat/aurochs-headed",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
@@ -629,7 +628,8 @@
    "wb:feat/express-rider",
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
-   "wb:feat/forager"
+   "wb:feat/forager",
+   "wb:feat/forensic-acumen"
   ]
  },
  "extras": {

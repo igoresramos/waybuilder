@@ -457,11 +457,11 @@
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/breath-control",
-   "wb:feat/fleet"
+   "wb:feat/fleet",
+   "wb:feat/natural-medicine"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -499,11 +499,11 @@
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
-   "wb:feat/improvised-repair"
+   "wb:feat/improvised-repair",
+   "wb:feat/inspiring-entertainment"
   ],
   "skill_feat@1": [
    "wb:feat/dubious-knowledge",
@@ -560,7 +560,6 @@
    "wb:feat/terrain-stalker",
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/natural-medicine",
@@ -587,7 +586,8 @@
    "wb:feat/experienced-tracker",
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
-   "wb:feat/forager"
+   "wb:feat/forager",
+   "wb:feat/forensic-acumen"
   ],
   "skill_feat@4": [
    "wb:feat/dubious-knowledge",
@@ -602,7 +602,6 @@
    "wb:feat/terrain-stalker",
    "wb:feat/train-animal",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
@@ -629,7 +628,8 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-tracker"
+   "wb:feat/experienced-tracker",
+   "wb:feat/eye-for-numbers"
   ]
  },
  "extras": {

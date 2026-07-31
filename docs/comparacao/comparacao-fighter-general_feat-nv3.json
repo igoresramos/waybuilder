@@ -16,12 +16,6 @@
     ],
     "divergencia_de_disponibilidade": [
       {
-        "nome": "Automatic Knowledge",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Dubious Knowledge",
         "waybuilder": true,
         "pathbuilder": false,

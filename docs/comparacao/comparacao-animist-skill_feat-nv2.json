@@ -14,12 +14,6 @@
     ],
     "divergencia_de_disponibilidade": [
       {
-        "nome": "Automatic Knowledge",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Encouraging Words",
         "waybuilder": true,
         "pathbuilder": false,

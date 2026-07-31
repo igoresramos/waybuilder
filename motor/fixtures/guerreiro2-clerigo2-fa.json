@@ -448,7 +448,6 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/diehard",
@@ -461,7 +460,8 @@
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
    "wb:feat/armor-assist",
-   "wb:feat/bargain-hunter"
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -490,7 +490,6 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
@@ -503,7 +502,8 @@
    "wb:feat/robust-health",
    "wb:feat/steel-your-resolve",
    "wb:feat/thorough-search",
-   "wb:feat/untrained-improvisation"
+   "wb:feat/untrained-improvisation",
+   "wb:feat/ambush-tactics"
   ],
   "skill_feat@1": [
    "wb:feat/dubious-knowledge",
@@ -554,7 +554,6 @@
    "wb:feat/quick-identification",
    "wb:feat/recognize-spell",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/student-of-the-canon",
@@ -587,7 +586,8 @@
    "wb:feat/forensic-acumen",
    "wb:feat/glean-contents",
    "wb:feat/group-coercion",
-   "wb:feat/group-impression"
+   "wb:feat/group-impression",
+   "wb:feat/hefty-hauler"
   ],
   "skill_feat@4": [
    "wb:feat/dubious-knowledge",
@@ -596,7 +596,6 @@
    "wb:feat/quick-identification",
    "wb:feat/recognize-spell",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
@@ -629,7 +628,8 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
    "wb:feat/forager",
-   "wb:feat/forensic-acumen"
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents"
   ]
  },
  "extras": {

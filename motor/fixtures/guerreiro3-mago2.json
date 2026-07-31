@@ -460,8 +460,8 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
-   "wb:feat/tattoo-artist"
+   "wb:feat/tattoo-artist",
+   "wb:feat/additional-lore"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -502,8 +502,8 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
-   "wb:feat/tattoo-artist"
+   "wb:feat/tattoo-artist",
+   "wb:feat/additional-circus-trick"
   ],
   "skill_feat@1": [
    "wb:feat/alchemical-crafting",
@@ -564,7 +564,6 @@
    "wb:feat/specialty-crafting",
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/tattoo-artist",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
@@ -587,7 +586,8 @@
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
    "wb:feat/experienced-smuggler",
-   "wb:feat/experienced-tracker"
+   "wb:feat/experienced-tracker",
+   "wb:feat/express-rider"
   ],
   "skill_feat@4": [
    "wb:feat/alchemical-crafting",
@@ -606,7 +606,6 @@
    "wb:feat/specialty-crafting",
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/tattoo-artist",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
@@ -629,7 +628,8 @@
    "wb:feat/contract-negotiator",
    "wb:feat/courtly-graces",
    "wb:feat/crystal-healing",
-   "wb:feat/deceptive-worship"
+   "wb:feat/deceptive-worship",
+   "wb:feat/dirty-trick"
   ]
  },
  "extras": {

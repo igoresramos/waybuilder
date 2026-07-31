@@ -430,14 +430,14 @@
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/slippery-prey",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/breath-control",
    "wb:feat/fleet",
    "wb:feat/impressive-performance",
-   "wb:feat/acrobatic-performer"
+   "wb:feat/acrobatic-performer",
+   "wb:feat/acupuncturist"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -472,14 +472,14 @@
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/slippery-prey",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
    "wb:feat/improvised-repair",
    "wb:feat/inspiring-entertainment",
-   "wb:feat/keen-follower"
+   "wb:feat/keen-follower",
+   "wb:feat/liquidate-resources"
   ],
   "skill_feat@1": [
    "wb:feat/armor-assist",
@@ -534,7 +534,6 @@
    "wb:feat/titan-wrestler",
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
-   "wb:feat/automatic-knowledge",
    "wb:feat/slippery-prey",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
@@ -563,7 +562,8 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/forager",
    "wb:feat/forensic-acumen",
-   "wb:feat/glean-contents"
+   "wb:feat/glean-contents",
+   "wb:feat/group-coercion"
   ],
   "skill_feat@4": [
    "wb:feat/armor-assist",
@@ -576,7 +576,6 @@
    "wb:feat/titan-wrestler",
    "wb:feat/underwater-marauder",
    "wb:feat/virtuosic-performer",
-   "wb:feat/automatic-knowledge",
    "wb:feat/slippery-prey",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
@@ -605,7 +604,8 @@
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
-   "wb:feat/eye-for-numbers"
+   "wb:feat/eye-for-numbers",
+   "wb:feat/forager"
   ]
  },
  "extras": {

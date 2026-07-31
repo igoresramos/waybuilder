@@ -458,10 +458,10 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/encouraging-words",
    "wb:feat/eyes-of-the-city",
-   "wb:feat/dubious-knowledge"
+   "wb:feat/dubious-knowledge",
+   "wb:feat/acrobatic-performer"
   ],
   "general_feat@4": [
    "wb:feat/additional-lore",
@@ -500,10 +500,10 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/encouraging-words",
    "wb:feat/eyes-of-the-city",
-   "wb:feat/additional-circus-trick"
+   "wb:feat/additional-circus-trick",
+   "wb:feat/ancestral-paragon"
   ],
   "skill_feat@1": [
    "wb:feat/additional-lore",
@@ -560,7 +560,6 @@
    "wb:feat/recognize-spell",
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/encouraging-words",
    "wb:feat/eyes-of-the-city",
    "wb:feat/dubious-knowledge",
@@ -587,7 +586,8 @@
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
    "wb:feat/eye-for-numbers",
-   "wb:feat/fascinating-performance"
+   "wb:feat/fascinating-performance",
+   "wb:feat/forager"
   ],
   "skill_feat@4": [
    "wb:feat/additional-lore",
@@ -602,7 +602,6 @@
    "wb:feat/recognize-spell",
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/encouraging-words",
    "wb:feat/eyes-of-the-city",
    "wb:feat/aurochs-headed",
@@ -629,7 +628,8 @@
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
    "wb:feat/experienced-professional",
-   "wb:feat/experienced-smuggler"
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker"
   ]
  },
  "extras": {

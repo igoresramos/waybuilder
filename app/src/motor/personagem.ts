@@ -2936,6 +2936,32 @@ export class Personagem implements ContextoDePredicado {
    * `lore:*` lê-se "alguma Lore" e devolve o MELHOR rank da ficha, porque o
    * requisito pode pedir mais que trained (`Scrollmaster` pede expert).
    */
+  /**
+   * RAW: Recall Knowledge é ação destas oito, e a lista é do livro -- não muda
+   * com a fonte. Perception e Athletics NÃO entram, e é isso que faz o termo
+   * discriminar.
+   */
+  private static PERICIAS_DE_RECALL = ["arcana", "crafting", "medicine", "nature",
+                                       "occultism", "religion", "society"];
+
+  /**
+   * `skill:recall-knowledge` lê-se "alguma perícia com Recall Knowledge".
+   *
+   * Mesmo desenho de `lore:*` e `weapon:*`: devolve o MELHOR rank da ficha,
+   * porque o requisito pode pedir mais que trained -- `Automatic Knowledge`
+   * pede expert e `Masterful Obfuscation` pede master.
+   * Spec: `specs/2026-07-31-pericia-de-recall-knowledge.md`
+   */
+  private _rank_de_recall(chave: string, excluir: string | null): string | null {
+    if (chave !== "skill:recall-knowledge") return null;
+    let melhor: string | null = null;
+    for (const p of Personagem.PERICIAS_DE_RECALL) {
+      melhor = melhorRank(melhor, this._rank_sem(p, excluir));
+    }
+    // qualquer Lore serve, e `lore:*` já responde a melhor delas
+    return melhorRank(melhor, this._rank_de_lore("lore:*", excluir));
+  }
+
   private _rank_de_lore(chave: string, excluir: string | null): string | null {
     if (!chave.startsWith("lore:")) return null;
     const pedido = chave.slice("lore:".length);
@@ -2952,6 +2978,7 @@ export class Personagem implements ContextoDePredicado {
     const excluir = this._avaliando;
     for (const [chave, exigencia] of Object.entries(dictDe(valor))) {
       const tenho = this._rank_de_arma(chave, excluir)
+        ?? this._rank_de_recall(chave, excluir)
         ?? this._rank_de_lore(chave, excluir)
         ?? this._rank_sem(chave, excluir);
       for (const [op, alvo] of Object.entries(dictDe(exigencia))) {

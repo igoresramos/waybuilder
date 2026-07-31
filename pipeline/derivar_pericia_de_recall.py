@@ -58,7 +58,10 @@ def main() -> int:
         termo = {"proficiency": {"skill:recall-knowledge": {">=": rank}}}
         atual = reg.get("requires")
         # nunca substitui o que ja existia -- o gate de nivel continua valendo
-        reg["requires"] = {"and": [atual, termo]} if atual else termo
+        # `all`, nao `and`: o avaliador conhece `all`/`any`/`not`, e chave
+        # desconhecida no topo do predicado passa em SILENCIO -- o gate
+        # inteiro virava no-op e os tres feats seguiam disponiveis.
+        reg["requires"] = {"all": [atual, termo]} if atual else termo
         # residuo resolvido que fica no residuo MENTE sobre o tamanho do que
         # falta ler; sai daqui.
         if fica:

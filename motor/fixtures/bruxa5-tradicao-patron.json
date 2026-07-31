@@ -457,11 +457,11 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/dubious-knowledge",
    "wb:feat/pet",
    "wb:feat/acrobatic-performer",
-   "wb:feat/acupuncturist"
+   "wb:feat/acupuncturist",
+   "wb:feat/alchemical-crafting"
   ],
   "general_feat@4": [
    "wb:feat/additional-lore",
@@ -499,11 +499,11 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
-   "wb:feat/improvised-repair"
+   "wb:feat/improvised-repair",
+   "wb:feat/inspiring-entertainment"
   ],
   "skill_feat@1": [
    "wb:feat/additional-lore",
@@ -560,7 +560,6 @@
    "wb:feat/schooled-in-secrets",
    "wb:feat/skill-training",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/dubious-knowledge",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -587,7 +586,8 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
    "wb:feat/forager",
-   "wb:feat/forensic-acumen"
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents"
   ],
   "skill_feat@4": [
    "wb:feat/additional-lore",
@@ -602,7 +602,6 @@
    "wb:feat/schooled-in-secrets",
    "wb:feat/skill-training",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
    "wb:feat/kreightons-cognitive-crossover",
@@ -629,7 +628,8 @@
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
-   "wb:feat/eye-for-numbers"
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance"
   ]
  },
  "extras": {

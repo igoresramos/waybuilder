@@ -566,7 +566,6 @@
    "wb:feat/titan-wrestler",
    "wb:feat/trick-magic-item",
    "wb:feat/underwater-marauder",
-   "wb:feat/automatic-knowledge",
    "wb:feat/slippery-prey",
    "wb:feat/intimidating-glare",
    "wb:feat/acrobatic-performer",
@@ -587,7 +586,8 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
-   "wb:feat/experienced-smuggler"
+   "wb:feat/experienced-smuggler",
+   "wb:feat/experienced-tracker"
   ],
   "skill_feat@4": [
    "wb:feat/additional-lore",
@@ -608,7 +608,6 @@
    "wb:feat/titan-wrestler",
    "wb:feat/trick-magic-item",
    "wb:feat/underwater-marauder",
-   "wb:feat/automatic-knowledge",
    "wb:feat/slippery-prey",
    "wb:feat/aurochs-headed",
    "wb:feat/intimidating-glare",
@@ -629,7 +628,8 @@
    "wb:feat/crafters-appraisal",
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
-   "wb:feat/dirty-trick"
+   "wb:feat/dirty-trick",
+   "wb:feat/experienced-smuggler"
   ]
  },
  "extras": {

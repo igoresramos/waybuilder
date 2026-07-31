@@ -458,10 +458,10 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/assurance",
-   "wb:feat/diehard"
+   "wb:feat/diehard",
+   "wb:feat/shield-block"
   ],
   "general_feat@4": [
    "wb:feat/additional-lore",
@@ -500,10 +500,10 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/additional-circus-trick",
-   "wb:feat/ancestral-paragon"
+   "wb:feat/ancestral-paragon",
+   "wb:feat/endure-anarchy"
   ],
   "skill_feat@1": [
    "wb:feat/additional-lore",
@@ -561,7 +561,6 @@
    "wb:feat/survey-wildlife",
    "wb:feat/terrain-expertise",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/assurance",
    "wb:feat/acrobatic-performer",
@@ -587,7 +586,8 @@
    "wb:feat/express-rider",
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
-   "wb:feat/forensic-acumen"
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents"
   ],
   "skill_feat@4": [
    "wb:feat/additional-lore",
@@ -603,7 +603,6 @@
    "wb:feat/survey-wildlife",
    "wb:feat/terrain-expertise",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/folk-dowsing",
    "wb:feat/ambush-tactics",
@@ -629,7 +628,8 @@
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
    "wb:feat/experienced-professional",
-   "wb:feat/experienced-smuggler"
+   "wb:feat/experienced-smuggler",
+   "wb:feat/express-rider"
   ]
  },
  "extras": {

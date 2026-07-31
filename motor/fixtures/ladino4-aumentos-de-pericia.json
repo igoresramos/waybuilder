@@ -394,7 +394,6 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dirty-trick",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/fast-recovery",
@@ -419,7 +418,8 @@
    "wb:feat/terrain-expertise",
    "wb:feat/titan-wrestler",
    "wb:feat/toughness",
-   "wb:feat/underwater-marauder"
+   "wb:feat/underwater-marauder",
+   "wb:feat/weapon-proficiency"
   ],
   "general_feat@2": [
    "wb:feat/adopted-ancestry",
@@ -436,7 +436,6 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dirty-trick",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/fast-recovery",
@@ -461,7 +460,8 @@
    "wb:feat/terrain-expertise",
    "wb:feat/titan-wrestler",
    "wb:feat/toughness",
-   "wb:feat/underwater-marauder"
+   "wb:feat/underwater-marauder",
+   "wb:feat/weapon-proficiency"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -478,7 +478,6 @@
    "wb:feat/diehard",
    "wb:feat/different-worlds",
    "wb:feat/dirty-trick",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/fast-recovery",
@@ -503,7 +502,8 @@
    "wb:feat/terrain-expertise",
    "wb:feat/titan-wrestler",
    "wb:feat/toughness",
-   "wb:feat/underwater-marauder"
+   "wb:feat/underwater-marauder",
+   "wb:feat/weapon-proficiency"
   ],
   "skill_feat@1": [
    "wb:feat/all-of-the-animal",
@@ -511,7 +511,6 @@
    "wb:feat/combat-climber",
    "wb:feat/concealing-legerdemain",
    "wb:feat/dirty-trick",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/hefty-hauler",
@@ -543,6 +542,7 @@
    "wb:feat/crafters-appraisal",
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/express-rider",
    "wb:feat/eye-for-numbers"
@@ -553,7 +553,6 @@
    "wb:feat/combat-climber",
    "wb:feat/concealing-legerdemain",
    "wb:feat/dirty-trick",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/hefty-hauler",
@@ -566,7 +565,6 @@
    "wb:feat/titan-wrestler",
    "wb:feat/underwater-marauder",
    "wb:feat/armored-stealth",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/quiet-allies",
    "wb:feat/shadow-mark",
@@ -587,7 +585,9 @@
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
    "wb:feat/charming-liar",
-   "wb:feat/contract-negotiator"
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces",
+   "wb:feat/crafters-appraisal"
   ],
   "skill_feat@4": [
    "wb:feat/all-of-the-animal",
@@ -595,7 +595,6 @@
    "wb:feat/combat-climber",
    "wb:feat/concealing-legerdemain",
    "wb:feat/dirty-trick",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/hefty-hauler",
@@ -608,7 +607,6 @@
    "wb:feat/titan-wrestler",
    "wb:feat/underwater-marauder",
    "wb:feat/armored-stealth",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/quiet-allies",
    "wb:feat/shadow-mark",
@@ -629,7 +627,9 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/arcane-sense",
    "wb:feat/bargain-hunter",
-   "wb:feat/battle-medicine"
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall"
   ]
  },
  "extras": {

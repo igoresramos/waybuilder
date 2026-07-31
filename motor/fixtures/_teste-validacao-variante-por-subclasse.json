@@ -456,12 +456,12 @@
    "wb:feat/specialty-crafting",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/tattoo-artist",
    "wb:feat/alchemical-crafting",
    "wb:feat/assurance",
    "wb:feat/acrobatic-performer",
-   "wb:feat/acupuncturist"
+   "wb:feat/acupuncturist",
+   "wb:feat/all-of-the-animal"
   ],
   "general_feat@4": [
    "wb:feat/additional-lore",
@@ -498,12 +498,12 @@
    "wb:feat/specialty-crafting",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/tattoo-artist",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
-   "wb:feat/improvised-repair"
+   "wb:feat/improvised-repair",
+   "wb:feat/inspiring-entertainment"
   ],
   "skill_feat@1": [
    "wb:feat/additional-lore",
@@ -559,7 +559,6 @@
    "wb:feat/skill-training",
    "wb:feat/snare-crafting",
    "wb:feat/specialty-crafting",
-   "wb:feat/automatic-knowledge",
    "wb:feat/tattoo-artist",
    "wb:feat/alchemical-crafting",
    "wb:feat/assurance",
@@ -587,7 +586,8 @@
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
    "wb:feat/forager",
-   "wb:feat/forensic-acumen"
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents"
   ],
   "skill_feat@4": [
    "wb:feat/additional-lore",
@@ -601,7 +601,6 @@
    "wb:feat/skill-training",
    "wb:feat/snare-crafting",
    "wb:feat/specialty-crafting",
-   "wb:feat/automatic-knowledge",
    "wb:feat/tattoo-artist",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
@@ -629,7 +628,8 @@
    "wb:feat/experienced-smuggler",
    "wb:feat/experienced-tracker",
    "wb:feat/express-rider",
-   "wb:feat/eye-for-numbers"
+   "wb:feat/eye-for-numbers",
+   "wb:feat/fascinating-performance"
   ]
  },
  "extras": {

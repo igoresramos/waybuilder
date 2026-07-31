@@ -390,7 +390,6 @@
    "wb:feat/cooperative-leadership",
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-tracker",
    "wb:feat/fleet",
    "wb:feat/forager",
@@ -419,7 +418,8 @@
    "wb:feat/armor-assist",
    "wb:feat/bargain-hunter",
    "wb:feat/battle-medicine",
-   "wb:feat/bon-mot"
+   "wb:feat/bon-mot",
+   "wb:feat/cat-fall"
   ],
   "general_feat@2": [
    "wb:feat/additional-lore",
@@ -432,7 +432,6 @@
    "wb:feat/cooperative-leadership",
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-tracker",
    "wb:feat/fleet",
    "wb:feat/forager",
@@ -451,7 +450,6 @@
    "wb:feat/terrain-expertise",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/assurance",
    "wb:feat/diehard",
@@ -461,7 +459,9 @@
    "wb:feat/alchemical-crafting",
    "wb:feat/arcane-sense",
    "wb:feat/armor-assist",
-   "wb:feat/bargain-hunter"
+   "wb:feat/bargain-hunter",
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot"
   ],
   "general_feat@4": [
    "wb:feat/additional-lore",
@@ -474,7 +474,6 @@
    "wb:feat/cooperative-leadership",
    "wb:feat/crush-dissent",
    "wb:feat/different-worlds",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-tracker",
    "wb:feat/fleet",
    "wb:feat/forager",
@@ -493,7 +492,6 @@
    "wb:feat/terrain-expertise",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
@@ -503,12 +501,13 @@
    "wb:feat/inspiring-entertainment",
    "wb:feat/keen-follower",
    "wb:feat/liquidate-resources",
-   "wb:feat/prescient-planner"
+   "wb:feat/prescient-planner",
+   "wb:feat/quick-recovery-kingdom",
+   "wb:feat/robust-health"
   ],
   "skill_feat@1": [
    "wb:feat/additional-lore",
    "wb:feat/all-of-the-animal",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-tracker",
    "wb:feat/forager",
    "wb:feat/stifle-flames",
@@ -534,6 +533,7 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/express-rider",
@@ -550,13 +550,11 @@
   "skill_feat@2": [
    "wb:feat/additional-lore",
    "wb:feat/all-of-the-animal",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-tracker",
    "wb:feat/forager",
    "wb:feat/stifle-flames",
    "wb:feat/survey-wildlife",
    "wb:feat/terrain-expertise",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/assurance",
    "wb:feat/acrobatic-performer",
@@ -578,6 +576,7 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/express-rider",
@@ -587,18 +586,17 @@
    "wb:feat/glean-contents",
    "wb:feat/group-coercion",
    "wb:feat/group-impression",
-   "wb:feat/hefty-hauler"
+   "wb:feat/hefty-hauler",
+   "wb:feat/hobnobber"
   ],
   "skill_feat@4": [
    "wb:feat/additional-lore",
    "wb:feat/all-of-the-animal",
-   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-tracker",
    "wb:feat/forager",
    "wb:feat/stifle-flames",
    "wb:feat/survey-wildlife",
    "wb:feat/terrain-expertise",
-   "wb:feat/automatic-knowledge",
    "wb:feat/predict-weather",
    "wb:feat/folk-dowsing",
    "wb:feat/ambush-tactics",
@@ -624,12 +622,14 @@
    "wb:feat/crystal-healing",
    "wb:feat/deceptive-worship",
    "wb:feat/dirty-trick",
+   "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
    "wb:feat/experienced-smuggler",
    "wb:feat/express-rider",
    "wb:feat/eye-for-numbers",
    "wb:feat/fascinating-performance",
-   "wb:feat/forensic-acumen"
+   "wb:feat/forensic-acumen",
+   "wb:feat/glean-contents"
   ]
  },
  "extras": {

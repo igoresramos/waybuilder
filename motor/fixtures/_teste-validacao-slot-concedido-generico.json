@@ -392,7 +392,6 @@
    "wb:feat/skill-training-kingdom",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/adopted-ancestry",
    "wb:feat/assurance",
    "wb:feat/diehard",
@@ -407,7 +406,8 @@
    "wb:feat/battle-medicine",
    "wb:feat/bon-mot",
    "wb:feat/cat-fall",
-   "wb:feat/charlatan"
+   "wb:feat/charlatan",
+   "wb:feat/charming-liar"
   ],
   "general_feat@4": [
    "wb:feat/additional-lore",
@@ -434,7 +434,6 @@
    "wb:feat/skill-training-kingdom",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
@@ -449,7 +448,8 @@
    "wb:feat/steel-your-resolve",
    "wb:feat/thorough-search",
    "wb:feat/untrained-improvisation",
-   "wb:feat/adopted-ancestry"
+   "wb:feat/adopted-ancestry",
+   "wb:feat/assurance"
   ],
   "skill_feat@1": [
    "wb:feat/additional-lore",
@@ -497,7 +497,6 @@
    "wb:feat/additional-lore",
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
-   "wb:feat/automatic-knowledge",
    "wb:feat/assurance",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -533,13 +532,13 @@
    "wb:feat/hobnobber",
    "wb:feat/impressive-performance",
    "wb:feat/improvise-tool",
-   "wb:feat/inoculation"
+   "wb:feat/inoculation",
+   "wb:feat/intimidating-glare"
   ],
   "skill_feat@4": [
    "wb:feat/additional-lore",
    "wb:feat/dubious-knowledge",
    "wb:feat/experienced-professional",
-   "wb:feat/automatic-knowledge",
    "wb:feat/assurance",
    "wb:feat/acrobatic-performer",
    "wb:feat/acupuncturist",
@@ -575,7 +574,8 @@
    "wb:feat/hobnobber",
    "wb:feat/impressive-performance",
    "wb:feat/improvise-tool",
-   "wb:feat/inoculation"
+   "wb:feat/inoculation",
+   "wb:feat/intimidating-glare"
   ]
  },
  "extras": {

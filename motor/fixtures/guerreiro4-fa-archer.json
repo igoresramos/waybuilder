@@ -448,7 +448,6 @@
    "wb:feat/skill-training-kingdom",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/diehard",
@@ -461,7 +460,8 @@
    "wb:feat/all-of-the-animal",
    "wb:feat/arcane-sense",
    "wb:feat/bargain-hunter",
-   "wb:feat/battle-medicine"
+   "wb:feat/battle-medicine",
+   "wb:feat/bon-mot"
   ],
   "general_feat@4": [
    "wb:feat/adopted-ancestry",
@@ -490,7 +490,6 @@
    "wb:feat/skill-training-kingdom",
    "wb:feat/toughness",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-circus-trick",
    "wb:feat/ancestral-paragon",
    "wb:feat/endure-anarchy",
@@ -503,7 +502,8 @@
    "wb:feat/robust-health",
    "wb:feat/steel-your-resolve",
    "wb:feat/thorough-search",
-   "wb:feat/untrained-improvisation"
+   "wb:feat/untrained-improvisation",
+   "wb:feat/ambush-tactics"
   ],
   "skill_feat@1": [
    "wb:feat/armor-assist",
@@ -553,7 +553,6 @@
    "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
    "wb:feat/quick-coercion",
-   "wb:feat/automatic-knowledge",
    "wb:feat/additional-lore",
    "wb:feat/assurance",
    "wb:feat/intimidating-glare",
@@ -587,7 +586,8 @@
    "wb:feat/group-impression",
    "wb:feat/hefty-hauler",
    "wb:feat/hobnobber",
-   "wb:feat/impressive-performance"
+   "wb:feat/impressive-performance",
+   "wb:feat/improvise-tool"
   ],
   "skill_feat@4": [
    "wb:feat/armor-assist",
@@ -595,7 +595,6 @@
    "wb:feat/experienced-professional",
    "wb:feat/group-coercion",
    "wb:feat/quick-coercion",
-   "wb:feat/automatic-knowledge",
    "wb:feat/aurochs-headed",
    "wb:feat/ambush-tactics",
    "wb:feat/efficient-explorer",
@@ -629,7 +628,8 @@
    "wb:feat/fascinating-performance",
    "wb:feat/forager",
    "wb:feat/forensic-acumen",
-   "wb:feat/glean-contents"
+   "wb:feat/glean-contents",
+   "wb:feat/group-impression"
   ]
  },
  "extras": {

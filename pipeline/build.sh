@@ -242,6 +242,12 @@ echo "== 7d3. variante por subclasse =="
 # SOBROU no balaio, e a ordem inversa gatearia opcao que virou eixo.
 python3 derivar_variante_por_subclasse.py
 
+echo "== 7d4. pericia com Recall Knowledge =="
+# Tres feats se ofereciam a quem nao podia pega-los: a clausula real vivia em
+# `requires_residuo` e o `requires` guardava so o gate de nivel. O Pathbuilder
+# apontou, em 12 sondas de skill_feat rodadas em paralelo.
+python3 derivar_pericia_de_recall.py
+
 echo "== 7e3. estatisticas de familiar e eidolon =="
 # A DECIMA PRIMEIRA lacuna de leitura: `aon_dump/rules.json` tem 3.645 registros
 # e nenhum extrator o abria. Familiar e eidolon derivam do mestre -- o que

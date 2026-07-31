@@ -1475,6 +1475,32 @@ checar(pericia and all("skill" in (BASE.get(c["id"]).get("traits") or [])
        "cujo filtro so deixa passar feat de pericia",
        f"{len(pericia)} candidatos")
 
+# -- pericia com Recall Knowledge (spec pericia-de-recall-knowledge) --------
+# Tres feats se ofereciam a quem nao podia pega-los: a clausula real vivia em
+# `requires_residuo` e o `requires` guardava so o gate de nivel. Quem apontou
+# foi o Pathbuilder, em 12 sondas de skill_feat rodadas em paralelo.
+print("\n-- pericia com Recall Knowledge --")
+DUBIOUS = BASE.get("wb:feat/dubious-knowledge").get("requires")
+AUTOMATIC = BASE.get("wb:feat/automatic-knowledge").get("requires")
+mago2 = personagem(niveis((WIZARD, 2)) + BOOSTS)
+barbaro2 = personagem(niveis(("wb:class/barbarian", 2)) + BOOSTS)
+checar(mago2.avaliar(DUBIOUS)[0],
+       "Mago 2, trained em Arcana, atende `Dubious Knowledge` (pede trained)",
+       f"{mago2.avaliar(DUBIOUS)[1]}")
+checar(not mago2.avaliar(AUTOMATIC)[0],
+       "e NAO atende `Automatic Knowledge`, que pede expert")
+checar("expert" in (mago2.avaliar(AUTOMATIC)[1] or [""])[0],
+       "com o motivo nomeando o rank que falta",
+       f"{mago2.avaliar(AUTOMATIC)[1]}")
+checar(not barbaro2.avaliar(DUBIOUS)[0],
+       "Barbaro 2, sem nenhuma das oito pericias, nao atende nem a de trained",
+       f"{barbaro2.avaliar(DUBIOUS)[1]}")
+# Lore conta: e o que separa este termo de uma lista fixa de sete
+so_lore = personagem(niveis((WIZARD, 2)) + BOOSTS + [
+    {"em": "criacao", "slot": "background", "pega": "wb:background/barkeep"}])
+checar(so_lore.avaliar(DUBIOUS)[0],
+       "e qualquer Lore serve -- o Barkeep entra pela Alcohol Lore")
+
 # -- variante por subclasse (spec variante-por-subclasse) -------------------
 # `Field Discovery (Bomber)` nao e escolha: o campo de pesquisa ja decidiu. Eram
 # 68 opcoes de balaio oferecidas lado a lado, e um Bomber podia escolher a do

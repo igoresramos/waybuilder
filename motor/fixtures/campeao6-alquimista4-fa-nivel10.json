@@ -461,7 +461,7 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge"
+   "wb:feat/godless-healing"
   ],
   "general_feat@4": [
    "wb:feat/acupuncturist",
@@ -503,7 +503,7 @@
    "wb:feat/toughness",
    "wb:feat/trick-magic-item",
    "wb:feat/weapon-proficiency",
-   "wb:feat/automatic-knowledge"
+   "wb:feat/godless-healing"
   ],
   "skill_feat@1": [
    "wb:feat/acupuncturist",
@@ -569,7 +569,6 @@
    "wb:feat/stitch-flesh",
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/godless-healing",
    "wb:feat/tattoo-artist",
    "wb:feat/vasodilation",
@@ -587,7 +586,8 @@
    "wb:feat/charming-liar",
    "wb:feat/combat-climber",
    "wb:feat/concealing-legerdemain",
-   "wb:feat/contract-negotiator"
+   "wb:feat/contract-negotiator",
+   "wb:feat/courtly-graces"
   ],
   "skill_feat@4": [
    "wb:feat/acupuncturist",
@@ -611,7 +611,6 @@
    "wb:feat/stitch-flesh",
    "wb:feat/student-of-the-canon",
    "wb:feat/trick-magic-item",
-   "wb:feat/automatic-knowledge",
    "wb:feat/godless-healing",
    "wb:feat/tattoo-artist",
    "wb:feat/vasodilation",
@@ -629,7 +628,8 @@
    "wb:feat/bon-mot",
    "wb:feat/cat-fall",
    "wb:feat/charlatan",
-   "wb:feat/charming-liar"
+   "wb:feat/charming-liar",
+   "wb:feat/combat-climber"
   ]
  },
  "extras": {
