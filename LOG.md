@@ -1491,3 +1491,33 @@ Com os quatro, o numero real e **1.204**, e o topo dele e catalogo puro (trait
 551, relic 122, language 121). O que sobra de acionavel sao `familiar-ability`
 (72, declarado fora na spec do item 43), `draconic-exemplar` (44) e `class-kit`
 (32).
+
+## 2026-07-31 (6a rodada) -- os 44 dragoes, e a terceira forma de ChoiceSet
+
+Os 44 `draconic-exemplar` estavam inalcancaveis porque as duas fontes nunca se
+encontraram: os registros vem do AoN, e o Foundry escreve a escolha de dragao
+INLINE (`label: "PF2E.Dragon.<Nome>"`, com `value` sendo um objeto), sem
+referenciar o compendio. Era uma TERCEIRA forma de `ChoiceSet`, alem da lista
+de referencias e da query por filtro.
+
+Os rotulos que nao casam sao os dragoes PRE-REMASTER (Black, Blue, Brass,
+Bronze, Copper, Gold, Green, Red). A base tem so os 44 do remaster e esta
+certa: nao casar ali e a fonte legada falando, nao lacuna nossa.
+
+Tres defeitos meus no caminho, todos do mesmo tipo -- eu generalizando cedo
+demais:
+
+1. O gate nao pegava porque o dono e `wb:class-feature/dragon-instinct` e o
+   eixo do Barbaro lista o GEMEO `wb:instinct/dragon`. Faltava olhar
+   `equivale_a`.
+2. Depois disso o bloco continuava sem condicao, porque eu a derivava da
+   interseccao dos `requires` das opcoes -- e os 44 dragoes servem ao Barbaro E
+   ao Feiticeiro, entao cada um tem um `any` diferente. A condicao do BLOCO e o
+   ramo DAQUELA classe, que eu ja sabia na hora de criar.
+3. E ao corrigir isso quebrei o Inventor: `initial-modification` tem QUATRO
+   donos (as quatro inovacoes), e gatear o bloco num deles fazia o eixo sumir
+   para quem escolheu outro. Gate de bloco so vale com dono UNICO; com varios,
+   o gate fica na OPCAO e a lista aparece inteira com o que nao cabe marcado.
+
+O oraculo Python pegou o terceiro -- os testes do Inventor da rodada anterior
+falharam na hora.
