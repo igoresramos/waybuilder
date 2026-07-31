@@ -122,25 +122,26 @@ items:
   id: 68
   date: '2026-07-29'
   priority: media
-- desc: 'MEDIDO 2026-07-31 e o balaio FINALMENTE tem explicacao estrutural -- ele nao e um monte de
-    opcoes sem regra, sao TRES familias, e nenhuma delas e escolha livre. Classificando as 202 pelo sufixo
-    do nome contra as opcoes de subclasse da propria classe: (a) **68 sao VARIANTE POR SUBCLASSE** --
-    `Field Discovery (Bomber|Chirurgeon|Mutagenist|Toxicologist)`, `Initiate Benefit (Amulet|Bell|Chalice|...)`,
-    `Final Doctrine (Warpriest)`. O parentese casa EXATAMENTE o nome de uma opcao de subclasse ja escolhida,
-    entao nao ha o que escolher: a subclasse determina. E o desenho ja provado duas vezes (gate
-    `requires: {subclass: ...}` da spec do Inventor, e o gemeo `equivale_a`). (b) **~30 sao o PAI GENERICO
-    dessas variantes** -- `Perpetual Infusions` sem parentese existe ao lado dos quatro `Perpetual Infusions
-    (X)`; e a entrada guarda-chuva, nao uma quinta opcao. (c) **O RESTO sao EIXOS DE VERDADE que ninguem
-    modelou**, e este e o achado que vale: os 18 do Exemplar sao os EPITETOS (`The Brave`, `The Cunning`,
-    `The Deft`, `The Mournful`, `The Proud`, `The Radiant`...) e os 4 do Clerigo sao os degraus de credo
-    (`Initial|Greater|True|Final Creed`). CAMINHO PRONTO: os epitetos carregam a tag `exemplar-root-epithet`
-    (6 registros), e ha mais dois grupos iguais na base -- `psychic-conscious-mind` (6) e `witch-patron`
-    (3). A maquinaria de derivar eixo por tag/filtro entrou em 31/07 e nao os alcancou porque a feature de
-    progressao que os concede nao declara `ChoiceSet` com filter. Proximo passo: spec propria, derivando
-    eixo a partir da TAG quando a classe tem registros com tag propria e nenhum eixo que os alcance. ||
-    HIPOTESES ANTERIORES, todas medidas e mortas: (a) estar na progressao -> ZERO das 265; (b) lista literal
-    de ChoiceSet -> 66 explicadas, feito na spec do Inventor; (c) ja concedida pela cadeia de grants ->
-    apenas TRES (`formula-book`, `versatile-vials`, `champions-aura`).'
+- desc: 'METADE FEITA 2026-07-31 (spec specs/2026-07-31-nomear-o-balaio-por-tag.md). O BALAIO JA ERA
+    EIXO -- faltava o NOME. Um Exemplar ja recebia os epitetos nos niveis 3, 7 e 15 com `escolhe: 1`;
+    o bloco funcionava, so se chamava `outras-opcoes`, e na tela virava "Exemplar / outras-opcoes" --
+    o jogador escolhia sem saber o que. O nome estava na `tags` dos proprios registros. Agora cada bloco
+    de balaio se PARTE por tag (grupo de 2+ vira eixo com o nome da tag; o que nao tem tag fica). Sao 11
+    eixos nomeados cobrindo 91 opcoes: Exemplar root/dominion/sovereignty-epithet (6/8/4), Sorcerer
+    bloodline 18, Summoner eidolon 13, Animist apparition 13 + practice 4 (UM balaio carregava DOIS eixos),
+    Barbarian instinct 9, Druid order 9, Investigator methodology 5, Champion blessing 2. Balaio: 202 ->
+    111. PROVA DE SEGURANCA: comparei `candidatos("subclasse", n)` de TODAS as classes antes e depois --
+    ZERO conjuntos mudaram, so foram redistribuidos entre blocos com nome. ACHADO DE QUEBRA: Feiticeiro
+    (18/19) e Invocador (13/14) sobram UMA opcao cada, e as duas sao a mesma coisa -- `Spell Repertoire
+    (Sorcerer|Summoner)`, feature automatica arquivada no balaio por engano, que NAO chega a ficha por
+    nenhum outro caminho. Antes elas estavam misturadas entre as linhagens e o jogador podia escolher
+    "Spell Repertoire" no lugar de uma linhagem; a divisao nao criou o problema, isolou. || AS 111 QUE
+    SOBRAM, ja explicadas em estrutura pela medicao de sufixo: ~68 sao VARIANTE POR SUBCLASSE (`Field
+    Discovery (Bomber)`, `Initiate Benefit (Amulet)`) -- o parentese casa exatamente uma opcao de subclasse
+    ja escolhida, entao pedem gate `requires: {subclass: ...}` e nao eixo; ~30 sao o PAI GENERICO dessas
+    variantes (`Perpetual Infusions` ao lado dos quatro `(X)`); o resto e cauda, com os dois Spell Repertoire
+    dentro. || HIPOTESES MORTAS, todas medidas: estar na progressao -> ZERO; lista literal de ChoiceSet ->
+    66, feito na spec do Inventor; ja concedida pela cadeia de grants -> TRES.'
   id: 69
   date: '2026-07-31'
   priority: media
