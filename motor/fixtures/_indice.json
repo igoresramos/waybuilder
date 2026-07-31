@@ -19,6 +19,14 @@
    "slots_abertos": 14
   },
   {
+   "ficha": "_teste-validacao-escolha-multipla",
+   "nivel": 3,
+   "hp": 41,
+   "avisos": 3,
+   "fora_do_requisito": 0,
+   "slots_abertos": 11
+  },
+  {
    "ficha": "_teste-validacao-familiar-concedido",
    "nivel": 3,
    "hp": 29,

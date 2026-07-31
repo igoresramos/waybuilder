@@ -289,6 +289,41 @@ export function subclasseEm(
   return typeof e?.pega === "string" ? e.pega : null;
 }
 
+// -- eixo que escolhe MAIS DE UMA -------------------------------------------
+//
+// `escolherSubclasse` SUBSTITUI por (nivel, eixo), que e o certo para os 52
+// blocos de `escolhe: 1`. O eixo de ikon do Exemplar pede tres ("Select three
+// ikons"), e substituir ali faria a segunda escolha apagar a primeira.
+//
+// A chave passa a ser o proprio `pega`: cada ikon e uma entrada, remover tira
+// aquele, e escolher um que ja esta la nao duplica.
+// Spec: specs/2026-07-30-escolha-multipla-e-ikons.md
+
+export function subclassesEm(
+  doc: Documento, nivel: number, eixo: string | null,
+): string[] {
+  return doc.escolhas.filter((x) => mesmaSub(x, nivel, eixo))
+                     .map((x) => x.pega)
+                     .filter((p): p is string => typeof p === "string");
+}
+
+export function adicionarSubclasse(
+  doc: Documento, nivel: number, eixo: string | null, pega: string,
+): Documento {
+  if (subclassesEm(doc, nivel, eixo).includes(pega)) return doc;
+  const escolhas = [...doc.escolhas, { em: nivel, slot: "subclasse", eixo, pega }];
+  return { ...doc, escolhas: ordenar(escolhas) };
+}
+
+export function removerSubclasse(
+  doc: Documento, nivel: number, eixo: string | null, pega: string,
+): Documento {
+  return {
+    ...doc,
+    escolhas: doc.escolhas.filter((e) => !(mesmaSub(e, nivel, eixo) && e.pega === pega)),
+  };
+}
+
 // -- ator concedido por feat -------------------------------------------------
 //
 // O companheiro NAO vive em `escolhas`: ele e um ator, com nome, especie e

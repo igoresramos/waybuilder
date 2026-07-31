@@ -1,0 +1,23 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {
+  "versao": "2026-07-30",
+  "pin_foundry": "87f9e502"
+ },
+ "identidade": {
+  "nome": "TESTE ESCOLHA MULTIPLA -- Exemplar 3 com os tres ikons",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao da spec specs/2026-07-30-escolha-multipla-e-ikons.md (item 97). O campo `escolhe` existe no schema desde sempre e ate 2026-07-30 TODOS os 52 blocos de sub-escolha da base usavam 1 -- o motor nem lia o campo, fazia `next((o for o in opcoes if o in escolhidas), None)` e devolvia UMA. O Exemplar concede `divine-spark-and-ikons` no nivel 1 e a prosa oficial diz 'Select three ikons': num bloco de tres, aquele `next` devolveria o primeiro e perderia dois em SILENCIO, que e o pior desfecho possivel. Esta ficha existe para que a camada de paridade Python/TS exercite o caso -- sem ela, nenhuma fixture teria bloco com `escolhe` diferente de 1 e o porte poderia divergir sem ninguem ver. Escolhe DOIS dos tres de proposito: assim a fixture congela ao mesmo tempo o estado 'parcialmente preenchido' (o slot continua aberto pedindo 1, e as duas features ja entraram) e o eixo de epithet do nivel 3, que e `escolhe: 1` e nao pode ter mudado de comportamento. Os ikons nao concedem mecanica -- `grants` esta vazio nos 21, dos dois lados do par ikon/class-feature --, entao o que se prova aqui e a ESCOLHA existir, aparecer em `features` e fechar o slot na conta certa."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/warrior"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/exemplar"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/exemplar"},
+  {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/exemplar"},
+  {"em": 1, "slot": "subclasse", "pega": "wb:ikon/gleaming-blade"},
+  {"em": 1, "slot": "subclasse", "pega": "wb:ikon/barrows-edge"},
+  {"em": 3, "slot": "subclasse", "pega": "wb:class-feature/the-brave"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "cha"]}
+ ]
+}

@@ -1446,7 +1446,9 @@
    {
     "classe": "Witch",
     "eixo": "lesson",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 2,
     "nome": null,
     "opcoes": 19,
@@ -1475,7 +1477,9 @@
    {
     "classe": "Witch",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 4,
@@ -1489,7 +1493,11 @@
    {
     "classe": "Witch",
     "eixo": "patron",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/baba-yaga",
+    "escolhidos": [
+     "wb:class-feature/baba-yaga"
+    ],
     "nivel": 1,
     "nome": "Baba Yaga",
     "opcoes": 16,

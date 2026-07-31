@@ -1421,7 +1421,9 @@
    {
     "classe": "Rogue",
     "eixo": "racket",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 6,

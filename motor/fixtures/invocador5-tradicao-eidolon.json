@@ -1456,7 +1456,11 @@
    {
     "classe": "Summoner",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/angel-eidolon",
+    "escolhidos": [
+     "wb:class-feature/angel-eidolon"
+    ],
     "nivel": 1,
     "nome": "Angel Eidolon",
     "opcoes": 14,

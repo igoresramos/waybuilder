@@ -1346,7 +1346,11 @@
    {
     "classe": "Wizard",
     "eixo": "arcane-school",
+    "escolhe": 1,
     "escolhido": "wb:arcane-school/evocation",
+    "escolhidos": [
+     "wb:arcane-school/evocation"
+    ],
     "nivel": 1,
     "nome": "Evocation",
     "opcoes": 23,
@@ -1379,7 +1383,11 @@
    {
     "classe": "Wizard",
     "eixo": "arcane-thesis",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/spell-blending",
+    "escolhidos": [
+     "wb:class-feature/spell-blending"
+    ],
     "nivel": 1,
     "nome": "Spell Blending",
     "opcoes": 5,
@@ -1394,7 +1402,9 @@
    {
     "classe": "Wizard",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 14,

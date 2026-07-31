@@ -1852,7 +1852,11 @@
    {
     "classe": "Champion",
     "eixo": "cause",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/justice",
+    "escolhidos": [
+     "wb:class-feature/justice"
+    ],
     "nivel": 1,
     "nome": "Justice",
     "opcoes": 7,
@@ -1869,7 +1873,9 @@
    {
     "classe": "Champion",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 2,
@@ -1881,7 +1887,9 @@
    {
     "classe": "Champion",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 3,
@@ -1894,7 +1902,9 @@
    {
     "classe": "Champion",
     "eixo": "deity",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 488,
@@ -2392,7 +2402,9 @@
    {
     "classe": "Alchemist",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 5,
@@ -2407,7 +2419,11 @@
    {
     "classe": "Alchemist",
     "eixo": "research-field",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/bomber",
+    "escolhidos": [
+     "wb:class-feature/bomber"
+    ],
     "nivel": 1,
     "nome": "Bomber",
     "opcoes": 4,

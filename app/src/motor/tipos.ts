@@ -259,6 +259,11 @@ export interface SlotDeSubclasse {
   opcoes: number;
   /** e QUAIS -- `candidatos("subclasse")` precisa dos ids */
   opcoes_ids: string[];
+  /** quantas o eixo pede. 1 em 52 dos 53 blocos; 3 no eixo de ikon do Exemplar */
+  escolhe: number;
+  /** todas as escolhidas, na ordem da fonte. Spec `escolha-multipla-e-ikons` */
+  escolhidos: string[];
+  /** a primeira de `escolhidos` -- o que os blocos de `escolhe: 1` sempre foram */
   escolhido: string | null;
   nome: string | null;
 }

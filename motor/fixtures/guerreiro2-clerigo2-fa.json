@@ -1441,7 +1441,11 @@
    {
     "classe": "Cleric",
     "eixo": "doctrine",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/warpriest",
+    "escolhidos": [
+     "wb:class-feature/warpriest"
+    ],
     "nivel": 1,
     "nome": "Warpriest",
     "opcoes": 3,
@@ -1454,7 +1458,9 @@
    {
     "classe": "Cleric",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 5,
@@ -1469,7 +1475,9 @@
    {
     "classe": "Cleric",
     "eixo": "deity",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 488,

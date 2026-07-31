@@ -1729,6 +1729,57 @@ guerreiro = personagem(
 checar(not julga(guerreiro, "wb:feat/battle-prayer"),
        "quem nao segue divindade nao atende `you follow a deity`")
 
+# --------------------------------------------------------------------------
+# `escolhe: N` -- o eixo de ikon do Exemplar e o primeiro bloco da base que nao
+# escolhe 1. Spec: specs/2026-07-30-escolha-multipla-e-ikons.md
+# --------------------------------------------------------------------------
+print("\n-- escolha multipla (ikons do Exemplar) --")
+
+IKONS = ["wb:ikon/gleaming-blade", "wb:ikon/barrows-edge", "wb:ikon/starshot"]
+
+def exemplar(*ikons):
+    return personagem(
+        [{"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/exemplar"}]
+        + [{"em": 1, "slot": "subclasse", "pega": i} for i in ikons])
+
+def slot_ikon(p):
+    return next((s for s in p.slots_abertos() if s.get("kind") == "ikon"), None)
+
+vazio = exemplar()
+checar((slot_ikon(vazio) or {}).get("escolhe") == 3,
+       "Exemplar 1 abre o slot de ikon pedindo 3")
+checar(any("falta escolher `ikon` (3 de 3)" in a for a in vazio.avisos),
+       "e o aviso diz quantas faltam, nao so que falta")
+
+um = exemplar(IKONS[0])
+checar((slot_ikon(um) or {}).get("escolhe") == 2,
+       "escolhido um, o slot continua aberto pedindo 2")
+checar(len([f for f in um.features if f.get("eixo") == "ikon"]) == 1,
+       "e o ikon escolhido entra em `features`")
+
+tres = exemplar(*IKONS)
+checar(slot_ikon(tres) is None, "escolhidos os tres, o slot fecha")
+checar(len([f for f in tres.features if f.get("eixo") == "ikon"]) == 3,
+       "e as TRES features entram -- nao so a primeira")
+
+# escolha demais e AVISO, nunca correcao: apagar escolha do jogador e o oposto
+# do que este projeto faz
+quatro = exemplar(*IKONS, "wb:ikon/noble-branch")
+checar(any("4 escolhas para 3 vaga(s)" in a for a in quatro.avisos),
+       "um quarto ikon vira aviso")
+checar(len([f for f in quatro.features if f.get("eixo") == "ikon"]) == 4,
+       "e nenhuma escolha e descartada")
+
+# os 52 blocos de `escolhe: 1` nao podem ter mudado de comportamento
+mago = personagem([{"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/wizard"}])
+checar(all(s.get("escolhe") == 1 for s in mago.slots_abertos()
+           if s.get("slot") == "subclasse"),
+       "e os eixos de escolha unica seguem pedindo 1")
+
+checar(BASE.opcional("wb:ikon/gleaming-blade").get("equivale_a")
+       == "wb:class-feature/gleaming-blade",
+       "o ikon e o gemeo class-feature estao ligados nos dois sentidos")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

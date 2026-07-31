@@ -184,18 +184,51 @@ export default function App() {
                   mesmo valor. Os candidatos tambem sao por eixo -- oferecer as
                   opcoes de `cause` num slot de `outras-opcoes` e oferecer o
                   que nao cabe ali. */}
-              {n <= nivel && v.subclasses.filter((b) => b.nivel === n).map((b, i) => (
-                <Slot base={base} key={`sub${i}-${b.eixo ?? ""}`}
-                      rotulo={`${b.classe} / ${b.eixo ?? "sub-escolha"}`}
-                      tipo="class"
-                      candidatos={p.candidatos("subclasse", n)
-                        .filter((c) => (b.opcoes_ids ?? []).includes(c.id))}
-                      escolhido={doc.subclasseEm(d, n, b.eixo ?? null)}
-                      aoEscolher={(x) =>
-                        setD(doc.escolherSubclasse(d, n, b.eixo ?? null, x))}
-                      aoLimpar={() =>
-                        setD(doc.limparSubclasse(d, n, b.eixo ?? null))} />
-              ))}
+              {n <= nivel && v.subclasses.filter((b) => b.nivel === n).flatMap((b, i) => {
+                const eixo = b.eixo ?? null;
+                const doEixo = p.candidatos("subclasse", n)
+                  .filter((c) => (b.opcoes_ids ?? []).includes(c.id));
+                const rotulo = `${b.classe} / ${b.eixo ?? "sub-escolha"}`;
+                // Os 52 blocos de `escolhe: 1` seguem exatamente como eram: uma
+                // linha, substituindo ao escolher.
+                if ((b.escolhe ?? 1) <= 1) {
+                  return [
+                    <Slot base={base} key={`sub${i}-${b.eixo ?? ""}`}
+                          rotulo={rotulo} tipo="class" candidatos={doEixo}
+                          escolhido={doc.subclasseEm(d, n, eixo)}
+                          aoEscolher={(x) =>
+                            setD(doc.escolherSubclasse(d, n, eixo, x))}
+                          aoLimpar={() => setD(doc.limparSubclasse(d, n, eixo))} />,
+                  ];
+                }
+                // `escolhe: N` (os tres ikons do Exemplar): uma linha por
+                // escolha ja feita, mais UMA aberta enquanto faltar. Substituir
+                // aqui faria a segunda escolha apagar a primeira.
+                const feitas = doc.subclassesEm(d, n, eixo);
+                const linhas = feitas.map((pego, j) => (
+                  <Slot base={base} key={`sub${i}-${b.eixo ?? ""}-${pego}`}
+                        rotulo={`${rotulo} ${j + 1}/${b.escolhe}`} tipo="class"
+                        candidatos={doEixo}
+                        escolhido={pego}
+                        aoEscolher={(x) => setD(doc.adicionarSubclasse(
+                          doc.removerSubclasse(d, n, eixo, pego), n, eixo, x))}
+                        aoLimpar={() =>
+                          setD(doc.removerSubclasse(d, n, eixo, pego))} />
+                ));
+                if (feitas.length < b.escolhe) {
+                  linhas.push(
+                    <Slot base={base} key={`sub${i}-${b.eixo ?? ""}-aberto`}
+                          rotulo={`${rotulo} ${feitas.length + 1}/${b.escolhe}`}
+                          tipo="class"
+                          candidatos={doEixo.filter((c) => !feitas.includes(c.id))}
+                          escolhido={null}
+                          aoEscolher={(x) =>
+                            setD(doc.adicionarSubclasse(d, n, eixo, x))}
+                          aoLimpar={() => setD(d)} />,
+                  );
+                }
+                return linhas;
+              })}
 
               {/* Companheiro concedido por feat. O slot nasce do `grant_actor`
                   do proprio feat pego neste nivel -- ate 2026-07-29 pegar

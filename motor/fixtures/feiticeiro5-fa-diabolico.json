@@ -1423,7 +1423,11 @@
    {
     "classe": "Sorcerer",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/bloodline-diabolic",
+    "escolhidos": [
+     "wb:class-feature/bloodline-diabolic"
+    ],
     "nivel": 1,
     "nome": "Bloodline: Diabolic",
     "opcoes": 19,

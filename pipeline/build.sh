@@ -169,6 +169,12 @@ echo "== 7e. mecanica de dedicacao derivada da prosa oficial =="
 # (passo 5) e nao deve enriquecer registro que a fusao vai absorver (passo 7).
 python3 derivar_mecanica_dedicacao.py
 
+echo "== 7e0. eixo de ikon do Exemplar (o primeiro `escolhe: 3`) =="
+# Antes do eixo de divindade so por ordem de leitura; os dois sao independentes.
+# Depois da fusao, como todos os passos que emitem id: as opcoes sao os ids
+# canonicos dos 21 ikons.
+python3 derivar_eixo_de_ikon.py
+
 echo "== 7e1. eixo de divindade nas classes que a exigem =="
 # Depois da fusao e dos aliases: as opcoes sao os ids CANONICOS das 488
 # divindades, e emitir antes pegaria id que a fusao ainda ia aposentar.

@@ -366,12 +366,22 @@ export class Personagem implements ContextoDePredicado {
           ? inteiro(bloco["nivel"]) : 1;
         if (nivel_bloco > nivel_classe) continue;
         const opcoes = listaDe(bloco["opcoes"]);
-        const escolha = opcoes.find((o) => escolhidas.has(o)) ?? null;
+        // `escolhe` existe no schema desde sempre e até 30/07 TODOS os 52
+        // blocos usavam 1 -- o motor nem lia o campo. O eixo de ikon do
+        // Exemplar é o primeiro com 3 ("Select three ikons", prosa oficial), e
+        // pegar só a primeira perderia duas em SILÊNCIO.
+        // Spec: specs/2026-07-30-escolha-multipla-e-ikons.md
+        const quantas = Math.max(1, inteiro(bloco["escolhe"] ?? 1) || 1);
+        const escolhidosDoBloco = opcoes.filter((o) => escolhidas.has(o))
+                                        .filter(ehStr);
+        const escolha = escolhidosDoBloco.length ? escolhidosDoBloco[0] : null;
         const reg = escolha === null ? null : this.base.opcional(escolha);
         this.slots_de_subclasse.push({
           classe: nomeOu(classe, cid),
           eixo: ehStr(bloco["eixo"]) ? bloco["eixo"] : null,
           nivel: ehInt(bloco["nivel"]) ? bloco["nivel"] : null,
+          escolhe: quantas,
+          escolhidos: escolhidosDoBloco,
           opcoes: opcoes.length,
           // a LISTA, alem da contagem: `candidatos("subclasse")` precisa dos
           // ids. Ate 2026-07-28 o Python iterava `opcoes` -- que e um int --
@@ -382,17 +392,29 @@ export class Personagem implements ContextoDePredicado {
           escolhido: ehStr(escolha) ? escolha : null,
           nome: escolha === null ? null : nome(reg),
         });
-        if (escolha === null) {
+        const faltamSub = quantas - escolhidosDoBloco.length;
+        if (faltamSub > 0) {
+          const quanto = quantas === 1
+            ? `(${opcoes.length} opcoes)`
+            : `(${faltamSub} de ${quantas})`;
           this.avisos.push(
             `${pyStr(nome(classe))}: falta escolher \`${pyStr(obter(bloco, "eixo"))}\` `
-            + `(${opcoes.length} opcoes)`);
-        } else if (reg !== null) {
+            + quanto);
+        } else if (faltamSub < 0) {
+          // escolha demais NÃO é corrigida: o motor diz, e não apaga.
+          this.avisos.push(
+            `${pyStr(nome(classe))}: \`${pyStr(obter(bloco, "eixo"))}\` tem `
+            + `${escolhidosDoBloco.length} escolhas para ${quantas} vaga(s)`);
+        }
+        for (const pego of escolhidosDoBloco) {
+          const r = this.base.opcional(pego);
+          if (r === null) continue;
           this.features.push({
-            id: ehStr(escolha) ? escolha : null,
-            nome: nomeOu(reg, pyStr(escolha)),
+            id: pego,
+            nome: nomeOu(r, pyStr(pego)),
             classe: nomeOu(classe, cid),
             nivel_de_classe: ehInt(bloco["nivel"]) ? bloco["nivel"] : null,
-            grants: listaDe(reg["grants"]),
+            grants: listaDe(r["grants"]),
             na_base: true,
             eixo: ehStr(bloco["eixo"]) ? bloco["eixo"] : null,
           });
@@ -2307,19 +2329,33 @@ export class Personagem implements ContextoDePredicado {
 
   /** A sub-escolha que este personagem fez para a classe dada. */
   private _subclasse_de(classe_id: string): string | null {
-    // A ordem é a da FONTE, e não a do documento. Uma classe tem VÁRIOS eixos
-    // (o Mago tem `arcane-school`, `arcane-thesis` e `outras-opcoes`), e
-    // percorrer as escolhas do jogador fazia a resposta depender de qual delas
-    // vinha antes no array. Spec: `specs/2026-07-30-pendencias-do-review.md`
+    const todas = this._subescolhas_de(classe_id);
+    return todas.length ? todas[0] : null;
+  }
+
+  /**
+   * TODAS as sub-escolhas desta classe, na ordem da FONTE.
+   *
+   * A ordem é a da FONTE, e não a do documento. Uma classe tem VÁRIOS eixos
+   * (o Mago tem `arcane-school`, `arcane-thesis` e `outras-opcoes`), e
+   * percorrer as escolhas do jogador fazia a resposta depender de qual delas
+   * vinha antes no array. Spec: `specs/2026-07-30-pendencias-do-review.md`
+   *
+   * Devolve LISTA por causa de `escolhe: N`: o eixo de ikon do Exemplar guarda
+   * três escolhas no mesmo bloco, e uma só deixaria duas invisíveis ao
+   * predicado.
+   */
+  private _subescolhas_de(classe_id: string): string[] {
     const classe = dictDe(this.base.opcional(classe_id));
     const escolhidas = new Set<unknown>(
       this._escolhas("subclasse").map((e) => e["pega"]));
+    const saida: string[] = [];
     for (const b of listaDe(classe["subclasses"])) {
       for (const o of listaDe(dictDe(b)["opcoes"])) {
-        if (escolhidas.has(o)) return ehStr(o) ? o : null;
+        if (escolhidas.has(o) && ehStr(o)) saida.push(o);
       }
     }
-    return null;
+    return saida;
   }
 
   // -- avaliação do predicado ---------------------------------------------
@@ -2651,8 +2687,13 @@ export class Personagem implements ContextoDePredicado {
       // personagem que ainda não escolheu subclasse (`escolhida` nulo) casava
       // com o `equivale_a` ausente e passava a atender TODO requisito.
       const gemeo = dictDe(this.base.opcional(alvo))["equivale_a"];
-      const casa = escolhida === alvo || (verdadeiro(gemeo) && escolhida === gemeo);
-      if (!verdadeiro(escolhida) || !casa) {
+      // com `escolhe: N` a classe tem VÁRIAS sub-escolhas no mesmo eixo (os
+      // três ikons do Exemplar). Comparar só com a primeira reprovaria
+      // requisito que cita a segunda ou a terceira.
+      const todas = new Set<unknown>(this._subescolhas_de(`wb:class/${slug}`));
+      if (verdadeiro(escolhida)) todas.add(escolhida);
+      const casa = todas.has(alvo) || (verdadeiro(gemeo) && todas.has(gemeo));
+      if (!casa) {
         const nome_alvo = nomeOu(this.base.opcional(alvo), pyStr(alvo));
         const atual = verdadeiro(escolhida)
           ? nomeOu(this.base.opcional(escolhida), pyStr(escolhida)) : "nenhuma";
@@ -2984,10 +3025,13 @@ export class Personagem implements ContextoDePredicado {
     }
 
     for (const bloco of this.slots_de_subclasse) {
-      if (bloco.escolhido === null) {
+      // `escolhe: N` -- o mesmo formato que `boosts_livres` já usava: um slot
+      // só, dizendo QUANTAS faltam.
+      const faltamSub = bloco.escolhe - bloco.escolhidos.length;
+      if (faltamSub > 0) {
         abertos.push({
           slot: "subclasse", em: bloco.nivel, kind: bloco.eixo,
-          escolhe: 1, opcoes: bloco.opcoes,
+          escolhe: faltamSub, opcoes: bloco.opcoes,
           rotulo: `${bloco.classe} / ${pyStr(bloco.eixo)}`,
         });
       }

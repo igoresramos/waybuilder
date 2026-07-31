@@ -1718,7 +1718,11 @@
    {
     "classe": "Ranger",
     "eixo": "hunters-edge",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/precision",
+    "escolhidos": [
+     "wb:class-feature/precision"
+    ],
     "nivel": 1,
     "nome": "Precision",
     "opcoes": 4,
@@ -1732,7 +1736,9 @@
    {
     "classe": "Ranger",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 2,

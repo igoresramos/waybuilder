@@ -1552,7 +1552,9 @@
    {
     "classe": "Wizard",
     "eixo": "arcane-school",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 23,
@@ -1585,7 +1587,9 @@
    {
     "classe": "Wizard",
     "eixo": "arcane-thesis",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 5,
@@ -1600,7 +1604,9 @@
    {
     "classe": "Wizard",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 14,

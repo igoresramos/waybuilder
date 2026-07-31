@@ -1498,7 +1498,11 @@
    {
     "classe": "Barbarian",
     "eixo": "instinct",
+    "escolhe": 1,
     "escolhido": "wb:instinct/fury",
+    "escolhidos": [
+     "wb:instinct/fury"
+    ],
     "nivel": 1,
     "nome": "Fury",
     "opcoes": 10,
@@ -1518,7 +1522,9 @@
    {
     "classe": "Barbarian",
     "eixo": "outras-opcoes",
+    "escolhe": 1,
     "escolhido": null,
+    "escolhidos": [],
     "nivel": 1,
     "nome": null,
     "opcoes": 9,

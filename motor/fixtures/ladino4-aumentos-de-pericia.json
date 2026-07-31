@@ -1424,7 +1424,11 @@
    {
     "classe": "Rogue",
     "eixo": "racket",
+    "escolhe": 1,
     "escolhido": "wb:class-feature/thief",
+    "escolhidos": [
+     "wb:class-feature/thief"
+    ],
     "nivel": 1,
     "nome": "Thief",
     "opcoes": 6,

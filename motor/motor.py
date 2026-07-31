@@ -356,11 +356,21 @@ class Personagem:
             for bloco in classe.get("subclasses") or []:
                 if int(bloco.get("nivel") or 1) > nivel_classe:
                     continue
-                escolha = next((o for o in bloco.get("opcoes") or [] if o in escolhidas), None)
+                # `escolhe` existe no schema desde sempre e ate 30/07 TODOS os
+                # 52 blocos usavam 1 -- o motor nem lia o campo, fazia
+                # `next(...)` e pronto. O eixo de ikon do Exemplar e o primeiro
+                # com 3 ("Select three ikons", prosa oficial), e um `next` ali
+                # devolveria a primeira e perderia duas em SILENCIO.
+                # Spec: specs/2026-07-30-escolha-multipla-e-ikons.md
+                quantas = max(1, int(bloco.get("escolhe") or 1))
+                escolhidos = [o for o in bloco.get("opcoes") or [] if o in escolhidas]
+                escolha = escolhidos[0] if escolhidos else None
                 self.slots_de_subclasse.append({
                     "classe": classe.get("name", cid),
                     "eixo": bloco.get("eixo"),
                     "nivel": bloco.get("nivel"),
+                    "escolhe": quantas,
+                    "escolhidos": escolhidos,
                     "opcoes": len(bloco.get("opcoes") or []),
                     # a LISTA, alem da contagem: `candidatos("subclasse")`
                     # precisa dos ids, e ate 2026-07-28 iterava `opcoes` -- que
@@ -371,15 +381,26 @@ class Personagem:
                     "escolhido": escolha,
                     "nome": (self.base.opcional(escolha) or {}).get("name") if escolha else None,
                 })
-                if escolha is None:
+                faltam = quantas - len(escolhidos)
+                if faltam > 0:
+                    quanto = (f"({len(bloco.get('opcoes') or [])} opcoes)"
+                              if quantas == 1
+                              else f"({faltam} de {quantas})")
                     self.avisos.append(
-                        f"{classe.get('name')}: falta escolher `{bloco.get('eixo')}` "
-                        f"({len(bloco.get('opcoes') or [])} opcoes)")
-                else:
-                    reg = self.base.opcional(escolha)
+                        f"{classe.get('name')}: falta escolher "
+                        f"`{bloco.get('eixo')}` {quanto}")
+                elif faltam < 0:
+                    # escolha demais NAO e corrigida: o motor diz, e nao apaga.
+                    # Descartar escolha do jogador e o oposto do que este
+                    # projeto faz -- ver a licao de `Base.opcional` e alias.
+                    self.avisos.append(
+                        f"{classe.get('name')}: `{bloco.get('eixo')}` tem "
+                        f"{len(escolhidos)} escolhas para {quantas} vaga(s)")
+                for pego in escolhidos:
+                    reg = self.base.opcional(pego)
                     if reg:
                         self.features.append({
-                            "id": escolha, "nome": reg.get("name", escolha),
+                            "id": pego, "nome": reg.get("name", pego),
                             "classe": classe.get("name", cid),
                             "nivel_de_classe": bloco.get("nivel"),
                             "grants": reg.get("grants") or [],
@@ -2146,13 +2167,20 @@ class Personagem:
 
         Spec: `specs/2026-07-30-pendencias-do-review.md`
         """
+        todas = self._subescolhas_de(classe_id)
+        return todas[0] if todas else None
+
+    def _subescolhas_de(self, classe_id: str) -> list[str]:
+        """TODAS as sub-escolhas desta classe, na ordem da FONTE.
+
+        Existe por causa de `escolhe: N`: o eixo de ikon do Exemplar guarda tres
+        escolhas no mesmo bloco, e `_subclasse_de` -- que devolve uma so --
+        deixaria duas invisiveis para o predicado.
+        """
         classe = self.base.opcional(classe_id) or {}
         escolhidas = {e.get("pega") for e in self._escolhas("subclasse")}
-        for bloco in (classe.get("subclasses") or []):
-            for o in (bloco.get("opcoes") or []):
-                if o in escolhidas:
-                    return o
-        return None
+        return [o for bloco in (classe.get("subclasses") or [])
+                for o in (bloco.get("opcoes") or []) if o in escolhidas]
 
     # -- avaliacao do predicado ---------------------------------------------
 
@@ -2469,7 +2497,13 @@ class Personagem:
             # atender TODO requisito de sub-escolha. Pego pela paridade, que
             # acusou 28 fixtures mudando de candidato.
             gemeos = {alvo} | ({gemeo} if gemeo else set())
-            if not escolhida or escolhida not in gemeos:
+            # com `escolhe: N` a classe tem VARIAS sub-escolhas no mesmo eixo
+            # (os tres ikons do Exemplar). Comparar so com a primeira reprovaria
+            # requisito que cita a segunda ou a terceira.
+            todas = set(self._subescolhas_de(f"wb:class/{slug}"))
+            if escolhida:
+                todas.add(escolhida)
+            if not todas & gemeos:
                 nome = (self.base.opcional(alvo) or {}).get("name", alvo)
                 atual = (self.base.opcional(escolhida) or {}).get("name", "nenhuma") \
                     if escolhida else "nenhuma"
@@ -2779,10 +2813,15 @@ class Personagem:
                 "rotulo": f"feat concedido por {bloco.get('origem')}"})
 
         for bloco in self.slots_de_subclasse:
-            if bloco.get("escolhido") is None:
+            # `escolhe: N` -- o mesmo formato que `boosts_livres` ja usava: um
+            # slot so, dizendo QUANTAS faltam. Ver spec
+            # `2026-07-30-escolha-multipla-e-ikons.md`.
+            faltam_sub = (int(bloco.get("escolhe") or 1)
+                          - len(bloco.get("escolhidos") or []))
+            if faltam_sub > 0:
                 abertos.append({
                     "slot": "subclasse", "em": bloco.get("nivel"),
-                    "kind": bloco.get("eixo"), "escolhe": 1,
+                    "kind": bloco.get("eixo"), "escolhe": faltam_sub,
                     "opcoes": bloco.get("opcoes"),
                     "rotulo": f"{bloco.get('classe')} / {bloco.get('eixo')}"})
 
