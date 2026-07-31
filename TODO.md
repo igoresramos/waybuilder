@@ -195,35 +195,26 @@ items:
 - id: 98
   date: '2026-07-30'
   priority: baixa
-  desc: 'PARTE PRINCIPAL FECHADA 2026-07-30 (commit 69d2df0f5, spec divindade-na-ficha). Entrou: eixo
-    `deity` derivado de quem cita `class-feature/deity-*` (Clerigo e Campeao, 488 opcoes), quatro termos
-    nos dois motores (deity, has_deity, deity_font, domain), os padroes de parser e a linha da divindade
-    na ficha com dominio e arma resolvidos por nome. Residuo de divindade: 54 -> 25 clausulas. SOBRA,
-    em ordem de valor: (a) a SUB-ESCOLHA da fonte para as 137 divindades que permitem heal e harm -- hoje
-    o motor nao reprova nenhuma das duas (principio zero), e resolver exige um eixo cujas opcoes dependam
-    da escolha anterior, que nenhum eixo da base tem; (b) arma favorita / pericia divina / santificacao
-    como termo (6 clausulas, o dado ja esta em favored_weapon e sanctification); (c) divindade OPCIONAL
-    para quem nao e Clerigo nem Campeao -- `you follow a deity` (4 clausulas) hoje so responde false para
-    as outras classes, e um Monge que segue divindade e legitimo em PF2e; (d) alinhamento segue RECUSADO
-    -- conceito que o Remaster aboliu.'
+  desc: 'FECHADO 2026-07-30. A parte principal saiu no commit 69d2df0f5 (eixo de divindade, quatro termos,
+    parser, linha na ficha) e a sub-escolha da FONTE -- o unico limite que a spec declarava -- saiu no
+    bed0f5754. Um Clerigo de Aakriti que escolhe `harm` deixa de atender Healing Hands; antes os dois
+    atendiam. Dois termos para nao ser circular: `deity_font_permitido` (a divindade permite?) no requires
+    das opcoes e `deity_font` (a fonte do personagem?) nas clausulas de feat. O QUE SOBRA vive em outros
+    itens: arma favorita / pericia divina / santificacao como TERMO (6 clausulas) e divindade opcional
+    para quem nao e Clerigo nem Campeao ficam no 87; alinhamento segue recusado; `Versatile Font` precisa
+    de CONCESSAO de escolha, que e outra familia.'
 - id: 99
   date: '2026-07-30'
   priority: media
-  desc: '194 ChoiceSet nos class-features do Foundry que ninguem le -- medido 2026-07-30, saiu do item
-    69. Os arquivos de `dados_brutos/foundry/class-features/` trazem regras `ChoiceSet` com PROMPT nomeando
-    o eixo: `Kineticist.KineticGate.Prompt` (33), `Exemplar.Ikon.*` (19+3), `Commander.Tactics.Prompt`
-    (11), `Prompt.Deity` (4), `Prompt.Sanctification` (3), `Prompt.PathToPerfection` (3), `ArcaneSchool`,
-    `Doctrine`, `Instinct`, `ElementalSchool`. Ou seja: a fonte DECLARA os eixos de sub-escolha, e o nosso
-    `aplicar_subclasses.py` os deriva por casamento de nome, jogando no balaio `outras-opcoes` o que nao
-    casa. CORROBORACAO: o eixo de ikon que entrou em 30/07 foi derivado da PROSA ("Select three ikons")
-    e bate exatamente com os 3 ChoiceSet de `Divine Spark and Ikons` -- a fonte dizia estruturalmente
-    o que eu li no texto. LICAO: checar o ChoiceSet do Foundry antes de derivar eixo de prosa. O QUE MEDIR
-    ANTES DE IMPLEMENTAR: 74 dos 194 tem `choices` como LISTA literal e essas cobrem ZERO das 265 opcoes
-    do balaio e ZERO dos class-features inalcancaveis (elas apontam para draconic-exemplar 95, animal-companion
-    12, skill 11 -- coisas ja modeladas). Os outros 104 sao `query`, que buscam no compendio por predicado,
-    e sao ELES que povoariam KineticGate e Ikon. Implementar exige um avaliador de query, que e trabalho
-    e risco novos. PRIMEIRO ALVO OBVIO: `Prompt.Sanctification` (3) -- o Campeao escolhe santificacao
-    holy/unholy, `sanctification` existe em 373 divindades e o eixo nao existe; e o complemento natural
-    do item 98.'
+  desc: 'PRIMEIRO ALVO FECHADO 2026-07-30 (commit 726c8cb9e, spec santificacao-escolhida): a santificacao
+    virou eixo, e com ela a base ganhou o desenho de SUB-ESCOLHA FILTRADA que faltava -- opcao com `requires`
+    proprio, avaliada por `candidatos()`, MARCADA e nunca escondida. O mesmo desenho fechou a fonte divina
+    em seguida. A medicao evitou uma armadilha: inferir o modal da lista achatada (`["holy"]` = obriga)
+    erraria em 408 divindades, porque a prosa do AoN diz `can choose holy` em 265 delas -- so 108 obrigam.
+    SOBRAM 191 das 194 regras ChoiceSet. As 74 de lista LITERAL cobrem zero do balaio e zero dos inalcancaveis
+    (apontam para draconic-exemplar 95, animal-companion 12, skill 11 -- ja modelados). A carga esta nas
+    104 de forma `query`, que buscam no compendio por predicado e povoariam `Kineticist.KineticGate` (33)
+    e `Exemplar.Ikon` (22): exige um avaliador de query, que e trabalho e risco novos e ainda nao foi
+    dimensionado.'
 promoted: []
 ---

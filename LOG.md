@@ -1150,3 +1150,29 @@ avaliador novo.
 
 E o item 69 perdeu a terceira hipotese: das 265 opcoes do balaio, apenas TRES ja
 sao concedidas pela cadeia sem escolher nada.
+
+## 2026-07-30 (3a rodada) -- a sub-escolha filtrada (itens 98 e 99)
+
+O item 99 rendeu o desenho que faltava. Os class-features do Foundry declaram
+os eixos em `ChoiceSet`, e `Deity (Champion)`, `Deity (Cleric)` e `Vindicator`
+trazem tres opcoes de santificacao **condicionadas a divindade escolhida** --
+exatamente o que a spec `divindade-na-ficha` declarou nao ter.
+
+A medicao evitou um erro grande. A base guarda `sanctification` achatado
+(`["holy"]`), e ia inferir "uma opcao so = obrigatoria". A prosa do AoN traz o
+modal e o extrator o descarta: `can choose holy` sao 265, `must choose holy` sao
+23. Cayden Cailean tem `["holy"]` e NAO obriga -- a inferencia teria forcado 408
+divindades. Nona vez do padrao "a fonte publica e o extrator nao le".
+
+E o desenho nao precisou de maquinaria nova: cada opcao e um registro com o seu
+`requires`, e `candidatos()` ja avalia isso. Filtrar virou MARCAR, que e o
+principio zero aplicado a sub-escolha.
+
+Com ele pronto, a fonte divina fechou o unico limite que a spec 98 declarava: um
+Clerigo de Aakriti que escolhe `harm` deixa de atender Healing Hands. Precisou
+de DOIS termos para nao ser circular -- `deity_font_permitido` pergunta pela
+divindade, `deity_font` pergunta pelo personagem.
+
+Sobram 191 das 194 regras ChoiceSet. Medido antes de prometer: as 74 de lista
+literal cobrem zero do balaio; a carga esta nas 104 de forma `query`, que
+precisam de avaliador proprio.
