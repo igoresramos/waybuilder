@@ -131,20 +131,21 @@ items:
   id: 69
   date: '2026-07-30'
   priority: media
-- desc: '5a RODADA FECHADA 2026-07-30 (commit 1bb66c6a9, spec requisito-de-subescolha). As cinco classes
-    que faltavam entraram no DEFAULT do comparador, com atributos MEDIDOS pela sonda (Campeao STR+3 DEX+1
-    CON+1 declara os cinco boosts porque a chave e escolha; Druida, Feiticeiro, Alquimista e Investigador
-    tem chave unica e o motor a aplica sozinho). ACHOU DEFEITO NOSSO: cinco feats do Campeao que liberavamos
-    e ele barrava, porque o requisito de CAUSA vivia em `requires_residuo` como prosa. Viraram requisito
-    de verdade -- 26 clausulas em 7 eixos. Residuo 560 -> 534. TRIAGEM do resto, sem defeito nosso: os
-    3 `so no Waybuilder` que aparecem em TODAS as classes (Chelaxian Scion, Knight Vigilant, Venture-Gossip)
-    sao recorte de fonte; os `wb=False pb=True` por pericia sao a diferenca de modelo declarada. PROXIMAS
-    RODADAS: (a) `Chemical Contagion` e `Enhanced Fire`, so no Pathbuilder no Alquimista 1, e `Artokus''s
-    Fire`/`Powerful Alchemy`/`Certain Strategem`/`Red Herring`, so nossos -- por investigar; (b) general_feat
-    fora do Guerreiro e do Bardo; (c) o quantificador "uma pericia que tenha a acao X" (Automatic/Dubious
-    Knowledge); (d) as classes ainda sem rodada: Barbaro ja teve, faltam Commander, Exemplar, Guardian,
-    Kineticist, Magus, Oracle, Psychic, Summoner, Swashbuckler, Thaumaturge, Witch, Inventor, Animist,
-    Necromancer, Runesmith.'
+- desc: 'RODADA 6 FEITA 2026-07-31 (docs/medicoes/2026-07-31_pathbuilder-rodada-6.md, com nota de correcao
+    no topo). As 14 classes que faltavam foram rodadas -- Guardian, Exemplar, Commander, Gunslinger, Inventor,
+    Kineticist, Swashbuckler e Thaumaturge no nivel 1; Animist, Witch, Magus, Psychic, Oracle e Summoner
+    no nivel 2. Boosts MEDIDOS com `sonda-estado-pathbuilder.mjs`, nunca chutados. Com isso as 27 classes
+    estao cobertas. RESULTADO: **zero defeitos nossos** em 152 pontos triados. O unico candidato (`wb:feat/incredible-familiar`
+    com trait `animist`) foi verificado contra a fonte e NAO e defeito -- o AoN publica esse trait no
+    Player Core e `prov.traits` mostra AoN e Foundry concordando; o Pathbuilder e que carrega a lista
+    pre-remaster do Dark Archive/APG. Balde certo: recorte de fonte. ACHADO ESTRUTURAL que vale guardar:
+    seis classes travam o Class Feat do nivel 1 atras de escolha de subclasse obrigatoria (Animist, Witch,
+    Magus, Psychic, Oracle, Summoner), somadas a Druida e Feiticeiro ja conhecidas -- sao 8 no total,
+    e isso e informacao, nao falha. LIMITE DO COMPARADOR, agora conhecido: `incredible-familiar` e `incredible-familiar-animist`
+    colidem na normalizacao e o script conta como "casado", entao par assim nunca aparece no placar --
+    consertar antes da proxima rodada, senao a cobertura mente. SOBRA: 3 pares novos de renomeacao Golarion->generico
+    para `equivalencias-pathbuilder.json`, e os 33 pontos do Kineticist que so confirmam o gap ja rastreado
+    nos itens 97/99 (os 6 gates elementais zerados).'
   id: 84
   date: '2026-07-30'
   priority: media
