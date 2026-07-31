@@ -1203,3 +1203,24 @@ antes de qualquer `verificacao/*.mjs`.** E o sintoma que denuncia: motor Python 
 TS discordando quando os dois arquivos de motor estao iguais -- a divergencia nao
 esta no codigo, esta no dado que cada um leu. Mesma familia do `WB_REEXTRAIR`
 logo acima: artefato derivado que sobrevive a mudanca da fonte.
+
+## Ancora de edicao por TEXTO apaga o que esta entre duas ocorrencias (2026-07-31)
+
+Editando `TODO.md` por script, usei como ancora
+`t.index("- desc: 'RE-MEDIDO 2026-07-29, e o item mudou de gravidade")` achando
+que era o item 97. Era o item **55**. O `replace` foi de la ate o `priority:`
+seguinte ao `id: 97`, e **apagou os 8 itens que viviam no meio** -- 55, 68, 69,
+84, 10, 31, 85 e 96.
+
+Passou pelo commit e pelo push. Nao ha portao para isso: os 10 portoes olham a
+BASE, e `TODO.md` nao e base. O que denunciou foi contar a fila no fim da
+sessao e ver 7 onde eram 15.
+
+Regra: **ancorar no marcador UNICO do proprio item (`  id: N\n`) e caminhar
+para tras ate o `- desc:` dele**, nunca num trecho de prosa que outro item pode
+compartilhar. E conferir a CONTAGEM antes e depois de toda edicao estrutural:
+
+    grep -cE "^  id: |^- id: " TODO.md
+
+Vale para qualquer arquivo de lista editado por script -- TODO, LOG, INDEX da
+wiki. O texto de um item nao e chave primaria; o id e.
