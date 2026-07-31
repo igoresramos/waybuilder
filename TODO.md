@@ -122,18 +122,27 @@ items:
   id: 68
   date: '2026-07-29'
   priority: media
-- desc: 'TERCEIRA hipotese do item tambem NAO se confirma (2026-07-30). O proprio item propunha: "para
-    cada opcao do balaio, checar se a cadeia de grants ja a concede -- se concede, nao e escolha". Medido
-    montando um personagem de cada uma das 16 classes com balaio, no nivel do bloco mais alto, e comparando
-    com o que a cadeia entrega sem escolher nada: das 265 opcoes, apenas TRES ja sao concedidas (`formula-book`
-    e `versatile-vials` do Alquimista, `champions-aura` do Campeao). Essas tres sao curadoria segura --
-    sao oferecidas como escolha estando ja concedidas. As outras 262 seguem sem regra que as explique:
-    a hipotese (a) do item deu zero (nenhuma esta na progressao), esta deu 3. O balaio nasce em aplicar_subclasses.py
-    quando a classe TEM lista autoritativa do Foundry e o nome da feature nao esta nela. VER ITEM 99:
-    os ChoiceSet dos class-features do Foundry nomeiam eixos, e e o unico caminho novo que apareceu --
-    mas as listas LITERAIS cobrem zero das 265, entao o ganho, se houver, esta nas 104 de forma `query`.'
+- desc: 'MEDIDO 2026-07-31 e o balaio FINALMENTE tem explicacao estrutural -- ele nao e um monte de
+    opcoes sem regra, sao TRES familias, e nenhuma delas e escolha livre. Classificando as 202 pelo sufixo
+    do nome contra as opcoes de subclasse da propria classe: (a) **68 sao VARIANTE POR SUBCLASSE** --
+    `Field Discovery (Bomber|Chirurgeon|Mutagenist|Toxicologist)`, `Initiate Benefit (Amulet|Bell|Chalice|...)`,
+    `Final Doctrine (Warpriest)`. O parentese casa EXATAMENTE o nome de uma opcao de subclasse ja escolhida,
+    entao nao ha o que escolher: a subclasse determina. E o desenho ja provado duas vezes (gate
+    `requires: {subclass: ...}` da spec do Inventor, e o gemeo `equivale_a`). (b) **~30 sao o PAI GENERICO
+    dessas variantes** -- `Perpetual Infusions` sem parentese existe ao lado dos quatro `Perpetual Infusions
+    (X)`; e a entrada guarda-chuva, nao uma quinta opcao. (c) **O RESTO sao EIXOS DE VERDADE que ninguem
+    modelou**, e este e o achado que vale: os 18 do Exemplar sao os EPITETOS (`The Brave`, `The Cunning`,
+    `The Deft`, `The Mournful`, `The Proud`, `The Radiant`...) e os 4 do Clerigo sao os degraus de credo
+    (`Initial|Greater|True|Final Creed`). CAMINHO PRONTO: os epitetos carregam a tag `exemplar-root-epithet`
+    (6 registros), e ha mais dois grupos iguais na base -- `psychic-conscious-mind` (6) e `witch-patron`
+    (3). A maquinaria de derivar eixo por tag/filtro entrou em 31/07 e nao os alcancou porque a feature de
+    progressao que os concede nao declara `ChoiceSet` com filter. Proximo passo: spec propria, derivando
+    eixo a partir da TAG quando a classe tem registros com tag propria e nenhum eixo que os alcance. ||
+    HIPOTESES ANTERIORES, todas medidas e mortas: (a) estar na progressao -> ZERO das 265; (b) lista literal
+    de ChoiceSet -> 66 explicadas, feito na spec do Inventor; (c) ja concedida pela cadeia de grants ->
+    apenas TRES (`formula-book`, `versatile-vials`, `champions-aura`).'
   id: 69
-  date: '2026-07-30'
+  date: '2026-07-31'
   priority: media
 - desc: 'COMPARADOR CONSERTADO 2026-07-31 (spec specs/2026-07-31-colisao-no-comparador.md) -- era a
     pendencia declarada desta task. `norm()` apaga o sufixo de desambiguacao de proposito, mas o codigo
