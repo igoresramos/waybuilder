@@ -91,6 +91,14 @@
    "slots_abertos": 6
   },
   {
+   "ficha": "_teste-validacao-variante-por-subclasse",
+   "nivel": 5,
+   "hp": 53,
+   "avisos": 4,
+   "fora_do_requisito": 0,
+   "slots_abertos": 17
+  },
+  {
    "ficha": "barbaro6-fa-duas-dedicacoes-limpo",
    "nivel": 6,
    "hp": 100,

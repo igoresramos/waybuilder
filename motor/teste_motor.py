@@ -1475,6 +1475,38 @@ checar(pericia and all("skill" in (BASE.get(c["id"]).get("traits") or [])
        "cujo filtro so deixa passar feat de pericia",
        f"{len(pericia)} candidatos")
 
+# -- variante por subclasse (spec variante-por-subclasse) -------------------
+# `Field Discovery (Bomber)` nao e escolha: o campo de pesquisa ja decidiu. Eram
+# 68 opcoes de balaio oferecidas lado a lado, e um Bomber podia escolher a do
+# Chirurgeon. GATE e nao remocao: nenhuma e concedida pelo dono
+# (`wb:class-feature/bomber` tem `grants: []`), entao tira-las as tornaria
+# inalcancaveis.
+print("\n-- variante por subclasse --")
+ALQ = "wb:class/alchemist"
+
+
+def _alquimista(campo=None):
+    esc = niveis((ALQ, 5)) + BOOSTS
+    if campo:
+        esc = esc + [{"em": 1, "slot": "subclasse", "eixo": "outras-opcoes",
+                      "pega": campo}]
+    return personagem(esc)
+
+
+sem_campo = _alquimista().candidatos("subclasse", 5)
+bomber = _alquimista("wb:class-feature/bomber").candidatos("subclasse", 5)
+checar(len(sem_campo) == 4 and len(bomber) == 4,
+       "as quatro `Field Discovery` continuam na lista -- gate MARCA, nao remove",
+       f"{len(sem_campo)} / {len(bomber)}")
+checar(not any(c["atende"] for c in sem_campo),
+       "sem campo de pesquisa escolhido, nenhuma atende")
+atendem = [c["nome"] for c in bomber if c["atende"]]
+checar(atendem == ["Field Discovery (Bomber)"],
+       "com Bomber, SO a dele atende", f"{atendem}")
+motivo = next(c["motivos"] for c in bomber if c["nome"] == "Field Discovery (Chirurgeon)")
+checar(motivo and "Chirurgeon" in motivo[0] and "Bomber" in motivo[0],
+       "e o motivo nomeia o campo que falta E o que o personagem tem", f"{motivo}")
+
 # -- o slot concedido deixa de ser so de feat (spec slot-concedido-generico) -
 # Sao 69 blocos na base com `tipo` e `filtro`; o motor lia so os 43 de `feat` e
 # as outras 26 escolhas NUNCA eram perguntadas. Quem tinha `Dragon Spit` nao

@@ -122,26 +122,27 @@ items:
   id: 68
   date: '2026-07-29'
   priority: media
-- desc: 'METADE FEITA 2026-07-31 (spec specs/2026-07-31-nomear-o-balaio-por-tag.md). O BALAIO JA ERA
-    EIXO -- faltava o NOME. Um Exemplar ja recebia os epitetos nos niveis 3, 7 e 15 com `escolhe: 1`;
-    o bloco funcionava, so se chamava `outras-opcoes`, e na tela virava "Exemplar / outras-opcoes" --
-    o jogador escolhia sem saber o que. O nome estava na `tags` dos proprios registros. Agora cada bloco
-    de balaio se PARTE por tag (grupo de 2+ vira eixo com o nome da tag; o que nao tem tag fica). Sao 11
-    eixos nomeados cobrindo 91 opcoes: Exemplar root/dominion/sovereignty-epithet (6/8/4), Sorcerer
-    bloodline 18, Summoner eidolon 13, Animist apparition 13 + practice 4 (UM balaio carregava DOIS eixos),
-    Barbarian instinct 9, Druid order 9, Investigator methodology 5, Champion blessing 2. Balaio: 202 ->
-    111. PROVA DE SEGURANCA: comparei `candidatos("subclasse", n)` de TODAS as classes antes e depois --
-    ZERO conjuntos mudaram, so foram redistribuidos entre blocos com nome. ACHADO DE QUEBRA: Feiticeiro
-    (18/19) e Invocador (13/14) sobram UMA opcao cada, e as duas sao a mesma coisa -- `Spell Repertoire
-    (Sorcerer|Summoner)`, feature automatica arquivada no balaio por engano, que NAO chega a ficha por
-    nenhum outro caminho. Antes elas estavam misturadas entre as linhagens e o jogador podia escolher
-    "Spell Repertoire" no lugar de uma linhagem; a divisao nao criou o problema, isolou. || AS 111 QUE
-    SOBRAM, ja explicadas em estrutura pela medicao de sufixo: ~68 sao VARIANTE POR SUBCLASSE (`Field
-    Discovery (Bomber)`, `Initiate Benefit (Amulet)`) -- o parentese casa exatamente uma opcao de subclasse
-    ja escolhida, entao pedem gate `requires: {subclass: ...}` e nao eixo; ~30 sao o PAI GENERICO dessas
-    variantes (`Perpetual Infusions` ao lado dos quatro `(X)`); o resto e cauda, com os dois Spell Repertoire
-    dentro. || HIPOTESES MORTAS, todas medidas: estar na progressao -> ZERO; lista literal de ChoiceSet ->
-    66, feito na spec do Inventor; ja concedida pela cadeia de grants -> TRES.'
+- desc: 'DUAS FATIAS FEITAS 2026-07-31 (specs 2026-07-31-nomear-o-balaio-por-tag.md e
+    2026-07-31-variante-por-subclasse.md). Balaio: 202 -> 111 -> e das 111, 68 deixaram de ser escolha
+    livre. || FATIA 1 -- O BALAIO JA ERA EIXO, faltava o NOME: um Exemplar ja recebia os epitetos nos
+    niveis 3/7/15 com `escolhe: 1`, o bloco funcionava, so se chamava `outras-opcoes` e na tela virava
+    "Exemplar / outras-opcoes". O nome estava na `tags` dos registros. Cada balaio se PARTE por tag (grupo
+    de 2+ vira eixo); 11 eixos cobrindo 91 opcoes -- Exemplar root/dominion/sovereignty-epithet (6/8/4),
+    Sorcerer bloodline 18, Summoner eidolon 13, Animist apparition 13 + practice 4 (UM balaio com DOIS
+    eixos), Barbarian instinct 9, Druid order 9, Investigator methodology 5, Champion blessing 2. PROVA:
+    `candidatos("subclasse", n)` de TODAS as classes, antes x depois -- ZERO conjuntos mudaram. || FATIA
+    2 -- VARIANTE POR SUBCLASSE: 68 opcoes cujo nome termina em parentese que casa EXATAMENTE uma opcao
+    de subclasse da classe (`Field Discovery (Bomber)`, os 10 `Initiate Benefit (X)` do Taumaturgo, `Final
+    Doctrine (Warpriest)`). Nao ha o que escolher -- o campo de pesquisa ja decidiu --, e antes as quatro
+    apareciam iguais e um Bomber podia escolher a do Chirurgeon. GATE e nao remocao, porque NENHUMA e
+    concedida pelo dono (`wb:class-feature/bomber` tem `grants: []`) e tira-las as tornaria inalcancaveis:
+    ganharam `requires.subclass`, ficam na lista MARCADAS com o motivo (`exige a sub-escolha Chirurgeon;
+    tem Bomber`). Thaumaturge 30, Alchemist 23, Cleric 12, zero puladas. || O QUE SOBRA: (a) ~30 PAIS
+    GENERICOS das variantes (`Perpetual Infusions` sem parentese, ao lado dos quatro `(X)`) -- sem
+    parentese nao ha regra que os explique sem inventar; (b) `Spell Repertoire (Sorcerer|Summoner)`, duas
+    features automaticas arquivadas no balaio que nao chegam a ficha por nenhum outro caminho; (c) o modelo
+    CERTO das 68 seria o dono CONCEDER a variante em vez de o jogador escolher-la marcada, e isso pede
+    vocabulario novo de grant (`concede feature no nivel N`) que nao existe -- mudanca de motor, TS e tela.'
   id: 69
   date: '2026-07-31'
   priority: media

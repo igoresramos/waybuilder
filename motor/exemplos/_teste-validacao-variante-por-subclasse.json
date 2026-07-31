@@ -1,0 +1,22 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {"versao": "2026-07-31", "pin_foundry": "87f9e502"},
+ "identidade": {
+  "nome": "TESTE VARIANTE -- Alquimista Bomber no nivel 5",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao do gate por sufixo de subclasse (spec specs/2026-07-31-variante-por-subclasse.md). No nivel 5 o Alquimista ve as QUATRO `Field Discovery (X)`, uma por campo de pesquisa. Elas nao sao escolha: o campo ja decidiu. Com Bomber escolhido, so a dele atende, e as outras tres continuam na lista MARCADAS com o motivo -- `exige a sub-escolha Chirurgeon; tem Bomber`. Antes desta spec as quatro apareciam iguais e um Bomber podia escolher a do Chirurgeon. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/versatile-human"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/scholar"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/alchemist"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/alchemist"},
+  {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/alchemist"},
+  {"em": 4, "slot": "nivel_de_classe", "pega": "wb:class/alchemist"},
+  {"em": 5, "slot": "nivel_de_classe", "pega": "wb:class/alchemist"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["int", "dex", "con", "wis"]},
+  {"em": 1, "slot": "subclasse", "eixo": "outras-opcoes", "pega": "wb:class-feature/bomber"}
+ ],
+ "inventario": []
+}

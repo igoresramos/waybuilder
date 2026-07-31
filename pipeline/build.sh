@@ -236,6 +236,12 @@ echo "== 7e2b. tags do Foundry + eixos por query (Kineticist e Commander) =="
 # com os 19.604 registros dentro.
 python3 derivar_eixo_por_tag.py
 
+echo "== 7d3. variante por subclasse =="
+# `Field Discovery (Bomber)` nao e escolha: o campo de pesquisa ja decidiu.
+# DEPOIS do passo acima, que nomeia o balaio pela tag -- o gate so olha o que
+# SOBROU no balaio, e a ordem inversa gatearia opcao que virou eixo.
+python3 derivar_variante_por_subclasse.py
+
 echo "== 7e3. estatisticas de familiar e eidolon =="
 # A DECIMA PRIMEIRA lacuna de leitura: `aon_dump/rules.json` tem 3.645 registros
 # e nenhum extrator o abria. Familiar e eidolon derivam do mestre -- o que
