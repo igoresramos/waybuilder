@@ -233,11 +233,15 @@ export class Personagem implements ContextoDePredicado {
     this._hp();
     this._slots_de_feat();
     this._conjuracao();
-    this._atores();
     this._focus();
     this._defesa();
     this._ataques();
     this._pericias_e_salvas();
+    // `_atores` DEPOIS de `_defesa` e `_pericias_e_salvas`: a AC e os saves do
+    // familiar são literalmente os do mestre ("equal to yours before applying
+    // circumstance or status bonuses"), então ele os LÊ em vez de recalcular.
+    // Na ordem antiga `this.ac` ainda não existia.
+    this._atores();
     this._resistencias();
     this._velocidade();
     this._checar_requisitos();
@@ -1843,10 +1847,52 @@ export class Personagem implements ContextoDePredicado {
     }
   }
 
+  /** A classe DESTA ficha cuja progressão traz esta class-feature.
+   *
+   * Exata, e não chute: se duas classes do personagem concedessem a mesma
+   * feature, a de MENOR nível manda, porque é a que aperta o cap da regra 17b
+   * -- o oposto seria escolher o cap mais frouxo por acaso de ordem. */
+  private _classe_que_concede(feature_id: string): string | null {
+    const donas: string[] = [];
+    for (const cid of this.ordem_de_classe) {
+      const classe = dictDe(this.base.opcional(cid));
+      const prog = listaDe(classe["progressao"]);
+      if (prog.some((e) => dictDe(e)["concede"] === feature_id)) donas.push(cid);
+    }
+    if (donas.length === 0) return null;
+    return donas.reduce((a, c) => this.nivel_de(c) < this.nivel_de(a) ? c : a);
+  }
+
+  /** Em que nível de PERSONAGEM esta class-feature chegou.
+   *
+   * A feature guarda `nivel_de_classe`, e a tela pergunta por nível de
+   * personagem -- com a houserule os dois números são diferentes. */
+  private _nivel_de_personagem_da_feature(feature_id: string): number | null {
+    const cid = this._classe_que_concede(feature_id);
+    if (cid === null) return null;
+    const f = this.features.find((x) => x.id === feature_id);
+    const alvo = f === undefined ? null : f.nivel_de_classe;
+    if (!ehInt(alvo)) return null;
+    let contados = 0;
+    for (const n of [...this.classe_do_nivel.keys()].sort((a, b) => a - b)) {
+      if (this.classe_do_nivel.get(n) === cid) {
+        contados += 1;
+        if (contados === alvo) return n;
+      }
+    }
+    return null;
+  }
+
   private _coletar_grant_actor(origem_id: string, reg: Dict, em: unknown): void {
     for (const g of this._grants_de(reg)) {
       if (!ehDict(g) || !("grant_actor" in g)) continue;
       const ga = dictDe(g["grant_actor"]);
+      // feature vinda da PROGRESSÃO não foi "pega" em nível nenhum, então `em`
+      // chegava null -- e a tela só desenha a concessão no bloco em que
+      // `em === n`. Resultado: o familiar da Bruxa nunca aparecia como slot.
+      if (em === null || em === undefined) {
+        em = this._nivel_de_personagem_da_feature(origem_id);
+      }
       this.concessoes_de_ator.push({
         origem: origem_id,
         origem_nome: nomeOu(reg, origem_id),
@@ -1854,7 +1900,12 @@ export class Personagem implements ContextoDePredicado {
         tipo: ehStr(ga["tipo"]) ? ga["tipo"] : "companheiro",
         escolhe: ehStr(ga["escolhe"]) ? ga["escolhe"] : "animal-companion",
         opcoes: listaDe(ga["opcoes"]).filter(ehStr),
-        classe: ehInt(em) ? (this.classe_do_nivel.get(em) ?? null) : null,
+        // o nível em que foi PEGO diz a classe -- mas feature vinda da
+        // PROGRESSÃO não foi pega em nível nenhum, e aí o `em` é null. Nesse
+        // caso a classe é exata: é a que traz a feature na `progressao`. Sem
+        // isto a regra 17b não aplicava a NENHUM familiar concedido por classe.
+        classe: ehInt(em) ? (this.classe_do_nivel.get(em) ?? null)
+                          : this._classe_que_concede(origem_id),
         preenchida: false,
         // a fonte declara as PROPRIAS excecoes a regra de um ator por vez:
         // "Contrary to the usual rules for animal companions, this feat can
@@ -1953,9 +2004,133 @@ export class Personagem implements ContextoDePredicado {
         ator["grau_pendente"] = grau === null;
         Object.assign(ator, this._ficha_de_companheiro(
           a, ator["nivel"] as number, grau ?? "mature", especializado));
+      } else if (a["tipo"] === "familiar") {
+        Object.assign(ator, this._ficha_de_familiar(ator["nivel"] as number));
+      } else if (a["tipo"] === "eidolon") {
+        Object.assign(ator, this._ficha_de_eidolon(a, ator["nivel"] as number));
       }
       this.atores.push(ator);
     }
+  }
+
+  // -- familiar e eidolon ---------------------------------------------------
+  //
+  // Ao contrário do companheiro animal, que tem colunas numéricas nativas no
+  // AoN, estes dois DERIVAM do mestre -- o que existe é fórmula, não tabela, e
+  // é por isso que procurar tabela nunca achou nada. A fórmula vem da base
+  // (`wb:stat-formula/*`), lida de `aon_dump/rules.json` e do feat `Pet`.
+  // Spec: `specs/2026-07-31-estatisticas-de-familiar-e-eidolon.md`
+
+  private _formula(qual: string): Dict {
+    return dictDe(dictDe(this.base.opcional(`wb:stat-formula/${qual}`))["formula"]);
+  }
+
+  /** O maior modificador de atributo de conjuração entre as classes.
+   *
+   * Sai de `key_ability` da CLASSE, e não de `this.conjuracao`: a visão de
+   * conjuração não expõe o modificador em campo próprio -- ele só aparece
+   * dentro do texto de `dc.nota`. Ler dali seria parsear a própria saída. */
+  private _mod_de_conjuracao(): number {
+    let melhor = 0;
+    for (const cid of this.ordem_de_classe) {
+      const classe = dictDe(this.base.opcional(cid));
+      if (!verdadeiro(classe["spellcasting"])) continue;
+      const chaves = listaDe(classe["key_ability"]).map((k) => String(k));
+      const mod = Math.max(0, ...chaves.map((k) => this.modificadores[k] ?? 0));
+      if (mod > melhor) melhor = mod;
+    }
+    return melhor;
+  }
+
+  private _ficha_de_familiar(nivel: number): Dict {
+    const f = this._formula("familiar");
+    if (Object.keys(f).length === 0) {
+      return { aviso: "formula do familiar ausente na base" };
+    }
+    const base_pericia = inteiro(f["pericia_base"]);
+    const mod = verdadeiro(f["usa_mod_de_conjuracao_se_maior"])
+      ? this._mod_de_conjuracao() : 0;
+    const usado = Math.max(base_pericia, mod);
+    return {
+      // AC e saves são os do MESTRE, não recalculados
+      ac: dictDe(this.ac)["total"] ?? null,
+      // o TOTAL, e não a linha inteira: o cartão de ator mostra número, e o
+      // companheiro já emite número. Copiar `salvas` cru punha
+      // `[object Object]` na ficha -- achado pela verificação no navegador.
+      saves: Object.fromEntries(Object.entries(this.salvas ?? {}).map(
+        ([k, v]) => [k, ehDict(v) ? v["total"] : v])),
+      hp: inteiro(f["hp_por_nivel"]) * nivel,
+      percepcao: usado + nivel,
+      pericias: { acrobatics: usado + nivel, stealth: usado + nivel },
+      outras_pericias: nivel,
+      velocidade: { land: inteiro(f["velocidade"]) },
+      tamanho: f["tamanho"] ?? null,
+      sentidos: "low-light vision",
+      nota_de_pericia: usado === base_pericia ? "3 + nivel"
+        : `mod de conjuracao ${comSinal(mod)} + nivel (maior que ${base_pericia})`,
+    };
+  }
+
+  private _ficha_de_eidolon(ator: Dict, nivel: number): Dict {
+    const f = this._formula("eidolon");
+    if (Object.keys(f).length === 0) {
+      return { aviso: "formula do eidolon ausente na base" };
+    }
+    const pega = listaDe(ator["escolhas"])
+      .map((e) => dictDe(e))
+      .find((e) => e["slot"] === "eidolon")?.["pega"] ?? null;
+    const tipo = dictDe(this.base.opcional(String(pega ?? "")));
+    const prof = dictDe(f["proficiencias"]);
+    const saves: Record<string, number> = {};
+    for (const k of ["fortitude", "reflex", "will"]) {
+      if (verdadeiro(prof[k])) {
+        saves[k] = this.nivel + RANK_BONUS[String(prof[k]) as Rank];
+      }
+    }
+    const saida: Dict = {
+      hp: null,                       // compartilha o pool do invocador
+      nota_de_hp: "sem HP proprio -- compartilha o pool do invocador",
+      proficiencias: { ...prof },
+      saves,
+      pericias_do_invocador: verdadeiro(f["compartilha_pericias_do_invocador"]),
+    };
+    if (Object.keys(tipo).length === 0) {
+      saida["aviso"] = pega === null ? "tipo de eidolon ainda nao escolhido"
+        : `tipo de eidolon nao encontrado: ${pega}`;
+      return saida;
+    }
+    const st = dictDe(tipo["stats"]);
+    // `arrays` é o que ESTA SPEC acrescentou; `stats` sozinho já existia com
+    // outra forma, então o teste tem de ser pelo campo novo.
+    const arrays = listaDe(st["arrays"]).map((a) => dictDe(a));
+    if (arrays.length === 0) {
+      saida["aviso"] = `${nomeOu(tipo, "")}: `
+        + `${tipo["stats_ausente"] ?? "sem array na fonte"}`;
+      saida["velocidade"] = st["velocidade"] ?? null;
+      return saida;
+    }
+    const escolhido = arrays.find((a) => a["nome"] === ator["array"]) ?? arrays[0];
+    const attr = dictDe(escolhido["atributos"]);
+    const dex = Math.min(inteiro(attr["dex"]), inteiro(escolhido["dex_cap"]));
+    Object.assign(saida, {
+      array: escolhido["nome"] ?? null,
+      arrays_possiveis: arrays.map((a) => a["nome"] ?? null),
+      atributos: { ...attr },
+      // 10 + nível + prof(unarmored, trained) + DEX capado + bônus de item
+      ac: 10 + this.nivel + RANK_BONUS["trained"] + dex
+        + inteiro(escolhido["ac_item"]),
+      dex_cap: escolhido["dex_cap"] ?? null,
+      pericias: listaDe(st["pericias"]).map((p) => String(p).toLowerCase()),
+      tamanhos: listaDe(st["tamanhos"]).map((s) => String(s)),
+      // o que o extrator de companheiros já trazia, preservado
+      velocidade: st["velocidade"] ?? null,
+      tradicao: st["tradicao"] ?? null,
+    });
+    if (arrays.length > 1 && !verdadeiro(ator["array"])) {
+      saida["nota_de_array"] = `${arrays.length} arrays possiveis e nenhum `
+        + `escolhido; mostrando ${escolhido["nome"]}`;
+    }
+    return saida;
   }
 
   /**

@@ -285,19 +285,30 @@ export function PainelDireito({
               </h4>
               {a.aviso && <p className="nota">{a.aviso}</p>}
               {a.nota && <p className="nota">{a.nota}</p>}
-              {a.hp != null && (
+              {/* o eidolon NAO tem HP proprio (compartilha o pool do
+                  invocador), entao o cartao nao pode depender de `hp` para
+                  existir -- com o gate antigo ele sumia inteiro da ficha.
+                  Spec: `specs/2026-07-31-estatisticas-de-familiar-e-eidolon.md` */}
+              {(a.hp != null || a.atributos != null) && (
                 <>
-                  <div className="linha-atributos">
-                    {ATRIBUTOS.map((x) => (
-                      <div key={x} className="atributo">
-                        <span className="rotulo">{x.toUpperCase()}</span>
-                        <strong>{sinal(a.atributos?.[x] ?? 0)}</strong>
-                      </div>
-                    ))}
-                  </div>
+                  {/* o familiar "doesn't have or use its own attribute
+                      modifiers": mostrar a linha zerada AFIRMARIA +0 em tudo,
+                      que e diferente de nao ter. Marca em vez de fingir. */}
+                  {a.atributos != null ? (
+                    <div className="linha-atributos">
+                      {ATRIBUTOS.map((x) => (
+                        <div key={x} className="atributo">
+                          <span className="rotulo">{x.toUpperCase()}</span>
+                          <strong>{sinal(a.atributos?.[x] ?? 0)}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="nota">sem atributos proprios</p>
+                  )}
                   <ul className="lista-simples">
-                    <li title={a.hp_detalhe}>
-                      <strong>{a.hp}</strong>
+                    <li title={a.hp_detalhe ?? a.nota_de_hp}>
+                      <strong>{a.hp ?? "--"}</strong>
                       <span className="nome">HP</span>
                       {/* `velocidade` vem por modo (`{land: 40, fly: 25}`) --
                           `max` e derivado e nao se mostra duas vezes */}

@@ -892,8 +892,8 @@
   "concessoes_de_ator": [
    {
     "adicional": true,
-    "classe": null,
-    "em": null,
+    "classe": "wb:class/witch",
+    "em": 1,
     "escolhe": "familiar-specific",
     "escolhido": null,
     "opcoes": [],
@@ -1321,15 +1321,6 @@
    {
     "em": "criacao",
     "escolhe": 1,
-    "kind": "familiar-specific",
-    "opcoes_ids": [],
-    "origem": "wb:class-feature/familiar-witch",
-    "rotulo": "familiar -- Familiar (Witch)",
-    "slot": "familiar"
-   },
-   {
-    "em": "criacao",
-    "escolhe": 1,
     "kind": "heritage",
     "rotulo": "heranca",
     "slot": "heranca"
@@ -1354,6 +1345,15 @@
     "kind": "feat",
     "rotulo": "ancestry feat (nivel 1)",
     "slot": "ancestry_feat"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "familiar-specific",
+    "opcoes_ids": [],
+    "origem": "wb:class-feature/familiar-witch",
+    "rotulo": "familiar -- Familiar (Witch)",
+    "slot": "familiar"
    },
    {
     "em": 1,

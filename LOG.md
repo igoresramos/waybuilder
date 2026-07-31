@@ -1308,3 +1308,48 @@ divindade escolhida. Marcado, nao sumido.
 Quatro camadas verdes. `verificar-eixos.mjs` acusa `Ma'at` duplicado no eixo
 do Campeao, mas a mesma verificacao FALHA no estado anterior -- e
 pre-existente, virou item 102 com a medicao pronta (e o unico caso em 488).
+
+## 2026-07-31 -- item 43: familiar e eidolon ganham numero (a fonte nunca faltou)
+
+A unica prioridade ALTA, parada desde 29/07 em "conseguir a fonte das
+estatisticas". Ela estava em disco o tempo todo, e e a DECIMA PRIMEIRA lacuna
+de leitura -- a primeira que nao e um campo e sim um ARQUIVO:
+`aon_dump/rules.json` tem 3.645 registros e nenhum extrator o abria.
+
+Procurar TABELA nunca ia achar nada, porque o que existe e FORMULA: familiar e
+eidolon derivam do mestre. E dai tambem a resposta para "por que o companheiro
+animal ja funcionava" -- `animal-companion` tem colunas numericas nativas no
+AoN; os outros dois nao.
+
+O familiar saiu do feat geral `Pet` (5 HP por nivel, `3 + nivel` nas tres
+pericias, velocidade 25, Tiny, AC e saves IGUAIS aos do mestre) mais o delta de
+`rules-2122` (usa o mod de conjuracao se for maior que 3). O eidolon saiu de
+`rules-1582` (Fort/Will expert, Reflex/Perception trained, pericias
+compartilhadas) mais os arrays por tipo do pf2etools -- 12 de 13, e `Swarm`
+fica MARCADO, nao escondido.
+
+Nada foi escrito a mao: cada numero sai de regex sobre a prosa da fonte, e o
+passo FALHA ALTO se o valor lido nao bater com o esperado.
+
+Quatro defeitos acharam-se pelo caminho, e tres so apareceram porque a
+verificacao foi ate o fim:
+
+1. Meu proprio passo SOBRESCREVIA `stats`, que ja existia nos eidolons com
+   outra forma -- apagaria `tradicao`, `plano_natal`, `velocidade` e `sentidos`
+   nos 12 registros que casavam. Virou merge.
+2. A regra 17b NAO aplicava a familiar nenhum concedido por classe: a concessao
+   saia com `classe: null` porque feature de progressao nao tem "nivel em que
+   foi pega". Um Bruxo 1 / Guerreiro 5 recebia familiar de nivel 6 em vez de 3.
+3. O familiar da Bruxa NUNCA aparecia como slot na tela, pelo mesmo motivo --
+   `em` chegava null e a tela so desenha a concessao no bloco em que `em === n`.
+   So dava para ter familiar editando o JSON a mao.
+4. O cartao de ator so renderizava com `hp != null`, e o eidolon nao tem HP --
+   ele sumia inteiro. E a linha de atributos saia zerada para o familiar,
+   AFIRMANDO +0 em tudo quando a regra diz que ele nao tem atributos.
+
+Os saves do familiar tambem sairam como `[object Object]` na primeira versao:
+copiei a linha inteira do mestre onde o cartao espera numero. Achado no
+navegador, nao nos testes.
+
+Quatro camadas verdes, com 16 assertivas novas no oraculo e
+`verificar-familiar.mjs` ponta a ponta.

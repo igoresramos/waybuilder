@@ -211,6 +211,12 @@ echo "== 7e2. categoria de feat que sobrou vazia =="
 # inteira alcanca tanto esses quanto os que nao casaram com o AoN.
 python3 derivar_categoria_de_feat.py
 
+echo "== 7e3. estatisticas de familiar e eidolon =="
+# A DECIMA PRIMEIRA lacuna de leitura: `aon_dump/rules.json` tem 3.645 registros
+# e nenhum extrator o abria. Familiar e eidolon derivam do mestre -- o que
+# existe e formula, nao tabela, e por isso procurar tabela nunca achou nada.
+python3 derivar_estatisticas_de_ator.py
+
 echo "== 7f. quem concede companheiro animal =="
 # Sem isto, nenhum feat da base diz "eu concedo um companheiro" e o ator so
 # entra por `doc[\"atores\"]` escrito a mao. Mesma janela do 7e: depois da prosa

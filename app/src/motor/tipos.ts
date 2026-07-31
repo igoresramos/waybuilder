@@ -139,10 +139,18 @@ export interface SlotAberto {
 }
 
 /**
- * Companheiro, familiar ou eidolon com a ficha derivada. Os campos de stat só
- * existem para `tipo: "companheiro"` -- familiar e eidolon entram na lista sem
- * ficha, porque o modelo deles ainda não existe (ver a dívida na spec
- * `2026-07-29-companheiro-concedido`).
+ * Companheiro, familiar ou eidolon com a ficha derivada.
+ *
+ * Os três têm ficha desde 2026-07-31. Antes disso só o companheiro tinha, e a
+ * razão era o schema do AoN: `animal-companion` traz colunas numéricas nativas,
+ * enquanto familiar e eidolon DERIVAM do mestre -- o que existe para eles é
+ * fórmula, não tabela, e ela mora em `aon_dump/rules.json`, um arquivo que
+ * nenhum extrator abria.
+ *
+ * As três fichas não têm os mesmos campos, e as ausências são deliberadas: o
+ * familiar não tem `atributos` (a regra diz que ele não usa os próprios) e o
+ * eidolon não tem `hp` (compartilha o pool do invocador).
+ * Spec: `specs/2026-07-31-estatisticas-de-familiar-e-eidolon.md`
  */
 export interface Ator {
   tipo: string;
@@ -162,13 +170,34 @@ export interface Ator {
   /** `{land: 40, max: 40}` -- por modo de deslocamento, em pes */
   velocidade?: Record<string, number>;
   sentidos?: string;
+  /** ausente no FAMILIAR de proposito: ele "doesn't have or use its own
+   * attribute modifiers". Ausencia e resposta -- a ficha diz isso em vez de
+   * mostrar +0 em tudo. */
   atributos?: Record<string, number>;
-  hp?: number;
+  /** `null` no EIDOLON: ele nao tem HP proprio, compartilha o pool do
+   * invocador. Ver `nota_de_hp`. */
+  hp?: number | null;
   hp_detalhe?: string;
-  ac?: number;
+  nota_de_hp?: string;
+  ac?: number | null;
   proficiencias?: Record<string, Rank>;
-  saves?: Record<string, number>;
+  /** sempre o TOTAL, nunca a linha inteira -- o cartao de ator mostra numero.
+   * No familiar sao os do MESTRE, porque a regra diz "equal to yours". */
+  saves?: Record<string, number | undefined>;
   percepcao?: number;
+  /** familiar: `3 + nivel` ou o mod de conjuracao, e qual dos dois valeu */
+  nota_de_pericia?: string;
+  outras_pericias?: number;
+  pericias?: unknown;
+  /** eidolon: o array escolhido e os que existem */
+  array?: string | null;
+  arrays_possiveis?: Array<string | null>;
+  arrays_pendente?: boolean;
+  nota_de_array?: string;
+  dex_cap?: number | null;
+  tamanhos?: string[];
+  tradicao?: unknown;
+  pericias_do_invocador?: boolean;
   ataques?: Array<{
     nome?: string; ataque: number; dano: string;
     tipo?: string | null; traits?: string[]; agil?: boolean;

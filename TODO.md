@@ -25,23 +25,20 @@
 # Os 55 itens concluidos vivem em docs/2026-07-29_todo-concluidos.md.
 project: waybuilder
 items:
-- desc: 'DESTRAVADO 2026-07-31 -- a fonte EXISTE em disco e foi verificada (docs/medicoes/2026-07-31_fonte-de-familiar-e-eidolon.md).
-    O item estava parado por "conseguir a fonte das estatisticas"; ela nunca faltou. E a DECIMA PRIMEIRA
-    lacuna de leitura, e a maior ate agora: nao e um campo, e um ARQUIVO INTEIRO. `pipeline/dados_brutos/aon_dump/rules.json`
-    tem 3.645 registros e NENHUM extrator o le (conferido por grep em pipeline/ e pipeline/extratores/).
-    FAMILIAR -- formula fechada, sem ambiguidade: `rules-162` diz "5 Hit Points for each of your levels";
-    `rules-161` (legado, Core Rulebook) diz que AC e saves sao iguais aos do mestre ANTES de circunstancia
-    e status, e que Perception/Acrobatics/Stealth = nivel + modificador de conjuracao; `rules-2122` (REMASTER,
-    Player Core pg. 212) ajusta para `3 + nivel`, com opcao de usar `mod de conjuracao + nivel` se for
-    maior -- e a versao remaster que vale, pela regra de sempre usar a mais recente; `rules-165` da Speed
-    25 ft (ou swim 25, escolha ao ganhar); nao faz Strikes e usa o nivel do mestre como modificador. EIDOLON
-    -- nao tem HP proprio, compartilha o pool do invocador; os arrays de atributo, cap de Dex e bonus
-    de item por tipo estao ESTRUTURADOS em `pipeline/dados_brutos/pf2etools_repo/data/companionsfamiliars.json`
-    (chave `eidolon`, 12 registros com campos `stats`/`skills`/`size`), faltando so o tipo "Swarm", que
-    esta em prosa. POR QUE O COMPANHEIRO ANIMAL JA FUNCIONA e estes dois nao: puro schema do AoN -- `animal-companion`
-    tem colunas numericas nativas, `eidolon` e `familiar-specific` nao tem, e o extrator `companheiros.py`
-    so le coluna, nunca prosa nem `rules.json`. NAO precisa de dump novo nem de PDF.'
-  id: 43
+- desc: 'SOBRA DO ITEM 43, FECHADO 2026-07-31 (spec specs/2026-07-31-estatisticas-de-familiar-e-eidolon.md).
+    Familiar e eidolon ganharam ficha; o que ficou de fora esta declarado com numero na spec. (a) As
+    10 habilidades de familiar (`rules-2125`: amphibious, burrower, climber, darkvision, echolocation,
+    fast movement, flier, manual dexterity, scent, tough) -- so `Tough` mexe em numero (`+2 HP por nivel`),
+    as outras nove sao sentido e movimento, e a ESCOLHA diaria delas e recurso por dia, nao construcao.
+    (b) Os ataques desarmados do eidolon (`rules-1584`: 4 dados possiveis no primario, secundario fixo
+    1d6 agile finesse) -- depende de conceder Strike, mesma familia dos 30 `Strike` do Animal Instinct
+    ja recusada no item 101. (c) O boost de atributo do eidolon (`rules-1583`, "gets boosts at the same
+    time you do") -- pede o orcamento de boost do personagem aplicado a outra ficha. (d) O tipo `Swarm`
+    e o unico eidolon sem array na fonte estruturada; hoje aparece MARCADO com o motivo. (e) A aba da
+    ficha ainda se chama "Companheiro" mesmo quando o ator e familiar ou eidolon -- cosmetico.'
+  id: 104
+  date: '2026-07-31'
+  priority: baixa
   date: '2026-07-29'
   priority: alta
 - desc: 'SOBRA DO ITEM 42, FECHADO 2026-07-30 (spec specs/2026-07-30-dano-de-furia.md). O que SOBROU do

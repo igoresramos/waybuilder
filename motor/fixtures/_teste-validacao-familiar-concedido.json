@@ -781,15 +781,35 @@
   "ataques": [],
   "atores": [
    {
+    "ac": 16,
     "classe": "Witch",
     "concedido_por": "wb:class-feature/familiar-witch",
     "em": null,
     "escolhas": [],
+    "hp": 15,
     "nivel": 3,
     "nivel_de_classe": 3,
     "nome": "Pipefox",
     "nota": null,
-    "tipo": "familiar"
+    "nota_de_pericia": "3 + nivel",
+    "outras_pericias": 3,
+    "percepcao": 6,
+    "pericias": {
+     "acrobatics": 6,
+     "stealth": 6
+    },
+    "saves": {
+     "fortitude": 6,
+     "perception": 6,
+     "reflex": 6,
+     "will": 8
+    },
+    "sentidos": "low-light vision",
+    "tamanho": "tiny",
+    "tipo": "familiar",
+    "velocidade": {
+     "land": 25
+    }
    }
   ],
   "atributos": {
@@ -879,8 +899,8 @@
   "concessoes_de_ator": [
    {
     "adicional": true,
-    "classe": null,
-    "em": null,
+    "classe": "wb:class/witch",
+    "em": 1,
     "escolhe": "familiar-specific",
     "escolhido": null,
     "opcoes": [],

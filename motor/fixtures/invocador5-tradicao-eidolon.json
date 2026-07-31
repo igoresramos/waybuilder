@@ -887,8 +887,8 @@
   "concessoes_de_ator": [
    {
     "adicional": false,
-    "classe": null,
-    "em": null,
+    "classe": "wb:class/summoner",
+    "em": 1,
     "escolhe": "eidolon",
     "escolhido": null,
     "opcoes": [],
@@ -1347,15 +1347,6 @@
    {
     "em": "criacao",
     "escolhe": 1,
-    "kind": "eidolon",
-    "opcoes_ids": [],
-    "origem": "wb:class-feature/eidolon",
-    "rotulo": "eidolon -- Eidolon",
-    "slot": "eidolon"
-   },
-   {
-    "em": "criacao",
-    "escolhe": 1,
     "kind": "heritage",
     "rotulo": "heranca",
     "slot": "heranca"
@@ -1380,6 +1371,15 @@
     "kind": "feat",
     "rotulo": "ancestry feat (nivel 1)",
     "slot": "ancestry_feat"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "eidolon",
+    "opcoes_ids": [],
+    "origem": "wb:class-feature/eidolon",
+    "rotulo": "eidolon -- Eidolon",
+    "slot": "eidolon"
    },
    {
     "em": 2,

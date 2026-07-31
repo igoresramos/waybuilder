@@ -231,11 +231,18 @@ class Personagem:
         self._hp()
         self._slots_de_feat()
         self._conjuracao()
-        self._atores()
         self._focus()
         self._defesa()
         self._ataques()
         self._pericias_e_salvas()
+        # `_atores` DEPOIS de `_defesa` e `_pericias_e_salvas`: a AC e os saves
+        # do familiar sao literalmente os do mestre ("equal to yours before
+        # applying circumstance or status bonuses"), entao ele os LE em vez de
+        # recalcular. Na ordem antiga `self.ac` ainda nao existia.
+        # Conferido antes de mover: nada entre as duas posicoes le `atores`,
+        # `escolhas_de_feat` ou `concessoes_de_ator`; o unico consumidor e
+        # `_termo_has_actor`, em `_checar_requisitos`, que continua depois.
+        self._atores()
         self._resistencias()
         self._velocidade()
         self._checar_requisitos()
@@ -1717,11 +1724,56 @@ class Personagem:
                 self._coletar_grant_actor(f["id"], self.base.opcional(f["id"]) or f,
                                           em_de.get(f["id"]))
 
+    def _classe_que_concede(self, feature_id: str) -> str | None:
+        """A classe DESTA ficha cuja progressao traz esta class-feature.
+
+        Exata, e nao chute: se duas classes do personagem concedessem a mesma
+        feature, a de MENOR nivel manda, porque e a que aperta o cap da regra
+        17b -- o oposto seria escolher o cap mais frouxo por acaso de ordem.
+        """
+        donas = []
+        for cid in self.ordem_de_classe:
+            classe = self.base.opcional(cid) or {}
+            if any(e.get("concede") == feature_id
+                   for e in (classe.get("progressao") or [])):
+                donas.append(cid)
+        return min(donas, key=self.nivel_de) if donas else None
+
+    def _nivel_de_personagem_da_feature(self, feature_id: str) -> int | None:
+        """Em que nivel de PERSONAGEM esta class-feature chegou.
+
+        A feature guarda `nivel_de_classe`, e a tela pergunta por nivel de
+        personagem -- com a houserule os dois numeros sao diferentes. Converte
+        contando quantos niveis daquela classe ja tinham sido gastos.
+        """
+        cid = self._classe_que_concede(feature_id)
+        if not cid:
+            return None
+        alvo = next((f.get("nivel_de_classe") for f in self.features
+                     if f.get("id") == feature_id), None)
+        if not isinstance(alvo, int):
+            return None
+        contados = 0
+        for n in sorted(self.classe_do_nivel):
+            if self.classe_do_nivel[n] == cid:
+                contados += 1
+                if contados == alvo:
+                    return n
+        return None
+
     def _coletar_grant_actor(self, origem_id: str, reg: dict, em) -> None:
         for g in self._grants_de(reg):
             if not isinstance(g, dict) or "grant_actor" not in g:
                 continue
             ga = g["grant_actor"] or {}
+            # feature vinda da PROGRESSAO nao foi "pega" em nivel nenhum, entao
+            # `em` chegava None -- e a tela so desenha a concessao no bloco em
+            # que `em === n`. Resultado: o familiar da Bruxa (e o eidolon do
+            # Summoner) NUNCA aparecia como slot, e o unico jeito de ter um era
+            # editar o JSON a mao. Converte para nivel de PERSONAGEM, que e o
+            # que a tela pergunta.
+            if em is None:
+                em = self._nivel_de_personagem_da_feature(origem_id)
             self.concessoes_de_ator.append({
                 "origem": origem_id,
                 "origem_nome": reg.get("name") or origem_id,
@@ -1729,7 +1781,14 @@ class Personagem:
                 "tipo": ga.get("tipo") or "companheiro",
                 "escolhe": ga.get("escolhe") or "animal-companion",
                 "opcoes": list(ga.get("opcoes") or []),
-                "classe": self.classe_do_nivel.get(em) if isinstance(em, int) else None,
+                # o nivel em que foi PEGO diz a classe -- mas feature vinda da
+                # PROGRESSAO nao foi pega em nivel nenhum, e ai o `em` e None.
+                # Nesse caso a classe e exata: e a que traz a feature na
+                # `progressao`. Sem isto a regra 17b nao aplicava a NENHUM
+                # familiar concedido por classe (Bruxa, Summoner, Druida): um
+                # Bruxo 1 / Guerreiro 5 saia com familiar de nivel 6 em vez de 3.
+                "classe": (self.classe_do_nivel.get(em) if isinstance(em, int)
+                           else self._classe_que_concede(origem_id)),
                 "preenchida": False,
                 "escolhido": None,
                 # a fonte declara as PROPRIAS excecoes a regra de um ator por
@@ -1831,7 +1890,125 @@ class Personagem:
                 ator["grau_pendente"] = grau is None
                 ator.update(self._ficha_de_companheiro(a, ator["nivel"],
                                                         grau or "mature", especializado))
+            elif a.get("tipo") == "familiar":
+                ator.update(self._ficha_de_familiar(ator["nivel"]))
+            elif a.get("tipo") == "eidolon":
+                ator.update(self._ficha_de_eidolon(a, ator["nivel"]))
             self.atores.append(ator)
+
+    # -- familiar e eidolon ---------------------------------------------------
+    #
+    # Ao contrario do companheiro animal, que tem colunas numericas nativas no
+    # AoN, estes dois DERIVAM do mestre -- o que existe e formula, nao tabela, e
+    # e por isso que procurar tabela nunca achou nada. A formula vem da base
+    # (`wb:stat-formula/*`), lida de `aon_dump/rules.json` e do feat `Pet`.
+    # Spec: `specs/2026-07-31-estatisticas-de-familiar-e-eidolon.md`
+
+    def _formula(self, qual: str) -> dict:
+        return (self.base.opcional(f"wb:stat-formula/{qual}") or {}).get("formula") or {}
+
+    def _mod_de_conjuracao(self) -> int:
+        """O maior modificador de atributo de conjuracao entre as classes.
+
+        Sai de `key_ability` da CLASSE, e nao de `self.conjuracao`: a visao de
+        conjuracao nao expoe o modificador em campo proprio -- ele so aparece
+        dentro do texto de `dc.nota`. Ler dali seria parsear a propria saida.
+        """
+        mods = []
+        for cid in self.ordem_de_classe:
+            classe = self.base.opcional(cid) or {}
+            if not classe.get("spellcasting"):
+                continue
+            chaves = classe.get("key_ability") or []
+            mods.append(max((self.modificadores.get(k, 0) for k in chaves),
+                            default=0))
+        return max(mods, default=0)
+
+    def _ficha_de_familiar(self, nivel: int) -> dict:
+        f = self._formula("familiar")
+        if not f:
+            return {"aviso": "formula do familiar ausente na base"}
+        # as tres pericias usam `3 + nivel`, ou o mod de conjuracao se for maior
+        base_pericia = int(f.get("pericia_base") or 0)
+        mod = self._mod_de_conjuracao() \
+            if f.get("usa_mod_de_conjuracao_se_maior") else 0
+        usado = max(base_pericia, mod)
+        return {
+            # AC e saves sao os do MESTRE, nao recalculados: se ele muda, o
+            # familiar muda junto
+            "ac": (self.ac or {}).get("total") if isinstance(self.ac, dict) else self.ac,
+            # o TOTAL, e nao a linha inteira: o cartao de ator mostra numero,
+            # e o companheiro ja emite numero. Copiar `self.salvas` cru punha
+            # `[object Object]` na ficha -- achado pela verificacao no navegador.
+            "saves": {k: (v or {}).get("total") if isinstance(v, dict) else v
+                      for k, v in (self.salvas or {}).items()},
+            "hp": int(f.get("hp_por_nivel") or 0) * nivel,
+            "percepcao": usado + nivel,
+            "pericias": {p: usado + nivel for p in ("acrobatics", "stealth")},
+            "outras_pericias": nivel,
+            "velocidade": {"land": int(f.get("velocidade") or 0)},
+            "tamanho": f.get("tamanho"),
+            "sentidos": "low-light vision",
+            "nota_de_pericia": (f"3 + nivel" if usado == base_pericia else
+                                f"mod de conjuracao {mod:+d} + nivel "
+                                f"(maior que {base_pericia})"),
+        }
+
+    def _ficha_de_eidolon(self, ator: dict, nivel: int) -> dict:
+        f = self._formula("eidolon")
+        if not f:
+            return {"aviso": "formula do eidolon ausente na base"}
+        pega = next((e.get("pega") for e in (ator.get("escolhas") or [])
+                     if e.get("slot") == "eidolon"), None)
+        tipo = self.base.opcional(pega or "") or {}
+        prof = dict(f.get("proficiencias") or {})
+        saida = {
+            "hp": None,                     # compartilha o pool do invocador
+            "nota_de_hp": "sem HP proprio -- compartilha o pool do invocador",
+            "proficiencias": prof,
+            "saves": {k: self.nivel + RANK_BONUS[v] for k, v in prof.items()
+                      if k in ("fortitude", "reflex", "will")},
+            "pericias_do_invocador": bool(f.get("compartilha_pericias_do_invocador")),
+        }
+        if not tipo:
+            saida["aviso"] = ("tipo de eidolon ainda nao escolhido"
+                              if not pega else
+                              f"tipo de eidolon nao encontrado: {pega}")
+            return saida
+        st = tipo.get("stats") or {}
+        # `arrays` e o que ESTA SPEC acrescentou; `stats` sozinho ja existia com
+        # outra forma (tradicao, plano natal, velocidade, sentidos), entao o
+        # teste tem de ser pelo campo novo, nao pela presenca de `stats`.
+        arrays = st.get("arrays") or []
+        if not arrays:
+            # marcar, nunca esconder -- e o caso do `Swarm`
+            saida["aviso"] = (f"{tipo.get('name')}: "
+                              f"{tipo.get('stats_ausente') or 'sem array na fonte'}")
+            saida["velocidade"] = st.get("velocidade")
+            return saida
+        escolhido = next((a for a in arrays
+                          if a.get("nome") == ator.get("array")), arrays[0])
+        attr = dict(escolhido.get("atributos") or {})
+        dex = min(attr.get("dex", 0), int(escolhido.get("dex_cap") or 0))
+        saida.update({
+            "array": escolhido.get("nome"),
+            "arrays_possiveis": [a.get("nome") for a in arrays],
+            "atributos": attr,
+            # 10 + nivel + prof(unarmored, trained) + DEX capado + bonus de item
+            "ac": 10 + self.nivel + RANK_BONUS["trained"] + dex
+                  + int(escolhido.get("ac_item") or 0),
+            "dex_cap": escolhido.get("dex_cap"),
+            "pericias": [str(p).lower() for p in (st.get("pericias") or [])],
+            "tamanhos": list(st.get("tamanhos") or []),
+            # o que o extrator de companheiros ja trazia, preservado
+            "velocidade": st.get("velocidade"),
+            "tradicao": st.get("tradicao"),
+        })
+        if len(arrays) > 1 and not ator.get("array"):
+            saida["nota_de_array"] = (
+                f"{len(arrays)} arrays possiveis e nenhum escolhido; "
+                f"mostrando {escolhido.get('nome')}")
+        return saida
 
     def _ficha_de_companheiro(self, ator: dict, nivel: int, grau: str,
                               especializado: bool) -> dict:

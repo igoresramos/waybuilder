@@ -2052,6 +2052,92 @@ for termo, valor in (("deity_favored_weapon_category", "simple"),
            f"`{termo}` sem divindade responde com motivo, nao estoura",
            f"deu {ok} {motivo!r}")
 
+# -- estatisticas de familiar e eidolon --------------------------------------
+# A DECIMA PRIMEIRA lacuna de leitura, e a primeira que nao e um campo e sim um
+# ARQUIVO: `aon_dump/rules.json` tem 3.645 registros e nenhum extrator o abria.
+# Familiar e eidolon DERIVAM do mestre -- o que existe e formula, nao tabela, e
+# por isso procurar tabela nunca achou nada.
+# Spec: `specs/2026-07-31-estatisticas-de-familiar-e-eidolon.md`
+print("\nestatisticas de familiar e eidolon")
+
+WITCH, SUMMONER = "wb:class/witch", "wb:class/summoner"
+FAMILIAR_WITCH = "wb:class-feature/familiar-witch"
+
+
+def _com_ator(pares, atores, extras=None):
+    escolhas, n = [], 0
+    for cid, quantos in pares:
+        for _ in range(quantos):
+            n += 1
+            escolhas.append({"em": n, "slot": "nivel_de_classe", "pega": cid})
+    return personagem(escolhas + (extras or []), atores=atores)
+
+
+checar(bool(BASE.opcional("wb:stat-formula/familiar")),
+       "a formula do familiar virou registro na base")
+checar(bool(BASE.opcional("wb:stat-formula/eidolon")),
+       "e a do eidolon tambem")
+
+_fam = [{"tipo": "familiar", "nome": "Corvo", "concedido_por": FAMILIAR_WITCH}]
+_a = _com_ator([(WITCH, 6)], _fam).visao()["atores"][0]
+checar(_a["hp"] == 30, "Bruxo 6: familiar com 30 HP (5 por nivel)", f"deu {_a['hp']}")
+checar(_a["percepcao"] == 9, "e Percepcao 9 (`3 + nivel`)", f"deu {_a['percepcao']}")
+checar(_a["velocidade"] == {"land": 25} and _a["tamanho"] == "tiny",
+       "velocidade 25 e tamanho Tiny, lidos do feat `Pet`", f"deu {_a!r}")
+
+# AC e saves sao os do MESTRE, nao recalculados
+_p = _com_ator([(WITCH, 6)], _fam)
+_a = _p.visao()["atores"][0]
+checar(_a["ac"] == (_p.ac or {}).get("total"),
+       "a AC do familiar E a do mestre -- lida, nao recalculada",
+       f"{_a['ac']} vs {(_p.ac or {}).get('total')}")
+
+# o delta do familiar sobre o Pet: mod de conjuracao se for MAIOR que 3
+_boosts = [{"em": 1, "slot": "boosts_livres", "pega": ["int", "int", "int", "con"]},
+           {"em": 5, "slot": "boosts_livres", "pega": ["int", "dex", "con", "wis"]}]
+_a = _com_ator([(WITCH, 6)], _fam, _boosts).visao()["atores"][0]
+checar(_a["percepcao"] == 11,
+       "com INT +5 a Percepcao vira 11 -- o mod de conjuracao passa o 3",
+       f"deu {_a['percepcao']}")
+checar("mod de conjuracao" in _a["nota_de_pericia"],
+       "e a nota diz qual dos dois foi usado", _a["nota_de_pericia"])
+
+# REGRA 17b: sem o conserto da classe da concessao, isto dava 6
+_a = _com_ator([(WITCH, 1), (FIGHTER, 5)], _fam).visao()["atores"][0]
+checar(_a["nivel"] == 3,
+       "Bruxo 1 / Guerreiro 5: familiar nivel 3 pela regra 17b, nao 6",
+       f"deu {_a['nivel']}")
+checar(_a["hp"] == 15, "e o HP acompanha o nivel capado", f"deu {_a['hp']}")
+
+# EIDOLON
+_eid = [{"tipo": "eidolon", "nome": "Anjo",
+         "escolhas": [{"slot": "eidolon", "pega": "wb:eidolon/angel"}]}]
+_a = _com_ator([(SUMMONER, 6)], _eid).visao()["atores"][0]
+checar(_a["hp"] is None and "pool do invocador" in _a["nota_de_hp"],
+       "o eidolon NAO tem HP proprio -- compartilha o pool do invocador",
+       f"deu {_a['hp']!r}")
+checar(_a["proficiencias"]["fortitude"] == "expert"
+       and _a["proficiencias"]["reflex"] == "trained",
+       "Fortitude expert e Reflex trained, lidos de `rules-1582`",
+       f"deu {_a['proficiencias']!r}")
+checar(_a["atributos"]["str"] == 18 and _a["dex_cap"] == 3,
+       "e os atributos vem do array escolhido, com o cap de Dex",
+       f"deu {_a.get('atributos')!r} cap {_a.get('dex_cap')!r}")
+checar(len(_a["arrays_possiveis"]) == 2 and "nota_de_array" in _a,
+       "com dois arrays e nenhum escolhido, mostra um e AVISA -- nao inventa",
+       f"deu {_a.get('arrays_possiveis')!r}")
+
+# `Swarm` e o unico sem array na fonte estruturada: marcado, nunca escondido
+_a = _com_ator([(SUMMONER, 6)],
+               [{"tipo": "eidolon", "nome": "Enxame",
+                 "escolhas": [{"slot": "eidolon", "pega": "wb:eidolon/swarm"}]}]
+               ).visao()["atores"][0]
+checar("Swarm" in str(_a.get("aviso")),
+       "o eidolon Swarm aparece MARCADO, com o motivo escrito", str(_a.get("aviso")))
+checar(_a.get("velocidade") is not None,
+       "e a velocidade que o extrator antigo trazia foi PRESERVADA -- o passo "
+       "mescla em `stats`, nao substitui", f"deu {_a.get('velocidade')!r}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")
