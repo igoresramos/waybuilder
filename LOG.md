@@ -1119,3 +1119,34 @@ Tambem corrigido: os scripts de verificacao escreviam em `"../docs/..."` e, ao
 rodar da raiz do projeto, criavam artefato FORA dele -- `caminhos.mjs` agora
 ancora em `import.meta.url`. E uma licao nova no LESSONS: mexer em extrator sem
 `WB_REEXTRAIR=1` da build verde sobre dado velho.
+
+## 2026-07-30 (continuacao) -- `escolhe: N` e os ikons do Exemplar (item 97)
+
+O item falava em 48 class-features inalcancaveis. Re-medido: os kinds `ikon`
+(21) e `mythic-calling` (15) sao INTEIROS inalcancaveis, e fundir os pares nao
+resolveria -- os dois lados continuariam sem ser citados. A causa estava na
+classe: o Exemplar concede `divine-spark-and-ikons` no nivel 1, a prosa oficial
+diz "Select three ikons", e a classe nao tinha eixo de ikon.
+
+O bloqueio era `escolhe: N`. O campo existia no schema e os 52 blocos usavam 1;
+o motor nem lia, fazia `next(...)`. Num bloco de tres isso perderia duas
+escolhas em silencio. Os dois motores passaram a ler, com `escolhido` seguindo
+sendo o primeiro -- os 52 blocos de escolha unica nao mudaram (diff de fixture
+puramente aditivo). Escolha demais virou AVISO, nunca correcao.
+
+Na tela, `escolherSubclasse` SUBSTITUI por (nivel, eixo): a segunda escolha
+apagaria a primeira. Entraram `adicionarSubclasse`/`removerSubclasse` e uma
+linha por ikon. E uma ficha de exemplo nova, senao nenhuma fixture exercitaria
+`escolhe` diferente de 1 e o porte poderia divergir sem ninguem ver.
+
+**Achado que virou o item 99:** os class-features do Foundry tem **194
+ChoiceSet** com prompt NOMEANDO o eixo (`Kineticist.KineticGate` 33,
+`Exemplar.Ikon` 22, `Commander.Tactics` 11, `Prompt.Deity` 4,
+`Prompt.Sanctification` 3...). A fonte declara estruturalmente o que eu derivei
+da prosa -- e as duas leituras batem. Licao: checar o ChoiceSet antes de derivar
+eixo de prosa. Medido antes de prometer: as 74 listas literais cobrem ZERO das
+265 opcoes do balaio; a carga esta nas 104 de forma `query`, que exigem um
+avaliador novo.
+
+E o item 69 perdeu a terceira hipotese: das 265 opcoes do balaio, apenas TRES ja
+sao concedidas pela cadeia sem escolher nada.

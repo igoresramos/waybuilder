@@ -109,18 +109,18 @@ items:
   id: 68
   date: '2026-07-29'
   priority: media
-- desc: 'RE-MEDIDO 2026-07-30, e a hipotese (a) do item NAO se confirma: ZERO das 265 opcoes de `outras-opcoes`
-    esta tambem na `progressao` da classe -- nao ha sobreposicao a limpar. O balaio se REPETE POR NIVEL
-    (o Alquimista tem 6 blocos `outras-opcoes`, um por degrau), e o bloco de nivel 1 dele mistura tres
-    coisas: feature que a CADEIA de grants ja concede (`formula-book` e `versatile-vials` aparecem em
-    `p.features` de um Alquimista 1 sem ele escolher nada), gemeo legado/remaster (`infused-reagents`
-    virou `versatile-vials`) e variante por sub-escolha (`field-discovery-bomber` etc). A regra do sufixo
-    pegou 9 pares no eixo `instinct` (item 42, resolvido) e nao ajuda aqui. SEGUE SENDO CURADORIA CASO
-    A CASO, e o proprio item ja decidira nao implementar heuristica parcial para nao quebrar os 11 eixos
-    que funcionam. Proximo passo objetivo: para cada opcao do balaio, checar se a cadeia de grants ja
-    a concede -- se concede, nao e escolha.'
+- desc: 'TERCEIRA hipotese do item tambem NAO se confirma (2026-07-30). O proprio item propunha: "para
+    cada opcao do balaio, checar se a cadeia de grants ja a concede -- se concede, nao e escolha". Medido
+    montando um personagem de cada uma das 16 classes com balaio, no nivel do bloco mais alto, e comparando
+    com o que a cadeia entrega sem escolher nada: das 265 opcoes, apenas TRES ja sao concedidas (`formula-book`
+    e `versatile-vials` do Alquimista, `champions-aura` do Campeao). Essas tres sao curadoria segura --
+    sao oferecidas como escolha estando ja concedidas. As outras 262 seguem sem regra que as explique:
+    a hipotese (a) do item deu zero (nenhuma esta na progressao), esta deu 3. O balaio nasce em aplicar_subclasses.py
+    quando a classe TEM lista autoritativa do Foundry e o nome da feature nao esta nela. VER ITEM 99:
+    os ChoiceSet dos class-features do Foundry nomeiam eixos, e e o unico caminho novo que apareceu --
+    mas as listas LITERAIS cobrem zero das 265, entao o ganho, se houver, esta nas 104 de forma `query`.'
   id: 69
-  date: '2026-07-29'
+  date: '2026-07-30'
   priority: media
 - desc: '4a RODADA FECHADA 2026-07-30 (Barbaro 6, secao 8 do relatorio docs/2026-07-30_comparacao-pathbuilder-rodada-3.md).
     NENHUM defeito nosso na aba -- 98x99 em class feats, tudo nas familias ja declaradas. O valor veio
@@ -178,23 +178,17 @@ items:
   id: 96
   date: '2026-07-30'
   priority: baixa
-- desc: 'RE-MEDIDO 2026-07-30 por agente, e o achado e MAIOR que o item. Confirmadas as 48 class-features
-    inalcancaveis. Mas os 26 pares com irmao de mesmo slug nao sao o problema: TODOS os 21 registros do
-    kind `ikon` e TODOS os 15 do kind `mythic-calling` sao inalcancaveis, com ou sem par. Ou seja, o compendio
-    `pf2e.classfeatures` do Foundry mistura Ikons e Mythic Callings com class-features de verdade, e o
-    extrator rotulou tudo como class-feature. Padrao unico nos 33 pares: mesmo nome (a menos de capitalizacao),
-    mesmo livro, `class: []` em 100%, xref do Foundry SO do lado class-feature. FUNDIR NAO RESOLVE ALCANCABILIDADE
-    -- so tira a duplicidade. O que resolve e a CAUSA: o Exemplar concede `divine-spark-and-ikons` no
-    nivel 1 e a prosa oficial diz "Select three ikons", mas a classe nao tem eixo de ikon nenhum. O AoN
-    tem exatamente 21 docs de ikon, entao nao ha lacuna de conteudo -- ha lacuna de ESCOLHA. BLOQUEIO
-    MEDIDO: o eixo precisa de `escolhe: 3` e hoje os 52 blocos da base usam `escolhe: 1`; o motor le UMA
-    escolha por bloco (`next((o for o in opcoes if o in escolhidas), None)`) e ignora o campo. Fazer `escolhe:
-    N` funcionar mexe em _subclasses, slots_abertos, _termo_subclass e no porte TS -- justamente o trecho
-    que ja produziu regressao pega pela paridade. Os 22 sem irmao sao outra coisa: 6 gates do Kineticist
-    + elemental-school + advanced-vials-toxicologist sao gap de progressao real; 7 deviant-classification
-    tem primo por NOME em `deviant-ability-classification` (kind que tem duplicidade propria nao resolvida);
-    3 echoes-of-* e 4 genericos (focus-spells, iron-will, improved-evasion, martial-weapon-mastery) sao
-    stubs orfaos.'
+- desc: 'CAUSA RESOLVIDA 2026-07-30 (commit 9c86ee6c3, spec escolha-multipla-e-ikons). O eixo `ikon` do
+    Exemplar existe, com `escolhe: 3` -- o primeiro bloco da base que nao escolhe 1 --, e os 21 ikons
+    ganharam `equivale_a` com o gemeo class-feature. Os dois motores passaram a ler `escolhe`; antes o
+    motor fazia `next(...)` e perderia duas escolhas em silencio. SOBRA, cada um com causa PROPRIA e medida:
+    (a) `wb:feat/additional-ikon` concede um QUARTO ikon -- a maquinaria de "feat abre slot" ja existe
+    (feat_concedido, grant_actor), falta o feat declarar, e nenhum campo da fonte diz; (b) os 15 `mythic-calling`
+    seguem inalcancaveis porque a ficha nao modela regras miticas -- ausencia declarada; (c) os 22 sem
+    gemeo: 6 gates do Kineticist + `elemental-school` + `advanced-vials-toxicologist` sao gap de progressao
+    de VERDADE (o slot da classe aponta para outra feature), 7 `deviant-classification` tem primo por
+    NOME e nao por slug em `deviant-ability-classification` (kind que tem duplicidade propria nao resolvida),
+    e 4 stubs genericos (focus-spells, iron-will, improved-evasion, martial-weapon-mastery).'
   id: 97
   date: '2026-07-30'
   priority: baixa
@@ -212,5 +206,24 @@ items:
     para quem nao e Clerigo nem Campeao -- `you follow a deity` (4 clausulas) hoje so responde false para
     as outras classes, e um Monge que segue divindade e legitimo em PF2e; (d) alinhamento segue RECUSADO
     -- conceito que o Remaster aboliu.'
+- id: 99
+  date: '2026-07-30'
+  priority: media
+  desc: '194 ChoiceSet nos class-features do Foundry que ninguem le -- medido 2026-07-30, saiu do item
+    69. Os arquivos de `dados_brutos/foundry/class-features/` trazem regras `ChoiceSet` com PROMPT nomeando
+    o eixo: `Kineticist.KineticGate.Prompt` (33), `Exemplar.Ikon.*` (19+3), `Commander.Tactics.Prompt`
+    (11), `Prompt.Deity` (4), `Prompt.Sanctification` (3), `Prompt.PathToPerfection` (3), `ArcaneSchool`,
+    `Doctrine`, `Instinct`, `ElementalSchool`. Ou seja: a fonte DECLARA os eixos de sub-escolha, e o nosso
+    `aplicar_subclasses.py` os deriva por casamento de nome, jogando no balaio `outras-opcoes` o que nao
+    casa. CORROBORACAO: o eixo de ikon que entrou em 30/07 foi derivado da PROSA ("Select three ikons")
+    e bate exatamente com os 3 ChoiceSet de `Divine Spark and Ikons` -- a fonte dizia estruturalmente
+    o que eu li no texto. LICAO: checar o ChoiceSet do Foundry antes de derivar eixo de prosa. O QUE MEDIR
+    ANTES DE IMPLEMENTAR: 74 dos 194 tem `choices` como LISTA literal e essas cobrem ZERO das 265 opcoes
+    do balaio e ZERO dos class-features inalcancaveis (elas apontam para draconic-exemplar 95, animal-companion
+    12, skill 11 -- coisas ja modeladas). Os outros 104 sao `query`, que buscam no compendio por predicado,
+    e sao ELES que povoariam KineticGate e Ikon. Implementar exige um avaliador de query, que e trabalho
+    e risco novos. PRIMEIRO ALVO OBVIO: `Prompt.Sanctification` (3) -- o Campeao escolhe santificacao
+    holy/unholy, `sanctification` existe em 373 divindades e o eixo nao existe; e o complemento natural
+    do item 98.'
 promoted: []
 ---
