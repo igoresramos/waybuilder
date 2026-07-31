@@ -8,7 +8,17 @@
     "so_no_waybuilder": [
       "Whisper of Warning"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "incredible familiar",
+        "nossos": [
+          "Incredible Familiar",
+          "Incredible Familiar (Animist)"
+        ],
+        "pathbuilder": "Incredible Familiar"
+      }
+    ]
   },
   {
     "slot": "Animist 2 / class_feat [Dedication Feats]",
@@ -34,14 +44,6 @@
         "pathbuilder": true,
         "motivos": [
           "exige survival >= trained; tem untrained"
-        ]
-      },
-      {
-        "nome": "Crossbow Infiltrator Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige stealth >= trained; tem untrained"
         ]
       },
       {
@@ -84,6 +86,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

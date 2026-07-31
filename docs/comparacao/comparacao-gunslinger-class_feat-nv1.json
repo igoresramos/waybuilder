@@ -6,7 +6,17 @@
     "em_comum": 80,
     "so_no_pathbuilder": [],
     "so_no_waybuilder": [],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "dual weapon reload",
+        "nossos": [
+          "Dual-Weapon Reload",
+          "Dual-Weapon Reload (Gunslinger)"
+        ],
+        "pathbuilder": "Dual-Weapon Reload"
+      }
+    ]
   },
   {
     "slot": "Gunslinger 1 / class_feat [Dedication Feats]",
@@ -19,6 +29,7 @@
       "Knight Vigilant",
       "Venture-Gossip Dedication"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": []
   }
 ]

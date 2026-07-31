@@ -8,7 +8,17 @@
     "so_no_waybuilder": [
       "Vermillion Threads"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "magic sense",
+        "nossos": [
+          "Magic Sense",
+          "Magic Sense (Magus)"
+        ],
+        "pathbuilder": "Magic Sense"
+      }
+    ]
   },
   {
     "slot": "Magus 2 / class_feat [Dedication Feats]",
@@ -53,14 +63,6 @@
         ]
       },
       {
-        "nome": "Crossbow Infiltrator Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige stealth >= trained; tem untrained"
-        ]
-      },
-      {
         "nome": "Ghost Hunter Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -93,6 +95,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

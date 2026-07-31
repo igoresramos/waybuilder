@@ -13,7 +13,8 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   },
   {
     "slot": "Inventor 1 / class_feat [Dedication Feats]",
@@ -26,6 +27,7 @@
       "Knight Vigilant",
       "Venture-Gossip Dedication"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": []
   }
 ]

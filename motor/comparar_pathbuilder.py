@@ -51,6 +51,23 @@ DEFAULT = {
     "Sorcerer": ("wb:class/sorcerer", ANCESTRIA, BACKGROUND),
     "Alchemist": ("wb:class/alchemist", ANCESTRIA, BACKGROUND),
     "Investigator": ("wb:class/investigator", ANCESTRIA, BACKGROUND),
+    # as 14 que a rodada 6 sondou e o comparador PULAVA EM SILENCIO -- os
+    # arquivos de comparacao delas eram de 07:12 de 31/07 e nao eram mais
+    # regerados, entao "toda sonda tem comparacao" passava e mentia.
+    "Animist": ("wb:class/animist", ANCESTRIA, BACKGROUND),
+    "Commander": ("wb:class/commander", ANCESTRIA, BACKGROUND),
+    "Exemplar": ("wb:class/exemplar", ANCESTRIA, BACKGROUND),
+    "Guardian": ("wb:class/guardian", ANCESTRIA, BACKGROUND),
+    "Gunslinger": ("wb:class/gunslinger", ANCESTRIA, BACKGROUND),
+    "Inventor": ("wb:class/inventor", ANCESTRIA, BACKGROUND),
+    "Kineticist": ("wb:class/kineticist", ANCESTRIA, BACKGROUND),
+    "Magus": ("wb:class/magus", ANCESTRIA, BACKGROUND),
+    "Oracle": ("wb:class/oracle", ANCESTRIA, BACKGROUND),
+    "Psychic": ("wb:class/psychic", ANCESTRIA, BACKGROUND),
+    "Summoner": ("wb:class/summoner", ANCESTRIA, BACKGROUND),
+    "Swashbuckler": ("wb:class/swashbuckler", ANCESTRIA, BACKGROUND),
+    "Thaumaturge": ("wb:class/thaumaturge", ANCESTRIA, BACKGROUND),
+    "Witch": ("wb:class/witch", ANCESTRIA, BACKGROUND),
 }
 
 
@@ -86,6 +103,23 @@ BOOSTS_DO_PATHBUILDER = {
     "Sorcerer":     ["str", "str", "dex", "con"],         # + CHA da chave
     "Alchemist":    ["str", "str", "dex", "con"],         # + INT da chave
     "Investigator": ["str", "str", "dex", "con"],         # + INT da chave
+    # DERIVADOS dos `estado-pathbuilder-<classe>-nv<N>.json`, colhidos da
+    # tela do Pathbuilder -- nunca chutados. Mesma regra do bloco acima: a
+    # habilidade-chave so entra na lista quando e ESCOLHA.
+    "Animist": ["str", "str", "dex", "con"],            # chave unica
+    "Commander": ["str", "str", "dex", "con"],          # chave unica
+    "Exemplar": ["str", "str", "str", "dex", "con"],    # chave e ESCOLHA (dex|str): declara os cinco
+    "Guardian": ["str", "str", "dex", "con"],           # chave unica
+    "Gunslinger": ["str", "str", "dex", "con"],         # chave unica
+    "Inventor": ["str", "str", "dex", "con"],           # chave unica
+    "Kineticist": ["str", "str", "dex", "con"],         # chave unica
+    "Magus": ["str", "str", "str", "dex", "con"],       # chave e ESCOLHA (dex|str)
+    "Oracle": ["str", "str", "dex", "con"],             # chave unica
+    "Psychic": ["str", "str", "dex", "con", "int"],     # chave e ESCOLHA (int|cha)
+    "Summoner": ["str", "str", "dex", "con"],           # chave unica
+    "Swashbuckler": ["str", "str", "dex", "con"],       # chave unica
+    "Thaumaturge": ["str", "str", "dex", "con"],        # chave unica
+    "Witch": ["str", "str", "dex", "con"],              # chave unica
 }
 
 
