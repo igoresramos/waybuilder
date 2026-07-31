@@ -2,7 +2,7 @@
 spec: grant-condicional
 project: waybuilder
 version: 2
-status: proposta
+status: aprovada
 created: 2026-07-31
 todo: [69, 107]
 ---

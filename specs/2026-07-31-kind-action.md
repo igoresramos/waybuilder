@@ -2,7 +2,7 @@
 spec: kind-action
 project: waybuilder
 version: 1
-status: proposta
+status: aprovada
 created: 2026-07-31
 todo: [111]
 ---
