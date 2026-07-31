@@ -61,7 +61,7 @@ prosa -- que pelo principio zero **nao e lacuna**.
 - `wb:class-feature/alchemical-sciences-methodology` (Alchemical Sciences Methodology): `[{"proficiency": {"crafting": "trained"}}, {"grant_feat": ["wb:feat/alchemical-crafting"]}, {"grant_feat": ["wb:equipment/formula-book-blank"]}]`
 - `wb:class-feature/alchemical-weapon-expertise` (Alchemical Weapon Expertise): `[{"proficiency": {"weapon-base-alchemical-bomb": "expert"}}]`
 - `wb:class-feature/alchemical-weapon-mastery` (Alchemical Weapon Mastery): `[{"proficiency": {"weapon-base-alchemical-bomb": "master"}}]`
-- `wb:class-feature/alchemy` (Alchemy): `[{"grant_feat": ["wb:feat/alchemical-crafting"]}, {"grant_feat": ["wb:class-feature/formula-book"]}, {"grant_feat": ["wb:feat/advanced-alchemy"]}, {"grant_feat": ["wb:class-feature/versatile-vials"]}, {"grant_feat": ["wb:feat/quick-alchemy"]}]`
+- `wb:class-feature/alchemy` (Alchemy): `[{"grant_feat": ["wb:feat/alchemical-crafting"]}, {"grant_feat": ["wb:class-feature/formula-book"]}, {"grant_feat": ["wb:class-feature/advanced-alchemy"]}, {"grant_feat": ["wb:class-feature/versatile-vials"]}, {"grant_feat": ["wb:class-feature/quick-alchemy"]}]`
 - `wb:class-feature/aloof-firmament` (Aloof Firmament): `[{"grant_feat": ["wb:feat/cat-fall"]}]`
 - `wb:class-feature/amulet` (Amulet): `[{"grant_feat": ["wb:equipment/amulet-implement"]}]`
 - `wb:class-feature/ancestors` (Ancestors): `[{"proficiency": {"society": "trained"}}, {"grant_feat": ["wb:class-feature/curse-of-ancestral-meddling"]}]`

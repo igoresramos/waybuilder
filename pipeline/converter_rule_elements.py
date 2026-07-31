@@ -87,7 +87,24 @@ def rules_do_foundry():
     return idx
 
 
-def converter(regras, por_nome=None):
+# O pack do UUID diz o KIND, e e o que desempata homonimo: `Advanced Alchemy`
+# existe como class-feature E como feat, e `por_nome` abaixo PREFERE feat --
+# entao `Alchemy` concedia `wb:feat/advanced-alchemy` quando o Foundry dizia
+# `classfeatures.Item.Advanced Alchemy`, e o class-feature ficava inalcancavel.
+# Sao 6 concessoes assim, medidas. `unificar_efeitos.resolver_grant_item` ja
+# fazia isto no OUTRO caminho; aqui faltava.
+# Spec: `specs/2026-07-29-grant-item-por-nome.md`
+PACK_PARA_KIND = {
+    "feats-srd": "feat",
+    "classfeatures": "class-feature",
+    "ancestryfeatures": "class-feature",
+    "equipment-srd": "equipment",
+    "spells-srd": "spell",
+    "heritages": "heritage",
+}
+
+
+def converter(regras, por_nome=None, por_nome_kind=None):
     """Rule elements -> (grants novos, quantos ficaram de fora e por que)."""
     grants, pulados = [], collections.Counter()
     for r in regras:
@@ -117,8 +134,15 @@ def converter(regras, por_nome=None):
             if "{" in uuid or "}" in uuid:
                 pulados["GrantItem com UUID dinamico (escolha do jogador)"] += 1
                 continue
-            nome = uuid.split(".")[-1].strip()
-            alvo = por_nome.get(normalizar(nome))
+            partes = uuid.split(".")
+            nome = partes[-1].strip()
+            # o pack e o TERCEIRO campo (`Compendium.pf2e.classfeatures.Item.X`)
+            pack = partes[2] if len(partes) > 3 else None
+            alvo = None
+            if por_nome_kind is not None and pack in PACK_PARA_KIND:
+                alvo = por_nome_kind.get((normalizar(nome), PACK_PARA_KIND[pack]))
+            if alvo is None:
+                alvo = por_nome.get(normalizar(nome))
             if alvo is None:
                 if normalizar(nome) in CONDICOES:
                     pulados["GrantItem de condicao de combate (fora de escopo)"] += 1
@@ -163,6 +187,10 @@ def main():
     for r in sorted(base, key=lambda x: (0 if x.get("grants") else 1,
                                          0 if x.get("kind") in ("feat", "spell") else 1)):
         por_nome.setdefault(normalizar(r.get("name")), r)
+    # indice por (nome, kind), para o pack do UUID desempatar homonimo
+    por_nome_kind = {}
+    for r in base:
+        por_nome_kind.setdefault((normalizar(r.get("name")), r.get("kind")), r)
 
     convertidos, novos_grants = 0, 0
     pulados_total = collections.Counter()
@@ -174,7 +202,7 @@ def main():
         regras = rules.get(fid)
         if not regras:
             continue
-        grants, pulados = converter(regras, por_nome)
+        grants, pulados = converter(regras, por_nome, por_nome_kind)
         pulados_total.update(pulados)
         if not grants:
             continue

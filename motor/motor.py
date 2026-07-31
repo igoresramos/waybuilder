@@ -2799,6 +2799,24 @@ class Personagem:
                     return False, f"exige {chave} {op} {alvo}; tem {tenho}"
         return True, ""
 
+    def _gemeos_de(self, wid: str) -> set:
+        """Os ids que sao a MESMA entidade que `wid`, pelos dois sentidos.
+
+        `equivale_a` e dirigido, e o par pode ter sido escrito em qualquer um
+        dos lados; aqui os dois valem, como ja valia para os gemeos de
+        instinto.
+        """
+        saida = set()
+        eq = (self.base.opcional(wid) or {}).get("equivale_a")
+        for e in (eq if isinstance(eq, list) else [eq] if eq else []):
+            saida.add(self.base.resolver(str(e)))
+        for r in self.base.por_id.values():
+            eq = r.get("equivale_a")
+            alvos = eq if isinstance(eq, list) else [eq] if eq else []
+            if any(self.base.resolver(str(a)) == wid for a in alvos):
+                saida.add(self.base.resolver(r["id"]))
+        return saida
+
     def _termo_has(self, valor) -> tuple[bool, str]:
         # `pega` nem sempre e um id: `boosts_livres` guarda uma LISTA de
         # atributos. Filtrar por str antes do set, senao estoura no primeiro
@@ -2845,7 +2863,16 @@ class Personagem:
         # o nome pre-remaster (`stunning-fist` pelo `stunning-blows`), e sem
         # resolver o alias o requisito nunca era satisfeito
         canonico = self.base.resolver(valor)
-        if canonico in {self.base.resolver(t) for t in tudo}:
+        tenho = {self.base.resolver(t) for t in tudo}
+        if canonico in tenho:
+            return True, ""
+        # o GEMEO tambem satisfaz. `Advanced Alchemy` existe como class-feature
+        # E como feat, e desde 31/07 a classe concede o class-feature (o pack do
+        # UUID do Foundry manda). Sem esta ponte, `efficient-alchemy`, que cita
+        # o FEAT, deixou de ser atendido por um Alquimista 8 -- exatamente a
+        # quebra que o item 100 previa ao trocar o alvo do `grants`.
+        # Spec: `specs/2026-07-31-gemeo-do-grant-item.md`
+        if self._gemeos_de(canonico) & tenho:
             return True, ""
         nome = (self.base.opcional(canonico) or {}).get("name", valor)
         return False, f"exige ter {nome}"

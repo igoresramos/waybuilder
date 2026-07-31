@@ -5,13 +5,22 @@
 
 `item:tag` era usado 54 vezes nos filtros da base e o motor o IGNORAVA -- e atomo ignorado conta como SATISFEITO. Isso e certo para estreitar slot de feat e destrutivo para definir eixo, que e por isso que a tag entra antes do eixo.
 
-- eixos criados: **0**
+- eixos criados: **9**
 - pulados pela guarda anti-duplicata: **19**
 
 O eixo NAO e lista a mao: sai de toda class-feature de PROGRESSAO com `ChoiceSet` de `filter`. A guarda so deixa nascer o eixo cujo filtro alcanca registro hoje INALCANCAVEL -- sem ela, o eidolon do Summoner ganharia um eixo duplicando o slot de ator.
 
 | classe | eixo | nivel | escolhe | casam | inalcancaveis |
 |---|---|---:|---:|---:|---:|
+| `wb:class/commander` | `expert-tactician` | 7 | 2 | 21 | 21 |
+| `wb:class/kineticist` | `fourth-gates-threshold` | 17 | 2 | 6 | 6 |
+| `wb:class/kineticist` | `gates-threshold` | 5 | 2 | 6 | 6 |
+| `wb:class/kineticist` | `kinetic-gate` | 1 | 2 | 6 | 6 |
+| `wb:class/commander` | `legendary-tactician` | 19 | 2 | 31 | 31 |
+| `wb:class/commander` | `master-tactician` | 15 | 2 | 26 | 26 |
+| `wb:class/kineticist` | `second-gates-threshold` | 9 | 2 | 6 | 6 |
+| `wb:class/commander` | `tactics` | 1 | 5 | 14 | 14 |
+| `wb:class/kineticist` | `third-gates-threshold` | 13 | 2 | 6 | 6 |
 
 ### Pulados
 
