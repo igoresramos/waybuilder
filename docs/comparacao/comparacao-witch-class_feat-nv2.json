@@ -1,0 +1,130 @@
+[
+  {
+    "slot": "Witch 2 / class_feat [Class Feats]",
+    "waybuilder": 59,
+    "pathbuilder": 59,
+    "em_comum": 53,
+    "so_no_pathbuilder": [
+      "Deadly Hair",
+      "Hexed Locks",
+      "Major Lesson I",
+      "Major Lesson II",
+      "Major Lesson III",
+      "Skillful Tresses"
+    ],
+    "so_no_waybuilder": [
+      "Major Lesson",
+      "Syu Tak-Nwa's Deadly Hair",
+      "Syu Tak-Nwa's Hexed Locks",
+      "Syu Tak-Nwa's Skillful Tresses"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Witch's Armaments",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      }
+    ]
+  },
+  {
+    "slot": "Witch 2 / class_feat [Dedication Feats]",
+    "waybuilder": 226,
+    "pathbuilder": 224,
+    "em_comum": 224,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [
+      "Chelaxian Scion Dedication",
+      "Knight Vigilant",
+      "Venture-Gossip Dedication"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Alkenstar Agent Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Bounty Hunter Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige survival >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige stealth >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige stealth >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Ghost Hunter Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige occultism >= trained; tem untrained",
+          "exige religion >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Magic Warrior Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Pactbinder Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Scroll Trickster Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige arcana >= trained; tem untrained",
+          "exige nature >= trained; tem untrained",
+          "exige occultism >= trained; tem untrained",
+          "exige religion >= trained; tem untrained"
+        ]
+      },
+      {
+        "nome": "Seneschal Witch Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Soulforger Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Ulfen Guard Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "War Mage Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      }
+    ]
+  }
+]

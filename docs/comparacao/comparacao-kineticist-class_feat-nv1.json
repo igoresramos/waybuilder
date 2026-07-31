@@ -1,0 +1,183 @@
+[
+  {
+    "slot": "Kineticist 1 / class_feat [Class Feats]",
+    "waybuilder": 135,
+    "pathbuilder": 130,
+    "em_comum": 130,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [
+      "Burning Demand",
+      "Drowning Mist",
+      "Flash Forge",
+      "Liberating Dive",
+      "Voice of the Elements"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Aerial Boomerang",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Air Cushion",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Armor in Earth",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Burning Jet",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Deflecting Wave",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Eternal Torch",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Extended Kinesis",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige ter Base Kinesis"
+        ]
+      },
+      {
+        "nome": "Flashforge",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Flying Flame",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Four Winds",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Fresh Produce",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Geologic Attunement",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Hail of Splinters",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Hardwood Armor",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Magnetic Pinions",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Metal Carapace",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Ocean's Balm",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Scorching Column",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Shard Strike",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Stepping Stones",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Tidal Hands",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Timber Sentinel",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Tremor",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Whisper on the Wind",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Winter's Clutch",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      }
+    ]
+  },
+  {
+    "slot": "Kineticist 1 / class_feat [Dedication Feats]",
+    "waybuilder": 226,
+    "pathbuilder": 224,
+    "em_comum": 224,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [
+      "Chelaxian Scion Dedication",
+      "Knight Vigilant",
+      "Venture-Gossip Dedication"
+    ],
+    "divergencia_de_disponibilidade": []
+  }
+]

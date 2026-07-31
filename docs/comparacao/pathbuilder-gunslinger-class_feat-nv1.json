@@ -1,0 +1,4592 @@
+{
+  "fonte": "pathbuilder 2e web 108, remaster on, legado ligado",
+  "classe": "Gunslinger",
+  "nivel": 1,
+  "slot": "class_feat",
+  "abas": {
+    "Class Feats": [
+      {
+        "nome": "Blast Lock",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Cover Fire",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Crossbow Crack Shot",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Dual-Weapon Reload",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Hit the Dirt!",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Munitions Crafter",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Sword and Pistol",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Advanced Shooter",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Alchemical Shot",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Black Powder Boost",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Blast Tackle",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Blood in the Air",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Bullet Split",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Bullet and A Broadside",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Called Shot",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Cannonball Fall",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Cauterize",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Come At Me!",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Dance of Thunder",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Deadeye",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Defensive Armaments",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Deflecting Shot",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Defy Fey",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Disruptive Blur",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Drifter's Juke",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Fake Out",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Fatal Bullet",
+        "nivel": "16",
+        "atende": false
+      },
+      {
+        "nome": "Fey Tracker",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Fight or Flight",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Final Shot",
+        "nivel": "18",
+        "atende": false
+      },
+      {
+        "nome": "Flesh Wound",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Greenwatch Initiate",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Greenwatch Veteran",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Greenwatcher",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Grit and Tenacity",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Hair Trigger",
+        "nivel": "16",
+        "atende": false
+      },
+      {
+        "nome": "Halyard Strike",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Headshot",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Instant Backup",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Instant Return",
+        "nivel": "16",
+        "atende": false
+      },
+      {
+        "nome": "Leap and Fire",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Munitions Machinist",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Nightwave Springing Reload",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Ostentatious Reload",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Paired Shots",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Penetrating Fire",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Perfect Readiness",
+        "nivel": "20",
+        "atende": false
+      },
+      {
+        "nome": "Phalanx Breaker",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Piercing Critical",
+        "nivel": "18",
+        "atende": false
+      },
+      {
+        "nome": "Pistol Twirl",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pistolero's Challenge",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Precious Munitions",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Quick Draw",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Reach for the Stars",
+        "nivel": "18",
+        "atende": false
+      },
+      {
+        "nome": "Rebounding Assault",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Redirecting Shot",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Ricochet Legend",
+        "nivel": "20",
+        "atende": false
+      },
+      {
+        "nome": "Ricochet Master",
+        "nivel": "16",
+        "atende": false
+      },
+      {
+        "nome": "Ricochet Shot",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Risky Reload",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Running Reload",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Scatter Blast",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Seize An Advantage",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Shattering Shot",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Shooter's Camouflage",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Showstopper",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Slinger's Reflexes",
+        "nivel": "20",
+        "atende": false
+      },
+      {
+        "nome": "Smoke Curtain",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Sniper's Aim",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Stab and Blast",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Think Twice",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Trick Shot",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Triggerbrand Blitz",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Triggerbrand Salvo",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Twin Shot Knockdown",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Two-Weapon Fusillade",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Unerring Shot",
+        "nivel": "18",
+        "atende": false
+      },
+      {
+        "nome": "Unseen Passage",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Unshakable Grit",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Warning Shot",
+        "nivel": "2",
+        "atende": false
+      }
+    ],
+    "Dedication Feats": [
+      {
+        "nome": "Acrobat Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Alchemist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Alter Ego Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Animal Trainer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Animist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Archaeologist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Archer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Artillerist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Assassin Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Avenger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Barbarian Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bard Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bastion Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Battle Harbinger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Beast Gunner Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Beastmaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bellflower Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Blackjacket Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Blessed One Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bloodrager Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bounty Hunter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bright Lion Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bullet Dancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Butterfly Blade Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Campfire Chronicler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Captain Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Captivator Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Cathartic Mage Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Cavalier Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Celebrity Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Champion Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Chime-Ringer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Chronoskimmer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "City Agent Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Clawdancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Cleric Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Clockwork Reanimator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "College Actor Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Collegiate Attendant Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Commander Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Corpse Tender Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Crystal Keeper Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Cultivator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Curse Maelstrom Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Dandy Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Demolitionist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Detective Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Draconic Acolyte Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Dragon Disciple Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Drake Rider Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Drow Shootist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Druid Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Dual-Weapon Warrior Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Duelist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Eagle Knight Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Eldritch Archer Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Eldritch Researcher Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Elementalist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Elementalist Dedication (Remastered)",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Exemplar Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Exorcist Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Familiar Master Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Familiar Sage Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Fan Dancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Field Propagandist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Fighter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Firebrand Braggart Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Firework Technician Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Five-Breath Vanguard Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Flexible Spellcaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Folklorist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Forest Shadow Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Game Hunter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Geomancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ghost Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ghost Eater Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ghost Hunter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ghoul Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Gladiator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Golden League Xun Dedication",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Golden Legionnaire Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Golem Grafter Dedication",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Guardian Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Guerrilla Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Guild Agent Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Gunslinger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Halcyon Speaker Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Hallowed Necromancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Harrower Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Heavenseeker Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Hellbreaker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Hellknight Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Herbalist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Horizon Walker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Horselord Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Inventor Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Investigator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Iridian Choirmaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Juggler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Kineticist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Knight Reclaimant Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Knight Vigilant Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Lich Dedication",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Lightning Surgeon Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Linguist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Lion Blade Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Living Monolith Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Living Vessel Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Loremaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Lumberjack Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Magic Warrior Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Magus Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Mammoth Lord Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Marine Marauder Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Marshal Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Martial Artist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Mauler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Medic Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Mind Smith Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Monk Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Mortal Herald Dedication",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Mummy Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Munitions Master Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Necrologist Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Oozemorph Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Oracle Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ostilli Host Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Overwatch Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pactbinder Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pactbound Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Palatine Detective Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pirate Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pistol Phenom Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Poisoner Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Priest of the Living God Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Prophet of Trade Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Provocator Dedication",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Psychic Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Psychic Duelist Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Pure Legion Enforcer Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Ranger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Reanimator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Red Mantis Assassin Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ritualist Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Rogue Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Rose Warden Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Runelord Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Runescarred Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sanguimancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Scion of the God Caller Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Scout Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Scroll Trickster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Scrollmaster Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Scrounger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Seneschal Witch Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sentinel Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sentry Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Shadowcaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Shadowdancer Dedication",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Shieldmarshal Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sister of the Golden Erinys Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sixth Pillar Dedication",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Skysage Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sleepwalker Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Snarecrafter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sniping Duo Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sorcerer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Soul Warden Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Soulforger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spell Trickster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spellmaster Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Spellshot Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Emissary Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Invoker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Involutionist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Warrior Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Staff Acrobat Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Stalwart Defender Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Starlit Sentinel Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Starstone Aspirant Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Steel Falcon Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Sterling Dynamo Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Stone Brawler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Stonebound Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Student of Perfection Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Summoner Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Swarmkeeper Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Swashbuckler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sword Duelist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Swordmaster Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Talisman Dabbler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Tattooed Historian Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Thaumaturge Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Thlipit Contestant Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Time Mage Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Trapsmith Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Trick Driver Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Twilight Speaker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Twilight Talon Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Undead Master Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Undead Slayer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Undersea Privateer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Unexpected Sharpshooter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vampire Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vehicle Mechanic Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vigilante Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Viking Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Viking Guard Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vindicator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wandering Chef Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "War Mage Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Warrior of Legend Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Weapon Improviser Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wellspring Mage Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Werecreature Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wild Mimic Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Winged Warrior Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Witch Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wizard Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Worm Caller Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wrestler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wylderheart Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Zephyr Guard Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Zombie Dedication",
+        "nivel": "2",
+        "atende": false
+      }
+    ],
+    "Archetype Class Feats": [],
+    "All Feats": [
+      {
+        "nome": "Blast Lock",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Cover Fire",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Crossbow Crack Shot",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Dual-Weapon Reload",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Hit the Dirt!",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Munitions Crafter",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Sword and Pistol",
+        "nivel": "1",
+        "atende": true
+      },
+      {
+        "nome": "Acrobat Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Advanced Shooter",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Alchemical Shot",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Alchemist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Alter Ego Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Animal Trainer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Animist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Archaeologist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Archer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Artillerist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Assassin Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Avenger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Barbarian Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bard Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bastion Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Battle Harbinger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Beast Gunner Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Beastmaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bellflower Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Black Powder Boost",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Blackjacket Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Blast Tackle",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Blessed One Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Blood in the Air",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Bloodrager Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bounty Hunter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bright Lion Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bullet Dancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Bullet Split",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Bullet and A Broadside",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Butterfly Blade Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Called Shot",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Campfire Chronicler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Cannonball Fall",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Captain Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Captivator Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Cathartic Mage Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Cauterize",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Cavalier Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Celebrity Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Champion Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Chime-Ringer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Chronoskimmer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "City Agent Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Clawdancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Cleric Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Clockwork Reanimator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "College Actor Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Collegiate Attendant Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Come At Me!",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Commander Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Corpse Tender Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Crossbow Infiltrator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Crystal Keeper Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Cultivator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Curse Maelstrom Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Dance of Thunder",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Dandy Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Deadeye",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Defensive Armaments",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Deflecting Shot",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Defy Fey",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Demolitionist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Detective Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Disruptive Blur",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Draconic Acolyte Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Dragon Disciple Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Drake Rider Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Drifter's Juke",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Drow Shootist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Druid Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Dual-Weapon Warrior Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Duelist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Eagle Knight Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Eldritch Archer Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Eldritch Researcher Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Elementalist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Elementalist Dedication (Remastered)",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Exemplar Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Exorcist Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Fake Out",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Familiar Master Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Familiar Sage Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Fan Dancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Fatal Bullet",
+        "nivel": "16",
+        "atende": false
+      },
+      {
+        "nome": "Fey Tracker",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Field Propagandist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Fight or Flight",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Fighter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Final Shot",
+        "nivel": "18",
+        "atende": false
+      },
+      {
+        "nome": "Firebrand Braggart Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Firework Technician Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Five-Breath Vanguard Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Flesh Wound",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Flexible Spellcaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Folklorist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Forest Shadow Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Game Hunter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Geomancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ghost Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ghost Eater Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ghost Hunter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ghoul Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Gladiator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Golden League Xun Dedication",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Golden Legionnaire Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Golem Grafter Dedication",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Greenwatch Initiate",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Greenwatch Veteran",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Greenwatcher",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Grit and Tenacity",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Guardian Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Guerrilla Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Guild Agent Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Gunslinger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Hair Trigger",
+        "nivel": "16",
+        "atende": false
+      },
+      {
+        "nome": "Halcyon Speaker Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Hallowed Necromancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Halyard Strike",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Harrower Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Headshot",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Heavenseeker Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Hellbreaker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Hellknight Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Herbalist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Horizon Walker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Horselord Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Instant Backup",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Instant Return",
+        "nivel": "16",
+        "atende": false
+      },
+      {
+        "nome": "Inventor Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Investigator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Iridian Choirmaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Juggler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Kineticist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Knight Reclaimant Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Knight Vigilant Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Leap and Fire",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Lich Dedication",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Lightning Surgeon Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Linguist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Lion Blade Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Living Monolith Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Living Vessel Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Loremaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Lumberjack Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Magic Warrior Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Magus Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Mammoth Lord Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Marine Marauder Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Marshal Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Martial Artist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Mauler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Medic Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Mind Smith Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Monk Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Mortal Herald Dedication",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Mummy Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Munitions Machinist",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Munitions Master Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Necrologist Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Nightwave Springing Reload",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Oozemorph Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Oracle Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ostentatious Reload",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Ostilli Host Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Overwatch Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pactbinder Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pactbound Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Paired Shots",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Palatine Detective Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Penetrating Fire",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Perfect Readiness",
+        "nivel": "20",
+        "atende": false
+      },
+      {
+        "nome": "Phalanx Breaker",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Piercing Critical",
+        "nivel": "18",
+        "atende": false
+      },
+      {
+        "nome": "Pirate Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pistol Phenom Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pistol Twirl",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Pistolero's Challenge",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Poisoner Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Precious Munitions",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Priest of the Living God Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Prophet of Trade Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Provocator Dedication",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Psychic Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Psychic Duelist Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Pure Legion Enforcer Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Quick Draw",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ranger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Reach for the Stars",
+        "nivel": "18",
+        "atende": false
+      },
+      {
+        "nome": "Reanimator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Rebounding Assault",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Red Mantis Assassin Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Redirecting Shot",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Ricochet Legend",
+        "nivel": "20",
+        "atende": false
+      },
+      {
+        "nome": "Ricochet Master",
+        "nivel": "16",
+        "atende": false
+      },
+      {
+        "nome": "Ricochet Shot",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Risky Reload",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Ritualist Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Rogue Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Rose Warden Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Runelord Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Runescarred Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Running Reload",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Sanguimancer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Scatter Blast",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Scion of the God Caller Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Scout Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Scroll Trickster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Scrollmaster Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Scrounger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Seize An Advantage",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Seneschal Witch Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sentinel Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sentry Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Shadowcaster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Shadowdancer Dedication",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Shattering Shot",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Shieldmarshal Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Shooter's Camouflage",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Showstopper",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Sister of the Golden Erinys Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sixth Pillar Dedication",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Skysage Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sleepwalker Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Slinger's Reflexes",
+        "nivel": "20",
+        "atende": false
+      },
+      {
+        "nome": "Smoke Curtain",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Snarecrafter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sniper's Aim",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Sniping Duo Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sorcerer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Soul Warden Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Soulforger Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spell Trickster Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spellmaster Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Spellshot Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Emissary Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Invoker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Involutionist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Spirit Warrior Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Stab and Blast",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Staff Acrobat Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Stalwart Defender Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Starlit Sentinel Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Starstone Aspirant Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Steel Falcon Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Sterling Dynamo Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Stone Brawler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Stonebound Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Student of Perfection Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Summoner Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Swarmkeeper Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Swashbuckler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Sword Duelist Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Swordmaster Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Talisman Dabbler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Tattooed Historian Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Thaumaturge Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Think Twice",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Thlipit Contestant Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Time Mage Dedication",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Trapsmith Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Trick Driver Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Trick Shot",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Triggerbrand Blitz",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Triggerbrand Salvo",
+        "nivel": "6",
+        "atende": false
+      },
+      {
+        "nome": "Twilight Speaker Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Twilight Talon Dedication",
+        "nivel": "4",
+        "atende": false
+      },
+      {
+        "nome": "Twin Shot Knockdown",
+        "nivel": "10",
+        "atende": false
+      },
+      {
+        "nome": "Two-Weapon Fusillade",
+        "nivel": "14",
+        "atende": false
+      },
+      {
+        "nome": "Undead Master Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Undead Slayer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Undersea Privateer Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Unerring Shot",
+        "nivel": "18",
+        "atende": false
+      },
+      {
+        "nome": "Unexpected Sharpshooter Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Unseen Passage",
+        "nivel": "8",
+        "atende": false
+      },
+      {
+        "nome": "Unshakable Grit",
+        "nivel": "12",
+        "atende": false
+      },
+      {
+        "nome": "Vampire Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vehicle Mechanic Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vigilante Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Viking Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Viking Guard Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Vindicator Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wandering Chef Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "War Mage Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Warning Shot",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Warrior of Legend Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Weapon Improviser Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wellspring Mage Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Werecreature Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wild Mimic Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Winged Warrior Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Witch Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wizard Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Worm Caller Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wrestler Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Wylderheart Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Zephyr Guard Dedication",
+        "nivel": "2",
+        "atende": false
+      },
+      {
+        "nome": "Zombie Dedication",
+        "nivel": "2",
+        "atende": false
+      }
+    ]
+  },
+  "opcoes": [
+    {
+      "nome": "Blast Lock",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Cover Fire",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Crossbow Crack Shot",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Dual-Weapon Reload",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Hit the Dirt!",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Munitions Crafter",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Sword and Pistol",
+      "nivel": "1",
+      "atende": true
+    },
+    {
+      "nome": "Acrobat Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Advanced Shooter",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Alchemical Shot",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Alchemist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Alter Ego Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Animal Trainer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Animist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Archaeologist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Archer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Artillerist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Assassin Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Avenger Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Barbarian Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Bard Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Bastion Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Battle Harbinger Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Beast Gunner Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Beastmaster Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Bellflower Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Black Powder Boost",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Blackjacket Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Blast Tackle",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Blessed One Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Blood in the Air",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Bloodrager Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Bounty Hunter Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Bright Lion Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Bullet Dancer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Bullet Split",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Bullet and A Broadside",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Butterfly Blade Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Called Shot",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Campfire Chronicler Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Cannonball Fall",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Captain Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Captivator Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Cathartic Mage Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Cauterize",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Cavalier Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Celebrity Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Champion Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Chime-Ringer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Chronoskimmer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "City Agent Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Clawdancer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Cleric Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Clockwork Reanimator Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "College Actor Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Collegiate Attendant Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Come At Me!",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Commander Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Corpse Tender Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Crossbow Infiltrator Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Crystal Keeper Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Cultivator Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Curse Maelstrom Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Dance of Thunder",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Dandy Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Deadeye",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Defensive Armaments",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Deflecting Shot",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Defy Fey",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Demolitionist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Detective Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Disruptive Blur",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Draconic Acolyte Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Dragon Disciple Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Drake Rider Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Drifter's Juke",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Drow Shootist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Druid Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Dual-Weapon Warrior Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Duelist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Eagle Knight Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Eldritch Archer Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Eldritch Researcher Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Elementalist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Elementalist Dedication (Remastered)",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Exemplar Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Exorcist Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Fake Out",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Familiar Master Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Familiar Sage Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Fan Dancer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Fatal Bullet",
+      "nivel": "16",
+      "atende": false
+    },
+    {
+      "nome": "Fey Tracker",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Field Propagandist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Fight or Flight",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Fighter Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Final Shot",
+      "nivel": "18",
+      "atende": false
+    },
+    {
+      "nome": "Firebrand Braggart Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Firework Technician Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Five-Breath Vanguard Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Flesh Wound",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Flexible Spellcaster Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Folklorist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Forest Shadow Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Game Hunter Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Geomancer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Ghost Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Ghost Eater Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Ghost Hunter Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Ghoul Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Gladiator Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Golden League Xun Dedication",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Golden Legionnaire Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Golem Grafter Dedication",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Greenwatch Initiate",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Greenwatch Veteran",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Greenwatcher",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Grit and Tenacity",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Guardian Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Guerrilla Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Guild Agent Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Gunslinger Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Hair Trigger",
+      "nivel": "16",
+      "atende": false
+    },
+    {
+      "nome": "Halcyon Speaker Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Hallowed Necromancer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Halyard Strike",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Harrower Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Headshot",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Heavenseeker Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Hellbreaker Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Hellknight Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Herbalist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Horizon Walker Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Horselord Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Instant Backup",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Instant Return",
+      "nivel": "16",
+      "atende": false
+    },
+    {
+      "nome": "Inventor Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Investigator Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Iridian Choirmaster Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Juggler Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Kineticist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Knight Reclaimant Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Knight Vigilant Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Leap and Fire",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Lich Dedication",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Lightning Surgeon Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Linguist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Lion Blade Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Living Monolith Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Living Vessel Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Loremaster Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Lumberjack Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Magic Warrior Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Magus Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Mammoth Lord Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Marine Marauder Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Marshal Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Martial Artist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Mauler Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Medic Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Mind Smith Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Monk Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Mortal Herald Dedication",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Mummy Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Munitions Machinist",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Munitions Master Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Necrologist Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Nightwave Springing Reload",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Oozemorph Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Oracle Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Ostentatious Reload",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Ostilli Host Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Overwatch Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Pactbinder Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Pactbound Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Paired Shots",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Palatine Detective Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Penetrating Fire",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Perfect Readiness",
+      "nivel": "20",
+      "atende": false
+    },
+    {
+      "nome": "Phalanx Breaker",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Piercing Critical",
+      "nivel": "18",
+      "atende": false
+    },
+    {
+      "nome": "Pirate Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Pistol Phenom Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Pistol Twirl",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Pistolero's Challenge",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Poisoner Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Precious Munitions",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Priest of the Living God Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Prophet of Trade Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Provocator Dedication",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Psychic Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Psychic Duelist Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Pure Legion Enforcer Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Quick Draw",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Ranger Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Reach for the Stars",
+      "nivel": "18",
+      "atende": false
+    },
+    {
+      "nome": "Reanimator Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Rebounding Assault",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Red Mantis Assassin Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Redirecting Shot",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Ricochet Legend",
+      "nivel": "20",
+      "atende": false
+    },
+    {
+      "nome": "Ricochet Master",
+      "nivel": "16",
+      "atende": false
+    },
+    {
+      "nome": "Ricochet Shot",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Risky Reload",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Ritualist Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Rogue Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Rose Warden Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Runelord Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Runescarred Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Running Reload",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Sanguimancer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Scatter Blast",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Scion of the God Caller Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Scout Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Scroll Trickster Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Scrollmaster Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Scrounger Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Seize An Advantage",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Seneschal Witch Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Sentinel Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Sentry Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Shadowcaster Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Shadowdancer Dedication",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Shattering Shot",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Shieldmarshal Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Shooter's Camouflage",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Showstopper",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Sister of the Golden Erinys Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Sixth Pillar Dedication",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Skysage Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Sleepwalker Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Slinger's Reflexes",
+      "nivel": "20",
+      "atende": false
+    },
+    {
+      "nome": "Smoke Curtain",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Snarecrafter Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Sniper's Aim",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Sniping Duo Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Sorcerer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Soul Warden Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Soulforger Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Spell Trickster Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Spellmaster Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Spellshot Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Spirit Emissary Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Spirit Invoker Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Spirit Involutionist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Spirit Warrior Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Stab and Blast",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Staff Acrobat Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Stalwart Defender Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Starlit Sentinel Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Starstone Aspirant Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Steel Falcon Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Sterling Dynamo Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Stone Brawler Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Stonebound Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Student of Perfection Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Summoner Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Swarmkeeper Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Swashbuckler Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Sword Duelist Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Swordmaster Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Talisman Dabbler Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Tattooed Historian Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Thaumaturge Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Think Twice",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Thlipit Contestant Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Time Mage Dedication",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Trapsmith Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Trick Driver Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Trick Shot",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Triggerbrand Blitz",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Triggerbrand Salvo",
+      "nivel": "6",
+      "atende": false
+    },
+    {
+      "nome": "Twilight Speaker Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Twilight Talon Dedication",
+      "nivel": "4",
+      "atende": false
+    },
+    {
+      "nome": "Twin Shot Knockdown",
+      "nivel": "10",
+      "atende": false
+    },
+    {
+      "nome": "Two-Weapon Fusillade",
+      "nivel": "14",
+      "atende": false
+    },
+    {
+      "nome": "Undead Master Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Undead Slayer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Undersea Privateer Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Unerring Shot",
+      "nivel": "18",
+      "atende": false
+    },
+    {
+      "nome": "Unexpected Sharpshooter Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Unseen Passage",
+      "nivel": "8",
+      "atende": false
+    },
+    {
+      "nome": "Unshakable Grit",
+      "nivel": "12",
+      "atende": false
+    },
+    {
+      "nome": "Vampire Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Vehicle Mechanic Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Vigilante Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Viking Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Viking Guard Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Vindicator Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Wandering Chef Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "War Mage Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Warning Shot",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Warrior of Legend Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Weapon Improviser Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Wellspring Mage Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Werecreature Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Wild Mimic Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Winged Warrior Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Witch Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Wizard Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Worm Caller Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Wrestler Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Wylderheart Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Zephyr Guard Dedication",
+      "nivel": "2",
+      "atende": false
+    },
+    {
+      "nome": "Zombie Dedication",
+      "nivel": "2",
+      "atende": false
+    }
+  ]
+}

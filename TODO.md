@@ -222,15 +222,28 @@ items:
 - id: 99
   date: '2026-07-30'
   priority: media
-  desc: 'PRIMEIRO ALVO FECHADO 2026-07-30 (commit 726c8cb9e, spec santificacao-escolhida): a santificacao
-    virou eixo, e com ela a base ganhou o desenho de SUB-ESCOLHA FILTRADA que faltava -- opcao com `requires`
-    proprio, avaliada por `candidatos()`, MARCADA e nunca escondida. O mesmo desenho fechou a fonte divina
-    em seguida. A medicao evitou uma armadilha: inferir o modal da lista achatada (`["holy"]` = obriga)
-    erraria em 408 divindades, porque a prosa do AoN diz `can choose holy` em 265 delas -- so 108 obrigam.
-    SOBRAM 191 das 194 regras ChoiceSet. As 74 de lista LITERAL cobrem zero do balaio e zero dos inalcancaveis
-    (apontam para draconic-exemplar 95, animal-companion 12, skill 11 -- ja modelados). A carga esta nas
-    104 de forma `query`, que buscam no compendio por predicado e povoariam `Kineticist.KineticGate` (33)
-    e `Exemplar.Ikon` (22): exige um avaliador de query, que e trabalho e risco novos e ainda nao foi
-    dimensionado.'
+  desc: 'RE-DIMENSIONADO 2026-07-31 (docs/medicoes/2026-07-31_dimensionar-avaliador-de-query.md). TRES
+    PREMISSAS DESTE ITEM ESTAVAM ERRADAS, e as tres foram verificadas contra o codigo e a base. (1) "exige
+    um avaliador de query, que e trabalho e risco novos" -- ELE JA EXISTE: `_casa_filtro` em `motor/motor.py:3184`
+    e `app/src/motor/personagem.ts:3437`, com `or`/`and`/`not`/`nor`/`xor`/`lte`, ja chamado em producao
+    para recortar slot. Nenhum dos operadores usados pelas queries falta. (2) "povoariam `Exemplar.Ikon`
+    (22)" -- o eixo `ikon` do Exemplar JA EXISTE na base com 21 opcoes e `escolhe: 3` (feito na spec escolha-multipla-e-ikons);
+    o 22 era contagem de REGRAS, nao de opcoes. Idem o "33" do Kineticist, que rende 6 gates. (3) "as
+    74 de lista literal cobrem zero do balaio" -- falso: 59 opcoes literais estao no balaio `outras-opcoes`
+    (Inventor 47, Wizard 12). O QUE SOBRA DE VERDADE: as 194 ChoiceSet sao QUATRO formas, nao duas --
+    88 `filter`, 74 literal, 16 `ownedItems`, 16 string. E o que a query destrava sao DOIS eixos em classes
+    que hoje tem ZERO bloco de subclasse (confirmado): Kineticist (6 gates + impulsos) e Commander (11
+    escolhas de tatica, 14 a 31 opcoes). DIVIDA VIVA que ninguem tinha contado: `_atomo_de_filtro` so
+    entende `trait`/`level`/`category`/`rarity`, e os filtros da base usam `item:slug` 74 vezes e `item:tag`
+    54 -- ignorados e contados como SATISFEITOS. Isso e correto para ESTREITAR slot de feat (principio
+    zero: nao esvaziar em silencio) e DESTRUTIVO para DEFINIR eixo, porque o eixo sai com tudo dentro
+    (mediana medida: 16.383 itens sobrando; 67 listas erradas por excesso contra 3 vazias). ORDEM OBRIGATORIA:
+    ensinar `item:tag` ao motor ANTES de usar filtro para definir eixo. RECORTE 80/20 PROPOSTO: Fatia
+    0 (ler as literais por nome, sem avaliador nenhum) + Fatia 1 (`item:tag` + extrair os ChoiceSet dos
+    class-features, que hoje sao 0 dos 847) fecham 68 das 88 queries e nomeiam 136 do balaio, com UM atomo
+    novo. As fatias seguintes somam 20 queries e ZERO opcao nova -- valem por correcao de nivel, nao por
+    volume. NAO VERIFIQUEI todas as 11 afirmacoes do relatorio; conferi 4 -- o avaliador existente, o
+    eixo do Exemplar, os zero blocos de Kineticist/Commander e a divida de `item:slug`/`item:tag` -- e
+    as 4 se sustentaram.'
 promoted: []
 ---
