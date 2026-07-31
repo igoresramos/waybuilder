@@ -865,7 +865,22 @@
     "ataque": 10,
     "atributo_do_ataque": "str",
     "categoria": "martial",
-    "dano": "1d8+2",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Longsword",
+       "texto": "1d8",
+       "tipo": "dados"
+      },
+      {
+       "origem": "FOR",
+       "tipo": "atributo",
+       "valor": 2
+      }
+     ],
+     "total": "1d8+2"
+    },
     "detalhe": "nivel 4 + prof 8 (expert) + FOR +2",
     "potencia": 0,
     "rank": "expert",

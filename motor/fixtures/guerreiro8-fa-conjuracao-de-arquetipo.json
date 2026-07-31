@@ -860,7 +860,27 @@
     "ataque": 14,
     "atributo_do_ataque": "str",
     "categoria": "martial",
-    "dano": "1d8+2",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Longsword",
+       "texto": "1d8",
+       "tipo": "dados"
+      },
+      {
+       "origem": "FOR",
+       "tipo": "atributo",
+       "valor": 2
+      },
+      {
+       "origem": "Weapon Specialization (expert)",
+       "tipo": "weapon_specialization",
+       "valor": 2
+      }
+     ],
+     "total": "1d8+4"
+    },
     "detalhe": "nivel 8 + prof 12 (expert) + FOR +2",
     "potencia": 0,
     "rank": "expert",
@@ -1094,7 +1114,17 @@
    },
    {
     "classe": "Fighter",
-    "grants": [],
+    "grants": [
+     {
+      "weapon_specialization": {
+       "por_rank": {
+        "expert": 2,
+        "legendary": 4,
+        "master": 3
+       }
+      }
+     }
+    ],
     "id": "wb:class-feature/weapon-specialization",
     "na_base": true,
     "nivel_de_classe": 7,

@@ -886,7 +886,22 @@
     "ataque": 11,
     "atributo_do_ataque": "str",
     "categoria": "martial",
-    "dano": "1d8+2",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Longsword",
+       "texto": "1d8",
+       "tipo": "dados"
+      },
+      {
+       "origem": "FOR",
+       "tipo": "atributo",
+       "valor": 2
+      }
+     ],
+     "total": "1d8+2"
+    },
     "detalhe": "nivel 5 + prof 9 (expert) + FOR +2",
     "potencia": 0,
     "rank": "expert",
@@ -902,7 +917,17 @@
     "ataque": 11,
     "atributo_do_ataque": "dex",
     "categoria": "martial",
-    "dano": "1d6",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Shortbow",
+       "texto": "1d6",
+       "tipo": "dados"
+      }
+     ],
+     "total": "1d6"
+    },
     "detalhe": "nivel 5 + prof 9 (expert) + DEX +2",
     "potencia": 0,
     "rank": "expert",

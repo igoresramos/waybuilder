@@ -221,8 +221,27 @@ export function PainelDireito({
                 <li key={i}>
                   <strong>{sinal(a.ataque)}</strong>
                   <span className="nome">{a.arma}</span>
-                  <span className="dado">{a.dano} {a.tipo_de_dano}</span>
+                  <span className="dado">{a.dano.total} {a.tipo_de_dano}</span>
                   <span className="origem">{a.detalhe}</span>
+                  {/* o dano decomposto: a soma sozinha não diz de onde veio, e
+                      era essa a lacuna -- Weapon Specialization e dano de fúria
+                      nem entravam na conta.
+                      Spec: `specs/2026-07-30-dano-de-furia.md` */}
+                  <span className="parcelas-de-dano">
+                    {a.dano.parcelas.map((p, j) => (
+                      <span key={j} className="parcela">
+                        {p.tipo === "dados" ? p.texto : sinal(p.valor ?? 0)}
+                        <em>{p.origem}</em>
+                      </span>
+                    ))}
+                  </span>
+                  {/* condicional NÃO entra no total: aparece com a condição
+                      escrita. Princípio zero -- marca, nunca esconde. */}
+                  {a.dano.condicionais.map((c, j) => (
+                    <span key={j} className="parcela condicional">
+                      {sinal(c.valor)}<em>{c.origem} — só com {c.condicao}</em>
+                    </span>
+                  ))}
                 </li>
               ))}
               {!v.ataques.length && (

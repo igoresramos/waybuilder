@@ -837,7 +837,17 @@
     "ataque": 12,
     "atributo_do_ataque": "dex",
     "categoria": "martial",
-    "dano": "1d8",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Longbow",
+       "texto": "1d8",
+       "tipo": "dados"
+      }
+     ],
+     "total": "1d8"
+    },
     "detalhe": "nivel 8 + prof 10 (trained) + DEX +2",
     "potencia": 0,
     "rank": "trained",
@@ -854,7 +864,17 @@
     "ataque": 0,
     "atributo_do_ataque": "str",
     "categoria": "martial",
-    "dano": "1d8",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Longsword",
+       "texto": "1d8",
+       "tipo": "dados"
+      }
+     ],
+     "total": "1d8"
+    },
     "detalhe": "nivel 8 + prof 0 (untrained) + FOR +0",
     "potencia": 0,
     "rank": "untrained",

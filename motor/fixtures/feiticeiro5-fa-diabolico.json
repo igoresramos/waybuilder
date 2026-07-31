@@ -862,7 +862,17 @@
     "ataque": 8,
     "atributo_do_ataque": "dex",
     "categoria": "simple",
-    "dano": "1d4",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Dagger",
+       "texto": "1d4",
+       "tipo": "dados"
+      }
+     ],
+     "total": "1d4"
+    },
     "detalhe": "nivel 5 + prof 7 (trained) + DEX +1",
     "potencia": 0,
     "rank": "trained",

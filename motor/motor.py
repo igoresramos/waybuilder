@@ -2135,9 +2135,9 @@ class Personagem:
                 "ataque": self.nivel + RANK_BONUS[rank] + atributo + potencia
                           if rank != "untrained" else atributo + potencia,
                 "atributo_do_ataque": "dex" if usa_dex else "str",
-                "dano": f"{dados}{dano.get('dado', '')}"
-                        f"{mod_dano:+d}" if mod_dano else
-                        f"{dados}{dano.get('dado', '')}",
+                "dano": self._dano_decomposto(
+                    arma, f"{dados}{dano.get('dado', '')}", mod_dano, rank,
+                    distancia),
                 "tipo_de_dano": dano.get("tipo") or dano.get("type"),
                 "potencia": potencia,
                 "striking": striking,
@@ -2146,6 +2146,109 @@ class Personagem:
                 "detalhe": f"nivel {self.nivel} + prof {prof} ({rank}) + "
                            f"{'DEX' if usa_dex else 'FOR'} {atributo:+d}",
             })
+
+    # -- parcelas de dano ----------------------------------------------------
+    #
+    # Ate 2026-07-30 `ataques[].dano` era string ja concatenada (`"2d8+4"`): o
+    # ATAQUE tinha `detalhe`, o dano nao tinha nada. E estava incompleta, nao so
+    # opaca -- faltavam duas parcelas, as duas deterministas.
+    # Spec: `specs/2026-07-30-dano-de-furia.md`
+
+    def _ids_da_ficha(self) -> list[str]:
+        """Features da progressao + sub-escolhas, sem repetir e em ordem.
+
+        As sub-escolhas entram porque o instinto do Barbaro NAO e feature: ele
+        vem do eixo `instinct`, e sem isto o dano de furia nunca apareceria.
+        """
+        ids = [f["id"] for f in self.features]
+        for classe in self.ordem_de_classe:
+            ids += self._subescolhas_de(classe)
+        vistos, fora = set(), []
+        for rid in ids:
+            if rid and rid not in vistos:
+                vistos.add(rid)
+                fora.append(rid)
+        return fora
+
+    def _parcela_weapon_specialization(self, rank: str) -> dict | None:
+        """+2/+3/+4 pelo rank DA ARMA, dobrado pelo Greater.
+
+        26 das 27 classes concedem, e a base tinha `grants: []` em todas: todo
+        personagem do nivel 7 pra cima estava com o dano errado na ficha.
+        """
+        por_rank, multiplicador, origem = {}, 1, None
+        for rid in self._ids_da_ficha():
+            reg = self.base.opcional(rid) or {}
+            for g in (reg.get("grants") or []):
+                ws = g.get("weapon_specialization") if isinstance(g, dict) else None
+                if not ws:
+                    continue
+                if ws.get("por_rank"):
+                    # duas classes concedendo nao somam: e a mesma tabela
+                    por_rank = ws["por_rank"]
+                    origem = origem or reg.get("name")
+                if ws.get("multiplicador"):
+                    multiplicador = max(multiplicador, int(ws["multiplicador"]))
+                    origem = reg.get("name")
+        valor = int(por_rank.get(rank) or 0) * multiplicador
+        if not valor:
+            return None
+        return {"tipo": "weapon_specialization", "valor": valor,
+                "origem": f"{origem} ({rank})"}
+
+    def _melhor_grau(self, rage_damage: dict) -> int | None:
+        """`mode: upgrade` no Foundry: MAIOR vence, nao soma."""
+        valor = None
+        for grau in (rage_damage.get("graus") or []):
+            exige = grau.get("requires")
+            if exige is not None and not self.avaliar(exige)[0]:
+                continue
+            v = int(grau.get("valor") or 0)
+            valor = v if valor is None else max(valor, v)
+        return valor
+
+    def _parcelas_de_furia(self, distancia: bool) -> tuple[dict | None, list]:
+        """(parcela incondicional, condicionais).
+
+        O condicional NAO entra no total: aparece com a condicao escrita. E o
+        principio zero -- marca, nunca esconde, nunca soma escondido.
+        """
+        if distancia:
+            return None, []          # o `Rage` exclui arma a distancia
+        melhor, condicionais = None, []
+        for rid in self._ids_da_ficha():
+            reg = self.base.opcional(rid) or {}
+            rd = reg.get("rage_damage")
+            if not rd:
+                continue
+            valor = self._melhor_grau(rd)
+            if valor is None:
+                continue
+            if rd.get("condicao"):
+                condicionais.append({"valor": valor, "origem": reg.get("name"),
+                                     "condicao": rd["condicao"]})
+            elif melhor is None or valor > melhor["valor"]:
+                melhor = {"tipo": "rage", "valor": valor,
+                          "origem": reg.get("name")}
+        condicionais.sort(key=lambda c: (-int(c["valor"]), str(c["origem"])))
+        return melhor, condicionais
+
+    def _dano_decomposto(self, arma, dados: str, mod_dano: int, rank: str,
+                         distancia: bool) -> dict:
+        parcelas = [{"tipo": "dados", "texto": dados, "origem": arma.get("name")}]
+        if mod_dano:
+            parcelas.append({"tipo": "atributo", "valor": mod_dano,
+                             "origem": "FOR"})
+        especializacao = self._parcela_weapon_specialization(rank)
+        if especializacao:
+            parcelas.append(especializacao)
+        furia, condicionais = self._parcelas_de_furia(distancia)
+        if furia:
+            parcelas.append(furia)
+        fixo = sum(int(p.get("valor") or 0) for p in parcelas)
+        return {"parcelas": parcelas,
+                "total": f"{dados}{fixo:+d}" if fixo else dados,
+                "condicionais": condicionais}
 
     # -- regra 3: bonus derivado --------------------------------------------
 

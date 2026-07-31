@@ -1010,7 +1010,22 @@
     "ataque": 16,
     "atributo_do_ataque": "str",
     "categoria": "martial",
-    "dano": "1d8+2",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Warhammer",
+       "texto": "1d8",
+       "tipo": "dados"
+      },
+      {
+       "origem": "FOR",
+       "tipo": "atributo",
+       "valor": 2
+      }
+     ],
+     "total": "1d8+2"
+    },
     "detalhe": "nivel 10 + prof 14 (expert) + FOR +2",
     "potencia": 0,
     "rank": "expert",

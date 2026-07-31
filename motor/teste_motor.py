@@ -48,6 +48,7 @@ def niveis(*pares):
 
 FIGHTER, WIZARD, CLERIC = "wb:class/fighter", "wb:class/wizard", "wb:class/cleric"
 RANGER = "wb:class/ranger"
+BARBARIAN = "wb:class/barbarian"
 
 
 # -- regra 1 ---------------------------------------------------------------
@@ -670,13 +671,92 @@ p = personagem(niveis((FIGHTER, 1))
                inventario=[{"item": "wb:weapon/blowgun", "qtd": 1, "equipado": True},
                            {"item": "wb:weapon/dagger", "qtd": 1, "equipado": True}])
 ataques = {a["arma"]: a for a in p.visao()["ataques"]}
-checar(ataques["Blowgun"]["dano"] == "1",
+checar(ataques["Blowgun"]["dano"]["total"] == "1",
        "Blowgun sai com dano 1, sem dado e sem 'None' na string",
-       f"deu {ataques['Blowgun']['dano']!r}")
+       f"deu {ataques['Blowgun']['dano']['total']!r}")
 checar(ataques["Blowgun"]["tipo_de_dano"] == "piercing",
        "e com o tipo de dano preservado")
-checar(ataques["Dagger"]["dano"] == "1d4+1",
-       "e a arma com dado normal nao muda", f"deu {ataques['Dagger']['dano']!r}")
+checar(ataques["Dagger"]["dano"]["total"] == "1d4+1",
+       "e a arma com dado normal nao muda",
+       f"deu {ataques['Dagger']['dano']['total']!r}")
+
+# -- dano decomposto em parcelas --------------------------------------------
+# Ate 2026-07-30 `dano` era string concatenada, e estava INCOMPLETA: faltavam
+# Weapon Specialization (26 das 27 classes, `grants: []` na base) e o dano de
+# furia (nove instintos, tambem `grants: []`).
+# Spec: `specs/2026-07-30-dano-de-furia.md`
+print("\ndano decomposto em parcelas")
+
+
+def _arma_de(pers, arma="Longsword"):
+    return {a["arma"]: a for a in pers.visao()["ataques"]}[arma]["dano"]
+
+
+def _parcela(dano, tipo):
+    return next((p for p in dano["parcelas"] if p["tipo"] == tipo), None)
+
+
+LONGSWORD = [{"item": "wb:weapon/longsword", "qtd": 1, "equipado": True}]
+
+d = _arma_de(personagem(niveis((FIGHTER, 7)), inventario=LONGSWORD))
+checar((_parcela(d, "weapon_specialization") or {}).get("valor") == 2,
+       "Guerreiro 7 ganha Weapon Specialization +2 pelo rank da ARMA",
+       f"parcelas {d['parcelas']!r}")
+
+d = _arma_de(personagem(niveis((FIGHTER, 15)), inventario=LONGSWORD))
+checar((_parcela(d, "weapon_specialization") or {}).get("valor") == 6,
+       "e no 15 o Greater DOBRA o +3 de master, dando 6", f"deu {d!r}")
+checar(_parcela(d, "rage") is None,
+       "e um Guerreiro nao tem parcela de furia nenhuma")
+
+FURY = [{"em": 1, "slot": "subclasse", "pega": "wb:instinct/fury"}]
+d = _arma_de(personagem(niveis((BARBARIAN, 1)) + FURY, inventario=LONGSWORD))
+checar((_parcela(d, "rage") or {}).get("valor") == 3,
+       "Barbaro 1 de instinto Fury tem dano de furia +3", f"deu {d!r}")
+
+d = _arma_de(personagem(niveis((BARBARIAN, 7)) + FURY, inventario=LONGSWORD))
+checar((_parcela(d, "rage") or {}).get("valor") == 7,
+       "no 7 sobe para +7 -- o grau amarra na FEATURE, nao no numero 7",
+       f"deu {d!r}")
+
+d = _arma_de(personagem(niveis((BARBARIAN, 15)) + FURY, inventario=LONGSWORD))
+checar((_parcela(d, "rage") or {}).get("valor") == 13,
+       "e no 15, com o Greater, +13", f"deu {d!r}")
+
+# Animal nao tem grau 1: vale o +2 do proprio Rage. E RAW -- o instinto Animal
+# paga em golpe desarmado, nao em dano de furia.
+d = _arma_de(personagem(niveis((BARBARIAN, 1))
+                        + [{"em": 1, "slot": "subclasse",
+                            "pega": "wb:instinct/animal"}], inventario=LONGSWORD))
+checar((_parcela(d, "rage") or {}).get("valor") == 2,
+       "Barbaro 1 de instinto Animal fica com o +2 base, que e RAW",
+       f"deu {d!r}")
+
+# o principio zero: quem ainda nao escolheu instinto nao e reprovado
+d = _arma_de(personagem(niveis((BARBARIAN, 1)), inventario=LONGSWORD))
+checar((_parcela(d, "rage") or {}).get("valor") == 2,
+       "e sem instinto escolhido tambem, sem aviso de erro", f"deu {d!r}")
+
+# CONDICIONAL: marca com a condicao escrita e NAO entra no total
+d = _arma_de(personagem(niveis((BARBARIAN, 7))
+                        + [{"em": 1, "slot": "subclasse",
+                            "pega": "wb:instinct/dragon"}], inventario=LONGSWORD))
+checar((_parcela(d, "rage") or {}).get("valor") == 2,
+       "Barbaro 7 de Dragon tem +2 INCONDICIONAL", f"deu {d!r}")
+checar([c["valor"] for c in d["condicionais"]] == [8],
+       "e o +8 do instinto aparece como condicional", f"deu {d['condicionais']!r}")
+checar(d["condicionais"][0]["condicao"] == "draconic rage",
+       "com a condicao NOMEADA -- marca, nunca esconde")
+checar("+8" not in d["total"] and d["total"].endswith("+5"),
+       "e o condicional NAO entra no total", f"total {d['total']!r}")
+
+# arma a distancia: o proprio `Rage` exclui
+d = _arma_de(personagem(niveis((BARBARIAN, 7)) + FURY,
+                        inventario=[{"item": "wb:weapon/longbow", "qtd": 1,
+                                     "equipado": True}]), "Longbow")
+checar(_parcela(d, "rage") is None,
+       "arma a distancia nao recebe dano de furia -- o `Rage` exclui",
+       f"deu {d!r}")
 
 # -- proficiencia de arma NOMEADA cai na categoria --------------------------
 # Achado comparando com o Pathbuilder (docs/2026-07-29_comparacao-pathbuilder.md):

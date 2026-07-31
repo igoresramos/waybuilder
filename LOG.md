@@ -1197,3 +1197,81 @@ prosa -- um Campeao de qualquer causa recebia `Brilliant Flash`, que so
 
 O conserto nao cabia no parser: ele roda na extracao e os eixos so existem
 depois de `aplicar_subclasses.py`.
+
+## 2026-07-30 (5a rodada) -- item 46 decidido: o arquetipo de multiclasse FICA
+
+As quatro validacoes que o Igor exigiu na anotacao foram medidas
+(`docs/medicoes/medir_corte_multiclasse.py`, parecer em
+`docs/2026-07-30_corte-multiclasse.md`). O recorte bate por duas vias
+independentes -- 27 arquetipos por nome e 27 por dedicacao, sem divergencia --
+e sairiam 202 feats, nao 195: sete tem trait `archetype` com o campo
+`archetype` vazio.
+
+A validacao (c) e terminal. Cortadas as 11 escadas Basic/Expert/Master, sobram
+duas rotas gratuitas de conjuracao com escada propria (Captivator, occult; e
+Rivethun, divine). **Arcane e primal ficam sem rota nenhuma** -- e o piso da
+regra 21 passa a comparar o nivel de classe contra algo que o personagem nao
+pode pegar. Esse piso nao e enfeite: foi ele que consertou a 17b, com 50 dos
+204 pares violando o invariante.
+
+A validacao (a) mostrou que a propria pergunta era estreita: ela olha
+`requires`, e a dependencia mais cara esta em `grants`. O `Spellshot`, que
+sobreviveria, **nao tem escada propria** -- empresta a do arquetipo de Mago.
+
+Decisao do Igor: **nao cortar**. A premissa nao se sustentava: a regra 23
+exclui as rotas POR CLASSE, e nao torna a dedicacao redundante -- um Guerreiro
+com Wizard Dedication e exatamente a rota paralela que a regra 20 mantem de
+proposito. E o corte apagaria 202 registros para calar 8 marcados, contra o
+principio zero do projeto.
+
+A medicao rendeu trabalho novo (item 100): 10 homonimos classe x arquetipo, 7
+feats com atribuicao vazia e 18 arquetipos sem porta de entrada.
+
+## 2026-07-30 (6a rodada) -- item 42: o dano da ficha vira parcelas
+
+O Igor decidiu o escopo: *"entra como um adicional do dano, n precisa integrar,
+gostaria que o dano sempre fosse decomposto, dano da arma adicional do dano,
+habilidades e tal"*. O entregavel deixou de ser um numero e virou a
+DECOMPOSICAO -- `ataques[].dano` era string ja concatenada (`"1d12+4"`), e o
+ataque tinha `detalhe` enquanto o dano nao tinha nada.
+
+E ela estava INCOMPLETA, nao so opaca. Duas parcelas faltando, as duas
+deterministas:
+
+**Weapon Specialization** -- `wb:class-feature/weapon-specialization` com
+`grants: []` na base, e **26 das 27 classes** concedem. +2/+3/+4 pelo rank DA
+ARMA, dobrado pelo Greater. Todo personagem do nivel 7 pra cima estava com o
+dano errado na ficha, faltando de 2 a 8. Esta e maior que o item 42 e nao e
+sobre o Barbaro.
+
+**Dano de furia** -- 37 regras `slug: rage` em 15 registros, universo fechado.
+A premissa do item ("o que sobra e mecanica CONDICIONAL") nao sobreviveu a
+medicao: o valor e funcao de instinto + Weapon Spec + Greater, sem depender de
+alvo nem de arma.
+
+A decisao que precisou de registro: o Foundry escreve o grau 2 como
+`self:level >= 7`, e `self:level` la e nivel de PERSONAGEM. Aqui os dois
+numeros diferem, entao o grau amarra na FEATURE que o nivel compra -- forma que
+o proprio Foundry usa no Elemental Instinct, e que a regra 3 ja decidiu.
+
+Tres defeitos meus, os tres achados por LER e nao pelo placar:
+
+1. `tokens()` achatava `{"not": "target:caster"}` como token positivo, e o grau
+   13 do Superstition sumia. Apareceu ao conferir o relatorio contra a tabela
+   da spec (3, 7 onde devia ser 3, 7, 13).
+2. `da_progressao("weapon-specialization")` casava com
+   `greater-weapon-specialization-barbarian` primeiro (ordem alfabetica): o
+   grau 2 passou a exigir o Greater, e um Barbaro 7 de Fury saia com +3 em vez
+   de +7.
+3. A verificacao no navegador rodou contra `app/public/base` defasado e deu 3
+   FALSAS falhas -- `build.sh` nao chama `sincronizar-base.sh`. Virou licao.
+
+O diff dos 30 fixtures foi lido: so DOIS totais mudaram -- o Barbaro 6 Fury
+(`1d12+4` -> `1d12+7`) e o Guerreiro 8 (`1d8+2` -> `1d8+4`). Os outros 28 sao
+personagens abaixo do nivel 7 sem instinto, e nao mudaram.
+
+Quatro camadas verdes: 10 portoes, oraculo Python com 13 assertivas novas,
+137 testes de paridade TS e `verificar-dano.mjs` ponta a ponta.
+
+O que sobrou do 42 esta declarado com numero no item 101 -- `ragingResistance`
+com a medicao pronta e os 30 `Strike` do Animal Instinct a frente.

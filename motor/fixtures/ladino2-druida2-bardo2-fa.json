@@ -979,7 +979,22 @@
     "ataque": 11,
     "atributo_do_ataque": "dex",
     "categoria": "martial",
-    "dano": "1d6-1",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Rapier",
+       "texto": "1d6",
+       "tipo": "dados"
+      },
+      {
+       "origem": "FOR",
+       "tipo": "atributo",
+       "valor": -1
+      }
+     ],
+     "total": "1d6-1"
+    },
     "detalhe": "nivel 6 + prof 8 (trained) + DEX +3",
     "potencia": 0,
     "rank": "trained",

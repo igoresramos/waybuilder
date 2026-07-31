@@ -841,7 +841,17 @@
     "ataque": 6,
     "atributo_do_ataque": "str",
     "categoria": "simple",
-    "dano": "1d4",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Staff",
+       "texto": "1d4",
+       "tipo": "dados"
+      }
+     ],
+     "total": "1d4"
+    },
     "detalhe": "nivel 4 + prof 6 (trained) + FOR +0",
     "potencia": 0,
     "rank": "trained",

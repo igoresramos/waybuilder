@@ -244,6 +244,20 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .lista-simples .quando, .lista-simples .dado { color: var(--fraco); font-size: .9em; }
 .lista-simples .vazio, .lista-pericias .vazio { color: var(--fraco); }
 
+/* o dano decomposto: as parcelas quebram para a linha de baixo, ocupando a
+   largura inteira do item. Spec: `specs/2026-07-30-dano-de-furia.md` */
+.lista-simples .parcelas-de-dano {
+  flex-basis: 100%; display: flex; flex-wrap: wrap; gap: calc(var(--u) / 2);
+}
+.lista-simples .parcela {
+  font-size: .8em; color: var(--fraco);
+  border: 1px solid var(--borda); border-radius: 3px;
+  padding: 0 calc(var(--u) / 2);
+}
+.lista-simples .parcela em { font-style: normal; opacity: .75; margin-left: 4px; }
+/* condicional nao entra no total -- e por isso que ele e tracejado */
+.lista-simples .parcela.condicional { flex-basis: 100%; border-style: dashed; }
+
 /* a ficha em duas faixas: coluna estreita de pericias | area de abas */
 .ficha-corpo { display: grid; grid-template-columns: 194px minmax(0, 1fr); gap: var(--u); }
 .ficha-corpo .coluna-pericias { display: grid; gap: var(--u); align-content: start; }

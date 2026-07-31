@@ -1180,3 +1180,26 @@ pipeline/build.sh`.** E a prova nunca e o placar dos portoes -- e ler o REGISTRO
 que a mudanca deveria alterar. Mesma familia das saidas orfas ja registradas
 aqui (`taticas_kits` fora do laco, `magias.py` no-op): artefato derivado que
 sobrevive a mudanca da fonte porque ninguem o reescreveu.
+
+## Verificacao no navegador roda contra `app/public/base`, que o build NAO atualiza (2026-07-30)
+
+`pipeline/build.sh` escreve o payload em `pipeline/base/app/`. Quem copia para
+`app/public/base/` -- que e o que o dev server serve -- e `app/sincronizar-base.sh`,
+e **o build nao o chama**. Entao a quarta camada pode rodar contra uma base de
+horas atras.
+
+Aconteceu com o dano decomposto: o Python dava `+2 Rage` e a tela nao mostrava
+parcela de furia nenhuma. Gastei a investigacao no motor TS -- conferi
+`melhorGrau`, `idsDaFicha`, `verdadeiro(null)` -- e o codigo estava certo o
+tempo todo: `app/public/base/por-kind/class-feature.json` tinha
+`rage_damage: None` porque era o arquivo de antes do build.
+
+Aqui a defasagem produziu FALSA FALHA, que e o lado seguro. Mas o lado
+perigoso existe: campo REMOVIDO da base continua na tela, e a verificacao passa
+por dado que nao existe mais.
+
+Regra: **mexeu no payload (passo 9 do build), rodar `bash app/sincronizar-base.sh`
+antes de qualquer `verificacao/*.mjs`.** E o sintoma que denuncia: motor Python e
+TS discordando quando os dois arquivos de motor estao iguais -- a divergencia nao
+esta no codigo, esta no dado que cada um leu. Mesma familia do `WB_REEXTRAIR`
+logo acima: artefato derivado que sobrevive a mudanca da fonte.

@@ -319,13 +319,40 @@ export interface SlotConcedido {
   filtro: unknown;
 }
 
+/** Uma parcela do dano. `dados` traz `texto` (`"2d8"`); as outras, `valor`. */
+export interface ParcelaDeDano {
+  tipo: "dados" | "atributo" | "weapon_specialization" | "rage";
+  texto?: string;
+  valor?: number;
+  origem: string | null;
+}
+
+/** Parcela que só vale sob uma condição de rolagem. NÃO entra no `total`:
+ * aparece na ficha com a condição escrita. Princípio zero -- marca, nunca
+ * esconde nem soma escondido. */
+export interface DanoCondicional {
+  valor: number;
+  origem: string | null;
+  condicao: string;
+}
+
+/** O dano decomposto. Até 2026-07-30 era só a string já concatenada
+ * (`"2d8+4"`): o ataque tinha `detalhe`, o dano não tinha nada -- e estava
+ * incompleta, faltando Weapon Specialization e dano de fúria.
+ * Spec: `specs/2026-07-30-dano-de-furia.md` */
+export interface DanoDecomposto {
+  parcelas: ParcelaDeDano[];
+  total: string;
+  condicionais: DanoCondicional[];
+}
+
 export interface Ataque {
   arma: string | null;
   categoria: string;
   rank: Rank;
   ataque: number;
   atributo_do_ataque: "str" | "dex";
-  dano: string;
+  dano: DanoDecomposto;
   tipo_de_dano: string | null;
   /** runas do item equipado: potência soma no ataque, striking soma DADOS de
    * dano, e as de propriedade só aparecem (o motor não roda o efeito delas).

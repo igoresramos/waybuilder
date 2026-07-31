@@ -870,7 +870,17 @@
     "ataque": 13,
     "atributo_do_ataque": "dex",
     "categoria": "martial",
-    "dano": "1d6",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Composite Shortbow",
+       "texto": "1d6",
+       "tipo": "dados"
+      }
+     ],
+     "total": "1d6"
+    },
     "detalhe": "nivel 8 + prof 12 (expert) + DEX +1",
     "potencia": 0,
     "rank": "expert",

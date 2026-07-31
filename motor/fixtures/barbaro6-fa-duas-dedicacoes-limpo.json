@@ -869,7 +869,27 @@
     "ataque": 14,
     "atributo_do_ataque": "str",
     "categoria": "martial",
-    "dano": "1d12+4",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Greataxe",
+       "texto": "1d12",
+       "tipo": "dados"
+      },
+      {
+       "origem": "FOR",
+       "tipo": "atributo",
+       "valor": 4
+      },
+      {
+       "origem": "Fury",
+       "tipo": "rage",
+       "valor": 3
+      }
+     ],
+     "total": "1d12+7"
+    },
     "detalhe": "nivel 6 + prof 10 (expert) + FOR +4",
     "potencia": 0,
     "rank": "expert",
@@ -885,7 +905,17 @@
     "ataque": 11,
     "atributo_do_ataque": "dex",
     "categoria": "simple",
-    "dano": "1d8",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Crossbow",
+       "texto": "1d8",
+       "tipo": "dados"
+      }
+     ],
+     "total": "1d8"
+    },
     "detalhe": "nivel 6 + prof 10 (expert) + DEX +1",
     "potencia": 0,
     "rank": "expert",

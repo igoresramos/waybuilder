@@ -35,7 +35,8 @@ import type { ContextoDePredicado, ResultadoDeTermo } from "./predicado.ts";
 import { avaliar as avaliarPredicado, comparar } from "./predicado.ts";
 import type {
   AC, Ataque, Ator, AumentoDePericia, Candidato, Concedido, ConcessaoDeAtor,
-  Conjuracao, Documento, ForaDoRequisito, LinhaDeFeature, FonteDeBoost, Rank,
+  Conjuracao, DanoCondicional, DanoDecomposto, Documento, ForaDoRequisito,
+  LinhaDeFeature, FonteDeBoost, ParcelaDeDano, Rank,
   BonusAplicado, DetalheDePericiaLivre, LinhaDePericia,
   LinhaDeResistencia, OpcaoDeGrant,
   Registro, SlotAberto, SlotConcedido, SlotDeSubclasse, Visao,
@@ -2306,7 +2307,7 @@ export class Personagem implements ContextoDePredicado {
           ? this.nivel + RANK_BONUS[rank] + atributo + potencia
           : atributo + potencia,
         atributo_do_ataque: usa_dex ? "dex" : "str",
-        dano: mod_dano ? `${base_do_dano}${comSinal(mod_dano)}` : base_do_dano,
+        dano: this.danoDecomposto(arma, base_do_dano, mod_dano, rank, distancia),
         tipo_de_dano: (verdadeiro(dano["tipo"]) ? dano["tipo"] : dano["type"] ?? null) as string | null,
         potencia,
         striking,
@@ -2316,6 +2317,120 @@ export class Personagem implements ContextoDePredicado {
                  + `${usa_dex ? "DEX" : "FOR"} ${comSinal(atributo)}`,
       });
     }
+  }
+
+  // -- parcelas de dano ----------------------------------------------------
+  //
+  // Até 2026-07-30 `ataques[].dano` era string já concatenada (`"2d8+4"`): o
+  // ATAQUE tinha `detalhe`, o dano não tinha nada. E estava incompleta, não só
+  // opaca -- faltavam duas parcelas, as duas deterministas.
+  // Spec: `specs/2026-07-30-dano-de-furia.md`
+
+  /** Features da progressão + sub-escolhas, sem repetir e em ordem.
+   *
+   * As sub-escolhas entram porque o instinto do Bárbaro NÃO é feature: ele vem
+   * do eixo `instinct`, e sem isto o dano de fúria nunca apareceria. */
+  private idsDaFicha(): string[] {
+    const ids = this.features.map((f) => f.id);
+    for (const classe of this.ordem_de_classe) {
+      ids.push(...this._subescolhas_de(classe));
+    }
+    const vistos = new Set<string>();
+    const fora: string[] = [];
+    for (const rid of ids) {
+      if (rid && !vistos.has(rid)) { vistos.add(rid); fora.push(rid); }
+    }
+    return fora;
+  }
+
+  /** +2/+3/+4 pelo rank DA ARMA, dobrado pelo Greater.
+   *
+   * 26 das 27 classes concedem, e a base tinha `grants: []` em todas: todo
+   * personagem do nível 7 pra cima estava com o dano errado na ficha. */
+  private parcelaWeaponSpecialization(rank: string): ParcelaDeDano | null {
+    let por_rank: Record<string, unknown> = {};
+    let multiplicador = 1;
+    let origem: string | null = null;
+    for (const rid of this.idsDaFicha()) {
+      const reg = this.base.opcional(rid);
+      if (reg === null) continue;
+      for (const g of listaDe(reg["grants"])) {
+        const ws = dictDe(dictDe(g)["weapon_specialization"]);
+        if (Object.keys(ws).length === 0) continue;
+        if (verdadeiro(ws["por_rank"])) {
+          // duas classes concedendo não somam: é a mesma tabela
+          por_rank = dictDe(ws["por_rank"]);
+          origem = origem ?? nome(reg);
+        }
+        if (verdadeiro(ws["multiplicador"])) {
+          multiplicador = Math.max(multiplicador, inteiro(ws["multiplicador"]));
+          origem = nome(reg);
+        }
+      }
+    }
+    const valor = inteiro(por_rank[rank]) * multiplicador;
+    if (!valor) return null;
+    return { tipo: "weapon_specialization", valor,
+             origem: `${origem} (${rank})` };
+  }
+
+  /** `mode: upgrade` no Foundry: MAIOR vence, não soma. */
+  private melhorGrau(rage_damage: Record<string, unknown>): number | null {
+    let valor: number | null = null;
+    for (const bruto of listaDe(rage_damage["graus"])) {
+      const grau = dictDe(bruto);
+      const exige = grau["requires"];
+      if (verdadeiro(exige) && !this.avaliar(exige)[0]) continue;
+      const v = inteiro(grau["valor"]);
+      valor = valor === null ? v : Math.max(valor, v);
+    }
+    return valor;
+  }
+
+  /** [parcela incondicional, condicionais].
+   *
+   * O condicional NÃO entra no total: aparece com a condição escrita. É o
+   * princípio zero -- marca, nunca esconde, nunca soma escondido. */
+  private parcelasDeFuria(distancia: boolean):
+      [ParcelaDeDano | null, DanoCondicional[]] {
+    if (distancia) return [null, []];      // o `Rage` exclui arma a distância
+    let melhor: ParcelaDeDano | null = null;
+    const condicionais: DanoCondicional[] = [];
+    for (const rid of this.idsDaFicha()) {
+      const reg = this.base.opcional(rid);
+      if (reg === null) continue;
+      const rd = dictDe(reg["rage_damage"]);
+      if (Object.keys(rd).length === 0) continue;
+      const valor = this.melhorGrau(rd);
+      if (valor === null) continue;
+      if (verdadeiro(rd["condicao"])) {
+        condicionais.push({ valor, origem: nome(reg),
+                            condicao: pyStr(rd["condicao"]) });
+      } else if (melhor === null || valor > (melhor.valor ?? 0)) {
+        melhor = { tipo: "rage", valor, origem: nome(reg) };
+      }
+    }
+    condicionais.sort((a, b) => b.valor - a.valor
+                      || pyStr(a.origem).localeCompare(pyStr(b.origem)));
+    return [melhor, condicionais];
+  }
+
+  private danoDecomposto(arma: Record<string, unknown>, dados: string,
+                         mod_dano: number, rank: string,
+                         distancia: boolean): DanoDecomposto {
+    const parcelas: ParcelaDeDano[] = [
+      { tipo: "dados", texto: dados, origem: nome(arma) },
+    ];
+    if (mod_dano) {
+      parcelas.push({ tipo: "atributo", valor: mod_dano, origem: "FOR" });
+    }
+    const especializacao = this.parcelaWeaponSpecialization(rank);
+    if (especializacao) parcelas.push(especializacao);
+    const [furia, condicionais] = this.parcelasDeFuria(distancia);
+    if (furia) parcelas.push(furia);
+    const fixo = parcelas.reduce((s, p) => s + inteiro(p.valor), 0);
+    return { parcelas, total: fixo ? `${dados}${comSinal(fixo)}` : dados,
+             condicionais };
   }
 
   // -- regra 3: bônus derivado --------------------------------------------

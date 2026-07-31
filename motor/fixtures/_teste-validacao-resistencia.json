@@ -1040,7 +1040,17 @@
    },
    {
     "classe": "Fighter",
-    "grants": [],
+    "grants": [
+     {
+      "weapon_specialization": {
+       "por_rank": {
+        "expert": 2,
+        "legendary": 4,
+        "master": 3
+       }
+      }
+     }
+    ],
     "id": "wb:class-feature/weapon-specialization",
     "na_base": true,
     "nivel_de_classe": 7,

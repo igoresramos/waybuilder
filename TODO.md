@@ -44,37 +44,31 @@ items:
   id: 43
   date: '2026-07-29'
   priority: alta
-- desc: 'PARCIALMENTE RESOLVIDO 2026-07-30. O eixo `instinct` do Barbaro saiu da lista de ZERADOS pelo
-    lado que importa: escolher instinto agora LIBERA os feats de instinto (commit 7884391ca, spec instinto-com-dois-ids)
-    -- antes nenhum dos 25 liberava, porque o requires citava `wb:class-feature/animal-instinct` e a tela
-    oferecia `wb:instinct/animal`. ATENCAO A PREMISSA: a conclusao original deste item (''o que falta
-    e mecanica de combate, que o principio zero poe fora de escopo'') repousa numa leitura que o IGOR
-    DERRUBOU em 2026-07-27: ''eu tinha lido o principio zero como mecanica de combate fica de fora e ESTAVA
-    ERRADO. O app e para construir o personagem inteiro... TODOS os numeros na ficha.'' O que sobra (dano
-    de rage, DamageDice, DamageAlteration) e mecanica CONDICIONAL, que e outra familia -- essa sim ja
-    recusada COM numero duas vezes (ItemAlteration e RollOption em 30/07, `strike-damage` em 30/07). Reavaliar
-    sob o escopo corrigido antes de fechar.'
-  id: 42
-  date: '2026-07-29'
-  priority: media
-- desc: 'PENSANDO EM CORTAR O ARQUETIPO DE MULTICLASSE (Igor, 2026-07-27) -- NAO FAZER AGORA, so anotado.
-    A ideia: permitir apenas arquetipo de DEDICACAO comum e remover os de multiclasse, porque na houserule
-    multiclasse ja se faz com nivel de classe -- as duas rotas competem, e a regra 23 acabou de declarar
-    que se excluem. Cortar seria a conclusao natural da 23: em vez de marcar conflito caso a caso, some
-    a rota duplicada. MEDIDO na base para dimensionar: 244 archetypes, dos quais 27 sao de multiclasse
-    (arquetipo cujo nome e nome de classe) e 217 nao; 2.129 feats tem trait `archetype`, 226 tem `dedication`
-    e exatamente 27 tem `multiclass` -- os 27 sao as dedicacoes das classes, e nenhum feat nao-dedicacao
-    carrega o trait. Os 27 arquetipos de multiclasse tem 195 feats no total. Ou seja, cortar remove 27
-    dedicacoes + 195 feats de arquetipo, sobrando 199 dedicacoes e ~1.934 feats. O recorte e DERIVAVEL
-    (trait `multiclass`), nao precisa de lista a mao. A VALIDAR antes de decidir: (a) algum feat de arquetipo
-    NAO-multiclasse exige um feat de arquetipo de multiclasse como pre-requisito? Se sim, cortar quebra
-    a cadeia; (b) o que se perde de conteudo unico -- ha feats de arquetipo de multiclasse que nao tem
-    equivalente na progressao da classe (ex: as basic/expert/master spellcasting, que dao slots que nenhum
-    nivel de classe da do mesmo jeito); (c) impacto na regra 21, que hoje usa a dedicacao de conjuracao
-    como PISO -- se o arquetipo de multiclasse sumir, o piso precisa de outra referencia ou a regra 21
-    fica sem chao; (d) o Free Archetype (regra 2) continua ligado e passa a apontar so para os 217 restantes'
-  id: 46
-  date: '2026-07-29'
+- desc: 'SOBRA DO ITEM 42, FECHADO 2026-07-30 (spec specs/2026-07-30-dano-de-furia.md). O que SOBROU do
+    eixo `instinct` esta declarado com numero na spec e nao foi feito. (a) `ragingResistance` -- `3 +
+    con.mod`, `8 + con.mod` com Unstoppable Juggernaut, mais o tipo de dano resistido por instinto: mesmo
+    achado e mesmo tamanho do dano de furia, mas mexe em `_resistencias`, que tem gramatica propria. A
+    MEDICAO JA ESTA PRONTA nos rule elements `Resistance` dos nove instintos. (b) os 30 `Strike` do Animal
+    Instinct, um por animal -- conceder ataque desarmado e outra familia, sem consumidor na ficha hoje.
+    (c) `item:trait:agile` cortando o dano de furia pela metade (2 regras, `mode: multiply 0.5`), `Effect:
+    Share Rage` / `Guard''s Fury` / `Mighty Rage` (3 regras de efeito ativo) e o degrau `target:caster`
+    do Superstition (4/8/16): todos por ARMA ou por ALVO no momento da rolagem, fora da ficha. (d) os
+    22 `flat_modifier` condicionais em seletor de dano ja entram em `condicionais`, marcados e nao somados.'
+  id: 101
+  date: '2026-07-30'
+  priority: baixa
+- desc: 'ACHADO LATERAL DA MEDICAO DO ITEM 46 (2026-07-30, docs/2026-07-30_corte-multiclasse.md). Tres
+    defeitos independentes do corte, todos da familia da licao do item 18 (homonimo resolvido para o
+    registro errado). (1) HOMONIMO CLASSE x ARQUETIPO: 10 registros com `requires`/`grants` apontando
+    para o feat de ARQUETIPO tendo o `class-feature` de mesmo nome ao lado -- `efficient-alchemy` ->
+    `wb:feat/advanced-alchemy` com `wb:class-feature/advanced-alchemy` na base; idem `shield-of-reckoning`
+    e `swift-retribution` -> `champions-reaction`; idem `wb:class-feature/alchemy` CONCEDENDO
+    `wb:feat/quick-alchemy` (o do arquetipo). (2) ATRIBUICAO DE ARQUETIPO COM BURACO: 7 feats com trait
+    `archetype` e campo `archetype` vazio, identificaveis porque o `requires` cita uma dedicacao de
+    multiclasse. (3) 18 arquetipos sem feat de dedicacao na base, ou seja sem porta de entrada. Medicao
+    reproduzivel em docs/medicoes/medir_corte_multiclasse.py'
+  id: 100
+  date: '2026-07-30'
   priority: media
 - desc: 'RE-MEDIDO 2026-07-29, e o item mudou de gravidade: e COSMETICO, nao numero errado. Contra o dump
     do AoN, 65 class-features nao existem na base por nome (nem como alias -- conferido, licao do item

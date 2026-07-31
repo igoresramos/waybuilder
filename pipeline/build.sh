@@ -193,6 +193,12 @@ echo "== 7e1d. requisito de sub-escolha preso no residuo =="
 # mapa `<opcao> <eixo>` sai das proprias `subclasses`.
 python3 derivar_requisito_de_subescolha.py
 
+echo "== 7e1e. parcelas de dano: weapon specialization e furia =="
+# Depois do desmembramento de colisoes (os tres `Greater Weapon Specialization`
+# tem ids diferentes) e depois de `aplicar_subclasses.py` (os gemeos de
+# instinto ja existem para receber `rage_damage` pelos dois ids).
+python3 derivar_parcelas_de_dano.py
+
 echo "== 7e2. categoria de feat que sobrou vazia =="
 # Roda TARDE de proposito: 8 dos 164 feats sem categoria nascem em
 # `desmembrar_colisoes.py`, depois do extrator, e so um passo sobre a base

@@ -880,7 +880,22 @@
     "ataque": 12,
     "atributo_do_ataque": "str",
     "categoria": "martial",
-    "dano": "1d6+4",
+    "dano": {
+     "condicionais": [],
+     "parcelas": [
+      {
+       "origem": "Rapier",
+       "texto": "1d6",
+       "tipo": "dados"
+      },
+      {
+       "origem": "FOR",
+       "tipo": "atributo",
+       "valor": 4
+      }
+     ],
+     "total": "1d6+4"
+    },
     "detalhe": "nivel 4 + prof 8 (expert) + FOR +4",
     "potencia": 0,
     "rank": "expert",
