@@ -5,7 +5,7 @@ status: active
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 28.0
+hours: 38.5
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -69,6 +69,24 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
+> **A bancada do Pathbuilder virou o motor da triagem** (2026-07-31). Ela
+> compara o que o app OFERECE num slot com o que o Pathbuilder oferece, e as 27
+> classes passaram a ser comparadas de verdade -- eram 13, e as outras 14 eram
+> puladas em silencio, com arquivos velhos parados em disco fingindo cobertura.
+>
+> **O volume da bancada e ilusao de escala.** 558 pontos viram ~74 divergencias
+> distintas: cada feat aparece em media 3,3 comparacoes, porque a lista de
+> dedicacoes e a mesma para toda classe. Do que sobra, a maior parte e
+> diferenca de MODELO declarada (o Pathbuilder conta escolha de pericia
+> pendente de outro jeito) ou recorte de fonte -- nenhum dos dois e defeito.
+>
+> **Fila em 19 itens e nenhum `alta`.** Aberto de verdade: 69 e 107, que estao
+> no mesmo bloqueio (a mae que concederia as features usa `GrantItem` com UUID
+> dinamico, e o extrator pula os 163 casos assim, corretamente), e 84, que agora
+> pede triagem dos 57 "so nosso". Bloqueados por coisa que nao existe: 68
+> (oraculo de em que nivel cada aumento foi gasto), 10 (o importador em si) e 96
+> (consumidor de `acesso`). 31 (i18n) fica por ultimo, decisao do Igor.
+
 > **App de pe e verificado em quatro camadas** (2026-07-29): 9 portoes de
 > pipeline, 132 assercoes do oraculo Python, 113 testes do porte TS e a checagem
 > no navegador (`app/verificacao/`, dois scripts). A quarta entrou porque as

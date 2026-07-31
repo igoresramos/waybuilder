@@ -1294,3 +1294,20 @@ Duas vezes no mesmo mes, em codigos diferentes.
 
 Regra: **default permissivo nao atravessa negacao.** Onde houver `not`/`nor`,
 clausula composta so de desconhecido nao pode decidir nada -- pula, nao inverte.
+
+## `and` nao existe no avaliador, e chave desconhecida vira NO-OP (2026-07-31)
+
+Escrevi `{"and": [<requires que existia>, <termo novo>]}` em dois passos de
+pipeline no mesmo dia. O avaliador conhece `all`, `any` e `not` -- **`and` nao**
+--, e pelo default do principio zero chave desconhecida **passa**. O predicado
+inteiro virou no-op: o campo gravado, o relatorio contando "3 gateados", e nada
+sendo checado.
+
+O que denunciou foi o absurdo do RESULTADO, nao o codigo: `masterful-obfuscation`
+pede rank *master* e apareceu atendido por um personagem de nivel 2. Se o teste
+tivesse so o caso positivo, teria passado verde.
+
+Regra: **todo gate novo precisa de um caso NEGATIVO no oraculo** -- alguem que
+nao atende, com o motivo esperado. O caso positivo sozinho nao distingue "gate
+funcionando" de "gate desligado". E antes de envelopar predicado, conferir o
+vocabulario de operadores que o motor realmente implementa.

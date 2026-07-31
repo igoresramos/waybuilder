@@ -4,6 +4,50 @@ project: waybuilder
 
 # LOG -- Waybuilder
 
+## 2026-07-31
+
+### Sessao | 06:54-17:28 | a bancada do Pathbuilder virou o motor da triagem | igor + claude-code
+
+Sessao longa e autonoma. O padrao de ontem se repetiu -- **a coisa errada quase
+nunca era a que o item dizia** --, e desta vez quem apontou nao foi a leitura:
+foi a comparacao contra o Pathbuilder.
+
+**Fechados:** 105 (`item:slug` + derivacao de eixo), 106 (slot concedido
+generico), 85 (armas Tian Xia), 108 (`skill:recall-knowledge`), 109 (gates
+elementais do Kineticist). **Parciais:** 69 (balaio 202 -> 111, e 68 gateadas),
+84 (comparador passou de 13 para 27 classes), 107 (causa raiz achada, 6 grants
+corrigidos).
+
+**A bancada rendeu de verdade.** 12 sondas rodadas em paralelo acharam 3 feats
+que oferecíamos e nao deviamos (`automatic-knowledge`, `dubious-knowledge`,
+`masterful-obfuscation`: a clausula real vivia em `requires_residuo` e o
+`requires` guardava so o gate de nivel). A 36a sonda achou as 37 features
+presas no balaio. E a maior divergencia unica -- 24 impulsos do Kineticist --
+era um defeito so: o `requires` de um impulso nao exigia elemento nenhum.
+
+**Tres premissas de item caíram, todas medidas:**
+- 85 nao precisava de dump do AoN: as armas estavam la sob os nomes chineses
+  (`Jiu Huan Dao`, `Feng Huo Lun`), e o nome ingles so aparece na PROSA.
+- 107 nao era "por as features na progressao": o Foundry nao as lista na
+  classe, sao sub-features concedidas pela mae.
+- 84 nao era "faltam rodadas": o comparador conhecia 13 das 27 classes e pulava
+  as outras EM SILENCIO, com os arquivos velhos parados em disco.
+
+**Erros meus, e o que os pegou.** Envelopei termo em `{"and": ...}` em dois
+passos e o avaliador so conhece `all`/`any`/`not` -- chave desconhecida no topo
+do predicado passa em silencio e o gate vira no-op; denunciou o absurdo de um
+feat que pede *master* ser atendido no nivel 2. Detonei a performance com um
+lookup de gemeo que varria os 19.606 registros a cada `has` (oraculo de
+segundos para +6 min). E o **portao 8 me pegou tres vezes** citando spec que eu
+ainda nao tinha escrito.
+
+**Licao que atravessou o dia:** o que o motor nao entende conta como
+SATISFEITO. E a decisao certa pelo principio zero, mas ela se inverte sob
+negacao e vira no-op no topo do predicado -- mordeu em tres lugares diferentes
+hoje (`item:tag`, `not` sobre atomo desconhecido, chave desconhecida).
+
+Pontos a triar na bancada: 344 -> 598 -> 558, conforme os defeitos saíram.
+
 ## 2026-07-30
 
 ### Sessao | 11:00-13:30 | seis itens, e a comparacao achando o que a leitura nao acha | igor + claude-code
