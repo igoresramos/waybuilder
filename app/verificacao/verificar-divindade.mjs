@@ -115,6 +115,30 @@ if (slot) {
   await pagina.keyboard.press("Escape");
   await pagina.waitForSelector(".modal", { state: "detached", timeout: 10_000 })
               .catch(() => {});
+
+  // A SANTIFICACAO -- a primeira sub-escolha da base FILTRADA pela escolha
+  // anterior. Pharasma nao tem santificacao nenhuma, entao so `none` cabe; as
+  // outras duas tem de aparecer MARCADAS, nunca sumir (principio zero).
+  // Spec: specs/2026-07-30-santificacao-escolhida.md
+  const linhaSanct = (await rotulos()).find((r) => /sanctification/i.test(r));
+  checar(linhaSanct !== undefined, "o Clerigo tambem abre o slot de santificacao");
+  if (linhaSanct) {
+    await abrirSlot(linhaSanct);
+    // conta `.nome`, e nao `li`: a lista e virtualizada e mantem dois `li`
+    // sentinela vazios nas pontas
+    const nomes = await pagina.locator(".modal-lista .nome").allTextContents();
+    checar(nomes.length === 3, "as tres opcoes aparecem", nomes.join(" | "));
+    checar(nomes[0] === "Sem santificacao",
+           "e a que ATENDE vem primeiro, as marcadas depois", nomes.join(" | "));
+    const marcados = await pagina.locator(".modal-lista li .marcado, "
+                                          + ".modal-lista li.marcado").count();
+    checar(marcados === 2,
+           "e duas vem MARCADAS, nao escondidas -- Pharasma nao tem santificacao",
+           `marcados=${marcados}`);
+    await pagina.keyboard.press("Escape");
+    await pagina.waitForSelector(".modal", { state: "detached", timeout: 10_000 })
+                .catch(() => {});
+  }
 }
 
 await pagina.screenshot({ path: docs("screenshots/2026-07-30_divindade.png"),

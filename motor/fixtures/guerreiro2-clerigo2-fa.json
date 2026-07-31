@@ -912,6 +912,7 @@
   "avisos": [
    "Cleric: falta escolher `outras-opcoes` (5 opcoes)",
    "Cleric: falta escolher `deity` (488 opcoes)",
+   "Cleric: falta escolher `sanctification` (3 opcoes)",
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3"
   ],
   "background": "Acolyte",
@@ -1427,6 +1428,14 @@
     "kind": "deity",
     "opcoes": 488,
     "rotulo": "Cleric / deity",
+    "slot": "subclasse"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "sanctification",
+    "opcoes": 3,
+    "rotulo": "Cleric / sanctification",
     "slot": "subclasse"
    },
    {
@@ -1970,6 +1979,21 @@
      "wb:deity/zura",
      "wb:deity/zursvaater",
      "wb:deity/zyphus"
+    ]
+   },
+   {
+    "classe": "Cleric",
+    "eixo": "sanctification",
+    "escolhe": 1,
+    "escolhido": null,
+    "escolhidos": [],
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 3,
+    "opcoes_ids": [
+     "wb:sanctification/holy",
+     "wb:sanctification/unholy",
+     "wb:sanctification/none"
     ]
    }
   ],

@@ -1780,6 +1780,57 @@ checar(BASE.opcional("wb:ikon/gleaming-blade").get("equivale_a")
        == "wb:class-feature/gleaming-blade",
        "o ikon e o gemeo class-feature estao ligados nos dois sentidos")
 
+# --------------------------------------------------------------------------
+# Santificacao -- a primeira sub-escolha FILTRADA pela escolha anterior.
+# Spec: specs/2026-07-30-santificacao-escolhida.md
+# --------------------------------------------------------------------------
+print("\n-- santificacao (sub-escolha filtrada) --")
+
+def clerigo_de(deity=None):
+    esc = [{"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/cleric"},
+           {"em": 1, "slot": "subclasse",
+            "pega": "wb:class-feature/cloistered-cleric"}]
+    if deity:
+        esc.append({"em": 1, "slot": "subclasse", "pega": deity})
+    return personagem(esc)
+
+def cabe(p, opcao):
+    return p.avaliar((BASE.opcional(f"wb:sanctification/{opcao}") or {})
+                     .get("requires"))[0]
+
+checar(BASE.opcional("wb:deity/cayden-cailean").get("sanctification_escolha") == "can"
+       and BASE.opcional("wb:deity/iomedae").get("sanctification_escolha") == "must",
+       "o modal vem da prosa do AoN, e nao da lista achatada")
+
+cayden = clerigo_de("wb:deity/cayden-cailean")
+checar(cabe(cayden, "holy") and cabe(cayden, "none") and not cabe(cayden, "unholy"),
+       "`can choose holy`: holy e none cabem, unholy nao")
+
+# a diferenca que a inferencia ingenua (uma opcao so = obriga) teria perdido em
+# 408 divindades
+iomedae = clerigo_de("wb:deity/iomedae")
+checar(cabe(iomedae, "holy") and not cabe(iomedae, "none"),
+       "`must choose holy`: none NAO cabe -- e o que separa can de must")
+
+abadar = clerigo_de("wb:deity/abadar")
+checar(cabe(abadar, "holy") and cabe(abadar, "unholy") and cabe(abadar, "none"),
+       "`can choose holy or unholy`: as tres cabem")
+
+magdh = clerigo_de("wb:deity/magdh")
+checar(not cabe(magdh, "holy") and not cabe(magdh, "unholy") and cabe(magdh, "none"),
+       "divindade sem santificacao: so `none`")
+
+sem_deus = clerigo_de()
+checar(not any(cabe(sem_deus, o) for o in ("holy", "unholy", "none")),
+       "sem divindade, nenhuma cabe -- e nao se inventa santificacao")
+
+# principio zero: MARCA, nunca esconde
+na_tela = [c for c in iomedae.candidatos("subclasse", 1)
+           if c["id"].startswith("wb:sanctification/")]
+checar(len(na_tela) == 3, "e as tres continuam na lista, marcadas")
+checar(any(c["motivos"] for c in na_tela if not c["atende"]),
+       "com o motivo dito, e nao so um `false`")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

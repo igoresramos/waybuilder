@@ -2733,6 +2733,35 @@ class Personagem:
         return False, (f"exige fonte divina {alvo}; {d.get('name')} concede "
                        f"{', '.join(fontes)}")
 
+    def _termo_deity_sanctification(self, valor) -> tuple[bool, str]:
+        """`{"deity_sanctification": "holy"}` -- cabe na divindade escolhida?
+
+        A base guarda `sanctification` como lista achatada, e inferir dela
+        ("uma opcao so = obrigatoria") erraria em 408 divindades: a prosa do
+        AoN diz `can choose holy` em 265 delas. O modal vem de
+        `sanctification_escolha`, lido pelo passo `derivar_santificacao.py`.
+
+        `none` cabe quando a divindade NAO OBRIGA nenhuma -- e literalmente o
+        predicado do Foundry (`nor must:holy, must:unholy`).
+        """
+        alvo = str(valor or "").lower()
+        d = self.divindade()
+        if d is None:
+            return False, f"exige santificacao {alvo}; nao segue divindade"
+        permite = [str(s).lower() for s in (d.get("sanctification") or [])]
+        obriga = str(d.get("sanctification_escolha") or "") == "must"
+        nome = d.get("name")
+        if alvo == "none":
+            if obriga and permite:
+                return False, (f"{nome} obriga santificacao "
+                               f"({', '.join(permite)})")
+            return True, ""
+        if alvo in permite:
+            return True, ""
+        return False, (f"exige santificacao {alvo}; {nome} "
+                       + (f"permite {', '.join(permite)}" if permite
+                          else "nao tem santificacao"))
+
     def _termo_domain(self, valor) -> tuple[bool, str]:
         """`{"domain": "wb:domain/death"}` -- a divindade concede o dominio?
 

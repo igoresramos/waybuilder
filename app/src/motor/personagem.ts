@@ -2392,6 +2392,7 @@ export class Personagem implements ContextoDePredicado {
       case "deity": return this._termo_deity(valor);
       case "deity_font": return this._termo_deity_font(valor);
       case "domain": return this._termo_domain(valor);
+      case "deity_sanctification": return this._termo_deity_sanctification(valor);
       case "spellcasting_tradition": return this._termo_spellcasting_tradition(valor);
       default: return null;
     }
@@ -2925,6 +2926,38 @@ export class Personagem implements ContextoDePredicado {
     if (fontes.length === 0) return [true, ""];
     return [false, `exige fonte divina ${alvo}; ${nomeOu(d, "")} concede `
                    + `${fontes.join(", ")}`];
+  }
+
+  /**
+   * `{"deity_sanctification": "holy"}` -- cabe na divindade escolhida?
+   *
+   * A base guarda `sanctification` como lista achatada, e inferir dela ("uma
+   * opção só = obrigatória") erraria em 408 divindades: a prosa do AoN diz
+   * `can choose holy` em 265 delas. O modal vem de `sanctification_escolha`.
+   *
+   * `none` cabe quando a divindade NÃO OBRIGA nenhuma -- é literalmente o
+   * predicado do Foundry (`nor must:holy, must:unholy`).
+   */
+  private _termo_deity_sanctification(valor: unknown): ResultadoDeTermo {
+    const alvo = String(valor ?? "").toLowerCase();
+    const d = this.divindade();
+    if (d === null) {
+      return [false, `exige santificacao ${alvo}; nao segue divindade`];
+    }
+    const cru = d["sanctification"];
+    const permite = (ehLista(cru) ? cru : []).map((s) => String(s).toLowerCase());
+    const obriga = String(d["sanctification_escolha"] ?? "") === "must";
+    const nomeDeus = nomeOu(d, "");
+    if (alvo === "none") {
+      if (obriga && permite.length) {
+        return [false, `${nomeDeus} obriga santificacao (${permite.join(", ")})`];
+      }
+      return [true, ""];
+    }
+    if (permite.includes(alvo)) return [true, ""];
+    return [false, `exige santificacao ${alvo}; ${nomeDeus} `
+                   + (permite.length ? `permite ${permite.join(", ")}`
+                                     : "nao tem santificacao")];
   }
 
   private _termo_domain(valor: unknown): ResultadoDeTermo {

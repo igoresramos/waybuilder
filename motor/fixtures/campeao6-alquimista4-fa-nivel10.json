@@ -1044,6 +1044,7 @@
    "Champion: falta escolher `outras-opcoes` (2 opcoes)",
    "Champion: falta escolher `outras-opcoes` (3 opcoes)",
    "Champion: falta escolher `deity` (488 opcoes)",
+   "Champion: falta escolher `sanctification` (3 opcoes)",
    "Alchemist: falta escolher `outras-opcoes` (5 opcoes)",
    "boosts de atributo: 7 declarado(s) de 16 a que o personagem tem direito -- faltam 9. Fontes: Dwarf (1), Field Medic (1), Field Medic (1), Champion (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4), nivel 10 (4)",
    "pericias livres: 0 declarada(s) de 5 a que o personagem tem direito -- faltam 5",
@@ -1814,6 +1815,14 @@
    {
     "em": 1,
     "escolhe": 1,
+    "kind": "sanctification",
+    "opcoes": 3,
+    "rotulo": "Champion / sanctification",
+    "slot": "subclasse"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
     "kind": "outras-opcoes",
     "opcoes": 5,
     "rotulo": "Alchemist / outras-opcoes",
@@ -2397,6 +2406,21 @@
      "wb:deity/zura",
      "wb:deity/zursvaater",
      "wb:deity/zyphus"
+    ]
+   },
+   {
+    "classe": "Champion",
+    "eixo": "sanctification",
+    "escolhe": 1,
+    "escolhido": null,
+    "escolhidos": [],
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 3,
+    "opcoes_ids": [
+     "wb:sanctification/holy",
+     "wb:sanctification/unholy",
+     "wb:sanctification/none"
     ]
    },
    {
