@@ -100,6 +100,18 @@ class Base:
         self._dedicacao_de: dict | None = None
         self._multiclasse: dict | None = None
         self._por_alias: dict | None = None
+        self._kinds: set | None = None
+
+    def kinds(self) -> set:
+        """Os kinds que a base REALMENTE tem.
+
+        O slot concedido usa isto para saber se o `tipo` do ChoiceSet estreita:
+        `spell`, `heritage`, `ancestry`, `deity` e `weapon` sao kinds; `action`
+        nao e, e ali quem estreita e o filtro.
+        """
+        if self._kinds is None:
+            self._kinds = {r.get("kind") for r in self.por_id.values()}
+        return self._kinds
 
     def resolver(self, wb_id: str) -> str:
         """Id canonico de uma referencia, seguindo `aliases`.
@@ -1196,11 +1208,21 @@ class Personagem:
                 continue
             for g in self._grants_de(reg):
                 ch = g.get("choice") if isinstance(g, dict) else None
-                if not isinstance(ch, dict) or ch.get("tipo") != "feat":
+                # QUALQUER tipo, nao so `feat`: sao 69 blocos na base (feat 43,
+                # spell 11, heritage 7, action 4, weapon 2, ancestry 1, deity 1)
+                # e todos tem filtro. Ate 2026-07-31 o motor filtrava por
+                # `feat` e as outras 26 escolhas nunca eram perguntadas -- o
+                # jogador com `Dragon Spit` nao escolhia truque nenhum.
+                # Spec: `specs/2026-07-31-slot-concedido-generico.md`
+                if not isinstance(ch, dict) or not ch.get("tipo"):
+                    continue
+                if not ch.get("filtro"):
+                    # sem filtro nao ha pool, e slot sem pool e pior que slot
+                    # nenhum: pede escolha e nao oferece nada
                     continue
                 self.slots_concedidos.append({
                     "origem": reg.get("name"), "origem_id": reg.get("id"),
-                    "em": em, "flag": ch.get("flag"),
+                    "em": em, "flag": ch.get("flag"), "tipo": ch.get("tipo"),
                     "filtro": ch.get("filtro"),
                 })
         # regra 2: Free Archetype sempre ligado -- slot em todo nivel par
@@ -3267,10 +3289,15 @@ class Personagem:
         for bloco in self.slots_concedidos:
             if bloco.get("flag") in usados_conc:
                 continue
+            # o `slot` continua `feat_concedido` mesmo carregando magia:
+            # renomear obrigaria a migrar documento salvo, fixture e ficha de
+            # exemplo, e o `kind` ja diz o que o slot pede. Divida de nome,
+            # nao de comportamento -- ver a spec.
+            tipo = bloco.get("tipo") or "feat"
             abertos.append({
-                "slot": "feat_concedido", "em": bloco.get("em"), "kind": "feat",
+                "slot": "feat_concedido", "em": bloco.get("em"), "kind": tipo,
                 "escolhe": 1, "flag": bloco.get("flag"),
-                "rotulo": f"feat concedido por {bloco.get('origem')}"})
+                "rotulo": f"{tipo} concedido por {bloco.get('origem')}"})
 
         for bloco in self.slots_de_subclasse:
             # `escolhe: N` -- o mesmo formato que `boosts_livres` ja usava: um
@@ -3349,7 +3376,7 @@ class Personagem:
     # Spec: `specs/2026-07-31-tag-e-eixo-por-query.md`
     CAMPO_DO_ATOMO = {"trait": "traits", "level": "level",
                       "category": "feat_category", "rarity": "rarity",
-                      "tag": "tags"}
+                      "tag": "tags", "slug": "slug"}
 
     def _sem_gate_de_nivel(self, requires):
         """O mesmo `requires` sem a clausula de nivel de personagem.
@@ -3398,12 +3425,39 @@ class Personagem:
         if campo is None:
             return None
         alvo = ":".join(partes[2:])
+        if campo == "slug":
+            # `slug` nao e campo: e o sufixo do id, ou um alias. Entrou com o
+            # slot concedido generico -- 60 dos 69 atomos `item:slug` vivem nos
+            # filtros de `tipo: spell`, e atomo ignorado conta como SATISFEITO,
+            # entao sem isto o slot de `Dragon Spit` ofereceria as 1.638 magias
+            # da base em vez de 4.
+            # `norm_slug` resolve de quebra o defeito de fonte
+            # `item:slug:dispel magic`, com espaco no meio.
+            alvo = norm_slug(alvo)
+            if norm_slug(reg.get("id", "").rsplit("/", 1)[-1]) == alvo:
+                return True
+            return alvo in {norm_slug(a) for a in (reg.get("aliases") or [])}
         valor = reg.get(campo)
         if campo in ("traits", "tags"):
             return alvo in (valor or [])
         if campo == "level":
             return isinstance(valor, int) and str(valor) == alvo
         return str(valor or "") == alvo
+
+    def _filtro_indecidivel(self, no) -> bool:
+        """O no nao tem NENHUM atomo que o motor saiba avaliar.
+
+        So serve para `not`/`nor`, onde a coercao do desconhecido para
+        satisfeito se inverte e vira reprovacao geral. Em `and`/`or` ela alarga,
+        que e o lado certo do principio zero, e nada aqui muda.
+        """
+        if isinstance(no, str):
+            return "{" in no or self._atomo_de_filtro({}, no) is None
+        if isinstance(no, (list, tuple)):
+            return all(self._filtro_indecidivel(x) for x in no)
+        if isinstance(no, dict):
+            return all(self._filtro_indecidivel(v) for v in no.values())
+        return False
 
     def _casa_filtro(self, reg: dict, filtro) -> bool:
         """O filtro RECORTA o slot, como `_aceita_no_slot` -- nao ordena.
@@ -3437,9 +3491,21 @@ class Personagem:
                 if not all(self._casa_filtro(reg, i) for i in itens):
                     return False
             elif op == "not":
+                # o default "atomo ignorado conta como SATISFEITO" e seguro sob
+                # `and`/`or`, onde ele ALARGA -- e se inverte sob `not`, onde
+                # passa a REPROVAR tudo. `Adopted Ancestry` filtra
+                # `{"not": "item:slug:{actor|...ancestry.trait}"}`, referencia
+                # dinamica de ator que o motor nao resolve: com a coercao para
+                # True, o `not` rejeitava as 50 ancestralidades e o slot nascia
+                # VAZIO. Clausula so de desconhecido nao decide nada, entao ela
+                # nao pode decidir o NAO.
+                if self._filtro_indecidivel(itens):
+                    continue
                 if all(self._casa_filtro(reg, i) for i in itens):
                     return False
             elif op == "nor":
+                if self._filtro_indecidivel(itens):
+                    continue        # mesma inversao do `not`
                 if any(self._casa_filtro(reg, i) for i in itens):
                     return False
             elif op == "xor":
@@ -3578,8 +3644,18 @@ class Personagem:
                       if em is None or b.get("em") == em]
             if flag is not None:
                 blocos = [b for b in blocos if b.get("flag") == flag]
+            # O `tipo` estreita QUANDO existe kind com aquele nome; o filtro
+            # estreita depois. Nao basta o filtro sozinho: `Adopted Ancestry`
+            # filtra so por referencia dinamica de ator, indecidivel para o
+            # motor, e sem o kind o slot oferecia os 19.606 registros da base.
+            # E nao basta o kind sozinho: os 4 blocos de `action` sao taticas
+            # do Commander e NAO existe `kind: action` -- ali o filtro
+            # (`item:trait:tactic` + tags) e quem alcanca, e exigir kind
+            # esvaziaria. Cada um cobre o buraco do outro.
+            kinds_do_bloco = {b.get("tipo") for b in blocos if b.get("tipo")}
+            kinds = {k for k in kinds_do_bloco if k in self.base.kinds()}
             registros = [r for r in self.base.por_id.values()
-                         if r.get("kind") == "feat"
+                         if (not kinds or r.get("kind") in kinds)
                          and any(self._casa_filtro(r, b.get("filtro"))
                                  for b in blocos)] if blocos else []
         else:
@@ -3610,8 +3686,16 @@ class Personagem:
             saida.append({"id": r["id"], "nome": r.get("name"),
                           "level": r.get("level"), "atende": atende,
                           "motivos": motivos, "ja_pego": r["id"] in ja})
+        # `level` so era int enquanto o pool era so de feat. Com o slot
+        # concedido generico entram kinds cujo nivel a fonte publica como
+        # texto, e comparar str com int estoura a ordenacao inteira.
+        def _nivel(x):
+            try:
+                return int(x["level"])
+            except (TypeError, ValueError):
+                return 0
         saida.sort(key=lambda x: (not x["atende"], x["ja_pego"],
-                                  x["level"] or 0, x["nome"] or ""))
+                                  _nivel(x), x["nome"] or ""))
         return saida[:limite] if limite else saida
 
     def disponiveis(self, kind: str = "feat", limite: int | None = None) -> list[dict]:

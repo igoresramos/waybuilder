@@ -18,6 +18,7 @@ export class Base {
   private _dedicacao_de: Map<string, string> | null = null;
   private _multiclasse: Map<string, string> | null = null;
   private _por_alias: Map<string, string> | null = null;
+  private _kinds: Set<string> | null = null;
 
   constructor(registros: Registro[]) {
     // `Map` e não objeto: a ordem de inserção é o que decide qual registro
@@ -25,6 +26,21 @@ export class Base {
     // candidatos em caso de empate. Objeto literal reordena chave numérica.
     this.por_id = new Map();
     for (const r of registros) this.por_id.set(r.id, r);
+  }
+
+  /**
+   * Os kinds que a base REALMENTE tem.
+   *
+   * O slot concedido usa isto para saber se o `tipo` do ChoiceSet estreita:
+   * `spell`, `heritage`, `ancestry`, `deity` e `weapon` são kinds; `action`
+   * não é, e ali quem estreita é o filtro.
+   */
+  kinds(): Set<string> {
+    if (this._kinds === null) {
+      this._kinds = new Set<string>();
+      for (const r of this.por_id.values()) if (r.kind) this._kinds.add(r.kind);
+    }
+    return this._kinds;
   }
 
   /**

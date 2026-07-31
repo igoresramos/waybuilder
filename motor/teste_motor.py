@@ -1475,6 +1475,63 @@ checar(pericia and all("skill" in (BASE.get(c["id"]).get("traits") or [])
        "cujo filtro so deixa passar feat de pericia",
        f"{len(pericia)} candidatos")
 
+# -- o slot concedido deixa de ser so de feat (spec slot-concedido-generico) -
+# Sao 69 blocos na base com `tipo` e `filtro`; o motor lia so os 43 de `feat` e
+# as outras 26 escolhas NUNCA eram perguntadas. Quem tinha `Dragon Spit` nao
+# escolhia truque nenhum.
+print("\n-- slot concedido generico --")
+
+
+def _conc(escolhas):
+    p = personagem(escolhas)
+    return p, {b["flag"]: p.candidatos("feat_concedido", em=b["em"], flag=b["flag"])
+               for b in p.slots_concedidos}
+
+
+_, cs = _conc([{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/yaoguai"},
+               {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/born-of-elements"},
+               {"em": 1, "slot": "nivel_de_classe", "pega": FIGHTER}])
+checar(len(cs.get("born-of-elements") or []) == 8,
+       "heranca `Born of Elements` abre slot de MAGIA com 8 truques",
+       f"{ {k: len(v) for k, v in cs.items()} }")
+
+# o numero que prova que `item:slug` esta sendo avaliado: o filtro cita cinco
+# slugs, mas `produce-flame`/`ignition` e `ray-of-frost`/`frostbite` sao a mesma
+# magia (nome pre-remaster e remaster) e o alias colapsa sozinho. Sem o atomo,
+# o slot ofereceria as 1.638 magias da base.
+_, cs = _conc([{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/dragonblood"},
+               {"em": 1, "slot": "nivel_de_classe", "pega": FIGHTER},
+               {"em": 1, "slot": "ancestry_feat", "pega": "wb:feat/dragon-spit"}])
+checar(len(cs.get("cantrip") or []) == 4,
+       "`Dragon Spit` abre slot com 4 truques -- nao com 1.638",
+       f"{ {k: len(v) for k, v in cs.items()} }")
+
+# `action` nao e kind na base: ali quem estreita e o FILTRO, e sao dois slots
+# porque a fonte declara duas flags (`firstTactic`, `secondTactic`)
+p, cs = _conc([{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/commander"}
+               for n in range(1, 9)]
+              + [{"em": 8, "slot": "class_feat", "pega": "wb:feat/tactical-excellence"}])
+checar(sorted(cs) == ["firstTactic", "secondTactic"],
+       "`Tactical Excellence` abre DOIS slots, um por flag da fonte", f"{sorted(cs)}")
+checar(all(len(v) == 21 for v in cs.values()),
+       "de tatica, estreitados pelo filtro e nao por kind (`action` nao e kind)",
+       f"{ {k: len(v) for k, v in cs.items()} }")
+
+# `Adopted Ancestry` filtra so por referencia DINAMICA de ator
+# (`{"not": "item:slug:{actor|...}"}`), que o motor nao resolve. Os dois erros
+# possiveis: o `not` sobre desconhecido reprovava tudo (slot VAZIO), e sem o
+# kind do `tipo` o slot oferecia os 19.606 registros da base.
+_, cs = _conc([{"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+               {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/versatile-human"},
+               {"em": 1, "slot": "nivel_de_classe", "pega": FIGHTER},
+               {"em": 1, "slot": "general_feat", "pega": "wb:feat/adopted-ancestry"}])
+adotada = cs.get("ancestry") or []
+checar(len(adotada) == 50,
+       "`Adopted Ancestry` abre slot com as 50 ancestralidades -- nem 0 nem 19.606",
+       f"{len(adotada)}")
+checar(all(BASE.get(c["id"]).get("kind") == "ancestry" for c in adotada),
+       "e so ancestralidade entra nele")
+
 # -- familiar e eidolon concedidos (spec familiar-e-eidolon-concedidos) -----
 # `derivar_concessao_de_ator.py` so casava "animal companion": 0 registros
 # concediam familiar e 0 concediam eidolon. A Bruxa nivel 1, cuja PRIMEIRA

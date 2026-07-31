@@ -1870,6 +1870,14 @@
     "kind": "skill",
     "rotulo": "aumento de pericia (nivel 9)",
     "slot": "skill_increase"
+   },
+   {
+    "em": 10,
+    "escolhe": 1,
+    "flag": "ancestry",
+    "kind": "ancestry",
+    "rotulo": "ancestry concedido por Adopted Ancestry",
+    "slot": "feat_concedido"
    }
   ],
   "subclasses": [

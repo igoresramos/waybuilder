@@ -1787,6 +1787,14 @@
     "kind": "skill",
     "rotulo": "pericias treinadas (7 a escolher)",
     "slot": "pericias_livres"
+   },
+   {
+    "em": 5,
+    "escolhe": 1,
+    "flag": "ancestry",
+    "kind": "ancestry",
+    "rotulo": "ancestry concedido por Adopted Ancestry",
+    "slot": "feat_concedido"
    }
   ],
   "subclasses": [

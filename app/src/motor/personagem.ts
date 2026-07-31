@@ -1282,11 +1282,16 @@ export class Personagem implements ContextoDePredicado {
       if (!reg) continue;
       for (const g of this._grants_de(dictDe(reg))) {
         const ch = dictDe(g)["choice"];
-        if (!ehDict(ch) || ch["tipo"] !== "feat") continue;
+        // QUALQUER tipo, não só `feat`: são 69 blocos na base (feat 43,
+        // spell 11, heritage 7, action 4, weapon 2, ancestry 1, deity 1) e
+        // todos têm filtro. Até 2026-07-31 o motor filtrava por `feat` e as
+        // outras 26 escolhas nunca eram perguntadas.
+        // Spec: `specs/2026-07-31-slot-concedido-generico.md`
+        if (!ehDict(ch) || !ch["tipo"] || !ch["filtro"]) continue;
         this.slots_concedidos.push({
           origem: pyStr(nome(dictDe(reg))), origem_id: pyStr(dictDe(reg)["id"]),
           em: emQue, flag: ch["flag"] === undefined ? null : pyStr(ch["flag"]),
-          filtro: ch["filtro"],
+          tipo: pyStr(ch["tipo"]), filtro: ch["filtro"],
         });
       }
     }
@@ -3515,9 +3520,12 @@ export class Personagem implements ContextoDePredicado {
     for (const bloco of this.slots_concedidos) {
       if (usadosConc.has(bloco.flag)) continue;
       abertos.push({
-        slot: "feat_concedido", em: bloco.em, kind: "feat", escolhe: 1,
-        flag: bloco.flag,
-        rotulo: `feat concedido por ${bloco.origem}`,
+        // o `slot` continua `feat_concedido` mesmo carregando magia:
+        // renomear obrigaria a migrar documento salvo, fixture e ficha de
+        // exemplo, e o `kind` já diz o que o slot pede. Dívida de nome.
+        slot: "feat_concedido", em: bloco.em, kind: bloco.tipo || "feat",
+        escolhe: 1, flag: bloco.flag,
+        rotulo: `${bloco.tipo || "feat"} concedido por ${bloco.origem}`,
       });
     }
 
@@ -3610,6 +3618,8 @@ export class Personagem implements ContextoDePredicado {
     // estreitar slot de feat, destrutivo para definir eixo.
     // Spec: `specs/2026-07-31-tag-e-eixo-por-query.md`
     tag: "tags",
+    // `slug` entrou com o slot concedido genérico -- ver `_atomo_de_filtro`
+    slug: "slug",
   };
 
   /**
@@ -3644,7 +3654,17 @@ export class Personagem implements ContextoDePredicado {
     if (partes.length < 3 || partes[0] !== "item") return null;
     const campo = Personagem.CAMPO_DO_ATOMO[partes[1]];
     if (campo === undefined) return null;
-    const alvo = partes.slice(2).join(":");
+    let alvo = partes.slice(2).join(":");
+    if (campo === "slug") {
+      // `slug` não é campo: é o sufixo do id, ou um alias. 60 dos 69 átomos
+      // `item:slug` vivem nos filtros de `tipo: spell`, e átomo ignorado conta
+      // como SATISFEITO -- sem isto o slot de `Dragon Spit` ofereceria as
+      // 1.638 magias da base em vez de 4. `normSlug` resolve de quebra o
+      // defeito de fonte `item:slug:dispel magic`, com espaço no meio.
+      alvo = normSlug(alvo);
+      if (normSlug(pyStr(reg["id"]).split("/").pop() ?? "") === alvo) return true;
+      return listaDe((reg as Dict)["aliases"]).some((a) => normSlug(pyStr(a)) === alvo);
+    }
     const valor = (reg as Dict)[campo];
     if (campo === "traits" || campo === "tags") {
       return listaDe(valor).map((t) => pyStr(t)).includes(alvo);
@@ -3660,6 +3680,22 @@ export class Personagem implements ContextoDePredicado {
    * 37, `nor` 2, `xor` 8, `lte` 59. Atomo desconhecido NAO reprova: conta em
    * `filtro_ignorado` e vale como satisfeito.
    */
+  /**
+   * O nó não tem NENHUM átomo que o motor saiba avaliar.
+   *
+   * Só serve para `not`/`nor`, onde a coerção do desconhecido para satisfeito
+   * se inverte e vira reprovação geral. Em `and`/`or` ela alarga, que é o lado
+   * certo do princípio zero, e nada aqui muda.
+   */
+  private _filtro_indecidivel(no: unknown): boolean {
+    if (ehStr(no)) {
+      return no.includes("{") || this._atomo_de_filtro({} as Registro, no) === null;
+    }
+    if (Array.isArray(no)) return no.every((x) => this._filtro_indecidivel(x));
+    if (ehDict(no)) return Object.values(no).every((v) => this._filtro_indecidivel(v));
+    return false;
+  }
+
   private _casa_filtro(reg: Registro, filtro: unknown): boolean {
     if (filtro === null || filtro === undefined || filtro === true) return true;
     if (ehStr(filtro)) {
@@ -3679,8 +3715,15 @@ export class Personagem implements ContextoDePredicado {
       } else if (op === "and") {
         if (!itens.every((i) => this._casa_filtro(reg, i))) return false;
       } else if (op === "not") {
+        // o default "átomo ignorado conta como SATISFEITO" é seguro sob
+        // `and`/`or`, onde ALARGA -- e se inverte sob `not`, onde passa a
+        // REPROVAR tudo. `Adopted Ancestry` filtra
+        // `{"not": "item:slug:{actor|...}"}`, e com a coerção para true o
+        // `not` rejeitava as 50 ancestralidades e o slot nascia VAZIO.
+        if (this._filtro_indecidivel(itens)) continue;
         if (itens.every((i) => this._casa_filtro(reg, i))) return false;
       } else if (op === "nor") {
+        if (this._filtro_indecidivel(itens)) continue;   // mesma inversão
         if (itens.some((i) => this._casa_filtro(reg, i))) return false;
       } else if (op === "xor") {
         if (itens.filter((i) => this._casa_filtro(reg, i)).length !== 1) return false;
@@ -3832,9 +3875,17 @@ export class Personagem implements ContextoDePredicado {
       // existir: entregaria escolha ilegal com cara de legal.
       let blocos = this.slots_concedidos.filter((b) => em === null || b.em === em);
       if (flag !== null) blocos = blocos.filter((b) => b.flag === flag);
+      // O `tipo` estreita QUANDO existe kind com aquele nome; o filtro
+      // estreita depois. Sem o kind, `Adopted Ancestry` -- cujo filtro é só
+      // referência dinâmica de ator -- ofereceria os 19.606 registros da base;
+      // sem o filtro, as 4 táticas do Commander sumiriam, porque `action` não
+      // é kind. Cada um cobre o buraco do outro.
+      const kindsDoBloco = blocos.map((b) => b.tipo).filter((k): k is string => !!k);
+      const kinds = new Set(kindsDoBloco.filter((k) => this.base.kinds().has(k)));
       registros = blocos.length === 0 ? [] :
         [...this.base.por_id.values()].filter((r) =>
-          r.kind === "feat" && blocos.some((b) => this._casa_filtro(r, b.filtro)));
+          (kinds.size === 0 || kinds.has(r.kind))
+          && blocos.some((b) => this._casa_filtro(r, b.filtro)));
     } else if (slot === "heranca") {
       // Heranca pertence a uma ancestralidade -- nao existe Anao Elfico. O
       // vinculo esta em `ancestry` (309 das 334 herancas o declaram).

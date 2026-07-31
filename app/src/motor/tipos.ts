@@ -349,6 +349,13 @@ export interface SlotConcedido {
   em: number | "criacao";
   /** `rollOption` do ChoiceSet -- e ele que da identidade ao slot */
   flag: string | null;
+  /**
+   * O `itemType` do ChoiceSet: `feat`, `spell`, `heritage`, `action`,
+   * `weapon`, `ancestry` ou `deity`. Estreita o pool quando existe kind com
+   * esse nome -- `action` nao existe, e la quem estreita e o filtro.
+   * Ver `specs/2026-07-31-slot-concedido-generico.md`.
+   */
+  tipo: string;
   /** o filtro verbatim da fonte: lista de atomos e operadores */
   filtro: unknown;
 }
