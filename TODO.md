@@ -398,7 +398,25 @@ items:
     sentidos (`deepest-wellspring` nv18 -> `amp-focus` nv12) -- vinculo explicito da fonte deveria vencer
     a guarda de nivel. IMPACTO NA FICHA, medido: `voice-of-elements` (foundry) tem 7 grants e
     `voice-of-the-elements-kineticist` (aon) tem 0, entao QUAL dos dois o jogador escolhe muda o que ele
-    recebe.'
+    recebe. || MEDIDO 2026-07-31 (docs/medicoes/2026-07-31_classe-pares-nao-fundidos.md, mais medicao
+    propria de conferencia). RESPOSTA DA PERGUNTA QUE DECIDE: **passo novo, nao curadoria** -- a ordem de
+    grandeza e de centenas, nao de 8. Mas a classe tem DUAS GRAVIDADES e elas nao devem ser consertadas
+    juntas: (a) CONTEUDO PARTIDO, 8 pares, onde os dois lados divergem em `grants` e escolher um ou outro
+    muda o que o jogador recebe -- e o unico grupo que poe numero errado na ficha; (b) RUIDO DE CATALOGO,
+    a familia `Wand of X`: **107** grupos (varinha + rank) que tem lado `aon` E lado `foundry`, conferido
+    com criterio proprio. Cada grupo tem TRES registros, nao dois -- `(2nd-Level Spell)` legado e
+    `(2nd-Rank Spell)` remaster, os dois do AoN, mais `(2nd-Rank)` do Foundry --, entao a familia sozinha
+    infla o catalogo em ~200 registros. Nivel bate em 100% dos 107 e `grants` e 0 nos tres lados: nao ha
+    numero errado, ha busca poluida. || A GUARDA DE `level` EM `fundir_renomeados.py`: o relatorio do
+    agente disse 22 vetos indevidos; medindo direto no dump do AoN o quadro e outro e MAIOR. Dos 11.367
+    pares `legacy->remaster`, **8.465 sao 1:1** e **2.902 sao N:1**. Entre os 1:1, **183 tem `level`
+    divergente** -- `Animal Elocutionist` nv5->nv1, `Divine Health` nv4->nv2, `Sanctify Water` nv7->nv2.
+    A DISTINCAO QUE NINGUEM FEZ, e que e o conserto: o sinal de identidade nao e "o `level` bateu", e a
+    CARDINALIDADE. Em par 1:1 declarado pelo AoN, `level` divergente e rebalanceamento de edicao e
+    esperado -- a guarda esta lendo o campo errado. Em N:1 a guarda esta CERTA e fica: os graus de item
+    (`winter-wolf-elixir` + `-moderate` + `-greater` -> `witchwarg-elixir`) apontam todos para o mesmo
+    alvo, e fundir apagaria dado. Dos 392 vetos totais, a amostra visivel no relatorio (60) tem 30 por
+    `level` e 30 por `kind`, e os de `kind` (class-feature x class) sao ruido do proprio AoN, veto certo.'
   id: 110
   date: '2026-07-31'
   priority: alta
