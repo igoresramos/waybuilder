@@ -161,8 +161,22 @@ items:
     conta escolha de pericia pendente como alcancavel e nos avaliamos o estado atual e MARCAMOS; 1 e o
     gate do Kineticist (`Extended Kinesis` exige `Base Kinesis`), familia dos itens 97/99; 1 e
     proficiencia de arma nomeada (Aldori). Concentracao: Kineticist 25, Witch 11, Summoner 10, Magus 9. ||
-    PROXIMO: triar os 57 do balde "so nosso" um a um (o unico que pode esconder defeito novo), e ai sim
-    rodar sondas novas em paralelo -- agora elas rendem, porque toda classe e comparada.'
+    TRIAGEM FEITA 2026-07-31 (relatorio docs/medicoes/2026-07-31_triagem-57-so-nosso.md), e A HIPOTESE
+    SE CONFIRMOU: o balde escondia defeito novo. Sao 56 pontos na recontagem exata, nao 57 (discrepancia
+    anotada e nao resolvida). Placar: DEFEITO NOSSO 21 pontos / 8 raizes, RECORTE DE FONTE 31, LIMITE DO
+    COMPARADOR 4, diferenca de modelo ja declarada 0. || OS 8 SAO UMA FAMILIA SO -- par AoN/Foundry da
+    mesma entidade que nenhum mecanismo funde, um lado `prov.name=aon` e outro `prov.name=foundry`:
+    `knight-vigilant` x `knight-vigilant-dedication`, `armor-` x `armored-regiment-training`, `flash-forge`
+    x `flashforge`, `voice-of-the-elements-kineticist` x `voice-of-elements`, `automatic-` x
+    `autonomic-psychic-action`, `vermillion-` x `vermilion-threads` (nossa grafia com 2 L e a do Foundry,
+    o AoN e o proprio PB usam 1 L), `whisper-` x `whispers-of-warning`, e `deepest-wellspring` x `amp-focus`
+    (este ultimo NAO e grafia: o AoN linka `remaster_id` feat-3693 -> feat-8336 nos dois sentidos e a guarda
+    de nivel divergente 18x12 vetou a fusao, deixando o feat legado vivo). O PIOR e `voice-of-elements`:
+    o lado com nome do AoN tem `grants: []` e o do Foundry tem 7 -- conteudo PARTIDO, nao so nome duplicado.
+    || DERRUBA CLASSIFICACAO ANTIGA de tres rodadas: `Armor Regiment Training` (rodada 6 disse "falha de
+    importacao do lado dele") esta no dump do PB como `{"nome": "Armored Regiment Training", "atende": true}`;
+    idem `Knight Vigilant Dedication` e `Vermilion Threads`. Conferido a mao nos dumps, nao so pelo agente.
+    || O CONSERTO NAO E CURADORIA: vira o item 110, porque curar 8 pares a mao repete o preco do item 85.'
   id: 84
   date: '2026-07-31'
   priority: media
@@ -354,5 +368,35 @@ items:
   id: 109
   date: '2026-07-31'
   priority: baixa
+- desc: 'ABERTO 2026-07-31 pelo item 84. CLASSE DE DEFEITO, nao lista de consertos: par AoN/Foundry da
+    MESMA entidade que vive como DOIS registros na base, um com `prov.name=aon` e outro `prov.name=foundry`,
+    porque nenhum mecanismo os junta -- `derivar_alias_legado` le `legacy_id` e nao ha; o colapso de irmaos
+    casa por NOME e os nomes divergem por uma letra, um plural ou um artigo. Ja custou tres vezes: item 85
+    (Tian Xia, dois pares curados a mao), item 107 (mesmo sintoma por OUTRO mecanismo -- o pack do UUID
+    escolhendo o kind errado) e agora 8 pares do item 84. NAO CURAR A MAO: medir a classe inteira primeiro
+    -- varrer a base por pares com `prov.name` divergente, mesmo livro, nivel igual ou proximo e nome
+    similar, e ver se sao 8 ou 80. So depois decidir entre passo de fusao novo e curadoria. DOIS ALVOS
+    SEPARADOS: (a) a grafia divergente, que e o grosso; (b) a GUARDA de campo estruturado divergente em
+    `fundir_renomeados.py`, que vetou uma fusao CORRETA quando o AoN dizia `remaster_id` explicito nos dois
+    sentidos (`deepest-wellspring` nv18 -> `amp-focus` nv12) -- vinculo explicito da fonte deveria vencer
+    a guarda de nivel. IMPACTO NA FICHA, medido: `voice-of-elements` (foundry) tem 7 grants e
+    `voice-of-the-elements-kineticist` (aon) tem 0, entao QUAL dos dois o jogador escolhe muda o que ele
+    recebe.'
+  id: 110
+  date: '2026-07-31'
+  priority: alta
+- desc: 'ABERTO 2026-07-31 pela spec do grant condicional. O pack `actionspf2e` do Foundry NAO E LIDO por
+    extrator nenhum e nao ha kind `action` na base -- e ele e pre-requisito de duas classes. MEDIDO: (a)
+    as 9 deeds do Gunslinger (`Ten Paces`, `One Shot, One Kill`, `Clear a Path`, `Living Fortification`,
+    `Covered Reload`, `Raconteur''s Reload`, `Reloading Strike`, `Touch and Go`, `Spring the Trap`) sao
+    alvo dos pares de grant condicional e nao existem: das 10 concessoes do Gunslinger so 1 tem onde
+    pousar; (b) `Retributive Strike` e `Liberating Step`, que as causas do Campeao concedem, tambem nao
+    existem -- e e ISSO que prende o Campeao, nao o UUID dinamico que o item 107 acusou. Bloqueia a parte
+    Gunslinger/Campeao da spec `2026-07-31-grant-condicional.md`. Decidir junto: `action` vira kind
+    proprio (o censo do AoN ja acusou `tactic` e `class-kit` assim) ou as acoes entram como
+    `class-feature`. O item 106 ja tinha esbarrado nisto de lado ("`action` nao e kind") sem abrir item.'
+  id: 111
+  date: '2026-07-31'
+  priority: alta
 promoted: []
 ---
