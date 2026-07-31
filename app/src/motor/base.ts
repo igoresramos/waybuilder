@@ -19,6 +19,7 @@ export class Base {
   private _multiclasse: Map<string, string> | null = null;
   private _por_alias: Map<string, string> | null = null;
   private _kinds: Set<string> | null = null;
+  private _gemeos: Map<string, Set<string>> | null = null;
 
   constructor(registros: Registro[]) {
     // `Map` e não objeto: a ordem de inserção é o que decide qual registro
@@ -26,6 +27,35 @@ export class Base {
     // candidatos em caso de empate. Objeto literal reordena chave numérica.
     this.por_id = new Map();
     for (const r of registros) this.por_id.set(r.id, r);
+  }
+
+  /**
+   * Índice de `equivale_a` nos DOIS sentidos, montado UMA vez.
+   *
+   * A primeira versão varria os 19.606 registros a cada `has`, e `has` roda
+   * milhares de vezes por ficha -- o oráculo passou de segundos para mais de
+   * seis minutos. O índice é o mesmo trabalho feito uma vez.
+   */
+  gemeos(): Map<string, Set<string>> {
+    if (this._gemeos === null) {
+      const idx = new Map<string, Set<string>>();
+      const por = (k: string) => {
+        if (!idx.has(k)) idx.set(k, new Set());
+        return idx.get(k)!;
+      };
+      for (const r of this.por_id.values()) {
+        const eq = (r as Record<string, unknown>)["equivale_a"];
+        const alvos = Array.isArray(eq) ? eq : eq ? [eq] : [];
+        const a = String(this.resolver(r.id));
+        for (const x of alvos) {
+          const b = String(this.resolver(String(x)));
+          por(a).add(b);
+          por(b).add(a);
+        }
+      }
+      this._gemeos = idx;
+    }
+    return this._gemeos;
   }
 
   /**

@@ -3046,6 +3046,14 @@ export class Personagem implements ContextoDePredicado {
     const resolvidos = new Set<unknown>();
     for (const t of tudo) resolvidos.add(this.base.resolver(t));
     if (resolvidos.has(canonico)) return [true, ""];
+    // o GÊMEO também satisfaz. `Advanced Alchemy` existe como class-feature E
+    // como feat, e desde 31/07 a classe concede o class-feature (o pack do UUID
+    // do Foundry manda). Sem esta ponte, `efficient-alchemy`, que cita o FEAT,
+    // deixou de ser atendido -- a quebra que o item 100 previa.
+    // Spec: `specs/2026-07-31-gemeo-do-grant-item.md`
+    for (const g of this.base.gemeos().get(String(canonico)) ?? []) {
+      if (resolvidos.has(g)) return [true, ""];
+    }
     return [false, `exige ter ${nomeOu(this.base.opcional(canonico), pyStr(valor))}`];
   }
 

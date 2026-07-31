@@ -906,7 +906,7 @@
     "por_id": "wb:class-feature/formula-book"
    },
    {
-    "id": "wb:feat/advanced-alchemy",
+    "id": "wb:class-feature/advanced-alchemy",
     "nome": "Advanced Alchemy",
     "por": "Alchemy",
     "por_id": "wb:class-feature/alchemy"
@@ -918,10 +918,16 @@
     "por_id": "wb:class-feature/alchemy"
    },
    {
-    "id": "wb:feat/quick-alchemy",
+    "id": "wb:class-feature/quick-alchemy",
     "nome": "Quick Alchemy",
     "por": "Alchemy",
     "por_id": "wb:class-feature/alchemy"
+   },
+   {
+    "id": "wb:feat/quick-alchemy",
+    "nome": "Quick Alchemy",
+    "por": "Quick Alchemy",
+    "por_id": "wb:class-feature/quick-alchemy"
    },
    {
     "id": "wb:feat/assurance",
@@ -950,7 +956,7 @@
      },
      {
       "grant_feat": [
-       "wb:feat/advanced-alchemy"
+       "wb:class-feature/advanced-alchemy"
       ]
      },
      {
@@ -960,7 +966,7 @@
      },
      {
       "grant_feat": [
-       "wb:feat/quick-alchemy"
+       "wb:class-feature/quick-alchemy"
       ]
      }
     ],
@@ -1023,10 +1029,38 @@
     "classe": null,
     "concedido_por": "wb:class-feature/alchemy",
     "grants": [],
+    "id": "wb:class-feature/advanced-alchemy",
+    "na_base": true,
+    "nivel_de_classe": null,
+    "nome": "Advanced Alchemy",
+    "origem": "Alchemy",
+    "raiz": "wb:class-feature/alchemy"
+   },
+   {
+    "classe": null,
+    "concedido_por": "wb:class-feature/alchemy",
+    "grants": [],
     "id": "wb:class-feature/versatile-vials",
     "na_base": true,
     "nivel_de_classe": null,
     "nome": "Versatile Vials",
+    "origem": "Alchemy",
+    "raiz": "wb:class-feature/alchemy"
+   },
+   {
+    "classe": null,
+    "concedido_por": "wb:class-feature/alchemy",
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:feat/quick-alchemy"
+      ]
+     }
+    ],
+    "id": "wb:class-feature/quick-alchemy",
+    "na_base": true,
+    "nivel_de_classe": null,
+    "nome": "Quick Alchemy",
     "origem": "Alchemy",
     "raiz": "wb:class-feature/alchemy"
    }

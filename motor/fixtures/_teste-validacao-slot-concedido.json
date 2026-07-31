@@ -845,7 +845,7 @@
   },
   "concedidos": [
    {
-    "id": "wb:feat/surprise-attack",
+    "id": "wb:class-feature/surprise-attack",
     "nome": "Surprise Attack",
     "por": "Rogue Dedication",
     "por_id": "wb:feat/rogue-dedication"
@@ -921,6 +921,17 @@
     "na_base": true,
     "nivel_de_classe": 1,
     "nome": "Warrior of Legend"
+   },
+   {
+    "classe": null,
+    "concedido_por": "wb:feat/rogue-dedication",
+    "grants": [],
+    "id": "wb:class-feature/surprise-attack",
+    "na_base": true,
+    "nivel_de_classe": null,
+    "nome": "Surprise Attack",
+    "origem": "Rogue Dedication",
+    "raiz": "wb:feat/rogue-dedication"
    }
   ],
   "focus_pool": 0,

@@ -101,6 +101,27 @@ class Base:
         self._multiclasse: dict | None = None
         self._por_alias: dict | None = None
         self._kinds: set | None = None
+        self._gemeos: dict | None = None
+
+    def gemeos(self) -> dict:
+        """Indice de `equivale_a` nos DOIS sentidos, montado UMA vez.
+
+        A primeira versao varria os 19.606 registros a cada `has`, e `has` roda
+        milhares de vezes por ficha -- o oraculo passou de segundos para mais de
+        seis minutos. O indice e o mesmo trabalho feito uma vez.
+        """
+        if self._gemeos is None:
+            idx: dict = {}
+            for r in self.por_id.values():
+                eq = r.get("equivale_a")
+                alvos = eq if isinstance(eq, list) else [eq] if eq else []
+                a = self.resolver(r["id"])
+                for x in alvos:
+                    b = self.resolver(str(x))
+                    idx.setdefault(a, set()).add(b)
+                    idx.setdefault(b, set()).add(a)
+            self._gemeos = {k: frozenset(v) for k, v in idx.items()}
+        return self._gemeos
 
     def kinds(self) -> set:
         """Os kinds que a base REALMENTE tem.
@@ -2806,16 +2827,7 @@ class Personagem:
         dos lados; aqui os dois valem, como ja valia para os gemeos de
         instinto.
         """
-        saida = set()
-        eq = (self.base.opcional(wid) or {}).get("equivale_a")
-        for e in (eq if isinstance(eq, list) else [eq] if eq else []):
-            saida.add(self.base.resolver(str(e)))
-        for r in self.base.por_id.values():
-            eq = r.get("equivale_a")
-            alvos = eq if isinstance(eq, list) else [eq] if eq else []
-            if any(self.base.resolver(str(a)) == wid for a in alvos):
-                saida.add(self.base.resolver(r["id"]))
-        return saida
+        return self.base.gemeos().get(wid, frozenset())
 
     def _termo_has(self, valor) -> tuple[bool, str]:
         # `pega` nem sempre e um id: `boosts_livres` guarda uma LISTA de
