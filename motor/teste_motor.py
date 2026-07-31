@@ -2277,6 +2277,29 @@ checar("thassilonian-sin" in {b["eixo"] for b in _thas.slots_de_subclasse},
 checar(not any("thassilonian-sin" in a for a in _abj.avisos),
        "e ninguem avisa `falta escolher` um eixo que o personagem nao tem")
 
+# TERCEIRA FORMA de ChoiceSet: o dragao vem INLINE no Foundry
+# (`label: "PF2E.Dragon.<Nome>"`), enquanto os 44 `draconic-exemplar` vem do
+# AoN. As duas fontes nunca se encontraram, e por isso os 44 estavam
+# inalcancaveis.
+BARBARIAN_ = "wb:class/barbarian"
+_fury = personagem(niveis((BARBARIAN_, 3))
+                   + [{"em": 1, "slot": "subclasse", "pega": "wb:instinct/fury"}])
+_drag = personagem(niveis((BARBARIAN_, 3))
+                   + [{"em": 1, "slot": "subclasse", "pega": "wb:instinct/dragon"}])
+checar("dragon-instinct-type" not in {b["eixo"] for b in _fury.slots_de_subclasse},
+       "Barbaro de instinto Fury NAO tem eixo de tipo de dragao",
+       f"{sorted(b['eixo'] for b in _fury.slots_de_subclasse)}")
+checar("dragon-instinct-type" in {b["eixo"] for b in _drag.slots_de_subclasse},
+       "e o de instinto Dragon tem",
+       f"{sorted(b['eixo'] for b in _drag.slots_de_subclasse)}")
+
+# a opcao e COMPARTILHADA com o Feiticeiro, e por isso o `requires` dela e um
+# `any` -- mas a condicao do BLOCO do Barbaro e so o ramo dele
+_dex = BASE.opcional("wb:draconic-exemplar/adamantine") or {}
+checar("any" in json.dumps(_dex.get("requires") or {}),
+       "o dragao serve a mais de uma classe, entao seu `requires` e um `any`",
+       json.dumps(_dex.get("requires"), ensure_ascii=False))
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

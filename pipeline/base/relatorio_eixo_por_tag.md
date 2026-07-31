@@ -28,7 +28,7 @@ O eixo NAO e lista a mao: sai de toda class-feature de PROGRESSAO com `ChoiceSet
 |---|---|---|
 | `wb:class/animist` | `animistic-practice` | nada inalcancavel |
 | `wb:class/champion` | `blessing-of-the-devoted` | nada inalcancavel |
-| `wb:class/sorcerer` | `bloodline` | nada inalcancavel |
+| `wb:class/sorcerer` | `bloodline` | ja ha eixo no nivel |
 | `wb:class/champion` | `deity-champion` | ja ha eixo no nivel |
 | `wb:class/exemplar` | `divine-spark-and-ikons` | ja ha eixo no nivel |
 | `wb:class/exemplar` | `dominion-epithet` | nada inalcancavel |

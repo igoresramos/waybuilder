@@ -57,11 +57,30 @@ DONOS = {
     "Revolutionary Innovation":          ("revolutionary-modification", 15),
     "School of Thassilonian Rune Magic": ("thassilonian-sin", 1),
     "School of Rooted Wisdom":           ("rooted-branch", 1),
+    "Dragon Instinct":                   ("dragon-instinct-type", 1),
+    "Bloodline: Draconic":               ("draconic-bloodline-type", 1),
+    "Bloodline: Wyrmblessed":            ("wyrmblessed-bloodline-type", 1),
 }
 
 # o eixo de identidade do Inventor, que nao existe hoje
 INOVACOES = ("Weapon Innovation", "Armor Innovation", "Construct Innovation",
              "Light Mortar Innovation")
+
+# TERCEIRA FORMA de ChoiceSet, e a que faltava para os 44 `draconic-exemplar`:
+# o Foundry nao referencia o compendio, ele escreve o dragao INLINE, com
+# `label: "PF2E.Dragon.<Nome>"` e `value` sendo um objeto (damageType,
+# dragonType, tradition). Os 44 registros vem do AoN por outro caminho, e as
+# duas fontes nunca se encontraram -- por isso os 44 estavam inalcancaveis.
+#
+# Os rotulos que NAO casam sao os dragoes PRE-REMASTER (Black, Blue, Brass,
+# Bronze, Copper, Gold, Green, Red). A base tem so os 44 do remaster, e esta
+# certa: nao casar aqui e a fonte legada falando, nao lacuna nossa.
+ROTULO_DE_DRAGAO = "PF2E.Dragon."
+DONOS_DE_DRAGAO = {
+    "Dragon Instinct":     "dragon-instinct-type",
+    "Bloodline: Draconic": "draconic-bloodline-type",
+    "Bloodline: Wyrmblessed": "wyrmblessed-bloodline-type",
+}
 
 
 def limpar(s) -> str:
@@ -116,6 +135,30 @@ def main() -> int:
                 if achados:
                     opcoes_de[limpar(d.get("name"))].append(achados[0])
 
+    # a terceira forma: dragao inline, casado por ROTULO
+    dragoes = {limpar(r.get("name")).lower(): r["id"] for r in base
+               if r.get("kind") == "draconic-exemplar"}
+    fora_do_remaster = set()
+    for f in glob.glob(f"{raiz}/**/*.json", recursive=True):
+        try:
+            d = json.load(open(f, encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(d, dict) or limpar(d.get("name")) not in DONOS_DE_DRAGAO:
+            continue
+        for r in ((d.get("system") or {}).get("rules") or []):
+            if not isinstance(r, dict) or r.get("key") != "ChoiceSet":
+                continue
+            for o in (r.get("choices") or []):
+                rot = o.get("label") if isinstance(o, dict) else None
+                if not (isinstance(rot, str) and rot.startswith(ROTULO_DE_DRAGAO)):
+                    continue
+                nome = rot[len(ROTULO_DE_DRAGAO):].lower()
+                if nome in dragoes:
+                    opcoes_de[limpar(d.get("name"))].append(dragoes[nome])
+                else:
+                    fora_do_remaster.add(nome)
+
     if not opcoes_de:
         print("!! nenhum dono com ChoiceSet literal -- a fonte mudou",
               file=sys.stderr)
@@ -133,19 +176,35 @@ def main() -> int:
     # TODO Mago, gerando "falta escolher" em quem nunca pegou aquela escola.
     dono_da_opcao = collections.defaultdict(set)
     slug_da_classe = {}
+    gate_do_bloco = collections.defaultdict(set)
     for dono, ids in opcoes_de.items():
         alvo = (por_nome.get(dono.lower()) or [None])[0]
         if not alvo:
             continue
+        # o dono pode estar no eixo pelo GEMEO: `Dragon Instinct` e
+        # `wb:class-feature/dragon-instinct`, mas o eixo `instinct` do Barbaro
+        # lista `wb:instinct/dragon`. Sem olhar `equivale_a`, o gate nao pegava
+        # e o eixo de tipo de dragao aparecia para TODO Barbaro.
+        gemeo = (por.get(alvo) or {}).get("equivale_a")
+        nomes_do_dono = {alvo} | ({gemeo} if gemeo else set())
         classe_dona = next(
             (r for r in base if r.get("kind") == "class"
-             and any(alvo in (b.get("opcoes") or [])
+             and any(nomes_do_dono & set(b.get("opcoes") or [])
                      for b in (r.get("subclasses") or []))), None)
         if classe_dona is None:
             continue                      # veio da progressao: sem gate
+        # o gate cita o id que o EIXO oferece, que e o que o jogador escolhe
+        no_eixo = next(
+            (o for b in (classe_dona.get("subclasses") or [])
+             for o in (b.get("opcoes") or []) if o in nomes_do_dono), alvo)
         for i in ids:
-            dono_da_opcao[i].add(alvo)
-            slug_da_classe[alvo] = classe_dona["id"].split("/")[-1]
+            dono_da_opcao[i].add(no_eixo)
+            slug_da_classe[no_eixo] = classe_dona["id"].split("/")[-1]
+        # o termo de gate DESTA classe para ESTE eixo. A opcao pode ser
+        # compartilhada (os 44 dragoes servem ao Barbaro E ao Feiticeiro), e ai
+        # o `requires` dela e um `any` das duas -- mas a condicao do BLOCO do
+        # Barbaro e so o ramo dele.
+        gate_do_bloco[(classe_dona["id"], DONOS[dono][0])].add(no_eixo)
 
     gateadas = 0
     for oid, donos in dono_da_opcao.items():
@@ -204,18 +263,24 @@ def main() -> int:
             # pecado thassiloniano com tudo marcado -- ele nao tem o eixo. Sem
             # isto o motor avisava "falta escolher `thassilonian-sin`" para
             # todo Mago, que e ruido, nao pendencia.
-            gates = {json.dumps((por.get(i) or {}).get("requires"),
-                                ensure_ascii=False, sort_keys=True)
-                     for i in unicos}
             bloco = {
                 "eixo": eixo, "nivel": nivel, "slot": "subclasse",
                 "escolhe": 1, "opcoes": unicos,
                 "com_mecanica": unicos, "so_catalogo": [],
             }
-            if len(gates) == 1 and unicos:
-                comum_req = (por.get(unicos[0]) or {}).get("requires")
-                if comum_req:
-                    bloco["requires"] = comum_req
+            # a condicao do bloco e o termo DESTA classe, e nao a interseccao
+            # dos `requires` das opcoes: elas podem ser compartilhadas entre
+            # classes (os 44 dragoes servem ao Barbaro e ao Feiticeiro) e ai
+            # cada uma tem um `any` diferente.
+            # SO com dono UNICO. `initial-modification` tem quatro donos (as
+            # quatro inovacoes), e gatear o bloco num deles faria o eixo sumir
+            # para quem escolheu outro -- que foi exatamente o que quebrou na
+            # primeira versao. Com mais de um dono, o gate fica na OPCAO, e a
+            # lista aparece inteira com o que nao cabe MARCADO.
+            donos_do_eixo = gate_do_bloco.get((cid, eixo)) or set()
+            if len(donos_do_eixo) == 1:
+                bloco["requires"] = {
+                    "subclass": {cid.split("/")[-1]: next(iter(donos_do_eixo))}}
             blocos.append(bloco)
             tocadas.append((cid, eixo, len(unicos)))
 
