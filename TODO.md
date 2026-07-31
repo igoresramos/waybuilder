@@ -316,24 +316,23 @@ items:
   id: 107
   date: '2026-07-31'
   priority: alta
-- desc: 'ACHADO 2026-07-31 por 12 sondas de `skill_feat` rodadas EM PARALELO (2 ondas de 6), a primeira
-    vez que a bancada cobre skill feat fora de Fighter/Rogue. Somos PERMISSIVOS DEMAIS em 3 feats, e a
-    causa e a mesma: a clausula real ficou em `requires_residuo`, prosa nao convertida em termo, e
-    `requires` so guarda o gate de nivel. `wb:feat/automatic-knowledge` pede "expert in a skill with the
-    recall knowledge action" e nosso requires diz so `character_level >= 2`; `wb:feat/dubious-knowledge`
-    pede "trained in a skill with the Recall Knowledge action" e diz so `character_level >= 1`;
-    `wb:feat/masterful-obfuscation` tem a mesma forma com "master". O Pathbuilder recusa os tres no nivel
-    certo e nos oferecemos -- entrega OPCAO ERRADA. A forma e quantificada e derivavel: "<rank> in a skill
-    with the Recall Knowledge action" vira "existe alguma pericia com rank >= X", e o motor ja tem o
-    curinga que resolve isso (`weapon:*` faz o equivalente para arma desde o item 95). Sao exatamente 3
-    registros, todos medidos. || NAO SAO DEFEITO, e ficam declarados: `Encouraging Words` (nos aceitamos,
-    eles nao) e `Armor Assist` (eles aceitam, nos nao) sao a diferenca de MODELO ja registrada no
-    comparador -- o Pathbuilder conta escolha de pericia PENDENTE como alcancavel e nos avaliamos o estado
-    atual e MARCAMOS. E os 5 `so no waybuilder` que apareceram em TODA classe (`Adventurous Outfitter`,
-    `As on the Board so on the Battlefield`, `Improvise Strategy`, `Seasoned Command`, `Tactical Acumen`)
-    sao todos de Pathfinder #223: Hell Destiny -- recorte de fonte, conteudo de AP que eles nao carregam.'
+- desc: 'FECHADO 2026-07-31 (spec specs/2026-07-31-pericia-de-recall-knowledge.md). Achado por 12 sondas
+    de `skill_feat` em PARALELO, a primeira vez que a bancada cobriu skill feat fora de Fighter/Rogue.
+    Tres feats se ofereciam a quem nao podia pega-los porque a clausula real vivia em `requires_residuo`
+    e o `requires` guardava so o gate de nivel: `automatic-knowledge` (expert), `dubious-knowledge`
+    (trained) e `masterful-obfuscation` (master), todos "in a skill with the Recall Knowledge action".
+    A forma e quantificada -- nao nomeia pericia, pergunta se EXISTE alguma com o rank --, entao virou
+    `skill:recall-knowledge`, mesmo desenho de `lore:*` (item 95) e `weapon:*`. A lista das oito e RAW e
+    vive no motor como constante; Perception e Athletics ficam FORA, e e isso que faz o termo discriminar.
+    Qualquer Lore conta. || ERRO MEU QUE O TESTE PEGOU, e que eu tinha cometido em DOIS passos: envelopei
+    o termo novo em `{"and": [...]}` e o avaliador so conhece `all`/`any`/`not` -- chave desconhecida no
+    topo do predicado passa em SILENCIO, entao o gate inteiro virava no-op e os tres seguiam disponiveis.
+    Consertado nos dois passos (`derivar_pericia_de_recall` e `derivar_variante_por_subclasse`) e nos 3
+    registros que ja tinham o envelope inerte. || PROVA NA BANCADA: `Automatic Knowledge` e `Masterful
+    Obfuscation` SUMIRAM das divergencias (598 -> 582 pontos). O que resta e a diferenca de modelo ja
+    declarada -- o Pathbuilder conta escolha de pericia pendente como alcancavel.'
   id: 108
   date: '2026-07-31'
-  priority: alta
+  priority: baixa
 promoted: []
 ---
