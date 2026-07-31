@@ -261,5 +261,29 @@ items:
     ser feat e nao progressao; (d) as fatias 2 a 4, que somam 20 queries exatas e ZERO opcao nova; (e) 202
     opcoes de balaio sem explicacao -- item 69; (f) defeito de fonte `item:slug:dispel magic` (com espaco),
     em `wb:feat/methodical-magic`, no ramo de magia que nao e avaliado.'
+- desc: 'FEITO 2026-07-31 (spec specs/2026-07-31-slot-concedido-generico.md), a pedido do Igor: nao
+    tratar magia como caso especial e sim PADRONIZAR -- toda habilidade que concede escolha abre um slot
+    com filtro, do mesmo jeito. Confirmado contra o Pathbuilder, que faz igual: o painel de nivel dele e
+    uma lista de pendencias (`Set Abilities`, `Skill Training`, `Heritage`, `Class Feat`) e nao um mecanismo
+    por familia. O motor lia so `tipo == "feat"` (43 blocos) e ignorava os outros 26: spell 11, heritage
+    7, action 4, weapon 2, ancestry 1, deity 1 -- quem pegava `Dragon Spit` nao escolhia truque nenhum.
+    Sao 69 blocos, todos com filtro e nenhum com lista solta. REGRA: o `tipo` estreita quando existe kind
+    com aquele nome, o filtro estreita depois, e um cobre o buraco do outro -- sem kind, `Adopted Ancestry`
+    (cujo filtro e so referencia dinamica de ator) oferecia os 19.606 registros da base; sem filtro, as
+    taticas do Commander sumiam, porque `action` nao e kind. ACHADOS DE TABELA: (a) o default "atomo ignorado
+    conta como SATISFEITO" e seguro sob and/or, onde ALARGA, e se INVERTE sob `not`/`nor`, onde reprova
+    tudo -- `Adopted Ancestry` nascia com slot VAZIO; agora clausula so de desconhecido nao decide o NAO;
+    (b) `feat_concedido` NUNCA foi renderizado pela UI, nem para feat: o motor abria o slot desde a spec
+    de 30/07 e a tela nunca desenhou, entao quem pegava `Ancient Elf` nao era perguntado nada -- consertado
+    junto, com helpers de doc por `flag` (a identidade do slot nao e o nivel: dois concessores caem no
+    mesmo). `item:slug` deixou de ser codigo morto e virou requisito. SOBRA: (a) 25 blocos sem `tipo` na
+    fonte nenhuma (`Assurance`, dedicacoes de multiclasse) -- sem `itemType` o pool nao e derivavel por
+    regra, cada um precisa de resposta propria; (b) 3 registros TEM `itemType` no Foundry e o extrator
+    descartou (`multifarious-muse`, `skill-mastery`, `verdant-weapon`) -- lacuna de leitura, conserto de
+    pipeline; (c) a conjuracao do personagem segue como CAPACIDADE, sem lista de magias, e a assimetria
+    e consciente.'
+  id: 106
+  date: '2026-07-31'
+  priority: baixa
 promoted: []
 ---

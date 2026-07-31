@@ -1260,3 +1260,37 @@ Regra: antes de ensinar um vocabulario novo ao motor, **medir quem consome cada
 ocorrencia**, uma a uma. "O motor ignora X" nao implica "implementar X muda
 algo": pode nao haver ninguem do outro lado. E o mesmo erro de metodo do item
 97, que contava citacoes sem perguntar por qual caminho o jogador chega.
+
+## O motor abrir o slot nao significa que o jogador o veja (2026-07-31)
+
+Generalizando o slot concedido, o oraculo, a paridade e as fixtures ficaram
+verdes -- `slots_abertos` trazia o slot de magia, com nivel, flag e rotulo. No
+navegador nao havia nada. `feat_concedido` **nunca foi renderizado pela UI**,
+nem para feat: o motor abria o slot desde a spec de 30/07 e a tela nunca o
+desenhou, entao quem pegava `Ancient Elf` nao era perguntado nada.
+
+E a terceira vez na mesma semana: o slot de familiar (`em: null`, a UI so
+desenha onde `em === n`) e a conjuracao (que existia so em `Ficha.tsx`, tela que
+ninguem usa). O padrao e sempre o mesmo -- **o motor calcula, a tela nao le**, e
+nenhuma camada abaixo do navegador enxerga isso, porque as tres testam o motor.
+
+Regra: quando a mudanca acrescenta ALGO QUE O JOGADOR ESCOLHE, a verificacao de
+navegador nao e a quarta camada, e a primeira pergunta -- "onde isso aparece na
+tela?" antes de escrever o motor. Fixture verde com tela vazia e o modo de falha
+mais caro do projeto, porque parece pronto.
+
+## Atomo desconhecido conta como satisfeito, e isso se INVERTE sob `not` (2026-07-31)
+
+`_casa_filtro` trata atomo que nao sabe avaliar como satisfeito -- certo pelo
+principio zero, porque ALARGA o slot em vez de esvazia-lo. Sob `not`/`nor` a
+mesma coercao vira o contrario: `Adopted Ancestry` filtra
+`{"not": "item:slug:{actor|...ancestry.trait}"}`, referencia dinamica que o
+motor nao resolve, e o `not` de "satisfeito" rejeitava as 50 ancestralidades. O
+slot nascia VAZIO.
+
+E o MESMO erro que apareceu no `tokens()` de `derivar_parcelas_de_dano.py`, onde
+achatar `{"not": "target:caster"}` trocava o sinal do grau 13 do Superstition.
+Duas vezes no mesmo mes, em codigos diferentes.
+
+Regra: **default permissivo nao atravessa negacao.** Onde houver `not`/`nor`,
+clausula composta so de desconhecido nao pode decidir nada -- pula, nao inverte.
