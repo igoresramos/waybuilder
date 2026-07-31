@@ -1455,3 +1455,39 @@ falha o build, o passo 9 nao emitiu o payload do app -- e a paridade TS/Python
 quebrou em seguida, com o TS lendo um payload de antes. Passei um tempo
 achando que era defasagem de sincronizacao, quando a causa estava tres passos
 antes. A spec foi escrita e o build voltou.
+
+## 2026-07-31 (5a rodada) -- o eixo deixa de ser lista a mao
+
+Ao re-medir o item 97 depois do trabalho da rodada anterior, apareceu que 23
+das 37 taticas do Commander seguiam INALCANCAVEIS -- depois do passo que
+deveria alcanca-las. A causa era a minha propria lista escrita a mao: ela
+cobria `Tactics` (nivel 1) e ignorava `Expert`, `Master` e `Legendary
+Tactician`, que sao os outros tres momentos em que o Commander escolhe tatica.
+
+O projeto ja tem uma regra sobre isso ("lista a mao ja errou tres vezes"), e eu
+a violei em codigo novo. O conserto foi trocar a lista pela DERIVACAO: toda
+class-feature que a progressao concede e que tem `ChoiceSet` com `filter` e um
+eixo declarado pela fonte. Sao 41 na base.
+
+Derivar cegamente duplicaria -- o eidolon do Summoner tem `ChoiceSet` com
+filtro e ja entra pelo slot de ator. A guarda tambem e derivavel: **o eixo so
+nasce se o filtro alcanca registro hoje INALCANCAVEL**. Sem opcao nova, o eixo
+nao acrescenta nada, so duplica.
+
+Resultado: 9 eixos (Commander com as 4 tiers -- 14, 21, 26 e 31 taticas;
+Kineticist com kinetic-gate e os 4 thresholds). E foram corretamente pulados o
+eidolon do Summoner, a bloodline do Feiticeiro, a druidic-order do Druida e a
+animistic-practice do Animista.
+
+## Sobre a medicao de "inalcancavel"
+
+O item 97 foi mal medido duas vezes, e a terceira mostrou por que. Contar
+"registro nunca citado" da 15.771 de 19.606 -- porque 99% do equipamento nao e
+citado por ninguem: ele se escolhe do CATALOGO. Ha quatro caminhos de alcance,
+nao um: citacao, kind (slots que varrem um kind inteiro), filtro (os eixos
+novos) e o gemeo `equivale_a`.
+
+Com os quatro, o numero real e **1.204**, e o topo dele e catalogo puro (trait
+551, relic 122, language 121). O que sobra de acionavel sao `familiar-ability`
+(72, declarado fora na spec do item 43), `draconic-exemplar` (44) e `class-kit`
+(32).

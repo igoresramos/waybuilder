@@ -214,23 +214,19 @@ items:
     de CONCESSAO de escolha, que e outra familia.'
 - id: 105
   date: '2026-07-31'
-  priority: media
-  desc: 'FATIA 0 FEITA 2026-07-31 (spec specs/2026-07-31-escolha-aninhada-do-inventor.md), e ela rendeu
-    mais do que o dimensionamento previa. O previsto era "ler as literais por nome e nomear 59 do balaio".
-    O que se achou foi ESTRUTURA: o Inventor era a UNICA classe sem eixo nenhum -- tres blocos `outras-opcoes`
-    (22, 15, 15) -- e o nivel 1 misturava 4 INOVACOES com 18 MODIFICACOES da inovacao, enquanto os niveis
-    7 e 15 eram tiers de modificacao. O Foundry declara tudo em `ChoiceSet` de lista literal (1.012 deles,
-    529 referencias, 395 distintas, 362 resolvem na base, ZERO ambiguas). FEITO: 6 eixos criados (Inventor
-    `innovation` 4, `initial-modification` 13, `breakthrough-modification` 32, `revolutionary-modification`
-    45; Mago `thassilonian-sin` 7 e `rooted-branch` 5), 63 opcoes saindo do balaio (265 -> 202), e 25
-    opcoes com gate por sub-escolha. Ganho de desenho: BLOCO CONDICIONAL -- quando todas as opcoes de
-    um eixo pedem a mesma sub-escolha, a condicao e do EIXO, e um Mago de outra escola simplesmente NAO
-    TEM o eixo de pecado thassiloniano (antes o motor avisava "falta escolher" para todo Mago). SOBRA:
-    (a) `item:slug`, 74 usos, ainda ignorado no `_atomo_de_filtro` -- todos apontam para registro especifico
-    e o slug do Foundry nem sempre e o nosso id; (b) `Manifold Modifications` (feat nv 8, 17 opcoes) ficou
-    fora do eixo por ser feat e nao progressao -- entra pela familia de slot concedido por feat; (c) as
-    fatias 2 a 4 do dimensionamento, que somam 20 queries exatas e ZERO opcao nova; (d) 202 opcoes de
-    balaio seguem sem explicacao (Alchemist 33, Thaumaturge 30, Cleric 18, Animist 13, Oracle 12) -- e
-    o item 69.'
+  priority: baixa
+  desc: 'FATIA 0 E A DERIVACAO DO EIXO FEITAS 2026-07-31 (specs 2026-07-31-escolha-aninhada-do-inventor.md
+    e 2026-07-31-tag-e-eixo-por-query.md). O eixo por query deixou de ser LISTA A MAO e passou a ser DERIVADO:
+    toda class-feature que a progressao concede e que tem `ChoiceSet` com `filter` e um eixo declarado
+    pela fonte -- sao 41 na base. A lista a mao ja tinha cobrado o preco: cobria `Tactics` (nv 1) e deixava
+    `Expert`, `Master` e `Legendary Tactician` de fora, e por isso 23 das 37 taticas seguiam inalcancaveis
+    DEPOIS do passo que deveria alcanca-las. Com a derivacao sao 9 eixos (Commander 4 tiers: 14/21/26/31
+    taticas; Kineticist 5: kinetic-gate + 4 thresholds, 6 cada). A GUARDA que impede duplicata e derivavel
+    tambem: o eixo so nasce se o filtro alcanca registro hoje INALCANCAVEL -- e por isso o eidolon do
+    Summoner foi corretamente PULADO (ja entra pelo slot de ator), assim como bloodline do Feiticeiro,
+    druidic-order do Druida e animistic-practice do Animista. SOBRA: (a) `item:slug`, 74 usos, ainda ignorado
+    no `_atomo_de_filtro`; (b) `Manifold Modifications` (feat nv 8, 17 opcoes) fora do eixo por ser feat
+    e nao progressao; (c) as fatias 2 a 4, que somam 20 queries exatas e ZERO opcao nova; (d) 202 opcoes
+    de balaio sem explicacao -- item 69.'
 promoted: []
 ---

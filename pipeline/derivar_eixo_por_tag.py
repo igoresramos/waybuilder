@@ -37,15 +37,23 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 BASE = f"{AQUI}/base"
 BRUTOS = f"{AQUI}/dados_brutos"
 
-# `flag` distintas no mesmo registro sao escolhas distintas: o Commander tem
-# `firstTactic`..`fifthTactic`, que sao CINCO taticas, nao uma.
-EIXOS = [
-    {"eixo": "kinetic-gate", "feature": "Kinetic Gate", "nivel": 1,
-     "flags": ("elementOne", "elementTwo")},
-    {"eixo": "tactic", "feature": "Tactics", "nivel": 1,
-     "flags": ("firstTactic", "secondTactic", "thirdTactic",
-               "fourthTactic", "fifthTactic")},
-]
+# O eixo NAO e mais lista escrita a mao. Ele e derivado: toda class-feature que
+# a progressao de uma classe concede e que tem `ChoiceSet` com `filter` e um
+# eixo declarado pela FONTE. Sao 41 na base.
+#
+# A lista a mao ja tinha cobrado o preco: ela cobria `Tactics` (nivel 1) e
+# deixava de fora `Expert`, `Master` e `Legendary Tactician`, que sao os outros
+# tres momentos em que o Commander escolhe tatica -- e por isso 23 das 37
+# taticas seguiam inalcancaveis depois do passo que deveria alcanca-las.
+#
+# A GUARDA que impede duplicata: o eixo so nasce se as opcoes do filtro estiverem
+# hoje INALCANCAVEIS. O eidolon do Summoner tem `ChoiceSet` com filtro e ja entra
+# pelo slot de ator; criar eixo para ele duplicaria a escolha na tela.
+JA_ALCANCAVEL_POR_KIND = {
+    "animal-companion", "familiar-specific", "eidolon", "skill", "class",
+    "equipment", "weapon", "armor", "shield", "feat", "spell", "ritual",
+    "ancestry", "heritage", "background", "archetype", "deity", "domain",
+}
 
 
 def foundry():
@@ -98,55 +106,93 @@ def main() -> int:
         if n:
             por_nome[n].append(d)
 
-    tocadas, relatorio = [], []
-    for cfg in EIXOS:
-        filtros, achados = None, 0
-        for d in por_nome.get(cfg["feature"], []):
-            for r in ((d.get("system") or {}).get("rules") or []):
-                if not isinstance(r, dict) or r.get("key") != "ChoiceSet":
-                    continue
-                if r.get("flag") not in cfg["flags"]:
-                    continue
-                escolhas = r.get("choices")
-                if isinstance(escolhas, dict) and escolhas.get("filter"):
-                    filtros = escolhas["filter"]
-                    achados += 1
-        if filtros is None:
-            print(f"!! eixo `{cfg['eixo']}`: nenhum ChoiceSet com filtro em "
-                  f"`{cfg['feature']}` -- a fonte mudou", file=sys.stderr)
-            return 1
+    # a feature de progressao que tem `ChoiceSet` com `filter` E um eixo, dito
+    # pela fonte. Nao ha lista: sao 41 na base.
+    concede_em = collections.defaultdict(list)
+    for reg in base:
+        if reg.get("kind") != "class":
+            continue
+        for e in (reg.get("progressao") or []):
+            concede_em[e.get("concede")].append((reg, e.get("nivel")))
 
-        # a class-feature na NOSSA base, e a classe que a concede
-        alvo = next((r["id"] for r in base
-                     if r.get("kind") == "class-feature"
-                     and str(r.get("name") or "") == cfg["feature"]), None)
+    # o que JA e alcancavel hoje, para a guarda anti-duplicata
+    alcancavel = {r["id"] for r in base
+                  if r.get("kind") in JA_ALCANCAVEL_POR_KIND}
+    for reg in base:
+        for bloco in (reg.get("subclasses") or []):
+            alcancavel |= set(bloco.get("opcoes") or [])
+
+    def casa(reg, filtro) -> bool:
+        """Avaliacao minima do filtro, so o que o eixo precisa: `and` implicito
+        na lista, `or`, e os atomos `item:trait` e `item:tag`. O motor avalia a
+        gramatica inteira; aqui basta saber SE o eixo tem opcao inalcancavel."""
+        if isinstance(filtro, str):
+            partes = filtro.split(":")
+            if len(partes) < 3 or partes[0] != "item":
+                return False
+            campo = {"trait": "traits", "tag": "tags"}.get(partes[1])
+            return bool(campo) and ":".join(partes[2:]) in (reg.get(campo) or [])
+        if isinstance(filtro, list):
+            return all(casa(reg, f) for f in filtro)
+        if isinstance(filtro, dict):
+            for op, itens in filtro.items():
+                if op == "or":
+                    return any(casa(reg, i) for i in itens)
+                if op == "and":
+                    return all(casa(reg, i) for i in itens)
+                if op == "not":
+                    return not casa(reg, itens)
+            return False
+        return False
+
+    tocadas, relatorio, pulados = [], [], []
+    for feature_id, donas in sorted(concede_em.items()):
+        alvo = next((r for r in base if r["id"] == feature_id), None)
         if alvo is None:
-            print(f"!! eixo `{cfg['eixo']}`: `{cfg['feature']}` nao esta na base",
-                  file=sys.stderr)
-            return 1
-        classes = [r for r in base if r.get("kind") == "class"
-                   and any(e.get("concede") == alvo
-                           for e in (r.get("progressao") or []))]
-        if not classes:
-            print(f"!! eixo `{cfg['eixo']}`: nenhuma classe concede `{alvo}`",
-                  file=sys.stderr)
-            return 1
-        for classe in classes:
+            continue
+        d = fnd.get(id_foundry(alvo))
+        if not d:
+            continue
+        filtros = [r["choices"]["filter"]
+                   for r in ((d.get("system") or {}).get("rules") or [])
+                   if isinstance(r, dict) and r.get("key") == "ChoiceSet"
+                   and isinstance(r.get("choices"), dict)
+                   and r["choices"].get("filter")]
+        if not filtros:
+            continue
+        # todas as `flag` do mesmo registro compartilham o filtro; o numero
+        # delas e quantas o eixo pede (o Commander escolhe 5 taticas no nv 1)
+        filtro = filtros[0]
+        eixo = feature_id.rsplit("/", 1)[-1]
+        for classe, nivel in donas:
             blocos = classe.setdefault("subclasses", [])
-            if any(b.get("eixo") == cfg["eixo"] for b in blocos):
+            if any(b.get("eixo") == eixo for b in blocos):
+                continue
+            # ja existe eixo de verdade neste nivel? entao o dado veio por
+            # outro caminho e criar outro duplicaria a escolha na tela
+            if any(b.get("nivel") == nivel and b.get("eixo") != "outras-opcoes"
+                   for b in blocos):
+                pulados.append((classe["id"], eixo, "ja ha eixo no nivel"))
+                continue
+            casam = [r["id"] for r in base if casa(r, filtro)]
+            novos = [i for i in casam if i not in alcancavel]
+            # A GUARDA: sem opcao inalcancavel, o eixo nao acrescenta -- so
+            # duplica. E o caso do eidolon do Summoner, que ja entra pelo slot
+            # de ator.
+            if not novos:
+                pulados.append((classe["id"], eixo, "nada inalcancavel"))
                 continue
             blocos.append({
-                "eixo": cfg["eixo"], "nivel": cfg["nivel"], "slot": "subclasse",
-                "escolhe": achados,
-                # sem `opcoes`: quem responde e `candidatos()`, avaliando o
-                # filtro. Congelar a lista aqui dessincroniza na primeira
-                # mudanca de fonte.
+                "eixo": eixo, "nivel": nivel, "slot": "subclasse",
+                "escolhe": len(filtros),
+                # sem `opcoes`: o bloco guarda o FILTRO e o motor resolve por
+                # personagem. Congelar aqui dessincroniza na mudanca de fonte.
                 "opcoes": [], "com_mecanica": [], "so_catalogo": [],
-                "filtro": filtros,
+                "filtro": filtro,
             })
-            tocadas.append(f"{classe['id']} / {cfg['eixo']}")
-            relatorio.append((classe["id"], cfg["eixo"], achados,
-                              json.dumps(filtros, ensure_ascii=False)))
+            tocadas.append(f"{classe['id']} / {eixo}")
+            relatorio.append((classe["id"], eixo, nivel, len(filtros),
+                              len(casam), len(novos)))
 
     with open(f"{BASE}/index.json", "w", encoding="utf-8") as fh:
         json.dump(base, fh, ensure_ascii=False)
@@ -158,10 +204,19 @@ def main() -> int:
            "IGNORAVA -- e atomo ignorado conta como SATISFEITO. Isso e certo "
            "para estreitar slot de feat e destrutivo para definir eixo, que e "
            "por isso que a tag entra antes do eixo.", "",
-           f"- eixos criados: **{len(tocadas)}**", "",
-           "| classe | eixo | escolhe | filtro |", "|---|---|---:|---|"]
-    for cid, eixo, quantos, filtro in relatorio:
-        rel.append(f"| `{cid}` | `{eixo}` | {quantos} | `{filtro}` |")
+           f"- eixos criados: **{len(tocadas)}**",
+           f"- pulados pela guarda anti-duplicata: **{len(pulados)}**", "",
+           "O eixo NAO e lista a mao: sai de toda class-feature de PROGRESSAO "
+           "com `ChoiceSet` de `filter`. A guarda so deixa nascer o eixo cujo "
+           "filtro alcanca registro hoje INALCANCAVEL -- sem ela, o eidolon do "
+           "Summoner ganharia um eixo duplicando o slot de ator.", "",
+           "| classe | eixo | nivel | escolhe | casam | inalcancaveis |",
+           "|---|---|---:|---:|---:|---:|"]
+    for cid, eixo, nivel, quantos, casam, novos in relatorio:
+        rel.append(f"| `{cid}` | `{eixo}` | {nivel} | {quantos} | {casam} | {novos} |")
+    rel += ["", "### Pulados", "", "| classe | eixo | motivo |", "|---|---|---|"]
+    for cid, eixo, motivo in pulados:
+        rel.append(f"| `{cid}` | `{eixo}` | {motivo} |")
     rel += ["", "O bloco guarda o FILTRO, nunca a lista: `candidatos()` avalia "
             "com `_casa_filtro`, que ja existia e ja rodava."]
     with open(f"{BASE}/relatorio_eixo_por_tag.md", "w", encoding="utf-8") as fh:

@@ -2161,11 +2161,31 @@ checar(all("Gate" in (x.get("nome") or "") for x in _c),
 
 _p = personagem(niveis((COMMANDER, 3)))
 _c = _p.candidatos("subclasse", 1)
-checar(len(_c) == 14, "e o Commander ganha 14 taticas", f"deu {len(_c)}")
-_bloco = next(b for b in _p.slots_de_subclasse if b.get("eixo") == "tactic")
+checar(len(_c) == 14, "e o Commander ganha 14 taticas no nivel 1", f"deu {len(_c)}")
+_bloco = next(b for b in _p.slots_de_subclasse if b.get("eixo") == "tactics")
 checar(_bloco["escolhe"] == 5,
        "com `escolhe: 5` -- sao cinco `flag` distintas no mesmo ChoiceSet",
        f"deu {_bloco['escolhe']}")
+
+# o eixo saiu de LISTA A MAO para DERIVACAO, e foi so entao que as outras tres
+# tiers de tatica apareceram: a lista cobria `Tactics` (nv 1) e deixava
+# `Expert`, `Master` e `Legendary Tactician` de fora -- 23 das 37 taticas
+# seguiam inalcancaveis depois do passo que deveria alcanca-las.
+_p20 = personagem(niveis((COMMANDER, 19)))
+_tiers = {b["eixo"] for b in _p20.slots_de_subclasse}
+for _t in ("tactics", "expert-tactician", "master-tactician",
+           "legendary-tactician"):
+    checar(_t in _tiers, f"o Commander 19 tem o eixo `{_t}`", f"tem {sorted(_tiers)}")
+checar(len({b["eixo"] for b in personagem(niveis((KINETICIST, 17))).slots_de_subclasse
+            if "gate" in b["eixo"] or "threshold" in b["eixo"]}) == 5,
+       "e o Kineticist 17 tem os 5 eixos de gate/threshold")
+
+# a GUARDA anti-duplicata: o eidolon do Summoner tem ChoiceSet com filtro, mas
+# ja entra pelo slot de ator -- criar eixo duplicaria a escolha na tela
+_sum = {b["eixo"] for b in personagem(niveis(("wb:class/summoner", 3))).slots_de_subclasse}
+checar("eidolon" not in _sum,
+       "e o Summoner NAO ganha eixo de eidolon -- ele ja entra pelo slot de ator",
+       f"tem {sorted(_sum)}")
 
 # o eixo que ja existia nao pode ter mudado
 _c = personagem(niveis(("wb:class/exemplar", 3))).candidatos("subclasse", 1)
