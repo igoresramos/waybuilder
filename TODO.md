@@ -140,7 +140,14 @@ items:
     parentese nao ha regra que os explique sem inventar; (b) `Spell Repertoire (Sorcerer|Summoner)`, duas
     features automaticas arquivadas no balaio que nao chegam a ficha por nenhum outro caminho; (c) o modelo
     CERTO das 68 seria o dono CONCEDER a variante em vez de o jogador escolher-la marcada, e isso pede
-    vocabulario novo de grant (`concede feature no nivel N`) que nao existe -- mudanca de motor, TS e tela.'
+    vocabulario novo de grant (`concede feature no nivel N`) que nao existe -- mudanca de motor, TS e tela.
+    || O VOCABULARIO SAIU MENOR QUE O PREVISTO, e a fonte o dita (spec
+    specs/2026-07-31-grant-condicional.md): nao e `concede feature no nivel N`, porque o NIVEL ja esta na
+    progressao da classe (`First Doctrine` no 1, `Second` no 3) -- falta so a CONDICAO, `grants[].se`. Os
+    64 pares `(opcao, item concedido)` estao declarados estaticamente no Foundry. Cobertura por familia:
+    Taumaturgo bate (30 pares / 30 gateadas), Clerigo bate (12/12), Alquimista NAO (12/23), e o Gunslinger
+    e familia nova que as 68 nao tinham. O gate desta fatia FICA para quem nao tiver par -- os dois
+    modelos convivem.'
   id: 69
   date: '2026-07-31'
   priority: media
@@ -330,7 +337,17 @@ items:
     nao tem gemeo concedido, e a mae que os concederia (`Cause`, do Campeao) usa `GrantItem` com UUID
     DINAMICO (`{item|flags.system.rulesSelections.cause}`) -- aponta para o que o jogador escolheu, e o
     extrator pula os 163 casos assim, corretamente. Resolver pede interpretar a escolha no build, outra
-    familia.'
+    familia. || RE-MEDIDO 2026-07-31 E ESTE PARAGRAFO ESTA ERRADO EM DUAS COISAS (spec
+    specs/2026-07-31-grant-condicional.md). (1) "os casos assim" nao sao uma familia: sao 221 hoje, em
+    DUAS formas. 206 usam `{item|...}` com o `ChoiceSet` da flag NO MESMO ITEM -- "conceda o que foi
+    escolhido neste eixo", que e identidade e o nosso eixo ja modela; o proprio `Cause` e desses, e
+    `wb:class/champion` TEM `subclasses[eixo=cause]` com as sete causas. Pular foi certo, e implementar
+    seria conceder de novo o que a escolha ja deu. Sobra 1 orfa real (`Runtsage`). As outras 15 usam
+    `{actor|flags.system.<classe>.<flag>}` -- a escolha vive em OUTRO item -- e essas NAO pedem
+    interpretador: a opcao declara o mapa inteiro estaticamente (`Cloistered Cleric` escreve as 6
+    doutrinas), sao 79 pares, 64 acionaveis. (2) A FAMILIA DO CAMPEAO ESTA ERRADA: o que prende ali nao e
+    UUID dinamico, e `GrantItem` com `predicate` (balde de 293) somado a `Retributive Strike` /
+    `Liberating Step` nao existirem na base -- pack `actionspf2e` nao extraido, item 111.'
   id: 107
   date: '2026-07-31'
   priority: media

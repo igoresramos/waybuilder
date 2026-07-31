@@ -1565,3 +1565,56 @@ demais:
 
 O oraculo Python pegou o terceiro -- os testes do Inventor da rodada anterior
 falharam na hora.
+
+## 2026-07-31 (7a rodada) -- o bloqueio que era duas coisas, e o balde que escondia defeito
+
+Duas frentes em paralelo. A do item 84 fechou a triagem que o proprio item
+pedia; a outra atacou o bloqueio declarado nos itens 69 e 107.
+
+**O bloqueio nao existia do jeito que estava escrito.** O item 107 dizia que os
+`GrantItem` com UUID dinamico pediam "interpretar a escolha no build". Medidos
+nos packs de construcao, sao 221 e se partem em DUAS formas:
+
+- **206** com `{item|...rulesSelections.X}` e o `ChoiceSet` da flag no MESMO
+  item. Isso e identidade -- "conceda o que foi escolhido neste eixo" -- e o
+  eixo ja existe. O proprio `Cause` do Campeao, citado no item como o caso
+  bloqueado, tem `subclasses[eixo=cause]` com as sete causas. Pular foi certo, e
+  implementar seria conceder de novo o que a escolha ja deu.
+- **15** com `{actor|flags.system.<classe>.<flag>}`, e essas nao pedem
+  interpretador nenhum: a opcao declara o mapa INTEIRO, estatico, na fonte.
+  `Cloistered Cleric` escreve as seis doutrinas de uma vez.
+
+Cruzando os dois lados saem **79 pares**, 64 acionaveis sem os `Spell Effect:`
+do wild shape: Taumaturgo 30, Clerigo 12, Alquimista 12, Gunslinger 10. Sao
+exatamente as familias que o item 69 gateou como "variante por subclasse" -- e
+o vocabulario que ele previa (`concede feature no nivel N`) saiu MENOR: o nivel
+ja esta na progressao, falta so a condicao. Spec `2026-07-31-grant-condicional`
+escrita, em review adversarial.
+
+**A armadilha do desenho** e que o avaliador de predicado trata termo
+desconhecido como satisfeito. Isso e certo em `requires`, que so marca; numa
+condicao de GRANT o mesmo default poe numero errado na ficha, calado -- a mesma
+armadilha do envelope `and` inerte do item 108.
+
+**Dois buracos que nao estavam em item nenhum.** O pack `actionspf2e` nao e
+lido por extrator nenhum e nao ha kind `action`: faltam as 9 deeds do
+Gunslinger e o `Retributive Strike` do Campeao. E e ISSO que prende o Campeao,
+nao o UUID dinamico. Virou o item 111.
+
+**O item 84 confirmou a propria hipotese.** Dos 56 pontos do balde "so nosso",
+21 sao defeito nosso, em 8 raizes -- e as 8 sao uma familia so: par AoN/Foundry
+da mesma entidade vivendo como dois registros, um `prov.name=aon` e outro
+`prov.name=foundry`, que nenhum mecanismo funde porque os nomes divergem por
+uma letra (`Vermillion`/`Vermilion`), um plural (`Whisper`/`Whispers`) ou um
+artigo (`Voice of the Elements`/`Voice of Elements`). Derruba a classificacao
+de "recorte de fonte" de tres rodadas: o Pathbuilder TEM `Armored Regiment
+Training` com `atende: true`, so com o nome do Foundry.
+
+O pior nao e o nome duplicado, e o conteudo partido: `voice-of-elements` tem 7
+grants e o gemeo do AoN tem zero. Qual dos dois o jogador escolhe muda o que
+ele recebe.
+
+E um caso nao e grafia: `Deepest Wellspring` -> `Amp Focus` tem `remaster_id`
+explicito nos dois sentidos no AoN, e a guarda de nivel divergente (18 x 12)
+vetou uma fusao correta. Virou o item 110, com a regra de nao curar a mao antes
+de medir a classe inteira -- o preco que o item 85 ja pagou.
