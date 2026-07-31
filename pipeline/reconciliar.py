@@ -20,7 +20,8 @@ import traits_uniao
 AQUI = os.path.dirname(os.path.abspath(__file__))
 ENTRADA = ["classes.json", "feats.json", "magias.json", "ancestrias.json",
            "equipamento.json", "companheiros.json", "referencia.json",
-           "rituais.json", "aon_kinds.json", "taticas_kits.json"]
+           "rituais.json", "aon_kinds.json", "taticas_kits.json",
+           "acoes.json"]
 
 # precedencia por campo, conforme specs/2026-07-26-schema-base.md
 PRECEDENCIA = {

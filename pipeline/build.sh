@@ -28,7 +28,7 @@ if [ "${WB_REEXTRAIR:-0}" = "1" ]; then
   # escreve arquivo nenhum. Chamar `magias.py` aqui era um no-op silencioso, e
   # por isso `saida/magias.json` ficou parado em 27/07 atravessando todos os
   # builds desde entao. Mesma classe do `taticas_kits`, que estava FORA do laco.
-  for e in classes feats _gerar_saida_magias ancestrias equipamento companheiros referencia rituais aon_kinds taticas_kits; do
+  for e in classes feats _gerar_saida_magias ancestrias equipamento companheiros referencia rituais aon_kinds taticas_kits acoes; do
     echo "-- $e"
     python3 "extratores/$e.py"
   done

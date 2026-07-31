@@ -101,6 +101,12 @@ PACK_PARA_KIND = {
     "equipment-srd": "equipment",
     "spells-srd": "spell",
     "heritages": "heritage",
+    # 31/07: sem esta linha, `Way of the Drifter -> Into the Fray` resolvia
+    # para `wb:feat/into-the-fray` -- feat nv8 do arquetipo Viking --, porque
+    # `por_nome` PREFERE feat. Criar o kind `action` sem ela PIORARIA o caso:
+    # passaria a haver dois candidatos e o errado continuaria ganhando, agora
+    # sem nem o alarme de "sem alvo na base".
+    "actionspf2e": "action",
 }
 
 

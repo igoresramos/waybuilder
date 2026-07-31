@@ -625,8 +625,12 @@ CENSO_APELIDO = {
 
 # Nao e conteudo de personagem jogavel: monstro, perigo, veiculo, texto de
 # regra, barra lateral, pagina de indice. Fora do escopo do construtor.
+# `action` SAIU daqui em 31/07: o pack `actionspf2e` passou a ser extraido
+# (kind proprio, spec 2026-07-31-kind-action.md). Enquanto esteve aqui, o
+# portao 9 nao cobrava as 557 acoes -- e por isso as 10 deeds do Gunslinger
+# e as reacoes do Campeao sumiram sem nada acusar.
 FORA_DE_ESCOPO = {
-    "action", "category-page", "condition", "creature", "creature-ability",
+    "category-page", "condition", "creature", "creature-ability",
     "creature-adjustment", "creature-family", "curse", "hazard", "item-bonus",
     "plane", "rules", "sidebar", "skill-general-action", "vehicle",
     "siege-weapon", "kingdom-structure", "class-sample", "source", "article",

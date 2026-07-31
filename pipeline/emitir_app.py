@@ -125,8 +125,11 @@ def main() -> int:
 
     # o que o construtor precisa para a PRIMEIRA tela: sem equipamento, sem
     # magia, sem catalogo de referencia
+    # `action` entra no nucleo: a deed do Gunslinger e a reacao do Campeao sao
+# concedidas no nivel 1 e precisam estar la na PRIMEIRA tela. Custo medido:
+# ~45 B/registro gzip, abaixo de 5% do nucleo.
     montar_ficha = ("class", "class-feature", "feat", "ancestry", "heritage",
-                    "background", "archetype", "skill")
+                    "background", "archetype", "skill", "action")
     nucleo = sum(fatias[k]["gzip_bytes"] for k in montar_ficha if k in fatias)
     print(f"\nnucleo para montar ficha ({', '.join(montar_ficha)}): "
           f"{nucleo / mb:.2f} MB gzip")
