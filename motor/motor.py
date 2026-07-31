@@ -2758,10 +2758,38 @@ class Personagem:
             melhor = melhor_rank(melhor, self._rank_sem(k, excluir))
         return melhor
 
+    # RAW: Recall Knowledge e acao destas oito, e a lista e do livro -- nao
+    # muda com a fonte, entao vive aqui como constante, igual a
+    # `CATEGORIAS_DE_ARMA`. Perception e Athletics NAO entram, e e isso que faz
+    # o termo discriminar.
+    PERICIAS_DE_RECALL = ("arcana", "crafting", "medicine", "nature",
+                          "occultism", "religion", "society")
+
+    def _rank_de_recall(self, chave: str, excluir) -> str | None:
+        """`skill:recall-knowledge` le-se "alguma pericia com Recall Knowledge".
+
+        Mesmo desenho de `lore:*` e `weapon:*`: devolve o MELHOR rank da ficha,
+        porque o requisito pode pedir mais que trained -- `Automatic Knowledge`
+        pede expert e `Masterful Obfuscation` pede master.
+
+        Existe porque a clausula vivia em `requires_residuo` e o `requires`
+        guardava so o gate de nivel: os tres feats saiam DISPONIVEIS para quem
+        nao podia pega-los, e o Pathbuilder apontou.
+        Spec: `specs/2026-07-31-pericia-de-recall-knowledge.md`
+        """
+        if chave != "skill:recall-knowledge":
+            return None
+        melhor = None
+        for p in self.PERICIAS_DE_RECALL:
+            melhor = melhor_rank(melhor, self._rank_sem(p, excluir))
+        # qualquer Lore serve, e `lore:*` ja responde o melhor delas
+        return melhor_rank(melhor, self._rank_de_lore("lore:*", excluir))
+
     def _termo_proficiency(self, valor) -> tuple[bool, str]:
         excluir = getattr(self, "_avaliando", None)
         for chave, exigencia in (valor or {}).items():
             tenho = (self._rank_de_arma(chave, excluir)
+                     or self._rank_de_recall(chave, excluir)
                      or self._rank_de_lore(chave, excluir)
                      or self._rank_sem(chave, excluir))
             for op, alvo in (exigencia or {}).items():
