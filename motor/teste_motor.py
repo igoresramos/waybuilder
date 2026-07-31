@@ -1882,6 +1882,36 @@ checar(any(s.get("kind") == "divine-font"
            for s in clerigo_fonte("wb:deity/aakriti").slots_abertos()),
        "e o Clerigo abre")
 
+# --------------------------------------------------------------------------
+# Requisito de sub-escolha que estava preso em `requires_residuo`.
+# Achado na 5a rodada com o Pathbuilder.
+# Spec: specs/2026-07-30-requisito-de-subescolha.md
+# --------------------------------------------------------------------------
+print("\n-- requisito de sub-escolha (achado no Pathbuilder) --")
+
+def campeao_de(causa):
+    return personagem(
+        [{"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/champion"},
+         {"em": 1, "slot": "subclasse", "pega": causa}])
+
+FLASH = BASE.opcional("wb:feat/brilliant-flash") or {}
+checar((FLASH.get("requires") or {}) != {"class_level": {"champion": {">=": 1}}},
+       "Brilliant Flash deixou de exigir so nivel de classe")
+checar(not FLASH.get("requires_residuo"),
+       "e `grandeur cause` saiu do residuo")
+checar(campeao_de("wb:class-feature/grandeur").avaliar(FLASH.get("requires"))[0],
+       "Campeao de causa Grandeur ATENDE")
+ok_justice, motivo = campeao_de("wb:class-feature/justice").avaliar(
+    FLASH.get("requires"))
+checar(not ok_justice, "e o de causa Justice NAO -- era este o defeito")
+checar(any("Grandeur" in m for m in motivo),
+       "com o motivo dizendo qual causa falta", str(motivo))
+
+# a mesma forma em outros eixos
+VIALS = BASE.opcional("wb:feat/soothing-vials") or {}
+checar("subclass" in json.dumps(VIALS.get("requires") or {}),
+       "e `chirurgeon research field` virou requisito no Alquimista")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

@@ -45,6 +45,11 @@ DEFAULT = {
     "Barbarian": ("wb:class/barbarian", ANCESTRIA, BACKGROUND),
     "Bard": ("wb:class/bard", ANCESTRIA, BACKGROUND),
     "Monk": ("wb:class/monk", ANCESTRIA, BACKGROUND),
+    "Champion": ("wb:class/champion", ANCESTRIA, BACKGROUND),
+    "Druid": ("wb:class/druid", ANCESTRIA, BACKGROUND),
+    "Sorcerer": ("wb:class/sorcerer", ANCESTRIA, BACKGROUND),
+    "Alchemist": ("wb:class/alchemist", ANCESTRIA, BACKGROUND),
+    "Investigator": ("wb:class/investigator", ANCESTRIA, BACKGROUND),
 }
 
 
@@ -70,6 +75,16 @@ BOOSTS_DO_PATHBUILDER = {
     # Bard sai STR +2 DEX +1 CON +1 CHA +1, Monk sai STR +3 DEX +1 CON +1.
     "Bard":    ["str", "str", "dex", "con"],          # + CHA 12 da chave
     "Monk":    ["str", "str", "str", "dex", "con"],   # STR 16, sem chave extra
+    # medidos em 2026-07-30 com a mesma sonda, um arquivo por classe em
+    # `docs/comparacao/estado-pathbuilder-<classe>-nv1.json`. A regra do bloco
+    # acima vale: a chave so entra na lista quando ela e ESCOLHA. Campeao tem
+    # `key_ability: [dex, str]` e por isso declara os cinco; as outras quatro
+    # tem chave unica (WIS, CHA, INT, INT) e o motor a aplica sozinho.
+    "Champion":     ["str", "str", "str", "dex", "con"],  # STR +3 DEX +1 CON +1
+    "Druid":        ["str", "str", "dex", "con"],         # + WIS da chave
+    "Sorcerer":     ["str", "str", "dex", "con"],         # + CHA da chave
+    "Alchemist":    ["str", "str", "dex", "con"],         # + INT da chave
+    "Investigator": ["str", "str", "dex", "con"],         # + INT da chave
 }
 
 

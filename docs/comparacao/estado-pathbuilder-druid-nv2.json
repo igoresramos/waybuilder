@@ -1,0 +1,205 @@
+{
+  "fonte": "pathbuilder 2e web 108, remaster on, legado ligado",
+  "personagem": "Human / Barkeep / Druid",
+  "nivel_alvo": 2,
+  "nivel_confirmado_na_tela": "2",
+  "atributos_modificador": {
+    "STR": "+2",
+    "DEX": "+1",
+    "CON": "+1",
+    "INT": "+0",
+    "WIS": "+1",
+    "CHA": "+0"
+  },
+  "pericias_treinadas_na_ficha": [
+    {
+      "nome": "Diplomacy",
+      "bonus": "+4",
+      "proficiencia": "trained"
+    },
+    {
+      "nome": "Lore: Alcohol",
+      "bonus": "+4",
+      "proficiencia": "trained"
+    },
+    {
+      "nome": "Nature",
+      "bonus": "+5",
+      "proficiencia": "trained"
+    }
+  ],
+  "pericias_todas_na_ficha": [
+    {
+      "nome": "Acrobatics",
+      "bonus": "+1",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Arcana",
+      "bonus": "+0",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Athletics",
+      "bonus": "+2",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Crafting",
+      "bonus": "+0",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Deception",
+      "bonus": "+0",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Diplomacy",
+      "bonus": "+4",
+      "proficiencia": "trained"
+    },
+    {
+      "nome": "Intimidation",
+      "bonus": "+0",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Lore: Alcohol",
+      "bonus": "+4",
+      "proficiencia": "trained"
+    },
+    {
+      "nome": "Medicine",
+      "bonus": "+1",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Nature",
+      "bonus": "+5",
+      "proficiencia": "trained"
+    },
+    {
+      "nome": "Occultism",
+      "bonus": "+0",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Performance",
+      "bonus": "+0",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Religion",
+      "bonus": "+1",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Society",
+      "bonus": "+0",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Stealth",
+      "bonus": "+1",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Survival",
+      "bonus": "+1",
+      "proficiencia": "untrained"
+    },
+    {
+      "nome": "Thievery",
+      "bonus": "+1",
+      "proficiencia": "untrained"
+    }
+  ],
+  "pendencias": {
+    "bloco_nivel1_antes_de_subir_de_nivel": "Level 1\n4\nSet Abilities\n2\nSkill Training\nHeritage\nNot Selected\nAncestry Feat\nNot Selected\nVoice of Nature\nNot Selected\nDruidic Order\nSelect Order\nNot Selected\nAnathema\nVoice of Nature\nWildsong\nFree Feat: Shield Block\nFree Feat: Hobnobber",
+    "blocos_apos_atingir_nivel_alvo": [
+      {
+        "indice": 1,
+        "texto": "Level 1\n4\nSet Abilities\n2\nSkill Training\nHeritage\nNot Selected\nAncestry Feat\nNot Selected\nVoice of Nature\nNot Selected\nDruidic Order\nSelect Order\nNot Selected\nAnathema\nVoice of Nature\nWildsong\nFree Feat: Shield Block\nFree Feat: Hobnobber"
+      },
+      {
+        "indice": 2,
+        "texto": "Level 2\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 3,
+        "texto": "Level 3\n1\nSkill Increase\nGeneral Feat\nNot Selected\nFortitude Expertise\nPerception Expertise"
+      },
+      {
+        "indice": 4,
+        "texto": "Level 4\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 5,
+        "texto": "Level 5\n1\nSkill Increase\n4\nAbility Boosts\nAncestry Feat\nNot Selected\nReflex Expertise"
+      },
+      {
+        "indice": 6,
+        "texto": "Level 6\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 7,
+        "texto": "Level 7\n1\nSkill Increase\nGeneral Feat\nNot Selected\nExpert Spellcaster"
+      },
+      {
+        "indice": 8,
+        "texto": "Level 8\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 9,
+        "texto": "Level 9\n1\nSkill Increase\nAncestry Feat\nNot Selected"
+      },
+      {
+        "indice": 10,
+        "texto": "Level 10\n4\nAbility Boosts\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 11,
+        "texto": "Level 11\n1\nSkill Increase\nGeneral Feat\nNot Selected\nWeapon Expertise\nWild Willpower"
+      },
+      {
+        "indice": 12,
+        "texto": "Level 12\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 13,
+        "texto": "Level 13\n1\nSkill Increase\nAncestry Feat\nNot Selected\nMedium Armor Expertise\nWeapon Specialization"
+      },
+      {
+        "indice": 14,
+        "texto": "Level 14\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 15,
+        "texto": "Level 15\n1\nSkill Increase\n4\nAbility Boosts\nGeneral Feat\nNot Selected\nMaster Spellcaster"
+      },
+      {
+        "indice": 16,
+        "texto": "Level 16\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 17,
+        "texto": "Level 17\n1\nSkill Increase\nAncestry Feat\nNot Selected"
+      },
+      {
+        "indice": 18,
+        "texto": "Level 18\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      },
+      {
+        "indice": 19,
+        "texto": "Level 19\n1\nSkill Increase\nGeneral Feat\nNot Selected\nLegendary Spellcaster\nPrimal Hierophant"
+      },
+      {
+        "indice": 20,
+        "texto": "Level 20\n4\nAbility Boosts\nClass Feat\nNot Selected\nSkill Feat\nNot Selected"
+      }
+    ],
+    "texto_literal_modal_skill_training": "Remaining Skill Selections: 2",
+    "texto_literal_modal_class_skill": null
+  }
+}

@@ -164,9 +164,17 @@ items:
     e `has_actor` ja lia isso -- faltava so `ATOR_RE` aceitar o bicho. 6 clausulas saíram do residuo.
     RECUSADO COM NUMERO na mesma spec: quebra de clausula por virgula (70 clausulas tem virgula e quase
     toda e LISTA dentro de um conceito unico; ", and" sao 8 e so 1 quebraria limpo; e `{@feat X|Fonte},
-    <prosa>` nao aparece em nenhum dos 28 registros que tem residuo e nenhum requires). SOBRA: as 19 clausulas
-    de divine font, que dependem do item novo 98 (a ficha nao tem divindade). Alinhamento segue recusado
-    -- conceito que o Remaster aboliu.'
+    <prosa>` nao aparece em nenhum dos 28 registros que tem residuo e nenhum requires). SOBRA (medido
+    2026-07-30, e agora TUDO destravado pela divindade): 6 clausulas de arma favorita / pericia divina
+    / santificacao. `favored_weapon` ja esta em 479 divindades como id real, `weapon_category` em 1.032
+    de 1.039 armas, e a tabela de proficiencia do Clerigo tem a chave literal "Deity''s favored weapon".
+    FALTA UM CAMPO, e e a DECIMA lacuna de leitura: `divine_skill` esta na prosa do AoN de praticamente
+    toda divindade (Athletics 79, Nature 67, Society 60, Diplomacy 57...) e a base tem ZERO. Precisa de:
+    (a) ler `divine_skill` da prosa, mesmo formato do modal de santificacao; (b) tres termos -- `deity_favored_weapon_category`
+    (deadly-simplicity exige favorita simple/unarmed), proficiencia na pericia divina (mortal-herald x2,
+    "master in Religion or your deity''s divine skill") e santificacao declarada (sanctify-water); (c)
+    padroes de parser. Alinhamento segue recusado. Divindade OPCIONAL para quem nao e Clerigo nem Campeao
+    (`you follow a deity`, 4 clausulas) e decisao de produto, nao de motor.'
   id: 87
   date: '2026-07-30'
   priority: baixa

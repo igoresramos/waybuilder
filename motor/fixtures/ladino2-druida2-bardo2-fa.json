@@ -132,7 +132,6 @@
    "wb:feat/verdant-weapon",
    "wb:feat/well-versed",
    "wb:feat/widen-spell",
-   "wb:feat/zoophonic-communication",
    "wb:feat/bardic-lore",
    "wb:feat/nimble-dodge",
    "wb:feat/plant-empathy",
@@ -147,6 +146,7 @@
    "wb:feat/untamed-form",
    "wb:feat/versatile-performance",
    "wb:feat/youre-next",
+   "wb:feat/zoophonic-communication",
    "wb:feat/acrobat-dedication",
    "wb:feat/agent-of-all-holds",
    "wb:feat/alchemist-dedication",
@@ -174,7 +174,6 @@
    "wb:feat/verdant-weapon",
    "wb:feat/well-versed",
    "wb:feat/widen-spell",
-   "wb:feat/zoophonic-communication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animal-trainer-dedication",
    "wb:feat/animist-dedication",
@@ -182,7 +181,6 @@
    "wb:feat/artillerist-dedication",
    "wb:feat/bastion-dedication",
    "wb:feat/beastmaster-dedication",
-   "wb:feat/bestial-snarling",
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
    "wb:feat/bounty-hunter-dedication",
@@ -200,7 +198,9 @@
    "wb:feat/cleric-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/cultivator-dedication",
-   "wb:feat/curse-maelstrom-dedication"
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication",
+   "wb:feat/demolitionist-dedication"
   ],
   "class_feat@4": [
    "wb:feat/animal-companion",
@@ -216,7 +216,6 @@
    "wb:feat/verdant-weapon",
    "wb:feat/well-versed",
    "wb:feat/widen-spell",
-   "wb:feat/zoophonic-communication",
    "wb:feat/alkenstar-agent-dedication",
    "wb:feat/animal-trainer-dedication",
    "wb:feat/animist-dedication",
@@ -224,7 +223,6 @@
    "wb:feat/artillerist-dedication",
    "wb:feat/bastion-dedication",
    "wb:feat/beastmaster-dedication",
-   "wb:feat/bestial-snarling",
    "wb:feat/blackjacket-dedication",
    "wb:feat/blessed-one-dedication",
    "wb:feat/bounty-hunter-dedication",
@@ -242,7 +240,9 @@
    "wb:feat/cleric-dedication",
    "wb:feat/crossbow-infiltrator-dedication",
    "wb:feat/cultivator-dedication",
-   "wb:feat/curse-maelstrom-dedication"
+   "wb:feat/curse-maelstrom-dedication",
+   "wb:feat/dandy-dedication",
+   "wb:feat/demolitionist-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
