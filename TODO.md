@@ -316,5 +316,24 @@ items:
   id: 107
   date: '2026-07-31'
   priority: alta
+- desc: 'ACHADO 2026-07-31 por 12 sondas de `skill_feat` rodadas EM PARALELO (2 ondas de 6), a primeira
+    vez que a bancada cobre skill feat fora de Fighter/Rogue. Somos PERMISSIVOS DEMAIS em 3 feats, e a
+    causa e a mesma: a clausula real ficou em `requires_residuo`, prosa nao convertida em termo, e
+    `requires` so guarda o gate de nivel. `wb:feat/automatic-knowledge` pede "expert in a skill with the
+    recall knowledge action" e nosso requires diz so `character_level >= 2`; `wb:feat/dubious-knowledge`
+    pede "trained in a skill with the Recall Knowledge action" e diz so `character_level >= 1`;
+    `wb:feat/masterful-obfuscation` tem a mesma forma com "master". O Pathbuilder recusa os tres no nivel
+    certo e nos oferecemos -- entrega OPCAO ERRADA. A forma e quantificada e derivavel: "<rank> in a skill
+    with the Recall Knowledge action" vira "existe alguma pericia com rank >= X", e o motor ja tem o
+    curinga que resolve isso (`weapon:*` faz o equivalente para arma desde o item 95). Sao exatamente 3
+    registros, todos medidos. || NAO SAO DEFEITO, e ficam declarados: `Encouraging Words` (nos aceitamos,
+    eles nao) e `Armor Assist` (eles aceitam, nos nao) sao a diferenca de MODELO ja registrada no
+    comparador -- o Pathbuilder conta escolha de pericia PENDENTE como alcancavel e nos avaliamos o estado
+    atual e MARCAMOS. E os 5 `so no waybuilder` que apareceram em TODA classe (`Adventurous Outfitter`,
+    `As on the Board so on the Battlefield`, `Improvise Strategy`, `Seasoned Command`, `Tactical Acumen`)
+    sao todos de Pathfinder #223: Hell Destiny -- recorte de fonte, conteudo de AP que eles nao carregam.'
+  id: 108
+  date: '2026-07-31'
+  priority: alta
 promoted: []
 ---

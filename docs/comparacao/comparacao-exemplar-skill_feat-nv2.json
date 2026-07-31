@@ -1,0 +1,39 @@
+[
+  {
+    "slot": "Exemplar 2 / skill_feat [Skill Feats]",
+    "waybuilder": 227,
+    "pathbuilder": 225,
+    "em_comum": 225,
+    "so_no_pathbuilder": [],
+    "so_no_waybuilder": [
+      "Adventurous Outfitter",
+      "As on the Board, so on the Battlefield",
+      "Improvise Strategy",
+      "Seasoned Command",
+      "Tactical Acumen"
+    ],
+    "divergencia_de_disponibilidade": [
+      {
+        "nome": "Automatic Knowledge",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Encouraging Words",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
+      },
+      {
+        "nome": "Ravening's Desperation",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige lore:zevgavizeb >= trained; tem untrained"
+        ]
+      }
+    ],
+    "colisoes_de_normalizacao": []
+  }
+]
