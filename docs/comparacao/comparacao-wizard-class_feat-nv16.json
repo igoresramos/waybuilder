@@ -88,14 +88,6 @@
         ]
       },
       {
-        "nome": "Crossbow Infiltrator Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige stealth >= trained; tem untrained"
-        ]
-      },
-      {
         "nome": "Eldritch Archer Dedication",
         "waybuilder": true,
         "pathbuilder": false,

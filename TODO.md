@@ -295,5 +295,22 @@ items:
   id: 106
   date: '2026-07-31'
   priority: baixa
+- desc: 'ACHADO 2026-07-31 pela sonda nova do Pathbuilder (Alchemist nv8), e e ENTREGA DE OPCAO ERRADA
+    na ficha -- por isso alta. **37 class-features AUTOMATICAS estao presas no balaio como se fossem
+    escolha.** Elas nao tem parentese de subclasse e NAO estao na progressao da classe, entao o
+    personagem nunca as tem. Exemplo que o Pathbuilder pegou: `Perpetual Infusions` e feature automatica
+    de nivel 7 do Alquimista, mas vive no balaio; `Perpetual Breadth` exige
+    `subclass: {alchemist: perpetual-infusions}` e por isso sai INDISPONIVEL para um Alquimista 8 --
+    o Pathbuilder oferece, nos nao. MEDIDO: **24 registros** tem `requires` dependendo de uma das 37.
+    Os maiores: `Warden Spells` do Ranger (14 dependentes), `Champions Aura` (5), `Vindicator` (2),
+    `Greater Weapon Specialization`, `Perpetual Infusions` e `Runelord` (1 cada). O conserto e mover as
+    37 do balaio para a PROGRESSAO da classe, no nivel do bloco -- mas isso e claim estrutural (dar
+    feature a quem nao deveria e o pior erro possivel), entao cada uma precisa ser conferida contra a
+    fonte antes, nao derivada por regra. Lista completa e reprodutivel: opcao de balaio, sem parentese,
+    fora da progressao. || Vem da familia do item 69, mas e item proprio porque a gravidade e outra: o
+    69 e buraco de modelo, este entrega opcao errada.'
+  id: 107
+  date: '2026-07-31'
+  priority: alta
 promoted: []
 ---

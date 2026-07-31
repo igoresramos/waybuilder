@@ -61,14 +61,6 @@
         ]
       },
       {
-        "nome": "Crossbow Infiltrator Dedication",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige stealth >= trained; tem untrained"
-        ]
-      },
-      {
         "nome": "Ghost Hunter Dedication",
         "waybuilder": false,
         "pathbuilder": true,

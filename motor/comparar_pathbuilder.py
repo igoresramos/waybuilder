@@ -237,6 +237,12 @@ def comparar(base: Base, sonda: dict, aba: str | None = None) -> dict:
     so_deles = sorted(deles[k]["nome"] for k in deles.keys() - nossos.keys())
 
     divergem, colisoes = [], []
+    # um registro pode entrar por DUAS chaves (nome canonico e alias) e as duas
+    # casarem: `Crossbow Infiltrator Dedication` tem `Drow Shootist Dedication`
+    # em `aliases`, e saia duas vezes no relatorio. O veredito e por REGISTRO.
+    # (regressao introduzida ao trocar o laco para veredito por grupo, e pega
+    # pela primeira sonda nova rodada depois)
+    ja_reportados = set()
     for k in nossos.keys() & deles.keys():
         # todos os NOSSOS registros que caem nesta chave, sem repetir quem
         # entrou por nome e por alias (`Crossbow Infiltrator Dedication` tem o
@@ -267,6 +273,9 @@ def comparar(base: Base, sonda: dict, aba: str | None = None) -> dict:
         # NENHUM dos nossos concorda, e ai ela sai nomeando todos.
         if any(c["atende"] == deles[k]["atende"] for c in elegiveis):
             continue
+        if any(c["id"] in ja_reportados for c in elegiveis):
+            continue
+        ja_reportados |= {c["id"] for c in elegiveis}
         divergem.append({
             "nome": " / ".join(sorted({c["nome"] for c in elegiveis})),
             "waybuilder": elegiveis[0]["atende"],

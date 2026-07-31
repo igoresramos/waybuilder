@@ -1,52 +1,72 @@
 [
   {
-    "slot": "Monk 10 / class_feat [Class Feats]",
-    "waybuilder": 135,
-    "pathbuilder": 139,
-    "em_comum": 138,
+    "slot": "Alchemist 8 / class_feat [Class Feats]",
+    "waybuilder": 72,
+    "pathbuilder": 75,
+    "em_comum": 73,
     "so_no_pathbuilder": [
-      "Form Lock"
+      "Chemical Contagion",
+      "Enhanced Fire"
     ],
-    "so_no_waybuilder": [],
+    "so_no_waybuilder": [
+      "Artokus's Fire",
+      "Powerful Alchemy"
+    ],
     "divergencia_de_disponibilidade": [
       {
-        "nome": "Advanced Qi Spells",
+        "nome": "Perpetual Breadth",
         "waybuilder": false,
         "pathbuilder": true,
         "motivos": [
-          "exige ter Qi Spells"
+          "exige a sub-escolha Perpetual Infusions; tem nenhuma"
         ]
       }
     ],
     "colisoes_de_normalizacao": [
       {
-        "chave": "inner fire",
+        "chave": "efficient alchemy",
         "nossos": [
-          "Inner Fire (Monk)",
-          "Inner Fire (SoM)"
+          "Efficient Alchemy",
+          "Efficient Alchemy (Paragon)"
         ],
-        "pathbuilder": "Inner Fire"
+        "pathbuilder": "Efficient Alchemy (Broken Promises)"
       },
       {
-        "chave": "medusas wrath",
+        "chave": "elastic mutagen",
         "nossos": [
-          "Grandmaster Qi Spells",
-          "Medusa's Wrath"
+          "Elastic Mutagen",
+          "Mutant Physique"
         ],
-        "pathbuilder": "Medusa's Wrath"
+        "pathbuilder": "Elastic Mutagen"
       },
       {
-        "chave": "quivering palm",
+        "chave": "genius mutagen",
         "nossos": [
-          "Grandmaster Qi Spells",
-          "Quivering Palm"
+          "Genius Mutagen",
+          "Mutant Innervation"
         ],
-        "pathbuilder": "Quivering Palm"
+        "pathbuilder": "Genius Mutagen"
+      },
+      {
+        "chave": "invincible mutagen",
+        "nossos": [
+          "Invincible Mutagen",
+          "Mutant Physique"
+        ],
+        "pathbuilder": "Invincible Mutagen"
+      },
+      {
+        "chave": "mindblank mutagen",
+        "nossos": [
+          "Mindblank Mutagen",
+          "Mutant Innervation"
+        ],
+        "pathbuilder": "Mindblank Mutagen"
       }
     ]
   },
   {
-    "slot": "Monk 10 / class_feat [Dedication Feats]",
+    "slot": "Alchemist 8 / class_feat [Dedication Feats]",
     "waybuilder": 226,
     "pathbuilder": 224,
     "em_comum": 224,
@@ -124,12 +144,11 @@
         "motivos": []
       },
       {
-        "nome": "Soulforger Dedication",
+        "nome": "Snarecrafter Dedication",
         "waybuilder": false,
         "pathbuilder": true,
         "motivos": [
-          "exige WIS >= 14; tem 10",
-          "exige conjurar divine; o personagem nao conjura"
+          "exige ter Snare Crafting"
         ]
       },
       {
