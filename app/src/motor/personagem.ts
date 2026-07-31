@@ -2509,6 +2509,12 @@ export class Personagem implements ContextoDePredicado {
       case "deity_font_permitido": return this._termo_deity_font_permitido(valor);
       case "domain": return this._termo_domain(valor);
       case "deity_sanctification": return this._termo_deity_sanctification(valor);
+      case "deity_favored_weapon_category":
+        return this._termo_deity_favored_weapon_category(valor);
+      case "proficiency_favored_weapon":
+        return this._termo_proficiency_favored_weapon(valor);
+      case "proficiency_divine_skill":
+        return this._termo_proficiency_divine_skill(valor);
       case "spellcasting_tradition": return this._termo_spellcasting_tradition(valor);
       default: return null;
     }
@@ -3130,6 +3136,95 @@ export class Personagem implements ContextoDePredicado {
       .map((a) => nomeOu(this.base.opcional(String(a)), String(a)))
       .sort().join(", ");
     return [false, `exige dominio ${nomes}; ${nomeOu(d, "")} nao o concede`];
+  }
+
+  // -- arma favorita e perícia divina --------------------------------------
+  // Spec: `specs/2026-07-30-pericia-divina-e-arma-favorita.md`
+
+  /** Os registros de arma que a divindade escolhida favorece. */
+  private armasFavoritas(): Registro[] {
+    const d = this.divindade();
+    if (d === null) return [];
+    return listaDe(d["favored_weapon"])
+      .map((a) => this.base.opcional(String(a)))
+      .filter((r): r is Registro => r !== null);
+  }
+
+  /** `{"deity_favored_weapon_category": "simple"}` -- Deadly Simplicity.
+   *
+   * Pergunta pela ARMA da divindade, não pela proficiência do personagem: são
+   * dois termos porque são duas perguntas, e `deadly-simplicity` faz as duas
+   * em cláusulas separadas. */
+  private _termo_deity_favored_weapon_category(valor: unknown): ResultadoDeTermo {
+    const alvo = String(valor ?? "").toLowerCase();
+    const d = this.divindade();
+    if (d === null) {
+      return [false, `exige arma favorita ${alvo}; nao segue divindade`];
+    }
+    const armas = this.armasFavoritas();
+    // `unarmed` não é `weapon_category` -- é trait, e é assim que o RAW
+    // descreve a arma favorita de quem luta desarmado
+    for (const arma of armas) {
+      const traits = new Set(listaDe(arma["traits"]).map((t) => String(t).toLowerCase()));
+      if (String(arma["weapon_category"] ?? "").toLowerCase() === alvo
+          || traits.has(alvo)) return [true, ""];
+    }
+    const tem = armas.map((a) => `${nomeOu(a, "")} (${a["weapon_category"]})`)
+      .join(", ") || "nenhuma";
+    return [false, `exige arma favorita ${alvo}; ${nomeOu(d, "")} favorece ${tem}`];
+  }
+
+  /** Compara rank contra `{">=": "expert"}`, o formato dos outros termos. */
+  private rankPorExigencia(tenho: string, exigencia: unknown,
+                           rotulo: string): ResultadoDeTermo {
+    for (const [op, alvo] of Object.entries(dictDe(exigencia))) {
+      const ia = indiceDeRank(tenho);
+      const ib = indiceDeRank(String(alvo));
+      if (!comparar(ia, op, ib)) {
+        return [false, `exige ${rotulo} ${op} ${alvo}; tem ${tenho}`];
+      }
+    }
+    return [true, ""];
+  }
+
+  /** O personagem tem rank X NA arma favorita da divindade? */
+  private _termo_proficiency_favored_weapon(valor: unknown): ResultadoDeTermo {
+    const d = this.divindade();
+    if (d === null) {
+      return [false, "exige proficiencia na arma favorita; nao segue divindade"];
+    }
+    const armas = this.armasFavoritas();
+    if (armas.length === 0) {
+      return [false, `${nomeOu(d, "")} nao tem arma favorita na base`];
+    }
+    const excluir = this._avaliando;
+    let melhor = "untrained";
+    let nome_da_arma: string | null = null;
+    for (const arma of armas) {
+      const slug = String(arma["id"]).split("/").pop() ?? "";
+      const tenho = this._rank_de_arma(`weapon:${slug}`, excluir)
+        ?? (this.proficiencias.get(
+              String(arma["weapon_category"] ?? "simple")) ?? "untrained");
+      if (indiceDeRank(tenho) >= indiceDeRank(melhor)) {
+        melhor = tenho;
+        nome_da_arma = nomeOu(arma, "");
+      }
+    }
+    return this.rankPorExigencia(melhor, valor, `proficiencia em ${nome_da_arma}`);
+  }
+
+  /** O personagem tem rank X na perícia divina da divindade?
+   *
+   * `divine_skill` é a décima lacuna de leitura: estava na prosa do AoN de 475
+   * divindades e a base tinha zero. As 13 sem o campo são filosofias, e para
+   * elas a resposta é não -- com o motivo escrito. */
+  private _termo_proficiency_divine_skill(valor: unknown): ResultadoDeTermo {
+    const d = this.divindade();
+    if (d === null) return [false, "exige a pericia divina; nao segue divindade"];
+    const pericia = String(d["divine_skill"] ?? "");
+    if (!pericia) return [false, `${nomeOu(d, "")} nao tem pericia divina`];
+    const tenho = this._rank_sem(pericia, this._avaliando);
+    return this.rankPorExigencia(tenho, valor, `${pericia} (pericia divina)`);
   }
 
   private _termo_trait(valor: unknown): ResultadoDeTermo {

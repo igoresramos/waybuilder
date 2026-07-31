@@ -1275,3 +1275,36 @@ Quatro camadas verdes: 10 portoes, oraculo Python com 13 assertivas novas,
 
 O que sobrou do 42 esta declarado com numero no item 101 -- `ragingResistance`
 com a medicao pronta e os 30 `Strike` do Animal Instinct a frente.
+
+## 2026-07-30 (7a rodada) -- item 87: `divine_skill`, a decima lacuna de leitura
+
+Mesmo formato das dez anteriores: o AoN publica o campo, o extrator nunca leu.
+`Divine Skill` esta na prosa de praticamente toda divindade e a base tinha
+**zero**. Lidas **475 de 488**; as 13 restantes sao filosofias (Atheism,
+Whispering Way, Prophecies of Kalistrade, Sangpotshi...) que nao tem pericia
+divina -- ausencia aqui e RESPOSTA. Nenhuma divindade tem mais de uma.
+
+O item previa 6 clausulas. Medido no residuo eram **18 de divindade**, e **11**
+fecharam -- porque **quatro** ja tinham termo desde a spec `divindade-na-ficha`
+e ninguem os havia aplicado ao residuo (`has_deity`, `deity_font_permitido`,
+`domain`). Isso e uma licao pequena: fechar um termo nao fecha as clausulas; a
+varredura do residuo e passo separado.
+
+Tres termos novos: `deity_favored_weapon_category`,
+`proficiency_favored_weapon` e `proficiency_divine_skill`. Os tres respondem
+False COM MOTIVO quando nao ha divindade -- nunca estouram.
+
+Nao fecharam 7, com o motivo: seis de alinhamento (o Remaster aboliu o
+conceito) e `versatile-font`, que precisa CONCEDER a segunda fonte.
+
+Um teste antigo caiu junto e foi consertado na raiz: `com_residuo > 500`
+pinava o total do residuo, e converter clausulas fazia PROGRESSO parecer
+regressao. Virou `> 0` -- o que ele prova e que o residuo continua carregado.
+
+O diff do fixture foi lido: um so mudou, e da forma certa --
+`deadly-simplicity` DESCEU na lista de um Guerreiro 2 / Clerigo 2 sem
+divindade escolhida. Marcado, nao sumido.
+
+Quatro camadas verdes. `verificar-eixos.mjs` acusa `Ma'at` duplicado no eixo
+do Campeao, mas a mesma verificacao FALHA no estado anterior -- e
+pre-existente, virou item 102 com a medicao pronta (e o unico caso em 488).

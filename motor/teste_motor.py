@@ -840,7 +840,11 @@ checar(not any("psychic duel" in m for m in motivos),
        f"{motivos}")
 
 com_residuo = sum(1 for r in BASE.por_id.values() if r.get("requires_residuo"))
-checar(com_residuo > 500,
+# O limiar NAO e pinado num numero. Era `> 500` e quebrou quando a spec
+# `pericia-divina-e-arma-favorita` converteu 11 clausulas: pinar o total faz
+# PROGRESSO parecer regressao, porque cada spec que le prosa derruba a conta.
+# O que este teste prova e que o residuo continua CARREGADO, nao descartado.
+checar(com_residuo > 0,
        f"e a base inteira carrega o residuo em {com_residuo} registros, "
        "visivel em vez de descartado")
 
@@ -1992,6 +1996,62 @@ VIALS = BASE.opcional("wb:feat/soothing-vials") or {}
 checar("subclass" in json.dumps(VIALS.get("requires") or {}),
        "e `chirurgeon research field` virou requisito no Alquimista")
 
+# -- pericia divina e arma favorita ------------------------------------------
+# A DECIMA lacuna de leitura: `divine_skill` estava na prosa do AoN de 475
+# divindades e a base tinha ZERO. Com ela e mais dois termos, 11 clausulas de
+# divindade sairam do residuo -- 4 delas com termo que ja existia.
+# Spec: `specs/2026-07-30-pericia-divina-e-arma-favorita.md`
+print("\npericia divina e arma favorita")
+
+CLERIC_ = "wb:class/cleric"
+
+
+def _clerigo(deidade, nivel=1, extras=None):
+    esc = niveis((CLERIC_, nivel))
+    if deidade:
+        esc = esc + [{"em": 1, "slot": "subclasse", "pega": deidade}]
+    return personagem(esc + (extras or []))
+
+
+checar(BASE.opcional("wb:deity/abadar").get("divine_skill") == "society",
+       "Abadar ganhou `divine_skill` -- a base tinha ZERO em 488 divindades",
+       f"deu {BASE.opcional('wb:deity/abadar').get('divine_skill')!r}")
+checar(not BASE.opcional("wb:deity/atheism").get("divine_skill"),
+       "e uma filosofia (Atheism) fica SEM -- ausencia e resposta, nao falha")
+
+# `deadly-simplicity` tinha DUAS clausulas em prosa; agora sao dois termos
+_ds = BASE.opcional("wb:feat/deadly-simplicity")
+checar(not _ds.get("requires_residuo"),
+       "deadly-simplicity nao tem mais clausula de divindade em prosa",
+       f"sobrou {_ds.get('requires_residuo')!r}")
+
+# Abadar favorece Crossbow (simple); Aakriti favorece Whip (martial)
+_p = _clerigo("wb:deity/abadar")
+checar(_p.avaliar({"deity_favored_weapon_category": "simple"})[0],
+       "Clerigo de Abadar (Crossbow, simple) atende a categoria simple")
+_p = _clerigo("wb:deity/aakriti")
+ok, motivo = _p.avaliar({"deity_favored_weapon_category": "simple"})
+checar(not ok, "e o de Aakriti (Whip, martial) NAO", f"deu {ok}")
+checar("Whip" in " ".join(motivo),
+       "com o motivo NOMEANDO a arma que a divindade favorece", f"deu {motivo!r}")
+
+# a pericia divina responde pela pericia CERTA, e nao por Religion
+_p = _clerigo("wb:deity/abadar")
+ok, motivo = _p.avaliar({"proficiency_divine_skill": {">=": "master"}})
+checar(not ok and "society" in " ".join(motivo),
+       "a pericia divina de Abadar e Society, e e ela que o motivo cita",
+       f"deu {motivo!r}")
+
+# sem divindade escolhida os tres respondem False COM MOTIVO, e nada estoura
+_p = personagem(niveis((FIGHTER, 1)))
+for termo, valor in (("deity_favored_weapon_category", "simple"),
+                     ("proficiency_favored_weapon", {">=": "trained"}),
+                     ("proficiency_divine_skill", {">=": "master"})):
+    ok, motivo = _p.avaliar({termo: valor})
+    checar(not ok and "nao segue divindade" in " ".join(motivo),
+           f"`{termo}` sem divindade responde com motivo, nao estoura",
+           f"deu {ok} {motivo!r}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")
@@ -2000,4 +2060,3 @@ if FALHAS:
     sys.exit(1)
 print("  todos os testes passaram")
 sys.exit(0)
-

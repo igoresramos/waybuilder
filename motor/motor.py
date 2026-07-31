@@ -2918,6 +2918,85 @@ class Personagem:
                                  for a in alvos))
         return False, f"exige dominio {nomes}; {d.get('name')} nao o concede"
 
+    # -- arma favorita e pericia divina --------------------------------------
+    # Spec: `specs/2026-07-30-pericia-divina-e-arma-favorita.md`
+
+    def _armas_favoritas(self) -> list[dict]:
+        """Os registros de arma que a divindade escolhida favorece."""
+        d = self.divindade()
+        if d is None:
+            return []
+        return [r for r in (self.base.opcional(str(a))
+                            for a in (d.get("favored_weapon") or [])) if r]
+
+    def _termo_deity_favored_weapon_category(self, valor) -> tuple[bool, str]:
+        """`{"deity_favored_weapon_category": "simple"}` -- Deadly Simplicity.
+
+        Pergunta pela ARMA da divindade, nao pela proficiencia do personagem:
+        sao dois termos porque sao duas perguntas, e `deadly-simplicity` faz as
+        duas em clausulas separadas.
+        """
+        alvo = str(valor or "").lower()
+        d = self.divindade()
+        if d is None:
+            return False, f"exige arma favorita {alvo}; nao segue divindade"
+        armas = self._armas_favoritas()
+        # `unarmed` nao e `weapon_category` -- e trait, e e assim que o RAW
+        # descreve a arma favorita de quem luta desarmado
+        for arma in armas:
+            traits = {str(t).lower() for t in (arma.get("traits") or [])}
+            if str(arma.get("weapon_category") or "").lower() == alvo or alvo in traits:
+                return True, ""
+        tem = ", ".join(f"{a.get('name')} ({a.get('weapon_category')})"
+                        for a in armas) or "nenhuma"
+        return False, (f"exige arma favorita {alvo}; "
+                       f"{d.get('name')} favorece {tem}")
+
+    def _rank_por_exigencia(self, tenho, exigencia, rotulo) -> tuple[bool, str]:
+        """Compara rank contra `{">=": "expert"}`, o formato dos outros termos."""
+        for op, alvo in (exigencia or {}).items():
+            ia = RANKS.index(tenho) if tenho in RANKS else 0
+            ib = RANKS.index(alvo) if alvo in RANKS else 0
+            if not _comparar(ia, op, ib):
+                return False, f"exige {rotulo} {op} {alvo}; tem {tenho}"
+        return True, ""
+
+    def _termo_proficiency_favored_weapon(self, valor) -> tuple[bool, str]:
+        """O personagem tem rank X NA arma favorita da divindade?"""
+        d = self.divindade()
+        if d is None:
+            return False, "exige proficiencia na arma favorita; nao segue divindade"
+        armas = self._armas_favoritas()
+        if not armas:
+            return False, f"{d.get('name')} nao tem arma favorita na base"
+        excluir = getattr(self, "_avaliando", None)
+        melhor, nome = "untrained", None
+        for arma in armas:
+            slug = arma["id"].split("/")[-1]
+            tenho = (self._rank_de_arma(f"weapon:{slug}", excluir)
+                     or self.proficiencias.get(
+                         str(arma.get("weapon_category") or "simple"), "untrained"))
+            if RANKS.index(tenho) >= RANKS.index(melhor):
+                melhor, nome = tenho, arma.get("name")
+        return self._rank_por_exigencia(melhor, valor, f"proficiencia em {nome}")
+
+    def _termo_proficiency_divine_skill(self, valor) -> tuple[bool, str]:
+        """O personagem tem rank X na pericia divina da divindade?
+
+        `divine_skill` e a decima lacuna de leitura: estava na prosa do AoN de
+        475 divindades e a base tinha zero. As 13 sem o campo sao filosofias, e
+        para elas a resposta e nao -- com o motivo escrito.
+        """
+        d = self.divindade()
+        if d is None:
+            return False, "exige a pericia divina; nao segue divindade"
+        pericia = str(d.get("divine_skill") or "")
+        if not pericia:
+            return False, f"{d.get('name')} nao tem pericia divina"
+        excluir = getattr(self, "_avaliando", None)
+        tenho = self._rank_sem(pericia, excluir)
+        return self._rank_por_exigencia(tenho, valor, f"{pericia} (pericia divina)")
+
     def _termo_trait(self, valor) -> tuple[bool, str]:
         alvos = valor if isinstance(valor, list) else [valor]
         meus = set()

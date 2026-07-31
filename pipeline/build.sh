@@ -193,6 +193,12 @@ echo "== 7e1d. requisito de sub-escolha preso no residuo =="
 # mapa `<opcao> <eixo>` sai das proprias `subclasses`.
 python3 derivar_requisito_de_subescolha.py
 
+echo "== 7e1d2. pericia divina + clausulas de divindade no residuo =="
+# Depois de `derivar_escolha_de_divindade.py` e da santificacao: `divine_skill`,
+# `favored_weapon` e os dominios so existem na base aqui, e e por isso que a
+# conversao nao cabe no parser de `feats.py`, que roda na EXTRACAO.
+python3 derivar_requisito_de_divindade.py
+
 echo "== 7e1e. parcelas de dano: weapon specialization e furia =="
 # Depois do desmembramento de colisoes (os tres `Greater Weapon Specialization`
 # tem ids diferentes) e depois de `aplicar_subclasses.py` (os gemeos de

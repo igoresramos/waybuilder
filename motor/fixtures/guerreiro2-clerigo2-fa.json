@@ -130,7 +130,6 @@
   "class_feat@1": [
    "wb:feat/agile-shield-grip",
    "wb:feat/combat-assessment",
-   "wb:feat/deadly-simplicity",
    "wb:feat/double-slice",
    "wb:feat/everstand-stance",
    "wb:feat/exacting-strike",
@@ -144,6 +143,7 @@
    "wb:feat/vile-desecration",
    "wb:feat/domain-initiate",
    "wb:feat/reactive-shield",
+   "wb:feat/deadly-simplicity",
    "wb:feat/divine-castigation",
    "wb:feat/false-faith",
    "wb:feat/harming-hands",
@@ -172,7 +172,6 @@
   "class_feat@2": [
    "wb:feat/agile-shield-grip",
    "wb:feat/combat-assessment",
-   "wb:feat/deadly-simplicity",
    "wb:feat/double-slice",
    "wb:feat/everstand-stance",
    "wb:feat/exacting-strike",
@@ -209,12 +208,12 @@
    "wb:feat/curse-maelstrom-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/devoted-guardian",
-   "wb:feat/dragging-strike"
+   "wb:feat/dragging-strike",
+   "wb:feat/dragon-disciple-dedication"
   ],
   "class_feat@4": [
    "wb:feat/agile-shield-grip",
    "wb:feat/combat-assessment",
-   "wb:feat/deadly-simplicity",
    "wb:feat/double-slice",
    "wb:feat/everstand-stance",
    "wb:feat/exacting-strike",
@@ -251,7 +250,8 @@
    "wb:feat/curse-maelstrom-dedication",
    "wb:feat/demolitionist-dedication",
    "wb:feat/devoted-guardian",
-   "wb:feat/dragging-strike"
+   "wb:feat/dragging-strike",
+   "wb:feat/dragon-disciple-dedication"
   ],
   "free_archetype@1": [
    "wb:feat/acrobat-dedication",
