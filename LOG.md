@@ -1420,3 +1420,38 @@ INALCANCAVEL. E cosmetico (familia do 55) de um lado e inalcancavel (familia do
 E o conserto obvio seria errado: trocar o alvo do `grants` para o
 `class-feature` QUEBRARIA a cadeia que hoje funciona. O caminho e `equivale_a`
 entre o par, como nos gemeos de instinto.
+
+## 2026-07-31 (4a rodada) -- o balaio do Inventor era escolha ANINHADA
+
+A Fatia 0 do item 99 estava dimensionada como "ler as referencias literais por
+nome e nomear 59 opcoes do balaio". O que se achou foi ESTRUTURA.
+
+O Inventor era a UNICA classe sem eixo nenhum: tres blocos `outras-opcoes` com
+22, 15 e 15 opcoes. Lido o conteudo, o nivel 1 misturava duas naturezas -- 4
+INOVACOES (a escolha de identidade) e 18 MODIFICACOES da inovacao --, e os
+niveis 7 e 15 eram tiers de modificacao. O Foundry declara tudo isso em
+`ChoiceSet` de lista literal, e cada dono diz quais sao as suas.
+
+Medido: 1.012 ChoiceSet literais, 529 referencias, 395 distintas, 362 resolvem
+na base, ZERO ambiguas -- e por ser inequivoca a resolucao por nome vale aqui.
+
+Nasceram 6 eixos e o balaio caiu de 265 para 202. O do Inventor foi de 22/15/15
+para praticamente zero.
+
+O ganho de desenho e o BLOCO CONDICIONAL. A primeira versao gateava so as
+OPCOES, e o resultado foi um Mago de Abjuracao com um eixo de pecado
+thassiloniano inteiro marcado -- e um aviso "falta escolher" que nao era
+pendencia, era ruido. Quando todas as opcoes de um eixo pedem a mesma
+sub-escolha, a condicao e do EIXO: quem nao pegou a escola nao TEM o eixo.
+
+## O portao 8 pegou um erro meu, e a cadeia de consequencias
+
+Ao fechar o item 100 eu enviei `derivar_arquetipo_do_feat.py` citando
+`specs/2026-07-31-arquetipo-do-feat.md` -- uma spec que eu nunca escrevi. A
+regra do projeto e spec primeiro, e eu a violei.
+
+Quem pegou foi o portao 8 ("artefato citado que sumiu do disco"). E como ele
+falha o build, o passo 9 nao emitiu o payload do app -- e a paridade TS/Python
+quebrou em seguida, com o TS lendo um payload de antes. Passei um tempo
+achando que era defasagem de sincronizacao, quando a causa estava tres passos
+antes. A spec foi escrita e o build voltou.

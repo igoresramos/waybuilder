@@ -215,18 +215,22 @@ items:
 - id: 105
   date: '2026-07-31'
   priority: media
-  desc: 'SOBRA DO ITEM 99, cujas fatias 0 e 1 fecharam em 2026-07-31 (spec specs/2026-07-31-tag-e-eixo-por-query.md).
-    FEITO: `tags` entrou na base em 549 registros lidos de `otherTags` do Foundry; `item:tag` virou atomo
-    do `_atomo_de_filtro` nos dois motores (eram 54 usos IGNORADOS, e atomo ignorado conta como SATISFEITO);
-    e nasceram os dois eixos das unicas classes que tinham ZERO bloco de subclasse -- Kineticist (`kinetic-gate`,
-    6 gates, `escolhe: 2`) e Commander (`tactic`, 14 taticas, `escolhe: 5`). O bloco guarda o FILTRO
-    e quem resolve e o MOTOR, por personagem: congelar a lista no build dessincroniza na primeira mudanca
-    de fonte. SOBRA: (a) `item:slug`, 74 usos, ainda ignorado -- todos apontam para registro especifico
-    por slug e o slug do Foundry nem sempre e o nosso id, entao errar ali aponta para o registro ERRADO;
-    (b) a Fatia 0 (ler as 109 referencias literais por nome dos 74 ChoiceSet de lista, que nomeiam 59
-    opcoes do balaio -- Inventor 47, Wizard 12), que e trabalho de pipeline sem avaliador nenhum; (c)
-    as fatias 2 a 4, que somam 20 queries exatas e ZERO opcao nova -- valem por correcao de nivel, nao
-    por volume; (d) 120 das 256 opcoes do balaio seguem sem explicacao, concentradas em Alchemist 33,
-    Thaumaturge 30, Cleric 18, Animist 13 e Oracle 12 -- e o item 69, e o avaliador chega a 53%% e para.'
+  desc: 'FATIA 0 FEITA 2026-07-31 (spec specs/2026-07-31-escolha-aninhada-do-inventor.md), e ela rendeu
+    mais do que o dimensionamento previa. O previsto era "ler as literais por nome e nomear 59 do balaio".
+    O que se achou foi ESTRUTURA: o Inventor era a UNICA classe sem eixo nenhum -- tres blocos `outras-opcoes`
+    (22, 15, 15) -- e o nivel 1 misturava 4 INOVACOES com 18 MODIFICACOES da inovacao, enquanto os niveis
+    7 e 15 eram tiers de modificacao. O Foundry declara tudo em `ChoiceSet` de lista literal (1.012 deles,
+    529 referencias, 395 distintas, 362 resolvem na base, ZERO ambiguas). FEITO: 6 eixos criados (Inventor
+    `innovation` 4, `initial-modification` 13, `breakthrough-modification` 32, `revolutionary-modification`
+    45; Mago `thassilonian-sin` 7 e `rooted-branch` 5), 63 opcoes saindo do balaio (265 -> 202), e 25
+    opcoes com gate por sub-escolha. Ganho de desenho: BLOCO CONDICIONAL -- quando todas as opcoes de
+    um eixo pedem a mesma sub-escolha, a condicao e do EIXO, e um Mago de outra escola simplesmente NAO
+    TEM o eixo de pecado thassiloniano (antes o motor avisava "falta escolher" para todo Mago). SOBRA:
+    (a) `item:slug`, 74 usos, ainda ignorado no `_atomo_de_filtro` -- todos apontam para registro especifico
+    e o slug do Foundry nem sempre e o nosso id; (b) `Manifold Modifications` (feat nv 8, 17 opcoes) ficou
+    fora do eixo por ser feat e nao progressao -- entra pela familia de slot concedido por feat; (c) as
+    fatias 2 a 4 do dimensionamento, que somam 20 queries exatas e ZERO opcao nova; (d) 202 opcoes de
+    balaio seguem sem explicacao (Alchemist 33, Thaumaturge 30, Cleric 18, Animist 13, Oracle 12) -- e
+    o item 69.'
 promoted: []
 ---

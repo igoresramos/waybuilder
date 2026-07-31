@@ -363,6 +363,13 @@ class Personagem:
             for bloco in classe.get("subclasses") or []:
                 if int(bloco.get("nivel") or 1) > nivel_classe:
                     continue
+                # eixo CONDICIONAL: quando todas as opcoes pedem a mesma
+                # sub-escolha, a condicao e do eixo. Um Mago de Abjuracao nao
+                # tem um eixo de pecado thassiloniano com tudo marcado -- ele
+                # NAO TEM o eixo, e avisar "falta escolher" seria ruido.
+                # Spec: `specs/2026-07-31-escolha-aninhada-do-inventor.md`
+                if bloco.get("requires") and not self.avaliar(bloco["requires"])[0]:
+                    continue
                 # `escolhe` existe no schema desde sempre e ate 30/07 TODOS os
                 # 52 blocos usavam 1 -- o motor nem lia o campo, fazia
                 # `next(...)` e pronto. O eixo de ikon do Exemplar e o primeiro

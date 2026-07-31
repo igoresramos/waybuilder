@@ -370,6 +370,14 @@ export class Personagem implements ContextoDePredicado {
         const nivel_bloco = Object.hasOwn(bloco, "nivel") && verdadeiro(bloco["nivel"])
           ? inteiro(bloco["nivel"]) : 1;
         if (nivel_bloco > nivel_classe) continue;
+        // eixo CONDICIONAL: quando todas as opções pedem a mesma sub-escolha, a
+        // condição é do EIXO. Um Mago de Abjuração não tem um eixo de pecado
+        // thassiloniano com tudo marcado -- ele NÃO TEM o eixo, e avisar "falta
+        // escolher" seria ruído.
+        // Spec: `specs/2026-07-31-escolha-aninhada-do-inventor.md`
+        if (verdadeiro(bloco["requires"]) && !this.avaliar(bloco["requires"])[0]) {
+          continue;
+        }
         const opcoes = listaDe(bloco["opcoes"]);
         // `escolhe` existe no schema desde sempre e até 30/07 TODOS os 52
         // blocos usavam 1 -- o motor nem lia o campo. O eixo de ikon do

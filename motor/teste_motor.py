@@ -2200,6 +2200,63 @@ checar(bool(_m.get("divine_font")) and bool(_m.get("domains")),
        "e a vencedora e a que tem os campos -- o legado era praticamente vazio",
        f"font={_m.get('divine_font')} domains={bool(_m.get('domains'))}")
 
+# -- escolha aninhada: o balaio do Inventor vira eixo ------------------------
+# O Inventor era a UNICA classe sem eixo nenhum: tres blocos `outras-opcoes`
+# (22, 15, 15). O nivel 1 misturava 4 INOVACOES com 18 MODIFICACOES da
+# inovacao, e os niveis 7 e 15 eram tiers de modificacao -- o Foundry declara
+# isso em `ChoiceSet` de lista literal.
+# Spec: `specs/2026-07-31-escolha-aninhada-do-inventor.md`
+print("\nescolha aninhada -- o balaio do Inventor")
+
+INVENTOR, WIZARD_ = "wb:class/inventor", "wb:class/wizard"
+
+_p = personagem(niveis((INVENTOR, 15)))
+_eixos = {b["eixo"] for b in _p.slots_de_subclasse}
+for _e in ("innovation", "initial-modification", "breakthrough-modification",
+           "revolutionary-modification"):
+    checar(_e in _eixos, f"o Inventor ganha o eixo `{_e}` -- tinha ZERO eixo",
+           f"tem {sorted(_eixos)}")
+
+_balaio = sum(b["opcoes"] for b in _p.slots_de_subclasse
+              if b["eixo"] == "outras-opcoes")
+checar(_balaio <= 1, "e o balaio dele esvazia (era 22 + 15 + 15)",
+       f"sobrou {_balaio}")
+
+# FILTRAR E MARCAR: a modificacao de arma aparece para quem pegou armadura
+_arma = personagem(niveis((INVENTOR, 3))
+                   + [{"em": 1, "slot": "subclasse",
+                       "pega": "wb:class-feature/weapon-innovation"}])
+_armadura = personagem(niveis((INVENTOR, 3))
+                       + [{"em": 1, "slot": "subclasse",
+                           "pega": "wb:class-feature/armor-innovation"}])
+_ca, _cb = _arma.candidatos("subclasse", 1), _armadura.candidatos("subclasse", 1)
+checar(len(_ca) == len(_cb),
+       "as duas inovacoes veem a MESMA lista -- filtrar e marcar, nao esconder",
+       f"{len(_ca)} vs {len(_cb)}")
+checar(sum(1 for x in _ca if x["atende"]) > sum(1 for x in _cb if x["atende"]),
+       "mas a de arma ATENDE mais que a de armadura",
+       f"{sum(1 for x in _ca if x['atende'])} vs "
+       f"{sum(1 for x in _cb if x['atende'])}")
+_marcado = next((x for x in _cb if not x["atende"]), None)
+checar(_marcado is not None and "Innovation" in " ".join(_marcado["motivos"]),
+       "e o motivo NOMEIA a inovacao que falta",
+       f"{_marcado and _marcado['motivos']}")
+
+# EIXO CONDICIONAL: quem nao pegou a escola nao TEM o eixo dela
+_abj = personagem(niveis((WIZARD_, 4))
+                  + [{"em": 1, "slot": "subclasse",
+                      "pega": "wb:class-feature/school-of-battle-magic"}])
+_thas = personagem(niveis((WIZARD_, 4))
+                   + [{"em": 1, "slot": "subclasse",
+                       "pega": "wb:class-feature/school-of-thassilonian-rune-magic"}])
+checar("thassilonian-sin" not in {b["eixo"] for b in _abj.slots_de_subclasse},
+       "Mago de outra escola NAO tem o eixo de pecado thassiloniano",
+       f"{sorted(b['eixo'] for b in _abj.slots_de_subclasse)}")
+checar("thassilonian-sin" in {b["eixo"] for b in _thas.slots_de_subclasse},
+       "e o de Thassilon tem", f"{sorted(b['eixo'] for b in _thas.slots_de_subclasse)}")
+checar(not any("thassilonian-sin" in a for a in _abj.avisos),
+       "e ninguem avisa `falta escolher` um eixo que o personagem nao tem")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

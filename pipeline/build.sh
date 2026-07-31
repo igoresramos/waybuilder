@@ -219,6 +219,11 @@ echo "== 7e2. categoria de feat que sobrou vazia =="
 # inteira alcanca tanto esses quanto os que nao casaram com o AoN.
 python3 derivar_categoria_de_feat.py
 
+echo "== 7e1f. escolha aninhada: o balaio do Inventor vira eixo =="
+# DEPOIS de `colapsar_opcoes_irmas` (7e1c2), que decide qual id de cada par e a
+# opcao viva -- mover para o eixo antes disso moveria o irmao errado.
+python3 derivar_escolha_aninhada.py
+
 echo "== 7e2a. arquetipo do feat, lido da dedicacao no requires =="
 # ANTES do gate de arquetipo nao da: `derivar_gate_arquetipo.py` roda no 4h2 e
 # depende de `archetype` ja estar preenchido. Aqui e tarde de proposito -- o que

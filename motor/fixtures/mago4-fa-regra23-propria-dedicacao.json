@@ -880,7 +880,7 @@
    ]
   },
   "avisos": [
-   "Wizard: falta escolher `outras-opcoes` (14 opcoes)",
+   "Wizard: falta escolher `outras-opcoes` (2 opcoes)",
    "wb:feat/basic-arcana: grant_item depende de escolha do jogador (uuid dinamico `{item|flags.system.rulesSelections.basicArcana}`) -- pendente, nao e alvo ausente",
    "pericias livres: 0 declarada(s) de 6 a que o personagem tem direito -- faltam 6"
   ],
@@ -1332,7 +1332,7 @@
     "em": 1,
     "escolhe": 1,
     "kind": "outras-opcoes",
-    "opcoes": 14,
+    "opcoes": 2,
     "rotulo": "Wizard / outras-opcoes",
     "slot": "subclasse"
    },
@@ -1420,22 +1420,10 @@
     "filtro": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 14,
+    "opcoes": 2,
     "opcoes_ids": [
-     "wb:class-feature/cascade-bearers",
-     "wb:class-feature/emerald-boughs",
-     "wb:class-feature/envy",
-     "wb:class-feature/gluttony",
-     "wb:class-feature/greed",
-     "wb:class-feature/lust",
-     "wb:class-feature/pride",
-     "wb:class-feature/rain-scribes",
      "wb:class-feature/runelord",
-     "wb:class-feature/sloth",
-     "wb:class-feature/tempest-sun-mages",
-     "wb:class-feature/uzunjati",
-     "wb:class-feature/war-magic",
-     "wb:class-feature/wrath"
+     "wb:class-feature/war-magic"
     ]
    }
   ],

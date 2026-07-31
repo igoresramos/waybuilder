@@ -956,7 +956,7 @@
    ]
   },
   "avisos": [
-   "Wizard: falta escolher `outras-opcoes` (14 opcoes)",
+   "Wizard: falta escolher `outras-opcoes` (2 opcoes)",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Dwarf (1), Scholar of the Ancients (1), Scholar of the Ancients (1), Fighter (habilidade-chave) (1), criacao (4 livres) (4), nivel 5 (4)",
    "pericias livres: 0 declarada(s) de 5 a que o personagem tem direito -- faltam 5"
   ],
@@ -1547,7 +1547,7 @@
     "em": 1,
     "escolhe": 1,
     "kind": "outras-opcoes",
-    "opcoes": 14,
+    "opcoes": 2,
     "rotulo": "Wizard / outras-opcoes",
     "slot": "subclasse"
    },
@@ -1648,22 +1648,10 @@
     "filtro": null,
     "nivel": 1,
     "nome": null,
-    "opcoes": 14,
+    "opcoes": 2,
     "opcoes_ids": [
-     "wb:class-feature/cascade-bearers",
-     "wb:class-feature/emerald-boughs",
-     "wb:class-feature/envy",
-     "wb:class-feature/gluttony",
-     "wb:class-feature/greed",
-     "wb:class-feature/lust",
-     "wb:class-feature/pride",
-     "wb:class-feature/rain-scribes",
      "wb:class-feature/runelord",
-     "wb:class-feature/sloth",
-     "wb:class-feature/tempest-sun-mages",
-     "wb:class-feature/uzunjati",
-     "wb:class-feature/war-magic",
-     "wb:class-feature/wrath"
+     "wb:class-feature/war-magic"
     ]
    }
   ],
