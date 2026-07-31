@@ -198,9 +198,9 @@
    "ficha": "kineticista6-fa-fogo",
    "nivel": 6,
    "hp": 80,
-   "avisos": 2,
+   "avisos": 3,
    "fora_do_requisito": 0,
-   "slots_abertos": 4
+   "slots_abertos": 5
   },
   {
    "ficha": "ladino2-druida2-bardo2-fa",

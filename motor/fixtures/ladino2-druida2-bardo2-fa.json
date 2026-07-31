@@ -1798,6 +1798,7 @@
     "escolhidos": [
      "wb:class-feature/thief"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Thief",
     "opcoes": 6,
@@ -1818,6 +1819,7 @@
     "escolhidos": [
      "wb:class-feature/animal-order"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Animal Order",
     "opcoes": 9,
@@ -1841,6 +1843,7 @@
     "escolhidos": [
      "wb:class-feature/enigma"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Enigma",
     "opcoes": 5,

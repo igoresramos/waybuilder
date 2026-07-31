@@ -1439,6 +1439,7 @@
     "escolhidos": [
      "wb:class-feature/thief"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Thief",
     "opcoes": 6,

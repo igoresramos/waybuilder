@@ -43,10 +43,33 @@ def chave_de_nome(nome: str) -> str:
     return " ".join((nome or "").split()).casefold()
 
 
+# chaves que TODO registro tem: nao dizem nada sobre quem sabe mais de si
+BOILERPLATE = {"id", "kind", "name", "level", "traits", "rarity", "source",
+               "requires", "grants", "text", "xref", "prov", "mechanized",
+               "grants_completos", "requires_parseado", "aliases"}
+
+
 def sinal(r: dict) -> tuple:
-    """Quanto o registro sabe sobre si mesmo. Maior ganha."""
+    """Quanto o registro sabe sobre si mesmo. Maior ganha.
+
+    O REMASTER vem primeiro desde 2026-07-31, e por um caso concreto: `Ma'at`
+    existe como `wb:deity/maat` (Divine Mysteries, com divine_font,
+    sanctification, domains e favored_weapon) e como `wb:deity/maat-ln` (Gods &
+    Magic, praticamente vazio). O legado GANHAVA, porque o unico sinal que os
+    separava era `traits`, e o unico trait dele e `ln` -- o codigo de
+    ALINHAMENTO, conceito que o proprio Remaster aboliu. Um resquicio do que foi
+    abolido decidia contra o registro rico.
+
+    A contagem de campos ESTRUTURADOS entra em seguida, pelo mesmo motivo: e ela
+    que mede o que o registro carrega, enquanto `traits` mede so se ele carrega
+    alguma etiqueta.
+    """
+    estruturados = sum(1 for k, v in r.items()
+                       if k not in BOILERPLATE and v not in (None, [], {}, ""))
     return (
+        1 if (r.get("source") or {}).get("remaster") else 0,
         1 if (r.get("grants") or []) else 0,
+        estruturados,
         1 if (r.get("traits") or []) else 0,
         1 if r.get("text") else 0,
         1 if r.get("kind") == "class-feature" else 0,

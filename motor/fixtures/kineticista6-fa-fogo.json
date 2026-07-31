@@ -928,6 +928,7 @@
    ]
   },
   "avisos": [
+   "Kineticist: falta escolher `kinetic-gate` (2 de 2)",
    "boosts de atributo: 7 declarado(s) de 11 a que o personagem tem direito -- faltam 4. Fontes: Leshy (1), Herbalist (1), Herbalist (1), criacao (4 livres) (4), nivel 5 (4)",
    "pericias livres: 0 declarada(s) de 2 a que o personagem tem direito -- faltam 2"
   ],
@@ -1417,6 +1418,14 @@
     "slot": "pericias_livres"
    },
    {
+    "em": 1,
+    "escolhe": 2,
+    "kind": "kinetic-gate",
+    "opcoes": 6,
+    "rotulo": "Kineticist / kinetic-gate",
+    "slot": "subclasse"
+   },
+   {
     "em": 3,
     "escolhe": 1,
     "kind": "skill",
@@ -1431,7 +1440,29 @@
     "slot": "skill_increase"
    }
   ],
-  "subclasses": [],
+  "subclasses": [
+   {
+    "classe": "Kineticist",
+    "eixo": "kinetic-gate",
+    "escolhe": 2,
+    "escolhido": null,
+    "escolhidos": [],
+    "filtro": [
+     "item:tag:kineticist-kinetic-gate"
+    ],
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 6,
+    "opcoes_ids": [
+     "wb:class-feature/air-gate",
+     "wb:class-feature/earth-gate",
+     "wb:class-feature/fire-gate",
+     "wb:class-feature/metal-gate",
+     "wb:class-feature/water-gate",
+     "wb:class-feature/wood-gate"
+    ]
+   }
+  ],
   "velocidade": {
    "land": 30
   },

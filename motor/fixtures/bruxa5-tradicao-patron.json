@@ -1449,6 +1449,7 @@
     "escolhe": 1,
     "escolhido": null,
     "escolhidos": [],
+    "filtro": null,
     "nivel": 2,
     "nome": null,
     "opcoes": 19,
@@ -1480,6 +1481,7 @@
     "escolhe": 1,
     "escolhido": null,
     "escolhidos": [],
+    "filtro": null,
     "nivel": 1,
     "nome": null,
     "opcoes": 4,
@@ -1498,6 +1500,7 @@
     "escolhidos": [
      "wb:class-feature/baba-yaga"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Baba Yaga",
     "opcoes": 16,

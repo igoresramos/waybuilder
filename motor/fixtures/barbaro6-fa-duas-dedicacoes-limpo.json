@@ -1533,6 +1533,7 @@
     "escolhidos": [
      "wb:instinct/fury"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Fury",
     "opcoes": 10,
@@ -1555,6 +1556,7 @@
     "escolhe": 1,
     "escolhido": null,
     "escolhidos": [],
+    "filtro": null,
     "nivel": 1,
     "nome": null,
     "opcoes": 9,

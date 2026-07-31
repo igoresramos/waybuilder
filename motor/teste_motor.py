@@ -2138,6 +2138,68 @@ checar(_a.get("velocidade") is not None,
        "e a velocidade que o extrator antigo trazia foi PRESERVADA -- o passo "
        "mescla em `stats`, nao substitui", f"deu {_a.get('velocidade')!r}")
 
+# -- tags e eixos por query --------------------------------------------------
+# O item 99 achava que faltava um AVALIADOR de query. Ele ja existia
+# (`_casa_filtro`). Faltava o VOCABULARIO: `item:tag` era usado 54 vezes nos
+# filtros e o motor o IGNORAVA -- e atomo ignorado conta como SATISFEITO, o que
+# e certo para estreitar slot de feat e destrutivo para DEFINIR eixo.
+# Spec: `specs/2026-07-31-tag-e-eixo-por-query.md`
+print("\ntags e eixos por query")
+
+_com_tags = sum(1 for r in BASE.por_id.values() if r.get("tags"))
+checar(_com_tags > 500,
+       f"`tags` entrou na base em {_com_tags} registros (eram 0)")
+
+KINETICIST, COMMANDER = "wb:class/kineticist", "wb:class/commander"
+_p = personagem(niveis((KINETICIST, 3)))
+_c = _p.candidatos("subclasse", 1)
+checar(len(_c) == 6,
+       "o Kineticist ganha eixo com os 6 gates elementais -- nao 0, nem a base "
+       "inteira", f"deu {len(_c)}")
+checar(all("Gate" in (x.get("nome") or "") for x in _c),
+       "e todos sao Gate", f"deu {[x.get('nome') for x in _c]}")
+
+_p = personagem(niveis((COMMANDER, 3)))
+_c = _p.candidatos("subclasse", 1)
+checar(len(_c) == 14, "e o Commander ganha 14 taticas", f"deu {len(_c)}")
+_bloco = next(b for b in _p.slots_de_subclasse if b.get("eixo") == "tactic")
+checar(_bloco["escolhe"] == 5,
+       "com `escolhe: 5` -- sao cinco `flag` distintas no mesmo ChoiceSet",
+       f"deu {_bloco['escolhe']}")
+
+# o eixo que ja existia nao pode ter mudado
+_c = personagem(niveis(("wb:class/exemplar", 3))).candidatos("subclasse", 1)
+checar(len(_c) == 21, "e o eixo de ikon do Exemplar continua com 21 opcoes",
+       f"deu {len(_c)}")
+
+# a divida que o atomo novo paga: `item:tag` deixa de ser ignorado
+_p = personagem(niveis((KINETICIST, 3)))
+_p.candidatos("subclasse", 1)
+checar(not any("item:tag" in k for k in _p.filtro_ignorado),
+       "e `item:tag` nao aparece mais no contador de filtro ignorado",
+       f"deu {dict(_p.filtro_ignorado)}")
+
+# -- uma divindade por nome no eixo -----------------------------------------
+# `Ma'at` aparecia DUAS vezes na lista do Campeao e do Clerigo. A causa era
+# ORDEM: `colapsar_opcoes_irmas.py` roda no 7d e o eixo `deity` so nasce no
+# 7e1. E quando passou a rodar depois, ele escolheu o LEGADO -- porque o unico
+# sinal que separava os dois era `traits`, e o unico trait do legado e `ln`, o
+# codigo de ALINHAMENTO que o proprio Remaster aboliu.
+print("\numa divindade por nome no eixo")
+
+for _cid in ("wb:class/champion", "wb:class/cleric"):
+    _c = BASE.opcional(_cid) or {}
+    _ops = [o for b in (_c.get("subclasses") or []) if b.get("eixo") == "deity"
+            for o in (b.get("opcoes") or []) if "maat" in o]
+    checar(_ops == ["wb:deity/maat"],
+           f"{_cid.split('/')[-1]}: uma so Ma'at, e e a do remaster",
+           f"deu {_ops}")
+
+_m = BASE.opcional("wb:deity/maat") or {}
+checar(bool(_m.get("divine_font")) and bool(_m.get("domains")),
+       "e a vencedora e a que tem os campos -- o legado era praticamente vazio",
+       f"font={_m.get('divine_font')} domains={bool(_m.get('domains'))}")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

@@ -1361,6 +1361,7 @@
     "escolhidos": [
      "wb:arcane-school/evocation"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Evocation",
     "opcoes": 23,
@@ -1398,6 +1399,7 @@
     "escolhidos": [
      "wb:class-feature/spell-blending"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Spell Blending",
     "opcoes": 5,
@@ -1415,6 +1417,7 @@
     "escolhe": 1,
     "escolhido": null,
     "escolhidos": [],
+    "filtro": null,
     "nivel": 1,
     "nome": null,
     "opcoes": 14,

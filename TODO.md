@@ -54,18 +54,24 @@ items:
   id: 101
   date: '2026-07-30'
   priority: baixa
-- desc: 'ACHADO AO DESTRAVAR O ITEM 43 (2026-07-31): `pipeline/dados_brutos/aon_dump/rules.json` tem
-    **3.645 registros** e **3,8 milhoes de caracteres** de prosa de REGRA, e NENHUM extrator o le -- conferido
-    por grep em `pipeline/*.py` e `pipeline/extratores/*.py`, zero ocorrencias. Nao e um campo esquecido,
-    e um ARQUIVO INTEIRO. Por livro: GM Core 799, Core Rulebook 785, Gamemastery Guide 590, Player Core
-    497, Kingmaker 139, Secrets of Magic 104, Treasure Vault 72+69. O item 43 mostrou que ali mora a formula
-    do familiar, que estava sendo tratada como fonte inexistente. A PERGUNTA A MEDIR antes de qualquer
-    spec: quantos OUTROS itens da fila (e quantas clausulas de `requires_residuo`) sao respondidos por
-    este arquivo? Varredura por termo dos itens abertos contra os 3.645 registros. Provavel que seja a
-    maior veia nao lida que sobrou -- as dez lacunas anteriores eram todas de CAMPO.'
+- desc: 'MEDIDO E REDIMENSIONADO 2026-07-31, e a propria premissa deste item nao se sustentou. Ele
+    dizia "provavel que seja a maior veia nao lida que sobrou". NAO E. `pipeline/dados_brutos/aon_dump/rules.json`
+    tem mesmo 3.645 registros e 3,8 milhoes de caracteres que nenhum extrator abre, mas o que sobra dali
+    e quase todo prosa de MESA, nao numero de ficha. Medido por duas vias: (1) das 389 clausulas distintas
+    em `requires_residuo`, apenas **13** tem o texto literal aparecendo no arquivo, e sao frases genericas
+    (`living creature`, `good alignment`, `you have a focus pool`) que casam por acaso, nao por conterem
+    a regra; (2) so **39 das 3.645** paginas carregam formula de personagem (`equal to your level`, `per
+    level`, `equal to yours` e irmas), e dessas **4 ja foram consumidas** pela spec de familiar e eidolon.
+    Das ~35 que sobram, a maioria e de MESTRE (Treasure by Encounter, Unexpected Difficulty, Complex Crafting)
+    ou de regra variante que nao usamos (Building a Dual-Class Character, Advanced Undead, Cryptids). As
+    poucas de personagem foram conferidas a mao -- `rules-35` (Proficiency), `rules-1147` (Devotee Benefits)
+    e `rules-1331` (Character Advancement) descrevem coisas que o motor JA implementa. CONCLUSAO: o familiar
+    foi a EXCECAO, nao o padrao -- o statblock dele morava numa pagina de regra em vez de na entidade.
+    Prioridade rebaixada de media para baixa. Se alguem voltar aqui, o alvo sao as ~35 paginas com formula,
+    nao os 3.645 registros.'
   id: 103
   date: '2026-07-31'
-  priority: media
+  priority: baixa
 - desc: 'RE-MEDIDO E VERIFICADO 2026-07-31 (docs/medicoes/2026-07-31_homonimos-e-duplicatas.md, com
     nota de correcao no topo). Tres defeitos independentes, achados na medicao do item 46. (1) HOMONIMO
     CLASSE x ARQUETIPO: **12** ocorrencias (3 em `requires`, 9 em `grants`) em 11 registros de origem,
@@ -172,18 +178,6 @@ items:
   id: 85
   date: '2026-07-29'
   priority: baixa
-- desc: 'ACHADO PELA VERIFICACAO `verificar-eixos.mjs` AO FECHAR O 87 (2026-07-30) -- e PRE-EXISTENTE,
-    confirmado rodando a verificacao no estado anterior. O eixo `deity` do Campeao oferece `Ma''at` DUAS
-    vezes: `wb:deity/maat` (Divine Mysteries, remaster) e `wb:deity/maat-ln` (Gods & Magic, legado). MEDIDO:
-    e o UNICO caso -- 1 nome de divindade duplicado em 488, e 1 unica divindade com sufixo de alinhamento
-    legado no id (`-ln`). Familia de `fundir_renomeados.py` / `derivar_alias_legado.py`, que nao alcancou
-    este par. ATENCAO AO FUNDIR, verificado 2026-07-31: `wb:deity/maat-ln` E REFERENCIADO, por `wb:class/champion`
-    e `wb:class/cleric` -- ele esta no eixo `deity` das duas. Uma medicao automatizada afirmou "0 referencias,
-    seguro fundir" e estava ERRADA; fundir sem tratar as duas listas quebra o eixo. O remaster e o canonico,
-    o legado vira alias.'
-  id: 102
-  date: '2026-07-30'
-  priority: baixa
 - desc: 'PASSO DOIS DO ITEM 22: estruturar `acesso` em filiacoes. Hoje e texto verbatim em 728 registros,
     e as formas se repetem (102 armas de fogo, 102 gadgets, 80 Pathfinder Society, 73 Knights of Lastwall,
     72 Absalom/New Thassilon, 55 Firebrands, 28 Tian Xia, 27 Hermea) -- da para cobrir a maioria com ~15
@@ -217,31 +211,21 @@ items:
     itens: arma favorita / pericia divina / santificacao como TERMO (6 clausulas) e divindade opcional
     para quem nao e Clerigo nem Campeao ficam no 87; alinhamento segue recusado; `Versatile Font` precisa
     de CONCESSAO de escolha, que e outra familia.'
-- id: 99
-  date: '2026-07-30'
+- id: 105
+  date: '2026-07-31'
   priority: media
-  desc: 'RE-DIMENSIONADO 2026-07-31 (docs/medicoes/2026-07-31_dimensionar-avaliador-de-query.md). TRES
-    PREMISSAS DESTE ITEM ESTAVAM ERRADAS, e as tres foram verificadas contra o codigo e a base. (1) "exige
-    um avaliador de query, que e trabalho e risco novos" -- ELE JA EXISTE: `_casa_filtro` em `motor/motor.py:3184`
-    e `app/src/motor/personagem.ts:3437`, com `or`/`and`/`not`/`nor`/`xor`/`lte`, ja chamado em producao
-    para recortar slot. Nenhum dos operadores usados pelas queries falta. (2) "povoariam `Exemplar.Ikon`
-    (22)" -- o eixo `ikon` do Exemplar JA EXISTE na base com 21 opcoes e `escolhe: 3` (feito na spec escolha-multipla-e-ikons);
-    o 22 era contagem de REGRAS, nao de opcoes. Idem o "33" do Kineticist, que rende 6 gates. (3) "as
-    74 de lista literal cobrem zero do balaio" -- falso: 59 opcoes literais estao no balaio `outras-opcoes`
-    (Inventor 47, Wizard 12). O QUE SOBRA DE VERDADE: as 194 ChoiceSet sao QUATRO formas, nao duas --
-    88 `filter`, 74 literal, 16 `ownedItems`, 16 string. E o que a query destrava sao DOIS eixos em classes
-    que hoje tem ZERO bloco de subclasse (confirmado): Kineticist (6 gates + impulsos) e Commander (11
-    escolhas de tatica, 14 a 31 opcoes). DIVIDA VIVA que ninguem tinha contado: `_atomo_de_filtro` so
-    entende `trait`/`level`/`category`/`rarity`, e os filtros da base usam `item:slug` 74 vezes e `item:tag`
-    54 -- ignorados e contados como SATISFEITOS. Isso e correto para ESTREITAR slot de feat (principio
-    zero: nao esvaziar em silencio) e DESTRUTIVO para DEFINIR eixo, porque o eixo sai com tudo dentro
-    (mediana medida: 16.383 itens sobrando; 67 listas erradas por excesso contra 3 vazias). ORDEM OBRIGATORIA:
-    ensinar `item:tag` ao motor ANTES de usar filtro para definir eixo. RECORTE 80/20 PROPOSTO: Fatia
-    0 (ler as literais por nome, sem avaliador nenhum) + Fatia 1 (`item:tag` + extrair os ChoiceSet dos
-    class-features, que hoje sao 0 dos 847) fecham 68 das 88 queries e nomeiam 136 do balaio, com UM atomo
-    novo. As fatias seguintes somam 20 queries e ZERO opcao nova -- valem por correcao de nivel, nao por
-    volume. NAO VERIFIQUEI todas as 11 afirmacoes do relatorio; conferi 4 -- o avaliador existente, o
-    eixo do Exemplar, os zero blocos de Kineticist/Commander e a divida de `item:slug`/`item:tag` -- e
-    as 4 se sustentaram.'
+  desc: 'SOBRA DO ITEM 99, cujas fatias 0 e 1 fecharam em 2026-07-31 (spec specs/2026-07-31-tag-e-eixo-por-query.md).
+    FEITO: `tags` entrou na base em 549 registros lidos de `otherTags` do Foundry; `item:tag` virou atomo
+    do `_atomo_de_filtro` nos dois motores (eram 54 usos IGNORADOS, e atomo ignorado conta como SATISFEITO);
+    e nasceram os dois eixos das unicas classes que tinham ZERO bloco de subclasse -- Kineticist (`kinetic-gate`,
+    6 gates, `escolhe: 2`) e Commander (`tactic`, 14 taticas, `escolhe: 5`). O bloco guarda o FILTRO
+    e quem resolve e o MOTOR, por personagem: congelar a lista no build dessincroniza na primeira mudanca
+    de fonte. SOBRA: (a) `item:slug`, 74 usos, ainda ignorado -- todos apontam para registro especifico
+    por slug e o slug do Foundry nem sempre e o nosso id, entao errar ali aponta para o registro ERRADO;
+    (b) a Fatia 0 (ler as 109 referencias literais por nome dos 74 ChoiceSet de lista, que nomeiam 59
+    opcoes do balaio -- Inventor 47, Wizard 12), que e trabalho de pipeline sem avaliador nenhum; (c)
+    as fatias 2 a 4, que somam 20 queries exatas e ZERO opcao nova -- valem por correcao de nivel, nao
+    por volume; (d) 120 das 256 opcoes do balaio seguem sem explicacao, concentradas em Alchemist 33,
+    Thaumaturge 30, Cleric 18, Animist 13 e Oracle 12 -- e o item 69, e o avaliador chega a 53%% e para.'
 promoted: []
 ---

@@ -1353,3 +1353,48 @@ navegador, nao nos testes.
 
 Quatro camadas verdes, com 16 assertivas novas no oraculo e
 `verificar-familiar.mjs` ponta a ponta.
+
+## 2026-07-31 (2a rodada) -- itens 99 e 102, e um resquicio do alinhamento decidindo errado
+
+O item 99 estava dimensionado errado em TRES premissas, todas conferidas contra
+o codigo antes de mexer: o avaliador de query JA EXISTIA (`_casa_filtro`, nos
+dois motores, ja em producao); o eixo de ikon do Exemplar JA EXISTIA com 21
+opcoes (o "22" era contagem de REGRAS); e as 74 listas literais cobrem 59 do
+balaio, nao zero.
+
+O que faltava nao era avaliador, era VOCABULARIO. `_atomo_de_filtro` entendia
+`trait`, `level`, `category` e `rarity`, e os filtros da base usam `item:tag`
+54 vezes -- ignorado, e atomo ignorado conta como SATISFEITO. Esse default e
+CERTO para estreitar slot de feat (o principio zero manda nao esvaziar em
+silencio) e DESTRUTIVO para definir eixo, porque a lista sai com os 19.604
+registros dentro. Dai a ordem: a tag entrou na base antes de virar eixo.
+
+Nasceram os eixos das duas unicas classes com ZERO bloco de subclasse:
+Kineticist (6 gates) e Commander (14 taticas, `escolhe: 5`).
+
+A camada certa levou duas tentativas. Primeiro pus a resolucao do filtro em
+`candidatos()`, e o navegador mostrou 0 onde o Python mostrava 6 -- porque o
+App refiltra por `opcoes_ids`, que estava vazio de proposito. A resposta foi
+mover a resolucao para a montagem do bloco: a BASE guarda o filtro (sem
+congelar), o MOTOR resolve por personagem, e a TELA continua consumindo ids sem
+saber que existe query.
+
+## Item 102 -- e a parte que quase passou
+
+`Ma'at` aparecia duas vezes na lista do Campeao e do Clerigo. A causa nao era
+falta de codigo: `colapsar_opcoes_irmas.py` ja faz "uma opcao por nome em cada
+eixo". Era ORDEM -- ele roda no 7d e o eixo `deity` so nasce no 7e1.
+
+Rodar de novo depois resolveu a duplicata e criou outra: ele elegeu o LEGADO.
+O criterio de desempate e "quem sabe mais de si", e o unico sinal que separava
+os dois era `traits` -- sendo que o unico trait do legado e `ln`, o codigo de
+ALINHAMENTO que o proprio Remaster aboliu. Um resquicio do conceito abolido
+decidindo contra o registro que tem divine_font, sanctification, domains e
+favored_weapon.
+
+O criterio ganhou dois termos acima de `traits`: o remaster primeiro, e a
+contagem de campos ESTRUTURADOS em seguida. Conferido que os 15 pares antigos
+nao viraram.
+
+Quatro camadas verdes, e `verificar-eixos.mjs` passou pela primeira vez desde
+que o Ma'at apareceu.

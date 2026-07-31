@@ -378,13 +378,25 @@ class Personagem:
                     "nivel": bloco.get("nivel"),
                     "escolhe": quantas,
                     "escolhidos": escolhidos,
-                    "opcoes": len(bloco.get("opcoes") or []),
+                    # a CONTAGEM acompanha `opcoes_ids`, e nao a lista crua da
+                    # base: no eixo por query a lista crua e vazia de proposito
+                    # e a tela mostrava "0 opcoes" com 6 opcoes na frente.
+                    "opcoes": len(list(bloco.get("opcoes") or [])
+                                  or self._ids_por_filtro(bloco.get("filtro"))),
                     # a LISTA, alem da contagem: `candidatos("subclasse")`
                     # precisa dos ids, e ate 2026-07-28 iterava `opcoes` -- que
                     # e um int -- e levantava TypeError. Nao explodia so porque
                     # nenhuma ficha de exemplo exercitava esse slot; o porte
                     # para TypeScript e que trouxe o caso a tona.
-                    "opcoes_ids": list(bloco.get("opcoes") or []),
+                    # eixo por QUERY: a base guarda o FILTRO em vez da lista,
+                    # porque congelar a lista no build dessincroniza na primeira
+                    # mudanca de fonte. Quem resolve e o MOTOR, aqui -- assim a
+                    # tela continua consumindo `opcoes_ids` como sempre, sem
+                    # saber que existe query. Kineticist e Commander sao os dois
+                    # primeiros. Spec: `specs/2026-07-31-tag-e-eixo-por-query.md`
+                    "opcoes_ids": (list(bloco.get("opcoes") or [])
+                                   or self._ids_por_filtro(bloco.get("filtro"))),
+                    "filtro": bloco.get("filtro"),
                     "escolhido": escolha,
                     "nome": (self.base.opcional(escolha) or {}).get("name") if escolha else None,
                 })
@@ -1723,6 +1735,18 @@ class Personagem:
                 vistos.add(f["id"])
                 self._coletar_grant_actor(f["id"], self.base.opcional(f["id"]) or f,
                                           em_de.get(f["id"]))
+
+    def _ids_por_filtro(self, filtro) -> list[str]:
+        """Os ids que casam com o filtro do `ChoiceSet`, ordenados por nome.
+
+        A base guarda o filtro; a resolucao e AQUI, por personagem, e nao no
+        build -- lista congelada dessincroniza na primeira mudanca de fonte.
+        """
+        if not filtro:
+            return []
+        casam = [r for r in self.base.por_id.values()
+                 if self._casa_filtro(r, filtro)]
+        return [r["id"] for r in sorted(casam, key=lambda r: r.get("name") or "")]
 
     def _classe_que_concede(self, feature_id: str) -> str | None:
         """A classe DESTA ficha cuja progressao traz esta class-feature.
@@ -3301,8 +3325,14 @@ class Personagem:
 
     # `item:X:Y` -> onde X vive no nosso registro. Medido nos 101 ChoiceSet com
     # `itemType: "feat"`: trait 291, level 94, category 56, rarity 8.
+    # `tag` entrou em 2026-07-31: os filtros da base usam `item:tag` 54 vezes e
+    # o motor o IGNORAVA -- e atomo ignorado conta como SATISFEITO. Certo para
+    # estreitar slot de feat, destrutivo para definir eixo (a lista sairia com
+    # os 19.604 registros dentro).
+    # Spec: `specs/2026-07-31-tag-e-eixo-por-query.md`
     CAMPO_DO_ATOMO = {"trait": "traits", "level": "level",
-                      "category": "feat_category", "rarity": "rarity"}
+                      "category": "feat_category", "rarity": "rarity",
+                      "tag": "tags"}
 
     def _sem_gate_de_nivel(self, requires):
         """O mesmo `requires` sem a clausula de nivel de personagem.
@@ -3352,7 +3382,7 @@ class Personagem:
             return None
         alvo = ":".join(partes[2:])
         valor = reg.get(campo)
-        if campo == "traits":
+        if campo in ("traits", "tags"):
             return alvo in (valor or [])
         if campo == "level":
             return isinstance(valor, int) and str(valor) == alvo
@@ -3513,9 +3543,9 @@ class Personagem:
             return saida[:limite] if limite else saida
 
         if slot == "subclasse":
-            ids = [o for b in self.slots_de_subclasse
-                   if em is None or b.get("nivel") == em
-                   for o in (b.get("opcoes_ids") or [])]
+            blocos = [b for b in self.slots_de_subclasse
+                      if em is None or b.get("nivel") == em]
+            ids = [o for b in blocos for o in (b.get("opcoes_ids") or [])]
             registros = [self.base.opcional(i) for i in ids]
         elif slot == "skill_increase":
             registros = [r for r in self.base.por_id.values()

@@ -188,6 +188,14 @@ python3 derivar_santificacao.py
 echo "== 7e1c. fonte divina: o par da santificacao, so no Clerigo =="
 python3 derivar_fonte_divina.py
 
+echo "== 7e1c2. colapsar irmas DE NOVO, agora que os eixos novos existem =="
+# O passo 7d roda antes de `derivar_escolha_de_divindade` (7e1), entao o eixo
+# `deity` nao existia quando ele passou -- e `Ma'at` ficava DUAS vezes na lista
+# do Campeao e do Clerigo (`wb:deity/maat` do remaster e `wb:deity/maat-ln` do
+# Gods & Magic). Rodar de novo aqui alcanca os eixos criados em 7e1*, e e
+# idempotente para os que ja foram colapsados.
+python3 colapsar_opcoes_irmas.py
+
 echo "== 7e1d. requisito de sub-escolha preso no residuo =="
 # DEPOIS de todos os eixos existirem (divindade, santificacao, fonte, ikon): o
 # mapa `<opcao> <eixo>` sai das proprias `subclasses`.
@@ -210,6 +218,12 @@ echo "== 7e2. categoria de feat que sobrou vazia =="
 # `desmembrar_colisoes.py`, depois do extrator, e so um passo sobre a base
 # inteira alcanca tanto esses quanto os que nao casaram com o AoN.
 python3 derivar_categoria_de_feat.py
+
+echo "== 7e2b. tags do Foundry + eixos por query (Kineticist e Commander) =="
+# ORDEM OBRIGATORIA: a tag entra na base ANTES de virar eixo. `item:tag` era
+# ignorado pelo motor, e atomo ignorado conta como SATISFEITO -- o eixo sairia
+# com os 19.604 registros dentro.
+python3 derivar_eixo_por_tag.py
 
 echo "== 7e3. estatisticas de familiar e eidolon =="
 # A DECIMA PRIMEIRA lacuna de leitura: `aon_dump/rules.json` tem 3.645 registros

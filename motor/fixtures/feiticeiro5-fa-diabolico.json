@@ -1438,6 +1438,7 @@
     "escolhidos": [
      "wb:class-feature/bloodline-diabolic"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Bloodline: Diabolic",
     "opcoes": 19,

@@ -1424,6 +1424,7 @@
     "escolhe": 1,
     "escolhido": null,
     "escolhidos": [],
+    "filtro": null,
     "nivel": 1,
     "nome": null,
     "opcoes": 6,

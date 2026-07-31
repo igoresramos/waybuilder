@@ -387,13 +387,25 @@ export class Personagem implements ContextoDePredicado {
           nivel: ehInt(bloco["nivel"]) ? bloco["nivel"] : null,
           escolhe: quantas,
           escolhidos: escolhidosDoBloco,
-          opcoes: opcoes.length,
+          // a CONTAGEM acompanha `opcoes_ids`: no eixo por query a lista crua
+          // é vazia de propósito, e a tela mostrava "0 opções" com 6 na frente.
+          opcoes: opcoes.length > 0
+            ? opcoes.length
+            : this._ids_por_filtro(bloco["filtro"]).length,
           // a LISTA, alem da contagem: `candidatos("subclasse")` precisa dos
           // ids. Ate 2026-07-28 o Python iterava `opcoes` -- que e um int --
           // e levantava TypeError; nao explodia so porque nenhuma ficha de
           // exemplo exercitava o slot, e foi este porte que trouxe o caso a
           // tona.
-          opcoes_ids: opcoes.filter(ehStr),
+          // eixo por QUERY: a base guarda o FILTRO em vez da lista, porque
+          // congelar no build dessincroniza na primeira mudança de fonte. Quem
+          // resolve é o MOTOR, aqui -- assim a tela continua consumindo
+          // `opcoes_ids` sem saber que existe query.
+          // Spec: `specs/2026-07-31-tag-e-eixo-por-query.md`
+          opcoes_ids: opcoes.filter(ehStr).length > 0
+            ? opcoes.filter(ehStr)
+            : this._ids_por_filtro(bloco["filtro"]),
+          filtro: bloco["filtro"] ?? null,
           escolhido: ehStr(escolha) ? escolha : null,
           nome: escolha === null ? null : nome(reg),
         });
@@ -1852,6 +1864,20 @@ export class Personagem implements ContextoDePredicado {
    * Exata, e não chute: se duas classes do personagem concedessem a mesma
    * feature, a de MENOR nível manda, porque é a que aperta o cap da regra 17b
    * -- o oposto seria escolher o cap mais frouxo por acaso de ordem. */
+  /** Os ids que casam com o filtro do `ChoiceSet`, ordenados por nome.
+   *
+   * A base guarda o filtro; a resolução é AQUI, por personagem, e não no build
+   * -- lista congelada dessincroniza na primeira mudança de fonte. */
+  private _ids_por_filtro(filtro: unknown): string[] {
+    if (!verdadeiro(filtro)) return [];
+    const casam: Registro[] = [];
+    for (const r of this.base.por_id.values()) {
+      if (this._casa_filtro(r, filtro)) casam.push(r);
+    }
+    casam.sort((a, b) => (a.name ?? "").localeCompare(b.name ?? ""));
+    return casam.map((r) => r.id);
+  }
+
   private _classe_que_concede(feature_id: string): string | null {
     const donas: string[] = [];
     for (const cid of this.ordem_de_classe) {
@@ -3561,6 +3587,11 @@ export class Personagem implements ContextoDePredicado {
    *  `itemType: "feat"`: trait 291, level 94, category 56, rarity 8. */
   private static CAMPO_DO_ATOMO: Record<string, string> = {
     trait: "traits", level: "level", category: "feat_category", rarity: "rarity",
+    // `tag` entrou em 2026-07-31: os filtros da base usam `item:tag` 54 vezes e
+    // o motor o IGNORAVA -- e átomo ignorado conta como SATISFEITO. Certo para
+    // estreitar slot de feat, destrutivo para definir eixo.
+    // Spec: `specs/2026-07-31-tag-e-eixo-por-query.md`
+    tag: "tags",
   };
 
   /**
@@ -3597,7 +3628,9 @@ export class Personagem implements ContextoDePredicado {
     if (campo === undefined) return null;
     const alvo = partes.slice(2).join(":");
     const valor = (reg as Dict)[campo];
-    if (campo === "traits") return listaDe(valor).map((t) => pyStr(t)).includes(alvo);
+    if (campo === "traits" || campo === "tags") {
+      return listaDe(valor).map((t) => pyStr(t)).includes(alvo);
+    }
     if (campo === "level") return ehInt(valor) && String(valor) === alvo;
     return pyStr(valor ?? "") === alvo;
   }
@@ -3768,9 +3801,7 @@ export class Personagem implements ContextoDePredicado {
       // exercitava este slot, e foi o porte que trouxe o caso a tona.
       const ids: string[] = [];
       for (const b of this.slots_de_subclasse) {
-        if (em === null || b.nivel === em) {
-          ids.push(...b.opcoes_ids);
-        }
+        if (em === null || b.nivel === em) ids.push(...b.opcoes_ids);
       }
       registros = ids.map((i) => this.base.opcional(i));
     } else if (slot === "skill_increase") {

@@ -14,7 +14,13 @@
 import { chromium } from "playwright";
 
 const URL = process.argv[2] ?? "http://localhost:5175/";
-const CLASSES = ["Champion", "Witch", "Wizard", "Barbarian"];
+// Kineticist e Commander entraram em 2026-07-31: sao os dois eixos por QUERY,
+// que guardam o filtro do `ChoiceSet` em vez de uma lista congelada. Eles sao
+// justamente o caso em que um atomo ignorado esvaziaria (ou encheria com a base
+// inteira) a lista -- por isso precisam estar aqui.
+// Spec: `specs/2026-07-31-tag-e-eixo-por-query.md`
+const CLASSES = ["Champion", "Witch", "Wizard", "Barbarian",
+                 "Kineticist", "Commander"];
 
 const navegador = await chromium.launch();
 const pagina = await navegador.newPage({ viewport: { width: 1440, height: 1200 } });

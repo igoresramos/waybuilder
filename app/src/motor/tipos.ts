@@ -295,6 +295,11 @@ export interface SlotDeSubclasse {
   /** a primeira de `escolhidos` -- o que os blocos de `escolhe: 1` sempre foram */
   escolhido: string | null;
   nome: string | null;
+  /** eixo por QUERY: o filtro do `ChoiceSet` do Foundry, verbatim, em vez de uma
+   * lista congelada -- congelar dessincroniza na primeira mudanca de fonte.
+   * Kineticist (`kinetic-gate`) e Commander (`tactic`) sao os dois primeiros.
+   * Spec: `specs/2026-07-31-tag-e-eixo-por-query.md` */
+  filtro?: unknown;
 }
 
 export interface Conjuracao {

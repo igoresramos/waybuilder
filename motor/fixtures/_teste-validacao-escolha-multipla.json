@@ -1383,6 +1383,7 @@
     "escolhidos": [
      "wb:class-feature/the-brave"
     ],
+    "filtro": null,
     "nivel": 3,
     "nome": "The Brave",
     "opcoes": 6,
@@ -1404,6 +1405,7 @@
      "wb:ikon/barrows-edge",
      "wb:ikon/gleaming-blade"
     ],
+    "filtro": null,
     "nivel": 1,
     "nome": "Barrow's Edge",
     "opcoes": 21,
