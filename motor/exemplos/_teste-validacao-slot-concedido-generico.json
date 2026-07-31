@@ -1,0 +1,23 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {
+  "versao": "2026-07-31",
+  "pin_foundry": "87f9e502"
+ },
+ "identidade": {
+  "nome": "TESTE SLOT GENERICO -- Yaoguai Born of Elements + Adopted Ancestry",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao do slot concedido generico (spec specs/2026-07-31-slot-concedido-generico.md). Irma da `_teste-validacao-slot-concedido`, que cobre `tipo: feat`; aqui entram os tipos que o motor ignorava. DOIS slots de naturezas diferentes na mesma ficha: (1) a heranca `Born of Elements` concede escolha de MAGIA, com 8 truques elementais -- e o unico caminho pelo qual uma escolha de magia chega a ficha hoje; (2) o feat geral `Adopted Ancestry` concede escolha de ANCESTRALIDADE, e vale por ser o caso limite dos dois lados: o filtro dele e so referencia dinamica de ator (`{not: item:slug:{actor|...}}`), indecidivel para o motor, entao sem a guarda do `not` o slot nascia VAZIO e sem o kind do `tipo` ele oferecia os 19.606 registros da base. O numero certo e 50. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/yaoguai"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/born-of-elements"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/scholar"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 3, "slot": "nivel_de_classe", "pega": "wb:class/fighter"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["str", "dex", "con", "wis"]},
+  {"em": 3, "slot": "general_feat", "pega": "wb:feat/adopted-ancestry"}
+ ],
+ "inventario": []
+}

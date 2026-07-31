@@ -72,6 +72,44 @@ export function limpar(
 }
 
 /**
+ * O slot CONCEDIDO por um feat ou heranca -- identidade pela `flag`, nao pelo
+ * nivel.
+ *
+ * `escolher()` substitui por `(slot, em)`, e isso nao serve aqui: dois
+ * concessores podem cair no mesmo nivel (`Ancient Elf` e um `basic-arcana`), e
+ * pela chave de nivel a segunda escolha apagaria a primeira. A `flag` e o
+ * `rollOption` do ChoiceSet da fonte, e e ela que da identidade ao slot.
+ * Ver `specs/2026-07-31-slot-concedido-generico.md`.
+ */
+const CONCEDIDO = "feat_concedido";
+
+export function escolherConcedido(
+  doc: Documento,
+  em: number | "criacao",
+  flag: string,
+  pega: string,
+): Documento {
+  const escolhas = doc.escolhas.filter(
+    (e) => !(e.slot === CONCEDIDO && e.flag === flag),
+  );
+  escolhas.push({ em, slot: CONCEDIDO, flag, pega });
+  return { ...doc, escolhas: ordenar(escolhas) };
+}
+
+export function limparConcedido(doc: Documento, flag: string): Documento {
+  return {
+    ...doc,
+    escolhas: doc.escolhas.filter((e) => !(e.slot === CONCEDIDO && e.flag === flag)),
+  };
+}
+
+/** O que ja foi escolhido naquele slot concedido, ou `null`. */
+export function concedidoDe(doc: Documento, flag: string): string | null {
+  const e = doc.escolhas.find((x) => x.slot === CONCEDIDO && x.flag === flag);
+  return typeof e?.pega === "string" ? e.pega : null;
+}
+
+/**
  * A houserule: cada nivel de personagem compra um nivel de UMA classe. E o
  * unico lugar do app onde a regra da casa aparece como escolha.
  */

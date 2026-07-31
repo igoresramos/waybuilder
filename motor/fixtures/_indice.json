@@ -75,6 +75,14 @@
    "slots_abertos": 4
   },
   {
+   "ficha": "_teste-validacao-slot-concedido-generico",
+   "nivel": 3,
+   "hp": 44,
+   "avisos": 2,
+   "fora_do_requisito": 0,
+   "slots_abertos": 10
+  },
+  {
    "ficha": "_teste-validacao-slot-concedido",
    "nivel": 1,
    "hp": 16,

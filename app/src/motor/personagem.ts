@@ -3884,7 +3884,7 @@ export class Personagem implements ContextoDePredicado {
       const kinds = new Set(kindsDoBloco.filter((k) => this.base.kinds().has(k)));
       registros = blocos.length === 0 ? [] :
         [...this.base.por_id.values()].filter((r) =>
-          (kinds.size === 0 || kinds.has(r.kind))
+          (kinds.size === 0 || kinds.has(r.kind ?? ""))
           && blocos.some((b) => this._casa_filtro(r, b.filtro)));
     } else if (slot === "heranca") {
       // Heranca pertence a uma ancestralidade -- nao existe Anao Elfico. O

@@ -35,6 +35,17 @@ const TRILHOS = [
 
 const ATRIBUTOS = ["str", "dex", "con", "int", "wis", "cha"];
 
+/**
+ * Rotulo humano para o `tipo` do slot concedido.
+ *
+ * O motor entrega o `itemType` cru da fonte (`spell`, `heritage`, `action`);
+ * quem le a ficha nao tem por que ver o vocabulario do Foundry.
+ */
+const NOME_DO_TIPO: Record<string, string> = {
+  feat: "Feat", spell: "Magia", heritage: "Heranca", action: "Acao",
+  weapon: "Arma", ancestry: "Ancestralidade", deity: "Divindade",
+};
+
 export default function App() {
   const [base, setBase] = useState<Base | null>(null);
   const [erro, setErro] = useState<string | null>(null);
@@ -81,6 +92,33 @@ export default function App() {
     (d.escolhas.find((e) => e.slot === slot && e.em === em)?.pega as string) ?? null;
 
   const classePrincipal = escolhaEm("nivel_de_classe", 1);
+
+  /**
+   * Os slots que um feat ou heranca CONCEDEU naquele momento da ficha.
+   *
+   * Ate 2026-07-31 nenhum deles era desenhado: o motor abria o slot desde a
+   * spec de 30/07 e a tela nunca o mostrava, entao quem pegava `Ancient Elf`
+   * nao era perguntado nada. A identidade e a `flag` da fonte, e nao o nivel --
+   * dois concessores podem cair no mesmo.
+   * Ver `specs/2026-07-31-slot-concedido-generico.md`.
+   */
+  const slotsConcedidos = (em: number | "criacao") => {
+    if (!p) return [];
+    return p.slots_concedidos.filter((b) => b.em === em && b.flag).map((b) => {
+      const flag = b.flag as string;
+      const tipo = b.tipo || "feat";
+      return (
+        <Slot base={base!} key={`conc-${flag}`}
+              rotulo={`${NOME_DO_TIPO[tipo] ?? tipo} de ${b.origem}`}
+              tipo={tipo}
+              candidatos={p.candidatos("feat_concedido", em, null, flag)}
+              filtros={tipo === "feat" ? FILTROS_DE_FEAT : FILTROS_DE_RARIDADE}
+              escolhido={doc.concedidoDe(d, flag)}
+              aoEscolher={(x) => setD(doc.escolherConcedido(d, em, flag, x))}
+              aoLimpar={() => setD(doc.limparConcedido(d, flag))} />
+      );
+    });
+  };
 
   return (
     <div className="app">
@@ -140,6 +178,8 @@ export default function App() {
                   escolhido={escolhaEm("background", "criacao")}
                   aoEscolher={(x) => setD(doc.escolher(d, "background", "criacao", x))}
                   aoLimpar={() => setD(doc.limpar(d, "background", "criacao"))} />
+
+            {slotsConcedidos("criacao")}
 
             <Boosts d={d} setD={setD}
                     declarados={v.boosts.declarados} direito={v.boosts.direito} />
@@ -229,6 +269,8 @@ export default function App() {
                 }
                 return linhas;
               })}
+
+              {n <= nivel && slotsConcedidos(n)}
 
               {/* Companheiro concedido por feat. O slot nasce do `grant_actor`
                   do proprio feat pego neste nivel -- ate 2026-07-29 pegar
