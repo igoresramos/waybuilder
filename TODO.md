@@ -39,8 +39,6 @@ items:
   id: 104
   date: '2026-07-31'
   priority: baixa
-  date: '2026-07-29'
-  priority: alta
 - desc: 'SOBRA DO ITEM 42, FECHADO 2026-07-30 (spec specs/2026-07-30-dano-de-furia.md). O que SOBROU do
     eixo `instinct` esta declarado com numero na spec e nao foi feito. (a) `ragingResistance` -- `3 +
     con.mod`, `8 + con.mod` com Unstoppable Juggernaut, mais o tipo de dano resistido por instinto: mesmo
