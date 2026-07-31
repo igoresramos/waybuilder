@@ -1176,3 +1176,24 @@ divindade, `deity_font` pergunta pelo personagem.
 Sobram 191 das 194 regras ChoiceSet. Medido antes de prometer: as 74 de lista
 literal cobrem zero do balaio; a carga esta nas 104 de forma `query`, que
 precisam de avaliador proprio.
+
+## 2026-07-30 (4a rodada) -- 5a comparacao com o Pathbuilder (item 84)
+
+Entraram no comparador as cinco classes que faltavam. Os atributos foram
+MEDIDOS com `sonda-estado-pathbuilder.mjs`, um arquivo por classe -- o proprio
+comparador avisa que adivinhar boost fabrica divergencia, e a regra da chave
+valeu: o Campeao declara os cinco boosts porque `key_ability` dele e escolha
+(`[dex, str]`), e as outras quatro tem chave unica.
+
+Duas descobertas de bancada: Druida e Feiticeiro **nao tem feat de classe no
+nivel 1** no Pathbuilder (tem `Select Order` e `Select Bloodline`), entao foram
+medidos no nivel 2.
+
+E um defeito nosso, do tipo mais caro de achar por leitura: no Campeao 1, cinco
+feats em que dizemos que atende e ele diz que nao. O `requires` deles so tinha
+`class_level >= 1` e a exigencia de CAUSA estava em `requires_residuo` como
+prosa -- um Campeao de qualquer causa recebia `Brilliant Flash`, que so
+`grandeur` destrava. A forma `<opcao> <eixo>` rendeu 26 clausulas em sete eixos.
+
+O conserto nao cabia no parser: ele roda na extracao e os eixos so existem
+depois de `aplicar_subclasses.py`.

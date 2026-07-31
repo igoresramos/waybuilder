@@ -122,15 +122,22 @@ items:
   id: 69
   date: '2026-07-30'
   priority: media
-- desc: '4a RODADA FECHADA 2026-07-30 (Barbaro 6, secao 8 do relatorio docs/2026-07-30_comparacao-pathbuilder-rodada-3.md).
-    NENHUM defeito nosso na aba -- 98x99 em class feats, tudo nas familias ja declaradas. O valor veio
-    da investigacao do unico item so-dele (`Reckless Abandon`): revelou que o nome antigo nao virava alias
-    FORA de magia, e sairam 335 renomeacoes (commit 1ce0d2601, spec alias-legado-fora-de-magia). PROXIMAS
-    RODADAS: general_feat fora do Guerreiro e do Bardo; o quantificador ''uma pericia que tenha a acao
-    X'' (Automatic/Dubious Knowledge); e classes ainda nao comparadas -- Champion, Druid, Sorcerer, Alchemist,
-    Investigator (o DEFAULT do comparador tem 8).'
+- desc: '5a RODADA FECHADA 2026-07-30 (commit 1bb66c6a9, spec requisito-de-subescolha). As cinco classes
+    que faltavam entraram no DEFAULT do comparador, com atributos MEDIDOS pela sonda (Campeao STR+3 DEX+1
+    CON+1 declara os cinco boosts porque a chave e escolha; Druida, Feiticeiro, Alquimista e Investigador
+    tem chave unica e o motor a aplica sozinho). ACHOU DEFEITO NOSSO: cinco feats do Campeao que liberavamos
+    e ele barrava, porque o requisito de CAUSA vivia em `requires_residuo` como prosa. Viraram requisito
+    de verdade -- 26 clausulas em 7 eixos. Residuo 560 -> 534. TRIAGEM do resto, sem defeito nosso: os
+    3 `so no Waybuilder` que aparecem em TODAS as classes (Chelaxian Scion, Knight Vigilant, Venture-Gossip)
+    sao recorte de fonte; os `wb=False pb=True` por pericia sao a diferenca de modelo declarada. PROXIMAS
+    RODADAS: (a) `Chemical Contagion` e `Enhanced Fire`, so no Pathbuilder no Alquimista 1, e `Artokus''s
+    Fire`/`Powerful Alchemy`/`Certain Strategem`/`Red Herring`, so nossos -- por investigar; (b) general_feat
+    fora do Guerreiro e do Bardo; (c) o quantificador "uma pericia que tenha a acao X" (Automatic/Dubious
+    Knowledge); (d) as classes ainda sem rodada: Barbaro ja teve, faltam Commander, Exemplar, Guardian,
+    Kineticist, Magus, Oracle, Psychic, Summoner, Swashbuckler, Thaumaturge, Witch, Inventor, Animist,
+    Necromancer, Runesmith.'
   id: 84
-  date: '2026-07-29'
+  date: '2026-07-30'
   priority: media
 - desc: 'Importador do Pathbuilder tem que AVISAR o que se perde. Confirmado com o Igor: o eidolon existe
     no app deles e nao sobrevive ao export. Perda silenciosa e o pior tipo'
