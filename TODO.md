@@ -299,23 +299,27 @@ items:
   id: 106
   date: '2026-07-31'
   priority: baixa
-- desc: 'ACHADO 2026-07-31 pela sonda nova do Pathbuilder (Alchemist nv8), e e ENTREGA DE OPCAO ERRADA
-    na ficha -- por isso alta. **37 class-features AUTOMATICAS estao presas no balaio como se fossem
-    escolha.** Elas nao tem parentese de subclasse e NAO estao na progressao da classe, entao o
-    personagem nunca as tem. Exemplo que o Pathbuilder pegou: `Perpetual Infusions` e feature automatica
-    de nivel 7 do Alquimista, mas vive no balaio; `Perpetual Breadth` exige
-    `subclass: {alchemist: perpetual-infusions}` e por isso sai INDISPONIVEL para um Alquimista 8 --
-    o Pathbuilder oferece, nos nao. MEDIDO: **24 registros** tem `requires` dependendo de uma das 37.
-    Os maiores: `Warden Spells` do Ranger (14 dependentes), `Champions Aura` (5), `Vindicator` (2),
-    `Greater Weapon Specialization`, `Perpetual Infusions` e `Runelord` (1 cada). O conserto e mover as
-    37 do balaio para a PROGRESSAO da classe, no nivel do bloco -- mas isso e claim estrutural (dar
-    feature a quem nao deveria e o pior erro possivel), entao cada uma precisa ser conferida contra a
-    fonte antes, nao derivada por regra. Lista completa e reprodutivel: opcao de balaio, sem parentese,
-    fora da progressao. || Vem da familia do item 69, mas e item proprio porque a gravidade e outra: o
-    69 e buraco de modelo, este entrega opcao errada.'
+- desc: 'CAUSA RAIZ ACHADA E METADE FECHADA 2026-07-31 (spec specs/2026-07-31-gemeo-do-grant-item.md).
+    A hipotese do item -- "por as 37 na PROGRESSAO da classe" -- estava ERRADA: o Foundry nao as lista
+    nas `items` da classe (Ranger tem `Hunt Prey@1` e `Hunter''s Edge@1`, sem `Warden Spells`; Alquimista
+    tem `Alchemy@1`, sem `Advanced Alchemy`). Elas sao SUB-FEATURES concedidas pela mae, e a mae as
+    declara: `Alchemy -> GrantItem classfeatures.Item.Advanced Alchemy`. || O DEFEITO:
+    `converter_rule_elements.py` resolvia o UUID SO POR NOME, e o indice `por_nome` PREFERE `feat` no
+    desempate -- entao com o Foundry dizendo `classfeatures.Item.X` a base gravava `wb:feat/X` e o
+    class-feature ficava inalcancavel. E o achado do item 100, agora com a causa. Medido: 548 GrantItem
+    com pack conhecido, 23 nomes existem em dois kinds, **6 estavam no kind ERRADO**. O outro caminho
+    (`unificar_efeitos.resolver_grant_item`) JA usava o pack; faltava alinhar este. || E A QUEBRA QUE O
+    ITEM 100 PREVIU ACONTECEU: corrigido o alvo, `efficient-alchemy` (que cita o FEAT) deixou de ser
+    atendido por um Alquimista 8. Conserto e o prescrito la -- `equivale_a` entre os 4 pares --, e o `has`
+    passa a aceitar o gemeo nos dois sentidos. O indice de gemeos e CACHEADO na Base: a primeira versao
+    varria os 19.606 registros a cada `has` e o oraculo passou de segundos para +6 minutos. || SOBRAM 33:
+    nao tem gemeo concedido, e a mae que os concederia (`Cause`, do Campeao) usa `GrantItem` com UUID
+    DINAMICO (`{item|flags.system.rulesSelections.cause}`) -- aponta para o que o jogador escolheu, e o
+    extrator pula os 163 casos assim, corretamente. Resolver pede interpretar a escolha no build, outra
+    familia.'
   id: 107
   date: '2026-07-31'
-  priority: alta
+  priority: media
 - desc: 'FECHADO 2026-07-31 (spec specs/2026-07-31-pericia-de-recall-knowledge.md). Achado por 12 sondas
     de `skill_feat` em PARALELO, a primeira vez que a bancada cobriu skill feat fora de Fighter/Rogue.
     Tres feats se ofereciam a quem nao podia pega-los porque a clausula real vivia em `requires_residuo`

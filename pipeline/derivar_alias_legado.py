@@ -78,6 +78,22 @@ PARES_CURADOS = [
     ("wb:weapon/wind-and-fire-wheel", "wb:weapon/feng-huo-lun"),
 ]
 
+# GEMEO class-feature x feat de MESMO NOME. Desde 31/07 o pack do UUID do
+# Foundry manda na resolucao do `GrantItem`, entao `Alchemy` concede
+# `wb:class-feature/advanced-alchemy` e nao mais o feat homonimo -- o certo. Mas
+# `efficient-alchemy` cita o FEAT, e sem esta ponte deixou de ser atendido: e
+# exatamente a quebra que o item 100 previa ao trocar o alvo do `grants`.
+#
+# Os dois ids passam a resolver, como ja acontece com os gemeos de instinto.
+# Sao os 4 pares em que a correcao do pack trocou o lado concedido.
+# Spec: specs/2026-07-31-gemeo-do-grant-item.md
+GEMEOS_DO_GRANT = [
+    ("wb:class-feature/advanced-alchemy", "wb:feat/advanced-alchemy"),
+    ("wb:class-feature/quick-alchemy", "wb:feat/quick-alchemy"),
+    ("wb:class-feature/surprise-attack", "wb:feat/surprise-attack"),
+    ("wb:class-feature/keen-recollection", "wb:feat/keen-recollection"),
+]
+
 
 def aplicar_curados(base: list) -> list:
     """O registro vazio vira GEMEO do completo -- nunca se apaga.
@@ -88,6 +104,13 @@ def aplicar_curados(base: list) -> list:
     """
     por_id = {r["id"]: r for r in base}
     feitos = []
+    for a, b in GEMEOS_DO_GRANT:
+        ra, rb = por_id.get(a), por_id.get(b)
+        if ra is None or rb is None or ra.get("equivale_a"):
+            continue
+        ra["equivale_a"] = b
+        ra.setdefault("prov", {})["equivale_a"] = "curado:gemeo-do-grant"
+        feitos.append((a, b, "gemeo"))
     for vazio, completo in PARES_CURADOS:
         a, b = por_id.get(vazio), por_id.get(completo)
         if a is None or b is None:
