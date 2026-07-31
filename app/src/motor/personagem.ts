@@ -2391,6 +2391,7 @@ export class Personagem implements ContextoDePredicado {
       case "has_deity": return this._termo_has_deity(valor);
       case "deity": return this._termo_deity(valor);
       case "deity_font": return this._termo_deity_font(valor);
+      case "deity_font_permitido": return this._termo_deity_font_permitido(valor);
       case "domain": return this._termo_domain(valor);
       case "deity_sanctification": return this._termo_deity_sanctification(valor);
       case "spellcasting_tradition": return this._termo_spellcasting_tradition(valor);
@@ -2909,16 +2910,50 @@ export class Personagem implements ContextoDePredicado {
                    + `tem ${d ? nomeOu(d, "") : "nenhuma divindade"}`];
   }
 
+  /** A fonte divina que o jogador pegou, se pegou. */
+  private _fonte_escolhida(): string | null {
+    for (const bloco of this.slots_de_subclasse) {
+      if (bloco.eixo === "divine-font" && bloco.escolhido) {
+        return bloco.escolhido.split("/").pop()!.toLowerCase();
+      }
+    }
+    return null;
+  }
+
   /**
-   * A SUB-ESCOLHA da fonte nao esta modelada, e 137 das 479 divindades com
-   * fonte declarada permitem as duas. Nessas o motor NAO reprova -- principio
-   * zero: ele nao sabe qual o jogador pegou.
+   * `{"deity_font_permitido": "heal"}` -- a DIVINDADE permite esta fonte?
+   *
+   * É o `requires` das duas opções do eixo, e espelha o predicado do Foundry
+   * (`deity:primary:font:heal`). Separado de `deity_font` para não ser
+   * circular: a opção `heal` não pode exigir que a fonte já seja `heal`.
+   */
+  private _termo_deity_font_permitido(valor: unknown): ResultadoDeTermo {
+    const alvo = String(valor ?? "").toLowerCase();
+    const d = this.divindade();
+    if (d === null) return [false, `exige divindade que conceda fonte ${alvo}`];
+    const cru = d["divine_font"];
+    const fontes = (ehLista(cru) ? cru : []).map((f) => String(f).toLowerCase());
+    if (fontes.includes(alvo) || fontes.length === 0) return [true, ""];
+    return [false, `${nomeOu(d, "")} concede ${fontes.join(", ")}, nao ${alvo}`];
+  }
+
+  /**
+   * `{"deity_font": "heal"}` -- a fonte do PERSONAGEM é esta?
+   *
+   * Com o eixo `divine-font` a pergunta tem resposta exata quando o jogador
+   * escolheu. Sem escolha, vale o comportamento antigo: responde pela PERMISSÃO
+   * da divindade e não reprova quando ela permite as duas -- princípio zero.
    */
   private _termo_deity_font(valor: unknown): ResultadoDeTermo {
     const alvo = String(valor ?? "").toLowerCase();
     const d = this.divindade();
     if (d === null) {
       return [false, `exige fonte divina ${alvo}; nao segue divindade`];
+    }
+    const escolhida = this._fonte_escolhida();
+    if (escolhida !== null) {
+      if (escolhida === alvo) return [true, ""];
+      return [false, `exige fonte divina ${alvo}; a escolhida foi ${escolhida}`];
     }
     const cru = d["divine_font"];
     const fontes = (ehLista(cru) ? cru : []).map((f) => String(f).toLowerCase());

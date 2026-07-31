@@ -2712,18 +2712,49 @@ class Personagem:
         return False, (f"exige adorar {nomes}; "
                        f"tem {(d or {}).get('name', 'nenhuma divindade')}")
 
-    def _termo_deity_font(self, valor) -> tuple[bool, str]:
-        """`{"deity_font": "heal"}` -- a divindade concede esta fonte divina?
+    def _fonte_escolhida(self) -> str | None:
+        """A fonte divina que o jogador pegou, se pegou."""
+        for bloco in self.slots_de_subclasse:
+            if bloco.get("eixo") == "divine-font" and bloco.get("escolhido"):
+                return str(bloco["escolhido"]).rsplit("/", 1)[-1].lower()
+        return None
 
-        A SUB-ESCOLHA da fonte nao esta modelada, e para 137 das 479 divindades
-        com fonte declarada as duas sao permitidas. Nessas o motor NAO reprova:
-        ele nao sabe qual o jogador pegou, e recusar seria afirmar o que nao se
-        sabe. Para as 342 que so permitem uma, a resposta e certa.
+    def _termo_deity_font_permitido(self, valor) -> tuple[bool, str]:
+        """`{"deity_font_permitido": "heal"}` -- a DIVINDADE permite esta fonte?
+
+        E o `requires` das duas opcoes do eixo, e espelha o predicado do Foundry
+        (`deity:primary:font:heal`). Separado de `deity_font` para nao ser
+        circular: a opcao `heal` nao pode exigir que a fonte ja seja `heal`.
+        """
+        alvo = str(valor or "").lower()
+        d = self.divindade()
+        if d is None:
+            return False, f"exige divindade que conceda fonte {alvo}"
+        fontes = [str(f).lower() for f in (d.get("divine_font") or [])]
+        if alvo in fontes or not fontes:
+            return True, ""
+        return False, (f"{d.get('name')} concede {', '.join(fontes)}, "
+                       f"nao {alvo}")
+
+    def _termo_deity_font(self, valor) -> tuple[bool, str]:
+        """`{"deity_font": "heal"}` -- a fonte do PERSONAGEM e esta?
+
+        Com o eixo `divine-font` (spec `fonte-divina-escolhida`) a pergunta tem
+        resposta exata quando o jogador escolheu. Sem escolha, vale o
+        comportamento antigo: responde pela PERMISSAO da divindade e nao
+        reprova quando ela permite as duas -- principio zero, o motor nao sabe
+        qual sera.
         """
         alvo = str(valor or "").lower()
         d = self.divindade()
         if d is None:
             return False, f"exige fonte divina {alvo}; nao segue divindade"
+        escolhida = self._fonte_escolhida()
+        if escolhida:
+            if escolhida == alvo:
+                return True, ""
+            return False, (f"exige fonte divina {alvo}; a escolhida foi "
+                           f"{escolhida}")
         fontes = [str(f).lower() for f in (d.get("divine_font") or [])]
         if alvo in fontes:
             return True, ""

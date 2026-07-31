@@ -1831,6 +1831,57 @@ checar(len(na_tela) == 3, "e as tres continuam na lista, marcadas")
 checar(any(c["motivos"] for c in na_tela if not c["atende"]),
        "com o motivo dito, e nao so um `false`")
 
+# --------------------------------------------------------------------------
+# Fonte divina escolhida -- fecha a ambiguidade das 137.
+# Spec: specs/2026-07-30-fonte-divina-escolhida.md
+# --------------------------------------------------------------------------
+print("\n-- fonte divina escolhida --")
+
+def clerigo_fonte(deity, fonte=None):
+    esc = [{"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/cleric"},
+           {"em": 1, "slot": "subclasse",
+            "pega": "wb:class-feature/cloistered-cleric"},
+           {"em": 1, "slot": "subclasse", "pega": deity}]
+    if fonte:
+        esc.append({"em": 1, "slot": "subclasse", "pega": f"wb:divine-font/{fonte}"})
+    return personagem(esc)
+
+def julga2(p, fid):
+    return p.avaliar((BASE.opcional(fid) or {}).get("requires"))[0]
+
+# Aakriti permite as duas: sem escolher, o motor nao reprova nenhuma -- e o
+# comportamento que protege as 342 divindades que ja respondiam certo
+aakriti = clerigo_fonte("wb:deity/aakriti")
+checar(julga2(aakriti, "wb:feat/healing-hands")
+       and julga2(aakriti, "wb:feat/harming-hands"),
+       "sem escolher fonte, divindade de duas nao reprova nenhuma")
+
+# escolhida `harm`, a resposta passa a ser EXATA
+harm = clerigo_fonte("wb:deity/aakriti", "harm")
+checar(julga2(harm, "wb:feat/harming-hands"),
+       "escolhida `harm`, Harming Hands atende")
+checar(not julga2(harm, "wb:feat/healing-hands"),
+       "e Healing Hands deixa de atender -- era isto que faltava nas 137")
+
+# a opcao so cabe se a DIVINDADE permitir (termo separado, sem circularidade)
+def cabe_fonte(p, f):
+    return p.avaliar((BASE.opcional(f"wb:divine-font/{f}") or {})
+                     .get("requires"))[0]
+
+pharasma = clerigo_fonte("wb:deity/pharasma")
+checar(cabe_fonte(pharasma, "heal") and not cabe_fonte(pharasma, "harm"),
+       "Pharasma so permite `heal`, e `harm` aparece marcada")
+checar(cabe_fonte(aakriti, "heal") and cabe_fonte(aakriti, "harm"),
+       "Aakriti permite as duas")
+
+# o eixo e do Clerigo, nao do Campeao
+campeao = personagem([{"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/champion"}])
+checar(not any(s.get("kind") == "divine-font" for s in campeao.slots_abertos()),
+       "o Campeao NAO abre eixo de fonte -- ele escolhe santificacao")
+checar(any(s.get("kind") == "divine-font"
+           for s in clerigo_fonte("wb:deity/aakriti").slots_abertos()),
+       "e o Clerigo abre")
+
 print("\n" + "=" * 58)
 if FALHAS:
     print(f"  {len(FALHAS)} FALHA(S):")

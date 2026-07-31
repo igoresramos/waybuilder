@@ -185,6 +185,9 @@ echo "== 7e1b. santificacao: modal lido da prosa + eixo filtrado =="
 # escolhida, e o `requires` de cada uma cita o termo `deity_sanctification`.
 python3 derivar_santificacao.py
 
+echo "== 7e1c. fonte divina: o par da santificacao, so no Clerigo =="
+python3 derivar_fonte_divina.py
+
 echo "== 7e2. categoria de feat que sobrou vazia =="
 # Roda TARDE de proposito: 8 dos 164 feats sem categoria nascem em
 # `desmembrar_colisoes.py`, depois do extrator, e so um passo sobre a base

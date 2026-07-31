@@ -913,6 +913,7 @@
    "Cleric: falta escolher `outras-opcoes` (5 opcoes)",
    "Cleric: falta escolher `deity` (488 opcoes)",
    "Cleric: falta escolher `sanctification` (3 opcoes)",
+   "Cleric: falta escolher `divine-font` (2 opcoes)",
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3"
   ],
   "background": "Acolyte",
@@ -1436,6 +1437,14 @@
     "kind": "sanctification",
     "opcoes": 3,
     "rotulo": "Cleric / sanctification",
+    "slot": "subclasse"
+   },
+   {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "divine-font",
+    "opcoes": 2,
+    "rotulo": "Cleric / divine-font",
     "slot": "subclasse"
    },
    {
@@ -1994,6 +2003,20 @@
      "wb:sanctification/holy",
      "wb:sanctification/unholy",
      "wb:sanctification/none"
+    ]
+   },
+   {
+    "classe": "Cleric",
+    "eixo": "divine-font",
+    "escolhe": 1,
+    "escolhido": null,
+    "escolhidos": [],
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 2,
+    "opcoes_ids": [
+     "wb:divine-font/heal",
+     "wb:divine-font/harm"
     ]
    }
   ],

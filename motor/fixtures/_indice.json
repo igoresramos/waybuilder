@@ -110,9 +110,9 @@
    "ficha": "guerreiro2-clerigo2-fa",
    "nivel": 4,
    "hp": 48,
-   "avisos": 4,
+   "avisos": 5,
    "fora_do_requisito": 0,
-   "slots_abertos": 6
+   "slots_abertos": 7
   },
   {
    "ficha": "guerreiro3-mago2",
