@@ -57,16 +57,19 @@ items:
   id: 101
   date: '2026-07-30'
   priority: baixa
-- desc: 'ACHADO LATERAL DA MEDICAO DO ITEM 46 (2026-07-30, docs/2026-07-30_corte-multiclasse.md). Tres
-    defeitos independentes do corte, todos da familia da licao do item 18 (homonimo resolvido para o
-    registro errado). (1) HOMONIMO CLASSE x ARQUETIPO: 10 registros com `requires`/`grants` apontando
-    para o feat de ARQUETIPO tendo o `class-feature` de mesmo nome ao lado -- `efficient-alchemy` ->
-    `wb:feat/advanced-alchemy` com `wb:class-feature/advanced-alchemy` na base; idem `shield-of-reckoning`
-    e `swift-retribution` -> `champions-reaction`; idem `wb:class-feature/alchemy` CONCEDENDO
-    `wb:feat/quick-alchemy` (o do arquetipo). (2) ATRIBUICAO DE ARQUETIPO COM BURACO: 7 feats com trait
-    `archetype` e campo `archetype` vazio, identificaveis porque o `requires` cita uma dedicacao de
-    multiclasse. (3) 18 arquetipos sem feat de dedicacao na base, ou seja sem porta de entrada. Medicao
-    reproduzivel em docs/medicoes/medir_corte_multiclasse.py'
+- desc: 'RE-MEDIDO E VERIFICADO 2026-07-31 (docs/medicoes/2026-07-31_homonimos-e-duplicatas.md, com
+    nota de correcao no topo). Tres defeitos independentes, achados na medicao do item 46. (1) HOMONIMO
+    CLASSE x ARQUETIPO: **12** ocorrencias (3 em `requires`, 9 em `grants`) em 11 registros de origem,
+    onde o alvo e mesmo feat de ARQUETIPO tendo `class-feature` de mesmo nome ao lado -- `quick-alchemy`
+    6, `advanced-alchemy` 2, `champions-reaction` 2, `keen-recollection` 1, `surprise-attack` 1. CUIDADO
+    COM A CONTAGEM: uma medicao automatizada deu 40 porque contou todo `wb:feat/X` com `wb:class-feature/X`
+    homonimo, sem checar se o feat era de arquetipo; `shield-block` (general, 12x) e `reactive-strike`
+    (classe, 5x) NAO sao defeito -- feat e feature de mesmo nome ai e RAW correto, e o motor ja resolve
+    por alias (testado: Guerreiro 2 com a class-feature responde True a `has` do feat). (2) ATRIBUICAO
+    DE ARQUETIPO VAZIA: **73** feats com trait `archetype` e campo `archetype` vazio -- muito maior que
+    os 7 medidos antes, que so olhavam o recorte de multiclasse. Destes, 49 sao re-ancoraveis automaticamente
+    porque o `requires` cita uma dedicacao de arquetipo conhecido; 24 pedem curadoria. (3) **18** arquetipos
+    sem nenhum feat de dedicacao apontando para eles, e nenhum tem dedicacao de nome similar so nao atribuida.'
   id: 100
   date: '2026-07-30'
   priority: media
@@ -161,11 +164,13 @@ items:
   priority: baixa
 - desc: 'ACHADO PELA VERIFICACAO `verificar-eixos.mjs` AO FECHAR O 87 (2026-07-30) -- e PRE-EXISTENTE,
     confirmado rodando a verificacao no estado anterior. O eixo `deity` do Campeao oferece `Ma''at` DUAS
-    vezes: `wb:deity/maat` (Divine Mysteries, remaster) e `wb:deity/maat-ln` (Gods & Magic, legado).
-    MEDIDO: e o UNICO caso -- 1 nome de divindade duplicado em 488, e 1 unica divindade com sufixo de
-    alinhamento legado no id (`-ln`). Familia de `fundir_renomeados.py` / `derivar_alias_legado.py`, que
-    nao alcancou este par. Escopo pequeno e fechado; o cuidado e nao fundir pelo lado errado (o remaster
-    e o canonico, o legado vira alias).'
+    vezes: `wb:deity/maat` (Divine Mysteries, remaster) e `wb:deity/maat-ln` (Gods & Magic, legado). MEDIDO:
+    e o UNICO caso -- 1 nome de divindade duplicado em 488, e 1 unica divindade com sufixo de alinhamento
+    legado no id (`-ln`). Familia de `fundir_renomeados.py` / `derivar_alias_legado.py`, que nao alcancou
+    este par. ATENCAO AO FUNDIR, verificado 2026-07-31: `wb:deity/maat-ln` E REFERENCIADO, por `wb:class/champion`
+    e `wb:class/cleric` -- ele esta no eixo `deity` das duas. Uma medicao automatizada afirmou "0 referencias,
+    seguro fundir" e estava ERRADA; fundir sem tratar as duas listas quebra o eixo. O remaster e o canonico,
+    o legado vira alias.'
   id: 102
   date: '2026-07-30'
   priority: baixa
