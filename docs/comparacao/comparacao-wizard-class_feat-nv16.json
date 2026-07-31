@@ -1,58 +1,12 @@
 [
   {
     "slot": "Wizard 16 / class_feat [Class Feats]",
-    "waybuilder": 61,
+    "waybuilder": 60,
     "pathbuilder": 59,
     "em_comum": 59,
     "so_no_pathbuilder": [],
     "so_no_waybuilder": [],
     "divergencia_de_disponibilidade": [
-      {
-        "nome": "Advanced School Spell",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige ter Arcane School"
-        ]
-      },
-      {
-        "nome": "Bond Conservation",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige ter Arcane Bond"
-        ]
-      },
-      {
-        "nome": "Bonded Focus",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige ter Arcane Bond"
-        ]
-      },
-      {
-        "nome": "Call Wizardly Tools",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige ter Arcane Bond"
-        ]
-      },
-      {
-        "nome": "Enhanced Familiar",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Linked Focus",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige ter Arcane Bond"
-        ]
-      },
       {
         "nome": "Necromancer's Visage",
         "waybuilder": true,
@@ -74,18 +28,28 @@
         "motivos": []
       },
       {
-        "nome": "Superior Bond",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige ter Arcane Bond"
-        ]
-      },
-      {
         "nome": "Undying Conviction",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
+      }
+    ],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "counterspell",
+        "nossos": [
+          "Counterspell",
+          "Counterspell (Prepared)"
+        ],
+        "pathbuilder": "Counterspell"
+      },
+      {
+        "chave": "knowledge is power",
+        "nossos": [
+          "Knowledge is Power",
+          "Knowledge is Power (Wizard)"
+        ],
+        "pathbuilder": "Knowledge Is Power"
       }
     ]
   },
@@ -138,12 +102,6 @@
         "motivos": []
       },
       {
-        "nome": "Familiar Sage Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Five-breath Vanguard Dedication",
         "waybuilder": true,
         "pathbuilder": false,
@@ -159,10 +117,14 @@
         ]
       },
       {
-        "nome": "Red Mantis Assassin Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "nome": "Mortal Herald Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige seguir uma divindade",
+          "exige religion >= master; tem untrained",
+          "exige a pericia divina; nao segue divindade"
+        ]
       },
       {
         "nome": "Seneschal Witch Dedication",
@@ -190,6 +152,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

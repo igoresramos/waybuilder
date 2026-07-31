@@ -12,12 +12,47 @@
       "Artokus's Fire",
       "Powerful Alchemy"
     ],
-    "divergencia_de_disponibilidade": [
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
       {
-        "nome": "Soothing Vials",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "chave": "efficient alchemy",
+        "nossos": [
+          "Efficient Alchemy",
+          "Efficient Alchemy (Paragon)"
+        ],
+        "pathbuilder": "Efficient Alchemy (Broken Promises)"
+      },
+      {
+        "chave": "elastic mutagen",
+        "nossos": [
+          "Elastic Mutagen",
+          "Mutant Physique"
+        ],
+        "pathbuilder": "Elastic Mutagen"
+      },
+      {
+        "chave": "genius mutagen",
+        "nossos": [
+          "Genius Mutagen",
+          "Mutant Innervation"
+        ],
+        "pathbuilder": "Genius Mutagen"
+      },
+      {
+        "chave": "invincible mutagen",
+        "nossos": [
+          "Invincible Mutagen",
+          "Mutant Physique"
+        ],
+        "pathbuilder": "Invincible Mutagen"
+      },
+      {
+        "chave": "mindblank mutagen",
+        "nossos": [
+          "Mindblank Mutagen",
+          "Mutant Innervation"
+        ],
+        "pathbuilder": "Mindblank Mutagen"
       }
     ]
   },
@@ -32,6 +67,7 @@
       "Knight Vigilant",
       "Venture-Gossip Dedication"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": []
   }
 ]

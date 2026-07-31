@@ -6,12 +6,55 @@
     "em_comum": 102,
     "so_no_pathbuilder": [],
     "so_no_waybuilder": [],
-    "divergencia_de_disponibilidade": [
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
       {
-        "nome": "Plant Empathy",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "chave": "animal empathy",
+        "nossos": [
+          "Animal Empathy",
+          "Animal Empathy (Druid)"
+        ],
+        "pathbuilder": "Animal Empathy"
+      },
+      {
+        "chave": "green empathy",
+        "nossos": [
+          "Green Empathy",
+          "Plant Empathy"
+        ],
+        "pathbuilder": "Green Empathy"
+      },
+      {
+        "chave": "incredible companion",
+        "nossos": [
+          "Incredible Companion",
+          "Incredible Companion (Druid)"
+        ],
+        "pathbuilder": "Incredible Companion"
+      },
+      {
+        "chave": "mature animal companion",
+        "nossos": [
+          "Mature Animal Companion",
+          "Mature Animal Companion (Druid)"
+        ],
+        "pathbuilder": "Mature Animal Companion"
+      },
+      {
+        "chave": "primal wellspring",
+        "nossos": [
+          "Primal Focus",
+          "Primal Wellspring"
+        ],
+        "pathbuilder": "Primal Wellspring"
+      },
+      {
+        "chave": "side by side",
+        "nossos": [
+          "Side by Side",
+          "Side by Side (Druid)"
+        ],
+        "pathbuilder": "Side by Side"
       }
     ]
   },
@@ -104,6 +147,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

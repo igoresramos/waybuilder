@@ -8,10 +8,13 @@
     "so_no_waybuilder": [],
     "divergencia_de_disponibilidade": [
       {
-        "nome": "Command Undead",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "nome": "Cast Down",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige fonte divina harm; nao segue divindade",
+          "exige fonte divina heal; nao segue divindade"
+        ]
       },
       {
         "nome": "Consecrate Spell",
@@ -19,6 +22,24 @@
         "pathbuilder": true,
         "motivos": [
           "exige focus pool >= 1; tem 0"
+        ]
+      },
+      {
+        "nome": "Deadly Simplicity",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige arma favorita simple; nao segue divindade",
+          "exige arma favorita unarmed; nao segue divindade",
+          "exige proficiencia na arma favorita; nao segue divindade"
+        ]
+      },
+      {
+        "nome": "Denier of Destruction",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige fonte divina heal; nao segue divindade"
         ]
       },
       {
@@ -47,37 +68,20 @@
         ]
       },
       {
-        "nome": "Harming Hands",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Healing Hands",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Heroic Recovery",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Maker of Miracles",
+        "nome": "False Faith",
         "waybuilder": false,
         "pathbuilder": true,
         "motivos": [
-          "exige ter Miraculous Spell"
+          "exige adorar Droskar; tem nenhuma divindade"
         ]
       },
       {
-        "nome": "Martyr",
+        "nome": "Fast Channel",
         "waybuilder": false,
         "pathbuilder": true,
         "motivos": [
-          "exige ter Divine Font"
+          "exige fonte divina harm; nao segue divindade",
+          "exige fonte divina heal; nao segue divindade"
         ]
       },
       {
@@ -93,10 +97,21 @@
         "motivos": []
       },
       {
-        "nome": "Restorative Channel",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "nome": "Replenishment of War",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige proficiencia na arma favorita; nao segue divindade"
+        ]
+      },
+      {
+        "nome": "Sacred Ground",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige fonte divina harm; nao segue divindade",
+          "exige fonte divina heal; nao segue divindade"
+        ]
       },
       {
         "nome": "Sanctify Armament",
@@ -114,10 +129,37 @@
         "motivos": []
       },
       {
+        "nome": "Syncretism",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige seguir uma divindade"
+        ]
+      },
+      {
         "nome": "Undying Conviction",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
+      },
+      {
+        "nome": "Versatile Font",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige fonte divina harm; nao segue divindade",
+          "exige fonte divina heal; nao segue divindade"
+        ]
+      }
+    ],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "domain wellspring",
+        "nossos": [
+          "Domain Focus",
+          "Domain Wellspring"
+        ],
+        "pathbuilder": "Domain Wellspring"
       }
     ]
   },
@@ -184,12 +226,6 @@
         "motivos": []
       },
       {
-        "nome": "Familiar Sage Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Five-breath Vanguard Dedication",
         "waybuilder": true,
         "pathbuilder": false,
@@ -202,10 +238,14 @@
         "motivos": []
       },
       {
-        "nome": "Red Mantis Assassin Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "nome": "Mortal Herald Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige seguir uma divindade",
+          "exige religion >= master; tem trained",
+          "exige a pericia divina; nao segue divindade"
+        ]
       },
       {
         "nome": "Seneschal Witch Dedication",
@@ -245,6 +285,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

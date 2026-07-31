@@ -35,7 +35,8 @@
           "exige lore:zevgavizeb >= trained; tem untrained"
         ]
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   },
   {
     "slot": "Bard 7 / general_feat [General Feats]",
@@ -76,6 +77,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

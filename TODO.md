@@ -135,23 +135,28 @@ items:
   id: 69
   date: '2026-07-30'
   priority: media
-- desc: 'RODADA 6 FEITA 2026-07-31 (docs/medicoes/2026-07-31_pathbuilder-rodada-6.md, com nota de correcao
-    no topo). As 14 classes que faltavam foram rodadas -- Guardian, Exemplar, Commander, Gunslinger, Inventor,
-    Kineticist, Swashbuckler e Thaumaturge no nivel 1; Animist, Witch, Magus, Psychic, Oracle e Summoner
-    no nivel 2. Boosts MEDIDOS com `sonda-estado-pathbuilder.mjs`, nunca chutados. Com isso as 27 classes
-    estao cobertas. RESULTADO: **zero defeitos nossos** em 152 pontos triados. O unico candidato (`wb:feat/incredible-familiar`
-    com trait `animist`) foi verificado contra a fonte e NAO e defeito -- o AoN publica esse trait no
-    Player Core e `prov.traits` mostra AoN e Foundry concordando; o Pathbuilder e que carrega a lista
-    pre-remaster do Dark Archive/APG. Balde certo: recorte de fonte. ACHADO ESTRUTURAL que vale guardar:
-    seis classes travam o Class Feat do nivel 1 atras de escolha de subclasse obrigatoria (Animist, Witch,
-    Magus, Psychic, Oracle, Summoner), somadas a Druida e Feiticeiro ja conhecidas -- sao 8 no total,
-    e isso e informacao, nao falha. LIMITE DO COMPARADOR, agora conhecido: `incredible-familiar` e `incredible-familiar-animist`
-    colidem na normalizacao e o script conta como "casado", entao par assim nunca aparece no placar --
-    consertar antes da proxima rodada, senao a cobertura mente. SOBRA: 3 pares novos de renomeacao Golarion->generico
-    para `equivalencias-pathbuilder.json`, e os 33 pontos do Kineticist que so confirmam o gap ja rastreado
-    nos itens 97/99 (os 6 gates elementais zerados).'
+- desc: 'COMPARADOR CONSERTADO 2026-07-31 (spec specs/2026-07-31-colisao-no-comparador.md) -- era a
+    pendencia declarada desta task. `norm()` apaga o sufixo de desambiguacao de proposito, mas o codigo
+    guardava UM registro por chave e pulava TODOS os que produziam aquela chave: 75 chaves da base
+    normalizam igual, envolvendo 205 feats. Agora o veredito e do GRUPO -- se qualquer irmao concorda com
+    o Pathbuilder, nao ha divergencia (o desmembrado legitimo continua sem virar sobra falsa); so ha
+    divergencia quando NENHUM concorda, e ai sai nomeando todos. E a colisao vai DECLARADA no relatorio
+    (`colisoes_de_normalizacao`). Medido antigo x novo sobre a MESMA base, para separar do drift: as
+    contagens ficaram identicas em todos os slots, 48 colisoes passaram a ser declaradas em 14 relatorios,
+    12 linhas duplicadas sumiram (`Crossbow Infiltrator Dedication` x11, que casava por nome E por alias)
+    e 2 FALSOS POSITIVOS caiiram. Os dois falsos positivos sao o oposto do que este item previa: em
+    `green empathy` temos dois registros -- `Plant Empathy`, que carrega `Green Empathy` em `aliases` e
+    esta disponivel, e o `Green Empathy` de verdade, que nao esta -- e o codigo antigo comparava o irmao
+    errado e acusava `wb=true pb=false`. A colisao nao so ESCONDIA ponto do placar: ela INVENTAVA. ||
+    RODADA 6 FEITA 2026-07-31 (docs/medicoes/2026-07-31_pathbuilder-rodada-6.md). As 27 classes estao
+    cobertas, com ZERO defeitos nossos em 152 pontos triados. ACHADO ESTRUTURAL: oito classes travam o
+    Class Feat do nivel 1 atras de escolha de subclasse obrigatoria (Animist, Witch, Magus, Psychic,
+    Oracle, Summoner, Druida, Feiticeiro) -- e informacao, nao falha. SOBRA: 3 pares novos de renomeacao
+    Golarion->generico para `equivalencias-pathbuilder.json`; os 33 pontos do Kineticist que so confirmam
+    o gap dos itens 97/99; e os JSONs de comparacao gravados estavam DEFASADOS em relacao a base (em_comum
+    222->224, 223->225, 98->99 so por a base ter crescido) -- proxima rodada comeca regravando as sondas.'
   id: 84
-  date: '2026-07-30'
+  date: '2026-07-31'
   priority: media
 - desc: 'Importador do Pathbuilder tem que AVISAR o que se perde. Confirmado com o Igor: o eidolon existe
     no app deles e nao sobrevive ao export. Perda silenciosa e o pior tipo'

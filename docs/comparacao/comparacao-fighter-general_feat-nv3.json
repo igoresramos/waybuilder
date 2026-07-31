@@ -3,18 +3,14 @@
     "slot": "Fighter 3 / general_feat [Skill Feats]",
     "waybuilder": 226,
     "pathbuilder": 225,
-    "em_comum": 222,
+    "em_comum": 224,
     "so_no_pathbuilder": [
-      "Aurochs-Headed",
-      "Card Sharp's Escape",
-      "Cognitive Crossover"
+      "Aurochs-Headed"
     ],
     "so_no_waybuilder": [
       "Adventurous Outfitter",
       "As on the Board, so on the Battlefield",
-      "Fane's Escape",
       "Improvise Strategy",
-      "Kreighton's Cognitive Crossover",
       "Seasoned Command",
       "Tactical Acumen"
     ],
@@ -45,7 +41,8 @@
           "exige lore:zevgavizeb >= trained; tem untrained"
         ]
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   },
   {
     "slot": "Fighter 3 / general_feat [General Feats]",
@@ -86,6 +83,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

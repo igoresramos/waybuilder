@@ -1,7 +1,7 @@
 [
   {
     "slot": "Fighter 12 / class_feat [Class Feats]",
-    "waybuilder": 125,
+    "waybuilder": 124,
     "pathbuilder": 117,
     "em_comum": 117,
     "so_no_pathbuilder": [],
@@ -16,14 +16,56 @@
         "motivos": [
           "exige athletics >= trained; tem untrained"
         ]
+      }
+    ],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "dueling dance",
+        "nossos": [
+          "Dueling Dance",
+          "Dueling Dance (Fighter)"
+        ],
+        "pathbuilder": "Dueling Dance"
       },
       {
-        "nome": "Resounding Bravery",
-        "waybuilder": false,
-        "pathbuilder": true,
-        "motivos": [
-          "exige ter Bravery"
-        ]
+        "chave": "dueling parry",
+        "nossos": [
+          "Dueling Parry",
+          "Dueling Parry (Fighter)"
+        ],
+        "pathbuilder": "Dueling Parry"
+      },
+      {
+        "chave": "improved twin riposte",
+        "nossos": [
+          "Improved Twin Riposte",
+          "Improved Twin Riposte (Fighter)"
+        ],
+        "pathbuilder": "Improved Twin Riposte"
+      },
+      {
+        "chave": "opening stance",
+        "nossos": [
+          "Opening Stance",
+          "Opening Stance (Fighter)"
+        ],
+        "pathbuilder": "Opening Stance"
+      },
+      {
+        "chave": "ricochet stance",
+        "nossos": [
+          "Ricochet Stance",
+          "Ricochet Stance (Fighter)"
+        ],
+        "pathbuilder": "Ricochet Stance"
+      },
+      {
+        "chave": "twinned defense",
+        "nossos": [
+          "Twinned Defense",
+          "Twinned Defense (Fighter)"
+        ],
+        "pathbuilder": "Twinned Defense"
       }
     ]
   },
@@ -70,12 +112,6 @@
         ]
       },
       {
-        "nome": "Familiar Sage Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Five-breath Vanguard Dedication",
         "waybuilder": true,
         "pathbuilder": false,
@@ -91,10 +127,28 @@
         ]
       },
       {
+        "nome": "Mortal Herald Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige seguir uma divindade",
+          "exige religion >= master; tem untrained",
+          "exige a pericia divina; nao segue divindade"
+        ]
+      },
+      {
         "nome": "Pactbinder Dedication",
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
+      },
+      {
+        "nome": "Red Mantis Assassin Dedication",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige adorar Achaekek; tem nenhuma divindade"
+        ]
       },
       {
         "nome": "Scroll Trickster Dedication",
@@ -126,7 +180,14 @@
         "waybuilder": true,
         "pathbuilder": false,
         "motivos": []
+      },
+      {
+        "nome": "Warrior Of Legend Dedication",
+        "waybuilder": true,
+        "pathbuilder": false,
+        "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

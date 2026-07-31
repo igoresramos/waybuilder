@@ -3,10 +3,8 @@
     "slot": "Barbarian 6 / class_feat [Class Feats]",
     "waybuilder": 98,
     "pathbuilder": 99,
-    "em_comum": 98,
-    "so_no_pathbuilder": [
-      "Reckless Abandon"
-    ],
+    "em_comum": 99,
+    "so_no_pathbuilder": [],
     "so_no_waybuilder": [],
     "divergencia_de_disponibilidade": [
       {
@@ -35,7 +33,8 @@
           "exige o sentido scent"
         ]
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   },
   {
     "slot": "Barbarian 6 / class_feat [Dedication Feats]",
@@ -126,12 +125,6 @@
         "motivos": []
       },
       {
-        "nome": "Red Mantis Assassin Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Scroll Trickster Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -170,6 +163,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

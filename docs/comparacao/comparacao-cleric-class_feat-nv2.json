@@ -8,6 +8,16 @@
     "so_no_waybuilder": [],
     "divergencia_de_disponibilidade": [
       {
+        "nome": "Deadly Simplicity",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige arma favorita simple; nao segue divindade",
+          "exige arma favorita unarmed; nao segue divindade",
+          "exige proficiencia na arma favorita; nao segue divindade"
+        ]
+      },
+      {
         "nome": "Divine Castigation",
         "waybuilder": false,
         "pathbuilder": true,
@@ -17,16 +27,39 @@
         ]
       },
       {
-        "nome": "Harming Hands",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "nome": "False Faith",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige adorar Droskar; tem nenhuma divindade"
+        ]
       },
       {
-        "nome": "Healing Hands",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "nome": "Syncretism",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige seguir uma divindade"
+        ]
+      },
+      {
+        "nome": "Versatile Font",
+        "waybuilder": false,
+        "pathbuilder": true,
+        "motivos": [
+          "exige fonte divina harm; nao segue divindade",
+          "exige fonte divina heal; nao segue divindade"
+        ]
+      }
+    ],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "domain wellspring",
+        "nossos": [
+          "Domain Focus",
+          "Domain Wellspring"
+        ],
+        "pathbuilder": "Domain Wellspring"
       }
     ]
   },
@@ -81,12 +114,6 @@
         ]
       },
       {
-        "nome": "Red Mantis Assassin Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Seneschal Witch Dedication",
         "waybuilder": true,
         "pathbuilder": false,
@@ -104,6 +131,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

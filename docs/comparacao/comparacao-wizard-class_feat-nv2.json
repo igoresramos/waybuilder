@@ -1,17 +1,28 @@
 [
   {
     "slot": "Wizard 2 / class_feat [Class Feats]",
-    "waybuilder": 61,
+    "waybuilder": 60,
     "pathbuilder": 59,
     "em_comum": 59,
     "so_no_pathbuilder": [],
     "so_no_waybuilder": [],
-    "divergencia_de_disponibilidade": [
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
       {
-        "nome": "Enhanced Familiar",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "chave": "counterspell",
+        "nossos": [
+          "Counterspell",
+          "Counterspell (Prepared)"
+        ],
+        "pathbuilder": "Counterspell"
+      },
+      {
+        "chave": "knowledge is power",
+        "nossos": [
+          "Knowledge is Power",
+          "Knowledge is Power (Wizard)"
+        ],
+        "pathbuilder": "Knowledge Is Power"
       }
     ]
   },
@@ -67,12 +78,6 @@
         ]
       },
       {
-        "nome": "Red Mantis Assassin Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Seneschal Witch Dedication",
         "waybuilder": true,
         "pathbuilder": false,
@@ -90,6 +95,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

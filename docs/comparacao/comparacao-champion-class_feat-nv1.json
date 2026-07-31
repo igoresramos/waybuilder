@@ -6,38 +6,8 @@
     "em_comum": 124,
     "so_no_pathbuilder": [],
     "so_no_waybuilder": [],
-    "divergencia_de_disponibilidade": [
-      {
-        "nome": "Brilliant Flash",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Iron Repercussions",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Nimble Reprisal",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Ongoing Selfishness",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
-        "nome": "Vicious Vengeance",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      }
-    ]
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": []
   },
   {
     "slot": "Champion 1 / class_feat [Dedication Feats]",
@@ -50,6 +20,7 @@
       "Knight Vigilant",
       "Venture-Gossip Dedication"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": []
   }
 ]

@@ -10,7 +10,41 @@
     "so_no_waybuilder": [
       "Wild Empathy"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "animal companion",
+        "nossos": [
+          "Animal Companion",
+          "Animal Companion (Ranger)"
+        ],
+        "pathbuilder": "Animal Companion"
+      },
+      {
+        "chave": "roll with it",
+        "nossos": [
+          "Roll with It (Ranger)",
+          "Roll with it (Kingmaker)"
+        ],
+        "pathbuilder": "Roll with It"
+      },
+      {
+        "chave": "the harder they fall",
+        "nossos": [
+          "The Harder They Fall (Kingmaker)",
+          "The Harder They Fall (Ranger)"
+        ],
+        "pathbuilder": "The Harder They Fall"
+      },
+      {
+        "chave": "wardens wellspring",
+        "nossos": [
+          "Warden's Focus",
+          "Warden's Wellspring"
+        ],
+        "pathbuilder": "Warden's Wellspring"
+      }
+    ]
   },
   {
     "slot": "Ranger 4 / class_feat [Dedication Feats]",
@@ -97,12 +131,6 @@
         ]
       },
       {
-        "nome": "Familiar Sage Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Ghost Hunter Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -152,12 +180,6 @@
         "motivos": [
           "exige nature >= trained; tem untrained"
         ]
-      },
-      {
-        "nome": "Red Mantis Assassin Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
       },
       {
         "nome": "Scroll Trickster Dedication",
@@ -232,6 +254,7 @@
           "exige lore:cave-worm >= trained; tem untrained"
         ]
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

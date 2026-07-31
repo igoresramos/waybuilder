@@ -1,7 +1,7 @@
 [
   {
     "slot": "Monk 10 / class_feat [Class Feats]",
-    "waybuilder": 137,
+    "waybuilder": 135,
     "pathbuilder": 139,
     "em_comum": 138,
     "so_no_pathbuilder": [
@@ -16,12 +16,32 @@
         "motivos": [
           "exige ter Qi Spells"
         ]
+      }
+    ],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "inner fire",
+        "nossos": [
+          "Inner Fire (Monk)",
+          "Inner Fire (SoM)"
+        ],
+        "pathbuilder": "Inner Fire"
       },
       {
-        "nome": "Sacred Ki",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
+        "chave": "medusas wrath",
+        "nossos": [
+          "Grandmaster Qi Spells",
+          "Medusa's Wrath"
+        ],
+        "pathbuilder": "Medusa's Wrath"
+      },
+      {
+        "chave": "quivering palm",
+        "nossos": [
+          "Grandmaster Qi Spells",
+          "Quivering Palm"
+        ],
+        "pathbuilder": "Quivering Palm"
       }
     ]
   },
@@ -95,12 +115,6 @@
         "motivos": []
       },
       {
-        "nome": "Red Mantis Assassin Dedication",
-        "waybuilder": true,
-        "pathbuilder": false,
-        "motivos": []
-      },
-      {
         "nome": "Scroll Trickster Dedication",
         "waybuilder": false,
         "pathbuilder": true,
@@ -140,6 +154,7 @@
         "pathbuilder": false,
         "motivos": []
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]

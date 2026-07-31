@@ -21,6 +21,7 @@ O que o relatorio separa, e por que a separacao importa mais que o placar:
 
 Uso: python3 motor/comparar_pathbuilder.py docs/comparacao/pathbuilder-*.json
 """
+import collections
 import glob
 import json
 import os
@@ -199,12 +200,20 @@ def comparar(base: Base, sonda: dict, aba: str | None = None) -> dict:
     # Dedication`, renomeado pela Paizo), e sem isso o comparador acusa como
     # buraco nosso um registro que temos com o nome NOVO -- que e o certo.
     nossos, chaves_de = {}, {}
+    # `nossos` guarda UM registro por chave, e `todos_da_chave` guarda todos.
+    # A diferenca importa: 75 chaves da base normalizam igual, envolvendo 205
+    # feats -- `Incredible Familiar`, `(Animist)` e `(Familiar Master)` viram a
+    # mesma chave --, e ate 2026-07-31 o laco de divergencia so olhava o
+    # primeiro. Os outros contavam como casados sem nunca ser comparados.
+    # Spec: `specs/2026-07-31-colisao-no-comparador.md`
+    todos_da_chave = collections.defaultdict(list)
     for c in todos:
         reg = base.opcional(c["id"]) or {}
         chaves = {norm(c["nome"])} | {norm(a) for a in (reg.get("aliases") or [])}
         chaves_de[c["id"]] = chaves
         for chave in chaves:
             nossos.setdefault(chave, c)
+            todos_da_chave[chave].append(c)
     deles = {}
     for o in (sonda.get("abas", {}).get(aba) if aba else sonda["opcoes"]):
         chave = norm(o["nome"])
@@ -227,21 +236,45 @@ def comparar(base: Base, sonda: dict, aba: str | None = None) -> dict:
     so_nossos.sort()
     so_deles = sorted(deles[k]["nome"] for k in deles.keys() - nossos.keys())
 
-    divergem = []
+    divergem, colisoes = [], []
     for k in nossos.keys() & deles.keys():
+        # todos os NOSSOS registros que caem nesta chave, sem repetir quem
+        # entrou por nome e por alias (`Crossbow Infiltrator Dedication` tem o
+        # nome antigo `Drow Shootist Dedication` em `aliases`, e saia duplicado).
+        grupo, vistos_id = [], set()
+        for c in todos_da_chave[k]:
+            if c["id"] not in vistos_id:
+                vistos_id.add(c["id"])
+                grupo.append(c)
+        if len({c["nome"] for c in grupo}) > 1:
+            # a colisao vai DECLARADA no relatorio. Truncar cobertura em
+            # silencio faz o placar dizer "cobri tudo" quando nao cobriu.
+            colisoes.append({"chave": k,
+                             "nossos": sorted({c["nome"] for c in grupo}),
+                             "pathbuilder": deles[k]["nome"]})
         # `ja_pego` do nosso lado explica o "nao atende" do lado deles sem ser
         # divergencia de regra: `Hobnobber` vem do background Barkeep, e o
         # Pathbuilder marca em vermelho o que o personagem ja tem
-        if nossos[k]["ja_pego"] and not deles[k]["atende"]:
+        elegiveis = [c for c in grupo
+                     if not (c["ja_pego"] and not deles[k]["atende"])]
+        if not elegiveis:
             continue
-        if nossos[k]["atende"] != deles[k]["atende"]:
-            divergem.append({
-                "nome": nossos[k]["nome"],
-                "waybuilder": nossos[k]["atende"],
-                "pathbuilder": deles[k]["atende"],
-                "motivos": nossos[k]["motivos"],
-            })
+        # O veredito e do GRUPO, nao do primeiro registro. Quando a colisao e
+        # desmembramento nosso (`Animal Companion` do Druida e
+        # `Animal Companion (Ranger)`), UM dos irmaos e o par legitimo da
+        # entrada deles -- se ele concorda, nao ha divergencia, e cobrar do
+        # outro irmao fabricaria falso positivo. So ha divergencia quando
+        # NENHUM dos nossos concorda, e ai ela sai nomeando todos.
+        if any(c["atende"] == deles[k]["atende"] for c in elegiveis):
+            continue
+        divergem.append({
+            "nome": " / ".join(sorted({c["nome"] for c in elegiveis})),
+            "waybuilder": elegiveis[0]["atende"],
+            "pathbuilder": deles[k]["atende"],
+            "motivos": elegiveis[0]["motivos"],
+        })
     divergem.sort(key=lambda d: d["nome"])
+    colisoes.sort(key=lambda c: c["chave"])
 
     return {
         "slot": f"{sonda['classe']} {sonda['nivel']} / {sonda['slot']}"
@@ -251,6 +284,7 @@ def comparar(base: Base, sonda: dict, aba: str | None = None) -> dict:
         "so_no_pathbuilder": so_deles,
         "so_no_waybuilder": so_nossos,
         "divergencia_de_disponibilidade": divergem,
+        "colisoes_de_normalizacao": colisoes,
     }
 
 

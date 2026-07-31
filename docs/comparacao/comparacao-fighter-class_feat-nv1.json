@@ -1,14 +1,64 @@
 [
   {
     "slot": "Fighter 1 / class_feat [Class Feats]",
-    "waybuilder": 125,
+    "waybuilder": 124,
     "pathbuilder": 117,
     "em_comum": 117,
     "so_no_pathbuilder": [],
     "so_no_waybuilder": [
       "Stance Savant"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": [
+      {
+        "chave": "dueling dance",
+        "nossos": [
+          "Dueling Dance",
+          "Dueling Dance (Fighter)"
+        ],
+        "pathbuilder": "Dueling Dance"
+      },
+      {
+        "chave": "dueling parry",
+        "nossos": [
+          "Dueling Parry",
+          "Dueling Parry (Fighter)"
+        ],
+        "pathbuilder": "Dueling Parry"
+      },
+      {
+        "chave": "improved twin riposte",
+        "nossos": [
+          "Improved Twin Riposte",
+          "Improved Twin Riposte (Fighter)"
+        ],
+        "pathbuilder": "Improved Twin Riposte"
+      },
+      {
+        "chave": "opening stance",
+        "nossos": [
+          "Opening Stance",
+          "Opening Stance (Fighter)"
+        ],
+        "pathbuilder": "Opening Stance"
+      },
+      {
+        "chave": "ricochet stance",
+        "nossos": [
+          "Ricochet Stance",
+          "Ricochet Stance (Fighter)"
+        ],
+        "pathbuilder": "Ricochet Stance"
+      },
+      {
+        "chave": "twinned defense",
+        "nossos": [
+          "Twinned Defense",
+          "Twinned Defense (Fighter)"
+        ],
+        "pathbuilder": "Twinned Defense"
+      }
+    ]
   },
   {
     "slot": "Fighter 1 / class_feat [Dedication Feats]",
@@ -21,6 +71,7 @@
       "Knight Vigilant",
       "Venture-Gossip Dedication"
     ],
-    "divergencia_de_disponibilidade": []
+    "divergencia_de_disponibilidade": [],
+    "colisoes_de_normalizacao": []
   }
 ]

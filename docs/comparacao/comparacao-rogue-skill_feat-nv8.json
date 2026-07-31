@@ -39,6 +39,7 @@
           "exige lore:zevgavizeb >= trained; tem untrained"
         ]
       }
-    ]
+    ],
+    "colisoes_de_normalizacao": []
   }
 ]
