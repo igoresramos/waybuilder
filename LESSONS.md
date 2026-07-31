@@ -1224,3 +1224,39 @@ compartilhar. E conferir a CONTAGEM antes e depois de toda edicao estrutural:
 
 Vale para qualquer arquivo de lista editado por script -- TODO, LOG, INDEX da
 wiki. O texto de um item nao e chave primaria; o id e.
+
+## `vitest` nao type-checa: o build do app ficou quebrado sem ninguem ver (2026-07-31)
+
+Ao rodar `npm run build` pela primeira vez desde o item 43, o `tsc -b` acusou
+`TS6133: 'nivel' is declared but its value is never read` em
+`_ficha_de_eidolon`. O parametro entrou por simetria com `_ficha_de_familiar`
+-- que USA o dele nas pericias -- e ficou vestigial nos dois motores: o eidolon
+nao tem nivel proprio, usa o do personagem (`self.nivel` / `this.nivel`).
+
+O ponto nao e o parametro, e **quanto tempo ele sobreviveu**. As 137 (hoje 140)
+paridades passavam verdes o tempo todo, porque `vitest` roda o TypeScript via
+transpile e **nao faz type-check**. Python nao reclama de parametro nao usado, e
+por isso o gemeo nao denunciou. As quatro camadas estavam verdes com o app
+inconstruivel.
+
+Regra: **`npm run build` faz parte das camadas, ao lado do oraculo, da paridade
+e do navegador.** Ele e a unica coisa no projeto que type-checa. E quando um
+parametro sai de um motor, sai do outro no mesmo commit -- os gemeos so servem
+de gabarito enquanto forem gemeos.
+
+## Implementar o atomo antes de existir quem o avalie e codigo morto (2026-07-31)
+
+O item 105 pedia `item:slug` no `_atomo_de_filtro`. Medido antes de escrever:
+dos 79 usos, **77 nao passam por la**. Sessenta vivem em `grants/choice` de
+`tipo: spell`, e `slots_concedidos` so coleta `tipo == "feat"` -- o filtro nunca
+e consultado. E nem adiantaria coletar: a ficha modela CAPACIDADE de conjuracao
+(slots, tradicao, DC) e nao QUAIS magias o personagem sabe, entao a escolha nao
+teria onde pousar.
+
+Sobraram dois, e esses eram numero errado na ficha -- mas por outro caminho
+(`_arma_casa`, o remap de proficiencia), nao pelo que o item apontava.
+
+Regra: antes de ensinar um vocabulario novo ao motor, **medir quem consome cada
+ocorrencia**, uma a uma. "O motor ignora X" nao implica "implementar X muda
+algo": pode nao haver ninguem do outro lado. E o mesmo erro de metodo do item
+97, que contava citacoes sem perguntar por qual caminho o jogador chega.

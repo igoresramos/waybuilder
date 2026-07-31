@@ -226,8 +226,9 @@ items:
 - id: 105
   date: '2026-07-31'
   priority: baixa
-  desc: 'FATIA 0 E A DERIVACAO DO EIXO FEITAS 2026-07-31 (specs 2026-07-31-escolha-aninhada-do-inventor.md
-    e 2026-07-31-tag-e-eixo-por-query.md). O eixo por query deixou de ser LISTA A MAO e passou a ser DERIVADO:
+  desc: 'FATIA 0, A DERIVACAO DO EIXO E O ATOMO `item:slug` FEITOS 2026-07-31 (specs
+    2026-07-31-escolha-aninhada-do-inventor.md, 2026-07-31-tag-e-eixo-por-query.md e
+    2026-07-31-atomo-slug.md). O eixo por query deixou de ser LISTA A MAO e passou a ser DERIVADO:
     toda class-feature que a progressao concede e que tem `ChoiceSet` com `filter` e um eixo declarado
     pela fonte -- sao 41 na base. A lista a mao ja tinha cobrado o preco: cobria `Tactics` (nv 1) e deixava
     `Expert`, `Master` e `Legendary Tactician` de fora, e por isso 23 das 37 taticas seguiam inalcancaveis
@@ -235,9 +236,25 @@ items:
     taticas; Kineticist 5: kinetic-gate + 4 thresholds, 6 cada). A GUARDA que impede duplicata e derivavel
     tambem: o eixo so nasce se o filtro alcanca registro hoje INALCANCAVEL -- e por isso o eidolon do
     Summoner foi corretamente PULADO (ja entra pelo slot de ator), assim como bloodline do Feiticeiro,
-    druidic-order do Druida e animistic-practice do Animista. SOBRA: (a) `item:slug`, 74 usos, ainda ignorado
-    no `_atomo_de_filtro`; (b) `Manifold Modifications` (feat nv 8, 17 opcoes) fora do eixo por ser feat
-    e nao progressao; (c) as fatias 2 a 4, que somam 20 queries exatas e ZERO opcao nova; (d) 202 opcoes
-    de balaio sem explicacao -- item 69.'
+    druidic-order do Druida e animistic-practice do Animista. || `item:slug` FECHADO, E A PREMISSA DO
+    ITEM ESTAVA ERRADA: nao eram 74 usos (regex antigo cortava em espaco), sao 79, e implementa-lo no
+    `_atomo_de_filtro` nao mudaria NADA -- o atomo nao e avaliado la. 60 vivem em `grants/choice` de
+    `tipo: spell`, e `slots_concedidos` so coleta `tipo == "feat"`; mesmo coletando, a ficha nao modela
+    QUAIS magias o personagem sabe (`_conjuracao` entrega capacidade -- slots, tradicao, DC -- e nao ha
+    campo de magia conhecida em nenhum dos dois motores), entao o slot nao teria onde pousar. Outros 3
+    apontam para ARMADURA (`Armiger''s Protection`) e nao existe caminho de remap de armadura. SOBRARAM
+    DOIS, e eram numero errado na ficha: `Sister of the Golden Erinys Dedication` trata `asp-coil` e
+    `scourge` (as duas marciais) como SIMPLES, e `_arma_casa` nao conhecia o seletor `slug` -- um Clerigo
+    com a dedicacao lia untrained nas duas. Corrigido nos dois motores (`slug` tem a mesma semantica de
+    `base`), com ficha de validacao propria e verificacao de navegador (+0 -> +4, espada longa de controle
+    intacta). A ambiguidade que o item temia NAO existe: o atomo TESTA o candidato, nao aponta para
+    registro. Os 69 atomos estaticos resolvem 100%% contra a base (55 por id, 14 por alias; os 5 restantes
+    sao nomes pre-remaster ja aliasados). SOBRA: (a) o slot de escolha de MAGIA -- 10 blocos, 11 registros
+    (`Dragon Spit`, `Hag Magic`, `Arcane Tattoos`...) que nunca sao perguntados ao jogador; depende de a
+    ficha modelar magia conhecida, que e decisao de produto do Igor e nao existe hoje; (b) remap de
+    ARMADURA, inexistente (3 atomos); (c) `Manifold Modifications` (feat nv 8, 17 opcoes) fora do eixo por
+    ser feat e nao progressao; (d) as fatias 2 a 4, que somam 20 queries exatas e ZERO opcao nova; (e) 202
+    opcoes de balaio sem explicacao -- item 69; (f) defeito de fonte `item:slug:dispel magic` (com espaco),
+    em `wb:feat/methodical-magic`, no ramo de magia que nao e avaliado.'
 promoted: []
 ---

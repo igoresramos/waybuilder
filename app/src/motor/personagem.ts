@@ -2041,7 +2041,7 @@ export class Personagem implements ContextoDePredicado {
       } else if (a["tipo"] === "familiar") {
         Object.assign(ator, this._ficha_de_familiar(ator["nivel"] as number));
       } else if (a["tipo"] === "eidolon") {
-        Object.assign(ator, this._ficha_de_eidolon(a, ator["nivel"] as number));
+        Object.assign(ator, this._ficha_de_eidolon(a));
       }
       this.atores.push(ator);
     }
@@ -2105,7 +2105,11 @@ export class Personagem implements ContextoDePredicado {
     };
   }
 
-  private _ficha_de_eidolon(ator: Dict, nivel: number): Dict {
+  // sem `nivel` de proposito: o eidolon nao tem nivel proprio, ele usa o do
+  // personagem (`this.nivel`) tanto no AC quanto nas salvas. O parametro
+  // entrou por simetria com `_ficha_de_familiar`, que USA o dele nas pericias,
+  // e ficou vestigial nos dois motores -- no TS ele quebrava `tsc -b`.
+  private _ficha_de_eidolon(ator: Dict): Dict {
     const f = this._formula("eidolon");
     if (Object.keys(f).length === 0) {
       return { aviso: "formula do eidolon ausente na base" };

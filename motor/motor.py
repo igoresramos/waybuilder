@@ -1924,7 +1924,7 @@ class Personagem:
             elif a.get("tipo") == "familiar":
                 ator.update(self._ficha_de_familiar(ator["nivel"]))
             elif a.get("tipo") == "eidolon":
-                ator.update(self._ficha_de_eidolon(a, ator["nivel"]))
+                ator.update(self._ficha_de_eidolon(a))
             self.atores.append(ator)
 
     # -- familiar e eidolon ---------------------------------------------------
@@ -1985,7 +1985,11 @@ class Personagem:
                                 f"(maior que {base_pericia})"),
         }
 
-    def _ficha_de_eidolon(self, ator: dict, nivel: int) -> dict:
+    # sem `nivel` de proposito: o eidolon nao tem nivel proprio, ele usa o do
+    # personagem (`self.nivel`) tanto no AC quanto nas salvas. O parametro
+    # entrou por simetria com `_ficha_de_familiar`, que USA o dele nas pericias,
+    # e ficou vestigial nos dois motores -- no TS ele quebrava `tsc -b`.
+    def _ficha_de_eidolon(self, ator: dict) -> dict:
         f = self._formula("eidolon")
         if not f:
             return {"aviso": "formula do eidolon ausente na base"}

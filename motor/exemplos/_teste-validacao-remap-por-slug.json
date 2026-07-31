@@ -1,0 +1,26 @@
+{
+ "esquema": "waybuilder/personagem@1",
+ "base": {
+  "versao": "2026-07-30",
+  "pin_foundry": "87f9e502"
+ },
+ "identidade": {
+  "nome": "TESTE REMAP POR SLUG -- Clerigo com Sister of the Golden Erinys",
+  "jogador": "Igor",
+  "notas": "Ficha de validacao do seletor `slug` no remap de arma (spec specs/2026-07-31-atomo-slug.md, item 105). Irma da `_teste-validacao-remap-de-arma`, que cobre `category`+`group`; aqui o remap vem por SLUG NOMEADO. O Clerigo e `simple: trained` e `martial: untrained`; `asp-coil` e `scourge` sao as duas MARCIAIS, e `Sister of the Golden Erinys Dedication` as trata como simples (`or[item:slug:asp-coil, item:slug:scourge] -> simple`). Sem o seletor `slug` o `_arma_casa` caia no `return False` e as duas saiam untrained. A espada longa esta equipada como CONTROLE: ela e marcial e NAO esta no `or`, entao tem de continuar untrained -- e o que prova que o remap nao vaza. Existe para o gabarito, nao para o conjunto canonico."
+ },
+ "escolhas": [
+  {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
+  {"em": "criacao", "slot": "heranca", "pega": "wb:heritage/versatile-human"},
+  {"em": "criacao", "slot": "background", "pega": "wb:background/scholar"},
+  {"em": 1, "slot": "nivel_de_classe", "pega": "wb:class/cleric"},
+  {"em": 2, "slot": "nivel_de_classe", "pega": "wb:class/cleric"},
+  {"em": 1, "slot": "boosts_livres", "pega": ["wis", "dex", "con", "cha"]},
+  {"em": 2, "slot": "class_feat", "pega": "wb:feat/sister-of-the-golden-erinys-dedication"}
+ ],
+ "inventario": [
+  {"item": "wb:weapon/asp-coil", "equipado": true},
+  {"item": "wb:weapon/scourge", "equipado": true},
+  {"item": "wb:weapon/longsword", "equipado": true}
+ ]
+}

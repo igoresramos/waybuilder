@@ -51,6 +51,14 @@
    "slots_abertos": 24
   },
   {
+   "ficha": "_teste-validacao-remap-por-slug",
+   "nivel": 2,
+   "hp": 26,
+   "avisos": 9,
+   "fora_do_requisito": 0,
+   "slots_abertos": 12
+  },
+  {
    "ficha": "_teste-validacao-resistencia",
    "nivel": 8,
    "hp": 104,
