@@ -144,29 +144,26 @@ items:
   id: 69
   date: '2026-07-31'
   priority: media
-- desc: 'COMPARADOR CONSERTADO 2026-07-31 (spec specs/2026-07-31-colisao-no-comparador.md) -- era a
-    pendencia declarada desta task. `norm()` apaga o sufixo de desambiguacao de proposito, mas o codigo
-    guardava UM registro por chave e pulava TODOS os que produziam aquela chave: 75 chaves da base
-    normalizam igual, envolvendo 205 feats. Agora o veredito e do GRUPO -- se qualquer irmao concorda com
-    o Pathbuilder, nao ha divergencia (o desmembrado legitimo continua sem virar sobra falsa); so ha
-    divergencia quando NENHUM concorda, e ai sai nomeando todos. E a colisao vai DECLARADA no relatorio
-    (`colisoes_de_normalizacao`). Medido antigo x novo sobre a MESMA base, para separar do drift: as
-    contagens ficaram identicas em todos os slots, 48 colisoes passaram a ser declaradas em 14 relatorios,
-    12 linhas duplicadas sumiram (`Crossbow Infiltrator Dedication` x11, que casava por nome E por alias)
-    e 2 FALSOS POSITIVOS caiiram. Os dois falsos positivos sao o oposto do que este item previa: em
-    `green empathy` temos dois registros -- `Plant Empathy`, que carrega `Green Empathy` em `aliases` e
-    esta disponivel, e o `Green Empathy` de verdade, que nao esta -- e o codigo antigo comparava o irmao
-    errado e acusava `wb=true pb=false`. A colisao nao so ESCONDIA ponto do placar: ela INVENTAVA. ||
-    RODADA 6 FEITA 2026-07-31 (docs/medicoes/2026-07-31_pathbuilder-rodada-6.md). As 27 classes estao
-    cobertas, com ZERO defeitos nossos em 152 pontos triados. ACHADO ESTRUTURAL: oito classes travam o
-    Class Feat do nivel 1 atras de escolha de subclasse obrigatoria (Animist, Witch, Magus, Psychic,
-    Oracle, Summoner, Druida, Feiticeiro) -- e informacao, nao falha. SOBRA: 3 pares novos de renomeacao
-    Golarion->generico para `equivalencias-pathbuilder.json`; os 33 pontos do Kineticist que so confirmam
-    o gap dos itens 97/99; e os JSONs de comparacao gravados estavam DEFASADOS em relacao a base (em_comum
-    222->224, 223->225, 98->99 so por a base ter crescido) -- proxima rodada comeca regravando as sondas.'
+- desc: 'BLOQUEIO REAL ENCONTRADO 2026-07-31, e ele invalida parte da rodada 6: **o comparador so
+    conhece 13 classes**. `DEFAULT` e `BOOSTS_DO_PATHBUILDER` tem 13 e 11 entradas, e classe fora do mapa
+    e PULADA EM SILENCIO ("pulado (classe sem equivalente montado)"). As 14 restantes (Animist, Commander,
+    Exemplar, Guardian, Gunslinger, Inventor, Kineticist, Magus, Oracle, Psychic, Summoner, Swashbuckler,
+    Thaumaturge, Witch) tem sonda E tem arquivo de comparacao em disco -- mas o arquivo e de 07:12 de hoje
+    e nao e mais regerado, entao a checagem "toda sonda tem comparacao" passa e mente. A rodada 6 dizia
+    "27 classes cobertas, zero defeitos nossos": vale para 13. Barbarian e Ranger estao em DEFAULT mas
+    faltam em BOOSTS. || O ELO PERDIDO: os boosts DAS 14 JA FORAM MEDIDOS na rodada 6 -- ha 30+ arquivos
+    `docs/comparacao/estado-pathbuilder-<classe>-nv<N>.json`, colhidos entre 06:50 e 06:56. O que nunca
+    aconteceu foi ESTENDER as duas tabelas com esses numeros. Trabalho pequeno e mecanico, e destrava as
+    14 de uma vez. Medi mais cinco em 31/07 as 16:30 (Exemplar, Thaumaturge, Kineticist, Inventor,
+    Guardian), cinco sondas em PARALELO, para confirmar que o caminho funciona. || PROXIMO PASSO, em
+    ordem: (1) estender DEFAULT + BOOSTS lendo os arquivos de estado, nunca chutando; (2) reger as 14
+    comparacoes e triar; (3) so entao rodar sondas novas em paralelo -- antes disso elas produzem arquivo
+    que ninguem compara. || FEITO ANTES: comparador consertado (spec colisao-no-comparador), veredito por
+    grupo, colisoes declaradas, 12 duplicatas e 2 falsos positivos removidos. Rodada 36 (Alchemist nv8)
+    achou o item 107.'
   id: 84
   date: '2026-07-31'
-  priority: media
+  priority: alta
 - desc: 'Importador do Pathbuilder tem que AVISAR o que se perde. Confirmado com o Igor: o eidolon existe
     no app deles e nao sobrevive ao export. Perda silenciosa e o pior tipo'
   id: 10
