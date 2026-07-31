@@ -904,6 +904,7 @@
    ]
   },
   "avisos": [
+   "Sorcerer: falta escolher `outras-opcoes` (1 opcoes)",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Gladiator (1), Gladiator (1), criacao (4 livres) (4), nivel 5 (4)",
    "pericias livres: 0 declarada(s) de 2 a que o personagem tem direito -- faltam 2"
   ],
@@ -1068,7 +1069,7 @@
    },
    {
     "classe": "Sorcerer",
-    "eixo": "outras-opcoes",
+    "eixo": "sorcerer-bloodline",
     "grants": [],
     "id": "wb:class-feature/bloodline-diabolic",
     "na_base": true,
@@ -1415,6 +1416,14 @@
     "slot": "pericias_livres"
    },
    {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "outras-opcoes",
+    "opcoes": 1,
+    "rotulo": "Sorcerer / outras-opcoes",
+    "slot": "subclasse"
+   },
+   {
     "em": 3,
     "escolhe": 1,
     "kind": "skill",
@@ -1432,7 +1441,7 @@
   "subclasses": [
    {
     "classe": "Sorcerer",
-    "eixo": "outras-opcoes",
+    "eixo": "sorcerer-bloodline",
     "escolhe": 1,
     "escolhido": "wb:class-feature/bloodline-diabolic",
     "escolhidos": [
@@ -1441,7 +1450,7 @@
     "filtro": null,
     "nivel": 1,
     "nome": "Bloodline: Diabolic",
-    "opcoes": 19,
+    "opcoes": 18,
     "opcoes_ids": [
      "wb:class-feature/bloodline-aberrant",
      "wb:class-feature/bloodline-aesir",
@@ -1460,7 +1469,20 @@
      "wb:class-feature/bloodline-psychopomp",
      "wb:class-feature/bloodline-shadow",
      "wb:class-feature/bloodline-undead",
-     "wb:class-feature/bloodline-wyrmblessed",
+     "wb:class-feature/bloodline-wyrmblessed"
+    ]
+   },
+   {
+    "classe": "Sorcerer",
+    "eixo": "outras-opcoes",
+    "escolhe": 1,
+    "escolhido": null,
+    "escolhidos": [],
+    "filtro": null,
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 1,
+    "opcoes_ids": [
      "wb:class-feature/spell-repertoire-sorcerer"
     ]
    }

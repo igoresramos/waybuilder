@@ -1056,7 +1056,7 @@
    ]
   },
   "avisos": [
-   "Champion: falta escolher `outras-opcoes` (2 opcoes)",
+   "Champion: falta escolher `blessing-of-the-devoted` (2 opcoes)",
    "Champion: falta escolher `outras-opcoes` (3 opcoes)",
    "Champion: falta escolher `deity` (487 opcoes)",
    "Champion: falta escolher `sanctification` (3 opcoes)",
@@ -1806,9 +1806,9 @@
    {
     "em": 1,
     "escolhe": 1,
-    "kind": "outras-opcoes",
+    "kind": "blessing-of-the-devoted",
     "opcoes": 2,
-    "rotulo": "Champion / outras-opcoes",
+    "rotulo": "Champion / blessing-of-the-devoted",
     "slot": "subclasse"
    },
    {
@@ -1905,7 +1905,7 @@
    },
    {
     "classe": "Champion",
-    "eixo": "outras-opcoes",
+    "eixo": "blessing-of-the-devoted",
     "escolhe": 1,
     "escolhido": null,
     "escolhidos": [],

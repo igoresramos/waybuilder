@@ -118,9 +118,9 @@
    "ficha": "feiticeiro5-fa-diabolico",
    "nivel": 5,
    "hp": 53,
-   "avisos": 2,
+   "avisos": 3,
    "fora_do_requisito": 0,
-   "slots_abertos": 4
+   "slots_abertos": 5
   },
   {
    "ficha": "guerreiro2-clerigo2-fa",
@@ -206,9 +206,9 @@
    "ficha": "invocador5-tradicao-eidolon",
    "nivel": 5,
    "hp": 68,
-   "avisos": 2,
+   "avisos": 3,
    "fora_do_requisito": 0,
-   "slots_abertos": 15
+   "slots_abertos": 16
   },
   {
    "ficha": "kineticista6-fa-fogo",

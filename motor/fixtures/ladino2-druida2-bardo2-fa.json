@@ -1270,7 +1270,7 @@
    },
    {
     "classe": "Druid",
-    "eixo": "outras-opcoes",
+    "eixo": "druid-order",
     "grants": [],
     "id": "wb:class-feature/animal-order",
     "na_base": true,
@@ -1821,7 +1821,7 @@
    },
    {
     "classe": "Druid",
-    "eixo": "outras-opcoes",
+    "eixo": "druid-order",
     "escolhe": 1,
     "escolhido": "wb:class-feature/animal-order",
     "escolhidos": [

@@ -194,6 +194,51 @@ def main() -> int:
             relatorio.append((classe["id"], eixo, nivel, len(filtros),
                               len(casam), len(novos)))
 
+    # -- 3) o balaio ja era eixo; faltava o NOME -----------------------------
+    # Um Exemplar de nivel 15 ja recebe os epitetos nos niveis 3, 7 e 15, com
+    # `escolhe: 1`: o bloco `outras-opcoes` FUNCIONA como eixo. So nao tem
+    # identidade -- na tela sai "Exemplar / outras-opcoes", e o jogador escolhe
+    # sem saber o que escolhe. O nome existe na fonte, na `tags` dos proprios
+    # registros, e por isso este passo vem DEPOIS de (1), que as escreve.
+    #
+    # Renomear o bloco nao basta: um unico balaio do Animista carrega DOIS
+    # eixos (13 de `animist-apparition` e 4 de `animistic-practice`), entao o
+    # bloco se PARTE por tag e o que nao tem tag fica onde estava.
+    # Spec: specs/2026-07-31-nomear-o-balaio-por-tag.md
+    por_id = {r["id"]: r for r in base}
+    nomeados = []
+    for reg in base:
+        if reg.get("kind") != "class":
+            continue
+        blocos = reg.get("subclasses") or []
+        saida = []
+        for bloco in blocos:
+            if bloco.get("eixo") != "outras-opcoes":
+                saida.append(bloco)
+                continue
+            grupos = collections.defaultdict(list)
+            for o in (bloco.get("opcoes") or []):
+                for tg in ((por_id.get(o) or {}).get("tags") or []):
+                    grupos[tg].append(o)
+            # grupo de UM nao e eixo: e coincidencia de tag. E uma opcao so
+            # entra num eixo -- a primeira tag que a agrupa, em ordem estavel.
+            usados, novos = set(), []
+            for tg in sorted(grupos):
+                g = [o for o in grupos[tg] if o not in usados]
+                if len(g) < 2:
+                    continue
+                usados |= set(g)
+                novos.append(dict(bloco, eixo=tg, opcoes=g,
+                                  com_mecanica=[], so_catalogo=[]))
+                nomeados.append((reg["id"], tg, bloco.get("nivel"), len(g)))
+            resto = [o for o in (bloco.get("opcoes") or []) if o not in usados]
+            saida.extend(novos)
+            # o balaio nao morre, encolhe -- e some se nao sobrou nada
+            if resto:
+                saida.append(dict(bloco, opcoes=resto))
+        if saida != blocos:
+            reg["subclasses"] = saida
+
     with open(f"{BASE}/index.json", "w", encoding="utf-8") as fh:
         json.dump(base, fh, ensure_ascii=False)
 
@@ -218,7 +263,18 @@ def main() -> int:
     for cid, eixo, motivo in pulados:
         rel.append(f"| `{cid}` | `{eixo}` | {motivo} |")
     rel += ["", "O bloco guarda o FILTRO, nunca a lista: `candidatos()` avalia "
-            "com `_casa_filtro`, que ja existia e ja rodava."]
+            "com `_casa_filtro`, que ja existia e ja rodava.", "",
+            "## O balaio nomeado pela tag", "",
+            f"- blocos de balaio que ganharam nome: **{len(nomeados)}**",
+            f"- opcoes cobertas: **{sum(q for _, _, _, q in nomeados)}**", "",
+            "O balaio ja funcionava como eixo -- as opcoes certas, no nivel "
+            "certo, com `escolhe: 1`. Faltava o NOME, e ele estava na `tags` "
+            "dos registros. Nada muda de conteudo; o bloco passa a ter "
+            "identidade. Um balaio pode se partir em mais de um eixo: o do "
+            "Animista carrega dois.", "",
+            "| classe | eixo | nivel | opcoes |", "|---|---|---:|---:|"]
+    for cid, tg, nv, q in nomeados:
+        rel.append(f"| `{cid}` | `{tg}` | {nv} | {q} |")
     with open(f"{BASE}/relatorio_eixo_por_tag.md", "w", encoding="utf-8") as fh:
         fh.write("\n".join(rel) + "\n")
 

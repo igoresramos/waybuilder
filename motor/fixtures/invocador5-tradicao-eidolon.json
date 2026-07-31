@@ -818,6 +818,7 @@
    ]
   },
   "avisos": [
+   "Summoner: falta escolher `outras-opcoes` (1 opcoes)",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Human (1), Human (1), Hermit (1), Hermit (1), criacao (4 livres) (4), nivel 5 (4)",
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3"
   ],
@@ -1011,7 +1012,7 @@
    },
    {
     "classe": "Summoner",
-    "eixo": "outras-opcoes",
+    "eixo": "summoner-eidolon",
     "grants": [
      {
       "proficiency": {
@@ -1382,6 +1383,14 @@
     "slot": "eidolon"
    },
    {
+    "em": 1,
+    "escolhe": 1,
+    "kind": "outras-opcoes",
+    "opcoes": 1,
+    "rotulo": "Summoner / outras-opcoes",
+    "slot": "subclasse"
+   },
+   {
     "em": 2,
     "escolhe": 1,
     "kind": "feat",
@@ -1455,7 +1464,7 @@
   "subclasses": [
    {
     "classe": "Summoner",
-    "eixo": "outras-opcoes",
+    "eixo": "summoner-eidolon",
     "escolhe": 1,
     "escolhido": "wb:class-feature/angel-eidolon",
     "escolhidos": [
@@ -1464,7 +1473,7 @@
     "filtro": null,
     "nivel": 1,
     "nome": "Angel Eidolon",
-    "opcoes": 14,
+    "opcoes": 13,
     "opcoes_ids": [
      "wb:class-feature/angel-eidolon",
      "wb:class-feature/anger-phantom-eidolon",
@@ -1477,9 +1486,22 @@
      "wb:class-feature/fey-eidolon",
      "wb:class-feature/plant-eidolon",
      "wb:class-feature/psychopomp-eidolon",
-     "wb:class-feature/spell-repertoire-summoner",
      "wb:class-feature/swarm-eidolon",
      "wb:class-feature/undead-eidolon"
+    ]
+   },
+   {
+    "classe": "Summoner",
+    "eixo": "outras-opcoes",
+    "escolhe": 1,
+    "escolhido": null,
+    "escolhidos": [],
+    "filtro": null,
+    "nivel": 1,
+    "nome": null,
+    "opcoes": 1,
+    "opcoes_ids": [
+     "wb:class-feature/spell-repertoire-summoner"
     ]
    }
   ],

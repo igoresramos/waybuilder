@@ -937,7 +937,7 @@
    },
    {
     "classe": "Exemplar",
-    "eixo": "outras-opcoes",
+    "eixo": "exemplar-root-epithet",
     "grants": [
      {
       "proficiency": {
@@ -1377,7 +1377,7 @@
   "subclasses": [
    {
     "classe": "Exemplar",
-    "eixo": "outras-opcoes",
+    "eixo": "exemplar-root-epithet",
     "escolhe": 1,
     "escolhido": "wb:class-feature/the-brave",
     "escolhidos": [

@@ -942,7 +942,7 @@
    ]
   },
   "avisos": [
-   "Barbarian: falta escolher `outras-opcoes` (9 opcoes)",
+   "Barbarian: falta escolher `barbarian-instinct` (9 opcoes)",
    "boosts de atributo: 8 declarado(s) de 12 a que o personagem tem direito -- faltam 4. Fontes: Orc (1), Orc (1), Gladiator (1), Gladiator (1), criacao (4 livres) (4), nivel 5 (4)",
    "pericias livres: 0 declarada(s) de 3 a que o personagem tem direito -- faltam 3",
    "Marshal Dedication: falta escolher `marshal-skill` (Diplomacy, Diplomacy, Intimidation, Intimidation)"
@@ -1504,9 +1504,9 @@
    {
     "em": 1,
     "escolhe": 1,
-    "kind": "outras-opcoes",
+    "kind": "barbarian-instinct",
     "opcoes": 9,
-    "rotulo": "Barbarian / outras-opcoes",
+    "rotulo": "Barbarian / barbarian-instinct",
     "slot": "subclasse"
    },
    {
@@ -1552,7 +1552,7 @@
    },
    {
     "classe": "Barbarian",
-    "eixo": "outras-opcoes",
+    "eixo": "barbarian-instinct",
     "escolhe": 1,
     "escolhido": null,
     "escolhidos": [],
