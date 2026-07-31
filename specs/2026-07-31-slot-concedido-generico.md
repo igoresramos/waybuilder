@@ -105,13 +105,20 @@ nome, nao de comportamento.
 
 ## O que esta spec NAO resolve, e declara com numero
 
-- **25 blocos sem `tipo` na fonte nenhuma** (`Assurance`, as dedicacoes de
-  multiclasse, `basic-lesson`...). Sem `itemType` no Foundry, o pool nao e
-  derivavel por regra; cada um precisa de resposta propria. Nao entram.
-- **3 registros TEM `itemType` no Foundry e o nosso extrator descartou**
-  (`multifarious-muse` e `skill-mastery` com `feat`, `verdant-weapon` com
-  `weapon`). E lacuna de leitura, conserto de pipeline, e sai em item proprio --
-  esta spec so mexe em motor.
+- **49 blocos tem filtro e nao tem `tipo`**, em 41 registros. Deles, **25** tem
+  par exato no ChoiceSet do Foundry e o par tambem nao traz `itemType`
+  (`Assurance`, as dedicacoes de multiclasse, `basic-lesson`...): sem itemType o
+  pool nao e derivavel por regra, e cada um precisa de resposta propria. Os
+  outros **24** nao tem par exato -- vivem aninhados dentro de `opcoes`, ou o
+  filtro foi reescrito na extracao. Nenhum dos 49 entra nesta spec.
+- ~~3 registros com `itemType` perdido pelo extrator~~ -- **CORRIGIDO em
+  2026-07-31, o numero e ZERO e a medicao que o produziu estava errada de
+  metodo.** Ela pareava por REGISTRO: `multifarious-muse` tem duas escolhas, uma
+  com `itemType: feat` (lida certo, e o `tipo` esta na base) e outra sem (que
+  corretamente nao tem tipo), e o registro entrava na conta como se tivesse
+  perdido a primeira. Pareando por BLOCO, com o `filtro` verbatim como chave,
+  nenhum bloco nosso sem `tipo` tem par no Foundry com `itemType`. O extrator
+  esta certo. Nao ha conserto de pipeline a fazer.
 - **155 blocos com `opcoes` inline** e outra familia, ja resolvida pela spec de
   escolha aninhada do Inventor.
 - **A conjuracao do personagem** (os 5 truques do Mago, os slots por rank)

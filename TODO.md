@@ -278,9 +278,10 @@ items:
     junto, com helpers de doc por `flag` (a identidade do slot nao e o nivel: dois concessores caem no
     mesmo). `item:slug` deixou de ser codigo morto e virou requisito. SOBRA: (a) 25 blocos sem `tipo` na
     fonte nenhuma (`Assurance`, dedicacoes de multiclasse) -- sem `itemType` o pool nao e derivavel por
-    regra, cada um precisa de resposta propria; (b) 3 registros TEM `itemType` no Foundry e o extrator
-    descartou (`multifarious-muse`, `skill-mastery`, `verdant-weapon`) -- lacuna de leitura, conserto de
-    pipeline; (c) a conjuracao do personagem segue como CAPACIDADE, sem lista de magias, e a assimetria
+    regra, cada um precisa de resposta propria; (b) [RETIRADO 2026-07-31] a lacuna de leitura de `itemType` NAO EXISTE:
+    a medicao pareava por REGISTRO em vez de por BLOCO, e registro com duas escolhas (uma com itemType,
+    lida certo, e outra sem) entrava na conta. Pareando por bloco com o `filtro` verbatim como chave, o
+    numero e ZERO -- o extrator esta certo; (c) a conjuracao do personagem segue como CAPACIDADE, sem lista de magias, e a assimetria
     e consciente.'
   id: 106
   date: '2026-07-31'
