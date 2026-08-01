@@ -22,6 +22,7 @@ import { Slot, FILTROS_DE_FEAT, FILTROS_DE_RARIDADE } from "./componentes/Slot";
 import { PainelDireito } from "./componentes/PainelDireito";
 import { IconeCog } from "./componentes/Icones";
 import { Detalhe } from "./componentes/Detalhe";
+import { Licenca } from "./componentes/Licenca";
 import * as doc from "./doc";
 import "./estilo.css";
 
@@ -342,6 +343,10 @@ export default function App() {
       {lendo && (
         <Detalhe base={base} id={lendo} aoFechar={() => setLendo(null)} />
       )}
+
+      {/* atribuicao OGL/ORC -- exigida ao REDISTRIBUIR, e publicar e
+          redistribuir. Ver componentes/Licenca.tsx */}
+      <footer className="rodape"><Licenca /></footer>
     </div>
   );
 }

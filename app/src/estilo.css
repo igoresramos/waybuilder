@@ -481,3 +481,19 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .link-concedido:disabled { opacity: 1; cursor: default; }
 .modal-leitura { width: min(760px, 100%); height: auto; max-height: 82vh; }
 .modal-leitura > header { align-items: baseline; }
+
+
+/* -- rodape de licenca ------------------------------------------------------
+   Obrigatorio so a partir da PUBLICACAO: OGL/ORC pedem atribuicao ao
+   redistribuir, e isso vale independente de haver venda. Ver Licenca.tsx. */
+.rodape { padding: 10px 14px 18px; text-align: center; }
+.rodape-licenca {
+  background: none; border: 0; color: var(--fraco); font-size: .8em;
+  cursor: pointer; text-decoration: underline; padding: 0;
+}
+.rodape-licenca:hover { color: var(--texto); }
+.modal.licenca { max-width: 620px; }
+.licenca-corpo { padding: 4px 18px 12px; overflow-y: auto; }
+.licenca-corpo h3 { margin: 14px 0 4px; font-size: .95em; }
+.licenca-corpo p { margin: 0 0 8px; line-height: 1.5; font-size: .9em; }
+.licenca-corpo .fraco { color: var(--fraco); font-size: .85em; }
