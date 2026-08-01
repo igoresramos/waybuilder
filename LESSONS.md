@@ -1311,3 +1311,59 @@ Regra: **todo gate novo precisa de um caso NEGATIVO no oraculo** -- alguem que
 nao atende, com o motivo esperado. O caso positivo sozinho nao distingue "gate
 funcionando" de "gate desligado". E antes de envelopar predicado, conferir o
 vocabulario de operadores que o motor realmente implementa.
+
+## Consertar um caminho quebrado ACORDA os bugs que dormiam atras dele (2026-07-31)
+
+`recuperar_mecanica_equipamento.py` lia `fontes: foundry=0 itens, aon=0 itens`
+havia semanas -- caminho fixo `dados_brutos/foundry/` numa maquina cujo clone e
+`foundry_repo/`, e nomes de dump do AoN que nao existem mais. Consertar os dois
+caminhos foi certo e trouxe 53 armas de volta.
+
+E ligou um bug **da fonte** que estava dormindo com a fonte desligada: o dump do
+AoN traz `damage_type: ["Piercing"]` chumbado nas 11 armas de combinacao
+`(Melee)`, contradizendo a propria string no MESMO documento --
+`Gun Sword (Melee)` tem `damage: "1d8 S"` e `damage_type: ["Piercing"]` lado a
+lado. O passo lia o campo estruturado e gravou `piercing` em arma cortante.
+
+O saldo liquido foi positivo (53 armas certas contra 11 erradas), mas a troca
+tem uma assimetria que importa: **`None` honesto virou valor errado plausivel**,
+e valor errado plausivel nao levanta suspeita de ninguem. Um campo vazio alguem
+vai investigar; `piercing` numa espada ninguem confere.
+
+Duas regras que saem daqui:
+
+1. Ao religar uma fonte que estava desligada, **conferir uma amostra do que ela
+   passa a escrever** -- ela nunca foi exercitada nesse caminho.
+2. Entre campo ESTRUTURADO e a STRING que o descreve, quando os dois vem da
+   mesma fonte e discordam, **a string costuma estar certa**: ela e o que o
+   editor humano escreveu, o campo e o que alguem derivou depois.
+
+## Cobertura que conta REGISTRO nao ve perda de CAMPO (2026-07-31)
+
+Os dez portoes passaram verdes enquanto 53 armas perdiam `damage` a cada
+rebuild. Nenhum estava quebrado: o portao 4 conta registros por kind (as armas
+continuavam existindo, so sem dano), o 8 cobre arquivo que sumiu do disco, o 10
+cobre `grants_completos`. **O buraco tinha nome: nenhum portao contava campo.**
+
+O portao 11 fecha isso, e a prova de que ele fecha e o par: tirando `damage` de
+53 armas, o 11 falha (`weapon.damage: 986 -> 933`) e o 4, na mesma base, passa.
+
+E "caiu?", nao "existe?" -- 102 registros seguem sem campo critico por razao
+legitima (bomba com dano por formula), e portao que nasce vermelho e desligado
+na primeira semana.
+
+## O motor abre o slot e a tela nao desenha -- terceira vez (2026-07-31)
+
+`feat_concedido` (item 106), `pericias_livres` e as fontes de boost. Nos tres, o
+motor estava certo e completo, as fixtures passavam verdes, e o jogador
+simplesmente nao era perguntado.
+
+`pericias_livres` foi o pior: alem de a tela nao desenhar, `candidatos()` nem
+conhecia o slot em nenhum dos dois motores -- caia no `else` final e devolveria
+FEATS se alguem o tivesse desenhado. Ninguem tinha exercitado o caminho porque
+ninguem chegava nele.
+
+**O gabarito nao pega isso, por construcao**: ele congela a saida do motor, e a
+saida do motor estava certa. So a quarta camada -- navegador -- ve o que o
+jogador ve. Quando o motor ganhar um slot novo, a pergunta a fazer nao e "o
+teste passa?", e "que tela desenha isto?".

@@ -1665,3 +1665,56 @@ passo ja declara quais sao, em `CRITICO`.
 
 Os 10 portoes passam, oraculo verde, iconics identicos (118/136 no HP) e
 pericia identica (62,9%).
+
+## 2026-07-31 (9a rodada) -- a tela que nao desenhava, e o app no ar
+
+### Sessao | 19:15-22:27 | igor + claude-code
+
+**O app foi publicado**: https://waybuilder.vercel.app -- estatico na Vercel,
+build de producao verificado no ar (base carrega em 1,5s, ficha calcula, zero
+erro de console). O Igor vai passar para um amigo validar.
+
+Antes de publicar entrou a **atribuicao OGL/ORC**, que nao existia em lugar
+nenhum da UI. Enquanto o app rodava so na maquina dele isso nao se aplicava;
+publicar e redistribuir, e as duas licencas pedem credito -- 13.105 registros
+ORC e 7.020 OGL, de 239 livros. O `LESSONS` ja registrava a regra havia dias;
+faltava a tela cumpri-la.
+
+**Dois defeitos que o Igor achou testando**, e os dois eram da MESMA familia
+-- o motor abre o slot e a tela nao desenha:
+
+1. "n tem como colocar +2 em nada": o picker de boost era uma fileira unica com
+   toggle, entao clicar STR duas vezes desmarcava. O motor ja entregava as
+   fontes SEPARADAS (`visao.boosts.fontes`) e a tela descartava o campo. A
+   regra que a fileira achatava: boost do mesmo bloco vai para atributo
+   diferente, blocos diferentes podem cair no mesmo -- e assim que se chega a
+   +2. Agora e uma linha por fonte.
+2. "n tem como upar pericias": `pericias_livres` nao existia na UI, e era pior
+   que isso -- `candidatos()` nem conhecia o slot em nenhum dos dois motores,
+   caia no `else` final e devolveria FEATS. O slot era aberto desde 29/07 e
+   nunca foi perguntado a ninguem.
+
+**A auditoria adversarial cobrou o preco de dois registros meus.** O relatorio
+(`docs/2026-07-31_auditoria-estado.md`) achou cinco problemas, e dois doeram:
+
+- **11 armas com tipo de dano ERRADO, introduzido por mim de manha.** Consertar
+  o caminho de `recuperar_mecanica_equipamento` ACORDOU um bug antigo da fonte:
+  o dump do AoN traz `damage_type: ["Piercing"]` chumbado nas armas de
+  combinacao, contradizendo a propria string no MESMO documento
+  (`Gun Sword (Melee)`: `damage: "1d8 S"`). Gravamos `piercing` em arma
+  cortante -- trocamos um `None` honesto por um valor errado plausivel, que e
+  pior porque ninguem desconfia. Agora a LETRA manda.
+- **Eu dei o item 111 como entrega cheia e ele nao esta.** A Decisao 5 da spec
+  (traduzir os 26 `predicate`) nao foi implementada, ha ZERO `grants[].se` na
+  base, e `Justice`/`Liberation` seguem com `grants: []` -- o Campeao, que e a
+  motivacao-titulo da spec, nao recebe nada. Registro corrigido.
+
+Entrou tambem o **portao 11**, que conta CAMPO e nao registro. Prova: tirando
+`damage` de 53 armas ele falha e o portao 4 na mesma base passa -- a medida
+exata da cegueira que existia. E o **tradutor de aumento de pericia**, que
+levou a metrica de 62,9% para 65,0%; o achado dele foi que 450 dos 723 pontos
+restantes sao `pericias_livres`, o mesmo slot que a tela nao desenhava.
+
+**Decisao de produto do Igor:** o app tem de deixar escolher MAGIA, como o
+Pathbuilder. Isso destrava os itens 105 e 106, que estavam parados com o texto
+"decisao de produto do Igor" escrito neles. Virou o item 116.

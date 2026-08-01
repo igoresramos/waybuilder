@@ -5,7 +5,7 @@ status: active
 priority: baixa
 version: 1
 started: 2026-07-26
-hours: 38.5
+hours: 41.75
 repo:
 tags: [rpg, pathfinder-2e, dados, pipeline, pwa, houserules]
 hidden: false
@@ -71,6 +71,49 @@ hidden: false
 - Modo de jogo / encontro / tracking de combate
 
 ## Estado atual
+> **O APP ESTA NO AR** (2026-07-31): https://waybuilder.vercel.app -- estatico
+> na Vercel, PWA offline, sem backend. Verificado publicado de ponta a ponta:
+> base carrega em 1,5s, monta ficha, zero erro de console. Com atribuicao
+> OGL/ORC, que nao existia e passou a ser exigivel no momento em que deixou de
+> ser software de uma maquina so.
+>
+> **Kind `action` existe** (520 registros; as 37 taticas do Commander ficam de
+> fora porque ja sao `kind: tactic`). Efeito medido: `GrantItem sem alvo na
+> base` caiu de 290 para 27, e os grants convertidos subiram de 556 para 819 --
+> 263 concessoes que nao pousavam em lugar nenhum. Um Guerreiro/Mago recebia
+> `wb:feat/reactive-strike`, o feat homonimo errado, e passou a receber
+> `wb:action/reactive-strike`.
+>
+> **O que NAO entrou, e o registro ja foi corrigido:** a traducao dos 26
+> `predicate` (Decisao 5 da spec do kind `action`) nao existe no codigo, nao ha
+> `grants[].se` na base, e por isso o Campeao e o Gunslinger -- a
+> motivacao-titulo daquela spec -- continuam sem receber as reacoes e deeds. As
+> duas specs se cruzam e nenhuma fecha sozinha.
+>
+> **Os dois slots de criacao que a tela nunca desenhou** foram consertados
+> depois de o Igor testar o app: o boost agora mostra uma linha por FONTE (da
+> para pos +2 no mesmo atributo, que era impossivel) e as pericias treinadas
+> existem. Nos dois casos o motor estava certo desde sempre -- so a tela nao
+> perguntava.
+>
+> **Portao 11** conta CAMPO e nao registro, e nasceu de um caso real: 53 armas
+> perdiam `damage` a cada rebuild com os dez portoes verdes.
+>
+> **Metrica de pericia em 65,0%** (era 62,9%). Dos 723 pontos que sobram, 450
+> sao `pericias_livres` -- o mesmo slot que faltava na tela.
+>
+> **Fila: 6 itens `alta`.** 110 (a classe de pares AoN/Foundry nao fundidos --
+> medida em centenas, com duas gravidades distintas), 111 (a parte que falta),
+> 112 (9 backgrounds achatam escolha de 1-de-2; quatro deles concedem DOIS
+> feats de graca), 113 (fechado), 115 (fechado), 116 (magias selecionaveis --
+> decisao de produto tomada nesta sessao, destrava os itens 105 e 106).
+>
+> **Auditoria adversarial em `docs/2026-07-31_auditoria-estado.md`** -- cinco
+> problemas nomeados, dois ja consertados. Os tres abertos: cobertura fantasma
+> (portao 9 cego para `action`, os xref vazios), documentacao dessincronizada
+> (numeros conflitantes entre PROJECT/TODO/specs) e relatorios narrativos
+> fingindo cobertura.
+
 > **A bancada do Pathbuilder virou o motor da triagem** (2026-07-31). Ela
 > compara o que o app OFERECE num slot com o que o Pathbuilder oferece, e as 27
 > classes passaram a ser comparadas de verdade -- eram 13, e as outras 14 eram
