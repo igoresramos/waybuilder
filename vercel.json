@@ -1,5 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm install --prefix app",
+  "buildCommand": "python3 pipeline/emitir_app.py && cd app && ./sincronizar-base.sh && npm run build",
+  "outputDirectory": "app/dist",
   "cleanUrls": true,
   "headers": [
     {
