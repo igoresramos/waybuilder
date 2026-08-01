@@ -103,12 +103,25 @@ inferencia nao toca no que estava errado.
 - divergencias de 2 degraus caem de 80 para 46; as de 1 degrau, de 679 para 670
 - HP: inalterado (118 batem, 11 divergem) -- o slot nao toca HP
 
-Caso concreto que passou a bater: **Amiri (Level 5)**, `athletics`. Barbaro
-treina Atletismo de graca (`trainedSkills.value == ["athletics"]`), e o rank
-oficial e `expert` no nivel 5 contra `trained` nos niveis 1 e 3. O diff acusa 1
-degrau na janela (3, 5], a cadencia do Barbaro traz o nivel 5, e o tradutor
-emite `{"em": 5, "slot": "skill_increase", "pega": ["athletics"]}`. O motor
-sobe de `trained` para `expert` e o ponto passa a bater.
+Caso concreto que passou a bater: **Kyra (Level 3)**, `religion`. Clerigo treina
+Religiao de graca, entao o motor ja dava `trained`; o rank oficial no nivel 3 e
+`expert`. O diff contra o snapshot de nivel 1 acusa exatamente 1 degrau, e a
+cadencia do Clerigo traz exatamente 1 nivel de aumento na janela (1, 3] -- o
+nivel 3. O tradutor emite
+`{"em": 3, "slot": "skill_increase", "pega": ["religion"]}`, o motor sobe para
+`expert` e o ponto passa a bater. Mesmo padrao, todos verificados: Fumbus
+(`crafting`), Harsk (`survival`), Korakai e Samo (`religion`), Lem
+(`performance`), Mios (`arcana`), Feiya e Thaleon (`occultism`), Ulka
+(`intimidation`).
+
+**Ressalva medida, e ela importa:** so em **31** dos 78 personagens o diff e
+exato em toda transicao (degraus == niveis disponiveis). Nos demais o
+pareamento degrau-a-nivel e por ordem, e nem sempre e o unico possivel. A
+Amiri, por exemplo, mostra 3 degraus na janela (3, 5] para 1 unico nivel de
+aumento: `athletics` leva o aumento por vir primeiro na ordem das pericias, e
+`medicine`/`stealth` sao descartados. O ponto de `athletics` dela passa a
+bater, mas por pareamento, nao por prova. A causa do excesso esta no item 3 de
+"o que esta spec NAO resolve".
 
 ## O que esta spec NAO resolve, e declara
 
