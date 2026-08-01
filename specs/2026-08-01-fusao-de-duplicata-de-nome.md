@@ -1,10 +1,11 @@
 ---
 spec: fusao-de-duplicata-de-nome
 project: waybuilder
-version: 1
-status: rascunho
+version: 2
+status: aprovada
 created: 2026-08-01
 todo: 84
+revisao: adversarial (fable, 2026-08-01) -- 10 mudancas obrigatorias incorporadas
 ---
 
 # Spec -- o mesmo registro da Paizo, duas grafias
@@ -24,10 +25,6 @@ causa:
 O efeito na ficha: o jogador ve DOIS botoes para a mesma coisa, e cada um ocupa
 um slot de escolha, porque a base nao os declara mutuamente exclusivos.
 
-A propria triagem declarou o que nao mediu (secao 8): "nao auditei a base
-inteira atras de mais pares... e bem provavel que existam mais fora desta
-amostra". Esta spec mede.
-
 ## A regra que a triagem propos casa ZERO
 
 A triagem propos, textualmente: *"quando dois candidatos tem MESMO
@@ -35,152 +32,203 @@ A triagem propos, textualmente: *"quando dois candidatos tem MESMO
 'Dedication', tratar como o mesmo feat"*.
 
 Rodada contra a base, essa regra casa **0 pares** -- inclusive os 7 que a
-propria triagem documentou. A causa e um campo so:
-
-| campo | pares (de 394 candidatos) que batem |
-|---|---:|
-| `book` | 327 |
-| `traits` | 301 |
-| `level` | 294 |
-| **`page`** | **0** |
-
-**O lado Foundry nunca tem numero de pagina.** `wb:feat/knight-vigilant` (aon)
-tem `page: 94`; `wb:feat/knight-vigilant-dedication` (foundry) tem `page: None`.
-Exigir igualdade de `page` entre um lado aon e um lado foundry e exigir algo que
-nao pode acontecer.
-
-Segundo defeito da regra proposta: `+/- "Dedication"` cobre 1 dos 7 casos. Os
-outros seis sao letra trocada (`Vermilion`/`Vermillion`), espaco
-(`Flash Forge`/`Flashforge`), plural (`Whisper`/`Whispers of Warning`) e palavra
-de ligacao (`Voice of (the) Elements`).
+propria triagem documentou. A causa e um campo so: **o lado Foundry nunca tem
+numero de pagina.** Medido: **0 de 1.073** registros so-foundry tem
+`source.page` preenchido. Exigir igualdade de `page` entre um lado aon e um lado
+foundry e exigir algo que nao pode acontecer.
 
 ## A medicao que decide o desenho
 
-Varredura da base inteira (20.125 registros), pareando por `kind` + 4 primeiros
-caracteres do nome normalizado, exigindo que um lado tenha **so** `xref.aon` e o
-outro **so** `xref.foundry`:
+Varredura da base inteira (20.125 registros), exigindo que um lado tenha **so**
+`xref.aon` e o outro **so** `xref.foundry`:
 
-| filtro | pares | o que corta |
-|---|---:|---|
-| nome quase-identico (espaco, +/-1 palavra, distancia <= 3) | 394 | -- |
-| + `book` e `level` iguais, `traits` iguais, `page` compativel | 200 | homonimo real de livro/nivel diferente |
-| + nenhum dos dois lados tem parenteses | **40** | **desambiguacao deliberada** |
+| filtro | pares |
+|---|---:|
+| bloco por `(kind, book, level)` + `traits` iguais + `page` compativel + nome quase-identico | 57 |
+| -- com parenteses em algum dos lados | 5 |
+| -- **fundiveis** (52 sem parenteses + 1 com parentese identico) | **53** |
 
-O terceiro filtro e o que mais importa. Sem ele a regra funde
-`Silence the Profane` com `Silence the Profane (Avenger)` **e** com
-`Silence the Profane (Vindicator)` -- o parentese ali e o desambiguador que o
-`desmembrar_colisoes.py` criou de proposito (os 318 irmaos do README, item 3).
-Fundir desfaria trabalho correto. Sao **160 dos 200** nessa condicao.
+O bloco por `(kind, book, level)` substitui o bloco por prefixo de 4 caracteres
+da v1. Os filtros ja exigiam `book` e `level` iguais, entao o bloco novo nao
+custa nada e captura pares que divergem no COMECO do nome, invisiveis para o
+prefixo:
 
-Os 40 seguros, por forma e por kind:
+- `Lurching Chomp` / `Luring Chomp`
+- `Eye of the Moonwarden` / `Eyes Of The Moonwarden`
+- `Comandant's Scabbard` / `Commandant's Scabbard`
+- `Fautless Defense` / `Faultless Defense`
 
-| forma | pares | exemplo |
-|---|---:|---|
-| letra trocada (d=1) | 22 | `Vermilion` / `Vermillion Threads` |
-| espaco | 6 | `Flash Forge` / `Flashforge` |
-| palavra de ligacao | 5 | `Voice of Elements` / `Voice of the Elements` |
-| letra trocada (d=3) | 4 | `Automatic` / `Autonomic Psychic Action` |
-| letra trocada (d=2) | 3 | `Armor` / `Armored Regiment Training` |
+Dois desses tem `grants` so no lado Foundry -- exatamente o defeito de mecanica
+que esta spec existe para consertar.
 
-kind: `feat` 27, `equipment` 10, `background` 3.
+**O bloco nao e detalhe de implementacao, e parte da regra.** Sem ele, a regra
+literal (distancia de edicao <= 3) funde **8 divindades em `Norns`** -- Gorum,
+Torag, Horus, Kols, Cong, Onos, Zohls e Lorris, todas de Divine Mysteries, todas
+com `level: None` e `traits: []`, todas com `page` nula do lado Foundry. Nomes
+curtos tornam a distancia 3 catastrofica.
 
-**A regra pega os 7 defeitos conhecidos, e nenhum a menos.** Ela tambem mostra
-que a ponta vista pela triagem (7, num recorte de 14 classes) era **um sexto** do
-total: sao 40 na base inteira.
+A exclusao por parenteses protege os 318 irmaos que o `desmembrar_colisoes.py`
+criou de proposito. Sem ela a regra funde `Silence the Profane` com
+`(Avenger)` **e** com `(Vindicator)`. **Excecao:** quando o conteudo do
+parentese e identico normalizado dos dois lados, o parentese nao esta
+desambiguando nada -- e o caso de `Submersible Helm (Greater)` /
+`Submersible Helmet (Greater)`, irmao graduado de um par que a regra ja funde.
 
 ## A regra
 
-Dois registros do mesmo `kind` sao o **mesmo registro real** quando, ao mesmo
-tempo:
+Dois registros sao o **mesmo registro real** quando, ao mesmo tempo:
 
-1. um tem so `xref.aon` e o outro tem so `xref.foundry`;
-2. `source.book` identico e `level` identico e `traits` identicos;
-3. `source.page` **compativel** -- iguais, ou pelo menos um dos dois nulo;
-4. nenhum dos dois nomes contem parenteses;
-5. os nomes normalizados (minuscula, sem pontuacao) diferem por **uma** destas
-   formas:
+1. mesmo `kind`, mesmo `source.book`, mesmo `level` (o bloco);
+2. um tem so `xref.aon` e o outro tem so `xref.foundry`;
+3. `traits` identicos;
+4. `source.page` compativel -- iguais, ou pelo menos um dos dois nulo;
+5. parenteses: nenhum dos dois nomes tem, **ou** os dois tem conteudo de
+   parentese identico apos normalizacao;
+6. os nomes normalizados diferem por **uma** destas formas:
    - so espaco/pontuacao (`Flash Forge` = `Flashforge`);
-   - uma palavra a mais que e `the`, `of` ou `dedication`;
+   - uma palavra a mais, e essa palavra e `the`, `of` ou `dedication`;
    - distancia de edicao <= 3.
+
+### A guarda estrutural (contra o futuro, nao contra a base de hoje)
+
+Nenhum dos 53 pares de hoje e falso positivo -- conferi um a um contra o dump do
+AoN, e em todos o nome do lado Foundry **nao existe** no AoN. Mas a seguranca e
+acidental: medidos no dump, existem **39 pares de entidades DISTINTAS** que
+passariam em todos os filtros acima, entre eles `Goblin Lore` / `Goblin Song`,
+`Basic Devotion` / `Basic Deduction`, `Quick Climb` / `Quick Swim` e -- o pior --
+**`Eagle Eye` / `Eagle Eyes`** (`feat-8725` e `feat-8770`, dois feats reais que o
+plural distingue). Hoje nenhum esta no estado so-aon/so-foundry, por isso a regra
+nao erra. Como isto vira etapa permanente do `build.sh`, uma re-extracao futura
+basta para armar a mina.
+
+**Guarda:** vetar a fusao se o nome do lado Foundry existir como doc DISTINTO no
+dump do AoN da mesma categoria. Se o AoN conhece os dois nomes, sao duas coisas.
 
 ## A politica de fusao
 
-Nenhum dos dois lados e descartado inteiro -- principio 4 do projeto ("nada e
-descartado"):
+Nenhum lado e descartado inteiro -- principio 4 ("nada e descartado").
 
-| campo | de onde vem |
+| campo | destino |
 |---|---|
-| `name` canonico | do lado **AoN** (bate com a grafia da Paizo) |
-| `aliases` | recebe o nome do lado Foundry |
-| `xref` | **uniao** dos dois |
-| `grants` | do lado que tiver; se so um tem, **herda dele** |
-| `id` | o slug do nome canonico; o outro id e apagado |
+| `name` canonico | ver "o voto de terceira fonte", abaixo |
+| `aliases` | recebe o nome perdedor **e** os `aliases` preexistentes dos dois |
+| `xref` | uniao |
+| `grants` | do lado que tiver; se so um tem, herda dele |
+| `text` | do canonico; **a prosa do perdedor vai para `conflitos`** |
+| `requires` | do canonico; se divergirem, o do perdedor vai para `conflitos` |
+| `rarity`, `source.remaster` | do canonico; divergencia registrada em `conflitos` |
+| `prov` | vira lista com as duas proveniencias |
+| `historico` | concatenado |
+| `id` | slug do nome canonico |
 
-A herança de `grants` nao e detalhe: em **5 dos 40** pares so um lado tem
-mecanica, e em 3 deles e o lado de nome ERRADO que a tem.
+### Re-apontamento -- sem isso a fusao QUEBRA a base
 
-| par | quem tem a mecanica |
-|---|---|
-| `Automatic` / `Autonomic Psychic Action` | o de nome errado (foundry, `Quickened`) |
-| `Voice of Elements` / `Voice of the Elements` | o de nome errado (foundry, 7 grants) |
-| `Exemplar Resilency` / `Exemplar Resiliency` | o de nome certo |
-| `Historical Reenactor` / `Reeanactor` | o de nome certo |
-| `Submersible Helm` / `Helmet` | o de nome certo |
+O id perdedor nao pode simplesmente sumir. `wb:feat/knight-vigilant-dedication`
+e citado em `requires` por **23 registros** (`wb:feat/aegis-of-arnisant`,
+`wb:feat/body-barrier`, `wb:feat/divine-healing`, `wb:feat/emissary-of-peace`,
+...). Apagar sem re-apontar cria 23 `requires` orfaos novos e regride o portao 3
+de 23 para 46.
 
-Escolher um lado inteiro perderia mecanica em 2 casos e nome correto em 3.
+**Toda citacao do id perdedor em `requires` e `grants` de qualquer registro passa
+a citar o canonico.** A fusao so e valida se, apos o passo, a contagem de
+referencias orfas nao subir.
+
+### Grants dos dois lados
+
+Medido: **3 pares** tem `grants` nos dois lados. Um e identico (`knight-vigilant`,
+trivial). Os outros dois sao backgrounds onde divergem de verdade
+(`post-guard-of-all-trade`, `reclaimed-investigator`: o lado Foundry tem
+`ability_boost` que o lado AoN nao tem) -- e para background o `ability_boost` e
+a mecanica inteira do registro. **Regra: uniao dos grants; se a uniao produzir
+duas entradas do mesmo tipo com valor diferente, ficam as duas e o par vai para
+`conflitos` marcado `REVISAR`.** Nao arbitrar em silencio.
+
+### O voto de terceira fonte -- o nome canonico NAO e sempre o do AoN
+
+A v1 dizia "canonico = nome do lado AoN, porque bate com a Paizo". **Falso numa
+fracao relevante:** o dump do AoN carrega typo em `Exemplar Resilency`,
+`Historical Reeanactor`, `Camoflage Coat`, `Certain Strategem`,
+`Repulse the Wicken`, `Flash of Omipotence`, `Vengful Remnant`,
+`Orator's Fillibuster`, `Mythic Resilent`, `Sack of Hyrdra's Teeth` -- cerca de
+10 dos 53. Canonizar o AoN nesses casos promove o typo e manda a grafia correta
+para alias. A propria tabela da triagem chama o lado Foundry de "nome certo" em
+tres deles.
+
+**Regra de desempate, nesta ordem:**
+
+1. se `pf2etools` conhece um dos dois nomes e o outro nao, **o nome que ele
+   conhece vence** (terceira fonte independente);
+2. se pf2etools nao desempata, vence o nome do lado **AoN**;
+3. o perdedor sempre vira alias -- a grafia errada continua buscavel.
+
+Correcao de fato da v1: dos 5 pares em que so um lado tem mecanica, **os 5 tem a
+mecanica no lado Foundry**, nao 2. Escolher um lado inteiro perderia mecanica em
+5 casos.
 
 ## A familia separada -- Legacy <-> Remaster com nivel divergente
 
-O oitavo defeito (`Deepest Wellspring` -> `Amp Focus`) **nao** e desta familia e
-nao entra na regra acima. E fusao Legacy/Remaster que a AoN declara
-explicitamente (`remaster_id`/`legacy_id`) e que `fundir_renomeados.py` vetou
-porque o `level` diverge (18 x 12).
+O oitavo defeito (`Deepest Wellspring` -> `Amp Focus`) nao e desta familia. E
+fusao Legacy/Remaster que a AoN declara (`remaster_id`/`legacy_id`) e que
+`fundir_renomeados.py` vetou porque o `level` diverge (18 x 12).
 
-A triagem propos "permitir que `level` divirja quando o par vem de
-`remaster_id` explicito". **Medido: isso atinge 269 pares, e seria destrutivo.**
+A triagem propos dispensar o veto de nivel sempre que o par vier de
+`remaster_id` explicito. **Seria destrutivo:** em equipamento, `Tanglefoot Bag`,
+`(Moderate)`, `(Greater)` e `(Major)` apontam **todos** para o mesmo
+`Glue Bomb` nv1 -- fundir colapsaria quatro itens distintos num so.
 
-| kind | pares com nivel divergente |
-|---|---:|
-| equipment | 208 |
-| feat | 34 |
-| item-bonus | 17 |
-| spell | 7 |
-| outros | 3 |
+**A excecao vale so para `kind: feat`.** Sao ~31 pares (a v1 dizia 34; refazer a
+contagem com o script versionado e registrar o numero no relatorio).
 
-Os 208 de equipamento sao graduacao: `Tanglefoot Bag`, `(Moderate)`,
-`(Greater)` e `(Major)` apontam **todos** para o mesmo `Glue Bomb` nv1. Fundir
-colapsaria quatro itens distintos num so.
+**Segunda guarda, obrigatoria:** dispensar o veto de nivel **somente quando o
+nivel de cada lado bate com o nivel do proprio doc do AoN que o `xref.aon`
+aponta**. Em 4 pares isso nao acontece -- `guardians-deflection` (nossa base
+nv6, doc `feat-6147` nv4), `improved-familiar` (nv4 x doc nv6),
+`predictive-purchase` (nv8 x doc nv6), `implausible-purchase` (nv18 x doc nv16).
+Nesses a divergencia de nivel e sintoma de **casamento contaminado** (familia do
+portao 7), e o veto de hoje e o unico alarme que os expoe no
+`relatorio_fusao.md`. Fundir por cima apagaria o alarme.
 
-**Portanto a excecao vale so para `kind: feat`** -- 34 pares. Dentro deles, 5
-destinos recebem mais de um legado (`Quivering Palm` e `Medusa's Wrath` viraram
-ambos `Grandmaster Qi Spells`); isso e consolidacao real da Paizo e resolve-se
-com **dois aliases no mesmo registro**, nao com dois registros.
+Os N->1 sao reais e ficam: `feat-6044 Grandmaster Qi Spells` declara
+`legacy_name: ["Medusa's Wrath", "Quivering Palm"]`, `feat-4995 Witch's
+Armaments` declara `["Living Hair", "Eldritch Nails"]`. Consolidacao da Paizo,
+resolvida com **dois aliases no mesmo registro**.
 
 ## O que esta spec NAO resolve, e declara
 
-- **Os 160 pares com parenteses** ficam como estao. Sao desambiguacao
-  deliberada; se algum deles for duplicata de verdade, e outro item.
-- **`item-bonus`, `spell` e `equipment` na fusao Legacy/Remaster** ficam fora.
-  So `feat` ganha a excecao de nivel.
-- **Os 4 pontos do balde (d) da triagem** (`Major Lesson`, os 3
-  `Syu Tak-Nwa's`) sao limite do comparador, nao da base -- entram em
-  `equivalencias-pathbuilder.json`, arquivo que esta spec nao toca.
-- **Os 31 pontos de recorte de fonte** (Hell's Destiny, blog da Paizo) nao sao
+- Os pares com parenteses DIFERENTES ficam como estao (desambiguacao
+  deliberada).
+- `equipment`, `spell` e afins na fusao Legacy/Remaster ficam fora; so `feat`
+  ganha a excecao de nivel.
+- **Os 12 orfaos so-Foundry** cujo nome e o prefixo de irmaos desmembrados
+  (`wb:feat/animal-empathy` -> `animal-empathy-druid`, `wb:feat/dueling-parry` ->
+  `dueling-parry-fighter`, ...) sao o mesmo defeito de dois botoes e **nao** sao
+  tratados aqui: exigem casar contra um irmao, nao contra um gemeo. Vira item de
+  TODO proprio.
+- Os 4 pontos do balde (d) da triagem (`Major Lesson`, os 3 `Syu Tak-Nwa's`) sao
+  limite do comparador -- entram em `equivalencias-pathbuilder.json`, arquivo
+  que esta spec nao toca.
+- Os 31 pontos de recorte de fonte (Hell's Destiny, blog da Paizo) nao sao
   defeito: o Pathbuilder nao carrega esses livros.
-- A varredura pareia por 4 primeiros caracteres. Par cuja divergencia esteja
-  **nos 4 primeiros caracteres** escapa. Nao medi quantos seriam.
 
 ## Como se prova que funciona
 
-1. Os 40 pares viram 40 registros; a base cai de 20.125 para **20.085**.
-2. Os 7 defeitos nomeados pela triagem somem da bancada do Pathbuilder --
+1. **Lista nominal.** O passo emite `relatorio_duplicata_de_nome.md` com os N
+   pares fundidos, nome a nome, vencedor e motivo do desempate. Contagem de
+   registros sozinha nao prova nada -- 53 fusoes ERRADAS tambem mudam a
+   contagem.
+2. Os 7 defeitos nomeados pela triagem somem da bancada do Pathbuilder;
    `Knight Vigilant` deixa de aparecer nas 14 classes (era 14 dos 56 pontos).
 3. `Voice of the Elements` e `Automatic Psychic Action` mantem os `grants` do
-   lado Foundry (7 e 1, respectivamente) -- o teste falha se sairem com
-   `grants: []`.
-4. Busca por `Vermillion Threads` (grafia errada) continua achando o registro,
-   via `aliases`.
-5. Nenhum dos 160 pares com parenteses e tocado -- `Silence the Profane`,
+   lado Foundry (7 e 1). Falha se sairem com `grants: []`.
+4. Busca por `Vermillion Threads` (grafia errada) continua achando o registro
+   via `aliases` -- o comparador ja consulta `aliases`
+   (`motor/comparar_pathbuilder.py:246`).
+5. **Zero referencias orfas novas:** a contagem de `requires` apontando para id
+   inexistente nao sobe. Especificamente, os 23 citadores de
+   `knight-vigilant-dedication` passam a citar `knight-vigilant`.
+6. **Portoes com baseline numerica.** `portoes.py` tem **11** portoes, e dois
+   falham hoje. O criterio nao e "continuam passando", e: portao 3 **<= 23**,
+   portao 6 **<= 1**, os outros nove passam.
+7. Nenhum par com parentese DIFERENTE e tocado: `Silence the Profane`,
    `(Avenger)` e `(Vindicator)` seguem tres registros.
-6. Os nove portoes de `portoes.py` continuam passando.
-7. As 20 fichas de exemplo derivam identicas em Python e TS.
+8. As 20 fichas de exemplo derivam identicas em Python e TS.
