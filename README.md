@@ -30,8 +30,12 @@ jogo rodando -- e um construtor, nao um sistema.
 | As 22 regras de multiclasse | `specs/2026-07-26-regras-multiclasse.md` |
 | Schema da base canonica | `specs/2026-07-26-schema-base.md` |
 | Schema do documento de personagem | `specs/2026-07-26-schema-personagem.md` |
-| Armadilhas tecnicas ja pagas | `LESSONS.md` |
-| Historico de sessao | `LOG.md` |
+| Armadilhas tecnicas ja pagas | `LESSONS.md` (no Tartarus) |
+| Historico de sessao | `LOG.md` (no Tartarus) |
+
+Os arquivos de gestao -- `PROJECT.md`, `LOG.md`, `TASKS.md`, `TODO.md` e
+`LESSONS.md` -- vivem em `Tartarus/Projetos/pessoal/waybuilder/`, nao aqui.
+Este repo e o codigo: base, motor, app e specs.
 
 **Nao redecida o que ja esta nesses arquivos sem ler o "por que" junto.** Quase
 toda regra tem um bloco de citacao explicando o que foi medido para chegar nela.
@@ -108,7 +112,8 @@ O **portao 8** passa, com 4 perdas conhecidas registradas em
 `pipeline/artefatos_perdidos.json`. Ele nasceu de uma perda real: a tabela de
 conjuracao do Animist, lida a olho de um PDF imagem-only, foi gravada em
 `dados_brutos/` -- que o `.gitignore` exclui alegando "reconstruivel pelos
-pins" -- e sumiu sem nada reclamar. Ver a licao em `LESSONS.md` e o item 14.
+pins" -- e sumiu sem nada reclamar. Ver a licao em `LESSONS.md` (no Tartarus)
+e o item 14.
 
 > **Correcao a spec, verificada contra as fontes:** ela dizia que em
 > `Death from Above` "o Foundry separa os dois; o AoN indexa so o mitico". E o
@@ -173,8 +178,8 @@ divergem, que e exatamente o ponto.
 
 ## O que falta
 
-O bloco de re-emissao fechou. O que resta esta em `TODO.md`; os quatro
-primeiros:
+O bloco de re-emissao fechou. O que resta esta em `TODO.md` (no Tartarus);
+os quatro primeiros:
 
 1. **Atores** -- companheiro, familiar e eidolon com stats proprios. A spec
    diz que e o mesmo motor com menos slots; hoje o motor so verifica que
