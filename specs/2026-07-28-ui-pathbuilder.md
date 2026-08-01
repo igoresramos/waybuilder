@@ -1,8 +1,9 @@
 ---
 spec: ui-pathbuilder
+req: WB-007
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-28
 ---
 

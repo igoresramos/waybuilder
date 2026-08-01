@@ -1,8 +1,9 @@
 ---
 spec: santificacao-escolhida
+req: WB-050
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-30
 todo: [98, 99]
 ---

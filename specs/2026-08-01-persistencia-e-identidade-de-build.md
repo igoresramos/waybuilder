@@ -1,8 +1,9 @@
 ---
 spec: persistencia-e-identidade-de-build
+req: WB-076
 project: waybuilder
 version: 2
-status: aprovada
+status: implementada
 created: 2026-08-01
 issue: 1
 ---

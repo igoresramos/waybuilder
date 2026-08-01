@@ -1,9 +1,11 @@
 ---
 spec: nomear-o-balaio-por-tag
+req: WB-065
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-31
+prova: exemplar-root-epithet
 todo: 69
 ---
 

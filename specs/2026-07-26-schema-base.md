@@ -1,8 +1,9 @@
 ---
 spec: schema-base
+req: WB-002
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-26
 ---
 
@@ -453,3 +454,54 @@ O build **falha** se:
 > Perda ja conhecida vive em `artefatos_perdidos.json` com motivo, dano medido e
 > decisao pendente -- aparece no relatorio sem quebrar o build. Perda **nova**
 > quebra. O objetivo nao e impedir toda perda; e impedir perda **silenciosa**.
+
+---
+
+<!-- specs-que-alteram:start -->
+
+## Specs que alteram este contrato
+
+> Gerado por `pipeline/verificar_specs.py --tabelas`. Nao editar a mao.
+> Uma spec entra aqui quando declara `altera:` apontando para este `req`.
+
+| req | spec |
+|---|---|
+| `WB-010` | `companheiro-concedido` |
+| `WB-011` | `grant-feat-de-background` |
+| `WB-012` | `grant-item-por-nome` |
+| `WB-014` | `pericias-livres` |
+| `WB-015` | `portao-de-cobertura-de-grants` |
+| `WB-017` | `requisito-parcial` |
+| `WB-018` | `spellcasting-de-arquetipo` |
+| `WB-019` | `termo-spellcasting-tradition` |
+| `WB-020` | `termos-de-predicado` |
+| `WB-021` | `acesso-por-filiacao` |
+| `WB-022` | `alias-de-magia-renomeada` |
+| `WB-024` | `alvo-e-salvaguarda-de-magia` |
+| `WB-025` | `aspecto-e-grau-de-reliquia` |
+| `WB-028` | `bonus-de-pericia-e-salva` |
+| `WB-029` | `categoria-de-feat-por-trait` |
+| `WB-030` | `cobertura-de-grants-completos` |
+| `WB-031` | `colisao-por-fonte-repetida` |
+| `WB-033` | `divindade-na-ficha` |
+| `WB-035` | `escolha-multipla-e-ikons` |
+| `WB-036` | `familiar-e-eidolon-concedidos` |
+| `WB-037` | `fonte-divina-escolhida` |
+| `WB-038` | `grau-legado-nao-fundido` |
+| `WB-042` | `pericia-divina-e-arma-favorita` |
+| `WB-043` | `pre-requisito-de-familiar` |
+| `WB-044` | `procedencia-e-grafia-de-livro` |
+| `WB-045` | `proficiencia-de-arma-nomeada` |
+| `WB-048` | `requisito-de-subescolha` |
+| `WB-051` | `segundo-ator` |
+| `WB-053` | `tradicao-por-subclasse` |
+| `WB-056` | `arquetipo-do-feat` |
+| `WB-062` | `gemeo-do-grant-item` |
+| `WB-063` | `grant-condicional` |
+| `WB-064` | `kind-action` |
+| `WB-066` | `par-curado-tian-xia` |
+| `WB-067` | `pericia-de-recall-knowledge` |
+| `WB-068` | `portao-de-campo-critico` |
+| `WB-075` | `fusao-de-duplicata-de-nome` |
+
+<!-- specs-que-alteram:end -->

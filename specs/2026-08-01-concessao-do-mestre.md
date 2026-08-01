@@ -1,5 +1,6 @@
 ---
 spec: concessao-do-mestre
+req: WB-074
 project: waybuilder
 version: 1
 status: rascunho

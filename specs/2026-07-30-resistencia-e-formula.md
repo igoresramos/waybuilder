@@ -1,8 +1,9 @@
 ---
 spec: resistencia-e-formula
+req: WB-049
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-30
 todo: 40
 ---

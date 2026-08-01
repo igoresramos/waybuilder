@@ -1,8 +1,9 @@
 ---
 spec: regras-multiclasse
+req: WB-001
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-26
 ---
 
@@ -436,3 +437,22 @@ Registrados porque a conclusao depende deles:
    save fraco; o Guerreiro roda sem buff nem flanqueamento. Inflam o conjurador.
 5. Gear, atributos e nivel dos alvos nao estavam declarados -- agora estao no
    codigo em `docs/simulacoes/`.
+
+---
+
+<!-- specs-que-alteram:start -->
+
+## Specs que alteram este contrato
+
+> Gerado por `pipeline/verificar_specs.py --tabelas`. Nao editar a mao.
+> Uma spec entra aqui quando declara `altera:` apontando para este `req`.
+
+| req | spec |
+|---|---|
+| `WB-018` | `spellcasting-de-arquetipo` |
+| `WB-020` | `termos-de-predicado` |
+| `WB-036` | `familiar-e-eidolon-concedidos` |
+| `WB-040` | `int-no-orcamento-de-pericia` |
+| `WB-051` | `segundo-ator` |
+
+<!-- specs-que-alteram:end -->
