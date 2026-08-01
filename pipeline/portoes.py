@@ -824,6 +824,64 @@ def portao_10_cobertura_de_grants(base, ctx):
     return piorou, detalhe
 
 
+def _campos_criticos():
+    """O dict vem de `recuperar_mecanica_equipamento`, e nao de uma copia aqui.
+
+    Duas listas do mesmo conceito divergem: foi assim que o `DEFAULT` do
+    comparador ficou em 13 classes enquanto o jogo tinha 27, e as outras 14
+    passavam em silencio.
+    """
+    try:
+        import recuperar_mecanica_equipamento as rme
+        return dict(rme.CRITICO)
+    except Exception:
+        return {"weapon": "damage", "armor": "ac_bonus", "shield": "ac_bonus"}
+
+
+def portao_11_campo_critico(base, ctx):
+    """Cobertura de CAMPO critico por kind nao cai vs o build anterior.
+
+    O buraco que este portao fecha: nenhum outro conta CAMPO. Em 31/07,
+    `recuperar_mecanica_equipamento` ficou semanas lendo `foundry=0 itens` em
+    silencio e 53 armas perdiam `damage` a cada rebuild -- `Blowgun`, `Fist` e
+    `Shield Bash` entre elas. Os dez portoes passavam: o 4 conta REGISTRO (as
+    armas continuavam existindo, so sem dano), o 8 cobre arquivo que sumiu do
+    disco, o 10 cobre `grants_completos`.
+
+    E "caiu?", nao "existe?": 102 registros seguem sem o campo critico por
+    razao legitima (bomba com dano por formula, item de aventura), e exigir
+    100% faria o portao nascer vermelho -- portao que nasce vermelho e
+    desligado na primeira semana.
+    Spec: specs/2026-07-31-portao-de-campo-critico.md
+    """
+    if not os.path.exists(COBERTURA):
+        return None, ["linha de base ausente -- grave com --gravar-cobertura"]
+    ant = (json.load(open(COBERTURA)).get("por_campo_critico") or {})
+    if not ant:
+        # PRIMEIRA MEDICAO: o arquivo existe, a chave nao. Devolver `None` aqui
+        # criava impasse -- o portao ficava "nao medido", e a guarda de
+        # `--gravar-cobertura` se recusa a gravar com portao nao medido, entao
+        # a linha de base nunca nascia. `None` fica so para o caso de o arquivo
+        # INTEIRO faltar, que e bootstrap de verdade.
+        atual = _contar_campo_critico(base)
+        return 0, [f"primeira medicao -- linha de base a gravar: "
+                   f"{dict(atual)}"]
+    atual = _contar_campo_critico(base)
+    quedas = [f"`{chave}`: {n} -> {atual.get(chave, 0)}"
+              for chave, n in ant.items() if atual.get(chave, 0) < n]
+    return len(quedas), quedas
+
+
+def _contar_campo_critico(base):
+    """{'weapon.damage': 995, ...} -- quantos registros do kind tem o campo."""
+    saida = collections.Counter()
+    for kind, campo in _campos_criticos().items():
+        saida[f"{kind}.{campo}"] = sum(
+            1 for r in base
+            if r.get("kind") == kind and r.get(campo) not in (None, "", [], {}))
+    return saida
+
+
 PORTOES = [
     (1, "prov por campo preenchido", portao_1_prov, ("pre-fusao", "final")),
     (2, "level divergente sem conflito", portao_2_level, ("pre-fusao", "final")),
@@ -835,6 +893,7 @@ PORTOES = [
     (8, "artefato citado que sumiu do disco", portao_8_artefato_citado, ("final",)),
     (9, "kind ausente vs censo do AoN", portao_9_censo, ("final",)),
     (10, "cobertura de grants_completos", portao_10_cobertura_de_grants, ("final",)),
+    (11, "campo critico ausente vs build anterior", portao_11_campo_critico, ("final",)),
 ]
 
 
@@ -899,7 +958,11 @@ def main():
             print(f"  linha de base NAO gravada -- {motivo}")
         else:
             json.dump({"total": len(base),
-                       "por_kind": dict(collections.Counter(r.get("kind") for r in base))},
+                       "por_kind": dict(collections.Counter(r.get("kind") for r in base)),
+                       # o portao 11 mora no MESMO arquivo do 4 de proposito:
+                       # linha de base em dois lugares e um lugar para esquecer
+                       # de gravar.
+                       "por_campo_critico": dict(_contar_campo_critico(base))},
                       open(COBERTURA, "w"), indent=1)
             print(f"  linha de base de cobertura gravada em {COBERTURA}")
 

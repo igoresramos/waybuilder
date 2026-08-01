@@ -1,5 +1,5 @@
 {
- "total": 19599,
+ "total": 20126,
  "por_kind": {
   "class": 27,
   "class-feature": 847,
@@ -54,6 +54,15 @@
   "mythic-calling": 15,
   "deviant-ability-classification": 10,
   "tactic": 37,
-  "class-kit": 32
+  "class-kit": 32,
+  "action": 520,
+  "sanctification": 3,
+  "divine-font": 2,
+  "stat-formula": 2
+ },
+ "por_campo_critico": {
+  "weapon.damage": 986,
+  "armor.ac_bonus": 206,
+  "shield.ac_bonus": 118
  }
 }

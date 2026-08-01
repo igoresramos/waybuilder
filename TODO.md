@@ -490,7 +490,24 @@ items:
     cobre PERDA DE CAMPO. O portao 4 conta registros por kind e nao viu 53 armas ficarem sem dano; o 8
     cobre artefato de disco, nao campo. Um portao de campo critico por kind (`damage` em weapon,
     `ac_bonus` em armor/shield, ja declarados em `CRITICO` no proprio passo) e o que teria pego isto na
-    hora -- e o mesmo desenho do portao 11 que a spec do grant condicional pede.'
+    hora -- e o mesmo desenho do portao 11 que a spec do grant condicional pede.
+    || FECHADO 2026-07-31 (spec specs/2026-07-31-portao-de-campo-critico.md). **Portao 11** conta CAMPO
+    por kind e falha quando o numero CAI vs o build anterior -- mesma semantica do 4, um nivel abaixo.
+    Linha de base gravada: `weapon.damage` 986, `armor.ac_bonus` 206, `shield.ac_bonus` 118, no MESMO
+    `_cobertura.json` do portao 4 (linha de base em dois arquivos e um arquivo para esquecer de gravar).
+    O dict de campos criticos e IMPORTADO de `recuperar_mecanica_equipamento.CRITICO`, nunca copiado --
+    duas listas do mesmo conceito divergem, foi assim que o `DEFAULT` do comparador ficou em 13 classes
+    com o jogo em 27. PROVA: base intacta passa; tirando `damage` de 53 armas o portao 11 FALHA
+    (`weapon.damage: 986 -> 933`) e o portao 4 na MESMA base sabotada PASSA -- que e a medida exata da
+    cegueira que existia. E "caiu?" e nao "existe?" de proposito: 102 registros seguem sem campo critico
+    por razao legitima (bomba com dano por formula, item de aventura), e portao que nasce vermelho e
+    desligado na primeira semana. ACHADO DE PERCURSO: a primeira versao criou impasse de bootstrap --
+    o portao devolvia `nao medido` sem linha de base, e a guarda de `--gravar-cobertura` se recusa a
+    gravar com portao nao medido, entao a linha nunca nasceria. `None` ficou so para o arquivo INTEIRO
+    ausente; chave nova em arquivo existente e primeira medicao e passa. SOBRA DECLARADA: so tres campos
+    em tres kinds (`spell.rank`, `feat.level`, `class.progressao` ficam de fora ate alguem medir quantos
+    ja nascem vazios); o portao ve campo AUSENTE, nao campo ERRADO; e o alarme na ORIGEM continua
+    faltando -- o passo que le fonte e acha zero itens ainda imprime e segue.'
   id: 113
   date: '2026-07-31'
   priority: alta

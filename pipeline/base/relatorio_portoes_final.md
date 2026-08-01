@@ -73,4 +73,11 @@ _Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
 
 - registros SEM resposta de `grants_completos`: **0** de 20126 (0.0%)
 - linha de base anterior: 0
+- linha de base GRAVADA em 0
+
+## Portao 11 -- campo critico ausente vs build anterior
+
+**PASSOU** -- 0 ocorrencia(s).
+
+- primeira medicao -- linha de base a gravar: {'weapon.damage': 986, 'armor.ac_bonus': 206, 'shield.ac_bonus': 118}
 
