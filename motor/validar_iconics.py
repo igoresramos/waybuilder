@@ -59,7 +59,117 @@ def por_tipo(doc, tipo):
     return [it for it in (doc.get("items") or []) if it.get("type") == tipo]
 
 
-def traduzir(doc, base):
+def nivel_do_ator(doc):
+    return (((doc.get("system") or {}).get("details") or {}).get("level") or {}).get("value") or 1
+
+
+def identidade_do_ator(nome):
+    """`Amiri (Level 3)` -> `Amiri`, para agrupar os snapshots do MESMO build.
+
+    So o sufixo ` (Level N)` e removido. ` (Beginner Box)` fica: a Kyra da
+    Beginner Box e outro build da mesma personagem (outros boosts, outro
+    equipamento), e agrupar os dois faria o diff inventar aumento que nao
+    existiu.
+    """
+    return re.sub(r"\s*\(Level\s+\d+\)\s*$", "", str(nome or "")).strip()
+
+
+def niveis_de_aumento_do_ator(doc):
+    """Cadencia de aumento de pericia lida do ITEM DE CLASSE DO PROPRIO ATOR.
+
+    `system.skillIncreaseLevels.value` existe nos 129 atores traduziveis. A
+    fonte importa: se a cadencia viesse da nossa base, o tradutor entregaria ao
+    motor exatamente a tabela que o motor ja usa e a comparacao nao testaria
+    nada. Vindo do Foundry, ela e um oraculo independente -- se a nossa base
+    declarar niveis diferentes, o motor emite aviso de "nivel que nao tem
+    aumento" e o defeito aparece.
+    """
+    for it in por_tipo(doc, "class"):
+        valor = ((it.get("system") or {}).get("skillIncreaseLevels") or {}).get("value")
+        if valor:
+            return sorted(int(x) for x in valor)
+    return []
+
+
+def inferir_aumentos(snapshots, diag):
+    """Escolhas `skill_increase` de um personagem, inferidas dos SEUS snapshots.
+
+    Os iconics da Paizo existem como atores separados nos niveis 1, 3 e 5 do
+    mesmo build. O rank final de cada pericia esta em cada snapshot
+    (`pericias_oficiais`, a uniao das duas fontes). O aumento de pericia sobe
+    exatamente UM degrau, em niveis fixos declarados pela classe. Logo, o
+    numero de aumentos gastos numa pericia entre dois snapshots consecutivos e
+    a DIFERENCA de rank entre eles -- aritmetica, nao chute.
+
+    O que torna isto legitimo e nao tautologia: a inferencia le so o ator do
+    Foundry (rank por snapshot + `skillIncreaseLevels`). Nunca le a saida do
+    motor. Se o metodo fosse "emitir aumento onde o motor ficou abaixo do
+    oficial", a metrica viraria fraude -- o tradutor estaria copiando o
+    gabarito para dentro da entrada.
+
+    O QUE SOBRA AMBIGUO, e por que nao se chuta:
+    o snapshot mais BAIXO nao tem com quem ser comparado. Se ele e de nivel 1,
+    nao ha ambiguidade nenhuma: nenhuma classe tem aumento no nivel 1 (a
+    cadencia mais cedo do corpus comeca em 2), entao todo rank discricionario
+    ali e treino inicial livre, nunca aumento -- e a base do diff e exata.
+    Se o snapshot mais baixo e de nivel > 1 (personagem que so existe num
+    nivel), rank 2 em Furtividade pode ser "treinou no 1 e aumentou no 3" ou
+    "aumentou duas vezes", e nada no ator distingue os dois. Nesse caso este
+    tradutor NAO emite aumento nenhum. Emitir o palpite mais provavel subiria
+    a metrica sem que o motor tivesse acertado nada.
+    """
+    ordenados = sorted(snapshots, key=lambda s: s["nivel"])
+    saida = {s["arquivo"]: [] for s in ordenados}
+    base_snap = ordenados[0]
+
+    if base_snap["nivel"] != 1:
+        # sem baseline de nivel 1 nao da pra separar treino inicial de aumento
+        diag["sem baseline nivel 1"] += len(ordenados)
+        return saida
+    diag["com baseline nivel 1"] += len(ordenados)
+
+    anterior = base_snap
+    for atual in ordenados[1:]:
+        niveis = [n for n in niveis_de_aumento_do_ator(atual["doc"])
+                  if anterior["nivel"] < n <= atual["nivel"]]
+        degraus = []
+        for pericia in PERICIAS:
+            passo = (RANKS.index(atual["oficiais"][pericia])
+                     - RANKS.index(anterior["oficiais"][pericia]))
+            if passo < 0:
+                # rank nao pode cair entre dois niveis do mesmo build
+                diag["rank regride entre snapshots"] += 1
+                continue
+            degraus.extend([pericia] * passo)
+
+        if len(degraus) > len(niveis):
+            # mais degraus do que aumentos disponiveis: alguma coisa alem do
+            # aumento subiu o rank (feat, class feature). Nao inventa nivel.
+            diag["degraus acima da cadencia"] += 1
+        if len(degraus) < len(niveis):
+            # sobra de aumento -- tipicamente gasto numa pericia de Lore, que
+            # nao esta nas 16 comparadas
+            diag["aumentos nao localizados nas 16"] += len(niveis) - len(degraus)
+
+        # qual degrau caiu em qual nivel da janela nao e recuperavel do ator, e
+        # tambem nao muda o rank final -- todos os niveis da janela estao
+        # abaixo do snapshot. Pareia na ordem, que e o suficiente para o motor
+        # conferir a cadencia da classe.
+        for nivel, pericia in zip(niveis, degraus):
+            saida[atual["arquivo"]].append(
+                {"em": nivel, "slot": "skill_increase", "pega": [pericia]})
+        anterior = atual
+
+    # cada snapshot precisa das escolhas ACUMULADAS desde o nivel 1, nao so as
+    # da ultima transicao -- um ator de nivel 5 gastou o aumento do 3 tambem
+    acumulado = []
+    for s in ordenados:
+        acumulado = acumulado + saida[s["arquivo"]]
+        saida[s["arquivo"]] = list(acumulado)
+    return saida
+
+
+def traduzir(doc, base, aumentos=()):
     """Ator do Foundry -> documento de personagem do Waybuilder."""
     sistema = doc.get("system") or {}
     nivel = ((sistema.get("details") or {}).get("level") or {}).get("value") or 1
@@ -123,6 +233,10 @@ def traduzir(doc, base):
         wid = f"wb:feat/{slug(re.sub(r'\\s*\\([^)]*\\)\\s*$', '', it['name']))}"
         if base.opcional(wid) is not None:
             escolhas.append({"em": 1, "slot": "class_feat", "pega": wid})
+
+    # aumentos de pericia inferidos do diff entre os snapshots deste mesmo
+    # personagem -- ver `inferir_aumentos`
+    escolhas.extend(aumentos)
 
     doc_wb = {"esquema": "waybuilder/personagem@1",
               "identidade": {"nome": doc.get("name")},
@@ -203,6 +317,33 @@ def main():
               file=sys.stderr)
         return 1
 
+    # --- pre-passe: agrupa os snapshots de cada personagem e infere os
+    # aumentos de pericia ANTES de traduzir, porque a inferencia de um ator de
+    # nivel 5 depende do ator de nivel 1 do mesmo build (outro arquivo)
+    diag_aumentos = collections.Counter()
+    snapshots = collections.defaultdict(list)
+    for f in arquivos:
+        try:
+            doc = json.load(open(f))
+        except Exception:
+            continue
+        if doc.get("type") != "character":
+            continue
+        snapshots[identidade_do_ator(doc.get("name"))].append(
+            {"arquivo": f, "doc": doc, "nivel": nivel_do_ator(doc),
+             "oficiais": pericias_oficiais(doc)})
+    aumentos_por_arquivo = {}
+    com_baseline = set()
+    for lista in snapshots.values():
+        if len(lista) == 1:
+            diag_aumentos["snapshot unico"] += 1
+        if min(s["nivel"] for s in lista) == 1:
+            com_baseline |= {s["arquivo"] for s in lista}
+        aumentos_por_arquivo.update(inferir_aumentos(lista, diag_aumentos))
+    diag_aumentos["personagens distintos"] = len(snapshots)
+    diag_aumentos["aumentos emitidos"] = sum(
+        len(v) for v in aumentos_por_arquivo.values())
+
     linhas, contagem = [], collections.Counter()
     divergencias = []
 
@@ -214,6 +355,9 @@ def main():
     por_par = collections.defaultdict(lambda: collections.Counter())
     diverg_pericias = []
     sobre_concessao = []   # motor da rank MAIOR que o oficial -- sinal acionavel
+    # divergencia partida pela unica variavel que decide se o aumento de
+    # pericia era inferivel: ter ou nao um snapshot de nivel 1 do mesmo build
+    por_baseline = collections.defaultdict(lambda: collections.Counter())
 
     for f in arquivos:
         try:
@@ -222,7 +366,7 @@ def main():
             continue
         if doc.get("type") != "character":
             continue
-        traduzido, erro = traduzir(doc, base)
+        traduzido, erro = traduzir(doc, base, aumentos_por_arquivo.get(f, ()))
         if erro:
             contagem["nao traduzido"] += 1
             linhas.append(f"- `{doc.get('name')}` -- NAO TRADUZIDO: {erro}")
@@ -250,6 +394,11 @@ def main():
             no_r = p.proficiencias.get(pericia, "untrained")
             bate_p = (of_r == no_r)
             contagem_pericias["pericia bate" if bate_p else "pericia diverge"] += 1
+            chave_base = ("com baseline nivel 1" if f in com_baseline
+                          else "sem baseline nivel 1")
+            por_baseline[chave_base]["total"] += 1
+            if not bate_p:
+                por_baseline[chave_base]["diverge"] += 1
             por_pericia[pericia]["total"] += 1
             por_classe[classe_nome]["total"] += 1
             por_par[(classe_nome, pericia)]["total"] += 1
@@ -286,6 +435,10 @@ def main():
             if c["diverge"]:
                 print(f"  {pericia:14} {c['diverge']:>4}/{c['total']:<4} "
                       f"({100*c['diverge']/c['total']:.0f}%)")
+
+    print("\ninferencia de aumento de pericia (tradutor):")
+    for k, n in sorted(diag_aumentos.items()):
+        print(f"  {k:34} {n:>5}")
 
     # secoes markdown -----------------------------------------------------
     linhas_por_pericia = [
@@ -364,18 +517,34 @@ def main():
         f"  - motor da rank MAIOR que o oficial: **{n_sobre}** -- sinal acionavel, "
         "ver \"Sobre-concessao\" abaixo\n\n"
         "### Causa-raiz da maioria das divergencias (nao e bug do motor)\n\n"
-        "A quase totalidade das divergencias e motor MENOR: o motor nunca\n"
-        "recebe a escolha discricionaria de pericia do jogador porque (a) este\n"
-        "tradutor (`validar_iconics.py`) nao emite escolhas `skill_increase`\n"
-        "-- so ha oraculo pro rank FINAL no Foundry, nao pra em qual nivel\n"
-        "cada aumento foi gasto -- e (b) `motor/motor.py` **nao processa o\n"
-        "slot `skill_increase` de forma alguma**: o schema\n"
-        "(`specs/2026-07-26-schema-personagem.md` linha 172-173) declara o\n"
-        "slot, mas `grep -n skill_increase motor/motor.py` nao retorna nenhuma\n"
-        "ocorrencia. Isso NAO e o achado de bug pedido pela tarefa -- e uma\n"
-        "escolha do jogador que este metodo de validacao estruturalmente nao\n"
-        "consegue auditar (nao ha oraculo de \"qual nivel\"), analogo a\n"
-        "limitacao ja documentada pro multiclasse por divisao de niveis.\n\n"
+        "A quase totalidade das divergencias e motor MENOR: o motor recebe\n"
+        "menos escolhas discricionarias de pericia do que o jogador fez.\n\n"
+        "**Correcao de 2026-07-31.** A versao anterior deste texto dizia que\n"
+        "(a) este tradutor nao emitia `skill_increase` e que (b)\n"
+        "`motor/motor.py` \"nao processa o slot `skill_increase` de forma\n"
+        "alguma\", citando um `grep` vazio. As duas afirmacoes ficaram falsas:\n"
+        "o motor processa o slot desde `_aumentos_de_pericia`\n"
+        "(`grep -c skill_increase motor/motor.py` retorna 11), e este tradutor\n"
+        "passou a emitir os aumentos, inferidos do diff entre os snapshots do\n"
+        "mesmo build (spec\n"
+        "`specs/2026-07-31-tradutor-de-aumento-de-pericia.md`). O que sobra de\n"
+        "divergencia tem outra causa, decomposta abaixo.\n\n"
+        "### Decomposicao do que sobra\n\n"
+        "A variavel que decide se o aumento de pericia era inferivel e ter ou\n"
+        "nao um snapshot de nivel 1 do mesmo personagem: sem ele nao da para\n"
+        "separar treino inicial de aumento, e o tradutor se recusa a chutar.\n\n"
+        + "".join(
+            f"- {k}: **{c['diverge']}**/{c['total']} divergem "
+            f"({100*c['diverge']/c['total']:.1f}%)\n"
+            for k, c in sorted(por_baseline.items()))
+        + "\nA causa dominante do que sobra NAO e o aumento de pericia: e o\n"
+        "**treino livre inicial** (slot `pericias_livres`, as \"N + INT\"\n"
+        "pericias treinadas na criacao), que este tradutor tambem nao emite.\n"
+        "Medido por contrafactual em 2026-07-31 -- emitindo tambem\n"
+        "`pericias_livres` a partir do snapshot de nivel 1, a metrica vai de\n"
+        "65,0% para 86,8% (450 dos pontos que sobram). Esse contrafactual NAO\n"
+        "esta neste arquivo de proposito: ver a decisao registrada em\n"
+        "`docs/medicoes/2026-07-31_tradutor-aumento-de-pericia.md`.\n\n"
         "### Divergencias por pericia\n\n"
         + ("\n".join(linhas_por_pericia) + "\n" if linhas_por_pericia else "nenhuma.\n")
         + "\n### Divergencias por classe\n\n"
@@ -391,18 +560,24 @@ def main():
            else "nenhum padrao sistemico encontrado.\n")
         + "\n### Sobre-concessao (motor MAIOR que o oficial -- unico sinal "
           f"realmente acionavel, {n_sobre} caso(s))\n\n"
-        "Investigado caso a caso -- NAO e bug do motor. Os 2 casos sao\n"
-        "`Droven` (Inventor) em `crafting`: o motor aplica a class-feature\n"
-        "`Expert Overdrive`, cujo texto RAW confirma\n"
-        "(`pipeline/base/text/class-feature.json`, chave\n"
-        "`wb:text/class-feature/expert-overdrive`): \"You become an expert in\n"
-        "Crafting\" -- automatico, sem escolha do jogador. O motor esta\n"
-        "correto; e o `system.skills` do ator do Foundry que NAO persiste\n"
-        "esse aumento automatico vindo de class feature (mesma classe de\n"
-        "limite documentada acima pro `trainedSkills.value`, so que essa\n"
-        "fonte nao cobre aumentos de FEATURE, so o treino INICIAL). Sem essa\n"
-        "explicacao os 2 casos ficariam contados como divergencia real; estao\n"
-        "listados aqui por transparencia, mas nao indicam problema no motor.\n\n"
+        "Investigado caso a caso -- NAO e bug do motor. Todos os casos sao em\n"
+        "`crafting`, e todos tem a mesma causa: proficiencia concedida\n"
+        "automaticamente por feat/class-feature, que o `system.skills` do ator\n"
+        "do Foundry NAO persiste.\n\n"
+        "- `Droven` (Inventor), niveis 3 e 5: o motor aplica a class-feature\n"
+        "  `Expert Overdrive`, cujo texto RAW confirma\n"
+        "  (`pipeline/base/text/class-feature.json`, chave\n"
+        "  `wb:text/class-feature/expert-overdrive`): \"You become an expert in\n"
+        "  Crafting\".\n"
+        "- `Booker Kaar` (Gunslinger), nivel 3: o motor aplica o feat\n"
+        "  `Munitions Crafter`, que treina Crafting por RAW. O ator traz\n"
+        "  `skills.crafting.rank == 0` mesmo carregando o feat.\n\n"
+        "Nos dois casos o motor esta correto e a fonte oficial e que esta\n"
+        "incompleta -- mesma classe de limite documentada acima pro\n"
+        "`trainedSkills.value`, que so cobre o treino INICIAL e nao alcanca\n"
+        "proficiencia vinda de feat ou de feature. Sem essa explicacao os\n"
+        "casos ficariam contados como divergencia real; estao listados aqui\n"
+        "por transparencia, mas nao indicam problema no motor.\n\n"
         + ("\n".join(linhas_sobre) + "\n" if linhas_sobre else "nenhuma.\n")
         + "\n### Amostra de divergencias individuais (ate 25, nao exaustiva -- "
           "ver secoes acima pro padrao completo)\n\n"

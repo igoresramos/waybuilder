@@ -178,76 +178,95 @@ rank 1 garantido). Chave ausente EM AMBAS as fontes == rank 0
 personagem traduzido**, sem subconjunto.
 
 - pontos de comparacao: **2064** (129 personagens x 16 pericias)
-- bate: **1298** (62.9%)
-- diverge: **766**, sendo:
-  - motor da rank MENOR que o oficial: **763** -- ver "causa-raiz" abaixo
+- bate: **1341** (65.0%)
+- diverge: **723**, sendo:
+  - motor da rank MENOR que o oficial: **720** -- ver "causa-raiz" abaixo
   - motor da rank MAIOR que o oficial: **3** -- sinal acionavel, ver "Sobre-concessao" abaixo
 
 ### Causa-raiz da maioria das divergencias (nao e bug do motor)
 
-A quase totalidade das divergencias e motor MENOR: o motor nunca
-recebe a escolha discricionaria de pericia do jogador porque (a) este
-tradutor (`validar_iconics.py`) nao emite escolhas `skill_increase`
--- so ha oraculo pro rank FINAL no Foundry, nao pra em qual nivel
-cada aumento foi gasto -- e (b) `motor/motor.py` **nao processa o
-slot `skill_increase` de forma alguma**: o schema
-(`specs/2026-07-26-schema-personagem.md` linha 172-173) declara o
-slot, mas `grep -n skill_increase motor/motor.py` nao retorna nenhuma
-ocorrencia. Isso NAO e o achado de bug pedido pela tarefa -- e uma
-escolha do jogador que este metodo de validacao estruturalmente nao
-consegue auditar (nao ha oraculo de "qual nivel"), analogo a
-limitacao ja documentada pro multiclasse por divisao de niveis.
+A quase totalidade das divergencias e motor MENOR: o motor recebe
+menos escolhas discricionarias de pericia do que o jogador fez.
+
+**Correcao de 2026-07-31.** A versao anterior deste texto dizia que
+(a) este tradutor nao emitia `skill_increase` e que (b)
+`motor/motor.py` "nao processa o slot `skill_increase` de forma
+alguma", citando um `grep` vazio. As duas afirmacoes ficaram falsas:
+o motor processa o slot desde `_aumentos_de_pericia`
+(`grep -c skill_increase motor/motor.py` retorna 11), e este tradutor
+passou a emitir os aumentos, inferidos do diff entre os snapshots do
+mesmo build (spec
+`specs/2026-07-31-tradutor-de-aumento-de-pericia.md`). O que sobra de
+divergencia tem outra causa, decomposta abaixo.
+
+### Decomposicao do que sobra
+
+A variavel que decide se o aumento de pericia era inferivel e ter ou
+nao um snapshot de nivel 1 do mesmo personagem: sem ele nao da para
+separar treino inicial de aumento, e o tradutor se recusa a chutar.
+
+- com baseline nivel 1: **481**/1488 divergem (32.3%)
+- sem baseline nivel 1: **242**/576 divergem (42.0%)
+
+A causa dominante do que sobra NAO e o aumento de pericia: e o
+**treino livre inicial** (slot `pericias_livres`, as "N + INT"
+pericias treinadas na criacao), que este tradutor tambem nao emite.
+Medido por contrafactual em 2026-07-31 -- emitindo tambem
+`pericias_livres` a partir do snapshot de nivel 1, a metrica vai de
+65,0% para 86,8% (450 dos pontos que sobram). Esse contrafactual NAO
+esta neste arquivo de proposito: ver a decisao registrada em
+`docs/medicoes/2026-07-31_tradutor-aumento-de-pericia.md`.
 
 ### Divergencias por pericia
 
-- `diplomacy`: 77/129 divergem (60%)
-- `acrobatics`: 71/129 divergem (55%)
-- `athletics`: 65/129 divergem (50%)
-- `stealth`: 61/129 divergem (47%)
-- `crafting`: 60/129 divergem (47%)
+- `diplomacy`: 75/129 divergem (58%)
+- `acrobatics`: 67/129 divergem (52%)
+- `stealth`: 60/129 divergem (47%)
+- `athletics`: 58/129 divergem (45%)
+- `crafting`: 58/129 divergem (45%)
 - `medicine`: 53/129 divergem (41%)
-- `society`: 50/129 divergem (39%)
-- `survival`: 50/129 divergem (39%)
-- `intimidation`: 46/129 divergem (36%)
+- `society`: 48/129 divergem (37%)
+- `survival`: 48/129 divergem (37%)
+- `intimidation`: 43/129 divergem (33%)
 - `deception`: 42/129 divergem (33%)
 - `thievery`: 42/129 divergem (33%)
-- `nature`: 39/129 divergem (30%)
-- `occultism`: 36/129 divergem (28%)
-- `religion`: 34/129 divergem (26%)
-- `arcana`: 24/129 divergem (19%)
-- `performance`: 16/129 divergem (12%)
+- `nature`: 37/129 divergem (29%)
+- `occultism`: 32/129 divergem (25%)
+- `religion`: 28/129 divergem (22%)
+- `arcana`: 18/129 divergem (14%)
+- `performance`: 14/129 divergem (11%)
 
 ### Divergencias por classe
 
-- `Rogue`: 125/208 divergem (60%)
-- `Fighter`: 51/144 divergem (35%)
-- `Sorcerer`: 47/144 divergem (33%)
-- `Cleric`: 41/144 divergem (28%)
-- `Bard`: 41/112 divergem (37%)
-- `Investigator`: 41/64 divergem (64%)
-- `Wizard`: 40/80 divergem (50%)
-- `Witch`: 40/80 divergem (50%)
+- `Rogue`: 124/208 divergem (60%)
+- `Fighter`: 49/144 divergem (34%)
+- `Sorcerer`: 45/144 divergem (31%)
+- `Witch`: 39/80 divergem (49%)
+- `Cleric`: 39/144 divergem (27%)
+- `Bard`: 39/112 divergem (35%)
+- `Investigator`: 38/64 divergem (59%)
+- `Wizard`: 37/80 divergem (46%)
 - `Gunslinger`: 31/112 divergem (28%)
-- `Monk`: 29/96 divergem (30%)
-- `Barbarian`: 27/112 divergem (24%)
-- `Alchemist`: 23/48 divergem (48%)
-- `Ranger`: 23/64 divergem (36%)
-- `Swashbuckler`: 23/64 divergem (36%)
-- `Druid`: 23/96 divergem (24%)
+- `Monk`: 27/96 divergem (28%)
+- `Barbarian`: 26/112 divergem (23%)
+- `Alchemist`: 21/48 divergem (44%)
+- `Ranger`: 21/64 divergem (33%)
+- `Swashbuckler`: 21/64 divergem (33%)
+- `Druid`: 21/96 divergem (22%)
 - `Inventor`: 20/48 divergem (42%)
-- `Commander`: 19/48 divergem (40%)
-- `Thaumaturge`: 18/48 divergem (38%)
-- `Oracle`: 17/64 divergem (27%)
-- `Animist`: 17/48 divergem (35%)
-- `Guardian`: 16/48 divergem (33%)
-- `Champion`: 15/48 divergem (31%)
-- `Exemplar`: 14/48 divergem (29%)
-- `Psychic`: 13/48 divergem (27%)
+- `Commander`: 18/48 divergem (38%)
+- `Oracle`: 15/64 divergem (23%)
+- `Thaumaturge`: 15/48 divergem (31%)
+- `Animist`: 15/48 divergem (31%)
+- `Guardian`: 13/48 divergem (27%)
+- `Champion`: 13/48 divergem (27%)
+- `Exemplar`: 12/48 divergem (25%)
+- `Psychic`: 12/48 divergem (25%)
 - `Kineticist`: 12/48 divergem (25%)
 
 ### Achados sistemicos (classe + pericia, >=2 amostras, >=50% divergindo)
 
-**147** combinacoes classe+pericia batem esse
+**131** combinacoes classe+pericia batem esse
 criterio -- confirma que a causa-raiz acima e generalizada: sao as
 pericias que os personagens pre-gerados da Paizo tipicamente ELEGEM
 treinar/subir por escolha do jogador, nao um bug localizado numa
@@ -268,22 +287,30 @@ classe. Top 15 por tamanho de amostra:
 - `Sorcerer` + `crafting`: diverge em 7/9 ocorrencias (78%)
 - `Sorcerer` + `deception`: diverge em 7/9 ocorrencias (78%)
 - `Fighter` + `acrobatics`: diverge em 7/9 ocorrencias (78%)
-- ... e mais 132 combinacoes classe+pericia com >=50% de divergencia (amostra menor, 2-3 personagens cada) -- o padrao e generalizado, nao um grupo pequeno de excecoes
+- ... e mais 116 combinacoes classe+pericia com >=50% de divergencia (amostra menor, 2-3 personagens cada) -- o padrao e generalizado, nao um grupo pequeno de excecoes
 
 ### Sobre-concessao (motor MAIOR que o oficial -- unico sinal realmente acionavel, 3 caso(s))
 
-Investigado caso a caso -- NAO e bug do motor. Os 2 casos sao
-`Droven` (Inventor) em `crafting`: o motor aplica a class-feature
-`Expert Overdrive`, cujo texto RAW confirma
-(`pipeline/base/text/class-feature.json`, chave
-`wb:text/class-feature/expert-overdrive`): "You become an expert in
-Crafting" -- automatico, sem escolha do jogador. O motor esta
-correto; e o `system.skills` do ator do Foundry que NAO persiste
-esse aumento automatico vindo de class feature (mesma classe de
-limite documentada acima pro `trainedSkills.value`, so que essa
-fonte nao cobre aumentos de FEATURE, so o treino INICIAL). Sem essa
-explicacao os 2 casos ficariam contados como divergencia real; estao
-listados aqui por transparencia, mas nao indicam problema no motor.
+Investigado caso a caso -- NAO e bug do motor. Todos os casos sao em
+`crafting`, e todos tem a mesma causa: proficiencia concedida
+automaticamente por feat/class-feature, que o `system.skills` do ator
+do Foundry NAO persiste.
+
+- `Droven` (Inventor), niveis 3 e 5: o motor aplica a class-feature
+  `Expert Overdrive`, cujo texto RAW confirma
+  (`pipeline/base/text/class-feature.json`, chave
+  `wb:text/class-feature/expert-overdrive`): "You become an expert in
+  Crafting".
+- `Booker Kaar` (Gunslinger), nivel 3: o motor aplica o feat
+  `Munitions Crafter`, que treina Crafting por RAW. O ator traz
+  `skills.crafting.rank == 0` mesmo carregando o feat.
+
+Nos dois casos o motor esta correto e a fonte oficial e que esta
+incompleta -- mesma classe de limite documentada acima pro
+`trainedSkills.value`, que so cobre o treino INICIAL e nao alcanca
+proficiencia vinda de feat ou de feature. Sem essa explicacao os
+casos ficariam contados como divergencia real; estao listados aqui
+por transparencia, mas nao indicam problema no motor.
 
 - `Droven (Level 3)` (Inventor, nivel 3) -- `crafting`: oficial trained, motor expert
 - `Droven (Level 5)` (Inventor, nivel 5) -- `crafting`: oficial trained, motor expert
@@ -295,11 +322,10 @@ listados aqui por transparencia, mas nao indicam problema no motor.
 - `Amiri (Level 1)` (Barbarian, nivel 1) -- `intimidation`: oficial trained, motor untrained
 - `Amiri (Level 1)` (Barbarian, nivel 1) -- `nature`: oficial trained, motor untrained
 - `Amiri (Level 3)` (Barbarian, nivel 3) -- `acrobatics`: oficial trained, motor untrained
-- `Amiri (Level 3)` (Barbarian, nivel 3) -- `intimidation`: oficial expert, motor untrained
+- `Amiri (Level 3)` (Barbarian, nivel 3) -- `intimidation`: oficial expert, motor trained
 - `Amiri (Level 3)` (Barbarian, nivel 3) -- `nature`: oficial trained, motor untrained
 - `Amiri (Level 5)` (Barbarian, nivel 5) -- `acrobatics`: oficial trained, motor untrained
-- `Amiri (Level 5)` (Barbarian, nivel 5) -- `athletics`: oficial expert, motor trained
-- `Amiri (Level 5)` (Barbarian, nivel 5) -- `intimidation`: oficial expert, motor untrained
+- `Amiri (Level 5)` (Barbarian, nivel 5) -- `intimidation`: oficial expert, motor trained
 - `Amiri (Level 5)` (Barbarian, nivel 5) -- `medicine`: oficial trained, motor untrained
 - `Amiri (Level 5)` (Barbarian, nivel 5) -- `nature`: oficial trained, motor untrained
 - `Amiri (Level 5)` (Barbarian, nivel 5) -- `stealth`: oficial trained, motor untrained
@@ -315,4 +341,5 @@ listados aqui por transparencia, mas nao indicam problema no motor.
 - `Droven (Level 3)` (Inventor, nivel 3) -- `occultism`: oficial trained, motor untrained
 - `Droven (Level 3)` (Inventor, nivel 3) -- `society`: oficial trained, motor untrained
 - `Droven (Level 3)` (Inventor, nivel 3) -- `stealth`: oficial trained, motor untrained
-- `Droven (Level 3)` (Inventor, nivel 3) -- `thievery`: oficial expert, motor untrained
+- `Droven (Level 3)` (Inventor, nivel 3) -- `thievery`: oficial expert, motor trained
+- `Droven (Level 5)` (Inventor, nivel 5) -- `arcana`: oficial trained, motor untrained
