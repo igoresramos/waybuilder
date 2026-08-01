@@ -126,19 +126,26 @@ python3 portoes.py --fase pre-fusao || true
 echo "== 7. fundir legacy/remaster =="
 python3 fundir_renomeados.py
 
-echo "== 7a. fundir duplicata de nome aon/foundry =="
-# DEPOIS do portao 7 (pre-fusao), pela mesma razao que a fusao legacy/remaster:
-# o passo faz a duplicata virar um registro so, e rodar antes faria o portao
-# passar por construcao.
-# Spec: specs/2026-08-01-fusao-de-duplicata-de-nome.md
-python3 fundir_duplicata_de_nome.py
-
 echo "== 7b. normalizar traits na base inteira =="
 # depois do ULTIMO escritor de index.json: auditar_conflitos e
 # desmembrar_colisoes criam conflito de traits depois da reparacao que roda
 # dentro do reconciliador, e registro de fonte unica nunca passava pela
 # normalizacao. Aqui a garantia vale para a base toda.
 python3 normalizar_traits.py
+
+echo "== 7c0. fundir duplicata de nome aon/foundry =="
+# DEPOIS do portao 7 (pre-fusao), pela mesma razao que a fusao legacy/remaster:
+# a fusao faz a duplicata virar um registro so, e rodar antes faria o portao
+# passar por construcao.
+# E DEPOIS de `normalizar_traits` (7b), o que a primeira versao errou: a regra
+# de fusao exige `traits` IDENTICOS (fundir_duplicata_de_nome.py:305), e antes
+# da normalizacao o lado AoN ainda carrega vocabulario legado (`necromancy`,
+# `ifrit`). Rodando em 7a, 3 pares nao fundiam -- e o defeito era invisivel
+# porque a base commitada tinha as 42 fusoes: o passo foi rodado A MAO sobre
+# uma base ja normalizada, e so o build de ponta a ponta expos a diferenca.
+# Achado por `comparar_bases.py`, que acusou 3 registros NASCIDOS no rebuild.
+# Spec: specs/2026-08-01-fusao-de-duplicata-de-nome.md
+python3 fundir_duplicata_de_nome.py
 
 echo "== 7c. aplicar aliases do remaster dentro de requires e subclasses =="
 # DEPOIS DA FUSAO, e nao antes. Quem aposenta o id e a fusao (passo 7): rodando
