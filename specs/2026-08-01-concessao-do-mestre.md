@@ -4,7 +4,7 @@ project: waybuilder
 version: 1
 status: rascunho
 created: 2026-08-01
-todo: 111
+todo: 117
 ---
 
 # Spec -- o que o mestre da de graca
