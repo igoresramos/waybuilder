@@ -1,9 +1,11 @@
 ---
 spec: grant-condicional
+req: WB-063
 project: waybuilder
 version: 2
-status: aprovada
+status: implementada
 created: 2026-07-31
+altera: [WB-002]
 todo: [69, 107]
 ---
 

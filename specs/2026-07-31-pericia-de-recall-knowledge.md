@@ -1,9 +1,11 @@
 ---
 spec: pericia-de-recall-knowledge
+req: WB-067
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-31
+altera: [WB-002]
 todo: 108
 ---
 

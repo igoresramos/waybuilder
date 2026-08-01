@@ -1,9 +1,11 @@
 ---
 spec: grant-feat-de-background
+req: WB-011
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-29
+altera: [WB-002]
 todo: 70
 ---
 

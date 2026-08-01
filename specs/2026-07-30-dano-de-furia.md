@@ -1,8 +1,9 @@
 ---
 spec: dano-decomposto
+req: WB-032
 project: waybuilder
 version: 2
-status: aprovada
+status: implementada
 created: 2026-07-30
 todo: 42
 ---

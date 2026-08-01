@@ -1,9 +1,11 @@
 ---
 spec: fusao-de-duplicata-de-nome
+req: WB-075
 project: waybuilder
 version: 2
-status: aprovada
+status: implementada
 created: 2026-08-01
+altera: [WB-002]
 todo: 84
 revisao: adversarial (fable, 2026-08-01) -- 10 mudancas obrigatorias incorporadas
 ---

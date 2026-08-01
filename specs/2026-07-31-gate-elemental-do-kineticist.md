@@ -1,8 +1,9 @@
 ---
 spec: gate-elemental-do-kineticist
+req: WB-061
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-31
 todo: 109
 ---

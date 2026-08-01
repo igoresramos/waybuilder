@@ -1,9 +1,11 @@
 ---
 spec: requisito-de-subescolha
+req: WB-048
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-30
+altera: [WB-002]
 todo: 84
 ---
 

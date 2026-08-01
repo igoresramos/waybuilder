@@ -1,8 +1,9 @@
 ---
 spec: schema-personagem
+req: WB-003
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-26
 ---
 
@@ -207,3 +208,19 @@ solto, nao existe id de Foundry nem de AoN dentro da ficha.
 
 E o que fecha o ciclo: as tres fontes tinham tres vocabularios, a base
 normalizou para um, e o personagem so fala esse.
+
+---
+
+<!-- specs-que-alteram:start -->
+
+## Specs que alteram este contrato
+
+> Gerado por `pipeline/verificar_specs.py --tabelas`. Nao editar a mao.
+> Uma spec entra aqui quando declara `altera:` apontando para este `req`.
+
+| req | spec |
+|---|---|
+| `WB-010` | `companheiro-concedido` |
+| `WB-016` | `recorte-temporal-do-has` |
+
+<!-- specs-que-alteram:end -->

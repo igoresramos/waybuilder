@@ -1,8 +1,9 @@
 ---
 spec: slots-e-candidatos
+req: WB-004
 project: waybuilder
 version: 2
-status: aprovada
+status: implementada
 created: 2026-07-27
 aprovada_em: 2026-07-29
 atualizada_em: 2026-08-01

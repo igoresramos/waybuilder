@@ -1,8 +1,9 @@
 ---
 spec: atomo-slug
+req: WB-057
 project: waybuilder
 version: 1
-status: aprovada
+status: implementada
 created: 2026-07-31
 todo: 105
 ---

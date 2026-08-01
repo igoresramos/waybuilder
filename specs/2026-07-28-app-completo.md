@@ -1,8 +1,9 @@
 ---
 spec: app-completo
+req: WB-005
 project: waybuilder
 version: 1
-status: viva
+status: implementada
 created: 2026-07-28
 todo: 43
 ---
