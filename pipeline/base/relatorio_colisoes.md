@@ -147,3 +147,24 @@ casamento por nome escolheu outra -- vira registro proprio.
 - `wb:weapon/tekko-kagi` (casou `weapon-304`) ganhou irmao `wb:weapon/tekko-kagi-trip` de `weapon-101` -- nv0, traits ['Agile', 'Disarm', 'Finesse', 'Parry', 'Trip', 'Uncommon']
 - `wb:weapon/throwing-knife`: 2 grupos com o MESMO conjunto de fontes -- mesma entidade, nao desmembrada
 - `wb:deity/maat` (casou `deity-518`) ganhou irmao `wb:deity/maat-ln` de `deity-55` -- nvNone, traits ['LN']
+- `wb:action/breath-weapon` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/change-shape` casou com ``, que nao representa nenhum dos 3 grupos -- REVISAR
+- `wb:action/climb` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/destructive-vengeance` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/disengage` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/feint` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/glimpse-of-redemption` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/hustle` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/interact` casou com ``, que nao representa nenhum dos 326 grupos -- REVISAR
+- `wb:action/iron-command` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/jinx` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/liberating-step` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/make-an-impression` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/opportune-riposte` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/perform` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/rally` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/recall-knowledge` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/retributive-strike` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/selfish-shield` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR
+- `wb:action/strike` casou com ``, que nao representa nenhum dos 5 grupos -- REVISAR
+- `wb:action/taunt` casou com ``, que nao representa nenhum dos 2 grupos -- REVISAR

@@ -1,9 +1,9 @@
 # Mecanica de dedicacao derivada da prosa
 
 - dedicacoes sem `grants` na entrada: **61**
-- mecanizadas aqui: **5**
+- mecanizadas aqui: **6**
 - divida declarada (modelo que o motor nao tem): **25**
-- sem padrao reconhecido: **31**
+- sem padrao reconhecido: **30**
 
 Cada linha traz a FRASE que justifica a concessao. Divergencia entre a frase e o `grants` e defeito deste passo, nao do dado.
 
@@ -15,6 +15,7 @@ Cada linha traz a FRASE que justifica a concessao. Divergencia entre a frase e o
 | Knight Vigilant | `{"proficiency": {"religion": "expert"}}` | expert in religion | - |
 | Prophet of Kalistrade Dedication | `{"proficiency": {"society": "expert"}}` | expert in society | - |
 | Rose Warden Dedication | `{"skill_training": {"auto": ["deception"]}}` | trained in deception | escolha: Deception, you become an expert in your choice of  |
+| Undead Master Dedication | `{"grant_feat": ["wb:action/call-companion"]}` | gain the Call Companion action | - |
 | Vehicle Mechanic Dedication | `{"proficiency": {"crafting": "expert"}}` | expert in crafting | master in crafting (rank posterior) |
 
 ## Divida declarada -- exige modelo novo no motor
@@ -75,7 +76,6 @@ Cada linha traz a FRASE que justifica a concessao. Divergencia entre a frase e o
 - Time Mage Dedication
 - Trapsmith Dedication
 - Trick Driver Dedication
-- Undead Master Dedication
 - Venture-Gossip Dedication
 - Viking Dedication
 - Weapon Improviser Dedication

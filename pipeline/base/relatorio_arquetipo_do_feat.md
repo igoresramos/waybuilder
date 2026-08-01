@@ -39,17 +39,12 @@ Chutar arquetipo por semelhanca de nome poria o feat na lista ERRADA, que e pior
 
 ## Homonimo classe x arquetipo (item 100)
 
-- ocorrencias reais: **8**
+- ocorrencias reais: **3**
 
 So conta quando o alvo E de arquetipo. Uma medicao automatizada deu 40 porque nao checava isso: `shield-block` (trait `general`) e `reactive-strike` (trait de classe) tem class-feature homonima e **nao sao defeito** -- e RAW correto, e o motor ja resolve por alias.
 
 | registro | campo | aponta para | class-feature homonima |
 |---|---|---|---|
-| `wb:class-feature/quick-alchemy` | `grants` | `wb:feat/quick-alchemy` | `wb:class-feature/quick-alchemy` |
-| `wb:feat/alchemist-dedication` | `grants` | `wb:feat/quick-alchemy` | `wb:class-feature/quick-alchemy` |
 | `wb:feat/efficient-alchemy` | `requires` | `wb:feat/advanced-alchemy` | `wb:class-feature/advanced-alchemy` |
-| `wb:feat/firework-technician-dedication` | `grants` | `wb:feat/quick-alchemy` | `wb:class-feature/quick-alchemy` |
-| `wb:feat/munitions-machinist` | `grants` | `wb:feat/quick-alchemy` | `wb:class-feature/quick-alchemy` |
 | `wb:feat/shield-of-reckoning` | `requires` | `wb:feat/champions-reaction` | `wb:class-feature/champions-reaction` |
 | `wb:feat/swift-retribution` | `requires` | `wb:feat/champions-reaction` | `wb:class-feature/champions-reaction` |
-| `wb:feat/wandering-chef-dedication` | `grants` | `wb:feat/quick-alchemy` | `wb:class-feature/quick-alchemy` |

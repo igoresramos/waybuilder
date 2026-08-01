@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **19606**
+- registros avaliados: **20162**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -22,8 +22,9 @@
 
 ## Portao 4 -- cobertura caindo vs build anterior
 
-**PASSOU** -- 0 ocorrencia(s).
+**FALHOU** -- 1 ocorrencia(s).
 
+- `weapon`: 1039 -> 1038
 
 ## Portao 5 -- license ausente
 
@@ -43,6 +44,13 @@ NAO SE APLICA nesta fase.
 
 **PASSOU** -- 0 ocorrencia(s).
 
+- 
+- _Perdas ja registradas em `artefatos_perdidos.json` (5) -- visiveis, nao bloqueiam:_
+- - `pipeline/dados_brutos/_dump_aon_rituais.py` -- RESOLVIDO -- sem acao (reproduzivel: True)
+- - `pipeline/dados_brutos/_wb_dump_companheiros.py` -- RESOLVIDO -- sem acao (reproduzivel: True)
+- - `pipeline/dados_brutos/pdfs/` -- PENDENTE -- Igor decide se rebaixa os livros (reproduzivel: False)
+- - `pipeline/dados_brutos/pdfs/PF2e/DM/` -- PENDENTE -- Igor decide se rebaixa os livros (reproduzivel: False)
+- - `pipeline/dados_brutos/tabelas_conjuracao_pdf.json` -- RESOLVIDO -- o arquivo continua perdido, mas nenhum dado dele esta (reproduzivel: False)
 
 ## Portao 9 -- kind ausente vs censo do AoN
 
@@ -50,10 +58,10 @@ NAO SE APLICA nesta fase.
 
 - 
 _Cobertura por raridade (AoN vigente em escopo):_
-- - `common`: 12264 de 12491 na base (98.2%)
-- - `uncommon`: 4212 de 4212 na base (100.0%)
-- - `rare`: 1449 de 1449 na base (100.0%)
-- - `unique`: 240 de 240 na base (100.0%)
+- - `common`: 8590 de 8817 na base (97.4%)
+- - `uncommon`: 1832 de 1832 na base (100.0%)
+- - `rare`: 602 de 602 na base (100.0%)
+- - `unique`: 5 de 5 na base (100.0%)
 - 
 _Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
 - - `class-feature`: 219 de 721 vigentes do AoN nao estao na base -- Alchemist Feats, Ancestry And Background, Ancestry And Background, Ancestry And Background, Ancestry Feat, Ancestry Feats -- 214 dos 219 sao LINHA DE TABELA DE PROGRESSAO, nao conteudo ('Attribute Boosts', 'Initial Proficiencies', 'Skill Feats', 'Skill Increases', 'Ancestry and Background', 'General Feats', '<Classe> Feats'), que a base modela dentro de `class.progressao`. Os 5 restantes sao class-features de verdade e estao no TODO 55: Incredible Senses, Lightning Reflexes (2 docs), Premonition's Reflexes, Vigilant Senses
@@ -64,6 +72,6 @@ _Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
 
 **PASSOU** -- 0 ocorrencia(s).
 
-- registros SEM resposta de `grants_completos`: **0** de 19606 (0.0%)
+- registros SEM resposta de `grants_completos`: **0** de 20162 (0.0%)
 - linha de base anterior: 0
 

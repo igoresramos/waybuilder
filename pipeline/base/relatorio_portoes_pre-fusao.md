@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `pre-fusao`
 
-- registros avaliados: **20258**
+- registros avaliados: **20778**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -32,7 +32,7 @@ NAO SE APLICA nesta fase.
 
 ## Portao 7 -- homonimo no mesmo kind
 
-**FALHOU** -- 95 ocorrencia(s).
+**FALHOU** -- 116 ocorrencia(s).
 
 - **COLISAO** `wb:feat/jellyfish-stance` casou com `feat-4077` mas o AoN tem 2 entidades: feat-2729(nv6,Monk,Stance,Uncommon); feat-4077(nv8,Monk,Stance,Uncommon)
 - **COLISAO** `wb:feat/rain-of-embers-stance` casou com `feat-2269` mas o AoN tem 2 entidades: feat-936(nv1,Monk,Rare,Stance); feat-2269(nv1,Fire,Monk,Rare,Stance)
@@ -75,7 +75,7 @@ NAO SE APLICA nesta fase.
 - **COLISAO** `wb:equipment/cursed-dreamstone` casou com `equipment-507-589` mas o AoN tem 2 entidades: equipment-507-589(nv9,Enchantment,Magical,Uncommon); equipment-641(nv9,Cursed,Enchantment,Magical,R)
 - **COLISAO** `wb:equipment/darkvision-elixir` casou com `equipment-3305` mas o AoN tem 2 entidades: equipment-2885(nv0,Alchemical,Consumable,Elixir); equipment-3305(nv2,Alchemical,Consumable,Elixir)
 - 
-- _Alem disso, 338 casos de mesmo level e mesmos traits -- par legacy/remaster que o AoN nao declarou via `remaster_id`. Fusao legitima, nao bloqueia o build._
+- _Alem disso, 351 casos de mesmo level e mesmos traits -- par legacy/remaster que o AoN nao declarou via `remaster_id`. Fusao legitima, nao bloqueia o build._
 - - `wb:feat/advanced-monastic-weaponry` casou com `feat-7108` mas o AoN tem 2 entidades: feat-5997(nv6,Monk); feat-7108(nv6,Monk)
 - - `wb:feat/banshee-cry-display` casou com `feat-8533` mas o AoN tem 2 entidades: feat-3250(nv12,Archetype); feat-8533(nv12,Archetype)
 - - `wb:feat/coughing-dragon-display` casou com `feat-8529` mas o AoN tem 2 entidades: feat-3246(nv4,Archetype); feat-8529(nv4,Archetype)

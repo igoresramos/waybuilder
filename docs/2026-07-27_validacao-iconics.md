@@ -7,8 +7,8 @@ exatamente com o oficial -- se nao bater, o motor esta errado.
 ## HP
 
 - avaliados: **136**
-- hp bate: **117**
-- hp diverge: **12**
+- hp bate: **118**
+- hp diverge: **11**
 - nao traduzido: **7**
 
 ### Por personagem
@@ -146,7 +146,7 @@ exatamente com o oficial -- se nao bater, o motor esta errado.
 - OK   `Zathri` nivel 5 -- HP oficial 73, motor 73
 - OK   `Ekene` nivel 1 -- HP oficial 16, motor 16
 - OK   `Kalaggi Nakutu` nivel 1 -- HP oficial 21, motor 21
-- DIFF `Muruwa` nivel 1 -- HP oficial 15, motor 9
+- OK   `Muruwa` nivel 1 -- HP oficial 15, motor 15
 - OK   `Ufi` nivel 1 -- HP oficial 17, motor 17
 - OK   `Zane Ikundi` nivel 1 -- HP oficial 15, motor 15
 

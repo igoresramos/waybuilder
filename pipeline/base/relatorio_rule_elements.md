@@ -9,24 +9,23 @@ rank e sem `predicate`. O resto depende do interpretador do Foundry
 (`item:trait:finesse`, `self:effect:rage`, `@actor.flags`) e fica como
 prosa -- que pelo principio zero **nao e lacuna**.
 
-- registros que ganharam efeito: **464**
-- grants adicionados: **556**
+- registros que ganharam efeito: **699**
+- grants adicionados: **819**
 
 ## Nao convertidos
 
-- FlatModifier: precisa do interpretador: 1823
-- ItemAlteration: precisa do interpretador: 1497
-- RollOption: precisa do interpretador: 1091
-- ActiveEffectLike sem path de rank: 634
-- ChoiceSet: precisa do interpretador: 623
-- Note: precisa do interpretador: 543
-- Resistance: precisa do interpretador: 341
+- FlatModifier: precisa do interpretador: 1850
+- ItemAlteration: precisa do interpretador: 1509
+- RollOption: precisa do interpretador: 1142
+- ActiveEffectLike sem path de rank: 635
+- ChoiceSet: precisa do interpretador: 625
+- Note: precisa do interpretador: 557
+- Resistance: precisa do interpretador: 346
 - GrantItem com predicate: 293
-- GrantItem sem alvo na base: 290
 - ActiveEffectLike com predicate: 269
-- DamageDice: precisa do interpretador: 255
-- AdjustDegreeOfSuccess: precisa do interpretador: 240
-- AdjustModifier: precisa do interpretador: 228
+- DamageDice: precisa do interpretador: 264
+- AdjustDegreeOfSuccess: precisa do interpretador: 243
+- AdjustModifier: precisa do interpretador: 235
 - Strike: precisa do interpretador: 201
 - GrantItem com UUID dinamico (escolha do jogador): 184
 - BaseSpeed: precisa do interpretador: 173
@@ -35,14 +34,15 @@ prosa -- que pelo principio zero **nao e lacuna**.
 - Sense: precisa do interpretador: 110
 - CriticalSpecialization: precisa do interpretador: 100
 - TokenLight: precisa do interpretador: 100
-- AdjustStrike: precisa do interpretador: 94
-- DamageAlteration: precisa do interpretador: 88
+- DamageAlteration: precisa do interpretador: 97
+- AdjustStrike: precisa do interpretador: 96
 - ActorTraits: precisa do interpretador: 65
 - valor de rank nao literal: 58
 - TokenEffectIcon: precisa do interpretador: 47
-- EphemeralEffect: precisa do interpretador: 29
-- CreatureSize: precisa do interpretador: 24
-- CraftingAbility: precisa do interpretador: 21
+- EphemeralEffect: precisa do interpretador: 30
+- GrantItem sem alvo na base: 27
+- CreatureSize: precisa do interpretador: 25
+- CraftingAbility: precisa do interpretador: 23
 - Immunity: precisa do interpretador: 21
 - Weakness: precisa do interpretador: 19
 - GrantItem de condicao de combate (fora de escopo): 17
@@ -58,10 +58,10 @@ prosa -- que pelo principio zero **nao e lacuna**.
 ## Exemplos
 
 - `wb:class/alchemist` (Alchemist): `[{"proficiency": {"weapon-base-alchemical-bomb": "trained"}}]`
-- `wb:class-feature/alchemical-sciences-methodology` (Alchemical Sciences Methodology): `[{"proficiency": {"crafting": "trained"}}, {"grant_feat": ["wb:feat/alchemical-crafting"]}, {"grant_feat": ["wb:equipment/formula-book-blank"]}]`
+- `wb:class-feature/acrobats-calling` (Acrobat's Calling): `[{"grant_feat": ["wb:action/rewrite-fate"]}]`
+- `wb:class-feature/alchemical-sciences-methodology` (Alchemical Sciences Methodology): `[{"proficiency": {"crafting": "trained"}}, {"grant_feat": ["wb:feat/alchemical-crafting"]}, {"grant_feat": ["wb:action/quick-tincture"]}, {"grant_feat": ["wb:equipment/formula-book-blank"]}]`
 - `wb:class-feature/alchemical-weapon-expertise` (Alchemical Weapon Expertise): `[{"proficiency": {"weapon-base-alchemical-bomb": "expert"}}]`
 - `wb:class-feature/alchemical-weapon-mastery` (Alchemical Weapon Mastery): `[{"proficiency": {"weapon-base-alchemical-bomb": "master"}}]`
 - `wb:class-feature/alchemy` (Alchemy): `[{"grant_feat": ["wb:feat/alchemical-crafting"]}, {"grant_feat": ["wb:class-feature/formula-book"]}, {"grant_feat": ["wb:class-feature/advanced-alchemy"]}, {"grant_feat": ["wb:class-feature/versatile-vials"]}, {"grant_feat": ["wb:class-feature/quick-alchemy"]}]`
 - `wb:class-feature/aloof-firmament` (Aloof Firmament): `[{"grant_feat": ["wb:feat/cat-fall"]}]`
 - `wb:class-feature/amulet` (Amulet): `[{"grant_feat": ["wb:equipment/amulet-implement"]}]`
-- `wb:class-feature/ancestors` (Ancestors): `[{"proficiency": {"society": "trained"}}, {"grant_feat": ["wb:class-feature/curse-of-ancestral-meddling"]}]`

@@ -1,8 +1,8 @@
 # Relatorio de reconciliacao
 
-- registros de entrada: **20803**
+- registros de entrada: **21323**
 - colisoes de id fundidas: **568**
-- base final: **20234** registros
+- base final: **20754** registros
 - registros com divergencia registrada: **1436**
 - suspeitas de par nao unido: **360**
 
@@ -15,6 +15,7 @@
 - `class-feature`: 841
 - `background`: 637
 - `trait`: 561
+- `action`: 520
 - `deity`: 490
 - `heritage`: 326
 - `archetype`: 247

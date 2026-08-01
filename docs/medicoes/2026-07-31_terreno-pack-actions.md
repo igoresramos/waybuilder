@@ -1,6 +1,6 @@
 # Terreno do pack `actionspf2e` -- embasamento para o item 111
 
-Medicao READ-ONLY (sem `./build.sh`, sem editar base/pipeline/motor/TODO). Todo
+Medicao READ-ONLY (sem `./build.sh`, sem editar base, pipeline, motor ou TODO). Todo
 comando roda contra `pipeline/dados_brutos/` como esta em disco hoje.
 
 Achado zero, antes de tudo: o pack chama-se `actionspf2e` no `system.pf2e.json`

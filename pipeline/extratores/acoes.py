@@ -80,10 +80,24 @@ def _docs_foundry():
             d = json.load(open(f, encoding="utf-8"))
         except Exception:
             continue
-        if isinstance(d, dict) and d.get("type") == "action" and d.get("name"):
-            d["_pasta"] = os.path.relpath(os.path.dirname(f),
-                                          os.path.join(raiz, "actions"))
-            docs.append(d)
+        if not (isinstance(d, dict) and d.get("type") == "action"
+                and d.get("name")):
+            continue
+        # AS 37 TATICAS DO COMMANDER FICAM DE FORA, e nao por escopo: elas ja
+        # SAO extraidas, como `kind: tactic`, por `taticas_kits.py` -- que
+        # documenta o vinculo ("os 37 docs do AoN batem por nome, 1:1, com um
+        # item `type=action` em packs/pf2e/actions/class/commander/"). Trazer
+        # os mesmos docs aqui criaria 37 pares "mesma entidade, dois kinds":
+        # exatamente a classe de defeito do item 110, so que fabricada por nos.
+        # E quebrava o eixo `tactics`, que casa por `item:trait:tactic` e
+        # passava a oferecer 74 opcoes onde ha 37 -- pego pelo oraculo.
+        if "tactic" in [str(t).lower() for t in
+                        (((d.get("system") or {}).get("traits") or {})
+                         .get("value") or [])]:
+            continue
+        d["_pasta"] = os.path.relpath(os.path.dirname(f),
+                                      os.path.join(raiz, "actions"))
+        docs.append(d)
     return docs
 
 
@@ -100,14 +114,20 @@ def _indice_aon():
         return {}
     docs = bruto if isinstance(bruto, list) else (
         bruto.get("docs") or bruto.get("hits") or [])
-    idx = {}
+    idx = collections.defaultdict(list)
     for d in docs:
         if not isinstance(d, dict) or not d.get("name"):
             continue
         # doc que declara `remaster_id` e o LEGADO -- a regra vale para o
         # pipeline inteiro. Fica no indice mesmo assim, porque e ele quem
         # carrega o vinculo; quem escolhe o vigente e o passo de fusao.
-        idx.setdefault(comum.normalizar(d["name"]), d)
+        idx[comum.normalizar(d["name"])].append(d)
+    # LISTA, e nao `setdefault`: com `setdefault` o primeiro doc vencia e os
+    # outros sumiam sem rastro -- o "casamento ambiguo" que o portao 7 existe
+    # para pegar e que o README descreve como o defeito real do
+    # `Death from Above`. Aqui isso importaria: o AoN indexa
+    # `Retributive Strike` duas vezes (`action-5` e `action-2807`), e escolher
+    # um deles em silencio seria afirmar o que nao se sabe.
     return idx
 
 
@@ -159,9 +179,14 @@ def _registro(d, sl, aon, est) -> dict:
     traits, aliases_traits, _ = traits_uniao.unir(
         {"foundry": [str(t) for t in (tr.get("value") or [])]})
 
-    doc_aon = aon.get(comum.normalizar(d["name"]))
+    candidatos = aon.get(comum.normalizar(d["name"])) or []
+    # so casa quando e INEQUIVOCO. Com N candidatos o xref fica vazio e o
+    # desmembramento de colisoes decide, que e o passo que existe para isso.
+    doc_aon = candidatos[0] if len(candidatos) == 1 else None
     if doc_aon:
         est["casaram_com_aon"] += 1
+    elif len(candidatos) > 1:
+        est["ambiguos_no_aon"] += 1
 
     prov = {
         "name": "foundry",
@@ -234,8 +259,10 @@ if __name__ == "__main__":
         json.dump(regs, fh, ensure_ascii=False, indent=2)
     est = ESTATISTICAS
     print(f"{len(regs)} registros extraidos -> {destino}")
-    print(f"  docs no pack do Foundry: {est.get('foundry_docs', 0)}")
+    print(f"  docs aproveitados do pack: {est.get('foundry_docs', 0)}"
+          f"  (as 37 taticas do Commander saem: ja sao kind `tactic`)")
     print(f"  colisoes de slug (legado x remaster): {est.get('colisoes_de_slug', 0)}")
     print(f"  casaram por nome com o AoN: {est.get('casaram_com_aon', 0)}"
           f" (indice: {est.get('aon_docs_indexados', 0)})")
+    print(f"  nome AMBIGUO no AoN (xref vazio de proposito): {est.get('ambiguos_no_aon', 0)}")
     print(f"  prosa vinda do AoN por ausencia no Foundry: {est.get('prosa_veio_do_aon', 0)}")

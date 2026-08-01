@@ -2,7 +2,7 @@
 
 - impulsos gateados: **111**
 - deles, `composite` (exigem DOIS gates): **16**
-- agnosticos, intocados: **5** (Command Elemental, Counter Element, Fearsome Familiar, Imperious Aura, Purify Element)
+- agnosticos, intocados: **8** (Base Kinesis, Command Elemental, Counter Element, Elemental Blast, Extract Element, Fearsome Familiar, Imperious Aura, Purify Element)
 
 Era o maior defeito unico da bancada: 24 das 314 divergencias contra o Pathbuilder eram impulsos que nos ofereciamos e ele recusava, com ele certo. O `requires` dizia so `class_level >= 1`.
 

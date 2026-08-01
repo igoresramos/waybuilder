@@ -15,13 +15,14 @@ Estava `grants: []` em todos. 26 das 27 classes concedem: todo personagem do niv
 
 ## Dano de furia
 
-- registros com `rage_damage`: **20**
-- descartados: **6** (alvo do combate 3, Mighty Rage 1, Elemental Evolution 1, Guard's Fury 1)
+- registros com `rage_damage`: **21**
+- descartados: **7** (alvo do combate 3, Mighty Rage 1, Elemental Evolution 1, Guard's Fury 1, valor nao inteiro 1)
 
 `mode: upgrade` = maior vence, nao soma: o instinto SUBSTITUI o +2 do Rage.
 
 | registro | nome | condicao | graus |
 |---|---|---|---|
+| `wb:action/rage` | Rage | -- | 2 |
 | `wb:class-feature/animal-instinct` | Animal Instinct | -- | 5, 12 |
 | `wb:class-feature/bloodrager` | Bloodrager | -- | 2, 4, 8 |
 | `wb:class-feature/decay-instinct` | Decay Instinct | rotting rage | 6, 10, 18 |

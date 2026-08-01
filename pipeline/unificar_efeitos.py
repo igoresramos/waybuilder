@@ -136,7 +136,9 @@ PACK_PARA_KIND = {
     "ancestryfeatures": "class-feature",
     "heritages": "heritage",
     "bestiary-ability-glossary-srd": None,
-    "actionspf2e": None,           # a base nao modela `action` como kind
+    # era `None` ("a base nao modela `action` como kind") ate 31/07, quando o
+    # pack passou a ser extraido -- spec 2026-07-31-kind-action.md
+    "actionspf2e": "action",
 }
 
 

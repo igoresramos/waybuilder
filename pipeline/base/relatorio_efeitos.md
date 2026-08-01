@@ -6,7 +6,7 @@ usava outro conjunto. Os campos originais permanecem -- isto
 adiciona a projecao canonica, nao substitui.
 
 - registros que ganharam `grants`: **985**
-- base com `grants`: **3769** de 20258 (18.6%)
+- base com `grants`: **3769** de 20778 (18.1%)
 
 ## Por kind
 

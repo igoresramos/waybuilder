@@ -20,7 +20,7 @@ sobreviveu (o Remaster renomeou dos dois lados), quem liga e o
 - `wb:spell/floating-disk` -> `wb:spell/carryall`
 - `wb:heritage/witch-gnoll` -> `wb:heritage/witch-kholo`
 - `wb:spell/obscuring-mist` -> `wb:spell/mist`
-- `wb:spell/ki-strike` -> `wb:spell/inner-upheaval`
+- `wb:spell/ki-strike` -> `wb:feat/qi-spells`
 - `wb:spell/vampiric-touch` -> `wb:spell/vampiric-feast`
 - `wb:spell/black-tentacles` -> `wb:spell/slither`
 - `wb:spell/dancing-lights` -> `wb:spell/light`

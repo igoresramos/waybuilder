@@ -424,7 +424,7 @@
     "category": null,
     "xref": {
       "foundry": "MHLuKy4nQO2Z4Am1",
-      "aon": "action-54",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -587,7 +587,7 @@
     "category": null,
     "xref": {
       "foundry": "UAaQk93a30nx0nYY",
-      "aon": "action-520",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -624,7 +624,7 @@
     "category": null,
     "xref": {
       "foundry": "HCl3pzVefiv9ZKQW",
-      "aon": "action-75",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -637,47 +637,6 @@
     },
     "conflitos": [],
     "texto": "Trigger An ally is about to use an action that requires a skill check or attack roll. \n Requirements The ally is willing to accept your aid, and you have prepared to help (see below). \n \n You try to help your ally with a task. To use this reaction, you must first prepare to help, usually by using an action during your turn. You must explain to the GM exactly how you're trying to help, and they determine whether you can Aid your ally. \n When you use your Aid reaction, attempt a skill check or attack roll of a type decided by the GM. The typical DC is 15, but the GM might adjust this DC for particularly hard or easy tasks. The GM can add any relevant traits to your preparatory action or to your Aid reaction depending on the situation, or even allow you to Aid checks other than skill checks and attack rolls. \n \n Critical Success You grant your ally a +2 circumstance bonus to the triggering check. If you're a master with the check you attempted, the bonus is +3, and if you're legendary, it's +4. \n Success You grant your ally a +1 circumstance bonus to the triggering check. \n Critical Failure Your ally takes a –1 circumstance penalty to the triggering check. \n @UUID[Compendium.pf2e.other-effects.Item.Effect: Aid]",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/alley-oop",
-    "kind": "action",
-    "name": "Alley-Oop",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "Z0HyZyvCe3Y1Chaa",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your team excels at sharing resources and delivering them exactly where they need to be. Signal a squadmate within the aura of your banner who is holding or wearing a consumable that can be activated as a single action. That squadmate can toss their consumable to any other squadmate within the aura of your banner as a free action, and the receiving squadmate can catch and activate the consumable as a reaction. If the receiving squadmate chooses not to catch the consumable or if they don't have a free hand to catch it with, it lands on the ground in their space. Special If the consumable is a piece of activated ammunition and the receiving squadmate is wielding a compatible weapon that takes 1 or fewer actions to reload, they can load the ammunition into their weapon as part of the reaction used to catch and activate it. The ammunition remains activated until the end of their next turn.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -746,7 +705,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "Or6RLXeoZkN8CLdi",
-      "aon": "action-1229",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -946,7 +905,7 @@
     "category": null,
     "xref": {
       "foundry": "qm7xptMSozAinnPS",
-      "aon": "action-91",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -1064,7 +1023,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "9sXQf1SyppS5B6O1",
-      "aon": "action-903",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -1102,7 +1061,7 @@
     "category": null,
     "xref": {
       "foundry": "UWdRX1VelipCzrCg",
-      "aon": "action-92",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -1181,7 +1140,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "IE2nThCmoyhQA0Jn",
-      "aon": "action-511",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -1221,7 +1180,7 @@
     "category": null,
     "xref": {
       "foundry": "M76ycLAqHoAgbcej",
-      "aon": "action-28",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -1799,47 +1758,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/bloody-guillotine",
-    "kind": "action",
-    "name": "Bloody Guillotine",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "zt5fgBBOQpr84CGE",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per day Your squad performs a brutal combination attack that levels an enemy and attempts to put them down permanently. Choose and signal up to three squadmates within the aura of your commander's banner. Each squadmate can Stride up to half their Speed directly toward a single enemy you designate as a free action. Any who end their movement adjacent to the designated target can attempt to @UUID[Compendium.pf2e.actionspf2e.Item.Trip] or Strike it as a reaction. \n The first time a @UUID[Compendium.pf2e.conditionitems.Item.Prone] enemy is successfully dealt damage by a Strike from this tactic, they must immediately attempt a @Check[fortitude|against:commander|traits:death,incapacitation] save against your class DC or die; this is a death and incapacitation effect. All enemies who witness a creature slain by Bloody Guillotine must succeed at a @Check[will|against:commander|options:inflicts:sickened|traits:emotion,mental] save against your class DC or become @UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 1} for 1 round (@UUID[Compendium.pf2e.conditionitems.Item.Sickened]{Sickened 2} for 1 round on a critical failure); this is an emotion and mental effect.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/board",
     "kind": "action",
     "name": "Board",
@@ -1862,7 +1780,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "bG91dbtbgOnw7Ofx",
-      "aon": "action-482",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -1983,7 +1901,7 @@
     "category": null,
     "xref": {
       "foundry": "OizxuPb44g3eHPFh",
-      "aon": "action-32",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -2226,7 +2144,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "Vr3w3t028ZKDg0mO",
-      "aon": "action-560",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -2281,48 +2199,6 @@
     },
     "conflitos": [],
     "texto": "Cost A bribe worth at least one-tenth of the Currency per Additional PC listed on Party Treasure by level. Doubling this amount grants a +2 circumstance bonus to the check. \n Requirements You've successfully Gained a Contact. You offer a bribe to your contact to help the heist in some way. Attempt a hard or very hard Deception or Diplomacy check. \n Success The contact accepts the bribe and you gain 1 EP. \n Failure You believe you successfully Bribed your Contact and gained 1 EP, but in fact the contact informs the opposition of the attempted bribery, adding 1 AP to the infiltration. The GM can reveal that this Edge Point grants no benefit at any point during the infiltration, as befits the story. \n Critical Failure As failure, but adding 2 AP to the infiltration.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/buckle-cut-blitz",
-    "kind": "action",
-    "name": "Buckle-Cut Blitz",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "3sNSr6NEVkUZ0dIr",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your squad dashes past enemies, slicing their boot laces and breaking their belt buckles. Signal up to two squadmates within the aura of your commander's banner; these squadmates can Stride up to their Speed as a reaction. Each enemy they are adjacent to at any point during this movement must attempt a @Check[reflex|against:commander|options:inflicts:clumsy] save against your class DC or become @UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 1} for 1 round (@UUID[Compendium.pf2e.conditionitems.Item.Clumsy]{Clumsy 2} on a critical failure).",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -2389,7 +2265,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "TXqTIwNGULs3j6CH",
-      "aon": "action-471",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -2471,7 +2347,7 @@
     "category": null,
     "xref": {
       "foundry": "H6v1VgowHaKHnVlG",
-      "aon": "action-93",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -2512,7 +2388,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "Fha8jFmfkOPxAsrZ",
-      "aon": "action-1225",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -2552,7 +2428,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "8kGpUUUSX1sB2OqQ",
-      "aon": "action-601",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -2670,7 +2546,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "8w6esW689NNbbq3i",
-      "aon": "action-1",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -2916,7 +2792,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "aBQ8ajvEBByv45yz",
-      "aon": "action-72",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -2998,7 +2874,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "34E7k2YRcsOU5uyl",
-      "aon": "action-700",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3036,7 +2912,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "s4s40hJr5uRLOqix",
-      "aon": "action-475",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3198,7 +3074,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "uOlyklPCUWLtCaYI",
-      "aon": "action-904",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3318,7 +3194,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "tw1KDRPdBAkg5DlS",
-      "aon": "action-918",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3358,7 +3234,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "pprgrYQ1QnIDGZiy",
-      "aon": "action-33",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3399,7 +3275,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "25WDi1cVUrW92sUj",
-      "aon": "action-545",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3484,7 +3360,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "tHCqgwjtQtzNqVvd",
-      "aon": "action-52",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3645,7 +3521,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "q9nbyIF0PEBqMtYe",
-      "aon": "action-58",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3686,7 +3562,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "yM20ZnvmNxu9qMDV",
-      "aon": "action-1591",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3727,7 +3603,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "qVNVSmsgpKFGk9hV",
-      "aon": "action-61",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3805,7 +3681,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "K878asDgf1EF0B9S",
-      "aon": "action-550",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -3944,89 +3820,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/coordinating-maneuvers",
-    "kind": "action",
-    "name": "Coordinating Maneuvers",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "Kp325Qf0qpF6RCDE",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your team works to slip enemies into a disadvantageous position. Signal one squadmate within the aura of your banner; that squadmate can immediately Step as a free action. If they end this movement next to an opponent, they can attempt to @UUID[Compendium.pf2e.actionspf2e.Item.Reposition] that target as a reaction.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/corpse-crenellation",
-    "kind": "action",
-    "name": "Corpse Crenellation",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Adventure Path: Hell's Destiny",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "yT2A0CxSA5nJ8e7n",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per 10 minutes With methodical, shocking efficiency, some Chelaxian and Hellknight squads can turn the corpses of their slain foes into temporary earthworks. Signal up to two squadmates within the aura of your commander's banner. These squadmates can Stride up to half their Speed and attempt a melee or ranged Strike against one enemy you designate as a reaction. If the enemy is reduced to 0 Hit Points by these Strikes, the enemy's body provides lesser cover to all squadmates in or adjacent to the enemy's space until the end of your next turn or until the enemy is no longer @UUID[Compendium.pf2e.conditionitems.Item.Unconscious] or dead. During this time, any squadmate who Takes Cover can also first Stride up to half their Speed, but they must end this movement in or adjacent to the fallen enemy's space. A squadmate who's at least two sizes smaller than the fallen enemy instead gains standard cover. Special If one of your squadmates knows or has prepared a cantrip that deals damage and requires 2 or fewer actions to cast, they can cast it targeting the designated enemy instead of taking the other actions normally granted by this tactic, gaining all other listed benefits.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/coughing-dragon",
     "kind": "action",
     "name": "Coughing Dragon",
@@ -4089,7 +3882,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "SB7cMECVtE06kByk",
-      "aon": "action-65",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4129,7 +3922,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "gBhWEy3ToxQeCLQm",
-      "aon": "action-914",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4170,7 +3963,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "rmwa3OyhTZ2i2AHl",
-      "aon": "action-43",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4291,7 +4084,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "Tj055UcNm6UEgtCg",
-      "aon": "action-76",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4331,7 +4124,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "GkmbTGfg8KcgynOA",
-      "aon": "action-45",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4413,7 +4206,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "ftG89SjTSa9DYDOD",
-      "aon": "action-60",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4467,48 +4260,6 @@
     },
     "conflitos": [],
     "texto": "Requirements You are wielding a crescent cross Effects You Strike up to three times with the ranged version of your crescent cross. If it is currently in its melee configuration, you can swap it to its ranged configuration as a free action before attempting these Strikes. You must have a bolt already chambered for each Strike and can Interact to swap to a different capacity chamber as a free action between each Strike. Each attack counts toward your multiple attack penalty, but you do not increase your penalty until you have made all your attacks.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/cry-havoc",
-    "kind": "action",
-    "name": "Cry Havoc!",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 3,
-    "category": "offensive",
-    "xref": {
-      "foundry": "k50ynPhpPSPZ4Akg",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per day Your squad rallies with a resounding clangor that drowns out all other sounds of war. Choose an enemy you are observing and signal all squadmates within the aura of your commander's banner. All squadmates can Stride up to twice their Speed directly toward the target as a reaction, yelling and trampling. When any squadmate enters a square adjacent to any enemy, that enemy must attempt a @Check[fortitude|against:commander|basic] save against your class DC or take @Damage[2d6[bludgeoning],2d6[sonic]|options:inflicts:deafened]{2d6 bludgeoning damage and 2d6 sonic damage} damage, plus an additional 2d6 bludgeoning and 2d6 sonic damage for every squadmate participating in Cry Havoc! (enemies who critically fail are @UUID[Compendium.pf2e.conditionitems.Item.Deafened] for 1 round). Regardless of the outcome, the enemy is then temporarily immune to any further damage from Cry Havoc! for 24 hours. \n Squadmates can use Cry Havoc! while Burrowing, Climbing, Flying, or Swimming instead of Striding if they have the corresponding movement type.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -4776,7 +4527,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "bp0Up04x3dzGK5bB",
-      "aon": "action-11",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4816,7 +4567,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "1LDOfV8jEka09eXr",
-      "aon": "action-472",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4858,7 +4609,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "d9gbpiQjChYDYA2L",
-      "aon": "action-22",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4939,7 +4690,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "ZUAaBIAntZhFQixm",
-      "aon": "action-1904",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -4979,7 +4730,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "cYtYKa1gDEl7y2N0",
-      "aon": "action-512",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5037,48 +4788,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/defensive-retreat",
-    "kind": "action",
-    "name": "Defensive Retreat",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "UJi0VYnhVSdnl9II",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You call for a careful retreat. Signal all squadmates within the aura of your banner; each can immediately Step up to three times as a free action. Each Step must take them farther away from at least one hostile creature they are observing and can only take them closer to a hostile creature if doing so is the only way for them to move toward safety (such as if they're surrounded).",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/delay",
     "kind": "action",
     "name": "Delay",
@@ -5099,7 +4808,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "A72nHGUtNXgY5Ey9",
-      "aon": "action-77",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5143,48 +4852,6 @@
     "category": "offensive",
     "xref": {
       "foundry": "2u915NdUyQan6uKF",
-      "aon": "action-53",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "With a sudden shout, a well-timed taunt, or a cutting put-down, you can shake an enemy's resolve. Choose a creature within 30 feet of you who you're aware of. Attempt an [[/act demoralize]]{Intimidation} check against that target's Will DC. If the target doesn't understand the language you are speaking, or you're not speaking a language, you take a –4 circumstance penalty to the check. Regardless of your result, the target is temporarily immune to your attempts to Demoralize it for 10 minutes. Critical Success The target becomes @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2}. \n Success The target becomes @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1}.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/demoralizing-charge",
-    "kind": "action",
-    "name": "Demoralizing Charge",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "q1dvlKJI2Kfegc4Y",
       "aon": null,
       "pf2etools": null
     },
@@ -5198,7 +4865,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Your team's coordinated assault strikes fear into your enemies' hearts. Signal up to two squadmates within the aura of your commander's banner; as a free action, those squadmates can immediately Stride toward an enemy they are observing. \n If they end this movement adjacent to an enemy, they can attempt to Strike that enemy as a reaction. For each of these Strikes that are successful, the target enemy must succeed at a @Check[will|against:commander|options:inflicts:frightened|traits:emotion,fear,mental] save against your class DC or become @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1} (@UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2} on a critical failure); this is an emotion, fear, and mental effect. \n If both Strikes target the same enemy, that enemy attempts the save only once after the final attack and takes a –1 circumstance penalty to their Will save to resist this effect (this penalty increases to –2 if both Strikes are successful or to –3 if both Strikes are successful and either is a critical hit.) \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Demoralizing Charge]",
+    "texto": "With a sudden shout, a well-timed taunt, or a cutting put-down, you can shake an enemy's resolve. Choose a creature within 30 feet of you who you're aware of. Attempt an [[/act demoralize]]{Intimidation} check against that target's Will DC. If the target doesn't understand the language you are speaking, or you're not speaking a language, you take a –4 circumstance penalty to the check. Regardless of your result, the target is temporarily immune to your attempts to Demoralize it for 10 minutes. Critical Success The target becomes @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2}. \n Success The target becomes @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1}.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -5264,7 +4931,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "r5Uth6yvCoE4tr9z",
-      "aon": "action-554",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5305,7 +4972,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "Yb0C1uLzeHrVLl7a",
-      "aon": "action-513",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5346,7 +5013,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "m0f2B7G9eaaTmhFL",
-      "aon": "action-546",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5466,7 +5133,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "cYdz2grcOcRt4jk6",
-      "aon": "action-69",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5506,7 +5173,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "Dt6B1slsBy8ipJu9",
-      "aon": "action-41",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5585,7 +5252,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "JLPY5hl4qiJ1zLi1",
-      "aon": "action-481",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5623,7 +5290,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "1wcMkrJ8isCWc1x6",
-      "aon": "action-1423",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5663,7 +5330,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "AjLSHZSWQ90exdLo",
-      "aon": "action-74",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5704,7 +5371,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "Fe487XZBdqEI2InL",
-      "aon": "action-925",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -5758,47 +5425,6 @@
     },
     "conflitos": [],
     "texto": "Requirements You aren't immune to electricity \n Trigger A creature within 30 feet of you is targeted by an electricity effect or is in the area of an electricity effect. \n \n Effect You draw the electricity to yourself like a lightning rod in order to shield the target. If the triggering effect was targeted, it targets you instead of the triggering creature. If it was an area effect, it leaps from the triggering creature's space to fill your space instead. This doesn't divert lightning from any other creatures targeted by or in the area of the lightning. You're automatically hit by or automatically fail your save against the effect. You then can't Divert Lightning for [[/r 1d4 #rounds]]{1d4 rounds}.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/double-team",
-    "kind": "action",
-    "name": "Double Team",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "c5jVVnNYlP5HB6Ob",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your team works together to set an enemy up for a vicious attack. Signal one squadmate who has an opponent within their reach. That ally can @UUID[Compendium.pf2e.actionspf2e.Item.Shove] or @UUID[Compendium.pf2e.actionspf2e.Item.Reposition] an opponent as a free action. If their maneuver is successful and the target ends their movement adjacent to a different squadmate, the second squadmate can attempt a melee Strike against that target as a reaction.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -6025,7 +5651,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "v82XtjAVN4ffgVVR",
-      "aon": "action-13",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -6227,7 +5853,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "YMhmebfXAoOFXeSB",
-      "aon": "action-909",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -6309,7 +5935,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "D91jQs0wleU5ml4K",
-      "aon": "action-1231",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -6431,7 +6057,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "HYNhdaPtF1QmQbR3",
-      "aon": "action-78",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -6471,7 +6097,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "xGqOIheAOV12RGU4",
-      "aon": "action-474",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -6552,7 +6178,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "QyzlsLrqM0EEwd7j",
-      "aon": "action-23",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -6856,49 +6482,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/end-it",
-    "kind": "action",
-    "name": "End It!",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "incapacitation",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "lI4JCQcqvrZE2U5n",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Requirements You and your allies currently outnumber enemies on the battlefield, and you or a squadmate have reduced an enemy to 0 Hit Points since the start of your last turn. At your proclamation that victory is already at hand, your allies march forward with an authoritative stomp, scattering your enemies in terror. Signal all squadmates within the aura of your banner; you and each ally can Step as a free action directly toward a hostile creature. Any hostile creatures within 10 feet of a squadmate after this movement must attempt a @Check[will|against:commander|options:area-effect,inflicts:fleeing,inflicts:frightened|traits:emotion,fear,mental] save against your class DC; on a failure they become @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] for 1 round, and on a critical failure they become fleeing for 1 round and @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2}. This is an emotion, fear, and mental effect.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/energy-emanation",
     "kind": "action",
     "name": "Energy Emanation",
@@ -6962,7 +6545,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "TSDbyYRQwhIyY2Oq",
-      "aon": "action-923",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -7363,47 +6946,6 @@
     "category": "interaction",
     "xref": {
       "foundry": "SkZAQRkLLkmBQNB9",
-      "aon": "action-79",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You attempt to escape from being @UUID[Compendium.pf2e.conditionitems.Item.Grabbed], @UUID[Compendium.pf2e.conditionitems.Item.Immobilized], or @UUID[Compendium.pf2e.conditionitems.Item.Restrained]. Choose one creature, object, spell effect, hazard, or other impediment imposing any of those conditions on you. Attempt a check using your [[/act escape statistic=unarmed]]{unarmed attack modifier} against the DC of the effect. This is typically the Athletics DC of a creature grabbing you, the Thievery DC of a creature who tied you up, the spell DC for a spell effect, or the listed Escape DC of an object, hazard, or other impediment. You can attempt an [[/act escape statistic=acrobatics]]{Acrobatics} or [[/act escape statistic=athletics]]{Athletics} check instead of using your attack modifier if you choose (but this action still has the attack trait). Critical Success You get free and remove the grabbed, immobilized, and restrained conditions imposed by your chosen target. You can then Stride up to 5 feet. \n Success You get free and remove the grabbed, immobilized, and restrained conditions imposed by your chosen target. \n Critical Failure You don't get free, and you can't attempt to Escape again until your next turn.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/executioners-volley",
-    "kind": "action",
-    "name": "Executioner's Volley",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "GkcfzMAJVX159ua7",
       "aon": null,
       "pf2etools": null
     },
@@ -7417,7 +6959,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Frequency once per day You command your squadmates to act as a lethal firing squad. You and each squadmate within the aura of your commander's banner can attempt a ranged Strike as a reaction against a single target you choose; combine the damage from all attacks for the purpose of resistances and weaknesses. If the designated target is a living creature, these attacks gain the death trait. If the designated target dies as a result of this tactic, all other enemies within the affected area of your commander's banner must succeed at a @Check[will|against:commander|options:inflicts:frightened|traits:emotion,fear,mental] save against your class DC or be @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2}; this is an emotion, fear, and mental effect. Special If one of your squadmates knows or has prepared a cantrip with a range of 30 feet or more that deals damage and requires 2 or fewer actions to cast, they can cast it targeting the designated enemy instead of taking the other actions normally granted by this tactic, gaining all other listed benefits.",
+    "texto": "You attempt to escape from being @UUID[Compendium.pf2e.conditionitems.Item.Grabbed], @UUID[Compendium.pf2e.conditionitems.Item.Immobilized], or @UUID[Compendium.pf2e.conditionitems.Item.Restrained]. Choose one creature, object, spell effect, hazard, or other impediment imposing any of those conditions on you. Attempt a check using your [[/act escape statistic=unarmed]]{unarmed attack modifier} against the DC of the effect. This is typically the Athletics DC of a creature grabbing you, the Thievery DC of a creature who tied you up, the spell DC for a spell effect, or the listed Escape DC of an object, hazard, or other impediment. You can attempt an [[/act escape statistic=acrobatics]]{Acrobatics} or [[/act escape statistic=athletics]]{Athletics} check instead of using your attack modifier if you choose (but this action still has the attack trait). Critical Success You get free and remove the grabbed, immobilized, and restrained conditions imposed by your chosen target. You can then Stride up to 5 feet. \n Success You get free and remove the grabbed, immobilized, and restrained conditions imposed by your chosen target. \n Critical Failure You don't get free, and you can't attempt to Escape again until your next turn.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -7444,7 +6986,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "jftNJjBNxp2cleoi",
-      "aon": "action-548",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -7527,7 +7069,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "naKVqd8POxcnGclz",
-      "aon": "action-902",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -7569,7 +7111,7 @@
     "category": null,
     "xref": {
       "foundry": "fodJ3zuwQsYnBbtk",
-      "aon": "action-1227",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -7652,7 +7194,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "AJeLwbQBt1YH3S6v",
-      "aon": "action-1226",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -7772,7 +7314,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "QNAVeNKtHA0EUw4X",
-      "aon": "action-48",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -8135,7 +7677,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "4IxCKbGaEM9nUhld",
-      "aon": "action-908",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -8338,7 +7880,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "04VQuQih77pxX06q",
-      "aon": "action-1233",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -8420,7 +7962,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "nbfNETdpee8CVM17",
-      "aon": "action-9",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -8460,7 +8002,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "cS9nfDRGD83bNU1p",
-      "aon": "action-94",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -8498,7 +8040,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "dypCcXb9mwVbg6xD",
-      "aon": "action-16",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -8541,7 +8083,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "tfa4Sh7wcxCEqL29",
-      "aon": "action-514",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -8597,48 +8139,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/for-talmandor-for-freedom",
-    "kind": "action",
-    "name": "For Talmandor! For Freedom!",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Adventure Path: Hell's Destiny",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "2U7V8K0zSFGyZHrP",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per day You raise your banner high with a reminder of what you and your allies truly fight for, granting them unshakable conviction. For yourself and each squadmate in your banner's aura when you use this tactic, you can attempt to counteract one effect affecting that creature. Your counteract modifier is your Warfare Lore modifier. The effect must have the mental trait or impose the clumsy, controlled, @UUID[Compendium.pf2e.conditionitems.Item.Fleeing], frightened, @UUID[Compendium.pf2e.conditionitems.Item.Grabbed], @UUID[Compendium.pf2e.conditionitems.Item.Immobilized], @UUID[Compendium.pf2e.conditionitems.Item.Paralyzed], @UUID[Compendium.pf2e.conditionitems.Item.Restrained], slowed, or stunned condition.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/force-open",
     "kind": "action",
     "name": "Force Open",
@@ -8661,7 +8161,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "SjmKHgI7a5Z9JzBx",
-      "aon": "action-34",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -9020,47 +8520,6 @@
     "category": "interaction",
     "xref": {
       "foundry": "plBGdZhqq5JBl1D8",
-      "aon": "action-49",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You canvass local markets, taverns, and gathering places in an attempt to learn about a specific individual or topic. The GM determines the DC of the [[/act gather-information]]{Diplomacy} check and the amount of time it takes (typically 2 hours, but sometimes more), along with any benefit you might be able to gain by spending coin on bribes, drinks, or gifts. \n Success You collect information about the individual or topic. The GM determines the specifics. \n Critical Failure You collect incorrect information about the individual or topic. Sample Gather Information Tasks Untrained talk of the town Trained common rumor Expert obscure rumor, poorly guarded secret Master well-guarded or esoteric information Legendary information known only to an incredibly select few, or only to extraordinary beings",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/gather-to-me",
-    "kind": "action",
-    "name": "Gather to Me!",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "URxnrN8ji84AoVup",
       "aon": null,
       "pf2etools": null
     },
@@ -9074,7 +8533,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "You signal your team to move into position together. Signal all squadmates; each can immediately Stride as a reaction, though each must end their movement inside your banner's aura, or as close to your banner's aura as their movement Speed allows. \n Squadmates can use Gather to Me! while Burrowing, Climbing, Flying, or Swimming instead of Striding if they have the corresponding movement type.",
+    "texto": "You canvass local markets, taverns, and gathering places in an attempt to learn about a specific individual or topic. The GM determines the DC of the [[/act gather-information]]{Diplomacy} check and the amount of time it takes (typically 2 hours, but sometimes more), along with any benefit you might be able to gain by spending coin on bribes, drinks, or gifts. \n Success You collect information about the individual or topic. The GM determines the specifics. \n Critical Failure You collect incorrect information about the individual or topic. Sample Gather Information Tasks Untrained talk of the town Trained common rumor Expert obscure rumor, poorly guarded secret Master well-guarded or esoteric information Legendary information known only to an incredibly select few, or only to extraordinary beings",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -9102,7 +8561,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "O1iircZOOCo42r9Y",
-      "aon": "action-917",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -9184,7 +8643,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "tuZnRWHixLArvaIf",
-      "aon": "action-6",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -9388,7 +8847,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "3yoajuKjwHZ9ApUY",
-      "aon": "action-95",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -9428,7 +8887,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "PMbdMWc2QroouFGD",
-      "aon": "action-35",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -9473,7 +8932,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "rI2MSXR1MQzgQUO7",
-      "aon": "action-913",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -9514,7 +8973,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "5tOovJGK2TQIBHUZ",
-      "aon": "action-1905",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -9876,7 +9335,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "XMcnh4cSI32tljXa",
-      "aon": "action-62",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -9916,7 +9375,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "2HJ4yuEFY1Cast4h",
-      "aon": "action-36",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10039,7 +9498,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "JYi4MnsdFu618hPm",
-      "aon": "action-10",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10158,7 +9617,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "JuqmIAnkL9hVGai8",
-      "aon": "action-515",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10241,7 +9700,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "Q4kdWVOf2ztIBFg1",
-      "aon": "action-44",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10283,7 +9742,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "eReSHVEPCsdkSL4G",
-      "aon": "action-24",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10326,7 +9785,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "AJstokjdG6iDjVjE",
-      "aon": "action-46",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10367,7 +9826,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "dnaPJfA0CDLNrWcW",
-      "aon": "action-1234",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10522,7 +9981,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "6Oe9dg3Lu10slyeC",
-      "aon": "action-480",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10662,48 +10121,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/insta-ballista",
-    "kind": "action",
-    "name": "Insta-Ballista",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "ut0jFv67YpvHBzD9",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per day Your squad quickly assembles a special impromptu ballista and fires it to lethal effect. Signal all squadmates you previously chose to participate in this tactic (see Special); these squadmates must be within the aura of your commander's banner. They can all Stride as a free action to assemble into a close formation; as long as all the chosen squadmates end their movement no more than 10 feet away from any of the other chosen squadmates. They quickly assemble an impromptu ballista and fire it at an enemy of your choice within 200 feet. \n This is a ranged Strike using your proficiency bonus with martial weapons and gets an item bonus to the attack roll you make with it equal to the number of assisting squadmates (maximum +4). It deals @Damage[10d12[piercing]] damage. Once the attack is completed, the pieces of the impromptu ballista fall apart. Special You must choose all squadmates who will participate in this tactic at the time you prepare it. Those squadmates must carry the pieces of your impromptu ballista, which can be made out of easily scavenged materials; these pieces are 8 Bulk in total and can be divided in 1 Bulk increments among any number of the chosen squadmates.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/instant-recovery",
     "kind": "action",
     "name": "Instant Recovery",
@@ -10771,7 +10188,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "HAmGozJwLAal5v82",
-      "aon": "action-1228",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10811,7 +10228,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "pvQ5rY2zrtPI614F",
-      "aon": "action-80",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -10933,7 +10350,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "Uq2qy9aGNQ5JcPI1",
-      "aon": "action-907",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11009,7 +10426,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "lvqPQDdWT2DDO0k2",
-      "aon": "action-289",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11050,7 +10467,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "EwgTZBWsc8qKaViP",
-      "aon": "action-516",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11169,7 +10586,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "M8RCbthRhB4bxO9t",
-      "aon": "action-552",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11210,7 +10627,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "hFRHPBj6wjAayNtW",
-      "aon": "action-541",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11450,7 +10867,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "d5I6018Mci2SWokk",
-      "aon": "action-81",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11491,7 +10908,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "Q5iIYCFdqJFM31GW",
-      "aon": "action-25",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11654,7 +11071,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "IX1VlVCL5sFTptEE",
-      "aon": "action-7",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11698,7 +11115,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "ewwCglB7XOPLUz72",
-      "aon": "action-47",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11776,7 +11193,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "9MJcQEMVVrmMyGyq",
-      "aon": "action-919",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11816,7 +11233,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "JUvAvruz7yRQXfz2",
-      "aon": "action-37",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11856,7 +11273,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "DXIZ4DHGxhZiWNWb",
-      "aon": "action-521",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -11940,7 +11357,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "OX4fy22hQgUHDr0q",
-      "aon": "action-50",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -12018,7 +11435,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "Qf1ylAbdVi1rkc8M",
-      "aon": "action-30",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -12346,7 +11763,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "Rlp7ND33yYfxiEWi",
-      "aon": "action-12",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -12447,48 +11864,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/mirrored-wall",
-    "kind": "action",
-    "name": "Mirrored Wall",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic",
-      "visual"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "EKEZGfOBKTNWTFDe",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per 10 minutes \n Requirements At least one of your squadmates is in bright light or has a focused light source available, such as a bull's-eye lantern. Your squadmates have polished their shields to a reflective sheen and now position them to reflect a blinding light into your enemy's eyes. All of your squadmates can Raise a Shield or cast @UUID[Compendium.pf2e.spells-srd.Item.Shield] as a reaction. \n Then, signal a squadmate within the aura of your commander's banner who currently has a shield raised (including spellcasting allies with an active casting of the shield cantrip), and choose an enemy within 60 feet. The formation bounces light off the raised shield and into the enemy's eyes; the target must succeed at a @Check[fortitude|against:commander|options:inflicts:blinded,inflicts:dazzled] saving throw against your class DC or become @UUID[Compendium.pf2e.conditionitems.Item.Blinded] for 1 round (on a critical failure, the creature remains @UUID[Compendium.pf2e.conditionitems.Item.Dazzled] for 3 rounds after the blindness ends). \n You can signal additional allies with raised shields to participate in this tactic; the target takes a circumstance penalty on this save equal to the number of additional participating squadmates (to a maximum –4 circumstance penalty to the target's save). \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Mirrored Wall]",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/mirrors-reflection",
     "kind": "action",
     "name": "Mirror's Reflection",
@@ -12514,7 +11889,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "Mh4Vdg6gu8g8RAjh",
-      "aon": "action-1232",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -12634,47 +12009,6 @@
     "category": "interaction",
     "xref": {
       "foundry": "PM5jvValFkbFH3TV",
-      "aon": "action-96",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Requirements You are adjacent to a creature that is at least one size larger than you and is willing to be your mount. \n \n You move onto the creature and ride it. If you're already mounted, you can instead use this action to dismount, moving off the mount into a space adjacent to it.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/mountaineering-training",
-    "kind": "action",
-    "name": "Mountaineering Training",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "bAXkEXAlnBx78S7t",
       "aon": null,
       "pf2etools": null
     },
@@ -12688,7 +12022,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Your instructions make it easier for you and your allies to scale dangerous surfaces. Signal all squadmates; until the end of your next turn, you and each ally gain a climb Speed of 20 feet. \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Mountaineering Training] Special If you have this tactic prepared, you can use [[/act climb skill=warfare-lore]]{Warfare Lore} in place of Athletics for checks you make to Climb.",
+    "texto": "Requirements You are adjacent to a creature that is at least one size larger than you and is willing to be your mount. \n \n You move onto the creature and ride it. If you're already mounted, you can instead use this action to dismount, moving off the mount into a space adjacent to it.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -12887,47 +12221,6 @@
     },
     "conflitos": [],
     "texto": "Frequency once per day; \n Trigger You fail or critically fail a Deception, Diplomacy, Intimidation, or Society check Effect Reroll the skill check. You must use the second result, even if it's worse.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/naval-training",
-    "kind": "action",
-    "name": "Naval Training",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "zuTNF3UEr0ZNleqR",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your instructions make it easier for you and your allies to swim through dangerous waters. Signal all squadmates; until the end of your next turn, you and each ally gain a swim Speed of 20 feet. \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Naval Training] Special If you have this tactic prepared, you can use [[/act swim skill=warfare-lore]]{Warfare Lore} in place of Athletics for checks you make to Swim.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -13205,7 +12498,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "Tlrde2xh7AhesXNB",
-      "aon": "action-915",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -13287,7 +12580,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "EfjoIuDmtUn4yiow",
-      "aon": "action-551",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -13410,7 +12703,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "3D9kGfwg4LUZBR9A",
-      "aon": "action-901",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -13570,47 +12863,6 @@
     "category": "interaction",
     "xref": {
       "foundry": "ijZ0DDFpMkWqaShd",
-      "aon": "action-67",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You pick up a small, unattended object and try not to be noticed. Roll a single [[/act palm-an-object]]{Thievery} check against the Perception DCs of all creatures who are currently observing you. You can typically only Palm Objects of negligible Bulk, though the GM might determine otherwise depending on the situation. Success The creature doesn't notice you Palming the Object. \n Failure The creature notices you Palming the Object.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/passage-of-lines",
-    "kind": "action",
-    "name": "Passage of Lines",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "BfC5pWAns8PNewW3",
       "aon": null,
       "pf2etools": null
     },
@@ -13624,7 +12876,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "You command your allies to regroup, allowing endangered units to fall back while rested units press the advantage. Signal all squadmates within the aura of your commander's banner; each can swap positions with another willing ally adjacent to them. An ally can't swap into a space it can't fit into, and if one of the allies occupies more squares than the other, the smaller ally can move into any part of the larger ally's space as long as the two remain adjacent after the swap. PFS Note: This tactic can be used by @UUID[Compendium.pf2e.conditionitems.Item.Prone] PCs, but not PCs who are @UUID[Compendium.pf2e.conditionitems.Item.Grabbed], @UUID[Compendium.pf2e.conditionitems.Item.Immobilized], or otherwise unable to move of their own volition.",
+    "texto": "You pick up a small, unattended object and try not to be noticed. Roll a single [[/act palm-an-object]]{Thievery} check against the Perception DCs of all creatures who are currently observing you. You can typically only Palm Objects of negligible Bulk, though the GM might determine otherwise depending on the situation. Success The creature doesn't notice you Palming the Object. \n Failure The creature notices you Palming the Object.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -13729,7 +12981,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "EEDElIyin4z60PXx",
-      "aon": "action-59",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -13769,7 +13021,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "2EE4aF4SZpYf0R6H",
-      "aon": "action-70",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -13783,88 +13035,6 @@
     },
     "conflitos": [],
     "texto": "Requirements You're holding or wearing a @UUID[Compendium.pf2e.equipment-srd.Item.Thieves' Toolkit]. Opening a lock without a key is very similar to @UUID[Compendium.pf2e.actionspf2e.Item.Disable a Device]{Disabling a Device}, but the DC of the check is determined by the complexity and construction of the lock you are attempting to pick. Locks of higher quality might require multiple successes to unlock. If you lack the proper tools, the GM might let you use improvised picks, which are treated as a shoddy toolkit. Critical Success You unlock the lock, or you achieve two successes toward opening a lock that requires more than one success. You leave no trace of your tampering. \n Success You open the lock, or you achieve one success toward opening a lock that requires more than one success. You leave behind damage that indicates the lock was picked on close scrutiny. \n Critical Failure You break your toolkit and leave behind obvious damage. Fixing a broken toolkit requires using Crafting to @UUID[Compendium.pf2e.actionspf2e.Item.Repair] it or else swapping in @UUID[Compendium.pf2e.equipment-srd.Item.Thieves' Toolkit (Replacement Picks)]{replacement picks} (costing 3 sp, or 3 gp for an @UUID[Compendium.pf2e.equipment-srd.Item.Thieves' Toolkit (Infiltrator Picks)]{infiltrator thieves' toolkit}).",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/pincer-attack",
-    "kind": "action",
-    "name": "Pincer Attack",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "zLFfwNmmPTND6OMO",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You call for an aggressive formation designed for exploiting enemies' vulnerabilities. Signal all squadmates; each can Step as a reaction. If any of your allies ends this movement adjacent to an opponent, that opponent is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] to melee attacks from you and all other squadmates who responded to Pincer Attack until the start of your next turn.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/piranha-assault",
-    "kind": "action",
-    "name": "Piranha Assault",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "NVLqYqkkQaCdnWWk",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per 10 minutes You know that a thousand small bites can fell a large foe just as surely a single well-placed hit. Designate a creature within the aura of your commander's banner and signal all squadmates; for 1 minute, each time they attack that creature and deal damage to it of a type the creature resists, they ignore an amount of that creature's resistance equal to your level.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -14053,7 +13223,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "sn2hIy1iIJX9Vpgj",
-      "aon": "action-97",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -14097,48 +13267,6 @@
     "category": "interaction",
     "xref": {
       "foundry": "xccOiNL2W1EtfUYl",
-      "aon": "action-549",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You ask a question that charms or needles someone in just the right way. Ask a question of a non-allied creature that you can see. Attempt a @Check[diplomacy|against:will] check against the creature's Will DC. The creature is then temporarily immune for 1 hour. Critical Success The target must directly answer your question. It doesn't have to answer truthfully, but you gain a +4 circumstance bonus to your Perception DC if the creature attempts to @UUID[Compendium.pf2e.actionspf2e.Item.Lie] to you. \n Whether it answers truthfully or not, you glean something from its body language, and it is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] to the Strike you make using @UUID[Compendium.pf2e.actionspf2e.Item.Devise a Stratagem] against it before the end of your turn. \n Success As critical success, but the circumstance bonus to your Perception DC is +2. \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Pointed Question] \n Failure The target can refuse to answer you as normal. \n Critical Failure The target can refuse to answer you as normal, and its attitude toward you decreases by one step due to your aggravating attention.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/pop-drop-and-lock",
-    "kind": "action",
-    "name": "Pop, Drop, and Lock",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "6YIG6eVGTplWubGb",
       "aon": null,
       "pf2etools": null
     },
@@ -14152,7 +13280,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Frequency once per 10 minutes You command your squadmates to perform a devastating coordinated takedown. Signal up to three squadmates within the aura of your commander's banner who all have the same enemy within their reach; the squadmates can attempt to Strike, @UUID[Compendium.pf2e.actionspf2e.Item.Trip], or @UUID[Compendium.pf2e.actionspf2e.Item.Grapple] the opponent as a reaction. Each squadmate can only attempt one specific action granted by this tactic, the actions can be attempted in any order and a specific action can only be attempted once as part of this tactic.",
+    "texto": "You ask a question that charms or needles someone in just the right way. Ask a question of a non-allied creature that you can see. Attempt a @Check[diplomacy|against:will] check against the creature's Will DC. The creature is then temporarily immune for 1 hour. Critical Success The target must directly answer your question. It doesn't have to answer truthfully, but you gain a +4 circumstance bonus to your Perception DC if the creature attempts to @UUID[Compendium.pf2e.actionspf2e.Item.Lie] to you. \n Whether it answers truthfully or not, you glean something from its body language, and it is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard] to the Strike you make using @UUID[Compendium.pf2e.actionspf2e.Item.Devise a Stratagem] against it before the end of your turn. \n Success As critical success, but the circumstance bonus to your Perception DC is +2. \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Pointed Question] \n Failure The target can refuse to answer you as normal. \n Critical Failure The target can refuse to answer you as normal, and its attitude toward you decreases by one step due to your aggravating attention.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -14280,48 +13408,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/protective-screen",
-    "kind": "action",
-    "name": "Protective Screen",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "5yBBgZ7OCWWJsnLo",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You've trained your allies in a technique designed to protect war mages. Signal one squadmate; as a reaction, that squadmate Strides directly toward any other squadmate who is within the aura of your banner. If the first squadmate ends their movement adjacent to another squadmate, the second squadmate does not trigger reactions when casting spells or making ranged attacks until the end of their next turn or until they are no longer adjacent to the first squadmate, whichever comes first. If the first squadmate ends their movement adjacent to more than one other squadmate, the first squadmate must choose which of the adjacent squadmates gains this benefit.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/psychic-defense",
     "kind": "action",
     "name": "Psychic Defense",
@@ -14345,7 +13431,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "iTx0vXAhiS4lKwEi",
-      "aon": "action-1235",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -14469,7 +13555,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "xTK2zsWFyxSJvYbX",
-      "aon": "action-544",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -14510,7 +13596,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "yzNJgwzV9XqEhKc6",
-      "aon": "action-2",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -14591,7 +13677,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "QHFMeJGzFWj2QczA",
-      "aon": "action-547",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -14672,7 +13758,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "RADNqsvAt4gP9FOX",
-      "aon": "action-910",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -14715,7 +13801,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "Ah5g9pDwWF9b9VW9",
-      "aon": "action-3",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -14753,7 +13839,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "xjGwis0uaC2305pm",
-      "aon": "action-98",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -14959,7 +14045,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "xJEkXFJgEfEida27",
-      "aon": "action-464",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15115,48 +14201,6 @@
     "category": "interaction",
     "xref": {
       "foundry": "dLgAMt3TbkmLkUqE",
-      "aon": "action-82",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You prepare to use an action that will occur outside your turn. Choose a single action or free action you can use, and designate a trigger. Your turn then ends. If the trigger you designated occurs before the start of your next turn, you can use the chosen action as a reaction (provided you still meet the requirements to use it). You can't Ready a free action that already has a trigger. \n If you have a multiple attack penalty and your readied action is an attack action, your readied attack takes the multiple attack penalty you had at the time you used Ready. This is one of the few times the multiple attack penalty applies when it's not your turn.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/ready-aim-fire",
-    "kind": "action",
-    "name": "Ready, Aim, Fire!",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "iuFPNbfhVXvbCPRO",
       "aon": null,
       "pf2etools": null
     },
@@ -15170,7 +14214,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Frequency once per 10 minutes You signal a volley of ranged attacks from your allies. Choose an enemy and signal up to three squadmates within the aura of your commander's banner; your squadmates can Interact to reload as a free action and attempt a ranged Strike against the enemy as a reaction Special If one of your squadmates knows or has prepared a cantrip with a range of 30 feet or more that deals damage and requires 2 or fewer actions to cast, they can cast it targeting the enemy instead of taking the other actions normally granted by this tactic.",
+    "texto": "You prepare to use an action that will occur outside your turn. Choose a single action or free action you can use, and designate a trigger. Your turn then ends. If the trigger you designated occurs before the start of your next turn, you can use the chosen action as a reaction (provided you still meet the requirements to use it). You can't Ready a free action that already has a trigger. \n If you have a multiple attack penalty and your readied action is an attack action, your readied attack takes the multiple attack penalty you had at the time you used Ready. This is one of the few times the multiple attack penalty applies when it's not your turn.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -15279,7 +14323,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "DYn1igFjCGJEiP22",
-      "aon": "action-924",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15320,7 +14364,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "1OagaWtBpVXExToo",
-      "aon": "action-26",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15362,7 +14406,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "kRxWINkrHUPSHHYq",
-      "aon": "action-1224",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15442,7 +14486,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "5p2AMqM9bOVnhwPT",
-      "aon": "action-1236",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15603,7 +14647,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "OSefkMgojBLqmRDh",
-      "aon": "action-71",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15683,7 +14727,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "wQYmDStjdjn0I26t",
-      "aon": "action-83",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15741,47 +14785,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/reload",
-    "kind": "action",
-    "name": "Reload!",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "NjS64g60oV74XZjq",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your drill instruction kicks in, and your allies rapidly reload their weapons to prepare for the next volley. Signal all squadmates; each can immediately Interact to reload as a reaction. Special When leading a siege weapon crew, you can use this tactic to command your squadmates to Load a siege weapon instead.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/reloading-strike",
     "kind": "action",
     "name": "Reloading Strike",
@@ -15804,7 +14807,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "jSC5AYEfliOPpO3H",
-      "aon": "action-906",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15885,7 +14888,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "bT3skovyLUtP22ME",
-      "aon": "action-42",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -15926,7 +14929,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "OQaFzDtVEOMWizJJ",
-      "aon": "action-517",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16049,7 +15052,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "DCb62iCBrJXy0Ik6",
-      "aon": "action-51",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16166,7 +15169,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "XeZwXzR1KBlJF770",
-      "aon": "action-905",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16250,7 +15253,7 @@
     "category": null,
     "xref": {
       "foundry": "XkrN7gxdRXTYYBkX",
-      "aon": "action-1223",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16330,7 +15333,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "24PSsn1SKpUwYA1X",
-      "aon": "action-522",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16371,7 +15374,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "EAP98XaChJEbgKcK",
-      "aon": "action-5",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16456,7 +15459,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "ublVm5gmCIm3eRdQ",
-      "aon": "action-1230",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16512,47 +15515,6 @@
     },
     "conflitos": [],
     "texto": "You clang your ikon against a weapon, shield, or the ground, emitting a shock wave that deals @Damage[(max(1,(floor((@actor.level - 2)/2))))d4[spirit],(max(1,(floor((@actor.level - 2)/2))))d4[sonic]|options:area-damage] damage to all creatures in a @Template[type:cone|distance:30] or @Template[type:emanation|distance:15] (@Check[fortitude|against:exemplar|basic|options:area-effect] save). A creature that critically fails its saving throw is @UUID[Compendium.pf2e.conditionitems.Item.Deafened] for 1 minute. \n At 6th level and every 2 levels thereafter, the damage increases by 1d4 spirit damage and 1d4 sonic damage.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/roaring-charge",
-    "kind": "action",
-    "name": "Roaring Charge",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "ILwYke30PIAr2CVX",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per 10 minutes You and your squad surge forward with a mighty roar. Signal all squadmates within the aura of your commander's banner. As a reaction, these squadmates can Stride up to twice their Speed directly toward any enemy they are observing. \n Any creature within 10 feet of a squadmate once all movement from this tactic has been completed must attempt a @Check[will|against:commander|options:inflicts:frightened,inflicts:fleeing|traits:emotion,fear,incapacitation,mental] save against your class DC with the following results. This is an emotion, fear, incapacitation, and mental effect. Critical Success No effect. \n Success The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 1}. \n Failure The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 2}. \n Critical Failure The target is @UUID[Compendium.pf2e.conditionitems.Item.Frightened]{Frightened 3} and @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] for 1 round.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -16622,7 +15584,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "lID4rJHAVZB6tavf",
-      "aon": "action-484",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16721,47 +15683,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/sanguine-revitalization",
-    "kind": "action",
-    "name": "Sanguine Revitalization",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "ZI7TLmmUu7fYLrP0",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Frequency once per day Your squad is rejuvenated by the arterial spray of your enemies. Choose a creature within the aura of your commander's banner and signal all squadmates within the aura who are wielding a piercing or slashing melee weapon, or who have a piercing or slashing melee unarmed attack. Those allies can Stride up to half their Speed as a free action. If they end this movement within reach of the designated target, they can Strike the target with the required weapon or unarmed attack as a reaction. \n Once all Strikes are completed, if the target took damage and is not immune to bleed damage, it must succeed at a @Check[fortitude|against:commander|options:damaging-effect,inflicts:bleed] saving throw against your class DC or take @Damage[10[persistent,bleed]]{10 points of persistent bleed} damage. The target takes a circumstance penalty on their save equal to the number of successful Strikes made as part of this tactic (up to a maximum –4 circumstance penalty). \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Sanguine Revitalization] \n Your squadmates are energized by the display of your enemy's imminent defeat; each squadmate in a @Template[type:emanation|distance:20] is healed for @Damage[10d6[healing]] Hit Points.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/scout",
     "kind": "action",
     "name": "Scout",
@@ -16785,7 +15706,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "kV3XM0YJeS2KCSOb",
-      "aon": "action-518",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16907,7 +15828,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "TiNDYUGlMmxzxBYU",
-      "aon": "action-519",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -16988,47 +15909,6 @@
     "category": "interaction",
     "xref": {
       "foundry": "BlAOM2X92SI6HMtJ",
-      "aon": "action-84",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You scan an area for signs of creatures or objects, possibly including secret doors or hazards. Choose an area to scan. The GM determines the area you can scan with one Seek action—almost always 30 feet or less in any dimension. The GM might impose a penalty if you search far away from you or adjust the number of actions it takes to Seek a particularly cluttered area. \n The GM attempts a single secret [[/act seek]]{Perception} check for you and compares the result to the Stealth DCs of any @UUID[Compendium.pf2e.conditionitems.Item.Undetected] or @UUID[Compendium.pf2e.conditionitems.Item.Hidden] creatures in the area, or the DC to detect each object in the area (as determined by the GM or by someone @UUID[Compendium.pf2e.actionspf2e.Item.Conceal an Object]{Concealing the Object}). A creature you detect might remain hidden, rather than becoming @UUID[Compendium.pf2e.conditionitems.Item.Observed], if you're using an imprecise sense or if an effect (such as @UUID[Compendium.pf2e.spells-srd.Item.Invisibility]) prevents the subject from being observed. Critical Success Any undetected or hidden creature you critically succeeded against becomes observed by you. You learn the location of objects in the area you critically succeeded against. \n Success Any undetected creature you suceeded against becomes hidden from you instead of undetected, and any hidden creature you succeeded against becomes observed by you. You learn the location of any object or get a clue to its whereabouts, as determined by the GM.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/seek-and-destroy",
-    "kind": "action",
-    "name": "Seek and Destroy",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Adventure Path: Hell's Destiny",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "h3NqgU6MEEF7mgzH",
       "aon": null,
       "pf2etools": null
     },
@@ -17042,7 +15922,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Frequency once per 10 minutes You direct your team to uncover hidden foes and exploit newly discovered weaknesses. Signal up to two squadmates within the aura of your commander's banner; they can immediately [[/act seek]] as a free action. Afterward, each can spend a reaction to either Point Out an enemy, Stride toward an enemy they're observing, or attempt to Strike an enemy they're observing. Each of the squadmates deals additional precision damage equal to half your level with their next successful Strike before the end of your next turn against a creature that has become observed by them from a successful Perception check to Seek.",
+    "texto": "You scan an area for signs of creatures or objects, possibly including secret doors or hazards. Choose an area to scan. The GM determines the area you can scan with one Seek action—almost always 30 feet or less in any dimension. The GM might impose a penalty if you search far away from you or adjust the number of actions it takes to Seek a particularly cluttered area. \n The GM attempts a single secret [[/act seek]]{Perception} check for you and compares the result to the Stealth DCs of any @UUID[Compendium.pf2e.conditionitems.Item.Undetected] or @UUID[Compendium.pf2e.conditionitems.Item.Hidden] creatures in the area, or the DC to detect each object in the area (as determined by the GM or by someone @UUID[Compendium.pf2e.actionspf2e.Item.Conceal an Object]{Concealing the Object}). A creature you detect might remain hidden, rather than becoming @UUID[Compendium.pf2e.conditionitems.Item.Observed], if you're using an imprecise sense or if an effect (such as @UUID[Compendium.pf2e.spells-srd.Item.Invisibility]) prevents the subject from being observed. Critical Success Any undetected or hidden creature you critically succeeded against becomes observed by you. You learn the location of objects in the area you critically succeeded against. \n Success Any undetected creature you suceeded against becomes hidden from you instead of undetected, and any hidden creature you succeeded against becomes observed by you. You learn the location of any object or get a clue to its whereabouts, as determined by the GM.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -17113,7 +15993,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "enQieRrITuEQZxx2",
-      "aon": "action-553",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -17154,7 +16034,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "fJImDBQfqfjKJOhk",
-      "aon": "action-64",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -17195,7 +16075,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "1xRFPTFtWtGJ9ELw",
-      "aon": "action-85",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -17233,7 +16113,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "uWTQxEOj2pl45Kns",
-      "aon": "action-473",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -17490,47 +16370,6 @@
     },
     "conflitos": [],
     "texto": "Requirements The familiar is in dim light or darkness. \n \n Effect The familiar teleports itself up to 30 feet. The destination must be in dim light or darkness and must be within your familiar's line of sight and line of effect. \n This action has the trait matching your tradition of magic, or occult if you aren't a spellcaster.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/shadows-in-the-moonlight",
-    "kind": "action",
-    "name": "Shadows in the Moonlight",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Adventure Path: Hell's Destiny",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "EZcykqDJzQyZmJ7E",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your commands help your team evade notice. Signal all squadmates within your banner's aura; until the end of your next turn, you and each ally count as Following the Expert for any checks to [[/act hide]] or [[/act sneak]] and can ignore the noisy trait on any armor you wear. If you spend 2 actions to use this tactic, up to two squadmates within your banner's aura can also either Hide or Sneak as a free action. Special If you have this tactic prepared, you can use Warfare Lore in place of Stealth for checks you attempt to Hide and Sneak.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -17854,47 +16693,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/shields-up",
-    "kind": "action",
-    "name": "Shields Up!",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "LAo3ERyiaHx3E8qg",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You signal your allies to ready their defenses. Signal all squadmates within the aura of your commander's banner; each can immediately Raise a Shield as a reaction. Squadmates who are wielding a parry weapon can instead position that weapon defensively as a reaction. Special If one of your squadmates knows or has prepared the @UUID[Compendium.pf2e.spells-srd.Item.Shield] cantrip, they can cast it as a reaction instead of taking the actions normally granted by this tactic.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/shift-immanence",
     "kind": "action",
     "name": "Shift Immanence",
@@ -17958,7 +16756,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "7blmbDrQFNfdT731",
-      "aon": "action-38",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -18081,7 +16879,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "A4L90h7FIgO5EyBx",
-      "aon": "action-921",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -18220,47 +17018,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/slip-and-sizzle",
-    "kind": "action",
-    "name": "Slip and Sizzle",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "OULAoPQYFoiRhjXP",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your team executes a brutal technique designed to knock down an opponent and blast them with magical devastation. Signal up to two squadmates within the aura of your commander's banner; one of these squadmates must be adjacent to an opponent and the other must be capable of casting a spell that deals damage. The first squadmate can attempt to @UUID[Compendium.pf2e.actionspf2e.Item.Trip] the adjacent opponent as a reaction. If this Trip is successful, the second squadmate can cast a ranged spell that deals damage and takes 2 or fewer actions to cast. This spell is cast as a reaction and must either target the tripped opponent or include the tripped opponent in the spell's area. \n If the second squadmate cast a spell using slots or Focus Points as part of this tactic, they are @UUID[Compendium.pf2e.conditionitems.Item.Slowed]{Slowed 1} until the end of their next turn and do not gain a reaction when they regain actions at the start of their next turn.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/smoke-blending",
     "kind": "action",
     "name": "Smoke Blending",
@@ -18324,7 +17081,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "VMozDqMMuK5kpoX4",
-      "aon": "action-63",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -18683,7 +17440,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "6OZfIjiPjWTIe7Pr",
-      "aon": "action-920",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -19043,7 +17800,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "kMcV8e5EZUxa6evt",
-      "aon": "action-31",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -19083,7 +17840,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "OdIUybJ3ddfL7wzj",
-      "aon": "action-86",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -19163,7 +17920,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "RDXXE7wMrSPCLv5k",
-      "aon": "action-68",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -19282,7 +18039,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "UHpkTuCtyaPqiCAB",
-      "aon": "action-87",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -19398,7 +18155,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "9gDMkIfDifh61yLz",
-      "aon": "action-485",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -19438,7 +18195,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "Bcxarzksqt9ezrs6",
-      "aon": "action-88",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -19519,7 +18276,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "VjxZFuUXrCU94MWR",
-      "aon": "action-89",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -19578,89 +18335,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/strike-hard",
-    "kind": "action",
-    "name": "Strike Hard!",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "73W3mBLXRPfeVl3G",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You command an ally to attack. Signal a squadmate within the aura of your commander's banner. That ally immediately attempts a Strike as a reaction.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/stupefying-raid",
-    "kind": "action",
-    "name": "Stupefying Raid",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "7HRhXh46dJVb241Y",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your team dashes about in a series of maneuvers that leave the enemy befuddled. Signal up to two squadmates within the aura of your commander's banner; these squadmates can Stride up to their Speed as a reaction. Each enemy they are adjacent to at any point during this movement must attempt a @Check[will|against:commander|options:inflicts:stupefied|traits:mental] save against your class DC or become @UUID[Compendium.pf2e.conditionitems.Item.Stupefied]{Stupefied 1} for 1 round (@UUID[Compendium.pf2e.conditionitems.Item.Stupefied]{Stupefied 2} on a critical failure); this is a mental effect.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/subsist",
     "kind": "action",
     "name": "Subsist",
@@ -19683,7 +18357,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "49y9Ec4bDii8pcD3",
-      "aon": "action-27",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -20008,7 +18682,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "c8TGiZ48ygoSPofx",
-      "aon": "action-39",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -20104,47 +18778,6 @@
     },
     "conflitos": [],
     "texto": "Trigger You gain the frightened condition \n Frequency once per hour Effect Realizing that discretion is the better part of valor, you opt to put some distance between you and a threat. You gain the @UUID[Compendium.pf2e.conditionitems.Item.Fleeing] condition until the beginning of your next turn, and you Stride.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/tactical-takedown",
-    "kind": "action",
-    "name": "Tactical Takedown",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 2,
-    "category": "offensive",
-    "xref": {
-      "foundry": "KtxzyElOleyy74Lg",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "You direct a coordinated maneuver that sends an enemy tumbling down. Signal up to two squadmates within the aura of your commander's banner. Each of those allies can Stride up to half their Speed as a reaction. If they both end this movement adjacent to an enemy, that enemy must succeed at a @Check[reflex|against:commander|options:inflicts:prone] save against your class DC or fall @UUID[Compendium.pf2e.conditionitems.Item.Prone].",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -20253,7 +18886,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "yh9O9BQjwWrAIiuf",
-      "aon": "action-486",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -20291,47 +18924,6 @@
     "category": "interaction",
     "xref": {
       "foundry": "ust1jJSCZQUhBZIz",
-      "aon": "action-90",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Requirements You are benefiting from standard cover, are near a feature that allows you to take cover, or are @UUID[Compendium.pf2e.conditionitems.Item.Prone]. You press yourself against a wall or duck behind an obstacle to take better advantage of cover. If you would have standard cover, you instead gain greater cover, which provides a +4 circumstance bonus to AC; to Reflex saves against area effects; and to Stealth checks to [[/act hide]], [[/act sneak]], or otherwise avoid detection. Otherwise, you gain standard cover (a +2 circumstance bonus instead). If you're prone, you gain greater cover against ranged attacks. Take Cover lasts until you move from your current space, use an attack action, become @UUID[Compendium.pf2e.conditionitems.Item.Unconscious], or end it as a free action.",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/take-the-high-ground",
-    "kind": "action",
-    "name": "Take the High Ground",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "HUJBYqs2vTTBeZgO",
       "aon": null,
       "pf2etools": null
     },
@@ -20345,7 +18937,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Your ally leaps to secure the high ground with a little help from the squad. Signal a squadmate within the aura of your commander's banner; as a free action, that squadmate can Stride directly toward any other squadmate you are both observing. If the first squadmate ends this movement adjacent to another squadmate, the first squadmate can immediately @UUID[Compendium.pf2e.actionspf2e.Item.Leap] up to 25 feet horizontally or 15 feet vertically as a reaction, boosted by the other squadmate. This distance increases to 40 feet horizontally or 25 feet vertically if you have legendary proficiency in Warfare Lore.",
+    "texto": "Requirements You are benefiting from standard cover, are near a feature that allows you to take cover, or are @UUID[Compendium.pf2e.conditionitems.Item.Prone]. You press yourself against a wall or duck behind an obstacle to take better advantage of cover. If you would have standard cover, you instead gain greater cover, which provides a +4 circumstance bonus to AC; to Reflex saves against area effects; and to Stealth checks to [[/act hide]], [[/act sneak]], or otherwise avoid detection. Otherwise, you gain standard cover (a +2 circumstance bonus instead). If you're prone, you gain greater cover against ranged attacks. Take Cover lasts until you move from your current space, use an attack action, become @UUID[Compendium.pf2e.conditionitems.Item.Unconscious], or end it as a free action.",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -20535,7 +19127,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "4DYFJ4TUsNkgFBDb",
-      "aon": "action-1437",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -20613,7 +19205,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "EeM0Czaep7G5ZSh5",
-      "aon": "action-911",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -20751,48 +19343,6 @@
     "requires_parseado": true
   },
   {
-    "id": "wb:action/the-bigger-they-are",
-    "kind": "action",
-    "name": "The Bigger They Are",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "Czcdh3pPzQ7y1cV7",
-      "aon": null,
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Regardless of your individual strengths, collectively your squad has the power to move mountains and topple giants. Signal a squadmate within the aura of your commander's banner. That squadmate can attempt to @UUID[Compendium.pf2e.actionspf2e.Item.Reposition], @UUID[Compendium.pf2e.actionspf2e.Item.Shove], or @UUID[Compendium.pf2e.actionspf2e.Item.Trip] a target within their reach. Each other squadmate who is adjacent to the original squadmate or the target can attempt to assist with the maneuver as a reaction \n For each squadmate who assists in this way, the original squadmate increases the maximum size of creature they can target (for example, if a total of two squadmates participated in this maneuver, the initial squadmate could target a creature up to two sizes larger than them.) The original squadmate gains a circumstance bonus on their check to Reposition, Shove, or Trip equal to the number of additional squadmates who assisted in the maneuver (maximum +4). \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: The Bigger They Are (Commander)]",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
     "id": "wb:action/thermal-eruption",
     "kind": "action",
     "name": "Thermal Eruption",
@@ -20856,7 +19406,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "9kIvFxA5V9rvNWiH",
-      "aon": "action-922",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -21181,7 +19731,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "EA5vuSgJfiHH7plD",
-      "aon": "action-66",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -21302,7 +19852,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "TC7OcDa7JlWbqMaN",
-      "aon": "action-55",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -21342,7 +19892,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "KjoCEEmPGTeFE4hh",
-      "aon": "action-56",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -21384,7 +19934,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "1kGNdIIhuglAjIp9",
-      "aon": "action-57",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -21462,7 +20012,7 @@
     "category": "offensive",
     "xref": {
       "foundry": "ge56Lu1xXVFYUnLP",
-      "aon": "action-40",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -21542,7 +20092,7 @@
     "category": "interaction",
     "xref": {
       "foundry": "21WIfSu7Xd7uKqV8",
-      "aon": "action-29",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -21707,7 +20257,7 @@
     "category": "defensive",
     "xref": {
       "foundry": "7GeguyqyD1TjoC4r",
-      "aon": "action-1222",
+      "aon": null,
       "pf2etools": null
     },
     "prov": {
@@ -21864,48 +20414,6 @@
     "category": "defensive",
     "xref": {
       "foundry": "F0JgJR2rXKOg9k1z",
-      "aon": "action-566",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Trigger An enemy attempts a skill check and doesn't get a critical success After your foe has tried their best, you show everyone how it's really done. Attempt a check using the same skill that triggered this reaction. Critical Success You gain a +1 status bonus to attack rolls, Perception checks, saving throws, and skill checks until the end of your next turn. \n Success As critical success, except you gain the benefits only if the triggering creature failed their skill check. \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Upstage]",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/valkyries-charge",
-    "kind": "action",
-    "name": "Valkyrie's Charge",
-    "level": null,
-    "traits": [
-      "brandish",
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Battlecry!",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 3,
-    "category": "offensive",
-    "xref": {
-      "foundry": "DGmzeAr4IfCnKN0R",
       "aon": null,
       "pf2etools": null
     },
@@ -21919,7 +20427,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Frequency once per day You and your allies defy death and defeat to make a glorious final charge. You restore @Damage[80[healing]|traits:healing] Hit Points to each squadmate within the aura of your commander's banner; this effect has the healing trait. If an affected ally was @UUID[Compendium.pf2e.conditionitems.Item.Unconscious] due to their Hit Points being reduced to 0, they can immediately Stand and pick up any dropped weapons as a free action. Then, each affected squadmate can, as a free action, Stride up to twice their Speed directly toward an enemy they are observing; if they end this movement with an enemy within their reach, they can attempt to Strike that enemy as a reaction. \n Squadmates can use Valkyrie's Charge while Burrowing, Climbing, Flying, or Swimming instead of Striding if they have the corresponding movement type.",
+    "texto": "Trigger An enemy attempts a skill check and doesn't get a critical success After your foe has tried their best, you show everyone how it's really done. Attempt a check using the same skill that triggered this reaction. Critical Success You gain a +1 status bonus to attack rolls, Perception checks, saving throws, and skill checks until the end of your next turn. \n Success As critical success, except you gain the benefits only if the triggering creature failed their skill check. \n @UUID[Compendium.pf2e.feat-effects.Item.Effect: Upstage]",
     "grants_completos": null,
     "requires_parseado": true
   },
@@ -22067,47 +20575,6 @@
     "category": "offensive",
     "xref": {
       "foundry": "vO0Y1dVjNfbDyT4S",
-      "aon": "action-916",
-      "pf2etools": null
-    },
-    "prov": {
-      "name": "foundry",
-      "traits": "foundry",
-      "rarity": "foundry",
-      "source": "foundry",
-      "action_type": "foundry",
-      "text": "foundry",
-      "category": "foundry"
-    },
-    "conflitos": [],
-    "texto": "Your careful shot against an unsuspecting opponent pierces a vital artery or organ. Make a ranged Strike. If the target is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard], the Strike deals an extra die of weapon damage, and the foe takes persistent bleed damage equal to the amount of precision damage from your @UUID[Compendium.pf2e.actionspf2e.Item.One Shot, One Kill].",
-    "grants_completos": null,
-    "requires_parseado": true
-  },
-  {
-    "id": "wb:action/wait-for-it",
-    "kind": "action",
-    "name": "Wait For It...",
-    "level": null,
-    "traits": [
-      "commander",
-      "tactic"
-    ],
-    "rarity": "common",
-    "source": {
-      "book": "Pathfinder Adventure Path: Hell's Destiny",
-      "page": null,
-      "license": "ORC",
-      "remaster": true
-    },
-    "requires": null,
-    "grants": [],
-    "mechanized": false,
-    "action_type": "action",
-    "action_cost": 1,
-    "category": "offensive",
-    "xref": {
-      "foundry": "5stdIykWux9WHqce",
       "aon": null,
       "pf2etools": null
     },
@@ -22121,7 +20588,7 @@
       "category": "foundry"
     },
     "conflitos": [],
-    "texto": "Your team intuitively keeps their guard up even while waiting for the ideal moment to act. Signal up to two squadmates within the aura of your commander's banner; while these squadmates Delay or Ready an action, they gain a +1 circumstance bonus to AC and saving throws. A squadmate's bonus lasts until the end of your next turn, until they stop Delaying, or until the end of the current creature's turn when the squadmate uses the designated action they Readied, whichever happens first. In addition, you can grant one of the squadmates an extra reaction from your drilled reactions class feature, but it can be used only to perform a designated action they Readied.",
+    "texto": "Your careful shot against an unsuspecting opponent pierces a vital artery or organ. Make a ranged Strike. If the target is @UUID[Compendium.pf2e.conditionitems.Item.Off-Guard], the Strike deals an extra die of weapon damage, and the foe takes persistent bleed damage equal to the amount of precision damage from your @UUID[Compendium.pf2e.actionspf2e.Item.One Shot, One Kill].",
     "grants_completos": null,
     "requires_parseado": true
   },
