@@ -525,5 +525,41 @@ items:
   id: 114
   date: '2026-07-31'
   priority: media
+- desc: 'FECHADO 2026-07-31 (spec specs/2026-07-31-slots-de-criacao-na-tela.md). DOIS DEFEITOS RELATADOS
+    PELO IGOR TESTANDO O APP, os dois da mesma familia do item 106 -- o motor abre o slot e a tela nao
+    desenha. (a) "n tem como colocar +2 em nada": o `BoostPicker` mostrava UMA fileira de seis botoes com
+    toggle, entao clicar STR duas vezes desmarcava. O motor ja entregava as fontes SEPARADAS em
+    `visao.boosts.fontes` (Human 1, Human 1, Fighter chave 1 com `opcoes: [dex,str]`, criacao 4 livres) e
+    a tela descartava o campo inteiro. A regra de PF2e que a fileira unica achatava: boost do MESMO bloco
+    vai para atributo diferente, blocos DIFERENTES podem cair no mesmo -- e e assim que se chega a +2.
+    Agora e uma linha por fonte. (b) "n tem como upar pericias": `grep -rn pericias_livres app/src/` fora
+    do motor dava ZERO, e `candidatos()` NAO conhecia o slot em nenhum dos dois motores -- caia no `else`
+    final e devolvia FEATS. O slot existia em `slots_abertos()` desde 29/07 e nunca foi perguntado.
+    || ACHADO DE PERCURSO: compactar as escolhas de boost (gravar so as preenchidas) fazia o mapeamento
+    fonte->escolha DESLIZAR no primeiro buraco. Posicao vazia agora e `pega: []`, e foi medido que o
+    motor a ignora na soma e nao a conta em `declarados`. || VERIFICADO NO NAVEGADOR
+    (`app/verificacao/verificar-slots-de-criacao.mjs`, 10 checagens): STR em duas fontes da +2, a linha
+    da chave oferece 2 atributos e nao 6, o bloco de 4 livres bloqueia o repetido, os 3 slots de pericia
+    aparecem e oferecem PERICIA. As fixtures passavam verdes o tempo todo -- os dois defeitos eram so da
+    tela, e so a quarta camada os pegaria.'
+  id: 115
+  date: '2026-07-31'
+  priority: alta
+- desc: 'DECISAO DE PRODUTO DO IGOR, 2026-07-31: o app tem de deixar ESCOLHER MAGIA, como o Pathbuilder --
+    "n pode me dizer so q tenho os slots, clerigo precisa da font e tudo mais". Ele avisou que nao precisa
+    resolver agora. ISTO DESTRAVA ITENS QUE ESTAVAM PARADOS ESPERANDO ESTA DECISAO, e o texto deles diz
+    isso com todas as letras: item 105 -- "a ficha nao modela QUAIS magias o personagem sabe (`_conjuracao`
+    entrega capacidade -- slots, tradicao, DC -- e nao ha campo de magia conhecida em nenhum dos dois
+    motores), entao o slot nao teria onde pousar... e decisao de produto do Igor e nao existe hoje", com
+    10 blocos e 11 registros (`Dragon Spit`, `Hag Magic`, `Arcane Tattoos`) que nunca sao perguntados;
+    item 106 -- "a conjuracao do personagem segue como CAPACIDADE, sem lista de magias, e a assimetria e
+    consciente". VERIFICAR JUNTO: a fonte divina do Clerigo (`divine-font`) FOI implementada no item 98
+    (eixo de divindade, `deity_font`, commits 69d2df0f5 e bed0f5754) -- se ela nao aparece na tela, e a
+    mesma familia do item 115 (motor abre, tela nao desenha) e nao falta de dado. Escopo a decidir:
+    magia conhecida (repertorio) x preparada por dia sao modelos diferentes, e `Versatile Font` precisa
+    de CONCESSAO de escolha, ja declarada como outra familia no item 98.'
+  id: 116
+  date: '2026-07-31'
+  priority: alta
 promoted: []
 ---

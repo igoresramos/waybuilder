@@ -3900,7 +3900,11 @@ export class Personagem implements ContextoDePredicado {
         if (em === null || b.nivel === em) ids.push(...b.opcoes_ids);
       }
       registros = ids.map((i) => this.base.opcional(i));
-    } else if (slot === "skill_increase") {
+    } else if (slot === "skill_increase" || slot === "pericias_livres") {
+      // `pericias_livres` caía no `else` final e devolvia FEATS -- o slot
+      // existia em `slots_abertos()` desde 29/07 e nunca foi perguntado ao
+      // jogador, então ninguém tinha exercitado o caminho.
+      // Spec: specs/2026-07-31-slots-de-criacao-na-tela.md
       registros = [...this.base.por_id.values()].filter((r) => r.kind === "skill");
     } else if (slot === "nivel_de_classe") {
       registros = [...this.base.por_id.values()].filter((r) => r.kind === "class");

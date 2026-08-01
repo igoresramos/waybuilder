@@ -57,7 +57,47 @@ export function escolher(
     (e) => !(e.slot === slot && e.em === em),
   );
   escolhas.push({ em, slot, pega });
-  return { ...doc, escolhas: ordenar(escolhas) };
+  return { ...doc, escolhas: ordenarEscolhas(escolhas) };
+}
+
+/**
+ * Slot que aceita VARIAS escolhas no mesmo nivel, enderecadas por indice.
+ *
+ * `escolher()` nao serve: ele apaga toda escolha do par (slot, em) antes de
+ * gravar, o que e certo para ancestralidade e errado para pericia treinada --
+ * um Guerreiro escolhe TRES, e a segunda apagaria a primeira.
+ *
+ * `id === null` remove aquela posicao. As demais nao se deslocam: a posicao e
+ * a identidade enquanto a tela estiver aberta.
+ * Spec: specs/2026-07-31-slots-de-criacao-na-tela.md
+ */
+export function definirMultipla(
+  doc: Documento,
+  slot: string,
+  em: number | "criacao",
+  indice: number,
+  id: string | null,
+): Documento {
+  const minhas = doc.escolhas.filter((e) => e.slot === slot && e.em === em);
+  const outras = doc.escolhas.filter((e) => !(e.slot === slot && e.em === em));
+  const valores = minhas.map((e) => e.pega as string);
+  while (valores.length <= indice) valores.push("");
+  valores[indice] = id ?? "";
+  for (const v of valores) {
+    if (v) outras.push({ em, slot, pega: v });
+  }
+  return { ...doc, escolhas: ordenarEscolhas(outras) };
+}
+
+/** As escolhas de um slot multiplo, na ordem -- `""` onde nada foi escolhido. */
+export function multiplas(
+  doc: Documento,
+  slot: string,
+  em: number | "criacao",
+): string[] {
+  return doc.escolhas
+    .filter((e) => e.slot === slot && e.em === em)
+    .map((e) => e.pega as string);
 }
 
 export function limpar(
@@ -93,7 +133,7 @@ export function escolherConcedido(
     (e) => !(e.slot === CONCEDIDO && e.flag === flag),
   );
   escolhas.push({ em, slot: CONCEDIDO, flag, pega });
-  return { ...doc, escolhas: ordenar(escolhas) };
+  return { ...doc, escolhas: ordenarEscolhas(escolhas) };
 }
 
 export function limparConcedido(doc: Documento, flag: string): Documento {
@@ -132,7 +172,7 @@ export function definirClasseDoNivel(
     (e) => !(e.slot === "nivel_de_classe" && e.em === nivel),
   );
   escolhas.push({ em: nivel, slot: "nivel_de_classe", pega: classeId });
-  return { ...partida, escolhas: ordenar(escolhas) };
+  return { ...partida, escolhas: ordenarEscolhas(escolhas) };
 }
 
 /**
@@ -171,11 +211,11 @@ export function definirBoosts(
     outros.push(e);
   }
   outros.push({ em, slot: "boosts_livres", pega: atributos });
-  return { ...doc, escolhas: ordenar(outros) };
+  return { ...doc, escolhas: ordenarEscolhas(outros) };
 }
 
 /** `criacao` sempre antes de qualquer nivel numerado. */
-function ordenar(escolhas: Escolha[]): Escolha[] {
+export function ordenarEscolhas(escolhas: Escolha[]): Escolha[] {
   const chave = (e: Escolha) => (typeof e.em === "number" ? e.em : 0);
   return [...escolhas].sort((a, b) => chave(a) - chave(b));
 }
@@ -311,7 +351,7 @@ export function escolherSubclasse(
 ): Documento {
   const escolhas = doc.escolhas.filter((e) => !mesmaSub(e, nivel, eixo));
   escolhas.push({ em: nivel, slot: "subclasse", eixo, pega });
-  return { ...doc, escolhas: ordenar(escolhas) };
+  return { ...doc, escolhas: ordenarEscolhas(escolhas) };
 }
 
 export function limparSubclasse(
@@ -350,7 +390,7 @@ export function adicionarSubclasse(
 ): Documento {
   if (subclassesEm(doc, nivel, eixo).includes(pega)) return doc;
   const escolhas = [...doc.escolhas, { em: nivel, slot: "subclasse", eixo, pega }];
-  return { ...doc, escolhas: ordenar(escolhas) };
+  return { ...doc, escolhas: ordenarEscolhas(escolhas) };
 }
 
 export function removerSubclasse(

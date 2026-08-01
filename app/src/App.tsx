@@ -16,7 +16,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Base } from "./motor/base";
 import { Personagem } from "./motor/personagem";
-import type { Candidato, Documento, Registro } from "./motor/tipos";
+import type { Candidato, Documento, FonteDeBoost, Registro } from "./motor/tipos";
 import { carregarNucleo } from "./carregarBase";
 import { Slot, FILTROS_DE_FEAT, FILTROS_DE_RARIDADE } from "./componentes/Slot";
 import { PainelDireito } from "./componentes/PainelDireito";
@@ -182,7 +182,14 @@ export default function App() {
             {slotsConcedidos("criacao")}
 
             <Boosts d={d} setD={setD}
-                    declarados={v.boosts.declarados} direito={v.boosts.direito} />
+                    declarados={v.boosts.declarados} direito={v.boosts.direito}
+                    fontes={(v.boosts.fontes ?? []) as FonteDeBoost[]} />
+
+            {/* PERICIAS TREINADAS -- o motor abria o slot desde 29/07 e a tela
+                nunca desenhou, entao nao havia como treinar pericia nenhuma.
+                Mesma familia do `feat_concedido` no item 106. */}
+            <PericiasLivres base={base} p={p} d={d} setD={setD}
+                            quantas={v.pericias_livres ?? 0} />
           </section>
 
           {Array.from({ length: Math.max(alvo, nivel) }, (_, i) => i + 1).map((n) => (
@@ -346,9 +353,10 @@ export default function App() {
  * numero grande na engrenagem diz de relance quantas faltam sem ocupar linha.
  */
 function Boosts({
-  d, setD, declarados, direito,
+  d, setD, declarados, direito, fontes,
 }: {
   d: Documento; setD: (x: Documento) => void; declarados: number; direito: number;
+  fontes: FonteDeBoost[];
 }) {
   const [aberto, setAberto] = useState(false);
   const faltam = Math.max(0, direito - declarados);
@@ -364,45 +372,140 @@ function Boosts({
           <span className="cog-rotulo">Boosts</span>
         </button>
       </div>
-      {aberto && <BoostPicker d={d} setD={setD} />}
+      {aberto && <BoostPicker d={d} setD={setD} fontes={fontes} />}
     </>
   );
 }
 
-/** Boost e o unico slot que aceita VARIAS entradas no mesmo nivel. */
-function BoostPicker({ d, setD }: { d: Documento; setD: (x: Documento) => void }) {
-  const [sel, setSel] = useState<string[]>([]);
+/**
+ * As pericias treinadas da criacao -- `N + INT` pela classe.
+ *
+ * Nao existia na tela: `grep -rn pericias_livres app/src/` fora do motor dava
+ * ZERO. O motor abria o slot desde 29/07 (`slots_abertos()` emite
+ * `pericias treinadas (3 a escolher)`) e ninguem nunca foi perguntado, entao
+ * nao havia como treinar pericia nenhuma no app. E `candidatos()` nem sequer
+ * conhecia o slot: caia no `else` final e devolvia FEATS.
+ *
+ * A mesma lacuna aparece na METRICA: dos 723 pontos que ainda divergem contra
+ * os iconics da Paizo, 450 sao exatamente este slot.
+ * Spec: specs/2026-07-31-slots-de-criacao-na-tela.md
+ */
+function PericiasLivres({
+  base, p, d, setD, quantas,
+}: {
+  base: Base; p: Personagem; d: Documento; setD: (x: Documento) => void;
+  quantas: number;
+}) {
+  if (!quantas) return null;
+  const escolhidas = doc.multiplas(d, "pericias_livres", "criacao");
+  const candidatos = p.candidatos("pericias_livres");
+  return (
+    <>
+      {Array.from({ length: quantas }, (_, i) => (
+        <Slot base={base} key={i} rotulo="Pericia treinada" tipo="skill_increase"
+              // as ja escolhidas saem da lista: treinar a mesma pericia duas
+              // vezes gastaria o orcamento sem mudar rank nenhum
+              candidatos={candidatos.filter(
+                (c) => c.id === escolhidas[i] || !escolhidas.includes(c.id))}
+              escolhido={escolhidas[i] ?? null}
+              aoEscolher={(x) => setD(doc.definirMultipla(d, "pericias_livres", "criacao", i, x))}
+              aoLimpar={() => setD(doc.definirMultipla(d, "pericias_livres", "criacao", i, null))} />
+      ))}
+    </>
+  );
+}
+
+/**
+ * Boost e o unico slot que aceita VARIAS entradas no mesmo nivel -- e as
+ * entradas NAO sao intercambiaveis: cada uma pertence a uma FONTE.
+ *
+ * A primeira versao mostrava uma fileira unica de seis botoes com toggle, e
+ * por isso clicar `STR` duas vezes DESMARCAVA. O efeito pratico, relatado pelo
+ * Igor testando: "n tem como colocar +2 em nada".
+ *
+ * A regra de PF2e que aquela fileira achatava: os boosts de um MESMO bloco vao
+ * cada um para um atributo diferente; blocos DIFERENTES podem cair no mesmo
+ * atributo -- e assim que um Guerreiro humano chega a STR 18 no nivel 1. Uma
+ * fileira so torna a regra inexprimivel: ou proibe tudo, ou permite o ilegal.
+ *
+ * O motor ja entregava as fontes separadas em `visao.boosts.fontes`; a tela é
+ * que descartava o campo.
+ *
+ * O documento NAO ganha a fonte: ele grava DECISAO, nao derivacao (principio 3
+ * do README). A associacao e posicional -- a fonte `i` consome as proximas
+ * `quantidade` entradas, na ordem, e o motor soma tudo igual.
+ * Spec: specs/2026-07-31-slots-de-criacao-na-tela.md
+ */
+function BoostPicker({
+  d, setD, fontes,
+}: { d: Documento; setD: (x: Documento) => void; fontes: FonteDeBoost[] }) {
+  // lista PLANA na ordem em que as entradas estao no documento; leva antiga
+  // com varios atributos e achatada na leitura, entao ficha salva continua
+  // abrindo
+  // uma ENTRADA por posicao, e posicao vazia vira `pega: []`. Compactar (so
+  // gravar as preenchidas) fazia o mapeamento fonte->escolha DESLIZAR no
+  // primeiro buraco: escolher na 4a fonte com as tres primeiras vazias gravava
+  // no indice 0, e a regra "nao repete dentro do bloco" passava a olhar o
+  // bloco errado. Medido: o motor ignora `pega: []` na soma e nao o conta em
+  // `declarados`, entao a posicao vazia e barata.
+  const plana = d.escolhas
+    .filter((e) => e.slot === "boosts_livres")
+    .map((e) => {
+      const v = (Array.isArray(e.pega) ? e.pega : [e.pega]) as string[];
+      return v[0] ?? "";
+    });
+
+  function definir(indiceGlobal: number, attr: string | null) {
+    const nova = [...plana];
+    while (nova.length <= indiceGlobal) nova.push("");
+    nova[indiceGlobal] = attr ?? "";
+    while (nova.length && nova[nova.length - 1] === "") nova.pop();  // sem cauda vazia
+    const outras = d.escolhas.filter((e) => e.slot !== "boosts_livres");
+    for (const a of nova) {
+      outras.push({ em: "criacao", slot: "boosts_livres", pega: a ? [a] : [] });
+    }
+    setD({ ...d, escolhas: doc.ordenarEscolhas(outras) });
+  }
+
+  let offset = 0;
   return (
     <div className="boost-picker">
-      <div className="linha">
-        {ATRIBUTOS.map((a) => (
-          <button key={a} className={sel.includes(a) ? "sel" : ""}
-                  onClick={() => setSel(sel.includes(a)
-                    ? sel.filter((x) => x !== a) : [...sel, a])}>
-            {a.toUpperCase()}
-          </button>
-        ))}
-      </div>
-      <button className="add" disabled={!sel.length}
-              onClick={() => {
-                const q = d.escolhas.filter((e) => e.slot === "boosts_livres").length;
-                setD(doc.definirBoosts(d, "criacao", q, sel));
-                setSel([]);
-              }}>
-        adicionar {sel.length || ""}
-      </button>
-      <ul className="declarados">
-        {d.escolhas.filter((e) => e.slot === "boosts_livres").map((e, i) => (
-          <li key={i}>
-            {(e.pega as string[]).join(" ").toUpperCase()}
-            <button className="slot-x" aria-label="remover boost"
-                    onClick={() => setD({
-                      ...d,
-                      escolhas: d.escolhas.filter((x) => x !== e),
-                    })}>x</button>
-          </li>
-        ))}
-      </ul>
+      {fontes.map((f, iFonte) => {
+        const inicio = offset;
+        offset += f.quantidade;
+        const permitidos = (f.opcoes as string[] | null) ?? ATRIBUTOS;
+        // dentro da MESMA fonte o atributo nao repete -- regra RAW, e so vale
+        // aqui. Entre fontes repetir e o comportamento certo, e e o que da +2.
+        const nesta = plana.slice(inicio, inicio + f.quantidade);
+        return (
+          <div className="boost-fonte" key={`${f.origem}-${iFonte}`}>
+            <span className="boost-origem">{f.origem}</span>
+            <div className="boost-seletores">
+              {Array.from({ length: f.quantidade }, (_, k) => {
+                const atual = plana[inicio + k] ?? "";
+                return (
+                  <div className="boost-linha" key={k}>
+                    {permitidos.map((a) => {
+                      const usadoNestaFonte = nesta.includes(a) && atual !== a;
+                      return (
+                        <button key={a}
+                          className={atual === a ? "sel" : usadoNestaFonte ? "bloqueado" : ""}
+                          disabled={usadoNestaFonte}
+                          title={usadoNestaFonte
+                            ? "cada boost deste bloco vai para um atributo diferente"
+                            : undefined}
+                          onClick={() => definir(inicio + k, atual === a ? null : a)}>
+                          {a.toUpperCase()}
+                        </button>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

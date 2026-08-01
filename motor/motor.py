@@ -3697,7 +3697,12 @@ class Personagem:
                       if em is None or b.get("nivel") == em]
             ids = [o for b in blocos for o in (b.get("opcoes_ids") or [])]
             registros = [self.base.opcional(i) for i in ids]
-        elif slot == "skill_increase":
+        elif slot in ("skill_increase", "pericias_livres"):
+            # `pericias_livres` caia no `else` final e devolvia FEATS -- o slot
+            # existia em `slots_abertos()` desde 29/07 e nunca foi perguntado
+            # ao jogador, entao ninguem tinha exercitado o caminho. Mesmo
+            # sintoma do `feat_concedido` no item 106.
+            # Spec: specs/2026-07-31-slots-de-criacao-na-tela.md
             registros = [r for r in self.base.por_id.values()
                          if r.get("kind") == "skill"]
         elif slot == "nivel_de_classe":
