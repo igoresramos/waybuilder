@@ -29,6 +29,9 @@ BASE = f"{AQUI}/base"
 BRUTOS = f"{AQUI}/dados_brutos"
 AON_DUMP = f"{BRUTOS}/aon_dump"
 COBERTURA = f"{BASE}/_cobertura.json"
+# Piso que um portao QUER gravar, mas que so pode ser gravado depois de o run
+# inteiro passar. Ver o comentario no portao 10.
+_PENDENTE: dict = {}
 
 # Raizes que um script reconstroi a partir de um pin: buscar_fontes.sh traz o
 # clone do Foundry, dump_aon.py traz o dump do AoN. Sumir daqui nao e perda.
@@ -809,8 +812,17 @@ def portao_10_cobertura_de_grants(base, ctx):
         detalhe.append(f"  - `{k}`: {n} de {n + com_resposta.get(k, 0)}")
 
     if "--gravar-cobertura" in sys.argv:
-        json.dump({"sem_resposta": hoje}, open(LINHA_DE_BASE, "w"))
-        detalhe.append(f"linha de base GRAVADA em {hoje}")
+        # NAO gravar aqui. Gravar dentro do portao rebaixa a referencia antes
+        # de o run saber se passou: com 3 portoes vermelhos o processo imprimia
+        # "linha de base NAO gravada" e mesmo assim subia o piso de grants de 0
+        # para 300 no mesmo run. E o defeito que
+        # `docs/2026-07-27_duas-linhas-merge-pendente.md` registra como
+        # consertado, reintroduzido num SEGUNDO arquivo de piso -- a guarda do
+        # fim protegia `_cobertura.json` e nao este.
+        # O valor fica pendente e so e gravado la, sob a mesma guarda.
+        _PENDENTE["grants"] = hoje
+        detalhe.append(f"linha de base pendente ({hoje}) -- "
+                       f"gravada no fim, se o run inteiro passar")
         return 0, detalhe
 
     if antes is None:
@@ -965,6 +977,10 @@ def main():
                        "por_campo_critico": dict(_contar_campo_critico(base))},
                       open(COBERTURA, "w"), indent=1)
             print(f"  linha de base de cobertura gravada em {COBERTURA}")
+            if "grants" in _PENDENTE:
+                json.dump({"sem_resposta": _PENDENTE["grants"]},
+                          open(f"{BASE}/_cobertura_grants.json", "w"))
+                print(f"  piso de grants gravado em {_PENDENTE['grants']}")
 
     open(f"{BASE}/relatorio_portoes_{fase}.md", "w").write("\n".join(linhas) + "\n")
     print(f"-> base/relatorio_portoes_{fase}.md   "

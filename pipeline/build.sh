@@ -37,7 +37,22 @@ else
 fi
 
 echo "== 2. reconciliar =="
-python3 reconciliar.py || true      # portao 5 ainda falha em 3 registros orfaos
+# `|| true` sozinho era o unico ponto cego do script: a intencao era tolerar o
+# portao 5 (3 registros orfaos conhecidos), o efeito era tolerar QUALQUER morte.
+# E `reconciliar.py` so grava index.json na ultima linha -- entao morrer antes
+# disso deixava a base do build ANTERIOR intacta, e a cadeia inteira seguia
+# mutando ela. Medido: 24 registros destruidos, 40 fabricados, 6.462 alterados,
+# e dos 11 portoes so o 4 acusou.
+# A tolerancia agora e explicita e verificada: o codigo de saida pode ser
+# diferente de zero, mas o artefato TEM de ter sido reescrito nesta rodada.
+_antes=$(stat -c %Y base/index.json 2>/dev/null || echo 0)
+python3 reconciliar.py || echo "  reconciliar.py saiu != 0 (portao 5 conhecido) -- conferindo o artefato"
+_depois=$(stat -c %Y base/index.json 2>/dev/null || echo 0)
+if [ "$_depois" -le "$_antes" ]; then
+  echo "!! reconciliar.py NAO reescreveu base/index.json -- morreu antes de gravar." >&2
+  echo "!! seguir daqui mutaria a base do build anterior em silencio. Abortando." >&2
+  exit 1
+fi
 
 echo "== 3. auditar divergencia entre fontes =="
 python3 auditar_conflitos.py
@@ -286,3 +301,12 @@ echo "== 9. emitir o payload do app =="
 # DERIVADO da base auditada, nunca o contrario. Corta metadado de build (prov,
 # xref, conflitos) e a prosa que vazou inline.
 python3 emitir_app.py
+
+echo "== 10. essa base saiu deste codigo? =="
+# O repo nao conseguia responder isso. `comparar_bases.py` foi escrito
+# exatamente para a pergunta e tinha ZERO chamadas -- a fronteira mais fragil
+# do projeto nao e entre modulos, e entre build e artefato.
+# NAO aborta: um build legitimo muda a base de proposito, e transformar isso em
+# erro treinaria todo mundo a ignorar. O que ele nao pode e ser silencioso --
+# diff registro a registro contra o commitado, na cara, todo build.
+python3 comparar_bases.py HEAD || echo "  ^^ a base difere do commitado -- confira se a mudanca e a que voce queria"
