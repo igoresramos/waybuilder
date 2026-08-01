@@ -23,3 +23,14 @@ app/public/base/
 docs/referencia-pathbuilder/app-local/assets/data131.txt
 docs/referencia-pathbuilder/app-local/assets/data_remastered71.txt
 .vercel
+
+# Saida crua de cada mecanismo rodado por `./verificar.sh`. E log de execucao,
+# nao artefato: o que vale versionar sao os relatorios que os proprios
+# mecanismos gravam (`pipeline/base/relatorio_*.md`, `docs/*validacao*.md`).
+docs/_verificacao/
+
+# Clone do acervo LPC no pin -- 100+ MB reconstruiveis por
+# `avatar/buscar_fonte.sh`, mesmo criterio de `pipeline/dados_brutos/`.
+# `avatar/saida/` NAO entra aqui: e o que o deploy consome e nao ha como
+# regera-lo no build da Vercel (spec do avatar, decisao 8b).
+avatar/fontes/
