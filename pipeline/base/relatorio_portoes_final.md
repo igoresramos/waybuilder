@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **20126**
+- registros avaliados: **20125**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -22,8 +22,10 @@
 
 ## Portao 4 -- cobertura caindo vs build anterior
 
-**PASSOU** -- 0 ocorrencia(s).
+**FALHOU** -- 2 ocorrencia(s).
 
+- `weapon`: 1039 -> 1038
+- **total**: 20126 -> 20125
 
 ## Portao 5 -- license ausente
 
@@ -71,13 +73,13 @@ _Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
 
 **PASSOU** -- 0 ocorrencia(s).
 
-- registros SEM resposta de `grants_completos`: **0** de 20126 (0.0%)
+- registros SEM resposta de `grants_completos`: **0** de 20125 (0.0%)
 - linha de base anterior: 0
 - linha de base GRAVADA em 0
 
 ## Portao 11 -- campo critico ausente vs build anterior
 
-**PASSOU** -- 0 ocorrencia(s).
+**FALHOU** -- 1 ocorrencia(s).
 
-- primeira medicao -- linha de base a gravar: {'weapon.damage': 986, 'armor.ac_bonus': 206, 'shield.ac_bonus': 118}
+- `weapon.damage`: 986 -> 985
 

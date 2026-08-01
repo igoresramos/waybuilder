@@ -457,7 +457,26 @@ items:
     dois kinds, nos dois motores; (b) meu indice do AoN usava `setdefault` e escolhia 1 entre N em
     silencio, o defeito que o portao 7 existe para pegar (`Retributive Strike` tem dois docs no AoN);
     agora so casa quando e INEQUIVOCO, e 173 ficam com xref vazio de proposito; (c) o falso positivo do
-    `Into the Fray` desapareceu.'
+    `Into the Fray` desapareceu.
+    || CORRECAO DE REGISTRO 2026-07-31, apos auditoria adversarial
+    (docs/2026-07-31_auditoria-estado.md): eu registrei este item como ENTREGA CHEIA e ele NAO ESTA.
+    A **Decisao 5 da spec -- traduzir os 26 `predicate` de `class:`/`feat:` -- nao foi implementada**, e
+    com ela caem as provas 2, 3, 4 e 5 da propria spec. Verificado: `wb:class-feature/justice` e
+    `wb:class-feature/liberation` seguem com `grants: []`, `way-of-the-drifter` so tem a proficiencia, e
+    ha ZERO registros com `grants[].se` na base. Ou seja: o Campeao e o Gunslinger, que sao a
+    motivacao-titulo da spec, continuam sem receber nada. O que ENTROU foi o kind `action` e as
+    integracoes (extrator, `PACK_PARA_KIND` nos dois caminhos, portao 9, `montar_ficha`) -- e isso
+    sozinho ja rendeu 290 -> 27 e 556 -> 819. O que FALTA depende de `grants[].se`, que vive na spec do
+    grant condicional: as duas specs se cruzam e nenhuma das duas fecha sozinha.
+    || DEFEITO NOVO INTRODUZIDO POR MIM, e ja consertado: o conserto do caminho em
+    `recuperar_mecanica_equipamento` ACORDOU um bug antigo da fonte -- o dump do AoN traz
+    `damage_type: ["Piercing"]` hardcoded nas 11 armas de combinacao `(Melee)` mesmo quando a string diz
+    outra coisa (`Gun Sword (Melee)`: `damage: "1d8 S"` e `damage_type: ["Piercing"]` no MESMO doc). O
+    passo lia o campo estruturado e gravou `piercing` em arma cortante: trocou um `None` honesto por um
+    valor errado PLAUSIVEL, que e pior porque ninguem desconfia. Corrigido lendo a LETRA da string
+    (`S`/`B`/`P`), com `damage_type` so como desempate. As 11 voltaram ao certo (Axe Musket, Black Powder
+    Knuckle Dusters, Bow Staff, Cane Pistol, Crescent Cross, Gnome Amalgam Musket, Gun Sword, Hammer Gun,
+    Mace Multipistol, Mikazuki, Piercing Wind).'
   id: 111
   date: '2026-07-31'
   priority: alta

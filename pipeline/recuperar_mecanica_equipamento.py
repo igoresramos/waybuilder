@@ -143,6 +143,26 @@ FIXO = re.compile(r"^\s*(\d+)\s*(?![dD]\d)")
 TIPO_CURTO = {"b": "bludgeoning", "p": "piercing", "s": "slashing"}
 
 
+def tipo_de_dano(bruto: str, declarado) -> str | None:
+    """A LETRA da string manda; `damage_type[]` e so o desempate.
+
+    O dump do AoN traz `damage_type` HARDCODED em `["Piercing"]` para as 11
+    armas de combinacao `(Melee)`, mesmo quando a propria string discorda:
+    `Gun Sword (Melee)` tem `damage: "1d8 S"` e `damage_type: ["Piercing"]` no
+    MESMO documento. Ler o campo estruturado gravava `piercing` em arma
+    cortante.
+
+    O bug e da fonte e e antigo, mas dormia enquanto `do_aon()` lia zero itens
+    por caminho errado. Consertar o caminho o ACORDOU, e trocou um `None`
+    honesto por um valor errado plausivel -- que e pior, porque ninguem
+    desconfia dele.
+    """
+    m = re.search(r"\d\s*(?:d\d+)?\s*([BPS])\b", str(bruto or ""), re.I)
+    if m:
+        return TIPO_CURTO[m.group(1).lower()]
+    return str(declarado[0]).lower() if declarado else None
+
+
 def do_aon():
     """nome normalizado -> bloco mecanico, dos dumps de equipamento."""
     saida = {}
@@ -174,13 +194,14 @@ def do_aon():
                 bruto = str(s.get("damage") or "")
                 m = DADO.search(bruto)
                 tipos = s.get("damage_type") or []
-                if m and tipos:
+                tipo_dmg = tipo_de_dano(bruto, tipos)
+                if m and tipo_dmg:
                     bloco["damage"] = {
                         "dados": int(m.group(1) or 1),
                         "dado": m.group(2).lower(),
-                        "tipo": str(tipos[0]).lower(),
+                        "tipo": tipo_dmg,
                     }
-                elif tipos and FIXO.match(bruto):
+                elif tipo_dmg and FIXO.match(bruto):
                     # sem a chave `dado`, e nao com `dado: None`: os dois motores
                     # fazem `dano.get("dado", "")` / `Object.hasOwn`, entao a
                     # chave presente com None imprimiria "None" na ficha

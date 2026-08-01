@@ -12,14 +12,14 @@
 
 # (derivados abaixo)
 
-- aliases acrescentados: **335**
+- aliases acrescentados: **334**
 
 A regra crua pega 1.606 e a maioria e lixo. Tres guardas: categoria igual, nome legado nao e nome de classe, e um nome nao e prefixo do outro (isso ultimo derruba os pares de GRAU).
 
 | kind | aliases |
 |---|---:|
 | equipment | 217 |
-| weapon | 57 |
+| weapon | 56 |
 | feat | 31 |
 | heritage | 12 |
 | ritual | 9 |

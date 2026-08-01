@@ -104,3 +104,7 @@ NAO SE APLICA nesta fase.
 
 NAO SE APLICA nesta fase.
 
+## Portao 11 -- campo critico ausente vs build anterior
+
+NAO SE APLICA nesta fase.
+
