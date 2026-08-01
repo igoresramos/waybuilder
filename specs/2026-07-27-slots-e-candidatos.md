@@ -1,10 +1,11 @@
 ---
 spec: slots-e-candidatos
 project: waybuilder
-version: 1
+version: 2
 status: aprovada
 created: 2026-07-27
 aprovada_em: 2026-07-29
+atualizada_em: 2026-08-01
 todo: 65
 ---
 
@@ -15,6 +16,15 @@ descreve ja estivesse no ar desde o commit `f98b4b4e5`. `candidatos(slot, em)` e
 `slots_abertos()` substituiram o `disponiveis()` por kind, e `_orcamento_de_boost`
 fechou a higiene de atributo (item 74). Do item 65 sobra so `_termo_has` sem
 recorte temporal.
+
+**Versao 2, 2026-08-01:** a linha `class_feat` da tabela de elegibilidade dizia
+so "trait de alguma classe do personagem". O motor deixou de se comportar assim
+em `3a44f10` (2026-07-28), quando passou a aceitar tambem feat de arquetipo
+nesse slot -- e a spec nao foi atualizada junto. Pior: ela foi marcada
+`aprovada` em 2026-07-29, um dia DEPOIS de o motor ja a contradizer. Por 4 dias
+a spec descreveu um motor que nao existia, e 28 testes escritos contra ela
+ficaram vermelhos acusando o motor CERTO -- o defeito era de SDD, nao de codigo.
+Ver "Por que o slot de classe aceita arquetipo" abaixo.
 
 Itens do TODO: 65 (candidatos por slot -- parcial), 74 (higiene de atributo --
 concluido)
@@ -130,7 +140,7 @@ p.candidatos("free_archetype", em=4)
 
 | slot | aceita |
 |---|---|
-| `class_feat` | `kind == feat` e trait de alguma classe do personagem |
+| `class_feat` | `kind == feat` e (trait de alguma classe do personagem **ou** trait `archetype`) |
 | `skill_feat` | `kind == feat` e trait `skill` |
 | `general_feat` | `kind == feat` e trait `general` |
 | `ancestry_feat` | `kind == feat` e trait da ancestralidade do personagem |
@@ -144,6 +154,42 @@ Nenhuma dessas listas e escrita a mao: todas saem de trait ou de campo que a
 base ja tem. Onde a regra de casa muda o RAW (regra 23, dedicacao da propria
 classe), o veto ja existe em `_veto_dedicacao_da_propria_classe` e entra como
 **motivo**, nunca como filtro.
+
+### Por que o slot de classe aceita arquetipo
+
+A regra RAW do PF2e e que a porta de entrada de um arquetipo e **gastar um feat
+de classe** na Dedication. O Free Archetype e regra VARIANTE: quem nao joga com
+ela so tem o slot de classe para entrar num arquetipo.
+
+O numero que fecha o argumento, medido em `pipeline/base/index.json` de
+2026-08-01: das **225 dedicacoes** da base (feats com trait `dedication`),
+**zero** carregam trait de classe. Exigir trait de classe no slot, como a versao
+1 desta spec dizia, tornava as 225 inalcancaveis por ele -- a unica porta para
+qualquer arquetipo virava o slot de Free Archetype, e um personagem sem a regra
+variante nao conseguiria nunca entrar em arquetipo nenhum. Isso e um filtro que
+BLOQUEIA escolha legal, o oposto do principio zero.
+
+O recorte continua sendo recorte, nao "aceita qualquer coisa". Num Guerreiro 4:
+
+| conjunto | tamanho |
+|---|---|
+| `disponiveis("feat")` | 6.239 |
+| `candidatos("class_feat", em=4)` | 2.239 |
+| ...por trait `fighter` | 124 |
+| ...por trait `archetype` | 2.115 (destes, 225 sao dedicacao) |
+
+Ou seja: 4.000 feats de OUTRAS classes continuam fora da lista. O que entra a
+mais e exatamente o corpo de arquetipo, que e o que o RAW manda entrar.
+
+Consequencia aceita: um feat de arquetipo NAO-dedicacao (os 2.115 menos 225)
+tambem aparece, mesmo que o personagem ainda nao tenha a Dedication dele. Isso e
+`requires` fazendo o seu papel -- o feat aparece com `atende: False` e o motivo
+"exige X Dedication", nunca sumido. Principio zero: sugere, nao bloqueia.
+
+A regra 23 nao muda: `_veto_dedicacao_da_propria_classe` marca a dedicacao da
+propria classe como fora-do-requisito, e ela continua na lista.
+
+Implementacao: `_aceita_no_slot`, `motor/motor.py:3634-3646`.
 
 `ja_pego` marca o que o personagem ja tem -- o app nao deve oferecer duas vezes
 o que nao se pode pegar duas vezes, mas quem decide exibir e a tela.
@@ -175,3 +221,12 @@ ela e usada por `ficha.py` e por teste. `candidatos()` e adicao, nao troca.
 5. Para as 27 classes, o total de boosts com direito bate com o RAW: 4 de
    ancestria (2 livres + 1 dirigido + flaw), 2 de background, 1 de classe, 4
    por nivel a cada 5 niveis.
+6. `candidatos("class_feat", em=4)`, para cada uma das 27 classes, so contem
+   feat com trait daquela classe OU com trait `archetype` -- nenhum item cai
+   fora dos dois. Feat de classe alheia sem `archetype` (`call-wizardly-tools`,
+   traits `concentrate/teleportation/wizard`) fica de fora num Guerreiro.
+7. As 225 dedicacoes estao TODAS na lista de `class_feat` de cada uma das 27
+   classes. E o teste que impede a regressao de 2026-07-27 voltar: se alguem
+   reintroduzir o filtro por trait de classe, este cai com 225 faltando.
+   Testes: `motor/testes/test_payload_do_app.py`,
+   `motor/testes/test_slots_e_candidatos.py`.

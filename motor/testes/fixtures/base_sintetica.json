@@ -1,0 +1,38 @@
+[
+  {
+    "id": "wb:ancestry/povo-de-teste",
+    "kind": "ancestry",
+    "name": "Povo de Teste",
+    "hp": 8,
+    "size": "med",
+    "speed": 25,
+    "grants": [{"hp_ancestry": 8}, {"size": "med"}, {"speed": {"land": 25}}]
+  },
+  {
+    "id": "wb:background/promessa-vaga",
+    "kind": "background",
+    "name": "Promessa Vaga",
+    "grants": [{"grant_feat": ["Olhar Intimidador"]}]
+  },
+  {
+    "id": "wb:feat/tecnica-nova",
+    "kind": "feat",
+    "name": "Tecnica Nova",
+    "level": 1,
+    "traits": [],
+    "aliases": ["Tecnica Antiga"],
+    "historico": [{"nome_legado": "Tecnica Antiga",
+                   "id_legado": "wb:feat/tecnica-antiga",
+                   "chave": "sintetico"}],
+    "grants": []
+  },
+  {
+    "id": "wb:feat/tecnica-derivada",
+    "kind": "feat",
+    "name": "Tecnica Derivada",
+    "level": 2,
+    "traits": [],
+    "requires": {"all": [{"has": "wb:feat/tecnica-antiga"}]},
+    "grants": []
+  }
+]

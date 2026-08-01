@@ -80,10 +80,21 @@ class TestCandidatosRecortamPeloSlot(unittest.TestCase):
         for item in self.p.candidatos("skill_feat", em=2)[:50]:
             self.assertIn("skill", BASE.get(item["id"]).get("traits") or [])
 
-    def test_class_feat_traz_a_classe_do_personagem(self):
+    def test_class_feat_traz_a_classe_do_personagem_e_arquetipo(self):
+        """Dois conjuntos entram; feat de classe alheia continua fora.
+
+        `archer-dedication` (traits `archetype`/`dedication`, sem trait de
+        classe) TEM de aparecer: gastar o feat de classe na Dedication e a porta
+        RAW de entrada num arquetipo, e o Free Archetype e regra variante. Ver
+        `motor/motor.py:3634-3646` e a spec, "Por que o slot de classe aceita
+        arquetipo".
+        """
         c = ids(self.p.candidatos("class_feat", em=4))
-        self.assertIn("wb:feat/reactive-shield", c)      # fighter
-        self.assertNotIn("wb:feat/archer-dedication", c)  # arquetipo puro
+        self.assertIn("wb:feat/reactive-shield", c)       # traits fighter/guardian
+        self.assertIn("wb:feat/archer-dedication", c)     # arquetipo puro, porta RAW
+        # traits concentrate/teleportation/wizard, sem `archetype`: classe
+        # alheia continua barrada -- e o que separa "recorte" de "sem filtro".
+        self.assertNotIn("wb:feat/call-wizardly-tools", c)
 
     def test_slot_de_atributo_traz_os_seis(self):
         c = self.p.candidatos("boosts_livres")

@@ -32,6 +32,30 @@ _spec.loader.exec_module(wb_motor)
 BASE = wb_motor.Base()
 FICHA = os.path.join(EXEMPLOS, "guerreiro4-fa-dedicacao-com-grants.json")
 
+# Base sintetica: quatro registros que EXISTEM so para manter dois defeitos
+# reproduziveis depois que o pipeline apagou a evidencia deles da base real.
+#
+# Medido em 2026-08-01 sobre `pipeline/base/index.json` (20.083 registros):
+#   - 1.170 alvos de `grant_feat`, ZERO nao resolvidos (eram 476, todos de
+#     background). O aviso "alvo nao resolvido pelo pipeline" virou codigo sem
+#     dado que o exercite.
+#   - 698 ids alternativos por alias, 578 sem registro proprio, e ZERO `requires`
+#     citando um deles -- `aplicar_aliases_em_requires.py` reescreveu todos para
+#     o id canonico.
+# Os dois consertos sao bons e ficam. Mas o motor continua sendo o ultimo
+# anteparo: ficha salva com o nome antigo, e extrator novo que volte a emitir
+# nome cru, sao os casos que ele tem de aguentar. Amarrar esses testes ao pin
+# significava perde-los em silencio na primeira melhora do pipeline -- o que
+# aconteceu. A fixture nao muda quando o pipeline muda.
+BASE_SINTETICA = wb_motor.Base(os.path.join(AQUI, "fixtures", "base_sintetica.json"))
+
+
+def doc_sintetico(escolhas: list[dict]) -> dict:
+    """Ficha na base sintetica, com ancestria so para o motor ter de onde
+    partir (`hp`, `size`, `speed`)."""
+    return {"escolhas": [{"em": "criacao", "slot": "ancestralidade",
+                          "pega": "wb:ancestry/povo-de-teste"}] + escolhas}
+
 # slots que descrevem o personagem sem nenhum feat escolhido -- a base neutra
 # para medir o que uma dedicacao entrega sem contaminacao. Aprendido na marra:
 # a primeira medicao usou a ficha inteira, que ja tinha `additional-lore` e
@@ -135,12 +159,26 @@ class TestOrigensDaCadeia(unittest.TestCase):
         self.assertEqual([c for c in p.concedidos if c["id"] == "wb:feat/fleet"], [])
 
     def test_alvo_nao_resolvido_pelo_pipeline_e_sinalizado(self):
-        """O background `warrior` promete Intimidating Glare e o alvo nao esta
-        resolvido (item 70). Antes de a cadeia visitar background, este aviso
-        era codigo morto: os 476 alvos orfaos estao todos nesse kind."""
-        p = wb_motor.Personagem(doc_base(), BASE)
-        self.assertTrue([a for a in p.avisos if "nao resolvido pelo pipeline" in a],
-                        p.avisos)
+        """Concessao que aponta para NOME em vez de id vira aviso, e nao perda
+        silenciosa.
+
+        O caso nasceu do background `warrior`, que prometia Intimidating Glare
+        por nome (item 70): eram 476 alvos orfaos, todos em background. Hoje o
+        pipeline resolve todos os 1.170 -- `wb:background/warrior` concede
+        `wb:feat/intimidating-glare` de verdade -- entao o caso so existe na
+        fixture. O motor continua sendo quem segura extrator novo que volte a
+        emitir nome cru.
+        """
+        p = wb_motor.Personagem(
+            doc_sintetico([{"em": "criacao", "slot": "background",
+                            "pega": "wb:background/promessa-vaga"}]),
+            BASE_SINTETICA)
+        avisos = [a for a in p.avisos if "nao resolvido pelo pipeline" in a]
+        self.assertTrue(avisos, p.avisos)
+        self.assertIn("Olhar Intimidador", avisos[0])
+        # o aviso e sobre alvo NAO resolvido: o que a fixture prometeu nao pode
+        # ter entrado na ficha por baixo do pano
+        self.assertEqual(p.concedidos, [])
 
 
 class TestRegrasDeDedicacaoEnxergamConcedidos(unittest.TestCase):
@@ -194,7 +232,9 @@ class TestAliasPreRemaster(unittest.TestCase):
 
     A base guarda o nome PRE-REMASTER como alias: `stunning-fist` e o mesmo
     feat que `stunning-blows`, `wild-shape` virou `untamed-form`,
-    `divine-ally` virou `devout-blessing`. Sao 348 ids alternativos.
+    `divine-ally` virou `devout-blessing`. Sao 698 ids alternativos, 578 deles
+    sem registro proprio (eram 348 na primeira medicao; recontado 2026-08-01,
+    depois da fusao de duplicata de nome).
 
     O portao 3 sempre resolveu alias antes de reclamar, e por isso passava
     verde. O motor comparava id cru -- entao 24 `requires` de feats de classes
@@ -204,10 +244,20 @@ class TestAliasPreRemaster(unittest.TestCase):
     """
 
     def test_o_dado_sustenta_o_caso(self):
-        self.assertIsNone(BASE.opcional("wb:feat/stunning-fist"))
-        self.assertIsNotNone(BASE.opcional("wb:feat/stunning-blows"))
-        self.assertIn("Stunning Fist",
-                      BASE.get("wb:feat/stunning-blows").get("aliases") or [])
+        """O alias e um id SEM registro proprio que chega no registro novo.
+
+        A versao anterior media isso em `stunning-fist` e exigia
+        `opcional() is None` para o id legado. As duas metades morreram: desde
+        a spec `2026-07-30-grau-legado-nao-fundido` o `opcional` segue alias de
+        proposito (ficha salva com id aposentado nao pode perder o item em
+        silencio), e a base tem 578 ids de alias sem registro proprio -- nenhum
+        deles devolve None. O que precisa continuar verdadeiro e o de baixo.
+        """
+        self.assertNotIn("wb:feat/tecnica-antiga", BASE_SINTETICA.por_id)
+        self.assertIn("Tecnica Antiga",
+                      BASE_SINTETICA.get("wb:feat/tecnica-nova").get("aliases") or [])
+        self.assertEqual(BASE_SINTETICA.opcional("wb:feat/tecnica-antiga")["id"],
+                         "wb:feat/tecnica-nova")
 
     def test_resolver_segue_o_alias(self):
         self.assertEqual(BASE.resolver("wb:feat/stunning-fist"),
@@ -226,24 +276,32 @@ class TestAliasPreRemaster(unittest.TestCase):
         self.assertEqual(BASE.resolver("wb:feat/nao-existe-nem-como-alias"),
                          "wb:feat/nao-existe-nem-como-alias")
 
+    ESCOLHAS_COM_AS_DUAS_TECNICAS = [
+        {"em": 1, "slot": "class_feat", "pega": "wb:feat/tecnica-nova"},
+        {"em": 2, "slot": "class_feat", "pega": "wb:feat/tecnica-derivada"},
+    ]
+
     def test_requisito_citando_o_nome_antigo_e_satisfeito(self):
         """O caso que motivou tudo: `requires` cita o nome pre-remaster e o
-        personagem tem o feat com o nome novo."""
-        alvo = "wb:feat/vitality-manipulating-stance"
-        reg = BASE.opcional(alvo)
-        if reg is None:
-            self.skipTest(f"{alvo} ausente da base neste pin")
-        self.assertIn("stunning-fist", json.dumps(reg.get("requires") or {}))
+        personagem tem o feat com o nome novo.
 
-        escolhas = [
-            {"em": "criacao", "slot": "ancestralidade", "pega": "wb:ancestry/human"},
-            {"em": "criacao", "slot": "background", "pega": "wb:background/warrior"},
-        ]
-        escolhas += [{"em": n, "slot": "nivel_de_classe", "pega": "wb:class/monk"}
-                     for n in range(1, 21)]
-        escolhas += [{"em": 1, "slot": "class_feat", "pega": "wb:feat/stunning-blows"},
-                     {"em": 20, "slot": "class_feat", "pega": alvo}]
-        p = wb_motor.Personagem({"escolhas": escolhas}, BASE)
-        pendentes = [m for m in motivos(p)
-                     if reg.get("name") in m and "Stunning" in m]
-        self.assertEqual(pendentes, [], f"ainda exige o nome antigo: {pendentes}")
+        Media em `vitality-manipulating-stance`, cujo `requires` citava
+        `stunning-fist`. Nao cita mais: `aplicar_aliases_em_requires.py`
+        reescreveu para `stunning-blows`, e hoje ZERO dos `requires` da base
+        aponta para um id que so existe como alias (medido 2026-08-01). O
+        conserto no pipeline nao dispensa o motor de resolver -- ficha salva
+        antes dele guarda o id antigo, e o `has` e o unico que a le.
+        """
+        p = wb_motor.Personagem(
+            doc_sintetico(self.ESCOLHAS_COM_AS_DUAS_TECNICAS), BASE_SINTETICA)
+        self.assertEqual(p.fora_do_requisito, [], motivos(p))
+
+    def test_e_falha_quando_o_alias_some(self):
+        """Controle negativo: sem o alias, o mesmo `requires` reprova. Sem isto
+        o teste acima passaria igual se `requires` nunca fosse avaliado."""
+        base = wb_motor.Base(os.path.join(AQUI, "fixtures", "base_sintetica.json"))
+        base.por_id["wb:feat/tecnica-nova"] = dict(
+            base.por_id["wb:feat/tecnica-nova"], aliases=[])
+        p = wb_motor.Personagem(
+            doc_sintetico(self.ESCOLHAS_COM_AS_DUAS_TECNICAS), base)
+        self.assertTrue([m for m in motivos(p) if "tecnica-antiga" in m], motivos(p))

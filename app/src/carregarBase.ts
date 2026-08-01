@@ -16,19 +16,77 @@
  * construtor funciona offline depois da primeira visita.
  */
 import { Base } from "./motor/base";
-import type { Registro } from "./motor/tipos";
+import type { PinDaBase, Registro } from "./motor/tipos";
 
 export interface BaseCarregada {
   base: Base;
   registros: number;
   kinds: string[];
   bytes: number;
+  /** a assinatura do payload -- ver `pinDoManifesto` */
+  pin: PinDaBase;
 }
 
-interface Manifesto {
+export interface Manifesto {
   registros?: number;
   kinds?: number;
+  hash?: string;
   por_kind?: Record<string, { registros: number; gzip_bytes: number }>;
+}
+
+/**
+ * JSON com as chaves ordenadas recursivamente e sem espaco.
+ *
+ * Sem isto o pin dependeria da ORDEM em que o pipeline emitiu as chaves, e um
+ * manifesto reordenado sem mudanca de conteudo pareceria base nova.
+ */
+function canonico(x: unknown): string {
+  if (Array.isArray(x)) return `[${x.map(canonico).join(",")}]`;
+  if (x && typeof x === "object") {
+    const o = x as Record<string, unknown>;
+    return `{${Object.keys(o).sort()
+      .map((k) => `${JSON.stringify(k)}:${canonico(o[k])}`).join(",")}}`;
+  }
+  return JSON.stringify(x) ?? "null";
+}
+
+/**
+ * A ASSINATURA DA BASE sob a qual a ficha foi editada.
+ *
+ * Derivada no cliente do `_manifesto.json` -- o arquivo que `carregarNucleo()`
+ * ja busca primeiro --, e nao do pipeline: `por_kind[k].gzip_bytes` e
+ * `registros` sao funcao do payload, e o pipeline e deterministico byte a byte
+ * (md5 `b3f4bce6` em duas execucoes completas). Assim o pin existe sem tocar em
+ * `pipeline/`.
+ *
+ * Se um dia o manifesto trouxer `hash` proprio, ELE GANHA e a origem vira
+ * `pipeline` -- a regra fica fixada agora para nao haver ambiguidade depois, e
+ * por isso `hash` sai do canonico.
+ *
+ * `crypto.subtle` so existe em secure context (`https:` ou `localhost`). Servido
+ * de `file://` ele e `undefined`: o pin vira `null` com origem `indisponivel`, a
+ * base carrega igual e nenhuma divergencia e afirmada.
+ * Spec: `specs/2026-08-01-persistencia-e-identidade-de-build.md`.
+ */
+export async function pinDoManifesto(m: Manifesto): Promise<PinDaBase> {
+  const conta = {
+    registros: m.registros,
+    kinds: m.kinds ?? Object.keys(m.por_kind ?? {}).length,
+  };
+  if (typeof m.hash === "string" && m.hash) {
+    return { pin: m.hash, origem: "pipeline", ...conta };
+  }
+  const { hash: _fora, ...semHash } = m;
+  void _fora;
+  try {
+    const bytes = new TextEncoder().encode(canonico(semHash));
+    const digest = await globalThis.crypto.subtle.digest("SHA-256", bytes);
+    const hex = [...new Uint8Array(digest)]
+      .map((b) => b.toString(16).padStart(2, "0")).join("");
+    return { pin: hex.slice(0, 16), origem: "manifesto", ...conta };
+  } catch {
+    return { pin: null, origem: "indisponivel", ...conta };
+  }
 }
 
 /**
@@ -80,13 +138,17 @@ export async function carregarNucleo(
 
   // em paralelo: sao arquivos independentes, e serializar multiplicaria a
   // latencia da primeira carga pelo numero de kinds
-  const fatias = await Promise.all(kinds.map((k) => fatia(k, raiz)));
+  const [fatias, pin] = await Promise.all([
+    Promise.all(kinds.map((k) => fatia(k, raiz))),
+    pinDoManifesto(manifesto),
+  ]);
   const registros = fatias.flat();
   return {
     base: new Base(registros),
     registros: registros.length,
     kinds,
     bytes: fatias.reduce((n, f) => n + JSON.stringify(f).length, 0),
+    pin,
   };
 }
 

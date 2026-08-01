@@ -48,13 +48,62 @@ export interface Escolha {
 }
 
 /**
+ * De onde saiu o pin da base que a ficha carimba.
+ *
+ * `pipeline` -- o `_manifesto.json` trouxe um `hash` proprio (ainda nao
+ * acontece; a regra fica fixada para quando acontecer).
+ * `manifesto` -- derivado no cliente do manifesto canonicalizado.
+ * `desconhecido` -- ficha migrada de `@1`, montada sob base que ninguem
+ * registrou. Nao ha com o que comparar, entao nao ha divergencia a afirmar.
+ * `indisponivel` -- `crypto.subtle` nao existe (fora de secure context) ou
+ * falhou. Mesma consequencia do anterior, causa diferente.
+ * Spec: `specs/2026-08-01-persistencia-e-identidade-de-build.md`.
+ */
+export type OrigemDePin = "pipeline" | "manifesto" | "desconhecido" | "indisponivel";
+
+/** O pin do payload carregado agora -- o lado ATUAL da comparacao. */
+export interface PinDaBase {
+  pin: string | null;
+  origem: OrigemDePin;
+  registros?: number;
+  kinds?: number;
+}
+
+/**
+ * A identidade de build GRAVADA no documento: sob que base esta ficha foi
+ * montada e sob qual ela foi editada pela ultima vez.
+ *
+ * `nascida_em_pin` e escrito uma unica vez e nunca sobrescrito -- inclusive
+ * quando e `null`, que e o caso da ficha migrada de `@1`: presente-e-nulo
+ * significa "nasceu sob base nao registrada", e preencher depois carimbaria
+ * como berco a base de hoje, que seria falso.
+ */
+export interface IdentidadeDeBuild {
+  pin?: string | null;
+  origem?: OrigemDePin;
+  registros?: number;
+  kinds?: number;
+  visto_em?: string;
+  nascida_em_pin?: string | null;
+  /** reservados para o pin da FONTE (`dump_aon.py:149`); nada os preenche ainda */
+  versao?: string;
+  pin_foundry?: string;
+}
+
+/**
  * O documento de personagem -- a UNICA fonte de verdade. Tudo mais e derivado
  * a cada mudanca; nada calculado e guardado aqui. E por isso que mudanca de
  * regra re-deriva em vez de invalidar ficha salva.
+ *
+ * `id` mora AQUI, e nao so no indice do `localStorage`, porque o indice nao
+ * sobrevive ao `exportar()` (`doc.ts` serializa o documento e mais nada) --
+ * reimportar o proprio backup criaria uma segunda ficha. Ate 2026-08-01 o id
+ * era cunhado a cada mount do `App` (issue #1), e por isso a ficha nunca voltava.
  */
 export interface Documento {
   esquema?: string;
-  base?: { versao?: string; pin_foundry?: string };
+  id?: string;
+  base?: IdentidadeDeBuild;
   identidade?: { nome?: string; jogador?: string; notas?: string };
   escolhas: Escolha[];
   atores?: unknown[];

@@ -137,7 +137,6 @@
    "wb:feat/deflecting-wave",
    "wb:feat/eternal-torch",
    "wb:feat/extended-kinesis",
-   "wb:feat/flash-forge",
    "wb:feat/flashforge",
    "wb:feat/flying-flame",
    "wb:feat/four-winds",
@@ -167,7 +166,8 @@
    "wb:feat/archaeologist-dedication",
    "wb:feat/artillerist-dedication",
    "wb:feat/assassin-dedication",
-   "wb:feat/avenger-dedication"
+   "wb:feat/avenger-dedication",
+   "wb:feat/barbarian-dedication"
   ],
   "class_feat@2": [
    "wb:feat/elemental-familiar-kineticist",

@@ -178,11 +178,16 @@ class TestDedicacaoPrimeiro(unittest.TestCase):
         self.assertTrue(e_dedicacao(ARCHER_DEDICATION))
         self.assertFalse(e_dedicacao("wb:feat/barbarian-resiliency"))
 
-    @unittest.expectedFailure
-    def test_lacuna_ordem_no_tempo_nao_e_conferida(self):
-        """LACUNA. `has` e avaliado contra o documento INTEIRO, nunca contra o
-        que existia naquele nivel. Pegar Quick Shot no nivel 2 e a dedicacao
-        no 4 e a ordem errada e passa limpo."""
+    def test_ordem_no_tempo_e_conferida(self):
+        """Era LACUNA ate 29/07: `has` olhava o documento INTEIRO, nunca o que
+        existia naquele nivel, e pegar Quick Shot no nivel 2 com a dedicacao no
+        4 -- ordem ilegal -- passava limpo.
+
+        O recorte temporal do `has` fechou o buraco
+        (`specs/2026-07-29-recorte-temporal-do-has.md`), e o
+        `@unittest.expectedFailure` ficou para tras: virou `unexpected
+        success`, que e o sinal combinado no cabecalho deste arquivo para
+        "a lacuna fechou, tire o marcador". Este e o ato de tirar."""
         def inverter(d):
             for e in d["escolhas"]:
                 if e.get("slot") == "free_archetype":

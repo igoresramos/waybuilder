@@ -13,18 +13,37 @@
  * O documento continua sendo a unica fonte de verdade: a tela edita
  * `escolhas[]` e o motor re-deriva tudo a cada mudanca.
  */
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Base } from "./motor/base";
 import { Personagem } from "./motor/personagem";
-import type { Candidato, Documento, FonteDeBoost, Registro } from "./motor/tipos";
+import type {
+  Candidato, Documento, FonteDeBoost, PinDaBase, Registro,
+} from "./motor/tipos";
 import { carregarNucleo } from "./carregarBase";
 import { Slot, FILTROS_DE_FEAT, FILTROS_DE_RARIDADE } from "./componentes/Slot";
 import { PainelDireito } from "./componentes/PainelDireito";
 import { IconeCog } from "./componentes/Icones";
 import { Detalhe } from "./componentes/Detalhe";
+import { Fichas } from "./componentes/Fichas";
 import { Licenca } from "./componentes/Licenca";
 import * as doc from "./doc";
 import "./estilo.css";
+
+/** o debounce da gravacao. Ate 2026-08-01 gravava a CADA tecla do campo de nome */
+const ESPERA_PARA_GRAVAR = 500;
+
+const AVISO_DE_COTA =
+  "o armazenamento deste navegador encheu: a ultima edicao NAO foi gravada. "
+  + "Ela continua aberta e pode ser exportada; para voltar a gravar, apague "
+  + "alguma ficha da lista.";
+
+/** `#/p/<id>` sem empilhar historico -- cada F5 numa aba volta na ficha dela. */
+function enderecar(id: string | null): void {
+  if (typeof location === "undefined" || typeof history === "undefined") return;
+  const alvo = id ? `#/p/${encodeURIComponent(id)}` : "";
+  if (location.hash === alvo) return;
+  history.replaceState(null, "", alvo || location.pathname + location.search);
+}
 
 const TRILHOS = [
   { slot: "class_feat", cadencia: "class", rotulo: "Feat de classe" },
@@ -50,19 +69,158 @@ const NOME_DO_TIPO: Record<string, string> = {
 export default function App() {
   const [base, setBase] = useState<Base | null>(null);
   const [erro, setErro] = useState<string | null>(null);
-  const [d, setD] = useState<Documento>(() => doc.novoDocumento());
-  const [id] = useState(() => doc.novoId());
+  // A CARGA DECIDE QUAL FICHA ABRE -- hash, ponteiro, mais recente, ou nova.
+  // Ate 2026-08-01 nao existia leitura nenhuma: `App.tsx:54` cunhava um id
+  // novo a cada mount e `App.tsx:63-65` so gravava, entao cada recarga nascia
+  // uma ficha diferente e a do jogador nunca voltava (issue #1). O id agora vem
+  // de dentro do documento carregado, e o teste `persistencia.test.ts` mantem
+  // este arquivo sem nenhuma cunhagem de id.
+  const [inicial] = useState(() => doc.abrir());
+  const [d, setD] = useState<Documento>(inicial.doc);
+  const [avisos, setAvisos] = useState<string[]>(inicial.avisos);
+  const [fichas, setFichas] = useState<doc.Salvo[]>(() => doc.listar());
+  const [seletor, setSeletor] = useState(false);
   const [alvo, setAlvo] = useState(4);
   // o registro que o jogador quer LER (concedido, nao escolhido)
   const [lendo, setLendo] = useState<string | null>(null);
   const arquivo = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    carregarNucleo().then((r) => setBase(r.base)).catch((e) => setErro(String(e)));
+  // o texto do ultimo documento GRAVADO: gravar de novo o identico e escrita a
+  // toa numa cota que ja foi vazada uma vez
+  const ultimoGravado = useRef<string | null>(null);
+  const pendente = useRef<Documento | null>(null);
+  const pinDaBase = useRef<PinDaBase | null>(null);
+  // o aviso de cota fala UMA vez por sessao: com o debounce falhando a cada
+  // 500 ms, repetir viraria ruido que esconde o proprio aviso
+  const avisouCota = useRef(false);
+
+  const avisar = useCallback((texto: string) => {
+    setAvisos((a) => (a.includes(texto) ? a : [...a, texto]));
   }, []);
+
   useEffect(() => {
-    if (d.escolhas.length) doc.salvar(id, d);
-  }, [d, id]);
+    if (!inicial.nova) enderecar(inicial.doc.id ?? null);
+  }, [inicial]);
+
+  useEffect(() => {
+    carregarNucleo().then((r) => {
+      setBase(r.base);
+      pinDaBase.current = r.pin;
+      // o aviso de base divergente e de CARGA: dispara uma vez, quando o pin
+      // chega, e nao a cada edicao. O aviso de id nao resolvido e outro bicho --
+      // ele e derivado da base e reaparece sozinho enquanto o id nao resolver.
+      const divergiu = doc.avisoDePin(d, r.pin);
+      if (divergiu) avisar(divergiu);
+    }).catch((e) => setErro(String(e)));
+    // de proposito sem `d`: rodar de novo a cada tecla recarregaria a base
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /**
+   * Grava o que estiver pendente, AGORA.
+   *
+   * Falha de cota nao descarta a edicao: ela continua em `d`, na tela e no
+   * `exportar()`. Perder ficha para caber e o unico desfecho que a spec proibe.
+   */
+  const gravar = useCallback(() => {
+    const alvoDoc = pendente.current;
+    if (!alvoDoc) return;
+    pendente.current = null;
+    const carimbado = pinDaBase.current
+      ? doc.carimbarBase(alvoDoc, pinDaBase.current) : alvoDoc;
+    const r = doc.salvar(carimbado);
+    if (!r.ok) {
+      if (!avisouCota.current) {
+        avisouCota.current = true;
+        avisar(r.detalhe && r.erro === "resgate" ? r.detalhe : AVISO_DE_COTA);
+        setSeletor(true); // para o jogador poder apagar o que quiser
+      }
+      return;
+    }
+    ultimoGravado.current = JSON.stringify(carimbado);
+    if (carimbado.id) {
+      doc.marcarAberta(carimbado.id);
+      enderecar(carimbado.id);
+    }
+    setFichas(r.lista);
+    // o carimbo faz parte do documento: sem isto o `base` gravado e o da tela
+    // divergiriam, e o proximo `exportar()` sairia sem identidade de build
+    setD(carimbado);
+  }, [avisar]);
+
+  useEffect(() => {
+    if (!doc.temConteudo(d)) return; // visita ociosa nao deixa entrada
+    const texto = JSON.stringify(d);
+    if (texto === ultimoGravado.current) return;
+    pendente.current = d;
+    const t = setTimeout(gravar, ESPERA_PARA_GRAVAR);
+    return () => clearTimeout(t);
+  }, [d, gravar]);
+
+  /**
+   * O debounce sem flush seria REGRESSAO: o codigo de hoje grava a cada tecla, e
+   * fechar a aba dentro dos 500 ms perderia a ultima edicao. `pagehide` cobre
+   * fechar e navegar; `visibilitychange` cobre o descarte do iOS, onde
+   * `pagehide` pode nao chegar.
+   */
+  useEffect(() => {
+    const flush = () => { if (pendente.current) gravar(); };
+    const aoEsconder = () => {
+      if (document.visibilityState === "hidden") flush();
+    };
+    window.addEventListener("pagehide", flush);
+    document.addEventListener("visibilitychange", aoEsconder);
+    return () => {
+      window.removeEventListener("pagehide", flush);
+      document.removeEventListener("visibilitychange", aoEsconder);
+    };
+  }, [gravar]);
+
+  /** Troca a ficha aberta -- gravando o pendente ANTES, senao a edicao some. */
+  const trocarPara = useCallback((novo: Documento, novosAvisos: string[]) => {
+    if (pendente.current) gravar();
+    ultimoGravado.current = null;
+    pendente.current = null;
+    setD(novo);
+    const divergiu = pinDaBase.current ? doc.avisoDePin(novo, pinDaBase.current) : null;
+    setAvisos(divergiu ? [...novosAvisos, divergiu] : novosAvisos);
+    setSeletor(false);
+    setFichas(doc.listar());
+  }, [gravar]);
+
+  const abrirFicha = useCallback((idAlvo: string) => {
+    const a = doc.abrir(`#/p/${encodeURIComponent(idAlvo)}`);
+    trocarPara(a.doc, a.avisos);
+    enderecar(a.nova ? null : a.doc.id ?? null);
+  }, [trocarPara]);
+
+  /**
+   * Comecar OUTRA ficha -- o substituto do habito antigo de recarregar a pagina.
+   *
+   * Nao grava no clique: ela entra na lista na primeira edicao, pela mesma regra
+   * que impede a visita ociosa de deixar entrada. Recarregar antes de editar
+   * volta na ficha anterior, porque um rascunho intocado nunca chegou ao disco.
+   */
+  const novaFicha = useCallback(() => {
+    doc.esquecerUltima();
+    enderecar(null);
+    trocarPara(doc.novoDocumento(), []);
+  }, [trocarPara]);
+
+  const apagarFicha = useCallback((idAlvo: string) => {
+    if (pendente.current) gravar(); // o pendente e de outra ficha; nao pode sumir
+    const r = doc.apagar(idAlvo);
+    setFichas(r.lista);
+    if (!r.ok) {
+      avisar(r.detalhe ?? AVISO_DE_COTA);
+      return;
+    }
+    if (idAlvo === d.id) {
+      const a = doc.abrir(""); // sem hash: cai no ponteiro / mais recente / nova
+      trocarPara(a.doc, a.avisos);
+      enderecar(a.nova ? null : a.doc.id ?? null);
+    }
+  }, [avisar, d.id, gravar, trocarPara]);
 
   const p = useMemo(
     () => (base ? new Personagem(structuredClone(d), base) : null),
@@ -143,6 +301,7 @@ export default function App() {
           />
         </div>
         <div className="acoes">
+          <button onClick={() => setSeletor(true)}>fichas ({fichas.length})</button>
           <button onClick={() => doc.exportar(d)}>exportar</button>
           <button onClick={() => arquivo.current?.click()}>importar</button>
           <input
@@ -150,14 +309,35 @@ export default function App() {
             onChange={async (e) => {
               const f = e.target.files?.[0];
               if (!f) return;
-              const { doc: lido, erro: falha } = doc.importar(await f.text());
+              const { doc: lido, erro: falha, aviso } = doc.importar(await f.text());
               if (falha) alert(falha);
-              else if (lido) setD(lido);
+              else if (lido) {
+                // ficha importada e OUTRA ficha: entra pelo mesmo caminho de
+                // troca, gravando o pendente antes de sair da atual
+                trocarPara(lido, aviso ? [aviso] : []);
+                enderecar(null); // so ganha endereco depois de gravada
+              }
               e.target.value = "";
             }}
           />
         </div>
       </header>
+
+      {/* AVISA, NUNCA RECUSA (principio 1): base divergente, esquema do futuro,
+          endereco morto e cota estourada aparecem aqui, e a ficha abre inteira
+          atras deles. */}
+      {avisos.length > 0 && (
+        <div className="avisos">
+          {avisos.map((a, i) => (
+            <p key={i}>
+              <span>{a}</span>
+              <button onClick={() => setAvisos((x) => x.filter((_, j) => j !== i))}>
+                ok
+              </button>
+            </p>
+          ))}
+        </div>
+      )}
 
       <div className="colunas">
         <main className="coluna-build">
@@ -342,6 +522,12 @@ export default function App() {
 
       {lendo && (
         <Detalhe base={base} id={lendo} aoFechar={() => setLendo(null)} />
+      )}
+
+      {seletor && (
+        <Fichas fichas={fichas} atual={d.id}
+                aoAbrir={abrirFicha} aoApagar={apagarFicha} aoNova={novaFicha}
+                aoFechar={() => setSeletor(false)} />
       )}
 
       {/* atribuicao OGL/ORC -- exigida ao REDISTRIBUIR, e publicar e

@@ -10,10 +10,18 @@
  * o app roda offline por decisao, nao por limitacao. Exportar/importar JSON
  * cobre backup e troca de maquina.
  */
-import type { Documento, Escolha } from "./motor/tipos";
+import type { Documento, Escolha, PinDaBase } from "./motor/tipos";
 
 const CHAVE = "waybuilder:personagens";
-const ESQUEMA = "waybuilder/personagem@1";
+const CHAVE_ULTIMA = "waybuilder:ultima";
+/** onde os bytes de uma lista ilegivel sao copiados antes de a chave sumir */
+const PREFIXO_RESGATE = `${CHAVE}:corrompido-`;
+
+export const ESQUEMA_ATUAL = 2;
+const ESQUEMA = `waybuilder/personagem@${ESQUEMA_ATUAL}`;
+
+/** o nome que `novoDocumento()` da: presente no campo, ausente como conteudo */
+const SEM_NOME = "Sem nome";
 
 export interface Salvo {
   id: string;
@@ -22,9 +30,12 @@ export interface Salvo {
   doc: Documento;
 }
 
-export function novoDocumento(nome = "Sem nome"): Documento {
+export function novoDocumento(nome = SEM_NOME): Documento {
   return {
     esquema: ESQUEMA,
+    // o id nasce AQUI, uma vez, e viaja dentro do documento -- ate 2026-08-01
+    // `App.tsx:54` o cunhava a cada mount e a ficha nunca voltava (issue #1)
+    id: novoId(),
     identidade: { nome, jogador: "" },
     escolhas: [],
     atores: [],
@@ -224,41 +235,381 @@ export function nivelDoPersonagem(doc: Documento): number {
   return doc.escolhas.filter((e) => e.slot === "nivel_de_classe").length;
 }
 
-// -- persistencia ----------------------------------------------------------
+// -- versao de esquema e migracao -------------------------------------------
+//
+// `doc.esquema` existia desde sempre e NUNCA era lido: `grep -rn esquema
+// app/src` so achava escritas. Passa a decidir a migracao.
+//
+// `@1 -> @2` adiciona `id` e `base`. Nada e removido nem renomeado, e a
+// migracao e idempotente: rodar duas vezes da o mesmo documento.
 
-export function listar(): Salvo[] {
+export function versaoDeEsquema(d: Documento): number {
+  const m = /@(\d+)\s*$/.exec(String(d?.esquema ?? ""));
+  // ausente ou ilegivel = `@1`: todo documento gravado ate 2026-08-01 e `@1`,
+  // e um escrito a mao pode nao ter o campo
+  return m ? Number(m[1]) : 1;
+}
+
+/**
+ * Poe o documento na forma atual, ou explica por que nao pos.
+ *
+ * Documento de versao FUTURA abre assim mesmo, intacto e com aviso -- inclusive
+ * o `esquema`, que nao e rebaixado: rebaixar destruiria a unica informacao de
+ * que aquele documento veio de um app mais novo, e o campo desconhecido que ele
+ * carrega e preservado pelo spread da gravacao.
+ * Spec: `specs/2026-07-26-schema-personagem.md:175-176`.
+ *
+ * `idDeFallback` e o `id` da ENTRADA do indice: numa ficha `@1` ele ja existe,
+ * ja e unico e ja e estavel em disco -- so nunca esteve dentro do documento.
+ */
+export function migrar(
+  d: Documento,
+  idDeFallback?: string,
+): { doc: Documento; avisos: string[] } {
+  const n = versaoDeEsquema(d);
+  if (n > ESQUEMA_ATUAL) {
+    return {
+      doc: d,
+      avisos: [
+        `esta ficha foi gravada num esquema mais novo (@${n}); este app entende `
+        + `ate @${ESQUEMA_ATUAL}. Ela abre inteira, e o que este app nao conhece `
+        + "e preservado na gravacao.",
+      ],
+    };
+  }
+  if (n < 2) {
+    return {
+      doc: {
+        ...d,
+        id: d.id ?? idDeFallback ?? novoId(),
+        // `pin: null` = montada sob base nao registrada. `nascida_em_pin: null`
+        // PRESENTE e nulo: o carimbo so preenche o campo ausente, entao ficha
+        // migrada nunca recebe a base de hoje como berco -- seria falso.
+        base: d.base ?? { pin: null, origem: "desconhecido", nascida_em_pin: null },
+        esquema: ESQUEMA,
+      },
+      avisos: [],
+    };
+  }
+  // ja `@2`: so o id, se um documento escrito a mao chegou sem ele
+  return { doc: d.id ? d : { ...d, id: idDeFallback ?? novoId() }, avisos: [] };
+}
+
+// -- persistencia ----------------------------------------------------------
+//
+// O `localStorage` E o banco: sem servidor, o que nao esta aqui nao existe.
+// Duas regras mandam nesta secao, e as duas vem do principio 4 (nada e
+// descartado):
+//
+//   1. entrada que nao se entende e PRESERVADA e pulada -- nunca descartada;
+//   2. chave ilegivel e COPIADA antes de qualquer `setItem` que a substitua.
+//
+// A regra 2 fecha o unico caminho de perda total que sobrava: `listar()`
+// devolvia `[]` para um JSON quebrado e a gravacao seguinte escrevia uma lista
+// de um elemento por cima de tudo.
+
+/** Uma entrada bem-formada tem um `doc` com `escolhas` -- o resto e lixo a preservar. */
+function bemFormada(e: unknown): e is { id?: unknown; atualizado?: unknown; doc: Documento } {
+  if (typeof e !== "object" || e === null) return false;
+  const doc = (e as { doc?: unknown }).doc;
+  return typeof doc === "object" && doc !== null
+    && Array.isArray((doc as Documento).escolhas);
+}
+
+interface Leitura {
+  /** o array cru, exatamente como esta em disco -- inclusive as malformadas */
+  entradas: unknown[];
+  /** indice no array cru -> id resolvido; so das bem-formadas */
+  idPorIndice: Map<number, string>;
+  salvos: Salvo[];
+  ilegivel: boolean;
+  cru: string | null;
+}
+
+function ler(): Leitura {
+  const vazio: Leitura = {
+    entradas: [], idPorIndice: new Map(), salvos: [], ilegivel: false, cru: null,
+  };
+  let cru: string | null = null;
   try {
-    const cru = localStorage.getItem(CHAVE);
-    if (!cru) return [];
-    const lista = JSON.parse(cru);
-    return Array.isArray(lista) ? lista : [];
+    cru = localStorage.getItem(CHAVE);
   } catch {
-    // localStorage corrompido nao pode derrubar o app -- o jogador perde a
-    // lista, nao a sessao
-    return [];
+    return vazio; // `localStorage` bloqueado (modo anonimo antigo): sem lista, com app
+  }
+  if (cru === null) return vazio;
+
+  let lido: unknown;
+  try {
+    lido = JSON.parse(cru);
+  } catch {
+    return { ...vazio, ilegivel: true, cru };
+  }
+  if (!Array.isArray(lido)) return { ...vazio, ilegivel: true, cru };
+
+  const idPorIndice = new Map<number, string>();
+  const salvos: Salvo[] = [];
+  const usados = new Set<string>();
+  lido.forEach((entrada, i) => {
+    if (!bemFormada(entrada)) return; // preservada em `entradas`, fora da lista
+    const idEntrada =
+      typeof entrada.id === "string" && entrada.id ? entrada.id : `p-sem-id-${i}`;
+    // O DOCUMENTO GANHA na divergencia: ele e a fonte de verdade e o indice e
+    // espelho. A excecao existe para nao criar duas fichas com o mesmo id --
+    // quem chegou depois cede, e a ordem do array decide, o que torna a
+    // resolucao deterministica (nada de id aleatorio no meio de uma leitura).
+    let id = typeof entrada.doc.id === "string" && entrada.doc.id
+      ? entrada.doc.id : idEntrada;
+    if (usados.has(id)) id = idEntrada;
+    if (usados.has(id)) id = `${idEntrada}#${i}`;
+    usados.add(id);
+    idPorIndice.set(i, id);
+
+    const migrado = migrar(entrada.doc, id).doc;
+    const doc = migrado.id === id ? migrado : { ...migrado, id };
+    salvos.push({
+      id,
+      nome: doc.identidade?.nome || SEM_NOME,
+      atualizado: typeof entrada.atualizado === "string" ? entrada.atualizado : "",
+      doc,
+    });
+  });
+  return { entradas: lido, idPorIndice, salvos, ilegivel: false, cru };
+}
+
+/**
+ * As fichas em disco, ja migradas EM MEMORIA.
+ *
+ * A migracao so vai ao disco na proxima gravacao daquela ficha: reescrever as N
+ * entradas de uma vez e uma unica escrita grande que, com a cota apertada --
+ * exatamente o cenario que a issue #1 produzia --, falha levando tudo junto.
+ */
+export function listar(): Salvo[] {
+  return ler().salvos;
+}
+
+export interface ResultadoDeGravacao {
+  ok: boolean;
+  lista: Salvo[];
+  /** `cota` cobre `QuotaExceededError` e qualquer recusa do `setItem` */
+  erro?: "cota" | "resgate";
+  detalhe?: string;
+}
+
+/**
+ * Copia os bytes de uma lista ilegivel para uma chave propria.
+ *
+ * Devolve `false` se a copia nao coube -- e ai a gravacao NAO acontece: perder
+ * a chance de gravar e recuperavel, sobrescrever o que nao se conseguiu copiar
+ * nao e.
+ */
+function resgatarIlegivel(l: Leitura): boolean {
+  if (!l.ilegivel || l.cru === null) return true;
+  try {
+    localStorage.setItem(`${PREFIXO_RESGATE}${new Date().toISOString()}`, l.cru);
+    return true;
+  } catch {
+    return false;
   }
 }
 
-export function salvar(id: string, doc: Documento): Salvo[] {
-  const lista = listar().filter((s) => s.id !== id);
-  lista.push({
-    id,
-    nome: doc.identidade?.nome || "Sem nome",
-    atualizado: new Date().toISOString(),
-    doc,
-  });
-  localStorage.setItem(CHAVE, JSON.stringify(lista));
-  return lista;
+/**
+ * Grava a ficha. O id vem de DENTRO do documento -- passar id por fora foi o
+ * que permitiu ao `App.tsx:54` inventar um a cada mount (issue #1).
+ *
+ * Nao lanca: cota estourada e caso normal de um banco que mora no navegador, e
+ * quem chama precisa poder avisar sem perder a edicao.
+ */
+export function salvar(documento: Documento): ResultadoDeGravacao {
+  const l = ler();
+  const id = documento.id ?? novoId();
+  const doc = documento.id ? documento : { ...documento, id };
+
+  if (!resgatarIlegivel(l)) {
+    return {
+      ok: false, lista: l.salvos, erro: "resgate",
+      detalhe: "a lista em disco esta ilegivel e a copia de resgate nao coube; "
+        + "nada foi sobrescrito",
+    };
+  }
+
+  // as OUTRAS entradas voltam ao disco como estavam, inclusive as malformadas
+  const preservadas = l.entradas.filter((_, i) => l.idPorIndice.get(i) !== id);
+  const lista = [
+    ...preservadas,
+    { id, nome: doc.identidade?.nome || SEM_NOME, atualizado: new Date().toISOString(), doc },
+  ];
+  try {
+    localStorage.setItem(CHAVE, JSON.stringify(lista));
+  } catch (e) {
+    return { ok: false, lista: l.salvos, erro: "cota", detalhe: String(e) };
+  }
+  return { ok: true, lista: ler().salvos };
 }
 
-export function apagar(id: string): Salvo[] {
-  const lista = listar().filter((s) => s.id !== id);
-  localStorage.setItem(CHAVE, JSON.stringify(lista));
-  return lista;
+/** Apagar e ato do jogador. Nenhum caminho de codigo chama isto sem clique. */
+export function apagar(id: string): ResultadoDeGravacao {
+  const l = ler();
+  if (!resgatarIlegivel(l)) {
+    return { ok: false, lista: l.salvos, erro: "resgate", detalhe: "lista ilegivel" };
+  }
+  const restantes = l.entradas.filter((_, i) => l.idPorIndice.get(i) !== id);
+  try {
+    localStorage.setItem(CHAVE, JSON.stringify(restantes));
+    if (ultimaAberta() === id) esquecerUltima();
+  } catch (e) {
+    return { ok: false, lista: l.salvos, erro: "cota", detalhe: String(e) };
+  }
+  return { ok: true, lista: ler().salvos };
 }
 
 export function novoId(): string {
   return `p${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`;
+}
+
+// -- qual ficha o app abre ---------------------------------------------------
+
+/** O ponteiro da ultima ficha ABERTA -- decisao, nao derivacao de `atualizado`. */
+export function ultimaAberta(): string | null {
+  try {
+    return localStorage.getItem(CHAVE_ULTIMA);
+  } catch {
+    return null;
+  }
+}
+
+export function marcarAberta(id: string): void {
+  try {
+    localStorage.setItem(CHAVE_ULTIMA, id);
+  } catch {
+    // ponteiro e conveniencia: sem ele a precedencia cai no maior `atualizado`
+  }
+}
+
+export function esquecerUltima(): void {
+  try {
+    localStorage.removeItem(CHAVE_ULTIMA);
+  } catch {
+    /* idem */
+  }
+}
+
+/** `#/p/<id>` -- hash, e nao rota: nao exige nada do servidor nem do SW. */
+export function idDoHash(hash: string): string | null {
+  const m = /^#\/p\/([^/?#]+)$/.exec((hash ?? "").trim());
+  return m ? decodeURIComponent(m[1]) : null;
+}
+
+export interface Abertura {
+  doc: Documento;
+  avisos: string[];
+  /** `true` = documento novo, ainda NAO gravado */
+  nova: boolean;
+}
+
+function abrirSalvo(s: Salvo, antes: string[]): Abertura {
+  const { doc: d, avisos } = migrar(s.doc, s.id);
+  marcarAberta(s.id);
+  return { doc: d, avisos: [...antes, ...avisos], nova: false };
+}
+
+/**
+ * A precedencia da carga. Primeira que resolve ganha:
+ *
+ *   1. `#/p/<id>` que nomeia uma entrada existente;
+ *   2. o ponteiro `waybuilder:ultima`;
+ *   3. a entrada de maior `atualizado` (a unica pista que a bagunca legada tem);
+ *   4. documento novo, NAO gravado -- e o que impede a visita ociosa de deixar
+ *      entrada, que e o defeito da issue #1 voltando por outra porta.
+ *
+ * Hash que nomeia ficha inexistente AVISA e cai no passo 4. Escorrer para o
+ * passo 2 abriria uma ficha DIFERENTE com o endereco de outra, e o debounce
+ * gravaria por cima dela em 500 ms.
+ */
+export function abrir(hash = hashAtual()): Abertura {
+  const lista = listar();
+  const porId = new Map(lista.map((s) => [s.id, s]));
+
+  const pedido = idDoHash(hash);
+  if (pedido) {
+    const achado = porId.get(pedido);
+    if (achado) return abrirSalvo(achado, []);
+    return {
+      doc: novoDocumento(),
+      avisos: [`o endereco pede a ficha \`${pedido}\`, que nao existe neste `
+        + "navegador; abrindo uma ficha nova em vez de outra qualquer"],
+      nova: true,
+    };
+  }
+
+  const ponteiro = ultimaAberta();
+  const apontada = ponteiro ? porId.get(ponteiro) : undefined;
+  if (apontada) return abrirSalvo(apontada, []);
+
+  if (lista.length) {
+    const recente = [...lista].sort(
+      (a, b) => (a.atualizado < b.atualizado ? 1 : a.atualizado > b.atualizado ? -1 : 0),
+    )[0];
+    return abrirSalvo(recente, []);
+  }
+  return { doc: novoDocumento(), avisos: [], nova: true };
+}
+
+function hashAtual(): string {
+  return typeof location === "undefined" ? "" : location.hash;
+}
+
+/**
+ * O que conta como ficha a gravar.
+ *
+ * Visita que so abre o app nao pode deixar entrada -- era uma entrada nova por
+ * recarga (issue #1). O nome default nao conta como conteudo: ele vem de
+ * `novoDocumento()`, nao do jogador.
+ */
+export function temConteudo(d: Documento): boolean {
+  if (d.escolhas.length) return true;
+  if ((d.atores?.length ?? 0) > 0) return true;
+  if ((d.inventario?.length ?? 0) > 0) return true;
+  const nome = (d.identidade?.nome ?? "").trim();
+  return nome !== "" && nome !== SEM_NOME;
+}
+
+// -- identidade de build -----------------------------------------------------
+
+/**
+ * Carimba no documento sob que base ele esta sendo editado.
+ *
+ * Pin nulo (`crypto.subtle` fora de secure context, ou ficha migrada) NAO
+ * carimba nada: gravar `null` por cima de um pin real apagaria a unica
+ * informacao boa que a ficha ja tinha.
+ */
+export function carimbarBase(d: Documento, atual: PinDaBase): Documento {
+  if (!atual.pin) return d;
+  const base = { ...(d.base ?? {}) };
+  base.pin = atual.pin;
+  base.origem = atual.origem;
+  if (atual.registros !== undefined) base.registros = atual.registros;
+  if (atual.kinds !== undefined) base.kinds = atual.kinds;
+  base.visto_em = new Date().toISOString();
+  // so o campo AUSENTE: `nascida_em_pin: null` de ficha migrada fica nulo
+  if (!("nascida_em_pin" in base)) base.nascida_em_pin = atual.pin;
+  return { ...d, base };
+}
+
+/**
+ * O aviso de base divergente -- AVISA, nunca recusa (principio 1).
+ *
+ * So compara pin contra pin. Ficha sem pin (migrada, ou carregada sem
+ * `crypto.subtle`) nao diverge de nada: afirmar divergencia sem ter os dois
+ * lados seria inventar.
+ */
+export function avisoDePin(d: Documento, atual: PinDaBase): string | null {
+  const antes = d.base?.pin;
+  if (!antes || !atual.pin || antes === atual.pin) return null;
+  const nAntes = d.base?.registros;
+  const quantos = (n?: number) => (n === undefined ? "?" : n.toLocaleString("pt-BR"));
+  return `esta ficha foi editada sobre outra base (${antes.slice(0, 8)}, `
+    + `${quantos(nAntes)} registros); a atual e ${atual.pin.slice(0, 8)}, `
+    + `${quantos(atual.registros)}. A ficha foi re-derivada, nada foi removido.`;
 }
 
 // -- export / import -------------------------------------------------------
@@ -282,8 +633,16 @@ export function exportar(doc: Documento): void {
 /**
  * Aceita o documento e devolve o erro em vez de lancar: importar arquivo
  * errado e caso normal, nao excecao.
+ *
+ * Tres casos de `id`, e nenhum deles sobrescreve ficha existente: importar o
+ * proprio backup por cima de uma ficha editada depois seria descartar trabalho
+ * sem perguntar. Restaurar backup por cima passa a exigir apagar antes -- o que
+ * so e aceitavel porque o seletor de fichas existe.
  */
-export function importar(texto: string): { doc?: Documento; erro?: string } {
+export function importar(
+  texto: string,
+  existentes: string[] = listar().map((s) => s.id),
+): { doc?: Documento; erro?: string; aviso?: string } {
   let lido: unknown;
   try {
     lido = JSON.parse(texto);
@@ -297,7 +656,18 @@ export function importar(texto: string): { doc?: Documento; erro?: string } {
   if (!Array.isArray(doc.escolhas)) {
     return { erro: "documento sem `escolhas` -- nao e uma ficha do Waybuilder" };
   }
-  return { doc: { ...novoDocumento(), ...doc } };
+  // o spread NAO descarta chave desconhecida -- propriedade contratual desde
+  // esta spec, e o que faz um documento `@futuro` voltar inteiro na gravacao
+  const bruto = { ...novoDocumento(), ...doc };
+  const { doc: migrado, avisos } = migrar(bruto);
+  const veioComId = typeof doc.id === "string" && doc.id !== "";
+  if (veioComId && existentes.includes(doc.id as string)) {
+    return {
+      doc: { ...migrado, id: novoId() },
+      aviso: "esta ficha ja existia neste navegador; entrou como copia",
+    };
+  }
+  return { doc: migrado, aviso: avisos[0] };
 }
 
 // -- inventario -------------------------------------------------------------

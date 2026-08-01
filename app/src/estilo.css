@@ -497,3 +497,47 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .licenca-corpo h3 { margin: 14px 0 4px; font-size: .95em; }
 .licenca-corpo p { margin: 0 0 8px; line-height: 1.5; font-size: .9em; }
 .licenca-corpo .fraco { color: var(--fraco); font-size: .85em; }
+
+/* SELETOR DE FICHAS e AVISOS
+   -------------------------------------------------------------------------
+   Duas pecas que nasceram juntas com a persistencia (issue #1): sem uma lista
+   na tela a ficha salva era inalcancavel, e sem uma faixa de aviso a base
+   divergente nao tinha onde aparecer -- e AVISAR, NUNCA RECUSAR (principio 1)
+   exige um lugar visivel que nao bloqueia nada.
+
+   A faixa fica no fluxo, acima das colunas, e nao sobreposta: aviso que tampa
+   conteudo vira aviso que se fecha sem ler. */
+.avisos { padding: 6px 14px 0; display: grid; gap: 6px; }
+.avisos p {
+  margin: 0; display: flex; gap: 10px; align-items: baseline;
+  background: var(--card); border: 1px solid var(--pend); border-radius: var(--r-p);
+  padding: 8px 10px; font-size: .9em; line-height: 1.45;
+}
+.avisos p span { flex: 1; }
+.avisos p button { flex: none; }
+
+.fichas-fundo {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, .6);
+  display: grid; place-items: center; z-index: 60; padding: 20px;
+}
+.fichas {
+  background: var(--fundo); border-radius: var(--r-p);
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 6px 18px rgba(0, 0, 0, .5));
+  width: min(620px, 100%); max-height: 86vh; display: flex; flex-direction: column;
+  padding: 12px 14px 14px;
+}
+.fichas > header { display: flex; align-items: center; gap: 14px; }
+.fichas > header h2 { margin: 0; font-size: 1.1em; font-weight: 700; }
+.fichas > header .fechar { margin-left: auto; }
+.fichas ul { list-style: none; margin: 10px 0; padding: 0; overflow-y: auto; }
+.fichas li { display: flex; gap: 8px; align-items: center; padding: 2px 0; }
+.fichas li .abrir {
+  flex: 1; display: grid; gap: 2px; text-align: left; padding: 7px 9px;
+}
+/* a ficha ABERTA fica marcada pelo accent no texto, nunca por fundo cheio */
+.fichas li.atual .abrir { border-color: var(--accent); }
+.fichas li.atual .abrir strong { color: var(--accent); }
+.fichas li .meta { color: var(--fraco); font-size: .82em; }
+.fichas li .apagar { color: var(--vermelho); border-color: var(--vermelho); }
+.fichas .nova { align-self: flex-start; }
+.fichas .nota { color: var(--fraco); font-size: .9em; margin: 12px 0; }

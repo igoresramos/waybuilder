@@ -118,18 +118,74 @@ class TestCandidatosEmEscala(unittest.TestCase):
                     # vazia sem explicacao
                     self.assertTrue(lista, f"{classe_id}/{slot} sem candidatos")
 
-    def test_class_feat_traz_feat_da_classe_certa(self):
-        """O recorte e por classe DO PERSONAGEM -- um Barbaro nao ve feat de
-        Mago no slot de classe."""
+    def test_class_feat_so_traz_a_classe_do_personagem_ou_arquetipo(self):
+        """O slot de classe aceita DOIS conjuntos, e nada alem deles.
+
+        Um Barbaro nao ve feat de Mago -- mas VE feat de arquetipo, porque
+        gastar o feat de classe na Dedication e a porta RAW para entrar num
+        arquetipo (`motor/motor.py:3634-3646`). A versao 1 da spec so previa o
+        primeiro conjunto e por isso este teste acusava o motor certo.
+
+        A lista inteira e varrida, nao um prefixo: com a ordenacao por `atende`
+        os 30 primeiros de um Guerreiro sao todos de arquetipo, entao um corte
+        no topo nao exercitaria o ramo da trait de classe.
+
+        Spec: `specs/2026-07-27-slots-e-candidatos.md`, "Por que o slot de
+        classe aceita arquetipo".
+        """
         for classe_id in self.classes:
             p = self._personagem(classe_id)
             nome = BASE_BUILD.get(classe_id).get("name", "").lower()
             lista = p.candidatos("class_feat", em=4)
+            da_classe = 0
             with self.subTest(classe=classe_id):
-                for item in lista[:30]:
+                for item in lista:
                     traits = {str(t).lower()
                               for t in (BASE_BUILD.get(item["id"]).get("traits") or [])}
-                    self.assertIn(nome, traits, f"{item['id']} nao e de {nome}")
+                    if nome in traits:
+                        da_classe += 1
+                        continue
+                    self.assertIn("archetype", traits,
+                                  f"{item['id']} nao e de {nome} nem e arquetipo")
+                # o ramo da trait de classe tem de continuar existindo: se ele
+                # quebrar, o teste acima passaria com uma lista 100% arquetipo.
+                # Medido em 2026-08-01: minimo 40 (animist), maximo 136 (monk).
+                self.assertGreaterEqual(
+                    da_classe, 20, f"{classe_id}: so {da_classe} feats da propria classe")
+
+    def test_toda_dedicacao_e_alcancavel_pelo_slot_de_classe(self):
+        """O motivo de o slot aceitar arquetipo, virado em teste.
+
+        Nenhuma das 225 dedicacoes da base carrega trait de classe (medido em
+        2026-08-01 sobre `pipeline/base/index.json`). Filtrar o slot por trait
+        de classe tornava TODAS inalcancaveis por ele, e a unica porta para
+        arquetipo virava o slot de Free Archetype -- que e regra variante. Este
+        teste e o que impede essa regressao de voltar.
+        """
+        dedicacoes = {r["id"] for r in BASE_BUILD.por_id.values()
+                      if r.get("kind") == "feat"
+                      and "dedication" in {str(t).lower() for t in (r.get("traits") or [])}}
+        self.assertGreaterEqual(len(dedicacoes), 200, "as dedicacoes sumiram da base?")
+        for classe_id in self.classes:
+            p = self._personagem(classe_id)
+            ids = {x["id"] for x in p.candidatos("class_feat", em=4)}
+            with self.subTest(classe=classe_id):
+                faltando = dedicacoes - ids
+                self.assertFalse(faltando,
+                                 f"{classe_id}: {len(faltando)} dedicacoes fora do slot")
+
+    def test_class_feat_continua_sendo_recorte(self):
+        """Aceitar arquetipo nao pode virar 'aceita qualquer coisa'.
+
+        Medido em 2026-08-01 num Guerreiro 4: 2.239 candidatos de 6.239 feats
+        (35,9%). Os ~4.000 que ficam de fora sao feats de outras classes -- e
+        exatamente o que o slot tem de barrar.
+        """
+        p = self._personagem("wb:class/fighter")
+        todos = len(p.disponiveis("feat"))
+        do_slot = len(p.candidatos("class_feat", em=4))
+        self.assertLess(do_slot, todos * 0.45,
+                        f"{do_slot} de {todos} -- o slot parou de recortar")
 
     def test_slots_abertos_responde_para_todas(self):
         for classe_id in self.classes:
