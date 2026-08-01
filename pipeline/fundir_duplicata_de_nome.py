@@ -244,7 +244,14 @@ def fundir(vencedor: dict, perdedor: dict, motivo: str) -> dict:
                           "valor": perdedor["prov"]})
 
     hist = list(vencedor.get("historico") or []) + list(perdedor.get("historico") or [])
-    hist.append({"passo": "fundir_duplicata_de_nome", "absorveu": perdedor["id"],
+    # `id_legado` e `nome_legado` NAO sao opcionais: e o contrato de rastro que
+    # `pipeline/testes/test_reconciliar.py:140` cobra de toda entrada de
+    # historico, e o passo o quebrou em 50 registros na primeira versao. O
+    # rastro por NOME e o que permite achar de onde um registro veio depois que
+    # o id sumiu.
+    hist.append({"passo": "fundir_duplicata_de_nome",
+                 "id_legado": perdedor["id"],
+                 "nome_legado": perdedor["name"],
                  "motivo": motivo})
     vencedor["historico"] = hist
 

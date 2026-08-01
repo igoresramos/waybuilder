@@ -18,8 +18,17 @@ Uso:
 import json, os, subprocess, sys, collections
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-RAIZ_GIT = "/home/igor0"
-REL = "Tartarus/Projetos/pessoal/waybuilder/pipeline/base/index.json"
+# Derivado, nunca hardcoded: o projeto saiu do monorepo em 2026-08-01 e os dois
+# caminhos fixos ("/home/igor0" e o REL com Tartarus/Projetos/...) deixaram este
+# script morto sem ninguem notar -- ele tinha zero chamadas. Ancorar em `AQUI`
+# faz funcionar de qualquer cwd; derivar `REL` por relpath sobrevive ao repo
+# mudar de lugar de novo.
+_r = subprocess.run(["git", "-C", AQUI, "rev-parse", "--show-toplevel"],
+                    capture_output=True, text=True)
+if _r.returncode != 0:
+    sys.exit(f"nao estou dentro de um repo git: {_r.stderr.strip()}")
+RAIZ_GIT = _r.stdout.strip()
+REL = os.path.relpath(f"{AQUI}/base/index.json", RAIZ_GIT)
 ATUAL = f"{AQUI}/base/index.json"
 
 
