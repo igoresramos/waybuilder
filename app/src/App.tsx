@@ -20,6 +20,7 @@ import type {
   Candidato, Documento, FonteDeBoost, PinDaBase, Registro,
 } from "./motor/tipos";
 import { carregarNucleo } from "./carregarBase";
+import { Avatar } from "./componentes/Avatar";
 import { Slot, FILTROS_DE_FEAT, FILTROS_DE_RARIDADE } from "./componentes/Slot";
 import { PainelDireito } from "./componentes/PainelDireito";
 import { IconeCog } from "./componentes/Icones";
@@ -66,7 +67,24 @@ const NOME_DO_TIPO: Record<string, string> = {
   weapon: "Arma", ancestry: "Ancestralidade", deity: "Divindade",
 };
 
+/**
+ * Rota de dev do avatar -- `#/avatar` (spec, passo 3 da ordem).
+ *
+ * Fica dentro do proprio app, com o mesmo build e o mesmo versionamento
+ * (decisao 10): a promocao a modal e mover um componente. Prototipo de
+ * interface em projeto separado e modo de perda conhecido nesta casa.
+ */
+function RotaDoAvatar() {
+  return (
+    <main style={{ padding: "var(--u)" }}>
+      <h2 style={{ marginTop: 0 }}>Avatar (rota de dev)</h2>
+      <Avatar />
+    </main>
+  );
+}
+
 export default function App() {
+  if (location.hash.startsWith("#/avatar")) return <RotaDoAvatar />;
   const [base, setBase] = useState<Base | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   // A CARGA DECIDE QUAL FICHA ABRE -- hash, ponteiro, mais recente, ou nova.

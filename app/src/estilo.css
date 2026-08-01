@@ -541,3 +541,75 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .fichas li .apagar { color: var(--vermelho); border-color: var(--vermelho); }
 .fichas .nova { align-self: flex-start; }
 .fichas .nota { color: var(--fraco); font-size: .9em; margin: 12px 0; }
+
+/* -- avatar: painel de casas, uma por slot ---------------------------------
+   Spec: waybuilder-avatar/specs/2026-08-01-avatar-do-personagem.md (5c).
+   Herda os tokens do app -- o avatar e um modal daqui, nao um produto a parte. */
+.avatar { display: flex; gap: calc(var(--u) * 2); align-items: flex-start; }
+
+.avatar-palco {
+  position: sticky; top: var(--u); flex: none;
+  display: flex; flex-direction: column; gap: var(--u); align-items: center;
+  background: var(--painel); border: 1px solid var(--borda);
+  border-radius: var(--r); padding: var(--u);
+}
+.avatar-boneco { image-rendering: pixelated; display: block; }
+
+.avatar-corpos { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+.avatar-corpos button {
+  background: var(--card); border: 1px solid var(--borda); color: var(--fraco);
+  border-radius: var(--r-p); padding: 4px 8px; cursor: pointer;
+  font-size: .85em; transition: border-color .2s, color .2s;
+}
+.avatar-corpos button:hover { border-color: var(--accent); }
+.avatar-corpos button.sel { color: var(--texto); border-color: var(--accent); }
+
+.avatar-casas { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--u); }
+.avatar-casas h3 { color: var(--fraco); font-size: .85em; font-weight: 500; margin: 0 0 4px; }
+.avatar-grupo { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* a casa: uma por slot. Cheia mostra a peca no boneco; vazia e um quadrado. */
+.avatar-casa {
+  width: 76px; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--r-p); padding: 5px; cursor: pointer;
+  transition: border-color .2s;
+}
+.avatar-casa:hover, .avatar-casa:focus-visible { border-color: var(--accent); }
+.avatar-casa .avatar-boneco { width: 64px; height: 64px; }
+.avatar-casa-vazia {
+  width: 64px; height: 64px; border-radius: var(--r-p);
+  border: 1px dashed var(--borda-forte); opacity: .5;
+}
+.avatar-casa-nome {
+  font-size: .7em; color: var(--fraco); max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.avatar-casa.cheia .avatar-casa-nome { color: var(--texto); }
+
+.avatar-picker .avatar-grade { display: flex; flex-wrap: wrap; gap: 6px; }
+.avatar-picker .avatar-grade li { list-style: none; }
+.avatar-picker .avatar-grade button {
+  width: 84px; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: var(--card); border: 1px solid var(--borda);
+  border-radius: var(--r-p); padding: 5px; cursor: pointer;
+  transition: border-color .2s;
+}
+.avatar-picker .avatar-grade button:hover { border-color: var(--accent); }
+.avatar-picker .avatar-grade button.sel { border-color: var(--accent); }
+.avatar-picker .avatar-grade .nome {
+  font-size: .7em; color: var(--fraco);
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+/* 130 itens nao tem arte em algum corpo: sem o aviso a celula mostraria o
+   boneco inalterado e o preview mentiria por omissao */
+.avatar-sem-arte { font-size: .62em; color: var(--pend); }
+
+.avatar-erro { color: var(--vermelho); padding: var(--u); }
+.avatar-carregando { color: var(--fraco); padding: var(--u); }
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-casa, .avatar-corpos button, .avatar-picker .avatar-grade button {
+    transition: none;
+  }
+}

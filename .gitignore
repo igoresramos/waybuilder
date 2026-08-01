@@ -28,3 +28,6 @@ docs/referencia-pathbuilder/app-local/assets/data_remastered71.txt
 # nao artefato: o que vale versionar sao os relatorios que os proprios
 # mecanismos gravam (`pipeline/base/relatorio_*.md`, `docs/*validacao*.md`).
 docs/_verificacao/
+
+# derivado do pacote waybuilder-avatar (sincronizar-avatar.sh)
+app/public/avatar/
