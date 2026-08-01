@@ -15,7 +15,9 @@ status: implementada
 created: 2026-08-01
 prova: exemplar-root-epithet        # so quando a deteccao automatica erra
 altera: [WB-002]                    # contratos grandes que esta spec muda
-todo: 84                            # secundario -- o TODO.md vive no Tartarus
+atualizada_em: 2026-08-01           # quando o texto mudou depois de aprovado
+issue: 1                            # issue do GitHub, quando houver
+todo: 84                            # legado -- o TODO.md vive no Tartarus
 ---
 ```
 
@@ -30,7 +32,12 @@ em quatro specs diferentes era a mesma tarefa ou renumeracao.
 `WB-001` a `WB-075`. **Nao renumere:** o id e citado por outras specs no campo
 `altera` e pelas tabelas de referencia cruzada.
 
-`todo` fica, como ponteiro secundario para quem tem o Tartarus a mao.
+`todo` fica, como ponteiro secundario para quem tem o Tartarus a mao. Spec nova
+usa **`issue: N`**, apontando para o board do GitHub -- convencao que apareceu
+sozinha em `persistencia-e-identidade-de-build` (2026-08-01) e que e melhor que
+as duas anteriores: o alvo e publico, versionado fora do repo e nao se perde numa
+mudanca de pasta. `req` continua sendo a identidade da SPEC; `issue` e o
+ponteiro para o TRABALHO. Sao coisas diferentes e convivem.
 
 > Ideia emprestada do Fusion (`REQ-<PREFIXO>-NNN`, 1.383 deles). O que **nao**
 > foi copiado de la e a marca `[MVP]`/`[V2]`: o Waybuilder nao tem essa divisao,
@@ -80,6 +87,16 @@ A regra foi calibrada duas vezes, e vale registrar as duas para nao voltarem:
 > `nomear-o-balaio-por-tag` escapou das quatro e foi confirmada a mao (o eixo
 > `exemplar-root-epithet` existe na base) -- dai a prova 5.
 
+## `version` e `atualizada_em`
+
+Spec editada depois de aprovada sobe `version` e ganha `atualizada_em`. A
+convencao **nao foi decidida aqui** -- ela apareceu na `main` em 2026-08-01,
+quando `slots-e-candidatos` virou v2 depois de descobrir que descrevia um motor
+que nao existia havia 4 dias. Esta pagina so registra o que o projeto ja fez.
+
+O portao nao cobra os dois campos: a maioria das specs nunca foi editada, e
+exigir `atualizada_em` de quem nao mudou seria pedir ruido.
+
 ## `altera` -- a referencia nos dois sentidos
 
 Spec pequena que muda um contrato grande declara qual:
@@ -117,19 +134,20 @@ python3 pipeline/verificar_specs.py --listar    # estado spec a spec
 python3 pipeline/verificar_specs.py --tabelas   # regenera a referencia cruzada
 ```
 
-> **Ainda nao esta ligado a nada.** Nao entra no `build.sh` porque nao e portao
-> de dado -- ele nao olha a base, olha as specs. O lugar dele e o comando de
-> teste do projeto, que ainda nao existe (`package.json` tem quatro comandos e
-> nenhum e `test`, e as 16 verificacoes de `app/verificacao/` tambem nao estao
-> em comando nenhum). Ate la, roda-se a mao -- e um portao que ninguem roda e
-> decoracao, entao isso e divida, nao pendencia menor.
+Esta ligado ao `./verificar.sh` como **mecanismo 8 de 8**, e roda em ~1 segundo.
+Nao entra no `build.sh` porque nao e portao de dado -- ele nao olha a base, olha
+as specs.
+
+> Este paragrafo dizia, ate a revisao deste PR, que o portao "nao esta ligado a
+> nada, porque o comando de teste do projeto nao existe". O `verificar.sh`
+> nasceu na `main` no meio do caminho, e a divida virou uma linha de codigo.
 
 ## O que esta convencao NAO resolve
 
-- **`version` continua sempre em `1`.** O texto e editado por cima e o numero
-  nao muda; a spec do app diz "atualizada em 28/07" e tem uma secao "estado em
-  29/07". Ficou sem decisao de proposito -- como todas estao em `1` e isso e
-  correto para spec nao-editada, decidir depois nao custa retrabalho.
+- **`version` so sobe quando alguem lembra.** O portao nao cobra, e a spec do
+  app segue dizendo "atualizada em 28/07" com uma secao "estado em 29/07".
+  Cobrar exigiria comparar o texto com a versao anterior no git -- da para
+  fazer, nao esta feito.
 - **A defasagem ja existente nos contratos grandes.** O `schema-base` fala em 8
   portoes (sao 11) e 22 kinds (sao 58); o `schema-personagem` lista 15 slots e
   faltam 4. A tabela de referencia cruzada torna a defasagem **descobrivel**,

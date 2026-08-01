@@ -92,7 +92,7 @@ registrar() {  # nome, estado, contagem, segundos, log
 # so existe no meio do build (o portao 7 procura homonimo, e depois da fusao a
 # duplicata virou um registro so) -- fora do build ela mediria a base errada.
 echo
-echo "${NEG}== 1/7  portoes da base ==${ZERO}"
+echo "${NEG}== 1/8  portoes da base ==${ZERO}"
 LOG="$LOGS/1-portoes.log"; INI=$SECONDS
 python3 pipeline/portoes.py --fase final >"$LOG" 2>&1; COD=$?
 T=$((SECONDS - INI))
@@ -110,7 +110,7 @@ registrar "portoes da base" "$([ $COD -eq 0 ] && echo OK || echo FALHA)" "$DET" 
 
 # ------------------------------------------------------- 2. oraculo do motor
 echo
-echo "${NEG}== 2/7  oraculo do motor ==${ZERO}"
+echo "${NEG}== 2/8  oraculo do motor ==${ZERO}"
 LOG="$LOGS/2-oraculo.log"; INI=$SECONDS
 python3 motor/teste_motor.py >"$LOG" 2>&1; COD=$?
 T=$((SECONDS - INI))
@@ -128,7 +128,7 @@ registrar "oraculo do motor" "$([ $COD -eq 0 ] && echo OK || echo FALHA)" \
 suite_unittest() {  # rotulo, diretorio, numero
   local rotulo="$1" dir="$2" num="$3"
   echo
-  echo "${NEG}== $num/7  $rotulo ==${ZERO}"
+  echo "${NEG}== $num/8  $rotulo ==${ZERO}"
   local log="$LOGS/$num-$(echo "$rotulo" | tr ' /' '--').log"
   local ini=$SECONDS
   python3 -m unittest discover -s "$dir" -t . >"$log" 2>&1
@@ -158,7 +158,7 @@ suite_unittest "unittest motor" motor/testes 4
 # real entre as duas implementacoes, entao vermelho aqui significa que app e
 # oraculo discordam.
 echo
-echo "${NEG}== 5/7  vitest do porte TS ==${ZERO}"
+echo "${NEG}== 5/8  vitest do porte TS ==${ZERO}"
 LOG="$LOGS/5-vitest.log"; INI=$SECONDS
 if [ ! -d app/node_modules ]; then
   registrar "vitest do porte TS" PULADO "app/node_modules ausente -- rode 'npm ci' em app/" 0 "-"
@@ -187,7 +187,7 @@ fi
 # mentir: `npm ci` nao baixa o navegador (ele vem de `npx playwright install`),
 # entao a maquina limpa e exatamente o caso em que o falso verde apareceria.
 echo
-echo "${NEG}== 6/7  sondas de navegador (app/verificacao) ==${ZERO}"
+echo "${NEG}== 6/8  sondas de navegador (app/verificacao) ==${ZERO}"
 SONDAS=(app/verificacao/verificar-*.mjs)
 N_SONDAS=${#SONDAS[@]}
 PORTA=5175
@@ -264,7 +264,7 @@ fi
 # verdade, e linha de base como a dos portoes 4 e 11: vermelho quando PIORA,
 # nao quando diverge. Isso pede spec propria e nao esta feito.
 echo
-echo "${NEG}== 7/7  iconics da Paizo (medicao) ==${ZERO}"
+echo "${NEG}== 7/8  iconics da Paizo (medicao) ==${ZERO}"
 LOG="$LOGS/7-iconics.log"; INI=$SECONDS
 python3 motor/validar_iconics.py >"$LOG" 2>&1; COD=$?
 T=$((SECONDS - INI))
@@ -286,6 +286,26 @@ printf '  %s %-22s %s\n' "${AMAR}medido${ZERO}" "iconics da Paizo" "$DET_ICON"
 
 # ------------------------------------------------------------------- placar
 FALHOU=0; PULOU=0; PASSOU=0
+# ------------------------------------------------------------ 8. portao das specs
+#
+# Nao e portao de DADO: ele nao olha `base/index.json`, olha o frontmatter das
+# specs. Por isso nao entra no `build.sh` -- o lugar dele e aqui, junto dos
+# outros mecanismos. Ver `specs/CONVENCAO.md`.
+#
+# Custa menos de um segundo, entao roda sempre: nao tem modo `--rapido`.
+echo
+echo "${NEG}== 8/8  portao das specs ==${ZERO}"
+LOG="$LOGS/8-specs.log"; INI=$SECONDS
+python3 pipeline/verificar_specs.py >"$LOG" 2>&1; COD=$?
+T=$((SECONDS - INI))
+# linha final do script: "specs: 76 -- 75 implementada, 1 rascunho"
+E_LINHA=$(grep -E '^specs: ' "$LOG" | tail -1)
+E_FALHAS=$(grep -oE 'PORTAO DE SPECS: [0-9]+' "$LOG" | grep -oE '[0-9]+' | head -1)
+DET="${E_LINHA#specs: }"
+[ -n "${E_FALHAS:-}" ] && DET="$DET, $E_FALHAS FALHANDO"
+[ -z "$E_LINHA" ] && DET="nao chegou a rodar -- ver $LOG"
+registrar "portao das specs" "$([ $COD -eq 0 ] && echo OK || echo FALHA)" "$DET" "$T" "$LOG"
+
 echo
 echo "${NEG}=================== PLACAR ===================${ZERO}"
 printf '%-24s %-8s %6s  %s\n' "MECANISMO" "ESTADO" "SEG" "CONTAGEM"
