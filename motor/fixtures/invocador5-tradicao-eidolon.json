@@ -879,6 +879,12 @@
   },
   "concedidos": [
    {
+    "id": "wb:action/manifest-eidolon",
+    "nome": "Manifest Eidolon",
+    "por": "Eidolon",
+    "por_id": "wb:class-feature/eidolon"
+   },
+   {
     "id": "wb:feat/dubious-knowledge",
     "nome": "Dubious Knowledge",
     "por": "Hermit",
@@ -928,6 +934,11 @@
    {
     "classe": "Summoner",
     "grants": [
+     {
+      "grant_feat": [
+       "wb:action/manifest-eidolon"
+      ]
+     },
      {
       "grant_actor": {
        "escolhe": "eidolon",

@@ -445,7 +445,19 @@ items:
     `predicate: [class:gunslinger]` e cai no balde dos 293 pulados, entao os dois caminhos estao
     bloqueados, por motivos diferentes; (b) `Into the Fray` NAO existia na base -- `wb:feat/into-the-fray`
     e outro registro, nv8 trait `archetype` do Player Core 2, e casou por COLISAO DE NOME. Minha medicao
-    de 31/07 contou como alcancavel: sao 10 alvos ausentes no Gunslinger, nao 9. Familia do portao 7.'
+    de 31/07 contou como alcancavel: sao 10 alvos ausentes no Gunslinger, nao 9. Familia do portao 7.
+    || IMPLEMENTADO 2026-07-31 (extratores/acoes.py). **520 registros**, nao 557: as 37 taticas do
+    Commander saem porque JA sao extraidas como `kind: tactic` -- traze-las aqui criava 37 pares "mesma
+    entidade, dois kinds", a classe do item 110 fabricada por nos, e o oraculo pegou. Efeito medido:
+    `GrantItem sem alvo na base` caiu de **290 para 27** e os grants convertidos subiram de 556 para 819
+    (+263 concessoes que nao pousavam em lugar nenhum). Os 10 portoes passam, oraculo verde, iconics
+    identicos (118/136 no HP), pericia identica (62,9%). TRES ACHADOS DE PERCURSO: (a) traduzir
+    `tipo: action` para o kind `action` sozinho ESVAZIAVA os 4 blocos de tatica do Commander (21 -> 0),
+    porque no Foundry tatica E `type: action` e aqui e `kind: tactic` -- o `tipo` passa a alcancar os
+    dois kinds, nos dois motores; (b) meu indice do AoN usava `setdefault` e escolhia 1 entre N em
+    silencio, o defeito que o portao 7 existe para pegar (`Retributive Strike` tem dois docs no AoN);
+    agora so casa quando e INEQUIVOCO, e 173 ficam com xref vazio de proposito; (c) o falso positivo do
+    `Into the Fray` desapareceu.'
   id: 111
   date: '2026-07-31'
   priority: alta
@@ -464,5 +476,37 @@ items:
   id: 112
   date: '2026-07-31'
   priority: alta
+- desc: 'ABERTO 2026-07-31, achado ao regenerar a base para o item 111. `recuperar_mecanica_equipamento.py`
+    estava QUEBRADO NAS DUAS FONTES, e em silencio -- imprimia `fontes: foundry=0 itens, aon=0 itens` e
+    seguia. (a) `do_foundry` usava caminho FIXO `dados_brutos/foundry/packs/...` quando nesta maquina o
+    clone e `foundry_repo/`: e exatamente a armadilha que `comum.packs_foundry()` existe para resolver, e
+    este passo ficou de fora da correcao que ja tinha alcancado portoes, emitir_textos, aplicar_subclasses
+    e converter_rule_elements. (b) `do_aon` procurava `aon_equipment_weapon.json` e irmaos, nomes que nao
+    existem desde que a fonte foi refeita dentro de `dados_brutos/` -- o dump grava `aon_dump/weapon.json`.
+    CUSTO MEDIDO: **53 armas perdiam `damage` a cada rebuild**, `Blowgun`, `Fist` e `Shield Bash` entre
+    elas, e a base versionada sobrevivia so porque carregava o dado de um build ANTIGO, feito quando o
+    clone tinha o outro nome. Ninguem teria notado ate a proxima regeneracao. CONSERTADO no mesmo dia
+    (foundry 0 -> 1.328 itens, aon 0 -> 399) e o oraculo voltou a passar. O QUE FICA ABERTO: nenhum portao
+    cobre PERDA DE CAMPO. O portao 4 conta registros por kind e nao viu 53 armas ficarem sem dano; o 8
+    cobre artefato de disco, nao campo. Um portao de campo critico por kind (`damage` em weapon,
+    `ac_bonus` em armor/shield, ja declarados em `CRITICO` no proprio passo) e o que teria pego isto na
+    hora -- e o mesmo desenho do portao 11 que a spec do grant condicional pede.'
+  id: 113
+  date: '2026-07-31'
+  priority: alta
+- desc: 'ABERTO 2026-07-31, achado ao rodar a terceira camada depois do item 111.
+    `docs/2026-07-27_simulacao-raw.md` versionado declarava **violacoes: 0**, e a base ja produzia
+    **343**. Nao foi regressao: medido isolando as duas variaveis -- motor do HEAD sobre a base nova da
+    343, e motor novo sobre a base do HEAD da 343 tambem. O relatorio em disco e que era velho, gerado
+    antes de os eixos de dragao nascerem (`dragon-instinct-type`, `draconic-bloodline-type`,
+    `wyrmblessed-bloodline-type`, spec de 31/07). A DIVIDA REAL: `Barbarian` e `Sorcerer` tem eixo
+    obrigatorio no nivel 1 que nao gera aviso quando fica sem escolha -- o simulador esta certo em
+    cobrar, e o `simular_raw.py` nao roda no `build.sh`, entao ninguem viu. MESMA CLASSE DO ITEM 84:
+    arquivo velho parado em disco fingindo cobertura. Duas coisas a decidir: (a) o aviso de eixo
+    obrigatorio sem escolha, que e o defeito de verdade; (b) por o simulador no `build.sh` ou num portao,
+    senao o proximo relatorio envelhece igual.'
+  id: 114
+  date: '2026-07-31'
+  priority: media
 promoted: []
 ---

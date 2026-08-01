@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **20162**
+- registros avaliados: **20126**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -22,9 +22,8 @@
 
 ## Portao 4 -- cobertura caindo vs build anterior
 
-**FALHOU** -- 1 ocorrencia(s).
+**PASSOU** -- 0 ocorrencia(s).
 
-- `weapon`: 1039 -> 1038
 
 ## Portao 5 -- license ausente
 
@@ -72,6 +71,6 @@ _Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
 
 **PASSOU** -- 0 ocorrencia(s).
 
-- registros SEM resposta de `grants_completos`: **0** de 20162 (0.0%)
+- registros SEM resposta de `grants_completos`: **0** de 20126 (0.0%)
 - linha de base anterior: 0
 

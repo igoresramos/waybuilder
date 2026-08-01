@@ -989,6 +989,30 @@
     "por_id": "wb:feat/anchoring-roots"
    },
    {
+    "id": "wb:action/anchor",
+    "nome": "Anchor",
+    "por": "Anchoring Roots",
+    "por_id": "wb:feat/anchoring-roots"
+   },
+   {
+    "id": "wb:action/elemental-blast",
+    "nome": "Elemental Blast",
+    "por": "Impulses",
+    "por_id": "wb:class-feature/impulses"
+   },
+   {
+    "id": "wb:action/channel-elements",
+    "nome": "Channel Elements",
+    "por": "Kinetic Aura",
+    "por_id": "wb:class-feature/kinetic-aura"
+   },
+   {
+    "id": "wb:action/extract-element",
+    "nome": "Extract Element",
+    "por": "Extract Element",
+    "por_id": "wb:class-feature/extract-element"
+   },
+   {
     "id": "wb:feat/natural-medicine",
     "nome": "Natural Medicine",
     "por": "Herbalist",
@@ -1004,8 +1028,8 @@
     "classe": "Kineticist",
     "grants": [
      {
-      "grant_spell": [
-       "wb:spell/elemental-blast"
+      "grant_feat": [
+       "wb:action/elemental-blast"
       ]
      }
     ],
@@ -1016,7 +1040,13 @@
    },
    {
     "classe": "Kineticist",
-    "grants": [],
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:action/channel-elements"
+      ]
+     }
+    ],
     "id": "wb:class-feature/kinetic-aura",
     "na_base": true,
     "nivel_de_classe": 1,
@@ -1035,7 +1065,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:class-feature/extract-element"
+       "wb:action/extract-element"
       ]
      }
     ],

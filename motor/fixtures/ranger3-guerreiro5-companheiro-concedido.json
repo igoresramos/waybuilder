@@ -1053,7 +1053,19 @@
   },
   "concedidos": [
    {
-    "id": "wb:feat/reactive-strike",
+    "id": "wb:action/call-companion",
+    "nome": "Call Companion",
+    "por": "Beastmaster Dedication",
+    "por_id": "wb:feat/beastmaster-dedication"
+   },
+   {
+    "id": "wb:action/hunt-prey",
+    "nome": "Hunt Prey",
+    "por": "Hunt Prey",
+    "por_id": "wb:class-feature/hunt-prey"
+   },
+   {
+    "id": "wb:action/reactive-strike",
     "nome": "Reactive Strike",
     "por": "Reactive Strike",
     "por_id": "wb:class-feature/reactive-strike"
@@ -1112,7 +1124,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:class-feature/hunt-prey"
+       "wb:action/hunt-prey"
       ]
      }
     ],
@@ -1157,7 +1169,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:feat/reactive-strike"
+       "wb:action/reactive-strike"
       ]
      }
     ],

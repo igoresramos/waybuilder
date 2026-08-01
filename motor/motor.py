@@ -3715,12 +3715,21 @@ class Personagem:
             # estreita depois. Nao basta o filtro sozinho: `Adopted Ancestry`
             # filtra so por referencia dinamica de ator, indecidivel para o
             # motor, e sem o kind o slot oferecia os 19.606 registros da base.
-            # E nao basta o kind sozinho: os 4 blocos de `action` sao taticas
-            # do Commander e NAO existe `kind: action` -- ali o filtro
-            # (`item:trait:tactic` + tags) e quem alcanca, e exigir kind
-            # esvaziaria. Cada um cobre o buraco do outro.
+            # E nao basta o kind sozinho: sem filtro, `Adopted Ancestry` nao
+            # estreita. Cada um cobre o buraco do outro.
+            #
+            # `action` do Foundry NAO e `kind: action` nosso, e isso importa
+            # desde 31/07: no Foundry a tatica do Commander E um `type: action`,
+            # e nos a modelamos como `kind: tactic` (extrator proprio, fonte
+            # AoN). Traduzir `tipo: action` para o kind `action` sozinho
+            # ESVAZIAVA os 4 blocos de tatica -- 21 opcoes viravam 0 --, porque
+            # `taticas_kits.py` e canonico para elas e o extrator de acoes as
+            # exclui de proposito para nao criar par duplicado.
+            # Spec: specs/2026-07-31-kind-action.md
             kinds_do_bloco = {b.get("tipo") for b in blocos if b.get("tipo")}
             kinds = {k for k in kinds_do_bloco if k in self.base.kinds()}
+            if "action" in kinds_do_bloco:
+                kinds |= {k for k in ("action", "tactic") if k in self.base.kinds()}
             registros = [r for r in self.base.por_id.values()
                          if (not kinds or r.get("kind") in kinds)
                          and any(self._casa_filtro(r, b.get("filtro"))

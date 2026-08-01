@@ -53,7 +53,9 @@ hidden: false
 - Duas camadas na mesma tabela: mecanizada (o app calcula) e prosa (o jogador
   controla na mao), separadas por flag
 - Um componente de picker reusado em todo slot
-- PWA: client-side, offline, sem backend (indice cabe em 0,53 MB gzip)
+- PWA: client-side, offline, sem backend (nucleo que monta ficha: 0,55 MB gzip --
+  eram 0,53 ate o kind `action` entrar em 31/07, +21 KB por 263 concessoes que
+  antes nao pousavam em lugar nenhum)
 - Free Archetype sempre ligado, rodando RAW
 
 **Fatias verticais** -- cada uma vai da fonte ate a tela
@@ -249,7 +251,7 @@ hidden: false
 ## Stack
 - Python ou TypeScript para o pipeline
 - SQLite como store canonico em tempo de build
-- Saida: JSON comprimido (indice 0,53 MB gzip / prosa 3,6 MB gzip, medidos)
+- Saida: JSON comprimido (nucleo 0,55 MB gzip / prosa 3,6 MB gzip, medidos)
 - Front: PWA, sem backend
 
 ## Fontes

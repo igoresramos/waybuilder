@@ -5,11 +5,11 @@ entra so para desempatar sucessor multiplo. Campo estruturado
 divergente veta a fusao.
 
 - pares declarados pelo AoN: **1049**
-- fundidos: **658**
-- vetados por divergencia estrutural: **391**
+- fundidos: **657**
+- vetados por divergencia estrutural: **392**
 - desempatados por prosa: **77**
-- base: 20778 -> **20120** registros
-- registros com alias: **444**
+- base: 20778 -> **20121** registros
+- registros com alias: **443**
 
 ## Vetados -- par declarado, conteudo divergente
 
@@ -779,4 +779,3 @@ fundir aqui apagaria dado.
 - **Khakkara** -> **Khakkhara** _(weapon)_
 - **Rungu** -> **Cruuk** _(weapon)_
 - **Dwarven War Axe** -> **Dwarven Waraxe** _(weapon)_
-- **Kursarigama** -> **Kusarigama** _(weapon)_

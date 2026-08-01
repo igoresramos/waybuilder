@@ -966,7 +966,14 @@
   "classes": {
    "Ranger": 4
   },
-  "concedidos": [],
+  "concedidos": [
+   {
+    "id": "wb:action/hunt-prey",
+    "nome": "Hunt Prey",
+    "por": "Hunt Prey",
+    "por_id": "wb:class-feature/hunt-prey"
+   }
+  ],
   "concessoes_de_ator": [],
   "conjuracao": [],
   "divindade": null,
@@ -977,7 +984,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:class-feature/hunt-prey"
+       "wb:action/hunt-prey"
       ]
      }
     ],

@@ -910,6 +910,18 @@
   },
   "concedidos": [
    {
+    "id": "wb:action/arcane-cascade",
+    "nome": "Arcane Cascade",
+    "por": "Arcane Cascade",
+    "por_id": "wb:class-feature/arcane-cascade"
+   },
+   {
+    "id": "wb:action/spellstrike",
+    "nome": "Spellstrike",
+    "por": "Spellstrike",
+    "por_id": "wb:class-feature/spellstrike"
+   },
+   {
     "id": "wb:feat/student-of-the-canon",
     "nome": "Student of the Canon",
     "por": "Acolyte",
@@ -948,7 +960,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:class-feature/arcane-cascade"
+       "wb:action/arcane-cascade"
       ]
      }
     ],
@@ -986,7 +998,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:class-feature/spellstrike"
+       "wb:action/spellstrike"
       ]
      }
     ],

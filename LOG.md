@@ -1618,3 +1618,50 @@ E um caso nao e grafia: `Deepest Wellspring` -> `Amp Focus` tem `remaster_id`
 explicito nos dois sentidos no AoN, e a guarda de nivel divergente (18 x 12)
 vetou uma fusao correta. Virou o item 110, com a regra de nao curar a mao antes
 de medir a classe inteira -- o preco que o item 85 ja pagou.
+
+## 2026-07-31 (8a rodada) -- o kind que faltava, e o passo que mentia ha semanas
+
+Spec `2026-07-31-kind-action` implementada. O pack `actionspf2e` passou a ser
+lido: **520 registros**, e nao os 557 do pack -- as 37 taticas do Commander
+ficam de fora porque JA sao extraidas como `kind: tactic`. Traze-las criaria 37
+pares "mesma entidade, dois kinds", que e a classe do item 110 fabricada por
+nos. O oraculo pegou isso na primeira tentativa.
+
+Efeito medido: `GrantItem sem alvo na base` caiu de **290 para 27**, e os
+grants convertidos subiram de 556 para **819**. Sao 263 concessoes que nao
+pousavam em lugar nenhum -- muito acima dos 11 alvos que a spec previa.
+
+**Tres achados de percurso, um por camada de verificacao:**
+
+1. Traduzir `tipo: action` para o kind `action` sozinho ESVAZIAVA os quatro
+   blocos de tatica do Commander, de 21 opcoes para zero. No Foundry a tatica
+   E `type: action`; aqui ela e `kind: tactic`. O `tipo` passa a alcancar os
+   dois kinds, nos dois motores.
+2. O meu indice do AoN usava `setdefault` e escolhia 1 entre N em silencio --
+   o casamento ambiguo que o portao 7 existe para pegar. `Retributive Strike`
+   tem dois docs no AoN. Agora so casa quando e inequivoco: 173 ficam com xref
+   vazio de proposito, e o desmembramento decide, que e o passo que existe para
+   isso.
+3. O falso positivo do `Into the Fray` desapareceu -- ele resolvia para o feat
+   do arquetipo Viking.
+
+**E um achado que nao era meu, mas que so apareceu porque a base foi
+regenerada.** `recuperar_mecanica_equipamento.py` estava quebrado nas DUAS
+fontes, imprimindo `fontes: foundry=0 itens, aon=0 itens` e seguindo em frente:
+o caminho do Foundry era fixo em `foundry/` onde esta maquina tem
+`foundry_repo/` -- a armadilha que `comum.packs_foundry()` existe para resolver
+--, e o do AoN apontava para nomes de arquivo que nao existem desde que a fonte
+foi refeita.
+
+Custo: **53 armas perdiam `damage` a cada rebuild**, com `Blowgun`, `Fist` e
+`Shield Bash` entre elas. A base versionada sobrevivia porque carregava o dado
+de um build antigo, feito quando o clone tinha o outro nome. Consertado
+(foundry 0 -> 1.328, aon 0 -> 399).
+
+O que isso ensina, e virou o item 113: **nenhum portao cobre perda de CAMPO**.
+O 4 conta registros por kind e nao viu 53 armas ficarem sem dano; o 8 cobre
+artefato de disco. Falta o portao de campo critico por kind -- e o proprio
+passo ja declara quais sao, em `CRITICO`.
+
+Os 10 portoes passam, oraculo verde, iconics identicos (118/136 no HP) e
+pericia identica (62,9%).

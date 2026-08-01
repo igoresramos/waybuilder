@@ -1187,10 +1187,16 @@
     "por_id": "wb:class-feature/alchemy"
    },
    {
-    "id": "wb:feat/quick-alchemy",
+    "id": "wb:action/quick-alchemy",
     "nome": "Quick Alchemy",
     "por": "Quick Alchemy",
     "por_id": "wb:class-feature/quick-alchemy"
+   },
+   {
+    "id": "wb:action/call-on-ancient-blood",
+    "nome": "Call on Ancient Blood",
+    "por": "Ancient-Blooded Dwarf",
+    "por_id": "wb:heritage/ancient-blooded-dwarf"
    },
    {
     "id": "wb:feat/battle-medicine",
@@ -1396,7 +1402,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:feat/quick-alchemy"
+       "wb:action/quick-alchemy"
       ]
      }
     ],

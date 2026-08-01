@@ -1004,6 +1004,18 @@
   },
   "concedidos": [
    {
+    "id": "wb:action/quick-tempered",
+    "nome": "Quick-Tempered",
+    "por": "Quick-Tempered",
+    "por_id": "wb:class-feature/quick-tempered"
+   },
+   {
+    "id": "wb:action/rage",
+    "nome": "Rage",
+    "por": "Rage",
+    "por_id": "wb:class-feature/rage"
+   },
+   {
     "id": "wb:feat/intimidating-glare",
     "nome": "Intimidating Glare",
     "por": "Battle-Ready Orc",
@@ -1034,7 +1046,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:class-feature/quick-tempered"
+       "wb:action/quick-tempered"
       ]
      }
     ],
@@ -1048,7 +1060,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:class-feature/rage"
+       "wb:action/rage"
       ]
      }
     ],

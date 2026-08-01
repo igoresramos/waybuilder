@@ -880,6 +880,12 @@
   },
   "concedidos": [
    {
+    "id": "wb:action/shift-immanence",
+    "nome": "Shift Immanence",
+    "por": "Divine Spark and Ikons",
+    "por_id": "wb:class-feature/divine-spark-and-ikons"
+   },
+   {
     "id": "wb:feat/shield-block",
     "nome": "Shield Block",
     "por": "Shield Block",
@@ -899,7 +905,13 @@
   "features": [
    {
     "classe": "Exemplar",
-    "grants": [],
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:action/shift-immanence"
+      ]
+     }
+    ],
     "id": "wb:class-feature/divine-spark-and-ikons",
     "na_base": true,
     "nivel_de_classe": 1,

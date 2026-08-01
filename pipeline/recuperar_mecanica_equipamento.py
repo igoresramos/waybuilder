@@ -43,6 +43,9 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 BASE = f"{AQUI}/base"
 BRUTOS = f"{AQUI}/dados_brutos"
 
+sys.path.insert(0, AQUI)
+import comum   # noqa: E402
+
 # sufixos que uma fonte poe e a outra nao
 SUFIXOS = (" armor", " shield", " weapon")
 
@@ -76,7 +79,19 @@ def chaves(nome: str):
 def do_foundry():
     """nome normalizado -> bloco mecanico, dos packs de equipamento."""
     saida = {}
-    for caminho in glob.glob(f"{BRUTOS}/foundry/packs/pf2e/equipment/*.json"):
+    # `comum.packs_foundry()` e nao caminho fixo: o clone chega como `foundry/`
+    # ou `foundry_repo/` conforme quem o baixou, e o caminho fixo `foundry/`
+    # caia no lado errado NESTA maquina -- `fontes: foundry=0 itens`, em
+    # silencio. Este passo ficou de fora da correcao que ja tinha alcancado
+    # portoes, emitir_textos, aplicar_subclasses e converter_rule_elements.
+    # Custo medido do silencio: 53 armas perdiam `damage` a cada rebuild
+    # (`Blowgun` entre elas), e a base versionada sobrevivia so porque
+    # carregava o dado de um build antigo, feito quando o clone tinha o outro
+    # nome. `**` porque os packs sao em subpasta por categoria.
+    raiz_foundry = comum.packs_foundry(BRUTOS)
+    padrao = (os.path.join(raiz_foundry, "equipment", "**", "*.json")
+              if raiz_foundry else f"{BRUTOS}/foundry/packs/pf2e/equipment/*.json")
+    for caminho in glob.glob(padrao, recursive=True):
         try:
             with open(caminho, encoding="utf-8") as fh:
                 d = json.load(fh)
@@ -131,7 +146,16 @@ TIPO_CURTO = {"b": "bludgeoning", "p": "piercing", "s": "slashing"}
 def do_aon():
     """nome normalizado -> bloco mecanico, dos dumps de equipamento."""
     saida = {}
+    # Os nomes `aon_equipment_*.json` nao existem em disco desde que a fonte foi
+    # refeita dentro de `dados_brutos/` -- o dump por categoria do AoN grava
+    # `aon_dump/weapon.json` e irmaos. O passo lia `aon=0 itens` e seguia
+    # calado, e por isso `Blowgun` (dano FIXO `1 P`, que so o AoN traz) ficava
+    # sem `damage` mesmo com o arquivo no disco. Os nomes antigos ficam na
+    # lista: se um dia voltarem, valem.
     mapa = {
+        "aon_dump/weapon.json": "weapon",
+        "aon_dump/armor.json": "armor",
+        "aon_dump/shield.json": "shield",
         "aon_equipment_weapon.json": "weapon",
         "aon_equipment_armor.json": "armor",
         "aon_equipment_shield.json": "shield",

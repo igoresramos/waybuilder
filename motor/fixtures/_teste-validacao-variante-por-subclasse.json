@@ -924,7 +924,7 @@
     "por_id": "wb:class-feature/alchemy"
    },
    {
-    "id": "wb:feat/quick-alchemy",
+    "id": "wb:action/quick-alchemy",
     "nome": "Quick Alchemy",
     "por": "Quick Alchemy",
     "por_id": "wb:class-feature/quick-alchemy"
@@ -1053,7 +1053,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:feat/quick-alchemy"
+       "wb:action/quick-alchemy"
       ]
      }
     ],

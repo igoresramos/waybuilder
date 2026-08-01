@@ -973,7 +973,7 @@
   },
   "concedidos": [
    {
-    "id": "wb:feat/reactive-strike",
+    "id": "wb:action/reactive-strike",
     "nome": "Reactive Strike",
     "por": "Reactive Strike",
     "por_id": "wb:class-feature/reactive-strike"
@@ -1007,7 +1007,7 @@
     "grants": [
      {
       "grant_feat": [
-       "wb:feat/reactive-strike"
+       "wb:action/reactive-strike"
       ]
      }
     ],

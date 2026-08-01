@@ -927,6 +927,18 @@
   },
   "concedidos": [
    {
+    "id": "wb:action/drain-bonded-item",
+    "nome": "Drain Bonded Item",
+    "por": "Arcane Bond",
+    "por_id": "wb:class-feature/arcane-bond"
+   },
+   {
+    "id": "wb:action/cast-a-spell",
+    "nome": "Cast a Spell",
+    "por": "Wizard Spellcasting",
+    "por_id": "wb:class-feature/wizard-spellcasting"
+   },
+   {
     "id": "wb:feat/dubious-knowledge",
     "nome": "Dubious Knowledge",
     "por": "Hermit",
@@ -982,7 +994,13 @@
   "features": [
    {
     "classe": "Wizard",
-    "grants": [],
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:action/drain-bonded-item"
+      ]
+     }
+    ],
     "id": "wb:class-feature/arcane-bond",
     "na_base": true,
     "nivel_de_classe": 1,
@@ -1006,7 +1024,13 @@
    },
    {
     "classe": "Wizard",
-    "grants": [],
+    "grants": [
+     {
+      "grant_feat": [
+       "wb:action/cast-a-spell"
+      ]
+     }
+    ],
     "id": "wb:class-feature/wizard-spellcasting",
     "na_base": true,
     "nivel_de_classe": 1,

@@ -3913,10 +3913,22 @@ export class Personagem implements ContextoDePredicado {
       // O `tipo` estreita QUANDO existe kind com aquele nome; o filtro
       // estreita depois. Sem o kind, `Adopted Ancestry` -- cujo filtro é só
       // referência dinâmica de ator -- ofereceria os 19.606 registros da base;
-      // sem o filtro, as 4 táticas do Commander sumiriam, porque `action` não
-      // é kind. Cada um cobre o buraco do outro.
+      // sem o filtro, `Adopted Ancestry` não estreita. Cada um cobre o buraco
+      // do outro.
+      //
+      // `action` do Foundry NÃO é o nosso `kind: action`, e isso importa desde
+      // 31/07: no Foundry a tática do Commander É um `type: action`, e nós a
+      // modelamos como `kind: tactic` (extrator próprio, fonte AoN). Traduzir
+      // `tipo: action` só para o kind `action` ESVAZIAVA os 4 blocos de tática
+      // -- 21 opções viravam 0.
+      // Spec: specs/2026-07-31-kind-action.md
       const kindsDoBloco = blocos.map((b) => b.tipo).filter((k): k is string => !!k);
       const kinds = new Set(kindsDoBloco.filter((k) => this.base.kinds().has(k)));
+      if (kindsDoBloco.includes("action")) {
+        for (const k of ["action", "tactic"]) {
+          if (this.base.kinds().has(k)) kinds.add(k);
+        }
+      }
       registros = blocos.length === 0 ? [] :
         [...this.base.por_id.values()].filter((r) =>
           (kinds.size === 0 || kinds.has(r.kind ?? ""))
