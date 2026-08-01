@@ -1,0 +1,460 @@
+== 0. fontes fixadas ==
+foundry: ja no pin 87f9e5028baaa10b70fdc766260b7886def17e04
+foundry: 28841 arquivos em packs/pf2e
+pf2etools: ja no pin 7d1ec43f84437b43668cd677265f42b8e9a0bb05
+pf2etools: espelhando data/ para a convencao dos extratores
+pf2etools: 382 arquivos JSON
+ok
+== 1. extratores ==
+(pulado -- exporte WB_REEXTRAIR=1 para re-extrair das fontes)
+== 2. reconciliar ==
+carregados: 21323 registros de 11 familias
+colisoes de id fundidas: 568  ->  base com 20755 registros
+traits refeitos como uniao: 2056  (registros com aliases_traits: 1459)
+suspeitas de par nao unido (mesmo kind+nome normalizado): 360
+license inferida a partir do livro: 3318
+artefatos organizacionais descartados: 1 -> ['wb:archetype/shared-archetype-feats']
+mechanized derivado de grants: 17189 registros corrigidos
+  entradas de prov sem valor removidas: 9986
+
+portoes: todos passaram
+kinds: {'class': 27, 'class-feature': 841, 'feat': 6412, 'archetype': 247, 'spell': 1642, 'ancestry': 50, 'heritage': 326, 'background': 637, 'armor': 216, 'equipment': 6164, 'shield': 125, 'weapon': 1038, 'animal-companion': 113, 'familiar-ability': 171, 'familiar-specific': 39, 'eidolon': 13, 'apparition': 14, 'trait': 561, 'skill': 33, 'domain': 64, 'deity': 490, 'ritual': 151, 'relic': 219, 'language': 155, 'arcane-school': 23, 'arcane-thesis': 10, 'bloodline': 28, 'cause': 13, 'conscious-mind': 12, 'doctrine': 5, 'druidic-order': 13, 'element': 6, 'hellknight-order': 14, 'hunters-edge': 7, 'hybrid-study': 8, 'ikon': 21, 'implement': 19, 'innovation': 7, 'instinct': 16, 'lesson': 31, 'methodology': 9, 'muse': 9, 'mystery': 22, 'patron': 27, 'racket': 10, 'research-field': 8, 'style': 11, 'subconscious-mind': 8, 'way': 11, 'draconic-exemplar': 44, 'mythic-calling': 15, 'deviant-ability-classification': 10, 'tactic': 37, 'class-kit': 32, 'action': 520}
+-> base/index.json  (19.1 MB)
+== 3. auditar divergencia entre fontes ==
+registros que ganharam conflito nesta passada: 427
+divergencias encontradas por campo: {'source.book': 333, 'name': 51, 'rarity': 55}
+registros com conflito registrado na base: 1830
+-> base/relatorio_conflitos.md
+== 4. desmembrar colisoes de identidade ==
+registros desmembrados: 24
+base: 20754 -> 20778
+-> base/relatorio_colisoes.md
+== 4b. injetar tabela de conjuracao nas classes ==
+tabelas aplicadas: 11
+classes com slots na base: 11
+== 4c. separar sub-escolha de concessao na progressao ==
+classes com sub-escolha separada: 22
+entradas movidas de concessao para opcao: 397
+devolvidas a progressao (eixo de 1 opcao so): 31 em 19 classes
+  Alchemist: 2
+  Barbarian: 2
+  Bard: 1
+  Champion: 1
+  Cleric: 3
+  Druid: 1
+  Fighter: 1
+  Gunslinger: 2
+  Investigator: 5
+  Kineticist: 1
+  Magus: 2
+  Monk: 1
+  Psychic: 2
+  Ranger: 1
+  Rogue: 1
+  Summoner: 1
+  Swashbuckler: 2
+  Witch: 1
+  Wizard: 1
+-> base/relatorio_subclasses.md
+== 4d. resolver referencias orfas do predicado ==
+referencias orfas resolvidas: 45 por nome, 10 por curadoria, 13 pela ponte do AoN
+removidas (nao eram entidade): 3
+nao resolvidas: 1 (1 ids distintos)
+-> base/relatorio_referencias.md
+== 4e. derivar o gate de nivel (class_level x character_level) ==
+gates derivados: 6424
+  archetype       2152
+  classe          1875
+  ancestria       1227
+  geral           1037
+  classe (varias)   125
+  ancestria (varias)     8
+
+registros usando class_level:     2002  (eram 79)
+registros usando character_level: 4424
+-> base/relatorio_gate_nivel.md
+== 4f. ensinar o predicado a falar de subclasse ==
+`has` convertidos para `subclass`: 206
+  outras-opcoes         129
+  muse                   30
+  hybrid-study           13
+  way                    11
+  racket                 10
+  cause                   6
+  doctrine                3
+  instinct                2
+  arcane-school           2
+
+classes com progressao de proficiencia por subclasse: 1
+  Cleric: ['cloistered_cleric', 'warpriest']
+-> base/relatorio_subclasse_predicado.md
+== 4g. unificar o modelo de efeito em grants ==
+grant_item: {'dinamico ou ja resolvido': 86, 'resolvido': 485, 'nao resolvido': 48}
+registros que ganharam grants: 985
+  background                           626
+  heritage                             309
+  ancestry                              50
+  heritage: sem efeito derivavel        17
+  background: sem efeito derivavel      11
+
+tipos de efeito emitidos: {'ability_boost': 1160, 'skill_training': 611, 'grant_feat': 550, 'requires_ancestry': 309, 'hp_ancestry': 50, 'size': 50, 'speed': 50, 'sense': 37, 'ability_flaw': 34}
+base com grants: 3769 de 20778 (18.1%)
+-> base/relatorio_efeitos.md
+== 4h. converter rule elements declarativos ==
+registros que ganharam efeito: 699  (819 grants)
+por kind: {'feat': 388, 'class-feature': 195, 'heritage': 79, 'background': 31, 'ancestry': 3, 'class': 1}
+
+nao convertidos (ficam como prosa, por decisao):
+    1850  FlatModifier: precisa do interpretador
+    1509  ItemAlteration: precisa do interpretador
+    1142  RollOption: precisa do interpretador
+     635  ActiveEffectLike sem path de rank
+     625  ChoiceSet: precisa do interpretador
+     557  Note: precisa do interpretador
+     346  Resistance: precisa do interpretador
+     293  GrantItem com predicate
+-> base/relatorio_rule_elements.md
+== 4h2. gate de arquetipo (regra do livro que a fonte deixa implicita) ==
+gate de arquetipo: 294 derivados, 1494 ja tinham, 135 intocados
+-> /home/igor0/waybuilder/pipeline/base/relatorio_gate_arquetipo.md
+== 4h4. recuperar mecanica de equipamento nao casada ==
+fontes: foundry=1328 itens, aon=399 itens
+curados: 66 | herdados: 0 | ainda sem: 65
+-> /home/igor0/waybuilder/pipeline/base/relatorio_mecanica_equipamento.md
+== 4h5. condicao de acesso (filiacao) lida do AoN ==
+acesso: 730 registros de 1010 docs do AoN com o campo
+-> /home/igor0/waybuilder/pipeline/base/relatorio_acesso.md
+== 4h5b. beneficio dos backgrounds que ficaram vazios ==
+beneficio de background: 119 preenchidos, 4 sem fonte, 12 lore com escolha
+-> /home/igor0/waybuilder/pipeline/base/relatorio_beneficio_background.md
+== 4h6. ranks de elevacao da magia, lidos do AoN ==
+ranks de magia: 1642 magias com `ranks`, 461 lacunas identificadas
+-> /home/igor0/waybuilder/pipeline/base/relatorio_ranks_de_magia.md
+== 4i. aplicar correcoes curadas ==
+  wb:class/psychic.key_ability = ["int", "cha"]
+  wb:feat/fighter-dedication.grants = [{"choice": {"flag": "attribute", "opcoes": [{"valor": "str", "rotulo": "AbilityStr"}, {"valor": "dex", "rotulo": "AbilityDex"}]}}, {"choice": {"flag": "skill", "opcoes": [{"valor": "acrobatics", "rotulo": "Acrobatics"}, {"valor": "athletics", "rotulo": "Athletics"}]}}, {"skill_training": {"free": 1, "rank": "trained"}}, {"proficiency": {"simple": "trained", "martial": "trained"}}]
+  wb:feat/play-to-the-crowd.rarity = "common"
+  wb:feat/death-from-above.rarity = "uncommon"
+  wb:spell/object-reading.rarity = "common"
+  wb:spell/pillar-of-water.rarity = "common"
+  wb:spell/imprint-message.rarity = "common"
+  wb:spell/tireless-worker.rarity = "uncommon"
+  wb:feat/marshal-dedication.grants = [{"choice": {"flag": "marshal-skill", "opcoes": [{"valor": "diplomacy-trained", "rotulo": "Diplomacy", "grants": [{"proficiency": {"diplomacy": "trained"}}]}, {"valor": "diplomacy-expert", "rotulo": "Diplomacy", "grants": [{"proficiency": {"diplomacy": "expert"}}]}, {"valor": "imtimidation-trained", "rotulo": "Intimidation", "grants": [{"proficiency": {"intimidation": "trained"}}]}, {"valor": "intimidation-expert", "rotulo": "Intimidation", "grants": [{"proficiency": {"intimidation": "expert"}}]}]}}]
+
+correcoes curadas aplicadas: 9 de 9
+== 5. emitir prosa ==
+indice de prosa: 43686 AoN(id), 26727 AoN(nome), 23514 Foundry, 11189 pf2etools
+  class             27 textos  0.43 MB
+  class-feature    841 textos  0.71 MB
+  feat            6424 textos  3.90 MB
+  archetype        247 textos  0.41 MB
+  spell           1642 textos  1.57 MB
+  ancestry          50 textos  0.37 MB
+  heritage         326 textos  0.16 MB
+  background       637 textos  0.56 MB
+  armor            216 textos  0.21 MB
+  equipment       6000 textos  7.63 MB
+  shield           125 textos  0.12 MB
+  weapon          1047 textos  1.24 MB
+  animal-companion   113 textos  0.09 MB
+  familiar-ability   171 textos  0.07 MB
+  familiar-specific    39 textos  0.03 MB
+  eidolon           13 textos  0.03 MB
+  apparition        14 textos  0.02 MB
+  trait            561 textos  0.08 MB
+  skill             33 textos  0.01 MB
+  domain            64 textos  0.01 MB
+  deity            491 textos  0.09 MB
+  ritual           151 textos  0.30 MB
+  relic            219 textos  0.12 MB
+  language         155 textos  0.01 MB
+  arcane-school     23 textos  0.02 MB
+  arcane-thesis     10 textos  0.01 MB
+  bloodline         28 textos  0.03 MB
+  cause             13 textos  0.01 MB
+  conscious-mind    12 textos  0.03 MB
+  doctrine           5 textos  0.01 MB
+  druidic-order     13 textos  0.01 MB
+  element            6 textos  0.01 MB
+  hellknight-order    14 textos  0.02 MB
+  hunters-edge       7 textos  0.01 MB
+  hybrid-study       8 textos  0.01 MB
+  ikon              21 textos  0.02 MB
+  implement         19 textos  0.04 MB
+  innovation         7 textos  0.06 MB
+  instinct          16 textos  0.03 MB
+  lesson            31 textos  0.01 MB
+  methodology        9 textos  0.01 MB
+  muse               9 textos  0.01 MB
+  mystery           22 textos  0.05 MB
+  patron            27 textos  0.02 MB
+  racket            10 textos  0.01 MB
+  research-field     8 textos  0.01 MB
+  style             11 textos  0.00 MB
+  subconscious-mind     8 textos  0.01 MB
+  way               11 textos  0.01 MB
+  draconic-exemplar    44 textos  0.01 MB
+  mythic-calling    15 textos  0.01 MB
+  deviant-ability-classification    10 textos  0.01 MB
+  tactic            37 textos  0.03 MB
+  class-kit         32 textos  0.02 MB
+  action           520 textos  0.35 MB
+referencias de texto criadas para registros que nao tinham: 1513
+prosa inline duplicada removida do indice: 2382 registros (a prosa fica no sidecar)
+
+referencias resolvidas: 20612/20612
+cobertura sobre a base: 20612/20778 (99.2%)
+registros sem referencia de texto: 166
+origem: {'aon': 18769, 'foundry': 1736, 'pf2etools': 46, 'aon:nome': 61}
+prosa total: 19.0 MB
+SEM PROSA (166): ['wb:equipment/agate', 'wb:equipment/alabaster', 'wb:equipment/alabaster-and-obsidian-game-set', 'wb:equipment/alabaster-idol', 'wb:equipment/alisendras-fan', 'wb:equipment/amber', 'wb:equipment/amethyst', 'wb:equipment/amphora-with-lavish-scenes', 'wb:equipment/ancient-dragon-skull-etched-with-mystic-sigils', 'wb:equipment/aquamarine', 'wb:equipment/augstens-cudgel', 'wb:equipment/azurite']
+== 6. portoes, fase pre-fusao ==
+fase pre-fusao: 20778 registros  (indices: aon=43686, foundry=28689)
+  portao 1  OK    prov por campo preenchido: 0
+  portao 2  OK    level divergente sem conflito: 0
+  portao 3  n/a   requires citando id inexistente
+  portao 4  n/a   cobertura caindo vs build anterior
+  portao 5  OK    license ausente: 0
+  portao 6  OK    traits disjunto apos uniao: 0
+  portao 7  FALHA  homonimo no mesmo kind: 116
+  portao 8  n/a   artefato citado que sumiu do disco
+  portao 9  n/a   kind ausente vs censo do AoN
+  portao 10  n/a   cobertura de grants_completos
+  portao 11  n/a   campo critico ausente vs build anterior
+-> base/relatorio_portoes_pre-fusao.md   (1 portao(es) falhando)
+== 7. fundir legacy/remaster ==
+registros que adotaram o sucessor (so o legado tinha entrado): 4
+pares declarados pelo AoN: 1049
+  vetados por campo estruturado divergente: 391
+  desempatados por prosa (sucessor multiplo): 77
+base: 20778 -> 20120 registros (658 absorvidos)
+registros com alias: 444
+-> base/relatorio_fusao.md
+== 7a. fundir duplicata de nome aon/foundry ==
+fundidos: 39 pares  (20120 -> 20081 registros)
+referencias re-apontadas: 3
+vetados pela guarda estrutural: 0
+por kind: {'feat': 24, 'background': 3, 'equipment': 12}
+-> /home/igor0/waybuilder/pipeline/base/relatorio_duplicata_de_nome.md
+== 7b. normalizar traits na base inteira ==
+conflitos de traits resolvidos: 15 de 15 (0 mudaram o valor emitido)
+registros com traits normalizados: 905
+conflitos de traits restantes: 0
+-> base/relatorio_normalizacao_traits.md
+== 7c. aplicar aliases do remaster dentro de requires e subclasses ==
+aliases em requires: 46 ids trocados em 47 registros; 3 com opcao repetida removida; 2 sem alias
+-> /home/igor0/waybuilder/pipeline/base/relatorio_aliases_requires.md
+== 7c2. grau legado que a fusao principal nao alcanca ==
+graus legados: 8 fundidos, 2 vetados
+-> /home/igor0/waybuilder/pipeline/base/relatorio_graus_legados.md
+== 7c3. nome antigo como alias, fora de magia ==
+alias legado: 334 acrescentados
+-> /home/igor0/waybuilder/pipeline/base/relatorio_alias_legado.md
+== 7d. uma opcao por nome em cada eixo de sub-escolha ==
+opcoes irmas: 15 referencias colapsadas em 3 classes
+-> /home/igor0/waybuilder/pipeline/base/relatorio_opcoes_irmas.md
+== 7d1b. sub-escolha que existe com dois ids ==
+equivalencia de sub-escolha: 9 pares ligados
+-> /home/igor0/waybuilder/pipeline/base/relatorio_equivalencia_subescolha.md
+== 7d2. tradicao de conjuracao da subclasse para a opcao viva ==
+tradicao levada para a opcao viva: 47 pares (1 sem tradicao na fonte)
+-> /home/igor0/waybuilder/pipeline/base/relatorio_tradicao_de_subclasse.md
+== 7d3. weapon expertise desmembrada por classe ==
+weapon expertise: 6 irmaos criados, 8 ja corretas, 0 sem prosa
+-> /home/igor0/waybuilder/pipeline/base/relatorio_weapon_expertise.md
+== 7e. mecanica de dedicacao derivada da prosa oficial ==
+mecanica de dedicacao: 5 derivadas da prosa, 25 divida declarada, 30 sem padrao (de 60)
+-> /home/igor0/waybuilder/pipeline/base/relatorio_mecanica_dedicacao.md
+./build.sh: line 194: escolhe:: command not found
+== 7e0. eixo de ikon do Exemplar (o primeiro ) ==
+eixo de ikon: 1 classe(s), 21 opcoes, escolhe 3; 21 pares ligados
+-> /home/igor0/waybuilder/pipeline/base/relatorio_eixo_de_ikon.md
+== 7e1. eixo de divindade nas classes que a exigem ==
+eixo de divindade: 2 classes, 488 opcoes
+-> /home/igor0/waybuilder/pipeline/base/relatorio_escolha_de_divindade.md
+== 7e1b. santificacao: modal lido da prosa + eixo filtrado ==
+santificacao: 3 opcoes, 2 classes, modal {None: 120, 'can': 260, 'must': 108}
+-> /home/igor0/waybuilder/pipeline/base/relatorio_santificacao.md
+== 7e1c. fonte divina: o par da santificacao, so no Clerigo ==
+fonte divina: 2 opcoes, 1 classe(s); divindades por n de fontes {0: 9, 1: 342, 2: 137}
+-> /home/igor0/waybuilder/pipeline/base/relatorio_fonte_divina.md
+== 7e1c2. colapsar irmas DE NOVO, agora que os eixos novos existem ==
+opcoes irmas: 2 referencias colapsadas em 2 classes
+-> /home/igor0/waybuilder/pipeline/base/relatorio_opcoes_irmas.md
+== 7e1d. requisito de sub-escolha preso no residuo ==
+requisito de sub-escolha: 25 clausulas convertidas, 3 chaves ambiguas descartadas
+-> /home/igor0/waybuilder/pipeline/base/relatorio_requisito_subescolha.md
+== 7e1d2. pericia divina + clausulas de divindade no residuo ==
+requisito de divindade: divine_skill em 475 divindades (13 sem), 11 clausulas convertidas
+-> /home/igor0/waybuilder/pipeline/base/relatorio_requisito_divindade.md
+== 7e1e. parcelas de dano: weapon specialization e furia ==
+parcelas de dano: weapon specialization em 4 registros, rage_damage em 21
+-> /home/igor0/waybuilder/pipeline/base/relatorio_parcelas_de_dano.md
+== 7e2. categoria de feat que sobrou vazia ==
+categoria de feat: 161 preenchidos, 0 sem resposta
+-> /home/igor0/waybuilder/pipeline/base/relatorio_categoria_de_feat.md
+== 7e1f. escolha aninhada: o balaio do Inventor vira eixo ==
+escolha aninhada: 9 eixos, 63 opcoes fora do balaio, 69 com gate
+-> /home/igor0/waybuilder/pipeline/base/relatorio_escolha_aninhada.md
+== 7e2a. arquetipo do feat, lido da dedicacao no requires ==
+arquetipo do feat: 37 re-ancorados, 33 sem ancora, 3 homonimos reais
+-> /home/igor0/waybuilder/pipeline/base/relatorio_arquetipo_do_feat.md
+== 7e2b. tags do Foundry + eixos por query (Kineticist e Commander) ==
+eixo por tag: 549 registros com `tags`, 9 eixo(s) criado(s)
+-> /home/igor0/waybuilder/pipeline/base/relatorio_eixo_por_tag.md
+== 7d3. variante por subclasse ==
+variante por subclasse: 68 gateadas, 0 puladas
+-> /home/igor0/waybuilder/pipeline/base/relatorio_variante_por_subclasse.md
+== 7d4. pericia com Recall Knowledge ==
+pericia de recall: 3 clausula(s) convertida(s)
+-> /home/igor0/waybuilder/pipeline/base/relatorio_pericia_de_recall.md
+== 7d5. gate elemental do Kineticist ==
+gate elemental: 110 impulsos gateados (16 composite), 8 agnosticos intocados
+-> /home/igor0/waybuilder/pipeline/base/relatorio_gate_elemental.md
+== 7e3. estatisticas de familiar e eidolon ==
+estatisticas de ator: 2 formulas, 12 eidolons com array, 1 sem
+-> /home/igor0/waybuilder/pipeline/base/relatorio_estatisticas_de_ator.md
+== 7f. quem concede companheiro animal ==
+concessao de ator: 16 concedem familiar, 2 concedem eidolon
+concessao de ator: 12 concedem companheiro animal, 4 divida, 1 vetados
+-> /home/igor0/waybuilder/pipeline/base/relatorio_concessao_de_ator.md
+== 7g. quem concede conjuracao de arquetipo ==
+spellcasting de arquetipo: 13 concedem, 4 sem cadeia (outro modelo), 6 sem tradicao fixa
+-> /home/igor0/waybuilder/pipeline/base/relatorio_spellcasting_arquetipo.md
+== 8. portoes, fase final ==
+fase final: 20086 registros  (indices: aon=43686, foundry=28689)
+  portao 1  OK    prov por campo preenchido: 0
+  portao 2  OK    level divergente sem conflito: 0
+  portao 3  OK    requires citando id inexistente: 0
+  portao 4  OK    cobertura caindo vs build anterior: 0
+  portao 5  OK    license ausente: 0
+  portao 6  OK    traits disjunto apos uniao: 0
+  portao 7  n/a   homonimo no mesmo kind
+  portao 8  OK    artefato citado que sumiu do disco: 0
+  portao 9  OK    kind ausente vs censo do AoN: 0
+  portao 10  OK    cobertura de grants_completos: 0
+  portao 11  OK    campo critico ausente vs build anterior: 0
+-> base/relatorio_portoes_final.md   (todos passaram)
+== 9. emitir o payload do app ==
+registros: 20086  em 58 kinds
+indice de build:   1.75 MB gzip
+indice do app:     1.14 MB gzip   (35% menor)
+prosa (separada): 18.15 MB em disco, carregada sob demanda
+
+maiores fatias (gzip):
+  feat                 429 KB   6241 registros
+  equipment            227 KB   6034 registros
+  spell                 97 KB   1638 registros
+  deity                 90 KB    488 registros
+  weapon                54 KB   1038 registros
+  ritual                52 KB    151 registros
+  background            40 KB    521 registros
+  class-feature         28 KB    847 registros
+
+nucleo para montar ficha (class, class-feature, feat, ancestry, heritage, background, archetype, skill, action): 0.55 MB gzip
+-> /home/igor0/waybuilder/pipeline/base/app/
+== 10. essa base saiu deste codigo? ==
+baseline HEAD: 20083 registros
+atual        : 20086 registros   (+3)
+
+registros que SUMIRAM : 0
+registros que NASCERAM: 3
+registros ALTERADOS   : 14  (27 campo(s) no total)
+
+== NASCERAM ==
+  wb:equipment/tyrants-writ
+  wb:feat/festering-wound
+  wb:feat/heatwave
+
+== CAMPOS ALTERADOS, por volume ==
+
+  conflitos  --  8 registro(s)
+    wb:equipment/tyrants-writs
+       antes : [{"campo": "text", "de": "wb:equipment/tyrants-writ", "valor": "wb:text/equipment/tyrants-...
+       depois: null
+    wb:feat/deep-vision
+       antes : [{"campo": "text", "de": "wb:feat/deepvision", "valor": "wb:text/feat/deepvision"}, {"camp...
+       depois: [{"campo": "text", "de": "wb:feat/deepvision", "valor": "wb:text/feat/deepvision"}, {"camp...
+    wb:feat/festering-wounds
+       antes : [{"campo": "text", "de": "wb:feat/festering-wound", "valor": "wb:text/feat/festering-wound...
+       depois: null
+    wb:feat/flashforge
+       antes : [{"campo": "text", "de": "wb:feat/flash-forge", "valor": "wb:text/feat/flash-forge"}, {"ca...
+       depois: [{"campo": "text", "de": "wb:feat/flash-forge", "valor": "wb:text/feat/flash-forge"}, {"ca...
+    ... e mais 4
+
+  aliases  --  5 registro(s)
+    wb:equipment/submersible-helm
+       antes : ["Helm of Underwater Action", "Submersible Helmet"]
+       depois: ["Submersible Helmet", "Helm of Underwater Action"]
+    wb:equipment/submersible-helm-greater
+       antes : ["Helm of Underwater Action", "Submersible Helmet (Greater)"]
+       depois: ["Submersible Helmet (Greater)", "Helm of Underwater Action"]
+    wb:equipment/tyrants-writs
+       antes : ["Tyrant's Writ"]
+       depois: null
+    wb:feat/festering-wounds
+       antes : ["Festering Wound"]
+       depois: null
+    ... e mais 1
+
+  historico  --  3 registro(s)
+    wb:equipment/tyrants-writs
+       antes : [{"id_legado": "wb:equipment/tyrants-writ", "motivo": "pf2etools conhece so o nome do Foun...
+       depois: null
+    wb:feat/festering-wounds
+       antes : [{"id_legado": "wb:feat/festering-wound", "motivo": "pf2etools conhece so o nome do Foundr...
+       depois: null
+    wb:feat/heat-wave
+       antes : [{"id_legado": "wb:feat/heatwave", "motivo": "pf2etools conhece so o nome do Foundry", "no...
+       depois: null
+
+  source  --  3 registro(s)
+    wb:equipment/tyrants-writs
+       antes : {"book": "Impossible Lands", "license": "OGL", "page": 178, "remaster": false}
+       depois: {"book": "Impossible Lands", "license": "OGL", "remaster": false}
+    wb:feat/festering-wounds
+       antes : {"book": "Book of the Dead", "license": "OGL", "page": 61, "remaster": false}
+       depois: {"book": "Book of the Dead", "license": "OGL", "remaster": false}
+    wb:feat/heat-wave
+       antes : {"book": "Ancestry Guide", "license": "OGL", "page": 103, "remaster": false}
+       depois: {"book": "Ancestry Guide", "license": "OGL", "remaster": false}
+
+  xref  --  3 registro(s)
+    wb:equipment/tyrants-writs
+       antes : {"aon": "equipment-1801", "foundry": "Compendium.pf2e.equipment-srd.Item.jfLMxToNvg2VzjSw"...
+       depois: {"foundry": "Compendium.pf2e.equipment-srd.Item.jfLMxToNvg2VzjSw", "pf2etools": "baseitems...
+    wb:feat/festering-wounds
+       antes : {"aon": "feat-3566", "foundry": "Compendium.pf2e.feats-srd.Item.pZUmoCqxBJfZmeqm", "pf2eto...
+       depois: {"foundry": "Compendium.pf2e.feats-srd.Item.pZUmoCqxBJfZmeqm", "pf2etools": "BotD#festerin...
+    wb:feat/heat-wave
+       antes : {"aon": "feat-2558", "foundry": "Compendium.pf2e.feats-srd.Item.bKc8MMFEOpOJJihb", "pf2eto...
+       depois: {"foundry": "Compendium.pf2e.feats-srd.Item.bKc8MMFEOpOJJihb", "pf2etools": "LOAG#heat-wav...
+
+  prov  --  2 registro(s)
+    wb:equipment/bombard
+       antes : {"level": "pf2etools", "name": "pf2etools", "source": "pf2etools", "source.license": "infe...
+       depois: {"level": "pf2etools", "name": "pf2etools", "source": "pf2etools", "source.license": "infe...
+    wb:feat/phalanx-formation-knight-vigilant
+       antes : {"feat_category": "aon~inferido:traits", "level": "aon", "name": "aon", "rarity": "aon", "...
+       depois: {"archetype": "derivado:dedicacao-no-requires", "feat_category": "aon~inferido:traits", "l...
+
+  subclasses  --  1 registro(s)
+    wb:class/inventor
+       antes : [{"com_mecanica": ["wb:class-feature/greater-weapon-specialization"], "eixo": "outras-opco...
+       depois: [{"com_mecanica": ["wb:class-feature/greater-weapon-specialization"], "eixo": "outras-opco...
+
+  requires  --  1 registro(s)
+    wb:feat/ki-cutting-sight
+       antes : {"all": [{"has": "wb:feat/qi-spells"}, {"class_level": {"monk": {">=": 6}}}]}
+       depois: {"all": [{"has": "wb:spell/inner-upheaval"}, {"class_level": {"monk": {">=": 6}}}]}
+
+  archetype  --  1 registro(s)
+    wb:feat/phalanx-formation-knight-vigilant
+       antes : null
+       depois: "wb:archetype/knight-vigilant"
+
+real	2m30.864s
+user	1m55.464s
+sys	0m18.214s
+EXIT=0
