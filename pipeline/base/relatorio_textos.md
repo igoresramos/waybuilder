@@ -3,7 +3,7 @@
 - cobertura sobre a base: **20612/20778** (99.2%)
 - referencias resolvidas: 20612/20612
 - registros sem referencia de texto: 166
-- origem: {'aon': 18769, 'foundry': 1735, 'pf2etools': 46, 'aon:nome': 62}
+- origem: {'aon': 18769, 'foundry': 1736, 'pf2etools': 46, 'aon:nome': 61}
 - prosa total: 19.0 MB
 - sem prosa: 166
 

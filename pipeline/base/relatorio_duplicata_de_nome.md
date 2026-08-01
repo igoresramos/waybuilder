@@ -1,11 +1,11 @@
 # Fusao de duplicata de nome aon/foundry
 
-Pares fundidos: **42**. Registros: 20125 -> **20083**.
+Pares fundidos: **39**. Registros: 20120 -> **20081**.
 Referencias re-apontadas: **3**.
 Vetados pela guarda estrutural (o AoN conhece os dois nomes): 0.
 
-Por kind: {'feat': 26, 'background': 3, 'equipment': 13}
-Por forma: {'letra1': 25, 'espaco': 6, 'palavra': 5, 'letra2': 4, 'letra3': 2}
+Por kind: {'feat': 24, 'background': 3, 'equipment': 12}
+Por forma: {'letra1': 23, 'espaco': 5, 'palavra': 5, 'letra2': 4, 'letra3': 2}
 
 | canonico | absorvido | kind | forma | desempate |
 |---|---|---|---|---|
@@ -22,13 +22,11 @@ Por forma: {'letra1': 25, 'espaco': 6, 'palavra': 5, 'letra2': 4, 'letra3': 2}
 | Eyes Of The Moonwarden | Eye of the Moonwarden | equipment | letra1 | empate na terceira fonte -- vence o AoN |
 | Fautless Defense | Faultless Defense | feat | letra1 | empate na terceira fonte -- vence o AoN |
 | Feather of the Unfounded Bravado | Feather of Unfounded Bravado | equipment | palavra | empate na terceira fonte -- vence o AoN |
-| Festering Wounds | Festering Wound | feat | letra1 | pf2etools conhece so o nome do Foundry |
 | Flash of Omipotence | Flash of Omnipotence | feat | letra1 | empate na terceira fonte -- vence o AoN |
 | Flashforge | Flash Forge | feat | espaco | pf2etools conhece so o nome do Foundry |
 | Fracture Time Flow | Fracture Timeflow | feat | espaco | empate na terceira fonte -- vence o AoN |
 | Fulus of Concealment | Fulu of Concealment | equipment | letra1 | pf2etools conhece so o nome do AoN |
 | Greengut | Green Gut | equipment | espaco | pf2etools conhece so o nome do Foundry |
-| Heat Wave | Heatwave | feat | espaco | pf2etools conhece so o nome do Foundry |
 | Historical Reenactor | Historical Reeanactor | background | letra1 | pf2etools conhece so o nome do Foundry |
 | Judgment of the Monolith | Judgement of the Monolith | feat | letra1 | pf2etools conhece so o nome do AoN |
 | Knight Vigilant Dedication | Knight Vigilant | feat | palavra | pf2etools conhece so o nome do Foundry |
@@ -44,7 +42,6 @@ Por forma: {'letra1': 25, 'espaco': 6, 'palavra': 5, 'letra2': 4, 'letra3': 2}
 | Sack of Hyrdra's Teeth | Sack of Hydra's Teeth | equipment | letra1 | empate na terceira fonte -- vence o AoN |
 | Submersible Helm | Submersible Helmet | equipment | letra2 | empate na terceira fonte -- vence o AoN |
 | Submersible Helm (Greater) | Submersible Helmet (Greater) | equipment | letra2 | empate na terceira fonte -- vence o AoN |
-| Tyrant's Writs | Tyrant's Writ | equipment | letra1 | pf2etools conhece so o nome do Foundry |
 | Vengeful Remnant | Vengful Remnant | feat | letra1 | pf2etools conhece so o nome do Foundry |
 | Vermilion Threads | Vermillion Threads | feat | letra1 | empate na terceira fonte -- vence o AoN |
 | Vindicator's Judgement | Vindicator's Judgment | feat | letra1 | empate na terceira fonte -- vence o AoN |

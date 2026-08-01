@@ -1,12 +1,12 @@
 # Categoria de feat derivada do trait
 
-- preenchidos: **164**
+- preenchidos: **161**
 - ainda sem resposta: **0**
 
 | categoria (de onde) | registros |
 |---|---:|
-| class (trait-de-classe) | 94 |
-| ancestry (trait-de-ancestria) | 51 |
+| class (trait-de-classe) | 92 |
+| ancestry (trait-de-ancestria) | 50 |
 | ancestry (trait-de-heranca) | 11 |
 | class (trait) | 8 |
 

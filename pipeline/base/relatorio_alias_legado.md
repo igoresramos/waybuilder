@@ -32,21 +32,21 @@ A regra crua pega 1.606 e a maioria e lixo. Tres guardas: categoria igual, nome 
 |---|---|---|
 | ancestry | Kholo | Gnoll |
 | ancestry | Tripkee | Grippli |
-| ritual | Binding Circle | Planar Binding |
-| ritual | Collective Memories | Legend Lore |
-| ritual | Planar Servitor | Planar Ally |
-| ritual | Demonic Pact | Abyssal Pact |
-| ritual | Diabolic Pact | Infernal Pact |
-| ritual | Fortifying Brew | Heroes' Feast |
-| ritual | Gathering Call | Word of Recall |
-| ritual | Phantasmal Custodians | Unseen Custodians |
-| ritual | Shadow Double | Simulacrum |
-| feat | Celestial Magic | Empyreal Blessing |
-| feat | Winglet Flight | Hatchling Flight |
-| feat | Domain Focus | Domain Wellspring |
-| feat | Primal Focus | Primal Wellspring |
-| feat | Warden's Focus | Warden's Wellspring |
-| feat | Hex Focus | Hex Wellspring |
-| feat | Amp Focus | Deepest Wellspring |
-| feat | Desperate Wrath | Reckless Abandon |
-| feat | Mutant Physique | Elastic Mutagen |
+| armor | Smoldering Armor | Remorhaz Armor |
+| equipment | Arbor Wine | Assassin Vine Wine |
+| equipment | Arbor Wine (Aged) | Assassin Vine Wine |
+| equipment | Affliction Suppressant (Lesser) | Addition Suppressant |
+| equipment | Affliction Suppressant (Moderate) | Addition Suppressant |
+| equipment | Affliction Suppressant (Greater) | Addition Suppressant |
+| equipment | Affliction Suppressant (Major) | Addition Suppressant |
+| equipment | Bendy-Arm Mutagen | Choker-Arm Mutagen |
+| equipment | Bendy-Arm Mutagen (Lesser) | Choker-Arm Mutagen |
+| equipment | Bendy-Arm Mutagen (Moderate) | Choker-Arm Mutagen |
+| equipment | Bendy-Arm Mutagen (Greater) | Choker-Arm Mutagen |
+| equipment | Bendy-Arm Mutagen (Major) | Choker-Arm Mutagen |
+| equipment | Execution Powder | Death Knell Powder |
+| equipment | Gnawbone Toxin | Hunger Oil |
+| equipment | Fraudslayer Oil | Liar's Demise |
+| equipment | Deadlock Mint | Bralani Breath |
+| equipment | Deadlock Mint (Greater) | Bralani Breath |
+| equipment | Burial Oil | Disrupting Oil |

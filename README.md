@@ -22,6 +22,11 @@ jogo rodando -- e um construtor, nao um sistema.
    derivado. Regra que muda re-deriva em vez de invalidar.
 4. **Nada e descartado.** Conteudo cortado pela Paizo (alinhamento, Legacy sem
    sucessor) fica na base. Renomeado vira um registro so, com os dois nomes.
+   Uma excecao, e uma so: o conteudo de Kingmaker sai (125 registros, passo
+   `7h` do `build.sh`), por decisao do Igor em 2026-08-01 -- ver
+   `specs/2026-08-01-remover-kingmaker.md`, que explica por que ela nao se
+   estende a mais nada. Conteudo raro, legado ou de outro Adventure Path
+   continua ficando.
 
 ## O que ja esta decidido, e onde
 

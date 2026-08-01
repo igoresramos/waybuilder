@@ -1,6 +1,6 @@
 # Gate elemental do Kineticist
 
-- impulsos gateados: **111**
+- impulsos gateados: **110**
 - deles, `composite` (exigem DOIS gates): **16**
 - agnosticos, intocados: **8** (Base Kinesis, Command Elemental, Counter Element, Elemental Blast, Extract Element, Fearsome Familiar, Imperious Aura, Purify Element)
 
@@ -10,10 +10,10 @@ A regra e da fonte, verbatim: "You can gain an impulse with the composite trait 
 
 | elemento | impulsos |
 |---|---:|
-| metal | 22 |
 | wood | 22 |
 | air | 21 |
 | fire | 21 |
+| metal | 21 |
 | water | 21 |
 | earth | 20 |
 
@@ -52,7 +52,6 @@ A regra e da fonte, verbatim: "You can gain an impulse with the composite trait 
 | Drowning Mist | water |  |
 | Elemental Artillery | metal, wood | sim |
 | Eternal Torch | fire |  |
-| Flash Forge | metal |  |
 | Flashforge | metal |  |
 | Flinging Updraft | air |  |
 | Flying Flame | fire |  |

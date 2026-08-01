@@ -1,6 +1,6 @@
 # Portoes de qualidade -- fase `final`
 
-- registros avaliados: **20083**
+- registros avaliados: **20086**
 
 ## Portao 1 -- prov por campo preenchido
 
@@ -22,12 +22,8 @@
 
 ## Portao 4 -- cobertura caindo vs build anterior
 
-**FALHOU** -- 4 ocorrencia(s).
+**PASSOU** -- 0 ocorrencia(s).
 
-- `feat`: 6265 -> 6239
-- `background`: 524 -> 521
-- `equipment`: 6046 -> 6033
-- **total**: 20125 -> 20083
 
 ## Portao 5 -- license ausente
 
@@ -50,9 +46,8 @@ NAO SE APLICA nesta fase.
 
 ## Portao 9 -- kind ausente vs censo do AoN
 
-**FALHOU** -- 1 ocorrencia(s).
+**PASSOU** -- 0 ocorrencia(s).
 
-- `action`: 44 de 225 vigentes do AoN nao estao na base -- action-3611, (auditory, emotion, incapacitation, magical, manipulate, mental), (concentrate, death, healing, positive), (concentrate, divine, incapacitation, manipulate), (concentrate, divine, mental), (concentrate, emotion, mental, spellshape) (44 sem decisao registrada)
 - 
 _Cobertura por raridade (AoN vigente em escopo):_
 - - `common`: 12443 de 12714 na base (97.9%)
@@ -60,7 +55,8 @@ _Cobertura por raridade (AoN vigente em escopo):_
 - - `rare`: 1451 de 1451 na base (100.0%)
 - - `unique`: 240 de 240 na base (100.0%)
 - 
-_Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
+_Ausencias ja decididas (4 categorias) -- visiveis, nao bloqueiam:_
+- - `action`: 44 de 225 vigentes do AoN nao estao na base -- action-3611, (auditory, emotion, incapacitation, magical, manipulate, mental), (concentrate, death, healing, positive), (concentrate, divine, incapacitation, manipulate), (concentrate, divine, mental), (concentrate, emotion, mental, spellshape) -- as 44 sao sub-documento de OUTRA entidade, nao acao autonoma. 42 sao o bloco `Activate-X` de um item magico, que o AoN publica como doc `action` proprio marcado `exclude_from_search: true` (o nome vem quebrado: o campo `name` carrega o parenteses de traits, ex. `(concentrate, manipulate)`); as 2 restantes sao acao de companheiro-cadeira do Treasure Vault. Nos 44 casos o conteudo ENTROU na base, no texto da entidade dona -- verificado casando `Activate-<rotulo>` contra o store de texto: 68 de 68 acharam o item pai, e as 2 acoes de cadeira estao em wb:text/animal-companion/{oozeform,rootball}-chair
 - - `class-feature`: 219 de 721 vigentes do AoN nao estao na base -- Alchemist Feats, Ancestry And Background, Ancestry And Background, Ancestry And Background, Ancestry Feat, Ancestry Feats -- 214 dos 219 sao LINHA DE TABELA DE PROGRESSAO, nao conteudo ('Attribute Boosts', 'Initial Proficiencies', 'Skill Feats', 'Skill Increases', 'Ancestry and Background', 'General Feats', '<Classe> Feats'), que a base modela dentro de `class.progressao`. Os 5 restantes sao class-features de verdade e estao no TODO 55: Incredible Senses, Lightning Reflexes (2 docs), Premonition's Reflexes, Vigilant Senses
 - - `feat`: 5 de 6085 vigentes do AoN nao estao na base -- Dad Joke, GGGHhhjjjJJK, Wombat Bastion, Wombat Burrow, Wombat Style -- entradas de piada do proprio AoN (Dad Joke, GGGHhhjjjJJK, Wombat Bastion/Burrow/Style). Nao sao conteudo de jogo
 - - `heritage`: 3 de 335 vigentes do AoN nao estao na base -- Half-Elf, Half-Orc, Three Kobolds in a Trench Coat -- As 3 sao herancas LEGADAS que o Remaster aposentou e que a fonte fixada do Foundry (pin 87f9e502) nao contem mais: Half-Elf virou Aiuvarin, Half-Orc virou Dromaar, e 'Three Kobolds in a Trench Coat' e piada de AP. O AoN ainda as lista como vigentes porque mantem o conteudo legado. Foram 20 registros de heranca legada que sairam da base em 2026-07-30, quando `extratores/ancestrias.py` voltou a ser rodado: a saida em disco estava parada em 27/07, de antes da fixacao da fonte, e carregava herancas que a fonte pinada nao produz. Terceira ocorrencia do mesmo padrao (taticas_kits fora do laco, magias.py no-op) e a que mais escondeu: a saida velha tambem mascarava que o extrator nunca migrou para o schema v2.
@@ -69,7 +65,7 @@ _Ausencias ja decididas (3 categorias) -- visiveis, nao bloqueiam:_
 
 **PASSOU** -- 0 ocorrencia(s).
 
-- registros SEM resposta de `grants_completos`: **0** de 20083 (0.0%)
+- registros SEM resposta de `grants_completos`: **0** de 20086 (0.0%)
 - linha de base anterior: 0
 
 ## Portao 11 -- campo critico ausente vs build anterior

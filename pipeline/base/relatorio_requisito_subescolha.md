@@ -1,6 +1,6 @@
 # Requisito de sub-escolha lido do residuo
 
-- clausulas convertidas: **26**
+- clausulas convertidas: **25**
 - chaves possiveis (opcao x eixo): **179**
 - descartadas por ambiguidade: **3** (holy sanctification, sem santificacao sanctification, unholy sanctification)
 
@@ -30,7 +30,6 @@ Achado na 5a rodada com o Pathbuilder: cinco feats do Campeao que nos liberavamo
 | `wb:feat/soothing-vials` | chirurgeon research field | `alchemist` -> `wb:class-feature/chirurgeon` |
 | `wb:feat/unsheathing-the-sword-light` | aloof firmament hybrid study | `magus` -> `wb:class-feature/aloof-firmament` |
 | `wb:feat/vermilion-threads` | unfurling brocade hybrid study | `magus` -> `wb:class-feature/unfurling-brocade` |
-| `wb:feat/vermillion-threads` | unfurling brocade hybrid study | `magus` -> `wb:class-feature/unfurling-brocade` |
 | `wb:feat/vicious-vengeance` | iniquity cause | `champion` -> `wb:class-feature/iniquity` |
 | `wb:feat/zoophonic-communication` | zoophonia muse | `bard` -> `wb:class-feature/zoophonia` |
 | `wb:feat/zoophonic-composition` | zoophonia muse | `bard` -> `wb:class-feature/zoophonia` |

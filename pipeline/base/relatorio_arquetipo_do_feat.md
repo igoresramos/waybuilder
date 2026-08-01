@@ -1,7 +1,7 @@
 # Arquetipo do feat
 
 - feats re-ancorados pelo `requires`: **37**
-- sem ancora (ficam como estao): **36**
+- sem ancora (ficam como estao): **33**
 
 Chutar arquetipo por semelhanca de nome poria o feat na lista ERRADA, que e pior que deixa-lo sem lista. `Skill Mastery` aceita Rogue OU Investigator -- ancorar num dos dois seria escolher.
 
@@ -9,9 +9,9 @@ Chutar arquetipo por semelhanca de nome poria o feat na lista ERRADA, que e pior
 |---|---:|
 | `wb:archetype/rogue` | 3 |
 | `wb:archetype/runelord` | 3 |
+| `wb:archetype/knight-vigilant` | 3 |
 | `wb:archetype/elementalist` | 2 |
 | `wb:archetype/alchemist` | 2 |
-| `wb:archetype/knight-vigilant` | 2 |
 | `wb:archetype/vindicator` | 2 |
 | `wb:archetype/archer` | 1 |
 | `wb:archetype/dragon-disciple` | 1 |
@@ -30,7 +30,6 @@ Chutar arquetipo por semelhanca de nome poria o feat na lista ERRADA, que e pior
 | `wb:archetype/hellbreaker` | 1 |
 | `wb:archetype/field-propagandist` | 1 |
 | `wb:archetype/trapsmith` | 1 |
-| `wb:archetype/lastwall-sentry` | 1 |
 | `wb:archetype/bastion` | 1 |
 | `wb:archetype/avenger` | 1 |
 | `wb:archetype/marshal` | 1 |

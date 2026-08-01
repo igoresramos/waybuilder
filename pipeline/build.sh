@@ -300,6 +300,36 @@ echo "== 7g. quem concede conjuracao de arquetipo =="
 # passo diz QUEM esta na rota e por qual cadeia Basic/Expert/Master.
 python3 derivar_spellcasting_arquetipo.py
 
+echo "== 7h. remover o conteudo de Kingmaker =="
+# UNICA excecao ao principio 4 do README ("nada e descartado"), decidida pelo
+# Igor em 2026-08-01. Leia specs/2026-08-01-remover-kingmaker.md ANTES de
+# "consertar" a falta de 125 registros -- a spec explica por que a excecao nao
+# se estende a mais nada (Shining Kingdoms, King of the Mountain e Crown of the
+# Kobold King ficam, inclusive com "King" no nome).
+# Medido: 125 registros dos tres livros de Kingmaker
+# (feat 31, trait 31, equipment 23, skill 16, spell 10, background 7, weapon 6,
+# ritual 1), e 1.142 ocorrencias deles em `candidatos` de slot de feat em 33 das
+# 34 fixtures do motor -- o defeito que a remocao apaga.
+#
+# TARDE de proposito, e a ordem tem tres amarras:
+#  - DEPOIS de `reconciliar` (2): o criterio e `source.book` CANONIZADO, e quem
+#    canoniza e ele, via canonico_livros.json. Antes disso a grafia e a da
+#    fonte ("kingmaker", "km") e a lista fechada de tres livros nao casa.
+#  - DEPOIS de `desmembrar_colisoes` (4), `fundir_renomeados` (7) e
+#    `fundir_duplicata_de_nome` (7c0): sao eles que cunham e aposentam id.
+#    Remover antes muda a familia de homonimos e o conjunto de candidatos da
+#    fusao. `Roll with It` tem 4 registros (2 de Kingmaker) e `The Harder They
+#    Fall` tem 4 (2 de Kingmaker): quem sobra -- `wb:feat/roll-with-it` e
+#    `wb:feat/roll-with-it-goblin` (Character Guide),
+#    `wb:feat/the-harder-they-fall` e `wb:feat/the-harder-they-fall-rogue`
+#    (Player Core) -- tem o id que tem por causa do desmembramento dessa
+#    familia. Tirar os irmaos antes pode renomear o sobrevivente EM SILENCIO, e
+#    o diff sairia como "alterado", indistinguivel de defeito.
+#  - ANTES do portao 8 e do `emitir_app` (9): o portao tem de medir a base que
+#    de fato sai, e o payload do cliente e derivado da base auditada.
+# Desligar e apagar esta linha; o passo nao deixa residuo em outro lugar.
+python3 remover_kingmaker.py
+
 echo "== 8. portoes, fase final =="
 python3 portoes.py --fase final
 
