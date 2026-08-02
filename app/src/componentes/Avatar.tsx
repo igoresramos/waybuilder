@@ -37,7 +37,7 @@ import { chaveDoRecolor, ordenarPorMatiz } from "../cores";
  * errado sem nenhum erro na tela. Versao nova = chave nova = invalidacao em
  * bloco. Ao republicar o acervo, bumpar os dois no mesmo ato.
  */
-const VERSAO_ACERVO = "0.2.0";
+const VERSAO_ACERVO = "0.3.0";
 const RAIZ = "https://igoresramos.github.io/waybuilder-avatar/saida/";
 
 /** A URL de um arquivo do acervo, com a versao que separa as geracoes. */
@@ -447,6 +447,11 @@ function Picker({
   const faixas = Object.keys(
     item.camadas[0]?.corpos[corpo]?.cores ?? {},
   ).filter((c) => c !== "base");
+  // A cor de cada faixa vem do build (spec 5f). Antes o painel tinha DOIS
+  // seletores diferentes -- quadradinho para a peca com paleta, nome escrito
+  // para a peca do formato antigo --, porque so no primeiro caso o app sabia o
+  // RGB. Agora o build olha a arte e diz a cor, e os dois viram um so.
+  const amostrasDaFaixa = item.camadas[0]?.corpos[corpo]?.amostras ?? {};
   // as faixas do escudo Kite vem `kite_blue_blue`: o nome da peca repetido
   const slug = item.id.split("/")[1];
 
@@ -522,14 +527,28 @@ function Picker({
         {faixas.length > 0 && (
           <div className="avatar-canal">
             <span className="avatar-canal-nome">cor</span>
-            <div className="avatar-tons avatar-tons-nome">
-              {faixas.map((nome) => (
-                <button
-                  key={nome} className={efetivas["cor"] === nome ? "sel" : ""}
-                  onClick={() => setCores((c) => ({ ...c, cor: nome }))}
-                  aria-pressed={efetivas["cor"] === nome}
-                >{rotuloDaCor(nome, slug, catalogo.cores)}</button>
-              ))}
+            <div className="avatar-tons">
+              {faixas.map((nome) => {
+                const am = amostrasDaFaixa[nome];
+                const rot = rotuloDaCor(nome, slug, catalogo.cores);
+                return (
+                  <button
+                    key={nome}
+                    className={[efetivas["cor"] === nome ? "sel" : "",
+                                am ? "" : "sem-amostra"].join(" ").trim()}
+                    ref={rolarSeSelecionado(efetivas["cor"] === nome)}
+                    onClick={() => setCores((c) => ({ ...c, cor: nome }))}
+                    title={rot}
+                    aria-label={`cor ${rot}`}
+                    aria-pressed={efetivas["cor"] === nome}
+                  >
+                    {am
+                      ? <span className="avatar-tom" aria-hidden="true"
+                              style={{ background: am }} />
+                      : rot /* acervo antigo, sem amostra: o nome ainda serve */}
+                  </button>
+                );
+              })}
             </div>
           </div>
         )}

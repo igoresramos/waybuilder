@@ -692,11 +692,13 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .avatar-canal-nome { display: block; color: var(--fraco); font-size: .8em; margin-bottom: 3px; }
 .avatar-picker footer { display: flex; gap: 6px; justify-content: flex-end; }
 .avatar-picker footer .primario { border-color: var(--accent); color: var(--texto); }
-/* cores nomeadas (formato antigo: a cor E o arquivo, nao ha hex para amostrar) */
-.avatar-tons-nome { max-width: none; }
-.avatar-tons-nome button {
+/* Cor sem amostra no catalogo -- so acontece com acervo anterior a decisao 5f,
+   que pode estar em cache. Cai no nome escrito, que era o comportamento de
+   todas as pecas do formato antigo antes de o build passar a dizer a cor. */
+.avatar-tons button.sem-amostra {
+  width: auto; height: auto;
   padding: 2px 6px; font-size: .72em; color: var(--fraco);
   background: var(--card); border: 1px solid var(--borda); line-height: 1.4;
 }
-.avatar-tons-nome button.sel { color: var(--texto); border-color: var(--accent); }
+.avatar-tons button.sem-amostra.sel { color: var(--texto); border-color: var(--accent); }
 .avatar-etiqueta { font-size: .78em; color: var(--accent); text-align: center; }
