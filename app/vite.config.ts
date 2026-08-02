@@ -34,7 +34,10 @@ export default defineConfig({
         // `Unexpected token '<', "<!doctype "...` e a tela diz "nao carregou a
         // base" -- um erro que nao aponta para lugar nenhum. Aconteceu com um
         // service worker de build anterior ainda registrado no navegador.
-        navigateFallbackDenylist: [/^\/base\//, /^\/avatar\//],
+        // (`/avatar/` saiu da lista em 2026-08-02: o acervo passou a vir de
+        // outro dominio, e `navigateFallback` so age em rota de navegacao
+        // deste. A entrada nao protegia mais nada.)
+        navigateFallbackDenylist: [/^\/base\//],
         // o indice do nucleo passa de 2 MB cru, e o default do Workbox e 2 MiB:
         // sem isto o arquivo MAIS importante ficaria de fora, em silencio, e o
         // app abriria offline sem base nenhuma
@@ -50,7 +53,17 @@ export default defineConfig({
             // colocar todas as cores, e so nao dar preload". A consequencia
             // aceita e que o avatar precisa de rede na primeira vez; depois
             // fica no cache.
-            urlPattern: /\/avatar\/.*\.(png|json)$/,
+            //
+            // MATCHER POR ORIGEM, nao por caminho (spec, decisao 2a): o acervo
+            // e servido do GitHub Pages do repo `waybuilder-avatar`. A regra
+            // antiga casava `/avatar/` e ficaria MUDA cross-origin -- o avatar
+            // nunca mais entraria no cache, e ninguem veria erro nenhum.
+            // A funcao e serializada para o `sw.js`, entao nao pode fechar
+            // sobre variavel de fora: as constantes ficam literais aqui.
+            urlPattern: ({ url }: { url: URL }) =>
+              url.origin === "https://igoresramos.github.io"
+              && url.pathname.startsWith("/waybuilder-avatar/saida/")
+              && /\.(png|json)$/.test(url.pathname),
             handler: "CacheFirst",
             options: {
               cacheName: "avatar",

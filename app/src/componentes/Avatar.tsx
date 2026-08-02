@@ -23,7 +23,27 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { chaveDoRecolor, ordenarPorMatiz } from "../cores";
 
-const RAIZ = "/avatar/";
+/**
+ * O acervo NAO mora no deploy do app -- spec, decisao 2a.
+ *
+ * Ele e servido do GitHub Pages do proprio repo `waybuilder-avatar`. O teto de
+ * estaticos do plano Hobby da Vercel (100 MB) deixa de reger o recorte, e as 4
+ * direcoes (118 MB projetados) passam a caber no 1 GB do Pages. O codigo do
+ * renderer continua vindo do pacote npm; so os ASSETS mudaram de origem.
+ *
+ * `VERSAO_ACERVO` acompanha o `version` do `package.json` do acervo e existe
+ * porque o runtime cache e `CacheFirst` de 90 dias: sob URL fixa, um acervo
+ * novo misturaria catalogo novo com atlas velho ainda em cache, e o boneco sai
+ * errado sem nenhum erro na tela. Versao nova = chave nova = invalidacao em
+ * bloco. Ao republicar o acervo, bumpar os dois no mesmo ato.
+ */
+const VERSAO_ACERVO = "0.1.0";
+const RAIZ = "https://igoresramos.github.io/waybuilder-avatar/saida/";
+
+/** A URL de um arquivo do acervo, com a versao que separa as geracoes. */
+function url(rel: string): string {
+  return `${RAIZ}${rel}?v=${VERSAO_ACERVO}`;
+}
 
 /**
  * O rotulo de uma cor.
@@ -101,7 +121,14 @@ function carregarImagem(arq: string): Promise<HTMLImageElement> {
     const im = new Image();
     im.onload = () => ok(im);
     im.onerror = () => falha(new Error(arq));
-    im.src = RAIZ + arq;
+    // OBRIGATORIO com o acervo em outro dominio, por duas razoes distintas:
+    // sem ele o canvas fica "tainted" e o `getImageData` do recolor estoura
+    // `SecurityError` em toda peca com cor; e a resposta chega OPACA, que o
+    // `CacheFirst` do service worker se recusa a guardar -- o avatar nunca
+    // ficaria offline. `Access-Control-Allow-Origin: *` do Pages nao basta
+    // sozinho: quem pede o CORS e o cliente. Same-origin isto e no-op.
+    im.crossOrigin = "anonymous";
+    im.src = url(arq);
   });
   imagens.set(arq, p);
   return p;
@@ -112,7 +139,7 @@ const paletas = new Map<string, Promise<Record<string, string[]>>>();
 function lerJson<T>(rel: string, cache: Map<string, Promise<T>>): Promise<T> {
   const guardado = cache.get(rel);
   if (guardado) return guardado;
-  const p = fetch(RAIZ + rel).then((r) => r.json() as Promise<T>);
+  const p = fetch(url(rel)).then((r) => r.json() as Promise<T>);
   cache.set(rel, p);
   return p;
 }
@@ -600,7 +627,7 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
   }, []);
 
   useEffect(() => {
-    fetch(`${RAIZ}catalogo.json`)
+    fetch(url("catalogo.json"))
       .then((r) => r.json())
       .then(setCatalogo)
       .catch(() => setErro("nao carregou o acervo do avatar"));

@@ -29,5 +29,7 @@ docs/referencia-pathbuilder/app-local/assets/data_remastered71.txt
 # mecanismos gravam (`pipeline/base/relatorio_*.md`, `docs/*validacao*.md`).
 docs/_verificacao/
 
-# derivado do pacote waybuilder-avatar (sincronizar-avatar.sh)
+# residuo do tempo em que o acervo era copiado para dentro do app. Desde a
+# decisao 2a da spec do avatar ele vem do GitHub Pages, em runtime; a linha
+# fica para que uma copia local esquecida nunca entre no repo.
 app/public/avatar/
