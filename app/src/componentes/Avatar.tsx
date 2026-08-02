@@ -16,10 +16,10 @@ import {
   type CamadaDesenhavel,
   type Catalogo,
   type Item,
+  type Escolha,
   type Selecao,
 } from "waybuilder-avatar";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ListaVirtual } from "./ListaVirtual";
 
 const RAIZ = "/avatar/";
 const Q = 64;
@@ -146,62 +146,171 @@ function Boneco({
   );
 }
 
-// -- picker de um slot --------------------------------------------------------
+// -- picker de um slot: uma peca por vez, com setas -------------------------
 
+/**
+ * Uma peca por vez, no proprio boneco, com setas para andar pela lista --
+ * o esquema do Stardew (decisao 5b, reescrita em @8).
+ *
+ * A grade de todas as pecas montava o personagem inteiro em cada celula: 89
+ * composicoes de uma vez so para abrir `hair`. Aqui abre UMA, e cada seta
+ * compoe mais uma.
+ */
 function Picker({
   catalogo, slot, itens, selecao, corpo, aoEscolher, aoFechar,
 }: {
   catalogo: Catalogo; slot: string; itens: Item[]; selecao: Selecao;
-  corpo: string; aoEscolher: (id: string | null) => void; aoFechar: () => void;
+  corpo: string; aoEscolher: (e: Escolha | null) => void; aoFechar: () => void;
 }) {
-  const [busca, setBusca] = useState("");
-  const filtrados = useMemo(() => {
-    const q = busca.trim().toLowerCase();
-    return q ? itens.filter((i) => i.nome.toLowerCase().includes(q)) : itens;
-  }, [itens, busca]);
+  const equipado = selecao[slot];
+  const partida = Math.max(0, itens.findIndex((i) => i.id === equipado?.id));
+  const [n, setN] = useState(partida);
+  const [cores, setCores] = useState<Record<string, string>>(equipado?.cores ?? {});
+
+  const item = itens[n];
+  const andar = useCallback((passo: number) => {
+    setN((v) => (v + passo + itens.length) % itens.length);
+    setCores({});
+  }, [itens.length]);
+
+  // as rampas de cada canal da peca atual
+  const [rampas, setRampas] = useState<Record<string, [string, string][]>>({});
+  useEffect(() => {
+    if (!item?.canais_de_cor?.length) { setRampas({}); return; }
+    let vivo = true;
+    Promise.all(item.canais_de_cor.map(async (c) => {
+      // TODAS as paletas que o canal declara, nao so a primeira: um cabelo
+      // declara ulpc + lpcr + all.lpcr, e cada uma traz rampas proprias.
+      // Usar so a primeira mostrava uma fracao das cores disponiveis.
+      // `all.lpcr` quer dizer MATERIAL `all`, paleta `lpcr` -- o ponto separa
+      // os dois. Tratar como nome unico procurava `hair/hair_all_lpcr.json`,
+      // que nao existe, e engolia as 75 rampas da paleta universal: um cabelo
+      // oferece 26 (ulpc) + 20 (lpcr) + 75 (all.lpcr) = 121 cores.
+      const listas = await Promise.all(
+        c.paletas.map((nome) => {
+          const [mat, pal] = nome.includes(".")
+            ? (nome.split(".") as [string, string])
+            : [c.material, nome];
+          return lerJson<Record<string, string[]>>(
+            `paletas/${mat}/${mat}_${pal}.json`, paletas,
+          ).catch(() => ({}) as Record<string, string[]>);
+        }),
+      );
+      // TODAS as rampas, qualificadas por paleta: 18 dos 19 nomes repetidos
+      // sao cores DIFERENTES (ha tres `white` e tres `orange`). Deduplicar por
+      // nome descartava cor real; a identidade e o par paleta+nome.
+      const todas: [string, string][] = [];
+      const vistas = new Set<string>();
+      listas.forEach((r, i) => {
+        const qual = c.paletas[i] ?? "";
+        for (const [k, v] of Object.entries(r)) {
+          const meio = v[Math.floor(v.length / 2)] ?? "#000";
+          if (vistas.has(`${qual}:${k}`)) continue;
+          vistas.add(`${qual}:${k}`);
+          todas.push([`${qual}:${k}`, meio]);
+        }
+      });
+      return [c.nome, todas] as const;
+    })).then((pares) => { if (vivo) setRampas(Object.fromEntries(pares)); });
+    return () => { vivo = false; };
+  }, [item]);
+
+  useEffect(() => {
+    const tecla = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") andar(-1);
+      else if (e.key === "ArrowRight") andar(1);
+      else if (e.key === "Escape") aoFechar();
+    };
+    window.addEventListener("keydown", tecla);
+    return () => window.removeEventListener("keydown", tecla);
+  }, [andar, aoFechar]);
+
+  if (!item) return null;
+  // As cores de uma peca vem de dois lugares, e ate @8 o picker so via um:
+  //   - `canais_de_cor` (415 pecas): recolor por paleta, em runtime
+  //   - faixas do atlas (241 pecas com `variants`): a cor E o arquivo
+  // Peca com `variants` e sem `recolors` nao mostrava seletor nenhum, apesar
+  // de ter as cores gravadas -- o Tricorne tem 24 e aparecia sem escolha.
+  const faixas = Object.keys(
+    item.camadas[0]?.corpos[corpo]?.cores ?? {},
+  ).filter((c) => c !== "base");
+
+  // A peca ja aparece colorida: cada canal cai na primeira rampa ate o jogador
+  // escolher outra. Sem isso ela abriria na cor crua da arte.
+  const padrao: Record<string, string> = {};
+  for (const c of item.canais_de_cor ?? []) {
+    const primeira = rampas[c.nome]?.[0]?.[0];
+    if (primeira) padrao[c.nome] = primeira;
+  }
+  if (faixas.length > 0 && padrao["cor"] === undefined) padrao["cor"] = faixas[0]!;
+  const efetivas = { ...padrao, ...cores };
+  const previa: Selecao = { ...selecao, [slot]: { id: item.id, cores: efetivas } };
+  const falta = item.sem_arte?.includes(corpo);
 
   return (
     <div className="modal-fundo" onClick={aoFechar}>
       <div className="modal avatar-picker" onClick={(e) => e.stopPropagation()}>
         <header>
-          <input
-            autoFocus className="busca" value={busca} placeholder={`buscar em ${slot}`}
-            onChange={(e) => setBusca(e.target.value)}
-            aria-label={`buscar peca de ${slot}`}
-          />
+          <span className="avatar-picker-slot">{slot}</span>
+          <span className="avatar-picker-conta">{n + 1} / {itens.length}</span>
           <button onClick={aoFechar} aria-label="fechar">x</button>
         </header>
-        <div className="modal-corpo">
-          <ListaVirtual
-            className="avatar-grade" itens={filtrados} altura={520}
-            vazio={<li className="vazio">nada com esse nome</li>}
-          >
-            {(item: Item) => {
-              // (5b) a celula mostra a peca NO personagem, nao isolada
-              const previa: Selecao = { ...selecao, [slot]: { id: item.id } };
-              const falta = item.sem_arte?.includes(corpo);
-              return (
-                <li key={item.id}>
-                  <button
-                    className={selecao[slot]?.id === item.id ? "sel" : ""}
-                    onClick={() => { aoEscolher(item.id); aoFechar(); }}
-                    title={item.nome}
-                  >
-                    <Boneco catalogo={catalogo} selecao={previa} corpo={corpo}
-                            zoom={1} titulo={item.nome} />
-                    <span className="nome">{item.nome}</span>
-                    {/* sem isto a celula mostraria o boneco inalterado e o
-                        preview mentiria por omissao -- 130 itens no acervo */}
-                    {falta && <span className="avatar-sem-arte">sem arte neste corpo</span>}
-                  </button>
-                </li>
-              );
-            }}
-          </ListaVirtual>
+
+        <div className="avatar-picker-palco">
+          <button className="avatar-seta" onClick={() => andar(-1)}
+                  aria-label="peca anterior">‹</button>
+          <div className="avatar-picker-peca">
+            <Boneco catalogo={catalogo} selecao={previa} corpo={corpo} zoom={3}
+                    titulo={item.nome} />
+            <strong>{item.nome}</strong>
+            {falta && <span className="avatar-sem-arte">sem arte neste corpo</span>}
+          </div>
+          <button className="avatar-seta" onClick={() => andar(1)}
+                  aria-label="proxima peca">›</button>
         </div>
+
+        {faixas.length > 0 && (
+          <div className="avatar-canal">
+            <span className="avatar-canal-nome">cor</span>
+            <div className="avatar-tons avatar-tons-nome">
+              {faixas.map((nome) => (
+                <button
+                  key={nome} className={efetivas["cor"] === nome ? "sel" : ""}
+                  onClick={() => setCores((c) => ({ ...c, cor: nome }))}
+                  aria-pressed={efetivas["cor"] === nome}
+                >{nome}</button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {(item.canais_de_cor ?? []).map((canal) => (
+          <div key={canal.nome} className="avatar-canal">
+            <span className="avatar-canal-nome">{canal.rotulo ?? canal.nome}</span>
+            <div className="avatar-tons">
+              {(rampas[canal.nome] ?? []).map(([nome, amostra]) => (
+                <button
+                  key={nome} className={efetivas[canal.nome] === nome ? "sel" : ""}
+                  onClick={() => setCores((c) => ({ ...c, [canal.nome]: nome }))}
+                  title={nome.replace(":", " · ")}
+                  aria-label={`${canal.nome} ${nome.replace(":", " ")}`}
+                  aria-pressed={efetivas[canal.nome] === nome}
+                >
+                  <span className="avatar-tom" style={{ background: amostra }}
+                        aria-hidden="true" />
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+
         <footer>
           <button onClick={() => { aoEscolher(null); aoFechar(); }}>
             deixar vazio
+          </button>
+          <button className="primario"
+                  onClick={() => { aoEscolher({ id: item.id, cores: efetivas }); aoFechar(); }}>
+            equipar
           </button>
         </footer>
       </div>
@@ -291,11 +400,11 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
     );
   }, [porSlot]);
 
-  const escolher = useCallback((slot: string, id: string | null) => {
+  const escolher = useCallback((slot: string, e: Escolha | null) => {
     setSelecao((s) => {
       const novo = { ...s };
-      if (id === null) delete novo[slot];
-      else novo[slot] = { id };
+      if (e === null) delete novo[slot];
+      else novo[slot] = e;
       return novo;
     });
   }, []);
@@ -362,7 +471,7 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
         <Picker
           catalogo={catalogo} slot={aberto} itens={porSlot.get(aberto) ?? []}
           selecao={selecao} corpo={corpo}
-          aoEscolher={(id) => escolher(aberto, id)}
+          aoEscolher={(e) => escolher(aberto, e)}
           aoFechar={() => setAberto(null)}
         />
       )}

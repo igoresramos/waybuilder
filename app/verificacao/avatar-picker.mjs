@@ -1,0 +1,20 @@
+/** Abre o picker de `hair`, conta cores oferecidas e anda com a seta. */
+import { chromium } from "playwright";
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 900, height: 800 } });
+const erros = [];
+p.on("pageerror", (e) => erros.push(String(e)));
+await p.goto(process.env.URL ?? "http://127.0.0.1:5181/#/avatar", { waitUntil: "networkidle" });
+await p.waitForTimeout(1500);
+const alvo = process.env.SLOT ?? "hair";
+await p.locator(`.avatar-casa[title^="${alvo}"]`).first().click();
+await p.waitForTimeout(2500);
+const conta = await p.locator(".avatar-picker-conta").textContent();
+const nome1 = await p.locator(".avatar-picker-peca strong").textContent();
+const cores = await p.locator(".avatar-canal button").count();
+await p.locator('.avatar-seta[aria-label="proxima peca"]').click();
+await p.waitForTimeout(1200);
+const nome2 = await p.locator(".avatar-picker-peca strong").textContent();
+await p.screenshot({ path: "../docs/screenshots/2026-08-01_avatar-picker-aberto.png" });
+console.log(JSON.stringify({ conta, nome1, nome2, coresOferecidas: cores, erros }, null, 1));
+await b.close();

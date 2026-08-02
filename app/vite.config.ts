@@ -19,7 +19,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       workbox: {
-        globPatterns: ["**/*.{js,css,html,json,webmanifest,png}"],
+        globPatterns: ["**/*.{js,css,html,json,webmanifest}"],
         // A PROSA FICA DE FORA DO PRE-CACHE. Sao 6,3 MB contra 4,2 MB do
         // nucleo: pre-cachear tudo faria a primeira visita baixar 10,9 MB para
         // mostrar uma tela que precisa de 4,2 -- e contra a razao de a prosa
@@ -40,6 +40,23 @@ export default defineConfig({
         // app abriria offline sem base nenhuma
         maximumFileSizeToCacheInBytes: 12 * 1024 * 1024,
         runtimeCaching: [
+          {
+            // O ACERVO DO AVATAR NAO VAI NO PRECACHE. Sao 24 MB depois que as
+            // cores passaram a vir por asset (o Tricorne tem 24, um cabelo
+            // 121): pre-cachear obrigaria toda primeira visita a baixar isso
+            // para abrir uma tela que a maioria nem usa.
+            //
+            // Decisao do dono, 2026-08-01, revendo a decisao 4 da spec: "pode
+            // colocar todas as cores, e so nao dar preload". A consequencia
+            // aceita e que o avatar precisa de rede na primeira vez; depois
+            // fica no cache.
+            urlPattern: /\/avatar\/.*\.(png|json)$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "avatar",
+              expiration: { maxEntries: 600, maxAgeSeconds: 60 * 60 * 24 * 90 },
+            },
+          },
           {
             urlPattern: /\/base\/text\/.*\.json$/,
             // a prosa nao muda entre builds da mesma base: uma vez baixada,
