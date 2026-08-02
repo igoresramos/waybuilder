@@ -613,3 +613,14 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
     transition: none;
   }
 }
+
+/* tons de pele: amostra = cor do meio da rampa (as pontas sao contorno/brilho) */
+.avatar-tons { display: flex; flex-wrap: wrap; gap: 3px; justify-content: center; max-width: 200px; }
+.avatar-tons button {
+  padding: 2px; background: none; border: 1px solid transparent;
+  border-radius: var(--r-p); cursor: pointer; line-height: 0;
+  transition: border-color .2s;
+}
+.avatar-tons button:hover { border-color: var(--borda-forte); }
+.avatar-tons button.sel { border-color: var(--accent); }
+.avatar-tom { display: block; width: 15px; height: 15px; border-radius: 3px; }

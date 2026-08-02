@@ -218,6 +218,28 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
   const [semeado, setSemeado] = useState(false);
   const [corpo, setCorpo] = useState(corpoInicial);
   const [aberto, setAberto] = useState<string | null>(null);
+  const [tons, setTons] = useState<[string, string][]>([]);
+
+  // as rampas da paleta de pele; o `meta` traz a padrao e a rampa da arte
+  useEffect(() => {
+    Promise.all([
+      fetch(`${RAIZ}paletas/body/meta_body.json`).then((r) => r.json()),
+      fetch(`${RAIZ}paletas/body/body_ulpc.json`).then((r) => r.json()),
+    ])
+      .then(([, rampas]: [unknown, Record<string, string[]>]) =>
+        // a amostra e a cor do meio da rampa: as pontas sao contorno e brilho
+        setTons(Object.entries(rampas).map(([n, r]) => [n, r[Math.floor(r.length / 2)] ?? "#000"])))
+      .catch(() => setTons([]));
+  }, []);
+
+  const peleAtual = selecao["body"]?.cores?.["cor"] ?? "light";
+  const trocarPele = useCallback((tom: string) => {
+    setSelecao((s) => {
+      const body = s["body"];
+      if (!body) return s;
+      return { ...s, body: { ...body, cores: { ...body.cores, cor: tom } } };
+    });
+  }, []);
 
   useEffect(() => {
     fetch(`${RAIZ}catalogo.json`)
@@ -285,6 +307,20 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
     <div className="avatar">
       <aside className="avatar-palco">
         <Boneco catalogo={catalogo} selecao={selecao} corpo={corpo} zoom={4} />
+        {tons.length > 0 && (
+          <div className="avatar-tons" role="group" aria-label="tom de pele">
+            {tons.map(([nome, amostra]) => (
+              <button
+                key={nome} className={nome === peleAtual ? "sel" : ""}
+                onClick={() => trocarPele(nome)} title={nome}
+                aria-label={`tom de pele ${nome}`} aria-pressed={nome === peleAtual}
+              >
+                <span className="avatar-tom" style={{ background: amostra }}
+                      aria-hidden="true" />
+              </button>
+            ))}
+          </div>
+        )}
         <div className="avatar-corpos" role="group" aria-label="tipo de corpo">
           {catalogo.recorte.corpos.map((c) => (
             <button key={c} className={c === corpo ? "sel" : ""}

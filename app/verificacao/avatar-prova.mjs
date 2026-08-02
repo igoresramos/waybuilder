@@ -10,7 +10,7 @@
 import { chromium } from "playwright";
 
 const alvo = process.argv[2] ?? "avatar.png";
-const url = process.env.URL ?? "http://127.0.0.1:5180/#/avatar";
+const url = process.env.URL ?? "http://127.0.0.1:5181/#/avatar";
 
 const navegador = await chromium.launch();
 const pagina = await navegador.newPage({ viewport: { width: 1280, height: 900 } });
