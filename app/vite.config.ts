@@ -19,7 +19,7 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       workbox: {
-        globPatterns: ["**/*.{js,css,html,json,webmanifest}"],
+        globPatterns: ["**/*.{js,css,html,json,webmanifest,png}"],
         // A PROSA FICA DE FORA DO PRE-CACHE. Sao 6,3 MB contra 4,2 MB do
         // nucleo: pre-cachear tudo faria a primeira visita baixar 10,9 MB para
         // mostrar uma tela que precisa de 4,2 -- e contra a razao de a prosa
@@ -34,7 +34,7 @@ export default defineConfig({
         // `Unexpected token '<', "<!doctype "...` e a tela diz "nao carregou a
         // base" -- um erro que nao aponta para lugar nenhum. Aconteceu com um
         // service worker de build anterior ainda registrado no navegador.
-        navigateFallbackDenylist: [/^\/base\//],
+        navigateFallbackDenylist: [/^\/base\//, /^\/avatar\//],
         // o indice do nucleo passa de 2 MB cru, e o default do Workbox e 2 MiB:
         // sem isto o arquivo MAIS importante ficaria de fora, em silencio, e o
         // app abriria offline sem base nenhuma
