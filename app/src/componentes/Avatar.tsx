@@ -37,7 +37,7 @@ import { chaveDoRecolor, ordenarPorMatiz } from "../cores";
  * errado sem nenhum erro na tela. Versao nova = chave nova = invalidacao em
  * bloco. Ao republicar o acervo, bumpar os dois no mesmo ato.
  */
-const VERSAO_ACERVO = "0.1.0";
+const VERSAO_ACERVO = "0.2.0";
 const RAIZ = "https://igoresramos.github.io/waybuilder-avatar/saida/";
 
 /** A URL de um arquivo do acervo, com a versao que separa as geracoes. */
@@ -102,6 +102,12 @@ const ROTULO_DO_CORPO: Record<string, string> = {
 const ROTULO_DA_ANIMACAO: Record<string, string> = {
   idle: "Parado", combat_idle: "Em guarda", walk: "Andando",
   sit: "Sentado", run: "Correndo",
+};
+
+/** As 4 direcoes do build.py (`DIRECOES`, build.py:89), em pt-BR. */
+const ROTULO_DA_DIRECAO: Record<string, string> = {
+  frente: "Frente", costas: "Costas",
+  perfil_esq: "Perfil esquerdo", perfil_dir: "Perfil direito",
 };
 
 /** Ordem das secoes no painel. As demais entram depois, em ordem alfabetica. */
@@ -274,15 +280,15 @@ function movimentoReduzido(): boolean {
 }
 
 function Boneco({
-  catalogo, selecao, corpo, zoom = 3, titulo, animacao = "idle", animar = false,
+  catalogo, selecao, corpo, zoom = 3, titulo, animacao = "idle", direcao = "frente", animar = false,
 }: {
   catalogo: Catalogo; selecao: Selecao; corpo: string; zoom?: number;
-  titulo?: string; animacao?: string; animar?: boolean;
+  titulo?: string; animacao?: string; direcao?: string; animar?: boolean;
 }) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const { camadas } = useMemo(
-    () => montarCamadas(catalogo, selecao, corpo, animacao),
-    [catalogo, selecao, corpo, animacao],
+    () => montarCamadas(catalogo, selecao, corpo, animacao, direcao),
+    [catalogo, selecao, corpo, animacao, direcao],
   );
 
   // O gerador nao toca os frames em ordem crua: cada animacao tem um CICLO
@@ -366,10 +372,10 @@ function Boneco({
  * compoe mais uma.
  */
 function Picker({
-  catalogo, slot, itens, selecao, corpo, animacao, aoEscolher, aoFechar,
+  catalogo, slot, itens, selecao, corpo, animacao, direcao, aoEscolher, aoFechar,
 }: {
   catalogo: Catalogo; slot: string; itens: Item[]; selecao: Selecao;
-  corpo: string; animacao: string;
+  corpo: string; animacao: string; direcao: string;
   aoEscolher: (e: Escolha | null) => void; aoFechar: () => void;
 }) {
   const equipado = selecao[slot];
@@ -490,7 +496,7 @@ function Picker({
                   aria-label="peca anterior">‹</button>
           <div className="avatar-picker-peca">
             <Boneco catalogo={catalogo} selecao={previa} corpo={corpo} zoom={3}
-                    animacao={animacao} titulo={nomeDoItem(item)} />
+                    animacao={animacao} direcao={direcao} titulo={nomeDoItem(item)} />
             <strong>{nomeDoItem(item)}</strong>
             {/* o jogador precisa saber QUAL cor pegou -- ha tres `white` e
                 tres `orange` distintos entre as paletas */}
@@ -573,6 +579,7 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
   const [corpo, setCorpo] = useState(corpoInicial);
   const [aberto, setAberto] = useState<string | null>(null);
   const [animacao, setAnimacao] = useState("idle");
+  const [direcao, setDirecao] = useState("frente");
   const [tons, setTons] = useState<[string, string][]>([]);
 
   // O tom de pele sai do CANAL do corpo, nao de um arquivo fixo: `body`
@@ -721,7 +728,7 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
     <div className="avatar">
       <aside className="avatar-palco">
         <Boneco catalogo={catalogo} selecao={selecao} corpo={corpo} zoom={4}
-                animacao={animacao} animar />
+                animacao={animacao} direcao={direcao} animar />
         {tons.length > 0 && (
           <div className="avatar-tons" role="group" aria-label="tom de pele">
             {tons.map(([nome, amostra]) => (
@@ -754,6 +761,17 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
                     onClick={() => setAnimacao(a)}>{ROTULO_DA_ANIMACAO[a] ?? a}</button>
           ))}
         </div>
+        {/* catalogo anterior a decisao 3b3 @10 nao tem `direcoes`: sem o campo,
+            nao ha o que girar, entao o controle nem aparece */}
+        {catalogo.recorte.direcoes && catalogo.recorte.direcoes.length > 0 && (
+          <div className="avatar-direcoes" role="group" aria-label="direção">
+            {catalogo.recorte.direcoes.map((d) => (
+              <button key={d} className={d === direcao ? "sel" : ""}
+                      data-direcao={d}
+                      onClick={() => setDirecao(d)}>{ROTULO_DA_DIRECAO[d] ?? d}</button>
+            ))}
+          </div>
+        )}
       </aside>
 
       <div className="avatar-casas">
@@ -797,7 +815,7 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
       {aberto && (
         <Picker
           catalogo={catalogo} slot={aberto} itens={porSlot.get(aberto) ?? []}
-          selecao={selecao} corpo={corpo} animacao={animacao}
+          selecao={selecao} corpo={corpo} animacao={animacao} direcao={direcao}
           aoEscolher={(e) => escolher(aberto, e)}
           aoFechar={() => setAberto(null)}
         />

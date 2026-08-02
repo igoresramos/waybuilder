@@ -573,6 +573,15 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .avatar-animacoes button:hover { border-color: var(--accent); }
 .avatar-animacoes button.sel { color: var(--texto); border-color: var(--accent); }
 
+.avatar-direcoes { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; }
+.avatar-direcoes button {
+  background: var(--card); border: 1px solid var(--borda); color: var(--fraco);
+  border-radius: var(--r-p); padding: 4px 8px; cursor: pointer;
+  font-size: .85em; transition: border-color .2s, color .2s;
+}
+.avatar-direcoes button:hover { border-color: var(--accent); }
+.avatar-direcoes button.sel { color: var(--texto); border-color: var(--accent); }
+
 .avatar-casas { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--u); }
 .avatar-casas h3 { color: var(--fraco); font-size: .85em; font-weight: 500; margin: 0 0 4px; }
 .avatar-grupo { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -625,7 +634,7 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 
 @media (prefers-reduced-motion: reduce) {
   .avatar-casa, .avatar-corpos button, .avatar-animacoes button,
-  .avatar-picker .avatar-grade button {
+  .avatar-direcoes button, .avatar-picker .avatar-grade button {
     transition: none;
   }
 }
