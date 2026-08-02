@@ -440,8 +440,9 @@ function Picker({
       return varios ? `${canal?.rotulo ?? n}: ${rot}` : rot;
     });
   const falta = item.sem_arte?.includes(corpo);
-  // peca sem a animacao atual nao desenha (`montarCamadas`): sem dizer isso, a
-  // celula mostra o boneco inalterado e o preview mente por omissao
+  // A peca sem a animacao atual agora DESENHA, travada no primeiro frame que
+  // ela tem (`montarCamadas`). Continua precisando ser dito: o jogador ve a
+  // peca parada enquanto o resto anda e, sem o aviso, culpa o app.
   const semEstaAnimacao = !item.camadas.some(
     (c) => c.corpos[corpo]?.animacoes.some((a) => a.nome === animacao),
   );
@@ -477,7 +478,7 @@ function Picker({
             {falta && <span className="avatar-sem-arte">sem arte neste corpo</span>}
             {!falta && semEstaAnimacao && (
               <span className="avatar-sem-arte">
-                sem a animação “{ROTULO_DA_ANIMACAO[animacao] ?? animacao}”
+                parada em “{ROTULO_DA_ANIMACAO[animacao] ?? animacao}”
               </span>
             )}
           </div>
