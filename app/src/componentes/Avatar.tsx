@@ -215,6 +215,7 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
   const [catalogo, setCatalogo] = useState<Catalogo | null>(null);
   const [erro, setErro] = useState<string | null>(null);
   const [selecao, setSelecao] = useState<Selecao>({});
+  const [semeado, setSemeado] = useState(false);
   const [corpo, setCorpo] = useState(corpoInicial);
   const [aberto, setAberto] = useState<string | null>(null);
 
@@ -224,6 +225,23 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
       .then(setCatalogo)
       .catch(() => setErro("nao carregou o acervo do avatar"));
   }, []);
+
+  // A semente e a MESMA do gerador oficial do LPC (`selectDefaults()`, em
+  // `sources/state/state.ts:159`): corpo + cabeca humana + expressao neutra,
+  // os tres na cor `light`. Sem cabeca o boneco abre decapitado -- no LPC o
+  // corpo nao inclui a cabeca, ela e slot proprio.
+  //
+  // A expressao neutra ainda nao entra: as 12 faces do acervo tem `${head}` no
+  // caminho e o build ainda nao interpola.
+  useEffect(() => {
+    if (!catalogo || semeado) return;
+    const semente: Selecao = {};
+    const por = (id: string) => catalogo.itens.find((i) => i.id === id);
+    if (por("body/body-color")) semente["body"] = { id: "body/body-color", cores: { cor: "light" } };
+    if (por("head/human-male")) semente["head"] = { id: "head/human-male", cores: { color_1: "light" } };
+    setSelecao((s) => ({ ...semente, ...s }));
+    setSemeado(true);
+  }, [catalogo, semeado]);
 
   const porSlot = useMemo(() => {
     const m = new Map<string, Item[]>();
