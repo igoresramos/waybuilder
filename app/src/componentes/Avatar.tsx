@@ -21,6 +21,7 @@ import {
   type Selecao,
 } from "waybuilder-avatar";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { chaveDoRecolor, ordenarPorMatiz } from "../cores";
 
 const RAIZ = "/avatar/";
 
@@ -46,6 +47,19 @@ function rotuloDaCor(
   }
   return so.replace(/[_-]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
+
+/**
+ * Traz o botao selecionado para a vista dentro da propria lista.
+ *
+ * Enquanto as cores vinham na ordem do arquivo, a escolhida costumava ser a
+ * primeira e estava sempre visivel. Agrupadas por matiz ela cai onde a familia
+ * dela estiver -- o tom de pele padrao foi para a posicao 47 de 106 --, e numa
+ * lista que rola isso quer dizer abrir o app sem enxergar o que esta ativo.
+ * `nearest` nao mexe em nada quando ja da para ver, e nao arrasta a pagina.
+ */
+const rolarSeSelecionado = (sel: boolean) => (el: HTMLButtonElement | null) => {
+  if (sel && el) el.scrollIntoView({ block: "nearest", inline: "nearest" });
+};
 
 /** O nome que a tela mostra: pt-BR quando existe, original como fallback. */
 function nomeDoItem(item: Item): string {
@@ -176,7 +190,11 @@ async function coresDoCanal(canal: CanalDeCor): Promise<[string, string][]> {
       fora.push([chave, cores[Math.floor(cores.length / 2)] ?? "#000"]);
     }
   });
-  return fora;
+  // A ordem de declaracao do arquivo de paleta nao diz nada ao olho. Agrupada
+  // por familia e em degrade, a lista vira uma roda de cores -- e e a unica
+  // pista possivel: os nomes das rampas (`ivory`, `porcelain`) nao descrevem
+  // a cor, entao procurar por nome nao e opcao.
+  return ordenarPorMatiz(fora);
 }
 
 /**
@@ -192,11 +210,10 @@ async function bitmapDa(camada: CamadaDesenhavel): Promise<CanvasImageSource> {
   const imagem = await carregarImagem(camada.arq);
   if (!camada.recolor?.length) return imagem;
 
-  // A chave cobre TODOS os canais. Com so o primeiro, trocar a cor dos olhos
-  // de uma cabeca devolvia o bitmap guardado da cor de pele: a lista mudava e
-  // o boneco nao -- medido em `avatar-cor-que-pinta`.
-  const chave = camada.recolor.map((r) => `${r.material}|${r.paleta}|${r.cor}`).join("+");
-  return cacheRecolor.obter(camada.arq, chave, "", async () => {
+  // A chave cobre todos os canais E a rampa de origem de cada um -- ver
+  // `chaveDoRecolor`. Sem os canais, trocar a cor dos olhos devolvia o bitmap
+  // guardado da cor de pele; sem a origem, o orc recebia o bitmap do porco.
+  return cacheRecolor.obter(camada.arq, chaveDoRecolor(camada.recolor), "", async () => {
     const cv = document.createElement("canvas");
     cv.width = imagem.width;
     cv.height = imagem.height;
@@ -490,6 +507,7 @@ function Picker({
               {(rampas[canal.nome] ?? []).map(([nome, amostra]) => (
                 <button
                   key={nome} className={efetivas[canal.nome] === nome ? "sel" : ""}
+                  ref={rolarSeSelecionado(efetivas[canal.nome] === nome)}
                   onClick={() => setCores((c) => ({ ...c, [canal.nome]: nome }))}
                   title={`${rotuloDaCor(nome, undefined, catalogo.cores)} (${nome.split(":")[0]})`}
                   aria-label={`${canal.nome} ${nome.replace(":", " ")}`}
@@ -548,6 +566,30 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
   }, [canalDoCorpo]);
 
   const peleAtual = selecao["body"]?.cores?.["cor"] ?? PELE_PADRAO;
+
+  /**
+   * A escolha com o tom de pele GRAVADO, para a casa poder mostrar a peca
+   * sozinha.
+   *
+   * A casa desenha so o slot -- sem o corpo junto, uma cabeca de 64px viraria
+   * um oitavo do quadrado. Mas a heranca do `match_body_color` le o tom do
+   * corpo EQUIPADO, e sem ele na selecao nao ha o que herdar: a cabeca de orc
+   * ficava verde na casa mesmo depois de o palco acertar. Aqui a cor deixa de
+   * ser herdada e passa a ser pedida, que da no mesmo pixel.
+   */
+  const comPele = useCallback((item: Item, e: Escolha): Escolha => {
+    if (!item.segue_cor_do_corpo) return e;
+    const herdeiros = (item.canais_de_cor ?? []).filter((c) => c.material === "body");
+    if (!herdeiros.length) return e;
+    return {
+      ...e,
+      cores: {
+        ...e.cores,
+        ...Object.fromEntries(herdeiros.map((c) => [c.nome, peleAtual])),
+      },
+    };
+  }, [peleAtual]);
+
   const trocarPele = useCallback((tom: string) => {
     setSelecao((s) => {
       const body = s["body"];
@@ -596,9 +638,19 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
     [catalogo],
   );
 
+  /**
+   * Os grupos e seus slots, ja sem o que este corpo nao veste.
+   *
+   * Slot cujas pecas TODAS declaram `sem_arte` neste corpo nao tem o que
+   * oferecer: o picker abriria com a lista vazia e -- como ele devolve `null`
+   * nesse caso -- o clique simplesmente nao fazia nada. Medido: em `child` sao
+   * 69 dos 102 slots, dois tercos da tela em casas mortas. O dado para decidir
+   * ja existia no `sem_arte`; so nao chegava ate a casa.
+   */
   const grupos = useMemo(() => {
     const m = new Map<string, string[]>();
     for (const [slot, itens] of porSlot) {
+      if (itens.every((i) => i.sem_arte?.includes(corpo))) continue;
       const g = itens[0]!.grupo;
       const lista = m.get(g) ?? [];
       lista.push(slot);
@@ -610,7 +662,20 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
         (ORDEM_DOS_GRUPOS.indexOf(a[0]) + 1 || 99) -
         (ORDEM_DOS_GRUPOS.indexOf(b[0]) + 1 || 99) || a[0].localeCompare(b[0]),
     );
-  }, [porSlot]);
+  }, [porSlot, corpo]);
+
+  // Explorar quer ver tudo; conferir o que montou quer ver so o vestido. Um
+  // interruptor, e nao um colapso por grupo: com 11 grupos, colapsar cobraria
+  // onze cliques de quem so quer olhar o acervo.
+  const [soVestidos, setSoVestidos] = useState(false);
+  const visiveis = useCallback(
+    (slots: string[]) => (soVestidos ? slots.filter((s) => selecao[s]) : slots),
+    [soVestidos, selecao],
+  );
+  const vestidos = useMemo(
+    () => grupos.reduce((n, [, s]) => n + s.filter((x) => selecao[x]).length, 0),
+    [grupos, selecao],
+  );
 
   const escolher = useCallback((slot: string, e: Escolha | null) => {
     setSelecao((s) => {
@@ -634,6 +699,7 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
             {tons.map(([nome, amostra]) => (
               <button
                 key={nome} className={nome === peleAtual ? "sel" : ""}
+                ref={rolarSeSelecionado(nome === peleAtual)}
                 onClick={() => trocarPele(nome)}
                 title={`${rotuloDaCor(nome, undefined, catalogo.cores)} (${nome.split(":")[0]})`}
                 aria-label={`tom de pele ${nome.replace(":", " ")}`}
@@ -663,11 +729,18 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
       </aside>
 
       <div className="avatar-casas">
-        {grupos.map(([grupo, slots]) => (
+        <div className="avatar-filtro">
+          <button className={soVestidos ? "sel" : ""}
+                  aria-pressed={soVestidos}
+                  onClick={() => setSoVestidos((v) => !v)}>
+            {soVestidos ? `mostrando ${vestidos} vestidos` : "só o que está vestido"}
+          </button>
+        </div>
+        {grupos.map(([grupo, slots]) => visiveis(slots).length > 0 && (
           <section key={grupo}>
             <h3>{grupo}</h3>
             <div className="avatar-grupo">
-              {slots.map((slot) => {
+              {visiveis(slots).map((slot) => {
                 const equipado = selecao[slot];
                 const item = equipado
                   ? porSlot.get(slot)!.find((i) => i.id === equipado.id)
@@ -681,7 +754,7 @@ export function Avatar({ corpoInicial = "male" }: { corpoInicial?: string }) {
                     title={`${rotuloDoSlot(slot)}${item ? `: ${nomeDoItem(item)}` : " (vazio)"}`}
                   >
                     {item
-                      ? <Boneco catalogo={catalogo} selecao={{ [slot]: equipado! }}
+                      ? <Boneco catalogo={catalogo} selecao={{ [slot]: comPele(item, equipado!) }}
                                 corpo={corpo} zoom={1} titulo={nomeDoItem(item)} />
                       : <span className="avatar-casa-vazia" aria-hidden="true" />}
                     <span className="avatar-casa-nome">{rotuloDoSlot(slot)}</span>

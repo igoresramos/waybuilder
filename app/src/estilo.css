@@ -590,9 +590,15 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
   width: 64px; height: 64px; border-radius: var(--r-p);
   border: 1px dashed var(--borda-forte); opacity: .5;
 }
+/* Duas linhas, nao reticencias: seis rotulos comecam com "Acabamento d" e
+   dois com "Ferida no Ol". Cortado em uma linha, o Torso mostrava tres
+   "Acabamento..." lado a lado, indistinguiveis -- o corte comia justamente a
+   parte que identifica. */
 .avatar-casa-nome {
   font-size: .7em; color: var(--fraco); max-width: 100%;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  line-height: 1.2; min-height: 2.4em; text-align: center;
+  overflow: hidden; display: -webkit-box; line-clamp: 2;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical;
 }
 .avatar-casa.cheia .avatar-casa-nome { color: var(--texto); }
 
@@ -636,7 +642,29 @@ code { background: var(--painel); padding: 1px 5px; border-radius: 4px; }
 .avatar-tom { display: block; width: 15px; height: 15px; border-radius: 3px; }
 
 /* picker: uma peca por vez, com setas -- esquema do Stardew (5b @8) */
-.avatar-picker { max-width: 420px; }
+/* Sem altura fixa: um canal chega a oferecer mais de cem rampas e a janela
+   estourava para fora da tela, levando o botao `equipar` junto. Cada lista de
+   cores rola dentro do proprio bloco, e header e footer ficam presos. */
+.avatar-picker {
+  max-width: 420px; height: auto; max-height: 92vh; overflow-y: auto;
+}
+.avatar-picker header {
+  position: sticky; top: 0; z-index: 1; background: var(--fundo); padding-top: 4px;
+}
+.avatar-picker .avatar-tons {
+  max-width: none; justify-content: flex-start;
+  max-height: 148px; overflow-y: auto; padding-right: 2px;
+}
+.avatar-palco .avatar-tons { max-height: 132px; overflow-y: auto; }
+
+.avatar-filtro { display: flex; margin-bottom: 2px; }
+.avatar-filtro button {
+  background: var(--card); border: 1px solid var(--borda); color: var(--fraco);
+  border-radius: var(--r-p); padding: 4px 10px; cursor: pointer;
+  font-size: .85em; transition: border-color .2s, color .2s;
+}
+.avatar-filtro button:hover { border-color: var(--accent); }
+.avatar-filtro button.sel { color: var(--texto); border-color: var(--accent); }
 .avatar-picker header { display: flex; align-items: center; gap: var(--u); }
 .avatar-picker-slot { font-weight: 500; }
 .avatar-picker-conta { color: var(--fraco); font-size: .85em; margin-left: auto; }
