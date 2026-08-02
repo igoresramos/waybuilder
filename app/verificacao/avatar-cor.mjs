@@ -23,15 +23,36 @@ const amostra = () =>
 
 const antes = await amostra();
 const tons = p.locator(".avatar-tons button");
+const oferecidos = await tons.count();
 await tons.nth(6).click();          // um tom bem diferente do padrao
 await p.waitForTimeout(1500);
 const depois = await amostra();
 
+// O seletor de pele passou a oferecer TODAS as paletas que o canal do corpo
+// declara -- inclusive `all.lpcr`, que e outro MATERIAL. A heranca precisa
+// atravessar a chave qualificada `paleta:nome`, senao o rosto fica no tom
+// velho e o torso no novo.
+const universal = p.locator('.avatar-tons button[aria-label*="all.lpcr"]');
+const temUniversal = await universal.count();
+let depoisUniversal = null;
+if (temUniversal) {
+  await universal.nth(20).click();
+  await p.waitForTimeout(1500);
+  depoisUniversal = await amostra();
+}
+
 console.log(JSON.stringify({
+  tonsOferecidos: oferecidos,
+  tonsDeAllLpcr: temUniversal,
   antes, depois,
   rostoMudou: antes.rosto !== depois.rosto,
   torsoMudou: antes.torso !== depois.torso,
   coerente: depois.rosto === depois.torso,
+  universal: depoisUniversal,
+  universalMudou: depoisUniversal !== null
+    && depoisUniversal.torso !== depois.torso,
+  universalCoerente: depoisUniversal !== null
+    && depoisUniversal.rosto === depoisUniversal.torso,
   erros,
 }, null, 1));
 await b.close();

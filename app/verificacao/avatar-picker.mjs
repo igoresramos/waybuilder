@@ -7,7 +7,7 @@ p.on("pageerror", (e) => erros.push(String(e)));
 await p.goto(process.env.URL ?? "http://127.0.0.1:5181/#/avatar", { waitUntil: "networkidle" });
 await p.waitForTimeout(1500);
 const alvo = process.env.SLOT ?? "hair";
-await p.locator(`.avatar-casa[title^="${alvo}"]`).first().click();
+await p.locator(`.avatar-casa[data-slot="${alvo}"]`).first().click();
 await p.waitForTimeout(2500);
 const conta = await p.locator(".avatar-picker-conta").textContent();
 const nome1 = await p.locator(".avatar-picker-peca strong").textContent();
