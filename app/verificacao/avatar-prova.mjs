@@ -9,7 +9,8 @@
  */
 import { chromium } from "playwright";
 
-const alvo = process.argv[2] ?? "avatar.png";
+// o default cai DENTRO do projeto: sem caminho, a captura nascia solta no cwd
+const alvo = process.argv[2] ?? "../docs/screenshots/avatar.png";
 const url = process.env.URL ?? "http://127.0.0.1:5181/#/avatar";
 
 const navegador = await chromium.launch();
